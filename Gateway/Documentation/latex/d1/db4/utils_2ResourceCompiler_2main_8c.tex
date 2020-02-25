@@ -1,0 +1,981 @@
+\hypertarget{utils_2ResourceCompiler_2main_8c}{}\section{utils/\+Resource\+Compiler/main.c File Reference}
+\label{utils_2ResourceCompiler_2main_8c}\index{utils/\+Resource\+Compiler/main.\+c@{utils/\+Resource\+Compiler/main.\+c}}
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$dirent.\+h$>$}\newline
+{\ttfamily \#include $<$libgen.\+h$>$}\newline
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structtResEntry}{t\+Res\+Entry}
+\begin{DoxyCompactList}\small\item\em Resource entry. \end{DoxyCompactList}\item 
+struct \hyperlink{structtResHeader}{t\+Res\+Header}
+\begin{DoxyCompactList}\small\item\em Resource header. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{utils_2ResourceCompiler_2main_8c_af08ec37a8c99d747fb60fa15bc28678b}{\+\_\+\+C\+R\+T\+\_\+\+S\+E\+C\+U\+R\+E\+\_\+\+N\+O\+\_\+\+W\+A\+R\+N\+I\+N\+GS}
+\item 
+\#define \hyperlink{utils_2ResourceCompiler_2main_8c_ae688d728e1acdfe5988c7db45d6f0166}{P\+A\+T\+H\+\_\+\+M\+AX}~256
+\item 
+\#define \hyperlink{utils_2ResourceCompiler_2main_8c_a258bb72419ef143530a2f8f55e7d57af}{N\+O\+\_\+\+E\+R\+R\+OR}~0
+\item 
+\#define \hyperlink{utils_2ResourceCompiler_2main_8c_aff71b0b68602d76200063aebde280859}{E\+R\+R\+O\+R\+\_\+\+F\+A\+I\+L\+U\+RE}~-\/1
+\item 
+\#define \hyperlink{utils_2ResourceCompiler_2main_8c_a812998d7fd8d6910dad8240d91cee51b}{E\+R\+R\+O\+R\+\_\+\+F\+I\+L\+E\+\_\+\+T\+O\+O\+\_\+\+L\+A\+R\+GE}~-\/2
+\item 
+\#define \hyperlink{utils_2ResourceCompiler_2main_8c_a47836960c8d5d00d23f9d224146c60c4}{E\+R\+R\+O\+R\+\_\+\+O\+P\+E\+N\+\_\+\+F\+A\+I\+L\+ED}~-\/3
+\item 
+\#define \hyperlink{utils_2ResourceCompiler_2main_8c_ac131f469a534061518ec6c433d07976f}{E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+R\+E\+S\+O\+U\+R\+CE}~-\/4
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{utils_2ResourceCompiler_2main_8c_a5d230b1f0bcb5116aa2e34179f4e4bc0}{t\+Res\+Type} \{ \hyperlink{utils_2ResourceCompiler_2main_8c_a5d230b1f0bcb5116aa2e34179f4e4bc0a0d823bf9b088e1ef3a19bc216f2e53c4}{R\+E\+S\+\_\+\+T\+Y\+P\+E\+\_\+\+D\+IR} = 1, 
+\hyperlink{utils_2ResourceCompiler_2main_8c_a5d230b1f0bcb5116aa2e34179f4e4bc0a09f1f91fd5adcf4bb32b2f20baa56e31}{R\+E\+S\+\_\+\+T\+Y\+P\+E\+\_\+\+F\+I\+LE} = 2
+ \}\begin{DoxyCompactList}\small\item\em Resource type. \end{DoxyCompactList}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{utils_2ResourceCompiler_2main_8c_afa7755f92698ac76396e303d472c4de7}{\+\_\+splitpath} (const char $\ast$path, char $\ast$drv, char $\ast$dir, char $\ast$\hyperlink{resource__manager_8h_a26532d7194d592ae8da35222073f36d6}{name}, char $\ast$ext)
+\begin{DoxyCompactList}\small\item\em Break a path name into components. \end{DoxyCompactList}\item 
+int \hyperlink{utils_2ResourceCompiler_2main_8c_ada569ea04a6de698d3cf27a9e93b9fb8}{add\+File} (const char $\ast$\hyperlink{tftp__common_8h_a054704ecfbf9f8eea80cd1d120b8cf62}{filename}, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{tftp__common_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t} max\+Size, \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t} $\ast$\hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length})
+\begin{DoxyCompactList}\small\item\em Add the contents of a file to the resource data. \end{DoxyCompactList}\item 
+int \hyperlink{utils_2ResourceCompiler_2main_8c_a627cec62a2c94035c76f3c3ba3b69621}{add\+Directory} (\hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t} parent\+Offset, \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t} parent\+Size, const char $\ast$directory, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{tftp__common_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t} max\+Size, \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t} $\ast$\hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length})
+\begin{DoxyCompactList}\small\item\em Add the contents of a directory to the resource data. \end{DoxyCompactList}\item 
+int \hyperlink{utils_2ResourceCompiler_2main_8c_a6c1bf39a928d35aeaebf908191ce38f3}{dump\+Directory} (const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{tftp__common_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, \hyperlink{structtResEntry}{t\+Res\+Entry} $\ast$directory, unsigned int \hyperlink{tls_8h_abbb6c7c49508c1ac374683f2d1159e08}{level})
+\begin{DoxyCompactList}\small\item\em Dump the contents of a directory. \end{DoxyCompactList}\item 
+int \hyperlink{utils_2ResourceCompiler_2main_8c_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Main routine. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{utils_2ResourceCompiler_2main_8c_af08ec37a8c99d747fb60fa15bc28678b}\label{utils_2ResourceCompiler_2main_8c_af08ec37a8c99d747fb60fa15bc28678b}} 
+\index{utils/\+Resource\+Compiler/main.\+c@{utils/\+Resource\+Compiler/main.\+c}!\+\_\+\+C\+R\+T\+\_\+\+S\+E\+C\+U\+R\+E\+\_\+\+N\+O\+\_\+\+W\+A\+R\+N\+I\+N\+GS@{\+\_\+\+C\+R\+T\+\_\+\+S\+E\+C\+U\+R\+E\+\_\+\+N\+O\+\_\+\+W\+A\+R\+N\+I\+N\+GS}}
+\index{\+\_\+\+C\+R\+T\+\_\+\+S\+E\+C\+U\+R\+E\+\_\+\+N\+O\+\_\+\+W\+A\+R\+N\+I\+N\+GS@{\+\_\+\+C\+R\+T\+\_\+\+S\+E\+C\+U\+R\+E\+\_\+\+N\+O\+\_\+\+W\+A\+R\+N\+I\+N\+GS}!utils/\+Resource\+Compiler/main.\+c@{utils/\+Resource\+Compiler/main.\+c}}
+\subsubsection{\texorpdfstring{\+\_\+\+C\+R\+T\+\_\+\+S\+E\+C\+U\+R\+E\+\_\+\+N\+O\+\_\+\+W\+A\+R\+N\+I\+N\+GS}{\_CRT\_SECURE\_NO\_WARNINGS}}
+{\footnotesize\ttfamily \#define \+\_\+\+C\+R\+T\+\_\+\+S\+E\+C\+U\+R\+E\+\_\+\+N\+O\+\_\+\+W\+A\+R\+N\+I\+N\+GS}
+
+
+
+Definition at line 30 of file main.\+c.
+
+\mbox{\Hypertarget{utils_2ResourceCompiler_2main_8c_aff71b0b68602d76200063aebde280859}\label{utils_2ResourceCompiler_2main_8c_aff71b0b68602d76200063aebde280859}} 
+\index{utils/\+Resource\+Compiler/main.\+c@{utils/\+Resource\+Compiler/main.\+c}!E\+R\+R\+O\+R\+\_\+\+F\+A\+I\+L\+U\+RE@{E\+R\+R\+O\+R\+\_\+\+F\+A\+I\+L\+U\+RE}}
+\index{E\+R\+R\+O\+R\+\_\+\+F\+A\+I\+L\+U\+RE@{E\+R\+R\+O\+R\+\_\+\+F\+A\+I\+L\+U\+RE}!utils/\+Resource\+Compiler/main.\+c@{utils/\+Resource\+Compiler/main.\+c}}
+\subsubsection{\texorpdfstring{E\+R\+R\+O\+R\+\_\+\+F\+A\+I\+L\+U\+RE}{ERROR\_FAILURE}}
+{\footnotesize\ttfamily \#define E\+R\+R\+O\+R\+\_\+\+F\+A\+I\+L\+U\+RE~-\/1}
+
+
+
+Definition at line 54 of file main.\+c.
+
+\mbox{\Hypertarget{utils_2ResourceCompiler_2main_8c_a812998d7fd8d6910dad8240d91cee51b}\label{utils_2ResourceCompiler_2main_8c_a812998d7fd8d6910dad8240d91cee51b}} 
+\index{utils/\+Resource\+Compiler/main.\+c@{utils/\+Resource\+Compiler/main.\+c}!E\+R\+R\+O\+R\+\_\+\+F\+I\+L\+E\+\_\+\+T\+O\+O\+\_\+\+L\+A\+R\+GE@{E\+R\+R\+O\+R\+\_\+\+F\+I\+L\+E\+\_\+\+T\+O\+O\+\_\+\+L\+A\+R\+GE}}
+\index{E\+R\+R\+O\+R\+\_\+\+F\+I\+L\+E\+\_\+\+T\+O\+O\+\_\+\+L\+A\+R\+GE@{E\+R\+R\+O\+R\+\_\+\+F\+I\+L\+E\+\_\+\+T\+O\+O\+\_\+\+L\+A\+R\+GE}!utils/\+Resource\+Compiler/main.\+c@{utils/\+Resource\+Compiler/main.\+c}}
+\subsubsection{\texorpdfstring{E\+R\+R\+O\+R\+\_\+\+F\+I\+L\+E\+\_\+\+T\+O\+O\+\_\+\+L\+A\+R\+GE}{ERROR\_FILE\_TOO\_LARGE}}
+{\footnotesize\ttfamily \#define E\+R\+R\+O\+R\+\_\+\+F\+I\+L\+E\+\_\+\+T\+O\+O\+\_\+\+L\+A\+R\+GE~-\/2}
+
+
+
+Definition at line 55 of file main.\+c.
+
+\mbox{\Hypertarget{utils_2ResourceCompiler_2main_8c_ac131f469a534061518ec6c433d07976f}\label{utils_2ResourceCompiler_2main_8c_ac131f469a534061518ec6c433d07976f}} 
+\index{utils/\+Resource\+Compiler/main.\+c@{utils/\+Resource\+Compiler/main.\+c}!E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+R\+E\+S\+O\+U\+R\+CE@{E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+R\+E\+S\+O\+U\+R\+CE}}
+\index{E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+R\+E\+S\+O\+U\+R\+CE@{E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+R\+E\+S\+O\+U\+R\+CE}!utils/\+Resource\+Compiler/main.\+c@{utils/\+Resource\+Compiler/main.\+c}}
+\subsubsection{\texorpdfstring{E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+R\+E\+S\+O\+U\+R\+CE}{ERROR\_INVALID\_RESOURCE}}
+{\footnotesize\ttfamily \#define E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+R\+E\+S\+O\+U\+R\+CE~-\/4}
+
+
+
+Definition at line 57 of file main.\+c.
+
+\mbox{\Hypertarget{utils_2ResourceCompiler_2main_8c_a47836960c8d5d00d23f9d224146c60c4}\label{utils_2ResourceCompiler_2main_8c_a47836960c8d5d00d23f9d224146c60c4}} 
+\index{utils/\+Resource\+Compiler/main.\+c@{utils/\+Resource\+Compiler/main.\+c}!E\+R\+R\+O\+R\+\_\+\+O\+P\+E\+N\+\_\+\+F\+A\+I\+L\+ED@{E\+R\+R\+O\+R\+\_\+\+O\+P\+E\+N\+\_\+\+F\+A\+I\+L\+ED}}
+\index{E\+R\+R\+O\+R\+\_\+\+O\+P\+E\+N\+\_\+\+F\+A\+I\+L\+ED@{E\+R\+R\+O\+R\+\_\+\+O\+P\+E\+N\+\_\+\+F\+A\+I\+L\+ED}!utils/\+Resource\+Compiler/main.\+c@{utils/\+Resource\+Compiler/main.\+c}}
+\subsubsection{\texorpdfstring{E\+R\+R\+O\+R\+\_\+\+O\+P\+E\+N\+\_\+\+F\+A\+I\+L\+ED}{ERROR\_OPEN\_FAILED}}
+{\footnotesize\ttfamily \#define E\+R\+R\+O\+R\+\_\+\+O\+P\+E\+N\+\_\+\+F\+A\+I\+L\+ED~-\/3}
+
+
+
+Definition at line 56 of file main.\+c.
+
+\mbox{\Hypertarget{utils_2ResourceCompiler_2main_8c_a258bb72419ef143530a2f8f55e7d57af}\label{utils_2ResourceCompiler_2main_8c_a258bb72419ef143530a2f8f55e7d57af}} 
+\index{utils/\+Resource\+Compiler/main.\+c@{utils/\+Resource\+Compiler/main.\+c}!N\+O\+\_\+\+E\+R\+R\+OR@{N\+O\+\_\+\+E\+R\+R\+OR}}
+\index{N\+O\+\_\+\+E\+R\+R\+OR@{N\+O\+\_\+\+E\+R\+R\+OR}!utils/\+Resource\+Compiler/main.\+c@{utils/\+Resource\+Compiler/main.\+c}}
+\subsubsection{\texorpdfstring{N\+O\+\_\+\+E\+R\+R\+OR}{NO\_ERROR}}
+{\footnotesize\ttfamily \#define N\+O\+\_\+\+E\+R\+R\+OR~0}
+
+
+
+Definition at line 53 of file main.\+c.
+
+\mbox{\Hypertarget{utils_2ResourceCompiler_2main_8c_ae688d728e1acdfe5988c7db45d6f0166}\label{utils_2ResourceCompiler_2main_8c_ae688d728e1acdfe5988c7db45d6f0166}} 
+\index{utils/\+Resource\+Compiler/main.\+c@{utils/\+Resource\+Compiler/main.\+c}!P\+A\+T\+H\+\_\+\+M\+AX@{P\+A\+T\+H\+\_\+\+M\+AX}}
+\index{P\+A\+T\+H\+\_\+\+M\+AX@{P\+A\+T\+H\+\_\+\+M\+AX}!utils/\+Resource\+Compiler/main.\+c@{utils/\+Resource\+Compiler/main.\+c}}
+\subsubsection{\texorpdfstring{P\+A\+T\+H\+\_\+\+M\+AX}{PATH\_MAX}}
+{\footnotesize\ttfamily \#define P\+A\+T\+H\+\_\+\+M\+AX~256}
+
+
+
+Definition at line 49 of file main.\+c.
+
+
+
+\subsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{utils_2ResourceCompiler_2main_8c_a5d230b1f0bcb5116aa2e34179f4e4bc0}\label{utils_2ResourceCompiler_2main_8c_a5d230b1f0bcb5116aa2e34179f4e4bc0}} 
+\index{utils/\+Resource\+Compiler/main.\+c@{utils/\+Resource\+Compiler/main.\+c}!t\+Res\+Type@{t\+Res\+Type}}
+\index{t\+Res\+Type@{t\+Res\+Type}!utils/\+Resource\+Compiler/main.\+c@{utils/\+Resource\+Compiler/main.\+c}}
+\subsubsection{\texorpdfstring{t\+Res\+Type}{tResType}}
+{\footnotesize\ttfamily enum \hyperlink{utils_2ResourceCompiler_2main_8c_a5d230b1f0bcb5116aa2e34179f4e4bc0}{t\+Res\+Type}}
+
+
+
+Resource type. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{R\+E\+S\+\_\+\+T\+Y\+P\+E\+\_\+\+D\+IR@{R\+E\+S\+\_\+\+T\+Y\+P\+E\+\_\+\+D\+IR}!utils/\+Resource\+Compiler/main.\+c@{utils/\+Resource\+Compiler/main.\+c}}\index{utils/\+Resource\+Compiler/main.\+c@{utils/\+Resource\+Compiler/main.\+c}!R\+E\+S\+\_\+\+T\+Y\+P\+E\+\_\+\+D\+IR@{R\+E\+S\+\_\+\+T\+Y\+P\+E\+\_\+\+D\+IR}}}\mbox{\Hypertarget{utils_2ResourceCompiler_2main_8c_a5d230b1f0bcb5116aa2e34179f4e4bc0a0d823bf9b088e1ef3a19bc216f2e53c4}\label{utils_2ResourceCompiler_2main_8c_a5d230b1f0bcb5116aa2e34179f4e4bc0a0d823bf9b088e1ef3a19bc216f2e53c4}} 
+R\+E\+S\+\_\+\+T\+Y\+P\+E\+\_\+\+D\+IR&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{R\+E\+S\+\_\+\+T\+Y\+P\+E\+\_\+\+F\+I\+LE@{R\+E\+S\+\_\+\+T\+Y\+P\+E\+\_\+\+F\+I\+LE}!utils/\+Resource\+Compiler/main.\+c@{utils/\+Resource\+Compiler/main.\+c}}\index{utils/\+Resource\+Compiler/main.\+c@{utils/\+Resource\+Compiler/main.\+c}!R\+E\+S\+\_\+\+T\+Y\+P\+E\+\_\+\+F\+I\+LE@{R\+E\+S\+\_\+\+T\+Y\+P\+E\+\_\+\+F\+I\+LE}}}\mbox{\Hypertarget{utils_2ResourceCompiler_2main_8c_a5d230b1f0bcb5116aa2e34179f4e4bc0a09f1f91fd5adcf4bb32b2f20baa56e31}\label{utils_2ResourceCompiler_2main_8c_a5d230b1f0bcb5116aa2e34179f4e4bc0a09f1f91fd5adcf4bb32b2f20baa56e31}} 
+R\+E\+S\+\_\+\+T\+Y\+P\+E\+\_\+\+F\+I\+LE&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line 64 of file main.\+c.
+
+
+\begin{DoxyCode}
+65 \{
+66    \hyperlink{utils_2ResourceCompiler_2main_8c_a5d230b1f0bcb5116aa2e34179f4e4bc0a0d823bf9b088e1ef3a19bc216f2e53c4}{RES\_TYPE\_DIR}  = 1,
+67    \hyperlink{utils_2ResourceCompiler_2main_8c_a5d230b1f0bcb5116aa2e34179f4e4bc0a09f1f91fd5adcf4bb32b2f20baa56e31}{RES\_TYPE\_FILE} = 2
+68 \} \hyperlink{utils_2ResourceCompiler_2main_8c_a5d230b1f0bcb5116aa2e34179f4e4bc0}{tResType};
+\end{DoxyCode}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{utils_2ResourceCompiler_2main_8c_afa7755f92698ac76396e303d472c4de7}\label{utils_2ResourceCompiler_2main_8c_afa7755f92698ac76396e303d472c4de7}} 
+\index{utils/\+Resource\+Compiler/main.\+c@{utils/\+Resource\+Compiler/main.\+c}!\+\_\+splitpath@{\+\_\+splitpath}}
+\index{\+\_\+splitpath@{\+\_\+splitpath}!utils/\+Resource\+Compiler/main.\+c@{utils/\+Resource\+Compiler/main.\+c}}
+\subsubsection{\texorpdfstring{\+\_\+splitpath()}{\_splitpath()}}
+{\footnotesize\ttfamily void \+\_\+splitpath (\begin{DoxyParamCaption}\item[{const char $\ast$}]{path,  }\item[{char $\ast$}]{drv,  }\item[{char $\ast$}]{dir,  }\item[{char $\ast$}]{name,  }\item[{char $\ast$}]{ext }\end{DoxyParamCaption})}
+
+
+
+Break a path name into components. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em path} & Full path \\
+\hline
+\mbox{\tt in}  & {\em drv} & Drive letter, followed by a colon \\
+\hline
+\mbox{\tt in}  & {\em dir} & Directory path, including trailing slash \\
+\hline
+\mbox{\tt in}  & {\em name} & Base filename (no extension) \\
+\hline
+\mbox{\tt in}  & {\em ext} & Filename extension, including leading period \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 115 of file main.\+c.
+
+
+\begin{DoxyCode}
+116 \{
+117    \textcolor{keyword}{const} \textcolor{keywordtype}{char} *end;
+118    \textcolor{keyword}{const} \textcolor{keywordtype}{char} *\hyperlink{ndp_8h_a6519522ad9a6f45e7a8d25d31392a977}{p};
+119    \textcolor{keyword}{const} \textcolor{keywordtype}{char} *\hyperlink{md2_8c_adf356ff381033f761b7de5f76e763a45}{s};
+120 
+121    \textcolor{comment}{//Extract drive name}
+122    \textcolor{keywordflow}{if}(path[0] != \textcolor{charliteral}{'\(\backslash\)0'} && path[1] == \textcolor{charliteral}{':'})
+123    \{
+124       \textcolor{keywordflow}{if}(drv != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+125       \{
+126          *drv++ = *path++;
+127          *drv++ = *path++;
+128          *drv = \textcolor{charliteral}{'\(\backslash\)0'};
+129       \}
+130    \}
+131    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(drv != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+132    \{
+133       *drv = \textcolor{charliteral}{'\(\backslash\)0'};
+134    \}
+135 
+136    \textcolor{comment}{//Search for the end of the string}
+137    \textcolor{keywordflow}{for}(end = path; *end != \textcolor{charliteral}{'\(\backslash\)0'} && *end != \textcolor{charliteral}{':'}; )
+138       end++;
+139 
+140    \textcolor{comment}{//Search for the begin of the file extension}
+141    \textcolor{keywordflow}{for}(p = end; p > path && *--p != \textcolor{charliteral}{'\(\backslash\)\(\backslash\)'} && *p != \textcolor{charliteral}{'/'}; )
+142    \{
+143       \textcolor{keywordflow}{if}(*p == \textcolor{charliteral}{'.'})
+144       \{
+145          end = \hyperlink{ndp_8h_a6519522ad9a6f45e7a8d25d31392a977}{p};
+146          \textcolor{keywordflow}{break};
+147       \}
+148    \}
+149 
+150    \textcolor{keywordflow}{if}(ext != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+151    \{
+152       \textcolor{keywordflow}{for}(s = end; (*ext = *s++); )
+153          ext++;
+154    \}
+155 
+156    \textcolor{comment}{//Search for the end of the directory name}
+157    \textcolor{keywordflow}{for}(p = end; p > path; )
+158    \{
+159       \textcolor{keywordflow}{if}(*--p == \textcolor{charliteral}{'\(\backslash\)\(\backslash\)'} || *p == \textcolor{charliteral}{'/'})
+160       \{
+161          p++;
+162          \textcolor{keywordflow}{break};
+163       \}
+164    \}
+165 
+166    \textcolor{keywordflow}{if}(\hyperlink{resource__manager_8h_a26532d7194d592ae8da35222073f36d6}{name} != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+167    \{
+168       \textcolor{keywordflow}{for}(s = p; s < end; )
+169          *\hyperlink{resource__manager_8h_a26532d7194d592ae8da35222073f36d6}{name}++ = *s++;
+170 
+171       *\hyperlink{resource__manager_8h_a26532d7194d592ae8da35222073f36d6}{name} = \textcolor{charliteral}{'\(\backslash\)0'};
+172    \}
+173 
+174    \textcolor{keywordflow}{if}(dir != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+175    \{
+176       \textcolor{keywordflow}{for}(s = path; s < \hyperlink{ndp_8h_a6519522ad9a6f45e7a8d25d31392a977}{p}; )
+177          *dir++ = *s++;
+178 
+179       *dir = \textcolor{charliteral}{'\(\backslash\)0'};
+180    \}
+181 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{utils_2ResourceCompiler_2main_8c_a627cec62a2c94035c76f3c3ba3b69621}\label{utils_2ResourceCompiler_2main_8c_a627cec62a2c94035c76f3c3ba3b69621}} 
+\index{utils/\+Resource\+Compiler/main.\+c@{utils/\+Resource\+Compiler/main.\+c}!add\+Directory@{add\+Directory}}
+\index{add\+Directory@{add\+Directory}!utils/\+Resource\+Compiler/main.\+c@{utils/\+Resource\+Compiler/main.\+c}}
+\subsubsection{\texorpdfstring{add\+Directory()}{addDirectory()}}
+{\footnotesize\ttfamily int add\+Directory (\begin{DoxyParamCaption}\item[{\hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t}}]{parent\+Offset,  }\item[{\hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t}}]{parent\+Size,  }\item[{const char $\ast$}]{directory,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{data,  }\item[{\hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t}}]{max\+Size,  }\item[{\hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t} $\ast$}]{length }\end{DoxyParamCaption})}
+
+
+
+Add the contents of a directory to the resource data. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em parent\+Offset} & Offset of the parent directory \\
+\hline
+\mbox{\tt in}  & {\em parent\+Size} & Size of the parent directory \\
+\hline
+\mbox{\tt in}  & {\em directory} & Path to the directory \\
+\hline
+\mbox{\tt in}  & {\em data} & Pointer to the resource data \\
+\hline
+\mbox{\tt in}  & {\em max\+Size} & Maximum size of the resulting resource file \\
+\hline
+\mbox{\tt out}  & {\em length} & Actual length of the directory \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Status code 
+\end{DoxyReturn}
+
+
+Definition at line 277 of file main.\+c.
+
+
+\begin{DoxyCode}
+279 \{
+280    \textcolor{keywordtype}{int} error;
+281    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} i;
+282    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} pos;
+283    \textcolor{keywordtype}{char} path[\hyperlink{utils_2ResourceCompiler_2main_8c_ae688d728e1acdfe5988c7db45d6f0166}{PATH\_MAX}];
+284    \textcolor{keywordtype}{char} \hyperlink{tftp__common_8h_a054704ecfbf9f8eea80cd1d120b8cf62}{filename}[\hyperlink{utils_2ResourceCompiler_2main_8c_ae688d728e1acdfe5988c7db45d6f0166}{PATH\_MAX}];
+285    \hyperlink{structtResEntry}{tResEntry} *entry;
+286 
+287 \textcolor{preprocessor}{#ifdef \_WIN32}
+288    \hyperlink{stdint_8h_abd3131a20f4053d808d4277db3e39a23}{intptr\_t} hFind;
+289    \textcolor{keyword}{struct }\_finddata\_t findData;
+290 \textcolor{preprocessor}{#else}
+291    DIR *dir;
+292    \textcolor{keyword}{struct }dirent *dirEntry;
+293 \textcolor{preprocessor}{#endif}
+294 
+295    \textcolor{comment}{//Point to the header of the resource data}
+296    \hyperlink{structtResHeader}{tResHeader} *\hyperlink{resource__manager_8h_acec072f8d98bf27c85418d0b270365d8}{ResHeader} = (\hyperlink{structtResHeader}{tResHeader} *) \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data};
+297    \textcolor{comment}{//Point to the location where to write the directory contents}
+298    pos = ResHeader->\hyperlink{structtResHeader_a902608e1b86415839e6441e1021c60b5}{totalSize};
+299    \textcolor{comment}{//Initialize the length field}
+300    *\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} = 0;
+301 
+302 \textcolor{preprocessor}{#ifdef \_WIN32}
+303    \textcolor{comment}{//Append "*" to the directory path}
+304    \_makepath(path, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, directory, \textcolor{stringliteral}{"*"}, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+305 
+306    \textcolor{comment}{//Open directory}
+307    hFind = \_findfirst(path, &findData);
+308    \textcolor{comment}{//Unable to read directory?}
+309    \textcolor{keywordflow}{if}(hFind < 0)
+310       \textcolor{keywordflow}{return} \hyperlink{utils_2ResourceCompiler_2main_8c_a47836960c8d5d00d23f9d224146c60c4}{ERROR\_OPEN\_FAILED};
+311 \textcolor{preprocessor}{#else}
+312    \textcolor{comment}{//Open directory}
+313    dir = opendir(directory);
+314    \textcolor{comment}{//Unable to read directory?}
+315    \textcolor{keywordflow}{if}(dir == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+316       \textcolor{keywordflow}{return} \hyperlink{utils_2ResourceCompiler_2main_8c_a47836960c8d5d00d23f9d224146c60c4}{ERROR\_OPEN\_FAILED};
+317 \textcolor{preprocessor}{#endif}
+318 
+319    \textcolor{comment}{//Point to the location where to write the directory contents}
+320    i = pos;
+321 
+322    \textcolor{comment}{//Check the actual size of the resource data}
+323    \textcolor{keywordflow}{if}((i + \textcolor{keyword}{sizeof}(\hyperlink{structtResEntry}{tResEntry}) + 1) >= maxSize)
+324    \{
+325 \textcolor{preprocessor}{#ifdef \_WIN32}
+326       \textcolor{comment}{//Close find search handle}
+327       \_findclose(hFind);
+328 \textcolor{preprocessor}{#else}
+329       \textcolor{comment}{//Close directory}
+330       closedir(dir);
+331 \textcolor{preprocessor}{#endif}
+332       \textcolor{comment}{//Report an error}
+333       \textcolor{keywordflow}{return} \hyperlink{utils_2ResourceCompiler_2main_8c_a812998d7fd8d6910dad8240d91cee51b}{ERROR\_FILE\_TOO\_LARGE};
+334    \}
+335 
+336    \textcolor{comment}{//Current directory}
+337    entry = (\hyperlink{structtResEntry}{tResEntry} *) (\hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data} + i);
+338    entry->\hyperlink{structtResEntry_a47648b5006a5bb90c673c1589b95673c}{type} = \hyperlink{utils_2ResourceCompiler_2main_8c_a5d230b1f0bcb5116aa2e34179f4e4bc0a0d823bf9b088e1ef3a19bc216f2e53c4}{RES\_TYPE\_DIR};
+339    entry->\hyperlink{structtResEntry_a88513f415b06add371a6b323fecf07ab}{dataOffset} = 0;
+340    entry->\hyperlink{structtResEntry_ab6c46c2d54823acfa660e98e8428ba1e}{dataLength} = 0;
+341    entry->\hyperlink{structtResEntry_ac0518953ee4a06845374e9a505695434}{nameLength} = 1;
+342    entry->\hyperlink{structtResEntry_af8a44a299155173ce72de5b75683e9fb}{name}[0] = \textcolor{charliteral}{'.'};
+343 
+344    \textcolor{comment}{//Jump to the following entry}
+345    i += \textcolor{keyword}{sizeof}(\hyperlink{structtResEntry}{tResEntry}) + entry->\hyperlink{structtResEntry_ac0518953ee4a06845374e9a505695434}{nameLength};
+346    \textcolor{comment}{//Update the length of the directory}
+347    *\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} += \textcolor{keyword}{sizeof}(\hyperlink{structtResEntry}{tResEntry}) + entry->\hyperlink{structtResEntry_ac0518953ee4a06845374e9a505695434}{nameLength};
+348 
+349    \textcolor{comment}{//Add a link to the parent directory?}
+350    \textcolor{keywordflow}{if}(parentOffset && parentSize)
+351    \{
+352       \textcolor{comment}{//Check the actual size of the resource data}
+353       \textcolor{keywordflow}{if}((i + \textcolor{keyword}{sizeof}(\hyperlink{structtResEntry}{tResEntry}) + 2) >= maxSize)
+354       \{
+355 \textcolor{preprocessor}{#ifdef \_WIN32}
+356          \textcolor{comment}{//Close find search handle}
+357          \_findclose(hFind);
+358 \textcolor{preprocessor}{#else}
+359          \textcolor{comment}{//Close directory}
+360          closedir(dir);
+361 \textcolor{preprocessor}{#endif}
+362          \textcolor{comment}{//Report an error}
+363          \textcolor{keywordflow}{return} \hyperlink{utils_2ResourceCompiler_2main_8c_a812998d7fd8d6910dad8240d91cee51b}{ERROR\_FILE\_TOO\_LARGE};
+364       \}
+365 
+366       \textcolor{comment}{//Parent directory}
+367       entry = (\hyperlink{structtResEntry}{tResEntry} *) (\hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data} + i);
+368       entry->\hyperlink{structtResEntry_a47648b5006a5bb90c673c1589b95673c}{type} = \hyperlink{utils_2ResourceCompiler_2main_8c_a5d230b1f0bcb5116aa2e34179f4e4bc0a0d823bf9b088e1ef3a19bc216f2e53c4}{RES\_TYPE\_DIR};
+369       entry->\hyperlink{structtResEntry_a88513f415b06add371a6b323fecf07ab}{dataOffset} = 0;
+370       entry->\hyperlink{structtResEntry_ab6c46c2d54823acfa660e98e8428ba1e}{dataLength} = 0;
+371       entry->\hyperlink{structtResEntry_ac0518953ee4a06845374e9a505695434}{nameLength} = 2;
+372       entry->\hyperlink{structtResEntry_af8a44a299155173ce72de5b75683e9fb}{name}[0] = \textcolor{charliteral}{'.'};
+373       entry->\hyperlink{structtResEntry_af8a44a299155173ce72de5b75683e9fb}{name}[1] = \textcolor{charliteral}{'.'};
+374 
+375       \textcolor{comment}{//Jump to the following entry}
+376       i += \textcolor{keyword}{sizeof}(\hyperlink{structtResEntry}{tResEntry}) + entry->\hyperlink{structtResEntry_ac0518953ee4a06845374e9a505695434}{nameLength};
+377       \textcolor{comment}{//Update the length of the directory}
+378       *\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} += \textcolor{keyword}{sizeof}(\hyperlink{structtResEntry}{tResEntry}) + entry->\hyperlink{structtResEntry_ac0518953ee4a06845374e9a505695434}{nameLength};
+379    \}
+380 
+381    \textcolor{comment}{//Loop through directory entries}
+382    \textcolor{keywordflow}{while}(1)
+383    \{
+384 \textcolor{preprocessor}{#ifdef \_WIN32}
+385       \textcolor{comment}{//Check file name}
+386       \textcolor{keywordflow}{if}(!strcmp(findData.name, \textcolor{stringliteral}{"."}) || !strcmp(findData.name, \textcolor{stringliteral}{".."}))
+387       \{
+388          \textcolor{comment}{//Discard . and .. directories}
+389       \}
+390       \textcolor{comment}{//Check file attributes}
+391       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(findData.attrib & \_A\_HIDDEN)
+392       \{
+393          \textcolor{comment}{//Discard hidden files}
+394       \}
+395       \textcolor{keywordflow}{else}
+396       \{
+397          \textcolor{comment}{//Make sure the maximum size is not exceeded}
+398          \textcolor{keywordflow}{if}((i + \textcolor{keyword}{sizeof}(\hyperlink{structtResEntry}{tResEntry}) + strlen(findData.name)) >= maxSize)
+399          \{
+400             \textcolor{comment}{//Close find search handle}
+401             \_findclose(hFind);
+402             \textcolor{comment}{//Report an error}
+403             \textcolor{keywordflow}{return} \hyperlink{utils_2ResourceCompiler_2main_8c_a812998d7fd8d6910dad8240d91cee51b}{ERROR\_FILE\_TOO\_LARGE};
+404          \}
+405 
+406          \textcolor{comment}{//Add a new entry}
+407          entry = (\hyperlink{structtResEntry}{tResEntry} *) (\hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data} + i);
+408          entry->\hyperlink{structtResEntry_a47648b5006a5bb90c673c1589b95673c}{type} = (findData.attrib & \_A\_SUBDIR) ? \hyperlink{utils_2ResourceCompiler_2main_8c_a5d230b1f0bcb5116aa2e34179f4e4bc0a0d823bf9b088e1ef3a19bc216f2e53c4}{RES\_TYPE\_DIR} : 
+      \hyperlink{utils_2ResourceCompiler_2main_8c_a5d230b1f0bcb5116aa2e34179f4e4bc0a09f1f91fd5adcf4bb32b2f20baa56e31}{RES\_TYPE\_FILE};
+409          entry->\hyperlink{structtResEntry_a88513f415b06add371a6b323fecf07ab}{dataOffset} = 0;
+410          entry->\hyperlink{structtResEntry_ab6c46c2d54823acfa660e98e8428ba1e}{dataLength} = 0;
+411          entry->\hyperlink{structtResEntry_ac0518953ee4a06845374e9a505695434}{nameLength} = strlen(findData.name);
+412          strncpy(entry->\hyperlink{structtResEntry_af8a44a299155173ce72de5b75683e9fb}{name}, findData.name, entry->\hyperlink{structtResEntry_ac0518953ee4a06845374e9a505695434}{nameLength});
+413 
+414          \textcolor{comment}{//Jump to the following entry}
+415          i += \textcolor{keyword}{sizeof}(\hyperlink{structtResEntry}{tResEntry}) + entry->\hyperlink{structtResEntry_ac0518953ee4a06845374e9a505695434}{nameLength};
+416          \textcolor{comment}{//Update the length of the directory}
+417          *\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} += \textcolor{keyword}{sizeof}(\hyperlink{structtResEntry}{tResEntry}) + entry->\hyperlink{structtResEntry_ac0518953ee4a06845374e9a505695434}{nameLength};
+418       \}
+419 
+420       \textcolor{comment}{//Get next file}
+421       \textcolor{keywordflow}{if}(\_findnext(hFind, &findData) < 0)
+422          \textcolor{keywordflow}{break};
+423 \textcolor{preprocessor}{#else}
+424       \textcolor{comment}{//Read directory entry}
+425       dirEntry = readdir(dir);
+426       \textcolor{comment}{//End of the directory stream?}
+427       \textcolor{keywordflow}{if}(dirEntry == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+428          \textcolor{keywordflow}{break};
+429 
+430       \textcolor{comment}{//Check file name}
+431       \textcolor{keywordflow}{if}(!strcmp(dirEntry->d\_name, \textcolor{stringliteral}{"."}) || !strcmp(dirEntry->d\_name, \textcolor{stringliteral}{".."}))
+432       \{
+433          \textcolor{comment}{//Discard . and .. directories}
+434       \}
+435       \textcolor{comment}{//Check file type}
+436       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(dirEntry->d\_type != DT\_DIR && dirEntry->d\_type != DT\_REG)
+437       \{
+438          \textcolor{comment}{//Discard unknown files}
+439       \}
+440       \textcolor{keywordflow}{else}
+441       \{
+442          \textcolor{comment}{//Make sure the maximum size is not exceeded}
+443          \textcolor{keywordflow}{if}((i + \textcolor{keyword}{sizeof}(\hyperlink{structtResEntry}{tResEntry}) + strlen(dirEntry->d\_name)) >= maxSize)
+444          \{
+445             \textcolor{comment}{//Close directory}
+446             closedir(dir);
+447             \textcolor{comment}{//Report an error}
+448             \textcolor{keywordflow}{return} \hyperlink{utils_2ResourceCompiler_2main_8c_a812998d7fd8d6910dad8240d91cee51b}{ERROR\_FILE\_TOO\_LARGE};
+449          \}
+450 
+451          \textcolor{comment}{//Add a new entry}
+452          entry = (\hyperlink{structtResEntry}{tResEntry} *) (\hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data} + i);
+453          entry->\hyperlink{structtResEntry_a47648b5006a5bb90c673c1589b95673c}{type} = (dirEntry->d\_type == DT\_DIR) ? \hyperlink{utils_2ResourceCompiler_2main_8c_a5d230b1f0bcb5116aa2e34179f4e4bc0a0d823bf9b088e1ef3a19bc216f2e53c4}{RES\_TYPE\_DIR} : 
+      \hyperlink{utils_2ResourceCompiler_2main_8c_a5d230b1f0bcb5116aa2e34179f4e4bc0a09f1f91fd5adcf4bb32b2f20baa56e31}{RES\_TYPE\_FILE};
+454          entry->\hyperlink{structtResEntry_a88513f415b06add371a6b323fecf07ab}{dataOffset} = 0;
+455          entry->\hyperlink{structtResEntry_ab6c46c2d54823acfa660e98e8428ba1e}{dataLength} = 0;
+456          entry->\hyperlink{structtResEntry_ac0518953ee4a06845374e9a505695434}{nameLength} = strlen(dirEntry->d\_name);
+457          strncpy(entry->\hyperlink{structtResEntry_af8a44a299155173ce72de5b75683e9fb}{name}, dirEntry->d\_name, entry->\hyperlink{structtResEntry_ac0518953ee4a06845374e9a505695434}{nameLength});
+458 
+459          \textcolor{comment}{//Jump to the following entry}
+460          i += \textcolor{keyword}{sizeof}(\hyperlink{structtResEntry}{tResEntry}) + entry->\hyperlink{structtResEntry_ac0518953ee4a06845374e9a505695434}{nameLength};
+461          \textcolor{comment}{//Update the length of the directory}
+462          *\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} += \textcolor{keyword}{sizeof}(\hyperlink{structtResEntry}{tResEntry}) + entry->\hyperlink{structtResEntry_ac0518953ee4a06845374e9a505695434}{nameLength};
+463       \}
+464 \textcolor{preprocessor}{#endif}
+465    \}
+466 
+467    \textcolor{comment}{//Update the total size of the resource file}
+468    ResHeader->\hyperlink{structtResHeader_a902608e1b86415839e6441e1021c60b5}{totalSize} += *\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length};
+469 
+470    \textcolor{comment}{//Parse the newly added entries}
+471    \textcolor{keywordflow}{for}(i = 0; i < *\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}; i += \textcolor{keyword}{sizeof}(\hyperlink{structtResEntry}{tResEntry}) + entry->
+      \hyperlink{structtResEntry_ac0518953ee4a06845374e9a505695434}{nameLength})
+472    \{
+473       \textcolor{comment}{//Point to the current entry}
+474       entry = (\hyperlink{structtResEntry}{tResEntry} *) (\hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data} + pos + i);
+475 
+476       \textcolor{comment}{//Special . directory?}
+477       \textcolor{keywordflow}{if}(entry->\hyperlink{structtResEntry_ac0518953ee4a06845374e9a505695434}{nameLength} == 1 && entry->\hyperlink{structtResEntry_af8a44a299155173ce72de5b75683e9fb}{name}[0] == \textcolor{charliteral}{'.'})
+478       \{
+479          \textcolor{comment}{//Set data offset}
+480          entry->\hyperlink{structtResEntry_a88513f415b06add371a6b323fecf07ab}{dataOffset} = pos;
+481          \textcolor{comment}{//Set directory size}
+482          entry->\hyperlink{structtResEntry_ab6c46c2d54823acfa660e98e8428ba1e}{dataLength} = *\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length};
+483       \}
+484       \textcolor{comment}{//Special .. directory?}
+485       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(entry->\hyperlink{structtResEntry_ac0518953ee4a06845374e9a505695434}{nameLength} == 2 && entry->\hyperlink{structtResEntry_af8a44a299155173ce72de5b75683e9fb}{name}[0] == \textcolor{charliteral}{'.'} && entry->
+      \hyperlink{structtResEntry_af8a44a299155173ce72de5b75683e9fb}{name}[1] == \textcolor{charliteral}{'.'})
+486       \{
+487          \textcolor{comment}{//Set data offset}
+488          entry->\hyperlink{structtResEntry_a88513f415b06add371a6b323fecf07ab}{dataOffset} = parentOffset;
+489          \textcolor{comment}{//Set directory size}
+490          entry->\hyperlink{structtResEntry_ab6c46c2d54823acfa660e98e8428ba1e}{dataLength} = parentSize;
+491       \}
+492       \textcolor{keywordflow}{else}
+493       \{
+494          \textcolor{comment}{//Data must be aligned on 4-byte boundaries}
+495          ResHeader->\hyperlink{structtResHeader_a902608e1b86415839e6441e1021c60b5}{totalSize} = (ResHeader->\hyperlink{structtResHeader_a902608e1b86415839e6441e1021c60b5}{totalSize} + 3) / 4 * 4;
+496          \textcolor{comment}{//Set data offset}
+497          entry->\hyperlink{structtResEntry_a88513f415b06add371a6b323fecf07ab}{dataOffset} = ResHeader->\hyperlink{structtResHeader_a902608e1b86415839e6441e1021c60b5}{totalSize};
+498 
+499          \textcolor{comment}{//Retrieve file name}
+500          strncpy(filename, entry->\hyperlink{structtResEntry_af8a44a299155173ce72de5b75683e9fb}{name}, entry->\hyperlink{structtResEntry_ac0518953ee4a06845374e9a505695434}{nameLength});
+501          filename[entry->\hyperlink{structtResEntry_ac0518953ee4a06845374e9a505695434}{nameLength}] = \textcolor{charliteral}{'\(\backslash\)0'};
+502 
+503 \textcolor{preprocessor}{#ifdef \_WIN32}
+504          \textcolor{comment}{//Form the full path to the item}
+505          \_makepath(path, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, directory, filename, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+506 \textcolor{preprocessor}{#else}
+507          \textcolor{comment}{//Form the full path to the item}
+508          strcpy(path, directory);
+509          strcat(path, \textcolor{stringliteral}{"/"});
+510          strcat(path, filename);
+511 \textcolor{preprocessor}{#endif}
+512 
+513          \textcolor{comment}{//Check entry type}
+514          \textcolor{keywordflow}{if}(entry->\hyperlink{structtResEntry_a47648b5006a5bb90c673c1589b95673c}{type} == \hyperlink{utils_2ResourceCompiler_2main_8c_a5d230b1f0bcb5116aa2e34179f4e4bc0a0d823bf9b088e1ef3a19bc216f2e53c4}{RES\_TYPE\_DIR})
+515          \{
+516             \textcolor{comment}{//Add the contents of the directory to the resource data}
+517             error = \hyperlink{utils_2ResourceCompiler_2main_8c_a627cec62a2c94035c76f3c3ba3b69621}{addDirectory}(pos, *length, path, \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, maxSize, &entry->
+      \hyperlink{structtResEntry_ab6c46c2d54823acfa660e98e8428ba1e}{dataLength});
+518          \}
+519          \textcolor{keywordflow}{else}
+520          \{
+521             \textcolor{comment}{//Add the contents of the file to the resource data}
+522             error = \hyperlink{utils_2ResourceCompiler_2main_8c_ada569ea04a6de698d3cf27a9e93b9fb8}{addFile}(path, \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, maxSize, &entry->\hyperlink{structtResEntry_ab6c46c2d54823acfa660e98e8428ba1e}{dataLength});
+523          \}
+524 
+525          \textcolor{comment}{//Any error to report?}
+526          \textcolor{keywordflow}{if}(error)
+527          \{
+528 \textcolor{preprocessor}{#ifdef \_WIN32}
+529             \textcolor{comment}{//Close find search handle}
+530             \_findclose(hFind);
+531 \textcolor{preprocessor}{#else}
+532             \textcolor{comment}{//Close directory}
+533             closedir(dir);
+534 \textcolor{preprocessor}{#endif}
+535             \textcolor{comment}{//Report an error}
+536             \textcolor{keywordflow}{return} error;
+537          \}
+538       \}
+539    \}
+540 
+541 \textcolor{preprocessor}{#ifdef \_WIN32}
+542    \textcolor{comment}{//Close find search handle}
+543    \_findclose(hFind);
+544 \textcolor{preprocessor}{#else}
+545    \textcolor{comment}{//Close directory}
+546    closedir(dir);
+547 \textcolor{preprocessor}{#endif}
+548 
+549    \textcolor{comment}{//Successful processing}
+550    \textcolor{keywordflow}{return} 0;
+551 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{utils_2ResourceCompiler_2main_8c_ada569ea04a6de698d3cf27a9e93b9fb8}\label{utils_2ResourceCompiler_2main_8c_ada569ea04a6de698d3cf27a9e93b9fb8}} 
+\index{utils/\+Resource\+Compiler/main.\+c@{utils/\+Resource\+Compiler/main.\+c}!add\+File@{add\+File}}
+\index{add\+File@{add\+File}!utils/\+Resource\+Compiler/main.\+c@{utils/\+Resource\+Compiler/main.\+c}}
+\subsubsection{\texorpdfstring{add\+File()}{addFile()}}
+{\footnotesize\ttfamily int add\+File (\begin{DoxyParamCaption}\item[{const char $\ast$}]{filename,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{data,  }\item[{\hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t}}]{max\+Size,  }\item[{\hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t} $\ast$}]{length }\end{DoxyParamCaption})}
+
+
+
+Add the contents of a file to the resource data. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em filename} & Path to the filename \\
+\hline
+\mbox{\tt in}  & {\em data} & Pointer to the resource data \\
+\hline
+\mbox{\tt in}  & {\em max\+Size} & Maximum size of the resulting resource file \\
+\hline
+\mbox{\tt out}  & {\em length} & Actual length of the file \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Status code 
+\end{DoxyReturn}
+
+
+Definition at line 195 of file main.\+c.
+
+
+\begin{DoxyCode}
+196 \{
+197    \textcolor{keywordtype}{int} error;
+198    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+199    FILE *fp;
+200 
+201    \textcolor{comment}{//Point to the header of the resource data}
+202    \hyperlink{structtResHeader}{tResHeader} *\hyperlink{resource__manager_8h_acec072f8d98bf27c85418d0b270365d8}{ResHeader} = (\hyperlink{structtResHeader}{tResHeader} *) \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data};
+203 
+204    \textcolor{comment}{//Open the specified file}
+205    fp = fopen(\hyperlink{tftp__common_8h_a054704ecfbf9f8eea80cd1d120b8cf62}{filename}, \textcolor{stringliteral}{"rb"});
+206    \textcolor{comment}{//Cannot open file?}
+207    \textcolor{keywordflow}{if}(!fp)
+208       \textcolor{keywordflow}{return} \hyperlink{utils_2ResourceCompiler_2main_8c_a47836960c8d5d00d23f9d224146c60c4}{ERROR\_OPEN\_FAILED};
+209 
+210    \textcolor{comment}{//Start of exception handling block}
+211    \textcolor{keywordflow}{do}
+212    \{
+213       \textcolor{comment}{//Jump to the end of the file}
+214       error = fseek(fp, 0, SEEK\_END);
+215       \textcolor{comment}{//Any error to report?}
+216       \textcolor{keywordflow}{if}(error)
+217       \{
+218          error = \hyperlink{utils_2ResourceCompiler_2main_8c_aff71b0b68602d76200063aebde280859}{ERROR\_FAILURE};
+219          \textcolor{keywordflow}{break};
+220       \}
+221 
+222       \textcolor{comment}{//Get the length of the file}
+223       *\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} = ftell(fp);
+224 
+225       \textcolor{comment}{//Check the length of the file}
+226       \textcolor{keywordflow}{if}((ResHeader->\hyperlink{structtResHeader_a902608e1b86415839e6441e1021c60b5}{totalSize} + *\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}) > maxSize)
+227       \{
+228          error = \hyperlink{utils_2ResourceCompiler_2main_8c_a812998d7fd8d6910dad8240d91cee51b}{ERROR\_FILE\_TOO\_LARGE};
+229          \textcolor{keywordflow}{break};
+230       \}
+231 
+232       \textcolor{comment}{//Back the beginning of the file}
+233       error = fseek(fp, 0, SEEK\_SET);
+234       \textcolor{comment}{//Any error to report?}
+235       \textcolor{keywordflow}{if}(error)
+236       \{
+237          error = \hyperlink{utils_2ResourceCompiler_2main_8c_aff71b0b68602d76200063aebde280859}{ERROR\_FAILURE};
+238          \textcolor{keywordflow}{break};
+239       \}
+240 
+241       \textcolor{comment}{//Read file contents}
+242       n = fread(\hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data} + ResHeader->\hyperlink{structtResHeader_a902608e1b86415839e6441e1021c60b5}{totalSize}, 1, *\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, fp);
+243       \textcolor{comment}{//Failed to read data?}
+244       \textcolor{keywordflow}{if}(n != *\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length})
+245       \{
+246          error = \hyperlink{utils_2ResourceCompiler_2main_8c_aff71b0b68602d76200063aebde280859}{ERROR\_FAILURE};
+247          \textcolor{keywordflow}{break};
+248       \}
+249 
+250       \textcolor{comment}{//Update the total length of the resource data}
+251       ResHeader->\hyperlink{structtResHeader_a902608e1b86415839e6441e1021c60b5}{totalSize} += *\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length};
+252 
+253       \textcolor{comment}{//Successful processing}
+254       error = \hyperlink{utils_2ResourceCompiler_2main_8c_a258bb72419ef143530a2f8f55e7d57af}{NO\_ERROR};
+255 
+256       \textcolor{comment}{//End of exception handling block}
+257    \} \textcolor{keywordflow}{while}(0);
+258 
+259    \textcolor{comment}{//Close file}
+260    fclose(fp);
+261    \textcolor{comment}{//Return status code}
+262    \textcolor{keywordflow}{return} error;
+263 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{utils_2ResourceCompiler_2main_8c_a6c1bf39a928d35aeaebf908191ce38f3}\label{utils_2ResourceCompiler_2main_8c_a6c1bf39a928d35aeaebf908191ce38f3}} 
+\index{utils/\+Resource\+Compiler/main.\+c@{utils/\+Resource\+Compiler/main.\+c}!dump\+Directory@{dump\+Directory}}
+\index{dump\+Directory@{dump\+Directory}!utils/\+Resource\+Compiler/main.\+c@{utils/\+Resource\+Compiler/main.\+c}}
+\subsubsection{\texorpdfstring{dump\+Directory()}{dumpDirectory()}}
+{\footnotesize\ttfamily int dump\+Directory (\begin{DoxyParamCaption}\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{data,  }\item[{\hyperlink{structtResEntry}{t\+Res\+Entry} $\ast$}]{directory,  }\item[{unsigned int}]{level }\end{DoxyParamCaption})}
+
+
+
+Dump the contents of a directory. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em directory} & Directory to dump \\
+\hline
+\mbox{\tt in}  & {\em parent\+Size} & Size of the parent directory \\
+\hline
+\mbox{\tt in}  & {\em level} & Recursion level \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Status code 
+\end{DoxyReturn}
+
+
+Definition at line 562 of file main.\+c.
+
+
+\begin{DoxyCode}
+563 \{
+564    \textcolor{keywordtype}{int} error;
+565    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} i;
+566    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+567    \hyperlink{structtResEntry}{tResEntry} *entry;
+568    \textcolor{keywordtype}{char} \hyperlink{tftp__common_8h_a054704ecfbf9f8eea80cd1d120b8cf62}{filename}[\hyperlink{utils_2ResourceCompiler_2main_8c_ae688d728e1acdfe5988c7db45d6f0166}{PATH\_MAX}];
+569 
+570    \textcolor{comment}{//Check entry type}
+571    \textcolor{keywordflow}{if}(directory->\hyperlink{structtResEntry_a47648b5006a5bb90c673c1589b95673c}{type} != \hyperlink{utils_2ResourceCompiler_2main_8c_a5d230b1f0bcb5116aa2e34179f4e4bc0a0d823bf9b088e1ef3a19bc216f2e53c4}{RES\_TYPE\_DIR})
+572       \textcolor{keywordflow}{return} \hyperlink{utils_2ResourceCompiler_2main_8c_aff71b0b68602d76200063aebde280859}{ERROR\_FAILURE};
+573 
+574    \textcolor{comment}{//Retrieve the length of the directory}
+575    n = directory->\hyperlink{structtResEntry_ab6c46c2d54823acfa660e98e8428ba1e}{dataLength};
+576    \textcolor{comment}{//Point to the first entry}
+577    entry = (\hyperlink{structtResEntry}{tResEntry} *) (\hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data} + directory->\hyperlink{structtResEntry_a88513f415b06add371a6b323fecf07ab}{dataOffset});
+578 
+579    \textcolor{comment}{//Loop through the directory}
+580    \textcolor{keywordflow}{while}(n > 0)
+581    \{
+582       \textcolor{comment}{//Check the number of remaining bytes}
+583       \textcolor{keywordflow}{if}(n < \textcolor{keyword}{sizeof}(\hyperlink{structtResEntry}{tResEntry}))
+584          \textcolor{keywordflow}{return} \hyperlink{utils_2ResourceCompiler_2main_8c_ac131f469a534061518ec6c433d07976f}{ERROR\_INVALID\_RESOURCE};
+585       \textcolor{comment}{//Make sure the entry is valid}
+586       \textcolor{keywordflow}{if}(n < (\textcolor{keyword}{sizeof}(\hyperlink{structtResEntry}{tResEntry}) + entry->\hyperlink{structtResEntry_ac0518953ee4a06845374e9a505695434}{nameLength}))
+587          \textcolor{keywordflow}{return} \hyperlink{utils_2ResourceCompiler_2main_8c_ac131f469a534061518ec6c433d07976f}{ERROR\_INVALID\_RESOURCE};
+588 
+589       \textcolor{comment}{//Retrieve filename}
+590       strncpy(filename, entry->\hyperlink{structtResEntry_af8a44a299155173ce72de5b75683e9fb}{name}, entry->\hyperlink{structtResEntry_ac0518953ee4a06845374e9a505695434}{nameLength});
+591       \textcolor{comment}{//Properly terminate the string with a NULL character}
+592       filename[entry->\hyperlink{structtResEntry_ac0518953ee4a06845374e9a505695434}{nameLength}] = \textcolor{charliteral}{'\(\backslash\)0'};
+593 
+594       \textcolor{comment}{//Indent the current line}
+595       \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{tls_8h_abbb6c7c49508c1ac374683f2d1159e08}{level}; i++) printf(\textcolor{stringliteral}{"  "});
+596 
+597       \textcolor{comment}{//Display filename}
+598       \textcolor{keywordflow}{if}(entry->\hyperlink{structtResEntry_a47648b5006a5bb90c673c1589b95673c}{type} == \hyperlink{utils_2ResourceCompiler_2main_8c_a5d230b1f0bcb5116aa2e34179f4e4bc0a0d823bf9b088e1ef3a19bc216f2e53c4}{RES\_TYPE\_DIR})
+599          printf(\textcolor{stringliteral}{"[%s]\(\backslash\)r\(\backslash\)n"}, filename);
+600       \textcolor{keywordflow}{else}
+601          printf(\textcolor{stringliteral}{"%s (%u bytes)\(\backslash\)r\(\backslash\)n"}, filename, entry->\hyperlink{structtResEntry_ab6c46c2d54823acfa660e98e8428ba1e}{dataLength});
+602 
+603       \textcolor{comment}{//Directory found?}
+604       \textcolor{keywordflow}{if}(entry->\hyperlink{structtResEntry_a47648b5006a5bb90c673c1589b95673c}{type} == \hyperlink{utils_2ResourceCompiler_2main_8c_a5d230b1f0bcb5116aa2e34179f4e4bc0a0d823bf9b088e1ef3a19bc216f2e53c4}{RES\_TYPE\_DIR})
+605       \{
+606          \textcolor{keywordflow}{if}(strcmp(filename, \textcolor{stringliteral}{"."}) && strcmp(filename, \textcolor{stringliteral}{".."}))
+607          \{
+608             \textcolor{comment}{//Recursively dump the contents of the directory}
+609             error = \hyperlink{utils_2ResourceCompiler_2main_8c_a6c1bf39a928d35aeaebf908191ce38f3}{dumpDirectory}(\hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, entry, level + 1);
+610             \textcolor{comment}{//Any error to report?}
+611             \textcolor{keywordflow}{if}(error) \textcolor{keywordflow}{return} error;
+612          \}
+613       \}
+614 
+615       \textcolor{comment}{//Remaining bytes to process}
+616       n -= \textcolor{keyword}{sizeof}(\hyperlink{structtResEntry}{tResEntry}) + entry->\hyperlink{structtResEntry_ac0518953ee4a06845374e9a505695434}{nameLength};
+617       \textcolor{comment}{//Point to the next entry}
+618       entry = (\hyperlink{structtResEntry}{tResEntry} *) ((\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *) entry + \textcolor{keyword}{sizeof}(
+      \hyperlink{structtResEntry}{tResEntry}) + entry->\hyperlink{structtResEntry_ac0518953ee4a06845374e9a505695434}{nameLength});
+619    \}
+620 
+621    \textcolor{comment}{//Successful processing}
+622    \textcolor{keywordflow}{return} \hyperlink{utils_2ResourceCompiler_2main_8c_a258bb72419ef143530a2f8f55e7d57af}{NO\_ERROR};
+623 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{utils_2ResourceCompiler_2main_8c_a0ddf1224851353fc92bfbff6f499fa97}\label{utils_2ResourceCompiler_2main_8c_a0ddf1224851353fc92bfbff6f499fa97}} 
+\index{utils/\+Resource\+Compiler/main.\+c@{utils/\+Resource\+Compiler/main.\+c}!main@{main}}
+\index{main@{main}!utils/\+Resource\+Compiler/main.\+c@{utils/\+Resource\+Compiler/main.\+c}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Main routine. 
+
+
+
+Definition at line 630 of file main.\+c.
+
+
+\begin{DoxyCode}
+631 \{
+632    \textcolor{keywordtype}{int} error;
+633    \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} i;
+634    \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} maxSize;
+635    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *\hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data};
+636    \textcolor{keyword}{const} \textcolor{keywordtype}{char} *srcDir;
+637    \textcolor{keyword}{const} \textcolor{keywordtype}{char} *destFile;
+638    \textcolor{keywordtype}{char} currentDir[\hyperlink{utils_2ResourceCompiler_2main_8c_ae688d728e1acdfe5988c7db45d6f0166}{PATH\_MAX}];
+639    \textcolor{keywordtype}{char} path[\hyperlink{utils_2ResourceCompiler_2main_8c_ae688d728e1acdfe5988c7db45d6f0166}{PATH\_MAX}];
+640    \textcolor{keywordtype}{char} drive[\hyperlink{utils_2ResourceCompiler_2main_8c_ae688d728e1acdfe5988c7db45d6f0166}{PATH\_MAX}];
+641    \textcolor{keywordtype}{char} \hyperlink{tftp__common_8h_a054704ecfbf9f8eea80cd1d120b8cf62}{filename}[\hyperlink{utils_2ResourceCompiler_2main_8c_ae688d728e1acdfe5988c7db45d6f0166}{PATH\_MAX}];
+642    \textcolor{keywordtype}{char} extension[\hyperlink{utils_2ResourceCompiler_2main_8c_ae688d728e1acdfe5988c7db45d6f0166}{PATH\_MAX}];
+643    \hyperlink{structtResHeader}{tResHeader} *resHeader;
+644    FILE *fp;
+645 
+646    \textcolor{comment}{//Check parameters}
+647    \textcolor{keywordflow}{if}(argc != 3 && argc != 4)
+648    \{
+649       \textcolor{comment}{//Print command syntax}
+650       printf(\textcolor{stringliteral}{"Usage: rc.exe input output [maxsize]\(\backslash\)r\(\backslash\)n"});
+651       printf(\textcolor{stringliteral}{"  - input:   Source directory to include in resource file\(\backslash\)r\(\backslash\)n"});
+652       printf(\textcolor{stringliteral}{"  - output:  Compiled resource file\(\backslash\)r\(\backslash\)n"});
+653       printf(\textcolor{stringliteral}{"  - maxsize: Maximum size of the resource file\(\backslash\)r\(\backslash\)n"});
+654       printf(\textcolor{stringliteral}{"Copyright (c) 2010-2017 Oryx Embedded\(\backslash\)r\(\backslash\)n"});
+655       \textcolor{comment}{//Report an error}
+656       \textcolor{keywordflow}{return} \hyperlink{utils_2ResourceCompiler_2main_8c_aff71b0b68602d76200063aebde280859}{ERROR\_FAILURE};
+657    \}
+658 
+659    \textcolor{comment}{//Source directory}
+660    srcDir = argv[1];
+661    \textcolor{comment}{//Destination resource file}
+662    destFile = argv[2];
+663 
+664    \textcolor{comment}{//Maximum size of the resulting resource file}
+665    maxSize = (argc == 4) ? atoi(argv[3]) : (1024 * 1024);
+666 
+667 \textcolor{preprocessor}{#ifdef \_WIN32}
+668    \textcolor{comment}{//Split source directory}
+669    \hyperlink{utils_2ResourceCompiler_2main_8c_afa7755f92698ac76396e303d472c4de7}{\_splitpath}(srcDir, drive, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+670 
+671    \textcolor{comment}{//Relative or absolute path?}
+672    \textcolor{keywordflow}{if}(drive[0] == \textcolor{charliteral}{'\(\backslash\)0'})
+673    \{
+674       \textcolor{comment}{//Get current working directory}
+675       \_getcwd(currentDir, \_MAX\_PATH);
+676 
+677       \textcolor{comment}{//Retrieve the full path}
+678       \_makepath(path, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, currentDir, srcDir, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+679    \}
+680    \textcolor{keywordflow}{else}
+681    \{
+682       \textcolor{comment}{//Copy the path to the source directory}
+683       strcpy(path, srcDir);
+684    \}
+685 \textcolor{preprocessor}{#else}
+686    \textcolor{comment}{//Relative or absolute path?}
+687    \textcolor{keywordflow}{if}(srcDir[0] != \textcolor{charliteral}{'/'})
+688    \{
+689       \textcolor{comment}{//Get current working directory}
+690       getcwd(currentDir, \hyperlink{utils_2ResourceCompiler_2main_8c_ae688d728e1acdfe5988c7db45d6f0166}{PATH\_MAX});
+691 
+692       \textcolor{comment}{//Retrieve the full path}
+693       strcpy(path, currentDir);
+694       strcat(path, \textcolor{stringliteral}{"/"});
+695       strcat(path, srcDir);
+696    \}
+697    \textcolor{keywordflow}{else}
+698    \{
+699       \textcolor{comment}{//Copy the path to the source directory}
+700       strcpy(path, srcDir);
+701    \}
+702 \textcolor{preprocessor}{#endif}
+703 
+704    \textcolor{comment}{//Allocate a memory buffer to hold the resulting data}
+705    data = malloc(maxSize);
+706    \textcolor{comment}{//Failed to allocate memory?}
+707    \textcolor{keywordflow}{if}(data == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+708    \{
+709       printf(\textcolor{stringliteral}{"Error: Unable to allocate memory!\(\backslash\)r\(\backslash\)n"});
+710       \textcolor{comment}{//Release previoulsy allocated memory}
+711       free(data);
+712       \textcolor{keywordflow}{return} \hyperlink{utils_2ResourceCompiler_2main_8c_aff71b0b68602d76200063aebde280859}{ERROR\_FAILURE};
+713    \}
+714 
+715    \textcolor{comment}{//Clear memory buffer}
+716    memset(data, 0, maxSize);
+717 
+718    \textcolor{comment}{//Initialize resource data header}
+719    resHeader = (\hyperlink{structtResHeader}{tResHeader} *) data;
+720    resHeader->\hyperlink{structtResHeader_a902608e1b86415839e6441e1021c60b5}{totalSize} = \textcolor{keyword}{sizeof}(\hyperlink{structtResHeader}{tResHeader});
+721    resHeader->\hyperlink{structtResHeader_a4b77f1300b97d87e79d894befb92944c}{rootEntry}.\hyperlink{structtResEntry_a47648b5006a5bb90c673c1589b95673c}{type} = \hyperlink{utils_2ResourceCompiler_2main_8c_a5d230b1f0bcb5116aa2e34179f4e4bc0a0d823bf9b088e1ef3a19bc216f2e53c4}{RES\_TYPE\_DIR};
+722    resHeader->\hyperlink{structtResHeader_a4b77f1300b97d87e79d894befb92944c}{rootEntry}.\hyperlink{structtResEntry_a88513f415b06add371a6b323fecf07ab}{dataOffset} = \textcolor{keyword}{sizeof}(\hyperlink{structtResHeader}{tResHeader});
+723    resHeader->\hyperlink{structtResHeader_a4b77f1300b97d87e79d894befb92944c}{rootEntry}.\hyperlink{structtResEntry_ab6c46c2d54823acfa660e98e8428ba1e}{dataLength} = 0;
+724    resHeader->\hyperlink{structtResHeader_a4b77f1300b97d87e79d894befb92944c}{rootEntry}.\hyperlink{structtResEntry_ac0518953ee4a06845374e9a505695434}{nameLength} = 0;
+725 
+726    \textcolor{comment}{//Add the contents of the specified directory to the resource file}
+727    error = \hyperlink{utils_2ResourceCompiler_2main_8c_a627cec62a2c94035c76f3c3ba3b69621}{addDirectory}(0, 0, path, data, maxSize, &resHeader->
+      \hyperlink{structtResHeader_a4b77f1300b97d87e79d894befb92944c}{rootEntry}.\hyperlink{structtResEntry_ab6c46c2d54823acfa660e98e8428ba1e}{dataLength});
+728 
+729    \textcolor{comment}{//Any error to report?}
+730    \textcolor{keywordflow}{if}(error == \hyperlink{utils_2ResourceCompiler_2main_8c_a812998d7fd8d6910dad8240d91cee51b}{ERROR\_FILE\_TOO\_LARGE})
+731    \{
+732       \textcolor{comment}{//User message}
+733       printf(\textcolor{stringliteral}{"Error: Maximum size exceeded (%u bytes)!\(\backslash\)r\(\backslash\)n"}, maxSize);
+734       \textcolor{comment}{//Release previoulsy allocated memory}
+735       free(data);
+736       \textcolor{comment}{//Report an error}
+737       \textcolor{keywordflow}{return} \hyperlink{utils_2ResourceCompiler_2main_8c_aff71b0b68602d76200063aebde280859}{ERROR\_FAILURE};
+738    \}
+739    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(error)
+740    \{
+741       \textcolor{comment}{//User message}
+742       printf(\textcolor{stringliteral}{"Error: Unable to read source directory!\(\backslash\)r\(\backslash\)n"});
+743       \textcolor{comment}{//Release previoulsy allocated memory}
+744       free(data);
+745       \textcolor{comment}{//Report an error}
+746       \textcolor{keywordflow}{return} \hyperlink{utils_2ResourceCompiler_2main_8c_aff71b0b68602d76200063aebde280859}{ERROR\_FAILURE};
+747    \}
+748 
+749    \textcolor{comment}{//Get filename}
+750    \hyperlink{utils_2ResourceCompiler_2main_8c_afa7755f92698ac76396e303d472c4de7}{\_splitpath}(destFile, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, filename, extension);
+751 
+752    \textcolor{comment}{//Check the extension of the output file}
+753    \textcolor{keywordflow}{if}(!strcmp(extension, \textcolor{stringliteral}{".c"}) || !strcmp(extension, \textcolor{stringliteral}{".h"}))
+754    \{
+755       \textcolor{comment}{//Open output file}
+756       fp = fopen(destFile, \textcolor{stringliteral}{"w+"});
+757 
+758       \textcolor{comment}{//Cannot open output file}
+759       \textcolor{keywordflow}{if}(!fp)
+760       \{
+761          \textcolor{comment}{//User message}
+762          printf(\textcolor{stringliteral}{"Error: Cannot open output file!\(\backslash\)r\(\backslash\)n"});
+763          \textcolor{comment}{//Release previoulsy allocated memory}
+764          free(data);
+765          \textcolor{comment}{//Report an error}
+766          \textcolor{keywordflow}{return} \hyperlink{utils_2ResourceCompiler_2main_8c_aff71b0b68602d76200063aebde280859}{ERROR\_FAILURE};
+767       \}
+768 
+769       \textcolor{comment}{//Write header}
+770       fprintf(fp, \textcolor{stringliteral}{"const unsigned char %s[] =\(\backslash\)n"}, filename);
+771       fprintf(fp, \textcolor{stringliteral}{"\{\(\backslash\)n"});
+772 
+773       \textcolor{comment}{//Write data}
+774       \textcolor{keywordflow}{for}(i = 0; i < resHeader->\hyperlink{structtResHeader_a902608e1b86415839e6441e1021c60b5}{totalSize}; i++)
+775       \{
+776          \textcolor{comment}{//Beginning of a new line?}
+777          \textcolor{keywordflow}{if}((i % 16) == 0)
+778             fprintf(fp, \textcolor{stringliteral}{"   "});
+779 
+780          \textcolor{comment}{//Display current data byte}
+781          fprintf(fp, \textcolor{stringliteral}{"0x%02X"}, data[i]);
+782 
+783          \textcolor{comment}{//Last byte?}
+784          \textcolor{keywordflow}{if}(i == (resHeader->\hyperlink{structtResHeader_a902608e1b86415839e6441e1021c60b5}{totalSize} - 1))
+785             fprintf(fp, \textcolor{stringliteral}{"\(\backslash\)n"});
+786          \textcolor{comment}{//End of current line?}
+787          \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}((i % 16) == 15)
+788             fprintf(fp, \textcolor{stringliteral}{",\(\backslash\)n"});
+789          \textcolor{keywordflow}{else}
+790             fprintf(fp, \textcolor{stringliteral}{", "});
+791       \}
+792 
+793       \textcolor{comment}{//Properly terminate the array}
+794       fprintf(fp, \textcolor{stringliteral}{"\};\(\backslash\)n"});
+795       \textcolor{comment}{//Close output file}
+796       fclose(fp);
+797    \}
+798    \textcolor{keywordflow}{else}
+799    \{
+800       \textcolor{comment}{//Open output file}
+801       fp = fopen(destFile, \textcolor{stringliteral}{"wb+"});
+802 
+803       \textcolor{comment}{//Cannot open output file}
+804       \textcolor{keywordflow}{if}(!fp)
+805       \{
+806          \textcolor{comment}{//User message}
+807          printf(\textcolor{stringliteral}{"Error: Cannot open output file!\(\backslash\)r\(\backslash\)n"});
+808          \textcolor{comment}{//Release previoulsy allocated memory}
+809          free(data);
+810          \textcolor{comment}{//Report an error}
+811          \textcolor{keywordflow}{return} \hyperlink{utils_2ResourceCompiler_2main_8c_aff71b0b68602d76200063aebde280859}{ERROR\_FAILURE};
+812       \}
+813 
+814       \textcolor{comment}{//Write data}
+815       fwrite(data, \textcolor{keyword}{sizeof}(\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t}), resHeader->\hyperlink{structtResHeader_a902608e1b86415839e6441e1021c60b5}{totalSize}, fp);
+816 
+817       \textcolor{comment}{//Close output file}
+818       fclose(fp);
+819    \}
+820 
+821    \textcolor{comment}{//Dump the contents of the resource file}
+822    \hyperlink{utils_2ResourceCompiler_2main_8c_a6c1bf39a928d35aeaebf908191ce38f3}{dumpDirectory}(data, &resHeader->\hyperlink{structtResHeader_a4b77f1300b97d87e79d894befb92944c}{rootEntry}, 0);
+823    \textcolor{comment}{//User message}
+824    printf(\textcolor{stringliteral}{"\(\backslash\)r\(\backslash\)n%u bytes successfully written !\(\backslash\)r\(\backslash\)n"}, resHeader->\hyperlink{structtResHeader_a902608e1b86415839e6441e1021c60b5}{totalSize});
+825 
+826    \textcolor{comment}{//Release previoulsy allocated memory}
+827    free(data);
+828 
+829    \textcolor{comment}{//Successful processing}
+830    \textcolor{keywordflow}{return} \hyperlink{utils_2ResourceCompiler_2main_8c_a258bb72419ef143530a2f8f55e7d57af}{NO\_ERROR};
+831 \}
+\end{DoxyCode}

@@ -1,0 +1,465 @@
+\hypertarget{tcp__timer_8c}{}\section{cyclone\+\_\+tcp/core/tcp\+\_\+timer.c File Reference}
+\label{tcp__timer_8c}\index{cyclone\+\_\+tcp/core/tcp\+\_\+timer.\+c@{cyclone\+\_\+tcp/core/tcp\+\_\+timer.\+c}}
+
+
+T\+CP timer management.  
+
+
+{\ttfamily \#include \char`\"{}core/net.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}core/socket.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}core/tcp.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}core/tcp\+\_\+misc.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}core/tcp\+\_\+timer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ipv4/ipv4.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ipv6/ipv6.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}date\+\_\+time.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}debug.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{tcp__timer_8c_afcdf5e66fd927a7f4cc64295acd20407}{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}~\hyperlink{net__config_8h_a1543cbd65f7ef07345d2b4e4ad740347}{T\+C\+P\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{tcp__timer_8c_afd5865aa3390d462ed15a1986f0e37b8}{tcp\+Tick} (void)
+\begin{DoxyCompactList}\small\item\em T\+CP timer handler. \end{DoxyCompactList}\item 
+void \hyperlink{tcp__timer_8c_ac28b31fb6e44b56d37fb37f2b34f8a67}{tcp\+Timer\+Start} (\hyperlink{structTcpTimer}{Tcp\+Timer} $\ast$timer, \hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\+\_\+t} delay)
+\begin{DoxyCompactList}\small\item\em Start T\+CP timer. \end{DoxyCompactList}\item 
+void \hyperlink{tcp__timer_8c_a3064f1c41511310223cdbaae4ab75674}{tcp\+Timer\+Stop} (\hyperlink{structTcpTimer}{Tcp\+Timer} $\ast$timer)
+\begin{DoxyCompactList}\small\item\em Stop T\+CP timer. \end{DoxyCompactList}\item 
+\hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} \hyperlink{tcp__timer_8c_a23e3bb081c9510f93e437a9a424b2983}{tcp\+Timer\+Running} (\hyperlink{structTcpTimer}{Tcp\+Timer} $\ast$timer)
+\begin{DoxyCompactList}\small\item\em Check whether a T\+CP timer is running. \end{DoxyCompactList}\item 
+\hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} \hyperlink{tcp__timer_8c_a73497c6e73b8fa0b087df7d432a55a4e}{tcp\+Timer\+Elapsed} (\hyperlink{structTcpTimer}{Tcp\+Timer} $\ast$timer)
+\begin{DoxyCompactList}\small\item\em Check whether a T\+CP timer has elapsed. \end{DoxyCompactList}\item 
+\hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\+\_\+t} \hyperlink{tcp__timer_8c_aa031bee2a1768b352a54b6ab08abd523}{tcp\+Timer\+Get\+Interval} (\hyperlink{structTcpTimer}{Tcp\+Timer} $\ast$timer)
+\begin{DoxyCompactList}\small\item\em Get current time interval. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+T\+CP timer management. 
+
+\hypertarget{pic32mz__ef__curiosity_8h_License}{}\subsection{License}\label{pic32mz__ef__curiosity_8h_License}
+S\+P\+D\+X-\/\+License-\/\+Identifier\+: G\+P\+L-\/2.\+0-\/or-\/later
+
+Copyright (C) 2010-\/2019 Oryx Embedded S\+A\+RL. All rights reserved.
+
+This file is part of Cyclone\+T\+CP Open.
+
+This program is free software; you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+
+You should have received a copy of the G\+NU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-\/1301, U\+SA.
+
+\begin{DoxyAuthor}{Author}
+Oryx Embedded S\+A\+RL (www.\+oryx-\/embedded.\+com) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+9.\+6 
+\end{DoxyVersion}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{tcp__timer_8c_afcdf5e66fd927a7f4cc64295acd20407}\label{tcp__timer_8c_afcdf5e66fd927a7f4cc64295acd20407}} 
+\index{tcp\+\_\+timer.\+c@{tcp\+\_\+timer.\+c}!T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+\index{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}!tcp\+\_\+timer.\+c@{tcp\+\_\+timer.\+c}}
+\subsubsection{\texorpdfstring{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}{TRACE\_LEVEL}}
+{\footnotesize\ttfamily \#define T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL~\hyperlink{net__config_8h_a1543cbd65f7ef07345d2b4e4ad740347}{T\+C\+P\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+
+
+
+Definition at line 32 of file tcp\+\_\+timer.\+c.
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{tcp__timer_8c_afd5865aa3390d462ed15a1986f0e37b8}\label{tcp__timer_8c_afd5865aa3390d462ed15a1986f0e37b8}} 
+\index{tcp\+\_\+timer.\+c@{tcp\+\_\+timer.\+c}!tcp\+Tick@{tcp\+Tick}}
+\index{tcp\+Tick@{tcp\+Tick}!tcp\+\_\+timer.\+c@{tcp\+\_\+timer.\+c}}
+\subsubsection{\texorpdfstring{tcp\+Tick()}{tcpTick()}}
+{\footnotesize\ttfamily void tcp\+Tick (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+T\+CP timer handler. 
+
+This routine must be periodically called by the T\+C\+P/\+IP stack to handle retransmissions and T\+CP related timers (persist timer, F\+I\+N-\/\+W\+A\+I\+T-\/2 timer and T\+I\+M\+E-\/\+W\+A\+IT timer) 
+
+Definition at line 58 of file tcp\+\_\+timer.\+c.
+
+
+\begin{DoxyCode}
+59 \{
+60    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+61    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+62    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+63    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} u;
+64 
+65    \textcolor{comment}{//Loop through opened sockets}
+66    \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{socket_8h_ab793a8c76592a00fa3ea0510cd2ffe3a}{SOCKET\_MAX\_COUNT}; i++)
+67    \{
+68       \textcolor{comment}{//Shortcut to the current socket}
+69       \hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} *\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket} = \hyperlink{socket_8c_acdd76d8e01b4715c774c404b10f958da}{socketTable} + i;
+70       \textcolor{comment}{//Check socket type}
+71       \textcolor{keywordflow}{if}(socket->type != \hyperlink{socket_8h_aa78c7398fa81f7f62aa233159d4d8d97a9dab003c4dc9f7279e806241534d4859}{SOCKET\_TYPE\_STREAM})
+72          \textcolor{keywordflow}{continue};
+73       \textcolor{comment}{//Check the current state of the TCP state machine}
+74       \textcolor{keywordflow}{if}(socket->state == \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfeca1af39131036c81d79f09174d2fb6f788}{TCP\_STATE\_CLOSED})
+75          \textcolor{keywordflow}{continue};
+76 
+77       \textcolor{comment}{//Is there any packet in the retransmission queue?}
+78       \textcolor{keywordflow}{if}(socket->retransmitQueue != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+79       \{
+80          \textcolor{comment}{//Retransmission timeout?}
+81          \textcolor{keywordflow}{if}(\hyperlink{tcp__timer_8c_a73497c6e73b8fa0b087df7d432a55a4e}{tcpTimerElapsed}(&socket->retransmitTimer))
+82          \{
+83 \textcolor{preprocessor}{#if (TCP\_CONGEST\_CONTROL\_SUPPORT == ENABLED)}
+84             \textcolor{comment}{//When a TCP sender detects segment loss using the retransmission}
+85             \textcolor{comment}{//timer and the given segment has not yet been resent by way of}
+86             \textcolor{comment}{//the retransmission timer, the value of ssthresh must be updated}
+87             \textcolor{keywordflow}{if}(!socket->retransmitCount)
+88             \{
+89                \textcolor{comment}{//Amount of data that has been sent but not yet acknowledged}
+90                \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} flightSize = socket->sndNxt - socket->sndUna;
+91                \textcolor{comment}{//Adjust ssthresh value}
+92                socket->ssthresh = \hyperlink{os__port_8h_afa99ec4acc4ecb2dc3c2d05da15d0e3f}{MAX}(flightSize / 2, 2 * socket->smss);
+93             \}
+94 
+95             \textcolor{comment}{//Furthermore, upon a timeout cwnd must be set to no more than}
+96             \textcolor{comment}{//the loss window, LW, which equals 1 full-sized segment}
+97             socket->cwnd = \hyperlink{os__port_8h_a3acffbd305ee72dcd4593c0d8af64a4f}{MIN}(\hyperlink{tcp_8h_af314a8120817efcb8b6abcb19547874e}{TCP\_LOSS\_WINDOW} * socket->smss, socket->txBufferSize);
+98 
+99             \textcolor{comment}{//After a retransmit timeout, record the highest sequence number}
+100             \textcolor{comment}{//transmitted in the variable recover}
+101             socket->recover = socket->sndNxt - 1;
+102 
+103             \textcolor{comment}{//Enter the fast loss recovery procedure}
+104             socket->congestState = \hyperlink{tcp_8h_ac69e0e40557f11fc979456965cdcd2f1a5c24204654ace8731ab8676ce459dc9a}{TCP\_CONGEST\_STATE\_LOSS\_RECOVERY};
+105 \textcolor{preprocessor}{#endif}
+106             \textcolor{comment}{//Make sure the maximum number of retransmissions has not been reached}
+107             \textcolor{keywordflow}{if}(socket->retransmitCount < \hyperlink{tcp_8h_a23562b70928601b9da68cbacdf8b616f}{TCP\_MAX\_RETRIES})
+108             \{
+109                \textcolor{comment}{//Debug message}
+110                \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"%s: TCP segment retransmission #%u (%u data bytes)...\(\backslash\)r\(\backslash\)n"},
+111                   \hyperlink{date__time_8c_ae15b3e664208ca7e4d6983921865cd74}{formatSystemTime}(\hyperlink{os__port__chibios_8c_ab66a11272d40a916fa69dd8e4dc443d4}{osGetSystemTime}(), 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}), socket->retransmitCount + 1,
+112                   socket->retransmitQueue->length);
+113 
+114                \textcolor{comment}{//Retransmit the earliest segment that has not been}
+115                \textcolor{comment}{//acknowledged by the TCP receiver}
+116                \hyperlink{tcp__misc_8c_aee22faafb5104e4cc56a505621050616}{tcpRetransmitSegment}(socket);
+117 
+118                \textcolor{comment}{//Use exponential back-off algorithm to calculate the new RTO}
+119                socket->rto = \hyperlink{os__port_8h_a3acffbd305ee72dcd4593c0d8af64a4f}{MIN}(socket->rto * 2, \hyperlink{tcp_8h_ab10a9785dd0ff10bb73ddbcf6f8f43a8}{TCP\_MAX\_RTO});
+120                \textcolor{comment}{//Restart retransmission timer}
+121                \hyperlink{tcp__timer_8c_ac28b31fb6e44b56d37fb37f2b34f8a67}{tcpTimerStart}(&socket->retransmitTimer, socket->rto);
+122                \textcolor{comment}{//Increment retransmission counter}
+123                socket->retransmitCount++;
+124             \}
+125             \textcolor{keywordflow}{else}
+126             \{
+127                \textcolor{comment}{//The maximum number of retransmissions has been exceeded}
+128                \hyperlink{tcp__misc_8c_af8741d2662dcc13ed4695fec3ef5a365}{tcpChangeState}(socket, \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfeca1af39131036c81d79f09174d2fb6f788}{TCP\_STATE\_CLOSED});
+129                \textcolor{comment}{//Turn off the retransmission timer}
+130                \hyperlink{tcp__timer_8c_a3064f1c41511310223cdbaae4ab75674}{tcpTimerStop}(&socket->retransmitTimer);
+131             \}
+132 
+133             \textcolor{comment}{//TCP must use Karn's algorithm for taking RTT samples. That is, RTT}
+134             \textcolor{comment}{//samples must not be made using segments that were retransmitted}
+135             socket->rttBusy = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+136          \}
+137       \}
+138 
+139       \textcolor{comment}{//Check the current state of the TCP state machine}
+140       \textcolor{keywordflow}{if}(socket->state == \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfeca1af39131036c81d79f09174d2fb6f788}{TCP\_STATE\_CLOSED})
+141          \textcolor{keywordflow}{continue};
+142 
+143       \textcolor{comment}{//The persist timer is used when the remote host advertises}
+144       \textcolor{comment}{//a window size of zero}
+145       \textcolor{keywordflow}{if}(!socket->sndWnd && socket->wndProbeInterval)
+146       \{
+147          \textcolor{comment}{//Time to send a new probe?}
+148          \textcolor{keywordflow}{if}(\hyperlink{tcp__timer_8c_a73497c6e73b8fa0b087df7d432a55a4e}{tcpTimerElapsed}(&socket->persistTimer))
+149          \{
+150             \textcolor{comment}{//Make sure the maximum number of retransmissions has not been reached}
+151             \textcolor{keywordflow}{if}(socket->wndProbeCount < \hyperlink{tcp_8h_a23562b70928601b9da68cbacdf8b616f}{TCP\_MAX\_RETRIES})
+152             \{
+153                \textcolor{comment}{//Debug message}
+154                \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"%s: TCP zero window probe #%u...\(\backslash\)r\(\backslash\)n"},
+155                   \hyperlink{date__time_8c_ae15b3e664208ca7e4d6983921865cd74}{formatSystemTime}(\hyperlink{os__port__chibios_8c_ab66a11272d40a916fa69dd8e4dc443d4}{osGetSystemTime}(), 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}), socket->wndProbeCount + 1);
+156 
+157                \textcolor{comment}{//Zero window probes usually have the sequence number one less than expected}
+158                \hyperlink{tcp__misc_8c_acf2944966efe796f3bb867f9d7233591}{tcpSendSegment}(socket, \hyperlink{tcp_8h_a4e6d97f0f2a3dc780d192efcdfe64aa7aae4cbb82c7a2373576547ed119498a4a}{TCP\_FLAG\_ACK}, socket->sndNxt - 1, socket->
+      rcvNxt, 0, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE});
+159                \textcolor{comment}{//The interval between successive probes should be increased exponentially}
+160                socket->wndProbeInterval = \hyperlink{os__port_8h_a3acffbd305ee72dcd4593c0d8af64a4f}{MIN}(socket->wndProbeInterval * 2, 
+      \hyperlink{tcp_8h_ae54deea793dc3babd4ec25ae9ed144b7}{TCP\_MAX\_PROBE\_INTERVAL});
+161                \textcolor{comment}{//Restart the persist timer}
+162                \hyperlink{tcp__timer_8c_ac28b31fb6e44b56d37fb37f2b34f8a67}{tcpTimerStart}(&socket->persistTimer, socket->wndProbeInterval);
+163                \textcolor{comment}{//Increment window probe counter}
+164                socket->wndProbeCount++;
+165             \}
+166             \textcolor{keywordflow}{else}
+167             \{
+168                \textcolor{comment}{//Enter CLOSED state}
+169                \hyperlink{tcp__misc_8c_af8741d2662dcc13ed4695fec3ef5a365}{tcpChangeState}(socket, \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfeca1af39131036c81d79f09174d2fb6f788}{TCP\_STATE\_CLOSED});
+170             \}
+171          \}
+172       \}
+173 
+174       \textcolor{comment}{//To avoid a deadlock, it is necessary to have a timeout to force}
+175       \textcolor{comment}{//transmission of data, overriding the SWS avoidance algorithm. In}
+176       \textcolor{comment}{//practice, this timeout should seldom occur (refer to RFC 1122,}
+177       \textcolor{comment}{//section 4.2.3.4)}
+178       \textcolor{keywordflow}{if}(socket->state == \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfecaacb7ccce8d3fcdbc6635983251b22189}{TCP\_STATE\_ESTABLISHED} || socket->state == 
+      \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfecabd723866a1772c3180b372605cfbc963}{TCP\_STATE\_CLOSE\_WAIT})
+179       \{
+180          \textcolor{comment}{//The override timeout occurred?}
+181          \textcolor{keywordflow}{if}(socket->sndUser && \hyperlink{tcp__timer_8c_a73497c6e73b8fa0b087df7d432a55a4e}{tcpTimerElapsed}(&socket->overrideTimer))
+182          \{
+183             \textcolor{comment}{//The amount of data that can be sent at any given time is}
+184             \textcolor{comment}{//limited by the receiver window and the congestion window}
+185             n = \hyperlink{os__port_8h_a3acffbd305ee72dcd4593c0d8af64a4f}{MIN}(socket->sndWnd, socket->txBufferSize);
+186 
+187 \textcolor{preprocessor}{#if (TCP\_CONGEST\_CONTROL\_SUPPORT == ENABLED)}
+188             \textcolor{comment}{//Check the congestion window}
+189             n = \hyperlink{os__port_8h_a3acffbd305ee72dcd4593c0d8af64a4f}{MIN}(n, socket->cwnd);
+190 \textcolor{preprocessor}{#endif}
+191             \textcolor{comment}{//Retrieve the size of the usable window}
+192             u = n - (socket->sndNxt - socket->sndUna);
+193 
+194             \textcolor{comment}{//Send as much data as possible}
+195             \textcolor{keywordflow}{while}(socket->sndUser > 0)
+196             \{
+197                \textcolor{comment}{//The usable window size may become zero or negative,}
+198                \textcolor{comment}{//preventing packet transmission}
+199                \textcolor{keywordflow}{if}((\hyperlink{compiler__port_8h_a022c65af7f6c8d3947e8a37d64db6ad6}{int\_t}) u <= 0)
+200                   \textcolor{keywordflow}{break};
+201 
+202                \textcolor{comment}{//Calculate the number of bytes to send at a time}
+203                n = \hyperlink{os__port_8h_a3acffbd305ee72dcd4593c0d8af64a4f}{MIN}(u, socket->sndUser);
+204                n = \hyperlink{os__port_8h_a3acffbd305ee72dcd4593c0d8af64a4f}{MIN}(n, socket->smss);
+205 
+206                \textcolor{comment}{//Send TCP segment}
+207                error = \hyperlink{tcp__misc_8c_acf2944966efe796f3bb867f9d7233591}{tcpSendSegment}(socket, \hyperlink{tcp_8h_a4e6d97f0f2a3dc780d192efcdfe64aa7a44a138e095774788c0f16e906d5a4c25}{TCP\_FLAG\_PSH} | 
+      \hyperlink{tcp_8h_a4e6d97f0f2a3dc780d192efcdfe64aa7aae4cbb82c7a2373576547ed119498a4a}{TCP\_FLAG\_ACK},
+208                   socket->sndNxt, socket->rcvNxt, n, \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE});
+209                \textcolor{comment}{//Failed to send TCP segment?}
+210                \textcolor{keywordflow}{if}(error)
+211                   \textcolor{keywordflow}{break};
+212 
+213                \textcolor{comment}{//Advance SND.NXT pointer}
+214                socket->sndNxt += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+215                \textcolor{comment}{//Adjust the number of bytes buffered but not yet sent}
+216                socket->sndUser -= \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+217                \textcolor{comment}{//Update the size of the usable window}
+218                u -= \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+219             \}
+220 
+221             \textcolor{comment}{//Check whether the transmitter can accept more data}
+222             \hyperlink{tcp__misc_8c_a1d69d8ed2662a74417c757291f540077}{tcpUpdateEvents}(socket);
+223 
+224             \textcolor{comment}{//Restart override timer if necessary}
+225             \textcolor{keywordflow}{if}(socket->sndUser > 0)
+226                \hyperlink{tcp__timer_8c_ac28b31fb6e44b56d37fb37f2b34f8a67}{tcpTimerStart}(&socket->overrideTimer, 
+      \hyperlink{tcp_8h_a96dd43e8ea17721fdc51d6057e5f988b}{TCP\_OVERRIDE\_TIMEOUT});
+227          \}
+228       \}
+229 
+230       \textcolor{comment}{//The FIN-WAIT-2 timer prevents the connection}
+231       \textcolor{comment}{//from staying in the FIN-WAIT-2 state forever}
+232       \textcolor{keywordflow}{if}(socket->state == \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfecac50f13616eeb349dc1aaa5cfd3422018}{TCP\_STATE\_FIN\_WAIT\_2})
+233       \{
+234          \textcolor{comment}{//Maximum FIN-WAIT-2 time has elapsed?}
+235          \textcolor{keywordflow}{if}(\hyperlink{tcp__timer_8c_a73497c6e73b8fa0b087df7d432a55a4e}{tcpTimerElapsed}(&socket->finWait2Timer))
+236          \{
+237             \textcolor{comment}{//Debug message}
+238             \hyperlink{debug_8h_a72b9761add7486364dba449091cd2579}{TRACE\_WARNING}(\textcolor{stringliteral}{"TCP FIN-WAIT-2 timer elapsed...\(\backslash\)r\(\backslash\)n"});
+239             \textcolor{comment}{//Enter CLOSED state}
+240             \hyperlink{tcp__misc_8c_af8741d2662dcc13ed4695fec3ef5a365}{tcpChangeState}(socket, \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfeca1af39131036c81d79f09174d2fb6f788}{TCP\_STATE\_CLOSED});
+241          \}
+242       \}
+243 
+244       \textcolor{comment}{//TIME-WAIT timer}
+245       \textcolor{keywordflow}{if}(socket->state == \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfeca8fa1774b3f785db85813df1b8e158c56}{TCP\_STATE\_TIME\_WAIT})
+246       \{
+247          \textcolor{comment}{//2MSL time has elapsed?}
+248          \textcolor{keywordflow}{if}(\hyperlink{tcp__timer_8c_a73497c6e73b8fa0b087df7d432a55a4e}{tcpTimerElapsed}(&socket->timeWaitTimer))
+249          \{
+250             \textcolor{comment}{//Debug message}
+251             \hyperlink{debug_8h_a72b9761add7486364dba449091cd2579}{TRACE\_WARNING}(\textcolor{stringliteral}{"TCP 2MSL timer elapsed (socket %u)...\(\backslash\)r\(\backslash\)n"}, i);
+252             \textcolor{comment}{//Enter CLOSED state}
+253             \hyperlink{tcp__misc_8c_af8741d2662dcc13ed4695fec3ef5a365}{tcpChangeState}(socket, \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfeca1af39131036c81d79f09174d2fb6f788}{TCP\_STATE\_CLOSED});
+254 
+255             \textcolor{comment}{//Dispose the socket if the user does not have the ownership anymore}
+256             \textcolor{keywordflow}{if}(!socket->ownedFlag)
+257             \{
+258                \textcolor{comment}{//Delete the TCB}
+259                \hyperlink{tcp__misc_8c_afdcebf22cbad213fdb1d751829db9fb3}{tcpDeleteControlBlock}(socket);
+260                \textcolor{comment}{//Mark the socket as closed}
+261                socket->type = \hyperlink{socket_8h_aa78c7398fa81f7f62aa233159d4d8d97a69a5ebbd0e9391abfc7f6798ebf73fb6}{SOCKET\_TYPE\_UNUSED};
+262             \}
+263          \}
+264       \}
+265    \}
+266 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{tcp__timer_8c_a73497c6e73b8fa0b087df7d432a55a4e}\label{tcp__timer_8c_a73497c6e73b8fa0b087df7d432a55a4e}} 
+\index{tcp\+\_\+timer.\+c@{tcp\+\_\+timer.\+c}!tcp\+Timer\+Elapsed@{tcp\+Timer\+Elapsed}}
+\index{tcp\+Timer\+Elapsed@{tcp\+Timer\+Elapsed}!tcp\+\_\+timer.\+c@{tcp\+\_\+timer.\+c}}
+\subsubsection{\texorpdfstring{tcp\+Timer\+Elapsed()}{tcpTimerElapsed()}}
+{\footnotesize\ttfamily \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} tcp\+Timer\+Elapsed (\begin{DoxyParamCaption}\item[{\hyperlink{structTcpTimer}{Tcp\+Timer} $\ast$}]{timer }\end{DoxyParamCaption})}
+
+
+
+Check whether a T\+CP timer has elapsed. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em timer} & Pointer to the timer structure \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Timer state 
+\end{DoxyReturn}
+
+
+Definition at line 317 of file tcp\+\_\+timer.\+c.
+
+
+\begin{DoxyCode}
+318 \{
+319    \hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\_t} \hyperlink{dhcpv6__common_8h_ae73654f333e4363463ad8c594eca1905}{time};
+320 
+321    \textcolor{comment}{//Check whether the timer is running}
+322    \textcolor{keywordflow}{if}(!timer->\hyperlink{structTcpTimer_adadb16ad3ae86a863d6d8f4f9ddb54d6}{running})
+323       \textcolor{keywordflow}{return} \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+324 
+325    \textcolor{comment}{//Get current time}
+326    time = \hyperlink{os__port__chibios_8c_ab66a11272d40a916fa69dd8e4dc443d4}{osGetSystemTime}();
+327 
+328    \textcolor{comment}{//Check whether the specified time interval has elapsed}
+329    \textcolor{keywordflow}{if}(\hyperlink{os__port_8h_a25c13833ef003da02045a91b1080263a}{timeCompare}(time, timer->\hyperlink{structTcpTimer_a567cd1bec04b2683a21940b9dea3f210}{startTime} + timer->\hyperlink{structTcpTimer_a1f9b0b5f3e2c2f5cc361c9bcb3724713}{interval}) >= 0)
+330       \textcolor{keywordflow}{return} \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+331    \textcolor{keywordflow}{else}
+332       \textcolor{keywordflow}{return} \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+333 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{tcp__timer_8c_aa031bee2a1768b352a54b6ab08abd523}\label{tcp__timer_8c_aa031bee2a1768b352a54b6ab08abd523}} 
+\index{tcp\+\_\+timer.\+c@{tcp\+\_\+timer.\+c}!tcp\+Timer\+Get\+Interval@{tcp\+Timer\+Get\+Interval}}
+\index{tcp\+Timer\+Get\+Interval@{tcp\+Timer\+Get\+Interval}!tcp\+\_\+timer.\+c@{tcp\+\_\+timer.\+c}}
+\subsubsection{\texorpdfstring{tcp\+Timer\+Get\+Interval()}{tcpTimerGetInterval()}}
+{\footnotesize\ttfamily \hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\+\_\+t} tcp\+Timer\+Get\+Interval (\begin{DoxyParamCaption}\item[{\hyperlink{structTcpTimer}{Tcp\+Timer} $\ast$}]{timer }\end{DoxyParamCaption})}
+
+
+
+Get current time interval. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em timer} & Pointer to the timer structure \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Current time interval 
+\end{DoxyReturn}
+
+
+Definition at line 342 of file tcp\+\_\+timer.\+c.
+
+
+\begin{DoxyCode}
+343 \{
+344    \textcolor{comment}{//Return current time interval}
+345    \textcolor{keywordflow}{return} timer->\hyperlink{structTcpTimer_a1f9b0b5f3e2c2f5cc361c9bcb3724713}{interval};
+346 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{tcp__timer_8c_a23e3bb081c9510f93e437a9a424b2983}\label{tcp__timer_8c_a23e3bb081c9510f93e437a9a424b2983}} 
+\index{tcp\+\_\+timer.\+c@{tcp\+\_\+timer.\+c}!tcp\+Timer\+Running@{tcp\+Timer\+Running}}
+\index{tcp\+Timer\+Running@{tcp\+Timer\+Running}!tcp\+\_\+timer.\+c@{tcp\+\_\+timer.\+c}}
+\subsubsection{\texorpdfstring{tcp\+Timer\+Running()}{tcpTimerRunning()}}
+{\footnotesize\ttfamily \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} tcp\+Timer\+Running (\begin{DoxyParamCaption}\item[{\hyperlink{structTcpTimer}{Tcp\+Timer} $\ast$}]{timer }\end{DoxyParamCaption})}
+
+
+
+Check whether a T\+CP timer is running. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em timer} & Pointer to the timer structure \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Timer state 
+\end{DoxyReturn}
+
+
+Definition at line 304 of file tcp\+\_\+timer.\+c.
+
+
+\begin{DoxyCode}
+305 \{
+306    \textcolor{comment}{//Check whether the timer is running}
+307    \textcolor{keywordflow}{return} timer->\hyperlink{structTcpTimer_adadb16ad3ae86a863d6d8f4f9ddb54d6}{running};
+308 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{tcp__timer_8c_ac28b31fb6e44b56d37fb37f2b34f8a67}\label{tcp__timer_8c_ac28b31fb6e44b56d37fb37f2b34f8a67}} 
+\index{tcp\+\_\+timer.\+c@{tcp\+\_\+timer.\+c}!tcp\+Timer\+Start@{tcp\+Timer\+Start}}
+\index{tcp\+Timer\+Start@{tcp\+Timer\+Start}!tcp\+\_\+timer.\+c@{tcp\+\_\+timer.\+c}}
+\subsubsection{\texorpdfstring{tcp\+Timer\+Start()}{tcpTimerStart()}}
+{\footnotesize\ttfamily void tcp\+Timer\+Start (\begin{DoxyParamCaption}\item[{\hyperlink{structTcpTimer}{Tcp\+Timer} $\ast$}]{timer,  }\item[{\hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\+\_\+t}}]{delay }\end{DoxyParamCaption})}
+
+
+
+Start T\+CP timer. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em timer} & Pointer to the timer structure \\
+\hline
+\mbox{\tt in}  & {\em delay} & Time interval \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 275 of file tcp\+\_\+timer.\+c.
+
+
+\begin{DoxyCode}
+276 \{
+277    \textcolor{comment}{//Start timer}
+278    timer->\hyperlink{structTcpTimer_a567cd1bec04b2683a21940b9dea3f210}{startTime} = \hyperlink{os__port__chibios_8c_ab66a11272d40a916fa69dd8e4dc443d4}{osGetSystemTime}();
+279    timer->\hyperlink{structTcpTimer_a1f9b0b5f3e2c2f5cc361c9bcb3724713}{interval} = delay;
+280 
+281    \textcolor{comment}{//The timer is now running...}
+282    timer->\hyperlink{structTcpTimer_adadb16ad3ae86a863d6d8f4f9ddb54d6}{running} = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+283 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{tcp__timer_8c_a3064f1c41511310223cdbaae4ab75674}\label{tcp__timer_8c_a3064f1c41511310223cdbaae4ab75674}} 
+\index{tcp\+\_\+timer.\+c@{tcp\+\_\+timer.\+c}!tcp\+Timer\+Stop@{tcp\+Timer\+Stop}}
+\index{tcp\+Timer\+Stop@{tcp\+Timer\+Stop}!tcp\+\_\+timer.\+c@{tcp\+\_\+timer.\+c}}
+\subsubsection{\texorpdfstring{tcp\+Timer\+Stop()}{tcpTimerStop()}}
+{\footnotesize\ttfamily void tcp\+Timer\+Stop (\begin{DoxyParamCaption}\item[{\hyperlink{structTcpTimer}{Tcp\+Timer} $\ast$}]{timer }\end{DoxyParamCaption})}
+
+
+
+Stop T\+CP timer. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em timer} & Pointer to the timer structure \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 291 of file tcp\+\_\+timer.\+c.
+
+
+\begin{DoxyCode}
+292 \{
+293    \textcolor{comment}{//Stop timer}
+294    timer->\hyperlink{structTcpTimer_adadb16ad3ae86a863d6d8f4f9ddb54d6}{running} = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+295 \}
+\end{DoxyCode}

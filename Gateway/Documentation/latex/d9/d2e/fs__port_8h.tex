@@ -1,0 +1,211 @@
+\hypertarget{fs__port_8h}{}\section{common/fs\+\_\+port.h File Reference}
+\label{fs__port_8h}\index{common/fs\+\_\+port.\+h@{common/fs\+\_\+port.\+h}}
+
+
+File system abstraction layer.  
+
+
+{\ttfamily \#include \char`\"{}fs\+\_\+port\+\_\+config.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}os\+\_\+port.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}date\+\_\+time.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}error.\+h\char`\"{}}\newline
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structFsDirEntry}{Fs\+Dir\+Entry}
+\begin{DoxyCompactList}\small\item\em Directory entry. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{fs__port_8h_a17f57e73738b6fd8b600eb2b4e0e5c71}{F\+S\+\_\+\+M\+A\+X\+\_\+\+N\+A\+M\+E\+\_\+\+L\+EN}~127
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{fs__port_8h_a2edaa29f659eebea8cf331b1066405a3}{Fs\+File\+Attributes} \{ \newline
+\hyperlink{fs__port_8h_a2edaa29f659eebea8cf331b1066405a3a218468508475fb0ef7155299f48fc9e5}{F\+S\+\_\+\+F\+I\+L\+E\+\_\+\+A\+T\+T\+R\+\_\+\+R\+E\+A\+D\+\_\+\+O\+N\+LY} = 0x01, 
+\hyperlink{fs__port_8h_a2edaa29f659eebea8cf331b1066405a3a053d0fe6563a6b592acd20e3d183f87b}{F\+S\+\_\+\+F\+I\+L\+E\+\_\+\+A\+T\+T\+R\+\_\+\+H\+I\+D\+D\+EN} = 0x02, 
+\hyperlink{fs__port_8h_a2edaa29f659eebea8cf331b1066405a3abcc2555025dbd7baf66e501fabc224e2}{F\+S\+\_\+\+F\+I\+L\+E\+\_\+\+A\+T\+T\+R\+\_\+\+S\+Y\+S\+T\+EM} = 0x04, 
+\hyperlink{fs__port_8h_a2edaa29f659eebea8cf331b1066405a3a77aa7b3ded46dcc5d6fdcf7eac26ad81}{F\+S\+\_\+\+F\+I\+L\+E\+\_\+\+A\+T\+T\+R\+\_\+\+V\+O\+L\+U\+M\+E\+\_\+\+N\+A\+ME} = 0x08, 
+\newline
+\hyperlink{fs__port_8h_a2edaa29f659eebea8cf331b1066405a3a24f8258160b4e054c565570b6260db96}{F\+S\+\_\+\+F\+I\+L\+E\+\_\+\+A\+T\+T\+R\+\_\+\+D\+I\+R\+E\+C\+T\+O\+RY} = 0x10, 
+\hyperlink{fs__port_8h_a2edaa29f659eebea8cf331b1066405a3a653dfcbf8e4ef036bfb70ab94e5a8505}{F\+S\+\_\+\+F\+I\+L\+E\+\_\+\+A\+T\+T\+R\+\_\+\+A\+R\+C\+H\+I\+VE} = 0x20
+ \}\begin{DoxyCompactList}\small\item\em File attributes. \end{DoxyCompactList}
+\item 
+enum \hyperlink{fs__port_8h_a086887b0800535e5a06340d3fc76c51c}{Fs\+File\+Mode} \{ \hyperlink{fs__port_8h_a086887b0800535e5a06340d3fc76c51cadf6c1e1805f97fa4f535acbdc2d943db}{F\+S\+\_\+\+F\+I\+L\+E\+\_\+\+M\+O\+D\+E\+\_\+\+R\+E\+AD} = 1, 
+\hyperlink{fs__port_8h_a086887b0800535e5a06340d3fc76c51caed4c8b2994951eeb8d60d929444fb8cb}{F\+S\+\_\+\+F\+I\+L\+E\+\_\+\+M\+O\+D\+E\+\_\+\+W\+R\+I\+TE} = 2, 
+\hyperlink{fs__port_8h_a086887b0800535e5a06340d3fc76c51ca59f9749189b0706360c6c117fd3ba104}{F\+S\+\_\+\+F\+I\+L\+E\+\_\+\+M\+O\+D\+E\+\_\+\+C\+R\+E\+A\+TE} = 4, 
+\hyperlink{fs__port_8h_a086887b0800535e5a06340d3fc76c51cae281d66b3b573b40eb7dc9bbae4bdfc3}{F\+S\+\_\+\+F\+I\+L\+E\+\_\+\+M\+O\+D\+E\+\_\+\+T\+R\+U\+NC} = 8
+ \}\begin{DoxyCompactList}\small\item\em File access mode. \end{DoxyCompactList}
+\item 
+enum \hyperlink{fs__port_8h_a96b63216b3c538b63de1928e54b5d013}{Fs\+Seek\+Origin} \{ \hyperlink{fs__port_8h_a96b63216b3c538b63de1928e54b5d013af39a070ab167a90b3c87ab6b058469cd}{F\+S\+\_\+\+S\+E\+E\+K\+\_\+\+S\+ET} = 0, 
+\hyperlink{fs__port_8h_a96b63216b3c538b63de1928e54b5d013ab7f080d71bee180296706c77d2cf3383}{F\+S\+\_\+\+S\+E\+E\+K\+\_\+\+C\+UR} = 1, 
+\hyperlink{fs__port_8h_a96b63216b3c538b63de1928e54b5d013a36dd416e193650f2c191423d3e3dad6d}{F\+S\+\_\+\+S\+E\+E\+K\+\_\+\+E\+ND} = 2
+ \}\begin{DoxyCompactList}\small\item\em File seek origin. \end{DoxyCompactList}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+File system abstraction layer. 
+
+\hypertarget{pic32mz__ef__curiosity_8h_License}{}\subsection{License}\label{pic32mz__ef__curiosity_8h_License}
+S\+P\+D\+X-\/\+License-\/\+Identifier\+: G\+P\+L-\/2.\+0-\/or-\/later
+
+Copyright (C) 2010-\/2019 Oryx Embedded S\+A\+RL. All rights reserved.
+
+This program is free software; you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+
+You should have received a copy of the G\+NU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-\/1301, U\+SA.
+
+\begin{DoxyAuthor}{Author}
+Oryx Embedded S\+A\+RL (www.\+oryx-\/embedded.\+com) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+9.\+6 
+\end{DoxyVersion}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{fs__port_8h_a17f57e73738b6fd8b600eb2b4e0e5c71}\label{fs__port_8h_a17f57e73738b6fd8b600eb2b4e0e5c71}} 
+\index{fs\+\_\+port.\+h@{fs\+\_\+port.\+h}!F\+S\+\_\+\+M\+A\+X\+\_\+\+N\+A\+M\+E\+\_\+\+L\+EN@{F\+S\+\_\+\+M\+A\+X\+\_\+\+N\+A\+M\+E\+\_\+\+L\+EN}}
+\index{F\+S\+\_\+\+M\+A\+X\+\_\+\+N\+A\+M\+E\+\_\+\+L\+EN@{F\+S\+\_\+\+M\+A\+X\+\_\+\+N\+A\+M\+E\+\_\+\+L\+EN}!fs\+\_\+port.\+h@{fs\+\_\+port.\+h}}
+\subsubsection{\texorpdfstring{F\+S\+\_\+\+M\+A\+X\+\_\+\+N\+A\+M\+E\+\_\+\+L\+EN}{FS\_MAX\_NAME\_LEN}}
+{\footnotesize\ttfamily \#define F\+S\+\_\+\+M\+A\+X\+\_\+\+N\+A\+M\+E\+\_\+\+L\+EN~127}
+
+
+
+Definition at line 40 of file fs\+\_\+port.\+h.
+
+
+
+\subsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{fs__port_8h_a2edaa29f659eebea8cf331b1066405a3}\label{fs__port_8h_a2edaa29f659eebea8cf331b1066405a3}} 
+\index{fs\+\_\+port.\+h@{fs\+\_\+port.\+h}!Fs\+File\+Attributes@{Fs\+File\+Attributes}}
+\index{Fs\+File\+Attributes@{Fs\+File\+Attributes}!fs\+\_\+port.\+h@{fs\+\_\+port.\+h}}
+\subsubsection{\texorpdfstring{Fs\+File\+Attributes}{FsFileAttributes}}
+{\footnotesize\ttfamily enum \hyperlink{fs__port_8h_a2edaa29f659eebea8cf331b1066405a3}{Fs\+File\+Attributes}}
+
+
+
+File attributes. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{F\+S\+\_\+\+F\+I\+L\+E\+\_\+\+A\+T\+T\+R\+\_\+\+R\+E\+A\+D\+\_\+\+O\+N\+LY@{F\+S\+\_\+\+F\+I\+L\+E\+\_\+\+A\+T\+T\+R\+\_\+\+R\+E\+A\+D\+\_\+\+O\+N\+LY}!fs\+\_\+port.\+h@{fs\+\_\+port.\+h}}\index{fs\+\_\+port.\+h@{fs\+\_\+port.\+h}!F\+S\+\_\+\+F\+I\+L\+E\+\_\+\+A\+T\+T\+R\+\_\+\+R\+E\+A\+D\+\_\+\+O\+N\+LY@{F\+S\+\_\+\+F\+I\+L\+E\+\_\+\+A\+T\+T\+R\+\_\+\+R\+E\+A\+D\+\_\+\+O\+N\+LY}}}\mbox{\Hypertarget{fs__port_8h_a2edaa29f659eebea8cf331b1066405a3a218468508475fb0ef7155299f48fc9e5}\label{fs__port_8h_a2edaa29f659eebea8cf331b1066405a3a218468508475fb0ef7155299f48fc9e5}} 
+F\+S\+\_\+\+F\+I\+L\+E\+\_\+\+A\+T\+T\+R\+\_\+\+R\+E\+A\+D\+\_\+\+O\+N\+LY&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{F\+S\+\_\+\+F\+I\+L\+E\+\_\+\+A\+T\+T\+R\+\_\+\+H\+I\+D\+D\+EN@{F\+S\+\_\+\+F\+I\+L\+E\+\_\+\+A\+T\+T\+R\+\_\+\+H\+I\+D\+D\+EN}!fs\+\_\+port.\+h@{fs\+\_\+port.\+h}}\index{fs\+\_\+port.\+h@{fs\+\_\+port.\+h}!F\+S\+\_\+\+F\+I\+L\+E\+\_\+\+A\+T\+T\+R\+\_\+\+H\+I\+D\+D\+EN@{F\+S\+\_\+\+F\+I\+L\+E\+\_\+\+A\+T\+T\+R\+\_\+\+H\+I\+D\+D\+EN}}}\mbox{\Hypertarget{fs__port_8h_a2edaa29f659eebea8cf331b1066405a3a053d0fe6563a6b592acd20e3d183f87b}\label{fs__port_8h_a2edaa29f659eebea8cf331b1066405a3a053d0fe6563a6b592acd20e3d183f87b}} 
+F\+S\+\_\+\+F\+I\+L\+E\+\_\+\+A\+T\+T\+R\+\_\+\+H\+I\+D\+D\+EN&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{F\+S\+\_\+\+F\+I\+L\+E\+\_\+\+A\+T\+T\+R\+\_\+\+S\+Y\+S\+T\+EM@{F\+S\+\_\+\+F\+I\+L\+E\+\_\+\+A\+T\+T\+R\+\_\+\+S\+Y\+S\+T\+EM}!fs\+\_\+port.\+h@{fs\+\_\+port.\+h}}\index{fs\+\_\+port.\+h@{fs\+\_\+port.\+h}!F\+S\+\_\+\+F\+I\+L\+E\+\_\+\+A\+T\+T\+R\+\_\+\+S\+Y\+S\+T\+EM@{F\+S\+\_\+\+F\+I\+L\+E\+\_\+\+A\+T\+T\+R\+\_\+\+S\+Y\+S\+T\+EM}}}\mbox{\Hypertarget{fs__port_8h_a2edaa29f659eebea8cf331b1066405a3abcc2555025dbd7baf66e501fabc224e2}\label{fs__port_8h_a2edaa29f659eebea8cf331b1066405a3abcc2555025dbd7baf66e501fabc224e2}} 
+F\+S\+\_\+\+F\+I\+L\+E\+\_\+\+A\+T\+T\+R\+\_\+\+S\+Y\+S\+T\+EM&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{F\+S\+\_\+\+F\+I\+L\+E\+\_\+\+A\+T\+T\+R\+\_\+\+V\+O\+L\+U\+M\+E\+\_\+\+N\+A\+ME@{F\+S\+\_\+\+F\+I\+L\+E\+\_\+\+A\+T\+T\+R\+\_\+\+V\+O\+L\+U\+M\+E\+\_\+\+N\+A\+ME}!fs\+\_\+port.\+h@{fs\+\_\+port.\+h}}\index{fs\+\_\+port.\+h@{fs\+\_\+port.\+h}!F\+S\+\_\+\+F\+I\+L\+E\+\_\+\+A\+T\+T\+R\+\_\+\+V\+O\+L\+U\+M\+E\+\_\+\+N\+A\+ME@{F\+S\+\_\+\+F\+I\+L\+E\+\_\+\+A\+T\+T\+R\+\_\+\+V\+O\+L\+U\+M\+E\+\_\+\+N\+A\+ME}}}\mbox{\Hypertarget{fs__port_8h_a2edaa29f659eebea8cf331b1066405a3a77aa7b3ded46dcc5d6fdcf7eac26ad81}\label{fs__port_8h_a2edaa29f659eebea8cf331b1066405a3a77aa7b3ded46dcc5d6fdcf7eac26ad81}} 
+F\+S\+\_\+\+F\+I\+L\+E\+\_\+\+A\+T\+T\+R\+\_\+\+V\+O\+L\+U\+M\+E\+\_\+\+N\+A\+ME&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{F\+S\+\_\+\+F\+I\+L\+E\+\_\+\+A\+T\+T\+R\+\_\+\+D\+I\+R\+E\+C\+T\+O\+RY@{F\+S\+\_\+\+F\+I\+L\+E\+\_\+\+A\+T\+T\+R\+\_\+\+D\+I\+R\+E\+C\+T\+O\+RY}!fs\+\_\+port.\+h@{fs\+\_\+port.\+h}}\index{fs\+\_\+port.\+h@{fs\+\_\+port.\+h}!F\+S\+\_\+\+F\+I\+L\+E\+\_\+\+A\+T\+T\+R\+\_\+\+D\+I\+R\+E\+C\+T\+O\+RY@{F\+S\+\_\+\+F\+I\+L\+E\+\_\+\+A\+T\+T\+R\+\_\+\+D\+I\+R\+E\+C\+T\+O\+RY}}}\mbox{\Hypertarget{fs__port_8h_a2edaa29f659eebea8cf331b1066405a3a24f8258160b4e054c565570b6260db96}\label{fs__port_8h_a2edaa29f659eebea8cf331b1066405a3a24f8258160b4e054c565570b6260db96}} 
+F\+S\+\_\+\+F\+I\+L\+E\+\_\+\+A\+T\+T\+R\+\_\+\+D\+I\+R\+E\+C\+T\+O\+RY&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{F\+S\+\_\+\+F\+I\+L\+E\+\_\+\+A\+T\+T\+R\+\_\+\+A\+R\+C\+H\+I\+VE@{F\+S\+\_\+\+F\+I\+L\+E\+\_\+\+A\+T\+T\+R\+\_\+\+A\+R\+C\+H\+I\+VE}!fs\+\_\+port.\+h@{fs\+\_\+port.\+h}}\index{fs\+\_\+port.\+h@{fs\+\_\+port.\+h}!F\+S\+\_\+\+F\+I\+L\+E\+\_\+\+A\+T\+T\+R\+\_\+\+A\+R\+C\+H\+I\+VE@{F\+S\+\_\+\+F\+I\+L\+E\+\_\+\+A\+T\+T\+R\+\_\+\+A\+R\+C\+H\+I\+VE}}}\mbox{\Hypertarget{fs__port_8h_a2edaa29f659eebea8cf331b1066405a3a653dfcbf8e4ef036bfb70ab94e5a8505}\label{fs__port_8h_a2edaa29f659eebea8cf331b1066405a3a653dfcbf8e4ef036bfb70ab94e5a8505}} 
+F\+S\+\_\+\+F\+I\+L\+E\+\_\+\+A\+T\+T\+R\+\_\+\+A\+R\+C\+H\+I\+VE&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line 55 of file fs\+\_\+port.\+h.
+
+
+\begin{DoxyCode}
+56 \{
+57    \hyperlink{fs__port_8h_a2edaa29f659eebea8cf331b1066405a3a218468508475fb0ef7155299f48fc9e5}{FS\_FILE\_ATTR\_READ\_ONLY}   = 0x01,
+58    \hyperlink{fs__port_8h_a2edaa29f659eebea8cf331b1066405a3a053d0fe6563a6b592acd20e3d183f87b}{FS\_FILE\_ATTR\_HIDDEN}      = 0x02,
+59    \hyperlink{fs__port_8h_a2edaa29f659eebea8cf331b1066405a3abcc2555025dbd7baf66e501fabc224e2}{FS\_FILE\_ATTR\_SYSTEM}      = 0x04,
+60    \hyperlink{fs__port_8h_a2edaa29f659eebea8cf331b1066405a3a77aa7b3ded46dcc5d6fdcf7eac26ad81}{FS\_FILE\_ATTR\_VOLUME\_NAME} = 0x08,
+61    \hyperlink{fs__port_8h_a2edaa29f659eebea8cf331b1066405a3a24f8258160b4e054c565570b6260db96}{FS\_FILE\_ATTR\_DIRECTORY}   = 0x10,
+62    \hyperlink{fs__port_8h_a2edaa29f659eebea8cf331b1066405a3a653dfcbf8e4ef036bfb70ab94e5a8505}{FS\_FILE\_ATTR\_ARCHIVE}     = 0x20
+63 \} \hyperlink{fs__port_8h_a2edaa29f659eebea8cf331b1066405a3}{FsFileAttributes};
+\end{DoxyCode}
+\mbox{\Hypertarget{fs__port_8h_a086887b0800535e5a06340d3fc76c51c}\label{fs__port_8h_a086887b0800535e5a06340d3fc76c51c}} 
+\index{fs\+\_\+port.\+h@{fs\+\_\+port.\+h}!Fs\+File\+Mode@{Fs\+File\+Mode}}
+\index{Fs\+File\+Mode@{Fs\+File\+Mode}!fs\+\_\+port.\+h@{fs\+\_\+port.\+h}}
+\subsubsection{\texorpdfstring{Fs\+File\+Mode}{FsFileMode}}
+{\footnotesize\ttfamily enum \hyperlink{fs__port_8h_a086887b0800535e5a06340d3fc76c51c}{Fs\+File\+Mode}}
+
+
+
+File access mode. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{F\+S\+\_\+\+F\+I\+L\+E\+\_\+\+M\+O\+D\+E\+\_\+\+R\+E\+AD@{F\+S\+\_\+\+F\+I\+L\+E\+\_\+\+M\+O\+D\+E\+\_\+\+R\+E\+AD}!fs\+\_\+port.\+h@{fs\+\_\+port.\+h}}\index{fs\+\_\+port.\+h@{fs\+\_\+port.\+h}!F\+S\+\_\+\+F\+I\+L\+E\+\_\+\+M\+O\+D\+E\+\_\+\+R\+E\+AD@{F\+S\+\_\+\+F\+I\+L\+E\+\_\+\+M\+O\+D\+E\+\_\+\+R\+E\+AD}}}\mbox{\Hypertarget{fs__port_8h_a086887b0800535e5a06340d3fc76c51cadf6c1e1805f97fa4f535acbdc2d943db}\label{fs__port_8h_a086887b0800535e5a06340d3fc76c51cadf6c1e1805f97fa4f535acbdc2d943db}} 
+F\+S\+\_\+\+F\+I\+L\+E\+\_\+\+M\+O\+D\+E\+\_\+\+R\+E\+AD&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{F\+S\+\_\+\+F\+I\+L\+E\+\_\+\+M\+O\+D\+E\+\_\+\+W\+R\+I\+TE@{F\+S\+\_\+\+F\+I\+L\+E\+\_\+\+M\+O\+D\+E\+\_\+\+W\+R\+I\+TE}!fs\+\_\+port.\+h@{fs\+\_\+port.\+h}}\index{fs\+\_\+port.\+h@{fs\+\_\+port.\+h}!F\+S\+\_\+\+F\+I\+L\+E\+\_\+\+M\+O\+D\+E\+\_\+\+W\+R\+I\+TE@{F\+S\+\_\+\+F\+I\+L\+E\+\_\+\+M\+O\+D\+E\+\_\+\+W\+R\+I\+TE}}}\mbox{\Hypertarget{fs__port_8h_a086887b0800535e5a06340d3fc76c51caed4c8b2994951eeb8d60d929444fb8cb}\label{fs__port_8h_a086887b0800535e5a06340d3fc76c51caed4c8b2994951eeb8d60d929444fb8cb}} 
+F\+S\+\_\+\+F\+I\+L\+E\+\_\+\+M\+O\+D\+E\+\_\+\+W\+R\+I\+TE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{F\+S\+\_\+\+F\+I\+L\+E\+\_\+\+M\+O\+D\+E\+\_\+\+C\+R\+E\+A\+TE@{F\+S\+\_\+\+F\+I\+L\+E\+\_\+\+M\+O\+D\+E\+\_\+\+C\+R\+E\+A\+TE}!fs\+\_\+port.\+h@{fs\+\_\+port.\+h}}\index{fs\+\_\+port.\+h@{fs\+\_\+port.\+h}!F\+S\+\_\+\+F\+I\+L\+E\+\_\+\+M\+O\+D\+E\+\_\+\+C\+R\+E\+A\+TE@{F\+S\+\_\+\+F\+I\+L\+E\+\_\+\+M\+O\+D\+E\+\_\+\+C\+R\+E\+A\+TE}}}\mbox{\Hypertarget{fs__port_8h_a086887b0800535e5a06340d3fc76c51ca59f9749189b0706360c6c117fd3ba104}\label{fs__port_8h_a086887b0800535e5a06340d3fc76c51ca59f9749189b0706360c6c117fd3ba104}} 
+F\+S\+\_\+\+F\+I\+L\+E\+\_\+\+M\+O\+D\+E\+\_\+\+C\+R\+E\+A\+TE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{F\+S\+\_\+\+F\+I\+L\+E\+\_\+\+M\+O\+D\+E\+\_\+\+T\+R\+U\+NC@{F\+S\+\_\+\+F\+I\+L\+E\+\_\+\+M\+O\+D\+E\+\_\+\+T\+R\+U\+NC}!fs\+\_\+port.\+h@{fs\+\_\+port.\+h}}\index{fs\+\_\+port.\+h@{fs\+\_\+port.\+h}!F\+S\+\_\+\+F\+I\+L\+E\+\_\+\+M\+O\+D\+E\+\_\+\+T\+R\+U\+NC@{F\+S\+\_\+\+F\+I\+L\+E\+\_\+\+M\+O\+D\+E\+\_\+\+T\+R\+U\+NC}}}\mbox{\Hypertarget{fs__port_8h_a086887b0800535e5a06340d3fc76c51cae281d66b3b573b40eb7dc9bbae4bdfc3}\label{fs__port_8h_a086887b0800535e5a06340d3fc76c51cae281d66b3b573b40eb7dc9bbae4bdfc3}} 
+F\+S\+\_\+\+F\+I\+L\+E\+\_\+\+M\+O\+D\+E\+\_\+\+T\+R\+U\+NC&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line 70 of file fs\+\_\+port.\+h.
+
+
+\begin{DoxyCode}
+71 \{
+72    \hyperlink{fs__port_8h_a086887b0800535e5a06340d3fc76c51cadf6c1e1805f97fa4f535acbdc2d943db}{FS\_FILE\_MODE\_READ}   = 1,
+73    \hyperlink{fs__port_8h_a086887b0800535e5a06340d3fc76c51caed4c8b2994951eeb8d60d929444fb8cb}{FS\_FILE\_MODE\_WRITE}  = 2,
+74    \hyperlink{fs__port_8h_a086887b0800535e5a06340d3fc76c51ca59f9749189b0706360c6c117fd3ba104}{FS\_FILE\_MODE\_CREATE} = 4,
+75    \hyperlink{fs__port_8h_a086887b0800535e5a06340d3fc76c51cae281d66b3b573b40eb7dc9bbae4bdfc3}{FS\_FILE\_MODE\_TRUNC}  = 8
+76 \} \hyperlink{fs__port_8h_a086887b0800535e5a06340d3fc76c51c}{FsFileMode};
+\end{DoxyCode}
+\mbox{\Hypertarget{fs__port_8h_a96b63216b3c538b63de1928e54b5d013}\label{fs__port_8h_a96b63216b3c538b63de1928e54b5d013}} 
+\index{fs\+\_\+port.\+h@{fs\+\_\+port.\+h}!Fs\+Seek\+Origin@{Fs\+Seek\+Origin}}
+\index{Fs\+Seek\+Origin@{Fs\+Seek\+Origin}!fs\+\_\+port.\+h@{fs\+\_\+port.\+h}}
+\subsubsection{\texorpdfstring{Fs\+Seek\+Origin}{FsSeekOrigin}}
+{\footnotesize\ttfamily enum \hyperlink{fs__port_8h_a96b63216b3c538b63de1928e54b5d013}{Fs\+Seek\+Origin}}
+
+
+
+File seek origin. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{F\+S\+\_\+\+S\+E\+E\+K\+\_\+\+S\+ET@{F\+S\+\_\+\+S\+E\+E\+K\+\_\+\+S\+ET}!fs\+\_\+port.\+h@{fs\+\_\+port.\+h}}\index{fs\+\_\+port.\+h@{fs\+\_\+port.\+h}!F\+S\+\_\+\+S\+E\+E\+K\+\_\+\+S\+ET@{F\+S\+\_\+\+S\+E\+E\+K\+\_\+\+S\+ET}}}\mbox{\Hypertarget{fs__port_8h_a96b63216b3c538b63de1928e54b5d013af39a070ab167a90b3c87ab6b058469cd}\label{fs__port_8h_a96b63216b3c538b63de1928e54b5d013af39a070ab167a90b3c87ab6b058469cd}} 
+F\+S\+\_\+\+S\+E\+E\+K\+\_\+\+S\+ET&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{F\+S\+\_\+\+S\+E\+E\+K\+\_\+\+C\+UR@{F\+S\+\_\+\+S\+E\+E\+K\+\_\+\+C\+UR}!fs\+\_\+port.\+h@{fs\+\_\+port.\+h}}\index{fs\+\_\+port.\+h@{fs\+\_\+port.\+h}!F\+S\+\_\+\+S\+E\+E\+K\+\_\+\+C\+UR@{F\+S\+\_\+\+S\+E\+E\+K\+\_\+\+C\+UR}}}\mbox{\Hypertarget{fs__port_8h_a96b63216b3c538b63de1928e54b5d013ab7f080d71bee180296706c77d2cf3383}\label{fs__port_8h_a96b63216b3c538b63de1928e54b5d013ab7f080d71bee180296706c77d2cf3383}} 
+F\+S\+\_\+\+S\+E\+E\+K\+\_\+\+C\+UR&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{F\+S\+\_\+\+S\+E\+E\+K\+\_\+\+E\+ND@{F\+S\+\_\+\+S\+E\+E\+K\+\_\+\+E\+ND}!fs\+\_\+port.\+h@{fs\+\_\+port.\+h}}\index{fs\+\_\+port.\+h@{fs\+\_\+port.\+h}!F\+S\+\_\+\+S\+E\+E\+K\+\_\+\+E\+ND@{F\+S\+\_\+\+S\+E\+E\+K\+\_\+\+E\+ND}}}\mbox{\Hypertarget{fs__port_8h_a96b63216b3c538b63de1928e54b5d013a36dd416e193650f2c191423d3e3dad6d}\label{fs__port_8h_a96b63216b3c538b63de1928e54b5d013a36dd416e193650f2c191423d3e3dad6d}} 
+F\+S\+\_\+\+S\+E\+E\+K\+\_\+\+E\+ND&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line 83 of file fs\+\_\+port.\+h.
+
+
+\begin{DoxyCode}
+84 \{
+85    \hyperlink{fs__port_8h_a96b63216b3c538b63de1928e54b5d013af39a070ab167a90b3c87ab6b058469cd}{FS\_SEEK\_SET} = 0,
+86    \hyperlink{fs__port_8h_a96b63216b3c538b63de1928e54b5d013ab7f080d71bee180296706c77d2cf3383}{FS\_SEEK\_CUR} = 1,
+87    \hyperlink{fs__port_8h_a96b63216b3c538b63de1928e54b5d013a36dd416e193650f2c191423d3e3dad6d}{FS\_SEEK\_END} = 2
+88 \} \hyperlink{fs__port_8h_a96b63216b3c538b63de1928e54b5d013}{FsSeekOrigin};
+\end{DoxyCode}

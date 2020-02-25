@@ -1,0 +1,26 @@
+var struct__FtpClientConnection =
+[
+    [ "buffer", "d8/da5/struct__FtpClientConnection.html#ab44673cccab94f0632ae554a0989a94d", null ],
+    [ "bufferLength", "d8/da5/struct__FtpClientConnection.html#ae6308df790baf35244826e38761696b5", null ],
+    [ "bufferPos", "d8/da5/struct__FtpClientConnection.html#af64f5a6528971bc633bc8da8706c60e6", null ],
+    [ "command", "d8/da5/struct__FtpClientConnection.html#a489a295a889fadad7cc8e44d01111372", null ],
+    [ "commandLen", "d8/da5/struct__FtpClientConnection.html#a4cfc20dd03e715cc5caa6713735cb0e7", null ],
+    [ "context", "d8/da5/struct__FtpClientConnection.html#a42fb1fa2b8ee5ffae185419e75e0e0f1", null ],
+    [ "controlChannel", "d8/da5/struct__FtpClientConnection.html#a29ae5684371cbb12a4ed5a179cf9ab92", null ],
+    [ "currentDir", "d8/da5/struct__FtpClientConnection.html#a82f458263d012950c964b88d899637c6", null ],
+    [ "dataChannel", "d8/da5/struct__FtpClientConnection.html#a6f6689abb4e803f4014d41b80617c6df", null ],
+    [ "dir", "d8/da5/struct__FtpClientConnection.html#a5e2e292f7a5a4395b9831d0f0edc171d", null ],
+    [ "file", "d8/da5/struct__FtpClientConnection.html#afa1056ae0607ea6f5db9fb377b671566", null ],
+    [ "homeDir", "d8/da5/struct__FtpClientConnection.html#a44b57789dfb498b410657e91c61e50bb", null ],
+    [ "interface", "d8/da5/struct__FtpClientConnection.html#a28166eba54cab14b064580e57ea8e211", null ],
+    [ "passiveMode", "d8/da5/struct__FtpClientConnection.html#a263b55cadbb1fc7edaf7e5ae63a0cf44", null ],
+    [ "path", "d8/da5/struct__FtpClientConnection.html#a2361233b4c33bcc14ac17f6b4029054f", null ],
+    [ "remoteIpAddr", "d8/da5/struct__FtpClientConnection.html#a76381be2a3bff01d89c4cdabc2cdafd8", null ],
+    [ "remotePort", "d8/da5/struct__FtpClientConnection.html#ad1173df8d2ab79484f1ce16c868e1f3d", null ],
+    [ "response", "d8/da5/struct__FtpClientConnection.html#ab77cf9a459475c16caa0d4204d7c6ca0", null ],
+    [ "responseLen", "d8/da5/struct__FtpClientConnection.html#acf313cf05ba0f5ac28a472e312457be2", null ],
+    [ "responsePos", "d8/da5/struct__FtpClientConnection.html#ab3bfa0b68d6d1e8e66f34abb71d0771e", null ],
+    [ "timestamp", "d8/da5/struct__FtpClientConnection.html#aa023c74e606fdfae6eca5f5e10f3e362", null ],
+    [ "user", "d8/da5/struct__FtpClientConnection.html#a6dbbd01eeb99077fe4441cd64620c696", null ],
+    [ "userLoggedIn", "d8/da5/struct__FtpClientConnection.html#a640338022687b9e562da44ad101cf82f", null ]
+];

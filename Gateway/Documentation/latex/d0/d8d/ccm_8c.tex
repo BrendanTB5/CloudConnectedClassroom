@@ -1,0 +1,541 @@
+\hypertarget{ccm_8c}{}\section{cyclone\+\_\+crypto/aead/ccm.c File Reference}
+\label{ccm_8c}\index{cyclone\+\_\+crypto/aead/ccm.\+c@{cyclone\+\_\+crypto/aead/ccm.\+c}}
+
+
+Cipher Block Chaining-\/\+Message Authentication Code (C\+CM)  
+
+
+{\ttfamily \#include \char`\"{}core/crypto.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}aead/ccm.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}debug.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{ccm_8c_afcdf5e66fd927a7f4cc64295acd20407}{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}~\hyperlink{crypto__config_8h_a6afae3a9b63f9b55d979e667ee0e881d}{C\+R\+Y\+P\+T\+O\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ccm_8c_a46d26dc0770850a161c9f9c605f7f51a}{ccm\+Encrypt} (const \hyperlink{structCipherAlgo}{Cipher\+Algo} $\ast$cipher, void $\ast$context, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n}, size\+\_\+t n\+Len, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}, size\+\_\+t a\+Len, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{ndp_8h_a6519522ad9a6f45e7a8d25d31392a977}{p}, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{llmnr__common_8h_a2e5a04327b5658199f0f7bda2acceee1}{c}, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length}, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{llmnr__common_8h_a2d03918f4f9edabaf3c9f43abcc2d85b}{t}, size\+\_\+t t\+Len)
+\begin{DoxyCompactList}\small\item\em Authenticated encryption using C\+CM. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ccm_8c_a1d322c27772da125eb188ffce04fc6ff}{ccm\+Decrypt} (const \hyperlink{structCipherAlgo}{Cipher\+Algo} $\ast$cipher, void $\ast$context, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n}, size\+\_\+t n\+Len, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}, size\+\_\+t a\+Len, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{llmnr__common_8h_a2e5a04327b5658199f0f7bda2acceee1}{c}, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{ndp_8h_a6519522ad9a6f45e7a8d25d31392a977}{p}, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length}, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{llmnr__common_8h_a2d03918f4f9edabaf3c9f43abcc2d85b}{t}, size\+\_\+t t\+Len)
+\begin{DoxyCompactList}\small\item\em Authenticated decryption using C\+CM. \end{DoxyCompactList}\item 
+void \hyperlink{ccm_8c_a21ab7b14db1802bf89e762efc29320c1}{ccm\+Xor\+Block} (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$x, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b}, size\+\_\+t \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n})
+\begin{DoxyCompactList}\small\item\em X\+OR operation. \end{DoxyCompactList}\item 
+void \hyperlink{ccm_8c_a03e739eef895c9d55787fe12a5259c9d}{ccm\+Inc\+Counter} (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$x, size\+\_\+t \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n})
+\begin{DoxyCompactList}\small\item\em Increment counter block. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Cipher Block Chaining-\/\+Message Authentication Code (C\+CM) 
+
+\hypertarget{pic32mz__ef__curiosity_8h_License}{}\subsection{License}\label{pic32mz__ef__curiosity_8h_License}
+S\+P\+D\+X-\/\+License-\/\+Identifier\+: G\+P\+L-\/2.\+0-\/or-\/later
+
+Copyright (C) 2010-\/2019 Oryx Embedded S\+A\+RL. All rights reserved.
+
+This file is part of Cyclone\+Crypto Open.
+
+This program is free software; you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+
+You should have received a copy of the G\+NU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-\/1301, U\+SA.\hypertarget{tftp__server_8c_Description}{}\subsection{Description}\label{tftp__server_8c_Description}
+C\+CM mode (Cipher Block Chaining-\/\+Message Authentication Code) is a mode of operation for cryptographic block ciphers. It is an authenticated encryption algorithm designed to provide both authentication and confidentiality. C\+CM mode is only defined for block ciphers with a block length of 128 bits. Refer to SP 800-\/38D for more details
+
+\begin{DoxyAuthor}{Author}
+Oryx Embedded S\+A\+RL (www.\+oryx-\/embedded.\+com) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+9.\+6 
+\end{DoxyVersion}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{ccm_8c_afcdf5e66fd927a7f4cc64295acd20407}\label{ccm_8c_afcdf5e66fd927a7f4cc64295acd20407}} 
+\index{ccm.\+c@{ccm.\+c}!T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+\index{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}!ccm.\+c@{ccm.\+c}}
+\subsubsection{\texorpdfstring{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}{TRACE\_LEVEL}}
+{\footnotesize\ttfamily \#define T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL~\hyperlink{crypto__config_8h_a6afae3a9b63f9b55d979e667ee0e881d}{C\+R\+Y\+P\+T\+O\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+
+
+
+Definition at line 40 of file ccm.\+c.
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{ccm_8c_a1d322c27772da125eb188ffce04fc6ff}\label{ccm_8c_a1d322c27772da125eb188ffce04fc6ff}} 
+\index{ccm.\+c@{ccm.\+c}!ccm\+Decrypt@{ccm\+Decrypt}}
+\index{ccm\+Decrypt@{ccm\+Decrypt}!ccm.\+c@{ccm.\+c}}
+\subsubsection{\texorpdfstring{ccm\+Decrypt()}{ccmDecrypt()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ccm\+Decrypt (\begin{DoxyParamCaption}\item[{const \hyperlink{structCipherAlgo}{Cipher\+Algo} $\ast$}]{cipher,  }\item[{void $\ast$}]{context,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{n,  }\item[{size\+\_\+t}]{n\+Len,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{a,  }\item[{size\+\_\+t}]{a\+Len,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{c,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{p,  }\item[{size\+\_\+t}]{length,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{t,  }\item[{size\+\_\+t}]{t\+Len }\end{DoxyParamCaption})}
+
+
+
+Authenticated decryption using C\+CM. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em cipher} & Cipher algorithm \\
+\hline
+\mbox{\tt in}  & {\em context} & Cipher algorithm context \\
+\hline
+\mbox{\tt in}  & {\em n} & Nonce \\
+\hline
+\mbox{\tt in}  & {\em n\+Len} & Length of the nonce \\
+\hline
+\mbox{\tt in}  & {\em a} & Additional authenticated data \\
+\hline
+\mbox{\tt in}  & {\em a\+Len} & Length of the additional data \\
+\hline
+\mbox{\tt in}  & {\em c} & Ciphertext to be decrypted \\
+\hline
+\mbox{\tt out}  & {\em p} & Plaintext resulting from the decryption \\
+\hline
+\mbox{\tt in}  & {\em length} & Total number of data bytes to be decrypted \\
+\hline
+\mbox{\tt in}  & {\em t} & M\+AC to be verified \\
+\hline
+\mbox{\tt in}  & {\em t\+Len} & Length of the M\+AC \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 237 of file ccm.\+c.
+
+
+\begin{DoxyCode}
+240 \{
+241    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} \hyperlink{web__socket_8h_a8a74907784be6c7786c2d060c8d7e10b}{mask};
+242    \textcolor{keywordtype}{size\_t} \hyperlink{ndp_8h_a6b3284d8492267a77ca46948daf5545e}{m};
+243    \textcolor{keywordtype}{size\_t} q;
+244    \textcolor{keywordtype}{size\_t} qLen;
+245    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} \hyperlink{dtls__misc_8h_ab590318ac859d0e57e15c3dd6c62a605}{b}[16];
+246    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} y[16];
+247    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} \hyperlink{ndp_8h_a4c5c6ceb8ed33456261fa907136e0c3a}{r}[16];
+248    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} \hyperlink{md2_8c_adf356ff381033f761b7de5f76e763a45}{s}[16];
+249 
+250    \textcolor{comment}{//Check parameters}
+251    \textcolor{keywordflow}{if}(cipher == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+252       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+253 
+254    \textcolor{comment}{//CCM supports only symmetric block ciphers whose block size is 128 bits}
+255    \textcolor{keywordflow}{if}(cipher->\hyperlink{structCipherAlgo_a840c614fa1ae0f98a9350bc4f040dc7a}{type} != \hyperlink{cyclone__crypto_2core_2crypto_8h_ae03a6c8f32ed798857924d908aacc49bac347f6aa82618d4d57fe85cba6520ce9}{CIPHER\_ALGO\_TYPE\_BLOCK} || cipher->
+      \hyperlink{structCipherAlgo_a1f318963e641736f3c5836274ef758f1}{blockSize} != 16)
+256       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+257 
+258    \textcolor{comment}{//Check the length of the nonce}
+259    \textcolor{keywordflow}{if}(nLen < 7 || nLen > 13)
+260       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cae5c014519c3ac2540447887ddca1bd28}{ERROR\_INVALID\_LENGTH};
+261 
+262    \textcolor{comment}{//Check the length of the MAC}
+263    \textcolor{keywordflow}{if}(tLen < 4 || tLen > 16 || (tLen % 2) != 0)
+264       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cae5c014519c3ac2540447887ddca1bd28}{ERROR\_INVALID\_LENGTH};
+265 
+266    \textcolor{comment}{//Q is the bit string representation of the octet length of C}
+267    q = \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length};
+268    \textcolor{comment}{//Compute the octet length of Q}
+269    qLen = 15 - nLen;
+270 
+271    \textcolor{comment}{//Format the leading octet of the first block}
+272    b[0] = (aLen > 0) ? 0x40 : 0x00;
+273    \textcolor{comment}{//Encode the octet length of T}
+274    b[0] |= ((tLen - 2) / 2) << 3;
+275    \textcolor{comment}{//Encode the octet length of Q}
+276    b[0] |= qLen - 1;
+277 
+278    \textcolor{comment}{//Copy the nonce}
+279    \hyperlink{cyclone__crypto_2core_2crypto_8h_a6724616c4014bb7e21f2660bd7b88be8}{cryptoMemcpy}(b + 1, \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n}, nLen);
+280 
+281    \textcolor{comment}{//Encode the length field Q}
+282    \textcolor{keywordflow}{for}(m = 0; m < qLen; m++, q >>= 8)
+283    \{
+284       b[15 - \hyperlink{ndp_8h_a6b3284d8492267a77ca46948daf5545e}{m}] = q & 0xFF;
+285    \}
+286 
+287    \textcolor{comment}{//Invalid length?}
+288    \textcolor{keywordflow}{if}(q != 0)
+289       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cae5c014519c3ac2540447887ddca1bd28}{ERROR\_INVALID\_LENGTH};
+290 
+291    \textcolor{comment}{//Set Y(0) = CIPH(B(0))}
+292    cipher->\hyperlink{structCipherAlgo_a61360848127c17c27fe5304588f7f211}{encryptBlock}(context, b, y);
+293 
+294    \textcolor{comment}{//Any additional data?}
+295    \textcolor{keywordflow}{if}(aLen > 0)
+296    \{
+297       \textcolor{comment}{//Format the associated data}
+298       \hyperlink{cyclone__crypto_2core_2crypto_8h_ad4465436e4ff353300fba4896012e18b}{cryptoMemset}(b, 0, 16);
+299 
+300       \textcolor{comment}{//Check the length of the associated data string}
+301       \textcolor{keywordflow}{if}(aLen < 0xFF00)
+302       \{
+303          \textcolor{comment}{//The length is encoded as 2 octets}
+304          \hyperlink{cpu__endian_8h_a8e657bcdf3842380d2d0006859029240}{STORE16BE}(aLen, b);
+305          \textcolor{comment}{//Number of bytes to copy}
+306          m = \hyperlink{os__port_8h_a3acffbd305ee72dcd4593c0d8af64a4f}{MIN}(aLen, 16 - 2);
+307          \textcolor{comment}{//Concatenate the associated data A}
+308          \hyperlink{cyclone__crypto_2core_2crypto_8h_a6724616c4014bb7e21f2660bd7b88be8}{cryptoMemcpy}(b + 2, \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}, m);
+309       \}
+310       \textcolor{keywordflow}{else}
+311       \{
+312          \textcolor{comment}{//The length is encoded as 6 octets}
+313          b[0] = 0xFF;
+314          b[1] = 0xFE;
+315          \textcolor{comment}{//MSB is stored first}
+316          \hyperlink{cpu__endian_8h_a8663906e08e818efa91dd6f65a7e636d}{STORE32BE}(aLen, b + 2);
+317          \textcolor{comment}{//Number of bytes to copy}
+318          m = \hyperlink{os__port_8h_a3acffbd305ee72dcd4593c0d8af64a4f}{MIN}(aLen, 16 - 6);
+319          \textcolor{comment}{//Concatenate the associated data A}
+320          \hyperlink{cyclone__crypto_2core_2crypto_8h_a6724616c4014bb7e21f2660bd7b88be8}{cryptoMemcpy}(b + 6, \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}, m);
+321       \}
+322 
+323       \textcolor{comment}{//XOR B(1) with Y(0)}
+324       \hyperlink{ccm_8c_a21ab7b14db1802bf89e762efc29320c1}{ccmXorBlock}(y, b, y, 16);
+325       \textcolor{comment}{//Compute Y(1) = CIPH(B(1) ^ Y(0))}
+326       cipher->\hyperlink{structCipherAlgo_a61360848127c17c27fe5304588f7f211}{encryptBlock}(context, y, y);
+327 
+328       \textcolor{comment}{//Number of remaining data bytes}
+329       aLen -= \hyperlink{ndp_8h_a6b3284d8492267a77ca46948daf5545e}{m};
+330       \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a} += \hyperlink{ndp_8h_a6b3284d8492267a77ca46948daf5545e}{m};
+331 
+332       \textcolor{comment}{//Process the remaining data bytes}
+333       \textcolor{keywordflow}{while}(aLen > 0)
+334       \{
+335          \textcolor{comment}{//Associated data are processed in a block-by-block fashion}
+336          m = \hyperlink{os__port_8h_a3acffbd305ee72dcd4593c0d8af64a4f}{MIN}(aLen, 16);
+337 
+338          \textcolor{comment}{//XOR B(i) with Y(i-1)}
+339          \hyperlink{ccm_8c_a21ab7b14db1802bf89e762efc29320c1}{ccmXorBlock}(y, \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}, y, m);
+340          \textcolor{comment}{//Compute Y(i) = CIPH(B(i) ^ Y(i-1))}
+341          cipher->\hyperlink{structCipherAlgo_a61360848127c17c27fe5304588f7f211}{encryptBlock}(context, y, y);
+342 
+343          \textcolor{comment}{//Next block}
+344          aLen -= \hyperlink{ndp_8h_a6b3284d8492267a77ca46948daf5545e}{m};
+345          \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a} += \hyperlink{ndp_8h_a6b3284d8492267a77ca46948daf5545e}{m};
+346       \}
+347    \}
+348 
+349    \textcolor{comment}{//Format CTR(0)}
+350    b[0] = (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t}) (qLen - 1);
+351    \textcolor{comment}{//Copy the nonce}
+352    \hyperlink{cyclone__crypto_2core_2crypto_8h_a6724616c4014bb7e21f2660bd7b88be8}{cryptoMemcpy}(b + 1, \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n}, nLen);
+353    \textcolor{comment}{//Initialize counter value}
+354    \hyperlink{cyclone__crypto_2core_2crypto_8h_ad4465436e4ff353300fba4896012e18b}{cryptoMemset}(b + 1 + nLen, 0, qLen);
+355 
+356    \textcolor{comment}{//Compute S(0) = CIPH(CTR(0))}
+357    cipher->\hyperlink{structCipherAlgo_a61360848127c17c27fe5304588f7f211}{encryptBlock}(context, b, s);
+358    \textcolor{comment}{//Save MSB(S(0))}
+359    \hyperlink{cyclone__crypto_2core_2crypto_8h_a6724616c4014bb7e21f2660bd7b88be8}{cryptoMemcpy}(r, s, tLen);
+360 
+361    \textcolor{comment}{//Decrypt ciphertext}
+362    \textcolor{keywordflow}{while}(\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} > 0)
+363    \{
+364       \textcolor{comment}{//The decryption operates in a block-by-block fashion}
+365       m = \hyperlink{os__port_8h_a3acffbd305ee72dcd4593c0d8af64a4f}{MIN}(\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, 16);
+366 
+367       \textcolor{comment}{//Increment counter}
+368       \hyperlink{ccm_8c_a03e739eef895c9d55787fe12a5259c9d}{ccmIncCounter}(b, qLen);
+369       \textcolor{comment}{//Compute S(i) = CIPH(CTR(i))}
+370       cipher->\hyperlink{structCipherAlgo_a61360848127c17c27fe5304588f7f211}{encryptBlock}(context, b, s);
+371       \textcolor{comment}{//Compute B(i) = C(i) XOR S(i)}
+372       \hyperlink{ccm_8c_a21ab7b14db1802bf89e762efc29320c1}{ccmXorBlock}(\hyperlink{ndp_8h_a6519522ad9a6f45e7a8d25d31392a977}{p}, \hyperlink{aria_8c_a5dadc28804036d1b82e1dc027e95c9a6}{c}, s, m);
+373 
+374       \textcolor{comment}{//XOR B(i) with Y(i-1)}
+375       \hyperlink{ccm_8c_a21ab7b14db1802bf89e762efc29320c1}{ccmXorBlock}(y, \hyperlink{ndp_8h_a6519522ad9a6f45e7a8d25d31392a977}{p}, y, m);
+376       \textcolor{comment}{//Compute Y(i) = CIPH(B(i) ^ Y(i-1))}
+377       cipher->\hyperlink{structCipherAlgo_a61360848127c17c27fe5304588f7f211}{encryptBlock}(context, y, y);
+378 
+379       \textcolor{comment}{//Next block}
+380       \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} -= \hyperlink{ndp_8h_a6b3284d8492267a77ca46948daf5545e}{m};
+381       \hyperlink{aria_8c_a5dadc28804036d1b82e1dc027e95c9a6}{c} += \hyperlink{ndp_8h_a6b3284d8492267a77ca46948daf5545e}{m};
+382       \hyperlink{ndp_8h_a6519522ad9a6f45e7a8d25d31392a977}{p} += \hyperlink{ndp_8h_a6b3284d8492267a77ca46948daf5545e}{m};
+383    \}
+384 
+385    \textcolor{comment}{//Compute MAC}
+386    \hyperlink{ccm_8c_a21ab7b14db1802bf89e762efc29320c1}{ccmXorBlock}(r, r, y, tLen);
+387 
+388    \textcolor{comment}{//The calculated tag is bitwise compared to the received tag. The message}
+389    \textcolor{comment}{//is authenticated if and only if the tags match}
+390    \textcolor{keywordflow}{for}(mask = 0, m = 0; m < tLen; m++)
+391    \{
+392       mask |= r[\hyperlink{ndp_8h_a6b3284d8492267a77ca46948daf5545e}{m}] ^ \hyperlink{llmnr__common_8h_a2d03918f4f9edabaf3c9f43abcc2d85b}{t}[\hyperlink{ndp_8h_a6b3284d8492267a77ca46948daf5545e}{m}];
+393    \}
+394 
+395    \textcolor{comment}{//Return status code}
+396    \textcolor{keywordflow}{return} (mask == 0) ? \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR} : \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cae9be6449970fca5714ab9957b16562a5}{ERROR\_FAILURE};
+397 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ccm_8c_a46d26dc0770850a161c9f9c605f7f51a}\label{ccm_8c_a46d26dc0770850a161c9f9c605f7f51a}} 
+\index{ccm.\+c@{ccm.\+c}!ccm\+Encrypt@{ccm\+Encrypt}}
+\index{ccm\+Encrypt@{ccm\+Encrypt}!ccm.\+c@{ccm.\+c}}
+\subsubsection{\texorpdfstring{ccm\+Encrypt()}{ccmEncrypt()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ccm\+Encrypt (\begin{DoxyParamCaption}\item[{const \hyperlink{structCipherAlgo}{Cipher\+Algo} $\ast$}]{cipher,  }\item[{void $\ast$}]{context,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{n,  }\item[{size\+\_\+t}]{n\+Len,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{a,  }\item[{size\+\_\+t}]{a\+Len,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{p,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{c,  }\item[{size\+\_\+t}]{length,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{t,  }\item[{size\+\_\+t}]{t\+Len }\end{DoxyParamCaption})}
+
+
+
+Authenticated encryption using C\+CM. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em cipher} & Cipher algorithm \\
+\hline
+\mbox{\tt in}  & {\em context} & Cipher algorithm context \\
+\hline
+\mbox{\tt in}  & {\em n} & Nonce \\
+\hline
+\mbox{\tt in}  & {\em n\+Len} & Length of the nonce \\
+\hline
+\mbox{\tt in}  & {\em a} & Additional authenticated data \\
+\hline
+\mbox{\tt in}  & {\em a\+Len} & Length of the additional data \\
+\hline
+\mbox{\tt in}  & {\em p} & Plaintext to be encrypted \\
+\hline
+\mbox{\tt out}  & {\em c} & Ciphertext resulting from the encryption \\
+\hline
+\mbox{\tt in}  & {\em length} & Total number of data bytes to be encrypted \\
+\hline
+\mbox{\tt out}  & {\em t} & M\+AC resulting from the encryption process \\
+\hline
+\mbox{\tt in}  & {\em t\+Len} & Length of the M\+AC \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 67 of file ccm.\+c.
+
+
+\begin{DoxyCode}
+70 \{
+71    \textcolor{keywordtype}{size\_t} \hyperlink{ndp_8h_a6b3284d8492267a77ca46948daf5545e}{m};
+72    \textcolor{keywordtype}{size\_t} q;
+73    \textcolor{keywordtype}{size\_t} qLen;
+74    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} \hyperlink{dtls__misc_8h_ab590318ac859d0e57e15c3dd6c62a605}{b}[16];
+75    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} y[16];
+76    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} \hyperlink{md2_8c_adf356ff381033f761b7de5f76e763a45}{s}[16];
+77 
+78    \textcolor{comment}{//Check parameters}
+79    \textcolor{keywordflow}{if}(cipher == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+80       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+81 
+82    \textcolor{comment}{//CCM supports only symmetric block ciphers whose block size is 128 bits}
+83    \textcolor{keywordflow}{if}(cipher->\hyperlink{structCipherAlgo_a840c614fa1ae0f98a9350bc4f040dc7a}{type} != \hyperlink{cyclone__crypto_2core_2crypto_8h_ae03a6c8f32ed798857924d908aacc49bac347f6aa82618d4d57fe85cba6520ce9}{CIPHER\_ALGO\_TYPE\_BLOCK} || cipher->
+      \hyperlink{structCipherAlgo_a1f318963e641736f3c5836274ef758f1}{blockSize} != 16)
+84       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+85 
+86    \textcolor{comment}{//Check the length of the nonce}
+87    \textcolor{keywordflow}{if}(nLen < 7 || nLen > 13)
+88       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cae5c014519c3ac2540447887ddca1bd28}{ERROR\_INVALID\_LENGTH};
+89 
+90    \textcolor{comment}{//Check the length of the MAC}
+91    \textcolor{keywordflow}{if}(tLen < 4 || tLen > 16 || (tLen % 2) != 0)
+92       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cae5c014519c3ac2540447887ddca1bd28}{ERROR\_INVALID\_LENGTH};
+93 
+94    \textcolor{comment}{//Q is the bit string representation of the octet length of P}
+95    q = \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length};
+96    \textcolor{comment}{//Compute the octet length of Q}
+97    qLen = 15 - nLen;
+98 
+99    \textcolor{comment}{//Format the leading octet of the first block}
+100    b[0] = (aLen > 0) ? 0x40 : 0x00;
+101    \textcolor{comment}{//Encode the octet length of T}
+102    b[0] |= ((tLen - 2) / 2) << 3;
+103    \textcolor{comment}{//Encode the octet length of Q}
+104    b[0] |= qLen - 1;
+105 
+106    \textcolor{comment}{//Copy the nonce}
+107    \hyperlink{cyclone__crypto_2core_2crypto_8h_a6724616c4014bb7e21f2660bd7b88be8}{cryptoMemcpy}(b + 1, \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n}, nLen);
+108 
+109    \textcolor{comment}{//Encode the length field Q}
+110    \textcolor{keywordflow}{for}(m = 0; m < qLen; m++, q >>= 8)
+111    \{
+112       b[15 - \hyperlink{ndp_8h_a6b3284d8492267a77ca46948daf5545e}{m}] = q & 0xFF;
+113    \}
+114 
+115    \textcolor{comment}{//Invalid length?}
+116    \textcolor{keywordflow}{if}(q != 0)
+117       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cae5c014519c3ac2540447887ddca1bd28}{ERROR\_INVALID\_LENGTH};
+118 
+119    \textcolor{comment}{//Set Y(0) = CIPH(B(0))}
+120    cipher->\hyperlink{structCipherAlgo_a61360848127c17c27fe5304588f7f211}{encryptBlock}(context, b, y);
+121 
+122    \textcolor{comment}{//Any additional data?}
+123    \textcolor{keywordflow}{if}(aLen > 0)
+124    \{
+125       \textcolor{comment}{//Format the associated data}
+126       \hyperlink{cyclone__crypto_2core_2crypto_8h_ad4465436e4ff353300fba4896012e18b}{cryptoMemset}(b, 0, 16);
+127 
+128       \textcolor{comment}{//Check the length of the associated data string}
+129       \textcolor{keywordflow}{if}(aLen < 0xFF00)
+130       \{
+131          \textcolor{comment}{//The length is encoded as 2 octets}
+132          \hyperlink{cpu__endian_8h_a8e657bcdf3842380d2d0006859029240}{STORE16BE}(aLen, b);
+133          \textcolor{comment}{//Number of bytes to copy}
+134          m = \hyperlink{os__port_8h_a3acffbd305ee72dcd4593c0d8af64a4f}{MIN}(aLen, 16 - 2);
+135          \textcolor{comment}{//Concatenate the associated data A}
+136          \hyperlink{cyclone__crypto_2core_2crypto_8h_a6724616c4014bb7e21f2660bd7b88be8}{cryptoMemcpy}(b + 2, \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}, m);
+137       \}
+138       \textcolor{keywordflow}{else}
+139       \{
+140          \textcolor{comment}{//The length is encoded as 6 octets}
+141          b[0] = 0xFF;
+142          b[1] = 0xFE;
+143          \textcolor{comment}{//MSB is stored first}
+144          \hyperlink{cpu__endian_8h_a8663906e08e818efa91dd6f65a7e636d}{STORE32BE}(aLen, b + 2);
+145          \textcolor{comment}{//Number of bytes to copy}
+146          m = \hyperlink{os__port_8h_a3acffbd305ee72dcd4593c0d8af64a4f}{MIN}(aLen, 16 - 6);
+147          \textcolor{comment}{//Concatenate the associated data A}
+148          \hyperlink{cyclone__crypto_2core_2crypto_8h_a6724616c4014bb7e21f2660bd7b88be8}{cryptoMemcpy}(b + 6, \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}, m);
+149       \}
+150 
+151       \textcolor{comment}{//XOR B(1) with Y(0)}
+152       \hyperlink{ccm_8c_a21ab7b14db1802bf89e762efc29320c1}{ccmXorBlock}(y, b, y, 16);
+153       \textcolor{comment}{//Compute Y(1) = CIPH(B(1) ^ Y(0))}
+154       cipher->\hyperlink{structCipherAlgo_a61360848127c17c27fe5304588f7f211}{encryptBlock}(context, y, y);
+155 
+156       \textcolor{comment}{//Number of remaining data bytes}
+157       aLen -= \hyperlink{ndp_8h_a6b3284d8492267a77ca46948daf5545e}{m};
+158       \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a} += \hyperlink{ndp_8h_a6b3284d8492267a77ca46948daf5545e}{m};
+159 
+160       \textcolor{comment}{//Process the remaining data bytes}
+161       \textcolor{keywordflow}{while}(aLen > 0)
+162       \{
+163          \textcolor{comment}{//Associated data are processed in a block-by-block fashion}
+164          m = \hyperlink{os__port_8h_a3acffbd305ee72dcd4593c0d8af64a4f}{MIN}(aLen, 16);
+165 
+166          \textcolor{comment}{//XOR B(i) with Y(i-1)}
+167          \hyperlink{ccm_8c_a21ab7b14db1802bf89e762efc29320c1}{ccmXorBlock}(y, \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}, y, m);
+168          \textcolor{comment}{//Compute Y(i) = CIPH(B(i) ^ Y(i-1))}
+169          cipher->\hyperlink{structCipherAlgo_a61360848127c17c27fe5304588f7f211}{encryptBlock}(context, y, y);
+170 
+171          \textcolor{comment}{//Next block}
+172          aLen -= \hyperlink{ndp_8h_a6b3284d8492267a77ca46948daf5545e}{m};
+173          \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a} += \hyperlink{ndp_8h_a6b3284d8492267a77ca46948daf5545e}{m};
+174       \}
+175    \}
+176 
+177    \textcolor{comment}{//Format CTR(0)}
+178    b[0] = (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t}) (qLen - 1);
+179    \textcolor{comment}{//Copy the nonce}
+180    \hyperlink{cyclone__crypto_2core_2crypto_8h_a6724616c4014bb7e21f2660bd7b88be8}{cryptoMemcpy}(b + 1, \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n}, nLen);
+181    \textcolor{comment}{//Initialize counter value}
+182    \hyperlink{cyclone__crypto_2core_2crypto_8h_ad4465436e4ff353300fba4896012e18b}{cryptoMemset}(b + 1 + nLen, 0, qLen);
+183 
+184    \textcolor{comment}{//Compute S(0) = CIPH(CTR(0))}
+185    cipher->\hyperlink{structCipherAlgo_a61360848127c17c27fe5304588f7f211}{encryptBlock}(context, b, s);
+186    \textcolor{comment}{//Save MSB(S(0))}
+187    \hyperlink{cyclone__crypto_2core_2crypto_8h_a6724616c4014bb7e21f2660bd7b88be8}{cryptoMemcpy}(\hyperlink{llmnr__common_8h_a2d03918f4f9edabaf3c9f43abcc2d85b}{t}, s, tLen);
+188 
+189    \textcolor{comment}{//Encrypt plaintext}
+190    \textcolor{keywordflow}{while}(\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} > 0)
+191    \{
+192       \textcolor{comment}{//The encryption operates in a block-by-block fashion}
+193       m = \hyperlink{os__port_8h_a3acffbd305ee72dcd4593c0d8af64a4f}{MIN}(\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, 16);
+194 
+195       \textcolor{comment}{//XOR B(i) with Y(i-1)}
+196       \hyperlink{ccm_8c_a21ab7b14db1802bf89e762efc29320c1}{ccmXorBlock}(y, \hyperlink{ndp_8h_a6519522ad9a6f45e7a8d25d31392a977}{p}, y, m);
+197       \textcolor{comment}{//Compute Y(i) = CIPH(B(i) ^ Y(i-1))}
+198       cipher->\hyperlink{structCipherAlgo_a61360848127c17c27fe5304588f7f211}{encryptBlock}(context, y, y);
+199 
+200       \textcolor{comment}{//Increment counter}
+201       \hyperlink{ccm_8c_a03e739eef895c9d55787fe12a5259c9d}{ccmIncCounter}(b, qLen);
+202       \textcolor{comment}{//Compute S(i) = CIPH(CTR(i))}
+203       cipher->\hyperlink{structCipherAlgo_a61360848127c17c27fe5304588f7f211}{encryptBlock}(context, b, s);
+204       \textcolor{comment}{//Compute C(i) = B(i) XOR S(i)}
+205       \hyperlink{ccm_8c_a21ab7b14db1802bf89e762efc29320c1}{ccmXorBlock}(\hyperlink{aria_8c_a5dadc28804036d1b82e1dc027e95c9a6}{c}, \hyperlink{ndp_8h_a6519522ad9a6f45e7a8d25d31392a977}{p}, s, m);
+206 
+207       \textcolor{comment}{//Next block}
+208       \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} -= \hyperlink{ndp_8h_a6b3284d8492267a77ca46948daf5545e}{m};
+209       \hyperlink{ndp_8h_a6519522ad9a6f45e7a8d25d31392a977}{p} += \hyperlink{ndp_8h_a6b3284d8492267a77ca46948daf5545e}{m};
+210       \hyperlink{aria_8c_a5dadc28804036d1b82e1dc027e95c9a6}{c} += \hyperlink{ndp_8h_a6b3284d8492267a77ca46948daf5545e}{m};
+211    \}
+212 
+213    \textcolor{comment}{//Compute MAC}
+214    \hyperlink{ccm_8c_a21ab7b14db1802bf89e762efc29320c1}{ccmXorBlock}(\hyperlink{llmnr__common_8h_a2d03918f4f9edabaf3c9f43abcc2d85b}{t}, \hyperlink{llmnr__common_8h_a2d03918f4f9edabaf3c9f43abcc2d85b}{t}, y, tLen);
+215 
+216    \textcolor{comment}{//Successful encryption}
+217    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+218 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ccm_8c_a03e739eef895c9d55787fe12a5259c9d}\label{ccm_8c_a03e739eef895c9d55787fe12a5259c9d}} 
+\index{ccm.\+c@{ccm.\+c}!ccm\+Inc\+Counter@{ccm\+Inc\+Counter}}
+\index{ccm\+Inc\+Counter@{ccm\+Inc\+Counter}!ccm.\+c@{ccm.\+c}}
+\subsubsection{\texorpdfstring{ccm\+Inc\+Counter()}{ccmIncCounter()}}
+{\footnotesize\ttfamily void ccm\+Inc\+Counter (\begin{DoxyParamCaption}\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{x,  }\item[{size\+\_\+t}]{n }\end{DoxyParamCaption})}
+
+
+
+Increment counter block. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in,out}  & {\em x} & Pointer to the counter block \\
+\hline
+\mbox{\tt in}  & {\em n} & Size in bytes of the specific part of the block to be incremented \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 426 of file ccm.\+c.
+
+
+\begin{DoxyCode}
+427 \{
+428    \textcolor{keywordtype}{size\_t} i;
+429 
+430    \textcolor{comment}{//The function increments the right-most bytes of the block. The remaining}
+431    \textcolor{comment}{//left-most bytes remain unchanged}
+432    \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n}; i++)
+433    \{
+434       \textcolor{comment}{//Increment the current byte and propagate the carry if necessary}
+435       \textcolor{keywordflow}{if}(++(x[15 - i]) != 0)
+436       \{
+437          \textcolor{keywordflow}{break};
+438       \}
+439    \}
+440 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ccm_8c_a21ab7b14db1802bf89e762efc29320c1}\label{ccm_8c_a21ab7b14db1802bf89e762efc29320c1}} 
+\index{ccm.\+c@{ccm.\+c}!ccm\+Xor\+Block@{ccm\+Xor\+Block}}
+\index{ccm\+Xor\+Block@{ccm\+Xor\+Block}!ccm.\+c@{ccm.\+c}}
+\subsubsection{\texorpdfstring{ccm\+Xor\+Block()}{ccmXorBlock()}}
+{\footnotesize\ttfamily void ccm\+Xor\+Block (\begin{DoxyParamCaption}\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{x,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{a,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{b,  }\item[{size\+\_\+t}]{n }\end{DoxyParamCaption})}
+
+
+
+X\+OR operation. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em x} & Block resulting from the X\+OR operation \\
+\hline
+\mbox{\tt in}  & {\em a} & First block \\
+\hline
+\mbox{\tt in}  & {\em b} & Second block \\
+\hline
+\mbox{\tt in}  & {\em n} & Size of the block \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 408 of file ccm.\+c.
+
+
+\begin{DoxyCode}
+409 \{
+410    \textcolor{keywordtype}{size\_t} i;
+411 
+412    \textcolor{comment}{//Perform XOR operation}
+413    \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n}; i++)
+414    \{
+415       x[i] = \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[i] ^ \hyperlink{dtls__misc_8h_ab590318ac859d0e57e15c3dd6c62a605}{b}[i];
+416    \}
+417 \}
+\end{DoxyCode}

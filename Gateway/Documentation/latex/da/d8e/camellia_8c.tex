@@ -1,0 +1,831 @@
+\hypertarget{camellia_8c}{}\section{cyclone\+\_\+crypto/cipher/camellia.c File Reference}
+\label{camellia_8c}\index{cyclone\+\_\+crypto/cipher/camellia.\+c@{cyclone\+\_\+crypto/cipher/camellia.\+c}}
+
+
+Camellia encryption algorithm.  
+
+
+{\ttfamily \#include \char`\"{}core/crypto.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}cipher/camellia.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}debug.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{camellia_8c_afcdf5e66fd927a7f4cc64295acd20407}{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}~\hyperlink{crypto__config_8h_a6afae3a9b63f9b55d979e667ee0e881d}{C\+R\+Y\+P\+T\+O\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}
+\item 
+\#define \hyperlink{camellia_8c_a154e5792105e99fa242318f6ac8b82e0}{C\+A\+M\+E\+L\+L\+I\+A\+\_\+\+R\+O\+U\+ND}(left1,  left2,  right1,  right2,  \hyperlink{pic32mz_2isr__support_8h_acd74e3bc3febb3d053f79a5fa02a92d1}{k1},  k2)
+\item 
+\#define \hyperlink{camellia_8c_a3b6df36231572b90cfff7e0175a1a11c}{C\+A\+M\+E\+L\+L\+I\+A\+\_\+F}(xl,  xr,  kl,  kr)
+\item 
+\#define \hyperlink{camellia_8c_a8e81bc8ddfc0612e79a9912b610b1771}{C\+A\+M\+E\+L\+L\+I\+A\+\_\+\+FL}(xl,  xr,  kl,  kr)
+\item 
+\#define \hyperlink{camellia_8c_accfd57a28293d2b24735a988ac847bba}{C\+A\+M\+E\+L\+L\+I\+A\+\_\+\+I\+N\+V\+\_\+\+FL}(yl,  yr,  kl,  kr)
+\item 
+\#define \hyperlink{camellia_8c_af283305b6282e28936036ab7a51a90d3}{C\+A\+M\+E\+L\+L\+I\+A\+\_\+S}(zl,  zr)
+\item 
+\#define \hyperlink{camellia_8c_af153390a98f074fc772919b138cf895a}{C\+A\+M\+E\+L\+L\+I\+A\+\_\+P}(zl,  zr)
+\item 
+\#define \hyperlink{camellia_8c_a81a7c36ecc75b2f02c2b6d2d6d49778e}{KL}~0
+\item 
+\#define \hyperlink{camellia_8c_a76f9425f5a9151312ae472a45a03b60c}{KR}~4
+\item 
+\#define \hyperlink{camellia_8c_ac20b871b737ec964c3a7c440d411f969}{KA}~8
+\item 
+\#define \hyperlink{camellia_8c_a1841fd1a462d245d8c73dce55e2f45da}{KB}~12
+\item 
+\#define \hyperlink{camellia_8c_aa73214aa5f2f94f63d90bb4e3d99fe53}{L}~0
+\item 
+\#define \hyperlink{camellia_8c_a5c71a5e59a53413cd6c270266d63b031}{R}~64
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{camellia_8c_a40f037ff4c0ba16da488c8956f737eb8}{camellia\+Init} (\hyperlink{structCamelliaContext}{Camellia\+Context} $\ast$context, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$key, size\+\_\+t key\+Len)
+\begin{DoxyCompactList}\small\item\em Initialize a Camellia context using the supplied key. \end{DoxyCompactList}\item 
+void \hyperlink{camellia_8c_ad3a28aca85720cfede64b88409905fc3}{camellia\+Encrypt\+Block} (\hyperlink{structCamelliaContext}{Camellia\+Context} $\ast$context, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$input, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$output)
+\begin{DoxyCompactList}\small\item\em Encrypt a 16-\/byte block using Camellia algorithm. \end{DoxyCompactList}\item 
+void \hyperlink{camellia_8c_a0312c04b9c38d4e956ef0f7baa5a2703}{camellia\+Decrypt\+Block} (\hyperlink{structCamelliaContext}{Camellia\+Context} $\ast$context, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$input, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$output)
+\begin{DoxyCompactList}\small\item\em Decrypt a 16-\/byte block using Camellia algorithm. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static const \hyperlink{structCamelliaSubkey}{Camellia\+Subkey} \hyperlink{camellia_8c_a816290e7a13c6b54677e41417c382765}{ks1} \mbox{[}$\,$\mbox{]}
+\item 
+static const \hyperlink{structCamelliaSubkey}{Camellia\+Subkey} \hyperlink{camellia_8c_a9d5a54f5ab87f285a18ad2d08b0ae091}{ks2} \mbox{[}$\,$\mbox{]}
+\item 
+static const \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t} \hyperlink{camellia_8c_a61428f6acc02d966c9771f969b643ec0}{sigma} \mbox{[}12\mbox{]}
+\item 
+static const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} \hyperlink{camellia_8c_adf62d61dafd707b3ac689d2900d5bdb4}{sbox1} \mbox{[}256\mbox{]}
+\item 
+static const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} \hyperlink{camellia_8c_a2f8db1df67c9853982d5d3ac57c938a8}{sbox2} \mbox{[}256\mbox{]}
+\item 
+static const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} \hyperlink{camellia_8c_a008d0e4d49b9bc49b80b7d632e42c6d6}{sbox3} \mbox{[}256\mbox{]}
+\item 
+static const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} \hyperlink{camellia_8c_aa1458efd8027e8ee35d50d9cff5e7186}{sbox4} \mbox{[}256\mbox{]}
+\item 
+const \hyperlink{structCipherAlgo}{Cipher\+Algo} \hyperlink{camellia_8c_a593a58219e849b6e74672d970bd46a1a}{camellia\+Cipher\+Algo}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Camellia encryption algorithm. 
+
+\hypertarget{pic32mz__ef__curiosity_8h_License}{}\subsection{License}\label{pic32mz__ef__curiosity_8h_License}
+S\+P\+D\+X-\/\+License-\/\+Identifier\+: G\+P\+L-\/2.\+0-\/or-\/later
+
+Copyright (C) 2010-\/2019 Oryx Embedded S\+A\+RL. All rights reserved.
+
+This file is part of Cyclone\+Crypto Open.
+
+This program is free software; you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+
+You should have received a copy of the G\+NU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-\/1301, U\+SA.\hypertarget{tftp__server_8c_Description}{}\subsection{Description}\label{tftp__server_8c_Description}
+Camellia is an encryption algorithm designed to encipher and decipher blocks of 128 bits under control of a 128/192/256-\/bit secret key
+
+\begin{DoxyAuthor}{Author}
+Oryx Embedded S\+A\+RL (www.\+oryx-\/embedded.\+com) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+9.\+6 
+\end{DoxyVersion}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{camellia_8c_a3b6df36231572b90cfff7e0175a1a11c}\label{camellia_8c_a3b6df36231572b90cfff7e0175a1a11c}} 
+\index{camellia.\+c@{camellia.\+c}!C\+A\+M\+E\+L\+L\+I\+A\+\_\+F@{C\+A\+M\+E\+L\+L\+I\+A\+\_\+F}}
+\index{C\+A\+M\+E\+L\+L\+I\+A\+\_\+F@{C\+A\+M\+E\+L\+L\+I\+A\+\_\+F}!camellia.\+c@{camellia.\+c}}
+\subsubsection{\texorpdfstring{C\+A\+M\+E\+L\+L\+I\+A\+\_\+F}{CAMELLIA\_F}}
+{\footnotesize\ttfamily \#define C\+A\+M\+E\+L\+L\+I\+A\+\_\+F(\begin{DoxyParamCaption}\item[{}]{xl,  }\item[{}]{xr,  }\item[{}]{kl,  }\item[{}]{kr }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}
+\{ \(\backslash\)
+   xl = xl ^ kl; \(\backslash\)
+   xl = xr ^ kr; \(\backslash\)
+   CAMELLIA\_S(xl, xr); \(\backslash\)
+   CAMELLIA\_P(xl, xr); \(\backslash\)
+\}
+\end{DoxyCode}
+
+
+Definition at line 63 of file camellia.\+c.
+
+\mbox{\Hypertarget{camellia_8c_a8e81bc8ddfc0612e79a9912b610b1771}\label{camellia_8c_a8e81bc8ddfc0612e79a9912b610b1771}} 
+\index{camellia.\+c@{camellia.\+c}!C\+A\+M\+E\+L\+L\+I\+A\+\_\+\+FL@{C\+A\+M\+E\+L\+L\+I\+A\+\_\+\+FL}}
+\index{C\+A\+M\+E\+L\+L\+I\+A\+\_\+\+FL@{C\+A\+M\+E\+L\+L\+I\+A\+\_\+\+FL}!camellia.\+c@{camellia.\+c}}
+\subsubsection{\texorpdfstring{C\+A\+M\+E\+L\+L\+I\+A\+\_\+\+FL}{CAMELLIA\_FL}}
+{\footnotesize\ttfamily \#define C\+A\+M\+E\+L\+L\+I\+A\+\_\+\+FL(\begin{DoxyParamCaption}\item[{}]{xl,  }\item[{}]{xr,  }\item[{}]{kl,  }\item[{}]{kr }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}
+\{ \(\backslash\)
+   temp1 = (xl & kl); \(\backslash\)
+   xr ^= \hyperlink{cyclone__crypto_2core_2crypto_8h_ad5e52b5ea688101f11d0bf34dc3a8b4b}{ROL32}(temp1, 1); \(\backslash\)
+   xl ^= (xr | kr); \(\backslash\)
+\}
+\end{DoxyCode}
+
+
+Definition at line 72 of file camellia.\+c.
+
+\mbox{\Hypertarget{camellia_8c_accfd57a28293d2b24735a988ac847bba}\label{camellia_8c_accfd57a28293d2b24735a988ac847bba}} 
+\index{camellia.\+c@{camellia.\+c}!C\+A\+M\+E\+L\+L\+I\+A\+\_\+\+I\+N\+V\+\_\+\+FL@{C\+A\+M\+E\+L\+L\+I\+A\+\_\+\+I\+N\+V\+\_\+\+FL}}
+\index{C\+A\+M\+E\+L\+L\+I\+A\+\_\+\+I\+N\+V\+\_\+\+FL@{C\+A\+M\+E\+L\+L\+I\+A\+\_\+\+I\+N\+V\+\_\+\+FL}!camellia.\+c@{camellia.\+c}}
+\subsubsection{\texorpdfstring{C\+A\+M\+E\+L\+L\+I\+A\+\_\+\+I\+N\+V\+\_\+\+FL}{CAMELLIA\_INV\_FL}}
+{\footnotesize\ttfamily \#define C\+A\+M\+E\+L\+L\+I\+A\+\_\+\+I\+N\+V\+\_\+\+FL(\begin{DoxyParamCaption}\item[{}]{yl,  }\item[{}]{yr,  }\item[{}]{kl,  }\item[{}]{kr }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}
+\{ \(\backslash\)
+   yl ^= (yr | kr); \(\backslash\)
+   temp1 = (yl & kl); \(\backslash\)
+   yr ^= \hyperlink{cyclone__crypto_2core_2crypto_8h_ad5e52b5ea688101f11d0bf34dc3a8b4b}{ROL32}(temp1, 1); \(\backslash\)
+\}
+\end{DoxyCode}
+
+
+Definition at line 80 of file camellia.\+c.
+
+\mbox{\Hypertarget{camellia_8c_af153390a98f074fc772919b138cf895a}\label{camellia_8c_af153390a98f074fc772919b138cf895a}} 
+\index{camellia.\+c@{camellia.\+c}!C\+A\+M\+E\+L\+L\+I\+A\+\_\+P@{C\+A\+M\+E\+L\+L\+I\+A\+\_\+P}}
+\index{C\+A\+M\+E\+L\+L\+I\+A\+\_\+P@{C\+A\+M\+E\+L\+L\+I\+A\+\_\+P}!camellia.\+c@{camellia.\+c}}
+\subsubsection{\texorpdfstring{C\+A\+M\+E\+L\+L\+I\+A\+\_\+P}{CAMELLIA\_P}}
+{\footnotesize\ttfamily \#define C\+A\+M\+E\+L\+L\+I\+A\+\_\+P(\begin{DoxyParamCaption}\item[{}]{zl,  }\item[{}]{zr }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}
+\{ \(\backslash\)
+   zl ^= \hyperlink{cyclone__crypto_2core_2crypto_8h_ad5e52b5ea688101f11d0bf34dc3a8b4b}{ROL32}(zr, 8); \(\backslash\)
+   zr ^= \hyperlink{cyclone__crypto_2core_2crypto_8h_ad5e52b5ea688101f11d0bf34dc3a8b4b}{ROL32}(zl, 16); \(\backslash\)
+   zl ^= \hyperlink{cyclone__crypto_2core_2crypto_8h_a1e84182b178c5f242e4ba717e6dcd0e5}{ROR32}(zr, 8); \(\backslash\)
+   zr ^= \hyperlink{cyclone__crypto_2core_2crypto_8h_a1e84182b178c5f242e4ba717e6dcd0e5}{ROR32}(zl, 8); \(\backslash\)
+\}
+\end{DoxyCode}
+
+
+Definition at line 97 of file camellia.\+c.
+
+\mbox{\Hypertarget{camellia_8c_a154e5792105e99fa242318f6ac8b82e0}\label{camellia_8c_a154e5792105e99fa242318f6ac8b82e0}} 
+\index{camellia.\+c@{camellia.\+c}!C\+A\+M\+E\+L\+L\+I\+A\+\_\+\+R\+O\+U\+ND@{C\+A\+M\+E\+L\+L\+I\+A\+\_\+\+R\+O\+U\+ND}}
+\index{C\+A\+M\+E\+L\+L\+I\+A\+\_\+\+R\+O\+U\+ND@{C\+A\+M\+E\+L\+L\+I\+A\+\_\+\+R\+O\+U\+ND}!camellia.\+c@{camellia.\+c}}
+\subsubsection{\texorpdfstring{C\+A\+M\+E\+L\+L\+I\+A\+\_\+\+R\+O\+U\+ND}{CAMELLIA\_ROUND}}
+{\footnotesize\ttfamily \#define C\+A\+M\+E\+L\+L\+I\+A\+\_\+\+R\+O\+U\+ND(\begin{DoxyParamCaption}\item[{}]{left1,  }\item[{}]{left2,  }\item[{}]{right1,  }\item[{}]{right2,  }\item[{}]{\hyperlink{pic32mz_2isr__support_8h_acd74e3bc3febb3d053f79a5fa02a92d1}{k1},  }\item[{}]{k2 }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}
+\{ \(\backslash\)
+   temp1 = left1 ^ \hyperlink{pic32mx_2isr__support_8h_acd74e3bc3febb3d053f79a5fa02a92d1}{k1}; \(\backslash\)
+   temp2 = left2 ^ k2; \(\backslash\)
+   CAMELLIA\_S(temp1, temp2); \(\backslash\)
+   CAMELLIA\_P(temp1, temp2); \(\backslash\)
+   temp1 ^= right2; \(\backslash\)
+   temp2 ^= right1; \(\backslash\)
+   right1 = left1; \(\backslash\)
+   right2 = left2; \(\backslash\)
+   left1 = temp2; \(\backslash\)
+   left2 = temp1; \(\backslash\)
+\}
+\end{DoxyCode}
+
+
+Definition at line 48 of file camellia.\+c.
+
+\mbox{\Hypertarget{camellia_8c_af283305b6282e28936036ab7a51a90d3}\label{camellia_8c_af283305b6282e28936036ab7a51a90d3}} 
+\index{camellia.\+c@{camellia.\+c}!C\+A\+M\+E\+L\+L\+I\+A\+\_\+S@{C\+A\+M\+E\+L\+L\+I\+A\+\_\+S}}
+\index{C\+A\+M\+E\+L\+L\+I\+A\+\_\+S@{C\+A\+M\+E\+L\+L\+I\+A\+\_\+S}!camellia.\+c@{camellia.\+c}}
+\subsubsection{\texorpdfstring{C\+A\+M\+E\+L\+L\+I\+A\+\_\+S}{CAMELLIA\_S}}
+{\footnotesize\ttfamily \#define C\+A\+M\+E\+L\+L\+I\+A\+\_\+S(\begin{DoxyParamCaption}\item[{}]{zl,  }\item[{}]{zr }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}
+\{ \(\backslash\)
+   zl = (\hyperlink{camellia_8c_adf62d61dafd707b3ac689d2900d5bdb4}{sbox1}[(zl >> 24) & 0xFF] << 24) | (\hyperlink{camellia_8c_a2f8db1df67c9853982d5d3ac57c938a8}{sbox2}[(zl >> 16) & 0xFF] << 16) | \(\backslash\)
+      (\hyperlink{camellia_8c_a008d0e4d49b9bc49b80b7d632e42c6d6}{sbox3}[(zl >> 8) & 0xFF] << 8) | \hyperlink{camellia_8c_aa1458efd8027e8ee35d50d9cff5e7186}{sbox4}[zl & 0xFF]; \(\backslash\)
+   zr = (\hyperlink{camellia_8c_a2f8db1df67c9853982d5d3ac57c938a8}{sbox2}[(zr >> 24) & 0xFF] << 24) | (\hyperlink{camellia_8c_a008d0e4d49b9bc49b80b7d632e42c6d6}{sbox3}[(zr >> 16) & 0xFF] << 16) | \(\backslash\)
+      (\hyperlink{camellia_8c_aa1458efd8027e8ee35d50d9cff5e7186}{sbox4}[(zr >> 8) & 0xFF] << 8) | \hyperlink{camellia_8c_adf62d61dafd707b3ac689d2900d5bdb4}{sbox1}[zr & 0xFF]; \(\backslash\)
+\}
+\end{DoxyCode}
+
+
+Definition at line 88 of file camellia.\+c.
+
+\mbox{\Hypertarget{camellia_8c_ac20b871b737ec964c3a7c440d411f969}\label{camellia_8c_ac20b871b737ec964c3a7c440d411f969}} 
+\index{camellia.\+c@{camellia.\+c}!KA@{KA}}
+\index{KA@{KA}!camellia.\+c@{camellia.\+c}}
+\subsubsection{\texorpdfstring{KA}{KA}}
+{\footnotesize\ttfamily \#define KA~8}
+
+
+
+Definition at line 108 of file camellia.\+c.
+
+\mbox{\Hypertarget{camellia_8c_a1841fd1a462d245d8c73dce55e2f45da}\label{camellia_8c_a1841fd1a462d245d8c73dce55e2f45da}} 
+\index{camellia.\+c@{camellia.\+c}!KB@{KB}}
+\index{KB@{KB}!camellia.\+c@{camellia.\+c}}
+\subsubsection{\texorpdfstring{KB}{KB}}
+{\footnotesize\ttfamily \#define KB~12}
+
+
+
+Definition at line 109 of file camellia.\+c.
+
+\mbox{\Hypertarget{camellia_8c_a81a7c36ecc75b2f02c2b6d2d6d49778e}\label{camellia_8c_a81a7c36ecc75b2f02c2b6d2d6d49778e}} 
+\index{camellia.\+c@{camellia.\+c}!KL@{KL}}
+\index{KL@{KL}!camellia.\+c@{camellia.\+c}}
+\subsubsection{\texorpdfstring{KL}{KL}}
+{\footnotesize\ttfamily \#define KL~0}
+
+
+
+Definition at line 106 of file camellia.\+c.
+
+\mbox{\Hypertarget{camellia_8c_a76f9425f5a9151312ae472a45a03b60c}\label{camellia_8c_a76f9425f5a9151312ae472a45a03b60c}} 
+\index{camellia.\+c@{camellia.\+c}!KR@{KR}}
+\index{KR@{KR}!camellia.\+c@{camellia.\+c}}
+\subsubsection{\texorpdfstring{KR}{KR}}
+{\footnotesize\ttfamily \#define KR~4}
+
+
+
+Definition at line 107 of file camellia.\+c.
+
+\mbox{\Hypertarget{camellia_8c_aa73214aa5f2f94f63d90bb4e3d99fe53}\label{camellia_8c_aa73214aa5f2f94f63d90bb4e3d99fe53}} 
+\index{camellia.\+c@{camellia.\+c}!L@{L}}
+\index{L@{L}!camellia.\+c@{camellia.\+c}}
+\subsubsection{\texorpdfstring{L}{L}}
+{\footnotesize\ttfamily \#define L~0}
+
+
+
+Definition at line 110 of file camellia.\+c.
+
+\mbox{\Hypertarget{camellia_8c_a5c71a5e59a53413cd6c270266d63b031}\label{camellia_8c_a5c71a5e59a53413cd6c270266d63b031}} 
+\index{camellia.\+c@{camellia.\+c}!R@{R}}
+\index{R@{R}!camellia.\+c@{camellia.\+c}}
+\subsubsection{\texorpdfstring{R}{R}}
+{\footnotesize\ttfamily \#define R~64}
+
+
+
+Definition at line 111 of file camellia.\+c.
+
+\mbox{\Hypertarget{camellia_8c_afcdf5e66fd927a7f4cc64295acd20407}\label{camellia_8c_afcdf5e66fd927a7f4cc64295acd20407}} 
+\index{camellia.\+c@{camellia.\+c}!T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+\index{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}!camellia.\+c@{camellia.\+c}}
+\subsubsection{\texorpdfstring{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}{TRACE\_LEVEL}}
+{\footnotesize\ttfamily \#define T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL~\hyperlink{crypto__config_8h_a6afae3a9b63f9b55d979e667ee0e881d}{C\+R\+Y\+P\+T\+O\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+
+
+
+Definition at line 37 of file camellia.\+c.
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{camellia_8c_a0312c04b9c38d4e956ef0f7baa5a2703}\label{camellia_8c_a0312c04b9c38d4e956ef0f7baa5a2703}} 
+\index{camellia.\+c@{camellia.\+c}!camellia\+Decrypt\+Block@{camellia\+Decrypt\+Block}}
+\index{camellia\+Decrypt\+Block@{camellia\+Decrypt\+Block}!camellia.\+c@{camellia.\+c}}
+\subsubsection{\texorpdfstring{camellia\+Decrypt\+Block()}{camelliaDecryptBlock()}}
+{\footnotesize\ttfamily void camellia\+Decrypt\+Block (\begin{DoxyParamCaption}\item[{\hyperlink{structCamelliaContext}{Camellia\+Context} $\ast$}]{context,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{input,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{output }\end{DoxyParamCaption})}
+
+
+
+Decrypt a 16-\/byte block using Camellia algorithm. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the Camellia context \\
+\hline
+\mbox{\tt in}  & {\em input} & Ciphertext block to decrypt \\
+\hline
+\mbox{\tt out}  & {\em output} & Plaintext block resulting from decryption \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 498 of file camellia.\+c.
+
+
+\begin{DoxyCode}
+499 \{
+500    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+501    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} temp1;
+502    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} temp2;
+503    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} *ks;
+504 
+505    \textcolor{comment}{//The ciphertext is separated into two parts (L and R)}
+506    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} right1 = \hyperlink{cpu__endian_8h_a1be529d679835eda85cf5541e7926ca7}{LOAD32BE}(input + 0);
+507    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} right2 = \hyperlink{cpu__endian_8h_a1be529d679835eda85cf5541e7926ca7}{LOAD32BE}(input + 4);
+508    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} left1 = \hyperlink{cpu__endian_8h_a1be529d679835eda85cf5541e7926ca7}{LOAD32BE}(input + 8);
+509    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} left2 = \hyperlink{cpu__endian_8h_a1be529d679835eda85cf5541e7926ca7}{LOAD32BE}(input + 12);
+510 
+511    \textcolor{comment}{//The key schedule must be applied in reverse order}
+512    ks = (context->\hyperlink{structCamelliaContext_a53fbc3b3b523fcf86ec2fb13690c4c5e}{nr} == 18) ? (context->\hyperlink{structCamelliaContext_a462c7479aab6b5e6a3646ab1b0eb6f6c}{ks} + 48) : (context->\hyperlink{structCamelliaContext_a462c7479aab6b5e6a3646ab1b0eb6f6c}{ks} + 64);
+513 
+514    \textcolor{comment}{//XOR ciphertext with kw3 and kw4}
+515    right1 ^= ks[0];
+516    right2 ^= ks[1];
+517    left1 ^= ks[2];
+518    left2 ^= ks[3];
+519 
+520    \textcolor{comment}{//Apply round function 18 or 24 times depending on the key length}
+521    \textcolor{keywordflow}{for}(i = context->\hyperlink{structCamelliaContext_a53fbc3b3b523fcf86ec2fb13690c4c5e}{nr}; i > 0; i--)
+522    \{
+523       \textcolor{comment}{//Update current location in key schedule}
+524       ks -= 2;
+525       \textcolor{comment}{//Apply round function}
+526       \hyperlink{camellia_8c_a154e5792105e99fa242318f6ac8b82e0}{CAMELLIA\_ROUND}(right1, right2, left1, left2, ks[0], ks[1]);
+527 
+528       \textcolor{comment}{//6th, 12th and 18th rounds require special processing}
+529       \textcolor{keywordflow}{if}(i == 7 || i == 13 || i == 19)
+530       \{
+531          \textcolor{comment}{//Update current location in key schedule}
+532          ks -= 4;
+533          \textcolor{comment}{//Apply FL-function}
+534          \hyperlink{camellia_8c_a8e81bc8ddfc0612e79a9912b610b1771}{CAMELLIA\_FL}(right1, right2, ks[2], ks[3])
+535          \textcolor{comment}{//Apply inverse FL-function}
+536          \hyperlink{camellia_8c_accfd57a28293d2b24735a988ac847bba}{CAMELLIA\_INV\_FL}(left1, left2, ks[0], ks[1])
+537       \}
+538    \}
+539 
+540    \textcolor{comment}{//Update current location in key schedule}
+541    ks -= 4;
+542    \textcolor{comment}{//XOR operation with kw1 and kw2}
+543    left1 ^= ks[0];
+544    left2 ^= ks[1];
+545    right1 ^= ks[2];
+546    right2 ^= ks[3];
+547 
+548    \textcolor{comment}{//The resulting value is the plaintext}
+549    \hyperlink{cpu__endian_8h_a8663906e08e818efa91dd6f65a7e636d}{STORE32BE}(left1, output + 0);
+550    \hyperlink{cpu__endian_8h_a8663906e08e818efa91dd6f65a7e636d}{STORE32BE}(left2, output + 4);
+551    \hyperlink{cpu__endian_8h_a8663906e08e818efa91dd6f65a7e636d}{STORE32BE}(right1, output + 8);
+552    \hyperlink{cpu__endian_8h_a8663906e08e818efa91dd6f65a7e636d}{STORE32BE}(right2, output + 12);
+553 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{camellia_8c_ad3a28aca85720cfede64b88409905fc3}\label{camellia_8c_ad3a28aca85720cfede64b88409905fc3}} 
+\index{camellia.\+c@{camellia.\+c}!camellia\+Encrypt\+Block@{camellia\+Encrypt\+Block}}
+\index{camellia\+Encrypt\+Block@{camellia\+Encrypt\+Block}!camellia.\+c@{camellia.\+c}}
+\subsubsection{\texorpdfstring{camellia\+Encrypt\+Block()}{camelliaEncryptBlock()}}
+{\footnotesize\ttfamily void camellia\+Encrypt\+Block (\begin{DoxyParamCaption}\item[{\hyperlink{structCamelliaContext}{Camellia\+Context} $\ast$}]{context,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{input,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{output }\end{DoxyParamCaption})}
+
+
+
+Encrypt a 16-\/byte block using Camellia algorithm. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the Camellia context \\
+\hline
+\mbox{\tt in}  & {\em input} & Plaintext block to encrypt \\
+\hline
+\mbox{\tt out}  & {\em output} & Ciphertext block resulting from encryption \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 433 of file camellia.\+c.
+
+
+\begin{DoxyCode}
+434 \{
+435    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+436    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} temp1;
+437    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} temp2;
+438    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} *ks;
+439 
+440    \textcolor{comment}{//The plaintext is separated into two parts (L and R)}
+441    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} left1 = \hyperlink{cpu__endian_8h_a1be529d679835eda85cf5541e7926ca7}{LOAD32BE}(input + 0);
+442    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} left2 = \hyperlink{cpu__endian_8h_a1be529d679835eda85cf5541e7926ca7}{LOAD32BE}(input + 4);
+443    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} right1 = \hyperlink{cpu__endian_8h_a1be529d679835eda85cf5541e7926ca7}{LOAD32BE}(input + 8);
+444    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} right2 = \hyperlink{cpu__endian_8h_a1be529d679835eda85cf5541e7926ca7}{LOAD32BE}(input + 12);
+445 
+446    \textcolor{comment}{//The key schedule must be applied in ascending order}
+447    ks = context->\hyperlink{structCamelliaContext_a462c7479aab6b5e6a3646ab1b0eb6f6c}{ks};
+448 
+449    \textcolor{comment}{//XOR plaintext with kw1 and kw2}
+450    left1 ^= ks[0];
+451    left2 ^= ks[1];
+452    right1 ^= ks[2];
+453    right2 ^= ks[3];
+454    \textcolor{comment}{//Advance current location in key schedule}
+455    ks += 4;
+456 
+457    \textcolor{comment}{//Apply round function 18 or 24 times depending on the key length}
+458    \textcolor{keywordflow}{for}(i = context->\hyperlink{structCamelliaContext_a53fbc3b3b523fcf86ec2fb13690c4c5e}{nr}; i > 0; i--)
+459    \{
+460       \textcolor{comment}{//Apply round function}
+461       \hyperlink{camellia_8c_a154e5792105e99fa242318f6ac8b82e0}{CAMELLIA\_ROUND}(left1, left2, right1, right2, ks[0], ks[1]);
+462       \textcolor{comment}{//Advance current location in key schedule}
+463       ks += 2;
+464 
+465       \textcolor{comment}{//6th, 12th and 18th rounds require special processing}
+466       \textcolor{keywordflow}{if}(i == 7 || i == 13 || i == 19)
+467       \{
+468          \textcolor{comment}{//Apply FL-function}
+469          \hyperlink{camellia_8c_a8e81bc8ddfc0612e79a9912b610b1771}{CAMELLIA\_FL}(left1, left2, ks[0], ks[1])
+470          \textcolor{comment}{//Apply inverse FL-function}
+471          \hyperlink{camellia_8c_accfd57a28293d2b24735a988ac847bba}{CAMELLIA\_INV\_FL}(right1, right2, ks[2], ks[3])
+472          \textcolor{comment}{//Advance current location in key schedule}
+473          ks += 4;
+474       \}
+475    \}
+476 
+477    \textcolor{comment}{//XOR operation with kw3 and kw4}
+478    right1 ^= ks[0];
+479    right2 ^= ks[1];
+480    left1 ^= ks[2];
+481    left2 ^= ks[3];
+482 
+483    \textcolor{comment}{//The resulting value is the ciphertext}
+484    \hyperlink{cpu__endian_8h_a8663906e08e818efa91dd6f65a7e636d}{STORE32BE}(right1, output + 0);
+485    \hyperlink{cpu__endian_8h_a8663906e08e818efa91dd6f65a7e636d}{STORE32BE}(right2, output + 4);
+486    \hyperlink{cpu__endian_8h_a8663906e08e818efa91dd6f65a7e636d}{STORE32BE}(left1, output + 8);
+487    \hyperlink{cpu__endian_8h_a8663906e08e818efa91dd6f65a7e636d}{STORE32BE}(left2, output + 12);
+488 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{camellia_8c_a40f037ff4c0ba16da488c8956f737eb8}\label{camellia_8c_a40f037ff4c0ba16da488c8956f737eb8}} 
+\index{camellia.\+c@{camellia.\+c}!camellia\+Init@{camellia\+Init}}
+\index{camellia\+Init@{camellia\+Init}!camellia.\+c@{camellia.\+c}}
+\subsubsection{\texorpdfstring{camellia\+Init()}{camelliaInit()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} camellia\+Init (\begin{DoxyParamCaption}\item[{\hyperlink{structCamelliaContext}{Camellia\+Context} $\ast$}]{context,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{key,  }\item[{size\+\_\+t}]{key\+Len }\end{DoxyParamCaption})}
+
+
+
+Initialize a Camellia context using the supplied key. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the Camellia context to initialize \\
+\hline
+\mbox{\tt in}  & {\em key} & Pointer to the key \\
+\hline
+\mbox{\tt in}  & {\em key\+Len} & Length of the key \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 301 of file camellia.\+c.
+
+
+\begin{DoxyCode}
+302 \{
+303    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+304    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} temp1;
+305    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} temp2;
+306    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} *\hyperlink{md5_8c_af11ea3cdbca7345eb6a4a8ac5ce0434d}{k};
+307    \textcolor{keyword}{const} \hyperlink{structCamelliaSubkey}{CamelliaSubkey} *\hyperlink{ndp_8h_a6519522ad9a6f45e7a8d25d31392a977}{p};
+308 
+309    \textcolor{comment}{//Check parameters}
+310    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || key == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+311       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+312 
+313    \textcolor{comment}{//Check the length of the key}
+314    \textcolor{keywordflow}{if}(keyLen == 16)
+315    \{
+316       \textcolor{comment}{//18 rounds are required for 128-bit key}
+317       context->\hyperlink{structCamelliaContext_a53fbc3b3b523fcf86ec2fb13690c4c5e}{nr} = 18;
+318    \}
+319    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(keyLen == 24 || keyLen == 32)
+320    \{
+321       \textcolor{comment}{//24 rounds are required for 192 and 256-bit keys}
+322       context->\hyperlink{structCamelliaContext_a53fbc3b3b523fcf86ec2fb13690c4c5e}{nr} = 24;
+323    \}
+324    \textcolor{keywordflow}{else}
+325    \{
+326       \textcolor{comment}{//Report an error}
+327       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca3764b2929469f1eb1bf7af50b40df62f}{ERROR\_INVALID\_KEY\_LENGTH};
+328    \}
+329 
+330    \textcolor{comment}{//Point to KA, KB, KL and KR}
+331    k = context->\hyperlink{structCamelliaContext_a0ced10c17db7c88b9be722699cfffffa}{k};
+332    \textcolor{comment}{//Clear key contents}
+333    \hyperlink{cyclone__crypto_2core_2crypto_8h_ad4465436e4ff353300fba4896012e18b}{cryptoMemset}(k, 0, 64);
+334    \textcolor{comment}{//Save the supplied secret key}
+335    \hyperlink{cyclone__crypto_2core_2crypto_8h_a6724616c4014bb7e21f2660bd7b88be8}{cryptoMemcpy}(k, key, keyLen);
+336 
+337    \textcolor{comment}{//192-bit keys require special processing}
+338    \textcolor{keywordflow}{if}(keyLen == 24)
+339    \{
+340       \textcolor{comment}{//Form a 256-bit key}
+341       k[\hyperlink{camellia_8c_a76f9425f5a9151312ae472a45a03b60c}{KR} + 2] = ~k[\hyperlink{camellia_8c_a76f9425f5a9151312ae472a45a03b60c}{KR} + 0];
+342       k[\hyperlink{camellia_8c_a76f9425f5a9151312ae472a45a03b60c}{KR} + 3] = ~k[\hyperlink{camellia_8c_a76f9425f5a9151312ae472a45a03b60c}{KR} + 1];
+343    \}
+344 
+345    \textcolor{comment}{//XOR KL and KR before applying the rounds}
+346    \textcolor{keywordflow}{for}(i = 0; i < 4; i++)
+347    \{
+348       k[\hyperlink{camellia_8c_a81a7c36ecc75b2f02c2b6d2d6d49778e}{KL} + i] = \hyperlink{cpu__endian_8h_a1f0e86c75b9c4d1fc0850a4762eb2148}{betoh32}(k[\hyperlink{camellia_8c_a81a7c36ecc75b2f02c2b6d2d6d49778e}{KL} + i]);
+349       k[\hyperlink{camellia_8c_a76f9425f5a9151312ae472a45a03b60c}{KR} + i] = \hyperlink{cpu__endian_8h_a1f0e86c75b9c4d1fc0850a4762eb2148}{betoh32}(k[\hyperlink{camellia_8c_a76f9425f5a9151312ae472a45a03b60c}{KR} + i]);
+350       k[\hyperlink{camellia_8c_a1841fd1a462d245d8c73dce55e2f45da}{KB} + i] = k[\hyperlink{camellia_8c_a81a7c36ecc75b2f02c2b6d2d6d49778e}{KL} + i] ^ k[\hyperlink{camellia_8c_a76f9425f5a9151312ae472a45a03b60c}{KR} + i];
+351    \}
+352 
+353    \textcolor{comment}{//Generate the 128-bit keys KA and KB}
+354    \textcolor{keywordflow}{for}(i = 0; i < 6; i++)
+355    \{
+356       \textcolor{comment}{//Apply round function}
+357       \hyperlink{camellia_8c_a154e5792105e99fa242318f6ac8b82e0}{CAMELLIA\_ROUND}(k[\hyperlink{camellia_8c_a1841fd1a462d245d8c73dce55e2f45da}{KB} + 0], k[\hyperlink{camellia_8c_a1841fd1a462d245d8c73dce55e2f45da}{KB} + 1], k[\hyperlink{camellia_8c_a1841fd1a462d245d8c73dce55e2f45da}{KB} + 2], k[\hyperlink{camellia_8c_a1841fd1a462d245d8c73dce55e2f45da}{KB} + 3], 
+      \hyperlink{camellia_8c_a61428f6acc02d966c9771f969b643ec0}{sigma}[2 * i], \hyperlink{camellia_8c_a61428f6acc02d966c9771f969b643ec0}{sigma}[2 * i + 1]);
+358 
+359       \textcolor{comment}{//The 2nd round requires special processing}
+360       \textcolor{keywordflow}{if}(i == 1)
+361       \{
+362          \textcolor{comment}{//The result is XORed with KL}
+363          k[\hyperlink{camellia_8c_a1841fd1a462d245d8c73dce55e2f45da}{KB} + 0] ^= k[\hyperlink{camellia_8c_a81a7c36ecc75b2f02c2b6d2d6d49778e}{KL} + 0];
+364          k[\hyperlink{camellia_8c_a1841fd1a462d245d8c73dce55e2f45da}{KB} + 1] ^= k[\hyperlink{camellia_8c_a81a7c36ecc75b2f02c2b6d2d6d49778e}{KL} + 1];
+365          k[\hyperlink{camellia_8c_a1841fd1a462d245d8c73dce55e2f45da}{KB} + 2] ^= k[\hyperlink{camellia_8c_a81a7c36ecc75b2f02c2b6d2d6d49778e}{KL} + 2];
+366          k[\hyperlink{camellia_8c_a1841fd1a462d245d8c73dce55e2f45da}{KB} + 3] ^= k[\hyperlink{camellia_8c_a81a7c36ecc75b2f02c2b6d2d6d49778e}{KL} + 3];
+367       \}
+368       \textcolor{comment}{//The 4th round requires special processing}
+369       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(i == 3)
+370       \{
+371          \textcolor{comment}{//Save KA after the 4th round}
+372          \hyperlink{cyclone__crypto_2core_2crypto_8h_a6724616c4014bb7e21f2660bd7b88be8}{cryptoMemcpy}(k + \hyperlink{camellia_8c_ac20b871b737ec964c3a7c440d411f969}{KA}, k + \hyperlink{camellia_8c_a1841fd1a462d245d8c73dce55e2f45da}{KB}, 16);
+373          \textcolor{comment}{//The result is XORed with KR}
+374          k[\hyperlink{camellia_8c_a1841fd1a462d245d8c73dce55e2f45da}{KB} + 0] ^= k[\hyperlink{camellia_8c_a76f9425f5a9151312ae472a45a03b60c}{KR} + 0];
+375          k[\hyperlink{camellia_8c_a1841fd1a462d245d8c73dce55e2f45da}{KB} + 1] ^= k[\hyperlink{camellia_8c_a76f9425f5a9151312ae472a45a03b60c}{KR} + 1];
+376          k[\hyperlink{camellia_8c_a1841fd1a462d245d8c73dce55e2f45da}{KB} + 2] ^= k[\hyperlink{camellia_8c_a76f9425f5a9151312ae472a45a03b60c}{KR} + 2];
+377          k[\hyperlink{camellia_8c_a1841fd1a462d245d8c73dce55e2f45da}{KB} + 3] ^= k[\hyperlink{camellia_8c_a76f9425f5a9151312ae472a45a03b60c}{KR} + 3];
+378       \}
+379    \}
+380 
+381    \textcolor{comment}{//The key schedule depends on the length of key}
+382    \textcolor{keywordflow}{if}(keyLen == 16)
+383    \{
+384       \textcolor{comment}{//Key schedule for 128-bit key}
+385       i = \hyperlink{os__port_8h_aa1394a41d43c0f3fd30febe41c7bb340}{arraysize}(\hyperlink{camellia_8c_a816290e7a13c6b54677e41417c382765}{ks1});
+386       p = \hyperlink{camellia_8c_a816290e7a13c6b54677e41417c382765}{ks1};
+387    \}
+388    \textcolor{keywordflow}{else}
+389    \{
+390       \textcolor{comment}{//Key schedule for 192 and 256-bit keys}
+391       i = \hyperlink{os__port_8h_aa1394a41d43c0f3fd30febe41c7bb340}{arraysize}(\hyperlink{camellia_8c_a9d5a54f5ab87f285a18ad2d08b0ae091}{ks2});
+392       p = \hyperlink{camellia_8c_a9d5a54f5ab87f285a18ad2d08b0ae091}{ks2};
+393    \}
+394 
+395    \textcolor{comment}{//Generate subkeys}
+396    \textcolor{keywordflow}{while}(i > 0)
+397    \{
+398       \textcolor{comment}{//Calculate the shift count}
+399       \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n} = (p->\hyperlink{structCamelliaSubkey_af62ef58a7800c83d492f05b8f1c04af0}{shift} + p->\hyperlink{structCamelliaSubkey_a851bbb32cfc2269202af66ef72aa897d}{position}) / 32;
+400       \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} \hyperlink{ndp_8h_a6b3284d8492267a77ca46948daf5545e}{m} = (p->\hyperlink{structCamelliaSubkey_af62ef58a7800c83d492f05b8f1c04af0}{shift} + p->\hyperlink{structCamelliaSubkey_a851bbb32cfc2269202af66ef72aa897d}{position}) % 32;
+401       \textcolor{comment}{//Point to KL, KR, KA or KB}
+402       k = context->\hyperlink{structCamelliaContext_a0ced10c17db7c88b9be722699cfffffa}{k} + p->\hyperlink{structCamelliaSubkey_a9d4ee77359241e8eada1a3fff35551ce}{key};
+403 
+404       \textcolor{comment}{//Generate the current subkey}
+405       \textcolor{keywordflow}{if}(m == 0)
+406       \{
+407          context->\hyperlink{structCamelliaContext_a462c7479aab6b5e6a3646ab1b0eb6f6c}{ks}[p->\hyperlink{structCamelliaSubkey_ae3fdfef5ccf7b49fc347ade24fe3e3ca}{index}] = k[n % 4];
+408          context->\hyperlink{structCamelliaContext_a462c7479aab6b5e6a3646ab1b0eb6f6c}{ks}[p->\hyperlink{structCamelliaSubkey_ae3fdfef5ccf7b49fc347ade24fe3e3ca}{index} + 1] = k[(n + 1) % 4];
+409       \}
+410       \textcolor{keywordflow}{else}
+411       \{
+412          context->\hyperlink{structCamelliaContext_a462c7479aab6b5e6a3646ab1b0eb6f6c}{ks}[p->\hyperlink{structCamelliaSubkey_ae3fdfef5ccf7b49fc347ade24fe3e3ca}{index}] = (k[n % 4] << \hyperlink{ndp_8h_a6b3284d8492267a77ca46948daf5545e}{m}) | (k[(n + 1) % 4] >> (32 - 
+      \hyperlink{ndp_8h_a6b3284d8492267a77ca46948daf5545e}{m}));
+413          context->\hyperlink{structCamelliaContext_a462c7479aab6b5e6a3646ab1b0eb6f6c}{ks}[p->\hyperlink{structCamelliaSubkey_ae3fdfef5ccf7b49fc347ade24fe3e3ca}{index} + 1] = (k[(n + 1) % 4] << m) | (k[(n + 2) % 4] >> (32 - m));
+414       \}
+415 
+416       \textcolor{comment}{//Next subkey}
+417       p++;
+418       i--;
+419    \}
+420 
+421    \textcolor{comment}{//No error to report}
+422    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+423 \}
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{camellia_8c_a593a58219e849b6e74672d970bd46a1a}\label{camellia_8c_a593a58219e849b6e74672d970bd46a1a}} 
+\index{camellia.\+c@{camellia.\+c}!camellia\+Cipher\+Algo@{camellia\+Cipher\+Algo}}
+\index{camellia\+Cipher\+Algo@{camellia\+Cipher\+Algo}!camellia.\+c@{camellia.\+c}}
+\subsubsection{\texorpdfstring{camellia\+Cipher\+Algo}{camelliaCipherAlgo}}
+{\footnotesize\ttfamily const \hyperlink{structCipherAlgo}{Cipher\+Algo} camellia\+Cipher\+Algo}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=
+\{
+   \textcolor{stringliteral}{"CAMELLIA"},
+   \textcolor{keyword}{sizeof}(\hyperlink{structCamelliaContext}{CamelliaContext}),
+   \hyperlink{cyclone__crypto_2core_2crypto_8h_ae03a6c8f32ed798857924d908aacc49bac347f6aa82618d4d57fe85cba6520ce9}{CIPHER\_ALGO\_TYPE\_BLOCK},
+   \hyperlink{camellia_8h_a75e646fb8543fc3279c2c3435fea75ed}{CAMELLIA\_BLOCK\_SIZE},
+   (\hyperlink{cyclone__crypto_2core_2crypto_8h_a1a0f02cdb8a3295caa1b87db2785e678}{CipherAlgoInit}) \hyperlink{camellia_8c_a40f037ff4c0ba16da488c8956f737eb8}{camelliaInit},
+   \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL},
+   \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL},
+   (\hyperlink{cyclone__crypto_2core_2crypto_8h_a4b511302b7e4f6ff51dd72f5abde7077}{CipherAlgoEncryptBlock}) \hyperlink{camellia_8c_ad3a28aca85720cfede64b88409905fc3}{camelliaEncryptBlock},
+   (\hyperlink{cyclone__crypto_2core_2crypto_8h_a15510227bd1c7721d1e3af2480069990}{CipherAlgoDecryptBlock}) \hyperlink{camellia_8c_a0312c04b9c38d4e956ef0f7baa5a2703}{camelliaDecryptBlock}
+\}
+\end{DoxyCode}
+
+
+Definition at line 279 of file camellia.\+c.
+
+\mbox{\Hypertarget{camellia_8c_a816290e7a13c6b54677e41417c382765}\label{camellia_8c_a816290e7a13c6b54677e41417c382765}} 
+\index{camellia.\+c@{camellia.\+c}!ks1@{ks1}}
+\index{ks1@{ks1}!camellia.\+c@{camellia.\+c}}
+\subsubsection{\texorpdfstring{ks1}{ks1}}
+{\footnotesize\ttfamily const \hyperlink{structCamelliaSubkey}{Camellia\+Subkey} ks1\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=
+\{
+   \{0,  \hyperlink{camellia_8c_a81a7c36ecc75b2f02c2b6d2d6d49778e}{KL}, 0,  \hyperlink{camellia_8c_aa73214aa5f2f94f63d90bb4e3d99fe53}{L}\},  
+   \{2,  \hyperlink{camellia_8c_a81a7c36ecc75b2f02c2b6d2d6d49778e}{KL}, 0,  \hyperlink{camellia_8c_a5c71a5e59a53413cd6c270266d63b031}{R}\},  
+   \{4,  \hyperlink{camellia_8c_ac20b871b737ec964c3a7c440d411f969}{KA}, 0,  L\},  
+   \{6,  \hyperlink{camellia_8c_ac20b871b737ec964c3a7c440d411f969}{KA}, 0,  R\},  
+   \{8,  \hyperlink{camellia_8c_a81a7c36ecc75b2f02c2b6d2d6d49778e}{KL}, 15, L\},  
+   \{10, \hyperlink{camellia_8c_a81a7c36ecc75b2f02c2b6d2d6d49778e}{KL}, 15, R\},  
+   \{12, \hyperlink{camellia_8c_ac20b871b737ec964c3a7c440d411f969}{KA}, 15, L\},  
+   \{14, \hyperlink{camellia_8c_ac20b871b737ec964c3a7c440d411f969}{KA}, 15, R\},  
+   \{16, \hyperlink{camellia_8c_ac20b871b737ec964c3a7c440d411f969}{KA}, 30, L\},  
+   \{18, \hyperlink{camellia_8c_ac20b871b737ec964c3a7c440d411f969}{KA}, 30, R\},  
+   \{20, \hyperlink{camellia_8c_a81a7c36ecc75b2f02c2b6d2d6d49778e}{KL}, 45, L\},  
+   \{22, \hyperlink{camellia_8c_a81a7c36ecc75b2f02c2b6d2d6d49778e}{KL}, 45, R\},  
+   \{24, \hyperlink{camellia_8c_ac20b871b737ec964c3a7c440d411f969}{KA}, 45, L\},  
+   \{26, \hyperlink{camellia_8c_a81a7c36ecc75b2f02c2b6d2d6d49778e}{KL}, 60, R\},  
+   \{28, \hyperlink{camellia_8c_ac20b871b737ec964c3a7c440d411f969}{KA}, 60, L\},  
+   \{30, \hyperlink{camellia_8c_ac20b871b737ec964c3a7c440d411f969}{KA}, 60, R\},  
+   \{32, \hyperlink{camellia_8c_a81a7c36ecc75b2f02c2b6d2d6d49778e}{KL}, 77, L\},  
+   \{34, \hyperlink{camellia_8c_a81a7c36ecc75b2f02c2b6d2d6d49778e}{KL}, 77, R\},  
+   \{36, \hyperlink{camellia_8c_a81a7c36ecc75b2f02c2b6d2d6d49778e}{KL}, 94, L\},  
+   \{38, \hyperlink{camellia_8c_a81a7c36ecc75b2f02c2b6d2d6d49778e}{KL}, 94, R\},  
+   \{40, \hyperlink{camellia_8c_ac20b871b737ec964c3a7c440d411f969}{KA}, 94, L\},  
+   \{42, \hyperlink{camellia_8c_ac20b871b737ec964c3a7c440d411f969}{KA}, 94, R\},  
+   \{44, \hyperlink{camellia_8c_a81a7c36ecc75b2f02c2b6d2d6d49778e}{KL}, 111, L\}, 
+   \{46, \hyperlink{camellia_8c_a81a7c36ecc75b2f02c2b6d2d6d49778e}{KL}, 111, R\}, 
+   \{48, \hyperlink{camellia_8c_ac20b871b737ec964c3a7c440d411f969}{KA}, 111, L\}, 
+   \{50, \hyperlink{camellia_8c_ac20b871b737ec964c3a7c440d411f969}{KA}, 111, R\}, 
+\}
+\end{DoxyCode}
+
+
+Definition at line 114 of file camellia.\+c.
+
+\mbox{\Hypertarget{camellia_8c_a9d5a54f5ab87f285a18ad2d08b0ae091}\label{camellia_8c_a9d5a54f5ab87f285a18ad2d08b0ae091}} 
+\index{camellia.\+c@{camellia.\+c}!ks2@{ks2}}
+\index{ks2@{ks2}!camellia.\+c@{camellia.\+c}}
+\subsubsection{\texorpdfstring{ks2}{ks2}}
+{\footnotesize\ttfamily const \hyperlink{structCamelliaSubkey}{Camellia\+Subkey} ks2\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 145 of file camellia.\+c.
+
+\mbox{\Hypertarget{camellia_8c_adf62d61dafd707b3ac689d2900d5bdb4}\label{camellia_8c_adf62d61dafd707b3ac689d2900d5bdb4}} 
+\index{camellia.\+c@{camellia.\+c}!sbox1@{sbox1}}
+\index{sbox1@{sbox1}!camellia.\+c@{camellia.\+c}}
+\subsubsection{\texorpdfstring{sbox1}{sbox1}}
+{\footnotesize\ttfamily const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} sbox1\mbox{[}256\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=
+\{
+   0x70, 0x82, 0x2C, 0xEC, 0xB3, 0x27, 0xC0, 0xE5, 0xE4, 0x85, 0x57, 0x35, 0xEA, 0x0C, 0xAE, 0x41,
+   0x23, 0xEF, 0x6B, 0x93, 0x45, 0x19, 0xA5, 0x21, 0xED, 0x0E, 0x4F, 0x4E, 0x1D, 0x65, 0x92, 0xBD,
+   0x86, 0xB8, 0xAF, 0x8F, 0x7C, 0xEB, 0x1F, 0xCE, 0x3E, 0x30, 0xDC, 0x5F, 0x5E, 0xC5, 0x0B, 0x1A,
+   0xA6, 0xE1, 0x39, 0xCA, 0xD5, 0x47, 0x5D, 0x3D, 0xD9, 0x01, 0x5A, 0xD6, 0x51, 0x56, 0x6C, 0x4D,
+   0x8B, 0x0D, 0x9A, 0x66, 0xFB, 0xCC, 0xB0, 0x2D, 0x74, 0x12, 0x2B, 0x20, 0xF0, 0xB1, 0x84, 0x99,
+   0xDF, 0x4C, 0xCB, 0xC2, 0x34, 0x7E, 0x76, 0x05, 0x6D, 0xB7, 0xA9, 0x31, 0xD1, 0x17, 0x04, 0xD7,
+   0x14, 0x58, 0x3A, 0x61, 0xDE, 0x1B, 0x11, 0x1C, 0x32, 0x0F, 0x9C, 0x16, 0x53, 0x18, 0xF2, 0x22,
+   0xFE, 0x44, 0xCF, 0xB2, 0xC3, 0xB5, 0x7A, 0x91, 0x24, 0x08, 0xE8, 0xA8, 0x60, 0xFC, 0x69, 0x50,
+   0xAA, 0xD0, 0xA0, 0x7D, 0xA1, 0x89, 0x62, 0x97, 0x54, 0x5B, 0x1E, 0x95, 0xE0, 0xFF, 0x64, 0xD2,
+   0x10, 0xC4, 0x00, 0x48, 0xA3, 0xF7, 0x75, 0xDB, 0x8A, 0x03, 0xE6, 0xDA, 0x09, 0x3F, 0xDD, 0x94,
+   0x87, 0x5C, 0x83, 0x02, 0xCD, 0x4A, 0x90, 0x33, 0x73, 0x67, 0xF6, 0xF3, 0x9D, 0x7F, 0xBF, 0xE2,
+   0x52, 0x9B, 0xD8, 0x26, 0xC8, 0x37, 0xC6, 0x3B, 0x81, 0x96, 0x6F, 0x4B, 0x13, 0xBE, 0x63, 0x2E,
+   0xE9, 0x79, 0xA7, 0x8C, 0x9F, 0x6E, 0xBC, 0x8E, 0x29, 0xF5, 0xF9, 0xB6, 0x2F, 0xFD, 0xB4, 0x59,
+   0x78, 0x98, 0x06, 0x6A, 0xE7, 0x46, 0x71, 0xBA, 0xD4, 0x25, 0xAB, 0x42, 0x88, 0xA2, 0x8D, 0xFA,
+   0x72, 0x07, 0xB9, 0x55, 0xF8, 0xEE, 0xAC, 0x0A, 0x36, 0x49, 0x2A, 0x68, 0x3C, 0x38, 0xF1, 0xA4,
+   0x40, 0x28, 0xD3, 0x7B, 0xBB, 0xC9, 0x43, 0xC1, 0x15, 0xE3, 0xAD, 0xF4, 0x77, 0xC7, 0x80, 0x9E
+\}
+\end{DoxyCode}
+
+
+Definition at line 195 of file camellia.\+c.
+
+\mbox{\Hypertarget{camellia_8c_a2f8db1df67c9853982d5d3ac57c938a8}\label{camellia_8c_a2f8db1df67c9853982d5d3ac57c938a8}} 
+\index{camellia.\+c@{camellia.\+c}!sbox2@{sbox2}}
+\index{sbox2@{sbox2}!camellia.\+c@{camellia.\+c}}
+\subsubsection{\texorpdfstring{sbox2}{sbox2}}
+{\footnotesize\ttfamily const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} sbox2\mbox{[}256\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=
+\{
+   0xE0, 0x05, 0x58, 0xD9, 0x67, 0x4E, 0x81, 0xCB, 0xC9, 0x0B, 0xAE, 0x6A, 0xD5, 0x18, 0x5D, 0x82,
+   0x46, 0xDF, 0xD6, 0x27, 0x8A, 0x32, 0x4B, 0x42, 0xDB, 0x1C, 0x9E, 0x9C, 0x3A, 0xCA, 0x25, 0x7B,
+   0x0D, 0x71, 0x5F, 0x1F, 0xF8, 0xD7, 0x3E, 0x9D, 0x7C, 0x60, 0xB9, 0xBE, 0xBC, 0x8B, 0x16, 0x34,
+   0x4D, 0xC3, 0x72, 0x95, 0xAB, 0x8E, 0xBA, 0x7A, 0xB3, 0x02, 0xB4, 0xAD, 0xA2, 0xAC, 0xD8, 0x9A,
+   0x17, 0x1A, 0x35, 0xCC, 0xF7, 0x99, 0x61, 0x5A, 0xE8, 0x24, 0x56, 0x40, 0xE1, 0x63, 0x09, 0x33,
+   0xBF, 0x98, 0x97, 0x85, 0x68, 0xFC, 0xEC, 0x0A, 0xDA, 0x6F, 0x53, 0x62, 0xA3, 0x2E, 0x08, 0xAF,
+   0x28, 0xB0, 0x74, 0xC2, 0xBD, 0x36, 0x22, 0x38, 0x64, 0x1E, 0x39, 0x2C, 0xA6, 0x30, 0xE5, 0x44,
+   0xFD, 0x88, 0x9F, 0x65, 0x87, 0x6B, 0xF4, 0x23, 0x48, 0x10, 0xD1, 0x51, 0xC0, 0xF9, 0xD2, 0xA0,
+   0x55, 0xA1, 0x41, 0xFA, 0x43, 0x13, 0xC4, 0x2F, 0xA8, 0xB6, 0x3C, 0x2B, 0xC1, 0xFF, 0xC8, 0xA5,
+   0x20, 0x89, 0x00, 0x90, 0x47, 0xEF, 0xEA, 0xB7, 0x15, 0x06, 0xCD, 0xB5, 0x12, 0x7E, 0xBB, 0x29,
+   0x0F, 0xB8, 0x07, 0x04, 0x9B, 0x94, 0x21, 0x66, 0xE6, 0xCE, 0xED, 0xE7, 0x3B, 0xFE, 0x7F, 0xC5,
+   0xA4, 0x37, 0xB1, 0x4C, 0x91, 0x6E, 0x8D, 0x76, 0x03, 0x2D, 0xDE, 0x96, 0x26, 0x7D, 0xC6, 0x5C,
+   0xD3, 0xF2, 0x4F, 0x19, 0x3F, 0xDC, 0x79, 0x1D, 0x52, 0xEB, 0xF3, 0x6D, 0x5E, 0xFB, 0x69, 0xB2,
+   0xF0, 0x31, 0x0C, 0xD4, 0xCF, 0x8C, 0xE2, 0x75, 0xA9, 0x4A, 0x57, 0x84, 0x11, 0x45, 0x1B, 0xF5,
+   0xE4, 0x0E, 0x73, 0xAA, 0xF1, 0xDD, 0x59, 0x14, 0x6C, 0x92, 0x54, 0xD0, 0x78, 0x70, 0xE3, 0x49,
+   0x80, 0x50, 0xA7, 0xF6, 0x77, 0x93, 0x86, 0x83, 0x2A, 0xC7, 0x5B, 0xE9, 0xEE, 0x8F, 0x01, 0x3D
+\}
+\end{DoxyCode}
+
+
+Definition at line 216 of file camellia.\+c.
+
+\mbox{\Hypertarget{camellia_8c_a008d0e4d49b9bc49b80b7d632e42c6d6}\label{camellia_8c_a008d0e4d49b9bc49b80b7d632e42c6d6}} 
+\index{camellia.\+c@{camellia.\+c}!sbox3@{sbox3}}
+\index{sbox3@{sbox3}!camellia.\+c@{camellia.\+c}}
+\subsubsection{\texorpdfstring{sbox3}{sbox3}}
+{\footnotesize\ttfamily const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} sbox3\mbox{[}256\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=
+\{
+   0x38, 0x41, 0x16, 0x76, 0xD9, 0x93, 0x60, 0xF2, 0x72, 0xC2, 0xAB, 0x9A, 0x75, 0x06, 0x57, 0xA0,
+   0x91, 0xF7, 0xB5, 0xC9, 0xA2, 0x8C, 0xD2, 0x90, 0xF6, 0x07, 0xA7, 0x27, 0x8E, 0xB2, 0x49, 0xDE,
+   0x43, 0x5C, 0xD7, 0xC7, 0x3E, 0xF5, 0x8F, 0x67, 0x1F, 0x18, 0x6E, 0xAF, 0x2F, 0xE2, 0x85, 0x0D,
+   0x53, 0xF0, 0x9C, 0x65, 0xEA, 0xA3, 0xAE, 0x9E, 0xEC, 0x80, 0x2D, 0x6B, 0xA8, 0x2B, 0x36, 0xA6,
+   0xC5, 0x86, 0x4D, 0x33, 0xFD, 0x66, 0x58, 0x96, 0x3A, 0x09, 0x95, 0x10, 0x78, 0xD8, 0x42, 0xCC,
+   0xEF, 0x26, 0xE5, 0x61, 0x1A, 0x3F, 0x3B, 0x82, 0xB6, 0xDB, 0xD4, 0x98, 0xE8, 0x8B, 0x02, 0xEB,
+   0x0A, 0x2C, 0x1D, 0xB0, 0x6F, 0x8D, 0x88, 0x0E, 0x19, 0x87, 0x4E, 0x0B, 0xA9, 0x0C, 0x79, 0x11,
+   0x7F, 0x22, 0xE7, 0x59, 0xE1, 0xDA, 0x3D, 0xC8, 0x12, 0x04, 0x74, 0x54, 0x30, 0x7E, 0xB4, 0x28,
+   0x55, 0x68, 0x50, 0xBE, 0xD0, 0xC4, 0x31, 0xCB, 0x2A, 0xAD, 0x0F, 0xCA, 0x70, 0xFF, 0x32, 0x69,
+   0x08, 0x62, 0x00, 0x24, 0xD1, 0xFB, 0xBA, 0xED, 0x45, 0x81, 0x73, 0x6D, 0x84, 0x9F, 0xEE, 0x4A,
+   0xC3, 0x2E, 0xC1, 0x01, 0xE6, 0x25, 0x48, 0x99, 0xB9, 0xB3, 0x7B, 0xF9, 0xCE, 0xBF, 0xDF, 0x71,
+   0x29, 0xCD, 0x6C, 0x13, 0x64, 0x9B, 0x63, 0x9D, 0xC0, 0x4B, 0xB7, 0xA5, 0x89, 0x5F, 0xB1, 0x17,
+   0xF4, 0xBC, 0xD3, 0x46, 0xCF, 0x37, 0x5E, 0x47, 0x94, 0xFA, 0xFC, 0x5B, 0x97, 0xFE, 0x5A, 0xAC,
+   0x3C, 0x4C, 0x03, 0x35, 0xF3, 0x23, 0xB8, 0x5D, 0x6A, 0x92, 0xD5, 0x21, 0x44, 0x51, 0xC6, 0x7D,
+   0x39, 0x83, 0xDC, 0xAA, 0x7C, 0x77, 0x56, 0x05, 0x1B, 0xA4, 0x15, 0x34, 0x1E, 0x1C, 0xF8, 0x52,
+   0x20, 0x14, 0xE9, 0xBD, 0xDD, 0xE4, 0xA1, 0xE0, 0x8A, 0xF1, 0xD6, 0x7A, 0xBB, 0xE3, 0x40, 0x4F
+\}
+\end{DoxyCode}
+
+
+Definition at line 237 of file camellia.\+c.
+
+\mbox{\Hypertarget{camellia_8c_aa1458efd8027e8ee35d50d9cff5e7186}\label{camellia_8c_aa1458efd8027e8ee35d50d9cff5e7186}} 
+\index{camellia.\+c@{camellia.\+c}!sbox4@{sbox4}}
+\index{sbox4@{sbox4}!camellia.\+c@{camellia.\+c}}
+\subsubsection{\texorpdfstring{sbox4}{sbox4}}
+{\footnotesize\ttfamily const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} sbox4\mbox{[}256\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=
+\{
+   0x70, 0x2C, 0xB3, 0xC0, 0xE4, 0x57, 0xEA, 0xAE, 0x23, 0x6B, 0x45, 0xA5, 0xED, 0x4F, 0x1D, 0x92,
+   0x86, 0xAF, 0x7C, 0x1F, 0x3E, 0xDC, 0x5E, 0x0B, 0xA6, 0x39, 0xD5, 0x5D, 0xD9, 0x5A, 0x51, 0x6C,
+   0x8B, 0x9A, 0xFB, 0xB0, 0x74, 0x2B, 0xF0, 0x84, 0xDF, 0xCB, 0x34, 0x76, 0x6D, 0xA9, 0xD1, 0x04,
+   0x14, 0x3A, 0xDE, 0x11, 0x32, 0x9C, 0x53, 0xF2, 0xFE, 0xCF, 0xC3, 0x7A, 0x24, 0xE8, 0x60, 0x69,
+   0xAA, 0xA0, 0xA1, 0x62, 0x54, 0x1E, 0xE0, 0x64, 0x10, 0x00, 0xA3, 0x75, 0x8A, 0xE6, 0x09, 0xDD,
+   0x87, 0x83, 0xCD, 0x90, 0x73, 0xF6, 0x9D, 0xBF, 0x52, 0xD8, 0xC8, 0xC6, 0x81, 0x6F, 0x13, 0x63,
+   0xE9, 0xA7, 0x9F, 0xBC, 0x29, 0xF9, 0x2F, 0xB4, 0x78, 0x06, 0xE7, 0x71, 0xD4, 0xAB, 0x88, 0x8D,
+   0x72, 0xB9, 0xF8, 0xAC, 0x36, 0x2A, 0x3C, 0xF1, 0x40, 0xD3, 0xBB, 0x43, 0x15, 0xAD, 0x77, 0x80,
+   0x82, 0xEC, 0x27, 0xE5, 0x85, 0x35, 0x0C, 0x41, 0xEF, 0x93, 0x19, 0x21, 0x0E, 0x4E, 0x65, 0xBD,
+   0xB8, 0x8F, 0xEB, 0xCE, 0x30, 0x5F, 0xC5, 0x1A, 0xE1, 0xCA, 0x47, 0x3D, 0x01, 0xD6, 0x56, 0x4D,
+   0x0D, 0x66, 0xCC, 0x2D, 0x12, 0x20, 0xB1, 0x99, 0x4C, 0xC2, 0x7E, 0x05, 0xB7, 0x31, 0x17, 0xD7,
+   0x58, 0x61, 0x1B, 0x1C, 0x0F, 0x16, 0x18, 0x22, 0x44, 0xB2, 0xB5, 0x91, 0x08, 0xA8, 0xFC, 0x50,
+   0xD0, 0x7D, 0x89, 0x97, 0x5B, 0x95, 0xFF, 0xD2, 0xC4, 0x48, 0xF7, 0xDB, 0x03, 0xDA, 0x3F, 0x94,
+   0x5C, 0x02, 0x4A, 0x33, 0x67, 0xF3, 0x7F, 0xE2, 0x9B, 0x26, 0x37, 0x3B, 0x96, 0x4B, 0xBE, 0x2E,
+   0x79, 0x8C, 0x6E, 0x8E, 0xF5, 0xB6, 0xFD, 0x59, 0x98, 0x6A, 0x46, 0xBA, 0x25, 0x42, 0xA2, 0xFA,
+   0x07, 0x55, 0xEE, 0x0A, 0x49, 0x68, 0x38, 0xA4, 0x28, 0x7B, 0xC9, 0xC1, 0xE3, 0xF4, 0xC7, 0x9E
+\}
+\end{DoxyCode}
+
+
+Definition at line 258 of file camellia.\+c.
+
+\mbox{\Hypertarget{camellia_8c_a61428f6acc02d966c9771f969b643ec0}\label{camellia_8c_a61428f6acc02d966c9771f969b643ec0}} 
+\index{camellia.\+c@{camellia.\+c}!sigma@{sigma}}
+\index{sigma@{sigma}!camellia.\+c@{camellia.\+c}}
+\subsubsection{\texorpdfstring{sigma}{sigma}}
+{\footnotesize\ttfamily const \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t} sigma\mbox{[}12\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=
+\{
+   0xA09E667F, 0x3BCC908B,
+   0xB67AE858, 0x4CAA73B2,
+   0xC6EF372F, 0xE94F82BE,
+   0x54FF53A5, 0xF1D36F1C,
+   0x10E527FA, 0xDE682D1D,
+   0xB05688C2, 0xB3E6C1FD
+\}
+\end{DoxyCode}
+
+
+Definition at line 184 of file camellia.\+c.
+

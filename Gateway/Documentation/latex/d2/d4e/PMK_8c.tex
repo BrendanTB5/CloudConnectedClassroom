@@ -1,0 +1,684 @@
+\hypertarget{PMK_8c}{}\section{third\+\_\+party/atmel/devices/wilc1000/drv\+\_\+hash/\+P\+MK.c File Reference}
+\label{PMK_8c}\index{third\+\_\+party/atmel/devices/wilc1000/drv\+\_\+hash/\+P\+M\+K.\+c@{third\+\_\+party/atmel/devices/wilc1000/drv\+\_\+hash/\+P\+M\+K.\+c}}
+
+
+Implementation of H\+A\+SH algorithms.  
+
+
+{\ttfamily \#include \char`\"{}driver/include/m2m\+\_\+types.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}drv\+\_\+hash/crypto.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{PMK_8c_a04d6324a73a5cb4d0dbd4e05408e4658}{A\+\_\+\+S\+H\+A\+\_\+\+D\+I\+G\+E\+S\+T\+\_\+\+L\+EN}~20
+\item 
+\#define \hyperlink{PMK_8c_a7e3c02684212a2504232b60c885b7be6}{S\+H\+A\+\_\+\+P\+A\+D\+\_\+\+B\+Y\+TE}~0x80
+\item 
+\#define \hyperlink{PMK_8c_a3c2b6b2959faadfcf644757cb570b734}{F1}(x,  y,  \hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z})~(((x) \& (y)) $\vert$ ($\sim$(x) \& (\hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z})))
+\item 
+\#define \hyperlink{PMK_8c_ae131b09a86bdafd00f48095647e80a00}{F2}(x,  y,  \hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z})~(((x) \& (\hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z})) $\vert$ ((y) \& $\sim$(\hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z})))
+\item 
+\#define \hyperlink{PMK_8c_a8f6625b749e5fe36981ee2d149229b98}{F3}(x,  y,  \hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z})~((x) $^\wedge$ (y) $^\wedge$ (\hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z}))
+\item 
+\#define \hyperlink{PMK_8c_a61cdb7eca418cc9b37e33601c1b08868}{F4}(x,  y,  \hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z})~(((x) \& (y)) $\vert$ ((x) \& (\hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z})) $\vert$ ((y) \& (\hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z})))
+\item 
+\#define \hyperlink{PMK_8c_a808b460f619d218ee79d35914ec381e8}{F5}(x,  y,  \hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z})~((y) $^\wedge$ ((x) $\vert$ $\sim$(\hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z})))
+\item 
+\#define \hyperlink{PMK_8c_aaa9669a6958244e73b45398c22b5f984}{S\+H\+A1\+\_\+\+CH}(x,  y,  \hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z})~\hyperlink{PMK_8c_a3c2b6b2959faadfcf644757cb570b734}{F1}(x,y,\hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z})
+\item 
+\#define \hyperlink{PMK_8c_a1068f28e524a1a625d0e48187d85d31e}{S\+H\+A1\+\_\+\+M\+AJ}(x,  y,  \hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z})~\hyperlink{PMK_8c_a61cdb7eca418cc9b37e33601c1b08868}{F4}(x,y,\hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z})
+\item 
+\#define \hyperlink{PMK_8c_af386086598689691224242ee799b1d90}{S\+H\+A\+\_\+\+P\+A\+R\+I\+TY}(x,  y,  \hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z})~\hyperlink{PMK_8c_a8f6625b749e5fe36981ee2d149229b98}{F3}(x,y,\hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z})
+\item 
+\#define \hyperlink{PMK_8c_a96b92b1138317bf7d3c8ef7b0fd0eaca}{S\+H\+A1\+\_\+\+I\+N\+E\+R\+M\+E\+D\+I\+A\+TE}(\hyperlink{aria_8c_a3ea882b0dc4bfc9d79c8840905a63a15}{A},  B,  C,  D,  E,  \hyperlink{sha512_8c_a1255a03794787336683d162cf62f7523}{W},  K)
+\item 
+\#define \hyperlink{PMK_8c_a29d0f400443345497a1163a06af22a65}{S\+H\+A256\+\_\+\+S\+M\+A\+L\+L\+\_\+\+S\+I\+G\+M\+A0}(x)~(\hyperlink{third__party_2atmel_2devices_2wilc1000_2drv__hash_2crypto_8h_afb4af69541deaa11610e763417a8684f}{S\+H\+A\+\_\+\+R\+O\+TR}(x, 7) $^\wedge$ \hyperlink{third__party_2atmel_2devices_2wilc1000_2drv__hash_2crypto_8h_afb4af69541deaa11610e763417a8684f}{S\+H\+A\+\_\+\+R\+O\+TR}(x,18) $^\wedge$  \hyperlink{third__party_2atmel_2devices_2wilc1000_2drv__hash_2crypto_8h_abba781ea63b915217054f5d058b5f3af}{S\+H\+A\+\_\+\+S\+HR}(x, 3))
+\item 
+\#define \hyperlink{PMK_8c_a8ebc95463e15dfd2ff68a4ca63db3f29}{S\+H\+A256\+\_\+\+S\+M\+A\+L\+L\+\_\+\+S\+I\+G\+M\+A1}(x)~(\hyperlink{third__party_2atmel_2devices_2wilc1000_2drv__hash_2crypto_8h_afb4af69541deaa11610e763417a8684f}{S\+H\+A\+\_\+\+R\+O\+TR}(x,17) $^\wedge$ \hyperlink{third__party_2atmel_2devices_2wilc1000_2drv__hash_2crypto_8h_afb4af69541deaa11610e763417a8684f}{S\+H\+A\+\_\+\+R\+O\+TR}(x,19) $^\wedge$ \hyperlink{third__party_2atmel_2devices_2wilc1000_2drv__hash_2crypto_8h_abba781ea63b915217054f5d058b5f3af}{S\+H\+A\+\_\+\+S\+HR}(x,10))
+\item 
+\#define \hyperlink{PMK_8c_a6c15c2fa8c8ed32d95d71c6bf8f98f19}{S\+H\+A256\+\_\+\+C\+A\+P\+\_\+\+S\+I\+G\+M\+A0}(x)~(\hyperlink{third__party_2atmel_2devices_2wilc1000_2drv__hash_2crypto_8h_afb4af69541deaa11610e763417a8684f}{S\+H\+A\+\_\+\+R\+O\+TR}(x, 2) $^\wedge$ \hyperlink{third__party_2atmel_2devices_2wilc1000_2drv__hash_2crypto_8h_afb4af69541deaa11610e763417a8684f}{S\+H\+A\+\_\+\+R\+O\+TR}(x,13) $^\wedge$ \hyperlink{third__party_2atmel_2devices_2wilc1000_2drv__hash_2crypto_8h_afb4af69541deaa11610e763417a8684f}{S\+H\+A\+\_\+\+R\+O\+TR}(x,22))
+\item 
+\#define \hyperlink{PMK_8c_ac0517b537efab91f2b603de97738fa12}{S\+H\+A256\+\_\+\+C\+A\+P\+\_\+\+S\+I\+G\+M\+A1}(x)~(\hyperlink{third__party_2atmel_2devices_2wilc1000_2drv__hash_2crypto_8h_afb4af69541deaa11610e763417a8684f}{S\+H\+A\+\_\+\+R\+O\+TR}(x, 6) $^\wedge$ \hyperlink{third__party_2atmel_2devices_2wilc1000_2drv__hash_2crypto_8h_afb4af69541deaa11610e763417a8684f}{S\+H\+A\+\_\+\+R\+O\+TR}(x,11) $^\wedge$ \hyperlink{third__party_2atmel_2devices_2wilc1000_2drv__hash_2crypto_8h_afb4af69541deaa11610e763417a8684f}{S\+H\+A\+\_\+\+R\+O\+TR}(x,25))
+\item 
+\#define \hyperlink{PMK_8c_a525460d5fe531fa1e9a29e0dc5dc6b88}{S\+H\+A256\+\_\+\+M\+AJ}(x,  y,  \hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z})~((x \& y) $\vert$ (\hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z} \& (x $\vert$ y)))
+\item 
+\#define \hyperlink{PMK_8c_af4b837505420960e30b9ddbc87ffed27}{S\+H\+A256\+\_\+\+CH}(x,  y,  \hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z})~(\hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z} $^\wedge$ (x \& (y $^\wedge$ \hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z})))
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} \hyperlink{PMK_8c_a48883907643bd8da3121b89f2298c35c}{pbkdf2\+\_\+sha1\+\_\+f} (\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} $\ast$key, \hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} key\+\_\+length, \hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} $\ast$\hyperlink{tftp__common_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, \hyperlink{group__DataT_ga100e7c691a47d6978527c479a0158245}{uint32} data\+\_\+len, \hyperlink{group__DataT_ga100e7c691a47d6978527c479a0158245}{uint32} iterations, \hyperlink{group__DataT_ga100e7c691a47d6978527c479a0158245}{uint32} count, \hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} $\ast$digest)
+\begin{DoxyCompactList}\small\item\em This function iterates the hashing of digest as per the key. \end{DoxyCompactList}\item 
+void \hyperlink{PMK_8c_aeb28bd3c72d6fb6e296f9ee7ca5c47c9}{Sha\+\_\+\+Hash\+Finish} (\hyperlink{structtstrHashContext}{tstr\+Hash\+Context} $\ast$pstr\+Hash\+Cxt, \hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} $\ast$pu8\+Length\+Padding)
+\item 
+void \hyperlink{PMK_8c_ab04d0ef6515528fcafebaa206a389d31}{Sha\+\_\+\+Hash\+Update} (\hyperlink{structtstrHashContext}{tstr\+Hash\+Context} $\ast$pstr\+Hash\+Cxt, \hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} $\ast$pu8\+Data, \hyperlink{group__DataT_ga100e7c691a47d6978527c479a0158245}{uint32} u32\+Data\+Length)
+\item 
+void \hyperlink{PMK_8c_aad79abefb1141fd15a0457fd58ab032c}{S\+H\+A1\+Process\+Block} (\hyperlink{group__DataT_ga100e7c691a47d6978527c479a0158245}{uint32} $\ast$pu32\+Sha1\+State, const \hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} $\ast$pu8\+Message\+Block)
+\item 
+void \hyperlink{PMK_8c_adab37aeb07fe6571c72ae10555a5942d}{D\+R\+V\+\_\+\+S\+H\+A1\+\_\+\+Hash} (\hyperlink{structtstrHashContext}{tstr\+Hash\+Context} $\ast$pstr\+Sha1\+Context, \hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} u8\+Flags, \hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} $\ast$pu8\+Data, \hyperlink{group__DataT_ga100e7c691a47d6978527c479a0158245}{uint32} u32\+Data\+Length, \hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} $\ast$pu8\+Digest)
+\item 
+void \hyperlink{PMK_8c_a7cece678e71f30163adc249daf035b40}{D\+R\+V\+\_\+\+H\+M\+A\+C\+\_\+\+Vector} (\hyperlink{third__party_2atmel_2devices_2wilc1000_2drv__hash_2crypto_8h_a38a7586ee0720f1fccfe749d0d21a703}{tpf\+Hash} fp\+Hash, \hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} $\ast$pu8\+Key, \hyperlink{group__DataT_ga100e7c691a47d6978527c479a0158245}{uint32} u32\+Key\+Length, \hyperlink{structtstrBuffer}{tstr\+Buffer} $\ast$pstr\+In\+Data, \hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} u8\+Num\+Inputs, \hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} $\ast$pu8\+Out)
+\begin{DoxyCompactList}\small\item\em Perform the H\+M\+AC operation on a given vector of data streams using the hash function passed to the D\+R\+V\+\_\+\+H\+M\+A\+C\+\_\+\+Vector. \end{DoxyCompactList}\item 
+void \hyperlink{PMK_8c_a31e277c9e2fb18e8d95407c25b780042}{D\+R\+V\+\_\+hmac\+\_\+sha1} (\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} $\ast$pu8\+Key, \hyperlink{group__DataT_ga100e7c691a47d6978527c479a0158245}{uint32} u32\+Key\+Length, \hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} $\ast$pu8\+Data, \hyperlink{group__DataT_ga100e7c691a47d6978527c479a0158245}{uint32} u32\+Data\+Length, \hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} $\ast$pu8\+Digest)
+\item 
+\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} \hyperlink{PMK_8c_a318c7e175b5bc9991153031d59b52ac0}{pbkdf2\+\_\+sha1} (\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} $\ast$key, \hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} key\+\_\+len, \hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} $\ast$\hyperlink{tftp__common_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, \hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} data\+\_\+len, \hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} $\ast$digest)
+\begin{DoxyCompactList}\small\item\em This function runs the P\+B\+K\+D\+F2 on the data with a given key. To obtain the P\+SK from the password, P\+B\+K\+D\+F2 is run on S\+S\+ID (data) with password (key). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Implementation of H\+A\+SH algorithms. 
+
+Copyright (c) 2016-\/2018 Microchip Technology Inc. and its subsidiaries.
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{PMK_8c_a04d6324a73a5cb4d0dbd4e05408e4658}\label{PMK_8c_a04d6324a73a5cb4d0dbd4e05408e4658}} 
+\index{P\+M\+K.\+c@{P\+M\+K.\+c}!A\+\_\+\+S\+H\+A\+\_\+\+D\+I\+G\+E\+S\+T\+\_\+\+L\+EN@{A\+\_\+\+S\+H\+A\+\_\+\+D\+I\+G\+E\+S\+T\+\_\+\+L\+EN}}
+\index{A\+\_\+\+S\+H\+A\+\_\+\+D\+I\+G\+E\+S\+T\+\_\+\+L\+EN@{A\+\_\+\+S\+H\+A\+\_\+\+D\+I\+G\+E\+S\+T\+\_\+\+L\+EN}!P\+M\+K.\+c@{P\+M\+K.\+c}}
+\subsubsection{\texorpdfstring{A\+\_\+\+S\+H\+A\+\_\+\+D\+I\+G\+E\+S\+T\+\_\+\+L\+EN}{A\_SHA\_DIGEST\_LEN}}
+{\footnotesize\ttfamily \#define A\+\_\+\+S\+H\+A\+\_\+\+D\+I\+G\+E\+S\+T\+\_\+\+L\+EN~20}
+
+
+
+Definition at line 41 of file P\+M\+K.\+c.
+
+\mbox{\Hypertarget{PMK_8c_a3c2b6b2959faadfcf644757cb570b734}\label{PMK_8c_a3c2b6b2959faadfcf644757cb570b734}} 
+\index{P\+M\+K.\+c@{P\+M\+K.\+c}!F1@{F1}}
+\index{F1@{F1}!P\+M\+K.\+c@{P\+M\+K.\+c}}
+\subsubsection{\texorpdfstring{F1}{F1}}
+{\footnotesize\ttfamily \#define F1(\begin{DoxyParamCaption}\item[{}]{x,  }\item[{}]{y,  }\item[{}]{\hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z} }\end{DoxyParamCaption})~(((x) \& (y)) $\vert$ ($\sim$(x) \& (\hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z})))}
+
+
+
+Definition at line 55 of file P\+M\+K.\+c.
+
+\mbox{\Hypertarget{PMK_8c_ae131b09a86bdafd00f48095647e80a00}\label{PMK_8c_ae131b09a86bdafd00f48095647e80a00}} 
+\index{P\+M\+K.\+c@{P\+M\+K.\+c}!F2@{F2}}
+\index{F2@{F2}!P\+M\+K.\+c@{P\+M\+K.\+c}}
+\subsubsection{\texorpdfstring{F2}{F2}}
+{\footnotesize\ttfamily \#define F2(\begin{DoxyParamCaption}\item[{}]{x,  }\item[{}]{y,  }\item[{}]{\hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z} }\end{DoxyParamCaption})~(((x) \& (\hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z})) $\vert$ ((y) \& $\sim$(\hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z})))}
+
+
+
+Definition at line 56 of file P\+M\+K.\+c.
+
+\mbox{\Hypertarget{PMK_8c_a8f6625b749e5fe36981ee2d149229b98}\label{PMK_8c_a8f6625b749e5fe36981ee2d149229b98}} 
+\index{P\+M\+K.\+c@{P\+M\+K.\+c}!F3@{F3}}
+\index{F3@{F3}!P\+M\+K.\+c@{P\+M\+K.\+c}}
+\subsubsection{\texorpdfstring{F3}{F3}}
+{\footnotesize\ttfamily \#define F3(\begin{DoxyParamCaption}\item[{}]{x,  }\item[{}]{y,  }\item[{}]{\hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z} }\end{DoxyParamCaption})~((x) $^\wedge$ (y) $^\wedge$ (\hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z}))}
+
+
+
+Definition at line 57 of file P\+M\+K.\+c.
+
+\mbox{\Hypertarget{PMK_8c_a61cdb7eca418cc9b37e33601c1b08868}\label{PMK_8c_a61cdb7eca418cc9b37e33601c1b08868}} 
+\index{P\+M\+K.\+c@{P\+M\+K.\+c}!F4@{F4}}
+\index{F4@{F4}!P\+M\+K.\+c@{P\+M\+K.\+c}}
+\subsubsection{\texorpdfstring{F4}{F4}}
+{\footnotesize\ttfamily \#define F4(\begin{DoxyParamCaption}\item[{}]{x,  }\item[{}]{y,  }\item[{}]{\hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z} }\end{DoxyParamCaption})~(((x) \& (y)) $\vert$ ((x) \& (\hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z})) $\vert$ ((y) \& (\hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z})))}
+
+
+
+Definition at line 58 of file P\+M\+K.\+c.
+
+\mbox{\Hypertarget{PMK_8c_a808b460f619d218ee79d35914ec381e8}\label{PMK_8c_a808b460f619d218ee79d35914ec381e8}} 
+\index{P\+M\+K.\+c@{P\+M\+K.\+c}!F5@{F5}}
+\index{F5@{F5}!P\+M\+K.\+c@{P\+M\+K.\+c}}
+\subsubsection{\texorpdfstring{F5}{F5}}
+{\footnotesize\ttfamily \#define F5(\begin{DoxyParamCaption}\item[{}]{x,  }\item[{}]{y,  }\item[{}]{\hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z} }\end{DoxyParamCaption})~((y) $^\wedge$ ((x) $\vert$ $\sim$(\hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z})))}
+
+
+
+Definition at line 59 of file P\+M\+K.\+c.
+
+\mbox{\Hypertarget{PMK_8c_aaa9669a6958244e73b45398c22b5f984}\label{PMK_8c_aaa9669a6958244e73b45398c22b5f984}} 
+\index{P\+M\+K.\+c@{P\+M\+K.\+c}!S\+H\+A1\+\_\+\+CH@{S\+H\+A1\+\_\+\+CH}}
+\index{S\+H\+A1\+\_\+\+CH@{S\+H\+A1\+\_\+\+CH}!P\+M\+K.\+c@{P\+M\+K.\+c}}
+\subsubsection{\texorpdfstring{S\+H\+A1\+\_\+\+CH}{SHA1\_CH}}
+{\footnotesize\ttfamily \#define S\+H\+A1\+\_\+\+CH(\begin{DoxyParamCaption}\item[{}]{x,  }\item[{}]{y,  }\item[{}]{\hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z} }\end{DoxyParamCaption})~\hyperlink{PMK_8c_a3c2b6b2959faadfcf644757cb570b734}{F1}(x,y,\hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z})}
+
+S\+H\+A1 specific defines. 
+
+Definition at line 62 of file P\+M\+K.\+c.
+
+\mbox{\Hypertarget{PMK_8c_a96b92b1138317bf7d3c8ef7b0fd0eaca}\label{PMK_8c_a96b92b1138317bf7d3c8ef7b0fd0eaca}} 
+\index{P\+M\+K.\+c@{P\+M\+K.\+c}!S\+H\+A1\+\_\+\+I\+N\+E\+R\+M\+E\+D\+I\+A\+TE@{S\+H\+A1\+\_\+\+I\+N\+E\+R\+M\+E\+D\+I\+A\+TE}}
+\index{S\+H\+A1\+\_\+\+I\+N\+E\+R\+M\+E\+D\+I\+A\+TE@{S\+H\+A1\+\_\+\+I\+N\+E\+R\+M\+E\+D\+I\+A\+TE}!P\+M\+K.\+c@{P\+M\+K.\+c}}
+\subsubsection{\texorpdfstring{S\+H\+A1\+\_\+\+I\+N\+E\+R\+M\+E\+D\+I\+A\+TE}{SHA1\_INERMEDIATE}}
+{\footnotesize\ttfamily \#define S\+H\+A1\+\_\+\+I\+N\+E\+R\+M\+E\+D\+I\+A\+TE(\begin{DoxyParamCaption}\item[{}]{\hyperlink{aria_8c_a3ea882b0dc4bfc9d79c8840905a63a15}{A},  }\item[{}]{B,  }\item[{}]{C,  }\item[{}]{D,  }\item[{}]{E,  }\item[{}]{\hyperlink{sha512_8c_a1255a03794787336683d162cf62f7523}{W},  }\item[{}]{K }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}
+\{   \(\backslash\)
+    W += \hyperlink{third__party_2atmel_2devices_2wilc1000_2drv__hash_2crypto_8h_a35a54e56bd5f3b3f3e873e35b9d0478f}{SHA\_ROTL}(\hyperlink{aria_8c_a3ea882b0dc4bfc9d79c8840905a63a15}{A},5) + E  + K;   \(\backslash\)
+    E = D;      \(\backslash\)
+    D = C;      \(\backslash\)
+    C = \hyperlink{third__party_2atmel_2devices_2wilc1000_2drv__hash_2crypto_8h_a35a54e56bd5f3b3f3e873e35b9d0478f}{SHA\_ROTL}(B,30); \(\backslash\)
+    B = \hyperlink{aria_8c_a3ea882b0dc4bfc9d79c8840905a63a15}{A};             \(\backslash\)
+    A = \hyperlink{sha1_8c_a1255a03794787336683d162cf62f7523}{W};             \(\backslash\)
+\}
+\end{DoxyCode}
+
+
+Definition at line 65 of file P\+M\+K.\+c.
+
+\mbox{\Hypertarget{PMK_8c_a1068f28e524a1a625d0e48187d85d31e}\label{PMK_8c_a1068f28e524a1a625d0e48187d85d31e}} 
+\index{P\+M\+K.\+c@{P\+M\+K.\+c}!S\+H\+A1\+\_\+\+M\+AJ@{S\+H\+A1\+\_\+\+M\+AJ}}
+\index{S\+H\+A1\+\_\+\+M\+AJ@{S\+H\+A1\+\_\+\+M\+AJ}!P\+M\+K.\+c@{P\+M\+K.\+c}}
+\subsubsection{\texorpdfstring{S\+H\+A1\+\_\+\+M\+AJ}{SHA1\_MAJ}}
+{\footnotesize\ttfamily \#define S\+H\+A1\+\_\+\+M\+AJ(\begin{DoxyParamCaption}\item[{}]{x,  }\item[{}]{y,  }\item[{}]{\hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z} }\end{DoxyParamCaption})~\hyperlink{PMK_8c_a61cdb7eca418cc9b37e33601c1b08868}{F4}(x,y,\hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z})}
+
+
+
+Definition at line 63 of file P\+M\+K.\+c.
+
+\mbox{\Hypertarget{PMK_8c_a6c15c2fa8c8ed32d95d71c6bf8f98f19}\label{PMK_8c_a6c15c2fa8c8ed32d95d71c6bf8f98f19}} 
+\index{P\+M\+K.\+c@{P\+M\+K.\+c}!S\+H\+A256\+\_\+\+C\+A\+P\+\_\+\+S\+I\+G\+M\+A0@{S\+H\+A256\+\_\+\+C\+A\+P\+\_\+\+S\+I\+G\+M\+A0}}
+\index{S\+H\+A256\+\_\+\+C\+A\+P\+\_\+\+S\+I\+G\+M\+A0@{S\+H\+A256\+\_\+\+C\+A\+P\+\_\+\+S\+I\+G\+M\+A0}!P\+M\+K.\+c@{P\+M\+K.\+c}}
+\subsubsection{\texorpdfstring{S\+H\+A256\+\_\+\+C\+A\+P\+\_\+\+S\+I\+G\+M\+A0}{SHA256\_CAP\_SIGMA0}}
+{\footnotesize\ttfamily \#define S\+H\+A256\+\_\+\+C\+A\+P\+\_\+\+S\+I\+G\+M\+A0(\begin{DoxyParamCaption}\item[{}]{x }\end{DoxyParamCaption})~(\hyperlink{third__party_2atmel_2devices_2wilc1000_2drv__hash_2crypto_8h_afb4af69541deaa11610e763417a8684f}{S\+H\+A\+\_\+\+R\+O\+TR}(x, 2) $^\wedge$ \hyperlink{third__party_2atmel_2devices_2wilc1000_2drv__hash_2crypto_8h_afb4af69541deaa11610e763417a8684f}{S\+H\+A\+\_\+\+R\+O\+TR}(x,13) $^\wedge$ \hyperlink{third__party_2atmel_2devices_2wilc1000_2drv__hash_2crypto_8h_afb4af69541deaa11610e763417a8684f}{S\+H\+A\+\_\+\+R\+O\+TR}(x,22))}
+
+
+
+Definition at line 78 of file P\+M\+K.\+c.
+
+\mbox{\Hypertarget{PMK_8c_ac0517b537efab91f2b603de97738fa12}\label{PMK_8c_ac0517b537efab91f2b603de97738fa12}} 
+\index{P\+M\+K.\+c@{P\+M\+K.\+c}!S\+H\+A256\+\_\+\+C\+A\+P\+\_\+\+S\+I\+G\+M\+A1@{S\+H\+A256\+\_\+\+C\+A\+P\+\_\+\+S\+I\+G\+M\+A1}}
+\index{S\+H\+A256\+\_\+\+C\+A\+P\+\_\+\+S\+I\+G\+M\+A1@{S\+H\+A256\+\_\+\+C\+A\+P\+\_\+\+S\+I\+G\+M\+A1}!P\+M\+K.\+c@{P\+M\+K.\+c}}
+\subsubsection{\texorpdfstring{S\+H\+A256\+\_\+\+C\+A\+P\+\_\+\+S\+I\+G\+M\+A1}{SHA256\_CAP\_SIGMA1}}
+{\footnotesize\ttfamily \#define S\+H\+A256\+\_\+\+C\+A\+P\+\_\+\+S\+I\+G\+M\+A1(\begin{DoxyParamCaption}\item[{}]{x }\end{DoxyParamCaption})~(\hyperlink{third__party_2atmel_2devices_2wilc1000_2drv__hash_2crypto_8h_afb4af69541deaa11610e763417a8684f}{S\+H\+A\+\_\+\+R\+O\+TR}(x, 6) $^\wedge$ \hyperlink{third__party_2atmel_2devices_2wilc1000_2drv__hash_2crypto_8h_afb4af69541deaa11610e763417a8684f}{S\+H\+A\+\_\+\+R\+O\+TR}(x,11) $^\wedge$ \hyperlink{third__party_2atmel_2devices_2wilc1000_2drv__hash_2crypto_8h_afb4af69541deaa11610e763417a8684f}{S\+H\+A\+\_\+\+R\+O\+TR}(x,25))}
+
+
+
+Definition at line 79 of file P\+M\+K.\+c.
+
+\mbox{\Hypertarget{PMK_8c_af4b837505420960e30b9ddbc87ffed27}\label{PMK_8c_af4b837505420960e30b9ddbc87ffed27}} 
+\index{P\+M\+K.\+c@{P\+M\+K.\+c}!S\+H\+A256\+\_\+\+CH@{S\+H\+A256\+\_\+\+CH}}
+\index{S\+H\+A256\+\_\+\+CH@{S\+H\+A256\+\_\+\+CH}!P\+M\+K.\+c@{P\+M\+K.\+c}}
+\subsubsection{\texorpdfstring{S\+H\+A256\+\_\+\+CH}{SHA256\_CH}}
+{\footnotesize\ttfamily \#define S\+H\+A256\+\_\+\+CH(\begin{DoxyParamCaption}\item[{}]{x,  }\item[{}]{y,  }\item[{}]{\hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z} }\end{DoxyParamCaption})~(\hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z} $^\wedge$ (x \& (y $^\wedge$ \hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z})))}
+
+
+
+Definition at line 81 of file P\+M\+K.\+c.
+
+\mbox{\Hypertarget{PMK_8c_a525460d5fe531fa1e9a29e0dc5dc6b88}\label{PMK_8c_a525460d5fe531fa1e9a29e0dc5dc6b88}} 
+\index{P\+M\+K.\+c@{P\+M\+K.\+c}!S\+H\+A256\+\_\+\+M\+AJ@{S\+H\+A256\+\_\+\+M\+AJ}}
+\index{S\+H\+A256\+\_\+\+M\+AJ@{S\+H\+A256\+\_\+\+M\+AJ}!P\+M\+K.\+c@{P\+M\+K.\+c}}
+\subsubsection{\texorpdfstring{S\+H\+A256\+\_\+\+M\+AJ}{SHA256\_MAJ}}
+{\footnotesize\ttfamily \#define S\+H\+A256\+\_\+\+M\+AJ(\begin{DoxyParamCaption}\item[{}]{x,  }\item[{}]{y,  }\item[{}]{\hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z} }\end{DoxyParamCaption})~((x \& y) $\vert$ (\hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z} \& (x $\vert$ y)))}
+
+
+
+Definition at line 80 of file P\+M\+K.\+c.
+
+\mbox{\Hypertarget{PMK_8c_a29d0f400443345497a1163a06af22a65}\label{PMK_8c_a29d0f400443345497a1163a06af22a65}} 
+\index{P\+M\+K.\+c@{P\+M\+K.\+c}!S\+H\+A256\+\_\+\+S\+M\+A\+L\+L\+\_\+\+S\+I\+G\+M\+A0@{S\+H\+A256\+\_\+\+S\+M\+A\+L\+L\+\_\+\+S\+I\+G\+M\+A0}}
+\index{S\+H\+A256\+\_\+\+S\+M\+A\+L\+L\+\_\+\+S\+I\+G\+M\+A0@{S\+H\+A256\+\_\+\+S\+M\+A\+L\+L\+\_\+\+S\+I\+G\+M\+A0}!P\+M\+K.\+c@{P\+M\+K.\+c}}
+\subsubsection{\texorpdfstring{S\+H\+A256\+\_\+\+S\+M\+A\+L\+L\+\_\+\+S\+I\+G\+M\+A0}{SHA256\_SMALL\_SIGMA0}}
+{\footnotesize\ttfamily \#define S\+H\+A256\+\_\+\+S\+M\+A\+L\+L\+\_\+\+S\+I\+G\+M\+A0(\begin{DoxyParamCaption}\item[{}]{x }\end{DoxyParamCaption})~(\hyperlink{third__party_2atmel_2devices_2wilc1000_2drv__hash_2crypto_8h_afb4af69541deaa11610e763417a8684f}{S\+H\+A\+\_\+\+R\+O\+TR}(x, 7) $^\wedge$ \hyperlink{third__party_2atmel_2devices_2wilc1000_2drv__hash_2crypto_8h_afb4af69541deaa11610e763417a8684f}{S\+H\+A\+\_\+\+R\+O\+TR}(x,18) $^\wedge$  \hyperlink{third__party_2atmel_2devices_2wilc1000_2drv__hash_2crypto_8h_abba781ea63b915217054f5d058b5f3af}{S\+H\+A\+\_\+\+S\+HR}(x, 3))}
+
+S\+H\+A256 specific defines. 
+
+Definition at line 76 of file P\+M\+K.\+c.
+
+\mbox{\Hypertarget{PMK_8c_a8ebc95463e15dfd2ff68a4ca63db3f29}\label{PMK_8c_a8ebc95463e15dfd2ff68a4ca63db3f29}} 
+\index{P\+M\+K.\+c@{P\+M\+K.\+c}!S\+H\+A256\+\_\+\+S\+M\+A\+L\+L\+\_\+\+S\+I\+G\+M\+A1@{S\+H\+A256\+\_\+\+S\+M\+A\+L\+L\+\_\+\+S\+I\+G\+M\+A1}}
+\index{S\+H\+A256\+\_\+\+S\+M\+A\+L\+L\+\_\+\+S\+I\+G\+M\+A1@{S\+H\+A256\+\_\+\+S\+M\+A\+L\+L\+\_\+\+S\+I\+G\+M\+A1}!P\+M\+K.\+c@{P\+M\+K.\+c}}
+\subsubsection{\texorpdfstring{S\+H\+A256\+\_\+\+S\+M\+A\+L\+L\+\_\+\+S\+I\+G\+M\+A1}{SHA256\_SMALL\_SIGMA1}}
+{\footnotesize\ttfamily \#define S\+H\+A256\+\_\+\+S\+M\+A\+L\+L\+\_\+\+S\+I\+G\+M\+A1(\begin{DoxyParamCaption}\item[{}]{x }\end{DoxyParamCaption})~(\hyperlink{third__party_2atmel_2devices_2wilc1000_2drv__hash_2crypto_8h_afb4af69541deaa11610e763417a8684f}{S\+H\+A\+\_\+\+R\+O\+TR}(x,17) $^\wedge$ \hyperlink{third__party_2atmel_2devices_2wilc1000_2drv__hash_2crypto_8h_afb4af69541deaa11610e763417a8684f}{S\+H\+A\+\_\+\+R\+O\+TR}(x,19) $^\wedge$ \hyperlink{third__party_2atmel_2devices_2wilc1000_2drv__hash_2crypto_8h_abba781ea63b915217054f5d058b5f3af}{S\+H\+A\+\_\+\+S\+HR}(x,10))}
+
+
+
+Definition at line 77 of file P\+M\+K.\+c.
+
+\mbox{\Hypertarget{PMK_8c_a7e3c02684212a2504232b60c885b7be6}\label{PMK_8c_a7e3c02684212a2504232b60c885b7be6}} 
+\index{P\+M\+K.\+c@{P\+M\+K.\+c}!S\+H\+A\+\_\+\+P\+A\+D\+\_\+\+B\+Y\+TE@{S\+H\+A\+\_\+\+P\+A\+D\+\_\+\+B\+Y\+TE}}
+\index{S\+H\+A\+\_\+\+P\+A\+D\+\_\+\+B\+Y\+TE@{S\+H\+A\+\_\+\+P\+A\+D\+\_\+\+B\+Y\+TE}!P\+M\+K.\+c@{P\+M\+K.\+c}}
+\subsubsection{\texorpdfstring{S\+H\+A\+\_\+\+P\+A\+D\+\_\+\+B\+Y\+TE}{SHA\_PAD\_BYTE}}
+{\footnotesize\ttfamily \#define S\+H\+A\+\_\+\+P\+A\+D\+\_\+\+B\+Y\+TE~0x80}
+
+
+
+Definition at line 53 of file P\+M\+K.\+c.
+
+\mbox{\Hypertarget{PMK_8c_af386086598689691224242ee799b1d90}\label{PMK_8c_af386086598689691224242ee799b1d90}} 
+\index{P\+M\+K.\+c@{P\+M\+K.\+c}!S\+H\+A\+\_\+\+P\+A\+R\+I\+TY@{S\+H\+A\+\_\+\+P\+A\+R\+I\+TY}}
+\index{S\+H\+A\+\_\+\+P\+A\+R\+I\+TY@{S\+H\+A\+\_\+\+P\+A\+R\+I\+TY}!P\+M\+K.\+c@{P\+M\+K.\+c}}
+\subsubsection{\texorpdfstring{S\+H\+A\+\_\+\+P\+A\+R\+I\+TY}{SHA\_PARITY}}
+{\footnotesize\ttfamily \#define S\+H\+A\+\_\+\+P\+A\+R\+I\+TY(\begin{DoxyParamCaption}\item[{}]{x,  }\item[{}]{y,  }\item[{}]{\hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z} }\end{DoxyParamCaption})~\hyperlink{PMK_8c_a8f6625b749e5fe36981ee2d149229b98}{F3}(x,y,\hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z})}
+
+
+
+Definition at line 64 of file P\+M\+K.\+c.
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{PMK_8c_a31e277c9e2fb18e8d95407c25b780042}\label{PMK_8c_a31e277c9e2fb18e8d95407c25b780042}} 
+\index{P\+M\+K.\+c@{P\+M\+K.\+c}!D\+R\+V\+\_\+hmac\+\_\+sha1@{D\+R\+V\+\_\+hmac\+\_\+sha1}}
+\index{D\+R\+V\+\_\+hmac\+\_\+sha1@{D\+R\+V\+\_\+hmac\+\_\+sha1}!P\+M\+K.\+c@{P\+M\+K.\+c}}
+\subsubsection{\texorpdfstring{D\+R\+V\+\_\+hmac\+\_\+sha1()}{DRV\_hmac\_sha1()}}
+{\footnotesize\ttfamily void D\+R\+V\+\_\+hmac\+\_\+sha1 (\begin{DoxyParamCaption}\item[{\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} $\ast$}]{pu8\+Key,  }\item[{\hyperlink{group__DataT_ga100e7c691a47d6978527c479a0158245}{uint32}}]{u32\+Key\+Length,  }\item[{\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} $\ast$}]{pu8\+Data,  }\item[{\hyperlink{group__DataT_ga100e7c691a47d6978527c479a0158245}{uint32}}]{u32\+Data\+Length,  }\item[{\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} $\ast$}]{pu8\+Digest }\end{DoxyParamCaption})}
+
+
+
+Definition at line 325 of file P\+M\+K.\+c.
+
+
+\begin{DoxyCode}
+326 \{
+327     \hyperlink{structtstrBuffer}{tstrBuffer}    strIn;
+328     strIn.\hyperlink{structtstrBuffer_a27c72a3c54c0d1239ff7a2b9e32299b5}{pu8Data} = pu8Data;
+329     strIn.\hyperlink{structtstrBuffer_abb8a6d4939c963003460e16e6b8a8243}{u16BufferSize} = u32DataLength;
+330     \hyperlink{PMK_8c_a7cece678e71f30163adc249daf035b40}{DRV\_HMAC\_Vector}(\hyperlink{PMK_8c_adab37aeb07fe6571c72ae10555a5942d}{DRV\_SHA1\_Hash},pu8Key,u32KeyLength,&strIn,1,pu8Digest);
+331 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{PMK_8c_a7cece678e71f30163adc249daf035b40}\label{PMK_8c_a7cece678e71f30163adc249daf035b40}} 
+\index{P\+M\+K.\+c@{P\+M\+K.\+c}!D\+R\+V\+\_\+\+H\+M\+A\+C\+\_\+\+Vector@{D\+R\+V\+\_\+\+H\+M\+A\+C\+\_\+\+Vector}}
+\index{D\+R\+V\+\_\+\+H\+M\+A\+C\+\_\+\+Vector@{D\+R\+V\+\_\+\+H\+M\+A\+C\+\_\+\+Vector}!P\+M\+K.\+c@{P\+M\+K.\+c}}
+\subsubsection{\texorpdfstring{D\+R\+V\+\_\+\+H\+M\+A\+C\+\_\+\+Vector()}{DRV\_HMAC\_Vector()}}
+{\footnotesize\ttfamily void D\+R\+V\+\_\+\+H\+M\+A\+C\+\_\+\+Vector (\begin{DoxyParamCaption}\item[{\hyperlink{third__party_2atmel_2devices_2wilc1000_2drv__hash_2crypto_8h_a38a7586ee0720f1fccfe749d0d21a703}{tpf\+Hash}}]{fp\+Hash,  }\item[{\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} $\ast$}]{pu8\+Key,  }\item[{\hyperlink{group__DataT_ga100e7c691a47d6978527c479a0158245}{uint32}}]{u32\+Key\+Length,  }\item[{\hyperlink{structtstrBuffer}{tstr\+Buffer} $\ast$}]{pstr\+In\+Data,  }\item[{\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8}}]{u8\+Num\+Inputs,  }\item[{\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} $\ast$}]{pu8\+Out }\end{DoxyParamCaption})}
+
+
+
+Perform the H\+M\+AC operation on a given vector of data streams using the hash function passed to the D\+R\+V\+\_\+\+H\+M\+A\+C\+\_\+\+Vector. 
+
+
+
+Definition at line 273 of file P\+M\+K.\+c.
+
+
+\begin{DoxyCode}
+275 \{
+276     \textcolor{keywordflow}{if}((pu8Key != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}) && (pstrInData != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}) && (pu8Out != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}) && (fpHash != 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}))
+277     \{
+278         \hyperlink{structtstrHashContext}{tstrHashContext}  strHashContext;
+279         \hyperlink{group__DataT_ga100e7c691a47d6978527c479a0158245}{uint32}        i;
+280         \hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8}          au8TmpBuffer[\hyperlink{third__party_2atmel_2devices_2wilc1000_2drv__hash_2crypto_8h_a7b4bbf50f237712b1e9bcc3283e41199}{SHA\_BLOCK\_SIZE}];
+281         \hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8}          au8TmpHash[\hyperlink{third__party_2atmel_2devices_2wilc1000_2drv__hash_2crypto_8h_a0391b26f91f9df705826a5770d1b34b5}{SHA\_MAX\_DIGEST\_SIZE}];
+282         \hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8}          au8TmpKey[\hyperlink{third__party_2atmel_2devices_2wilc1000_2drv__hash_2crypto_8h_a0391b26f91f9df705826a5770d1b34b5}{SHA\_MAX\_DIGEST\_SIZE}];
+283         \textcolor{comment}{/* HMAC initialize. */}
+284         \textcolor{comment}{/* Adjust the key size. */}
+285         \textcolor{keywordflow}{if}(u32KeyLength > \hyperlink{third__party_2atmel_2devices_2wilc1000_2drv__hash_2crypto_8h_a7b4bbf50f237712b1e9bcc3283e41199}{SHA\_BLOCK\_SIZE})
+286         \{
+287             fpHash(&strHashContext, \hyperlink{third__party_2atmel_2devices_2wilc1000_2drv__hash_2crypto_8h_ae69f3b9e9ff6a4eddbf8cf945b54e17e}{SHA\_FLAGS\_FULL\_HASH}, pu8Key, u32KeyLength,pu8Key);
+288             u32KeyLength = strHashContext.\hyperlink{structtstrHashContext_a0ac827ded50656132aba2801121618e7}{u8DigestSize};
+289             pu8Key = au8TmpKey;
+290         \}
+291         
+292         \hyperlink{third__party_2atmel_2devices_2wilc1000_2drv__hash_2crypto_8h_acae58fe65cb0bc50c7a30357e474e6dd}{M2M\_MEMSET}(au8TmpBuffer, 0x36, \hyperlink{third__party_2atmel_2devices_2wilc1000_2drv__hash_2crypto_8h_a7b4bbf50f237712b1e9bcc3283e41199}{SHA\_BLOCK\_SIZE});
+293         \textcolor{keywordflow}{for}(i = 0; i< u32KeyLength ; i++)
+294         \{
+295             au8TmpBuffer[i] ^= pu8Key[i];
+296         \}
+297 
+298         \textcolor{comment}{/* Start hashing. */}
+299         fpHash(&strHashContext , \hyperlink{third__party_2atmel_2devices_2wilc1000_2drv__hash_2crypto_8h_a0f1823fb0e909f23f5df5c18b7823bb1}{SHA\_FLAGS\_INIT} | \hyperlink{third__party_2atmel_2devices_2wilc1000_2drv__hash_2crypto_8h_a59b2c813f1c068250497bf8a815cb38a}{SHA\_FLAGS\_UPDATE}, 
+      au8TmpBuffer, \hyperlink{third__party_2atmel_2devices_2wilc1000_2drv__hash_2crypto_8h_a7b4bbf50f237712b1e9bcc3283e41199}{SHA\_BLOCK\_SIZE}, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+300         
+301         \textcolor{comment}{/* HMAC update. */}
+302         \textcolor{keywordflow}{for}(i = 0 ; i < u8NumInputs ; i ++)
+303         \{
+304             fpHash(
+305                 &strHashContext , \hyperlink{third__party_2atmel_2devices_2wilc1000_2drv__hash_2crypto_8h_a59b2c813f1c068250497bf8a815cb38a}{SHA\_FLAGS\_UPDATE} , 
+306                 pstrInData[i].pu8Data , pstrInData[i].u16BufferSize , \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+307         \}
+308         
+309         fpHash(
+310             &strHashContext , \hyperlink{third__party_2atmel_2devices_2wilc1000_2drv__hash_2crypto_8h_ae2b8298ef0759c63b3b5d2f9addb6dcf}{SHA\_FLAGS\_FINISH}, 
+311             \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, 0, au8TmpHash);
+312         
+313         \textcolor{comment}{/* HMAC finalize. */}        
+314         \hyperlink{third__party_2atmel_2devices_2wilc1000_2drv__hash_2crypto_8h_acae58fe65cb0bc50c7a30357e474e6dd}{M2M\_MEMSET}(au8TmpBuffer, 0x5C, \hyperlink{third__party_2atmel_2devices_2wilc1000_2drv__hash_2crypto_8h_a7b4bbf50f237712b1e9bcc3283e41199}{SHA\_BLOCK\_SIZE});
+315         \textcolor{keywordflow}{for}(i = 0; i< u32KeyLength ; i++)
+316         \{
+317             au8TmpBuffer[i] ^= pu8Key[i];
+318         \}
+319 
+320         fpHash(&strHashContext,     \hyperlink{third__party_2atmel_2devices_2wilc1000_2drv__hash_2crypto_8h_a0f1823fb0e909f23f5df5c18b7823bb1}{SHA\_FLAGS\_INIT} | 
+      \hyperlink{third__party_2atmel_2devices_2wilc1000_2drv__hash_2crypto_8h_a59b2c813f1c068250497bf8a815cb38a}{SHA\_FLAGS\_UPDATE}, au8TmpBuffer, \hyperlink{third__party_2atmel_2devices_2wilc1000_2drv__hash_2crypto_8h_a7b4bbf50f237712b1e9bcc3283e41199}{SHA\_BLOCK\_SIZE}, 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+321         fpHash(&strHashContext, \hyperlink{third__party_2atmel_2devices_2wilc1000_2drv__hash_2crypto_8h_a59b2c813f1c068250497bf8a815cb38a}{SHA\_FLAGS\_UPDATE} | 
+      \hyperlink{third__party_2atmel_2devices_2wilc1000_2drv__hash_2crypto_8h_ae2b8298ef0759c63b3b5d2f9addb6dcf}{SHA\_FLAGS\_FINISH}, au8TmpHash, strHashContext.\hyperlink{structtstrHashContext_a0ac827ded50656132aba2801121618e7}{u8DigestSize}, pu8Out);
+322     \}
+323 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{PMK_8c_adab37aeb07fe6571c72ae10555a5942d}\label{PMK_8c_adab37aeb07fe6571c72ae10555a5942d}} 
+\index{P\+M\+K.\+c@{P\+M\+K.\+c}!D\+R\+V\+\_\+\+S\+H\+A1\+\_\+\+Hash@{D\+R\+V\+\_\+\+S\+H\+A1\+\_\+\+Hash}}
+\index{D\+R\+V\+\_\+\+S\+H\+A1\+\_\+\+Hash@{D\+R\+V\+\_\+\+S\+H\+A1\+\_\+\+Hash}!P\+M\+K.\+c@{P\+M\+K.\+c}}
+\subsubsection{\texorpdfstring{D\+R\+V\+\_\+\+S\+H\+A1\+\_\+\+Hash()}{DRV\_SHA1\_Hash()}}
+{\footnotesize\ttfamily void D\+R\+V\+\_\+\+S\+H\+A1\+\_\+\+Hash (\begin{DoxyParamCaption}\item[{\hyperlink{structtstrHashContext}{tstr\+Hash\+Context} $\ast$}]{pstr\+Sha1\+Context,  }\item[{\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8}}]{u8\+Flags,  }\item[{\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} $\ast$}]{pu8\+Data,  }\item[{\hyperlink{group__DataT_ga100e7c691a47d6978527c479a0158245}{uint32}}]{u32\+Data\+Length,  }\item[{\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} $\ast$}]{pu8\+Digest }\end{DoxyParamCaption})}
+
+
+
+Definition at line 219 of file P\+M\+K.\+c.
+
+
+\begin{DoxyCode}
+221 \{
+222     \textcolor{keywordflow}{if}(pstrSha1Context != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+223     \{       
+224         \textcolor{comment}{/* SHA1 hash initialization. */}
+225         \textcolor{keywordflow}{if}(u8Flags & \hyperlink{third__party_2atmel_2devices_2wilc1000_2drv__hash_2crypto_8h_a0f1823fb0e909f23f5df5c18b7823bb1}{SHA\_FLAGS\_INIT})
+226         \{
+227             \textcolor{comment}{/* Initialize the Hash Context. */}
+228             \hyperlink{third__party_2atmel_2devices_2wilc1000_2drv__hash_2crypto_8h_acae58fe65cb0bc50c7a30357e474e6dd}{M2M\_MEMSET}((\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} *)pstrSha1Context, 0, \textcolor{keyword}{sizeof}(
+      \hyperlink{structtstrHashContext}{tstrHashContext}));
+229 
+230             \textcolor{comment}{/* Define SHA1 Specific parameters. */}
+231             pstrSha1Context->fpHash = \hyperlink{PMK_8c_aad79abefb1141fd15a0457fd58ab032c}{SHA1ProcessBlock};
+232             pstrSha1Context->u8BlockSize = \hyperlink{third__party_2atmel_2devices_2wilc1000_2drv__hash_2crypto_8h_a7b4bbf50f237712b1e9bcc3283e41199}{SHA\_BLOCK\_SIZE};
+233             pstrSha1Context->u8DigestSize = \hyperlink{sha1_8h_a3ba9296b223f1b3c710d6b812fd860e8}{SHA1\_DIGEST\_SIZE};
+234             
+235             \textcolor{comment}{/* Set the Hash state to the initial value (specified by the standard). */}
+236             pstrSha1Context->au32HashState[0] = 0x67452301;
+237             pstrSha1Context->au32HashState[1] = 0xEFCDAB89;
+238             pstrSha1Context->au32HashState[2] = 0x98BADCFE;
+239             pstrSha1Context->au32HashState[3] = 0x10325476;
+240             pstrSha1Context->au32HashState[4] = 0xC3D2E1F0;
+241         \}
+242 
+243         \textcolor{comment}{/* SHA1 hash update. */}
+244         \textcolor{keywordflow}{if}((u8Flags & \hyperlink{third__party_2atmel_2devices_2wilc1000_2drv__hash_2crypto_8h_a59b2c813f1c068250497bf8a815cb38a}{SHA\_FLAGS\_UPDATE}) && (pu8Data != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}))
+245         \{
+246             \hyperlink{PMK_8c_ab04d0ef6515528fcafebaa206a389d31}{Sha\_HashUpdate}(pstrSha1Context, pu8Data, u32DataLength);
+247         \}
+248 
+249         \textcolor{comment}{/* SHA1 hash finish. */}
+250         \textcolor{keywordflow}{if}(u8Flags & \hyperlink{third__party_2atmel_2devices_2wilc1000_2drv__hash_2crypto_8h_ae2b8298ef0759c63b3b5d2f9addb6dcf}{SHA\_FLAGS\_FINISH})
+251         \{
+252             \hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8}  au8Tmp[8];
+253 
+254             \textcolor{comment}{/* Pack the length at the end of the padding block. */}
+255             \hyperlink{third__party_2atmel_2devices_2wilc1000_2drv__hash_2crypto_8h_aee5a5064db9875cc90eb993f3ffc6cff}{PUTU32}(pstrSha1Context->\hyperlink{structtstrHashContext_a1f34ee5e16cfba096d97cda5afcdf0d0}{u32TotalLength} >> 29, au8Tmp,0);
+256             \hyperlink{third__party_2atmel_2devices_2wilc1000_2drv__hash_2crypto_8h_aee5a5064db9875cc90eb993f3ffc6cff}{PUTU32}(pstrSha1Context->\hyperlink{structtstrHashContext_a1f34ee5e16cfba096d97cda5afcdf0d0}{u32TotalLength} << 3, au8Tmp, 4);
+257             \hyperlink{PMK_8c_aeb28bd3c72d6fb6e296f9ee7ca5c47c9}{Sha\_HashFinish}(pstrSha1Context,au8Tmp);
+258 
+259             \textcolor{comment}{/* Compute digest. */}
+260             \hyperlink{third__party_2atmel_2devices_2wilc1000_2drv__hash_2crypto_8h_aee5a5064db9875cc90eb993f3ffc6cff}{PUTU32}(pstrSha1Context->\hyperlink{structtstrHashContext_a98c3033fa6c3fcfb2fde0f8d9e4b77cd}{au32HashState}[0], pu8Digest, 0);
+261             \hyperlink{third__party_2atmel_2devices_2wilc1000_2drv__hash_2crypto_8h_aee5a5064db9875cc90eb993f3ffc6cff}{PUTU32}(pstrSha1Context->\hyperlink{structtstrHashContext_a98c3033fa6c3fcfb2fde0f8d9e4b77cd}{au32HashState}[1], pu8Digest, 4);
+262             \hyperlink{third__party_2atmel_2devices_2wilc1000_2drv__hash_2crypto_8h_aee5a5064db9875cc90eb993f3ffc6cff}{PUTU32}(pstrSha1Context->\hyperlink{structtstrHashContext_a98c3033fa6c3fcfb2fde0f8d9e4b77cd}{au32HashState}[2], pu8Digest, 8);
+263             \hyperlink{third__party_2atmel_2devices_2wilc1000_2drv__hash_2crypto_8h_aee5a5064db9875cc90eb993f3ffc6cff}{PUTU32}(pstrSha1Context->\hyperlink{structtstrHashContext_a98c3033fa6c3fcfb2fde0f8d9e4b77cd}{au32HashState}[3], pu8Digest, 12);
+264             \hyperlink{third__party_2atmel_2devices_2wilc1000_2drv__hash_2crypto_8h_aee5a5064db9875cc90eb993f3ffc6cff}{PUTU32}(pstrSha1Context->\hyperlink{structtstrHashContext_a98c3033fa6c3fcfb2fde0f8d9e4b77cd}{au32HashState}[4], pu8Digest, 16);
+265         \}
+266     \}
+267 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{PMK_8c_a318c7e175b5bc9991153031d59b52ac0}\label{PMK_8c_a318c7e175b5bc9991153031d59b52ac0}} 
+\index{P\+M\+K.\+c@{P\+M\+K.\+c}!pbkdf2\+\_\+sha1@{pbkdf2\+\_\+sha1}}
+\index{pbkdf2\+\_\+sha1@{pbkdf2\+\_\+sha1}!P\+M\+K.\+c@{P\+M\+K.\+c}}
+\subsubsection{\texorpdfstring{pbkdf2\+\_\+sha1()}{pbkdf2\_sha1()}}
+{\footnotesize\ttfamily \hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} pbkdf2\+\_\+sha1 (\begin{DoxyParamCaption}\item[{\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} $\ast$}]{key,  }\item[{\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8}}]{key\+\_\+len,  }\item[{\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} $\ast$}]{data,  }\item[{\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8}}]{data\+\_\+len,  }\item[{\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} $\ast$}]{digest }\end{DoxyParamCaption})}
+
+
+
+This function runs the P\+B\+K\+D\+F2 on the data with a given key. To obtain the P\+SK from the password, P\+B\+K\+D\+F2 is run on S\+S\+ID (data) with password (key). 
+
+
+
+Definition at line 392 of file P\+M\+K.\+c.
+
+
+\begin{DoxyCode}
+393 \{
+394     \textcolor{keywordflow}{if} ((key\_len > 64) || (data\_len > 32))
+395         \textcolor{keywordflow}{return} 0;
+396 
+397     \textcolor{keywordflow}{if} (\hyperlink{PMK_8c_a48883907643bd8da3121b89f2298c35c}{pbkdf2\_sha1\_f}(key, key\_len, \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, data\_len, 4096, 1, digest) == 0) \{
+398         \textcolor{keywordflow}{return} 0;
+399     \}
+400     \textcolor{keywordflow}{return} \hyperlink{PMK_8c_a48883907643bd8da3121b89f2298c35c}{pbkdf2\_sha1\_f}(key, key\_len, \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, data\_len, 4096, 2, &digest[
+      \hyperlink{PMK_8c_a04d6324a73a5cb4d0dbd4e05408e4658}{A\_SHA\_DIGEST\_LEN}]);
+401 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{PMK_8c_a48883907643bd8da3121b89f2298c35c}\label{PMK_8c_a48883907643bd8da3121b89f2298c35c}} 
+\index{P\+M\+K.\+c@{P\+M\+K.\+c}!pbkdf2\+\_\+sha1\+\_\+f@{pbkdf2\+\_\+sha1\+\_\+f}}
+\index{pbkdf2\+\_\+sha1\+\_\+f@{pbkdf2\+\_\+sha1\+\_\+f}!P\+M\+K.\+c@{P\+M\+K.\+c}}
+\subsubsection{\texorpdfstring{pbkdf2\+\_\+sha1\+\_\+f()}{pbkdf2\_sha1\_f()}}
+{\footnotesize\ttfamily \hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} pbkdf2\+\_\+sha1\+\_\+f (\begin{DoxyParamCaption}\item[{\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} $\ast$}]{key,  }\item[{\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8}}]{key\+\_\+length,  }\item[{\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} $\ast$}]{data,  }\item[{\hyperlink{group__DataT_ga100e7c691a47d6978527c479a0158245}{uint32}}]{data\+\_\+len,  }\item[{\hyperlink{group__DataT_ga100e7c691a47d6978527c479a0158245}{uint32}}]{iterations,  }\item[{\hyperlink{group__DataT_ga100e7c691a47d6978527c479a0158245}{uint32}}]{count,  }\item[{\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} $\ast$}]{digest }\end{DoxyParamCaption})}
+
+
+
+This function iterates the hashing of digest as per the key. 
+
+\begin{DoxyReturn}{Returns}
+1 on success, 0 on failure. 
+\end{DoxyReturn}
+
+
+Definition at line 338 of file P\+M\+K.\+c.
+
+
+\begin{DoxyCode}
+340 \{
+341     \hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} tmp1[36] = \{0\};
+342     \hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} tmp2[\hyperlink{PMK_8c_a04d6324a73a5cb4d0dbd4e05408e4658}{A\_SHA\_DIGEST\_LEN}] = \{0\};
+343     \hyperlink{group__DataT_ga1daa745171fc6e31d942c161422a76f9}{uint16} i, j;
+344     
+345     \textcolor{keywordflow}{for} (i = 0; i < key\_length ; i++)
+346     \{
+347         \textcolor{keywordflow}{if} (key[i] < 32)
+348         \{           
+349             \textcolor{keywordflow}{return} 0;
+350         \}
+351         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (key[i] > 126)
+352         \{           
+353             \textcolor{keywordflow}{return} 0;
+354         \}
+355     \}
+356 
+357 
+358     \textcolor{comment}{/* U1 = PRF(P, S || int(i)) */}
+359     \hyperlink{nm__common_8h_a62b30b611dfcc58e190254d1f663470a}{m2m\_memcpy}(tmp1, \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, data\_len);
+360 
+361     tmp1[data\_len]   = (\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8})((count>>24) & 0xFF);
+362     tmp1[data\_len+1] = (\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8})((count>>16) & 0xFF);
+363     tmp1[data\_len+2] = (\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8})((count>>8) & 0xFF);
+364     tmp1[data\_len+3] = (\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8})(count & 0xFF);
+365 
+366     \hyperlink{PMK_8c_a31e277c9e2fb18e8d95407c25b780042}{DRV\_hmac\_sha1}(key, key\_length, tmp1, (data\_len + 4), tmp2);
+367 
+368 
+369     \textcolor{comment}{/* digest = U1 */}
+370     \hyperlink{nm__common_8h_a62b30b611dfcc58e190254d1f663470a}{m2m\_memcpy}(digest, tmp2, \hyperlink{PMK_8c_a04d6324a73a5cb4d0dbd4e05408e4658}{A\_SHA\_DIGEST\_LEN});
+371 
+372     \textcolor{keywordflow}{for} (i = 1; i < iterations; i++)
+373     \{
+374         \textcolor{comment}{/* Un = PRF(P, Un-1) */}
+375         \hyperlink{PMK_8c_a31e277c9e2fb18e8d95407c25b780042}{DRV\_hmac\_sha1}(key, key\_length, tmp2, \hyperlink{PMK_8c_a04d6324a73a5cb4d0dbd4e05408e4658}{A\_SHA\_DIGEST\_LEN}, tmp1);
+376 
+377         \hyperlink{nm__common_8h_a62b30b611dfcc58e190254d1f663470a}{m2m\_memcpy}(tmp2, tmp1, \hyperlink{PMK_8c_a04d6324a73a5cb4d0dbd4e05408e4658}{A\_SHA\_DIGEST\_LEN});
+378 
+379         \textcolor{comment}{/* digest = digest xor Un */}
+380         \textcolor{keywordflow}{for} (j = 0; j < \hyperlink{PMK_8c_a04d6324a73a5cb4d0dbd4e05408e4658}{A\_SHA\_DIGEST\_LEN}; j++)
+381         \{
+382             digest[j] ^= tmp1[j];
+383         \}
+384     \}   
+385     \textcolor{keywordflow}{return} 1;
+386 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{PMK_8c_aad79abefb1141fd15a0457fd58ab032c}\label{PMK_8c_aad79abefb1141fd15a0457fd58ab032c}} 
+\index{P\+M\+K.\+c@{P\+M\+K.\+c}!S\+H\+A1\+Process\+Block@{S\+H\+A1\+Process\+Block}}
+\index{S\+H\+A1\+Process\+Block@{S\+H\+A1\+Process\+Block}!P\+M\+K.\+c@{P\+M\+K.\+c}}
+\subsubsection{\texorpdfstring{S\+H\+A1\+Process\+Block()}{SHA1ProcessBlock()}}
+{\footnotesize\ttfamily void S\+H\+A1\+Process\+Block (\begin{DoxyParamCaption}\item[{\hyperlink{group__DataT_ga100e7c691a47d6978527c479a0158245}{uint32} $\ast$}]{pu32\+Sha1\+State,  }\item[{const \hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} $\ast$}]{pu8\+Message\+Block }\end{DoxyParamCaption})}
+
+
+
+Definition at line 83 of file P\+M\+K.\+c.
+
+
+\begin{DoxyCode}
+84 \{
+85     \textcolor{comment}{/* Constants defined in FIPS-180-2, section 4.2.1 */}
+86     \textcolor{keyword}{const} \hyperlink{group__DataT_ga100e7c691a47d6978527c479a0158245}{uint32} K[4] = \{
+87         0x5A827999,
+88         0x6ED9EBA1,
+89         0x8F1BBCDC,
+90         0xCA62C1D6
+91     \};
+92     \textcolor{keywordtype}{int} \hyperlink{llmnr__common_8h_a2d03918f4f9edabaf3c9f43abcc2d85b}{t};                  \textcolor{comment}{/* Loop counter */}
+93     \hyperlink{group__DataT_ga100e7c691a47d6978527c479a0158245}{uint32} \hyperlink{sha1_8c_a1255a03794787336683d162cf62f7523}{W}[80];           \textcolor{comment}{/* Word sequence */}
+94     \hyperlink{group__DataT_ga100e7c691a47d6978527c479a0158245}{uint32} \hyperlink{aria_8c_a3ea882b0dc4bfc9d79c8840905a63a15}{A}, B, C, D, E;   \textcolor{comment}{/* Word buffers */}
+95 
+96     \textcolor{comment}{/* Initialize the first 16 words in the array W. */}
+97     \textcolor{keywordflow}{for} (t = 0; t < 16; t++) 
+98         W[t] = \hyperlink{third__party_2atmel_2devices_2wilc1000_2drv__hash_2crypto_8h_ace23a3a3fa01849780e60f438543605b}{GETU32}(pu8MessageBlock, (t * 4));
+99 
+100     \textcolor{keywordflow}{for} (t = 16; t < 80; t++)
+101         W[t] = \hyperlink{third__party_2atmel_2devices_2wilc1000_2drv__hash_2crypto_8h_a35a54e56bd5f3b3f3e873e35b9d0478f}{SHA\_ROTL}((W[t-3] ^ W[t-8] ^ W[t-14] ^ W[t-16]), 1);
+102 
+103     A = pu32Sha1State[0];
+104     B = pu32Sha1State[1];
+105     C = pu32Sha1State[2];
+106     D = pu32Sha1State[3];
+107     E = pu32Sha1State[4];
+108 
+109     \textcolor{keywordflow}{for} (t = 0; t < 20; t++) \{
+110         W[\hyperlink{llmnr__common_8h_a2d03918f4f9edabaf3c9f43abcc2d85b}{t}] += \hyperlink{PMK_8c_aaa9669a6958244e73b45398c22b5f984}{SHA1\_CH}(B, C, D);
+111         \hyperlink{PMK_8c_a96b92b1138317bf7d3c8ef7b0fd0eaca}{SHA1\_INERMEDIATE}(A, B, C, D, E, W[t], K[0])
+112     \}
+113 
+114     \textcolor{keywordflow}{for} (t = 20; t < 40; t++) \{
+115         W[\hyperlink{llmnr__common_8h_a2d03918f4f9edabaf3c9f43abcc2d85b}{t}] += \hyperlink{PMK_8c_af386086598689691224242ee799b1d90}{SHA\_PARITY}(B, C, D);
+116         \hyperlink{PMK_8c_a96b92b1138317bf7d3c8ef7b0fd0eaca}{SHA1\_INERMEDIATE}(A, B, C, D, E, W[t], K[1])
+117     \}
+118 
+119     \textcolor{keywordflow}{for} (t = 40; t < 60; t++) \{
+120         W[\hyperlink{llmnr__common_8h_a2d03918f4f9edabaf3c9f43abcc2d85b}{t}] += \hyperlink{PMK_8c_a1068f28e524a1a625d0e48187d85d31e}{SHA1\_MAJ}(B, C, D);
+121         \hyperlink{PMK_8c_a96b92b1138317bf7d3c8ef7b0fd0eaca}{SHA1\_INERMEDIATE}(A, B, C, D, E, W[t], K[2])
+122     \}
+123 
+124     \textcolor{keywordflow}{for} (t = 60; t < 80; t++) \{
+125         W[\hyperlink{llmnr__common_8h_a2d03918f4f9edabaf3c9f43abcc2d85b}{t}] += \hyperlink{PMK_8c_af386086598689691224242ee799b1d90}{SHA\_PARITY}(B, C, D);
+126         \hyperlink{PMK_8c_a96b92b1138317bf7d3c8ef7b0fd0eaca}{SHA1\_INERMEDIATE}(A, B, C, D, E, W[t], K[3])
+127     \}
+128 
+129     pu32Sha1State[0] += \hyperlink{aria_8c_a3ea882b0dc4bfc9d79c8840905a63a15}{A};
+130     pu32Sha1State[1] += B;
+131     pu32Sha1State[2] += C;
+132     pu32Sha1State[3] += D;
+133     pu32Sha1State[4] += E;
+134 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{PMK_8c_aeb28bd3c72d6fb6e296f9ee7ca5c47c9}\label{PMK_8c_aeb28bd3c72d6fb6e296f9ee7ca5c47c9}} 
+\index{P\+M\+K.\+c@{P\+M\+K.\+c}!Sha\+\_\+\+Hash\+Finish@{Sha\+\_\+\+Hash\+Finish}}
+\index{Sha\+\_\+\+Hash\+Finish@{Sha\+\_\+\+Hash\+Finish}!P\+M\+K.\+c@{P\+M\+K.\+c}}
+\subsubsection{\texorpdfstring{Sha\+\_\+\+Hash\+Finish()}{Sha\_HashFinish()}}
+{\footnotesize\ttfamily void Sha\+\_\+\+Hash\+Finish (\begin{DoxyParamCaption}\item[{\hyperlink{structtstrHashContext}{tstr\+Hash\+Context} $\ast$}]{pstr\+Hash\+Cxt,  }\item[{\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} $\ast$}]{pu8\+Length\+Padding }\end{DoxyParamCaption})}
+
+
+
+Definition at line 187 of file P\+M\+K.\+c.
+
+
+\begin{DoxyCode}
+188 \{
+189     \textcolor{keywordflow}{if}(pstrHashCxt != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+190     \{
+191         \textcolor{keywordflow}{if}(pstrHashCxt->\hyperlink{structtstrHashContext_a85933854439e5041779b7c36d03f2ed1}{fpHash} != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+192         \{
+193             \hyperlink{group__DataT_ga100e7c691a47d6978527c479a0158245}{uint32}    u32Offset;
+194             \hyperlink{group__DataT_ga100e7c691a47d6978527c479a0158245}{uint32}    u32PaddingLength;
+195 
+196             \textcolor{comment}{/* Calculate the offset of the last data byte in the current block. */}
+197             u32Offset = pstrHashCxt->\hyperlink{structtstrHashContext_a1f34ee5e16cfba096d97cda5afcdf0d0}{u32TotalLength} % pstrHashCxt->
+      \hyperlink{structtstrHashContext_a98d5af4e1c764a7b1571aa0ebdb4df6b}{u8BlockSize};
+198 
+199             \textcolor{comment}{/* Add the padding byte 0x80. */}
+200             pstrHashCxt->\hyperlink{structtstrHashContext_ad800fad9e6b7da0be3599969634ae4dd}{au8CurrentBlock}[u32Offset ++] = 
+      \hyperlink{PMK_8c_a7e3c02684212a2504232b60c885b7be6}{SHA\_PAD\_BYTE};
+201 
+202             \textcolor{comment}{/* Calculate the required padding to complete one Hash Block Size. */}
+203             u32PaddingLength = pstrHashCxt->\hyperlink{structtstrHashContext_a98d5af4e1c764a7b1571aa0ebdb4df6b}{u8BlockSize} - u32Offset;
+204             \hyperlink{third__party_2atmel_2devices_2wilc1000_2drv__hash_2crypto_8h_acae58fe65cb0bc50c7a30357e474e6dd}{M2M\_MEMSET}(&pstrHashCxt->\hyperlink{structtstrHashContext_ad800fad9e6b7da0be3599969634ae4dd}{au8CurrentBlock}[u32Offset],0,u32PaddingLength
+      );
+205 
+206             \textcolor{comment}{/* If the padding count is not enough to hold 64-bit representation of */}
+207             \textcolor{comment}{/* the total input message length, one padding block is required. */}
+208             \textcolor{keywordflow}{if}(u32PaddingLength < 8)
+209             \{
+210                 pstrHashCxt->\hyperlink{structtstrHashContext_a85933854439e5041779b7c36d03f2ed1}{fpHash}(pstrHashCxt->\hyperlink{structtstrHashContext_a98c3033fa6c3fcfb2fde0f8d9e4b77cd}{au32HashState},pstrHashCxt->
+      \hyperlink{structtstrHashContext_ad800fad9e6b7da0be3599969634ae4dd}{au8CurrentBlock});
+211                 \hyperlink{third__party_2atmel_2devices_2wilc1000_2drv__hash_2crypto_8h_acae58fe65cb0bc50c7a30357e474e6dd}{M2M\_MEMSET}(pstrHashCxt->\hyperlink{structtstrHashContext_ad800fad9e6b7da0be3599969634ae4dd}{au8CurrentBlock},0,pstrHashCxt->
+      \hyperlink{structtstrHashContext_a98d5af4e1c764a7b1571aa0ebdb4df6b}{u8BlockSize});
+212             \}
+213             \hyperlink{third__party_2atmel_2devices_2wilc1000_2drv__hash_2crypto_8h_aca4ab40cd974c1e0dd4a4e995f86cded}{M2M\_MEMCPY}(&pstrHashCxt->\hyperlink{structtstrHashContext_ad800fad9e6b7da0be3599969634ae4dd}{au8CurrentBlock}[pstrHashCxt->
+      \hyperlink{structtstrHashContext_a98d5af4e1c764a7b1571aa0ebdb4df6b}{u8BlockSize} - 8],pu8LengthPadding,8);
+214             pstrHashCxt->\hyperlink{structtstrHashContext_a85933854439e5041779b7c36d03f2ed1}{fpHash}(pstrHashCxt->\hyperlink{structtstrHashContext_a98c3033fa6c3fcfb2fde0f8d9e4b77cd}{au32HashState},pstrHashCxt->
+      \hyperlink{structtstrHashContext_ad800fad9e6b7da0be3599969634ae4dd}{au8CurrentBlock});
+215         \}
+216     \}
+217 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{PMK_8c_ab04d0ef6515528fcafebaa206a389d31}\label{PMK_8c_ab04d0ef6515528fcafebaa206a389d31}} 
+\index{P\+M\+K.\+c@{P\+M\+K.\+c}!Sha\+\_\+\+Hash\+Update@{Sha\+\_\+\+Hash\+Update}}
+\index{Sha\+\_\+\+Hash\+Update@{Sha\+\_\+\+Hash\+Update}!P\+M\+K.\+c@{P\+M\+K.\+c}}
+\subsubsection{\texorpdfstring{Sha\+\_\+\+Hash\+Update()}{Sha\_HashUpdate()}}
+{\footnotesize\ttfamily void Sha\+\_\+\+Hash\+Update (\begin{DoxyParamCaption}\item[{\hyperlink{structtstrHashContext}{tstr\+Hash\+Context} $\ast$}]{pstr\+Hash\+Cxt,  }\item[{\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} $\ast$}]{pu8\+Data,  }\item[{\hyperlink{group__DataT_ga100e7c691a47d6978527c479a0158245}{uint32}}]{u32\+Data\+Length }\end{DoxyParamCaption})}
+
+
+
+Definition at line 136 of file P\+M\+K.\+c.
+
+
+\begin{DoxyCode}
+137 \{
+138     \textcolor{keywordflow}{if}((pstrHashCxt != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}) && (pu8Data != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}) && (u32DataLength != 0))
+139     \{
+140         \textcolor{keywordflow}{if}(pstrHashCxt->\hyperlink{structtstrHashContext_a85933854439e5041779b7c36d03f2ed1}{fpHash} != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+141         \{
+142             \hyperlink{group__DataT_ga100e7c691a47d6978527c479a0158245}{uint32}    u32ResidualBytes;
+143             \hyperlink{group__DataT_ga100e7c691a47d6978527c479a0158245}{uint32}    u32NBlocks;
+144             \hyperlink{group__DataT_ga100e7c691a47d6978527c479a0158245}{uint32}    u32Offset;
+145             \hyperlink{group__DataT_ga100e7c691a47d6978527c479a0158245}{uint32}    u32BlockCount;
+146 
+147             \textcolor{comment}{/* Get the remaining bytes from the previous update (if the length is not block alligned). */}
+148             u32ResidualBytes = pstrHashCxt->\hyperlink{structtstrHashContext_a1f34ee5e16cfba096d97cda5afcdf0d0}{u32TotalLength} % pstrHashCxt->
+      \hyperlink{structtstrHashContext_a98d5af4e1c764a7b1571aa0ebdb4df6b}{u8BlockSize};
+149 
+150             \textcolor{comment}{/* Update the total data length. */}
+151             pstrHashCxt->\hyperlink{structtstrHashContext_a1f34ee5e16cfba096d97cda5afcdf0d0}{u32TotalLength} += u32DataLength;
+152 
+153             \textcolor{keywordflow}{if}(u32ResidualBytes != 0)
+154             \{
+155                 \textcolor{keywordflow}{if}((u32ResidualBytes + u32DataLength) >= pstrHashCxt->
+      \hyperlink{structtstrHashContext_a98d5af4e1c764a7b1571aa0ebdb4df6b}{u8BlockSize})
+156                 \{
+157                     u32Offset = pstrHashCxt->\hyperlink{structtstrHashContext_a98d5af4e1c764a7b1571aa0ebdb4df6b}{u8BlockSize} - u32ResidualBytes;
+158                     \hyperlink{third__party_2atmel_2devices_2wilc1000_2drv__hash_2crypto_8h_aca4ab40cd974c1e0dd4a4e995f86cded}{M2M\_MEMCPY}(&pstrHashCxt->\hyperlink{structtstrHashContext_ad800fad9e6b7da0be3599969634ae4dd}{au8CurrentBlock}[u32ResidualBytes],
+      pu8Data,u32Offset);
+159                     pu8Data += u32Offset;
+160                     u32DataLength -= u32Offset;
+161                     pstrHashCxt->\hyperlink{structtstrHashContext_a85933854439e5041779b7c36d03f2ed1}{fpHash}(pstrHashCxt->\hyperlink{structtstrHashContext_a98c3033fa6c3fcfb2fde0f8d9e4b77cd}{au32HashState}, pstrHashCxt->
+      \hyperlink{structtstrHashContext_ad800fad9e6b7da0be3599969634ae4dd}{au8CurrentBlock});
+162                 \}
+163                 \textcolor{keywordflow}{else}
+164                 \{
+165                     \hyperlink{third__party_2atmel_2devices_2wilc1000_2drv__hash_2crypto_8h_aca4ab40cd974c1e0dd4a4e995f86cded}{M2M\_MEMCPY}(&pstrHashCxt->\hyperlink{structtstrHashContext_ad800fad9e6b7da0be3599969634ae4dd}{au8CurrentBlock}[u32ResidualBytes],
+      pu8Data,u32DataLength);
+166                     u32DataLength = 0;
+167                 \}
+168             \}
+169 
+170             \textcolor{comment}{/* Get the number of HASH BLOCKs and the residual bytes. */}
+171             u32NBlocks = u32DataLength / pstrHashCxt->\hyperlink{structtstrHashContext_a98d5af4e1c764a7b1571aa0ebdb4df6b}{u8BlockSize};
+172             u32ResidualBytes = u32DataLength % pstrHashCxt->\hyperlink{structtstrHashContext_a98d5af4e1c764a7b1571aa0ebdb4df6b}{u8BlockSize};
+173             \textcolor{keywordflow}{for}(u32BlockCount = 0 ; u32BlockCount < u32NBlocks ; u32BlockCount ++)
+174             \{
+175                 pstrHashCxt->\hyperlink{structtstrHashContext_a85933854439e5041779b7c36d03f2ed1}{fpHash}(pstrHashCxt->\hyperlink{structtstrHashContext_a98c3033fa6c3fcfb2fde0f8d9e4b77cd}{au32HashState}, pu8Data);
+176                 pu8Data += pstrHashCxt->\hyperlink{structtstrHashContext_a98d5af4e1c764a7b1571aa0ebdb4df6b}{u8BlockSize};
+177             \}
+178             
+179             \textcolor{keywordflow}{if}(u32ResidualBytes != 0)
+180             \{
+181                 \hyperlink{third__party_2atmel_2devices_2wilc1000_2drv__hash_2crypto_8h_aca4ab40cd974c1e0dd4a4e995f86cded}{M2M\_MEMCPY}(pstrHashCxt->\hyperlink{structtstrHashContext_ad800fad9e6b7da0be3599969634ae4dd}{au8CurrentBlock}, pu8Data, u32ResidualBytes
+      );
+182             \}   
+183         \}
+184     \}
+185 \}
+\end{DoxyCode}

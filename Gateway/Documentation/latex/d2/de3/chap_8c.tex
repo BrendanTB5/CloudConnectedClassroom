@@ -1,0 +1,1002 @@
+\hypertarget{chap_8c}{}\section{cyclone\+\_\+tcp/ppp/chap.c File Reference}
+\label{chap_8c}\index{cyclone\+\_\+tcp/ppp/chap.\+c@{cyclone\+\_\+tcp/ppp/chap.\+c}}
+
+
+C\+H\+AP (Challenge Handshake Authentication Protocol)  
+
+
+{\ttfamily \#include \char`\"{}core/net.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ppp/ppp\+\_\+debug.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ppp/lcp.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ppp/ipcp.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ppp/ipv6cp.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ppp/chap.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}debug.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}core/crypto.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}hash/md5.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{chap_8c_afcdf5e66fd927a7f4cc64295acd20407}{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}~P\+P\+P\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{chap_8c_ae9797d6803ada8fa458a2b8e74bb9e00}{chap\+Start\+Auth} (\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Start C\+H\+AP authentication. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{chap_8c_a26c789cfd1cc7009e7bedcaa884dd551}{chap\+Abort\+Auth} (\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Abort C\+H\+AP authentication. \end{DoxyCompactList}\item 
+void \hyperlink{chap_8c_ade54e106e42ba888d9e125cf1fc919b4}{chap\+Tick} (\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em C\+H\+AP timer handler. \end{DoxyCompactList}\item 
+void \hyperlink{chap_8c_a45e64d4338d5a8673235e4136db7acec}{chap\+Process\+Packet} (\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$context, const \hyperlink{ppp_8h_aa975a68f06316e1db0de962a31e30c2e}{Ppp\+Packet} $\ast$packet, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length})
+\begin{DoxyCompactList}\small\item\em Process an incoming C\+H\+AP packet. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{chap_8c_a5293777854f5eb184e57edb25defdac4}{chap\+Process\+Challenge} (\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$context, const \hyperlink{chap_8h_ab683cbc9f8f1c8ac9727d16ae39db9e3}{Chap\+Challenge\+Packet} $\ast$challenge\+Packet, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length})
+\begin{DoxyCompactList}\small\item\em Process Challenge packet. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{chap_8c_aa6bb43f2de32fbb08eec4235a95d2594}{chap\+Process\+Response} (\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$context, const \hyperlink{chap_8h_ab63543381c7c79cfbb9f3f225450074e}{Chap\+Response\+Packet} $\ast$response\+Packet, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length})
+\begin{DoxyCompactList}\small\item\em Process Response packet. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{chap_8c_a0872c316b7b4cbfe80d619193602e033}{chap\+Process\+Success} (\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$context, const \hyperlink{chap_8h_aa1e3b3e258753a4cd9bc27814db133fe}{Chap\+Success\+Packet} $\ast$success\+Packet, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length})
+\begin{DoxyCompactList}\small\item\em Process Success packet. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{chap_8c_a975442eeed06e61e7a45471e06650ab3}{chap\+Process\+Failure} (\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$context, const \hyperlink{chap_8h_aafa4c83f6e1949e7b1a15ab2d2977d5a}{Chap\+Failure\+Packet} $\ast$failure\+Packet, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length})
+\begin{DoxyCompactList}\small\item\em Process Failure packet. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{chap_8c_ab915f81331768b23d1035a19e6d8d936}{chap\+Send\+Challenge} (\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Send Challenge packet. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{chap_8c_a9d72f48b09dd46c5c5eda6ea09cf5b2f}{chap\+Send\+Response} (\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$context, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{chap_8h_adfa040d04d16520129a735fff8fb1628}{value})
+\begin{DoxyCompactList}\small\item\em Send Response packet. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{chap_8c_a907171dd3bb320e1c5059fd2564ec723}{chap\+Send\+Success} (\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Send Success packet. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{chap_8c_a4093cae9ce9eb775b6f5b27fe3bddf3c}{chap\+Send\+Failure} (\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Send Failure packet. \end{DoxyCompactList}\item 
+\hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} \hyperlink{chap_8c_a788ef009a57f3ca195ff29d5bbbe85b9}{chap\+Check\+Password} (\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$context, const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$password)
+\begin{DoxyCompactList}\small\item\em Password verification. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+C\+H\+AP (Challenge Handshake Authentication Protocol) 
+
+\hypertarget{pic32mz__ef__curiosity_8h_License}{}\subsection{License}\label{pic32mz__ef__curiosity_8h_License}
+S\+P\+D\+X-\/\+License-\/\+Identifier\+: G\+P\+L-\/2.\+0-\/or-\/later
+
+Copyright (C) 2010-\/2019 Oryx Embedded S\+A\+RL. All rights reserved.
+
+This file is part of Cyclone\+T\+CP Open.
+
+This program is free software; you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+
+You should have received a copy of the G\+NU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-\/1301, U\+SA.
+
+\begin{DoxyAuthor}{Author}
+Oryx Embedded S\+A\+RL (www.\+oryx-\/embedded.\+com) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+9.\+6 
+\end{DoxyVersion}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{chap_8c_afcdf5e66fd927a7f4cc64295acd20407}\label{chap_8c_afcdf5e66fd927a7f4cc64295acd20407}} 
+\index{chap.\+c@{chap.\+c}!T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+\index{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}!chap.\+c@{chap.\+c}}
+\subsubsection{\texorpdfstring{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}{TRACE\_LEVEL}}
+{\footnotesize\ttfamily \#define T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL~P\+P\+P\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}
+
+
+
+Definition at line 32 of file chap.\+c.
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{chap_8c_a26c789cfd1cc7009e7bedcaa884dd551}\label{chap_8c_a26c789cfd1cc7009e7bedcaa884dd551}} 
+\index{chap.\+c@{chap.\+c}!chap\+Abort\+Auth@{chap\+Abort\+Auth}}
+\index{chap\+Abort\+Auth@{chap\+Abort\+Auth}!chap.\+c@{chap.\+c}}
+\subsubsection{\texorpdfstring{chap\+Abort\+Auth()}{chapAbortAuth()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} chap\+Abort\+Auth (\begin{DoxyParamCaption}\item[{\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Abort C\+H\+AP authentication. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & P\+PP context \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 91 of file chap.\+c.
+
+
+\begin{DoxyCode}
+92 \{
+93    \textcolor{comment}{//Debug message}
+94    \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"\(\backslash\)r\(\backslash\)nAborting CHAP authentication...\(\backslash\)r\(\backslash\)n"});
+95 
+96    \textcolor{comment}{//Abort CHAP authentication process}
+97    context->chapFsm.localState = \hyperlink{chap_8h_a3bdf094cadf998921f2dc76942809bc8abe2c63d482b5edcbc36ded67c10953d8}{CHAP\_STATE\_0\_INITIAL};
+98    context->chapFsm.peerState = \hyperlink{chap_8h_a3bdf094cadf998921f2dc76942809bc8abe2c63d482b5edcbc36ded67c10953d8}{CHAP\_STATE\_0\_INITIAL};
+99 
+100    \textcolor{comment}{//Successful processing}
+101    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+102 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{chap_8c_a788ef009a57f3ca195ff29d5bbbe85b9}\label{chap_8c_a788ef009a57f3ca195ff29d5bbbe85b9}} 
+\index{chap.\+c@{chap.\+c}!chap\+Check\+Password@{chap\+Check\+Password}}
+\index{chap\+Check\+Password@{chap\+Check\+Password}!chap.\+c@{chap.\+c}}
+\subsubsection{\texorpdfstring{chap\+Check\+Password()}{chapCheckPassword()}}
+{\footnotesize\ttfamily \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} chap\+Check\+Password (\begin{DoxyParamCaption}\item[{\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$}]{context,  }\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{password }\end{DoxyParamCaption})}
+
+
+
+Password verification. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & P\+PP context \\
+\hline
+\mbox{\tt in}  & {\em password} & N\+U\+L\+L-\/terminated string containing the password to be checked \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+T\+R\+UE if the password is valid, else F\+A\+L\+SE 
+\end{DoxyReturn}
+
+
+Definition at line 712 of file chap.\+c.
+
+
+\begin{DoxyCode}
+713 \{
+714    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+715    \hyperlink{structMd5Context}{Md5Context} md5Context;
+716 
+717    \textcolor{comment}{//Retrieve the length of the password}
+718    n = strlen(password);
+719 
+720    \textcolor{comment}{//The response value is the one-way hash calculated over a stream}
+721    \textcolor{comment}{//of octets consisting of the identifier, followed by the secret,}
+722    \textcolor{comment}{//followed by the challenge value}
+723    \hyperlink{md5_8c_acc37d4333236797f144067f5c39f345e}{md5Init}(&md5Context);
+724    \hyperlink{md5_8c_aa396f66cc4a5275f4b610551602df8ff}{md5Update}(&md5Context, &context->chapFsm.localIdentifier, \textcolor{keyword}{sizeof}(
+      \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t}));
+725    \hyperlink{md5_8c_aa396f66cc4a5275f4b610551602df8ff}{md5Update}(&md5Context, password, n);
+726    \hyperlink{md5_8c_aa396f66cc4a5275f4b610551602df8ff}{md5Update}(&md5Context, context->chapFsm.challenge, \hyperlink{md5_8h_ad86b38d6ab14e243543904e30f26bed2}{MD5\_DIGEST\_SIZE});
+727    \hyperlink{md5_8c_add832f9f73d9df95f48bed551122df55}{md5Final}(&md5Context, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+728 
+729    \textcolor{comment}{//Check the resulting digest value}
+730    \textcolor{keywordflow}{if}(!memcmp(md5Context.\hyperlink{structMd5Context_a2f29146370d91b5b9b9a6bd6f9b8f79b}{digest}, context->chapFsm.response, 
+      \hyperlink{md5_8h_ad86b38d6ab14e243543904e30f26bed2}{MD5\_DIGEST\_SIZE}))
+731       \textcolor{keywordflow}{return} \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+732    \textcolor{keywordflow}{else}
+733       \textcolor{keywordflow}{return} \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+734 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{chap_8c_a5293777854f5eb184e57edb25defdac4}\label{chap_8c_a5293777854f5eb184e57edb25defdac4}} 
+\index{chap.\+c@{chap.\+c}!chap\+Process\+Challenge@{chap\+Process\+Challenge}}
+\index{chap\+Process\+Challenge@{chap\+Process\+Challenge}!chap.\+c@{chap.\+c}}
+\subsubsection{\texorpdfstring{chap\+Process\+Challenge()}{chapProcessChallenge()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} chap\+Process\+Challenge (\begin{DoxyParamCaption}\item[{\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$}]{context,  }\item[{const \hyperlink{chap_8h_ab683cbc9f8f1c8ac9727d16ae39db9e3}{Chap\+Challenge\+Packet} $\ast$}]{challenge\+Packet,  }\item[{size\+\_\+t}]{length }\end{DoxyParamCaption})}
+
+
+
+Process Challenge packet. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & P\+PP context \\
+\hline
+\mbox{\tt in}  & {\em challenge\+Packet} & Packet received from the peer \\
+\hline
+\mbox{\tt in}  & {\em length} & Length of the packet, in bytes \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 218 of file chap.\+c.
+
+
+\begin{DoxyCode}
+220 \{
+221    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+222    \hyperlink{structMd5Context}{Md5Context} md5Context;
+223 
+224    \textcolor{comment}{//Debug message}
+225    \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"\(\backslash\)r\(\backslash\)nCHAP Challenge packet received\(\backslash\)r\(\backslash\)n"});
+226 
+227    \textcolor{comment}{//Make sure the Challenge packet is acceptable}
+228    \textcolor{keywordflow}{if}(context->peerConfig.authProtocol != \hyperlink{ppp_8h_a5d2e3565b503cd5cb131aaff4e0ba9c2ac0897e91a9ab8cedc751087ef1b65a1d}{PPP\_PROTOCOL\_CHAP})
+229       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cae9be6449970fca5714ab9957b16562a5}{ERROR\_FAILURE};
+230 
+231    \textcolor{comment}{//Check the length of the packet}
+232    \textcolor{keywordflow}{if}(\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} < \textcolor{keyword}{sizeof}(\hyperlink{chap_8h_ab683cbc9f8f1c8ac9727d16ae39db9e3}{ChapChallengePacket}))
+233       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cae5c014519c3ac2540447887ddca1bd28}{ERROR\_INVALID\_LENGTH};
+234 
+235    \textcolor{comment}{//Malformed Challenge packet?}
+236    \textcolor{keywordflow}{if}(\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} < (\textcolor{keyword}{sizeof}(\hyperlink{chap_8h_ab683cbc9f8f1c8ac9727d16ae39db9e3}{ChapChallengePacket}) + challengePacket->valueSize))
+237       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cae5c014519c3ac2540447887ddca1bd28}{ERROR\_INVALID\_LENGTH};
+238 
+239    \textcolor{comment}{//Save the Identifier field}
+240    context->chapFsm.peerIdentifier = challengePacket->identifier;
+241 
+242    \textcolor{comment}{//Retrieve the length of the password}
+243    n = strlen(context->password);
+244 
+245    \textcolor{comment}{//The response value is the one-way hash calculated over a stream}
+246    \textcolor{comment}{//of octets consisting of the identifier, followed by the secret,}
+247    \textcolor{comment}{//followed by the challenge value}
+248    \hyperlink{md5_8c_acc37d4333236797f144067f5c39f345e}{md5Init}(&md5Context);
+249    \hyperlink{md5_8c_aa396f66cc4a5275f4b610551602df8ff}{md5Update}(&md5Context, &challengePacket->identifier, \textcolor{keyword}{sizeof}(\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t}));
+250    \hyperlink{md5_8c_aa396f66cc4a5275f4b610551602df8ff}{md5Update}(&md5Context, context->password, n);
+251    \hyperlink{md5_8c_aa396f66cc4a5275f4b610551602df8ff}{md5Update}(&md5Context, challengePacket->value, challengePacket->valueSize);
+252    \hyperlink{md5_8c_add832f9f73d9df95f48bed551122df55}{md5Final}(&md5Context, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+253 
+254    \textcolor{comment}{//Whenever a Challenge packet is received, the peer must send a Response packet}
+255    \hyperlink{chap_8c_a9d72f48b09dd46c5c5eda6ea09cf5b2f}{chapSendResponse}(context, md5Context.\hyperlink{structMd5Context_a2f29146370d91b5b9b9a6bd6f9b8f79b}{digest});
+256 
+257    \textcolor{comment}{//Switch to the Response-Sent state}
+258    context->chapFsm.peerState = \hyperlink{chap_8h_a3bdf094cadf998921f2dc76942809bc8a96835255fb116f166df4a85490320507}{CHAP\_STATE\_4\_RESPONSE\_SENT};
+259 
+260    \textcolor{comment}{//Successful processing}
+261    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+262 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{chap_8c_a975442eeed06e61e7a45471e06650ab3}\label{chap_8c_a975442eeed06e61e7a45471e06650ab3}} 
+\index{chap.\+c@{chap.\+c}!chap\+Process\+Failure@{chap\+Process\+Failure}}
+\index{chap\+Process\+Failure@{chap\+Process\+Failure}!chap.\+c@{chap.\+c}}
+\subsubsection{\texorpdfstring{chap\+Process\+Failure()}{chapProcessFailure()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} chap\+Process\+Failure (\begin{DoxyParamCaption}\item[{\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$}]{context,  }\item[{const \hyperlink{chap_8h_aafa4c83f6e1949e7b1a15ab2d2977d5a}{Chap\+Failure\+Packet} $\ast$}]{failure\+Packet,  }\item[{size\+\_\+t}]{length }\end{DoxyParamCaption})}
+
+
+
+Process Failure packet. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & P\+PP context \\
+\hline
+\mbox{\tt in}  & {\em failure\+Packet} & Packet received from the peer \\
+\hline
+\mbox{\tt in}  & {\em length} & Length of the packet, in bytes \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 445 of file chap.\+c.
+
+
+\begin{DoxyCode}
+447 \{
+448    \textcolor{comment}{//Debug message}
+449    \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"\(\backslash\)r\(\backslash\)nCHAP Failure packet received\(\backslash\)r\(\backslash\)n"});
+450 
+451    \textcolor{comment}{//Make sure the Failure packet is acceptable}
+452    \textcolor{keywordflow}{if}(context->peerConfig.authProtocol != \hyperlink{ppp_8h_a5d2e3565b503cd5cb131aaff4e0ba9c2ac0897e91a9ab8cedc751087ef1b65a1d}{PPP\_PROTOCOL\_CHAP})
+453       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cae9be6449970fca5714ab9957b16562a5}{ERROR\_FAILURE};
+454 
+455    \textcolor{comment}{//Check the length of the packet}
+456    \textcolor{keywordflow}{if}(\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} < \textcolor{keyword}{sizeof}(\hyperlink{chap_8h_aafa4c83f6e1949e7b1a15ab2d2977d5a}{ChapFailurePacket}))
+457       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cae5c014519c3ac2540447887ddca1bd28}{ERROR\_INVALID\_LENGTH};
+458 
+459    \textcolor{comment}{//When a packet is received with an invalid Identifier field, the}
+460    \textcolor{comment}{//packet is silently discarded without affecting the automaton}
+461    \textcolor{keywordflow}{if}(failurePacket->identifier != context->chapFsm.peerIdentifier)
+462       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca2bc2298123e24e3d82592b5c68c20612}{ERROR\_WRONG\_IDENTIFIER};
+463 
+464    \textcolor{comment}{//Switch to the Failure-Rcvd state}
+465    context->chapFsm.peerState = \hyperlink{chap_8h_a3bdf094cadf998921f2dc76942809bc8a8b5c5b6d5e79d5f62a83561eb278b116}{CHAP\_STATE\_9\_FAILURE\_RCVD};
+466    \textcolor{comment}{//Authentication failed}
+467    \hyperlink{lcp_8c_a588713b9f40b510b652a2ef5fe564161}{lcpClose}(context);
+468 
+469    \textcolor{comment}{//Successful processing}
+470    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+471 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{chap_8c_a45e64d4338d5a8673235e4136db7acec}\label{chap_8c_a45e64d4338d5a8673235e4136db7acec}} 
+\index{chap.\+c@{chap.\+c}!chap\+Process\+Packet@{chap\+Process\+Packet}}
+\index{chap\+Process\+Packet@{chap\+Process\+Packet}!chap.\+c@{chap.\+c}}
+\subsubsection{\texorpdfstring{chap\+Process\+Packet()}{chapProcessPacket()}}
+{\footnotesize\ttfamily void chap\+Process\+Packet (\begin{DoxyParamCaption}\item[{\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$}]{context,  }\item[{const \hyperlink{ppp_8h_aa975a68f06316e1db0de962a31e30c2e}{Ppp\+Packet} $\ast$}]{packet,  }\item[{size\+\_\+t}]{length }\end{DoxyParamCaption})}
+
+
+
+Process an incoming C\+H\+AP packet. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & P\+PP context \\
+\hline
+\mbox{\tt in}  & {\em packet} & C\+H\+AP packet received from the peer \\
+\hline
+\mbox{\tt in}  & {\em length} & Length of the packet, in bytes \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 149 of file chap.\+c.
+
+
+\begin{DoxyCode}
+151 \{
+152    \textcolor{comment}{//Ensure the length of the incoming CHAP packet is valid}
+153    \textcolor{keywordflow}{if}(\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} < \textcolor{keyword}{sizeof}(\hyperlink{ppp_8h_aa975a68f06316e1db0de962a31e30c2e}{PppPacket}))
+154       \textcolor{keywordflow}{return};
+155 
+156    \textcolor{comment}{//Check the length field}
+157    \textcolor{keywordflow}{if}(\hyperlink{cpu__endian_8h_a9312c6eb72e64f748ae0d0e0dc3ec9b9}{ntohs}(packet->length) > \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length})
+158       \textcolor{keywordflow}{return};
+159    \textcolor{keywordflow}{if}(\hyperlink{cpu__endian_8h_a9312c6eb72e64f748ae0d0e0dc3ec9b9}{ntohs}(packet->length) < \textcolor{keyword}{sizeof}(\hyperlink{ppp_8h_aa975a68f06316e1db0de962a31e30c2e}{PppPacket}))
+160       \textcolor{keywordflow}{return};
+161 
+162    \textcolor{comment}{//Save the length of the CHAP packet}
+163    \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} = \hyperlink{cpu__endian_8h_a9312c6eb72e64f748ae0d0e0dc3ec9b9}{ntohs}(packet->length);
+164 
+165    \textcolor{comment}{//Debug message}
+166    \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"CHAP packet received (%"} \hyperlink{compiler__port_8h_a2b7b0557dc6cd786df02dafbb51f5292}{PRIuSIZE} \textcolor{stringliteral}{" bytes)...\(\backslash\)r\(\backslash\)n"}, 
+      \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length});
+167    \textcolor{comment}{//Dump CHAP packet contents for debugging purpose}
+168    \hyperlink{ppp__debug_8c_aebeb2591b3799b0ede290881fdd67e78}{pppDumpPacket}(packet, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \hyperlink{ppp_8h_a5d2e3565b503cd5cb131aaff4e0ba9c2ac0897e91a9ab8cedc751087ef1b65a1d}{PPP\_PROTOCOL\_CHAP});
+169 
+170    \textcolor{comment}{//CHAP is done at initial link establishment, and could also be}
+171    \textcolor{comment}{//requested after link establishment}
+172    \textcolor{keywordflow}{if}(context->pppPhase != \hyperlink{ppp_8h_aa187b5eb62890e0b7bac9a94259c1d29aab4c795f3f8509655c0e1eb0c3991104}{PPP\_PHASE\_AUTHENTICATE} &&
+173       context->pppPhase != \hyperlink{ppp_8h_aa187b5eb62890e0b7bac9a94259c1d29ab0d3380ae163bae2a13438207f8f6adf}{PPP\_PHASE\_NETWORK})
+174    \{
+175       \textcolor{comment}{//Any packets received during any other phase must be silently discarded}
+176       \textcolor{keywordflow}{return};
+177    \}
+178 
+179    \textcolor{comment}{//Check CHAP code field}
+180    \textcolor{keywordflow}{switch}(packet->code)
+181    \{
+182    \textcolor{comment}{//Challenge packet?}
+183    \textcolor{keywordflow}{case} \hyperlink{chap_8h_a51665c1b5c9136f608c8f923c1873107a8b903cb9c2e5aae66498864fd1326510}{CHAP\_CODE\_CHALLENGE}:
+184       \textcolor{comment}{//Process Challenge packet}
+185       \hyperlink{chap_8c_a5293777854f5eb184e57edb25defdac4}{chapProcessChallenge}(context, (\hyperlink{chap_8h_ab683cbc9f8f1c8ac9727d16ae39db9e3}{ChapChallengePacket} *) packet, 
+      \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length});
+186       \textcolor{keywordflow}{break};
+187    \textcolor{comment}{//Response packet?}
+188    \textcolor{keywordflow}{case} \hyperlink{chap_8h_a51665c1b5c9136f608c8f923c1873107a102ce6c3681b89662a252610b26572f9}{CHAP\_CODE\_RESPONSE}:
+189       \textcolor{comment}{//Process Response packet}
+190       \hyperlink{chap_8c_aa6bb43f2de32fbb08eec4235a95d2594}{chapProcessResponse}(context, (\hyperlink{chap_8h_ab63543381c7c79cfbb9f3f225450074e}{ChapResponsePacket} *) packet, 
+      \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length});
+191       \textcolor{keywordflow}{break};
+192    \textcolor{comment}{//Success packet?}
+193    \textcolor{keywordflow}{case} \hyperlink{chap_8h_a51665c1b5c9136f608c8f923c1873107a7ba149c3d7d9f5a7fb6218e901d7715f}{CHAP\_CODE\_SUCCESS}:
+194       \textcolor{comment}{//Process Success packet}
+195       \hyperlink{chap_8c_a0872c316b7b4cbfe80d619193602e033}{chapProcessSuccess}(context, (\hyperlink{chap_8h_aa1e3b3e258753a4cd9bc27814db133fe}{ChapSuccessPacket} *) packet, 
+      \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length});
+196       \textcolor{keywordflow}{break};
+197    \textcolor{comment}{//Failure packet?}
+198    \textcolor{keywordflow}{case} \hyperlink{chap_8h_a51665c1b5c9136f608c8f923c1873107ae578898fce8e45cc89ef365aa7688ada}{CHAP\_CODE\_FAILURE}:
+199       \textcolor{comment}{//Process Failure packet}
+200       \hyperlink{chap_8c_a975442eeed06e61e7a45471e06650ab3}{chapProcessFailure}(context, (\hyperlink{chap_8h_aafa4c83f6e1949e7b1a15ab2d2977d5a}{ChapFailurePacket} *) packet, 
+      \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length});
+201       \textcolor{keywordflow}{break};
+202    \textcolor{comment}{//Unknown code field}
+203    \textcolor{keywordflow}{default}:
+204       \textcolor{comment}{//Silently drop the incoming packet}
+205       \textcolor{keywordflow}{break};
+206    \}
+207 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{chap_8c_aa6bb43f2de32fbb08eec4235a95d2594}\label{chap_8c_aa6bb43f2de32fbb08eec4235a95d2594}} 
+\index{chap.\+c@{chap.\+c}!chap\+Process\+Response@{chap\+Process\+Response}}
+\index{chap\+Process\+Response@{chap\+Process\+Response}!chap.\+c@{chap.\+c}}
+\subsubsection{\texorpdfstring{chap\+Process\+Response()}{chapProcessResponse()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} chap\+Process\+Response (\begin{DoxyParamCaption}\item[{\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$}]{context,  }\item[{const \hyperlink{chap_8h_ab63543381c7c79cfbb9f3f225450074e}{Chap\+Response\+Packet} $\ast$}]{response\+Packet,  }\item[{size\+\_\+t}]{length }\end{DoxyParamCaption})}
+
+
+
+Process Response packet. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & P\+PP context \\
+\hline
+\mbox{\tt in}  & {\em response\+Packet} & Packet received from the peer \\
+\hline
+\mbox{\tt in}  & {\em length} & Length of the packet, in bytes \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 273 of file chap.\+c.
+
+
+\begin{DoxyCode}
+275 \{
+276    \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\_t} status;
+277    \textcolor{keyword}{const} \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *\hyperlink{ndp_8h_a6519522ad9a6f45e7a8d25d31392a977}{p};
+278 
+279    \textcolor{comment}{//Debug message}
+280    \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"\(\backslash\)r\(\backslash\)nCHAP Response packet received\(\backslash\)r\(\backslash\)n"});
+281 
+282    \textcolor{comment}{//Make sure the Response packet is acceptable}
+283    \textcolor{keywordflow}{if}(context->localConfig.authProtocol != \hyperlink{ppp_8h_a5d2e3565b503cd5cb131aaff4e0ba9c2ac0897e91a9ab8cedc751087ef1b65a1d}{PPP\_PROTOCOL\_CHAP})
+284       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cae9be6449970fca5714ab9957b16562a5}{ERROR\_FAILURE};
+285 
+286    \textcolor{comment}{//Check the length of the packet}
+287    \textcolor{keywordflow}{if}(\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} < \textcolor{keyword}{sizeof}(\hyperlink{chap_8h_ab63543381c7c79cfbb9f3f225450074e}{ChapResponsePacket}))
+288       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cae5c014519c3ac2540447887ddca1bd28}{ERROR\_INVALID\_LENGTH};
+289 
+290    \textcolor{comment}{//When a packet is received with an invalid Identifier field, the}
+291    \textcolor{comment}{//packet is silently discarded without affecting the automaton}
+292    \textcolor{keywordflow}{if}(responsePacket->identifier != context->chapFsm.localIdentifier)
+293       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca2bc2298123e24e3d82592b5c68c20612}{ERROR\_WRONG\_IDENTIFIER};
+294 
+295    \textcolor{comment}{//Malformed Response packet?}
+296    \textcolor{keywordflow}{if}(\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} < (\textcolor{keyword}{sizeof}(\hyperlink{chap_8h_ab63543381c7c79cfbb9f3f225450074e}{ChapResponsePacket}) + responsePacket->valueSize))
+297       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cae5c014519c3ac2540447887ddca1bd28}{ERROR\_INVALID\_LENGTH};
+298 
+299    \textcolor{comment}{//The length of the response value depends upon the hash algorithm used}
+300    \textcolor{keywordflow}{if}(responsePacket->valueSize != \hyperlink{md5_8h_ad86b38d6ab14e243543904e30f26bed2}{MD5\_DIGEST\_SIZE})
+301       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cae5c014519c3ac2540447887ddca1bd28}{ERROR\_INVALID\_LENGTH};
+302 
+303    \textcolor{comment}{//Retrieve the response value}
+304    context->chapFsm.response = responsePacket->value;
+305 
+306    \textcolor{comment}{//Point to the Name field}
+307    p = responsePacket->value + responsePacket->valueSize;
+308    \textcolor{comment}{//Retrieve the length of the Name field}
+309    \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} -= \textcolor{keyword}{sizeof}(\hyperlink{chap_8h_ab63543381c7c79cfbb9f3f225450074e}{ChapResponsePacket}) + responsePacket->valueSize;
+310 
+311    \textcolor{comment}{//Limit the length of the string}
+312    \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} = \hyperlink{os__port_8h_a3acffbd305ee72dcd4593c0d8af64a4f}{MIN}(\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \hyperlink{ppp_8h_acafaf0139acdee8a293aa63cd32666b6}{PPP\_MAX\_USERNAME\_LEN});
+313    \textcolor{comment}{//Copy the name of the peer to be identified}
+314    memcpy(context->peerName, p, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length});
+315    \textcolor{comment}{//Properly terminate the string with a NULL character}
+316    context->peerName[\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}] = \textcolor{charliteral}{'\(\backslash\)0'};
+317 
+318    \textcolor{comment}{//Invoke user-defined callback, if any}
+319    \textcolor{keywordflow}{if}(context->settings.authCallback != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+320    \{
+321       \textcolor{comment}{//Perfom username and password verification}
+322       status = context->settings.authCallback(context->interface,
+323          context->peerName);
+324    \}
+325    \textcolor{keywordflow}{else}
+326    \{
+327       \textcolor{comment}{//Unable to perform authentication...}
+328       status = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+329    \}
+330 
+331    \textcolor{comment}{//Whenever a Response packet is received, the authenticator compares the}
+332    \textcolor{comment}{//Response Value with its own calculation of the expected value. Based on}
+333    \textcolor{comment}{//this comparison, the authenticator must send a Success or Failure packet}
+334    \textcolor{keywordflow}{if}(status)
+335    \{
+336       \textcolor{comment}{//Send a Success packet}
+337       \hyperlink{chap_8c_a907171dd3bb320e1c5059fd2564ec723}{chapSendSuccess}(context);
+338 
+339       \textcolor{comment}{//Switch to the Success-Sent state}
+340       context->chapFsm.localState = \hyperlink{chap_8h_a3bdf094cadf998921f2dc76942809bc8a4a10a3062b1698cccfd4fc528afb1918}{CHAP\_STATE\_6\_SUCCESS\_SENT};
+341       \textcolor{comment}{//The user has been successfully authenticated}
+342       context->localAuthDone = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+343 
+344       \textcolor{comment}{//Check whether PPP authentication is complete}
+345       \textcolor{keywordflow}{if}(context->localAuthDone && context->peerAuthDone)
+346       \{
+347          \textcolor{comment}{//Check current PPP phase}
+348          \textcolor{keywordflow}{if}(context->pppPhase == \hyperlink{ppp_8h_aa187b5eb62890e0b7bac9a94259c1d29aab4c795f3f8509655c0e1eb0c3991104}{PPP\_PHASE\_AUTHENTICATE})
+349          \{
+350             \textcolor{comment}{//Advance to the Network phase}
+351             context->pppPhase = \hyperlink{ppp_8h_aa187b5eb62890e0b7bac9a94259c1d29ab0d3380ae163bae2a13438207f8f6adf}{PPP\_PHASE\_NETWORK};
+352 
+353 \textcolor{preprocessor}{#if (IPV4\_SUPPORT == ENABLED)}
+354             \textcolor{comment}{//IPCP Open event}
+355             \hyperlink{ipcp_8c_a964305681ae4db8b15a060834fc95967}{ipcpOpen}(context);
+356 \textcolor{preprocessor}{#endif}
+357 \textcolor{preprocessor}{#if (IPV6\_SUPPORT == ENABLED)}
+358             \textcolor{comment}{//IPV6CP Open event}
+359             \hyperlink{ipv6cp_8c_a0bef2c07fcc5f6302075dde648aec215}{ipv6cpOpen}(context);
+360 \textcolor{preprocessor}{#endif}
+361          \}
+362       \}
+363    \}
+364    \textcolor{keywordflow}{else}
+365    \{
+366       \textcolor{comment}{//Send a Failure packet}
+367       \hyperlink{chap_8c_a4093cae9ce9eb775b6f5b27fe3bddf3c}{chapSendFailure}(context);
+368 
+369       \textcolor{comment}{//Switch to the Failure-Sent state}
+370       context->chapFsm.localState = \hyperlink{chap_8h_a3bdf094cadf998921f2dc76942809bc8a1938348d11a55c9815632fe09b5f64cb}{CHAP\_STATE\_8\_FAILURE\_SENT};
+371       \textcolor{comment}{//The authenticator should take action to terminate the link}
+372       \hyperlink{lcp_8c_a588713b9f40b510b652a2ef5fe564161}{lcpClose}(context);
+373    \}
+374 
+375    \textcolor{comment}{//Successful processing}
+376    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+377 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{chap_8c_a0872c316b7b4cbfe80d619193602e033}\label{chap_8c_a0872c316b7b4cbfe80d619193602e033}} 
+\index{chap.\+c@{chap.\+c}!chap\+Process\+Success@{chap\+Process\+Success}}
+\index{chap\+Process\+Success@{chap\+Process\+Success}!chap.\+c@{chap.\+c}}
+\subsubsection{\texorpdfstring{chap\+Process\+Success()}{chapProcessSuccess()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} chap\+Process\+Success (\begin{DoxyParamCaption}\item[{\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$}]{context,  }\item[{const \hyperlink{chap_8h_aa1e3b3e258753a4cd9bc27814db133fe}{Chap\+Success\+Packet} $\ast$}]{success\+Packet,  }\item[{size\+\_\+t}]{length }\end{DoxyParamCaption})}
+
+
+
+Process Success packet. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & P\+PP context \\
+\hline
+\mbox{\tt in}  & {\em success\+Packet} & Packet received from the peer \\
+\hline
+\mbox{\tt in}  & {\em length} & Length of the packet, in bytes \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 388 of file chap.\+c.
+
+
+\begin{DoxyCode}
+390 \{
+391    \textcolor{comment}{//Debug message}
+392    \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"\(\backslash\)r\(\backslash\)nCHAP Success packet received\(\backslash\)r\(\backslash\)n"});
+393 
+394    \textcolor{comment}{//Make sure the Success packet is acceptable}
+395    \textcolor{keywordflow}{if}(context->peerConfig.authProtocol != \hyperlink{ppp_8h_a5d2e3565b503cd5cb131aaff4e0ba9c2ac0897e91a9ab8cedc751087ef1b65a1d}{PPP\_PROTOCOL\_CHAP})
+396       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cae9be6449970fca5714ab9957b16562a5}{ERROR\_FAILURE};
+397 
+398    \textcolor{comment}{//Check the length of the packet}
+399    \textcolor{keywordflow}{if}(\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} < \textcolor{keyword}{sizeof}(\hyperlink{chap_8h_aa1e3b3e258753a4cd9bc27814db133fe}{ChapSuccessPacket}))
+400       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cae5c014519c3ac2540447887ddca1bd28}{ERROR\_INVALID\_LENGTH};
+401 
+402    \textcolor{comment}{//When a packet is received with an invalid Identifier field, the}
+403    \textcolor{comment}{//packet is silently discarded without affecting the automaton}
+404    \textcolor{keywordflow}{if}(successPacket->identifier != context->chapFsm.peerIdentifier)
+405       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca2bc2298123e24e3d82592b5c68c20612}{ERROR\_WRONG\_IDENTIFIER};
+406 
+407    \textcolor{comment}{//Switch to the Success-Rcvd state}
+408    context->chapFsm.peerState = \hyperlink{chap_8h_a3bdf094cadf998921f2dc76942809bc8a174150e895abd4385a3a2a9f2c9e4b02}{CHAP\_STATE\_7\_SUCCESS\_RCVD};
+409    \textcolor{comment}{//The user name has been accepted by the authenticator}
+410    context->peerAuthDone = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+411 
+412    \textcolor{comment}{//Check whether PPP authentication is complete}
+413    \textcolor{keywordflow}{if}(context->localAuthDone && context->peerAuthDone)
+414    \{
+415       \textcolor{comment}{//Check current PPP phase}
+416       \textcolor{keywordflow}{if}(context->pppPhase == \hyperlink{ppp_8h_aa187b5eb62890e0b7bac9a94259c1d29aab4c795f3f8509655c0e1eb0c3991104}{PPP\_PHASE\_AUTHENTICATE})
+417       \{
+418          \textcolor{comment}{//Advance to the Network phase}
+419          context->pppPhase = \hyperlink{ppp_8h_aa187b5eb62890e0b7bac9a94259c1d29ab0d3380ae163bae2a13438207f8f6adf}{PPP\_PHASE\_NETWORK};
+420 
+421 \textcolor{preprocessor}{#if (IPV4\_SUPPORT == ENABLED)}
+422          \textcolor{comment}{//IPCP Open event}
+423          \hyperlink{ipcp_8c_a964305681ae4db8b15a060834fc95967}{ipcpOpen}(context);
+424 \textcolor{preprocessor}{#endif}
+425 \textcolor{preprocessor}{#if (IPV6\_SUPPORT == ENABLED)}
+426          \textcolor{comment}{//IPV6CP Open event}
+427          \hyperlink{ipv6cp_8c_a0bef2c07fcc5f6302075dde648aec215}{ipv6cpOpen}(context);
+428 \textcolor{preprocessor}{#endif}
+429       \}
+430    \}
+431 
+432    \textcolor{comment}{//Successful processing}
+433    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+434 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{chap_8c_ab915f81331768b23d1035a19e6d8d936}\label{chap_8c_ab915f81331768b23d1035a19e6d8d936}} 
+\index{chap.\+c@{chap.\+c}!chap\+Send\+Challenge@{chap\+Send\+Challenge}}
+\index{chap\+Send\+Challenge@{chap\+Send\+Challenge}!chap.\+c@{chap.\+c}}
+\subsubsection{\texorpdfstring{chap\+Send\+Challenge()}{chapSendChallenge()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} chap\+Send\+Challenge (\begin{DoxyParamCaption}\item[{\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Send Challenge packet. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & P\+PP context \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 480 of file chap.\+c.
+
+
+\begin{DoxyCode}
+481 \{
+482    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+483    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+484    \textcolor{keywordtype}{size\_t} \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length};
+485    \textcolor{keywordtype}{size\_t} \hyperlink{pic32mz_2isr__support_8h_a12a5aed8a193ebbf9a641104a310610d}{offset};
+486    \hyperlink{structNetBuffer}{NetBuffer} *buffer;
+487    \hyperlink{chap_8h_ab683cbc9f8f1c8ac9727d16ae39db9e3}{ChapChallengePacket} *challengePacket;
+488 
+489    \textcolor{comment}{//Retrieve the length of the username}
+490    n = strlen(context->username);
+491    \textcolor{comment}{//Calculate the length of the Challenge packet}
+492    length = \textcolor{keyword}{sizeof}(\hyperlink{chap_8h_ab683cbc9f8f1c8ac9727d16ae39db9e3}{ChapChallengePacket}) + \hyperlink{md5_8h_ad86b38d6ab14e243543904e30f26bed2}{MD5\_DIGEST\_SIZE} + n;
+493 
+494    \textcolor{comment}{//Allocate a buffer memory to hold the Challenge packet}
+495    buffer = \hyperlink{ppp_8c_a9100186e00aec050c4952fd462b035aa}{pppAllocBuffer}(length, &offset);
+496    \textcolor{comment}{//Failed to allocate memory?}
+497    \textcolor{keywordflow}{if}(buffer == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+498       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac0a554045048d2fb61387cf735676f69}{ERROR\_OUT\_OF\_MEMORY};
+499 
+500    \textcolor{comment}{//Point to the Challenge packet}
+501    challengePacket = \hyperlink{net__mem_8c_a20d30c9db547b3b2743368b589cf482b}{netBufferAt}(buffer, offset);
+502 
+503    \textcolor{comment}{//Format packet header}
+504    challengePacket->code = \hyperlink{chap_8h_a51665c1b5c9136f608c8f923c1873107a8b903cb9c2e5aae66498864fd1326510}{CHAP\_CODE\_CHALLENGE};
+505    challengePacket->identifier = ++context->chapFsm.localIdentifier;
+506    challengePacket->length = \hyperlink{cpu__endian_8h_a800cdbf435a85a9b3ad4f0edc518472a}{htons}(length);
+507    challengePacket->valueSize = \hyperlink{md5_8h_ad86b38d6ab14e243543904e30f26bed2}{MD5\_DIGEST\_SIZE};
+508 
+509    \textcolor{comment}{//Make sure that the callback function has been registered}
+510    \textcolor{keywordflow}{if}(context->settings.randCallback != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+511    \{
+512       \textcolor{comment}{//Generate a random challenge value}
+513       error = context->settings.randCallback(
+514          context->chapFsm.challenge, \hyperlink{md5_8h_ad86b38d6ab14e243543904e30f26bed2}{MD5\_DIGEST\_SIZE});
+515    \}
+516    \textcolor{keywordflow}{else}
+517    \{
+518       \textcolor{comment}{//Report an error}
+519       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cae9be6449970fca5714ab9957b16562a5}{ERROR\_FAILURE};
+520    \}
+521 
+522    \textcolor{comment}{//Check status code}
+523    \textcolor{keywordflow}{if}(!error)
+524    \{
+525       \textcolor{comment}{//Copy the challenge value}
+526       memcpy(challengePacket->value, context->chapFsm.challenge, \hyperlink{md5_8h_ad86b38d6ab14e243543904e30f26bed2}{MD5\_DIGEST\_SIZE});
+527 
+528       \textcolor{comment}{//The Name field is one or more octets representing the}
+529       \textcolor{comment}{//identification of the system transmitting the packet}
+530       memcpy(challengePacket->value + \hyperlink{md5_8h_ad86b38d6ab14e243543904e30f26bed2}{MD5\_DIGEST\_SIZE}, context->username, n);
+531 
+532       \textcolor{comment}{//Debug message}
+533       \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"Sending CHAP Challenge packet (%"} \hyperlink{compiler__port_8h_a2b7b0557dc6cd786df02dafbb51f5292}{PRIuSIZE} \textcolor{stringliteral}{" bytes)...\(\backslash\)r\(\backslash\)n"}, length);
+534       \textcolor{comment}{//Dump packet contents for debugging purpose}
+535       \hyperlink{ppp__debug_8c_aebeb2591b3799b0ede290881fdd67e78}{pppDumpPacket}((\hyperlink{ppp_8h_aa975a68f06316e1db0de962a31e30c2e}{PppPacket} *) challengePacket, length, 
+      \hyperlink{ppp_8h_a5d2e3565b503cd5cb131aaff4e0ba9c2ac0897e91a9ab8cedc751087ef1b65a1d}{PPP\_PROTOCOL\_CHAP});
+536 
+537       \textcolor{comment}{//Send PPP frame}
+538       error = \hyperlink{ppp_8c_aaacd84d6af940a50fa94b67324b080ea}{pppSendFrame}(context->interface, buffer, offset, 
+      \hyperlink{ppp_8h_a5d2e3565b503cd5cb131aaff4e0ba9c2ac0897e91a9ab8cedc751087ef1b65a1d}{PPP\_PROTOCOL\_CHAP});
+539 
+540       \textcolor{comment}{//The restart counter is decremented each time a Challenge packet is sent}
+541       \textcolor{keywordflow}{if}(context->chapFsm.restartCounter > 0)
+542          context->chapFsm.restartCounter--;
+543 
+544       \textcolor{comment}{//Save the time at which the packet was sent}
+545       context->chapFsm.timestamp = \hyperlink{os__port__chibios_8c_ab66a11272d40a916fa69dd8e4dc443d4}{osGetSystemTime}();
+546    \}
+547 
+548    \textcolor{comment}{//Free previously allocated memory block}
+549    \hyperlink{net__mem_8c_aa33fc4dd2a71649194052f297c707d08}{netBufferFree}(buffer);
+550    \textcolor{comment}{//Return status code}
+551    \textcolor{keywordflow}{return} error;
+552 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{chap_8c_a4093cae9ce9eb775b6f5b27fe3bddf3c}\label{chap_8c_a4093cae9ce9eb775b6f5b27fe3bddf3c}} 
+\index{chap.\+c@{chap.\+c}!chap\+Send\+Failure@{chap\+Send\+Failure}}
+\index{chap\+Send\+Failure@{chap\+Send\+Failure}!chap.\+c@{chap.\+c}}
+\subsubsection{\texorpdfstring{chap\+Send\+Failure()}{chapSendFailure()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} chap\+Send\+Failure (\begin{DoxyParamCaption}\item[{\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Send Failure packet. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & P\+PP context \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 665 of file chap.\+c.
+
+
+\begin{DoxyCode}
+666 \{
+667    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+668    \textcolor{keywordtype}{size\_t} \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length};
+669    \textcolor{keywordtype}{size\_t} \hyperlink{pic32mz_2isr__support_8h_a12a5aed8a193ebbf9a641104a310610d}{offset};
+670    \hyperlink{structNetBuffer}{NetBuffer} *buffer;
+671    \hyperlink{ppp_8h_aa975a68f06316e1db0de962a31e30c2e}{PppPacket} *failurePacket;
+672 
+673    \textcolor{comment}{//Retrieve the length of the Failure packet}
+674    length = \textcolor{keyword}{sizeof}(\hyperlink{ppp_8h_aa975a68f06316e1db0de962a31e30c2e}{PppPacket});
+675 
+676    \textcolor{comment}{//Allocate a buffer memory to hold the Failure packet}
+677    buffer = \hyperlink{ppp_8c_a9100186e00aec050c4952fd462b035aa}{pppAllocBuffer}(length, &offset);
+678    \textcolor{comment}{//Failed to allocate memory?}
+679    \textcolor{keywordflow}{if}(buffer == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+680       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac0a554045048d2fb61387cf735676f69}{ERROR\_OUT\_OF\_MEMORY};
+681 
+682    \textcolor{comment}{//Point to the Failure packet}
+683    failurePacket = \hyperlink{net__mem_8c_a20d30c9db547b3b2743368b589cf482b}{netBufferAt}(buffer, offset);
+684 
+685    \textcolor{comment}{//Format packet header}
+686    failurePacket->code = \hyperlink{chap_8h_a51665c1b5c9136f608c8f923c1873107ae578898fce8e45cc89ef365aa7688ada}{CHAP\_CODE\_FAILURE};
+687    failurePacket->identifier = context->chapFsm.localIdentifier;
+688    failurePacket->length = \hyperlink{cpu__endian_8h_a800cdbf435a85a9b3ad4f0edc518472a}{htons}(length);
+689 
+690    \textcolor{comment}{//Debug message}
+691    \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"Sending CHAP Failure packet (%"} \hyperlink{compiler__port_8h_a2b7b0557dc6cd786df02dafbb51f5292}{PRIuSIZE} \textcolor{stringliteral}{" bytes)...\(\backslash\)r\(\backslash\)n"}, length);
+692    \textcolor{comment}{//Dump packet contents for debugging purpose}
+693    \hyperlink{ppp__debug_8c_aebeb2591b3799b0ede290881fdd67e78}{pppDumpPacket}((\hyperlink{ppp_8h_aa975a68f06316e1db0de962a31e30c2e}{PppPacket} *) failurePacket, length, 
+      \hyperlink{ppp_8h_a5d2e3565b503cd5cb131aaff4e0ba9c2ac0897e91a9ab8cedc751087ef1b65a1d}{PPP\_PROTOCOL\_CHAP});
+694 
+695    \textcolor{comment}{//Send PPP frame}
+696    error = \hyperlink{ppp_8c_aaacd84d6af940a50fa94b67324b080ea}{pppSendFrame}(context->interface, buffer, offset, 
+      \hyperlink{ppp_8h_a5d2e3565b503cd5cb131aaff4e0ba9c2ac0897e91a9ab8cedc751087ef1b65a1d}{PPP\_PROTOCOL\_CHAP});
+697 
+698    \textcolor{comment}{//Free previously allocated memory block}
+699    \hyperlink{net__mem_8c_aa33fc4dd2a71649194052f297c707d08}{netBufferFree}(buffer);
+700    \textcolor{comment}{//Return status code}
+701    \textcolor{keywordflow}{return} error;
+702 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{chap_8c_a9d72f48b09dd46c5c5eda6ea09cf5b2f}\label{chap_8c_a9d72f48b09dd46c5c5eda6ea09cf5b2f}} 
+\index{chap.\+c@{chap.\+c}!chap\+Send\+Response@{chap\+Send\+Response}}
+\index{chap\+Send\+Response@{chap\+Send\+Response}!chap.\+c@{chap.\+c}}
+\subsubsection{\texorpdfstring{chap\+Send\+Response()}{chapSendResponse()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} chap\+Send\+Response (\begin{DoxyParamCaption}\item[{\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$}]{context,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{value }\end{DoxyParamCaption})}
+
+
+
+Send Response packet. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & P\+PP context \\
+\hline
+\mbox{\tt in}  & {\em value} & Response value \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 562 of file chap.\+c.
+
+
+\begin{DoxyCode}
+563 \{
+564    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+565    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+566    \textcolor{keywordtype}{size\_t} \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length};
+567    \textcolor{keywordtype}{size\_t} \hyperlink{pic32mz_2isr__support_8h_a12a5aed8a193ebbf9a641104a310610d}{offset};
+568    \hyperlink{structNetBuffer}{NetBuffer} *buffer;
+569    \hyperlink{chap_8h_ab63543381c7c79cfbb9f3f225450074e}{ChapResponsePacket} *responsePacket;
+570 
+571    \textcolor{comment}{//Retrieve the length of the username}
+572    n = strlen(context->username);
+573    \textcolor{comment}{//Calculate the length of the Response packet}
+574    length = \textcolor{keyword}{sizeof}(\hyperlink{chap_8h_ab63543381c7c79cfbb9f3f225450074e}{ChapResponsePacket}) + \hyperlink{md5_8h_ad86b38d6ab14e243543904e30f26bed2}{MD5\_DIGEST\_SIZE} + n;
+575 
+576    \textcolor{comment}{//Allocate a buffer memory to hold the Response packet}
+577    buffer = \hyperlink{ppp_8c_a9100186e00aec050c4952fd462b035aa}{pppAllocBuffer}(length, &offset);
+578    \textcolor{comment}{//Failed to allocate memory?}
+579    \textcolor{keywordflow}{if}(buffer == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+580       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac0a554045048d2fb61387cf735676f69}{ERROR\_OUT\_OF\_MEMORY};
+581 
+582    \textcolor{comment}{//Point to the Response packet}
+583    responsePacket = \hyperlink{net__mem_8c_a20d30c9db547b3b2743368b589cf482b}{netBufferAt}(buffer, offset);
+584 
+585    \textcolor{comment}{//Format packet header}
+586    responsePacket->code = \hyperlink{chap_8h_a51665c1b5c9136f608c8f923c1873107a102ce6c3681b89662a252610b26572f9}{CHAP\_CODE\_RESPONSE};
+587    responsePacket->identifier = context->chapFsm.peerIdentifier;
+588    responsePacket->length = \hyperlink{cpu__endian_8h_a800cdbf435a85a9b3ad4f0edc518472a}{htons}(length);
+589    responsePacket->valueSize = \hyperlink{md5_8h_ad86b38d6ab14e243543904e30f26bed2}{MD5\_DIGEST\_SIZE};
+590 
+591    \textcolor{comment}{//Copy the Response value}
+592    memcpy(responsePacket->value, \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}, \hyperlink{md5_8h_ad86b38d6ab14e243543904e30f26bed2}{MD5\_DIGEST\_SIZE});
+593 
+594    \textcolor{comment}{//The Name field is one or more octets representing the}
+595    \textcolor{comment}{//identification of the system transmitting the packet}
+596    memcpy(responsePacket->value + \hyperlink{md5_8h_ad86b38d6ab14e243543904e30f26bed2}{MD5\_DIGEST\_SIZE}, context->username, n);
+597 
+598    \textcolor{comment}{//Debug message}
+599    \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"Sending CHAP Response packet (%"} \hyperlink{compiler__port_8h_a2b7b0557dc6cd786df02dafbb51f5292}{PRIuSIZE} \textcolor{stringliteral}{" bytes)...\(\backslash\)r\(\backslash\)n"}, length);
+600    \textcolor{comment}{//Dump packet contents for debugging purpose}
+601    \hyperlink{ppp__debug_8c_aebeb2591b3799b0ede290881fdd67e78}{pppDumpPacket}((\hyperlink{ppp_8h_aa975a68f06316e1db0de962a31e30c2e}{PppPacket} *) responsePacket, length, 
+      \hyperlink{ppp_8h_a5d2e3565b503cd5cb131aaff4e0ba9c2ac0897e91a9ab8cedc751087ef1b65a1d}{PPP\_PROTOCOL\_CHAP});
+602 
+603    \textcolor{comment}{//Send PPP frame}
+604    error = \hyperlink{ppp_8c_aaacd84d6af940a50fa94b67324b080ea}{pppSendFrame}(context->interface, buffer, offset, 
+      \hyperlink{ppp_8h_a5d2e3565b503cd5cb131aaff4e0ba9c2ac0897e91a9ab8cedc751087ef1b65a1d}{PPP\_PROTOCOL\_CHAP});
+605 
+606    \textcolor{comment}{//Free previously allocated memory block}
+607    \hyperlink{net__mem_8c_aa33fc4dd2a71649194052f297c707d08}{netBufferFree}(buffer);
+608    \textcolor{comment}{//Return status code}
+609    \textcolor{keywordflow}{return} error;
+610 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{chap_8c_a907171dd3bb320e1c5059fd2564ec723}\label{chap_8c_a907171dd3bb320e1c5059fd2564ec723}} 
+\index{chap.\+c@{chap.\+c}!chap\+Send\+Success@{chap\+Send\+Success}}
+\index{chap\+Send\+Success@{chap\+Send\+Success}!chap.\+c@{chap.\+c}}
+\subsubsection{\texorpdfstring{chap\+Send\+Success()}{chapSendSuccess()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} chap\+Send\+Success (\begin{DoxyParamCaption}\item[{\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Send Success packet. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & P\+PP context \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 619 of file chap.\+c.
+
+
+\begin{DoxyCode}
+620 \{
+621    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+622    \textcolor{keywordtype}{size\_t} \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length};
+623    \textcolor{keywordtype}{size\_t} \hyperlink{pic32mz_2isr__support_8h_a12a5aed8a193ebbf9a641104a310610d}{offset};
+624    \hyperlink{structNetBuffer}{NetBuffer} *buffer;
+625    \hyperlink{ppp_8h_aa975a68f06316e1db0de962a31e30c2e}{PppPacket} *successPacket;
+626 
+627    \textcolor{comment}{//Retrieve the length of the Success packet}
+628    length = \textcolor{keyword}{sizeof}(\hyperlink{ppp_8h_aa975a68f06316e1db0de962a31e30c2e}{PppPacket});
+629 
+630    \textcolor{comment}{//Allocate a buffer memory to hold the Success packet}
+631    buffer = \hyperlink{ppp_8c_a9100186e00aec050c4952fd462b035aa}{pppAllocBuffer}(length, &offset);
+632    \textcolor{comment}{//Failed to allocate memory?}
+633    \textcolor{keywordflow}{if}(buffer == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+634       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac0a554045048d2fb61387cf735676f69}{ERROR\_OUT\_OF\_MEMORY};
+635 
+636    \textcolor{comment}{//Point to the Success packet}
+637    successPacket = \hyperlink{net__mem_8c_a20d30c9db547b3b2743368b589cf482b}{netBufferAt}(buffer, offset);
+638 
+639    \textcolor{comment}{//Format packet header}
+640    successPacket->code = \hyperlink{chap_8h_a51665c1b5c9136f608c8f923c1873107a7ba149c3d7d9f5a7fb6218e901d7715f}{CHAP\_CODE\_SUCCESS};
+641    successPacket->identifier = context->chapFsm.localIdentifier;
+642    successPacket->length = \hyperlink{cpu__endian_8h_a800cdbf435a85a9b3ad4f0edc518472a}{htons}(length);
+643 
+644    \textcolor{comment}{//Debug message}
+645    \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"Sending CHAP Success packet (%"} \hyperlink{compiler__port_8h_a2b7b0557dc6cd786df02dafbb51f5292}{PRIuSIZE} \textcolor{stringliteral}{" bytes)...\(\backslash\)r\(\backslash\)n"}, length);
+646    \textcolor{comment}{//Dump packet contents for debugging purpose}
+647    \hyperlink{ppp__debug_8c_aebeb2591b3799b0ede290881fdd67e78}{pppDumpPacket}((\hyperlink{ppp_8h_aa975a68f06316e1db0de962a31e30c2e}{PppPacket} *) successPacket, length, 
+      \hyperlink{ppp_8h_a5d2e3565b503cd5cb131aaff4e0ba9c2ac0897e91a9ab8cedc751087ef1b65a1d}{PPP\_PROTOCOL\_CHAP});
+648 
+649    \textcolor{comment}{//Send PPP frame}
+650    error = \hyperlink{ppp_8c_aaacd84d6af940a50fa94b67324b080ea}{pppSendFrame}(context->interface, buffer, offset, 
+      \hyperlink{ppp_8h_a5d2e3565b503cd5cb131aaff4e0ba9c2ac0897e91a9ab8cedc751087ef1b65a1d}{PPP\_PROTOCOL\_CHAP});
+651 
+652    \textcolor{comment}{//Free previously allocated memory block}
+653    \hyperlink{net__mem_8c_aa33fc4dd2a71649194052f297c707d08}{netBufferFree}(buffer);
+654    \textcolor{comment}{//Return status code}
+655    \textcolor{keywordflow}{return} error;
+656 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{chap_8c_ae9797d6803ada8fa458a2b8e74bb9e00}\label{chap_8c_ae9797d6803ada8fa458a2b8e74bb9e00}} 
+\index{chap.\+c@{chap.\+c}!chap\+Start\+Auth@{chap\+Start\+Auth}}
+\index{chap\+Start\+Auth@{chap\+Start\+Auth}!chap.\+c@{chap.\+c}}
+\subsubsection{\texorpdfstring{chap\+Start\+Auth()}{chapStartAuth()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} chap\+Start\+Auth (\begin{DoxyParamCaption}\item[{\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Start C\+H\+AP authentication. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & P\+PP context \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 57 of file chap.\+c.
+
+
+\begin{DoxyCode}
+58 \{
+59    \textcolor{comment}{//Debug message}
+60    \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"\(\backslash\)r\(\backslash\)nStarting CHAP authentication...\(\backslash\)r\(\backslash\)n"});
+61 
+62    \textcolor{comment}{//Check whether the other end of the PPP link is being authenticated}
+63    \textcolor{keywordflow}{if}(context->localConfig.authProtocol == \hyperlink{ppp_8h_a5d2e3565b503cd5cb131aaff4e0ba9c2ac0897e91a9ab8cedc751087ef1b65a1d}{PPP\_PROTOCOL\_CHAP})
+64    \{
+65       \textcolor{comment}{//Initialize restart counter}
+66       context->chapFsm.restartCounter = \hyperlink{chap_8h_ae9053a9e7d2ede44912225be3e7c5dcf}{CHAP\_MAX\_CHALLENGES};
+67       \textcolor{comment}{//Send a Challenge packet}
+68       \hyperlink{chap_8c_ab915f81331768b23d1035a19e6d8d936}{chapSendChallenge}(context);
+69       \textcolor{comment}{//Switch to the Challenge-Sent state}
+70       context->chapFsm.localState = \hyperlink{chap_8h_a3bdf094cadf998921f2dc76942809bc8a11015070b3114e7f4373662fbe9eece9}{CHAP\_STATE\_2\_CHALLENGE\_SENT};
+71    \}
+72 
+73    \textcolor{comment}{//Check whether the other end of the PPP link is the authenticator}
+74    \textcolor{keywordflow}{if}(context->peerConfig.authProtocol == \hyperlink{ppp_8h_a5d2e3565b503cd5cb131aaff4e0ba9c2ac0897e91a9ab8cedc751087ef1b65a1d}{PPP\_PROTOCOL\_CHAP})
+75    \{
+76       \textcolor{comment}{//Switch to the Started state}
+77       context->chapFsm.peerState = \hyperlink{chap_8h_a3bdf094cadf998921f2dc76942809bc8aa4d0e35a513e91fd0b184e7d536cd2b0}{CHAP\_STATE\_1\_STARTED};
+78    \}
+79 
+80    \textcolor{comment}{//Successful processing}
+81    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+82 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{chap_8c_ade54e106e42ba888d9e125cf1fc919b4}\label{chap_8c_ade54e106e42ba888d9e125cf1fc919b4}} 
+\index{chap.\+c@{chap.\+c}!chap\+Tick@{chap\+Tick}}
+\index{chap\+Tick@{chap\+Tick}!chap.\+c@{chap.\+c}}
+\subsubsection{\texorpdfstring{chap\+Tick()}{chapTick()}}
+{\footnotesize\ttfamily void chap\+Tick (\begin{DoxyParamCaption}\item[{\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+C\+H\+AP timer handler. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & P\+PP context \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 110 of file chap.\+c.
+
+
+\begin{DoxyCode}
+111 \{
+112    \textcolor{comment}{//Check whether the restart timer is running}
+113    \textcolor{keywordflow}{if}(context->chapFsm.localState == \hyperlink{chap_8h_a3bdf094cadf998921f2dc76942809bc8a11015070b3114e7f4373662fbe9eece9}{CHAP\_STATE\_2\_CHALLENGE\_SENT})
+114    \{
+115       \textcolor{comment}{//Get current time}
+116       \hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\_t} \hyperlink{dhcpv6__common_8h_ae73654f333e4363463ad8c594eca1905}{time} = \hyperlink{os__port__chibios_8c_ab66a11272d40a916fa69dd8e4dc443d4}{osGetSystemTime}();
+117 
+118       \textcolor{comment}{//Check restart timer}
+119       \textcolor{keywordflow}{if}((time - context->chapFsm.timestamp) >= \hyperlink{chap_8h_af3d23ab898615fdaea01168e3effd710}{CHAP\_RESTART\_TIMER})
+120       \{
+121          \textcolor{comment}{//Debug message}
+122          \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"\(\backslash\)r\(\backslash\)nCHAP Timeout event\(\backslash\)r\(\backslash\)n"});
+123 
+124          \textcolor{comment}{//Check whether the restart counter is greater than zero}
+125          \textcolor{keywordflow}{if}(context->chapFsm.restartCounter > 0)
+126          \{
+127             \textcolor{comment}{//Retransmit the Challenge packet}
+128             \hyperlink{chap_8c_ab915f81331768b23d1035a19e6d8d936}{chapSendChallenge}(context);
+129          \}
+130          \textcolor{keywordflow}{else}
+131          \{
+132             \textcolor{comment}{//Abort CHAP authentication}
+133             context->chapFsm.localState = \hyperlink{chap_8h_a3bdf094cadf998921f2dc76942809bc8abe2c63d482b5edcbc36ded67c10953d8}{CHAP\_STATE\_0\_INITIAL};
+134             \textcolor{comment}{//Authentication failed}
+135             \hyperlink{lcp_8c_a588713b9f40b510b652a2ef5fe564161}{lcpClose}(context);
+136          \}
+137       \}
+138    \}
+139 \}
+\end{DoxyCode}

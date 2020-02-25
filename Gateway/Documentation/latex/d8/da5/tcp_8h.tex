@@ -1,0 +1,2093 @@
+\hypertarget{tcp_8h}{}\section{cyclone\+\_\+tcp/core/tcp.h File Reference}
+\label{tcp_8h}\index{cyclone\+\_\+tcp/core/tcp.\+h@{cyclone\+\_\+tcp/core/tcp.\+h}}
+
+
+T\+CP (Transmission Control Protocol)  
+
+
+{\ttfamily \#include \char`\"{}net\+\_\+config.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}core/ip.\+h\char`\"{}}\newline
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structTcpTimer}{Tcp\+Timer}
+\begin{DoxyCompactList}\small\item\em T\+CP timer. \end{DoxyCompactList}\item 
+struct \hyperlink{struct__TcpQueueItem}{\+\_\+\+Tcp\+Queue\+Item}
+\begin{DoxyCompactList}\small\item\em Retransmission queue item. \end{DoxyCompactList}\item 
+struct \hyperlink{struct__TcpSynQueueItem}{\+\_\+\+Tcp\+Syn\+Queue\+Item}
+\begin{DoxyCompactList}\small\item\em S\+YN queue item. \end{DoxyCompactList}\item 
+struct \hyperlink{structTcpSackBlock}{Tcp\+Sack\+Block}
+\begin{DoxyCompactList}\small\item\em S\+A\+CK block. \end{DoxyCompactList}\item 
+struct \hyperlink{structTcpTxBuffer}{Tcp\+Tx\+Buffer}
+\begin{DoxyCompactList}\small\item\em Transmit buffer. \end{DoxyCompactList}\item 
+struct \hyperlink{structTcpRxBuffer}{Tcp\+Rx\+Buffer}
+\begin{DoxyCompactList}\small\item\em Receive buffer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{tcp_8h_a709793f69082c895d39f91d6f0457a44}{T\+C\+P\+\_\+\+S\+U\+P\+P\+O\+RT}~\hyperlink{os__port_8h_a73c228f87e038e8295ee8ea8eceaa5ac}{E\+N\+A\+B\+L\+ED}
+\item 
+\#define \hyperlink{tcp_8h_a4286cfd9edc274047735b30f2b2f7607}{T\+C\+P\+\_\+\+T\+I\+C\+K\+\_\+\+I\+N\+T\+E\+R\+V\+AL}~100
+\item 
+\#define \hyperlink{tcp_8h_a54e8d598d7db34761edb76924934b840}{T\+C\+P\+\_\+\+M\+A\+X\+\_\+\+M\+SS}~1430
+\item 
+\#define \hyperlink{tcp_8h_aedd7de15002fd15efa1df5e0fcf0f68e}{T\+C\+P\+\_\+\+M\+I\+N\+\_\+\+M\+SS}~64
+\item 
+\#define \hyperlink{tcp_8h_a2044a2f0db067616a51d9c0db8834782}{T\+C\+P\+\_\+\+D\+E\+F\+A\+U\+L\+T\+\_\+\+T\+X\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE}~2860
+\item 
+\#define \hyperlink{tcp_8h_a85c483022d7093f56ad49e0f7373c432}{T\+C\+P\+\_\+\+M\+A\+X\+\_\+\+T\+X\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE}~22880
+\item 
+\#define \hyperlink{tcp_8h_aa257073f580e464ba23f7066abc108ea}{T\+C\+P\+\_\+\+D\+E\+F\+A\+U\+L\+T\+\_\+\+R\+X\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE}~2860
+\item 
+\#define \hyperlink{tcp_8h_a220fffa3407e7ee49fdd8466c24d21b7}{T\+C\+P\+\_\+\+M\+A\+X\+\_\+\+R\+X\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE}~22880
+\item 
+\#define \hyperlink{tcp_8h_a4b58a602e54f588d7ccf0eaad8b7d902}{T\+C\+P\+\_\+\+D\+E\+F\+A\+U\+L\+T\+\_\+\+S\+Y\+N\+\_\+\+Q\+U\+E\+U\+E\+\_\+\+S\+I\+ZE}~4
+\item 
+\#define \hyperlink{tcp_8h_a75302eb8ae53daebc5cfd490d5b0f951}{T\+C\+P\+\_\+\+M\+A\+X\+\_\+\+S\+Y\+N\+\_\+\+Q\+U\+E\+U\+E\+\_\+\+S\+I\+ZE}~16
+\item 
+\#define \hyperlink{tcp_8h_a23562b70928601b9da68cbacdf8b616f}{T\+C\+P\+\_\+\+M\+A\+X\+\_\+\+R\+E\+T\+R\+I\+ES}~5
+\item 
+\#define \hyperlink{tcp_8h_a39313cc0ab930ccb5886a17d7a1662d1}{T\+C\+P\+\_\+\+I\+N\+I\+T\+I\+A\+L\+\_\+\+R\+TO}~1000
+\item 
+\#define \hyperlink{tcp_8h_a305211e7eb6a1e212f4e0647da3cf92b}{T\+C\+P\+\_\+\+M\+I\+N\+\_\+\+R\+TO}~1000
+\item 
+\#define \hyperlink{tcp_8h_ab10a9785dd0ff10bb73ddbcf6f8f43a8}{T\+C\+P\+\_\+\+M\+A\+X\+\_\+\+R\+TO}~60000
+\item 
+\#define \hyperlink{tcp_8h_ade0f30673d76b48104924674b821b3fb}{T\+C\+P\+\_\+\+C\+O\+N\+G\+E\+S\+T\+\_\+\+C\+O\+N\+T\+R\+O\+L\+\_\+\+S\+U\+P\+P\+O\+RT}~\hyperlink{os__port_8h_a73c228f87e038e8295ee8ea8eceaa5ac}{E\+N\+A\+B\+L\+ED}
+\item 
+\#define \hyperlink{tcp_8h_a71e45bd21d93e12c4720cce4c2a890fe}{T\+C\+P\+\_\+\+F\+A\+S\+T\+\_\+\+R\+E\+T\+R\+A\+N\+S\+M\+I\+T\+\_\+\+T\+H\+R\+ES}~3
+\item 
+\#define \hyperlink{tcp_8h_a7f8767b38b51f53547a5a4b3b9e2d478}{T\+C\+P\+\_\+\+I\+N\+I\+T\+I\+A\+L\+\_\+\+W\+I\+N\+D\+OW}~3
+\item 
+\#define \hyperlink{tcp_8h_af314a8120817efcb8b6abcb19547874e}{T\+C\+P\+\_\+\+L\+O\+S\+S\+\_\+\+W\+I\+N\+D\+OW}~1
+\item 
+\#define \hyperlink{tcp_8h_a166c09148b661e84c948345c4bcd9aab}{T\+C\+P\+\_\+\+D\+E\+F\+A\+U\+L\+T\+\_\+\+P\+R\+O\+B\+E\+\_\+\+I\+N\+T\+E\+R\+V\+AL}~1000
+\item 
+\#define \hyperlink{tcp_8h_ae54deea793dc3babd4ec25ae9ed144b7}{T\+C\+P\+\_\+\+M\+A\+X\+\_\+\+P\+R\+O\+B\+E\+\_\+\+I\+N\+T\+E\+R\+V\+AL}~60000
+\item 
+\#define \hyperlink{tcp_8h_a96dd43e8ea17721fdc51d6057e5f988b}{T\+C\+P\+\_\+\+O\+V\+E\+R\+R\+I\+D\+E\+\_\+\+T\+I\+M\+E\+O\+UT}~500
+\item 
+\#define \hyperlink{tcp_8h_adbe5e26c6697be0dbc17eb0548796378}{T\+C\+P\+\_\+\+F\+I\+N\+\_\+\+W\+A\+I\+T\+\_\+2\+\_\+\+T\+I\+M\+ER}~4000
+\item 
+\#define \hyperlink{tcp_8h_ac7600c784459aedc792edbefd5041e2f}{T\+C\+P\+\_\+2\+M\+S\+L\+\_\+\+T\+I\+M\+ER}~4000
+\item 
+\#define \hyperlink{tcp_8h_a71b2b072735743712d30d6058074ad39}{T\+C\+P\+\_\+\+S\+A\+C\+K\+\_\+\+S\+U\+P\+P\+O\+RT}~\hyperlink{os__port_8h_abd5c8ab57c190a6522ccdbf0ed7577da}{D\+I\+S\+A\+B\+L\+ED}
+\item 
+\#define \hyperlink{tcp_8h_a8d978686549f4d2aec3526cadf667dc1}{T\+C\+P\+\_\+\+M\+A\+X\+\_\+\+S\+A\+C\+K\+\_\+\+B\+L\+O\+C\+KS}~4
+\item 
+\#define \hyperlink{tcp_8h_a296869e905bda7013716794027a5b07c}{T\+C\+P\+\_\+\+M\+A\+X\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+L\+E\+N\+G\+TH}~60
+\item 
+\#define \hyperlink{tcp_8h_aa4a906440587860da3261d78809a13a5}{T\+C\+P\+\_\+\+D\+E\+F\+A\+U\+L\+T\+\_\+\+M\+SS}~536
+\item 
+\#define \hyperlink{tcp_8h_adcfa1a4af128e2438f93db11c81c09cf}{T\+C\+P\+\_\+\+C\+M\+P\+\_\+\+S\+EQ}(\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a},  \hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b})~((\hyperlink{stdint_8h_ab1967d8591af1a4e48c37fd2b0f184d0}{int32\+\_\+t}) ((\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}) -\/ (\hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b})))
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+struct \{\\
+\>\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t} \hyperlink{tcp_8h_a26ebbf4f65c3f6fd9959d9cecef5c9d8}{srcPort}\\
+\>\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t} \hyperlink{tcp_8h_af15d713ad2bc92686abfa6ab012b5039}{destPort}\\
+\>\hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} \hyperlink{tcp_8h_a5c6ae6c0d8819f5ef0fd57e7f9ee6a08}{seqNum}\\
+\>\hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} \hyperlink{tcp_8h_a077154909d67fa134c81b5a3c4ed57f4}{ackNum}\\
+\>\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} \hyperlink{tcp_8h_a2a2556147677ece60b8aadf4a0d608ed}{reserved1}: 4\\
+\>\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} \hyperlink{tcp_8h_ae0743b8326e63b450642f96ca32a3bea}{dataOffset}: 4\\
+\>\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} \hyperlink{tcp_8h_aa2585d779da0ab21273a8d92de9a0ebe}{flags}: 6\\
+\>\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} \hyperlink{tcp_8h_a646df3514a24749a0f54731bf41c6c67}{reserved2}: 2\\
+\>\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t} \hyperlink{tcp_8h_a6b307b5083cf92aca29549d780b44bd5}{window}\\
+\>\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t} \hyperlink{tcp_8h_a6796c847bbd16253ce2538754c250bd6}{checksum}\\
+\>\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t} \hyperlink{tcp_8h_aa82e6fdc131e1d8425a6bbec47fa7ae2}{urgentPointer}\\
+\>\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} \hyperlink{tcp_8h_a789f9812dfd8d65750fad784fd195953}{options} \mbox{[}$\,$\mbox{]}\\
+\} \hyperlink{tcp_8h_a38f08160c28f0a8e104907d2ee71fed5}{TcpHeader}\\
+
+\end{tabbing}\begin{DoxyCompactList}\small\item\em T\+CP header. \end{DoxyCompactList}\item 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+struct \{\\
+\>\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} \hyperlink{tcp_8h_a9aca84b04dfc09a4eeae08b3b3266eb6}{kind}\\
+\>\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} \hyperlink{tcp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length}\\
+\>\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} \hyperlink{tcp_8h_adfa040d04d16520129a735fff8fb1628}{value} \mbox{[}$\,$\mbox{]}\\
+\} \hyperlink{tcp_8h_a5562fc6b2b8e28e99a3c0d1c36054b72}{TcpOption}\\
+
+\end{tabbing}\begin{DoxyCompactList}\small\item\em T\+CP option. \end{DoxyCompactList}\item 
+typedef struct \hyperlink{struct__TcpQueueItem}{\+\_\+\+Tcp\+Queue\+Item} \hyperlink{tcp_8h_acfab1d17433f464b8b01a6fbb186bb9e}{Tcp\+Queue\+Item}
+\begin{DoxyCompactList}\small\item\em Retransmission queue item. \end{DoxyCompactList}\item 
+typedef struct \hyperlink{struct__TcpSynQueueItem}{\+\_\+\+Tcp\+Syn\+Queue\+Item} \hyperlink{tcp_8h_a933e3439a35c2a8994d9de8f460cc5b1}{Tcp\+Syn\+Queue\+Item}
+\begin{DoxyCompactList}\small\item\em S\+YN queue item. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfec}{Tcp\+State} \{ \newline
+\hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfeca1af39131036c81d79f09174d2fb6f788}{T\+C\+P\+\_\+\+S\+T\+A\+T\+E\+\_\+\+C\+L\+O\+S\+ED} = 0, 
+\hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfeca7f99d4d604cb5009b50f04f84f5cb1c6}{T\+C\+P\+\_\+\+S\+T\+A\+T\+E\+\_\+\+L\+I\+S\+T\+EN} = 1, 
+\hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfeca63834296a6449f272b397d54a5536bfc}{T\+C\+P\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+Y\+N\+\_\+\+S\+E\+NT} = 2, 
+\hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfecadfce7e58cb083022157243f993d4ddc3}{T\+C\+P\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+Y\+N\+\_\+\+R\+E\+C\+E\+I\+V\+ED} = 3, 
+\newline
+\hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfecaacb7ccce8d3fcdbc6635983251b22189}{T\+C\+P\+\_\+\+S\+T\+A\+T\+E\+\_\+\+E\+S\+T\+A\+B\+L\+I\+S\+H\+ED} = 4, 
+\hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfecabd723866a1772c3180b372605cfbc963}{T\+C\+P\+\_\+\+S\+T\+A\+T\+E\+\_\+\+C\+L\+O\+S\+E\+\_\+\+W\+A\+IT} = 5, 
+\hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfeca29f7d016b33a1856dfba699643c69260}{T\+C\+P\+\_\+\+S\+T\+A\+T\+E\+\_\+\+L\+A\+S\+T\+\_\+\+A\+CK} = 6, 
+\hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfecad80d0b794cc52f39180e65bd1da1b555}{T\+C\+P\+\_\+\+S\+T\+A\+T\+E\+\_\+\+F\+I\+N\+\_\+\+W\+A\+I\+T\+\_\+1} = 7, 
+\newline
+\hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfecac50f13616eeb349dc1aaa5cfd3422018}{T\+C\+P\+\_\+\+S\+T\+A\+T\+E\+\_\+\+F\+I\+N\+\_\+\+W\+A\+I\+T\+\_\+2} = 8, 
+\hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfecad9c881087c2449f9d8c7a2a2ab188f22}{T\+C\+P\+\_\+\+S\+T\+A\+T\+E\+\_\+\+C\+L\+O\+S\+I\+NG} = 9, 
+\hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfeca8fa1774b3f785db85813df1b8e158c56}{T\+C\+P\+\_\+\+S\+T\+A\+T\+E\+\_\+\+T\+I\+M\+E\+\_\+\+W\+A\+IT} = 10
+ \}\begin{DoxyCompactList}\small\item\em T\+CP F\+SM states. \end{DoxyCompactList}
+\item 
+enum \hyperlink{tcp_8h_ac69e0e40557f11fc979456965cdcd2f1}{Tcp\+Congest\+State} \{ \hyperlink{tcp_8h_ac69e0e40557f11fc979456965cdcd2f1ae65a75edff829ef84c7a96ac82a6e0f3}{T\+C\+P\+\_\+\+C\+O\+N\+G\+E\+S\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+I\+D\+LE} = 0, 
+\hyperlink{tcp_8h_ac69e0e40557f11fc979456965cdcd2f1a8a8b065a15d7f4d16740a5745ff49fb2}{T\+C\+P\+\_\+\+C\+O\+N\+G\+E\+S\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+R\+E\+C\+O\+V\+E\+RY} = 1, 
+\hyperlink{tcp_8h_ac69e0e40557f11fc979456965cdcd2f1a5c24204654ace8731ab8676ce459dc9a}{T\+C\+P\+\_\+\+C\+O\+N\+G\+E\+S\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+L\+O\+S\+S\+\_\+\+R\+E\+C\+O\+V\+E\+RY} = 2
+ \}\begin{DoxyCompactList}\small\item\em T\+CP congestion states. \end{DoxyCompactList}
+\item 
+enum \hyperlink{tcp_8h_a4e6d97f0f2a3dc780d192efcdfe64aa7}{Tcp\+Flags} \{ \newline
+\hyperlink{tcp_8h_a4e6d97f0f2a3dc780d192efcdfe64aa7a332cfb33224b794e0be773cba056efa1}{T\+C\+P\+\_\+\+F\+L\+A\+G\+\_\+\+F\+IN} = 0x01, 
+\hyperlink{tcp_8h_a4e6d97f0f2a3dc780d192efcdfe64aa7af2f8a42ff8bff07cbca1cd2ed6df9fae}{T\+C\+P\+\_\+\+F\+L\+A\+G\+\_\+\+S\+YN} = 0x02, 
+\hyperlink{tcp_8h_a4e6d97f0f2a3dc780d192efcdfe64aa7a2eaeb7e7c1984d0bd4d1cbb48b2b5ce4}{T\+C\+P\+\_\+\+F\+L\+A\+G\+\_\+\+R\+ST} = 0x04, 
+\hyperlink{tcp_8h_a4e6d97f0f2a3dc780d192efcdfe64aa7a44a138e095774788c0f16e906d5a4c25}{T\+C\+P\+\_\+\+F\+L\+A\+G\+\_\+\+P\+SH} = 0x08, 
+\newline
+\hyperlink{tcp_8h_a4e6d97f0f2a3dc780d192efcdfe64aa7aae4cbb82c7a2373576547ed119498a4a}{T\+C\+P\+\_\+\+F\+L\+A\+G\+\_\+\+A\+CK} = 0x10, 
+\hyperlink{tcp_8h_a4e6d97f0f2a3dc780d192efcdfe64aa7ae04489b7fa5cac77c12d26a0d0d1e398}{T\+C\+P\+\_\+\+F\+L\+A\+G\+\_\+\+U\+RG} = 0x20
+ \}\begin{DoxyCompactList}\small\item\em T\+CP control flags. \end{DoxyCompactList}
+\item 
+enum \hyperlink{tcp_8h_a064186fb289be38d3e1a71ecf446fe8c}{Tcp\+Option\+Kind} \{ \newline
+\hyperlink{tcp_8h_a064186fb289be38d3e1a71ecf446fe8caf07244108eff002a75f229d8f61da372}{T\+C\+P\+\_\+\+O\+P\+T\+I\+O\+N\+\_\+\+E\+ND} = 0, 
+\hyperlink{tcp_8h_a064186fb289be38d3e1a71ecf446fe8cae9a7564649350c5c35115c0284fe79ba}{T\+C\+P\+\_\+\+O\+P\+T\+I\+O\+N\+\_\+\+N\+OP} = 1, 
+\hyperlink{tcp_8h_a064186fb289be38d3e1a71ecf446fe8caa534c3934b8bd83794d7892083275375}{T\+C\+P\+\_\+\+O\+P\+T\+I\+O\+N\+\_\+\+M\+A\+X\+\_\+\+S\+E\+G\+M\+E\+N\+T\+\_\+\+S\+I\+ZE} = 2, 
+\hyperlink{tcp_8h_a064186fb289be38d3e1a71ecf446fe8cab46e59953fdcbd47fdc6f9d372c8fefe}{T\+C\+P\+\_\+\+O\+P\+T\+I\+O\+N\+\_\+\+W\+I\+N\+D\+O\+W\+\_\+\+S\+C\+A\+L\+E\+\_\+\+F\+A\+C\+T\+OR} = 3, 
+\newline
+\hyperlink{tcp_8h_a064186fb289be38d3e1a71ecf446fe8ca99d8f487511fc1d0c5db7204e0c14abf}{T\+C\+P\+\_\+\+O\+P\+T\+I\+O\+N\+\_\+\+S\+A\+C\+K\+\_\+\+P\+E\+R\+M\+I\+T\+T\+ED} = 4, 
+\hyperlink{tcp_8h_a064186fb289be38d3e1a71ecf446fe8ca46972692f83abeff52f7f62fd0aec186}{T\+C\+P\+\_\+\+O\+P\+T\+I\+O\+N\+\_\+\+S\+A\+CK} = 5, 
+\hyperlink{tcp_8h_a064186fb289be38d3e1a71ecf446fe8ca3efeeda47a47a6e02149191d780777bc}{T\+C\+P\+\_\+\+O\+P\+T\+I\+O\+N\+\_\+\+T\+I\+M\+E\+S\+T\+A\+MP} = 8
+ \}\begin{DoxyCompactList}\small\item\em T\+CP option types. \end{DoxyCompactList}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{tcp_8h_ac9b0a9b949c8a39e3dfb4e54f4babb90}{tcp\+Init} (void)
+\begin{DoxyCompactList}\small\item\em T\+CP related initialization. \end{DoxyCompactList}\item 
+\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} \hyperlink{tcp_8h_a9b9267b95c40d4e437d3c43c29267b02}{tcp\+Get\+Dynamic\+Port} (void)
+\begin{DoxyCompactList}\small\item\em Get an ephemeral port number. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{tcp_8h_acdf3499416a761d544c9c2210b36fd3c}{tcp\+Connect} (\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$\hyperlink{bsd__socket_8h_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, const \hyperlink{structIpAddr}{Ip\+Addr} $\ast$remote\+Ip\+Addr, \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} remote\+Port)
+\begin{DoxyCompactList}\small\item\em Establish a T\+CP connection. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{tcp_8h_a95ef0ed28e2843d976605a49bfb9286c}{tcp\+Listen} (\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$\hyperlink{bsd__socket_8h_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} backlog)
+\begin{DoxyCompactList}\small\item\em Place a socket in the listening state. \end{DoxyCompactList}\item 
+\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$ \hyperlink{tcp_8h_a5ef77d175010247794c1e98a9acc0e7e}{tcp\+Accept} (\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$\hyperlink{bsd__socket_8h_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, \hyperlink{structIpAddr}{Ip\+Addr} $\ast$client\+Ip\+Addr, \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} $\ast$client\+Port)
+\begin{DoxyCompactList}\small\item\em Permit an incoming connection attempt on a T\+CP socket. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{tcp_8h_ae42ff0820ab0fdfde9f2db2f3afa9595}{tcp\+Send} (\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$\hyperlink{bsd__socket_8h_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{tftp__common_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length}, size\+\_\+t $\ast$written, \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} \hyperlink{nbns__common_8h_a1e87af3c18a2fd36c61faf89949bdc3f}{flags})
+\begin{DoxyCompactList}\small\item\em Send data to a connected socket. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{tcp_8h_af5bafdbb2dbf35df2d0fee56f1c0c168}{tcp\+Receive} (\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$\hyperlink{bsd__socket_8h_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{tftp__common_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, size\+\_\+t size, size\+\_\+t $\ast$received, \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} \hyperlink{nbns__common_8h_a1e87af3c18a2fd36c61faf89949bdc3f}{flags})
+\begin{DoxyCompactList}\small\item\em Receive data from a connected socket. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{tcp_8h_a9520355455840d2ba13b3fc00921981f}{tcp\+Shutdown} (\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$\hyperlink{bsd__socket_8h_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} how)
+\begin{DoxyCompactList}\small\item\em Shutdown gracefully reception, transmission, or both. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{tcp_8h_a2e3cdf2c9c5e7d6939f15a7cea345fe7}{tcp\+Abort} (\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$\hyperlink{bsd__socket_8h_a3f8f3a2707fbc87fc30aa70f31f53218}{socket})
+\begin{DoxyCompactList}\small\item\em Abort an existing T\+CP connection. \end{DoxyCompactList}\item 
+\hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfec}{Tcp\+State} \hyperlink{tcp_8h_a5256b029b29f2bdbf34927938935b7ff}{tcp\+Get\+State} (\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$\hyperlink{bsd__socket_8h_a3f8f3a2707fbc87fc30aa70f31f53218}{socket})
+\begin{DoxyCompactList}\small\item\em Get the current state of the T\+CP F\+SM. \end{DoxyCompactList}\item 
+\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$ \hyperlink{tcp_8h_a7e56a871df61979ed1f70b56559e7443}{tcp\+Kill\+Oldest\+Connection} (void)
+\begin{DoxyCompactList}\small\item\em Kill the oldest socket in the T\+I\+M\+E-\/\+W\+A\+IT state. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\+\_\+t} \hyperlink{tcp_8h_ac8a0b26b68c9a94f4886ec15a6d11498}{tcp\+Tick\+Counter}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+T\+CP (Transmission Control Protocol) 
+
+\hypertarget{pic32mz__ef__curiosity_8h_License}{}\subsection{License}\label{pic32mz__ef__curiosity_8h_License}
+S\+P\+D\+X-\/\+License-\/\+Identifier\+: G\+P\+L-\/2.\+0-\/or-\/later
+
+Copyright (C) 2010-\/2019 Oryx Embedded S\+A\+RL. All rights reserved.
+
+This file is part of Cyclone\+T\+CP Open.
+
+This program is free software; you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+
+You should have received a copy of the G\+NU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-\/1301, U\+SA.
+
+\begin{DoxyAuthor}{Author}
+Oryx Embedded S\+A\+RL (www.\+oryx-\/embedded.\+com) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+9.\+6 
+\end{DoxyVersion}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{tcp_8h_ac7600c784459aedc792edbefd5041e2f}\label{tcp_8h_ac7600c784459aedc792edbefd5041e2f}} 
+\index{tcp.\+h@{tcp.\+h}!T\+C\+P\+\_\+2\+M\+S\+L\+\_\+\+T\+I\+M\+ER@{T\+C\+P\+\_\+2\+M\+S\+L\+\_\+\+T\+I\+M\+ER}}
+\index{T\+C\+P\+\_\+2\+M\+S\+L\+\_\+\+T\+I\+M\+ER@{T\+C\+P\+\_\+2\+M\+S\+L\+\_\+\+T\+I\+M\+ER}!tcp.\+h@{tcp.\+h}}
+\subsubsection{\texorpdfstring{T\+C\+P\+\_\+2\+M\+S\+L\+\_\+\+T\+I\+M\+ER}{TCP\_2MSL\_TIMER}}
+{\footnotesize\ttfamily \#define T\+C\+P\+\_\+2\+M\+S\+L\+\_\+\+T\+I\+M\+ER~4000}
+
+
+
+Definition at line 194 of file tcp.\+h.
+
+\mbox{\Hypertarget{tcp_8h_adcfa1a4af128e2438f93db11c81c09cf}\label{tcp_8h_adcfa1a4af128e2438f93db11c81c09cf}} 
+\index{tcp.\+h@{tcp.\+h}!T\+C\+P\+\_\+\+C\+M\+P\+\_\+\+S\+EQ@{T\+C\+P\+\_\+\+C\+M\+P\+\_\+\+S\+EQ}}
+\index{T\+C\+P\+\_\+\+C\+M\+P\+\_\+\+S\+EQ@{T\+C\+P\+\_\+\+C\+M\+P\+\_\+\+S\+EQ}!tcp.\+h@{tcp.\+h}}
+\subsubsection{\texorpdfstring{T\+C\+P\+\_\+\+C\+M\+P\+\_\+\+S\+EQ}{TCP\_CMP\_SEQ}}
+{\footnotesize\ttfamily \#define T\+C\+P\+\_\+\+C\+M\+P\+\_\+\+S\+EQ(\begin{DoxyParamCaption}\item[{}]{\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a},  }\item[{}]{\hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b} }\end{DoxyParamCaption})~((\hyperlink{stdint_8h_ab1967d8591af1a4e48c37fd2b0f184d0}{int32\+\_\+t}) ((\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}) -\/ (\hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b})))}
+
+
+
+Definition at line 219 of file tcp.\+h.
+
+\mbox{\Hypertarget{tcp_8h_ade0f30673d76b48104924674b821b3fb}\label{tcp_8h_ade0f30673d76b48104924674b821b3fb}} 
+\index{tcp.\+h@{tcp.\+h}!T\+C\+P\+\_\+\+C\+O\+N\+G\+E\+S\+T\+\_\+\+C\+O\+N\+T\+R\+O\+L\+\_\+\+S\+U\+P\+P\+O\+RT@{T\+C\+P\+\_\+\+C\+O\+N\+G\+E\+S\+T\+\_\+\+C\+O\+N\+T\+R\+O\+L\+\_\+\+S\+U\+P\+P\+O\+RT}}
+\index{T\+C\+P\+\_\+\+C\+O\+N\+G\+E\+S\+T\+\_\+\+C\+O\+N\+T\+R\+O\+L\+\_\+\+S\+U\+P\+P\+O\+RT@{T\+C\+P\+\_\+\+C\+O\+N\+G\+E\+S\+T\+\_\+\+C\+O\+N\+T\+R\+O\+L\+\_\+\+S\+U\+P\+P\+O\+RT}!tcp.\+h@{tcp.\+h}}
+\subsubsection{\texorpdfstring{T\+C\+P\+\_\+\+C\+O\+N\+G\+E\+S\+T\+\_\+\+C\+O\+N\+T\+R\+O\+L\+\_\+\+S\+U\+P\+P\+O\+RT}{TCP\_CONGEST\_CONTROL\_SUPPORT}}
+{\footnotesize\ttfamily \#define T\+C\+P\+\_\+\+C\+O\+N\+G\+E\+S\+T\+\_\+\+C\+O\+N\+T\+R\+O\+L\+\_\+\+S\+U\+P\+P\+O\+RT~\hyperlink{os__port_8h_a73c228f87e038e8295ee8ea8eceaa5ac}{E\+N\+A\+B\+L\+ED}}
+
+
+
+Definition at line 138 of file tcp.\+h.
+
+\mbox{\Hypertarget{tcp_8h_aa4a906440587860da3261d78809a13a5}\label{tcp_8h_aa4a906440587860da3261d78809a13a5}} 
+\index{tcp.\+h@{tcp.\+h}!T\+C\+P\+\_\+\+D\+E\+F\+A\+U\+L\+T\+\_\+\+M\+SS@{T\+C\+P\+\_\+\+D\+E\+F\+A\+U\+L\+T\+\_\+\+M\+SS}}
+\index{T\+C\+P\+\_\+\+D\+E\+F\+A\+U\+L\+T\+\_\+\+M\+SS@{T\+C\+P\+\_\+\+D\+E\+F\+A\+U\+L\+T\+\_\+\+M\+SS}!tcp.\+h@{tcp.\+h}}
+\subsubsection{\texorpdfstring{T\+C\+P\+\_\+\+D\+E\+F\+A\+U\+L\+T\+\_\+\+M\+SS}{TCP\_DEFAULT\_MSS}}
+{\footnotesize\ttfamily \#define T\+C\+P\+\_\+\+D\+E\+F\+A\+U\+L\+T\+\_\+\+M\+SS~536}
+
+
+
+Definition at line 216 of file tcp.\+h.
+
+\mbox{\Hypertarget{tcp_8h_a166c09148b661e84c948345c4bcd9aab}\label{tcp_8h_a166c09148b661e84c948345c4bcd9aab}} 
+\index{tcp.\+h@{tcp.\+h}!T\+C\+P\+\_\+\+D\+E\+F\+A\+U\+L\+T\+\_\+\+P\+R\+O\+B\+E\+\_\+\+I\+N\+T\+E\+R\+V\+AL@{T\+C\+P\+\_\+\+D\+E\+F\+A\+U\+L\+T\+\_\+\+P\+R\+O\+B\+E\+\_\+\+I\+N\+T\+E\+R\+V\+AL}}
+\index{T\+C\+P\+\_\+\+D\+E\+F\+A\+U\+L\+T\+\_\+\+P\+R\+O\+B\+E\+\_\+\+I\+N\+T\+E\+R\+V\+AL@{T\+C\+P\+\_\+\+D\+E\+F\+A\+U\+L\+T\+\_\+\+P\+R\+O\+B\+E\+\_\+\+I\+N\+T\+E\+R\+V\+AL}!tcp.\+h@{tcp.\+h}}
+\subsubsection{\texorpdfstring{T\+C\+P\+\_\+\+D\+E\+F\+A\+U\+L\+T\+\_\+\+P\+R\+O\+B\+E\+\_\+\+I\+N\+T\+E\+R\+V\+AL}{TCP\_DEFAULT\_PROBE\_INTERVAL}}
+{\footnotesize\ttfamily \#define T\+C\+P\+\_\+\+D\+E\+F\+A\+U\+L\+T\+\_\+\+P\+R\+O\+B\+E\+\_\+\+I\+N\+T\+E\+R\+V\+AL~1000}
+
+
+
+Definition at line 166 of file tcp.\+h.
+
+\mbox{\Hypertarget{tcp_8h_aa257073f580e464ba23f7066abc108ea}\label{tcp_8h_aa257073f580e464ba23f7066abc108ea}} 
+\index{tcp.\+h@{tcp.\+h}!T\+C\+P\+\_\+\+D\+E\+F\+A\+U\+L\+T\+\_\+\+R\+X\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE@{T\+C\+P\+\_\+\+D\+E\+F\+A\+U\+L\+T\+\_\+\+R\+X\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE}}
+\index{T\+C\+P\+\_\+\+D\+E\+F\+A\+U\+L\+T\+\_\+\+R\+X\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE@{T\+C\+P\+\_\+\+D\+E\+F\+A\+U\+L\+T\+\_\+\+R\+X\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE}!tcp.\+h@{tcp.\+h}}
+\subsubsection{\texorpdfstring{T\+C\+P\+\_\+\+D\+E\+F\+A\+U\+L\+T\+\_\+\+R\+X\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE}{TCP\_DEFAULT\_RX\_BUFFER\_SIZE}}
+{\footnotesize\ttfamily \#define T\+C\+P\+\_\+\+D\+E\+F\+A\+U\+L\+T\+\_\+\+R\+X\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE~2860}
+
+
+
+Definition at line 82 of file tcp.\+h.
+
+\mbox{\Hypertarget{tcp_8h_a4b58a602e54f588d7ccf0eaad8b7d902}\label{tcp_8h_a4b58a602e54f588d7ccf0eaad8b7d902}} 
+\index{tcp.\+h@{tcp.\+h}!T\+C\+P\+\_\+\+D\+E\+F\+A\+U\+L\+T\+\_\+\+S\+Y\+N\+\_\+\+Q\+U\+E\+U\+E\+\_\+\+S\+I\+ZE@{T\+C\+P\+\_\+\+D\+E\+F\+A\+U\+L\+T\+\_\+\+S\+Y\+N\+\_\+\+Q\+U\+E\+U\+E\+\_\+\+S\+I\+ZE}}
+\index{T\+C\+P\+\_\+\+D\+E\+F\+A\+U\+L\+T\+\_\+\+S\+Y\+N\+\_\+\+Q\+U\+E\+U\+E\+\_\+\+S\+I\+ZE@{T\+C\+P\+\_\+\+D\+E\+F\+A\+U\+L\+T\+\_\+\+S\+Y\+N\+\_\+\+Q\+U\+E\+U\+E\+\_\+\+S\+I\+ZE}!tcp.\+h@{tcp.\+h}}
+\subsubsection{\texorpdfstring{T\+C\+P\+\_\+\+D\+E\+F\+A\+U\+L\+T\+\_\+\+S\+Y\+N\+\_\+\+Q\+U\+E\+U\+E\+\_\+\+S\+I\+ZE}{TCP\_DEFAULT\_SYN\_QUEUE\_SIZE}}
+{\footnotesize\ttfamily \#define T\+C\+P\+\_\+\+D\+E\+F\+A\+U\+L\+T\+\_\+\+S\+Y\+N\+\_\+\+Q\+U\+E\+U\+E\+\_\+\+S\+I\+ZE~4}
+
+
+
+Definition at line 96 of file tcp.\+h.
+
+\mbox{\Hypertarget{tcp_8h_a2044a2f0db067616a51d9c0db8834782}\label{tcp_8h_a2044a2f0db067616a51d9c0db8834782}} 
+\index{tcp.\+h@{tcp.\+h}!T\+C\+P\+\_\+\+D\+E\+F\+A\+U\+L\+T\+\_\+\+T\+X\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE@{T\+C\+P\+\_\+\+D\+E\+F\+A\+U\+L\+T\+\_\+\+T\+X\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE}}
+\index{T\+C\+P\+\_\+\+D\+E\+F\+A\+U\+L\+T\+\_\+\+T\+X\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE@{T\+C\+P\+\_\+\+D\+E\+F\+A\+U\+L\+T\+\_\+\+T\+X\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE}!tcp.\+h@{tcp.\+h}}
+\subsubsection{\texorpdfstring{T\+C\+P\+\_\+\+D\+E\+F\+A\+U\+L\+T\+\_\+\+T\+X\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE}{TCP\_DEFAULT\_TX\_BUFFER\_SIZE}}
+{\footnotesize\ttfamily \#define T\+C\+P\+\_\+\+D\+E\+F\+A\+U\+L\+T\+\_\+\+T\+X\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE~2860}
+
+
+
+Definition at line 68 of file tcp.\+h.
+
+\mbox{\Hypertarget{tcp_8h_a71e45bd21d93e12c4720cce4c2a890fe}\label{tcp_8h_a71e45bd21d93e12c4720cce4c2a890fe}} 
+\index{tcp.\+h@{tcp.\+h}!T\+C\+P\+\_\+\+F\+A\+S\+T\+\_\+\+R\+E\+T\+R\+A\+N\+S\+M\+I\+T\+\_\+\+T\+H\+R\+ES@{T\+C\+P\+\_\+\+F\+A\+S\+T\+\_\+\+R\+E\+T\+R\+A\+N\+S\+M\+I\+T\+\_\+\+T\+H\+R\+ES}}
+\index{T\+C\+P\+\_\+\+F\+A\+S\+T\+\_\+\+R\+E\+T\+R\+A\+N\+S\+M\+I\+T\+\_\+\+T\+H\+R\+ES@{T\+C\+P\+\_\+\+F\+A\+S\+T\+\_\+\+R\+E\+T\+R\+A\+N\+S\+M\+I\+T\+\_\+\+T\+H\+R\+ES}!tcp.\+h@{tcp.\+h}}
+\subsubsection{\texorpdfstring{T\+C\+P\+\_\+\+F\+A\+S\+T\+\_\+\+R\+E\+T\+R\+A\+N\+S\+M\+I\+T\+\_\+\+T\+H\+R\+ES}{TCP\_FAST\_RETRANSMIT\_THRES}}
+{\footnotesize\ttfamily \#define T\+C\+P\+\_\+\+F\+A\+S\+T\+\_\+\+R\+E\+T\+R\+A\+N\+S\+M\+I\+T\+\_\+\+T\+H\+R\+ES~3}
+
+
+
+Definition at line 145 of file tcp.\+h.
+
+\mbox{\Hypertarget{tcp_8h_adbe5e26c6697be0dbc17eb0548796378}\label{tcp_8h_adbe5e26c6697be0dbc17eb0548796378}} 
+\index{tcp.\+h@{tcp.\+h}!T\+C\+P\+\_\+\+F\+I\+N\+\_\+\+W\+A\+I\+T\+\_\+2\+\_\+\+T\+I\+M\+ER@{T\+C\+P\+\_\+\+F\+I\+N\+\_\+\+W\+A\+I\+T\+\_\+2\+\_\+\+T\+I\+M\+ER}}
+\index{T\+C\+P\+\_\+\+F\+I\+N\+\_\+\+W\+A\+I\+T\+\_\+2\+\_\+\+T\+I\+M\+ER@{T\+C\+P\+\_\+\+F\+I\+N\+\_\+\+W\+A\+I\+T\+\_\+2\+\_\+\+T\+I\+M\+ER}!tcp.\+h@{tcp.\+h}}
+\subsubsection{\texorpdfstring{T\+C\+P\+\_\+\+F\+I\+N\+\_\+\+W\+A\+I\+T\+\_\+2\+\_\+\+T\+I\+M\+ER}{TCP\_FIN\_WAIT\_2\_TIMER}}
+{\footnotesize\ttfamily \#define T\+C\+P\+\_\+\+F\+I\+N\+\_\+\+W\+A\+I\+T\+\_\+2\+\_\+\+T\+I\+M\+ER~4000}
+
+
+
+Definition at line 187 of file tcp.\+h.
+
+\mbox{\Hypertarget{tcp_8h_a39313cc0ab930ccb5886a17d7a1662d1}\label{tcp_8h_a39313cc0ab930ccb5886a17d7a1662d1}} 
+\index{tcp.\+h@{tcp.\+h}!T\+C\+P\+\_\+\+I\+N\+I\+T\+I\+A\+L\+\_\+\+R\+TO@{T\+C\+P\+\_\+\+I\+N\+I\+T\+I\+A\+L\+\_\+\+R\+TO}}
+\index{T\+C\+P\+\_\+\+I\+N\+I\+T\+I\+A\+L\+\_\+\+R\+TO@{T\+C\+P\+\_\+\+I\+N\+I\+T\+I\+A\+L\+\_\+\+R\+TO}!tcp.\+h@{tcp.\+h}}
+\subsubsection{\texorpdfstring{T\+C\+P\+\_\+\+I\+N\+I\+T\+I\+A\+L\+\_\+\+R\+TO}{TCP\_INITIAL\_RTO}}
+{\footnotesize\ttfamily \#define T\+C\+P\+\_\+\+I\+N\+I\+T\+I\+A\+L\+\_\+\+R\+TO~1000}
+
+
+
+Definition at line 117 of file tcp.\+h.
+
+\mbox{\Hypertarget{tcp_8h_a7f8767b38b51f53547a5a4b3b9e2d478}\label{tcp_8h_a7f8767b38b51f53547a5a4b3b9e2d478}} 
+\index{tcp.\+h@{tcp.\+h}!T\+C\+P\+\_\+\+I\+N\+I\+T\+I\+A\+L\+\_\+\+W\+I\+N\+D\+OW@{T\+C\+P\+\_\+\+I\+N\+I\+T\+I\+A\+L\+\_\+\+W\+I\+N\+D\+OW}}
+\index{T\+C\+P\+\_\+\+I\+N\+I\+T\+I\+A\+L\+\_\+\+W\+I\+N\+D\+OW@{T\+C\+P\+\_\+\+I\+N\+I\+T\+I\+A\+L\+\_\+\+W\+I\+N\+D\+OW}!tcp.\+h@{tcp.\+h}}
+\subsubsection{\texorpdfstring{T\+C\+P\+\_\+\+I\+N\+I\+T\+I\+A\+L\+\_\+\+W\+I\+N\+D\+OW}{TCP\_INITIAL\_WINDOW}}
+{\footnotesize\ttfamily \#define T\+C\+P\+\_\+\+I\+N\+I\+T\+I\+A\+L\+\_\+\+W\+I\+N\+D\+OW~3}
+
+
+
+Definition at line 152 of file tcp.\+h.
+
+\mbox{\Hypertarget{tcp_8h_af314a8120817efcb8b6abcb19547874e}\label{tcp_8h_af314a8120817efcb8b6abcb19547874e}} 
+\index{tcp.\+h@{tcp.\+h}!T\+C\+P\+\_\+\+L\+O\+S\+S\+\_\+\+W\+I\+N\+D\+OW@{T\+C\+P\+\_\+\+L\+O\+S\+S\+\_\+\+W\+I\+N\+D\+OW}}
+\index{T\+C\+P\+\_\+\+L\+O\+S\+S\+\_\+\+W\+I\+N\+D\+OW@{T\+C\+P\+\_\+\+L\+O\+S\+S\+\_\+\+W\+I\+N\+D\+OW}!tcp.\+h@{tcp.\+h}}
+\subsubsection{\texorpdfstring{T\+C\+P\+\_\+\+L\+O\+S\+S\+\_\+\+W\+I\+N\+D\+OW}{TCP\_LOSS\_WINDOW}}
+{\footnotesize\ttfamily \#define T\+C\+P\+\_\+\+L\+O\+S\+S\+\_\+\+W\+I\+N\+D\+OW~1}
+
+
+
+Definition at line 159 of file tcp.\+h.
+
+\mbox{\Hypertarget{tcp_8h_a296869e905bda7013716794027a5b07c}\label{tcp_8h_a296869e905bda7013716794027a5b07c}} 
+\index{tcp.\+h@{tcp.\+h}!T\+C\+P\+\_\+\+M\+A\+X\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+L\+E\+N\+G\+TH@{T\+C\+P\+\_\+\+M\+A\+X\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+L\+E\+N\+G\+TH}}
+\index{T\+C\+P\+\_\+\+M\+A\+X\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+L\+E\+N\+G\+TH@{T\+C\+P\+\_\+\+M\+A\+X\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+L\+E\+N\+G\+TH}!tcp.\+h@{tcp.\+h}}
+\subsubsection{\texorpdfstring{T\+C\+P\+\_\+\+M\+A\+X\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+L\+E\+N\+G\+TH}{TCP\_MAX\_HEADER\_LENGTH}}
+{\footnotesize\ttfamily \#define T\+C\+P\+\_\+\+M\+A\+X\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+L\+E\+N\+G\+TH~60}
+
+
+
+Definition at line 214 of file tcp.\+h.
+
+\mbox{\Hypertarget{tcp_8h_a54e8d598d7db34761edb76924934b840}\label{tcp_8h_a54e8d598d7db34761edb76924934b840}} 
+\index{tcp.\+h@{tcp.\+h}!T\+C\+P\+\_\+\+M\+A\+X\+\_\+\+M\+SS@{T\+C\+P\+\_\+\+M\+A\+X\+\_\+\+M\+SS}}
+\index{T\+C\+P\+\_\+\+M\+A\+X\+\_\+\+M\+SS@{T\+C\+P\+\_\+\+M\+A\+X\+\_\+\+M\+SS}!tcp.\+h@{tcp.\+h}}
+\subsubsection{\texorpdfstring{T\+C\+P\+\_\+\+M\+A\+X\+\_\+\+M\+SS}{TCP\_MAX\_MSS}}
+{\footnotesize\ttfamily \#define T\+C\+P\+\_\+\+M\+A\+X\+\_\+\+M\+SS~1430}
+
+
+
+Definition at line 54 of file tcp.\+h.
+
+\mbox{\Hypertarget{tcp_8h_ae54deea793dc3babd4ec25ae9ed144b7}\label{tcp_8h_ae54deea793dc3babd4ec25ae9ed144b7}} 
+\index{tcp.\+h@{tcp.\+h}!T\+C\+P\+\_\+\+M\+A\+X\+\_\+\+P\+R\+O\+B\+E\+\_\+\+I\+N\+T\+E\+R\+V\+AL@{T\+C\+P\+\_\+\+M\+A\+X\+\_\+\+P\+R\+O\+B\+E\+\_\+\+I\+N\+T\+E\+R\+V\+AL}}
+\index{T\+C\+P\+\_\+\+M\+A\+X\+\_\+\+P\+R\+O\+B\+E\+\_\+\+I\+N\+T\+E\+R\+V\+AL@{T\+C\+P\+\_\+\+M\+A\+X\+\_\+\+P\+R\+O\+B\+E\+\_\+\+I\+N\+T\+E\+R\+V\+AL}!tcp.\+h@{tcp.\+h}}
+\subsubsection{\texorpdfstring{T\+C\+P\+\_\+\+M\+A\+X\+\_\+\+P\+R\+O\+B\+E\+\_\+\+I\+N\+T\+E\+R\+V\+AL}{TCP\_MAX\_PROBE\_INTERVAL}}
+{\footnotesize\ttfamily \#define T\+C\+P\+\_\+\+M\+A\+X\+\_\+\+P\+R\+O\+B\+E\+\_\+\+I\+N\+T\+E\+R\+V\+AL~60000}
+
+
+
+Definition at line 173 of file tcp.\+h.
+
+\mbox{\Hypertarget{tcp_8h_a23562b70928601b9da68cbacdf8b616f}\label{tcp_8h_a23562b70928601b9da68cbacdf8b616f}} 
+\index{tcp.\+h@{tcp.\+h}!T\+C\+P\+\_\+\+M\+A\+X\+\_\+\+R\+E\+T\+R\+I\+ES@{T\+C\+P\+\_\+\+M\+A\+X\+\_\+\+R\+E\+T\+R\+I\+ES}}
+\index{T\+C\+P\+\_\+\+M\+A\+X\+\_\+\+R\+E\+T\+R\+I\+ES@{T\+C\+P\+\_\+\+M\+A\+X\+\_\+\+R\+E\+T\+R\+I\+ES}!tcp.\+h@{tcp.\+h}}
+\subsubsection{\texorpdfstring{T\+C\+P\+\_\+\+M\+A\+X\+\_\+\+R\+E\+T\+R\+I\+ES}{TCP\_MAX\_RETRIES}}
+{\footnotesize\ttfamily \#define T\+C\+P\+\_\+\+M\+A\+X\+\_\+\+R\+E\+T\+R\+I\+ES~5}
+
+
+
+Definition at line 110 of file tcp.\+h.
+
+\mbox{\Hypertarget{tcp_8h_ab10a9785dd0ff10bb73ddbcf6f8f43a8}\label{tcp_8h_ab10a9785dd0ff10bb73ddbcf6f8f43a8}} 
+\index{tcp.\+h@{tcp.\+h}!T\+C\+P\+\_\+\+M\+A\+X\+\_\+\+R\+TO@{T\+C\+P\+\_\+\+M\+A\+X\+\_\+\+R\+TO}}
+\index{T\+C\+P\+\_\+\+M\+A\+X\+\_\+\+R\+TO@{T\+C\+P\+\_\+\+M\+A\+X\+\_\+\+R\+TO}!tcp.\+h@{tcp.\+h}}
+\subsubsection{\texorpdfstring{T\+C\+P\+\_\+\+M\+A\+X\+\_\+\+R\+TO}{TCP\_MAX\_RTO}}
+{\footnotesize\ttfamily \#define T\+C\+P\+\_\+\+M\+A\+X\+\_\+\+R\+TO~60000}
+
+
+
+Definition at line 131 of file tcp.\+h.
+
+\mbox{\Hypertarget{tcp_8h_a220fffa3407e7ee49fdd8466c24d21b7}\label{tcp_8h_a220fffa3407e7ee49fdd8466c24d21b7}} 
+\index{tcp.\+h@{tcp.\+h}!T\+C\+P\+\_\+\+M\+A\+X\+\_\+\+R\+X\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE@{T\+C\+P\+\_\+\+M\+A\+X\+\_\+\+R\+X\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE}}
+\index{T\+C\+P\+\_\+\+M\+A\+X\+\_\+\+R\+X\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE@{T\+C\+P\+\_\+\+M\+A\+X\+\_\+\+R\+X\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE}!tcp.\+h@{tcp.\+h}}
+\subsubsection{\texorpdfstring{T\+C\+P\+\_\+\+M\+A\+X\+\_\+\+R\+X\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE}{TCP\_MAX\_RX\_BUFFER\_SIZE}}
+{\footnotesize\ttfamily \#define T\+C\+P\+\_\+\+M\+A\+X\+\_\+\+R\+X\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE~22880}
+
+
+
+Definition at line 89 of file tcp.\+h.
+
+\mbox{\Hypertarget{tcp_8h_a8d978686549f4d2aec3526cadf667dc1}\label{tcp_8h_a8d978686549f4d2aec3526cadf667dc1}} 
+\index{tcp.\+h@{tcp.\+h}!T\+C\+P\+\_\+\+M\+A\+X\+\_\+\+S\+A\+C\+K\+\_\+\+B\+L\+O\+C\+KS@{T\+C\+P\+\_\+\+M\+A\+X\+\_\+\+S\+A\+C\+K\+\_\+\+B\+L\+O\+C\+KS}}
+\index{T\+C\+P\+\_\+\+M\+A\+X\+\_\+\+S\+A\+C\+K\+\_\+\+B\+L\+O\+C\+KS@{T\+C\+P\+\_\+\+M\+A\+X\+\_\+\+S\+A\+C\+K\+\_\+\+B\+L\+O\+C\+KS}!tcp.\+h@{tcp.\+h}}
+\subsubsection{\texorpdfstring{T\+C\+P\+\_\+\+M\+A\+X\+\_\+\+S\+A\+C\+K\+\_\+\+B\+L\+O\+C\+KS}{TCP\_MAX\_SACK\_BLOCKS}}
+{\footnotesize\ttfamily \#define T\+C\+P\+\_\+\+M\+A\+X\+\_\+\+S\+A\+C\+K\+\_\+\+B\+L\+O\+C\+KS~4}
+
+
+
+Definition at line 208 of file tcp.\+h.
+
+\mbox{\Hypertarget{tcp_8h_a75302eb8ae53daebc5cfd490d5b0f951}\label{tcp_8h_a75302eb8ae53daebc5cfd490d5b0f951}} 
+\index{tcp.\+h@{tcp.\+h}!T\+C\+P\+\_\+\+M\+A\+X\+\_\+\+S\+Y\+N\+\_\+\+Q\+U\+E\+U\+E\+\_\+\+S\+I\+ZE@{T\+C\+P\+\_\+\+M\+A\+X\+\_\+\+S\+Y\+N\+\_\+\+Q\+U\+E\+U\+E\+\_\+\+S\+I\+ZE}}
+\index{T\+C\+P\+\_\+\+M\+A\+X\+\_\+\+S\+Y\+N\+\_\+\+Q\+U\+E\+U\+E\+\_\+\+S\+I\+ZE@{T\+C\+P\+\_\+\+M\+A\+X\+\_\+\+S\+Y\+N\+\_\+\+Q\+U\+E\+U\+E\+\_\+\+S\+I\+ZE}!tcp.\+h@{tcp.\+h}}
+\subsubsection{\texorpdfstring{T\+C\+P\+\_\+\+M\+A\+X\+\_\+\+S\+Y\+N\+\_\+\+Q\+U\+E\+U\+E\+\_\+\+S\+I\+ZE}{TCP\_MAX\_SYN\_QUEUE\_SIZE}}
+{\footnotesize\ttfamily \#define T\+C\+P\+\_\+\+M\+A\+X\+\_\+\+S\+Y\+N\+\_\+\+Q\+U\+E\+U\+E\+\_\+\+S\+I\+ZE~16}
+
+
+
+Definition at line 103 of file tcp.\+h.
+
+\mbox{\Hypertarget{tcp_8h_a85c483022d7093f56ad49e0f7373c432}\label{tcp_8h_a85c483022d7093f56ad49e0f7373c432}} 
+\index{tcp.\+h@{tcp.\+h}!T\+C\+P\+\_\+\+M\+A\+X\+\_\+\+T\+X\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE@{T\+C\+P\+\_\+\+M\+A\+X\+\_\+\+T\+X\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE}}
+\index{T\+C\+P\+\_\+\+M\+A\+X\+\_\+\+T\+X\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE@{T\+C\+P\+\_\+\+M\+A\+X\+\_\+\+T\+X\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE}!tcp.\+h@{tcp.\+h}}
+\subsubsection{\texorpdfstring{T\+C\+P\+\_\+\+M\+A\+X\+\_\+\+T\+X\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE}{TCP\_MAX\_TX\_BUFFER\_SIZE}}
+{\footnotesize\ttfamily \#define T\+C\+P\+\_\+\+M\+A\+X\+\_\+\+T\+X\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE~22880}
+
+
+
+Definition at line 75 of file tcp.\+h.
+
+\mbox{\Hypertarget{tcp_8h_aedd7de15002fd15efa1df5e0fcf0f68e}\label{tcp_8h_aedd7de15002fd15efa1df5e0fcf0f68e}} 
+\index{tcp.\+h@{tcp.\+h}!T\+C\+P\+\_\+\+M\+I\+N\+\_\+\+M\+SS@{T\+C\+P\+\_\+\+M\+I\+N\+\_\+\+M\+SS}}
+\index{T\+C\+P\+\_\+\+M\+I\+N\+\_\+\+M\+SS@{T\+C\+P\+\_\+\+M\+I\+N\+\_\+\+M\+SS}!tcp.\+h@{tcp.\+h}}
+\subsubsection{\texorpdfstring{T\+C\+P\+\_\+\+M\+I\+N\+\_\+\+M\+SS}{TCP\_MIN\_MSS}}
+{\footnotesize\ttfamily \#define T\+C\+P\+\_\+\+M\+I\+N\+\_\+\+M\+SS~64}
+
+
+
+Definition at line 61 of file tcp.\+h.
+
+\mbox{\Hypertarget{tcp_8h_a305211e7eb6a1e212f4e0647da3cf92b}\label{tcp_8h_a305211e7eb6a1e212f4e0647da3cf92b}} 
+\index{tcp.\+h@{tcp.\+h}!T\+C\+P\+\_\+\+M\+I\+N\+\_\+\+R\+TO@{T\+C\+P\+\_\+\+M\+I\+N\+\_\+\+R\+TO}}
+\index{T\+C\+P\+\_\+\+M\+I\+N\+\_\+\+R\+TO@{T\+C\+P\+\_\+\+M\+I\+N\+\_\+\+R\+TO}!tcp.\+h@{tcp.\+h}}
+\subsubsection{\texorpdfstring{T\+C\+P\+\_\+\+M\+I\+N\+\_\+\+R\+TO}{TCP\_MIN\_RTO}}
+{\footnotesize\ttfamily \#define T\+C\+P\+\_\+\+M\+I\+N\+\_\+\+R\+TO~1000}
+
+
+
+Definition at line 124 of file tcp.\+h.
+
+\mbox{\Hypertarget{tcp_8h_a96dd43e8ea17721fdc51d6057e5f988b}\label{tcp_8h_a96dd43e8ea17721fdc51d6057e5f988b}} 
+\index{tcp.\+h@{tcp.\+h}!T\+C\+P\+\_\+\+O\+V\+E\+R\+R\+I\+D\+E\+\_\+\+T\+I\+M\+E\+O\+UT@{T\+C\+P\+\_\+\+O\+V\+E\+R\+R\+I\+D\+E\+\_\+\+T\+I\+M\+E\+O\+UT}}
+\index{T\+C\+P\+\_\+\+O\+V\+E\+R\+R\+I\+D\+E\+\_\+\+T\+I\+M\+E\+O\+UT@{T\+C\+P\+\_\+\+O\+V\+E\+R\+R\+I\+D\+E\+\_\+\+T\+I\+M\+E\+O\+UT}!tcp.\+h@{tcp.\+h}}
+\subsubsection{\texorpdfstring{T\+C\+P\+\_\+\+O\+V\+E\+R\+R\+I\+D\+E\+\_\+\+T\+I\+M\+E\+O\+UT}{TCP\_OVERRIDE\_TIMEOUT}}
+{\footnotesize\ttfamily \#define T\+C\+P\+\_\+\+O\+V\+E\+R\+R\+I\+D\+E\+\_\+\+T\+I\+M\+E\+O\+UT~500}
+
+
+
+Definition at line 180 of file tcp.\+h.
+
+\mbox{\Hypertarget{tcp_8h_a71b2b072735743712d30d6058074ad39}\label{tcp_8h_a71b2b072735743712d30d6058074ad39}} 
+\index{tcp.\+h@{tcp.\+h}!T\+C\+P\+\_\+\+S\+A\+C\+K\+\_\+\+S\+U\+P\+P\+O\+RT@{T\+C\+P\+\_\+\+S\+A\+C\+K\+\_\+\+S\+U\+P\+P\+O\+RT}}
+\index{T\+C\+P\+\_\+\+S\+A\+C\+K\+\_\+\+S\+U\+P\+P\+O\+RT@{T\+C\+P\+\_\+\+S\+A\+C\+K\+\_\+\+S\+U\+P\+P\+O\+RT}!tcp.\+h@{tcp.\+h}}
+\subsubsection{\texorpdfstring{T\+C\+P\+\_\+\+S\+A\+C\+K\+\_\+\+S\+U\+P\+P\+O\+RT}{TCP\_SACK\_SUPPORT}}
+{\footnotesize\ttfamily \#define T\+C\+P\+\_\+\+S\+A\+C\+K\+\_\+\+S\+U\+P\+P\+O\+RT~\hyperlink{os__port_8h_abd5c8ab57c190a6522ccdbf0ed7577da}{D\+I\+S\+A\+B\+L\+ED}}
+
+
+
+Definition at line 201 of file tcp.\+h.
+
+\mbox{\Hypertarget{tcp_8h_a709793f69082c895d39f91d6f0457a44}\label{tcp_8h_a709793f69082c895d39f91d6f0457a44}} 
+\index{tcp.\+h@{tcp.\+h}!T\+C\+P\+\_\+\+S\+U\+P\+P\+O\+RT@{T\+C\+P\+\_\+\+S\+U\+P\+P\+O\+RT}}
+\index{T\+C\+P\+\_\+\+S\+U\+P\+P\+O\+RT@{T\+C\+P\+\_\+\+S\+U\+P\+P\+O\+RT}!tcp.\+h@{tcp.\+h}}
+\subsubsection{\texorpdfstring{T\+C\+P\+\_\+\+S\+U\+P\+P\+O\+RT}{TCP\_SUPPORT}}
+{\footnotesize\ttfamily \#define T\+C\+P\+\_\+\+S\+U\+P\+P\+O\+RT~\hyperlink{os__port_8h_a73c228f87e038e8295ee8ea8eceaa5ac}{E\+N\+A\+B\+L\+ED}}
+
+
+
+Definition at line 40 of file tcp.\+h.
+
+\mbox{\Hypertarget{tcp_8h_a4286cfd9edc274047735b30f2b2f7607}\label{tcp_8h_a4286cfd9edc274047735b30f2b2f7607}} 
+\index{tcp.\+h@{tcp.\+h}!T\+C\+P\+\_\+\+T\+I\+C\+K\+\_\+\+I\+N\+T\+E\+R\+V\+AL@{T\+C\+P\+\_\+\+T\+I\+C\+K\+\_\+\+I\+N\+T\+E\+R\+V\+AL}}
+\index{T\+C\+P\+\_\+\+T\+I\+C\+K\+\_\+\+I\+N\+T\+E\+R\+V\+AL@{T\+C\+P\+\_\+\+T\+I\+C\+K\+\_\+\+I\+N\+T\+E\+R\+V\+AL}!tcp.\+h@{tcp.\+h}}
+\subsubsection{\texorpdfstring{T\+C\+P\+\_\+\+T\+I\+C\+K\+\_\+\+I\+N\+T\+E\+R\+V\+AL}{TCP\_TICK\_INTERVAL}}
+{\footnotesize\ttfamily \#define T\+C\+P\+\_\+\+T\+I\+C\+K\+\_\+\+I\+N\+T\+E\+R\+V\+AL~100}
+
+
+
+Definition at line 47 of file tcp.\+h.
+
+
+
+\subsection{Typedef Documentation}
+\mbox{\Hypertarget{tcp_8h_a38f08160c28f0a8e104907d2ee71fed5}\label{tcp_8h_a38f08160c28f0a8e104907d2ee71fed5}} 
+\index{tcp.\+h@{tcp.\+h}!Tcp\+Header@{Tcp\+Header}}
+\index{Tcp\+Header@{Tcp\+Header}!tcp.\+h@{tcp.\+h}}
+\subsubsection{\texorpdfstring{Tcp\+Header}{TcpHeader}}
+{\footnotesize\ttfamily typedef \{ ... \}  \hyperlink{tcp_8h_a38f08160c28f0a8e104907d2ee71fed5}{Tcp\+Header}}
+
+
+
+T\+CP header. 
+
+\mbox{\Hypertarget{tcp_8h_a5562fc6b2b8e28e99a3c0d1c36054b72}\label{tcp_8h_a5562fc6b2b8e28e99a3c0d1c36054b72}} 
+\index{tcp.\+h@{tcp.\+h}!Tcp\+Option@{Tcp\+Option}}
+\index{Tcp\+Option@{Tcp\+Option}!tcp.\+h@{tcp.\+h}}
+\subsubsection{\texorpdfstring{Tcp\+Option}{TcpOption}}
+{\footnotesize\ttfamily typedef \{ ... \}  \hyperlink{tcp_8h_a5562fc6b2b8e28e99a3c0d1c36054b72}{Tcp\+Option}}
+
+
+
+T\+CP option. 
+
+\mbox{\Hypertarget{tcp_8h_acfab1d17433f464b8b01a6fbb186bb9e}\label{tcp_8h_acfab1d17433f464b8b01a6fbb186bb9e}} 
+\index{tcp.\+h@{tcp.\+h}!Tcp\+Queue\+Item@{Tcp\+Queue\+Item}}
+\index{Tcp\+Queue\+Item@{Tcp\+Queue\+Item}!tcp.\+h@{tcp.\+h}}
+\subsubsection{\texorpdfstring{Tcp\+Queue\+Item}{TcpQueueItem}}
+{\footnotesize\ttfamily typedef struct \hyperlink{struct__TcpQueueItem}{\+\_\+\+Tcp\+Queue\+Item}  \hyperlink{tcp_8h_acfab1d17433f464b8b01a6fbb186bb9e}{Tcp\+Queue\+Item}}
+
+
+
+Retransmission queue item. 
+
+\mbox{\Hypertarget{tcp_8h_a933e3439a35c2a8994d9de8f460cc5b1}\label{tcp_8h_a933e3439a35c2a8994d9de8f460cc5b1}} 
+\index{tcp.\+h@{tcp.\+h}!Tcp\+Syn\+Queue\+Item@{Tcp\+Syn\+Queue\+Item}}
+\index{Tcp\+Syn\+Queue\+Item@{Tcp\+Syn\+Queue\+Item}!tcp.\+h@{tcp.\+h}}
+\subsubsection{\texorpdfstring{Tcp\+Syn\+Queue\+Item}{TcpSynQueueItem}}
+{\footnotesize\ttfamily typedef struct \hyperlink{struct__TcpSynQueueItem}{\+\_\+\+Tcp\+Syn\+Queue\+Item}  \hyperlink{tcp_8h_a933e3439a35c2a8994d9de8f460cc5b1}{Tcp\+Syn\+Queue\+Item}}
+
+
+
+S\+YN queue item. 
+
+
+
+\subsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{tcp_8h_ac69e0e40557f11fc979456965cdcd2f1}\label{tcp_8h_ac69e0e40557f11fc979456965cdcd2f1}} 
+\index{tcp.\+h@{tcp.\+h}!Tcp\+Congest\+State@{Tcp\+Congest\+State}}
+\index{Tcp\+Congest\+State@{Tcp\+Congest\+State}!tcp.\+h@{tcp.\+h}}
+\subsubsection{\texorpdfstring{Tcp\+Congest\+State}{TcpCongestState}}
+{\footnotesize\ttfamily enum \hyperlink{tcp_8h_ac69e0e40557f11fc979456965cdcd2f1}{Tcp\+Congest\+State}}
+
+
+
+T\+CP congestion states. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{T\+C\+P\+\_\+\+C\+O\+N\+G\+E\+S\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+I\+D\+LE@{T\+C\+P\+\_\+\+C\+O\+N\+G\+E\+S\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+I\+D\+LE}!tcp.\+h@{tcp.\+h}}\index{tcp.\+h@{tcp.\+h}!T\+C\+P\+\_\+\+C\+O\+N\+G\+E\+S\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+I\+D\+LE@{T\+C\+P\+\_\+\+C\+O\+N\+G\+E\+S\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+I\+D\+LE}}}\mbox{\Hypertarget{tcp_8h_ac69e0e40557f11fc979456965cdcd2f1ae65a75edff829ef84c7a96ac82a6e0f3}\label{tcp_8h_ac69e0e40557f11fc979456965cdcd2f1ae65a75edff829ef84c7a96ac82a6e0f3}} 
+T\+C\+P\+\_\+\+C\+O\+N\+G\+E\+S\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+I\+D\+LE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{T\+C\+P\+\_\+\+C\+O\+N\+G\+E\+S\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+R\+E\+C\+O\+V\+E\+RY@{T\+C\+P\+\_\+\+C\+O\+N\+G\+E\+S\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+R\+E\+C\+O\+V\+E\+RY}!tcp.\+h@{tcp.\+h}}\index{tcp.\+h@{tcp.\+h}!T\+C\+P\+\_\+\+C\+O\+N\+G\+E\+S\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+R\+E\+C\+O\+V\+E\+RY@{T\+C\+P\+\_\+\+C\+O\+N\+G\+E\+S\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+R\+E\+C\+O\+V\+E\+RY}}}\mbox{\Hypertarget{tcp_8h_ac69e0e40557f11fc979456965cdcd2f1a8a8b065a15d7f4d16740a5745ff49fb2}\label{tcp_8h_ac69e0e40557f11fc979456965cdcd2f1a8a8b065a15d7f4d16740a5745ff49fb2}} 
+T\+C\+P\+\_\+\+C\+O\+N\+G\+E\+S\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+R\+E\+C\+O\+V\+E\+RY&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{T\+C\+P\+\_\+\+C\+O\+N\+G\+E\+S\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+L\+O\+S\+S\+\_\+\+R\+E\+C\+O\+V\+E\+RY@{T\+C\+P\+\_\+\+C\+O\+N\+G\+E\+S\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+L\+O\+S\+S\+\_\+\+R\+E\+C\+O\+V\+E\+RY}!tcp.\+h@{tcp.\+h}}\index{tcp.\+h@{tcp.\+h}!T\+C\+P\+\_\+\+C\+O\+N\+G\+E\+S\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+L\+O\+S\+S\+\_\+\+R\+E\+C\+O\+V\+E\+RY@{T\+C\+P\+\_\+\+C\+O\+N\+G\+E\+S\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+L\+O\+S\+S\+\_\+\+R\+E\+C\+O\+V\+E\+RY}}}\mbox{\Hypertarget{tcp_8h_ac69e0e40557f11fc979456965cdcd2f1a5c24204654ace8731ab8676ce459dc9a}\label{tcp_8h_ac69e0e40557f11fc979456965cdcd2f1a5c24204654ace8731ab8676ce459dc9a}} 
+T\+C\+P\+\_\+\+C\+O\+N\+G\+E\+S\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+L\+O\+S\+S\+\_\+\+R\+E\+C\+O\+V\+E\+RY&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line 251 of file tcp.\+h.
+
+
+\begin{DoxyCode}
+252 \{
+253    \hyperlink{tcp_8h_ac69e0e40557f11fc979456965cdcd2f1ae65a75edff829ef84c7a96ac82a6e0f3}{TCP\_CONGEST\_STATE\_IDLE}          = 0,
+254    \hyperlink{tcp_8h_ac69e0e40557f11fc979456965cdcd2f1a8a8b065a15d7f4d16740a5745ff49fb2}{TCP\_CONGEST\_STATE\_RECOVERY}      = 1,
+255    \hyperlink{tcp_8h_ac69e0e40557f11fc979456965cdcd2f1a5c24204654ace8731ab8676ce459dc9a}{TCP\_CONGEST\_STATE\_LOSS\_RECOVERY} = 2
+256 \} \hyperlink{tcp_8h_ac69e0e40557f11fc979456965cdcd2f1}{TcpCongestState};
+\end{DoxyCode}
+\mbox{\Hypertarget{tcp_8h_a4e6d97f0f2a3dc780d192efcdfe64aa7}\label{tcp_8h_a4e6d97f0f2a3dc780d192efcdfe64aa7}} 
+\index{tcp.\+h@{tcp.\+h}!Tcp\+Flags@{Tcp\+Flags}}
+\index{Tcp\+Flags@{Tcp\+Flags}!tcp.\+h@{tcp.\+h}}
+\subsubsection{\texorpdfstring{Tcp\+Flags}{TcpFlags}}
+{\footnotesize\ttfamily enum \hyperlink{tcp_8h_a4e6d97f0f2a3dc780d192efcdfe64aa7}{Tcp\+Flags}}
+
+
+
+T\+CP control flags. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{T\+C\+P\+\_\+\+F\+L\+A\+G\+\_\+\+F\+IN@{T\+C\+P\+\_\+\+F\+L\+A\+G\+\_\+\+F\+IN}!tcp.\+h@{tcp.\+h}}\index{tcp.\+h@{tcp.\+h}!T\+C\+P\+\_\+\+F\+L\+A\+G\+\_\+\+F\+IN@{T\+C\+P\+\_\+\+F\+L\+A\+G\+\_\+\+F\+IN}}}\mbox{\Hypertarget{tcp_8h_a4e6d97f0f2a3dc780d192efcdfe64aa7a332cfb33224b794e0be773cba056efa1}\label{tcp_8h_a4e6d97f0f2a3dc780d192efcdfe64aa7a332cfb33224b794e0be773cba056efa1}} 
+T\+C\+P\+\_\+\+F\+L\+A\+G\+\_\+\+F\+IN&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{T\+C\+P\+\_\+\+F\+L\+A\+G\+\_\+\+S\+YN@{T\+C\+P\+\_\+\+F\+L\+A\+G\+\_\+\+S\+YN}!tcp.\+h@{tcp.\+h}}\index{tcp.\+h@{tcp.\+h}!T\+C\+P\+\_\+\+F\+L\+A\+G\+\_\+\+S\+YN@{T\+C\+P\+\_\+\+F\+L\+A\+G\+\_\+\+S\+YN}}}\mbox{\Hypertarget{tcp_8h_a4e6d97f0f2a3dc780d192efcdfe64aa7af2f8a42ff8bff07cbca1cd2ed6df9fae}\label{tcp_8h_a4e6d97f0f2a3dc780d192efcdfe64aa7af2f8a42ff8bff07cbca1cd2ed6df9fae}} 
+T\+C\+P\+\_\+\+F\+L\+A\+G\+\_\+\+S\+YN&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{T\+C\+P\+\_\+\+F\+L\+A\+G\+\_\+\+R\+ST@{T\+C\+P\+\_\+\+F\+L\+A\+G\+\_\+\+R\+ST}!tcp.\+h@{tcp.\+h}}\index{tcp.\+h@{tcp.\+h}!T\+C\+P\+\_\+\+F\+L\+A\+G\+\_\+\+R\+ST@{T\+C\+P\+\_\+\+F\+L\+A\+G\+\_\+\+R\+ST}}}\mbox{\Hypertarget{tcp_8h_a4e6d97f0f2a3dc780d192efcdfe64aa7a2eaeb7e7c1984d0bd4d1cbb48b2b5ce4}\label{tcp_8h_a4e6d97f0f2a3dc780d192efcdfe64aa7a2eaeb7e7c1984d0bd4d1cbb48b2b5ce4}} 
+T\+C\+P\+\_\+\+F\+L\+A\+G\+\_\+\+R\+ST&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{T\+C\+P\+\_\+\+F\+L\+A\+G\+\_\+\+P\+SH@{T\+C\+P\+\_\+\+F\+L\+A\+G\+\_\+\+P\+SH}!tcp.\+h@{tcp.\+h}}\index{tcp.\+h@{tcp.\+h}!T\+C\+P\+\_\+\+F\+L\+A\+G\+\_\+\+P\+SH@{T\+C\+P\+\_\+\+F\+L\+A\+G\+\_\+\+P\+SH}}}\mbox{\Hypertarget{tcp_8h_a4e6d97f0f2a3dc780d192efcdfe64aa7a44a138e095774788c0f16e906d5a4c25}\label{tcp_8h_a4e6d97f0f2a3dc780d192efcdfe64aa7a44a138e095774788c0f16e906d5a4c25}} 
+T\+C\+P\+\_\+\+F\+L\+A\+G\+\_\+\+P\+SH&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{T\+C\+P\+\_\+\+F\+L\+A\+G\+\_\+\+A\+CK@{T\+C\+P\+\_\+\+F\+L\+A\+G\+\_\+\+A\+CK}!tcp.\+h@{tcp.\+h}}\index{tcp.\+h@{tcp.\+h}!T\+C\+P\+\_\+\+F\+L\+A\+G\+\_\+\+A\+CK@{T\+C\+P\+\_\+\+F\+L\+A\+G\+\_\+\+A\+CK}}}\mbox{\Hypertarget{tcp_8h_a4e6d97f0f2a3dc780d192efcdfe64aa7aae4cbb82c7a2373576547ed119498a4a}\label{tcp_8h_a4e6d97f0f2a3dc780d192efcdfe64aa7aae4cbb82c7a2373576547ed119498a4a}} 
+T\+C\+P\+\_\+\+F\+L\+A\+G\+\_\+\+A\+CK&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{T\+C\+P\+\_\+\+F\+L\+A\+G\+\_\+\+U\+RG@{T\+C\+P\+\_\+\+F\+L\+A\+G\+\_\+\+U\+RG}!tcp.\+h@{tcp.\+h}}\index{tcp.\+h@{tcp.\+h}!T\+C\+P\+\_\+\+F\+L\+A\+G\+\_\+\+U\+RG@{T\+C\+P\+\_\+\+F\+L\+A\+G\+\_\+\+U\+RG}}}\mbox{\Hypertarget{tcp_8h_a4e6d97f0f2a3dc780d192efcdfe64aa7ae04489b7fa5cac77c12d26a0d0d1e398}\label{tcp_8h_a4e6d97f0f2a3dc780d192efcdfe64aa7ae04489b7fa5cac77c12d26a0d0d1e398}} 
+T\+C\+P\+\_\+\+F\+L\+A\+G\+\_\+\+U\+RG&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line 263 of file tcp.\+h.
+
+
+\begin{DoxyCode}
+264 \{
+265    \hyperlink{tcp_8h_a4e6d97f0f2a3dc780d192efcdfe64aa7a332cfb33224b794e0be773cba056efa1}{TCP\_FLAG\_FIN} = 0x01,
+266    \hyperlink{tcp_8h_a4e6d97f0f2a3dc780d192efcdfe64aa7af2f8a42ff8bff07cbca1cd2ed6df9fae}{TCP\_FLAG\_SYN} = 0x02,
+267    \hyperlink{tcp_8h_a4e6d97f0f2a3dc780d192efcdfe64aa7a2eaeb7e7c1984d0bd4d1cbb48b2b5ce4}{TCP\_FLAG\_RST} = 0x04,
+268    \hyperlink{tcp_8h_a4e6d97f0f2a3dc780d192efcdfe64aa7a44a138e095774788c0f16e906d5a4c25}{TCP\_FLAG\_PSH} = 0x08,
+269    \hyperlink{tcp_8h_a4e6d97f0f2a3dc780d192efcdfe64aa7aae4cbb82c7a2373576547ed119498a4a}{TCP\_FLAG\_ACK} = 0x10,
+270    \hyperlink{tcp_8h_a4e6d97f0f2a3dc780d192efcdfe64aa7ae04489b7fa5cac77c12d26a0d0d1e398}{TCP\_FLAG\_URG} = 0x20
+271 \} \hyperlink{tcp_8h_a4e6d97f0f2a3dc780d192efcdfe64aa7}{TcpFlags};
+\end{DoxyCode}
+\mbox{\Hypertarget{tcp_8h_a064186fb289be38d3e1a71ecf446fe8c}\label{tcp_8h_a064186fb289be38d3e1a71ecf446fe8c}} 
+\index{tcp.\+h@{tcp.\+h}!Tcp\+Option\+Kind@{Tcp\+Option\+Kind}}
+\index{Tcp\+Option\+Kind@{Tcp\+Option\+Kind}!tcp.\+h@{tcp.\+h}}
+\subsubsection{\texorpdfstring{Tcp\+Option\+Kind}{TcpOptionKind}}
+{\footnotesize\ttfamily enum \hyperlink{tcp_8h_a064186fb289be38d3e1a71ecf446fe8c}{Tcp\+Option\+Kind}}
+
+
+
+T\+CP option types. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{T\+C\+P\+\_\+\+O\+P\+T\+I\+O\+N\+\_\+\+E\+ND@{T\+C\+P\+\_\+\+O\+P\+T\+I\+O\+N\+\_\+\+E\+ND}!tcp.\+h@{tcp.\+h}}\index{tcp.\+h@{tcp.\+h}!T\+C\+P\+\_\+\+O\+P\+T\+I\+O\+N\+\_\+\+E\+ND@{T\+C\+P\+\_\+\+O\+P\+T\+I\+O\+N\+\_\+\+E\+ND}}}\mbox{\Hypertarget{tcp_8h_a064186fb289be38d3e1a71ecf446fe8caf07244108eff002a75f229d8f61da372}\label{tcp_8h_a064186fb289be38d3e1a71ecf446fe8caf07244108eff002a75f229d8f61da372}} 
+T\+C\+P\+\_\+\+O\+P\+T\+I\+O\+N\+\_\+\+E\+ND&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{T\+C\+P\+\_\+\+O\+P\+T\+I\+O\+N\+\_\+\+N\+OP@{T\+C\+P\+\_\+\+O\+P\+T\+I\+O\+N\+\_\+\+N\+OP}!tcp.\+h@{tcp.\+h}}\index{tcp.\+h@{tcp.\+h}!T\+C\+P\+\_\+\+O\+P\+T\+I\+O\+N\+\_\+\+N\+OP@{T\+C\+P\+\_\+\+O\+P\+T\+I\+O\+N\+\_\+\+N\+OP}}}\mbox{\Hypertarget{tcp_8h_a064186fb289be38d3e1a71ecf446fe8cae9a7564649350c5c35115c0284fe79ba}\label{tcp_8h_a064186fb289be38d3e1a71ecf446fe8cae9a7564649350c5c35115c0284fe79ba}} 
+T\+C\+P\+\_\+\+O\+P\+T\+I\+O\+N\+\_\+\+N\+OP&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{T\+C\+P\+\_\+\+O\+P\+T\+I\+O\+N\+\_\+\+M\+A\+X\+\_\+\+S\+E\+G\+M\+E\+N\+T\+\_\+\+S\+I\+ZE@{T\+C\+P\+\_\+\+O\+P\+T\+I\+O\+N\+\_\+\+M\+A\+X\+\_\+\+S\+E\+G\+M\+E\+N\+T\+\_\+\+S\+I\+ZE}!tcp.\+h@{tcp.\+h}}\index{tcp.\+h@{tcp.\+h}!T\+C\+P\+\_\+\+O\+P\+T\+I\+O\+N\+\_\+\+M\+A\+X\+\_\+\+S\+E\+G\+M\+E\+N\+T\+\_\+\+S\+I\+ZE@{T\+C\+P\+\_\+\+O\+P\+T\+I\+O\+N\+\_\+\+M\+A\+X\+\_\+\+S\+E\+G\+M\+E\+N\+T\+\_\+\+S\+I\+ZE}}}\mbox{\Hypertarget{tcp_8h_a064186fb289be38d3e1a71ecf446fe8caa534c3934b8bd83794d7892083275375}\label{tcp_8h_a064186fb289be38d3e1a71ecf446fe8caa534c3934b8bd83794d7892083275375}} 
+T\+C\+P\+\_\+\+O\+P\+T\+I\+O\+N\+\_\+\+M\+A\+X\+\_\+\+S\+E\+G\+M\+E\+N\+T\+\_\+\+S\+I\+ZE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{T\+C\+P\+\_\+\+O\+P\+T\+I\+O\+N\+\_\+\+W\+I\+N\+D\+O\+W\+\_\+\+S\+C\+A\+L\+E\+\_\+\+F\+A\+C\+T\+OR@{T\+C\+P\+\_\+\+O\+P\+T\+I\+O\+N\+\_\+\+W\+I\+N\+D\+O\+W\+\_\+\+S\+C\+A\+L\+E\+\_\+\+F\+A\+C\+T\+OR}!tcp.\+h@{tcp.\+h}}\index{tcp.\+h@{tcp.\+h}!T\+C\+P\+\_\+\+O\+P\+T\+I\+O\+N\+\_\+\+W\+I\+N\+D\+O\+W\+\_\+\+S\+C\+A\+L\+E\+\_\+\+F\+A\+C\+T\+OR@{T\+C\+P\+\_\+\+O\+P\+T\+I\+O\+N\+\_\+\+W\+I\+N\+D\+O\+W\+\_\+\+S\+C\+A\+L\+E\+\_\+\+F\+A\+C\+T\+OR}}}\mbox{\Hypertarget{tcp_8h_a064186fb289be38d3e1a71ecf446fe8cab46e59953fdcbd47fdc6f9d372c8fefe}\label{tcp_8h_a064186fb289be38d3e1a71ecf446fe8cab46e59953fdcbd47fdc6f9d372c8fefe}} 
+T\+C\+P\+\_\+\+O\+P\+T\+I\+O\+N\+\_\+\+W\+I\+N\+D\+O\+W\+\_\+\+S\+C\+A\+L\+E\+\_\+\+F\+A\+C\+T\+OR&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{T\+C\+P\+\_\+\+O\+P\+T\+I\+O\+N\+\_\+\+S\+A\+C\+K\+\_\+\+P\+E\+R\+M\+I\+T\+T\+ED@{T\+C\+P\+\_\+\+O\+P\+T\+I\+O\+N\+\_\+\+S\+A\+C\+K\+\_\+\+P\+E\+R\+M\+I\+T\+T\+ED}!tcp.\+h@{tcp.\+h}}\index{tcp.\+h@{tcp.\+h}!T\+C\+P\+\_\+\+O\+P\+T\+I\+O\+N\+\_\+\+S\+A\+C\+K\+\_\+\+P\+E\+R\+M\+I\+T\+T\+ED@{T\+C\+P\+\_\+\+O\+P\+T\+I\+O\+N\+\_\+\+S\+A\+C\+K\+\_\+\+P\+E\+R\+M\+I\+T\+T\+ED}}}\mbox{\Hypertarget{tcp_8h_a064186fb289be38d3e1a71ecf446fe8ca99d8f487511fc1d0c5db7204e0c14abf}\label{tcp_8h_a064186fb289be38d3e1a71ecf446fe8ca99d8f487511fc1d0c5db7204e0c14abf}} 
+T\+C\+P\+\_\+\+O\+P\+T\+I\+O\+N\+\_\+\+S\+A\+C\+K\+\_\+\+P\+E\+R\+M\+I\+T\+T\+ED&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{T\+C\+P\+\_\+\+O\+P\+T\+I\+O\+N\+\_\+\+S\+A\+CK@{T\+C\+P\+\_\+\+O\+P\+T\+I\+O\+N\+\_\+\+S\+A\+CK}!tcp.\+h@{tcp.\+h}}\index{tcp.\+h@{tcp.\+h}!T\+C\+P\+\_\+\+O\+P\+T\+I\+O\+N\+\_\+\+S\+A\+CK@{T\+C\+P\+\_\+\+O\+P\+T\+I\+O\+N\+\_\+\+S\+A\+CK}}}\mbox{\Hypertarget{tcp_8h_a064186fb289be38d3e1a71ecf446fe8ca46972692f83abeff52f7f62fd0aec186}\label{tcp_8h_a064186fb289be38d3e1a71ecf446fe8ca46972692f83abeff52f7f62fd0aec186}} 
+T\+C\+P\+\_\+\+O\+P\+T\+I\+O\+N\+\_\+\+S\+A\+CK&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{T\+C\+P\+\_\+\+O\+P\+T\+I\+O\+N\+\_\+\+T\+I\+M\+E\+S\+T\+A\+MP@{T\+C\+P\+\_\+\+O\+P\+T\+I\+O\+N\+\_\+\+T\+I\+M\+E\+S\+T\+A\+MP}!tcp.\+h@{tcp.\+h}}\index{tcp.\+h@{tcp.\+h}!T\+C\+P\+\_\+\+O\+P\+T\+I\+O\+N\+\_\+\+T\+I\+M\+E\+S\+T\+A\+MP@{T\+C\+P\+\_\+\+O\+P\+T\+I\+O\+N\+\_\+\+T\+I\+M\+E\+S\+T\+A\+MP}}}\mbox{\Hypertarget{tcp_8h_a064186fb289be38d3e1a71ecf446fe8ca3efeeda47a47a6e02149191d780777bc}\label{tcp_8h_a064186fb289be38d3e1a71ecf446fe8ca3efeeda47a47a6e02149191d780777bc}} 
+T\+C\+P\+\_\+\+O\+P\+T\+I\+O\+N\+\_\+\+T\+I\+M\+E\+S\+T\+A\+MP&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line 278 of file tcp.\+h.
+
+
+\begin{DoxyCode}
+279 \{
+280    \hyperlink{tcp_8h_a064186fb289be38d3e1a71ecf446fe8caf07244108eff002a75f229d8f61da372}{TCP\_OPTION\_END}                 = 0,
+281    \hyperlink{tcp_8h_a064186fb289be38d3e1a71ecf446fe8cae9a7564649350c5c35115c0284fe79ba}{TCP\_OPTION\_NOP}                 = 1,
+282    \hyperlink{tcp_8h_a064186fb289be38d3e1a71ecf446fe8caa534c3934b8bd83794d7892083275375}{TCP\_OPTION\_MAX\_SEGMENT\_SIZE}    = 2,
+283    \hyperlink{tcp_8h_a064186fb289be38d3e1a71ecf446fe8cab46e59953fdcbd47fdc6f9d372c8fefe}{TCP\_OPTION\_WINDOW\_SCALE\_FACTOR} = 3,
+284    \hyperlink{tcp_8h_a064186fb289be38d3e1a71ecf446fe8ca99d8f487511fc1d0c5db7204e0c14abf}{TCP\_OPTION\_SACK\_PERMITTED}      = 4,
+285    \hyperlink{tcp_8h_a064186fb289be38d3e1a71ecf446fe8ca46972692f83abeff52f7f62fd0aec186}{TCP\_OPTION\_SACK}                = 5,
+286    \hyperlink{tcp_8h_a064186fb289be38d3e1a71ecf446fe8ca3efeeda47a47a6e02149191d780777bc}{TCP\_OPTION\_TIMESTAMP}           = 8
+287 \} \hyperlink{tcp_8h_a064186fb289be38d3e1a71ecf446fe8c}{TcpOptionKind};
+\end{DoxyCode}
+\mbox{\Hypertarget{tcp_8h_a4310b47e70de394d33f7cf601e35bfec}\label{tcp_8h_a4310b47e70de394d33f7cf601e35bfec}} 
+\index{tcp.\+h@{tcp.\+h}!Tcp\+State@{Tcp\+State}}
+\index{Tcp\+State@{Tcp\+State}!tcp.\+h@{tcp.\+h}}
+\subsubsection{\texorpdfstring{Tcp\+State}{TcpState}}
+{\footnotesize\ttfamily enum \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfec}{Tcp\+State}}
+
+
+
+T\+CP F\+SM states. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{T\+C\+P\+\_\+\+S\+T\+A\+T\+E\+\_\+\+C\+L\+O\+S\+ED@{T\+C\+P\+\_\+\+S\+T\+A\+T\+E\+\_\+\+C\+L\+O\+S\+ED}!tcp.\+h@{tcp.\+h}}\index{tcp.\+h@{tcp.\+h}!T\+C\+P\+\_\+\+S\+T\+A\+T\+E\+\_\+\+C\+L\+O\+S\+ED@{T\+C\+P\+\_\+\+S\+T\+A\+T\+E\+\_\+\+C\+L\+O\+S\+ED}}}\mbox{\Hypertarget{tcp_8h_a4310b47e70de394d33f7cf601e35bfeca1af39131036c81d79f09174d2fb6f788}\label{tcp_8h_a4310b47e70de394d33f7cf601e35bfeca1af39131036c81d79f09174d2fb6f788}} 
+T\+C\+P\+\_\+\+S\+T\+A\+T\+E\+\_\+\+C\+L\+O\+S\+ED&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{T\+C\+P\+\_\+\+S\+T\+A\+T\+E\+\_\+\+L\+I\+S\+T\+EN@{T\+C\+P\+\_\+\+S\+T\+A\+T\+E\+\_\+\+L\+I\+S\+T\+EN}!tcp.\+h@{tcp.\+h}}\index{tcp.\+h@{tcp.\+h}!T\+C\+P\+\_\+\+S\+T\+A\+T\+E\+\_\+\+L\+I\+S\+T\+EN@{T\+C\+P\+\_\+\+S\+T\+A\+T\+E\+\_\+\+L\+I\+S\+T\+EN}}}\mbox{\Hypertarget{tcp_8h_a4310b47e70de394d33f7cf601e35bfeca7f99d4d604cb5009b50f04f84f5cb1c6}\label{tcp_8h_a4310b47e70de394d33f7cf601e35bfeca7f99d4d604cb5009b50f04f84f5cb1c6}} 
+T\+C\+P\+\_\+\+S\+T\+A\+T\+E\+\_\+\+L\+I\+S\+T\+EN&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{T\+C\+P\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+Y\+N\+\_\+\+S\+E\+NT@{T\+C\+P\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+Y\+N\+\_\+\+S\+E\+NT}!tcp.\+h@{tcp.\+h}}\index{tcp.\+h@{tcp.\+h}!T\+C\+P\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+Y\+N\+\_\+\+S\+E\+NT@{T\+C\+P\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+Y\+N\+\_\+\+S\+E\+NT}}}\mbox{\Hypertarget{tcp_8h_a4310b47e70de394d33f7cf601e35bfeca63834296a6449f272b397d54a5536bfc}\label{tcp_8h_a4310b47e70de394d33f7cf601e35bfeca63834296a6449f272b397d54a5536bfc}} 
+T\+C\+P\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+Y\+N\+\_\+\+S\+E\+NT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{T\+C\+P\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+Y\+N\+\_\+\+R\+E\+C\+E\+I\+V\+ED@{T\+C\+P\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+Y\+N\+\_\+\+R\+E\+C\+E\+I\+V\+ED}!tcp.\+h@{tcp.\+h}}\index{tcp.\+h@{tcp.\+h}!T\+C\+P\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+Y\+N\+\_\+\+R\+E\+C\+E\+I\+V\+ED@{T\+C\+P\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+Y\+N\+\_\+\+R\+E\+C\+E\+I\+V\+ED}}}\mbox{\Hypertarget{tcp_8h_a4310b47e70de394d33f7cf601e35bfecadfce7e58cb083022157243f993d4ddc3}\label{tcp_8h_a4310b47e70de394d33f7cf601e35bfecadfce7e58cb083022157243f993d4ddc3}} 
+T\+C\+P\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+Y\+N\+\_\+\+R\+E\+C\+E\+I\+V\+ED&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{T\+C\+P\+\_\+\+S\+T\+A\+T\+E\+\_\+\+E\+S\+T\+A\+B\+L\+I\+S\+H\+ED@{T\+C\+P\+\_\+\+S\+T\+A\+T\+E\+\_\+\+E\+S\+T\+A\+B\+L\+I\+S\+H\+ED}!tcp.\+h@{tcp.\+h}}\index{tcp.\+h@{tcp.\+h}!T\+C\+P\+\_\+\+S\+T\+A\+T\+E\+\_\+\+E\+S\+T\+A\+B\+L\+I\+S\+H\+ED@{T\+C\+P\+\_\+\+S\+T\+A\+T\+E\+\_\+\+E\+S\+T\+A\+B\+L\+I\+S\+H\+ED}}}\mbox{\Hypertarget{tcp_8h_a4310b47e70de394d33f7cf601e35bfecaacb7ccce8d3fcdbc6635983251b22189}\label{tcp_8h_a4310b47e70de394d33f7cf601e35bfecaacb7ccce8d3fcdbc6635983251b22189}} 
+T\+C\+P\+\_\+\+S\+T\+A\+T\+E\+\_\+\+E\+S\+T\+A\+B\+L\+I\+S\+H\+ED&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{T\+C\+P\+\_\+\+S\+T\+A\+T\+E\+\_\+\+C\+L\+O\+S\+E\+\_\+\+W\+A\+IT@{T\+C\+P\+\_\+\+S\+T\+A\+T\+E\+\_\+\+C\+L\+O\+S\+E\+\_\+\+W\+A\+IT}!tcp.\+h@{tcp.\+h}}\index{tcp.\+h@{tcp.\+h}!T\+C\+P\+\_\+\+S\+T\+A\+T\+E\+\_\+\+C\+L\+O\+S\+E\+\_\+\+W\+A\+IT@{T\+C\+P\+\_\+\+S\+T\+A\+T\+E\+\_\+\+C\+L\+O\+S\+E\+\_\+\+W\+A\+IT}}}\mbox{\Hypertarget{tcp_8h_a4310b47e70de394d33f7cf601e35bfecabd723866a1772c3180b372605cfbc963}\label{tcp_8h_a4310b47e70de394d33f7cf601e35bfecabd723866a1772c3180b372605cfbc963}} 
+T\+C\+P\+\_\+\+S\+T\+A\+T\+E\+\_\+\+C\+L\+O\+S\+E\+\_\+\+W\+A\+IT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{T\+C\+P\+\_\+\+S\+T\+A\+T\+E\+\_\+\+L\+A\+S\+T\+\_\+\+A\+CK@{T\+C\+P\+\_\+\+S\+T\+A\+T\+E\+\_\+\+L\+A\+S\+T\+\_\+\+A\+CK}!tcp.\+h@{tcp.\+h}}\index{tcp.\+h@{tcp.\+h}!T\+C\+P\+\_\+\+S\+T\+A\+T\+E\+\_\+\+L\+A\+S\+T\+\_\+\+A\+CK@{T\+C\+P\+\_\+\+S\+T\+A\+T\+E\+\_\+\+L\+A\+S\+T\+\_\+\+A\+CK}}}\mbox{\Hypertarget{tcp_8h_a4310b47e70de394d33f7cf601e35bfeca29f7d016b33a1856dfba699643c69260}\label{tcp_8h_a4310b47e70de394d33f7cf601e35bfeca29f7d016b33a1856dfba699643c69260}} 
+T\+C\+P\+\_\+\+S\+T\+A\+T\+E\+\_\+\+L\+A\+S\+T\+\_\+\+A\+CK&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{T\+C\+P\+\_\+\+S\+T\+A\+T\+E\+\_\+\+F\+I\+N\+\_\+\+W\+A\+I\+T\+\_\+1@{T\+C\+P\+\_\+\+S\+T\+A\+T\+E\+\_\+\+F\+I\+N\+\_\+\+W\+A\+I\+T\+\_\+1}!tcp.\+h@{tcp.\+h}}\index{tcp.\+h@{tcp.\+h}!T\+C\+P\+\_\+\+S\+T\+A\+T\+E\+\_\+\+F\+I\+N\+\_\+\+W\+A\+I\+T\+\_\+1@{T\+C\+P\+\_\+\+S\+T\+A\+T\+E\+\_\+\+F\+I\+N\+\_\+\+W\+A\+I\+T\+\_\+1}}}\mbox{\Hypertarget{tcp_8h_a4310b47e70de394d33f7cf601e35bfecad80d0b794cc52f39180e65bd1da1b555}\label{tcp_8h_a4310b47e70de394d33f7cf601e35bfecad80d0b794cc52f39180e65bd1da1b555}} 
+T\+C\+P\+\_\+\+S\+T\+A\+T\+E\+\_\+\+F\+I\+N\+\_\+\+W\+A\+I\+T\+\_\+1&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{T\+C\+P\+\_\+\+S\+T\+A\+T\+E\+\_\+\+F\+I\+N\+\_\+\+W\+A\+I\+T\+\_\+2@{T\+C\+P\+\_\+\+S\+T\+A\+T\+E\+\_\+\+F\+I\+N\+\_\+\+W\+A\+I\+T\+\_\+2}!tcp.\+h@{tcp.\+h}}\index{tcp.\+h@{tcp.\+h}!T\+C\+P\+\_\+\+S\+T\+A\+T\+E\+\_\+\+F\+I\+N\+\_\+\+W\+A\+I\+T\+\_\+2@{T\+C\+P\+\_\+\+S\+T\+A\+T\+E\+\_\+\+F\+I\+N\+\_\+\+W\+A\+I\+T\+\_\+2}}}\mbox{\Hypertarget{tcp_8h_a4310b47e70de394d33f7cf601e35bfecac50f13616eeb349dc1aaa5cfd3422018}\label{tcp_8h_a4310b47e70de394d33f7cf601e35bfecac50f13616eeb349dc1aaa5cfd3422018}} 
+T\+C\+P\+\_\+\+S\+T\+A\+T\+E\+\_\+\+F\+I\+N\+\_\+\+W\+A\+I\+T\+\_\+2&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{T\+C\+P\+\_\+\+S\+T\+A\+T\+E\+\_\+\+C\+L\+O\+S\+I\+NG@{T\+C\+P\+\_\+\+S\+T\+A\+T\+E\+\_\+\+C\+L\+O\+S\+I\+NG}!tcp.\+h@{tcp.\+h}}\index{tcp.\+h@{tcp.\+h}!T\+C\+P\+\_\+\+S\+T\+A\+T\+E\+\_\+\+C\+L\+O\+S\+I\+NG@{T\+C\+P\+\_\+\+S\+T\+A\+T\+E\+\_\+\+C\+L\+O\+S\+I\+NG}}}\mbox{\Hypertarget{tcp_8h_a4310b47e70de394d33f7cf601e35bfecad9c881087c2449f9d8c7a2a2ab188f22}\label{tcp_8h_a4310b47e70de394d33f7cf601e35bfecad9c881087c2449f9d8c7a2a2ab188f22}} 
+T\+C\+P\+\_\+\+S\+T\+A\+T\+E\+\_\+\+C\+L\+O\+S\+I\+NG&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{T\+C\+P\+\_\+\+S\+T\+A\+T\+E\+\_\+\+T\+I\+M\+E\+\_\+\+W\+A\+IT@{T\+C\+P\+\_\+\+S\+T\+A\+T\+E\+\_\+\+T\+I\+M\+E\+\_\+\+W\+A\+IT}!tcp.\+h@{tcp.\+h}}\index{tcp.\+h@{tcp.\+h}!T\+C\+P\+\_\+\+S\+T\+A\+T\+E\+\_\+\+T\+I\+M\+E\+\_\+\+W\+A\+IT@{T\+C\+P\+\_\+\+S\+T\+A\+T\+E\+\_\+\+T\+I\+M\+E\+\_\+\+W\+A\+IT}}}\mbox{\Hypertarget{tcp_8h_a4310b47e70de394d33f7cf601e35bfeca8fa1774b3f785db85813df1b8e158c56}\label{tcp_8h_a4310b47e70de394d33f7cf601e35bfeca8fa1774b3f785db85813df1b8e158c56}} 
+T\+C\+P\+\_\+\+S\+T\+A\+T\+E\+\_\+\+T\+I\+M\+E\+\_\+\+W\+A\+IT&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line 231 of file tcp.\+h.
+
+
+\begin{DoxyCode}
+232 \{
+233    \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfeca1af39131036c81d79f09174d2fb6f788}{TCP\_STATE\_CLOSED}       = 0,
+234    \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfeca7f99d4d604cb5009b50f04f84f5cb1c6}{TCP\_STATE\_LISTEN}       = 1,
+235    \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfeca63834296a6449f272b397d54a5536bfc}{TCP\_STATE\_SYN\_SENT}     = 2,
+236    \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfecadfce7e58cb083022157243f993d4ddc3}{TCP\_STATE\_SYN\_RECEIVED} = 3,
+237    \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfecaacb7ccce8d3fcdbc6635983251b22189}{TCP\_STATE\_ESTABLISHED}  = 4,
+238    \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfecabd723866a1772c3180b372605cfbc963}{TCP\_STATE\_CLOSE\_WAIT}   = 5,
+239    \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfeca29f7d016b33a1856dfba699643c69260}{TCP\_STATE\_LAST\_ACK}     = 6,
+240    \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfecad80d0b794cc52f39180e65bd1da1b555}{TCP\_STATE\_FIN\_WAIT\_1}   = 7,
+241    \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfecac50f13616eeb349dc1aaa5cfd3422018}{TCP\_STATE\_FIN\_WAIT\_2}   = 8,
+242    \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfecad9c881087c2449f9d8c7a2a2ab188f22}{TCP\_STATE\_CLOSING}      = 9,
+243    \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfeca8fa1774b3f785db85813df1b8e158c56}{TCP\_STATE\_TIME\_WAIT}    = 10
+244 \} \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfec}{TcpState};
+\end{DoxyCode}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{tcp_8h_a2e3cdf2c9c5e7d6939f15a7cea345fe7}\label{tcp_8h_a2e3cdf2c9c5e7d6939f15a7cea345fe7}} 
+\index{tcp.\+h@{tcp.\+h}!tcp\+Abort@{tcp\+Abort}}
+\index{tcp\+Abort@{tcp\+Abort}!tcp.\+h@{tcp.\+h}}
+\subsubsection{\texorpdfstring{tcp\+Abort()}{tcpAbort()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} tcp\+Abort (\begin{DoxyParamCaption}\item[{\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$}]{socket }\end{DoxyParamCaption})}
+
+
+
+Abort an existing T\+CP connection. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em socket} & Handle identifying the socket to close \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 873 of file tcp.\+c.
+
+
+\begin{DoxyCode}
+874 \{
+875    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+876 
+877    \textcolor{comment}{//Check current state}
+878    \textcolor{keywordflow}{switch}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->state)
+879    \{
+880    \textcolor{comment}{//SYN-RECEIVED, ESTABLISHED, FIN-WAIT-1}
+881    \textcolor{comment}{//FIN-WAIT-2 or CLOSE-WAIT state?}
+882    \textcolor{keywordflow}{case} \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfecadfce7e58cb083022157243f993d4ddc3}{TCP\_STATE\_SYN\_RECEIVED}:
+883    \textcolor{keywordflow}{case} \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfecaacb7ccce8d3fcdbc6635983251b22189}{TCP\_STATE\_ESTABLISHED}:
+884    \textcolor{keywordflow}{case} \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfecad80d0b794cc52f39180e65bd1da1b555}{TCP\_STATE\_FIN\_WAIT\_1}:
+885    \textcolor{keywordflow}{case} \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfecac50f13616eeb349dc1aaa5cfd3422018}{TCP\_STATE\_FIN\_WAIT\_2}:
+886    \textcolor{keywordflow}{case} \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfecabd723866a1772c3180b372605cfbc963}{TCP\_STATE\_CLOSE\_WAIT}:
+887       \textcolor{comment}{//Send a reset segment}
+888       error = \hyperlink{tcp__misc_8c_acf2944966efe796f3bb867f9d7233591}{tcpSendSegment}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, \hyperlink{tcp_8h_a4e6d97f0f2a3dc780d192efcdfe64aa7a2eaeb7e7c1984d0bd4d1cbb48b2b5ce4}{TCP\_FLAG\_RST}, 
+      \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->sndNxt, 0, 0, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE});
+889       \textcolor{comment}{//Enter CLOSED state}
+890       \hyperlink{tcp__misc_8c_af8741d2662dcc13ed4695fec3ef5a365}{tcpChangeState}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfeca1af39131036c81d79f09174d2fb6f788}{TCP\_STATE\_CLOSED});
+891       \textcolor{comment}{//Delete TCB}
+892       \hyperlink{tcp__misc_8c_afdcebf22cbad213fdb1d751829db9fb3}{tcpDeleteControlBlock}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket});
+893       \textcolor{comment}{//Mark the socket as closed}
+894       \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->type = \hyperlink{socket_8h_aa78c7398fa81f7f62aa233159d4d8d97a69a5ebbd0e9391abfc7f6798ebf73fb6}{SOCKET\_TYPE\_UNUSED};
+895       \textcolor{comment}{//Return status code}
+896       \textcolor{keywordflow}{return} error;
+897 
+898    \textcolor{comment}{//TIME-WAIT state?}
+899    \textcolor{keywordflow}{case} \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfeca8fa1774b3f785db85813df1b8e158c56}{TCP\_STATE\_TIME\_WAIT}:
+900 \textcolor{preprocessor}{#if (TCP\_2MSL\_TIMER > 0)}
+901       \textcolor{comment}{//The user doe not own the socket anymore...}
+902       \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->ownedFlag = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+903       \textcolor{comment}{//TCB will be deleted and socket will be closed}
+904       \textcolor{comment}{//when the 2MSL timer will elapse}
+905       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+906 \textcolor{preprocessor}{#else}
+907       \textcolor{comment}{//Enter CLOSED state}
+908       \hyperlink{tcp__misc_8c_af8741d2662dcc13ed4695fec3ef5a365}{tcpChangeState}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfeca1af39131036c81d79f09174d2fb6f788}{TCP\_STATE\_CLOSED});
+909       \textcolor{comment}{//Delete TCB}
+910       \hyperlink{tcp__misc_8c_afdcebf22cbad213fdb1d751829db9fb3}{tcpDeleteControlBlock}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket});
+911       \textcolor{comment}{//Mark the socket as closed}
+912       \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->type = \hyperlink{socket_8h_aa78c7398fa81f7f62aa233159d4d8d97a69a5ebbd0e9391abfc7f6798ebf73fb6}{SOCKET\_TYPE\_UNUSED};
+913       \textcolor{comment}{//No error to report}
+914       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+915 \textcolor{preprocessor}{#endif}
+916 
+917    \textcolor{comment}{//Any other state?}
+918    \textcolor{keywordflow}{default}:
+919       \textcolor{comment}{//Enter CLOSED state}
+920       \hyperlink{tcp__misc_8c_af8741d2662dcc13ed4695fec3ef5a365}{tcpChangeState}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfeca1af39131036c81d79f09174d2fb6f788}{TCP\_STATE\_CLOSED});
+921       \textcolor{comment}{//Delete TCB}
+922       \hyperlink{tcp__misc_8c_afdcebf22cbad213fdb1d751829db9fb3}{tcpDeleteControlBlock}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket});
+923       \textcolor{comment}{//Mark the socket as closed}
+924       \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->type = \hyperlink{socket_8h_aa78c7398fa81f7f62aa233159d4d8d97a69a5ebbd0e9391abfc7f6798ebf73fb6}{SOCKET\_TYPE\_UNUSED};
+925       \textcolor{comment}{//No error to report}
+926       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+927    \}
+928 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{tcp_8h_a5ef77d175010247794c1e98a9acc0e7e}\label{tcp_8h_a5ef77d175010247794c1e98a9acc0e7e}} 
+\index{tcp.\+h@{tcp.\+h}!tcp\+Accept@{tcp\+Accept}}
+\index{tcp\+Accept@{tcp\+Accept}!tcp.\+h@{tcp.\+h}}
+\subsubsection{\texorpdfstring{tcp\+Accept()}{tcpAccept()}}
+{\footnotesize\ttfamily \hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket}$\ast$ tcp\+Accept (\begin{DoxyParamCaption}\item[{\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$}]{socket,  }\item[{\hyperlink{structIpAddr}{Ip\+Addr} $\ast$}]{client\+Ip\+Addr,  }\item[{\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} $\ast$}]{client\+Port }\end{DoxyParamCaption})}
+
+
+
+Permit an incoming connection attempt on a T\+CP socket. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em socket} & Handle to a socket previously placed in a listening state \\
+\hline
+\mbox{\tt out}  & {\em client\+Ip\+Addr} & IP address of the client \\
+\hline
+\mbox{\tt out}  & {\em client\+Port} & Port number used by the client \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Handle to the socket in which the actual connection is made 
+\end{DoxyReturn}
+
+
+Definition at line 263 of file tcp.\+c.
+
+
+\begin{DoxyCode}
+264 \{
+265    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+266    \hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} *newSocket;
+267    \hyperlink{struct__TcpSynQueueItem}{TcpSynQueueItem} *queueItem;
+268 
+269    \textcolor{comment}{//Ensure the socket was previously placed in the listening state}
+270    \textcolor{keywordflow}{if}(\hyperlink{tcp_8c_a5256b029b29f2bdbf34927938935b7ff}{tcpGetState}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}) != \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfeca7f99d4d604cb5009b50f04f84f5cb1c6}{TCP\_STATE\_LISTEN})
+271       \textcolor{keywordflow}{return} \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+272 
+273    \textcolor{comment}{//Get exclusive access}
+274    \hyperlink{os__port__chibios_8c_a58485224df4bfa522246d55b35bbd83a}{osAcquireMutex}(&\hyperlink{net_8c_afe31551ad26115fae8e575654346d441}{netMutex});
+275 
+276    \textcolor{comment}{//Wait for an connection attempt}
+277    \textcolor{keywordflow}{while}(1)
+278    \{
+279       \textcolor{comment}{//The SYN queue is empty?}
+280       \textcolor{keywordflow}{if}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->synQueue == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+281       \{
+282          \textcolor{comment}{//Set the events the application is interested in}
+283          \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->eventMask = \hyperlink{socket_8h_add8a4c36456f478ab23bd4372aebde6ea72985d7e82625f037ca8a6734f49996c}{SOCKET\_EVENT\_RX\_READY};
+284          \textcolor{comment}{//Reset the event object}
+285          \hyperlink{os__port__chibios_8c_a9122a1cf258caef553a6b224ef8ef6bf}{osResetEvent}(&\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->event);
+286 
+287          \textcolor{comment}{//Release exclusive access}
+288          \hyperlink{os__port__chibios_8c_a8e10e5b2c6d3877b5ba60e375ac45d79}{osReleaseMutex}(&\hyperlink{net_8c_afe31551ad26115fae8e575654346d441}{netMutex});
+289          \textcolor{comment}{//Wait until a SYN message is received from a client}
+290          \hyperlink{os__port__chibios_8c_a1dc707247e44dfefae5bec4a322fc78a}{osWaitForEvent}(&\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->event, \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->timeout);
+291          \textcolor{comment}{//Get exclusive access}
+292          \hyperlink{os__port__chibios_8c_a58485224df4bfa522246d55b35bbd83a}{osAcquireMutex}(&\hyperlink{net_8c_afe31551ad26115fae8e575654346d441}{netMutex});
+293       \}
+294 
+295       \textcolor{comment}{//Check whether the queue is still empty}
+296       \textcolor{keywordflow}{if}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->synQueue == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+297       \{
+298          \textcolor{comment}{//Timeout error}
+299          newSocket = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+300          \textcolor{comment}{//Exit immediately}
+301          \textcolor{keywordflow}{break};
+302       \}
+303 
+304       \textcolor{comment}{//Point to the first item in the SYN queue}
+305       queueItem = \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->synQueue;
+306 
+307       \textcolor{comment}{//Return the client IP address and port number}
+308       \textcolor{keywordflow}{if}(clientIpAddr)
+309          *clientIpAddr = queueItem->\hyperlink{struct__TcpSynQueueItem_a6a25919b9ea8c17c7e85fcacfa52f6a1}{srcAddr};
+310       \textcolor{keywordflow}{if}(clientPort)
+311          *clientPort = queueItem->\hyperlink{struct__TcpSynQueueItem_ab6f9b3ec9b271f14661b6c6d18fb3066}{srcPort};
+312 
+313       \textcolor{comment}{//Release exclusive access}
+314       \hyperlink{os__port__chibios_8c_a8e10e5b2c6d3877b5ba60e375ac45d79}{osReleaseMutex}(&\hyperlink{net_8c_afe31551ad26115fae8e575654346d441}{netMutex});
+315       \textcolor{comment}{//Create a new socket to handle the incoming connection request}
+316       newSocket = \hyperlink{socket_8c_aa139bbf42b326b52eb08cf52771ac337}{socketOpen}(\hyperlink{socket_8h_aa78c7398fa81f7f62aa233159d4d8d97a9dab003c4dc9f7279e806241534d4859}{SOCKET\_TYPE\_STREAM}, 
+      \hyperlink{socket_8h_a56eb0e60bda5d1d8a2e702228405d969ae0f38a6f025bce7700b3cf0ddd04bb2a}{SOCKET\_IP\_PROTO\_TCP});
+317       \textcolor{comment}{//Get exclusive access}
+318       \hyperlink{os__port__chibios_8c_a58485224df4bfa522246d55b35bbd83a}{osAcquireMutex}(&\hyperlink{net_8c_afe31551ad26115fae8e575654346d441}{netMutex});
+319 
+320       \textcolor{comment}{//Socket successfully created?}
+321       \textcolor{keywordflow}{if}(newSocket != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+322       \{
+323          \textcolor{comment}{//The user owns the socket}
+324          newSocket->ownedFlag = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+325 
+326          \textcolor{comment}{//Inherit settings from the listening socket}
+327          newSocket->txBufferSize = \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->txBufferSize;
+328          newSocket->rxBufferSize = \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->rxBufferSize;
+329 
+330          \textcolor{comment}{//Number of chunks that comprise the TX and the RX buffers}
+331          newSocket->txBuffer.maxChunkCount = \hyperlink{os__port_8h_aa1394a41d43c0f3fd30febe41c7bb340}{arraysize}(newSocket->txBuffer.chunk);
+332          newSocket->rxBuffer.maxChunkCount = \hyperlink{os__port_8h_aa1394a41d43c0f3fd30febe41c7bb340}{arraysize}(newSocket->rxBuffer.chunk);
+333 
+334          \textcolor{comment}{//Allocate transmit buffer}
+335          error = \hyperlink{net__mem_8c_ac0a46f396754e069dd1ee65cdc559b28}{netBufferSetLength}((\hyperlink{structNetBuffer}{NetBuffer} *) &newSocket->txBuffer,
+336             newSocket->txBufferSize);
+337 
+338          \textcolor{comment}{//Check status code}
+339          \textcolor{keywordflow}{if}(!error)
+340          \{
+341             \textcolor{comment}{//Allocate receive buffer}
+342             error = \hyperlink{net__mem_8c_ac0a46f396754e069dd1ee65cdc559b28}{netBufferSetLength}((\hyperlink{structNetBuffer}{NetBuffer} *) &newSocket->rxBuffer,
+343                newSocket->rxBufferSize);
+344          \}
+345 
+346          \textcolor{comment}{//Transmit and receive buffers successfully allocated?}
+347          \textcolor{keywordflow}{if}(!error)
+348          \{
+349             \textcolor{comment}{//Bind the newly created socket to the appropriate interface}
+350             newSocket->interface = queueItem->\hyperlink{struct__TcpSynQueueItem_a547cb108888dc5c24d68f917429f0c94}{interface};
+351 
+352             \textcolor{comment}{//Bind the socket to the specified address}
+353             newSocket->localIpAddr = queueItem->\hyperlink{struct__TcpSynQueueItem_a6187af43e120966851c614da06753e2c}{destAddr};
+354             newSocket->localPort = \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->localPort;
+355             \textcolor{comment}{//Save the port number and the IP address of the remote host}
+356             newSocket->remoteIpAddr = queueItem->\hyperlink{struct__TcpSynQueueItem_a6a25919b9ea8c17c7e85fcacfa52f6a1}{srcAddr};
+357             newSocket->remotePort = queueItem->\hyperlink{struct__TcpSynQueueItem_ab6f9b3ec9b271f14661b6c6d18fb3066}{srcPort};
+358 
+359             \textcolor{comment}{//The SMSS is the size of the largest segment that the sender}
+360             \textcolor{comment}{//can transmit}
+361             newSocket->smss = queueItem->\hyperlink{struct__TcpSynQueueItem_a51c3ba7f08a857f3afcf7a4d4432825e}{mss};
+362 
+363             \textcolor{comment}{//The RMSS is the size of the largest segment the receiver is}
+364             \textcolor{comment}{//willing to accept}
+365             newSocket->rmss = \hyperlink{os__port_8h_a3acffbd305ee72dcd4593c0d8af64a4f}{MIN}(newSocket->rxBufferSize, \hyperlink{tcp_8h_a54e8d598d7db34761edb76924934b840}{TCP\_MAX\_MSS});
+366 
+367             \textcolor{comment}{//Initialize TCP control block}
+368             newSocket->iss = \hyperlink{net_8c_a7bb00b31d641749ac8ce742261eb1f6d}{netGetRand}();
+369             newSocket->irs = queueItem->\hyperlink{struct__TcpSynQueueItem_a9b4eaa2fcb2b66297f2b4439ecacbd24}{isn};
+370             newSocket->sndUna = newSocket->iss;
+371             newSocket->sndNxt = newSocket->iss + 1;
+372             newSocket->rcvNxt = newSocket->irs + 1;
+373             newSocket->rcvUser = 0;
+374             newSocket->rcvWnd = newSocket->rxBufferSize;
+375 
+376             \textcolor{comment}{//Default retransmission timeout}
+377             newSocket->rto = \hyperlink{tcp_8h_a39313cc0ab930ccb5886a17d7a1662d1}{TCP\_INITIAL\_RTO};
+378 
+379 \textcolor{preprocessor}{#if (TCP\_CONGEST\_CONTROL\_SUPPORT == ENABLED)}
+380             \textcolor{comment}{//Default congestion state}
+381             \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->congestState = \hyperlink{tcp_8h_ac69e0e40557f11fc979456965cdcd2f1ae65a75edff829ef84c7a96ac82a6e0f3}{TCP\_CONGEST\_STATE\_IDLE};
+382             \textcolor{comment}{//Initial congestion window}
+383             newSocket->cwnd = \hyperlink{os__port_8h_a3acffbd305ee72dcd4593c0d8af64a4f}{MIN}(\hyperlink{tcp_8h_a7f8767b38b51f53547a5a4b3b9e2d478}{TCP\_INITIAL\_WINDOW} * newSocket->smss, newSocket->
+      txBufferSize);
+384             \textcolor{comment}{//Slow start threshold should be set arbitrarily high}
+385             newSocket->ssthresh = \hyperlink{stdint_8h_a3ea490c9b3617d4479bd80ef93cd5602}{UINT16\_MAX};
+386             \textcolor{comment}{//Recover is set to the initial send sequence number}
+387             newSocket->recover = newSocket->iss;
+388 \textcolor{preprocessor}{#endif}
+389             \textcolor{comment}{//Send a SYN ACK control segment}
+390             error = \hyperlink{tcp__misc_8c_acf2944966efe796f3bb867f9d7233591}{tcpSendSegment}(newSocket, \hyperlink{tcp_8h_a4e6d97f0f2a3dc780d192efcdfe64aa7af2f8a42ff8bff07cbca1cd2ed6df9fae}{TCP\_FLAG\_SYN} | 
+      \hyperlink{tcp_8h_a4e6d97f0f2a3dc780d192efcdfe64aa7aae4cbb82c7a2373576547ed119498a4a}{TCP\_FLAG\_ACK},
+391                newSocket->iss, newSocket->rcvNxt, 0, \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE});
+392 
+393             \textcolor{comment}{//TCP segment successfully sent?}
+394             \textcolor{keywordflow}{if}(!error)
+395             \{
+396                \textcolor{comment}{//Remove the item from the SYN queue}
+397                \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->synQueue = queueItem->\hyperlink{struct__TcpSynQueueItem_aec234d81bcfbfba730e21c3affa37848}{next};
+398                \textcolor{comment}{//Deallocate memory buffer}
+399                \hyperlink{net__mem_8c_a5e8a514f3dfcb35008de9beb39bcdcde}{memPoolFree}(queueItem);
+400                \textcolor{comment}{//Update the state of events}
+401                \hyperlink{tcp__misc_8c_a1d69d8ed2662a74417c757291f540077}{tcpUpdateEvents}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket});
+402 
+403                \textcolor{comment}{//The connection state should be changed to SYN-RECEIVED}
+404                \hyperlink{tcp__misc_8c_af8741d2662dcc13ed4695fec3ef5a365}{tcpChangeState}(newSocket, \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfecadfce7e58cb083022157243f993d4ddc3}{TCP\_STATE\_SYN\_RECEIVED});
+405 
+406                \textcolor{comment}{//Number of times TCP connections have made a direct transition to}
+407                \textcolor{comment}{//the SYN-RECEIVED state from the LISTEN state}
+408                \hyperlink{mib2__module_8h_abac73a39224e47d597f3b461620d2119}{MIB2\_INC\_COUNTER32}(tcpGroup.tcpPassiveOpens, 1);
+409                \hyperlink{tcp__mib__module_8h_a296ad60b53152af0749116138a8ae227}{TCP\_MIB\_INC\_COUNTER32}(tcpPassiveOpens, 1);
+410 
+411                \textcolor{comment}{//We are done...}
+412                \textcolor{keywordflow}{break};
+413             \}
+414          \}
+415 
+416          \textcolor{comment}{//Dispose the socket}
+417          \hyperlink{tcp_8c_a2e3cdf2c9c5e7d6939f15a7cea345fe7}{tcpAbort}(newSocket);
+418       \}
+419 
+420       \textcolor{comment}{//Debug message}
+421       \hyperlink{debug_8h_a72b9761add7486364dba449091cd2579}{TRACE\_WARNING}(\textcolor{stringliteral}{"Cannot accept TCP connection!\(\backslash\)r\(\backslash\)n"});
+422 
+423       \textcolor{comment}{//Remove the item from the SYN queue}
+424       \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->synQueue = queueItem->\hyperlink{struct__TcpSynQueueItem_aec234d81bcfbfba730e21c3affa37848}{next};
+425       \textcolor{comment}{//Deallocate memory buffer}
+426       \hyperlink{net__mem_8c_a5e8a514f3dfcb35008de9beb39bcdcde}{memPoolFree}(queueItem);
+427 
+428       \textcolor{comment}{//Wait for the next connection attempt}
+429    \}
+430 
+431    \textcolor{comment}{//Release exclusive access}
+432    \hyperlink{os__port__chibios_8c_a8e10e5b2c6d3877b5ba60e375ac45d79}{osReleaseMutex}(&\hyperlink{net_8c_afe31551ad26115fae8e575654346d441}{netMutex});
+433 
+434    \textcolor{comment}{//Return a handle to the newly created socket}
+435    \textcolor{keywordflow}{return} newSocket;
+436 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{tcp_8h_acdf3499416a761d544c9c2210b36fd3c}\label{tcp_8h_acdf3499416a761d544c9c2210b36fd3c}} 
+\index{tcp.\+h@{tcp.\+h}!tcp\+Connect@{tcp\+Connect}}
+\index{tcp\+Connect@{tcp\+Connect}!tcp.\+h@{tcp.\+h}}
+\subsubsection{\texorpdfstring{tcp\+Connect()}{tcpConnect()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} tcp\+Connect (\begin{DoxyParamCaption}\item[{\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$}]{socket,  }\item[{const \hyperlink{structIpAddr}{Ip\+Addr} $\ast$}]{remote\+Ip\+Addr,  }\item[{\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t}}]{remote\+Port }\end{DoxyParamCaption})}
+
+
+
+Establish a T\+CP connection. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em socket} & Handle to an unconnected socket \\
+\hline
+\mbox{\tt in}  & {\em remote\+Ip\+Addr} & IP address of the remote host \\
+\hline
+\mbox{\tt in}  & {\em remote\+Port} & Remote port number that will be used to establish the connection \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 115 of file tcp.\+c.
+
+
+\begin{DoxyCode}
+116 \{
+117    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+118    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} event;
+119 
+120    \textcolor{comment}{//Check current TCP state}
+121    \textcolor{keywordflow}{if}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->state == \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfeca1af39131036c81d79f09174d2fb6f788}{TCP\_STATE\_CLOSED})
+122    \{
+123       \textcolor{comment}{//Save port number and IP address of the remote host}
+124       \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->remoteIpAddr = *remoteIpAddr;
+125       \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->remotePort = remotePort;
+126 
+127       \textcolor{comment}{//Select the source address and the relevant network interface}
+128       \textcolor{comment}{//to use when establishing the connection}
+129       error = \hyperlink{ip_8c_a453a712a9fa25badbfbc5d0c0201c0be}{ipSelectSourceAddr}(&\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->interface,
+130          &\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->remoteIpAddr, &\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->localIpAddr);
+131       \textcolor{comment}{//Any error to report?}
+132       \textcolor{keywordflow}{if}(error)
+133          \textcolor{keywordflow}{return} error;
+134 
+135       \textcolor{comment}{//Make sure the source address is valid}
+136       \textcolor{keywordflow}{if}(\hyperlink{ip_8c_aba51017dec530411809b07309cdc7f64}{ipIsUnspecifiedAddr}(&\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->localIpAddr))
+137          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca87925068eccab5b84c3b48065f3bf5b7}{ERROR\_NOT\_CONFIGURED};
+138 
+139       \textcolor{comment}{//The user owns the socket}
+140       \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->ownedFlag = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+141 
+142       \textcolor{comment}{//Number of chunks that comprise the TX and the RX buffers}
+143       \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->txBuffer.maxChunkCount = \hyperlink{os__port_8h_aa1394a41d43c0f3fd30febe41c7bb340}{arraysize}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->txBuffer.chunk);
+144       \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->rxBuffer.maxChunkCount = \hyperlink{os__port_8h_aa1394a41d43c0f3fd30febe41c7bb340}{arraysize}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->rxBuffer.chunk);
+145 
+146       \textcolor{comment}{//Allocate transmit buffer}
+147       error = \hyperlink{net__mem_8c_ac0a46f396754e069dd1ee65cdc559b28}{netBufferSetLength}((\hyperlink{structNetBuffer}{NetBuffer} *) &
+      \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->txBuffer,
+148          \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->txBufferSize);
+149 
+150       \textcolor{comment}{//Allocate receive buffer}
+151       \textcolor{keywordflow}{if}(!error)
+152       \{
+153          error = \hyperlink{net__mem_8c_ac0a46f396754e069dd1ee65cdc559b28}{netBufferSetLength}((\hyperlink{structNetBuffer}{NetBuffer} *) &
+      \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->rxBuffer,
+154             \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->rxBufferSize);
+155       \}
+156 
+157       \textcolor{comment}{//Failed to allocate memory?}
+158       \textcolor{keywordflow}{if}(error)
+159       \{
+160          \textcolor{comment}{//Free any previously allocated memory}
+161          \hyperlink{tcp__misc_8c_afdcebf22cbad213fdb1d751829db9fb3}{tcpDeleteControlBlock}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket});
+162          \textcolor{comment}{//Report an error to the caller}
+163          \textcolor{keywordflow}{return} error;
+164       \}
+165 
+166       \textcolor{comment}{//The SMSS is the size of the largest segment that the sender can transmit}
+167       \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->smss = \hyperlink{os__port_8h_a3acffbd305ee72dcd4593c0d8af64a4f}{MIN}(\hyperlink{tcp_8h_aa4a906440587860da3261d78809a13a5}{TCP\_DEFAULT\_MSS}, \hyperlink{tcp_8h_a54e8d598d7db34761edb76924934b840}{TCP\_MAX\_MSS});
+168       \textcolor{comment}{//The RMSS is the size of the largest segment the receiver is willing to accept}
+169       \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->rmss = \hyperlink{os__port_8h_a3acffbd305ee72dcd4593c0d8af64a4f}{MIN}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->rxBufferSize, \hyperlink{tcp_8h_a54e8d598d7db34761edb76924934b840}{TCP\_MAX\_MSS});
+170 
+171       \textcolor{comment}{//An initial send sequence number is selected}
+172       \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->iss = \hyperlink{net_8c_a7bb00b31d641749ac8ce742261eb1f6d}{netGetRand}();
+173 
+174       \textcolor{comment}{//Initialize TCP control block}
+175       \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->sndUna = \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->iss;
+176       \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->sndNxt = \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->iss + 1;
+177       \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->rcvUser = 0;
+178       \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->rcvWnd = \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->rxBufferSize;
+179 
+180       \textcolor{comment}{//Default retransmission timeout}
+181       \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->rto = \hyperlink{tcp_8h_a39313cc0ab930ccb5886a17d7a1662d1}{TCP\_INITIAL\_RTO};
+182 
+183 \textcolor{preprocessor}{#if (TCP\_CONGEST\_CONTROL\_SUPPORT == ENABLED)}
+184       \textcolor{comment}{//Default congestion state}
+185       \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->congestState = \hyperlink{tcp_8h_ac69e0e40557f11fc979456965cdcd2f1ae65a75edff829ef84c7a96ac82a6e0f3}{TCP\_CONGEST\_STATE\_IDLE};
+186       \textcolor{comment}{//Initial congestion window}
+187       \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->cwnd = \hyperlink{os__port_8h_a3acffbd305ee72dcd4593c0d8af64a4f}{MIN}(\hyperlink{tcp_8h_a7f8767b38b51f53547a5a4b3b9e2d478}{TCP\_INITIAL\_WINDOW} * \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->smss, 
+      \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->txBufferSize);
+188       \textcolor{comment}{//Slow start threshold should be set arbitrarily high}
+189       \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->ssthresh = \hyperlink{stdint_8h_a3ea490c9b3617d4479bd80ef93cd5602}{UINT16\_MAX};
+190       \textcolor{comment}{//Recover is set to the initial send sequence number}
+191       \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->recover = \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->iss;
+192 \textcolor{preprocessor}{#endif}
+193 
+194       \textcolor{comment}{//Send a SYN segment}
+195       error = \hyperlink{tcp__misc_8c_acf2944966efe796f3bb867f9d7233591}{tcpSendSegment}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, \hyperlink{tcp_8h_a4e6d97f0f2a3dc780d192efcdfe64aa7af2f8a42ff8bff07cbca1cd2ed6df9fae}{TCP\_FLAG\_SYN}, 
+      \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->iss, 0, 0, \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE});
+196       \textcolor{comment}{//Failed to send TCP segment?}
+197       \textcolor{keywordflow}{if}(error)
+198          \textcolor{keywordflow}{return} error;
+199 
+200       \textcolor{comment}{//Switch to the SYN-SENT state}
+201       \hyperlink{tcp__misc_8c_af8741d2662dcc13ed4695fec3ef5a365}{tcpChangeState}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfeca63834296a6449f272b397d54a5536bfc}{TCP\_STATE\_SYN\_SENT});
+202 
+203       \textcolor{comment}{//Number of times TCP connections have made a direct transition to}
+204       \textcolor{comment}{//the SYN-SENT state from the CLOSED state}
+205       \hyperlink{mib2__module_8h_abac73a39224e47d597f3b461620d2119}{MIB2\_INC\_COUNTER32}(tcpGroup.tcpActiveOpens, 1);
+206       \hyperlink{tcp__mib__module_8h_a296ad60b53152af0749116138a8ae227}{TCP\_MIB\_INC\_COUNTER32}(tcpActiveOpens, 1);
+207    \}
+208 
+209    \textcolor{comment}{//Wait for the connection to be established}
+210    \textcolor{keyword}{event} = \hyperlink{tcp__misc_8c_a004bf9b96c5217222960bc09c2e48a78}{tcpWaitForEvents}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, \hyperlink{socket_8h_add8a4c36456f478ab23bd4372aebde6ea007de01376b29a77df52df9f87676ad6}{SOCKET\_EVENT\_CONNECTED} |
+211       \hyperlink{socket_8h_add8a4c36456f478ab23bd4372aebde6ea7a2ec59a16cf8b477fa5d5617131e649}{SOCKET\_EVENT\_CLOSED}, \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->timeout);
+212 
+213    \textcolor{comment}{//Connection successfully established?}
+214    \textcolor{keywordflow}{if}(event == \hyperlink{socket_8h_add8a4c36456f478ab23bd4372aebde6ea007de01376b29a77df52df9f87676ad6}{SOCKET\_EVENT\_CONNECTED})
+215       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+216    \textcolor{comment}{//Failed to establish connection?}
+217    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(event == \hyperlink{socket_8h_add8a4c36456f478ab23bd4372aebde6ea7a2ec59a16cf8b477fa5d5617131e649}{SOCKET\_EVENT\_CLOSED})
+218       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca0a6ba075ed4da57d15cfd4b151a2b3d6}{ERROR\_CONNECTION\_FAILED};
+219    \textcolor{comment}{//Timeout exception?}
+220    \textcolor{keywordflow}{else}
+221       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4d0f7be53b837f004379ac6bbd56f1e2}{ERROR\_TIMEOUT};
+222 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{tcp_8h_a9b9267b95c40d4e437d3c43c29267b02}\label{tcp_8h_a9b9267b95c40d4e437d3c43c29267b02}} 
+\index{tcp.\+h@{tcp.\+h}!tcp\+Get\+Dynamic\+Port@{tcp\+Get\+Dynamic\+Port}}
+\index{tcp\+Get\+Dynamic\+Port@{tcp\+Get\+Dynamic\+Port}!tcp.\+h@{tcp.\+h}}
+\subsubsection{\texorpdfstring{tcp\+Get\+Dynamic\+Port()}{tcpGetDynamicPort()}}
+{\footnotesize\ttfamily \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} tcp\+Get\+Dynamic\+Port (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Get an ephemeral port number. 
+
+\begin{DoxyReturn}{Returns}
+Ephemeral port 
+\end{DoxyReturn}
+
+
+Definition at line 75 of file tcp.\+c.
+
+
+\begin{DoxyCode}
+76 \{
+77    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} \hyperlink{dns__common_8h_a8e0798404bf2cf5dabb84c5ba9a4f236}{port};
+78 
+79    \textcolor{comment}{//Retrieve current port number}
+80    port = \hyperlink{tcp_8c_a8d38bebcb0e45bba870286a9f18b121a}{tcpDynamicPort};
+81 
+82    \textcolor{comment}{//Invalid port number?}
+83    \textcolor{keywordflow}{if}(port < SOCKET\_EPHEMERAL\_PORT\_MIN || port > \hyperlink{socket_8h_ac78b12932199df1d3a2804a6fb57e148}{SOCKET\_EPHEMERAL\_PORT\_MAX})
+84    \{
+85       \textcolor{comment}{//Generate a random port number}
+86       port = \hyperlink{socket_8h_aea871a62e4a6f91fc96870da3faf703c}{SOCKET\_EPHEMERAL\_PORT\_MIN} + \hyperlink{net_8c_a7bb00b31d641749ac8ce742261eb1f6d}{netGetRand}() %
+87          (SOCKET\_EPHEMERAL\_PORT\_MAX - \hyperlink{socket_8h_aea871a62e4a6f91fc96870da3faf703c}{SOCKET\_EPHEMERAL\_PORT\_MIN} + 1);
+88    \}
+89 
+90    \textcolor{comment}{//Next dynamic port to use}
+91    \textcolor{keywordflow}{if}(port < SOCKET\_EPHEMERAL\_PORT\_MAX)
+92    \{
+93       \textcolor{comment}{//Increment port number}
+94       \hyperlink{tcp_8c_a8d38bebcb0e45bba870286a9f18b121a}{tcpDynamicPort} = port + 1;
+95    \}
+96    \textcolor{keywordflow}{else}
+97    \{
+98       \textcolor{comment}{//Wrap around if necessary}
+99       \hyperlink{tcp_8c_a8d38bebcb0e45bba870286a9f18b121a}{tcpDynamicPort} = \hyperlink{socket_8h_aea871a62e4a6f91fc96870da3faf703c}{SOCKET\_EPHEMERAL\_PORT\_MIN};
+100    \}
+101 
+102    \textcolor{comment}{//Return an ephemeral port number}
+103    \textcolor{keywordflow}{return} \hyperlink{dns__common_8h_a8e0798404bf2cf5dabb84c5ba9a4f236}{port};
+104 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{tcp_8h_a5256b029b29f2bdbf34927938935b7ff}\label{tcp_8h_a5256b029b29f2bdbf34927938935b7ff}} 
+\index{tcp.\+h@{tcp.\+h}!tcp\+Get\+State@{tcp\+Get\+State}}
+\index{tcp\+Get\+State@{tcp\+Get\+State}!tcp.\+h@{tcp.\+h}}
+\subsubsection{\texorpdfstring{tcp\+Get\+State()}{tcpGetState()}}
+{\footnotesize\ttfamily \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfec}{Tcp\+State} tcp\+Get\+State (\begin{DoxyParamCaption}\item[{\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$}]{socket }\end{DoxyParamCaption})}
+
+
+
+Get the current state of the T\+CP F\+SM. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em socket} & Handle identifying the socket \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+T\+CP F\+SM state 
+\end{DoxyReturn}
+
+
+Definition at line 937 of file tcp.\+c.
+
+
+\begin{DoxyCode}
+938 \{
+939    \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfec}{TcpState} state;
+940 
+941    \textcolor{comment}{//Get exclusive access}
+942    \hyperlink{os__port__chibios_8c_a58485224df4bfa522246d55b35bbd83a}{osAcquireMutex}(&\hyperlink{net_8c_afe31551ad26115fae8e575654346d441}{netMutex});
+943 
+944    \textcolor{comment}{//Get TCP FSM current state}
+945    state = \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->state;
+946 
+947    \textcolor{comment}{//Release exclusive access}
+948    \hyperlink{os__port__chibios_8c_a8e10e5b2c6d3877b5ba60e375ac45d79}{osReleaseMutex}(&\hyperlink{net_8c_afe31551ad26115fae8e575654346d441}{netMutex});
+949 
+950    \textcolor{comment}{//Return current state}
+951    \textcolor{keywordflow}{return} state;
+952 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{tcp_8h_ac9b0a9b949c8a39e3dfb4e54f4babb90}\label{tcp_8h_ac9b0a9b949c8a39e3dfb4e54f4babb90}} 
+\index{tcp.\+h@{tcp.\+h}!tcp\+Init@{tcp\+Init}}
+\index{tcp\+Init@{tcp\+Init}!tcp.\+h@{tcp.\+h}}
+\subsubsection{\texorpdfstring{tcp\+Init()}{tcpInit()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} tcp\+Init (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+T\+CP related initialization. 
+
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 60 of file tcp.\+c.
+
+
+\begin{DoxyCode}
+61 \{
+62    \textcolor{comment}{//Reset ephemeral port number}
+63    \hyperlink{tcp_8c_a8d38bebcb0e45bba870286a9f18b121a}{tcpDynamicPort} = 0;
+64 
+65    \textcolor{comment}{//Successful initialization}
+66    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+67 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{tcp_8h_a7e56a871df61979ed1f70b56559e7443}\label{tcp_8h_a7e56a871df61979ed1f70b56559e7443}} 
+\index{tcp.\+h@{tcp.\+h}!tcp\+Kill\+Oldest\+Connection@{tcp\+Kill\+Oldest\+Connection}}
+\index{tcp\+Kill\+Oldest\+Connection@{tcp\+Kill\+Oldest\+Connection}!tcp.\+h@{tcp.\+h}}
+\subsubsection{\texorpdfstring{tcp\+Kill\+Oldest\+Connection()}{tcpKillOldestConnection()}}
+{\footnotesize\ttfamily \hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket}$\ast$ tcp\+Kill\+Oldest\+Connection (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Kill the oldest socket in the T\+I\+M\+E-\/\+W\+A\+IT state. 
+
+\begin{DoxyReturn}{Returns}
+Handle identifying the oldest T\+CP connection in the T\+I\+M\+E-\/\+W\+A\+IT state. N\+U\+LL is returned if no socket is currently in the T\+I\+M\+E-\/\+W\+A\+IT state 
+\end{DoxyReturn}
+
+
+Definition at line 961 of file tcp.\+c.
+
+
+\begin{DoxyCode}
+962 \{
+963    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+964    \hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\_t} \hyperlink{dhcpv6__common_8h_ae73654f333e4363463ad8c594eca1905}{time};
+965    \hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} *\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket};
+966    \hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} *oldestSocket;
+967 
+968    \textcolor{comment}{//Get current time}
+969    time = \hyperlink{os__port__chibios_8c_ab66a11272d40a916fa69dd8e4dc443d4}{osGetSystemTime}();
+970 
+971    \textcolor{comment}{//Keep track of the oldest socket in the TIME-WAIT state}
+972    oldestSocket = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+973 
+974    \textcolor{comment}{//Loop through socket descriptors}
+975    \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{socket_8h_ab793a8c76592a00fa3ea0510cd2ffe3a}{SOCKET\_MAX\_COUNT}; i++)
+976    \{
+977       \textcolor{comment}{//Point to the current socket descriptor}
+978       socket = &\hyperlink{socket_8c_acdd76d8e01b4715c774c404b10f958da}{socketTable}[i];
+979 
+980       \textcolor{comment}{//TCP connection found?}
+981       \textcolor{keywordflow}{if}(socket->type == \hyperlink{socket_8h_aa78c7398fa81f7f62aa233159d4d8d97a9dab003c4dc9f7279e806241534d4859}{SOCKET\_TYPE\_STREAM})
+982       \{
+983          \textcolor{comment}{//Check current state}
+984          \textcolor{keywordflow}{if}(socket->state == \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfeca8fa1774b3f785db85813df1b8e158c56}{TCP\_STATE\_TIME\_WAIT})
+985          \{
+986             \textcolor{comment}{//Keep track of the oldest socket in the TIME-WAIT state}
+987             \textcolor{keywordflow}{if}(oldestSocket == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+988             \{
+989                \textcolor{comment}{//Save socket handle}
+990                oldestSocket = \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket};
+991             \}
+992             \textcolor{keywordflow}{if}((time - socket->timeWaitTimer.startTime) >
+993                (time - oldestSocket->timeWaitTimer.startTime))
+994             \{
+995                \textcolor{comment}{//Save socket handle}
+996                oldestSocket = \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket};
+997             \}
+998          \}
+999       \}
+1000    \}
+1001 
+1002    \textcolor{comment}{//Any connection in the TIME-WAIT state?}
+1003    \textcolor{keywordflow}{if}(oldestSocket != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1004    \{
+1005       \textcolor{comment}{//Enter CLOSED state}
+1006       \hyperlink{tcp__misc_8c_af8741d2662dcc13ed4695fec3ef5a365}{tcpChangeState}(oldestSocket, \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfeca1af39131036c81d79f09174d2fb6f788}{TCP\_STATE\_CLOSED});
+1007       \textcolor{comment}{//Delete TCB}
+1008       \hyperlink{tcp__misc_8c_afdcebf22cbad213fdb1d751829db9fb3}{tcpDeleteControlBlock}(oldestSocket);
+1009       \textcolor{comment}{//Mark the socket as closed}
+1010       oldestSocket->type = \hyperlink{socket_8h_aa78c7398fa81f7f62aa233159d4d8d97a69a5ebbd0e9391abfc7f6798ebf73fb6}{SOCKET\_TYPE\_UNUSED};
+1011    \}
+1012 
+1013    \textcolor{comment}{//The oldest connection in the TIME-WAIT state can be reused}
+1014    \textcolor{comment}{//when the socket table runs out of space}
+1015    \textcolor{keywordflow}{return} oldestSocket;
+1016 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{tcp_8h_a95ef0ed28e2843d976605a49bfb9286c}\label{tcp_8h_a95ef0ed28e2843d976605a49bfb9286c}} 
+\index{tcp.\+h@{tcp.\+h}!tcp\+Listen@{tcp\+Listen}}
+\index{tcp\+Listen@{tcp\+Listen}!tcp.\+h@{tcp.\+h}}
+\subsubsection{\texorpdfstring{tcp\+Listen()}{tcpListen()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} tcp\+Listen (\begin{DoxyParamCaption}\item[{\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$}]{socket,  }\item[{\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t}}]{backlog }\end{DoxyParamCaption})}
+
+
+
+Place a socket in the listening state. 
+
+Place a socket in a state in which it is listening for an incoming connection
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em socket} & Socket to place in the listening state \\
+\hline
+\mbox{\tt in}  & {\em backlog} & backlog The maximum length of the pending connection queue. If this parameter is zero, then the default backlog value is used instead \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 236 of file tcp.\+c.
+
+
+\begin{DoxyCode}
+237 \{
+238    \textcolor{comment}{//Socket already connected?}
+239    \textcolor{keywordflow}{if}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->state != \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfeca1af39131036c81d79f09174d2fb6f788}{TCP\_STATE\_CLOSED})
+240       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caf13ecb3f9a3314ab1eec8859427852c5}{ERROR\_ALREADY\_CONNECTED};
+241 
+242    \textcolor{comment}{//Set the size of the SYN queue}
+243    \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->synQueueSize = (backlog > 0) ? backlog : 
+      \hyperlink{tcp_8h_a4b58a602e54f588d7ccf0eaad8b7d902}{TCP\_DEFAULT\_SYN\_QUEUE\_SIZE};
+244    \textcolor{comment}{//Limit the number of pending connections}
+245    \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->synQueueSize = \hyperlink{os__port_8h_a3acffbd305ee72dcd4593c0d8af64a4f}{MIN}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->synQueueSize, 
+      \hyperlink{tcp_8h_a75302eb8ae53daebc5cfd490d5b0f951}{TCP\_MAX\_SYN\_QUEUE\_SIZE});
+246 
+247    \textcolor{comment}{//Place the socket in the listening state}
+248    \hyperlink{tcp__misc_8c_af8741d2662dcc13ed4695fec3ef5a365}{tcpChangeState}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfeca7f99d4d604cb5009b50f04f84f5cb1c6}{TCP\_STATE\_LISTEN});
+249 
+250    \textcolor{comment}{//Successful processing}
+251    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+252 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{tcp_8h_af5bafdbb2dbf35df2d0fee56f1c0c168}\label{tcp_8h_af5bafdbb2dbf35df2d0fee56f1c0c168}} 
+\index{tcp.\+h@{tcp.\+h}!tcp\+Receive@{tcp\+Receive}}
+\index{tcp\+Receive@{tcp\+Receive}!tcp.\+h@{tcp.\+h}}
+\subsubsection{\texorpdfstring{tcp\+Receive()}{tcpReceive()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} tcp\+Receive (\begin{DoxyParamCaption}\item[{\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$}]{socket,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{data,  }\item[{size\+\_\+t}]{size,  }\item[{size\+\_\+t $\ast$}]{received,  }\item[{\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t}}]{flags }\end{DoxyParamCaption})}
+
+
+
+Receive data from a connected socket. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em socket} & Handle that identifies a connected socket \\
+\hline
+\mbox{\tt out}  & {\em data} & Buffer where to store the incoming data \\
+\hline
+\mbox{\tt in}  & {\em size} & Maximum number of bytes that can be received \\
+\hline
+\mbox{\tt out}  & {\em received} & Number of bytes that have been received \\
+\hline
+\mbox{\tt in}  & {\em flags} & Set of flags that influences the behavior of this function \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 574 of file tcp.\+c.
+
+
+\begin{DoxyCode}
+576 \{
+577    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+578    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+579    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} event;
+580    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} \hyperlink{dtls__misc_8h_a334ea08fc328b399d92541b8795beed5}{seqNum};
+581    \hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\_t} timeout;
+582 
+583    \textcolor{comment}{//Retrieve the break character code}
+584    \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\_t} \hyperlink{aria_8c_a5dadc28804036d1b82e1dc027e95c9a6}{c} = \hyperlink{os__port_8h_a34a3aa6cbadec6a80ab1eae8efd0083d}{LSB}(\hyperlink{tcp_8h_aa2585d779da0ab21273a8d92de9a0ebe}{flags});
+585    \textcolor{comment}{//No data has been read yet}
+586    *received = 0;
+587 
+588    \textcolor{comment}{//Check whether the socket is in the listening state}
+589    \textcolor{keywordflow}{if}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->state == \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfeca7f99d4d604cb5009b50f04f84f5cb1c6}{TCP\_STATE\_LISTEN})
+590       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca8cf62de6117b9a4c1537d1ce96c219a8}{ERROR\_NOT\_CONNECTED};
+591 
+592    \textcolor{comment}{//Read as much data as possible}
+593    \textcolor{keywordflow}{while}(*received < size)
+594    \{
+595       \textcolor{comment}{//The SOCKET\_FLAG\_DONT\_WAIT enables non-blocking operation}
+596       timeout = (\hyperlink{tcp_8h_aa2585d779da0ab21273a8d92de9a0ebe}{flags} & \hyperlink{socket_8h_a36c1d45d435e2f0ebe609c31d0c2da16abbdb82a09cc4206db646e1b31ac3224e}{SOCKET\_FLAG\_DONT\_WAIT}) ? 0 : 
+      \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->timeout;
+597       \textcolor{comment}{//Wait for data to be available for reading}
+598       event = \hyperlink{tcp__misc_8c_a004bf9b96c5217222960bc09c2e48a78}{tcpWaitForEvents}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, 
+      \hyperlink{socket_8h_add8a4c36456f478ab23bd4372aebde6ea72985d7e82625f037ca8a6734f49996c}{SOCKET\_EVENT\_RX\_READY}, timeout);
+599 
+600       \textcolor{comment}{//A timeout exception occurred?}
+601       \textcolor{keywordflow}{if}(event != \hyperlink{socket_8h_add8a4c36456f478ab23bd4372aebde6ea72985d7e82625f037ca8a6734f49996c}{SOCKET\_EVENT\_RX\_READY})
+602          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4d0f7be53b837f004379ac6bbd56f1e2}{ERROR\_TIMEOUT};
+603 
+604       \textcolor{comment}{//Check current TCP state}
+605       \textcolor{keywordflow}{switch}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->state)
+606       \{
+607       \textcolor{comment}{//ESTABLISHED, FIN-WAIT-1 or FIN-WAIT-2 state?}
+608       \textcolor{keywordflow}{case} \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfecaacb7ccce8d3fcdbc6635983251b22189}{TCP\_STATE\_ESTABLISHED}:
+609       \textcolor{keywordflow}{case} \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfecad80d0b794cc52f39180e65bd1da1b555}{TCP\_STATE\_FIN\_WAIT\_1}:
+610       \textcolor{keywordflow}{case} \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfecac50f13616eeb349dc1aaa5cfd3422018}{TCP\_STATE\_FIN\_WAIT\_2}:
+611          \textcolor{comment}{//Sequence number of the first byte to read}
+612          seqNum = \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->rcvNxt - \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->rcvUser;
+613          \textcolor{comment}{//Data is available in the receive buffer}
+614          \textcolor{keywordflow}{break};
+615 
+616       \textcolor{comment}{//CLOSE-WAIT, LAST-ACK, CLOSING or TIME-WAIT state?}
+617       \textcolor{keywordflow}{case} \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfecabd723866a1772c3180b372605cfbc963}{TCP\_STATE\_CLOSE\_WAIT}:
+618       \textcolor{keywordflow}{case} \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfeca29f7d016b33a1856dfba699643c69260}{TCP\_STATE\_LAST\_ACK}:
+619       \textcolor{keywordflow}{case} \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfecad9c881087c2449f9d8c7a2a2ab188f22}{TCP\_STATE\_CLOSING}:
+620       \textcolor{keywordflow}{case} \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfeca8fa1774b3f785db85813df1b8e158c56}{TCP\_STATE\_TIME\_WAIT}:
+621          \textcolor{comment}{//The user must be satisfied with data already on hand}
+622          \textcolor{keywordflow}{if}(!\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->rcvUser)
+623          \{
+624             \textcolor{keywordflow}{if}(*received > 0)
+625                \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+626             \textcolor{keywordflow}{else}
+627                \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca8b7223773301a4f3dd811f1d35e13ce4}{ERROR\_END\_OF\_STREAM};
+628          \}
+629 
+630          \textcolor{comment}{//Sequence number of the first byte to read}
+631          seqNum = (\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->rcvNxt - 1) - \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->rcvUser;
+632          \textcolor{comment}{//Data is available in the receive buffer}
+633          \textcolor{keywordflow}{break};
+634 
+635       \textcolor{comment}{//CLOSED state?}
+636       \textcolor{keywordflow}{default}:
+637          \textcolor{comment}{//The connection was reset by remote side?}
+638          \textcolor{keywordflow}{if}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->resetFlag)
+639             \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cae6789100dbdd64f265c5ac1ec3d75382}{ERROR\_CONNECTION\_RESET};
+640          \textcolor{comment}{//The connection has not yet been established?}
+641          \textcolor{keywordflow}{if}(!\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->closedFlag)
+642             \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca8cf62de6117b9a4c1537d1ce96c219a8}{ERROR\_NOT\_CONNECTED};
+643 
+644          \textcolor{comment}{//The user must be satisfied with data already on hand}
+645          \textcolor{keywordflow}{if}(!\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->rcvUser)
+646          \{
+647             \textcolor{keywordflow}{if}(*received > 0)
+648                \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+649             \textcolor{keywordflow}{else}
+650                \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca8b7223773301a4f3dd811f1d35e13ce4}{ERROR\_END\_OF\_STREAM};
+651          \}
+652 
+653          \textcolor{comment}{//Sequence number of the first byte to read}
+654          seqNum = (\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->rcvNxt - 1) - \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->rcvUser;
+655          \textcolor{comment}{//Data is available in the receive buffer}
+656          \textcolor{keywordflow}{break};
+657       \}
+658 
+659       \textcolor{comment}{//Sanity check}
+660       \textcolor{keywordflow}{if}(!\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->rcvUser)
+661          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cae9be6449970fca5714ab9957b16562a5}{ERROR\_FAILURE};
+662 
+663       \textcolor{comment}{//Calculate the number of bytes to read at a time}
+664       n = \hyperlink{os__port_8h_a3acffbd305ee72dcd4593c0d8af64a4f}{MIN}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->rcvUser, size - *received);
+665       \textcolor{comment}{//Copy data from circular buffer}
+666       \hyperlink{tcp__misc_8c_aa97c7d519e5e230fcdd62de48d790776}{tcpReadRxBuffer}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, seqNum, \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, n);
+667 
+668       \textcolor{comment}{//Read data until a break character is encountered?}
+669       \textcolor{keywordflow}{if}(\hyperlink{tcp_8h_aa2585d779da0ab21273a8d92de9a0ebe}{flags} & \hyperlink{socket_8h_a36c1d45d435e2f0ebe609c31d0c2da16aeeed0758dce300e5b3cc9ff7feb80468}{SOCKET\_FLAG\_BREAK\_CHAR})
+670       \{
+671          \textcolor{comment}{//Search for the specified break character}
+672          \textcolor{keywordflow}{for}(i = 0; i < n && \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}[i] != \hyperlink{aria_8c_a5dadc28804036d1b82e1dc027e95c9a6}{c}; i++);
+673          \textcolor{comment}{//Adjust the number of data to read}
+674          n = \hyperlink{os__port_8h_a3acffbd305ee72dcd4593c0d8af64a4f}{MIN}(n, i + 1);
+675       \}
+676 
+677       \textcolor{comment}{//Total number of data that have been read}
+678       *received += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+679       \textcolor{comment}{//Remaining data still available in the receive buffer}
+680       \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->rcvUser -= \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+681 
+682       \textcolor{comment}{//Update the receive window}
+683       \hyperlink{tcp__misc_8c_aa1656bdca8c8970333412696664c3064}{tcpUpdateReceiveWindow}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket});
+684       \textcolor{comment}{//Update RX event state}
+685       \hyperlink{tcp__misc_8c_a1d69d8ed2662a74417c757291f540077}{tcpUpdateEvents}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket});
+686 
+687       \textcolor{comment}{//The SOCKET\_FLAG\_BREAK\_CHAR flag causes the function to stop reading}
+688       \textcolor{comment}{//data as soon as the specified break character is encountered}
+689       \textcolor{keywordflow}{if}(\hyperlink{tcp_8h_aa2585d779da0ab21273a8d92de9a0ebe}{flags} & SOCKET\_FLAG\_BREAK\_CHAR)
+690       \{
+691          \textcolor{comment}{//Check whether a break character has been found}
+692          \textcolor{keywordflow}{if}(\hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}[n - 1] == c)
+693             \textcolor{keywordflow}{break};
+694       \}
+695       \textcolor{comment}{//The SOCKET\_FLAG\_WAIT\_ALL flag causes the function to return}
+696       \textcolor{comment}{//only when the requested number of bytes have been read}
+697       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!(\hyperlink{tcp_8h_aa2585d779da0ab21273a8d92de9a0ebe}{flags} & \hyperlink{socket_8h_a36c1d45d435e2f0ebe609c31d0c2da16a39d0c7263a468e53133cbad1f6010df2}{SOCKET\_FLAG\_WAIT\_ALL}))
+698       \{
+699          \textcolor{keywordflow}{break};
+700       \}
+701 
+702       \textcolor{comment}{//Advance data pointer}
+703       \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data} += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+704    \}
+705 
+706    \textcolor{comment}{//Successful read operation}
+707    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+708 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{tcp_8h_ae42ff0820ab0fdfde9f2db2f3afa9595}\label{tcp_8h_ae42ff0820ab0fdfde9f2db2f3afa9595}} 
+\index{tcp.\+h@{tcp.\+h}!tcp\+Send@{tcp\+Send}}
+\index{tcp\+Send@{tcp\+Send}!tcp.\+h@{tcp.\+h}}
+\subsubsection{\texorpdfstring{tcp\+Send()}{tcpSend()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} tcp\+Send (\begin{DoxyParamCaption}\item[{\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$}]{socket,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{data,  }\item[{size\+\_\+t}]{length,  }\item[{size\+\_\+t $\ast$}]{written,  }\item[{\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t}}]{flags }\end{DoxyParamCaption})}
+
+
+
+Send data to a connected socket. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em socket} & Handle that identifies a connected socket \\
+\hline
+\mbox{\tt in}  & {\em data} & Pointer to a buffer containing the data to be transmitted \\
+\hline
+\mbox{\tt in}  & {\em length} & Number of bytes to be transmitted \\
+\hline
+\mbox{\tt out}  & {\em written} & Actual number of bytes written (optional parameter) \\
+\hline
+\mbox{\tt in}  & {\em flags} & Set of flags that influences the behavior of this function \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 449 of file tcp.\+c.
+
+
+\begin{DoxyCode}
+451 \{
+452    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+453    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} totalLength;
+454    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} event;
+455 
+456    \textcolor{comment}{//Check whether the socket is in the listening state}
+457    \textcolor{keywordflow}{if}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->state == \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfeca7f99d4d604cb5009b50f04f84f5cb1c6}{TCP\_STATE\_LISTEN})
+458       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca8cf62de6117b9a4c1537d1ce96c219a8}{ERROR\_NOT\_CONNECTED};
+459 
+460    \textcolor{comment}{//Actual number of bytes written}
+461    totalLength = 0;
+462 
+463    \textcolor{comment}{//Send as much data as possible}
+464    \textcolor{keywordflow}{do}
+465    \{
+466       \textcolor{comment}{//Wait until there is more room in the send buffer}
+467       \textcolor{keyword}{event} = \hyperlink{tcp__misc_8c_a004bf9b96c5217222960bc09c2e48a78}{tcpWaitForEvents}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, 
+      \hyperlink{socket_8h_add8a4c36456f478ab23bd4372aebde6ea078fc309f8e29689ee08e584f00a73b6}{SOCKET\_EVENT\_TX\_READY}, \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->timeout);
+468 
+469       \textcolor{comment}{//A timeout exception occurred?}
+470       \textcolor{keywordflow}{if}(event != \hyperlink{socket_8h_add8a4c36456f478ab23bd4372aebde6ea078fc309f8e29689ee08e584f00a73b6}{SOCKET\_EVENT\_TX\_READY})
+471          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4d0f7be53b837f004379ac6bbd56f1e2}{ERROR\_TIMEOUT};
+472 
+473       \textcolor{comment}{//Check current TCP state}
+474       \textcolor{keywordflow}{switch}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->state)
+475       \{
+476       \textcolor{comment}{//ESTABLISHED or CLOSE-WAIT state?}
+477       \textcolor{keywordflow}{case} \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfecaacb7ccce8d3fcdbc6635983251b22189}{TCP\_STATE\_ESTABLISHED}:
+478       \textcolor{keywordflow}{case} \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfecabd723866a1772c3180b372605cfbc963}{TCP\_STATE\_CLOSE\_WAIT}:
+479          \textcolor{comment}{//The send buffer is now available for writing}
+480          \textcolor{keywordflow}{break};
+481 
+482       \textcolor{comment}{//LAST-ACK, FIN-WAIT-1, FIN-WAIT-2, CLOSING or TIME-WAIT state?}
+483       \textcolor{keywordflow}{case} \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfeca29f7d016b33a1856dfba699643c69260}{TCP\_STATE\_LAST\_ACK}:
+484       \textcolor{keywordflow}{case} \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfecad80d0b794cc52f39180e65bd1da1b555}{TCP\_STATE\_FIN\_WAIT\_1}:
+485       \textcolor{keywordflow}{case} \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfecac50f13616eeb349dc1aaa5cfd3422018}{TCP\_STATE\_FIN\_WAIT\_2}:
+486       \textcolor{keywordflow}{case} \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfecad9c881087c2449f9d8c7a2a2ab188f22}{TCP\_STATE\_CLOSING}:
+487       \textcolor{keywordflow}{case} \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfeca8fa1774b3f785db85813df1b8e158c56}{TCP\_STATE\_TIME\_WAIT}:
+488          \textcolor{comment}{//The connection is being closed}
+489          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca23f338e4dcebc53bd379ec05a1fc7ffb}{ERROR\_CONNECTION\_CLOSING};
+490 
+491       \textcolor{comment}{//CLOSED state?}
+492       \textcolor{keywordflow}{default}:
+493          \textcolor{comment}{//The connection was reset by remote side?}
+494          \textcolor{keywordflow}{return} (\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->resetFlag) ? \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cae6789100dbdd64f265c5ac1ec3d75382}{ERROR\_CONNECTION\_RESET} : 
+      \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca8cf62de6117b9a4c1537d1ce96c219a8}{ERROR\_NOT\_CONNECTED};
+495       \}
+496 
+497       \textcolor{comment}{//Determine the actual number of bytes in the send buffer}
+498       n = \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->sndUser + \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->sndNxt - \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->sndUna;
+499       \textcolor{comment}{//Exit immediately if the transmission buffer is full (sanity check)}
+500       \textcolor{keywordflow}{if}(n >= \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->txBufferSize)
+501          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cae9be6449970fca5714ab9957b16562a5}{ERROR\_FAILURE};
+502 
+503       \textcolor{comment}{//Number of bytes available for writing}
+504       n = \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->txBufferSize - \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+505       \textcolor{comment}{//Calculate the number of bytes to copy at a time}
+506       n = \hyperlink{os__port_8h_a3acffbd305ee72dcd4593c0d8af64a4f}{MIN}(n, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} - totalLength);
+507 
+508       \textcolor{comment}{//Any data to copy?}
+509       \textcolor{keywordflow}{if}(n > 0)
+510       \{
+511          \textcolor{comment}{//Copy user data to send buffer}
+512          \hyperlink{tcp__misc_8c_a9bbd4fc8a09ba17e2b064ac4674b5d09}{tcpWriteTxBuffer}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->sndNxt + 
+      \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->sndUser, \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, n);
+513 
+514          \textcolor{comment}{//Update the number of data buffered but not yet sent}
+515          \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->sndUser += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+516          \textcolor{comment}{//Advance data pointer}
+517          \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data} += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+518          \textcolor{comment}{//Update byte counter}
+519          totalLength += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+520 
+521          \textcolor{comment}{//Total number of data that have been written}
+522          \textcolor{keywordflow}{if}(written != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+523             *written = totalLength;
+524 
+525          \textcolor{comment}{//Update TX events}
+526          \hyperlink{tcp__misc_8c_a1d69d8ed2662a74417c757291f540077}{tcpUpdateEvents}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket});
+527 
+528          \textcolor{comment}{//To avoid a deadlock, it is necessary to have a timeout to force}
+529          \textcolor{comment}{//transmission of data, overriding the SWS avoidance algorithm. In}
+530          \textcolor{comment}{//practice, this timeout should seldom occur (refer to RFC 1122,}
+531          \textcolor{comment}{//section 4.2.3.4)}
+532          \textcolor{keywordflow}{if}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->sndUser == n)
+533             \hyperlink{tcp__timer_8c_ac28b31fb6e44b56d37fb37f2b34f8a67}{tcpTimerStart}(&\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->overrideTimer, 
+      \hyperlink{tcp_8h_a96dd43e8ea17721fdc51d6057e5f988b}{TCP\_OVERRIDE\_TIMEOUT});
+534       \}
+535 
+536       \textcolor{comment}{//The Nagle algorithm should be implemented to coalesce}
+537       \textcolor{comment}{//short segments (refer to RFC 1122 4.2.3.4)}
+538       \hyperlink{tcp__misc_8c_ab354828c280bda2e01554f5ea827d752}{tcpNagleAlgo}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, \hyperlink{tcp_8h_aa2585d779da0ab21273a8d92de9a0ebe}{flags});
+539 
+540       \textcolor{comment}{//Send as much data as possible}
+541    \} \textcolor{keywordflow}{while}(totalLength < \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length});
+542 
+543    \textcolor{comment}{//The SOCKET\_FLAG\_WAIT\_ACK flag causes the function to}
+544    \textcolor{comment}{//wait for acknowledgment from the remote side}
+545    \textcolor{keywordflow}{if}(\hyperlink{tcp_8h_aa2585d779da0ab21273a8d92de9a0ebe}{flags} & \hyperlink{socket_8h_a36c1d45d435e2f0ebe609c31d0c2da16aa2859eda1a4e62564c15d72c25632b81}{SOCKET\_FLAG\_WAIT\_ACK})
+546    \{
+547       \textcolor{comment}{//Wait for the data to be acknowledged}
+548       \textcolor{keyword}{event} = \hyperlink{tcp__misc_8c_a004bf9b96c5217222960bc09c2e48a78}{tcpWaitForEvents}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, 
+      \hyperlink{socket_8h_add8a4c36456f478ab23bd4372aebde6ea9303c52298e0adf175b7064fbe7ce077}{SOCKET\_EVENT\_TX\_ACKED}, \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->timeout);
+549 
+550       \textcolor{comment}{//A timeout exception occurred?}
+551       \textcolor{keywordflow}{if}(event != \hyperlink{socket_8h_add8a4c36456f478ab23bd4372aebde6ea9303c52298e0adf175b7064fbe7ce077}{SOCKET\_EVENT\_TX\_ACKED})
+552          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4d0f7be53b837f004379ac6bbd56f1e2}{ERROR\_TIMEOUT};
+553 
+554       \textcolor{comment}{//The connection was closed before an acknowledgment was received?}
+555       \textcolor{keywordflow}{if}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->state != \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfecaacb7ccce8d3fcdbc6635983251b22189}{TCP\_STATE\_ESTABLISHED} && 
+      \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->state != \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfecabd723866a1772c3180b372605cfbc963}{TCP\_STATE\_CLOSE\_WAIT})
+556          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca8cf62de6117b9a4c1537d1ce96c219a8}{ERROR\_NOT\_CONNECTED};
+557    \}
+558 
+559    \textcolor{comment}{//Successful write operation}
+560    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+561 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{tcp_8h_a9520355455840d2ba13b3fc00921981f}\label{tcp_8h_a9520355455840d2ba13b3fc00921981f}} 
+\index{tcp.\+h@{tcp.\+h}!tcp\+Shutdown@{tcp\+Shutdown}}
+\index{tcp\+Shutdown@{tcp\+Shutdown}!tcp.\+h@{tcp.\+h}}
+\subsubsection{\texorpdfstring{tcp\+Shutdown()}{tcpShutdown()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} tcp\+Shutdown (\begin{DoxyParamCaption}\item[{\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$}]{socket,  }\item[{\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t}}]{how }\end{DoxyParamCaption})}
+
+
+
+Shutdown gracefully reception, transmission, or both. 
+
+Note that \hyperlink{socket_8c_acc736b53dba4a0d3b11b63f75cdcfffb}{socket\+Shutdown()} does not close the socket, and resources attached to the socket will not be freed until \hyperlink{socket_8c_ac5012e9f71c97e2ea0410f2c5baccb0e}{socket\+Close()} is invoked
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em socket} & Handle to a socket \\
+\hline
+\mbox{\tt in}  & {\em how} & Flag that describes what types of operation will no longer be allowed \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 722 of file tcp.\+c.
+
+
+\begin{DoxyCode}
+723 \{
+724    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+725    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} event;
+726 
+727    \textcolor{comment}{//Disable transmission?}
+728    \textcolor{keywordflow}{if}(how == \hyperlink{socket_8h_a36ee33c18de64f549a6336d1aa7333b7a535dc5f70a642b86e56e6e83ce2a3378}{SOCKET\_SD\_SEND} || how == \hyperlink{socket_8h_a36ee33c18de64f549a6336d1aa7333b7a4c533f4b86ea89dfd6a508bb4262c76d}{SOCKET\_SD\_BOTH})
+729    \{
+730       \textcolor{comment}{//Check current state}
+731       \textcolor{keywordflow}{switch}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->state)
+732       \{
+733       \textcolor{comment}{//CLOSED or LISTEN state?}
+734       \textcolor{keywordflow}{case} \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfeca1af39131036c81d79f09174d2fb6f788}{TCP\_STATE\_CLOSED}:
+735       \textcolor{keywordflow}{case} \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfeca7f99d4d604cb5009b50f04f84f5cb1c6}{TCP\_STATE\_LISTEN}:
+736          \textcolor{comment}{//The connection does not exist}
+737          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca8cf62de6117b9a4c1537d1ce96c219a8}{ERROR\_NOT\_CONNECTED};
+738 
+739       \textcolor{comment}{//SYN-RECEIVED or ESTABLISHED state?}
+740       \textcolor{keywordflow}{case} \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfecadfce7e58cb083022157243f993d4ddc3}{TCP\_STATE\_SYN\_RECEIVED}:
+741       \textcolor{keywordflow}{case} \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfecaacb7ccce8d3fcdbc6635983251b22189}{TCP\_STATE\_ESTABLISHED}:
+742          \textcolor{comment}{//Flush the send buffer}
+743          error = \hyperlink{tcp_8c_ae42ff0820ab0fdfde9f2db2f3afa9595}{tcpSend}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, 0, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, 
+      \hyperlink{socket_8h_a36c1d45d435e2f0ebe609c31d0c2da16a2a3399f24cd678390ebf586c4ffefc8c}{SOCKET\_FLAG\_NO\_DELAY});
+744          \textcolor{comment}{//Any error to report?}
+745          \textcolor{keywordflow}{if}(error)
+746             \textcolor{keywordflow}{return} error;
+747 
+748          \textcolor{comment}{//Make sure all the data has been sent out}
+749          \textcolor{keyword}{event} = \hyperlink{tcp__misc_8c_a004bf9b96c5217222960bc09c2e48a78}{tcpWaitForEvents}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, 
+      \hyperlink{socket_8h_add8a4c36456f478ab23bd4372aebde6ea18bba7ecd37cc15131588d430017f205}{SOCKET\_EVENT\_TX\_DONE}, \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->timeout);
+750          \textcolor{comment}{//Timeout error?}
+751          \textcolor{keywordflow}{if}(event != \hyperlink{socket_8h_add8a4c36456f478ab23bd4372aebde6ea18bba7ecd37cc15131588d430017f205}{SOCKET\_EVENT\_TX\_DONE})
+752             \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4d0f7be53b837f004379ac6bbd56f1e2}{ERROR\_TIMEOUT};
+753 
+754          \textcolor{comment}{//Send a FIN segment}
+755          error = \hyperlink{tcp__misc_8c_acf2944966efe796f3bb867f9d7233591}{tcpSendSegment}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, \hyperlink{tcp_8h_a4e6d97f0f2a3dc780d192efcdfe64aa7a332cfb33224b794e0be773cba056efa1}{TCP\_FLAG\_FIN} | 
+      \hyperlink{tcp_8h_a4e6d97f0f2a3dc780d192efcdfe64aa7aae4cbb82c7a2373576547ed119498a4a}{TCP\_FLAG\_ACK},
+756             \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->sndNxt, \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->rcvNxt, 0, \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE});
+757          \textcolor{comment}{//Failed to send FIN segment?}
+758          \textcolor{keywordflow}{if}(error)
+759             \textcolor{keywordflow}{return} error;
+760 
+761          \textcolor{comment}{//Sequence number expected to be received}
+762          \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->sndNxt++;
+763          \textcolor{comment}{//Switch to the FIN-WAIT1 state}
+764          \hyperlink{tcp__misc_8c_af8741d2662dcc13ed4695fec3ef5a365}{tcpChangeState}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfecad80d0b794cc52f39180e65bd1da1b555}{TCP\_STATE\_FIN\_WAIT\_1});
+765 
+766          \textcolor{comment}{//Wait for the FIN to be acknowledged}
+767          \textcolor{keyword}{event} = \hyperlink{tcp__misc_8c_a004bf9b96c5217222960bc09c2e48a78}{tcpWaitForEvents}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, 
+      \hyperlink{socket_8h_add8a4c36456f478ab23bd4372aebde6ea7c192744b90c583effbac921fe00c4a0}{SOCKET\_EVENT\_TX\_SHUTDOWN}, \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->timeout);
+768          \textcolor{comment}{//Timeout interval elapsed?}
+769          \textcolor{keywordflow}{if}(event != \hyperlink{socket_8h_add8a4c36456f478ab23bd4372aebde6ea7c192744b90c583effbac921fe00c4a0}{SOCKET\_EVENT\_TX\_SHUTDOWN})
+770             \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4d0f7be53b837f004379ac6bbd56f1e2}{ERROR\_TIMEOUT};
+771 
+772          \textcolor{comment}{//Continue processing}
+773          \textcolor{keywordflow}{break};
+774 
+775       \textcolor{comment}{//CLOSE-WAIT state?}
+776       \textcolor{keywordflow}{case} \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfecabd723866a1772c3180b372605cfbc963}{TCP\_STATE\_CLOSE\_WAIT}:
+777          \textcolor{comment}{//Flush the send buffer}
+778          error = \hyperlink{tcp_8c_ae42ff0820ab0fdfde9f2db2f3afa9595}{tcpSend}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, 0, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, 
+      \hyperlink{socket_8h_a36c1d45d435e2f0ebe609c31d0c2da16a2a3399f24cd678390ebf586c4ffefc8c}{SOCKET\_FLAG\_NO\_DELAY});
+779          \textcolor{comment}{//Any error to report?}
+780          \textcolor{keywordflow}{if}(error)
+781             \textcolor{keywordflow}{return} error;
+782 
+783          \textcolor{comment}{//Make sure all the data has been sent out}
+784          \textcolor{keyword}{event} = \hyperlink{tcp__misc_8c_a004bf9b96c5217222960bc09c2e48a78}{tcpWaitForEvents}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, 
+      \hyperlink{socket_8h_add8a4c36456f478ab23bd4372aebde6ea18bba7ecd37cc15131588d430017f205}{SOCKET\_EVENT\_TX\_DONE}, \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->timeout);
+785          \textcolor{comment}{//Timeout error?}
+786          \textcolor{keywordflow}{if}(event != \hyperlink{socket_8h_add8a4c36456f478ab23bd4372aebde6ea18bba7ecd37cc15131588d430017f205}{SOCKET\_EVENT\_TX\_DONE})
+787             \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4d0f7be53b837f004379ac6bbd56f1e2}{ERROR\_TIMEOUT};
+788 
+789          \textcolor{comment}{//Send a FIN segment}
+790          error = \hyperlink{tcp__misc_8c_acf2944966efe796f3bb867f9d7233591}{tcpSendSegment}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, \hyperlink{tcp_8h_a4e6d97f0f2a3dc780d192efcdfe64aa7a332cfb33224b794e0be773cba056efa1}{TCP\_FLAG\_FIN} | 
+      \hyperlink{tcp_8h_a4e6d97f0f2a3dc780d192efcdfe64aa7aae4cbb82c7a2373576547ed119498a4a}{TCP\_FLAG\_ACK},
+791             \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->sndNxt, \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->rcvNxt, 0, \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE});
+792          \textcolor{comment}{//Failed to send FIN segment?}
+793          \textcolor{keywordflow}{if}(error)
+794             \textcolor{keywordflow}{return} error;
+795 
+796          \textcolor{comment}{//Sequence number expected to be received}
+797          \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->sndNxt++;
+798          \textcolor{comment}{//Switch to the LAST-ACK state}
+799          \hyperlink{tcp__misc_8c_af8741d2662dcc13ed4695fec3ef5a365}{tcpChangeState}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfeca29f7d016b33a1856dfba699643c69260}{TCP\_STATE\_LAST\_ACK});
+800 
+801          \textcolor{comment}{//Wait for the FIN to be acknowledged}
+802          \textcolor{keyword}{event} = \hyperlink{tcp__misc_8c_a004bf9b96c5217222960bc09c2e48a78}{tcpWaitForEvents}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, 
+      \hyperlink{socket_8h_add8a4c36456f478ab23bd4372aebde6ea7c192744b90c583effbac921fe00c4a0}{SOCKET\_EVENT\_TX\_SHUTDOWN}, \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->timeout);
+803          \textcolor{comment}{//Timeout interval elapsed?}
+804          \textcolor{keywordflow}{if}(event != \hyperlink{socket_8h_add8a4c36456f478ab23bd4372aebde6ea7c192744b90c583effbac921fe00c4a0}{SOCKET\_EVENT\_TX\_SHUTDOWN})
+805             \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4d0f7be53b837f004379ac6bbd56f1e2}{ERROR\_TIMEOUT};
+806 
+807          \textcolor{comment}{//Continue processing}
+808          \textcolor{keywordflow}{break};
+809 
+810       \textcolor{comment}{//FIN-WAIT-1, CLOSING or LAST-ACK state?}
+811       \textcolor{keywordflow}{case} \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfecad80d0b794cc52f39180e65bd1da1b555}{TCP\_STATE\_FIN\_WAIT\_1}:
+812       \textcolor{keywordflow}{case} \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfecad9c881087c2449f9d8c7a2a2ab188f22}{TCP\_STATE\_CLOSING}:
+813       \textcolor{keywordflow}{case} \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfeca29f7d016b33a1856dfba699643c69260}{TCP\_STATE\_LAST\_ACK}:
+814          \textcolor{comment}{//Wait for the FIN to be acknowledged}
+815          \textcolor{keyword}{event} = \hyperlink{tcp__misc_8c_a004bf9b96c5217222960bc09c2e48a78}{tcpWaitForEvents}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, 
+      \hyperlink{socket_8h_add8a4c36456f478ab23bd4372aebde6ea7c192744b90c583effbac921fe00c4a0}{SOCKET\_EVENT\_TX\_SHUTDOWN}, \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->timeout);
+816          \textcolor{comment}{//Timeout interval elapsed?}
+817          \textcolor{keywordflow}{if}(event != \hyperlink{socket_8h_add8a4c36456f478ab23bd4372aebde6ea7c192744b90c583effbac921fe00c4a0}{SOCKET\_EVENT\_TX\_SHUTDOWN})
+818             \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4d0f7be53b837f004379ac6bbd56f1e2}{ERROR\_TIMEOUT};
+819 
+820          \textcolor{comment}{//Continue processing}
+821          \textcolor{keywordflow}{break};
+822 
+823       \textcolor{comment}{//SYN-SENT, FIN-WAIT-2 or TIME-WAIT state?}
+824       \textcolor{keywordflow}{default}:
+825          \textcolor{comment}{//Continue processing}
+826          \textcolor{keywordflow}{break};
+827       \}
+828    \}
+829 
+830    \textcolor{comment}{//Disable reception?}
+831    \textcolor{keywordflow}{if}(how == \hyperlink{socket_8h_a36ee33c18de64f549a6336d1aa7333b7a88cccdaadbcce09cccd7561d10af6a39}{SOCKET\_SD\_RECEIVE} || how == \hyperlink{socket_8h_a36ee33c18de64f549a6336d1aa7333b7a4c533f4b86ea89dfd6a508bb4262c76d}{SOCKET\_SD\_BOTH})
+832    \{
+833       \textcolor{comment}{//Check current state}
+834       \textcolor{keywordflow}{switch}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->state)
+835       \{
+836       \textcolor{comment}{//LISTEN state?}
+837       \textcolor{keywordflow}{case} \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfeca7f99d4d604cb5009b50f04f84f5cb1c6}{TCP\_STATE\_LISTEN}:
+838          \textcolor{comment}{//The connection does not exist}
+839          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca8cf62de6117b9a4c1537d1ce96c219a8}{ERROR\_NOT\_CONNECTED};
+840 
+841       \textcolor{comment}{//SYN-SENT, SYN-RECEIVED, ESTABLISHED, FIN-WAIT-1 or FIN-WAIT-2 state?}
+842       \textcolor{keywordflow}{case} \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfeca63834296a6449f272b397d54a5536bfc}{TCP\_STATE\_SYN\_SENT}:
+843       \textcolor{keywordflow}{case} \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfecadfce7e58cb083022157243f993d4ddc3}{TCP\_STATE\_SYN\_RECEIVED}:
+844       \textcolor{keywordflow}{case} \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfecaacb7ccce8d3fcdbc6635983251b22189}{TCP\_STATE\_ESTABLISHED}:
+845       \textcolor{keywordflow}{case} \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfecad80d0b794cc52f39180e65bd1da1b555}{TCP\_STATE\_FIN\_WAIT\_1}:
+846       \textcolor{keywordflow}{case} \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfecac50f13616eeb349dc1aaa5cfd3422018}{TCP\_STATE\_FIN\_WAIT\_2}:
+847          \textcolor{comment}{//Wait for a FIN to be received}
+848          \textcolor{keyword}{event} = \hyperlink{tcp__misc_8c_a004bf9b96c5217222960bc09c2e48a78}{tcpWaitForEvents}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, 
+      \hyperlink{socket_8h_add8a4c36456f478ab23bd4372aebde6ea0578189399787b74acb9636b9eef30fc}{SOCKET\_EVENT\_RX\_SHUTDOWN}, \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->timeout);
+849          \textcolor{comment}{//Timeout interval elapsed?}
+850          \textcolor{keywordflow}{if}(event != \hyperlink{socket_8h_add8a4c36456f478ab23bd4372aebde6ea0578189399787b74acb9636b9eef30fc}{SOCKET\_EVENT\_RX\_SHUTDOWN})
+851             \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4d0f7be53b837f004379ac6bbd56f1e2}{ERROR\_TIMEOUT};
+852          \textcolor{comment}{//A FIN segment has been received}
+853          \textcolor{keywordflow}{break};
+854 
+855       \textcolor{comment}{//CLOSING, TIME-WAIT, CLOSE-WAIT, LAST-ACK or CLOSED state?}
+856       \textcolor{keywordflow}{default}:
+857          \textcolor{comment}{//A FIN segment has already been received}
+858          \textcolor{keywordflow}{break};
+859       \}
+860    \}
+861 
+862    \textcolor{comment}{//Successful operation}
+863    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+864 \}
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{tcp_8h_a077154909d67fa134c81b5a3c4ed57f4}\label{tcp_8h_a077154909d67fa134c81b5a3c4ed57f4}} 
+\index{tcp.\+h@{tcp.\+h}!ack\+Num@{ack\+Num}}
+\index{ack\+Num@{ack\+Num}!tcp.\+h@{tcp.\+h}}
+\subsubsection{\texorpdfstring{ack\+Num}{ackNum}}
+{\footnotesize\ttfamily \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t} ack\+Num}
+
+
+
+Definition at line 305 of file tcp.\+h.
+
+\mbox{\Hypertarget{tcp_8h_a6796c847bbd16253ce2538754c250bd6}\label{tcp_8h_a6796c847bbd16253ce2538754c250bd6}} 
+\index{tcp.\+h@{tcp.\+h}!checksum@{checksum}}
+\index{checksum@{checksum}!tcp.\+h@{tcp.\+h}}
+\subsubsection{\texorpdfstring{checksum}{checksum}}
+{\footnotesize\ttfamily \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} checksum}
+
+
+
+Definition at line 318 of file tcp.\+h.
+
+\mbox{\Hypertarget{tcp_8h_ae0743b8326e63b450642f96ca32a3bea}\label{tcp_8h_ae0743b8326e63b450642f96ca32a3bea}} 
+\index{tcp.\+h@{tcp.\+h}!data\+Offset@{data\+Offset}}
+\index{data\+Offset@{data\+Offset}!tcp.\+h@{tcp.\+h}}
+\subsubsection{\texorpdfstring{data\+Offset}{dataOffset}}
+{\footnotesize\ttfamily \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} data\+Offset}
+
+
+
+Definition at line 313 of file tcp.\+h.
+
+\mbox{\Hypertarget{tcp_8h_af15d713ad2bc92686abfa6ab012b5039}\label{tcp_8h_af15d713ad2bc92686abfa6ab012b5039}} 
+\index{tcp.\+h@{tcp.\+h}!dest\+Port@{dest\+Port}}
+\index{dest\+Port@{dest\+Port}!tcp.\+h@{tcp.\+h}}
+\subsubsection{\texorpdfstring{dest\+Port}{destPort}}
+{\footnotesize\ttfamily \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} dest\+Port}
+
+
+
+Definition at line 303 of file tcp.\+h.
+
+\mbox{\Hypertarget{tcp_8h_aa2585d779da0ab21273a8d92de9a0ebe}\label{tcp_8h_aa2585d779da0ab21273a8d92de9a0ebe}} 
+\index{tcp.\+h@{tcp.\+h}!flags@{flags}}
+\index{flags@{flags}!tcp.\+h@{tcp.\+h}}
+\subsubsection{\texorpdfstring{flags}{flags}}
+{\footnotesize\ttfamily \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} flags}
+
+
+
+Definition at line 314 of file tcp.\+h.
+
+\mbox{\Hypertarget{tcp_8h_a9aca84b04dfc09a4eeae08b3b3266eb6}\label{tcp_8h_a9aca84b04dfc09a4eeae08b3b3266eb6}} 
+\index{tcp.\+h@{tcp.\+h}!kind@{kind}}
+\index{kind@{kind}!tcp.\+h@{tcp.\+h}}
+\subsubsection{\texorpdfstring{kind}{kind}}
+{\footnotesize\ttfamily \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} kind}
+
+
+
+Definition at line 330 of file tcp.\+h.
+
+\mbox{\Hypertarget{tcp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}\label{tcp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}} 
+\index{tcp.\+h@{tcp.\+h}!length@{length}}
+\index{length@{length}!tcp.\+h@{tcp.\+h}}
+\subsubsection{\texorpdfstring{length}{length}}
+{\footnotesize\ttfamily \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} length}
+
+
+
+Definition at line 331 of file tcp.\+h.
+
+\mbox{\Hypertarget{tcp_8h_a789f9812dfd8d65750fad784fd195953}\label{tcp_8h_a789f9812dfd8d65750fad784fd195953}} 
+\index{tcp.\+h@{tcp.\+h}!options@{options}}
+\index{options@{options}!tcp.\+h@{tcp.\+h}}
+\subsubsection{\texorpdfstring{options}{options}}
+{\footnotesize\ttfamily \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} options\mbox{[}$\,$\mbox{]}}
+
+
+
+Definition at line 320 of file tcp.\+h.
+
+\mbox{\Hypertarget{tcp_8h_a2a2556147677ece60b8aadf4a0d608ed}\label{tcp_8h_a2a2556147677ece60b8aadf4a0d608ed}} 
+\index{tcp.\+h@{tcp.\+h}!reserved1@{reserved1}}
+\index{reserved1@{reserved1}!tcp.\+h@{tcp.\+h}}
+\subsubsection{\texorpdfstring{reserved1}{reserved1}}
+{\footnotesize\ttfamily \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} reserved1}
+
+
+
+Definition at line 312 of file tcp.\+h.
+
+\mbox{\Hypertarget{tcp_8h_a646df3514a24749a0f54731bf41c6c67}\label{tcp_8h_a646df3514a24749a0f54731bf41c6c67}} 
+\index{tcp.\+h@{tcp.\+h}!reserved2@{reserved2}}
+\index{reserved2@{reserved2}!tcp.\+h@{tcp.\+h}}
+\subsubsection{\texorpdfstring{reserved2}{reserved2}}
+{\footnotesize\ttfamily \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} reserved2}
+
+
+
+Definition at line 315 of file tcp.\+h.
+
+\mbox{\Hypertarget{tcp_8h_a5c6ae6c0d8819f5ef0fd57e7f9ee6a08}\label{tcp_8h_a5c6ae6c0d8819f5ef0fd57e7f9ee6a08}} 
+\index{tcp.\+h@{tcp.\+h}!seq\+Num@{seq\+Num}}
+\index{seq\+Num@{seq\+Num}!tcp.\+h@{tcp.\+h}}
+\subsubsection{\texorpdfstring{seq\+Num}{seqNum}}
+{\footnotesize\ttfamily \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t} seq\+Num}
+
+
+
+Definition at line 304 of file tcp.\+h.
+
+\mbox{\Hypertarget{tcp_8h_a26ebbf4f65c3f6fd9959d9cecef5c9d8}\label{tcp_8h_a26ebbf4f65c3f6fd9959d9cecef5c9d8}} 
+\index{tcp.\+h@{tcp.\+h}!src\+Port@{src\+Port}}
+\index{src\+Port@{src\+Port}!tcp.\+h@{tcp.\+h}}
+\subsubsection{\texorpdfstring{src\+Port}{srcPort}}
+{\footnotesize\ttfamily \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} src\+Port}
+
+
+
+Definition at line 302 of file tcp.\+h.
+
+\mbox{\Hypertarget{tcp_8h_ac8a0b26b68c9a94f4886ec15a6d11498}\label{tcp_8h_ac8a0b26b68c9a94f4886ec15a6d11498}} 
+\index{tcp.\+h@{tcp.\+h}!tcp\+Tick\+Counter@{tcp\+Tick\+Counter}}
+\index{tcp\+Tick\+Counter@{tcp\+Tick\+Counter}!tcp.\+h@{tcp.\+h}}
+\subsubsection{\texorpdfstring{tcp\+Tick\+Counter}{tcpTickCounter}}
+{\footnotesize\ttfamily \hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\+\_\+t} tcp\+Tick\+Counter}
+
+
+
+Definition at line 49 of file tcp.\+c.
+
+\mbox{\Hypertarget{tcp_8h_aa82e6fdc131e1d8425a6bbec47fa7ae2}\label{tcp_8h_aa82e6fdc131e1d8425a6bbec47fa7ae2}} 
+\index{tcp.\+h@{tcp.\+h}!urgent\+Pointer@{urgent\+Pointer}}
+\index{urgent\+Pointer@{urgent\+Pointer}!tcp.\+h@{tcp.\+h}}
+\subsubsection{\texorpdfstring{urgent\+Pointer}{urgentPointer}}
+{\footnotesize\ttfamily \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} urgent\+Pointer}
+
+
+
+Definition at line 319 of file tcp.\+h.
+
+\mbox{\Hypertarget{tcp_8h_adfa040d04d16520129a735fff8fb1628}\label{tcp_8h_adfa040d04d16520129a735fff8fb1628}} 
+\index{tcp.\+h@{tcp.\+h}!value@{value}}
+\index{value@{value}!tcp.\+h@{tcp.\+h}}
+\subsubsection{\texorpdfstring{value}{value}}
+{\footnotesize\ttfamily \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} value\mbox{[}$\,$\mbox{]}}
+
+
+
+Definition at line 332 of file tcp.\+h.
+
+\mbox{\Hypertarget{tcp_8h_a6b307b5083cf92aca29549d780b44bd5}\label{tcp_8h_a6b307b5083cf92aca29549d780b44bd5}} 
+\index{tcp.\+h@{tcp.\+h}!window@{window}}
+\index{window@{window}!tcp.\+h@{tcp.\+h}}
+\subsubsection{\texorpdfstring{window}{window}}
+{\footnotesize\ttfamily \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} window}
+
+
+
+Definition at line 317 of file tcp.\+h.
+

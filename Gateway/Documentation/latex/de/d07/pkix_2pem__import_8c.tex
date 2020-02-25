@@ -1,0 +1,1956 @@
+\hypertarget{pkix_2pem__import_8c}{}\section{cyclone\+\_\+crypto/pkix/pem\+\_\+import.c File Reference}
+\label{pkix_2pem__import_8c}\index{cyclone\+\_\+crypto/pkix/pem\+\_\+import.\+c@{cyclone\+\_\+crypto/pkix/pem\+\_\+import.\+c}}
+{\ttfamily \#include \char`\"{}core/crypto.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}pkix/pem\+\_\+import.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}pkix/pkcs8\+\_\+key\+\_\+parse.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}pkix/x509\+\_\+key\+\_\+parse.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}encoding/asn1.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}encoding/oid.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}encoding/base64.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}mpi/mpi.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}debug.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{pkix_2pem__import_8c_afcdf5e66fd927a7f4cc64295acd20407}{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}~\hyperlink{crypto__config_8h_a6afae3a9b63f9b55d979e667ee0e881d}{C\+R\+Y\+P\+T\+O\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{pkix_2pem__import_8c_af6c950c5dd94048cd30683461d6c7fd4}{pem\+Import\+Certificate} (const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$input, size\+\_\+t input\+Len, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$output, size\+\_\+t $\ast$output\+Len, size\+\_\+t $\ast$consumed)
+\begin{DoxyCompactList}\small\item\em Decode a P\+EM file containing a certificate. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{pkix_2pem__import_8c_a91dc314f21f759e8d0eebbea719f162e}{pem\+Import\+Crl} (const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$input, size\+\_\+t input\+Len, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$output, size\+\_\+t $\ast$output\+Len, size\+\_\+t $\ast$consumed)
+\begin{DoxyCompactList}\small\item\em Decode a P\+EM file containing a certificate revocation list. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{pkix_2pem__import_8c_a3234818e19b113aba7140cd7efd5159c}{pem\+Import\+Csr} (const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$input, size\+\_\+t input\+Len, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$output, size\+\_\+t $\ast$output\+Len)
+\begin{DoxyCompactList}\small\item\em Decode a P\+EM file containing a certification signing request. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{pkix_2pem__import_8c_a0afa6464bcb0c1a2e17488fef1d3c3a8}{pem\+Import\+Dh\+Parameters} (const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$input, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length}, \hyperlink{structDhParameters}{Dh\+Parameters} $\ast$params)
+\begin{DoxyCompactList}\small\item\em Decode a P\+EM file containing Diffie-\/\+Hellman parameters. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{pkix_2pem__import_8c_a1809adf16add2cd9dd88133a4661d663}{pem\+Import\+Rsa\+Public\+Key} (const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$input, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length}, \hyperlink{structRsaPublicKey}{Rsa\+Public\+Key} $\ast$public\+Key)
+\begin{DoxyCompactList}\small\item\em Decode a P\+EM file containing an R\+SA public key. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{pkix_2pem__import_8c_a114ebb672dd84b4d44cddac7bb1bdf89}{pem\+Import\+Rsa\+Private\+Key} (const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$input, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length}, \hyperlink{structRsaPrivateKey}{Rsa\+Private\+Key} $\ast$private\+Key)
+\begin{DoxyCompactList}\small\item\em Decode a P\+EM file containing an R\+SA private key. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{pkix_2pem__import_8c_a6e96ddcc71015cabccbedbaf356d777f}{pem\+Import\+Dsa\+Public\+Key} (const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$input, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length}, \hyperlink{structDsaPublicKey}{Dsa\+Public\+Key} $\ast$public\+Key)
+\begin{DoxyCompactList}\small\item\em Decode a P\+EM file containing a D\+SA public key. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{pkix_2pem__import_8c_af0fc6f908b1ad439e9594929b50b1699}{pem\+Import\+Dsa\+Private\+Key} (const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$input, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length}, \hyperlink{structDsaPrivateKey}{Dsa\+Private\+Key} $\ast$private\+Key)
+\begin{DoxyCompactList}\small\item\em Decode a P\+EM file containing a D\+SA private key. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{pkix_2pem__import_8c_a5d76a217bb3b6fad9de9aa71bcd8317f}{pem\+Import\+Ec\+Parameters} (const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$input, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length}, \hyperlink{structEcDomainParameters}{Ec\+Domain\+Parameters} $\ast$params)
+\begin{DoxyCompactList}\small\item\em Decode a P\+EM file containing EC domain parameters. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{pkix_2pem__import_8c_a18b47e073135ab8f0402b18c5fd3cdb1}{pem\+Import\+Ec\+Public\+Key} (const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$input, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length}, \hyperlink{structEcPoint}{Ec\+Point} $\ast$public\+Key)
+\begin{DoxyCompactList}\small\item\em Decode a P\+EM file containing an EC public key. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{pkix_2pem__import_8c_a9af816d9592aa7645688bfeb26b489ec}{pem\+Import\+Ec\+Private\+Key} (const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$input, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length}, \hyperlink{structMpi}{Mpi} $\ast$private\+Key)
+\begin{DoxyCompactList}\small\item\em Decode a P\+EM file containing an EC private key. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{pkix_2pem__import_8c_aec20ff8773400e63cba4100beac9c3d5}{pem\+Import\+Eddsa\+Public\+Key} (const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$input, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length}, \hyperlink{structEddsaPublicKey}{Eddsa\+Public\+Key} $\ast$public\+Key)
+\begin{DoxyCompactList}\small\item\em Decode a P\+EM file containing a Ed\+D\+SA public key. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{pkix_2pem__import_8c_ae775e11e32114fca446a42f9dfd1f3dd}{pem\+Import\+Eddsa\+Private\+Key} (const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$input, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length}, \hyperlink{structEddsaPrivateKey}{Eddsa\+Private\+Key} $\ast$private\+Key)
+\begin{DoxyCompactList}\small\item\em Decode a P\+EM file containing a Ed\+D\+SA private key. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{pkix_2pem__import_8c_a8e27e3726b65f41297dd547cc92c2591}{pem\+Get\+Public\+Key\+Type} (const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$input, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length}, \hyperlink{pkix_2x509__common_8h_acf496c7fd4beb6099d0865b64ca6a0cf}{X509\+Key\+Type} $\ast$key\+Type)
+\begin{DoxyCompactList}\small\item\em Retrieve the type of a P\+E\+M-\/encoded public key. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{pkix_2pem__import_8c_ab8e7b8eb8281557129f96cfc2f92a270}{pem\+Get\+Private\+Key\+Type} (const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$input, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length}, \hyperlink{pkix_2x509__common_8h_acf496c7fd4beb6099d0865b64ca6a0cf}{X509\+Key\+Type} $\ast$key\+Type)
+\begin{DoxyCompactList}\small\item\em Retrieve the type of a P\+E\+M-\/encoded private key. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{pkix_2pem__import_8c_afabfed2db07e95a3438690d707815cda}{pem\+Decode\+File} (const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$input, size\+\_\+t input\+Len, const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$label, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$output, size\+\_\+t $\ast$output\+Len, size\+\_\+t $\ast$consumed)
+\begin{DoxyCompactList}\small\item\em Convert P\+EM container to A\+S\+N.\+1 format. \end{DoxyCompactList}\item 
+\hyperlink{compiler__port_8h_a022c65af7f6c8d3947e8a37d64db6ad6}{int\+\_\+t} \hyperlink{pkix_2pem__import_8c_a37377952efa1ddd43d9c152c56d15aab}{pem\+Find\+Tag} (const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$input, size\+\_\+t input\+Len, const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$tag1, const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$tag2, const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$tag3)
+\begin{DoxyCompactList}\small\item\em Search a string for a given tag. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{pkix_2pem__import_8c_afcdf5e66fd927a7f4cc64295acd20407}\label{pkix_2pem__import_8c_afcdf5e66fd927a7f4cc64295acd20407}} 
+\index{pkix/pem\+\_\+import.\+c@{pkix/pem\+\_\+import.\+c}!T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+\index{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}!pkix/pem\+\_\+import.\+c@{pkix/pem\+\_\+import.\+c}}
+\subsubsection{\texorpdfstring{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}{TRACE\_LEVEL}}
+{\footnotesize\ttfamily \#define T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL~\hyperlink{crypto__config_8h_a6afae3a9b63f9b55d979e667ee0e881d}{C\+R\+Y\+P\+T\+O\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+
+
+
+Definition at line 32 of file pem\+\_\+import.\+c.
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{pkix_2pem__import_8c_afabfed2db07e95a3438690d707815cda}\label{pkix_2pem__import_8c_afabfed2db07e95a3438690d707815cda}} 
+\index{pkix/pem\+\_\+import.\+c@{pkix/pem\+\_\+import.\+c}!pem\+Decode\+File@{pem\+Decode\+File}}
+\index{pem\+Decode\+File@{pem\+Decode\+File}!pkix/pem\+\_\+import.\+c@{pkix/pem\+\_\+import.\+c}}
+\subsubsection{\texorpdfstring{pem\+Decode\+File()}{pemDecodeFile()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} pem\+Decode\+File (\begin{DoxyParamCaption}\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{input,  }\item[{size\+\_\+t}]{input\+Len,  }\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{label,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{output,  }\item[{size\+\_\+t $\ast$}]{output\+Len,  }\item[{size\+\_\+t $\ast$}]{consumed }\end{DoxyParamCaption})}
+
+
+
+Convert P\+EM container to A\+S\+N.\+1 format. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em input} & P\+EM container to decode \\
+\hline
+\mbox{\tt in}  & {\em input\+Len} & Length of the P\+EM container to decode \\
+\hline
+\mbox{\tt in}  & {\em label} & Label indicating the type of data \\
+\hline
+\mbox{\tt out}  & {\em output} & A\+S\+N.\+1 data (optional parameter) \\
+\hline
+\mbox{\tt out}  & {\em output\+Len} & Length of the A\+S\+N.\+1 data \\
+\hline
+\mbox{\tt out}  & {\em consumed} & Total number of characters that have been consumed (optional parameter) \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 1468 of file pem\+\_\+import.\+c.
+
+
+\begin{DoxyCode}
+1470 \{
+1471    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+1472    \hyperlink{compiler__port_8h_a022c65af7f6c8d3947e8a37d64db6ad6}{int\_t} i;
+1473    \hyperlink{compiler__port_8h_a022c65af7f6c8d3947e8a37d64db6ad6}{int\_t} j;
+1474 
+1475    \textcolor{comment}{//The PEM container begins with a "-----BEGIN " line}
+1476    i = \hyperlink{pkix_2pem__import_8c_a37377952efa1ddd43d9c152c56d15aab}{pemFindTag}(input, inputLen, \textcolor{stringliteral}{"-----BEGIN "}, label, \textcolor{stringliteral}{"-----"});
+1477    \textcolor{comment}{//Encapsulation boundary not found?}
+1478    \textcolor{keywordflow}{if}(i < 0)
+1479       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca488b657f8cc2e6c29df47f282e8ff3ad}{ERROR\_END\_OF\_FILE};
+1480 
+1481    \textcolor{comment}{//Skip the encapsulation boundary}
+1482    i += \hyperlink{cyclone__crypto_2core_2crypto_8h_a60355e8a0b63bff69cedd877fc82c624}{cryptoStrlen}(\textcolor{stringliteral}{"-----BEGIN -----"}) + \hyperlink{cyclone__crypto_2core_2crypto_8h_a60355e8a0b63bff69cedd877fc82c624}{cryptoStrlen}(label);
+1483 
+1484    \textcolor{comment}{//The PEM container ends with a "-----END " line}
+1485    j = \hyperlink{pkix_2pem__import_8c_a37377952efa1ddd43d9c152c56d15aab}{pemFindTag}(input + i, inputLen - i, \textcolor{stringliteral}{"-----END "}, label, \textcolor{stringliteral}{"-----"});
+1486    \textcolor{comment}{//Encapsulation boundary not found?}
+1487    \textcolor{keywordflow}{if}(j < 0)
+1488       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca92e7b26953f11d1bc4f4526fad39aed0}{ERROR\_INVALID\_SYNTAX};
+1489 
+1490    \textcolor{comment}{//The contents of the PEM file is Base64-encoded}
+1491    error = \hyperlink{base64_8c_ae360cde3e2ef08783ac2e01591b78530}{base64Decode}(input + i, j, output, outputLen);
+1492    \textcolor{comment}{//Failed to decode the file?}
+1493    \textcolor{keywordflow}{if}(error)
+1494       \textcolor{keywordflow}{return} error;
+1495 
+1496    \textcolor{comment}{//Sanity check}
+1497    \textcolor{keywordflow}{if}(*outputLen == 0)
+1498       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca92e7b26953f11d1bc4f4526fad39aed0}{ERROR\_INVALID\_SYNTAX};
+1499 
+1500    \textcolor{comment}{//If the output parameter is NULL, then the function calculates the}
+1501    \textcolor{comment}{//length of the resulting ASN.1 data without copying any data}
+1502    \textcolor{keywordflow}{if}(output != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1503    \{
+1504       \textcolor{comment}{//Display ASN.1 structure}
+1505       error = \hyperlink{asn1_8c_adfebd6c0e21cc4d23414ff98aa9e9a69}{asn1DumpObject}(output, *outputLen, 0);
+1506       \textcolor{comment}{//Any error to report?}
+1507       \textcolor{keywordflow}{if}(error)
+1508          \textcolor{keywordflow}{return} error;
+1509    \}
+1510 
+1511    \textcolor{comment}{//The last parameter is optional}
+1512    \textcolor{keywordflow}{if}(consumed != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1513    \{
+1514       \textcolor{comment}{//Total number of characters that have been consumed}
+1515       *consumed = i + j + \hyperlink{cyclone__crypto_2core_2crypto_8h_a60355e8a0b63bff69cedd877fc82c624}{cryptoStrlen}(\textcolor{stringliteral}{"-----END -----"}) + 
+      \hyperlink{cyclone__crypto_2core_2crypto_8h_a60355e8a0b63bff69cedd877fc82c624}{cryptoStrlen}(label);
+1516    \}
+1517 
+1518    \textcolor{comment}{//Successful processing}
+1519    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+1520 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{pkix_2pem__import_8c_a37377952efa1ddd43d9c152c56d15aab}\label{pkix_2pem__import_8c_a37377952efa1ddd43d9c152c56d15aab}} 
+\index{pkix/pem\+\_\+import.\+c@{pkix/pem\+\_\+import.\+c}!pem\+Find\+Tag@{pem\+Find\+Tag}}
+\index{pem\+Find\+Tag@{pem\+Find\+Tag}!pkix/pem\+\_\+import.\+c@{pkix/pem\+\_\+import.\+c}}
+\subsubsection{\texorpdfstring{pem\+Find\+Tag()}{pemFindTag()}}
+{\footnotesize\ttfamily \hyperlink{compiler__port_8h_a022c65af7f6c8d3947e8a37d64db6ad6}{int\+\_\+t} pem\+Find\+Tag (\begin{DoxyParamCaption}\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{input,  }\item[{size\+\_\+t}]{input\+Len,  }\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{tag1,  }\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{tag2,  }\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{tag3 }\end{DoxyParamCaption})}
+
+
+
+Search a string for a given tag. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em input} & String to search \\
+\hline
+\mbox{\tt in}  & {\em input\+Len} & Length of the string to search \\
+\hline
+\mbox{\tt in}  & {\em tag1} & First part of the tag (N\+U\+L\+L-\/terminated string) \\
+\hline
+\mbox{\tt in}  & {\em tag2} & Second part of the tag (N\+U\+L\+L-\/terminated string) \\
+\hline
+\mbox{\tt in}  & {\em tag3} & Third part of the tag (N\+U\+L\+L-\/terminated string) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The index of the first occurrence of the tag in the string, or -\/1 if the tag does not appear in the string 
+\end{DoxyReturn}
+
+
+Definition at line 1534 of file pem\+\_\+import.\+c.
+
+
+\begin{DoxyCode}
+1536 \{
+1537    \textcolor{keywordtype}{size\_t} i;
+1538    \textcolor{keywordtype}{size\_t} j;
+1539    \textcolor{keywordtype}{size\_t} n1;
+1540    \textcolor{keywordtype}{size\_t} n2;
+1541    \textcolor{keywordtype}{size\_t} n3;
+1542    \hyperlink{compiler__port_8h_a022c65af7f6c8d3947e8a37d64db6ad6}{int\_t} index;
+1543 
+1544    \textcolor{comment}{//Initialize index}
+1545    index = -1;
+1546 
+1547    \textcolor{comment}{//Calculate the length of the tag}
+1548    n1 = \hyperlink{cyclone__crypto_2core_2crypto_8h_a60355e8a0b63bff69cedd877fc82c624}{cryptoStrlen}(tag1);
+1549    n2 = \hyperlink{cyclone__crypto_2core_2crypto_8h_a60355e8a0b63bff69cedd877fc82c624}{cryptoStrlen}(tag2);
+1550    n3 = \hyperlink{cyclone__crypto_2core_2crypto_8h_a60355e8a0b63bff69cedd877fc82c624}{cryptoStrlen}(tag3);
+1551 
+1552    \textcolor{comment}{//Parse input string}
+1553    \textcolor{keywordflow}{for}(i = 0; (i + n1 + n2 + n3) <= inputLen; i++)
+1554    \{
+1555       \textcolor{comment}{//Compare current substring with the given tag}
+1556       \textcolor{keywordflow}{for}(j = 0; j < (n1 + n2 + n3); j++)
+1557       \{
+1558          \textcolor{keywordflow}{if}(j < n1)
+1559          \{
+1560             \textcolor{keywordflow}{if}(input[i + j] != tag1[j])
+1561                \textcolor{keywordflow}{break};
+1562          \}
+1563          \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(j < (n1 + n2))
+1564          \{
+1565             \textcolor{keywordflow}{if}(input[i + j] != tag2[j - n1])
+1566                \textcolor{keywordflow}{break};
+1567          \}
+1568          \textcolor{keywordflow}{else}
+1569          \{
+1570             \textcolor{keywordflow}{if}(input[i + j] != tag3[j - n1 - n2])
+1571                \textcolor{keywordflow}{break};
+1572          \}
+1573       \}
+1574 
+1575       \textcolor{comment}{//Check whether the tag has been found}
+1576       \textcolor{keywordflow}{if}(j == (n1 + n2 + n3))
+1577       \{
+1578          index = i;
+1579          \textcolor{keywordflow}{break};
+1580       \}
+1581    \}
+1582 
+1583    \textcolor{comment}{//Return the index of the first occurrence of the tag in the string}
+1584    \textcolor{keywordflow}{return} index;
+1585 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{pkix_2pem__import_8c_ab8e7b8eb8281557129f96cfc2f92a270}\label{pkix_2pem__import_8c_ab8e7b8eb8281557129f96cfc2f92a270}} 
+\index{pkix/pem\+\_\+import.\+c@{pkix/pem\+\_\+import.\+c}!pem\+Get\+Private\+Key\+Type@{pem\+Get\+Private\+Key\+Type}}
+\index{pem\+Get\+Private\+Key\+Type@{pem\+Get\+Private\+Key\+Type}!pkix/pem\+\_\+import.\+c@{pkix/pem\+\_\+import.\+c}}
+\subsubsection{\texorpdfstring{pem\+Get\+Private\+Key\+Type()}{pemGetPrivateKeyType()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} pem\+Get\+Private\+Key\+Type (\begin{DoxyParamCaption}\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{input,  }\item[{size\+\_\+t}]{length,  }\item[{\hyperlink{pkix_2x509__common_8h_acf496c7fd4beb6099d0865b64ca6a0cf}{X509\+Key\+Type} $\ast$}]{key\+Type }\end{DoxyParamCaption})}
+
+
+
+Retrieve the type of a P\+E\+M-\/encoded private key. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em input} & Pointer to the P\+EM encoding \\
+\hline
+\mbox{\tt in}  & {\em length} & Length of the P\+EM encoding \\
+\hline
+\mbox{\tt out}  & {\em Private} & key type \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 1356 of file pem\+\_\+import.\+c.
+
+
+\begin{DoxyCode}
+1358 \{
+1359    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+1360    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1361    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *buffer;
+1362    \hyperlink{structPkcs8PrivateKeyInfo}{Pkcs8PrivateKeyInfo} privateKeyInfo;
+1363 
+1364    \textcolor{comment}{//Check parameters}
+1365    \textcolor{keywordflow}{if}(input == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} && \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} != 0)
+1366       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+1367    \textcolor{keywordflow}{if}(keyType == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1368       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+1369 
+1370    \textcolor{comment}{//Initialize status code}
+1371    error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+1372 
+1373    \textcolor{comment}{//Default private key type}
+1374    *keyType = \hyperlink{pkix_2x509__common_8h_acf496c7fd4beb6099d0865b64ca6a0cfa8e82399e69b45d4274a6fe76eae9aa3c}{X509\_KEY\_TYPE\_UNKNOWN};
+1375 
+1376 \textcolor{preprocessor}{#if (RSA\_SUPPORT == ENABLED)}
+1377    \textcolor{comment}{//PEM container with "RSA PRIVATE KEY" label?}
+1378    \textcolor{keywordflow}{if}(\hyperlink{pkix_2pem__import_8c_afabfed2db07e95a3438690d707815cda}{pemDecodeFile}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"RSA PRIVATE KEY"}, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, &n, 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}) == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR})
+1379    \{
+1380       \textcolor{comment}{//The PEM file contains an RSA private key (PKCS #1 format)}
+1381       *keyType = \hyperlink{pkix_2x509__common_8h_acf496c7fd4beb6099d0865b64ca6a0cfab4b6af5b2d73cc06782ebcaf9cff57f4}{X509\_KEY\_TYPE\_RSA};
+1382    \}
+1383    \textcolor{keywordflow}{else}
+1384 \textcolor{preprocessor}{#endif}
+1385 \textcolor{preprocessor}{#if (DSA\_SUPPORT == ENABLED)}
+1386    \textcolor{comment}{//PEM container with "DSA PRIVATE KEY" label?}
+1387    \textcolor{keywordflow}{if}(\hyperlink{pkix_2pem__import_8c_afabfed2db07e95a3438690d707815cda}{pemDecodeFile}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"DSA PRIVATE KEY"}, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, &n, 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}) == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR})
+1388    \{
+1389       \textcolor{comment}{//The PEM file contains a DSA private key}
+1390       *keyType = \hyperlink{pkix_2x509__common_8h_acf496c7fd4beb6099d0865b64ca6a0cfa7de5ab7acd9aa59ca58b5def6ffa26dd}{X509\_KEY\_TYPE\_DSA};
+1391    \}
+1392    \textcolor{keywordflow}{else}
+1393 \textcolor{preprocessor}{#endif}
+1394 \textcolor{preprocessor}{#if (EC\_SUPPORT == ENABLED)}
+1395    \textcolor{comment}{//PEM container with "EC PRIVATE KEY" label?}
+1396    \textcolor{keywordflow}{if}(\hyperlink{pkix_2pem__import_8c_afabfed2db07e95a3438690d707815cda}{pemDecodeFile}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"EC PRIVATE KEY"}, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, &n, 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}) == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR})
+1397    \{
+1398       \textcolor{comment}{//The PEM file contains an EC private key}
+1399       *keyType = \hyperlink{pkix_2x509__common_8h_acf496c7fd4beb6099d0865b64ca6a0cfaee2c0fc850eb31b187155030778cbd4c}{X509\_KEY\_TYPE\_EC};
+1400    \}
+1401    \textcolor{keywordflow}{else}
+1402 \textcolor{preprocessor}{#endif}
+1403    \textcolor{comment}{//PEM container with "PRIVATE KEY" label?}
+1404    \textcolor{keywordflow}{if}(\hyperlink{pkix_2pem__import_8c_afabfed2db07e95a3438690d707815cda}{pemDecodeFile}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"PRIVATE KEY"}, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, &n, 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}) == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR})
+1405    \{
+1406       \textcolor{comment}{//Allocate a memory buffer to hold the ASN.1 data}
+1407       buffer = \hyperlink{cyclone__crypto_2core_2crypto_8h_a48b53d16f66d31e5dcf82db3c1b882ba}{cryptoAllocMem}(n);
+1408 
+1409       \textcolor{comment}{//Successful memory allocation?}
+1410       \textcolor{keywordflow}{if}(buffer != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1411       \{
+1412          \textcolor{comment}{//Decode the content of the PEM container}
+1413          error = \hyperlink{pkix_2pem__import_8c_afabfed2db07e95a3438690d707815cda}{pemDecodeFile}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"PRIVATE KEY"}, buffer, &n, 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+1414 
+1415          \textcolor{comment}{//Check status code}
+1416          \textcolor{keywordflow}{if}(!error)
+1417          \{
+1418             \textcolor{comment}{//Read the PrivateKeyInfo structure (refer to RFC 5208, section 5)}
+1419             error = \hyperlink{pkcs8__key__parse_8c_af62e7988b51a0bb9b5ad79db6da97c54}{pkcs8ParsePrivateKeyInfo}(buffer, n, &privateKeyInfo);
+1420          \}
+1421 
+1422          \textcolor{comment}{//Check status code}
+1423          \textcolor{keywordflow}{if}(!error)
+1424          \{
+1425             \textcolor{comment}{//Check private key algorithm identifier}
+1426             *keyType = \hyperlink{pkix_2x509__common_8c_ade97135c6d99e8e34f247e8d04d9f15d}{x509GetPublicKeyType}(privateKeyInfo.
+      \hyperlink{structPkcs8PrivateKeyInfo_a233da5c7077e926f9d337e69892f4fb1}{oid},
+1427                privateKeyInfo.\hyperlink{structPkcs8PrivateKeyInfo_a77b3088c43e5ad25a5caedcddcb15a2f}{oidLen});
+1428 
+1429             \textcolor{comment}{//Unknown algorithm identifier?}
+1430             \textcolor{keywordflow}{if}(*keyType == \hyperlink{pkix_2x509__common_8h_acf496c7fd4beb6099d0865b64ca6a0cfa8e82399e69b45d4274a6fe76eae9aa3c}{X509\_KEY\_TYPE\_UNKNOWN})
+1431             \{
+1432                \textcolor{comment}{//Report an error}
+1433                error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca2bc2298123e24e3d82592b5c68c20612}{ERROR\_WRONG\_IDENTIFIER};
+1434             \}
+1435          \}
+1436 
+1437          \textcolor{comment}{//Release previously allocated memory}
+1438          \hyperlink{cyclone__crypto_2core_2crypto_8h_ac8a223b176683db4e9eed4162774f870}{cryptoFreeMem}(buffer);
+1439       \}
+1440       \textcolor{keywordflow}{else}
+1441       \{
+1442          \textcolor{comment}{//Failed to allocate memory}
+1443          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac0a554045048d2fb61387cf735676f69}{ERROR\_OUT\_OF\_MEMORY};
+1444       \}
+1445    \}
+1446    \textcolor{keywordflow}{else}
+1447    \{
+1448       \textcolor{comment}{//The PEM file does not contain a valid private key}
+1449       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca488b657f8cc2e6c29df47f282e8ff3ad}{ERROR\_END\_OF\_FILE};
+1450    \}
+1451 
+1452    \textcolor{comment}{//Return status code}
+1453    \textcolor{keywordflow}{return} error;
+1454 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{pkix_2pem__import_8c_a8e27e3726b65f41297dd547cc92c2591}\label{pkix_2pem__import_8c_a8e27e3726b65f41297dd547cc92c2591}} 
+\index{pkix/pem\+\_\+import.\+c@{pkix/pem\+\_\+import.\+c}!pem\+Get\+Public\+Key\+Type@{pem\+Get\+Public\+Key\+Type}}
+\index{pem\+Get\+Public\+Key\+Type@{pem\+Get\+Public\+Key\+Type}!pkix/pem\+\_\+import.\+c@{pkix/pem\+\_\+import.\+c}}
+\subsubsection{\texorpdfstring{pem\+Get\+Public\+Key\+Type()}{pemGetPublicKeyType()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} pem\+Get\+Public\+Key\+Type (\begin{DoxyParamCaption}\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{input,  }\item[{size\+\_\+t}]{length,  }\item[{\hyperlink{pkix_2x509__common_8h_acf496c7fd4beb6099d0865b64ca6a0cf}{X509\+Key\+Type} $\ast$}]{key\+Type }\end{DoxyParamCaption})}
+
+
+
+Retrieve the type of a P\+E\+M-\/encoded public key. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em input} & Pointer to the P\+EM encoding \\
+\hline
+\mbox{\tt in}  & {\em length} & Length of the P\+EM encoding \\
+\hline
+\mbox{\tt out}  & {\em Public} & key type \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 1264 of file pem\+\_\+import.\+c.
+
+
+\begin{DoxyCode}
+1266 \{
+1267    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+1268    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1269    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *buffer;
+1270    \hyperlink{structX509SubjectPublicKeyInfo}{X509SubjectPublicKeyInfo} publicKeyInfo;
+1271 
+1272    \textcolor{comment}{//Check parameters}
+1273    \textcolor{keywordflow}{if}(input == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} && \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} != 0)
+1274       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+1275    \textcolor{keywordflow}{if}(keyType == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1276       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+1277 
+1278    \textcolor{comment}{//Initialize status code}
+1279    error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+1280 
+1281    \textcolor{comment}{//Default public key type}
+1282    *keyType = \hyperlink{pkix_2x509__common_8h_acf496c7fd4beb6099d0865b64ca6a0cfa8e82399e69b45d4274a6fe76eae9aa3c}{X509\_KEY\_TYPE\_UNKNOWN};
+1283 
+1284 \textcolor{preprocessor}{#if (RSA\_SUPPORT == ENABLED)}
+1285    \textcolor{comment}{//PEM container with "RSA PUBLIC KEY" label?}
+1286    \textcolor{keywordflow}{if}(\hyperlink{pkix_2pem__import_8c_afabfed2db07e95a3438690d707815cda}{pemDecodeFile}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"RSA PUBLIC KEY"}, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, &n, 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}) == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR})
+1287    \{
+1288       \textcolor{comment}{//The PEM file contains an RSA public key (PKCS #1 format)}
+1289       *keyType = \hyperlink{pkix_2x509__common_8h_acf496c7fd4beb6099d0865b64ca6a0cfab4b6af5b2d73cc06782ebcaf9cff57f4}{X509\_KEY\_TYPE\_RSA};
+1290    \}
+1291    \textcolor{keywordflow}{else}
+1292 \textcolor{preprocessor}{#endif}
+1293    \textcolor{comment}{//PEM container with "PUBLIC KEY" label?}
+1294    \textcolor{keywordflow}{if}(\hyperlink{pkix_2pem__import_8c_afabfed2db07e95a3438690d707815cda}{pemDecodeFile}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"PUBLIC KEY"}, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, &n, 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}) == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR})
+1295    \{
+1296       \textcolor{comment}{//Allocate a memory buffer to hold the ASN.1 data}
+1297       buffer = \hyperlink{cyclone__crypto_2core_2crypto_8h_a48b53d16f66d31e5dcf82db3c1b882ba}{cryptoAllocMem}(n);
+1298 
+1299       \textcolor{comment}{//Successful memory allocation?}
+1300       \textcolor{keywordflow}{if}(buffer != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1301       \{
+1302          \textcolor{comment}{//Decode the content of the PEM container}
+1303          error = \hyperlink{pkix_2pem__import_8c_afabfed2db07e95a3438690d707815cda}{pemDecodeFile}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"PUBLIC KEY"}, buffer, &n, 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+1304 
+1305          \textcolor{comment}{//Check status code}
+1306          \textcolor{keywordflow}{if}(!error)
+1307          \{
+1308             \textcolor{comment}{//The ASN.1 encoded data of the public key is the SubjectPublicKeyInfo}
+1309             \textcolor{comment}{//structure (refer to RFC 7468, section 13)}
+1310             error = \hyperlink{certificate_2x509__cert__parse_8c_a17bacf95e872d7fdcd6cec43b1724dd6}{x509ParseSubjectPublicKeyInfo}(buffer, n, &n, &
+      publicKeyInfo);
+1311          \}
+1312 
+1313          \textcolor{comment}{//Check status code}
+1314          \textcolor{keywordflow}{if}(!error)
+1315          \{
+1316             \textcolor{comment}{//Check public key algorithm identifier}
+1317             *keyType = \hyperlink{pkix_2x509__common_8c_ade97135c6d99e8e34f247e8d04d9f15d}{x509GetPublicKeyType}(publicKeyInfo.
+      \hyperlink{structX509SubjectPublicKeyInfo_a90a8b808782b18de901306acd49b0706}{oid},
+1318                publicKeyInfo.\hyperlink{structX509SubjectPublicKeyInfo_a7c5d6f507f653f6085ba56e6b4b55912}{oidLen});
+1319 
+1320             \textcolor{comment}{//Unknown algorithm identifier?}
+1321             \textcolor{keywordflow}{if}(*keyType == \hyperlink{pkix_2x509__common_8h_acf496c7fd4beb6099d0865b64ca6a0cfa8e82399e69b45d4274a6fe76eae9aa3c}{X509\_KEY\_TYPE\_UNKNOWN})
+1322             \{
+1323                \textcolor{comment}{//Report an error}
+1324                error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca2bc2298123e24e3d82592b5c68c20612}{ERROR\_WRONG\_IDENTIFIER};
+1325             \}
+1326          \}
+1327 
+1328          \textcolor{comment}{//Release previously allocated memory}
+1329          \hyperlink{cyclone__crypto_2core_2crypto_8h_ac8a223b176683db4e9eed4162774f870}{cryptoFreeMem}(buffer);
+1330       \}
+1331       \textcolor{keywordflow}{else}
+1332       \{
+1333          \textcolor{comment}{//Failed to allocate memory}
+1334          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac0a554045048d2fb61387cf735676f69}{ERROR\_OUT\_OF\_MEMORY};
+1335       \}
+1336    \}
+1337    \textcolor{keywordflow}{else}
+1338    \{
+1339       \textcolor{comment}{//The PEM file does not contain a valid public key}
+1340       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca488b657f8cc2e6c29df47f282e8ff3ad}{ERROR\_END\_OF\_FILE};
+1341    \}
+1342 
+1343    \textcolor{comment}{//Return status code}
+1344    \textcolor{keywordflow}{return} error;
+1345 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{pkix_2pem__import_8c_af6c950c5dd94048cd30683461d6c7fd4}\label{pkix_2pem__import_8c_af6c950c5dd94048cd30683461d6c7fd4}} 
+\index{pkix/pem\+\_\+import.\+c@{pkix/pem\+\_\+import.\+c}!pem\+Import\+Certificate@{pem\+Import\+Certificate}}
+\index{pem\+Import\+Certificate@{pem\+Import\+Certificate}!pkix/pem\+\_\+import.\+c@{pkix/pem\+\_\+import.\+c}}
+\subsubsection{\texorpdfstring{pem\+Import\+Certificate()}{pemImportCertificate()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} pem\+Import\+Certificate (\begin{DoxyParamCaption}\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{input,  }\item[{size\+\_\+t}]{input\+Len,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{output,  }\item[{size\+\_\+t $\ast$}]{output\+Len,  }\item[{size\+\_\+t $\ast$}]{consumed }\end{DoxyParamCaption})}
+
+
+
+Decode a P\+EM file containing a certificate. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em input} & Pointer to the P\+EM encoding \\
+\hline
+\mbox{\tt in}  & {\em input\+Len} & Length of the P\+EM structure \\
+\hline
+\mbox{\tt out}  & {\em output} & Pointer to the D\+E\+R-\/encoded certificate \\
+\hline
+\mbox{\tt out}  & {\em output\+Len} & Length of the D\+E\+R-\/encoded certificate, in bytes \\
+\hline
+\mbox{\tt out}  & {\em consumed} & Total number of characters that have been consumed (optional parameter) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 60 of file pem\+\_\+import.\+c.
+
+
+\begin{DoxyCode}
+62 \{
+63    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+64 
+65    \textcolor{comment}{//Check parameters}
+66    \textcolor{keywordflow}{if}(input == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} && inputLen != 0)
+67       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+68    \textcolor{keywordflow}{if}(outputLen == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+69       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+70 
+71    \textcolor{comment}{//X.509 certificates are encoded using the "CERTIFICATE" label}
+72    error = \hyperlink{pkix_2pem__import_8c_afabfed2db07e95a3438690d707815cda}{pemDecodeFile}(input, inputLen, \textcolor{stringliteral}{"CERTIFICATE"}, output, outputLen,
+73       consumed);
+74 
+75    \textcolor{comment}{//Return status code}
+76    \textcolor{keywordflow}{return} error;
+77 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{pkix_2pem__import_8c_a91dc314f21f759e8d0eebbea719f162e}\label{pkix_2pem__import_8c_a91dc314f21f759e8d0eebbea719f162e}} 
+\index{pkix/pem\+\_\+import.\+c@{pkix/pem\+\_\+import.\+c}!pem\+Import\+Crl@{pem\+Import\+Crl}}
+\index{pem\+Import\+Crl@{pem\+Import\+Crl}!pkix/pem\+\_\+import.\+c@{pkix/pem\+\_\+import.\+c}}
+\subsubsection{\texorpdfstring{pem\+Import\+Crl()}{pemImportCrl()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} pem\+Import\+Crl (\begin{DoxyParamCaption}\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{input,  }\item[{size\+\_\+t}]{input\+Len,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{output,  }\item[{size\+\_\+t $\ast$}]{output\+Len,  }\item[{size\+\_\+t $\ast$}]{consumed }\end{DoxyParamCaption})}
+
+
+
+Decode a P\+EM file containing a certificate revocation list. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em input} & Pointer to the P\+EM encoding \\
+\hline
+\mbox{\tt in}  & {\em input\+Len} & Length of the P\+EM structure \\
+\hline
+\mbox{\tt out}  & {\em output} & Pointer to the D\+E\+R-\/encoded C\+RL \\
+\hline
+\mbox{\tt out}  & {\em output\+Len} & Length of the D\+E\+R-\/encoded C\+RL, in bytes \\
+\hline
+\mbox{\tt out}  & {\em consumed} & Total number of characters that have been consumed (optional parameter) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 91 of file pem\+\_\+import.\+c.
+
+
+\begin{DoxyCode}
+93 \{
+94    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+95 
+96    \textcolor{comment}{//Check parameters}
+97    \textcolor{keywordflow}{if}(input == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} && inputLen != 0)
+98       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+99    \textcolor{keywordflow}{if}(outputLen == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+100       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+101 
+102    \textcolor{comment}{//CRLs are encoded using the "X509 CRL" label}
+103    error = \hyperlink{pkix_2pem__import_8c_afabfed2db07e95a3438690d707815cda}{pemDecodeFile}(input, inputLen, \textcolor{stringliteral}{"X509 CRL"}, output, outputLen,
+104       consumed);
+105 
+106    \textcolor{comment}{//Return status code}
+107    \textcolor{keywordflow}{return} error;
+108 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{pkix_2pem__import_8c_a3234818e19b113aba7140cd7efd5159c}\label{pkix_2pem__import_8c_a3234818e19b113aba7140cd7efd5159c}} 
+\index{pkix/pem\+\_\+import.\+c@{pkix/pem\+\_\+import.\+c}!pem\+Import\+Csr@{pem\+Import\+Csr}}
+\index{pem\+Import\+Csr@{pem\+Import\+Csr}!pkix/pem\+\_\+import.\+c@{pkix/pem\+\_\+import.\+c}}
+\subsubsection{\texorpdfstring{pem\+Import\+Csr()}{pemImportCsr()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} pem\+Import\+Csr (\begin{DoxyParamCaption}\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{input,  }\item[{size\+\_\+t}]{input\+Len,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{output,  }\item[{size\+\_\+t $\ast$}]{output\+Len }\end{DoxyParamCaption})}
+
+
+
+Decode a P\+EM file containing a certification signing request. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em input} & Pointer to the P\+EM encoding \\
+\hline
+\mbox{\tt in}  & {\em input\+Len} & Length of the P\+EM structure \\
+\hline
+\mbox{\tt out}  & {\em output} & Pointer to the D\+E\+R-\/encoded C\+SR \\
+\hline
+\mbox{\tt out}  & {\em output\+Len} & Length of the D\+E\+R-\/encoded C\+SR, in bytes \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 120 of file pem\+\_\+import.\+c.
+
+
+\begin{DoxyCode}
+122 \{
+123    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+124 
+125    \textcolor{comment}{//Check parameters}
+126    \textcolor{keywordflow}{if}(input == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} && inputLen != 0)
+127       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+128    \textcolor{keywordflow}{if}(outputLen == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+129       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+130 
+131    \textcolor{comment}{//CSRs are encoded using the "CERTIFICATE REQUEST" label}
+132    error = \hyperlink{pkix_2pem__import_8c_afabfed2db07e95a3438690d707815cda}{pemDecodeFile}(input, inputLen, \textcolor{stringliteral}{"CERTIFICATE REQUEST"}, output,
+133       outputLen, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+134 
+135    \textcolor{comment}{//Return status code}
+136    \textcolor{keywordflow}{return} error;
+137 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{pkix_2pem__import_8c_a0afa6464bcb0c1a2e17488fef1d3c3a8}\label{pkix_2pem__import_8c_a0afa6464bcb0c1a2e17488fef1d3c3a8}} 
+\index{pkix/pem\+\_\+import.\+c@{pkix/pem\+\_\+import.\+c}!pem\+Import\+Dh\+Parameters@{pem\+Import\+Dh\+Parameters}}
+\index{pem\+Import\+Dh\+Parameters@{pem\+Import\+Dh\+Parameters}!pkix/pem\+\_\+import.\+c@{pkix/pem\+\_\+import.\+c}}
+\subsubsection{\texorpdfstring{pem\+Import\+Dh\+Parameters()}{pemImportDhParameters()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} pem\+Import\+Dh\+Parameters (\begin{DoxyParamCaption}\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{input,  }\item[{size\+\_\+t}]{length,  }\item[{\hyperlink{structDhParameters}{Dh\+Parameters} $\ast$}]{params }\end{DoxyParamCaption})}
+
+
+
+Decode a P\+EM file containing Diffie-\/\+Hellman parameters. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em input} & Pointer to the P\+EM encoding \\
+\hline
+\mbox{\tt in}  & {\em length} & Length of the P\+EM encoding \\
+\hline
+\mbox{\tt out}  & {\em params} & Diffie-\/\+Hellman parameters resulting from the parsing process \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 148 of file pem\+\_\+import.\+c.
+
+
+\begin{DoxyCode}
+150 \{
+151 \textcolor{preprocessor}{#if (DH\_SUPPORT == ENABLED)}
+152    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+153    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+154    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *buffer;
+155    \textcolor{keyword}{const} \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *\hyperlink{ndp_8h_a6519522ad9a6f45e7a8d25d31392a977}{p};
+156    \hyperlink{structAsn1Tag}{Asn1Tag} tag;
+157 
+158    \textcolor{comment}{//Check parameters}
+159    \textcolor{keywordflow}{if}(input == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} && \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} != 0)
+160       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+161    \textcolor{keywordflow}{if}(params == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+162       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+163 
+164    \textcolor{comment}{//Initialize variables}
+165    p = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+166    n = 0;
+167 
+168    \textcolor{comment}{//Diffie-Hellman parameters are encoded using the "DH PARAMETERS" label}
+169    error = \hyperlink{pkix_2pem__import_8c_afabfed2db07e95a3438690d707815cda}{pemDecodeFile}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"DH PARAMETERS"}, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, &n, 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+170 
+171    \textcolor{comment}{//Check status code}
+172    \textcolor{keywordflow}{if}(!error)
+173    \{
+174       \textcolor{comment}{//Allocate a memory buffer to hold the ASN.1 data}
+175       buffer = \hyperlink{cyclone__crypto_2core_2crypto_8h_a48b53d16f66d31e5dcf82db3c1b882ba}{cryptoAllocMem}(n);
+176 
+177       \textcolor{comment}{//Successful memory allocation?}
+178       \textcolor{keywordflow}{if}(buffer != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+179       \{
+180          \textcolor{comment}{//Decode the content of the PEM container}
+181          error = \hyperlink{pkix_2pem__import_8c_afabfed2db07e95a3438690d707815cda}{pemDecodeFile}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"DH PARAMETERS"}, buffer, &n, 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+182 
+183          \textcolor{comment}{//Check status code}
+184          \textcolor{keywordflow}{if}(!error)
+185          \{
+186             \textcolor{comment}{//The Diffie-Hellman parameters are encapsulated within a sequence}
+187             error = \hyperlink{asn1_8c_a5df4a5a14b22837b3dea3525608a9122}{asn1ReadSequence}(buffer, n, &tag);
+188          \}
+189 
+190          \textcolor{comment}{//Check status code}
+191          \textcolor{keywordflow}{if}(!error)
+192          \{
+193             \textcolor{comment}{//Point to the first field of the sequence}
+194             p = tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value};
+195             n = tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length};
+196 
+197             \textcolor{comment}{//Read the prime modulus}
+198             error = \hyperlink{asn1_8c_aa73309637560abf8e42288890c19d641}{asn1ReadMpi}(p, n, &tag, &params->\hyperlink{structDhParameters_ae39a6a92b952ae9c49c66c5c9c131a3b}{p});
+199          \}
+200 
+201          \textcolor{comment}{//Check status code}
+202          \textcolor{keywordflow}{if}(!error)
+203          \{
+204             \textcolor{comment}{//Point to the next field}
+205             p += tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+206             n -= tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+207 
+208             \textcolor{comment}{//Read the generator}
+209             error = \hyperlink{asn1_8c_aa73309637560abf8e42288890c19d641}{asn1ReadMpi}(p, n, &tag, &params->\hyperlink{structDhParameters_abc22697d6ee37e502b54f988a1c4393d}{g});
+210          \}
+211 
+212          \textcolor{comment}{//Check status code}
+213          \textcolor{keywordflow}{if}(!error)
+214          \{
+215             \textcolor{comment}{//Debug message}
+216             \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"Diffie-Hellman parameters:\(\backslash\)r\(\backslash\)n"});
+217             \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  Prime modulus:\(\backslash\)r\(\backslash\)n"});
+218             \hyperlink{debug_8h_a9c9f3b28f2daf14d77b401512c189d93}{TRACE\_DEBUG\_MPI}(\textcolor{stringliteral}{"    "}, &params->\hyperlink{structDhParameters_ae39a6a92b952ae9c49c66c5c9c131a3b}{p});
+219             \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  Generator:\(\backslash\)r\(\backslash\)n"});
+220             \hyperlink{debug_8h_a9c9f3b28f2daf14d77b401512c189d93}{TRACE\_DEBUG\_MPI}(\textcolor{stringliteral}{"    "}, &params->\hyperlink{structDhParameters_abc22697d6ee37e502b54f988a1c4393d}{g});
+221          \}
+222 
+223          \textcolor{comment}{//Release previously allocated memory}
+224          \hyperlink{cyclone__crypto_2core_2crypto_8h_ac8a223b176683db4e9eed4162774f870}{cryptoFreeMem}(buffer);
+225       \}
+226       \textcolor{keywordflow}{else}
+227       \{
+228          \textcolor{comment}{//Failed to allocate memory}
+229          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac0a554045048d2fb61387cf735676f69}{ERROR\_OUT\_OF\_MEMORY};
+230       \}
+231    \}
+232 
+233    \textcolor{comment}{//Any error to report?}
+234    \textcolor{keywordflow}{if}(error)
+235    \{
+236       \textcolor{comment}{//Clean up side effects}
+237       \hyperlink{mpi_8c_a9dc5be2f62d37d3854fa61beab3a61ad}{mpiFree}(&params->\hyperlink{structDhParameters_ae39a6a92b952ae9c49c66c5c9c131a3b}{p});
+238       \hyperlink{mpi_8c_a9dc5be2f62d37d3854fa61beab3a61ad}{mpiFree}(&params->\hyperlink{structDhParameters_abc22697d6ee37e502b54f988a1c4393d}{g});
+239    \}
+240 
+241    \textcolor{comment}{//Return status code}
+242    \textcolor{keywordflow}{return} error;
+243 \textcolor{preprocessor}{#else}
+244    \textcolor{comment}{//Not implemented}
+245    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cab61c5ef368fbf03fdc1fb566c63f2f9a}{ERROR\_NOT\_IMPLEMENTED};
+246 \textcolor{preprocessor}{#endif}
+247 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{pkix_2pem__import_8c_af0fc6f908b1ad439e9594929b50b1699}\label{pkix_2pem__import_8c_af0fc6f908b1ad439e9594929b50b1699}} 
+\index{pkix/pem\+\_\+import.\+c@{pkix/pem\+\_\+import.\+c}!pem\+Import\+Dsa\+Private\+Key@{pem\+Import\+Dsa\+Private\+Key}}
+\index{pem\+Import\+Dsa\+Private\+Key@{pem\+Import\+Dsa\+Private\+Key}!pkix/pem\+\_\+import.\+c@{pkix/pem\+\_\+import.\+c}}
+\subsubsection{\texorpdfstring{pem\+Import\+Dsa\+Private\+Key()}{pemImportDsaPrivateKey()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} pem\+Import\+Dsa\+Private\+Key (\begin{DoxyParamCaption}\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{input,  }\item[{size\+\_\+t}]{length,  }\item[{\hyperlink{structDsaPrivateKey}{Dsa\+Private\+Key} $\ast$}]{private\+Key }\end{DoxyParamCaption})}
+
+
+
+Decode a P\+EM file containing a D\+SA private key. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em input} & Pointer to the P\+EM encoding \\
+\hline
+\mbox{\tt in}  & {\em length} & Length of the P\+EM encoding \\
+\hline
+\mbox{\tt out}  & {\em private\+Key} & D\+SA private key resulting from the parsing process \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 585 of file pem\+\_\+import.\+c.
+
+
+\begin{DoxyCode}
+587 \{
+588 \textcolor{preprocessor}{#if (DSA\_SUPPORT == ENABLED)}
+589    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+590    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+591    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *buffer;
+592    \hyperlink{structPkcs8PrivateKeyInfo}{Pkcs8PrivateKeyInfo} privateKeyInfo;
+593 
+594    \textcolor{comment}{//Check parameters}
+595    \textcolor{keywordflow}{if}(input == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} && \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} != 0)
+596       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+597    \textcolor{keywordflow}{if}(privateKey == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+598       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+599 
+600    \textcolor{comment}{//Clear the PrivateKeyInfo structure}
+601    \hyperlink{cyclone__crypto_2core_2crypto_8h_ad4465436e4ff353300fba4896012e18b}{cryptoMemset}(&privateKeyInfo, 0, \textcolor{keyword}{sizeof}(\hyperlink{structPkcs8PrivateKeyInfo}{Pkcs8PrivateKeyInfo}));
+602 
+603    \textcolor{comment}{//The type of data encoded is labeled depending on the type label in}
+604    \textcolor{comment}{//the "-----BEGIN " line (refer to RFC 7468, section 2)}
+605    \textcolor{keywordflow}{if}(\hyperlink{pkix_2pem__import_8c_afabfed2db07e95a3438690d707815cda}{pemDecodeFile}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"DSA PRIVATE KEY"}, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, &n, 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}) == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR})
+606    \{
+607       \textcolor{comment}{//Allocate a memory buffer to hold the ASN.1 data}
+608       buffer = \hyperlink{cyclone__crypto_2core_2crypto_8h_a48b53d16f66d31e5dcf82db3c1b882ba}{cryptoAllocMem}(n);
+609 
+610       \textcolor{comment}{//Successful memory allocation?}
+611       \textcolor{keywordflow}{if}(buffer != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+612       \{
+613          \textcolor{comment}{//Decode the content of the PEM container}
+614          error = \hyperlink{pkix_2pem__import_8c_afabfed2db07e95a3438690d707815cda}{pemDecodeFile}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"DSA PRIVATE KEY"}, buffer, &n,
+615             \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+616 
+617          \textcolor{comment}{//Check status code}
+618          \textcolor{keywordflow}{if}(!error)
+619          \{
+620             \textcolor{comment}{//Read DSAPrivateKey structure}
+621             error = \hyperlink{pkcs8__key__parse_8c_a40f662465ee7609eb06793f75780caee}{pkcs8ParseDsaPrivateKey}(buffer, n, &privateKeyInfo.
+      \hyperlink{structPkcs8PrivateKeyInfo_a39c25a14822c36dc314a432ebe8dda8c}{dsaParams},
+622                &privateKeyInfo.\hyperlink{structPkcs8PrivateKeyInfo_a652af88cbae3bcea5818155c8ca9d2db}{dsaPrivateKey});
+623          \}
+624 
+625          \textcolor{comment}{//Check status code}
+626          \textcolor{keywordflow}{if}(!error)
+627          \{
+628             \textcolor{comment}{//Set private key algorithm identifier}
+629             privateKeyInfo.\hyperlink{structPkcs8PrivateKeyInfo_a233da5c7077e926f9d337e69892f4fb1}{oid} = \hyperlink{dsa_8c_aec62d423add8486c829eacb574ebe4f3}{DSA\_OID};
+630             privateKeyInfo.\hyperlink{structPkcs8PrivateKeyInfo_a77b3088c43e5ad25a5caedcddcb15a2f}{oidLen} = \textcolor{keyword}{sizeof}(\hyperlink{dsa_8c_aec62d423add8486c829eacb574ebe4f3}{DSA\_OID});
+631 
+632             \textcolor{comment}{//Import the DSA private key}
+633             error = \hyperlink{pkcs8__key__parse_8c_afb0457779147ef577936d6b4fce3bf34}{pkcs8ImportDsaPrivateKey}(&privateKeyInfo, privateKey);
+634          \}
+635 
+636          \textcolor{comment}{//Release previously allocated memory}
+637          \hyperlink{cyclone__crypto_2core_2crypto_8h_ac8a223b176683db4e9eed4162774f870}{cryptoFreeMem}(buffer);
+638       \}
+639       \textcolor{keywordflow}{else}
+640       \{
+641          \textcolor{comment}{//Failed to allocate memory}
+642          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac0a554045048d2fb61387cf735676f69}{ERROR\_OUT\_OF\_MEMORY};
+643       \}
+644    \}
+645    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(\hyperlink{pkix_2pem__import_8c_afabfed2db07e95a3438690d707815cda}{pemDecodeFile}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"PRIVATE KEY"}, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, &n, 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}) == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR})
+646    \{
+647       \textcolor{comment}{//Allocate a memory buffer to hold the ASN.1 data}
+648       buffer = \hyperlink{cyclone__crypto_2core_2crypto_8h_a48b53d16f66d31e5dcf82db3c1b882ba}{cryptoAllocMem}(n);
+649 
+650       \textcolor{comment}{//Successful memory allocation?}
+651       \textcolor{keywordflow}{if}(buffer != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+652       \{
+653          \textcolor{comment}{//Decode the content of the PEM container}
+654          error = \hyperlink{pkix_2pem__import_8c_afabfed2db07e95a3438690d707815cda}{pemDecodeFile}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"PRIVATE KEY"}, buffer, &n, 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+655 
+656          \textcolor{comment}{//Check status code}
+657          \textcolor{keywordflow}{if}(!error)
+658          \{
+659             \textcolor{comment}{//Read the PrivateKeyInfo structure (refer to RFC 5208, section 5)}
+660             error = \hyperlink{pkcs8__key__parse_8c_af62e7988b51a0bb9b5ad79db6da97c54}{pkcs8ParsePrivateKeyInfo}(buffer, n, &privateKeyInfo);
+661          \}
+662 
+663          \textcolor{comment}{//Check status code}
+664          \textcolor{keywordflow}{if}(!error)
+665          \{
+666             \textcolor{comment}{//Import the DSA private key}
+667             error = \hyperlink{pkcs8__key__parse_8c_afb0457779147ef577936d6b4fce3bf34}{pkcs8ImportDsaPrivateKey}(&privateKeyInfo, privateKey);
+668          \}
+669 
+670          \textcolor{comment}{//Release previously allocated memory}
+671          \hyperlink{cyclone__crypto_2core_2crypto_8h_ac8a223b176683db4e9eed4162774f870}{cryptoFreeMem}(buffer);
+672       \}
+673       \textcolor{keywordflow}{else}
+674       \{
+675          \textcolor{comment}{//Failed to allocate memory}
+676          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac0a554045048d2fb61387cf735676f69}{ERROR\_OUT\_OF\_MEMORY};
+677       \}
+678    \}
+679    \textcolor{keywordflow}{else}
+680    \{
+681       \textcolor{comment}{//The PEM file does not contain a valid RSA private key}
+682       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca488b657f8cc2e6c29df47f282e8ff3ad}{ERROR\_END\_OF\_FILE};
+683    \}
+684 
+685    \textcolor{comment}{//Any error to report?}
+686    \textcolor{keywordflow}{if}(error)
+687    \{
+688       \textcolor{comment}{//Clean up side effects}
+689       \hyperlink{dsa_8c_a028cb6faf1b5384b57e740fe95f58c60}{dsaFreePrivateKey}(privateKey);
+690    \}
+691 
+692    \textcolor{comment}{//Return status code}
+693    \textcolor{keywordflow}{return} error;
+694 \textcolor{preprocessor}{#else}
+695    \textcolor{comment}{//Not implemented}
+696    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cab61c5ef368fbf03fdc1fb566c63f2f9a}{ERROR\_NOT\_IMPLEMENTED};
+697 \textcolor{preprocessor}{#endif}
+698 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{pkix_2pem__import_8c_a6e96ddcc71015cabccbedbaf356d777f}\label{pkix_2pem__import_8c_a6e96ddcc71015cabccbedbaf356d777f}} 
+\index{pkix/pem\+\_\+import.\+c@{pkix/pem\+\_\+import.\+c}!pem\+Import\+Dsa\+Public\+Key@{pem\+Import\+Dsa\+Public\+Key}}
+\index{pem\+Import\+Dsa\+Public\+Key@{pem\+Import\+Dsa\+Public\+Key}!pkix/pem\+\_\+import.\+c@{pkix/pem\+\_\+import.\+c}}
+\subsubsection{\texorpdfstring{pem\+Import\+Dsa\+Public\+Key()}{pemImportDsaPublicKey()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} pem\+Import\+Dsa\+Public\+Key (\begin{DoxyParamCaption}\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{input,  }\item[{size\+\_\+t}]{length,  }\item[{\hyperlink{structDsaPublicKey}{Dsa\+Public\+Key} $\ast$}]{public\+Key }\end{DoxyParamCaption})}
+
+
+
+Decode a P\+EM file containing a D\+SA public key. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em input} & Pointer to the P\+EM encoding \\
+\hline
+\mbox{\tt in}  & {\em length} & Length of the P\+EM encoding \\
+\hline
+\mbox{\tt out}  & {\em public\+Key} & D\+SA public key resulting from the parsing process \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 506 of file pem\+\_\+import.\+c.
+
+
+\begin{DoxyCode}
+508 \{
+509 \textcolor{preprocessor}{#if (DSA\_SUPPORT == ENABLED)}
+510    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+511    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+512    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *buffer;
+513    \hyperlink{structX509SubjectPublicKeyInfo}{X509SubjectPublicKeyInfo} publicKeyInfo;
+514 
+515    \textcolor{comment}{//Check parameters}
+516    \textcolor{keywordflow}{if}(input == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} && \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} != 0)
+517       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+518    \textcolor{keywordflow}{if}(publicKey == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+519       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+520 
+521    \textcolor{comment}{//Public keys are encoded using the "PUBLIC KEY" label}
+522    error = \hyperlink{pkix_2pem__import_8c_afabfed2db07e95a3438690d707815cda}{pemDecodeFile}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"PUBLIC KEY"}, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, &n, 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+523 
+524    \textcolor{comment}{//Check status code}
+525    \textcolor{keywordflow}{if}(!error)
+526    \{
+527       \textcolor{comment}{//Allocate a memory buffer to hold the ASN.1 data}
+528       buffer = \hyperlink{cyclone__crypto_2core_2crypto_8h_a48b53d16f66d31e5dcf82db3c1b882ba}{cryptoAllocMem}(n);
+529 
+530       \textcolor{comment}{//Successful memory allocation?}
+531       \textcolor{keywordflow}{if}(buffer != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+532       \{
+533          \textcolor{comment}{//Decode the content of the PEM container}
+534          error = \hyperlink{pkix_2pem__import_8c_afabfed2db07e95a3438690d707815cda}{pemDecodeFile}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"PUBLIC KEY"}, buffer, &n, 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+535 
+536          \textcolor{comment}{//Check status code}
+537          \textcolor{keywordflow}{if}(!error)
+538          \{
+539             \textcolor{comment}{//The ASN.1 encoded data of the public key is the SubjectPublicKeyInfo}
+540             \textcolor{comment}{//structure (refer to RFC 7468, section 13)}
+541             error = \hyperlink{certificate_2x509__cert__parse_8c_a17bacf95e872d7fdcd6cec43b1724dd6}{x509ParseSubjectPublicKeyInfo}(buffer, n, &n, &
+      publicKeyInfo);
+542          \}
+543 
+544          \textcolor{comment}{//Check status code}
+545          \textcolor{keywordflow}{if}(!error)
+546          \{
+547             \textcolor{comment}{//Import the DSA public key}
+548             error = \hyperlink{x509__key__parse_8c_aa028d369d57dd4e935aed069e8274de9}{x509ImportDsaPublicKey}(&publicKeyInfo, publicKey);
+549          \}
+550 
+551          \textcolor{comment}{//Release previously allocated memory}
+552          \hyperlink{cyclone__crypto_2core_2crypto_8h_ac8a223b176683db4e9eed4162774f870}{cryptoFreeMem}(buffer);
+553       \}
+554       \textcolor{keywordflow}{else}
+555       \{
+556          \textcolor{comment}{//Failed to allocate memory}
+557          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac0a554045048d2fb61387cf735676f69}{ERROR\_OUT\_OF\_MEMORY};
+558       \}
+559    \}
+560 
+561    \textcolor{comment}{//Any error to report?}
+562    \textcolor{keywordflow}{if}(error)
+563    \{
+564       \textcolor{comment}{//Clean up side effects}
+565       \hyperlink{dsa_8c_aecb06a7f6d0f7df028b6a30284fa0016}{dsaFreePublicKey}(publicKey);
+566    \}
+567 
+568    \textcolor{comment}{//Return status code}
+569    \textcolor{keywordflow}{return} error;
+570 \textcolor{preprocessor}{#else}
+571    \textcolor{comment}{//Not implemented}
+572    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cab61c5ef368fbf03fdc1fb566c63f2f9a}{ERROR\_NOT\_IMPLEMENTED};
+573 \textcolor{preprocessor}{#endif}
+574 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{pkix_2pem__import_8c_a5d76a217bb3b6fad9de9aa71bcd8317f}\label{pkix_2pem__import_8c_a5d76a217bb3b6fad9de9aa71bcd8317f}} 
+\index{pkix/pem\+\_\+import.\+c@{pkix/pem\+\_\+import.\+c}!pem\+Import\+Ec\+Parameters@{pem\+Import\+Ec\+Parameters}}
+\index{pem\+Import\+Ec\+Parameters@{pem\+Import\+Ec\+Parameters}!pkix/pem\+\_\+import.\+c@{pkix/pem\+\_\+import.\+c}}
+\subsubsection{\texorpdfstring{pem\+Import\+Ec\+Parameters()}{pemImportEcParameters()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} pem\+Import\+Ec\+Parameters (\begin{DoxyParamCaption}\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{input,  }\item[{size\+\_\+t}]{length,  }\item[{\hyperlink{structEcDomainParameters}{Ec\+Domain\+Parameters} $\ast$}]{params }\end{DoxyParamCaption})}
+
+
+
+Decode a P\+EM file containing EC domain parameters. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em input} & Pointer to the P\+EM encoding \\
+\hline
+\mbox{\tt in}  & {\em length} & Length of the P\+EM encoding \\
+\hline
+\mbox{\tt out}  & {\em params} & EC domain parameters \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 709 of file pem\+\_\+import.\+c.
+
+
+\begin{DoxyCode}
+711 \{
+712 \textcolor{preprocessor}{#if (EC\_SUPPORT == ENABLED)}
+713    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+714    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+715    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *buffer;
+716 
+717    \textcolor{comment}{//Check parameters}
+718    \textcolor{keywordflow}{if}(input == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} && \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} != 0)
+719       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+720    \textcolor{keywordflow}{if}(params == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+721       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+722 
+723    \textcolor{comment}{//The type of data encoded is labeled depending on the type label in}
+724    \textcolor{comment}{//the "-----BEGIN " line (refer to RFC 7468, section 2)}
+725    \textcolor{keywordflow}{if}(\hyperlink{pkix_2pem__import_8c_afabfed2db07e95a3438690d707815cda}{pemDecodeFile}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"EC PARAMETERS"}, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, &n, 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}) == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR})
+726    \{
+727       \hyperlink{structX509EcParameters}{X509EcParameters} ecParams;
+728 
+729       \textcolor{comment}{//Allocate a memory buffer to hold the ASN.1 data}
+730       buffer = \hyperlink{cyclone__crypto_2core_2crypto_8h_a48b53d16f66d31e5dcf82db3c1b882ba}{cryptoAllocMem}(n);
+731 
+732       \textcolor{comment}{//Successful memory allocation?}
+733       \textcolor{keywordflow}{if}(buffer != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+734       \{
+735          \textcolor{comment}{//Decode the content of the PEM container}
+736          error = \hyperlink{pkix_2pem__import_8c_afabfed2db07e95a3438690d707815cda}{pemDecodeFile}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"EC PARAMETERS"}, buffer, &n,
+737             \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+738 
+739          \textcolor{comment}{//Check status code}
+740          \textcolor{keywordflow}{if}(!error)
+741          \{
+742             \textcolor{comment}{//Parse ECParameters structure}
+743             error = \hyperlink{certificate_2x509__cert__parse_8c_a2caeec4d90cfecef949ee31dcaefaf83}{x509ParseEcParameters}(buffer, n, &ecParams);
+744          \}
+745 
+746          \textcolor{comment}{//Check status code}
+747          \textcolor{keywordflow}{if}(!error)
+748          \{
+749             \textcolor{comment}{//Import the EC domain parameters}
+750             error = \hyperlink{x509__key__parse_8c_a33bcbd04df4e936a5781b70bd473a508}{x509ImportEcParameters}(&ecParams, params);
+751          \}
+752 
+753          \textcolor{comment}{//Release previously allocated memory}
+754          \hyperlink{cyclone__crypto_2core_2crypto_8h_ac8a223b176683db4e9eed4162774f870}{cryptoFreeMem}(buffer);
+755       \}
+756       \textcolor{keywordflow}{else}
+757       \{
+758          \textcolor{comment}{//Failed to allocate memory}
+759          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac0a554045048d2fb61387cf735676f69}{ERROR\_OUT\_OF\_MEMORY};
+760       \}
+761    \}
+762    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(\hyperlink{pkix_2pem__import_8c_afabfed2db07e95a3438690d707815cda}{pemDecodeFile}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"EC PRIVATE KEY"}, 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, &n, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}) == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR})
+763    \{
+764       \hyperlink{structPkcs8PrivateKeyInfo}{Pkcs8PrivateKeyInfo} privateKeyInfo;
+765 
+766       \textcolor{comment}{//Allocate a memory buffer to hold the ASN.1 data}
+767       buffer = \hyperlink{cyclone__crypto_2core_2crypto_8h_a48b53d16f66d31e5dcf82db3c1b882ba}{cryptoAllocMem}(n);
+768 
+769       \textcolor{comment}{//Successful memory allocation?}
+770       \textcolor{keywordflow}{if}(buffer != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+771       \{
+772          \textcolor{comment}{//Decode the content of the PEM container}
+773          error = \hyperlink{pkix_2pem__import_8c_afabfed2db07e95a3438690d707815cda}{pemDecodeFile}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"EC PRIVATE KEY"}, buffer, &n,
+774             \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+775 
+776          \textcolor{comment}{//Check status code}
+777          \textcolor{keywordflow}{if}(!error)
+778          \{
+779             \textcolor{comment}{//Read ECPrivateKey structure}
+780             error = \hyperlink{pkcs8__key__parse_8c_a4876889b45a4452389bd2e0b44c74ab1}{pkcs8ParseEcPrivateKey}(buffer, n, &privateKeyInfo.
+      \hyperlink{structPkcs8PrivateKeyInfo_aac7a6c1cc222b5d7c40ade99d632f92f}{ecParams},
+781                &privateKeyInfo.\hyperlink{structPkcs8PrivateKeyInfo_abb7fbb9eeceb773e8d5ff034021429f2}{ecPrivateKey});
+782          \}
+783 
+784          \textcolor{comment}{//Check status code}
+785          \textcolor{keywordflow}{if}(!error)
+786          \{
+787             \textcolor{comment}{//Import the EC domain parameters}
+788             error = \hyperlink{x509__key__parse_8c_a33bcbd04df4e936a5781b70bd473a508}{x509ImportEcParameters}(&privateKeyInfo.
+      \hyperlink{structPkcs8PrivateKeyInfo_aac7a6c1cc222b5d7c40ade99d632f92f}{ecParams}, params);
+789          \}
+790 
+791          \textcolor{comment}{//Release previously allocated memory}
+792          \hyperlink{cyclone__crypto_2core_2crypto_8h_ac8a223b176683db4e9eed4162774f870}{cryptoFreeMem}(buffer);
+793       \}
+794       \textcolor{keywordflow}{else}
+795       \{
+796          \textcolor{comment}{//Failed to allocate memory}
+797          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac0a554045048d2fb61387cf735676f69}{ERROR\_OUT\_OF\_MEMORY};
+798       \}
+799    \}
+800    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(\hyperlink{pkix_2pem__import_8c_afabfed2db07e95a3438690d707815cda}{pemDecodeFile}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"PRIVATE KEY"}, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, &n, 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}) == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR})
+801    \{
+802       \hyperlink{structPkcs8PrivateKeyInfo}{Pkcs8PrivateKeyInfo} privateKeyInfo;
+803 
+804       \textcolor{comment}{//Allocate a memory buffer to hold the ASN.1 data}
+805       buffer = \hyperlink{cyclone__crypto_2core_2crypto_8h_a48b53d16f66d31e5dcf82db3c1b882ba}{cryptoAllocMem}(n);
+806 
+807       \textcolor{comment}{//Successful memory allocation?}
+808       \textcolor{keywordflow}{if}(buffer != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+809       \{
+810          \textcolor{comment}{//Decode the content of the PEM container}
+811          error = \hyperlink{pkix_2pem__import_8c_afabfed2db07e95a3438690d707815cda}{pemDecodeFile}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"PRIVATE KEY"}, buffer, &n, 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+812 
+813          \textcolor{comment}{//Check status code}
+814          \textcolor{keywordflow}{if}(!error)
+815          \{
+816             \textcolor{comment}{//Read the PrivateKeyInfo structure (refer to RFC 5208, section 5)}
+817             error = \hyperlink{pkcs8__key__parse_8c_af62e7988b51a0bb9b5ad79db6da97c54}{pkcs8ParsePrivateKeyInfo}(buffer, n, &privateKeyInfo);
+818          \}
+819 
+820          \textcolor{comment}{//Check status code}
+821          \textcolor{keywordflow}{if}(!error)
+822          \{
+823             \textcolor{comment}{//Import the EC domain parameters}
+824             error = \hyperlink{x509__key__parse_8c_a33bcbd04df4e936a5781b70bd473a508}{x509ImportEcParameters}(&privateKeyInfo.
+      \hyperlink{structPkcs8PrivateKeyInfo_aac7a6c1cc222b5d7c40ade99d632f92f}{ecParams}, params);
+825          \}
+826 
+827          \textcolor{comment}{//Release previously allocated memory}
+828          \hyperlink{cyclone__crypto_2core_2crypto_8h_ac8a223b176683db4e9eed4162774f870}{cryptoFreeMem}(buffer);
+829       \}
+830       \textcolor{keywordflow}{else}
+831       \{
+832          \textcolor{comment}{//Failed to allocate memory}
+833          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac0a554045048d2fb61387cf735676f69}{ERROR\_OUT\_OF\_MEMORY};
+834       \}
+835    \}
+836    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(\hyperlink{pkix_2pem__import_8c_afabfed2db07e95a3438690d707815cda}{pemDecodeFile}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"PUBLIC KEY"}, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, &n, 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}) == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR})
+837    \{
+838       \hyperlink{structX509SubjectPublicKeyInfo}{X509SubjectPublicKeyInfo} publicKeyInfo;
+839 
+840       \textcolor{comment}{//Allocate a memory buffer to hold the ASN.1 data}
+841       buffer = \hyperlink{cyclone__crypto_2core_2crypto_8h_a48b53d16f66d31e5dcf82db3c1b882ba}{cryptoAllocMem}(n);
+842 
+843       \textcolor{comment}{//Successful memory allocation?}
+844       \textcolor{keywordflow}{if}(buffer != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+845       \{
+846          \textcolor{comment}{//Decode the content of the PEM container}
+847          error = \hyperlink{pkix_2pem__import_8c_afabfed2db07e95a3438690d707815cda}{pemDecodeFile}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"PUBLIC KEY"}, buffer, &n,
+848             \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+849 
+850          \textcolor{comment}{//Check status code}
+851          \textcolor{keywordflow}{if}(!error)
+852          \{
+853             \textcolor{comment}{//The ASN.1 encoded data of the public key is the SubjectPublicKeyInfo}
+854             \textcolor{comment}{//structure (refer to RFC 7468, section 13)}
+855             error = \hyperlink{certificate_2x509__cert__parse_8c_a17bacf95e872d7fdcd6cec43b1724dd6}{x509ParseSubjectPublicKeyInfo}(buffer, n, &n, &
+      publicKeyInfo);
+856          \}
+857 
+858          \textcolor{comment}{//Check status code}
+859          \textcolor{keywordflow}{if}(!error)
+860          \{
+861             \textcolor{comment}{//Import the EC domain parameters}
+862             error = \hyperlink{x509__key__parse_8c_a33bcbd04df4e936a5781b70bd473a508}{x509ImportEcParameters}(&publicKeyInfo.
+      \hyperlink{structX509SubjectPublicKeyInfo_af45ca47e19db60631c9fdb4d4b62ed10}{ecParams}, params);
+863          \}
+864 
+865          \textcolor{comment}{//Release previously allocated memory}
+866          \hyperlink{cyclone__crypto_2core_2crypto_8h_ac8a223b176683db4e9eed4162774f870}{cryptoFreeMem}(buffer);
+867       \}
+868       \textcolor{keywordflow}{else}
+869       \{
+870          \textcolor{comment}{//Failed to allocate memory}
+871          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac0a554045048d2fb61387cf735676f69}{ERROR\_OUT\_OF\_MEMORY};
+872       \}
+873    \}
+874    \textcolor{keywordflow}{else}
+875    \{
+876       \textcolor{comment}{//The PEM file does not contain a valid RSA private key}
+877       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca488b657f8cc2e6c29df47f282e8ff3ad}{ERROR\_END\_OF\_FILE};
+878    \}
+879 
+880    \textcolor{comment}{//Any error to report?}
+881    \textcolor{keywordflow}{if}(error)
+882    \{
+883       \textcolor{comment}{//Clean up side effects}
+884       \hyperlink{ec_8c_a256993c154cf87c3d9d18138a1365eca}{ecFreeDomainParameters}(params);
+885    \}
+886 
+887    \textcolor{comment}{//Return status code}
+888    \textcolor{keywordflow}{return} error;
+889 \textcolor{preprocessor}{#else}
+890    \textcolor{comment}{//Not implemented}
+891    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cab61c5ef368fbf03fdc1fb566c63f2f9a}{ERROR\_NOT\_IMPLEMENTED};
+892 \textcolor{preprocessor}{#endif}
+893 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{pkix_2pem__import_8c_a9af816d9592aa7645688bfeb26b489ec}\label{pkix_2pem__import_8c_a9af816d9592aa7645688bfeb26b489ec}} 
+\index{pkix/pem\+\_\+import.\+c@{pkix/pem\+\_\+import.\+c}!pem\+Import\+Ec\+Private\+Key@{pem\+Import\+Ec\+Private\+Key}}
+\index{pem\+Import\+Ec\+Private\+Key@{pem\+Import\+Ec\+Private\+Key}!pkix/pem\+\_\+import.\+c@{pkix/pem\+\_\+import.\+c}}
+\subsubsection{\texorpdfstring{pem\+Import\+Ec\+Private\+Key()}{pemImportEcPrivateKey()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} pem\+Import\+Ec\+Private\+Key (\begin{DoxyParamCaption}\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{input,  }\item[{size\+\_\+t}]{length,  }\item[{\hyperlink{structMpi}{Mpi} $\ast$}]{private\+Key }\end{DoxyParamCaption})}
+
+
+
+Decode a P\+EM file containing an EC private key. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em input} & Pointer to the P\+EM encoding \\
+\hline
+\mbox{\tt in}  & {\em length} & Length of the P\+EM encoding \\
+\hline
+\mbox{\tt out}  & {\em private\+Key} & EC private key resulting from the parsing process \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 983 of file pem\+\_\+import.\+c.
+
+
+\begin{DoxyCode}
+985 \{
+986 \textcolor{preprocessor}{#if (EC\_SUPPORT == ENABLED)}
+987    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+988    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+989    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *buffer;
+990    \hyperlink{structPkcs8PrivateKeyInfo}{Pkcs8PrivateKeyInfo} privateKeyInfo;
+991 
+992    \textcolor{comment}{//Check parameters}
+993    \textcolor{keywordflow}{if}(input == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} && \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} != 0)
+994       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+995    \textcolor{keywordflow}{if}(privateKey == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+996       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+997 
+998    \textcolor{comment}{//Clear the PrivateKeyInfo structure}
+999    \hyperlink{cyclone__crypto_2core_2crypto_8h_ad4465436e4ff353300fba4896012e18b}{cryptoMemset}(&privateKeyInfo, 0, \textcolor{keyword}{sizeof}(\hyperlink{structPkcs8PrivateKeyInfo}{Pkcs8PrivateKeyInfo}));
+1000 
+1001    \textcolor{comment}{//The type of data encoded is labeled depending on the type label in}
+1002    \textcolor{comment}{//the "-----BEGIN " line (refer to RFC 7468, section 2)}
+1003    \textcolor{keywordflow}{if}(\hyperlink{pkix_2pem__import_8c_afabfed2db07e95a3438690d707815cda}{pemDecodeFile}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"EC PRIVATE KEY"}, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, &n, 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}) == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR})
+1004    \{
+1005       \textcolor{comment}{//Allocate a memory buffer to hold the ASN.1 data}
+1006       buffer = \hyperlink{cyclone__crypto_2core_2crypto_8h_a48b53d16f66d31e5dcf82db3c1b882ba}{cryptoAllocMem}(n);
+1007 
+1008       \textcolor{comment}{//Successful memory allocation?}
+1009       \textcolor{keywordflow}{if}(buffer != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1010       \{
+1011          \textcolor{comment}{//Decode the content of the PEM container}
+1012          error = \hyperlink{pkix_2pem__import_8c_afabfed2db07e95a3438690d707815cda}{pemDecodeFile}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"EC PRIVATE KEY"}, buffer, &n,
+1013             \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+1014 
+1015          \textcolor{comment}{//Check status code}
+1016          \textcolor{keywordflow}{if}(!error)
+1017          \{
+1018             \textcolor{comment}{//Read ECPrivateKey structure}
+1019             error = \hyperlink{pkcs8__key__parse_8c_a4876889b45a4452389bd2e0b44c74ab1}{pkcs8ParseEcPrivateKey}(buffer, n, &privateKeyInfo.
+      \hyperlink{structPkcs8PrivateKeyInfo_aac7a6c1cc222b5d7c40ade99d632f92f}{ecParams},
+1020                &privateKeyInfo.\hyperlink{structPkcs8PrivateKeyInfo_abb7fbb9eeceb773e8d5ff034021429f2}{ecPrivateKey});
+1021          \}
+1022 
+1023          \textcolor{comment}{//Check status code}
+1024          \textcolor{keywordflow}{if}(!error)
+1025          \{
+1026             \textcolor{comment}{//Set public key algorithm identifier}
+1027             privateKeyInfo.\hyperlink{structPkcs8PrivateKeyInfo_a233da5c7077e926f9d337e69892f4fb1}{oid} = \hyperlink{ec_8c_a5ff93c201b1e50b6fda04774a2fa537c}{EC\_PUBLIC\_KEY\_OID};
+1028             privateKeyInfo.\hyperlink{structPkcs8PrivateKeyInfo_a77b3088c43e5ad25a5caedcddcb15a2f}{oidLen} = \textcolor{keyword}{sizeof}(\hyperlink{ec_8c_a5ff93c201b1e50b6fda04774a2fa537c}{EC\_PUBLIC\_KEY\_OID});
+1029 
+1030             \textcolor{comment}{//Import the EC private key}
+1031             error = \hyperlink{pkcs8__key__parse_8c_a5402c2cf605d684dafbb86eb260502f0}{pkcs8ImportEcPrivateKey}(&privateKeyInfo, privateKey);
+1032          \}
+1033 
+1034          \textcolor{comment}{//Release previously allocated memory}
+1035          \hyperlink{cyclone__crypto_2core_2crypto_8h_ac8a223b176683db4e9eed4162774f870}{cryptoFreeMem}(buffer);
+1036       \}
+1037       \textcolor{keywordflow}{else}
+1038       \{
+1039          \textcolor{comment}{//Failed to allocate memory}
+1040          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac0a554045048d2fb61387cf735676f69}{ERROR\_OUT\_OF\_MEMORY};
+1041       \}
+1042    \}
+1043    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(\hyperlink{pkix_2pem__import_8c_afabfed2db07e95a3438690d707815cda}{pemDecodeFile}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"PRIVATE KEY"}, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, &n, 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}) == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR})
+1044    \{
+1045       \textcolor{comment}{//Allocate a memory buffer to hold the ASN.1 data}
+1046       buffer = \hyperlink{cyclone__crypto_2core_2crypto_8h_a48b53d16f66d31e5dcf82db3c1b882ba}{cryptoAllocMem}(n);
+1047 
+1048       \textcolor{comment}{//Successful memory allocation?}
+1049       \textcolor{keywordflow}{if}(buffer != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1050       \{
+1051          \textcolor{comment}{//Decode the content of the PEM container}
+1052          error = \hyperlink{pkix_2pem__import_8c_afabfed2db07e95a3438690d707815cda}{pemDecodeFile}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"PRIVATE KEY"}, buffer, &n, 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+1053 
+1054          \textcolor{comment}{//Check status code}
+1055          \textcolor{keywordflow}{if}(!error)
+1056          \{
+1057             \textcolor{comment}{//Read the PrivateKeyInfo structure (refer to RFC 5208, section 5)}
+1058             error = \hyperlink{pkcs8__key__parse_8c_af62e7988b51a0bb9b5ad79db6da97c54}{pkcs8ParsePrivateKeyInfo}(buffer, n, &privateKeyInfo);
+1059          \}
+1060 
+1061          \textcolor{comment}{//Check status code}
+1062          \textcolor{keywordflow}{if}(!error)
+1063          \{
+1064             \textcolor{comment}{//Import the EC private key}
+1065             error = \hyperlink{pkcs8__key__parse_8c_a5402c2cf605d684dafbb86eb260502f0}{pkcs8ImportEcPrivateKey}(&privateKeyInfo, privateKey);
+1066          \}
+1067 
+1068          \textcolor{comment}{//Release previously allocated memory}
+1069          \hyperlink{cyclone__crypto_2core_2crypto_8h_ac8a223b176683db4e9eed4162774f870}{cryptoFreeMem}(buffer);
+1070       \}
+1071       \textcolor{keywordflow}{else}
+1072       \{
+1073          \textcolor{comment}{//Failed to allocate memory}
+1074          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac0a554045048d2fb61387cf735676f69}{ERROR\_OUT\_OF\_MEMORY};
+1075       \}
+1076    \}
+1077    \textcolor{keywordflow}{else}
+1078    \{
+1079       \textcolor{comment}{//The PEM file does not contain a valid RSA private key}
+1080       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca488b657f8cc2e6c29df47f282e8ff3ad}{ERROR\_END\_OF\_FILE};
+1081    \}
+1082 
+1083    \textcolor{comment}{//Any error to report?}
+1084    \textcolor{keywordflow}{if}(error)
+1085    \{
+1086       \textcolor{comment}{//Clean up side effects}
+1087       \hyperlink{mpi_8c_a9dc5be2f62d37d3854fa61beab3a61ad}{mpiFree}(privateKey);
+1088    \}
+1089 
+1090    \textcolor{comment}{//Return status code}
+1091    \textcolor{keywordflow}{return} error;
+1092 \textcolor{preprocessor}{#else}
+1093    \textcolor{comment}{//Not implemented}
+1094    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cab61c5ef368fbf03fdc1fb566c63f2f9a}{ERROR\_NOT\_IMPLEMENTED};
+1095 \textcolor{preprocessor}{#endif}
+1096 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{pkix_2pem__import_8c_a18b47e073135ab8f0402b18c5fd3cdb1}\label{pkix_2pem__import_8c_a18b47e073135ab8f0402b18c5fd3cdb1}} 
+\index{pkix/pem\+\_\+import.\+c@{pkix/pem\+\_\+import.\+c}!pem\+Import\+Ec\+Public\+Key@{pem\+Import\+Ec\+Public\+Key}}
+\index{pem\+Import\+Ec\+Public\+Key@{pem\+Import\+Ec\+Public\+Key}!pkix/pem\+\_\+import.\+c@{pkix/pem\+\_\+import.\+c}}
+\subsubsection{\texorpdfstring{pem\+Import\+Ec\+Public\+Key()}{pemImportEcPublicKey()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} pem\+Import\+Ec\+Public\+Key (\begin{DoxyParamCaption}\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{input,  }\item[{size\+\_\+t}]{length,  }\item[{\hyperlink{structEcPoint}{Ec\+Point} $\ast$}]{public\+Key }\end{DoxyParamCaption})}
+
+
+
+Decode a P\+EM file containing an EC public key. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em input} & Pointer to the P\+EM encoding \\
+\hline
+\mbox{\tt in}  & {\em length} & Length of the P\+EM encoding \\
+\hline
+\mbox{\tt out}  & {\em public\+Key} & EC public key resulting from the parsing process \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 904 of file pem\+\_\+import.\+c.
+
+
+\begin{DoxyCode}
+906 \{
+907 \textcolor{preprocessor}{#if (EC\_SUPPORT == ENABLED)}
+908    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+909    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+910    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *buffer;
+911    \hyperlink{structX509SubjectPublicKeyInfo}{X509SubjectPublicKeyInfo} publicKeyInfo;
+912 
+913    \textcolor{comment}{//Check parameters}
+914    \textcolor{keywordflow}{if}(input == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} && \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} != 0)
+915       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+916    \textcolor{keywordflow}{if}(publicKey == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+917       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+918 
+919    \textcolor{comment}{//Public keys are encoded using the "PUBLIC KEY" label}
+920    error = \hyperlink{pkix_2pem__import_8c_afabfed2db07e95a3438690d707815cda}{pemDecodeFile}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"PUBLIC KEY"}, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, &n, 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+921 
+922    \textcolor{comment}{//Check status code}
+923    \textcolor{keywordflow}{if}(!error)
+924    \{
+925       \textcolor{comment}{//Allocate a memory buffer to hold the ASN.1 data}
+926       buffer = \hyperlink{cyclone__crypto_2core_2crypto_8h_a48b53d16f66d31e5dcf82db3c1b882ba}{cryptoAllocMem}(n);
+927 
+928       \textcolor{comment}{//Successful memory allocation?}
+929       \textcolor{keywordflow}{if}(buffer != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+930       \{
+931          \textcolor{comment}{//Decode the content of the PEM container}
+932          error = \hyperlink{pkix_2pem__import_8c_afabfed2db07e95a3438690d707815cda}{pemDecodeFile}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"PUBLIC KEY"}, buffer, &n, 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+933 
+934          \textcolor{comment}{//Check status code}
+935          \textcolor{keywordflow}{if}(!error)
+936          \{
+937             \textcolor{comment}{//The ASN.1 encoded data of the public key is the SubjectPublicKeyInfo}
+938             \textcolor{comment}{//structure (refer to RFC 7468, section 13)}
+939             error = \hyperlink{certificate_2x509__cert__parse_8c_a17bacf95e872d7fdcd6cec43b1724dd6}{x509ParseSubjectPublicKeyInfo}(buffer, n, &n, &
+      publicKeyInfo);
+940          \}
+941 
+942          \textcolor{comment}{//Check status code}
+943          \textcolor{keywordflow}{if}(!error)
+944          \{
+945             \textcolor{comment}{//Import the EC public key}
+946             error = \hyperlink{x509__key__parse_8c_a9679c73982634a74e0a2a819820a9b46}{x509ImportEcPublicKey}(&publicKeyInfo, publicKey);
+947          \}
+948 
+949          \textcolor{comment}{//Release previously allocated memory}
+950          \hyperlink{cyclone__crypto_2core_2crypto_8h_ac8a223b176683db4e9eed4162774f870}{cryptoFreeMem}(buffer);
+951       \}
+952       \textcolor{keywordflow}{else}
+953       \{
+954          \textcolor{comment}{//Failed to allocate memory}
+955          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac0a554045048d2fb61387cf735676f69}{ERROR\_OUT\_OF\_MEMORY};
+956       \}
+957    \}
+958 
+959    \textcolor{comment}{//Any error to report?}
+960    \textcolor{keywordflow}{if}(error)
+961    \{
+962       \textcolor{comment}{//Clean up side effects}
+963       \hyperlink{ec_8c_ae4a9276eac491f8acbb6d0916287411b}{ecFree}(publicKey);
+964    \}
+965 
+966    \textcolor{comment}{//Return status code}
+967    \textcolor{keywordflow}{return} error;
+968 \textcolor{preprocessor}{#else}
+969    \textcolor{comment}{//Not implemented}
+970    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cab61c5ef368fbf03fdc1fb566c63f2f9a}{ERROR\_NOT\_IMPLEMENTED};
+971 \textcolor{preprocessor}{#endif}
+972 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{pkix_2pem__import_8c_ae775e11e32114fca446a42f9dfd1f3dd}\label{pkix_2pem__import_8c_ae775e11e32114fca446a42f9dfd1f3dd}} 
+\index{pkix/pem\+\_\+import.\+c@{pkix/pem\+\_\+import.\+c}!pem\+Import\+Eddsa\+Private\+Key@{pem\+Import\+Eddsa\+Private\+Key}}
+\index{pem\+Import\+Eddsa\+Private\+Key@{pem\+Import\+Eddsa\+Private\+Key}!pkix/pem\+\_\+import.\+c@{pkix/pem\+\_\+import.\+c}}
+\subsubsection{\texorpdfstring{pem\+Import\+Eddsa\+Private\+Key()}{pemImportEddsaPrivateKey()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} pem\+Import\+Eddsa\+Private\+Key (\begin{DoxyParamCaption}\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{input,  }\item[{size\+\_\+t}]{length,  }\item[{\hyperlink{structEddsaPrivateKey}{Eddsa\+Private\+Key} $\ast$}]{private\+Key }\end{DoxyParamCaption})}
+
+
+
+Decode a P\+EM file containing a Ed\+D\+SA private key. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em input} & Pointer to the P\+EM encoding \\
+\hline
+\mbox{\tt in}  & {\em length} & Length of the P\+EM encoding \\
+\hline
+\mbox{\tt out}  & {\em private\+Key} & Ed\+D\+SA private key resulting from the parsing process \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 1186 of file pem\+\_\+import.\+c.
+
+
+\begin{DoxyCode}
+1188 \{
+1189 \textcolor{preprocessor}{#if (ED25519\_SUPPORT == ENABLED || ED448\_SUPPORT == ENABLED)}
+1190    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+1191    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1192    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *buffer;
+1193    \hyperlink{structPkcs8PrivateKeyInfo}{Pkcs8PrivateKeyInfo} privateKeyInfo;
+1194 
+1195    \textcolor{comment}{//Check parameters}
+1196    \textcolor{keywordflow}{if}(input == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} && \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} != 0)
+1197       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+1198    \textcolor{keywordflow}{if}(privateKey == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1199       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+1200 
+1201    \textcolor{comment}{//PKCS#8 private keys are encoded using the "PRIVATE KEY" label}
+1202    error = \hyperlink{pkix_2pem__import_8c_afabfed2db07e95a3438690d707815cda}{pemDecodeFile}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"PRIVATE KEY"}, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, &n, 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+1203 
+1204    \textcolor{comment}{//Check status code}
+1205    \textcolor{keywordflow}{if}(!error)
+1206    \{
+1207       \textcolor{comment}{//Allocate a memory buffer to hold the ASN.1 data}
+1208       buffer = \hyperlink{cyclone__crypto_2core_2crypto_8h_a48b53d16f66d31e5dcf82db3c1b882ba}{cryptoAllocMem}(n);
+1209 
+1210       \textcolor{comment}{//Successful memory allocation?}
+1211       \textcolor{keywordflow}{if}(buffer != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1212       \{
+1213          \textcolor{comment}{//Decode the content of the PEM container}
+1214          error = \hyperlink{pkix_2pem__import_8c_afabfed2db07e95a3438690d707815cda}{pemDecodeFile}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"PRIVATE KEY"}, buffer, &n, 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+1215 
+1216          \textcolor{comment}{//Check status code}
+1217          \textcolor{keywordflow}{if}(!error)
+1218          \{
+1219             \textcolor{comment}{//Read the PrivateKeyInfo structure (refer to RFC 5208, section 5)}
+1220             error = \hyperlink{pkcs8__key__parse_8c_af62e7988b51a0bb9b5ad79db6da97c54}{pkcs8ParsePrivateKeyInfo}(buffer, n, &privateKeyInfo);
+1221          \}
+1222 
+1223          \textcolor{comment}{//Check status code}
+1224          \textcolor{keywordflow}{if}(!error)
+1225          \{
+1226             \textcolor{comment}{//Import the EdDSA private key}
+1227             error = \hyperlink{pkcs8__key__parse_8c_a710b52559726007407f201c7d5bd3b05}{pkcs8ImportEddsaPrivateKey}(&privateKeyInfo, privateKey);
+1228          \}
+1229 
+1230          \textcolor{comment}{//Release previously allocated memory}
+1231          \hyperlink{cyclone__crypto_2core_2crypto_8h_ac8a223b176683db4e9eed4162774f870}{cryptoFreeMem}(buffer);
+1232       \}
+1233       \textcolor{keywordflow}{else}
+1234       \{
+1235          \textcolor{comment}{//Failed to allocate memory}
+1236          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac0a554045048d2fb61387cf735676f69}{ERROR\_OUT\_OF\_MEMORY};
+1237       \}
+1238    \}
+1239 
+1240    \textcolor{comment}{//Any error to report?}
+1241    \textcolor{keywordflow}{if}(error)
+1242    \{
+1243       \textcolor{comment}{//Clean up side effects}
+1244       \hyperlink{eddsa_8c_a91e6371d69fb2a796878d8b43a1924c6}{eddsaFreePrivateKey}(privateKey);
+1245    \}
+1246 
+1247    \textcolor{comment}{//Return status code}
+1248    \textcolor{keywordflow}{return} error;
+1249 \textcolor{preprocessor}{#else}
+1250    \textcolor{comment}{//Not implemented}
+1251    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cab61c5ef368fbf03fdc1fb566c63f2f9a}{ERROR\_NOT\_IMPLEMENTED};
+1252 \textcolor{preprocessor}{#endif}
+1253 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{pkix_2pem__import_8c_aec20ff8773400e63cba4100beac9c3d5}\label{pkix_2pem__import_8c_aec20ff8773400e63cba4100beac9c3d5}} 
+\index{pkix/pem\+\_\+import.\+c@{pkix/pem\+\_\+import.\+c}!pem\+Import\+Eddsa\+Public\+Key@{pem\+Import\+Eddsa\+Public\+Key}}
+\index{pem\+Import\+Eddsa\+Public\+Key@{pem\+Import\+Eddsa\+Public\+Key}!pkix/pem\+\_\+import.\+c@{pkix/pem\+\_\+import.\+c}}
+\subsubsection{\texorpdfstring{pem\+Import\+Eddsa\+Public\+Key()}{pemImportEddsaPublicKey()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} pem\+Import\+Eddsa\+Public\+Key (\begin{DoxyParamCaption}\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{input,  }\item[{size\+\_\+t}]{length,  }\item[{\hyperlink{structEddsaPublicKey}{Eddsa\+Public\+Key} $\ast$}]{public\+Key }\end{DoxyParamCaption})}
+
+
+
+Decode a P\+EM file containing a Ed\+D\+SA public key. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em input} & Pointer to the P\+EM encoding \\
+\hline
+\mbox{\tt in}  & {\em length} & Length of the P\+EM encoding \\
+\hline
+\mbox{\tt out}  & {\em public\+Key} & Ed\+D\+SA public key resulting from the parsing process \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 1107 of file pem\+\_\+import.\+c.
+
+
+\begin{DoxyCode}
+1109 \{
+1110 \textcolor{preprocessor}{#if (ED25519\_SUPPORT == ENABLED || ED448\_SUPPORT == ENABLED)}
+1111    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+1112    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1113    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *buffer;
+1114    \hyperlink{structX509SubjectPublicKeyInfo}{X509SubjectPublicKeyInfo} publicKeyInfo;
+1115 
+1116    \textcolor{comment}{//Check parameters}
+1117    \textcolor{keywordflow}{if}(input == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} && \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} != 0)
+1118       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+1119    \textcolor{keywordflow}{if}(publicKey == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1120       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+1121 
+1122    \textcolor{comment}{//Public keys are encoded using the "PUBLIC KEY" label}
+1123    error = \hyperlink{pkix_2pem__import_8c_afabfed2db07e95a3438690d707815cda}{pemDecodeFile}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"PUBLIC KEY"}, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, &n, 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+1124 
+1125    \textcolor{comment}{//Check status code}
+1126    \textcolor{keywordflow}{if}(!error)
+1127    \{
+1128       \textcolor{comment}{//Allocate a memory buffer to hold the ASN.1 data}
+1129       buffer = \hyperlink{cyclone__crypto_2core_2crypto_8h_a48b53d16f66d31e5dcf82db3c1b882ba}{cryptoAllocMem}(n);
+1130 
+1131       \textcolor{comment}{//Successful memory allocation?}
+1132       \textcolor{keywordflow}{if}(buffer != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1133       \{
+1134          \textcolor{comment}{//Decode the content of the PEM container}
+1135          error = \hyperlink{pkix_2pem__import_8c_afabfed2db07e95a3438690d707815cda}{pemDecodeFile}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"PUBLIC KEY"}, buffer, &n, 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+1136 
+1137          \textcolor{comment}{//Check status code}
+1138          \textcolor{keywordflow}{if}(!error)
+1139          \{
+1140             \textcolor{comment}{//The ASN.1 encoded data of the public key is the SubjectPublicKeyInfo}
+1141             \textcolor{comment}{//structure (refer to RFC 7468, section 13)}
+1142             error = \hyperlink{certificate_2x509__cert__parse_8c_a17bacf95e872d7fdcd6cec43b1724dd6}{x509ParseSubjectPublicKeyInfo}(buffer, n, &n, &
+      publicKeyInfo);
+1143          \}
+1144 
+1145          \textcolor{comment}{//Check status code}
+1146          \textcolor{keywordflow}{if}(!error)
+1147          \{
+1148             \textcolor{comment}{//Import the EdDSA public key}
+1149             error = \hyperlink{x509__key__parse_8c_a927d8a10e25e8155a113cda1630f67dc}{x509ImportEddsaPublicKey}(&publicKeyInfo, publicKey);
+1150          \}
+1151 
+1152          \textcolor{comment}{//Release previously allocated memory}
+1153          \hyperlink{cyclone__crypto_2core_2crypto_8h_ac8a223b176683db4e9eed4162774f870}{cryptoFreeMem}(buffer);
+1154       \}
+1155       \textcolor{keywordflow}{else}
+1156       \{
+1157          \textcolor{comment}{//Failed to allocate memory}
+1158          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac0a554045048d2fb61387cf735676f69}{ERROR\_OUT\_OF\_MEMORY};
+1159       \}
+1160    \}
+1161 
+1162    \textcolor{comment}{//Any error to report?}
+1163    \textcolor{keywordflow}{if}(error)
+1164    \{
+1165       \textcolor{comment}{//Clean up side effects}
+1166       \hyperlink{eddsa_8c_ad3facfe31e3941abeab8a29d500e387b}{eddsaFreePublicKey}(publicKey);
+1167    \}
+1168 
+1169    \textcolor{comment}{//Return status code}
+1170    \textcolor{keywordflow}{return} error;
+1171 \textcolor{preprocessor}{#else}
+1172    \textcolor{comment}{//Not implemented}
+1173    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cab61c5ef368fbf03fdc1fb566c63f2f9a}{ERROR\_NOT\_IMPLEMENTED};
+1174 \textcolor{preprocessor}{#endif}
+1175 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{pkix_2pem__import_8c_a114ebb672dd84b4d44cddac7bb1bdf89}\label{pkix_2pem__import_8c_a114ebb672dd84b4d44cddac7bb1bdf89}} 
+\index{pkix/pem\+\_\+import.\+c@{pkix/pem\+\_\+import.\+c}!pem\+Import\+Rsa\+Private\+Key@{pem\+Import\+Rsa\+Private\+Key}}
+\index{pem\+Import\+Rsa\+Private\+Key@{pem\+Import\+Rsa\+Private\+Key}!pkix/pem\+\_\+import.\+c@{pkix/pem\+\_\+import.\+c}}
+\subsubsection{\texorpdfstring{pem\+Import\+Rsa\+Private\+Key()}{pemImportRsaPrivateKey()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} pem\+Import\+Rsa\+Private\+Key (\begin{DoxyParamCaption}\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{input,  }\item[{size\+\_\+t}]{length,  }\item[{\hyperlink{structRsaPrivateKey}{Rsa\+Private\+Key} $\ast$}]{private\+Key }\end{DoxyParamCaption})}
+
+
+
+Decode a P\+EM file containing an R\+SA private key. 
+
+Decode a P\+EM file containing a R\+SA private key.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em input} & Pointer to the P\+EM encoding \\
+\hline
+\mbox{\tt in}  & {\em length} & Length of the P\+EM encoding \\
+\hline
+\mbox{\tt out}  & {\em private\+Key} & R\+SA private key resulting from the parsing process \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 382 of file pem\+\_\+import.\+c.
+
+
+\begin{DoxyCode}
+384 \{
+385 \textcolor{preprocessor}{#if (RSA\_SUPPORT == ENABLED)}
+386    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+387    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+388    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *buffer;
+389    \hyperlink{structPkcs8PrivateKeyInfo}{Pkcs8PrivateKeyInfo} privateKeyInfo;
+390 
+391    \textcolor{comment}{//Check parameters}
+392    \textcolor{keywordflow}{if}(input == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} && \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} != 0)
+393       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+394    \textcolor{keywordflow}{if}(privateKey == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+395       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+396 
+397    \textcolor{comment}{//Clear the PrivateKeyInfo structure}
+398    \hyperlink{cyclone__crypto_2core_2crypto_8h_ad4465436e4ff353300fba4896012e18b}{cryptoMemset}(&privateKeyInfo, 0, \textcolor{keyword}{sizeof}(\hyperlink{structPkcs8PrivateKeyInfo}{Pkcs8PrivateKeyInfo}));
+399 
+400    \textcolor{comment}{//The type of data encoded is labeled depending on the type label in}
+401    \textcolor{comment}{//the "-----BEGIN " line (refer to RFC 7468, section 2)}
+402    \textcolor{keywordflow}{if}(\hyperlink{pkix_2pem__import_8c_afabfed2db07e95a3438690d707815cda}{pemDecodeFile}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"RSA PRIVATE KEY"}, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, &n, 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}) == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR})
+403    \{
+404       \textcolor{comment}{//Allocate a memory buffer to hold the ASN.1 data}
+405       buffer = \hyperlink{cyclone__crypto_2core_2crypto_8h_a48b53d16f66d31e5dcf82db3c1b882ba}{cryptoAllocMem}(n);
+406 
+407       \textcolor{comment}{//Successful memory allocation?}
+408       \textcolor{keywordflow}{if}(buffer != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+409       \{
+410          \textcolor{comment}{//Decode the content of the PEM container}
+411          error = \hyperlink{pkix_2pem__import_8c_afabfed2db07e95a3438690d707815cda}{pemDecodeFile}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"RSA PRIVATE KEY"}, buffer, &n,
+412             \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+413 
+414          \textcolor{comment}{//Check status code}
+415          \textcolor{keywordflow}{if}(!error)
+416          \{
+417             \textcolor{comment}{//Read RSAPrivateKey structure}
+418             error = \hyperlink{pkcs8__key__parse_8c_a331e97be9c59e5c93bd628ff7c57b99a}{pkcs8ParseRsaPrivateKey}(buffer, n,
+419                &privateKeyInfo.\hyperlink{structPkcs8PrivateKeyInfo_a283526fe608f6a28f2f7fcbd85ef67bb}{rsaPrivateKey});
+420          \}
+421 
+422          \textcolor{comment}{//Check status code}
+423          \textcolor{keywordflow}{if}(!error)
+424          \{
+425             \textcolor{comment}{//Set private key algorithm identifier}
+426             privateKeyInfo.\hyperlink{structPkcs8PrivateKeyInfo_a233da5c7077e926f9d337e69892f4fb1}{oid} = \hyperlink{rsa_8c_a05da0bdcba7d0be3da2cc921a8a0dd50}{RSA\_ENCRYPTION\_OID};
+427             privateKeyInfo.\hyperlink{structPkcs8PrivateKeyInfo_a77b3088c43e5ad25a5caedcddcb15a2f}{oidLen} = \textcolor{keyword}{sizeof}(\hyperlink{rsa_8c_a05da0bdcba7d0be3da2cc921a8a0dd50}{RSA\_ENCRYPTION\_OID});
+428 
+429             \textcolor{comment}{//Import the RSA private key}
+430             error = \hyperlink{pkcs8__key__parse_8c_a1af528d707f166576fc2ae239f620ce1}{pkcs8ImportRsaPrivateKey}(&privateKeyInfo, privateKey);
+431          \}
+432 
+433          \textcolor{comment}{//Release previously allocated memory}
+434          \hyperlink{cyclone__crypto_2core_2crypto_8h_ac8a223b176683db4e9eed4162774f870}{cryptoFreeMem}(buffer);
+435       \}
+436       \textcolor{keywordflow}{else}
+437       \{
+438          \textcolor{comment}{//Failed to allocate memory}
+439          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac0a554045048d2fb61387cf735676f69}{ERROR\_OUT\_OF\_MEMORY};
+440       \}
+441    \}
+442    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(\hyperlink{pkix_2pem__import_8c_afabfed2db07e95a3438690d707815cda}{pemDecodeFile}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"PRIVATE KEY"}, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, &n, 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}) == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR})
+443    \{
+444       \textcolor{comment}{//Allocate a memory buffer to hold the ASN.1 data}
+445       buffer = \hyperlink{cyclone__crypto_2core_2crypto_8h_a48b53d16f66d31e5dcf82db3c1b882ba}{cryptoAllocMem}(n);
+446 
+447       \textcolor{comment}{//Successful memory allocation?}
+448       \textcolor{keywordflow}{if}(buffer != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+449       \{
+450          \textcolor{comment}{//Decode the content of the PEM container}
+451          error = \hyperlink{pkix_2pem__import_8c_afabfed2db07e95a3438690d707815cda}{pemDecodeFile}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"PRIVATE KEY"}, buffer, &n, 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+452 
+453          \textcolor{comment}{//Check status code}
+454          \textcolor{keywordflow}{if}(!error)
+455          \{
+456             \textcolor{comment}{//Read the PrivateKeyInfo structure (refer to RFC 5208, section 5)}
+457             error = \hyperlink{pkcs8__key__parse_8c_af62e7988b51a0bb9b5ad79db6da97c54}{pkcs8ParsePrivateKeyInfo}(buffer, n, &privateKeyInfo);
+458          \}
+459 
+460          \textcolor{comment}{//Check status code}
+461          \textcolor{keywordflow}{if}(!error)
+462          \{
+463             \textcolor{comment}{//Import the RSA private key}
+464             error = \hyperlink{pkcs8__key__parse_8c_a1af528d707f166576fc2ae239f620ce1}{pkcs8ImportRsaPrivateKey}(&privateKeyInfo, privateKey);
+465          \}
+466 
+467          \textcolor{comment}{//Release previously allocated memory}
+468          \hyperlink{cyclone__crypto_2core_2crypto_8h_ac8a223b176683db4e9eed4162774f870}{cryptoFreeMem}(buffer);
+469       \}
+470       \textcolor{keywordflow}{else}
+471       \{
+472          \textcolor{comment}{//Failed to allocate memory}
+473          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac0a554045048d2fb61387cf735676f69}{ERROR\_OUT\_OF\_MEMORY};
+474       \}
+475    \}
+476    \textcolor{keywordflow}{else}
+477    \{
+478       \textcolor{comment}{//The PEM file does not contain a valid RSA private key}
+479       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca488b657f8cc2e6c29df47f282e8ff3ad}{ERROR\_END\_OF\_FILE};
+480    \}
+481 
+482    \textcolor{comment}{//Any error to report?}
+483    \textcolor{keywordflow}{if}(error)
+484    \{
+485       \textcolor{comment}{//Clean up side effects}
+486       \hyperlink{rsa_8c_a14ee0338e3149b934552c40b97c8f096}{rsaFreePrivateKey}(privateKey);
+487    \}
+488 
+489    \textcolor{comment}{//Return status code}
+490    \textcolor{keywordflow}{return} error;
+491 \textcolor{preprocessor}{#else}
+492    \textcolor{comment}{//Not implemented}
+493    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cab61c5ef368fbf03fdc1fb566c63f2f9a}{ERROR\_NOT\_IMPLEMENTED};
+494 \textcolor{preprocessor}{#endif}
+495 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{pkix_2pem__import_8c_a1809adf16add2cd9dd88133a4661d663}\label{pkix_2pem__import_8c_a1809adf16add2cd9dd88133a4661d663}} 
+\index{pkix/pem\+\_\+import.\+c@{pkix/pem\+\_\+import.\+c}!pem\+Import\+Rsa\+Public\+Key@{pem\+Import\+Rsa\+Public\+Key}}
+\index{pem\+Import\+Rsa\+Public\+Key@{pem\+Import\+Rsa\+Public\+Key}!pkix/pem\+\_\+import.\+c@{pkix/pem\+\_\+import.\+c}}
+\subsubsection{\texorpdfstring{pem\+Import\+Rsa\+Public\+Key()}{pemImportRsaPublicKey()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} pem\+Import\+Rsa\+Public\+Key (\begin{DoxyParamCaption}\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{input,  }\item[{size\+\_\+t}]{length,  }\item[{\hyperlink{structRsaPublicKey}{Rsa\+Public\+Key} $\ast$}]{public\+Key }\end{DoxyParamCaption})}
+
+
+
+Decode a P\+EM file containing an R\+SA public key. 
+
+Decode a P\+EM file containing a R\+SA public key.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em input} & Pointer to the P\+EM encoding \\
+\hline
+\mbox{\tt in}  & {\em length} & Length of the P\+EM encoding \\
+\hline
+\mbox{\tt out}  & {\em public\+Key} & R\+SA public key resulting from the parsing process \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 258 of file pem\+\_\+import.\+c.
+
+
+\begin{DoxyCode}
+260 \{
+261 \textcolor{preprocessor}{#if (RSA\_SUPPORT == ENABLED)}
+262    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+263    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+264    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *buffer;
+265    \hyperlink{structX509SubjectPublicKeyInfo}{X509SubjectPublicKeyInfo} publicKeyInfo;
+266 
+267    \textcolor{comment}{//Check parameters}
+268    \textcolor{keywordflow}{if}(input == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} && \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} != 0)
+269       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+270    \textcolor{keywordflow}{if}(publicKey == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+271       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+272 
+273    \textcolor{comment}{//Clear the SubjectPublicKeyInfo structure}
+274    \hyperlink{cyclone__crypto_2core_2crypto_8h_ad4465436e4ff353300fba4896012e18b}{cryptoMemset}(&publicKeyInfo, 0, \textcolor{keyword}{sizeof}(\hyperlink{structX509SubjectPublicKeyInfo}{X509SubjectPublicKeyInfo}));
+275 
+276    \textcolor{comment}{//The type of data encoded is labeled depending on the type label in}
+277    \textcolor{comment}{//the "-----BEGIN " line (refer to RFC 7468, section 2)}
+278    \textcolor{keywordflow}{if}(\hyperlink{pkix_2pem__import_8c_afabfed2db07e95a3438690d707815cda}{pemDecodeFile}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"RSA PUBLIC KEY"}, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, &n, 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}) == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR})
+279    \{
+280       \textcolor{comment}{//Allocate a memory buffer to hold the ASN.1 data}
+281       buffer = \hyperlink{cyclone__crypto_2core_2crypto_8h_a48b53d16f66d31e5dcf82db3c1b882ba}{cryptoAllocMem}(n);
+282 
+283       \textcolor{comment}{//Successful memory allocation?}
+284       \textcolor{keywordflow}{if}(buffer != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+285       \{
+286          \textcolor{comment}{//Decode the content of the PEM container}
+287          error = \hyperlink{pkix_2pem__import_8c_afabfed2db07e95a3438690d707815cda}{pemDecodeFile}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"RSA PUBLIC KEY"}, buffer, &n,
+288             \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+289 
+290          \textcolor{comment}{//Check status code}
+291          \textcolor{keywordflow}{if}(!error)
+292          \{
+293             \textcolor{comment}{//Read RSAPublicKey structure}
+294             error = \hyperlink{certificate_2x509__cert__parse_8c_a9af828c1f9152b3f008a9334d071bac2}{x509ParseRsaPublicKey}(buffer, n, &publicKeyInfo.
+      \hyperlink{structX509SubjectPublicKeyInfo_ab8bc6398001418fd21271ff8b791caab}{rsaPublicKey});
+295          \}
+296 
+297          \textcolor{comment}{//Check status code}
+298          \textcolor{keywordflow}{if}(!error)
+299          \{
+300             \textcolor{comment}{//Set public key algorithm identifier}
+301             publicKeyInfo.\hyperlink{structX509SubjectPublicKeyInfo_a90a8b808782b18de901306acd49b0706}{oid} = \hyperlink{rsa_8c_a05da0bdcba7d0be3da2cc921a8a0dd50}{RSA\_ENCRYPTION\_OID};
+302             publicKeyInfo.\hyperlink{structX509SubjectPublicKeyInfo_a7c5d6f507f653f6085ba56e6b4b55912}{oidLen} = \textcolor{keyword}{sizeof}(\hyperlink{rsa_8c_a05da0bdcba7d0be3da2cc921a8a0dd50}{RSA\_ENCRYPTION\_OID});
+303 
+304             \textcolor{comment}{//Import the RSA public key}
+305             error = \hyperlink{x509__key__parse_8c_a46b55059a7e4840fa58c40d2c2b44cd4}{x509ImportRsaPublicKey}(&publicKeyInfo, publicKey);
+306          \}
+307 
+308          \textcolor{comment}{//Release previously allocated memory}
+309          \hyperlink{cyclone__crypto_2core_2crypto_8h_ac8a223b176683db4e9eed4162774f870}{cryptoFreeMem}(buffer);
+310       \}
+311       \textcolor{keywordflow}{else}
+312       \{
+313          \textcolor{comment}{//Failed to allocate memory}
+314          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac0a554045048d2fb61387cf735676f69}{ERROR\_OUT\_OF\_MEMORY};
+315       \}
+316    \}
+317    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(\hyperlink{pkix_2pem__import_8c_afabfed2db07e95a3438690d707815cda}{pemDecodeFile}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"PUBLIC KEY"}, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, &n, 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}) == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR})
+318    \{
+319       \textcolor{comment}{//Allocate a memory buffer to hold the ASN.1 data}
+320       buffer = \hyperlink{cyclone__crypto_2core_2crypto_8h_a48b53d16f66d31e5dcf82db3c1b882ba}{cryptoAllocMem}(n);
+321 
+322       \textcolor{comment}{//Successful memory allocation?}
+323       \textcolor{keywordflow}{if}(buffer != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+324       \{
+325          \textcolor{comment}{//Decode the content of the PEM container}
+326          error = \hyperlink{pkix_2pem__import_8c_afabfed2db07e95a3438690d707815cda}{pemDecodeFile}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"PUBLIC KEY"}, buffer, &n, 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+327 
+328          \textcolor{comment}{//Check status code}
+329          \textcolor{keywordflow}{if}(!error)
+330          \{
+331             \textcolor{comment}{//The ASN.1 encoded data of the public key is the SubjectPublicKeyInfo}
+332             \textcolor{comment}{//structure (refer to RFC 7468, section 13)}
+333             error = \hyperlink{certificate_2x509__cert__parse_8c_a17bacf95e872d7fdcd6cec43b1724dd6}{x509ParseSubjectPublicKeyInfo}(buffer, n, &n, &
+      publicKeyInfo);
+334          \}
+335 
+336          \textcolor{comment}{//Check status code}
+337          \textcolor{keywordflow}{if}(!error)
+338          \{
+339             \textcolor{comment}{//Import the RSA public key}
+340             error = \hyperlink{x509__key__parse_8c_a46b55059a7e4840fa58c40d2c2b44cd4}{x509ImportRsaPublicKey}(&publicKeyInfo, publicKey);
+341          \}
+342 
+343          \textcolor{comment}{//Release previously allocated memory}
+344          \hyperlink{cyclone__crypto_2core_2crypto_8h_ac8a223b176683db4e9eed4162774f870}{cryptoFreeMem}(buffer);
+345       \}
+346       \textcolor{keywordflow}{else}
+347       \{
+348          \textcolor{comment}{//Failed to allocate memory}
+349          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac0a554045048d2fb61387cf735676f69}{ERROR\_OUT\_OF\_MEMORY};
+350       \}
+351    \}
+352    \textcolor{keywordflow}{else}
+353    \{
+354       \textcolor{comment}{//The PEM file does not contain a valid RSA public key}
+355       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca488b657f8cc2e6c29df47f282e8ff3ad}{ERROR\_END\_OF\_FILE};
+356    \}
+357 
+358    \textcolor{comment}{//Any error to report?}
+359    \textcolor{keywordflow}{if}(error)
+360    \{
+361       \textcolor{comment}{//Clean up side effects}
+362       \hyperlink{rsa_8c_a6dc1711d56454b2a6e565199509d884e}{rsaFreePublicKey}(publicKey);
+363    \}
+364 
+365    \textcolor{comment}{//Return status code}
+366    \textcolor{keywordflow}{return} error;
+367 \textcolor{preprocessor}{#else}
+368    \textcolor{comment}{//Not implemented}
+369    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cab61c5ef368fbf03fdc1fb566c63f2f9a}{ERROR\_NOT\_IMPLEMENTED};
+370 \textcolor{preprocessor}{#endif}
+371 \}
+\end{DoxyCode}

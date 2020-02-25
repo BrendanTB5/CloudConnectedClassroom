@@ -1,0 +1,947 @@
+\hypertarget{ndp__misc_8c}{}\section{cyclone\+\_\+tcp/ipv6/ndp\+\_\+misc.c File Reference}
+\label{ndp__misc_8c}\index{cyclone\+\_\+tcp/ipv6/ndp\+\_\+misc.\+c@{cyclone\+\_\+tcp/ipv6/ndp\+\_\+misc.\+c}}
+
+
+Helper functions for N\+DP (Neighbor Discovery Protocol)  
+
+
+{\ttfamily \#include \char`\"{}core/net.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ipv6/ipv6.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ipv6/ipv6\+\_\+misc.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ipv6/ndp.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ipv6/ndp\+\_\+cache.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ipv6/ndp\+\_\+misc.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}mdns/mdns\+\_\+responder.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}debug.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{ndp__misc_8c_afcdf5e66fd927a7f4cc64295acd20407}{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}~\hyperlink{net__config_8h_a9b043f871643938bfb7bb24a351c144c}{N\+D\+P\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{ndp__misc_8c_ab7707a98f198e1f2a1f2f52557865ed6}{ndp\+Parse\+Prefix\+Info\+Option} (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface, \hyperlink{ndp_8h_a7da4a31f2fe9a81aabb5dfd8979ec3a6}{Ndp\+Prefix\+Info\+Option} $\ast$option)
+\begin{DoxyCompactList}\small\item\em Parse Prefix Information Option. \end{DoxyCompactList}\item 
+void \hyperlink{ndp__misc_8c_a11e39a940e9b547e8f1dc2bfb4d6f2b9}{ndp\+Update\+Addr\+List} (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface)
+\begin{DoxyCompactList}\small\item\em Manage the lifetime of I\+Pv6 addresses. \end{DoxyCompactList}\item 
+void \hyperlink{ndp__misc_8c_a6606369f2059b60ad027762b27d7570e}{ndp\+Update\+Prefix\+List} (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface)
+\begin{DoxyCompactList}\small\item\em Periodically update Prefix List. \end{DoxyCompactList}\item 
+void \hyperlink{ndp__misc_8c_a0b14d06878fd62aace574f808d819677}{ndp\+Update\+Default\+Router\+List} (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface)
+\begin{DoxyCompactList}\small\item\em Periodically update Default Router List. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ndp__misc_8c_a9ebc5a15a1d3e978256246f030778f1e}{ndp\+Select\+Default\+Router} (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface, const \hyperlink{ipv6_8h_aed0cbc40c61ed5b4fb681ebc55237e89}{Ipv6\+Addr} $\ast$unreachable\+Addr, \hyperlink{ipv6_8h_aed0cbc40c61ed5b4fb681ebc55237e89}{Ipv6\+Addr} $\ast$\hyperlink{nbns__common_8h_ac597eaa9711dfbc34f49d506132e85cd}{addr})
+\begin{DoxyCompactList}\small\item\em Default Router Selection. \end{DoxyCompactList}\item 
+\hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} \hyperlink{ndp__misc_8c_ab02536abae3654c6c0c86df994035966}{ndp\+Is\+First\+Hop\+Router} (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface, const \hyperlink{ipv6_8h_aed0cbc40c61ed5b4fb681ebc55237e89}{Ipv6\+Addr} $\ast$\hyperlink{ndp_8h_ab217f0ee2104c7c5529a4ece1f77e02c}{dest\+Addr}, const \hyperlink{ipv6_8h_aed0cbc40c61ed5b4fb681ebc55237e89}{Ipv6\+Addr} $\ast$next\+Hop)
+\begin{DoxyCompactList}\small\item\em Check whether an address is the first-\/hop router for the specified destination. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ndp__misc_8c_a86b146f8a07c562a996ec11d4e927ca2}{ndp\+Select\+Next\+Hop} (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface, const \hyperlink{ipv6_8h_aed0cbc40c61ed5b4fb681ebc55237e89}{Ipv6\+Addr} $\ast$\hyperlink{ndp_8h_ab217f0ee2104c7c5529a4ece1f77e02c}{dest\+Addr}, const \hyperlink{ipv6_8h_aed0cbc40c61ed5b4fb681ebc55237e89}{Ipv6\+Addr} $\ast$unreachable\+Next\+Hop, \hyperlink{ipv6_8h_aed0cbc40c61ed5b4fb681ebc55237e89}{Ipv6\+Addr} $\ast$next\+Hop, \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} \hyperlink{nbns__common_8h_a1e87af3c18a2fd36c61faf89949bdc3f}{flags})
+\begin{DoxyCompactList}\small\item\em Next-\/hop determination. \end{DoxyCompactList}\item 
+void \hyperlink{ndp__misc_8c_a66a620811139785755682cb22a997b47}{ndp\+Update\+Next\+Hop} (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface, const \hyperlink{ipv6_8h_aed0cbc40c61ed5b4fb681ebc55237e89}{Ipv6\+Addr} $\ast$unreachable\+Next\+Hop)
+\begin{DoxyCompactList}\small\item\em Update next-\/hop field of Destination Cache entries. \end{DoxyCompactList}\item 
+void \hyperlink{ndp__misc_8c_a30c9073c96be88de0b5768e07d22db8e}{ndp\+Add\+Option} (void $\ast$\hyperlink{pap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}, size\+\_\+t $\ast$message\+Len, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} \hyperlink{ppp_8h_a1d127017fb298b889f4ba24752d08b8e}{type}, const void $\ast$\hyperlink{chap_8h_adfa040d04d16520129a735fff8fb1628}{value}, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length})
+\begin{DoxyCompactList}\small\item\em Append an option to a N\+DP message. \end{DoxyCompactList}\item 
+void $\ast$ \hyperlink{ndp__misc_8c_a6d3addbaab223cf3eab295c590e42f35}{ndp\+Get\+Option} (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{ppp_8h_a789f9812dfd8d65750fad784fd195953}{options}, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length}, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} \hyperlink{ppp_8h_a1d127017fb298b889f4ba24752d08b8e}{type})
+\begin{DoxyCompactList}\small\item\em Find a specified option in a N\+DP message. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ndp__misc_8c_a91cdf966964a174f131172ae9f4582de}{ndp\+Check\+Options} (const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{ppp_8h_a789f9812dfd8d65750fad784fd195953}{options}, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length})
+\begin{DoxyCompactList}\small\item\em Check N\+DP message options. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Helper functions for N\+DP (Neighbor Discovery Protocol) 
+
+\hypertarget{pic32mz__ef__curiosity_8h_License}{}\subsection{License}\label{pic32mz__ef__curiosity_8h_License}
+S\+P\+D\+X-\/\+License-\/\+Identifier\+: G\+P\+L-\/2.\+0-\/or-\/later
+
+Copyright (C) 2010-\/2019 Oryx Embedded S\+A\+RL. All rights reserved.
+
+This file is part of Cyclone\+T\+CP Open.
+
+This program is free software; you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+
+You should have received a copy of the G\+NU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-\/1301, U\+SA.
+
+\begin{DoxyAuthor}{Author}
+Oryx Embedded S\+A\+RL (www.\+oryx-\/embedded.\+com) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+9.\+6 
+\end{DoxyVersion}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{ndp__misc_8c_afcdf5e66fd927a7f4cc64295acd20407}\label{ndp__misc_8c_afcdf5e66fd927a7f4cc64295acd20407}} 
+\index{ndp\+\_\+misc.\+c@{ndp\+\_\+misc.\+c}!T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+\index{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}!ndp\+\_\+misc.\+c@{ndp\+\_\+misc.\+c}}
+\subsubsection{\texorpdfstring{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}{TRACE\_LEVEL}}
+{\footnotesize\ttfamily \#define T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL~\hyperlink{net__config_8h_a9b043f871643938bfb7bb24a351c144c}{N\+D\+P\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+
+
+
+Definition at line 32 of file ndp\+\_\+misc.\+c.
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{ndp__misc_8c_a30c9073c96be88de0b5768e07d22db8e}\label{ndp__misc_8c_a30c9073c96be88de0b5768e07d22db8e}} 
+\index{ndp\+\_\+misc.\+c@{ndp\+\_\+misc.\+c}!ndp\+Add\+Option@{ndp\+Add\+Option}}
+\index{ndp\+Add\+Option@{ndp\+Add\+Option}!ndp\+\_\+misc.\+c@{ndp\+\_\+misc.\+c}}
+\subsubsection{\texorpdfstring{ndp\+Add\+Option()}{ndpAddOption()}}
+{\footnotesize\ttfamily void ndp\+Add\+Option (\begin{DoxyParamCaption}\item[{void $\ast$}]{message,  }\item[{size\+\_\+t $\ast$}]{message\+Len,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}}]{type,  }\item[{const void $\ast$}]{value,  }\item[{size\+\_\+t}]{length }\end{DoxyParamCaption})}
+
+
+
+Append an option to a N\+DP message. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em message} & Pointer to the N\+DP message \\
+\hline
+\mbox{\tt in,out}  & {\em message\+Len} & Length of the entire message \\
+\hline
+\mbox{\tt in}  & {\em type} & Option type \\
+\hline
+\mbox{\tt in}  & {\em value} & Option value \\
+\hline
+\mbox{\tt in}  & {\em length} & Length of the option value \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 597 of file ndp\+\_\+misc.\+c.
+
+
+\begin{DoxyCode}
+599 \{
+600    \textcolor{keywordtype}{size\_t} optionLen;
+601    \textcolor{keywordtype}{size\_t} paddingLen;
+602    \hyperlink{ndp_8h_a4703825ac5372088c82fde5ea118b93d}{NdpOption} *option;
+603 
+604    \textcolor{comment}{//Length of the option in units of 8 bytes including the type and length fields}
+605    optionLen = (\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} + \textcolor{keyword}{sizeof}(\hyperlink{ndp_8h_a4703825ac5372088c82fde5ea118b93d}{NdpOption}) + 7) / 8;
+606 
+607    \textcolor{comment}{//Sanity check}
+608    \textcolor{keywordflow}{if}(optionLen <= \hyperlink{stdint_8h_aeb4e270a084ee26fe73e799861bd0252}{UINT8\_MAX})
+609    \{
+610       \textcolor{comment}{//Point to the buffer where the option is to be written}
+611       option = (\hyperlink{ndp_8h_a4703825ac5372088c82fde5ea118b93d}{NdpOption} *) ((\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *) \hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message} + *messageLen);
+612 
+613       \textcolor{comment}{//Option type}
+614       option->type = \hyperlink{resource__manager_8h_a12e46a33bfe90638e58ef067c6fd4a6e}{type};
+615       \textcolor{comment}{//Option length}
+616       option->length = (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t}) optionLen;
+617       \textcolor{comment}{//Option value}
+618       memcpy(option->value, \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length});
+619 
+620       \textcolor{comment}{//Options should be padded when necessary to ensure that they end on}
+621       \textcolor{comment}{//their natural 64-bit boundaries}
+622       \textcolor{keywordflow}{if}((\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} + \textcolor{keyword}{sizeof}(\hyperlink{ndp_8h_a4703825ac5372088c82fde5ea118b93d}{NdpOption})) < (optionLen * 8))
+623       \{
+624          \textcolor{comment}{//Determine the amount of padding data to append}
+625          paddingLen = (optionLen * 8) - \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} - \textcolor{keyword}{sizeof}(\hyperlink{ndp_8h_a4703825ac5372088c82fde5ea118b93d}{NdpOption});
+626          \textcolor{comment}{//Write padding data}
+627          memset(option->value + \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, 0, paddingLen);
+628       \}
+629 
+630       \textcolor{comment}{//Adjust the length of the NDP message}
+631       *messageLen += optionLen * 8;
+632    \}
+633 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ndp__misc_8c_a91cdf966964a174f131172ae9f4582de}\label{ndp__misc_8c_a91cdf966964a174f131172ae9f4582de}} 
+\index{ndp\+\_\+misc.\+c@{ndp\+\_\+misc.\+c}!ndp\+Check\+Options@{ndp\+Check\+Options}}
+\index{ndp\+Check\+Options@{ndp\+Check\+Options}!ndp\+\_\+misc.\+c@{ndp\+\_\+misc.\+c}}
+\subsubsection{\texorpdfstring{ndp\+Check\+Options()}{ndpCheckOptions()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ndp\+Check\+Options (\begin{DoxyParamCaption}\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{options,  }\item[{size\+\_\+t}]{length }\end{DoxyParamCaption})}
+
+
+
+Check N\+DP message options. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em options} & Pointer to the Options field \\
+\hline
+\mbox{\tt in}  & {\em length} & Length of the Options field \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 687 of file ndp\+\_\+misc.\+c.
+
+
+\begin{DoxyCode}
+688 \{
+689    \textcolor{keywordtype}{size\_t} i;
+690    \hyperlink{ndp_8h_a4703825ac5372088c82fde5ea118b93d}{NdpOption} *option;
+691 
+692    \textcolor{comment}{//Point to the very first option of the NDP message}
+693    i = 0;
+694 
+695    \textcolor{comment}{//Parse options}
+696    \textcolor{keywordflow}{while}((i + \textcolor{keyword}{sizeof}(\hyperlink{ndp_8h_a4703825ac5372088c82fde5ea118b93d}{NdpOption})) <= \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length})
+697    \{
+698       \textcolor{comment}{//Point to the current option}
+699       option = (\hyperlink{ndp_8h_a4703825ac5372088c82fde5ea118b93d}{NdpOption} *) (\hyperlink{tcp_8h_a789f9812dfd8d65750fad784fd195953}{options} + i);
+700 
+701       \textcolor{comment}{//Nodes must silently discard an NDP message that contains}
+702       \textcolor{comment}{//an option with length zero}
+703       \textcolor{keywordflow}{if}(option->length == 0)
+704          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca29b2389396deec9c8dbd640bfffe457c}{ERROR\_INVALID\_OPTION};
+705 
+706       \textcolor{comment}{//Jump to next the next option}
+707       i += option->length * 8;
+708    \}
+709 
+710    \textcolor{comment}{//The Options field is valid}
+711    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+712 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ndp__misc_8c_a6d3addbaab223cf3eab295c590e42f35}\label{ndp__misc_8c_a6d3addbaab223cf3eab295c590e42f35}} 
+\index{ndp\+\_\+misc.\+c@{ndp\+\_\+misc.\+c}!ndp\+Get\+Option@{ndp\+Get\+Option}}
+\index{ndp\+Get\+Option@{ndp\+Get\+Option}!ndp\+\_\+misc.\+c@{ndp\+\_\+misc.\+c}}
+\subsubsection{\texorpdfstring{ndp\+Get\+Option()}{ndpGetOption()}}
+{\footnotesize\ttfamily void$\ast$ ndp\+Get\+Option (\begin{DoxyParamCaption}\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{options,  }\item[{size\+\_\+t}]{length,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}}]{type }\end{DoxyParamCaption})}
+
+
+
+Find a specified option in a N\+DP message. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em options} & Pointer to the Options field \\
+\hline
+\mbox{\tt in}  & {\em length} & Length of the Options field \\
+\hline
+\mbox{\tt in}  & {\em type} & Type of the option to find \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+If the specified option is found, a pointer to the corresponding option is returned. Otherwise N\+U\+LL pointer is returned 
+\end{DoxyReturn}
+
+
+Definition at line 645 of file ndp\+\_\+misc.\+c.
+
+
+\begin{DoxyCode}
+646 \{
+647    \textcolor{keywordtype}{size\_t} i;
+648    \hyperlink{ndp_8h_a4703825ac5372088c82fde5ea118b93d}{NdpOption} *option;
+649 
+650    \textcolor{comment}{//Point to the very first option of the NDP message}
+651    i = 0;
+652 
+653    \textcolor{comment}{//Parse options}
+654    \textcolor{keywordflow}{while}((i + \textcolor{keyword}{sizeof}(\hyperlink{ndp_8h_a4703825ac5372088c82fde5ea118b93d}{NdpOption})) <= \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length})
+655    \{
+656       \textcolor{comment}{//Point to the current option}
+657       option = (\hyperlink{ndp_8h_a4703825ac5372088c82fde5ea118b93d}{NdpOption} *) (\hyperlink{tcp_8h_a789f9812dfd8d65750fad784fd195953}{options} + i);
+658 
+659       \textcolor{comment}{//Nodes must silently discard an NDP message that contains}
+660       \textcolor{comment}{//an option with length zero}
+661       \textcolor{keywordflow}{if}(option->length == 0)
+662          \textcolor{keywordflow}{break};
+663       \textcolor{comment}{//Check option length}
+664       \textcolor{keywordflow}{if}((i + option->length * 8) > \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length})
+665          \textcolor{keywordflow}{break};
+666 
+667       \textcolor{comment}{//Current option type matches the specified one?}
+668       \textcolor{keywordflow}{if}(option->type == \hyperlink{resource__manager_8h_a12e46a33bfe90638e58ef067c6fd4a6e}{type} || \hyperlink{resource__manager_8h_a12e46a33bfe90638e58ef067c6fd4a6e}{type} == \hyperlink{ndp_8h_af1e00e3e4e4a40cf7cc766002871bf30a583697ce5d809ba05e9dd49701b8c10a}{NDP\_OPT\_ANY})
+669          \textcolor{keywordflow}{return} option;
+670 
+671       \textcolor{comment}{//Jump to next the next option}
+672       i += option->length * 8;
+673    \}
+674 
+675    \textcolor{comment}{//Specified option type not found}
+676    \textcolor{keywordflow}{return} \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+677 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ndp__misc_8c_ab02536abae3654c6c0c86df994035966}\label{ndp__misc_8c_ab02536abae3654c6c0c86df994035966}} 
+\index{ndp\+\_\+misc.\+c@{ndp\+\_\+misc.\+c}!ndp\+Is\+First\+Hop\+Router@{ndp\+Is\+First\+Hop\+Router}}
+\index{ndp\+Is\+First\+Hop\+Router@{ndp\+Is\+First\+Hop\+Router}!ndp\+\_\+misc.\+c@{ndp\+\_\+misc.\+c}}
+\subsubsection{\texorpdfstring{ndp\+Is\+First\+Hop\+Router()}{ndpIsFirstHopRouter()}}
+{\footnotesize\ttfamily \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} ndp\+Is\+First\+Hop\+Router (\begin{DoxyParamCaption}\item[{\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$}]{interface,  }\item[{const \hyperlink{ipv6_8h_aed0cbc40c61ed5b4fb681ebc55237e89}{Ipv6\+Addr} $\ast$}]{dest\+Addr,  }\item[{const \hyperlink{ipv6_8h_aed0cbc40c61ed5b4fb681ebc55237e89}{Ipv6\+Addr} $\ast$}]{next\+Hop }\end{DoxyParamCaption})}
+
+
+
+Check whether an address is the first-\/hop router for the specified destination. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em interface} & Underlying network interface \\
+\hline
+\mbox{\tt in}  & {\em dest\+Addr} & Destination address \\
+\hline
+\mbox{\tt in}  & {\em next\+Hop} & First-\/hop address to be checked \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+T\+R\+UE if the address is the first-\/hop router, else F\+A\+L\+SE 
+\end{DoxyReturn}
+
+
+Definition at line 445 of file ndp\+\_\+misc.\+c.
+
+
+\begin{DoxyCode}
+447 \{
+448    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+449    \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\_t} isFirstHopRouter;
+450    \hyperlink{structIpv6RouterEntry}{Ipv6RouterEntry} *routerEntry;
+451    \hyperlink{structNdpDestCacheEntry}{NdpDestCacheEntry} *destCacheEntry;
+452 
+453    \textcolor{comment}{//Clear flag}
+454    isFirstHopRouter = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+455 
+456    \textcolor{comment}{//Search the cache for the specified destination address}
+457    destCacheEntry = \hyperlink{ndp__cache_8c_a8fff27f53999959c6e2964700774a25d}{ndpFindDestCacheEntry}(interface, 
+      \hyperlink{ethernet_8h_a00f00b33d6300737183211cc435fa7e2}{destAddr});
+458 
+459    \textcolor{comment}{//Any matching entry?}
+460    \textcolor{keywordflow}{if}(destCacheEntry != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+461    \{
+462       \textcolor{comment}{//Check if the address is the same as the current first-hop}
+463       \textcolor{comment}{//router for the specified destination}
+464       \textcolor{keywordflow}{if}(\hyperlink{ipv6_8h_ab1e93bd2152bc3f3b5642fd0216384d7}{ipv6CompAddr}(&destCacheEntry->\hyperlink{structNdpDestCacheEntry_ad4faeec940b627f2b0c73d298fb2e605}{nextHop}, nextHop))
+465          isFirstHopRouter = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+466    \}
+467    \textcolor{keywordflow}{else}
+468    \{
+469       \textcolor{comment}{//Loop through the Default Router List}
+470       \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{ipv6_8h_af61cd2a89ea067f9ecd5a7f7d9649bba}{IPV6\_ROUTER\_LIST\_SIZE}; i++)
+471       \{
+472          \textcolor{comment}{//Point to the current entry}
+473          routerEntry = &interface->ipv6Context.routerList[i];
+474 
+475          \textcolor{comment}{//Check the lifetime associated with the default router}
+476          \textcolor{keywordflow}{if}(routerEntry->\hyperlink{structIpv6RouterEntry_aed560238a63f534a2cecaf1c5eea614c}{lifetime})
+477          \{
+478             \textcolor{comment}{//Check whether the current entry matches the specified address}
+479             \textcolor{keywordflow}{if}(\hyperlink{ipv6_8h_ab1e93bd2152bc3f3b5642fd0216384d7}{ipv6CompAddr}(&routerEntry->\hyperlink{structIpv6RouterEntry_ae229e171486421953e178c27b8527789}{addr}, nextHop))
+480             \{
+481                \textcolor{comment}{//The specified address is a valid first-hop router}
+482                isFirstHopRouter = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+483                \textcolor{comment}{//We are done}
+484                \textcolor{keywordflow}{break};
+485             \}
+486          \}
+487       \}
+488    \}
+489 
+490    \textcolor{comment}{//Return TRUE if the address is the same as the current first-hop}
+491    \textcolor{comment}{//router for the specified destination}
+492    \textcolor{keywordflow}{return} isFirstHopRouter;
+493 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ndp__misc_8c_ab7707a98f198e1f2a1f2f52557865ed6}\label{ndp__misc_8c_ab7707a98f198e1f2a1f2f52557865ed6}} 
+\index{ndp\+\_\+misc.\+c@{ndp\+\_\+misc.\+c}!ndp\+Parse\+Prefix\+Info\+Option@{ndp\+Parse\+Prefix\+Info\+Option}}
+\index{ndp\+Parse\+Prefix\+Info\+Option@{ndp\+Parse\+Prefix\+Info\+Option}!ndp\+\_\+misc.\+c@{ndp\+\_\+misc.\+c}}
+\subsubsection{\texorpdfstring{ndp\+Parse\+Prefix\+Info\+Option()}{ndpParsePrefixInfoOption()}}
+{\footnotesize\ttfamily void ndp\+Parse\+Prefix\+Info\+Option (\begin{DoxyParamCaption}\item[{\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$}]{interface,  }\item[{\hyperlink{ndp_8h_a7da4a31f2fe9a81aabb5dfd8979ec3a6}{Ndp\+Prefix\+Info\+Option} $\ast$}]{option }\end{DoxyParamCaption})}
+
+
+
+Parse Prefix Information Option. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em interface} & Underlying network interface \\
+\hline
+\mbox{\tt in}  & {\em option} & Pointer to the Prefix Information option \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 54 of file ndp\+\_\+misc.\+c.
+
+
+\begin{DoxyCode}
+55 \{
+56    \textcolor{comment}{//Make sure the Prefix Information option is valid}
+57    \textcolor{keywordflow}{if}(option == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || option->length != 4)
+58       \textcolor{keywordflow}{return};
+59 
+60    \textcolor{comment}{//A prefix Information option that have the on-link flag set indicates a}
+61    \textcolor{comment}{//prefix identifying a range of addresses that should be considered on-link}
+62    \textcolor{keywordflow}{if}(!option->l)
+63       \textcolor{keywordflow}{return};
+64 
+65    \textcolor{comment}{//If the prefix is the link-local prefix, silently ignore the}
+66    \textcolor{comment}{//Prefix Information option}
+67    \textcolor{keywordflow}{if}(\hyperlink{ipv6__misc_8c_a6cf8eae90cab177c8b32b1bf1709952b}{ipv6CompPrefix}(&option->prefix, &\hyperlink{ipv6_8c_a99dbd3de4e61de432b438d8e581c2cf1}{IPV6\_LINK\_LOCAL\_ADDR\_PREFIX}
+      , 10))
+68       \textcolor{keywordflow}{return};
+69 
+70    \textcolor{comment}{//If the preferred lifetime is greater than the valid lifetime,}
+71    \textcolor{comment}{//silently ignore the Prefix Information option}
+72    \textcolor{keywordflow}{if}(\hyperlink{cpu__endian_8h_a22f92ea3318059b7d88dfbd98d0cbc3e}{ntohl}(option->preferredLifetime) > \hyperlink{cpu__endian_8h_a22f92ea3318059b7d88dfbd98d0cbc3e}{ntohl}(option->validLifetime))
+73       \textcolor{keywordflow}{return};
+74 
+75    \textcolor{comment}{//Check whether the Valid Lifetime field is non-zero}
+76    \textcolor{keywordflow}{if}(\hyperlink{cpu__endian_8h_a22f92ea3318059b7d88dfbd98d0cbc3e}{ntohl}(option->validLifetime) != 0)
+77    \{
+78       \textcolor{comment}{//If the prefix is not already present in the Prefix List, create a new}
+79       \textcolor{comment}{//entry for the prefix. If the prefix is already present in the list,}
+80       \textcolor{comment}{//reset its invalidation timer}
+81       \hyperlink{ipv6__misc_8c_a884d417b4bfee285e631132b9d8dffb9}{ipv6AddPrefix}(interface, &option->prefix, option->prefixLength, option->l,
+82          option->a, \hyperlink{cpu__endian_8h_a22f92ea3318059b7d88dfbd98d0cbc3e}{ntohl}(option->validLifetime), \hyperlink{cpu__endian_8h_a22f92ea3318059b7d88dfbd98d0cbc3e}{ntohl}(option->preferredLifetime));
+83    \}
+84    \textcolor{keywordflow}{else}
+85    \{
+86       \textcolor{comment}{//If the new Lifetime value is zero, time-out the prefix immediately}
+87       \hyperlink{ipv6__misc_8c_abfcbbca4428fa3b858e1e4e8f5bb8b1c}{ipv6RemovePrefix}(interface, &option->prefix, option->prefixLength);
+88    \}
+89 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ndp__misc_8c_a9ebc5a15a1d3e978256246f030778f1e}\label{ndp__misc_8c_a9ebc5a15a1d3e978256246f030778f1e}} 
+\index{ndp\+\_\+misc.\+c@{ndp\+\_\+misc.\+c}!ndp\+Select\+Default\+Router@{ndp\+Select\+Default\+Router}}
+\index{ndp\+Select\+Default\+Router@{ndp\+Select\+Default\+Router}!ndp\+\_\+misc.\+c@{ndp\+\_\+misc.\+c}}
+\subsubsection{\texorpdfstring{ndp\+Select\+Default\+Router()}{ndpSelectDefaultRouter()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ndp\+Select\+Default\+Router (\begin{DoxyParamCaption}\item[{\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$}]{interface,  }\item[{const \hyperlink{ipv6_8h_aed0cbc40c61ed5b4fb681ebc55237e89}{Ipv6\+Addr} $\ast$}]{unreachable\+Addr,  }\item[{\hyperlink{ipv6_8h_aed0cbc40c61ed5b4fb681ebc55237e89}{Ipv6\+Addr} $\ast$}]{addr }\end{DoxyParamCaption})}
+
+
+
+Default Router Selection. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em interface} & Underlying network interface \\
+\hline
+\mbox{\tt in}  & {\em unreachable\+Addr} & I\+Pv6 address of the unreachable router (optional parameter) \\
+\hline
+\mbox{\tt out}  & {\em addr} & I\+Pv6 address of the default router to be used \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 343 of file ndp\+\_\+misc.\+c.
+
+
+\begin{DoxyCode}
+345 \{
+346    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+347    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} j;
+348    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} \hyperlink{md5_8c_af11ea3cdbca7345eb6a4a8ac5ce0434d}{k};
+349    \hyperlink{structIpv6RouterEntry}{Ipv6RouterEntry} *routerEntry;
+350    \hyperlink{structNdpNeighborCacheEntry}{NdpNeighborCacheEntry} *neighborCacheEntry;
+351 
+352    \textcolor{comment}{//Initialize index}
+353    i = 0;
+354 
+355    \textcolor{comment}{//This parameter is optional...}
+356    \textcolor{keywordflow}{if}(unreachableAddr != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+357    \{
+358       \textcolor{comment}{//Search the Default Router List for the router whose reachability is suspect}
+359       \textcolor{keywordflow}{for}(j = 0; j < \hyperlink{ipv6_8h_af61cd2a89ea067f9ecd5a7f7d9649bba}{IPV6\_ROUTER\_LIST\_SIZE}; j++)
+360       \{
+361          \textcolor{comment}{//Point to the current entry}
+362          routerEntry = &interface->ipv6Context.routerList[j];
+363 
+364          \textcolor{comment}{//Check the lifetime associated with the default router}
+365          \textcolor{keywordflow}{if}(routerEntry->\hyperlink{structIpv6RouterEntry_aed560238a63f534a2cecaf1c5eea614c}{lifetime})
+366          \{
+367             \textcolor{comment}{//Check the router address against the address whose reachability is suspect}
+368             \textcolor{keywordflow}{if}(\hyperlink{ipv6_8h_ab1e93bd2152bc3f3b5642fd0216384d7}{ipv6CompAddr}(&routerEntry->\hyperlink{structIpv6RouterEntry_ae229e171486421953e178c27b8527789}{addr}, unreachableAddr))
+369             \{
+370                \textcolor{comment}{//Routers should be selected in a round-robin fashion}
+371                i = j + 1;
+372                \textcolor{comment}{//We are done}
+373                \textcolor{keywordflow}{break};
+374             \}
+375          \}
+376       \}
+377    \}
+378 
+379    \textcolor{comment}{//Routers that are reachable or probably reachable should be preferred}
+380    \textcolor{comment}{//over routers whose reachability is unknown or suspect}
+381    \textcolor{keywordflow}{for}(j = 0; j < \hyperlink{ipv6_8h_af61cd2a89ea067f9ecd5a7f7d9649bba}{IPV6\_ROUTER\_LIST\_SIZE}; j++)
+382    \{
+383       \textcolor{comment}{//Get current index}
+384       k = (i + j) % IPV6\_ROUTER\_LIST\_SIZE;
+385 
+386       \textcolor{comment}{//Point to the corresponding entry}
+387       routerEntry = &interface->ipv6Context.routerList[\hyperlink{md5_8c_af11ea3cdbca7345eb6a4a8ac5ce0434d}{k}];
+388 
+389       \textcolor{comment}{//Check the lifetime associated with the default router}
+390       \textcolor{keywordflow}{if}(routerEntry->\hyperlink{structIpv6RouterEntry_aed560238a63f534a2cecaf1c5eea614c}{lifetime})
+391       \{
+392          \textcolor{comment}{//Search the Neighbor Cache for the router address}
+393          neighborCacheEntry = \hyperlink{ndp__cache_8c_a4bb136704775638d094e9b9b0eab0c62}{ndpFindNeighborCacheEntry}(interface, &routerEntry->
+      \hyperlink{structIpv6RouterEntry_ae229e171486421953e178c27b8527789}{addr});
+394 
+395          \textcolor{comment}{//Check whether the router is reachable or probably reachable}
+396          \textcolor{keywordflow}{if}(neighborCacheEntry != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+397          \{
+398             \textcolor{comment}{//Any state other than INCOMPLETE?}
+399             \textcolor{keywordflow}{if}(neighborCacheEntry->\hyperlink{structNdpNeighborCacheEntry_a574ecea20d21d33352612dcd9583e3d5}{state} != \hyperlink{ndp_8h_a97a48b3286230efa6a168a56910ea479af1920f2caebfea1b46a7e9f9439bc6f9}{NDP\_STATE\_INCOMPLETE})
+400             \{
+401                \textcolor{comment}{//Return the IPv6 address of the default router}
+402                *\hyperlink{nbns__common_8h_ac597eaa9711dfbc34f49d506132e85cd}{addr} = routerEntry->\hyperlink{structIpv6RouterEntry_ae229e171486421953e178c27b8527789}{addr};
+403                \textcolor{comment}{//Successful default router selection}
+404                \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+405             \}
+406          \}
+407       \}
+408    \}
+409 
+410    \textcolor{comment}{//When no routers on the list are known to be reachable or probably}
+411    \textcolor{comment}{//reachable, routers should be selected in a round-robin fashion, so}
+412    \textcolor{comment}{//that subsequent requests for a default router do not return the}
+413    \textcolor{comment}{//same router until all other routers have been selected}
+414    \textcolor{keywordflow}{for}(j = 0; j < \hyperlink{ipv6_8h_af61cd2a89ea067f9ecd5a7f7d9649bba}{IPV6\_ROUTER\_LIST\_SIZE}; j++)
+415    \{
+416       \textcolor{comment}{//Get current index}
+417       k = (i + j) % IPV6\_ROUTER\_LIST\_SIZE;
+418 
+419       \textcolor{comment}{//Point to the corresponding entry}
+420       routerEntry = &interface->ipv6Context.routerList[\hyperlink{md5_8c_af11ea3cdbca7345eb6a4a8ac5ce0434d}{k}];
+421 
+422       \textcolor{comment}{//Check the lifetime associated with the default router}
+423       \textcolor{keywordflow}{if}(routerEntry->\hyperlink{structIpv6RouterEntry_aed560238a63f534a2cecaf1c5eea614c}{lifetime})
+424       \{
+425          \textcolor{comment}{//Return the IPv6 address of the default router}
+426          *\hyperlink{nbns__common_8h_ac597eaa9711dfbc34f49d506132e85cd}{addr} = routerEntry->\hyperlink{structIpv6RouterEntry_ae229e171486421953e178c27b8527789}{addr};
+427          \textcolor{comment}{//Successful default router selection}
+428          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+429       \}
+430    \}
+431 
+432    \textcolor{comment}{//No default router found...}
+433    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4cb699f8833527b8a0ab6ae79bd21b89}{ERROR\_NO\_ROUTE};
+434 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ndp__misc_8c_a86b146f8a07c562a996ec11d4e927ca2}\label{ndp__misc_8c_a86b146f8a07c562a996ec11d4e927ca2}} 
+\index{ndp\+\_\+misc.\+c@{ndp\+\_\+misc.\+c}!ndp\+Select\+Next\+Hop@{ndp\+Select\+Next\+Hop}}
+\index{ndp\+Select\+Next\+Hop@{ndp\+Select\+Next\+Hop}!ndp\+\_\+misc.\+c@{ndp\+\_\+misc.\+c}}
+\subsubsection{\texorpdfstring{ndp\+Select\+Next\+Hop()}{ndpSelectNextHop()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ndp\+Select\+Next\+Hop (\begin{DoxyParamCaption}\item[{\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$}]{interface,  }\item[{const \hyperlink{ipv6_8h_aed0cbc40c61ed5b4fb681ebc55237e89}{Ipv6\+Addr} $\ast$}]{dest\+Addr,  }\item[{const \hyperlink{ipv6_8h_aed0cbc40c61ed5b4fb681ebc55237e89}{Ipv6\+Addr} $\ast$}]{unreachable\+Next\+Hop,  }\item[{\hyperlink{ipv6_8h_aed0cbc40c61ed5b4fb681ebc55237e89}{Ipv6\+Addr} $\ast$}]{next\+Hop,  }\item[{\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t}}]{flags }\end{DoxyParamCaption})}
+
+
+
+Next-\/hop determination. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em interface} & Underlying network interface \\
+\hline
+\mbox{\tt in}  & {\em dest\+Addr} & Destination address \\
+\hline
+\mbox{\tt in}  & {\em unreachable\+Next\+Hop} & Address of the unreachable next-\/hop (optional parameter) \\
+\hline
+\mbox{\tt out}  & {\em next\+Hop} & Next-\/hop address to be used \\
+\hline
+\mbox{\tt in}  & {\em flags} & Set of flags that influences the behavior of this function \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 506 of file ndp\+\_\+misc.\+c.
+
+
+\begin{DoxyCode}
+508 \{
+509    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+510 
+511    \textcolor{comment}{//Destination IPv6 address is a multicast address?}
+512    \textcolor{keywordflow}{if}(\hyperlink{ipv6_8h_a68fbc1145d242384c90a670196a38495}{ipv6IsMulticastAddr}(\hyperlink{ethernet_8h_a00f00b33d6300737183211cc435fa7e2}{destAddr}))
+513    \{
+514       \textcolor{comment}{//For multicast packets, the next-hop is always the (multicast)}
+515       \textcolor{comment}{//destination address and is considered to be on-link}
+516       *nextHop = *\hyperlink{ethernet_8h_a00f00b33d6300737183211cc435fa7e2}{destAddr};
+517       \textcolor{comment}{//Successful next-hop determination}
+518       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+519    \}
+520    \textcolor{keywordflow}{else}
+521    \{
+522       \textcolor{comment}{//The sender performs a longest prefix match against the Prefix List to}
+523       \textcolor{comment}{//determine whether the packet's destination is on-link or off-link}
+524       \textcolor{keywordflow}{if}(\hyperlink{ipv6__misc_8c_ab10ec233f3239c6238bb4f5995543a79}{ipv6IsOnLink}(interface, \hyperlink{ethernet_8h_a00f00b33d6300737183211cc435fa7e2}{destAddr}))
+525       \{
+526          \textcolor{comment}{//If the destination is on-link, the next-hop address is the same as}
+527          \textcolor{comment}{//the packet's destination address}
+528          *nextHop = *\hyperlink{ethernet_8h_a00f00b33d6300737183211cc435fa7e2}{destAddr};
+529          \textcolor{comment}{//Successful next-hop determination}
+530          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+531       \}
+532       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}((\hyperlink{tcp_8h_aa2585d779da0ab21273a8d92de9a0ebe}{flags} & \hyperlink{ip_8h_ad2b4b992325fba597d230405d65e6c98ac6b038dad7629acb28d7fe2f77faa9c5}{IP\_FLAG\_DONT\_ROUTE}) != 0)
+533       \{
+534          \textcolor{comment}{//Do not send the packet via a router}
+535          *nextHop = *\hyperlink{ethernet_8h_a00f00b33d6300737183211cc435fa7e2}{destAddr};
+536          \textcolor{comment}{//Successful next-hop determination}
+537          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+538       \}
+539       \textcolor{keywordflow}{else}
+540       \{
+541          \textcolor{comment}{//If the destination is off-link, the sender selects a router from}
+542          \textcolor{comment}{//the Default Router List}
+543          error = \hyperlink{ndp__misc_8c_a9ebc5a15a1d3e978256246f030778f1e}{ndpSelectDefaultRouter}(interface, unreachableNextHop, nextHop);
+544       \}
+545    \}
+546 
+547    \textcolor{comment}{//Return status code}
+548    \textcolor{keywordflow}{return} error;
+549 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ndp__misc_8c_a11e39a940e9b547e8f1dc2bfb4d6f2b9}\label{ndp__misc_8c_a11e39a940e9b547e8f1dc2bfb4d6f2b9}} 
+\index{ndp\+\_\+misc.\+c@{ndp\+\_\+misc.\+c}!ndp\+Update\+Addr\+List@{ndp\+Update\+Addr\+List}}
+\index{ndp\+Update\+Addr\+List@{ndp\+Update\+Addr\+List}!ndp\+\_\+misc.\+c@{ndp\+\_\+misc.\+c}}
+\subsubsection{\texorpdfstring{ndp\+Update\+Addr\+List()}{ndpUpdateAddrList()}}
+{\footnotesize\ttfamily void ndp\+Update\+Addr\+List (\begin{DoxyParamCaption}\item[{\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$}]{interface }\end{DoxyParamCaption})}
+
+
+
+Manage the lifetime of I\+Pv6 addresses. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em interface} & Underlying network interface \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 97 of file ndp\+\_\+misc.\+c.
+
+
+\begin{DoxyCode}
+98 \{
+99    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+100    \hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\_t} \hyperlink{dhcpv6__common_8h_ae73654f333e4363463ad8c594eca1905}{time};
+101    \hyperlink{structIpv6AddrEntry}{Ipv6AddrEntry} *entry;
+102    \hyperlink{structNdpContext}{NdpContext} *context;
+103 
+104    \textcolor{comment}{//Point to the NDP context}
+105    context = &interface->ndpContext;
+106 
+107    \textcolor{comment}{//Get current time}
+108    time = \hyperlink{os__port__chibios_8c_ab66a11272d40a916fa69dd8e4dc443d4}{osGetSystemTime}();
+109 
+110    \textcolor{comment}{//Go through the list of IPv6 addresses}
+111    \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{ipv6_8h_aa9064306086cc3bba39cf75db3ec2881}{IPV6\_ADDR\_LIST\_SIZE}; i++)
+112    \{
+113       \textcolor{comment}{//Point to the current entry}
+114       entry = &interface->ipv6Context.addrList[i];
+115 
+116       \textcolor{comment}{//Tentative address?}
+117       \textcolor{keywordflow}{if}(entry->\hyperlink{structIpv6AddrEntry_ae4ce939ceef8a1d15ac7d11542215a0f}{state} == \hyperlink{ipv6_8h_acb54c5e2b7ee1652f5bf055e14cc518dacb3152ea8c90d13a425042070b987fe6}{IPV6\_ADDR\_STATE\_TENTATIVE})
+118       \{
+119          \textcolor{comment}{//Check whether the link is up}
+120          \textcolor{keywordflow}{if}(interface->linkState)
+121          \{
+122             \textcolor{comment}{//To check an address, a node should send Neighbor Solicitation messages}
+123             \textcolor{keywordflow}{if}(entry->\hyperlink{structIpv6AddrEntry_ade9430db97130475d7b1ea5f9b1880e0}{dadRetransmitCount} == 0)
+124             \{
+125                \textcolor{comment}{//Set time stamp}
+126                entry->\hyperlink{structIpv6AddrEntry_a9080e69e7dc724704176843cdadfb29b}{timestamp} = \hyperlink{dhcpv6__common_8h_ae73654f333e4363463ad8c594eca1905}{time};
+127 
+128                \textcolor{comment}{//Check whether Duplicate Address Detection should be performed}
+129                \textcolor{keywordflow}{if}(context->\hyperlink{structNdpContext_a47458438d295650512e889531b1e0471}{dupAddrDetectTransmits} > 0)
+130                \{
+131                   \textcolor{comment}{//Link-local address?}
+132                   \textcolor{keywordflow}{if}(i == 0)
+133                   \{
+134                      \textcolor{comment}{//Delay before transmitting the first solicitation}
+135                      entry->\hyperlink{structIpv6AddrEntry_ae1f2402bd716fae570c797064da15807}{dadTimeout} = \hyperlink{net_8c_af45ea0afc9806749114ec85e507014e1}{netGetRandRange}(0, 
+      \hyperlink{ndp_8h_aabd73da3c2aca80788a052444d83b0d5}{NDP\_MAX\_RTR\_SOLICITATION\_DELAY});
+136                      \textcolor{comment}{//Prepare to send the first Neighbor Solicitation message}
+137                      entry->\hyperlink{structIpv6AddrEntry_ade9430db97130475d7b1ea5f9b1880e0}{dadRetransmitCount} = 1;
+138                   \}
+139                   \textcolor{keywordflow}{else}
+140                   \{
+141                      \textcolor{comment}{//Valid link-local address?}
+142                      \textcolor{keywordflow}{if}(\hyperlink{ipv6_8h_a0650f6186ad38b49662420902ae208ea}{ipv6GetLinkLocalAddrState}(interface) == 
+      \hyperlink{ipv6_8h_acb54c5e2b7ee1652f5bf055e14cc518daaa3a0ce422a678d8eb14a36f4c642d16}{IPV6\_ADDR\_STATE\_PREFERRED})
+143                      \{
+144                         \textcolor{comment}{//Prepare to send the first Neighbor Solicitation message}
+145                         entry->\hyperlink{structIpv6AddrEntry_ae1f2402bd716fae570c797064da15807}{dadTimeout} = 0;
+146                         entry->\hyperlink{structIpv6AddrEntry_ade9430db97130475d7b1ea5f9b1880e0}{dadRetransmitCount} = 1;
+147                      \}
+148                   \}
+149                \}
+150                \textcolor{keywordflow}{else}
+151                \{
+152                   \textcolor{comment}{//Do not perform Duplicate Address Detection}
+153                   entry->\hyperlink{structIpv6AddrEntry_ae4ce939ceef8a1d15ac7d11542215a0f}{state} = \hyperlink{ipv6_8h_acb54c5e2b7ee1652f5bf055e14cc518daaa3a0ce422a678d8eb14a36f4c642d16}{IPV6\_ADDR\_STATE\_PREFERRED};
+154                \}
+155             \}
+156             \textcolor{keywordflow}{else}
+157             \{
+158                \textcolor{comment}{//Check current time}
+159                \textcolor{keywordflow}{if}(\hyperlink{os__port_8h_a25c13833ef003da02045a91b1080263a}{timeCompare}(time, entry->\hyperlink{structIpv6AddrEntry_a9080e69e7dc724704176843cdadfb29b}{timestamp} + entry->
+      \hyperlink{structIpv6AddrEntry_ae1f2402bd716fae570c797064da15807}{dadTimeout}) >= 0)
+160                \{
+161                   \textcolor{comment}{//Duplicate Address Detection failed?}
+162                   \textcolor{keywordflow}{if}(entry->\hyperlink{structIpv6AddrEntry_aebcce0d3eff51b7c413e43ec5bf86282}{duplicate})
+163                   \{
+164                      \textcolor{comment}{//A tentative address that is determined to be a duplicate}
+165                      \textcolor{comment}{//must not be assigned to an interface}
+166                      \textcolor{keywordflow}{if}(entry->\hyperlink{structIpv6AddrEntry_a196db6647dd1196a1c3a06c8a4083a48}{permanent})
+167                      \{
+168                         \textcolor{comment}{//The IPv6 address should be preserved if it has been}
+169                         \textcolor{comment}{//manually assigned}
+170                         \hyperlink{ipv6__misc_8c_a260c329b0f6deb7be88e6ee7a1003063}{ipv6SetAddr}(interface, i, &entry->\hyperlink{structIpv6AddrEntry_a55b2d1238731a3b4ffca6928ebb52fe0}{addr},
+171                            \hyperlink{ipv6_8h_acb54c5e2b7ee1652f5bf055e14cc518dabdf9e5bbd4cc04a803d6e63cc9992ebb}{IPV6\_ADDR\_STATE\_INVALID}, 0, 0, 
+      \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE});
+172                      \}
+173                      \textcolor{keywordflow}{else}
+174                      \{
+175                         \textcolor{comment}{//The IPv6 address is no more valid and should be}
+176                         \textcolor{comment}{//removed from the list}
+177                         \hyperlink{ipv6__misc_8c_a260c329b0f6deb7be88e6ee7a1003063}{ipv6SetAddr}(interface, i, &
+      \hyperlink{ipv6_8c_aa4baeec4f7b8b166d2457787fb9eddf9}{IPV6\_UNSPECIFIED\_ADDR},
+178                            \hyperlink{ipv6_8h_acb54c5e2b7ee1652f5bf055e14cc518dabdf9e5bbd4cc04a803d6e63cc9992ebb}{IPV6\_ADDR\_STATE\_INVALID}, 0, 0, 
+      \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE});
+179                      \}
+180                   \}
+181                   \textcolor{comment}{//Duplicate Address Detection is on-going?}
+182                   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(entry->\hyperlink{structIpv6AddrEntry_ade9430db97130475d7b1ea5f9b1880e0}{dadRetransmitCount} <= context->
+      \hyperlink{structNdpContext_a47458438d295650512e889531b1e0471}{dupAddrDetectTransmits})
+183                   \{
+184                      \textcolor{comment}{//Send a multicast Neighbor Solicitation message}
+185                      \hyperlink{ndp_8c_aa2d7bb550603db3b3e48a150c4e30d49}{ndpSendNeighborSol}(interface, &entry->
+      \hyperlink{structIpv6AddrEntry_a55b2d1238731a3b4ffca6928ebb52fe0}{addr}, \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE});
+186 
+187                      \textcolor{comment}{//Set timeout value}
+188                      entry->\hyperlink{structIpv6AddrEntry_ae1f2402bd716fae570c797064da15807}{dadTimeout} += context->\hyperlink{structNdpContext_a529caf9017efd6a9e5b9e546a9a0c012}{retransTimer};
+189                      \textcolor{comment}{//Increment retransmission counter}
+190                      entry->\hyperlink{structIpv6AddrEntry_ade9430db97130475d7b1ea5f9b1880e0}{dadRetransmitCount}++;
+191                   \}
+192                   \textcolor{comment}{//Duplicate Address Detection is complete?}
+193                   \textcolor{keywordflow}{else}
+194                   \{
+195                      \textcolor{comment}{//The use of the IPv6 address is now unrestricted}
+196                      entry->\hyperlink{structIpv6AddrEntry_ae4ce939ceef8a1d15ac7d11542215a0f}{state} = \hyperlink{ipv6_8h_acb54c5e2b7ee1652f5bf055e14cc518daaa3a0ce422a678d8eb14a36f4c642d16}{IPV6\_ADDR\_STATE\_PREFERRED};
+197 
+198 \textcolor{preprocessor}{#if (MDNS\_RESPONDER\_SUPPORT == ENABLED)}
+199                      \textcolor{comment}{//Link-local address?}
+200                      \textcolor{keywordflow}{if}(i == 0)
+201                      \{
+202                         \textcolor{comment}{//Restart mDNS probing process}
+203                         \hyperlink{mdns__responder_8c_ad0aa26e45ce7db6737cb978d4fedea0a}{mdnsResponderStartProbing}(interface->mdnsResponderContext)
+      ;
+204                      \}
+205 \textcolor{preprocessor}{#endif}
+206                   \}
+207                \}
+208             \}
+209          \}
+210       \}
+211       \textcolor{comment}{//Preferred address?}
+212       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(entry->\hyperlink{structIpv6AddrEntry_ae4ce939ceef8a1d15ac7d11542215a0f}{state} == \hyperlink{ipv6_8h_acb54c5e2b7ee1652f5bf055e14cc518daaa3a0ce422a678d8eb14a36f4c642d16}{IPV6\_ADDR\_STATE\_PREFERRED})
+213       \{
+214          \textcolor{comment}{//An IPv6 address with an infinite preferred lifetime is never timed out}
+215          \textcolor{keywordflow}{if}(entry->\hyperlink{structIpv6AddrEntry_a4d368a125e163baf554e7622edff555f}{preferredLifetime} != \hyperlink{ndp_8h_a96fa12d04b522371a81350239b9e2d11}{NDP\_INFINITE\_LIFETIME})
+216          \{
+217             \textcolor{comment}{//When the preferred lifetime expires, the address becomes deprecated}
+218             \textcolor{keywordflow}{if}(\hyperlink{os__port_8h_a25c13833ef003da02045a91b1080263a}{timeCompare}(time, entry->\hyperlink{structIpv6AddrEntry_a9080e69e7dc724704176843cdadfb29b}{timestamp} + entry->
+      \hyperlink{structIpv6AddrEntry_a4d368a125e163baf554e7622edff555f}{preferredLifetime}) >= 0)
+219             \{
+220                \textcolor{comment}{//A deprecated address should continue to be used as a source}
+221                \textcolor{comment}{//address in existing communications, but should not be used}
+222                \textcolor{comment}{//to initiate new communications}
+223                entry->\hyperlink{structIpv6AddrEntry_ae4ce939ceef8a1d15ac7d11542215a0f}{state} = \hyperlink{ipv6_8h_acb54c5e2b7ee1652f5bf055e14cc518da4cd161ce2c979312f91a8f3e946acec6}{IPV6\_ADDR\_STATE\_DEPRECATED};
+224             \}
+225          \}
+226       \}
+227       \textcolor{comment}{//Deprecated address?}
+228       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(entry->\hyperlink{structIpv6AddrEntry_ae4ce939ceef8a1d15ac7d11542215a0f}{state} == \hyperlink{ipv6_8h_acb54c5e2b7ee1652f5bf055e14cc518da4cd161ce2c979312f91a8f3e946acec6}{IPV6\_ADDR\_STATE\_DEPRECATED})
+229       \{
+230          \textcolor{comment}{//An IPv6 address with an infinite valid lifetime is never timed out}
+231          \textcolor{keywordflow}{if}(entry->\hyperlink{structIpv6AddrEntry_ab56a11d9de06327ab5af04e8ae18164d}{validLifetime} != \hyperlink{ndp_8h_a96fa12d04b522371a81350239b9e2d11}{NDP\_INFINITE\_LIFETIME})
+232          \{
+233             \textcolor{comment}{//When the valid lifetime expires, the address becomes invalid}
+234             \textcolor{keywordflow}{if}(\hyperlink{os__port_8h_a25c13833ef003da02045a91b1080263a}{timeCompare}(time, entry->\hyperlink{structIpv6AddrEntry_a9080e69e7dc724704176843cdadfb29b}{timestamp} + entry->
+      \hyperlink{structIpv6AddrEntry_ab56a11d9de06327ab5af04e8ae18164d}{validLifetime}) >= 0)
+235             \{
+236                \textcolor{comment}{//The IPv6 address is no more valid and should be removed from the list}
+237                \hyperlink{ipv6__misc_8c_a260c329b0f6deb7be88e6ee7a1003063}{ipv6SetAddr}(interface, i, &\hyperlink{ipv6_8c_aa4baeec4f7b8b166d2457787fb9eddf9}{IPV6\_UNSPECIFIED\_ADDR},
+238                   \hyperlink{ipv6_8h_acb54c5e2b7ee1652f5bf055e14cc518dabdf9e5bbd4cc04a803d6e63cc9992ebb}{IPV6\_ADDR\_STATE\_INVALID}, 0, 0, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE});
+239             \}
+240          \}
+241       \}
+242    \}
+243 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ndp__misc_8c_a0b14d06878fd62aace574f808d819677}\label{ndp__misc_8c_a0b14d06878fd62aace574f808d819677}} 
+\index{ndp\+\_\+misc.\+c@{ndp\+\_\+misc.\+c}!ndp\+Update\+Default\+Router\+List@{ndp\+Update\+Default\+Router\+List}}
+\index{ndp\+Update\+Default\+Router\+List@{ndp\+Update\+Default\+Router\+List}!ndp\+\_\+misc.\+c@{ndp\+\_\+misc.\+c}}
+\subsubsection{\texorpdfstring{ndp\+Update\+Default\+Router\+List()}{ndpUpdateDefaultRouterList()}}
+{\footnotesize\ttfamily void ndp\+Update\+Default\+Router\+List (\begin{DoxyParamCaption}\item[{\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$}]{interface }\end{DoxyParamCaption})}
+
+
+
+Periodically update Default Router List. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em interface} & Underlying network interface \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 287 of file ndp\+\_\+misc.\+c.
+
+
+\begin{DoxyCode}
+288 \{
+289    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+290    \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\_t} flag;
+291    \hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\_t} \hyperlink{dhcpv6__common_8h_ae73654f333e4363463ad8c594eca1905}{time};
+292    \hyperlink{structIpv6RouterEntry}{Ipv6RouterEntry} *entry;
+293 
+294    \textcolor{comment}{//This flag will be set if any entry has been removed from}
+295    \textcolor{comment}{//the Default Router List}
+296    flag = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+297 
+298    \textcolor{comment}{//Get current time}
+299    time = \hyperlink{os__port__chibios_8c_ab66a11272d40a916fa69dd8e4dc443d4}{osGetSystemTime}();
+300 
+301    \textcolor{comment}{//Go through the Default Router List}
+302    \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{ipv6_8h_af61cd2a89ea067f9ecd5a7f7d9649bba}{IPV6\_ROUTER\_LIST\_SIZE}; i++)
+303    \{
+304       \textcolor{comment}{//Point to the current entry}
+305       entry = &interface->ipv6Context.routerList[i];
+306 
+307       \textcolor{comment}{//Check the lifetime value}
+308       \textcolor{keywordflow}{if}(entry->\hyperlink{structIpv6RouterEntry_aed560238a63f534a2cecaf1c5eea614c}{lifetime} > 0 && entry->\hyperlink{structIpv6RouterEntry_aed560238a63f534a2cecaf1c5eea614c}{lifetime} < \hyperlink{os__port_8h_ab893de6f8a0ec8b0e6dd8097ff398019}{INFINITE\_DELAY})
+309       \{
+310          \textcolor{comment}{//A node should retain entries in the Default Router List until}
+311          \textcolor{comment}{//their lifetimes expire}
+312          \textcolor{keywordflow}{if}(\hyperlink{os__port_8h_a25c13833ef003da02045a91b1080263a}{timeCompare}(time, entry->\hyperlink{structIpv6RouterEntry_a913df3ea3054f2f7c605e103196d9f65}{timestamp} + entry->
+      \hyperlink{structIpv6RouterEntry_aed560238a63f534a2cecaf1c5eea614c}{lifetime}) >= 0)
+313          \{
+314             \textcolor{comment}{//Immediately time-out the entry}
+315             entry->\hyperlink{structIpv6RouterEntry_ae229e171486421953e178c27b8527789}{addr} = \hyperlink{ipv6_8c_aa4baeec4f7b8b166d2457787fb9eddf9}{IPV6\_UNSPECIFIED\_ADDR};
+316             entry->\hyperlink{structIpv6RouterEntry_aed560238a63f534a2cecaf1c5eea614c}{lifetime} = 0;
+317 
+318             \textcolor{comment}{//Set flag}
+319             flag = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+320          \}
+321       \}
+322    \}
+323 
+324    \textcolor{comment}{//Check whether an entry has been removed from the list}
+325    \textcolor{keywordflow}{if}(flag)
+326    \{
+327       \textcolor{comment}{//When removing an entry from the Default Router List, any entries}
+328       \textcolor{comment}{//in the Destination Cache that go through that router must perform}
+329       \textcolor{comment}{//next-hop determination again to select a new default router}
+330       \hyperlink{ndp__cache_8c_a37506956e2aa6b664eef6acf9137e9ef}{ndpFlushDestCache}(interface);
+331    \}
+332 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ndp__misc_8c_a66a620811139785755682cb22a997b47}\label{ndp__misc_8c_a66a620811139785755682cb22a997b47}} 
+\index{ndp\+\_\+misc.\+c@{ndp\+\_\+misc.\+c}!ndp\+Update\+Next\+Hop@{ndp\+Update\+Next\+Hop}}
+\index{ndp\+Update\+Next\+Hop@{ndp\+Update\+Next\+Hop}!ndp\+\_\+misc.\+c@{ndp\+\_\+misc.\+c}}
+\subsubsection{\texorpdfstring{ndp\+Update\+Next\+Hop()}{ndpUpdateNextHop()}}
+{\footnotesize\ttfamily void ndp\+Update\+Next\+Hop (\begin{DoxyParamCaption}\item[{\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$}]{interface,  }\item[{const \hyperlink{ipv6_8h_aed0cbc40c61ed5b4fb681ebc55237e89}{Ipv6\+Addr} $\ast$}]{unreachable\+Next\+Hop }\end{DoxyParamCaption})}
+
+
+
+Update next-\/hop field of Destination Cache entries. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em interface} & Underlying network interface \\
+\hline
+\mbox{\tt in}  & {\em unreachable\+Next\+Hop} & Address of the unreachable next-\/hop \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 558 of file ndp\+\_\+misc.\+c.
+
+
+\begin{DoxyCode}
+559 \{
+560    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+561    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+562    \hyperlink{structNdpDestCacheEntry}{NdpDestCacheEntry} *entry;
+563 
+564    \textcolor{comment}{//Go through Destination Cache}
+565    \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{ndp_8h_a7b0ca1a78a956c8d64de4b00b7a724aa}{NDP\_DEST\_CACHE\_SIZE}; i++)
+566    \{
+567       \textcolor{comment}{//Point to the current entry}
+568       entry = &interface->ndpContext.destCache[i];
+569 
+570       \textcolor{comment}{//Check whether the unreachable IPv6 address is used a first-hop router}
+571       \textcolor{keywordflow}{if}(\hyperlink{ipv6_8h_ab1e93bd2152bc3f3b5642fd0216384d7}{ipv6CompAddr}(&entry->\hyperlink{structNdpDestCacheEntry_ad4faeec940b627f2b0c73d298fb2e605}{nextHop}, unreachableNextHop))
+572       \{
+573          \textcolor{comment}{//Perform next-hop determination}
+574          error = \hyperlink{ndp__misc_8c_a86b146f8a07c562a996ec11d4e927ca2}{ndpSelectNextHop}(interface, &entry->\hyperlink{structNdpDestCacheEntry_a7ae9c14d0f1debbf7e5a756d4edb20ff}{destAddr}, &entry->
+      \hyperlink{structNdpDestCacheEntry_ad4faeec940b627f2b0c73d298fb2e605}{nextHop},
+575             &entry->\hyperlink{structNdpDestCacheEntry_ad4faeec940b627f2b0c73d298fb2e605}{nextHop}, 0);
+576 
+577          \textcolor{comment}{//Next-hop determination failed?}
+578          \textcolor{keywordflow}{if}(error)
+579          \{
+580             \textcolor{comment}{//Remove the current entry from the Destination Cache}
+581             entry->\hyperlink{structNdpDestCacheEntry_a7ae9c14d0f1debbf7e5a756d4edb20ff}{destAddr} = \hyperlink{ipv6_8c_aa4baeec4f7b8b166d2457787fb9eddf9}{IPV6\_UNSPECIFIED\_ADDR};
+582          \}
+583       \}
+584    \}
+585 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ndp__misc_8c_a6606369f2059b60ad027762b27d7570e}\label{ndp__misc_8c_a6606369f2059b60ad027762b27d7570e}} 
+\index{ndp\+\_\+misc.\+c@{ndp\+\_\+misc.\+c}!ndp\+Update\+Prefix\+List@{ndp\+Update\+Prefix\+List}}
+\index{ndp\+Update\+Prefix\+List@{ndp\+Update\+Prefix\+List}!ndp\+\_\+misc.\+c@{ndp\+\_\+misc.\+c}}
+\subsubsection{\texorpdfstring{ndp\+Update\+Prefix\+List()}{ndpUpdatePrefixList()}}
+{\footnotesize\ttfamily void ndp\+Update\+Prefix\+List (\begin{DoxyParamCaption}\item[{\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$}]{interface }\end{DoxyParamCaption})}
+
+
+
+Periodically update Prefix List. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em interface} & Underlying network interface \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 251 of file ndp\+\_\+misc.\+c.
+
+
+\begin{DoxyCode}
+252 \{
+253    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+254    \hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\_t} \hyperlink{dhcpv6__common_8h_ae73654f333e4363463ad8c594eca1905}{time};
+255    \hyperlink{structIpv6PrefixEntry}{Ipv6PrefixEntry} *entry;
+256 
+257    \textcolor{comment}{//Get current time}
+258    time = \hyperlink{os__port__chibios_8c_ab66a11272d40a916fa69dd8e4dc443d4}{osGetSystemTime}();
+259 
+260    \textcolor{comment}{//Go through the Prefix List}
+261    \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{ipv6_8h_a928a90013c8822cded35706806f00171}{IPV6\_PREFIX\_LIST\_SIZE}; i++)
+262    \{
+263       \textcolor{comment}{//Point to the current entry}
+264       entry = &interface->ipv6Context.prefixList[i];
+265 
+266       \textcolor{comment}{//Check the lifetime value}
+267       \textcolor{keywordflow}{if}(entry->\hyperlink{structIpv6PrefixEntry_aa60a2863be803fd4a40d40443ecb96f8}{validLifetime} > 0 && entry->\hyperlink{structIpv6PrefixEntry_aa60a2863be803fd4a40d40443ecb96f8}{validLifetime} < 
+      \hyperlink{os__port_8h_ab893de6f8a0ec8b0e6dd8097ff398019}{INFINITE\_DELAY})
+268       \{
+269          \textcolor{comment}{//A node should retain entries in the Prefix List until their}
+270          \textcolor{comment}{//lifetimes expire}
+271          \textcolor{keywordflow}{if}(\hyperlink{os__port_8h_a25c13833ef003da02045a91b1080263a}{timeCompare}(time, entry->\hyperlink{structIpv6PrefixEntry_a3c685a8be455dd84c5b4886b082fe943}{timestamp} + entry->
+      \hyperlink{structIpv6PrefixEntry_aa60a2863be803fd4a40d40443ecb96f8}{validLifetime}) >= 0)
+272          \{
+273             \textcolor{comment}{//When removing an entry from the Prefix List, there is no need}
+274             \textcolor{comment}{//to purge any entries from the Destination or Neighbor Caches}
+275             \hyperlink{ipv6__misc_8c_abfcbbca4428fa3b858e1e4e8f5bb8b1c}{ipv6RemovePrefix}(interface, &entry->\hyperlink{structIpv6PrefixEntry_ac8fdea2f9884d84f35af314249e47aa4}{prefix}, entry->
+      \hyperlink{structIpv6PrefixEntry_a42ac450d305210faf002c0b59e0c9bc8}{prefixLen});
+276          \}
+277       \}
+278    \}
+279 \}
+\end{DoxyCode}

@@ -1,0 +1,1379 @@
+\hypertarget{pem__export_8c}{}\section{cyclone\+\_\+crypto/pkix/pem\+\_\+export.c File Reference}
+\label{pem__export_8c}\index{cyclone\+\_\+crypto/pkix/pem\+\_\+export.\+c@{cyclone\+\_\+crypto/pkix/pem\+\_\+export.\+c}}
+
+
+P\+EM file export functions.  
+
+
+{\ttfamily \#include \char`\"{}core/crypto.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}pkix/pem\+\_\+export.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}pkix/pkcs8\+\_\+key\+\_\+format.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}pkix/x509\+\_\+cert\+\_\+create.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}pkix/x509\+\_\+key\+\_\+format.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}encoding/asn1.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}encoding/base64.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}mpi/mpi.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}debug.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{pem__export_8c_afcdf5e66fd927a7f4cc64295acd20407}{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}~\hyperlink{crypto__config_8h_a6afae3a9b63f9b55d979e667ee0e881d}{C\+R\+Y\+P\+T\+O\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{pem__export_8c_a9c343961733e013b57d664d46efcfb21}{pem\+Export\+Certificate} (const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$cert, size\+\_\+t cert\+Len, \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$output, size\+\_\+t $\ast$written)
+\begin{DoxyCompactList}\small\item\em Export an X.\+509 certificate to P\+EM format. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{pem__export_8c_a382e412e19814ca274eb4123b2adbc3a}{pem\+Export\+Crl} (const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$crl, size\+\_\+t crl\+Len, \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$output, size\+\_\+t $\ast$written)
+\begin{DoxyCompactList}\small\item\em Export a certificate revocation list to P\+EM format. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{pem__export_8c_a6a2579c14a292dd5a380dd70bef3c539}{pem\+Export\+Csr} (const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$csr, size\+\_\+t csr\+Len, \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$output, size\+\_\+t $\ast$written)
+\begin{DoxyCompactList}\small\item\em Export a certification signing request to P\+EM format. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{pem__export_8c_a6cee331558db60c86c9a4eaf2a74e944}{pem\+Export\+Rsa\+Public\+Key} (const \hyperlink{structRsaPublicKey}{Rsa\+Public\+Key} $\ast$public\+Key, \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$output, size\+\_\+t $\ast$written)
+\begin{DoxyCompactList}\small\item\em Export an R\+SA public key to P\+EM format. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{pem__export_8c_a8cc3e21bd17364812e6a05ff19c53e7d}{pem\+Export\+Rsa\+Private\+Key} (const \hyperlink{structRsaPrivateKey}{Rsa\+Private\+Key} $\ast$private\+Key, \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$output, size\+\_\+t $\ast$written)
+\begin{DoxyCompactList}\small\item\em Export an R\+SA private key to P\+EM format. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{pem__export_8c_aa5c2837f302e5b29a7ca4b54a5707cd2}{pem\+Export\+Rsa\+Pss\+Public\+Key} (const \hyperlink{structRsaPublicKey}{Rsa\+Public\+Key} $\ast$public\+Key, \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$output, size\+\_\+t $\ast$written)
+\begin{DoxyCompactList}\small\item\em Export an R\+S\+A-\/\+P\+SS public key to P\+EM format. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{pem__export_8c_ada07a39bcc51019e7b93d29f0c3ad555}{pem\+Export\+Rsa\+Pss\+Private\+Key} (const \hyperlink{structRsaPrivateKey}{Rsa\+Private\+Key} $\ast$private\+Key, \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$output, size\+\_\+t $\ast$written)
+\begin{DoxyCompactList}\small\item\em Export an R\+S\+A-\/\+P\+SS private key to P\+EM format. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{pem__export_8c_a88af9312484ee332bbaf786ba51becd9}{pem\+Export\+Dsa\+Public\+Key} (const \hyperlink{structDsaPublicKey}{Dsa\+Public\+Key} $\ast$public\+Key, \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$output, size\+\_\+t $\ast$written)
+\begin{DoxyCompactList}\small\item\em Export a D\+SA public key to P\+EM format. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{pem__export_8c_ae7a759a0a4a363dca04cd48a750c800b}{pem\+Export\+Dsa\+Private\+Key} (const \hyperlink{structDsaPrivateKey}{Dsa\+Private\+Key} $\ast$private\+Key, \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$output, size\+\_\+t $\ast$written)
+\begin{DoxyCompactList}\small\item\em Export a D\+SA private key to P\+EM format. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{pem__export_8c_a4d18439e507170083d27be01ea9e8e64}{pem\+Export\+Ec\+Parameters} (const \hyperlink{structEcCurveInfo}{Ec\+Curve\+Info} $\ast$curve\+Info, \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$output, size\+\_\+t $\ast$written)
+\begin{DoxyCompactList}\small\item\em Export EC domain parameters to P\+EM format. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{pem__export_8c_a57c41e8c954e9f0b7e352ebffb8d1748}{pem\+Export\+Ec\+Public\+Key} (const \hyperlink{structEcCurveInfo}{Ec\+Curve\+Info} $\ast$curve\+Info, const \hyperlink{structEcPoint}{Ec\+Point} $\ast$public\+Key, \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$output, size\+\_\+t $\ast$written)
+\begin{DoxyCompactList}\small\item\em Export an EC public key to P\+EM format. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{pem__export_8c_a697d60684005624c63f5c56541b38356}{pem\+Export\+Ec\+Private\+Key} (const \hyperlink{structEcCurveInfo}{Ec\+Curve\+Info} $\ast$curve\+Info, const \hyperlink{structMpi}{Mpi} $\ast$private\+Key, const \hyperlink{structEcPoint}{Ec\+Point} $\ast$public\+Key, \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$output, size\+\_\+t $\ast$written)
+\begin{DoxyCompactList}\small\item\em Export an EC private key to P\+EM format. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{pem__export_8c_a5593eb8ebab42749bde51e49f34f56c1}{pem\+Export\+Eddsa\+Public\+Key} (const \hyperlink{structEcCurveInfo}{Ec\+Curve\+Info} $\ast$curve\+Info, const \hyperlink{structEddsaPublicKey}{Eddsa\+Public\+Key} $\ast$public\+Key, \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$output, size\+\_\+t $\ast$written)
+\begin{DoxyCompactList}\small\item\em Export an Ed\+D\+SA public key to P\+EM format. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{pem__export_8c_ac6d70533457ad44f2d1f6264b4d23268}{pem\+Export\+Eddsa\+Private\+Key} (const \hyperlink{structEcCurveInfo}{Ec\+Curve\+Info} $\ast$curve\+Info, const \hyperlink{structEddsaPrivateKey}{Eddsa\+Private\+Key} $\ast$private\+Key, \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$output, size\+\_\+t $\ast$written)
+\begin{DoxyCompactList}\small\item\em Export an Ed\+D\+SA private key to P\+EM format. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{pem__export_8c_a046042ef569a9fd059689512a70475b5}{pem\+Encode\+File} (const void $\ast$input, size\+\_\+t input\+Len, const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$label, \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$output, size\+\_\+t $\ast$output\+Len)
+\begin{DoxyCompactList}\small\item\em Convert A\+S\+N.\+1 data to P\+EM encoding. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+P\+EM file export functions. 
+
+\hypertarget{pic32mz__ef__curiosity_8h_License}{}\subsection{License}\label{pic32mz__ef__curiosity_8h_License}
+S\+P\+D\+X-\/\+License-\/\+Identifier\+: G\+P\+L-\/2.\+0-\/or-\/later
+
+Copyright (C) 2010-\/2019 Oryx Embedded S\+A\+RL. All rights reserved.
+
+This file is part of Cyclone\+Crypto Open.
+
+This program is free software; you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+
+You should have received a copy of the G\+NU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-\/1301, U\+SA.
+
+\begin{DoxyAuthor}{Author}
+Oryx Embedded S\+A\+RL (www.\+oryx-\/embedded.\+com) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+9.\+6 
+\end{DoxyVersion}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{pem__export_8c_afcdf5e66fd927a7f4cc64295acd20407}\label{pem__export_8c_afcdf5e66fd927a7f4cc64295acd20407}} 
+\index{pem\+\_\+export.\+c@{pem\+\_\+export.\+c}!T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+\index{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}!pem\+\_\+export.\+c@{pem\+\_\+export.\+c}}
+\subsubsection{\texorpdfstring{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}{TRACE\_LEVEL}}
+{\footnotesize\ttfamily \#define T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL~\hyperlink{crypto__config_8h_a6afae3a9b63f9b55d979e667ee0e881d}{C\+R\+Y\+P\+T\+O\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+
+
+
+Definition at line 32 of file pem\+\_\+export.\+c.
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{pem__export_8c_a046042ef569a9fd059689512a70475b5}\label{pem__export_8c_a046042ef569a9fd059689512a70475b5}} 
+\index{pem\+\_\+export.\+c@{pem\+\_\+export.\+c}!pem\+Encode\+File@{pem\+Encode\+File}}
+\index{pem\+Encode\+File@{pem\+Encode\+File}!pem\+\_\+export.\+c@{pem\+\_\+export.\+c}}
+\subsubsection{\texorpdfstring{pem\+Encode\+File()}{pemEncodeFile()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} pem\+Encode\+File (\begin{DoxyParamCaption}\item[{const void $\ast$}]{input,  }\item[{size\+\_\+t}]{input\+Len,  }\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{label,  }\item[{\hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{output,  }\item[{size\+\_\+t $\ast$}]{output\+Len }\end{DoxyParamCaption})}
+
+
+
+Convert A\+S\+N.\+1 data to P\+EM encoding. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em input} & A\+S\+N.\+1 data to encode \\
+\hline
+\mbox{\tt in}  & {\em input\+Len} & Length of the A\+S\+N.\+1 data to encode \\
+\hline
+\mbox{\tt in}  & {\em label} & Label indicating the type of data \\
+\hline
+\mbox{\tt out}  & {\em output} & P\+EM container (optional parameter) \\
+\hline
+\mbox{\tt out}  & {\em output\+Len} & Length of the P\+EM container \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 1009 of file pem\+\_\+export.\+c.
+
+
+\begin{DoxyCode}
+1011 \{
+1012    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1013    \textcolor{keywordtype}{size\_t} labelLen;
+1014    \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\_t} *\hyperlink{ndp_8h_a6519522ad9a6f45e7a8d25d31392a977}{p};
+1015 
+1016    \textcolor{comment}{//Check parameters}
+1017    \textcolor{keywordflow}{if}(input == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || label == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || outputLen == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1018       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+1019 
+1020    \textcolor{comment}{//Calculate the length of the label}
+1021    labelLen = \hyperlink{cyclone__crypto_2core_2crypto_8h_a60355e8a0b63bff69cedd877fc82c624}{cryptoStrlen}(label);
+1022 
+1023    \textcolor{comment}{//Encode the ASN.1 data using Base64}
+1024    \hyperlink{base64_8c_a6eb49435a26b3297e611264f6d1cbf5f}{base64Encode}(input, inputLen, output, &n);
+1025 
+1026    \textcolor{comment}{//If the output parameter is NULL, then the function calculates the}
+1027    \textcolor{comment}{//length of the resulting PEM file without copying any data}
+1028    \textcolor{keywordflow}{if}(output != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1029    \{
+1030       \textcolor{comment}{//A PEM file starts with a beginning tag}
+1031       p = output + \hyperlink{cyclone__crypto_2core_2crypto_8h_a60355e8a0b63bff69cedd877fc82c624}{cryptoStrlen}(\textcolor{stringliteral}{"-----BEGIN -----\(\backslash\)r\(\backslash\)n"}) + labelLen;
+1032 
+1033       \textcolor{comment}{//Make room for the beginning tag}
+1034       \hyperlink{cyclone__crypto_2core_2crypto_8h_ad9bc988e3454b747101a8163dfdc1618}{cryptoMemmove}(p, output, n);
+1035 
+1036       \textcolor{comment}{//The type of data encoded is labeled depending on the type label in}
+1037       \textcolor{comment}{//the "-----BEGIN " line (refer to RFC 7468, section 2)}
+1038       \hyperlink{cyclone__crypto_2core_2crypto_8h_abf103c49118d398d66475f26db70412b}{cryptoStrcpy}(output, \textcolor{stringliteral}{"-----BEGIN "});
+1039       \hyperlink{cyclone__crypto_2core_2crypto_8h_abf103c49118d398d66475f26db70412b}{cryptoStrcpy}(output + 11, label);
+1040       \hyperlink{cyclone__crypto_2core_2crypto_8h_a5601f0b55202a449b315a01aab32ee42}{cryptoStrncpy}(p - 7, \textcolor{stringliteral}{"-----\(\backslash\)r\(\backslash\)n"}, 7);
+1041 
+1042       \textcolor{comment}{//Generators must put the same label on the "-----END " line as the}
+1043       \textcolor{comment}{//corresponding "-----BEGIN " line}
+1044       \hyperlink{cyclone__crypto_2core_2crypto_8h_abf103c49118d398d66475f26db70412b}{cryptoStrcpy}(p + n, \textcolor{stringliteral}{"\(\backslash\)r\(\backslash\)n-----END "});
+1045       \hyperlink{cyclone__crypto_2core_2crypto_8h_abf103c49118d398d66475f26db70412b}{cryptoStrcpy}(p + n + 11, label);
+1046       \hyperlink{cyclone__crypto_2core_2crypto_8h_abf103c49118d398d66475f26db70412b}{cryptoStrcpy}(p + n + labelLen + 11, \textcolor{stringliteral}{"-----\(\backslash\)r\(\backslash\)n"});
+1047    \}
+1048 
+1049    \textcolor{comment}{//Consider the length of the PEM tags}
+1050    n += \hyperlink{cyclone__crypto_2core_2crypto_8h_a60355e8a0b63bff69cedd877fc82c624}{cryptoStrlen}(\textcolor{stringliteral}{"-----BEGIN -----\(\backslash\)r\(\backslash\)n"}) + labelLen;
+1051    n += \hyperlink{cyclone__crypto_2core_2crypto_8h_a60355e8a0b63bff69cedd877fc82c624}{cryptoStrlen}(\textcolor{stringliteral}{"\(\backslash\)r\(\backslash\)n-----END -----\(\backslash\)r\(\backslash\)n"}) + labelLen;
+1052 
+1053    \textcolor{comment}{//Total number of bytes that have been written}
+1054    *outputLen = \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1055 
+1056    \textcolor{comment}{//Successful processing}
+1057    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+1058 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{pem__export_8c_a9c343961733e013b57d664d46efcfb21}\label{pem__export_8c_a9c343961733e013b57d664d46efcfb21}} 
+\index{pem\+\_\+export.\+c@{pem\+\_\+export.\+c}!pem\+Export\+Certificate@{pem\+Export\+Certificate}}
+\index{pem\+Export\+Certificate@{pem\+Export\+Certificate}!pem\+\_\+export.\+c@{pem\+\_\+export.\+c}}
+\subsubsection{\texorpdfstring{pem\+Export\+Certificate()}{pemExportCertificate()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} pem\+Export\+Certificate (\begin{DoxyParamCaption}\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{cert,  }\item[{size\+\_\+t}]{cert\+Len,  }\item[{\hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{output,  }\item[{size\+\_\+t $\ast$}]{written }\end{DoxyParamCaption})}
+
+
+
+Export an X.\+509 certificate to P\+EM format. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em cert} & Pointer to the D\+E\+R-\/encoded certificate \\
+\hline
+\mbox{\tt in}  & {\em cert\+Len} & Length of the D\+E\+R-\/encoded certificate, in bytes \\
+\hline
+\mbox{\tt out}  & {\em output} & Buffer where to store the P\+EM encoding \\
+\hline
+\mbox{\tt out}  & {\em written} & Length of the resulting P\+EM encoding \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 58 of file pem\+\_\+export.\+c.
+
+
+\begin{DoxyCode}
+60 \{
+61    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+62    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+63 
+64    \textcolor{comment}{//Check parameters}
+65    \textcolor{keywordflow}{if}(cert == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || written == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+66       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+67 
+68    \textcolor{comment}{//X.509 certificates are encoded using the "CERTIFICATE" label}
+69    error = \hyperlink{pem__export_8c_a046042ef569a9fd059689512a70475b5}{pemEncodeFile}(cert, certLen, \textcolor{stringliteral}{"CERTIFICATE"}, output, &n);
+70    \textcolor{comment}{//Any error to report?}
+71    \textcolor{keywordflow}{if}(error)
+72       \textcolor{keywordflow}{return} error;
+73 
+74    \textcolor{comment}{//Total number of bytes that have been written}
+75    *written = \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+76 
+77    \textcolor{comment}{//Successful processing}
+78    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+79 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{pem__export_8c_a382e412e19814ca274eb4123b2adbc3a}\label{pem__export_8c_a382e412e19814ca274eb4123b2adbc3a}} 
+\index{pem\+\_\+export.\+c@{pem\+\_\+export.\+c}!pem\+Export\+Crl@{pem\+Export\+Crl}}
+\index{pem\+Export\+Crl@{pem\+Export\+Crl}!pem\+\_\+export.\+c@{pem\+\_\+export.\+c}}
+\subsubsection{\texorpdfstring{pem\+Export\+Crl()}{pemExportCrl()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} pem\+Export\+Crl (\begin{DoxyParamCaption}\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{crl,  }\item[{size\+\_\+t}]{crl\+Len,  }\item[{\hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{output,  }\item[{size\+\_\+t $\ast$}]{written }\end{DoxyParamCaption})}
+
+
+
+Export a certificate revocation list to P\+EM format. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em crl} & Pointer to the D\+E\+R-\/encoded C\+RL \\
+\hline
+\mbox{\tt in}  & {\em crl\+Len} & Length of the D\+E\+R-\/encoded C\+RL, in bytes \\
+\hline
+\mbox{\tt out}  & {\em output} & Buffer where to store the P\+EM encoding \\
+\hline
+\mbox{\tt out}  & {\em written} & Length of the resulting P\+EM encoding \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 91 of file pem\+\_\+export.\+c.
+
+
+\begin{DoxyCode}
+93 \{
+94    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+95    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+96 
+97    \textcolor{comment}{//Check parameters}
+98    \textcolor{keywordflow}{if}(crl == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || written == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+99       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+100 
+101    \textcolor{comment}{//CRLs are encoded using the "X509 CRL" label}
+102    error = \hyperlink{pem__export_8c_a046042ef569a9fd059689512a70475b5}{pemEncodeFile}(crl, crlLen, \textcolor{stringliteral}{"X509 CRL"}, output, &n);
+103    \textcolor{comment}{//Any error to report?}
+104    \textcolor{keywordflow}{if}(error)
+105       \textcolor{keywordflow}{return} error;
+106 
+107    \textcolor{comment}{//Total number of bytes that have been written}
+108    *written = \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+109 
+110    \textcolor{comment}{//Successful processing}
+111    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+112 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{pem__export_8c_a6a2579c14a292dd5a380dd70bef3c539}\label{pem__export_8c_a6a2579c14a292dd5a380dd70bef3c539}} 
+\index{pem\+\_\+export.\+c@{pem\+\_\+export.\+c}!pem\+Export\+Csr@{pem\+Export\+Csr}}
+\index{pem\+Export\+Csr@{pem\+Export\+Csr}!pem\+\_\+export.\+c@{pem\+\_\+export.\+c}}
+\subsubsection{\texorpdfstring{pem\+Export\+Csr()}{pemExportCsr()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} pem\+Export\+Csr (\begin{DoxyParamCaption}\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{csr,  }\item[{size\+\_\+t}]{csr\+Len,  }\item[{\hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{output,  }\item[{size\+\_\+t $\ast$}]{written }\end{DoxyParamCaption})}
+
+
+
+Export a certification signing request to P\+EM format. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em csr} & Pointer to the D\+E\+R-\/encoded C\+SR \\
+\hline
+\mbox{\tt in}  & {\em csr\+Len} & Length of the D\+E\+R-\/encoded C\+SR, in bytes \\
+\hline
+\mbox{\tt out}  & {\em output} & Buffer where to store the P\+EM encoding \\
+\hline
+\mbox{\tt out}  & {\em written} & Length of the resulting P\+EM encoding \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 124 of file pem\+\_\+export.\+c.
+
+
+\begin{DoxyCode}
+126 \{
+127    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+128    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+129 
+130    \textcolor{comment}{//Check parameters}
+131    \textcolor{keywordflow}{if}(csr == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || written == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+132       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+133 
+134    \textcolor{comment}{//CSRs are encoded using the "CERTIFICATE REQUEST" label}
+135    error = \hyperlink{pem__export_8c_a046042ef569a9fd059689512a70475b5}{pemEncodeFile}(csr, csrLen, \textcolor{stringliteral}{"CERTIFICATE REQUEST"}, output, &n);
+136    \textcolor{comment}{//Any error to report?}
+137    \textcolor{keywordflow}{if}(error)
+138       \textcolor{keywordflow}{return} error;
+139 
+140    \textcolor{comment}{//Total number of bytes that have been written}
+141    *written = \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+142 
+143    \textcolor{comment}{//Successful processing}
+144    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+145 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{pem__export_8c_ae7a759a0a4a363dca04cd48a750c800b}\label{pem__export_8c_ae7a759a0a4a363dca04cd48a750c800b}} 
+\index{pem\+\_\+export.\+c@{pem\+\_\+export.\+c}!pem\+Export\+Dsa\+Private\+Key@{pem\+Export\+Dsa\+Private\+Key}}
+\index{pem\+Export\+Dsa\+Private\+Key@{pem\+Export\+Dsa\+Private\+Key}!pem\+\_\+export.\+c@{pem\+\_\+export.\+c}}
+\subsubsection{\texorpdfstring{pem\+Export\+Dsa\+Private\+Key()}{pemExportDsaPrivateKey()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} pem\+Export\+Dsa\+Private\+Key (\begin{DoxyParamCaption}\item[{const \hyperlink{structDsaPrivateKey}{Dsa\+Private\+Key} $\ast$}]{private\+Key,  }\item[{\hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{output,  }\item[{size\+\_\+t $\ast$}]{written }\end{DoxyParamCaption})}
+
+
+
+Export a D\+SA private key to P\+EM format. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em private\+Key} & D\+SA private key \\
+\hline
+\mbox{\tt out}  & {\em output} & Buffer where to store the P\+EM encoding \\
+\hline
+\mbox{\tt out}  & {\em written} & Length of the resulting P\+EM encoding \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 523 of file pem\+\_\+export.\+c.
+
+
+\begin{DoxyCode}
+525 \{
+526 \textcolor{preprocessor}{#if (DSA\_SUPPORT == ENABLED)}
+527    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+528    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+529    \textcolor{keywordtype}{size\_t} \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length};
+530    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *\hyperlink{ndp_8h_a6519522ad9a6f45e7a8d25d31392a977}{p};
+531    \hyperlink{structAsn1Tag}{Asn1Tag} tag;
+532    \hyperlink{structDsaDomainParameters}{DsaDomainParameters} params;
+533    \hyperlink{structX509SubjectPublicKeyInfo}{X509SubjectPublicKeyInfo} publicKeyInfo;
+534 
+535    \textcolor{comment}{//Check parameters}
+536    \textcolor{keywordflow}{if}(privateKey == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || written == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+537       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+538 
+539    \textcolor{comment}{//Clear the SubjectPublicKeyInfo structure}
+540    \hyperlink{cyclone__crypto_2core_2crypto_8h_ad4465436e4ff353300fba4896012e18b}{cryptoMemset}(&publicKeyInfo, 0, \textcolor{keyword}{sizeof}(\hyperlink{structX509SubjectPublicKeyInfo}{X509SubjectPublicKeyInfo}));
+541 
+542    \textcolor{comment}{//Point to the buffer where to write the PrivateKeyInfo structure}
+543    p = (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *) output;
+544    \textcolor{comment}{//Total length of the PrivateKeyInfo structure}
+545    length = 0;
+546 
+547    \textcolor{comment}{//Format Version field (refer to RFC 5208, section 5)}
+548    error = \hyperlink{asn1_8c_a150ad7208a84f75148cee37c949cc9d5}{asn1WriteInt32}(0, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, p, &n);
+549    \textcolor{comment}{//Any error to report?}
+550    \textcolor{keywordflow}{if}(error)
+551       \textcolor{keywordflow}{return} error;
+552 
+553    \textcolor{comment}{//Update the length of the PrivateKeyInfo structure}
+554    length += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+555 
+556    \textcolor{comment}{//Advance data pointer}
+557    \textcolor{keywordflow}{if}(output != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+558       p += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+559 
+560    \textcolor{comment}{//Retrieve DSA domain parameters}
+561    params.\hyperlink{structDsaDomainParameters_a651791ea6179f2fa29caa4e8f7870bf8}{p} = privateKey->\hyperlink{structDsaPrivateKey_a8f8fd999b327a6bbff828cb04e31772e}{p};
+562    params.\hyperlink{structDsaDomainParameters_aa9078cd4d84fbe43a0661f9b50b78894}{q} = privateKey->\hyperlink{structDsaPrivateKey_a57748f022f498aaf35d7b30f562af7ca}{q};
+563    params.\hyperlink{structDsaDomainParameters_a4c63bdcea59ab75967b3a4cff15ed3c9}{g} = privateKey->\hyperlink{structDsaPrivateKey_a78da170adbc7f1a7eeb95e6bc52d4124}{g};
+564 
+565    \textcolor{comment}{//The PrivateKeyAlgorithm identifies the private-key algorithm}
+566    publicKeyInfo.\hyperlink{structX509SubjectPublicKeyInfo_a90a8b808782b18de901306acd49b0706}{oid} = \hyperlink{dsa_8c_aec62d423add8486c829eacb574ebe4f3}{DSA\_OID};
+567    publicKeyInfo.\hyperlink{structX509SubjectPublicKeyInfo_a7c5d6f507f653f6085ba56e6b4b55912}{oidLen} = \textcolor{keyword}{sizeof}(\hyperlink{dsa_8c_aec62d423add8486c829eacb574ebe4f3}{DSA\_OID});
+568 
+569    \textcolor{comment}{//Format PrivateKeyAlgorithm field}
+570    error = \hyperlink{x509__key__format_8c_aa1b4eacfd7bb96848894d6acf5cd5256}{x509FormatAlgorithmIdentifier}(&publicKeyInfo, &params, p, &n);
+571    \textcolor{comment}{//Any error to report?}
+572    \textcolor{keywordflow}{if}(error)
+573       \textcolor{keywordflow}{return} error;
+574 
+575    \textcolor{comment}{//Update the length of the PrivateKeyInfo structure}
+576    length += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+577 
+578    \textcolor{comment}{//Advance data pointer}
+579    \textcolor{keywordflow}{if}(output != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+580       p += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+581 
+582    \textcolor{comment}{//Format PrivateKey field}
+583    error = \hyperlink{pkcs8__key__format_8c_af39c11b90a4a0e2bff19a6ca9786bb67}{pkcs8FormatDsaPrivateKey}(privateKey, p, &n);
+584    \textcolor{comment}{//Any error to report?}
+585    \textcolor{keywordflow}{if}(error)
+586       \textcolor{keywordflow}{return} error;
+587 
+588    \textcolor{comment}{//Update the length of the PrivateKeyInfo structure}
+589    length += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+590 
+591    \textcolor{comment}{//The PrivateKeyInfo structure is encapsulated within a sequence}
+592    tag.\hyperlink{structAsn1Tag_a93c64e611d57dfb59e6ebafe938f28c1}{constructed} = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+593    tag.\hyperlink{structAsn1Tag_a9f35c291ffa22d903d9c66638bb225ea}{objClass} = \hyperlink{asn1_8h_ab3589ac11c049bfda069aa3ecf683578}{ASN1\_CLASS\_UNIVERSAL};
+594    tag.\hyperlink{structAsn1Tag_a3ecdc4bbf328b5216521cb2114f45935}{objType} = \hyperlink{asn1_8h_a1b0f39cb3d87e425703ba389df9da1dfaf6223adf2132054146cf838b14c593ea}{ASN1\_TYPE\_SEQUENCE};
+595    tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length} = \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length};
+596    tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value} = (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *) output;
+597 
+598    \textcolor{comment}{//Write the corresponding ASN.1 tag}
+599    error = \hyperlink{asn1_8c_a246f5e4192e8f064bd28d519a89d0207}{asn1WriteTag}(&tag, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *) output, &n);
+600    \textcolor{comment}{//Any error to report?}
+601    \textcolor{keywordflow}{if}(error)
+602       \textcolor{keywordflow}{return} error;
+603 
+604    \textcolor{comment}{//Get the length of the PrivateKeyInfo structure}
+605    n = tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+606 
+607    \textcolor{comment}{//PKCS#8 private keys are encoded using the "PRIVATE KEY" label}
+608    error = \hyperlink{pem__export_8c_a046042ef569a9fd059689512a70475b5}{pemEncodeFile}(output, n, \textcolor{stringliteral}{"PRIVATE KEY"}, output, &n);
+609    \textcolor{comment}{//Any error to report?}
+610    \textcolor{keywordflow}{if}(error)
+611       \textcolor{keywordflow}{return} error;
+612 
+613    \textcolor{comment}{//Total number of bytes that have been written}
+614    *written = \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+615 
+616    \textcolor{comment}{//Successful processing}
+617    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+618 \textcolor{preprocessor}{#else}
+619    \textcolor{comment}{//Not implemented}
+620    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cab61c5ef368fbf03fdc1fb566c63f2f9a}{ERROR\_NOT\_IMPLEMENTED};
+621 \textcolor{preprocessor}{#endif}
+622 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{pem__export_8c_a88af9312484ee332bbaf786ba51becd9}\label{pem__export_8c_a88af9312484ee332bbaf786ba51becd9}} 
+\index{pem\+\_\+export.\+c@{pem\+\_\+export.\+c}!pem\+Export\+Dsa\+Public\+Key@{pem\+Export\+Dsa\+Public\+Key}}
+\index{pem\+Export\+Dsa\+Public\+Key@{pem\+Export\+Dsa\+Public\+Key}!pem\+\_\+export.\+c@{pem\+\_\+export.\+c}}
+\subsubsection{\texorpdfstring{pem\+Export\+Dsa\+Public\+Key()}{pemExportDsaPublicKey()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} pem\+Export\+Dsa\+Public\+Key (\begin{DoxyParamCaption}\item[{const \hyperlink{structDsaPublicKey}{Dsa\+Public\+Key} $\ast$}]{public\+Key,  }\item[{\hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{output,  }\item[{size\+\_\+t $\ast$}]{written }\end{DoxyParamCaption})}
+
+
+
+Export a D\+SA public key to P\+EM format. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em public\+Key} & D\+SA public key \\
+\hline
+\mbox{\tt out}  & {\em output} & Buffer where to store the P\+EM encoding \\
+\hline
+\mbox{\tt out}  & {\em written} & Length of the resulting P\+EM encoding \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 470 of file pem\+\_\+export.\+c.
+
+
+\begin{DoxyCode}
+472 \{
+473 \textcolor{preprocessor}{#if (DSA\_SUPPORT == ENABLED)}
+474    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+475    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+476    \hyperlink{structX509SubjectPublicKeyInfo}{X509SubjectPublicKeyInfo} publicKeyInfo;
+477 
+478    \textcolor{comment}{//Check parameters}
+479    \textcolor{keywordflow}{if}(publicKey == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || written == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+480       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+481 
+482    \textcolor{comment}{//Clear the SubjectPublicKeyInfo structure}
+483    \hyperlink{cyclone__crypto_2core_2crypto_8h_ad4465436e4ff353300fba4896012e18b}{cryptoMemset}(&publicKeyInfo, 0, \textcolor{keyword}{sizeof}(\hyperlink{structX509SubjectPublicKeyInfo}{X509SubjectPublicKeyInfo}));
+484 
+485    \textcolor{comment}{//The ASN.1 encoded data of the public key is the SubjectPublicKeyInfo}
+486    \textcolor{comment}{//structure (refer to RFC 7468, section 13)}
+487    publicKeyInfo.\hyperlink{structX509SubjectPublicKeyInfo_a90a8b808782b18de901306acd49b0706}{oid} = \hyperlink{dsa_8c_aec62d423add8486c829eacb574ebe4f3}{DSA\_OID};
+488    publicKeyInfo.\hyperlink{structX509SubjectPublicKeyInfo_a7c5d6f507f653f6085ba56e6b4b55912}{oidLen} = \textcolor{keyword}{sizeof}(\hyperlink{dsa_8c_aec62d423add8486c829eacb574ebe4f3}{DSA\_OID});
+489 
+490    \textcolor{comment}{//Format the SubjectPublicKeyInfo structure}
+491    error = \hyperlink{x509__key__format_8c_abbb03bcffd2633f46b56044c90372cd3}{x509FormatSubjectPublicKeyInfo}(&publicKeyInfo, publicKey, 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL},
+492       (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *) output, &n);
+493    \textcolor{comment}{//Any error to report?}
+494    \textcolor{keywordflow}{if}(error)
+495       \textcolor{keywordflow}{return} error;
+496 
+497    \textcolor{comment}{//Public keys are encoded using the "PUBLIC KEY" label}
+498    error = \hyperlink{pem__export_8c_a046042ef569a9fd059689512a70475b5}{pemEncodeFile}(output, n, \textcolor{stringliteral}{"PUBLIC KEY"}, output, &n);
+499    \textcolor{comment}{//Any error to report?}
+500    \textcolor{keywordflow}{if}(error)
+501       \textcolor{keywordflow}{return} error;
+502 
+503    \textcolor{comment}{//Total number of bytes that have been written}
+504    *written = \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+505 
+506    \textcolor{comment}{//Successful processing}
+507    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+508 \textcolor{preprocessor}{#else}
+509    \textcolor{comment}{//Not implemented}
+510    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cab61c5ef368fbf03fdc1fb566c63f2f9a}{ERROR\_NOT\_IMPLEMENTED};
+511 \textcolor{preprocessor}{#endif}
+512 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{pem__export_8c_a4d18439e507170083d27be01ea9e8e64}\label{pem__export_8c_a4d18439e507170083d27be01ea9e8e64}} 
+\index{pem\+\_\+export.\+c@{pem\+\_\+export.\+c}!pem\+Export\+Ec\+Parameters@{pem\+Export\+Ec\+Parameters}}
+\index{pem\+Export\+Ec\+Parameters@{pem\+Export\+Ec\+Parameters}!pem\+\_\+export.\+c@{pem\+\_\+export.\+c}}
+\subsubsection{\texorpdfstring{pem\+Export\+Ec\+Parameters()}{pemExportEcParameters()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} pem\+Export\+Ec\+Parameters (\begin{DoxyParamCaption}\item[{const \hyperlink{structEcCurveInfo}{Ec\+Curve\+Info} $\ast$}]{curve\+Info,  }\item[{\hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{output,  }\item[{size\+\_\+t $\ast$}]{written }\end{DoxyParamCaption})}
+
+
+
+Export EC domain parameters to P\+EM format. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em curve\+Info} & Elliptic curve parameters \\
+\hline
+\mbox{\tt out}  & {\em output} & Buffer where to store the P\+EM encoding \\
+\hline
+\mbox{\tt out}  & {\em written} & Length of the resulting P\+EM encoding \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 633 of file pem\+\_\+export.\+c.
+
+
+\begin{DoxyCode}
+635 \{
+636 \textcolor{preprocessor}{#if (EC\_SUPPORT == ENABLED)}
+637    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+638    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+639    \hyperlink{structAsn1Tag}{Asn1Tag} tag;
+640 
+641    \textcolor{comment}{//Check parameters}
+642    \textcolor{keywordflow}{if}(curveInfo == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || written == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+643       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+644 
+645    \textcolor{comment}{//Format ECParameters field}
+646    tag.\hyperlink{structAsn1Tag_a93c64e611d57dfb59e6ebafe938f28c1}{constructed} = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+647    tag.\hyperlink{structAsn1Tag_a9f35c291ffa22d903d9c66638bb225ea}{objClass} = \hyperlink{asn1_8h_ab3589ac11c049bfda069aa3ecf683578}{ASN1\_CLASS\_UNIVERSAL};
+648    tag.\hyperlink{structAsn1Tag_a3ecdc4bbf328b5216521cb2114f45935}{objType} = \hyperlink{asn1_8h_a1b0f39cb3d87e425703ba389df9da1dfa586ebdd8b160ea2185cff78381dfe4b0}{ASN1\_TYPE\_OBJECT\_IDENTIFIER};
+649    tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length} = curveInfo->\hyperlink{structEcCurveInfo_aa948a3d595c3de00163f6e4ec47b80a2}{oidSize};
+650    tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value} = curveInfo->\hyperlink{structEcCurveInfo_a92a5953e46ab92ae71576c79d225d72e}{oid};
+651 
+652    \textcolor{comment}{//Write the corresponding ASN.1 tag}
+653    error = \hyperlink{asn1_8c_a246f5e4192e8f064bd28d519a89d0207}{asn1WriteTag}(&tag, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *) output, &n);
+654    \textcolor{comment}{//Any error to report?}
+655    \textcolor{keywordflow}{if}(error)
+656       \textcolor{keywordflow}{return} error;
+657 
+658    \textcolor{comment}{//EC domain parameters are encoded using the "EC PARAMETERS" label}
+659    error = \hyperlink{pem__export_8c_a046042ef569a9fd059689512a70475b5}{pemEncodeFile}(output, n, \textcolor{stringliteral}{"EC PARAMETERS"}, output, &n);
+660    \textcolor{comment}{//Any error to report?}
+661    \textcolor{keywordflow}{if}(error)
+662       \textcolor{keywordflow}{return} error;
+663 
+664    \textcolor{comment}{//Total number of bytes that have been written}
+665    *written = \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+666 
+667    \textcolor{comment}{//Successful processing}
+668    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+669 \textcolor{preprocessor}{#else}
+670    \textcolor{comment}{//Not implemented}
+671    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cab61c5ef368fbf03fdc1fb566c63f2f9a}{ERROR\_NOT\_IMPLEMENTED};
+672 \textcolor{preprocessor}{#endif}
+673 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{pem__export_8c_a697d60684005624c63f5c56541b38356}\label{pem__export_8c_a697d60684005624c63f5c56541b38356}} 
+\index{pem\+\_\+export.\+c@{pem\+\_\+export.\+c}!pem\+Export\+Ec\+Private\+Key@{pem\+Export\+Ec\+Private\+Key}}
+\index{pem\+Export\+Ec\+Private\+Key@{pem\+Export\+Ec\+Private\+Key}!pem\+\_\+export.\+c@{pem\+\_\+export.\+c}}
+\subsubsection{\texorpdfstring{pem\+Export\+Ec\+Private\+Key()}{pemExportEcPrivateKey()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} pem\+Export\+Ec\+Private\+Key (\begin{DoxyParamCaption}\item[{const \hyperlink{structEcCurveInfo}{Ec\+Curve\+Info} $\ast$}]{curve\+Info,  }\item[{const \hyperlink{structMpi}{Mpi} $\ast$}]{private\+Key,  }\item[{const \hyperlink{structEcPoint}{Ec\+Point} $\ast$}]{public\+Key,  }\item[{\hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{output,  }\item[{size\+\_\+t $\ast$}]{written }\end{DoxyParamCaption})}
+
+
+
+Export an EC private key to P\+EM format. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em curve\+Info} & Elliptic curve parameters \\
+\hline
+\mbox{\tt in}  & {\em private\+Key} & EC private key \\
+\hline
+\mbox{\tt in}  & {\em public\+Key} & EC public key (optional parameter) \\
+\hline
+\mbox{\tt out}  & {\em output} & Buffer where to store the P\+EM encoding \\
+\hline
+\mbox{\tt out}  & {\em written} & Length of the resulting P\+EM encoding \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 742 of file pem\+\_\+export.\+c.
+
+
+\begin{DoxyCode}
+745 \{
+746 \textcolor{preprocessor}{#if (EC\_SUPPORT == ENABLED)}
+747    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+748    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+749    \textcolor{keywordtype}{size\_t} \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length};
+750    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *\hyperlink{ndp_8h_a6519522ad9a6f45e7a8d25d31392a977}{p};
+751    \hyperlink{structAsn1Tag}{Asn1Tag} tag;
+752    \hyperlink{structX509SubjectPublicKeyInfo}{X509SubjectPublicKeyInfo} publicKeyInfo;
+753 
+754    \textcolor{comment}{//Check parameters}
+755    \textcolor{keywordflow}{if}(curveInfo == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || privateKey == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || written == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+756       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+757 
+758    \textcolor{comment}{//Clear the SubjectPublicKeyInfo structure}
+759    \hyperlink{cyclone__crypto_2core_2crypto_8h_ad4465436e4ff353300fba4896012e18b}{cryptoMemset}(&publicKeyInfo, 0, \textcolor{keyword}{sizeof}(\hyperlink{structX509SubjectPublicKeyInfo}{X509SubjectPublicKeyInfo}));
+760 
+761    \textcolor{comment}{//Point to the buffer where to write the PrivateKeyInfo structure}
+762    p = (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *) output;
+763    \textcolor{comment}{//Total length of the PrivateKeyInfo structure}
+764    length = 0;
+765 
+766    \textcolor{comment}{//Format Version field (refer to RFC 5208, section 5)}
+767    error = \hyperlink{asn1_8c_a150ad7208a84f75148cee37c949cc9d5}{asn1WriteInt32}(0, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, p, &n);
+768    \textcolor{comment}{//Any error to report?}
+769    \textcolor{keywordflow}{if}(error)
+770       \textcolor{keywordflow}{return} error;
+771 
+772    \textcolor{comment}{//Update the length of the PrivateKeyInfo structure}
+773    length += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+774 
+775    \textcolor{comment}{//Advance data pointer}
+776    \textcolor{keywordflow}{if}(output != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+777       p += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+778 
+779    \textcolor{comment}{//The PrivateKeyAlgorithm identifies the private-key algorithm}
+780    publicKeyInfo.\hyperlink{structX509SubjectPublicKeyInfo_a90a8b808782b18de901306acd49b0706}{oid} = \hyperlink{ec_8c_a5ff93c201b1e50b6fda04774a2fa537c}{EC\_PUBLIC\_KEY\_OID};
+781    publicKeyInfo.\hyperlink{structX509SubjectPublicKeyInfo_a7c5d6f507f653f6085ba56e6b4b55912}{oidLen} = \textcolor{keyword}{sizeof}(\hyperlink{ec_8c_a5ff93c201b1e50b6fda04774a2fa537c}{EC\_PUBLIC\_KEY\_OID});
+782    publicKeyInfo.\hyperlink{structX509SubjectPublicKeyInfo_af45ca47e19db60631c9fdb4d4b62ed10}{ecParams}.\hyperlink{structX509EcParameters_a122c5387fb2f12374a905ecfd2ca4c86}{namedCurve} = curveInfo->\hyperlink{structEcCurveInfo_a92a5953e46ab92ae71576c79d225d72e}{oid};
+783    publicKeyInfo.\hyperlink{structX509SubjectPublicKeyInfo_af45ca47e19db60631c9fdb4d4b62ed10}{ecParams}.\hyperlink{structX509EcParameters_ac58081bd63ed68d0cb101ff7e65667ec}{namedCurveLen} = curveInfo->
+      \hyperlink{structEcCurveInfo_aa948a3d595c3de00163f6e4ec47b80a2}{oidSize};
+784 
+785    \textcolor{comment}{//Format PrivateKeyAlgorithm field}
+786    error = \hyperlink{x509__key__format_8c_aa1b4eacfd7bb96848894d6acf5cd5256}{x509FormatAlgorithmIdentifier}(&publicKeyInfo, 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, p, &n);
+787    \textcolor{comment}{//Any error to report?}
+788    \textcolor{keywordflow}{if}(error)
+789       \textcolor{keywordflow}{return} error;
+790 
+791    \textcolor{comment}{//Update the length of the PrivateKeyInfo structure}
+792    length += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+793 
+794    \textcolor{comment}{//Advance data pointer}
+795    \textcolor{keywordflow}{if}(output != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+796       p += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+797 
+798    \textcolor{comment}{//Format PrivateKey field}
+799    error = \hyperlink{pkcs8__key__format_8c_a0d227b926309795d53f478e4aa352952}{pkcs8FormatEcPrivateKey}(curveInfo, privateKey, publicKey, p, &n);
+800    \textcolor{comment}{//Any error to report?}
+801    \textcolor{keywordflow}{if}(error)
+802       \textcolor{keywordflow}{return} error;
+803 
+804    \textcolor{comment}{//Update the length of the PrivateKeyInfo structure}
+805    length += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+806 
+807    \textcolor{comment}{//The PrivateKeyInfo structure is encapsulated within a sequence}
+808    tag.\hyperlink{structAsn1Tag_a93c64e611d57dfb59e6ebafe938f28c1}{constructed} = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+809    tag.\hyperlink{structAsn1Tag_a9f35c291ffa22d903d9c66638bb225ea}{objClass} = \hyperlink{asn1_8h_ab3589ac11c049bfda069aa3ecf683578}{ASN1\_CLASS\_UNIVERSAL};
+810    tag.\hyperlink{structAsn1Tag_a3ecdc4bbf328b5216521cb2114f45935}{objType} = \hyperlink{asn1_8h_a1b0f39cb3d87e425703ba389df9da1dfaf6223adf2132054146cf838b14c593ea}{ASN1\_TYPE\_SEQUENCE};
+811    tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length} = \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length};
+812    tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value} = (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *) output;
+813 
+814    \textcolor{comment}{//Write the corresponding ASN.1 tag}
+815    error = \hyperlink{asn1_8c_a246f5e4192e8f064bd28d519a89d0207}{asn1WriteTag}(&tag, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *) output, &n);
+816    \textcolor{comment}{//Any error to report?}
+817    \textcolor{keywordflow}{if}(error)
+818       \textcolor{keywordflow}{return} error;
+819 
+820    \textcolor{comment}{//Get the length of the PrivateKeyInfo structure}
+821    n = tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+822 
+823    \textcolor{comment}{//PKCS#8 private keys are encoded using the "PRIVATE KEY" label}
+824    error = \hyperlink{pem__export_8c_a046042ef569a9fd059689512a70475b5}{pemEncodeFile}(output, n, \textcolor{stringliteral}{"PRIVATE KEY"}, output, &n);
+825    \textcolor{comment}{//Any error to report?}
+826    \textcolor{keywordflow}{if}(error)
+827       \textcolor{keywordflow}{return} error;
+828 
+829    \textcolor{comment}{//Total number of bytes that have been written}
+830    *written = \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+831 
+832    \textcolor{comment}{//Successful processing}
+833    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+834 \textcolor{preprocessor}{#else}
+835    \textcolor{comment}{//Not implemented}
+836    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cab61c5ef368fbf03fdc1fb566c63f2f9a}{ERROR\_NOT\_IMPLEMENTED};
+837 \textcolor{preprocessor}{#endif}
+838 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{pem__export_8c_a57c41e8c954e9f0b7e352ebffb8d1748}\label{pem__export_8c_a57c41e8c954e9f0b7e352ebffb8d1748}} 
+\index{pem\+\_\+export.\+c@{pem\+\_\+export.\+c}!pem\+Export\+Ec\+Public\+Key@{pem\+Export\+Ec\+Public\+Key}}
+\index{pem\+Export\+Ec\+Public\+Key@{pem\+Export\+Ec\+Public\+Key}!pem\+\_\+export.\+c@{pem\+\_\+export.\+c}}
+\subsubsection{\texorpdfstring{pem\+Export\+Ec\+Public\+Key()}{pemExportEcPublicKey()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} pem\+Export\+Ec\+Public\+Key (\begin{DoxyParamCaption}\item[{const \hyperlink{structEcCurveInfo}{Ec\+Curve\+Info} $\ast$}]{curve\+Info,  }\item[{const \hyperlink{structEcPoint}{Ec\+Point} $\ast$}]{public\+Key,  }\item[{\hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{output,  }\item[{size\+\_\+t $\ast$}]{written }\end{DoxyParamCaption})}
+
+
+
+Export an EC public key to P\+EM format. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em curve\+Info} & Elliptic curve parameters \\
+\hline
+\mbox{\tt in}  & {\em public\+Key} & EC public key \\
+\hline
+\mbox{\tt out}  & {\em output} & Buffer where to store the P\+EM encoding \\
+\hline
+\mbox{\tt out}  & {\em written} & Length of the resulting P\+EM encoding \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 685 of file pem\+\_\+export.\+c.
+
+
+\begin{DoxyCode}
+687 \{
+688 \textcolor{preprocessor}{#if (EC\_SUPPORT == ENABLED)}
+689    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+690    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+691    \hyperlink{structX509SubjectPublicKeyInfo}{X509SubjectPublicKeyInfo} publicKeyInfo;
+692 
+693    \textcolor{comment}{//Check parameters}
+694    \textcolor{keywordflow}{if}(curveInfo == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || publicKey == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || written == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+695       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+696 
+697    \textcolor{comment}{//Clear the SubjectPublicKeyInfo structure}
+698    \hyperlink{cyclone__crypto_2core_2crypto_8h_ad4465436e4ff353300fba4896012e18b}{cryptoMemset}(&publicKeyInfo, 0, \textcolor{keyword}{sizeof}(\hyperlink{structX509SubjectPublicKeyInfo}{X509SubjectPublicKeyInfo}));
+699 
+700    \textcolor{comment}{//The ASN.1 encoded data of the public key is the SubjectPublicKeyInfo}
+701    \textcolor{comment}{//structure (refer to RFC 7468, section 13)}
+702    publicKeyInfo.\hyperlink{structX509SubjectPublicKeyInfo_a90a8b808782b18de901306acd49b0706}{oid} = \hyperlink{ec_8c_a5ff93c201b1e50b6fda04774a2fa537c}{EC\_PUBLIC\_KEY\_OID};
+703    publicKeyInfo.\hyperlink{structX509SubjectPublicKeyInfo_a7c5d6f507f653f6085ba56e6b4b55912}{oidLen} = \textcolor{keyword}{sizeof}(\hyperlink{ec_8c_a5ff93c201b1e50b6fda04774a2fa537c}{EC\_PUBLIC\_KEY\_OID});
+704    publicKeyInfo.\hyperlink{structX509SubjectPublicKeyInfo_af45ca47e19db60631c9fdb4d4b62ed10}{ecParams}.\hyperlink{structX509EcParameters_a122c5387fb2f12374a905ecfd2ca4c86}{namedCurve} = curveInfo->\hyperlink{structEcCurveInfo_a92a5953e46ab92ae71576c79d225d72e}{oid};
+705    publicKeyInfo.\hyperlink{structX509SubjectPublicKeyInfo_af45ca47e19db60631c9fdb4d4b62ed10}{ecParams}.\hyperlink{structX509EcParameters_ac58081bd63ed68d0cb101ff7e65667ec}{namedCurveLen} = curveInfo->
+      \hyperlink{structEcCurveInfo_aa948a3d595c3de00163f6e4ec47b80a2}{oidSize};
+706 
+707    \textcolor{comment}{//Format the SubjectPublicKeyInfo structure}
+708    error = \hyperlink{x509__key__format_8c_abbb03bcffd2633f46b56044c90372cd3}{x509FormatSubjectPublicKeyInfo}(&publicKeyInfo, publicKey, 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL},
+709       (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *) output, &n);
+710    \textcolor{comment}{//Any error to report?}
+711    \textcolor{keywordflow}{if}(error)
+712       \textcolor{keywordflow}{return} error;
+713 
+714    \textcolor{comment}{//Public keys are encoded using the "PUBLIC KEY" label}
+715    error = \hyperlink{pem__export_8c_a046042ef569a9fd059689512a70475b5}{pemEncodeFile}(output, n, \textcolor{stringliteral}{"PUBLIC KEY"}, output, &n);
+716    \textcolor{comment}{//Any error to report?}
+717    \textcolor{keywordflow}{if}(error)
+718       \textcolor{keywordflow}{return} error;
+719 
+720    \textcolor{comment}{//Total number of bytes that have been written}
+721    *written = \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+722 
+723    \textcolor{comment}{//Successful processing}
+724    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+725 \textcolor{preprocessor}{#else}
+726    \textcolor{comment}{//Not implemented}
+727    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cab61c5ef368fbf03fdc1fb566c63f2f9a}{ERROR\_NOT\_IMPLEMENTED};
+728 \textcolor{preprocessor}{#endif}
+729 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{pem__export_8c_ac6d70533457ad44f2d1f6264b4d23268}\label{pem__export_8c_ac6d70533457ad44f2d1f6264b4d23268}} 
+\index{pem\+\_\+export.\+c@{pem\+\_\+export.\+c}!pem\+Export\+Eddsa\+Private\+Key@{pem\+Export\+Eddsa\+Private\+Key}}
+\index{pem\+Export\+Eddsa\+Private\+Key@{pem\+Export\+Eddsa\+Private\+Key}!pem\+\_\+export.\+c@{pem\+\_\+export.\+c}}
+\subsubsection{\texorpdfstring{pem\+Export\+Eddsa\+Private\+Key()}{pemExportEddsaPrivateKey()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} pem\+Export\+Eddsa\+Private\+Key (\begin{DoxyParamCaption}\item[{const \hyperlink{structEcCurveInfo}{Ec\+Curve\+Info} $\ast$}]{curve\+Info,  }\item[{const \hyperlink{structEddsaPrivateKey}{Eddsa\+Private\+Key} $\ast$}]{private\+Key,  }\item[{\hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{output,  }\item[{size\+\_\+t $\ast$}]{written }\end{DoxyParamCaption})}
+
+
+
+Export an Ed\+D\+SA private key to P\+EM format. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em curve\+Info} & Elliptic curve parameters \\
+\hline
+\mbox{\tt in}  & {\em private\+Key} & Ed\+D\+SA private key \\
+\hline
+\mbox{\tt out}  & {\em output} & Buffer where to store the P\+EM encoding \\
+\hline
+\mbox{\tt out}  & {\em written} & Length of the resulting P\+EM encoding \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 904 of file pem\+\_\+export.\+c.
+
+
+\begin{DoxyCode}
+906 \{
+907 \textcolor{preprocessor}{#if (ED25519\_SUPPORT == ENABLED || ED448\_SUPPORT == ENABLED)}
+908    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+909    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+910    \textcolor{keywordtype}{size\_t} \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length};
+911    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *\hyperlink{ndp_8h_a6519522ad9a6f45e7a8d25d31392a977}{p};
+912    \hyperlink{structAsn1Tag}{Asn1Tag} tag;
+913    \hyperlink{structX509SubjectPublicKeyInfo}{X509SubjectPublicKeyInfo} publicKeyInfo;
+914 
+915    \textcolor{comment}{//Check parameters}
+916    \textcolor{keywordflow}{if}(curveInfo == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || privateKey == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || written == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+917       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+918 
+919    \textcolor{comment}{//Clear the SubjectPublicKeyInfo structure}
+920    \hyperlink{cyclone__crypto_2core_2crypto_8h_ad4465436e4ff353300fba4896012e18b}{cryptoMemset}(&publicKeyInfo, 0, \textcolor{keyword}{sizeof}(\hyperlink{structX509SubjectPublicKeyInfo}{X509SubjectPublicKeyInfo}));
+921 
+922    \textcolor{comment}{//Point to the buffer where to write the PrivateKeyInfo structure}
+923    p = (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *) output;
+924    \textcolor{comment}{//Total length of the PrivateKeyInfo structure}
+925    length = 0;
+926 
+927    \textcolor{comment}{//Format Version field (refer to RFC 5208, section 5)}
+928    error = \hyperlink{asn1_8c_a150ad7208a84f75148cee37c949cc9d5}{asn1WriteInt32}(0, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, p, &n);
+929    \textcolor{comment}{//Any error to report?}
+930    \textcolor{keywordflow}{if}(error)
+931       \textcolor{keywordflow}{return} error;
+932 
+933    \textcolor{comment}{//Update the length of the PrivateKeyInfo structure}
+934    length += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+935 
+936    \textcolor{comment}{//Advance data pointer}
+937    \textcolor{keywordflow}{if}(output != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+938       p += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+939 
+940    \textcolor{comment}{//The PrivateKeyAlgorithm identifies the private-key algorithm}
+941    publicKeyInfo.\hyperlink{structX509SubjectPublicKeyInfo_a90a8b808782b18de901306acd49b0706}{oid} = curveInfo->\hyperlink{structEcCurveInfo_a92a5953e46ab92ae71576c79d225d72e}{oid};
+942    publicKeyInfo.\hyperlink{structX509SubjectPublicKeyInfo_a7c5d6f507f653f6085ba56e6b4b55912}{oidLen} = curveInfo->\hyperlink{structEcCurveInfo_aa948a3d595c3de00163f6e4ec47b80a2}{oidSize};
+943 
+944    \textcolor{comment}{//Format PrivateKeyAlgorithm field}
+945    error = \hyperlink{x509__key__format_8c_aa1b4eacfd7bb96848894d6acf5cd5256}{x509FormatAlgorithmIdentifier}(&publicKeyInfo, 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, p, &n);
+946    \textcolor{comment}{//Any error to report?}
+947    \textcolor{keywordflow}{if}(error)
+948       \textcolor{keywordflow}{return} error;
+949 
+950    \textcolor{comment}{//Update the length of the PrivateKeyInfo structure}
+951    length += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+952 
+953    \textcolor{comment}{//Advance data pointer}
+954    \textcolor{keywordflow}{if}(output != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+955       p += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+956 
+957    \textcolor{comment}{//Format PrivateKey field}
+958    error = \hyperlink{pkcs8__key__format_8c_ad6ba9ca375bd5433cf5b3f043efd76d5}{pkcs8FormatEddsaPrivateKey}(curveInfo, privateKey, p, &n);
+959    \textcolor{comment}{//Any error to report?}
+960    \textcolor{keywordflow}{if}(error)
+961       \textcolor{keywordflow}{return} error;
+962 
+963    \textcolor{comment}{//Update the length of the PrivateKeyInfo structure}
+964    length += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+965 
+966    \textcolor{comment}{//The PrivateKeyInfo structure is encapsulated within a sequence}
+967    tag.\hyperlink{structAsn1Tag_a93c64e611d57dfb59e6ebafe938f28c1}{constructed} = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+968    tag.\hyperlink{structAsn1Tag_a9f35c291ffa22d903d9c66638bb225ea}{objClass} = \hyperlink{asn1_8h_ab3589ac11c049bfda069aa3ecf683578}{ASN1\_CLASS\_UNIVERSAL};
+969    tag.\hyperlink{structAsn1Tag_a3ecdc4bbf328b5216521cb2114f45935}{objType} = \hyperlink{asn1_8h_a1b0f39cb3d87e425703ba389df9da1dfaf6223adf2132054146cf838b14c593ea}{ASN1\_TYPE\_SEQUENCE};
+970    tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length} = \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length};
+971    tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value} = (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *) output;
+972 
+973    \textcolor{comment}{//Write the corresponding ASN.1 tag}
+974    error = \hyperlink{asn1_8c_a246f5e4192e8f064bd28d519a89d0207}{asn1WriteTag}(&tag, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *) output, &n);
+975    \textcolor{comment}{//Any error to report?}
+976    \textcolor{keywordflow}{if}(error)
+977       \textcolor{keywordflow}{return} error;
+978 
+979    \textcolor{comment}{//Get the length of the PrivateKeyInfo structure}
+980    n = tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+981 
+982    \textcolor{comment}{//PKCS#8 private keys are encoded using the "PRIVATE KEY" label}
+983    error = \hyperlink{pem__export_8c_a046042ef569a9fd059689512a70475b5}{pemEncodeFile}(output, n, \textcolor{stringliteral}{"PRIVATE KEY"}, output, &n);
+984    \textcolor{comment}{//Any error to report?}
+985    \textcolor{keywordflow}{if}(error)
+986       \textcolor{keywordflow}{return} error;
+987 
+988    \textcolor{comment}{//Total number of bytes that have been written}
+989    *written = \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+990 
+991    \textcolor{comment}{//Successful processing}
+992    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+993 \textcolor{preprocessor}{#else}
+994    \textcolor{comment}{//Not implemented}
+995    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cab61c5ef368fbf03fdc1fb566c63f2f9a}{ERROR\_NOT\_IMPLEMENTED};
+996 \textcolor{preprocessor}{#endif}
+997 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{pem__export_8c_a5593eb8ebab42749bde51e49f34f56c1}\label{pem__export_8c_a5593eb8ebab42749bde51e49f34f56c1}} 
+\index{pem\+\_\+export.\+c@{pem\+\_\+export.\+c}!pem\+Export\+Eddsa\+Public\+Key@{pem\+Export\+Eddsa\+Public\+Key}}
+\index{pem\+Export\+Eddsa\+Public\+Key@{pem\+Export\+Eddsa\+Public\+Key}!pem\+\_\+export.\+c@{pem\+\_\+export.\+c}}
+\subsubsection{\texorpdfstring{pem\+Export\+Eddsa\+Public\+Key()}{pemExportEddsaPublicKey()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} pem\+Export\+Eddsa\+Public\+Key (\begin{DoxyParamCaption}\item[{const \hyperlink{structEcCurveInfo}{Ec\+Curve\+Info} $\ast$}]{curve\+Info,  }\item[{const \hyperlink{structEddsaPublicKey}{Eddsa\+Public\+Key} $\ast$}]{public\+Key,  }\item[{\hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{output,  }\item[{size\+\_\+t $\ast$}]{written }\end{DoxyParamCaption})}
+
+
+
+Export an Ed\+D\+SA public key to P\+EM format. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em curve\+Info} & Elliptic curve parameters \\
+\hline
+\mbox{\tt in}  & {\em public\+Key} & Ed\+D\+SA public key \\
+\hline
+\mbox{\tt out}  & {\em output} & Buffer where to store the P\+EM encoding \\
+\hline
+\mbox{\tt out}  & {\em written} & Length of the resulting P\+EM encoding \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 850 of file pem\+\_\+export.\+c.
+
+
+\begin{DoxyCode}
+852 \{
+853 \textcolor{preprocessor}{#if (ED25519\_SUPPORT == ENABLED || ED448\_SUPPORT == ENABLED)}
+854    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+855    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+856    \hyperlink{structX509SubjectPublicKeyInfo}{X509SubjectPublicKeyInfo} publicKeyInfo;
+857 
+858    \textcolor{comment}{//Check parameters}
+859    \textcolor{keywordflow}{if}(curveInfo == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || publicKey == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || written == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+860       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+861 
+862    \textcolor{comment}{//Clear the SubjectPublicKeyInfo structure}
+863    \hyperlink{cyclone__crypto_2core_2crypto_8h_ad4465436e4ff353300fba4896012e18b}{cryptoMemset}(&publicKeyInfo, 0, \textcolor{keyword}{sizeof}(\hyperlink{structX509SubjectPublicKeyInfo}{X509SubjectPublicKeyInfo}));
+864 
+865    \textcolor{comment}{//The ASN.1 encoded data of the public key is the SubjectPublicKeyInfo}
+866    \textcolor{comment}{//structure (refer to RFC 7468, section 13)}
+867    publicKeyInfo.\hyperlink{structX509SubjectPublicKeyInfo_a90a8b808782b18de901306acd49b0706}{oid} = curveInfo->\hyperlink{structEcCurveInfo_a92a5953e46ab92ae71576c79d225d72e}{oid};
+868    publicKeyInfo.\hyperlink{structX509SubjectPublicKeyInfo_a7c5d6f507f653f6085ba56e6b4b55912}{oidLen} = curveInfo->\hyperlink{structEcCurveInfo_aa948a3d595c3de00163f6e4ec47b80a2}{oidSize};
+869 
+870    \textcolor{comment}{//Format the SubjectPublicKeyInfo structure}
+871    error = \hyperlink{x509__key__format_8c_abbb03bcffd2633f46b56044c90372cd3}{x509FormatSubjectPublicKeyInfo}(&publicKeyInfo, publicKey, 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL},
+872       (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *) output, &n);
+873    \textcolor{comment}{//Any error to report?}
+874    \textcolor{keywordflow}{if}(error)
+875       \textcolor{keywordflow}{return} error;
+876 
+877    \textcolor{comment}{//Public keys are encoded using the "PUBLIC KEY" label}
+878    error = \hyperlink{pem__export_8c_a046042ef569a9fd059689512a70475b5}{pemEncodeFile}(output, n, \textcolor{stringliteral}{"PUBLIC KEY"}, output, &n);
+879    \textcolor{comment}{//Any error to report?}
+880    \textcolor{keywordflow}{if}(error)
+881       \textcolor{keywordflow}{return} error;
+882 
+883    \textcolor{comment}{//Total number of bytes that have been written}
+884    *written = \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+885 
+886    \textcolor{comment}{//Successful processing}
+887    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+888 \textcolor{preprocessor}{#else}
+889    \textcolor{comment}{//Not implemented}
+890    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cab61c5ef368fbf03fdc1fb566c63f2f9a}{ERROR\_NOT\_IMPLEMENTED};
+891 \textcolor{preprocessor}{#endif}
+892 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{pem__export_8c_a8cc3e21bd17364812e6a05ff19c53e7d}\label{pem__export_8c_a8cc3e21bd17364812e6a05ff19c53e7d}} 
+\index{pem\+\_\+export.\+c@{pem\+\_\+export.\+c}!pem\+Export\+Rsa\+Private\+Key@{pem\+Export\+Rsa\+Private\+Key}}
+\index{pem\+Export\+Rsa\+Private\+Key@{pem\+Export\+Rsa\+Private\+Key}!pem\+\_\+export.\+c@{pem\+\_\+export.\+c}}
+\subsubsection{\texorpdfstring{pem\+Export\+Rsa\+Private\+Key()}{pemExportRsaPrivateKey()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} pem\+Export\+Rsa\+Private\+Key (\begin{DoxyParamCaption}\item[{const \hyperlink{structRsaPrivateKey}{Rsa\+Private\+Key} $\ast$}]{private\+Key,  }\item[{\hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{output,  }\item[{size\+\_\+t $\ast$}]{written }\end{DoxyParamCaption})}
+
+
+
+Export an R\+SA private key to P\+EM format. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em private\+Key} & R\+SA private key \\
+\hline
+\mbox{\tt out}  & {\em output} & Buffer where to store the P\+EM encoding \\
+\hline
+\mbox{\tt out}  & {\em written} & Length of the resulting P\+EM encoding \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 209 of file pem\+\_\+export.\+c.
+
+
+\begin{DoxyCode}
+211 \{
+212 \textcolor{preprocessor}{#if (RSA\_SUPPORT == ENABLED)}
+213    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+214    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+215    \textcolor{keywordtype}{size\_t} \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length};
+216    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *\hyperlink{ndp_8h_a6519522ad9a6f45e7a8d25d31392a977}{p};
+217    \hyperlink{structAsn1Tag}{Asn1Tag} tag;
+218    \hyperlink{structX509SubjectPublicKeyInfo}{X509SubjectPublicKeyInfo} publicKeyInfo;
+219 
+220    \textcolor{comment}{//Check parameters}
+221    \textcolor{keywordflow}{if}(privateKey == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || written == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+222       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+223 
+224    \textcolor{comment}{//Clear the SubjectPublicKeyInfo structure}
+225    \hyperlink{cyclone__crypto_2core_2crypto_8h_ad4465436e4ff353300fba4896012e18b}{cryptoMemset}(&publicKeyInfo, 0, \textcolor{keyword}{sizeof}(\hyperlink{structX509SubjectPublicKeyInfo}{X509SubjectPublicKeyInfo}));
+226 
+227    \textcolor{comment}{//Point to the buffer where to write the PrivateKeyInfo structure}
+228    p = (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *) output;
+229    \textcolor{comment}{//Total length of the PrivateKeyInfo structure}
+230    length = 0;
+231 
+232    \textcolor{comment}{//Format Version field (refer to RFC 5208, section 5)}
+233    error = \hyperlink{asn1_8c_a150ad7208a84f75148cee37c949cc9d5}{asn1WriteInt32}(0, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, p, &n);
+234    \textcolor{comment}{//Any error to report?}
+235    \textcolor{keywordflow}{if}(error)
+236       \textcolor{keywordflow}{return} error;
+237 
+238    \textcolor{comment}{//Update the length of the PrivateKeyInfo structure}
+239    length += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+240 
+241    \textcolor{comment}{//Advance data pointer}
+242    \textcolor{keywordflow}{if}(output != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+243       p += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+244 
+245    \textcolor{comment}{//The PrivateKeyAlgorithm identifies the private-key algorithm}
+246    publicKeyInfo.\hyperlink{structX509SubjectPublicKeyInfo_a90a8b808782b18de901306acd49b0706}{oid} = \hyperlink{rsa_8c_a05da0bdcba7d0be3da2cc921a8a0dd50}{RSA\_ENCRYPTION\_OID};
+247    publicKeyInfo.\hyperlink{structX509SubjectPublicKeyInfo_a7c5d6f507f653f6085ba56e6b4b55912}{oidLen} = \textcolor{keyword}{sizeof}(\hyperlink{rsa_8c_a05da0bdcba7d0be3da2cc921a8a0dd50}{RSA\_ENCRYPTION\_OID});
+248 
+249    \textcolor{comment}{//Format PrivateKeyAlgorithm field}
+250    error = \hyperlink{x509__key__format_8c_aa1b4eacfd7bb96848894d6acf5cd5256}{x509FormatAlgorithmIdentifier}(&publicKeyInfo, 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, p, &n);
+251    \textcolor{comment}{//Any error to report?}
+252    \textcolor{keywordflow}{if}(error)
+253       \textcolor{keywordflow}{return} error;
+254 
+255    \textcolor{comment}{//Update the length of the PrivateKeyInfo structure}
+256    length += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+257 
+258    \textcolor{comment}{//Advance data pointer}
+259    \textcolor{keywordflow}{if}(output != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+260       p += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+261 
+262    \textcolor{comment}{//Format PrivateKey field}
+263    error = \hyperlink{pkcs8__key__format_8c_a24fd24542b0a86618946c9d9778731b7}{pkcs8FormatRsaPrivateKey}(privateKey, p, &n);
+264    \textcolor{comment}{//Any error to report?}
+265    \textcolor{keywordflow}{if}(error)
+266       \textcolor{keywordflow}{return} error;
+267 
+268    \textcolor{comment}{//Update the length of the PrivateKeyInfo structure}
+269    length += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+270 
+271    \textcolor{comment}{//The PrivateKeyInfo structure is encapsulated within a sequence}
+272    tag.\hyperlink{structAsn1Tag_a93c64e611d57dfb59e6ebafe938f28c1}{constructed} = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+273    tag.\hyperlink{structAsn1Tag_a9f35c291ffa22d903d9c66638bb225ea}{objClass} = \hyperlink{asn1_8h_ab3589ac11c049bfda069aa3ecf683578}{ASN1\_CLASS\_UNIVERSAL};
+274    tag.\hyperlink{structAsn1Tag_a3ecdc4bbf328b5216521cb2114f45935}{objType} = \hyperlink{asn1_8h_a1b0f39cb3d87e425703ba389df9da1dfaf6223adf2132054146cf838b14c593ea}{ASN1\_TYPE\_SEQUENCE};
+275    tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length} = \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length};
+276    tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value} = (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *) output;
+277 
+278    \textcolor{comment}{//Write the corresponding ASN.1 tag}
+279    error = \hyperlink{asn1_8c_a246f5e4192e8f064bd28d519a89d0207}{asn1WriteTag}(&tag, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *) output, &n);
+280    \textcolor{comment}{//Any error to report?}
+281    \textcolor{keywordflow}{if}(error)
+282       \textcolor{keywordflow}{return} error;
+283 
+284    \textcolor{comment}{//Get the length of the PrivateKeyInfo structure}
+285    n = tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+286 
+287    \textcolor{comment}{//PKCS#8 private keys are encoded using the "PRIVATE KEY" label}
+288    error = \hyperlink{pem__export_8c_a046042ef569a9fd059689512a70475b5}{pemEncodeFile}(output, n, \textcolor{stringliteral}{"PRIVATE KEY"}, output, &n);
+289    \textcolor{comment}{//Any error to report?}
+290    \textcolor{keywordflow}{if}(error)
+291       \textcolor{keywordflow}{return} error;
+292 
+293    \textcolor{comment}{//Total number of bytes that have been written}
+294    *written = \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+295 
+296    \textcolor{comment}{//Successful processing}
+297    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+298 \textcolor{preprocessor}{#else}
+299    \textcolor{comment}{//Not implemented}
+300    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cab61c5ef368fbf03fdc1fb566c63f2f9a}{ERROR\_NOT\_IMPLEMENTED};
+301 \textcolor{preprocessor}{#endif}
+302 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{pem__export_8c_ada07a39bcc51019e7b93d29f0c3ad555}\label{pem__export_8c_ada07a39bcc51019e7b93d29f0c3ad555}} 
+\index{pem\+\_\+export.\+c@{pem\+\_\+export.\+c}!pem\+Export\+Rsa\+Pss\+Private\+Key@{pem\+Export\+Rsa\+Pss\+Private\+Key}}
+\index{pem\+Export\+Rsa\+Pss\+Private\+Key@{pem\+Export\+Rsa\+Pss\+Private\+Key}!pem\+\_\+export.\+c@{pem\+\_\+export.\+c}}
+\subsubsection{\texorpdfstring{pem\+Export\+Rsa\+Pss\+Private\+Key()}{pemExportRsaPssPrivateKey()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} pem\+Export\+Rsa\+Pss\+Private\+Key (\begin{DoxyParamCaption}\item[{const \hyperlink{structRsaPrivateKey}{Rsa\+Private\+Key} $\ast$}]{private\+Key,  }\item[{\hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{output,  }\item[{size\+\_\+t $\ast$}]{written }\end{DoxyParamCaption})}
+
+
+
+Export an R\+S\+A-\/\+P\+SS private key to P\+EM format. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em private\+Key} & R\+S\+A-\/\+P\+SS private key \\
+\hline
+\mbox{\tt out}  & {\em output} & Buffer where to store the P\+EM encoding \\
+\hline
+\mbox{\tt out}  & {\em written} & Length of the resulting P\+EM encoding \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 366 of file pem\+\_\+export.\+c.
+
+
+\begin{DoxyCode}
+368 \{
+369 \textcolor{preprocessor}{#if (RSA\_SUPPORT == ENABLED)}
+370    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+371    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+372    \textcolor{keywordtype}{size\_t} \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length};
+373    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *\hyperlink{ndp_8h_a6519522ad9a6f45e7a8d25d31392a977}{p};
+374    \hyperlink{structAsn1Tag}{Asn1Tag} tag;
+375    \hyperlink{structX509SubjectPublicKeyInfo}{X509SubjectPublicKeyInfo} publicKeyInfo;
+376 
+377    \textcolor{comment}{//Check parameters}
+378    \textcolor{keywordflow}{if}(privateKey == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || written == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+379       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+380 
+381    \textcolor{comment}{//Clear the SubjectPublicKeyInfo structure}
+382    \hyperlink{cyclone__crypto_2core_2crypto_8h_ad4465436e4ff353300fba4896012e18b}{cryptoMemset}(&publicKeyInfo, 0, \textcolor{keyword}{sizeof}(\hyperlink{structX509SubjectPublicKeyInfo}{X509SubjectPublicKeyInfo}));
+383 
+384    \textcolor{comment}{//Point to the buffer where to write the PrivateKeyInfo structure}
+385    p = (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *) output;
+386    \textcolor{comment}{//Total length of the PrivateKeyInfo structure}
+387    length = 0;
+388 
+389    \textcolor{comment}{//Format Version field (refer to RFC 5208, section 5)}
+390    error = \hyperlink{asn1_8c_a150ad7208a84f75148cee37c949cc9d5}{asn1WriteInt32}(0, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, p, &n);
+391    \textcolor{comment}{//Any error to report?}
+392    \textcolor{keywordflow}{if}(error)
+393       \textcolor{keywordflow}{return} error;
+394 
+395    \textcolor{comment}{//Update the length of the PrivateKeyInfo structure}
+396    length += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+397 
+398    \textcolor{comment}{//Advance data pointer}
+399    \textcolor{keywordflow}{if}(output != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+400       p += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+401 
+402    \textcolor{comment}{//The PrivateKeyAlgorithm identifies the private-key algorithm}
+403    publicKeyInfo.\hyperlink{structX509SubjectPublicKeyInfo_a90a8b808782b18de901306acd49b0706}{oid} = \hyperlink{rsa_8c_ac136e2cc009f56598c67cf31f37c0d2b}{RSASSA\_PSS\_OID};
+404    publicKeyInfo.\hyperlink{structX509SubjectPublicKeyInfo_a7c5d6f507f653f6085ba56e6b4b55912}{oidLen} = \textcolor{keyword}{sizeof}(\hyperlink{rsa_8c_ac136e2cc009f56598c67cf31f37c0d2b}{RSASSA\_PSS\_OID});
+405 
+406    \textcolor{comment}{//Format PrivateKeyAlgorithm field}
+407    error = \hyperlink{x509__key__format_8c_aa1b4eacfd7bb96848894d6acf5cd5256}{x509FormatAlgorithmIdentifier}(&publicKeyInfo, 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, p, &n);
+408    \textcolor{comment}{//Any error to report?}
+409    \textcolor{keywordflow}{if}(error)
+410       \textcolor{keywordflow}{return} error;
+411 
+412    \textcolor{comment}{//Update the length of the PrivateKeyInfo structure}
+413    length += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+414 
+415    \textcolor{comment}{//Advance data pointer}
+416    \textcolor{keywordflow}{if}(output != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+417       p += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+418 
+419    \textcolor{comment}{//Format PrivateKey field}
+420    error = \hyperlink{pkcs8__key__format_8c_a24fd24542b0a86618946c9d9778731b7}{pkcs8FormatRsaPrivateKey}(privateKey, p, &n);
+421    \textcolor{comment}{//Any error to report?}
+422    \textcolor{keywordflow}{if}(error)
+423       \textcolor{keywordflow}{return} error;
+424 
+425    \textcolor{comment}{//Update the length of the PrivateKeyInfo structure}
+426    length += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+427 
+428    \textcolor{comment}{//The PrivateKeyInfo structure is encapsulated within a sequence}
+429    tag.\hyperlink{structAsn1Tag_a93c64e611d57dfb59e6ebafe938f28c1}{constructed} = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+430    tag.\hyperlink{structAsn1Tag_a9f35c291ffa22d903d9c66638bb225ea}{objClass} = \hyperlink{asn1_8h_ab3589ac11c049bfda069aa3ecf683578}{ASN1\_CLASS\_UNIVERSAL};
+431    tag.\hyperlink{structAsn1Tag_a3ecdc4bbf328b5216521cb2114f45935}{objType} = \hyperlink{asn1_8h_a1b0f39cb3d87e425703ba389df9da1dfaf6223adf2132054146cf838b14c593ea}{ASN1\_TYPE\_SEQUENCE};
+432    tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length} = \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length};
+433    tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value} = (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *) output;
+434 
+435    \textcolor{comment}{//Write the corresponding ASN.1 tag}
+436    error = \hyperlink{asn1_8c_a246f5e4192e8f064bd28d519a89d0207}{asn1WriteTag}(&tag, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *) output, &n);
+437    \textcolor{comment}{//Any error to report?}
+438    \textcolor{keywordflow}{if}(error)
+439       \textcolor{keywordflow}{return} error;
+440 
+441    \textcolor{comment}{//Get the length of the PrivateKeyInfo structure}
+442    n = tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+443 
+444    \textcolor{comment}{//PKCS#8 private keys are encoded using the "PRIVATE KEY" label}
+445    error = \hyperlink{pem__export_8c_a046042ef569a9fd059689512a70475b5}{pemEncodeFile}(output, n, \textcolor{stringliteral}{"PRIVATE KEY"}, output, &n);
+446    \textcolor{comment}{//Any error to report?}
+447    \textcolor{keywordflow}{if}(error)
+448       \textcolor{keywordflow}{return} error;
+449 
+450    \textcolor{comment}{//Total number of bytes that have been written}
+451    *written = \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+452 
+453    \textcolor{comment}{//Successful processing}
+454    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+455 \textcolor{preprocessor}{#else}
+456    \textcolor{comment}{//Not implemented}
+457    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cab61c5ef368fbf03fdc1fb566c63f2f9a}{ERROR\_NOT\_IMPLEMENTED};
+458 \textcolor{preprocessor}{#endif}
+459 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{pem__export_8c_aa5c2837f302e5b29a7ca4b54a5707cd2}\label{pem__export_8c_aa5c2837f302e5b29a7ca4b54a5707cd2}} 
+\index{pem\+\_\+export.\+c@{pem\+\_\+export.\+c}!pem\+Export\+Rsa\+Pss\+Public\+Key@{pem\+Export\+Rsa\+Pss\+Public\+Key}}
+\index{pem\+Export\+Rsa\+Pss\+Public\+Key@{pem\+Export\+Rsa\+Pss\+Public\+Key}!pem\+\_\+export.\+c@{pem\+\_\+export.\+c}}
+\subsubsection{\texorpdfstring{pem\+Export\+Rsa\+Pss\+Public\+Key()}{pemExportRsaPssPublicKey()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} pem\+Export\+Rsa\+Pss\+Public\+Key (\begin{DoxyParamCaption}\item[{const \hyperlink{structRsaPublicKey}{Rsa\+Public\+Key} $\ast$}]{public\+Key,  }\item[{\hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{output,  }\item[{size\+\_\+t $\ast$}]{written }\end{DoxyParamCaption})}
+
+
+
+Export an R\+S\+A-\/\+P\+SS public key to P\+EM format. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em public\+Key} & R\+S\+A-\/\+P\+SS public key \\
+\hline
+\mbox{\tt out}  & {\em output} & Buffer where to store the P\+EM encoding \\
+\hline
+\mbox{\tt out}  & {\em written} & Length of the resulting P\+EM encoding \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 313 of file pem\+\_\+export.\+c.
+
+
+\begin{DoxyCode}
+315 \{
+316 \textcolor{preprocessor}{#if (RSA\_SUPPORT == ENABLED)}
+317    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+318    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+319    \hyperlink{structX509SubjectPublicKeyInfo}{X509SubjectPublicKeyInfo} publicKeyInfo;
+320 
+321    \textcolor{comment}{//Check parameters}
+322    \textcolor{keywordflow}{if}(publicKey == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || written == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+323       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+324 
+325    \textcolor{comment}{//Clear the SubjectPublicKeyInfo structure}
+326    \hyperlink{cyclone__crypto_2core_2crypto_8h_ad4465436e4ff353300fba4896012e18b}{cryptoMemset}(&publicKeyInfo, 0, \textcolor{keyword}{sizeof}(\hyperlink{structX509SubjectPublicKeyInfo}{X509SubjectPublicKeyInfo}));
+327 
+328    \textcolor{comment}{//The ASN.1 encoded data of the public key is the SubjectPublicKeyInfo}
+329    \textcolor{comment}{//structure (refer to RFC 7468, section 13)}
+330    publicKeyInfo.\hyperlink{structX509SubjectPublicKeyInfo_a90a8b808782b18de901306acd49b0706}{oid} = \hyperlink{rsa_8c_ac136e2cc009f56598c67cf31f37c0d2b}{RSASSA\_PSS\_OID};
+331    publicKeyInfo.\hyperlink{structX509SubjectPublicKeyInfo_a7c5d6f507f653f6085ba56e6b4b55912}{oidLen} = \textcolor{keyword}{sizeof}(\hyperlink{rsa_8c_ac136e2cc009f56598c67cf31f37c0d2b}{RSASSA\_PSS\_OID});
+332 
+333    \textcolor{comment}{//Format the SubjectPublicKeyInfo structure}
+334    error = \hyperlink{x509__key__format_8c_abbb03bcffd2633f46b56044c90372cd3}{x509FormatSubjectPublicKeyInfo}(&publicKeyInfo, publicKey, 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL},
+335       (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *) output, &n);
+336    \textcolor{comment}{//Any error to report?}
+337    \textcolor{keywordflow}{if}(error)
+338       \textcolor{keywordflow}{return} error;
+339 
+340    \textcolor{comment}{//Public keys are encoded using the "PUBLIC KEY" label}
+341    error = \hyperlink{pem__export_8c_a046042ef569a9fd059689512a70475b5}{pemEncodeFile}(output, n, \textcolor{stringliteral}{"PUBLIC KEY"}, output, &n);
+342    \textcolor{comment}{//Any error to report?}
+343    \textcolor{keywordflow}{if}(error)
+344       \textcolor{keywordflow}{return} error;
+345 
+346    \textcolor{comment}{//Total number of bytes that have been written}
+347    *written = \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+348 
+349    \textcolor{comment}{//Successful processing}
+350    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+351 \textcolor{preprocessor}{#else}
+352    \textcolor{comment}{//Not implemented}
+353    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cab61c5ef368fbf03fdc1fb566c63f2f9a}{ERROR\_NOT\_IMPLEMENTED};
+354 \textcolor{preprocessor}{#endif}
+355 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{pem__export_8c_a6cee331558db60c86c9a4eaf2a74e944}\label{pem__export_8c_a6cee331558db60c86c9a4eaf2a74e944}} 
+\index{pem\+\_\+export.\+c@{pem\+\_\+export.\+c}!pem\+Export\+Rsa\+Public\+Key@{pem\+Export\+Rsa\+Public\+Key}}
+\index{pem\+Export\+Rsa\+Public\+Key@{pem\+Export\+Rsa\+Public\+Key}!pem\+\_\+export.\+c@{pem\+\_\+export.\+c}}
+\subsubsection{\texorpdfstring{pem\+Export\+Rsa\+Public\+Key()}{pemExportRsaPublicKey()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} pem\+Export\+Rsa\+Public\+Key (\begin{DoxyParamCaption}\item[{const \hyperlink{structRsaPublicKey}{Rsa\+Public\+Key} $\ast$}]{public\+Key,  }\item[{\hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{output,  }\item[{size\+\_\+t $\ast$}]{written }\end{DoxyParamCaption})}
+
+
+
+Export an R\+SA public key to P\+EM format. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em public\+Key} & R\+SA public key \\
+\hline
+\mbox{\tt out}  & {\em output} & Buffer where to store the P\+EM encoding \\
+\hline
+\mbox{\tt out}  & {\em written} & Length of the resulting P\+EM encoding \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 156 of file pem\+\_\+export.\+c.
+
+
+\begin{DoxyCode}
+158 \{
+159 \textcolor{preprocessor}{#if (RSA\_SUPPORT == ENABLED)}
+160    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+161    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+162    \hyperlink{structX509SubjectPublicKeyInfo}{X509SubjectPublicKeyInfo} publicKeyInfo;
+163 
+164    \textcolor{comment}{//Check parameters}
+165    \textcolor{keywordflow}{if}(publicKey == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || written == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+166       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+167 
+168    \textcolor{comment}{//Clear the SubjectPublicKeyInfo structure}
+169    \hyperlink{cyclone__crypto_2core_2crypto_8h_ad4465436e4ff353300fba4896012e18b}{cryptoMemset}(&publicKeyInfo, 0, \textcolor{keyword}{sizeof}(\hyperlink{structX509SubjectPublicKeyInfo}{X509SubjectPublicKeyInfo}));
+170 
+171    \textcolor{comment}{//The ASN.1 encoded data of the public key is the SubjectPublicKeyInfo}
+172    \textcolor{comment}{//structure (refer to RFC 7468, section 13)}
+173    publicKeyInfo.\hyperlink{structX509SubjectPublicKeyInfo_a90a8b808782b18de901306acd49b0706}{oid} = \hyperlink{rsa_8c_a05da0bdcba7d0be3da2cc921a8a0dd50}{RSA\_ENCRYPTION\_OID};
+174    publicKeyInfo.\hyperlink{structX509SubjectPublicKeyInfo_a7c5d6f507f653f6085ba56e6b4b55912}{oidLen} = \textcolor{keyword}{sizeof}(\hyperlink{rsa_8c_a05da0bdcba7d0be3da2cc921a8a0dd50}{RSA\_ENCRYPTION\_OID});
+175 
+176    \textcolor{comment}{//Format the SubjectPublicKeyInfo structure}
+177    error = \hyperlink{x509__key__format_8c_abbb03bcffd2633f46b56044c90372cd3}{x509FormatSubjectPublicKeyInfo}(&publicKeyInfo, publicKey, 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL},
+178       (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *) output, &n);
+179    \textcolor{comment}{//Any error to report?}
+180    \textcolor{keywordflow}{if}(error)
+181       \textcolor{keywordflow}{return} error;
+182 
+183    \textcolor{comment}{//Public keys are encoded using the "PUBLIC KEY" label}
+184    error = \hyperlink{pem__export_8c_a046042ef569a9fd059689512a70475b5}{pemEncodeFile}(output, n, \textcolor{stringliteral}{"PUBLIC KEY"}, output, &n);
+185    \textcolor{comment}{//Any error to report?}
+186    \textcolor{keywordflow}{if}(error)
+187       \textcolor{keywordflow}{return} error;
+188 
+189    \textcolor{comment}{//Total number of bytes that have been written}
+190    *written = \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+191 
+192    \textcolor{comment}{//Successful processing}
+193    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+194 \textcolor{preprocessor}{#else}
+195    \textcolor{comment}{//Not implemented}
+196    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cab61c5ef368fbf03fdc1fb566c63f2f9a}{ERROR\_NOT\_IMPLEMENTED};
+197 \textcolor{preprocessor}{#endif}
+198 \}
+\end{DoxyCode}

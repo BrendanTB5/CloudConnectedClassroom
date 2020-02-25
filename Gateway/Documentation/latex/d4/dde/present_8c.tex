@@ -1,0 +1,428 @@
+\hypertarget{present_8c}{}\section{cyclone\+\_\+crypto/cipher/present.c File Reference}
+\label{present_8c}\index{cyclone\+\_\+crypto/cipher/present.\+c@{cyclone\+\_\+crypto/cipher/present.\+c}}
+
+
+P\+R\+E\+S\+E\+NT encryption algorithm.  
+
+
+{\ttfamily \#include \char`\"{}core/crypto.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}cipher/present.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{present_8c_afcdf5e66fd927a7f4cc64295acd20407}{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}~\hyperlink{crypto__config_8h_a6afae3a9b63f9b55d979e667ee0e881d}{C\+R\+Y\+P\+T\+O\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{present_8c_a53a27ba7eeba01422cd6f36e54e879bf}{present\+Init} (\hyperlink{structPresentContext}{Present\+Context} $\ast$context, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$key, size\+\_\+t key\+Len)
+\begin{DoxyCompactList}\small\item\em Key expansion. \end{DoxyCompactList}\item 
+void \hyperlink{present_8c_ab71c2ec7e1ccc2b46b6cdca899ea1bc7}{present\+Encrypt\+Block} (\hyperlink{structPresentContext}{Present\+Context} $\ast$context, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$input, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$output)
+\begin{DoxyCompactList}\small\item\em Encrypt a 8-\/byte block using P\+R\+E\+S\+E\+NT algorithm. \end{DoxyCompactList}\item 
+void \hyperlink{present_8c_aa220867126e044c73aca238cee9bc31b}{present\+Decrypt\+Block} (\hyperlink{structPresentContext}{Present\+Context} $\ast$context, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$input, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$output)
+\begin{DoxyCompactList}\small\item\em Decrypt a 8-\/byte block using P\+R\+E\+S\+E\+NT algorithm. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} \hyperlink{present_8c_a09382ccb7826d007307c650d5f706000}{sbox} \mbox{[}16\mbox{]}
+\item 
+static const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} \hyperlink{present_8c_a7937f1040dcd7aea8595768cc6d95e8e}{isbox} \mbox{[}256\mbox{]}
+\item 
+static const \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t} \hyperlink{present_8c_aa854b62585a6195a35dfe106c4a9fc47}{ipbox} \mbox{[}256\mbox{]}
+\item 
+static const \hyperlink{stdint_8h_aec6fcb673ff035718c238c8c9d544c47}{uint64\+\_\+t} \hyperlink{present_8c_a0db8dc1199ca0b26de7fd7980588f6a1}{spbox} \mbox{[}256\mbox{]}
+\item 
+const \hyperlink{structCipherAlgo}{Cipher\+Algo} \hyperlink{present_8c_ac287ff4a0a107d617c553f4a09bffc0a}{present\+Cipher\+Algo}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+P\+R\+E\+S\+E\+NT encryption algorithm. 
+
+\hypertarget{pic32mz__ef__curiosity_8h_License}{}\subsection{License}\label{pic32mz__ef__curiosity_8h_License}
+S\+P\+D\+X-\/\+License-\/\+Identifier\+: G\+P\+L-\/2.\+0-\/or-\/later
+
+Copyright (C) 2010-\/2019 Oryx Embedded S\+A\+RL. All rights reserved.
+
+This file is part of Cyclone\+Crypto Open.
+
+This program is free software; you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+
+You should have received a copy of the G\+NU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-\/1301, U\+SA.\hypertarget{tftp__server_8c_Description}{}\subsection{Description}\label{tftp__server_8c_Description}
+P\+R\+E\+S\+E\+NT is an ultra-\/lightweight block cipher
+
+\begin{DoxyAuthor}{Author}
+Oryx Embedded S\+A\+RL (www.\+oryx-\/embedded.\+com) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+9.\+6 
+\end{DoxyVersion}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{present_8c_afcdf5e66fd927a7f4cc64295acd20407}\label{present_8c_afcdf5e66fd927a7f4cc64295acd20407}} 
+\index{present.\+c@{present.\+c}!T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+\index{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}!present.\+c@{present.\+c}}
+\subsubsection{\texorpdfstring{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}{TRACE\_LEVEL}}
+{\footnotesize\ttfamily \#define T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL~\hyperlink{crypto__config_8h_a6afae3a9b63f9b55d979e667ee0e881d}{C\+R\+Y\+P\+T\+O\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+
+
+
+Definition at line 36 of file present.\+c.
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{present_8c_aa220867126e044c73aca238cee9bc31b}\label{present_8c_aa220867126e044c73aca238cee9bc31b}} 
+\index{present.\+c@{present.\+c}!present\+Decrypt\+Block@{present\+Decrypt\+Block}}
+\index{present\+Decrypt\+Block@{present\+Decrypt\+Block}!present.\+c@{present.\+c}}
+\subsubsection{\texorpdfstring{present\+Decrypt\+Block()}{presentDecryptBlock()}}
+{\footnotesize\ttfamily void present\+Decrypt\+Block (\begin{DoxyParamCaption}\item[{\hyperlink{structPresentContext}{Present\+Context} $\ast$}]{context,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{input,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{output }\end{DoxyParamCaption})}
+
+
+
+Decrypt a 8-\/byte block using P\+R\+E\+S\+E\+NT algorithm. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the P\+R\+E\+S\+E\+NT context \\
+\hline
+\mbox{\tt in}  & {\em input} & Ciphertext block to decrypt \\
+\hline
+\mbox{\tt out}  & {\em output} & Plaintext block resulting from decryption \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 338 of file present.\+c.
+
+
+\begin{DoxyCode}
+339 \{
+340    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+341    \hyperlink{stdint_8h_aec6fcb673ff035718c238c8c9d544c47}{uint64\_t} \hyperlink{md2_8c_adf356ff381033f761b7de5f76e763a45}{s};
+342    \hyperlink{stdint_8h_aec6fcb673ff035718c238c8c9d544c47}{uint64\_t} \hyperlink{llmnr__common_8h_a2d03918f4f9edabaf3c9f43abcc2d85b}{t};
+343    \hyperlink{stdint_8h_aec6fcb673ff035718c238c8c9d544c47}{uint64\_t} state;
+344 
+345    \textcolor{comment}{//Copy the ciphertext to the 64-bit state}
+346    state = \hyperlink{cpu__endian_8h_a7a0cbf37cd7f47dbcad3244a5983b033}{LOAD64BE}(input);
+347 
+348    \textcolor{comment}{//The decryption consists of 31 rounds}
+349    \textcolor{keywordflow}{for}(i = 31; i > 0; i--)
+350    \{
+351       \textcolor{comment}{//Add round key}
+352       state ^= context->\hyperlink{structPresentContext_acc45bfe5b10140d7b89d0d9d94e771e6}{ks}[i];
+353 
+354       \textcolor{comment}{//Apply inverse bit permutation}
+355       s = \hyperlink{present_8c_aa854b62585a6195a35dfe106c4a9fc47}{ipbox}[state & 0xFF];
+356       t = \hyperlink{present_8c_aa854b62585a6195a35dfe106c4a9fc47}{ipbox}[(state >> 8) & 0xFF];
+357       s |= \hyperlink{cyclone__crypto_2core_2crypto_8h_aa80c49fe62eb3d421b2abca5b4c597ff}{ROL64}(t, 32);
+358       t = \hyperlink{present_8c_aa854b62585a6195a35dfe106c4a9fc47}{ipbox}[(state >> 16) & 0xFF];
+359       s |= \hyperlink{cyclone__crypto_2core_2crypto_8h_aa80c49fe62eb3d421b2abca5b4c597ff}{ROL64}(t, 1);
+360       t = \hyperlink{present_8c_aa854b62585a6195a35dfe106c4a9fc47}{ipbox}[(state >> 24) & 0xFF];
+361       s |= \hyperlink{cyclone__crypto_2core_2crypto_8h_aa80c49fe62eb3d421b2abca5b4c597ff}{ROL64}(t, 33);
+362       t = \hyperlink{present_8c_aa854b62585a6195a35dfe106c4a9fc47}{ipbox}[(state >> 32) & 0xFF];
+363       s |= \hyperlink{cyclone__crypto_2core_2crypto_8h_aa80c49fe62eb3d421b2abca5b4c597ff}{ROL64}(t, 2);
+364       t = \hyperlink{present_8c_aa854b62585a6195a35dfe106c4a9fc47}{ipbox}[(state >> 40) & 0xFF];
+365       s |= \hyperlink{cyclone__crypto_2core_2crypto_8h_aa80c49fe62eb3d421b2abca5b4c597ff}{ROL64}(t, 34);
+366       t = \hyperlink{present_8c_aa854b62585a6195a35dfe106c4a9fc47}{ipbox}[(state >> 48) & 0xFF];
+367       s |= \hyperlink{cyclone__crypto_2core_2crypto_8h_aa80c49fe62eb3d421b2abca5b4c597ff}{ROL64}(t, 3);
+368       t = \hyperlink{present_8c_aa854b62585a6195a35dfe106c4a9fc47}{ipbox}[(state >> 56) & 0xFF];
+369       s |= \hyperlink{cyclone__crypto_2core_2crypto_8h_aa80c49fe62eb3d421b2abca5b4c597ff}{ROL64}(t, 35);
+370 
+371       \textcolor{comment}{//Apply inverse S-box}
+372       state = \hyperlink{present_8c_a7937f1040dcd7aea8595768cc6d95e8e}{isbox}[s & 0xFF];
+373       t = \hyperlink{present_8c_a7937f1040dcd7aea8595768cc6d95e8e}{isbox}[(s >> 8) & 0xFF];
+374       state |= \hyperlink{cyclone__crypto_2core_2crypto_8h_aa80c49fe62eb3d421b2abca5b4c597ff}{ROL64}(t, 8);
+375       t = \hyperlink{present_8c_a7937f1040dcd7aea8595768cc6d95e8e}{isbox}[(s >> 16) & 0xFF];
+376       state |= \hyperlink{cyclone__crypto_2core_2crypto_8h_aa80c49fe62eb3d421b2abca5b4c597ff}{ROL64}(t, 16);
+377       t = \hyperlink{present_8c_a7937f1040dcd7aea8595768cc6d95e8e}{isbox}[(s >> 24) & 0xFF];
+378       state |= \hyperlink{cyclone__crypto_2core_2crypto_8h_aa80c49fe62eb3d421b2abca5b4c597ff}{ROL64}(t, 24);
+379       t = \hyperlink{present_8c_a7937f1040dcd7aea8595768cc6d95e8e}{isbox}[(s >> 32) & 0xFF];
+380       state |= \hyperlink{cyclone__crypto_2core_2crypto_8h_aa80c49fe62eb3d421b2abca5b4c597ff}{ROL64}(t, 32);
+381       t = \hyperlink{present_8c_a7937f1040dcd7aea8595768cc6d95e8e}{isbox}[(s >> 40) & 0xFF];
+382       state |= \hyperlink{cyclone__crypto_2core_2crypto_8h_aa80c49fe62eb3d421b2abca5b4c597ff}{ROL64}(t, 40);
+383       t = \hyperlink{present_8c_a7937f1040dcd7aea8595768cc6d95e8e}{isbox}[(s >> 48) & 0xFF];
+384       state |= \hyperlink{cyclone__crypto_2core_2crypto_8h_aa80c49fe62eb3d421b2abca5b4c597ff}{ROL64}(t, 48);
+385       t = \hyperlink{present_8c_a7937f1040dcd7aea8595768cc6d95e8e}{isbox}[(s >> 56) & 0xFF];
+386       state |= \hyperlink{cyclone__crypto_2core_2crypto_8h_aa80c49fe62eb3d421b2abca5b4c597ff}{ROL64}(t, 56);
+387    \}
+388 
+389    \textcolor{comment}{//Final round key addition}
+390    state ^= context->\hyperlink{structPresentContext_acc45bfe5b10140d7b89d0d9d94e771e6}{ks}[0];
+391 
+392    \textcolor{comment}{//The final state is then copied to the output}
+393    \hyperlink{cpu__endian_8h_abd64119985555609ad9c94eed4c96e0f}{STORE64BE}(state, output);
+394 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{present_8c_ab71c2ec7e1ccc2b46b6cdca899ea1bc7}\label{present_8c_ab71c2ec7e1ccc2b46b6cdca899ea1bc7}} 
+\index{present.\+c@{present.\+c}!present\+Encrypt\+Block@{present\+Encrypt\+Block}}
+\index{present\+Encrypt\+Block@{present\+Encrypt\+Block}!present.\+c@{present.\+c}}
+\subsubsection{\texorpdfstring{present\+Encrypt\+Block()}{presentEncryptBlock()}}
+{\footnotesize\ttfamily void present\+Encrypt\+Block (\begin{DoxyParamCaption}\item[{\hyperlink{structPresentContext}{Present\+Context} $\ast$}]{context,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{input,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{output }\end{DoxyParamCaption})}
+
+
+
+Encrypt a 8-\/byte block using P\+R\+E\+S\+E\+NT algorithm. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the P\+R\+E\+S\+E\+NT context \\
+\hline
+\mbox{\tt in}  & {\em input} & Plaintext block to encrypt \\
+\hline
+\mbox{\tt out}  & {\em output} & Ciphertext block resulting from encryption \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 289 of file present.\+c.
+
+
+\begin{DoxyCode}
+290 \{
+291    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+292    \hyperlink{stdint_8h_aec6fcb673ff035718c238c8c9d544c47}{uint64\_t} \hyperlink{md2_8c_adf356ff381033f761b7de5f76e763a45}{s};
+293    \hyperlink{stdint_8h_aec6fcb673ff035718c238c8c9d544c47}{uint64\_t} \hyperlink{llmnr__common_8h_a2d03918f4f9edabaf3c9f43abcc2d85b}{t};
+294    \hyperlink{stdint_8h_aec6fcb673ff035718c238c8c9d544c47}{uint64\_t} state;
+295 
+296    \textcolor{comment}{//Copy the plaintext to the 64-bit state}
+297    state = \hyperlink{cpu__endian_8h_a7a0cbf37cd7f47dbcad3244a5983b033}{LOAD64BE}(input);
+298 
+299    \textcolor{comment}{//Initial round key addition}
+300    state ^= context->\hyperlink{structPresentContext_acc45bfe5b10140d7b89d0d9d94e771e6}{ks}[0];
+301 
+302    \textcolor{comment}{//The encryption consists of 31 rounds}
+303    \textcolor{keywordflow}{for}(i = 1; i <= 31; i++)
+304    \{
+305       \textcolor{comment}{//Apply S-box and bit permutation}
+306       s = \hyperlink{present_8c_a0db8dc1199ca0b26de7fd7980588f6a1}{spbox}[state & 0xFF];
+307       t = \hyperlink{present_8c_a0db8dc1199ca0b26de7fd7980588f6a1}{spbox}[(state >> 8) & 0xFF];
+308       s |= \hyperlink{cyclone__crypto_2core_2crypto_8h_aa80c49fe62eb3d421b2abca5b4c597ff}{ROL64}(t, 2);
+309       t = \hyperlink{present_8c_a0db8dc1199ca0b26de7fd7980588f6a1}{spbox}[(state >> 16) & 0xFF];
+310       s |= \hyperlink{cyclone__crypto_2core_2crypto_8h_aa80c49fe62eb3d421b2abca5b4c597ff}{ROL64}(t, 4);
+311       t = \hyperlink{present_8c_a0db8dc1199ca0b26de7fd7980588f6a1}{spbox}[(state >> 24) & 0xFF];
+312       s |= \hyperlink{cyclone__crypto_2core_2crypto_8h_aa80c49fe62eb3d421b2abca5b4c597ff}{ROL64}(t, 6);
+313       t = \hyperlink{present_8c_a0db8dc1199ca0b26de7fd7980588f6a1}{spbox}[(state >> 32) & 0xFF];
+314       s |= \hyperlink{cyclone__crypto_2core_2crypto_8h_aa80c49fe62eb3d421b2abca5b4c597ff}{ROL64}(t, 8);
+315       t = \hyperlink{present_8c_a0db8dc1199ca0b26de7fd7980588f6a1}{spbox}[(state >> 40) & 0xFF];
+316       s |= \hyperlink{cyclone__crypto_2core_2crypto_8h_aa80c49fe62eb3d421b2abca5b4c597ff}{ROL64}(t, 10);
+317       t = \hyperlink{present_8c_a0db8dc1199ca0b26de7fd7980588f6a1}{spbox}[(state >> 48) & 0xFF];
+318       s |= \hyperlink{cyclone__crypto_2core_2crypto_8h_aa80c49fe62eb3d421b2abca5b4c597ff}{ROL64}(t, 12);
+319       t = \hyperlink{present_8c_a0db8dc1199ca0b26de7fd7980588f6a1}{spbox}[(state >> 56) & 0xFF];
+320       s |= \hyperlink{cyclone__crypto_2core_2crypto_8h_aa80c49fe62eb3d421b2abca5b4c597ff}{ROL64}(t, 14);
+321 
+322       \textcolor{comment}{//Add round key}
+323       state = s ^ context->\hyperlink{structPresentContext_acc45bfe5b10140d7b89d0d9d94e771e6}{ks}[i];
+324    \}
+325 
+326    \textcolor{comment}{//The final state is then copied to the output}
+327    \hyperlink{cpu__endian_8h_abd64119985555609ad9c94eed4c96e0f}{STORE64BE}(state, output);
+328 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{present_8c_a53a27ba7eeba01422cd6f36e54e879bf}\label{present_8c_a53a27ba7eeba01422cd6f36e54e879bf}} 
+\index{present.\+c@{present.\+c}!present\+Init@{present\+Init}}
+\index{present\+Init@{present\+Init}!present.\+c@{present.\+c}}
+\subsubsection{\texorpdfstring{present\+Init()}{presentInit()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} present\+Init (\begin{DoxyParamCaption}\item[{\hyperlink{structPresentContext}{Present\+Context} $\ast$}]{context,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{key,  }\item[{size\+\_\+t}]{key\+Len }\end{DoxyParamCaption})}
+
+
+
+Key expansion. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the P\+R\+E\+S\+E\+NT context to initialize \\
+\hline
+\mbox{\tt in}  & {\em key} & Pointer to the key \\
+\hline
+\mbox{\tt in}  & {\em key\+Len} & Length of the key \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 201 of file present.\+c.
+
+
+\begin{DoxyCode}
+202 \{
+203    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+204    \hyperlink{stdint_8h_aec6fcb673ff035718c238c8c9d544c47}{uint64\_t} \hyperlink{llmnr__common_8h_a2d03918f4f9edabaf3c9f43abcc2d85b}{t};
+205    \hyperlink{stdint_8h_aec6fcb673ff035718c238c8c9d544c47}{uint64\_t} kl;
+206    \hyperlink{stdint_8h_aec6fcb673ff035718c238c8c9d544c47}{uint64\_t} kh;
+207 
+208    \textcolor{comment}{//Check parameters}
+209    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || key == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+210       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+211 
+212    \textcolor{comment}{//Check key length}
+213    \textcolor{keywordflow}{if}(keyLen != 10 && keyLen != 16)
+214       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca3764b2929469f1eb1bf7af50b40df62f}{ERROR\_INVALID\_KEY\_LENGTH};
+215 
+216    \textcolor{comment}{//PRESENT can take keys of either 80 or 128 bits}
+217    \textcolor{keywordflow}{if}(keyLen == 10)
+218    \{
+219       \textcolor{comment}{//Copy the 80-bit key}
+220       kh = \hyperlink{cpu__endian_8h_ae21854587c05993c850b537156470088}{LOAD16BE}(key);
+221       kl = \hyperlink{cpu__endian_8h_a7a0cbf37cd7f47dbcad3244a5983b033}{LOAD64BE}(key + 2);
+222 
+223       \textcolor{comment}{//Save the 64 leftmost bits of K}
+224       context->\hyperlink{structPresentContext_acc45bfe5b10140d7b89d0d9d94e771e6}{ks}[0] = (kh << 48) | (kl >> 16);
+225 
+226       \textcolor{comment}{//Generate round keys}
+227       \textcolor{keywordflow}{for}(i = 1; i <= 31; i++)
+228       \{
+229          \textcolor{comment}{//The key register is rotated by 61 bit positions to the left}
+230          t = kh & 0xFFFF;
+231          kh = (kl >> 3) & 0xFFFF;
+232          kl = (kl << 61) | (t << 45) | (kl >> 19);
+233 
+234          \textcolor{comment}{//The left-most four bits are passed through the S-box}
+235          t = \hyperlink{present_8c_a09382ccb7826d007307c650d5f706000}{sbox}[(kh >> 12) & 0x0F];
+236          kh = (kh & 0x0FFF) | (t << 12);
+237 
+238          \textcolor{comment}{//The round counter value i is XOR-ed with bits 19, 18, 17, 16, 15 of K}
+239          kl ^= (\hyperlink{stdint_8h_aec6fcb673ff035718c238c8c9d544c47}{uint64\_t}) i << 15;
+240 
+241          \textcolor{comment}{//Save the 64 leftmost bits of K}
+242          context->\hyperlink{structPresentContext_acc45bfe5b10140d7b89d0d9d94e771e6}{ks}[i] = (kh << 48) | (kl >> 16);
+243       \}
+244    \}
+245    \textcolor{keywordflow}{else}
+246    \{
+247       \textcolor{comment}{//Copy the 128-bit key}
+248       kh = \hyperlink{cpu__endian_8h_a7a0cbf37cd7f47dbcad3244a5983b033}{LOAD64BE}(key);
+249       kl = \hyperlink{cpu__endian_8h_a7a0cbf37cd7f47dbcad3244a5983b033}{LOAD64BE}(key + 8);
+250 
+251       \textcolor{comment}{//Save the 64 leftmost bits of K}
+252       context->\hyperlink{structPresentContext_acc45bfe5b10140d7b89d0d9d94e771e6}{ks}[0] = kh;
+253 
+254       \textcolor{comment}{//Generate round keys}
+255       \textcolor{keywordflow}{for}(i = 1; i <= 31; i++)
+256       \{
+257          \textcolor{comment}{//The key register is rotated by 61 bit positions to the left}
+258          t = kh;
+259          kh = (t << 61) | (kl >> 3);
+260          kl = (kl << 61) | (t >> 3);
+261 
+262          \textcolor{comment}{//The left-most eight bits are passed through two S-boxes}
+263          t = \hyperlink{present_8c_a09382ccb7826d007307c650d5f706000}{sbox}[(kh >> 56) & 0x0F];
+264          kh = (kh & 0xF0FFFFFFFFFFFFFF) | (t << 56);
+265          t = \hyperlink{present_8c_a09382ccb7826d007307c650d5f706000}{sbox}[(kh >> 60) & 0x0F];
+266          kh = (kh & 0x0FFFFFFFFFFFFFFF) | (t << 60);
+267 
+268          \textcolor{comment}{//The round counter value i is XOR-ed with bits 66, 65, 64, 63, 62 of K}
+269          kh ^= (\hyperlink{stdint_8h_aec6fcb673ff035718c238c8c9d544c47}{uint64\_t}) i >> 2;
+270          kl ^= (\hyperlink{stdint_8h_aec6fcb673ff035718c238c8c9d544c47}{uint64\_t}) i << 62;
+271 
+272          \textcolor{comment}{//Save the 64 leftmost bits of K}
+273          context->\hyperlink{structPresentContext_acc45bfe5b10140d7b89d0d9d94e771e6}{ks}[i] = kh;
+274       \}
+275    \}
+276 
+277    \textcolor{comment}{//No error to report}
+278    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+279 \}
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{present_8c_aa854b62585a6195a35dfe106c4a9fc47}\label{present_8c_aa854b62585a6195a35dfe106c4a9fc47}} 
+\index{present.\+c@{present.\+c}!ipbox@{ipbox}}
+\index{ipbox@{ipbox}!present.\+c@{present.\+c}}
+\subsubsection{\texorpdfstring{ipbox}{ipbox}}
+{\footnotesize\ttfamily const \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t} ipbox\mbox{[}256\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 73 of file present.\+c.
+
+\mbox{\Hypertarget{present_8c_a7937f1040dcd7aea8595768cc6d95e8e}\label{present_8c_a7937f1040dcd7aea8595768cc6d95e8e}} 
+\index{present.\+c@{present.\+c}!isbox@{isbox}}
+\index{isbox@{isbox}!present.\+c@{present.\+c}}
+\subsubsection{\texorpdfstring{isbox}{isbox}}
+{\footnotesize\ttfamily const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} isbox\mbox{[}256\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=
+\{
+   0x55, 0x5E, 0x5F, 0x58, 0x5C, 0x51, 0x52, 0x5D, 0x5B, 0x54, 0x56, 0x53, 0x50, 0x57, 0x59, 0x5A,
+   0xE5, 0xEE, 0xEF, 0xE8, 0xEC, 0xE1, 0xE2, 0xED, 0xEB, 0xE4, 0xE6, 0xE3, 0xE0, 0xE7, 0xE9, 0xEA,
+   0xF5, 0xFE, 0xFF, 0xF8, 0xFC, 0xF1, 0xF2, 0xFD, 0xFB, 0xF4, 0xF6, 0xF3, 0xF0, 0xF7, 0xF9, 0xFA,
+   0x85, 0x8E, 0x8F, 0x88, 0x8C, 0x81, 0x82, 0x8D, 0x8B, 0x84, 0x86, 0x83, 0x80, 0x87, 0x89, 0x8A,
+   0xC5, 0xCE, 0xCF, 0xC8, 0xCC, 0xC1, 0xC2, 0xCD, 0xCB, 0xC4, 0xC6, 0xC3, 0xC0, 0xC7, 0xC9, 0xCA,
+   0x15, 0x1E, 0x1F, 0x18, 0x1C, 0x11, 0x12, 0x1D, 0x1B, 0x14, 0x16, 0x13, 0x10, 0x17, 0x19, 0x1A,
+   0x25, 0x2E, 0x2F, 0x28, 0x2C, 0x21, 0x22, 0x2D, 0x2B, 0x24, 0x26, 0x23, 0x20, 0x27, 0x29, 0x2A,
+   0xD5, 0xDE, 0xDF, 0xD8, 0xDC, 0xD1, 0xD2, 0xDD, 0xDB, 0xD4, 0xD6, 0xD3, 0xD0, 0xD7, 0xD9, 0xDA,
+   0xB5, 0xBE, 0xBF, 0xB8, 0xBC, 0xB1, 0xB2, 0xBD, 0xBB, 0xB4, 0xB6, 0xB3, 0xB0, 0xB7, 0xB9, 0xBA,
+   0x45, 0x4E, 0x4F, 0x48, 0x4C, 0x41, 0x42, 0x4D, 0x4B, 0x44, 0x46, 0x43, 0x40, 0x47, 0x49, 0x4A,
+   0x65, 0x6E, 0x6F, 0x68, 0x6C, 0x61, 0x62, 0x6D, 0x6B, 0x64, 0x66, 0x63, 0x60, 0x67, 0x69, 0x6A,
+   0x35, 0x3E, 0x3F, 0x38, 0x3C, 0x31, 0x32, 0x3D, 0x3B, 0x34, 0x36, 0x33, 0x30, 0x37, 0x39, 0x3A,
+   0x05, 0x0E, 0x0F, 0x08, 0x0C, 0x01, 0x02, 0x0D, 0x0B, 0x04, 0x06, 0x03, 0x00, 0x07, 0x09, 0x0A,
+   0x75, 0x7E, 0x7F, 0x78, 0x7C, 0x71, 0x72, 0x7D, 0x7B, 0x74, 0x76, 0x73, 0x70, 0x77, 0x79, 0x7A,
+   0x95, 0x9E, 0x9F, 0x98, 0x9C, 0x91, 0x92, 0x9D, 0x9B, 0x94, 0x96, 0x93, 0x90, 0x97, 0x99, 0x9A,
+   0xA5, 0xAE, 0xAF, 0xA8, 0xAC, 0xA1, 0xA2, 0xAD, 0xAB, 0xA4, 0xA6, 0xA3, 0xA0, 0xA7, 0xA9, 0xAA,
+\}
+\end{DoxyCode}
+
+
+Definition at line 52 of file present.\+c.
+
+\mbox{\Hypertarget{present_8c_ac287ff4a0a107d617c553f4a09bffc0a}\label{present_8c_ac287ff4a0a107d617c553f4a09bffc0a}} 
+\index{present.\+c@{present.\+c}!present\+Cipher\+Algo@{present\+Cipher\+Algo}}
+\index{present\+Cipher\+Algo@{present\+Cipher\+Algo}!present.\+c@{present.\+c}}
+\subsubsection{\texorpdfstring{present\+Cipher\+Algo}{presentCipherAlgo}}
+{\footnotesize\ttfamily const \hyperlink{structCipherAlgo}{Cipher\+Algo} present\+Cipher\+Algo}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=
+\{
+   \textcolor{stringliteral}{"PRESENT"},
+   \textcolor{keyword}{sizeof}(\hyperlink{structPresentContext}{PresentContext}),
+   \hyperlink{cyclone__crypto_2core_2crypto_8h_ae03a6c8f32ed798857924d908aacc49bac347f6aa82618d4d57fe85cba6520ce9}{CIPHER\_ALGO\_TYPE\_BLOCK},
+   \hyperlink{present_8h_a98a8e4b88fd067f4bdc59a93d1062214}{PRESENT\_BLOCK\_SIZE},
+   (\hyperlink{cyclone__crypto_2core_2crypto_8h_a1a0f02cdb8a3295caa1b87db2785e678}{CipherAlgoInit}) \hyperlink{present_8c_a53a27ba7eeba01422cd6f36e54e879bf}{presentInit},
+   \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL},
+   \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL},
+   (\hyperlink{cyclone__crypto_2core_2crypto_8h_a4b511302b7e4f6ff51dd72f5abde7077}{CipherAlgoEncryptBlock}) \hyperlink{present_8c_ab71c2ec7e1ccc2b46b6cdca899ea1bc7}{presentEncryptBlock},
+   (\hyperlink{cyclone__crypto_2core_2crypto_8h_a15510227bd1c7721d1e3af2480069990}{CipherAlgoDecryptBlock}) \hyperlink{present_8c_aa220867126e044c73aca238cee9bc31b}{presentDecryptBlock}
+\}
+\end{DoxyCode}
+
+
+Definition at line 179 of file present.\+c.
+
+\mbox{\Hypertarget{present_8c_a09382ccb7826d007307c650d5f706000}\label{present_8c_a09382ccb7826d007307c650d5f706000}} 
+\index{present.\+c@{present.\+c}!sbox@{sbox}}
+\index{sbox@{sbox}!present.\+c@{present.\+c}}
+\subsubsection{\texorpdfstring{sbox}{sbox}}
+{\footnotesize\ttfamily const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} sbox\mbox{[}16\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=
+\{
+   0x0C, 0x05, 0x06, 0x0B, 0x09, 0x00, 0x0A, 0x0D, 0x03, 0x0E, 0x0F, 0x08, 0x04, 0x07, 0x01, 0x02
+\}
+\end{DoxyCode}
+
+
+Definition at line 46 of file present.\+c.
+
+\mbox{\Hypertarget{present_8c_a0db8dc1199ca0b26de7fd7980588f6a1}\label{present_8c_a0db8dc1199ca0b26de7fd7980588f6a1}} 
+\index{present.\+c@{present.\+c}!spbox@{spbox}}
+\index{spbox@{spbox}!present.\+c@{present.\+c}}
+\subsubsection{\texorpdfstring{spbox}{spbox}}
+{\footnotesize\ttfamily const \hyperlink{stdint_8h_aec6fcb673ff035718c238c8c9d544c47}{uint64\+\_\+t} spbox\mbox{[}256\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 110 of file present.\+c.
+

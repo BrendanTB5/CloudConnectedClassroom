@@ -1,0 +1,1952 @@
+\hypertarget{x509__key__format_8c}{}\section{cyclone\+\_\+crypto/pkix/x509\+\_\+key\+\_\+format.c File Reference}
+\label{x509__key__format_8c}\index{cyclone\+\_\+crypto/pkix/x509\+\_\+key\+\_\+format.\+c@{cyclone\+\_\+crypto/pkix/x509\+\_\+key\+\_\+format.\+c}}
+
+
+Formatting of A\+S\+N.\+1 encoded keys.  
+
+
+{\ttfamily \#include \char`\"{}core/crypto.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}pkix/x509\+\_\+key\+\_\+format.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}encoding/asn1.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}encoding/oid.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}hash/sha1.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ecc/ed25519.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ecc/ed448.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}debug.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{x509__key__format_8c_afcdf5e66fd927a7f4cc64295acd20407}{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}~\hyperlink{crypto__config_8h_a6afae3a9b63f9b55d979e667ee0e881d}{C\+R\+Y\+P\+T\+O\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{x509__key__format_8c_abbb03bcffd2633f46b56044c90372cd3}{x509\+Format\+Subject\+Public\+Key\+Info} (const \hyperlink{structX509SubjectPublicKeyInfo}{X509\+Subject\+Public\+Key\+Info} $\ast$public\+Key\+Info, const void $\ast$public\+Key, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{ntp__common_8h_a6746c280135f32ec3fe8a04c9df42258}{key\+Id}, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$output, size\+\_\+t $\ast$written)
+\begin{DoxyCompactList}\small\item\em Format Subject\+Public\+Key\+Info structure. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{x509__key__format_8c_aa1b4eacfd7bb96848894d6acf5cd5256}{x509\+Format\+Algorithm\+Identifier} (const \hyperlink{structX509SubjectPublicKeyInfo}{X509\+Subject\+Public\+Key\+Info} $\ast$public\+Key\+Info, const void $\ast$params, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$output, size\+\_\+t $\ast$written)
+\begin{DoxyCompactList}\small\item\em Format Algorithm\+Identifier structure. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{x509__key__format_8c_a4b6b2d32fcf51078e4a07f5652c6997e}{x509\+Format\+Rsa\+Public\+Key} (const \hyperlink{structX509RsaPublicKey}{X509\+Rsa\+Public\+Key} $\ast$rsa\+Public\+Key, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$output, size\+\_\+t $\ast$written)
+\begin{DoxyCompactList}\small\item\em Format R\+S\+A\+Public\+Key structure. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{x509__key__format_8c_ae2b4a6a59d622e8c77a4fb961aee2735}{x509\+Format\+Rsa\+Pss\+Parameters} (const \hyperlink{structX509RsaPssParameters}{X509\+Rsa\+Pss\+Parameters} $\ast$rsa\+Pss\+Params, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$output, size\+\_\+t $\ast$written)
+\begin{DoxyCompactList}\small\item\em Format R\+S\+A\+S\+S\+A-\/\+P\+SS parameters. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{x509__key__format_8c_abb9bb43fc9af429f6deb031f143f4249}{x509\+Format\+Rsa\+Pss\+Hash\+Algo} (const \hyperlink{structX509RsaPssParameters}{X509\+Rsa\+Pss\+Parameters} $\ast$rsa\+Pss\+Params, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$output, size\+\_\+t $\ast$written)
+\begin{DoxyCompactList}\small\item\em Format R\+S\+A\+S\+S\+A-\/\+P\+SS hash algorithm. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{x509__key__format_8c_a910a7958675041d81fd48b3ab94e5323}{x509\+Format\+Rsa\+Pss\+Mask\+Gen\+Algo} (const \hyperlink{structX509RsaPssParameters}{X509\+Rsa\+Pss\+Parameters} $\ast$rsa\+Pss\+Params, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$output, size\+\_\+t $\ast$written)
+\begin{DoxyCompactList}\small\item\em Format R\+S\+A\+S\+S\+A-\/\+P\+SS mask generation algorithm. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{x509__key__format_8c_abfb690f68af342266e98721d5f874ca7}{x509\+Format\+Rsa\+Pss\+Mask\+Gen\+Hash\+Algo} (const \hyperlink{structX509RsaPssParameters}{X509\+Rsa\+Pss\+Parameters} $\ast$rsa\+Pss\+Params, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$output, size\+\_\+t $\ast$written)
+\begin{DoxyCompactList}\small\item\em Format R\+S\+A\+S\+S\+A-\/\+P\+SS mask generation hash algorithm. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{x509__key__format_8c_a1bd7b4391eb570de0af47ea956443821}{x509\+Format\+Rsa\+Pss\+Salt\+Length} (const \hyperlink{structX509RsaPssParameters}{X509\+Rsa\+Pss\+Parameters} $\ast$rsa\+Pss\+Params, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$output, size\+\_\+t $\ast$written)
+\begin{DoxyCompactList}\small\item\em Format R\+S\+A\+S\+S\+A-\/\+P\+SS salt length. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{x509__key__format_8c_a22cc8b9da833724eef56e39e3f3555c1}{x509\+Format\+Dsa\+Public\+Key} (const \hyperlink{structX509DsaPublicKey}{X509\+Dsa\+Public\+Key} $\ast$dsa\+Public\+Key, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$output, size\+\_\+t $\ast$written)
+\begin{DoxyCompactList}\small\item\em Format D\+S\+A\+Public\+Key structure. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{x509__key__format_8c_a5d1fa3dbbeef608f7ce0024785eaf634}{x509\+Format\+Dsa\+Parameters} (const \hyperlink{structX509DsaParameters}{X509\+Dsa\+Parameters} $\ast$dsa\+Params, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$output, size\+\_\+t $\ast$written)
+\begin{DoxyCompactList}\small\item\em Format D\+SA domain parameters. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{x509__key__format_8c_ae868b08390041bc5b7c7d38778008b5e}{x509\+Format\+Ec\+Public\+Key} (const \hyperlink{structX509EcPublicKey}{X509\+Ec\+Public\+Key} $\ast$ec\+Public\+Key, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$output, size\+\_\+t $\ast$written)
+\begin{DoxyCompactList}\small\item\em Format E\+C\+Public\+Key structure. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{x509__key__format_8c_af750d46c465091c8d4c9ab18bf181764}{x509\+Format\+Ec\+Parameters} (const \hyperlink{structX509EcParameters}{X509\+Ec\+Parameters} $\ast$ec\+Params, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$output, size\+\_\+t $\ast$written)
+\begin{DoxyCompactList}\small\item\em Format E\+C\+Parameters structure. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{x509__key__format_8c_a45e4b2226b49bdacefba16326a724eab}{x509\+Export\+Rsa\+Public\+Key} (const \hyperlink{structRsaPublicKey}{Rsa\+Public\+Key} $\ast$public\+Key, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$output, size\+\_\+t $\ast$written)
+\begin{DoxyCompactList}\small\item\em Export an R\+SA public key to A\+S\+N.\+1 format. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{x509__key__format_8c_ae62741137abd1b7a292ce95cb18a8a23}{x509\+Export\+Rsa\+Private\+Key} (const \hyperlink{structRsaPrivateKey}{Rsa\+Private\+Key} $\ast$private\+Key, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$output, size\+\_\+t $\ast$written)
+\begin{DoxyCompactList}\small\item\em Export an R\+SA private key to A\+S\+N.\+1 format. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{x509__key__format_8c_ac07b39a72c5abce0fb80c391d42ec46b}{x509\+Export\+Dsa\+Public\+Key} (const \hyperlink{structDsaPublicKey}{Dsa\+Public\+Key} $\ast$public\+Key, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$output, size\+\_\+t $\ast$written)
+\begin{DoxyCompactList}\small\item\em Export a D\+SA public key to A\+S\+N.\+1 format. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{x509__key__format_8c_a8ee26c8fedba8ce89a2947601f81a5e6}{x509\+Export\+Dsa\+Private\+Key} (const \hyperlink{structDsaPrivateKey}{Dsa\+Private\+Key} $\ast$private\+Key, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$output, size\+\_\+t $\ast$written)
+\begin{DoxyCompactList}\small\item\em Export a D\+SA private key to A\+S\+N.\+1 format. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{x509__key__format_8c_aba5fd11d3f0d08825e0355bfbfce6857}{x509\+Export\+Dsa\+Parameters} (const \hyperlink{structDsaDomainParameters}{Dsa\+Domain\+Parameters} $\ast$params, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$output, size\+\_\+t $\ast$written)
+\begin{DoxyCompactList}\small\item\em Export D\+SA domain parameters to A\+S\+N.\+1 format. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{x509__key__format_8c_a0ff2c6a084599f69f04581699fedece5}{x509\+Export\+Ec\+Public\+Key} (const \hyperlink{structX509SubjectPublicKeyInfo}{X509\+Subject\+Public\+Key\+Info} $\ast$public\+Key\+Info, const \hyperlink{structEcPoint}{Ec\+Point} $\ast$public\+Key, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$output, size\+\_\+t $\ast$written)
+\begin{DoxyCompactList}\small\item\em Export an EC public key to A\+S\+N.\+1 format. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{x509__key__format_8c_a81a4926b7df7e1564bcd24504a7d6e15}{x509\+Export\+Eddsa\+Public\+Key} (const \hyperlink{structEddsaPublicKey}{Eddsa\+Public\+Key} $\ast$public\+Key, size\+\_\+t public\+Key\+Len, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$output, size\+\_\+t $\ast$written)
+\begin{DoxyCompactList}\small\item\em Export an Ed\+D\+SA public key to A\+S\+N.\+1 format. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{x509__key__format_8c_abf998d8a1c7fbd551e9e624d79b9725d}{x509\+Export\+Eddsa\+Private\+Key} (const \hyperlink{structEddsaPrivateKey}{Eddsa\+Private\+Key} $\ast$private\+Key, size\+\_\+t private\+Key\+Len, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$output, size\+\_\+t $\ast$written)
+\begin{DoxyCompactList}\small\item\em Export an Ed\+D\+SA private key to A\+S\+N.\+1 format. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Formatting of A\+S\+N.\+1 encoded keys. 
+
+\hypertarget{pic32mz__ef__curiosity_8h_License}{}\subsection{License}\label{pic32mz__ef__curiosity_8h_License}
+S\+P\+D\+X-\/\+License-\/\+Identifier\+: G\+P\+L-\/2.\+0-\/or-\/later
+
+Copyright (C) 2010-\/2019 Oryx Embedded S\+A\+RL. All rights reserved.
+
+This file is part of Cyclone\+Crypto Open.
+
+This program is free software; you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+
+You should have received a copy of the G\+NU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-\/1301, U\+SA.
+
+\begin{DoxyAuthor}{Author}
+Oryx Embedded S\+A\+RL (www.\+oryx-\/embedded.\+com) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+9.\+6 
+\end{DoxyVersion}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{x509__key__format_8c_afcdf5e66fd927a7f4cc64295acd20407}\label{x509__key__format_8c_afcdf5e66fd927a7f4cc64295acd20407}} 
+\index{x509\+\_\+key\+\_\+format.\+c@{x509\+\_\+key\+\_\+format.\+c}!T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+\index{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}!x509\+\_\+key\+\_\+format.\+c@{x509\+\_\+key\+\_\+format.\+c}}
+\subsubsection{\texorpdfstring{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}{TRACE\_LEVEL}}
+{\footnotesize\ttfamily \#define T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL~\hyperlink{crypto__config_8h_a6afae3a9b63f9b55d979e667ee0e881d}{C\+R\+Y\+P\+T\+O\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+
+
+
+Definition at line 32 of file x509\+\_\+key\+\_\+format.\+c.
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{x509__key__format_8c_aba5fd11d3f0d08825e0355bfbfce6857}\label{x509__key__format_8c_aba5fd11d3f0d08825e0355bfbfce6857}} 
+\index{x509\+\_\+key\+\_\+format.\+c@{x509\+\_\+key\+\_\+format.\+c}!x509\+Export\+Dsa\+Parameters@{x509\+Export\+Dsa\+Parameters}}
+\index{x509\+Export\+Dsa\+Parameters@{x509\+Export\+Dsa\+Parameters}!x509\+\_\+key\+\_\+format.\+c@{x509\+\_\+key\+\_\+format.\+c}}
+\subsubsection{\texorpdfstring{x509\+Export\+Dsa\+Parameters()}{x509ExportDsaParameters()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} x509\+Export\+Dsa\+Parameters (\begin{DoxyParamCaption}\item[{const \hyperlink{structDsaDomainParameters}{Dsa\+Domain\+Parameters} $\ast$}]{params,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{output,  }\item[{size\+\_\+t $\ast$}]{written }\end{DoxyParamCaption})}
+
+
+
+Export D\+SA domain parameters to A\+S\+N.\+1 format. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em params} & Pointer to the D\+SA domain parameters \\
+\hline
+\mbox{\tt out}  & {\em output} & Buffer where to store the A\+S\+N.\+1 structure \\
+\hline
+\mbox{\tt out}  & {\em written} & Length of the resulting A\+S\+N.\+1 structure \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 1338 of file x509\+\_\+key\+\_\+format.\+c.
+
+
+\begin{DoxyCode}
+1340 \{
+1341    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+1342    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1343    \textcolor{keywordtype}{size\_t} \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length};
+1344    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *\hyperlink{ndp_8h_a6519522ad9a6f45e7a8d25d31392a977}{p};
+1345    \hyperlink{structAsn1Tag}{Asn1Tag} tag;
+1346 
+1347    \textcolor{comment}{//Point to the buffer where to write the ASN.1 structure}
+1348    p = output;
+1349    \textcolor{comment}{//Length of the ASN.1 structure}
+1350    length = 0;
+1351 
+1352    \textcolor{comment}{//Write parameter p}
+1353    error = \hyperlink{asn1_8c_a2232296cd470abd4077f4e61f102473f}{asn1WriteMpi}(&params->\hyperlink{structDsaDomainParameters_a651791ea6179f2fa29caa4e8f7870bf8}{p}, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, p, &n);
+1354    \textcolor{comment}{//Any error to report?}
+1355    \textcolor{keywordflow}{if}(error)
+1356       \textcolor{keywordflow}{return} error;
+1357 
+1358    \textcolor{comment}{//Advance data pointer}
+1359    p += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1360    length += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1361 
+1362    \textcolor{comment}{//Write parameter q}
+1363    error = \hyperlink{asn1_8c_a2232296cd470abd4077f4e61f102473f}{asn1WriteMpi}(&params->\hyperlink{structDsaDomainParameters_aa9078cd4d84fbe43a0661f9b50b78894}{q}, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, p, &n);
+1364    \textcolor{comment}{//Any error to report?}
+1365    \textcolor{keywordflow}{if}(error)
+1366       \textcolor{keywordflow}{return} error;
+1367 
+1368    \textcolor{comment}{//Advance data pointer}
+1369    p += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1370    length += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1371 
+1372    \textcolor{comment}{//Write parameter g}
+1373    error = \hyperlink{asn1_8c_a2232296cd470abd4077f4e61f102473f}{asn1WriteMpi}(&params->\hyperlink{structDsaDomainParameters_a4c63bdcea59ab75967b3a4cff15ed3c9}{g}, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, p, &n);
+1374    \textcolor{comment}{//Any error to report?}
+1375    \textcolor{keywordflow}{if}(error)
+1376       \textcolor{keywordflow}{return} error;
+1377 
+1378    \textcolor{comment}{//Advance data pointer}
+1379    p += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1380    length += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1381 
+1382    \textcolor{comment}{//The DSA domain parameters are encapsulated within a sequence}
+1383    tag.\hyperlink{structAsn1Tag_a93c64e611d57dfb59e6ebafe938f28c1}{constructed} = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+1384    tag.\hyperlink{structAsn1Tag_a9f35c291ffa22d903d9c66638bb225ea}{objClass} = \hyperlink{asn1_8h_ab3589ac11c049bfda069aa3ecf683578}{ASN1\_CLASS\_UNIVERSAL};
+1385    tag.\hyperlink{structAsn1Tag_a3ecdc4bbf328b5216521cb2114f45935}{objType} = \hyperlink{asn1_8h_a1b0f39cb3d87e425703ba389df9da1dfaf6223adf2132054146cf838b14c593ea}{ASN1\_TYPE\_SEQUENCE};
+1386    tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length} = \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length};
+1387    tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value} = output;
+1388 
+1389    \textcolor{comment}{//Write DSAParameters structure}
+1390    error = \hyperlink{asn1_8c_a246f5e4192e8f064bd28d519a89d0207}{asn1WriteTag}(&tag, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, output, &n);
+1391    \textcolor{comment}{//Any error to report?}
+1392    \textcolor{keywordflow}{if}(error)
+1393       \textcolor{keywordflow}{return} error;
+1394 
+1395    \textcolor{comment}{//Total number of bytes that have been written}
+1396    *written = \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1397 
+1398    \textcolor{comment}{//Successful processing}
+1399    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+1400 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{x509__key__format_8c_a8ee26c8fedba8ce89a2947601f81a5e6}\label{x509__key__format_8c_a8ee26c8fedba8ce89a2947601f81a5e6}} 
+\index{x509\+\_\+key\+\_\+format.\+c@{x509\+\_\+key\+\_\+format.\+c}!x509\+Export\+Dsa\+Private\+Key@{x509\+Export\+Dsa\+Private\+Key}}
+\index{x509\+Export\+Dsa\+Private\+Key@{x509\+Export\+Dsa\+Private\+Key}!x509\+\_\+key\+\_\+format.\+c@{x509\+\_\+key\+\_\+format.\+c}}
+\subsubsection{\texorpdfstring{x509\+Export\+Dsa\+Private\+Key()}{x509ExportDsaPrivateKey()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} x509\+Export\+Dsa\+Private\+Key (\begin{DoxyParamCaption}\item[{const \hyperlink{structDsaPrivateKey}{Dsa\+Private\+Key} $\ast$}]{private\+Key,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{output,  }\item[{size\+\_\+t $\ast$}]{written }\end{DoxyParamCaption})}
+
+
+
+Export a D\+SA private key to A\+S\+N.\+1 format. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em private\+Key} & Pointer to the D\+SA private key \\
+\hline
+\mbox{\tt out}  & {\em output} & Buffer where to store the A\+S\+N.\+1 structure \\
+\hline
+\mbox{\tt out}  & {\em written} & Length of the resulting A\+S\+N.\+1 structure \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 1310 of file x509\+\_\+key\+\_\+format.\+c.
+
+
+\begin{DoxyCode}
+1312 \{
+1313    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+1314    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1315 
+1316    \textcolor{comment}{//Write private key}
+1317    error = \hyperlink{asn1_8c_a2232296cd470abd4077f4e61f102473f}{asn1WriteMpi}(&privateKey->\hyperlink{structDsaPrivateKey_ac5b101c89f19f59b4cddd85429f1c30e}{x}, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, output, &n);
+1318    \textcolor{comment}{//Any error to report?}
+1319    \textcolor{keywordflow}{if}(error)
+1320       \textcolor{keywordflow}{return} error;
+1321 
+1322    \textcolor{comment}{//Total number of bytes that have been written}
+1323    *written = \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1324 
+1325    \textcolor{comment}{//Successful processing}
+1326    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+1327 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{x509__key__format_8c_ac07b39a72c5abce0fb80c391d42ec46b}\label{x509__key__format_8c_ac07b39a72c5abce0fb80c391d42ec46b}} 
+\index{x509\+\_\+key\+\_\+format.\+c@{x509\+\_\+key\+\_\+format.\+c}!x509\+Export\+Dsa\+Public\+Key@{x509\+Export\+Dsa\+Public\+Key}}
+\index{x509\+Export\+Dsa\+Public\+Key@{x509\+Export\+Dsa\+Public\+Key}!x509\+\_\+key\+\_\+format.\+c@{x509\+\_\+key\+\_\+format.\+c}}
+\subsubsection{\texorpdfstring{x509\+Export\+Dsa\+Public\+Key()}{x509ExportDsaPublicKey()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} x509\+Export\+Dsa\+Public\+Key (\begin{DoxyParamCaption}\item[{const \hyperlink{structDsaPublicKey}{Dsa\+Public\+Key} $\ast$}]{public\+Key,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{output,  }\item[{size\+\_\+t $\ast$}]{written }\end{DoxyParamCaption})}
+
+
+
+Export a D\+SA public key to A\+S\+N.\+1 format. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em public\+Key} & Pointer to the D\+SA public key \\
+\hline
+\mbox{\tt out}  & {\em output} & Buffer where to store the A\+S\+N.\+1 structure \\
+\hline
+\mbox{\tt out}  & {\em written} & Length of the resulting A\+S\+N.\+1 structure \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 1282 of file x509\+\_\+key\+\_\+format.\+c.
+
+
+\begin{DoxyCode}
+1284 \{
+1285    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+1286    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1287 
+1288    \textcolor{comment}{//Write public key}
+1289    error = \hyperlink{asn1_8c_a2232296cd470abd4077f4e61f102473f}{asn1WriteMpi}(&publicKey->\hyperlink{structDsaPublicKey_a47d0a3368a5a61e48cc36ed0414392a6}{y}, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, output, &n);
+1290    \textcolor{comment}{//Any error to report?}
+1291    \textcolor{keywordflow}{if}(error)
+1292       \textcolor{keywordflow}{return} error;
+1293 
+1294    \textcolor{comment}{//Total number of bytes that have been written}
+1295    *written = \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1296 
+1297    \textcolor{comment}{//Successful processing}
+1298    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+1299 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{x509__key__format_8c_a0ff2c6a084599f69f04581699fedece5}\label{x509__key__format_8c_a0ff2c6a084599f69f04581699fedece5}} 
+\index{x509\+\_\+key\+\_\+format.\+c@{x509\+\_\+key\+\_\+format.\+c}!x509\+Export\+Ec\+Public\+Key@{x509\+Export\+Ec\+Public\+Key}}
+\index{x509\+Export\+Ec\+Public\+Key@{x509\+Export\+Ec\+Public\+Key}!x509\+\_\+key\+\_\+format.\+c@{x509\+\_\+key\+\_\+format.\+c}}
+\subsubsection{\texorpdfstring{x509\+Export\+Ec\+Public\+Key()}{x509ExportEcPublicKey()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} x509\+Export\+Ec\+Public\+Key (\begin{DoxyParamCaption}\item[{const \hyperlink{structX509SubjectPublicKeyInfo}{X509\+Subject\+Public\+Key\+Info} $\ast$}]{public\+Key\+Info,  }\item[{const \hyperlink{structEcPoint}{Ec\+Point} $\ast$}]{public\+Key,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{output,  }\item[{size\+\_\+t $\ast$}]{written }\end{DoxyParamCaption})}
+
+
+
+Export an EC public key to A\+S\+N.\+1 format. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em public\+Key\+Info} & Public key information \\
+\hline
+\mbox{\tt in}  & {\em public\+Key} & Pointer to the EC public key \\
+\hline
+\mbox{\tt out}  & {\em output} & Buffer where to store the A\+S\+N.\+1 structure \\
+\hline
+\mbox{\tt out}  & {\em written} & Length of the resulting A\+S\+N.\+1 structure \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 1412 of file x509\+\_\+key\+\_\+format.\+c.
+
+
+\begin{DoxyCode}
+1414 \{
+1415 \textcolor{preprocessor}{#if (EC\_SUPPORT == ENABLED)}
+1416    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+1417    \textcolor{keyword}{const} \hyperlink{structEcCurveInfo}{EcCurveInfo} *curveInfo;
+1418    \hyperlink{structEcDomainParameters}{EcDomainParameters} params;
+1419 
+1420    \textcolor{comment}{//Initialize EC domain parameters}
+1421    \hyperlink{ec_8c_a5b5132fb8adf668ffa74ec10e7e63441}{ecInitDomainParameters}(&params);
+1422 
+1423    \textcolor{comment}{//Retrieve EC domain parameters}
+1424    curveInfo = \hyperlink{certificate_2x509__common_8c_a6f6416a69dd75fe6f18aab77a0f7205c}{x509GetCurveInfo}(publicKeyInfo->\hyperlink{structX509SubjectPublicKeyInfo_af45ca47e19db60631c9fdb4d4b62ed10}{ecParams}.
+      \hyperlink{structX509EcParameters_a122c5387fb2f12374a905ecfd2ca4c86}{namedCurve},
+1425       publicKeyInfo->\hyperlink{structX509SubjectPublicKeyInfo_af45ca47e19db60631c9fdb4d4b62ed10}{ecParams}.\hyperlink{structX509EcParameters_ac58081bd63ed68d0cb101ff7e65667ec}{namedCurveLen});
+1426 
+1427    \textcolor{comment}{//Make sure the specified elliptic curve is supported}
+1428    \textcolor{keywordflow}{if}(curveInfo != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1429    \{
+1430       \textcolor{comment}{//Load EC domain parameters}
+1431       error = \hyperlink{ec_8c_ab3d7ebcb8fd2e79990ef25e39a68f4a5}{ecLoadDomainParameters}(&params, curveInfo);
+1432    \}
+1433    \textcolor{keywordflow}{else}
+1434    \{
+1435       \textcolor{comment}{//Invalid EC domain parameters}
+1436       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca2bc2298123e24e3d82592b5c68c20612}{ERROR\_WRONG\_IDENTIFIER};
+1437    \}
+1438 
+1439    \textcolor{comment}{//Check status code}
+1440    \textcolor{keywordflow}{if}(!error)
+1441    \{
+1442       \textcolor{comment}{//Format ECPublicKey structure}
+1443       error = \hyperlink{ec_8c_a5b0e532e196ac4715c98d0946304772c}{ecExport}(&params, publicKey, output, written);
+1444    \}
+1445 
+1446    \textcolor{comment}{//Release EC domain parameters}
+1447    \hyperlink{ec_8c_a256993c154cf87c3d9d18138a1365eca}{ecFreeDomainParameters}(&params);
+1448 
+1449    \textcolor{comment}{//Return status code}
+1450    \textcolor{keywordflow}{return} error;
+1451 \textcolor{preprocessor}{#else}
+1452    \textcolor{comment}{//Not implemented}
+1453    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cab61c5ef368fbf03fdc1fb566c63f2f9a}{ERROR\_NOT\_IMPLEMENTED};
+1454 \textcolor{preprocessor}{#endif}
+1455 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{x509__key__format_8c_abf998d8a1c7fbd551e9e624d79b9725d}\label{x509__key__format_8c_abf998d8a1c7fbd551e9e624d79b9725d}} 
+\index{x509\+\_\+key\+\_\+format.\+c@{x509\+\_\+key\+\_\+format.\+c}!x509\+Export\+Eddsa\+Private\+Key@{x509\+Export\+Eddsa\+Private\+Key}}
+\index{x509\+Export\+Eddsa\+Private\+Key@{x509\+Export\+Eddsa\+Private\+Key}!x509\+\_\+key\+\_\+format.\+c@{x509\+\_\+key\+\_\+format.\+c}}
+\subsubsection{\texorpdfstring{x509\+Export\+Eddsa\+Private\+Key()}{x509ExportEddsaPrivateKey()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} x509\+Export\+Eddsa\+Private\+Key (\begin{DoxyParamCaption}\item[{const \hyperlink{structEddsaPrivateKey}{Eddsa\+Private\+Key} $\ast$}]{private\+Key,  }\item[{size\+\_\+t}]{private\+Key\+Len,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{output,  }\item[{size\+\_\+t $\ast$}]{written }\end{DoxyParamCaption})}
+
+
+
+Export an Ed\+D\+SA private key to A\+S\+N.\+1 format. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em private\+Key} & Pointer to the Ed\+D\+SA private key \\
+\hline
+\mbox{\tt in}  & {\em private\+Key\+Len} & Length of the Ed\+D\+SA private key, in bytes \\
+\hline
+\mbox{\tt out}  & {\em output} & Buffer where to store the A\+S\+N.\+1 structure \\
+\hline
+\mbox{\tt out}  & {\em written} & Length of the resulting A\+S\+N.\+1 structure \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 1496 of file x509\+\_\+key\+\_\+format.\+c.
+
+
+\begin{DoxyCode}
+1498 \{
+1499    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+1500    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1501    \hyperlink{structAsn1Tag}{Asn1Tag} tag;
+1502 
+1503    \textcolor{comment}{//The private key is always an opaque byte sequence}
+1504    error = \hyperlink{mpi_8c_aad846b0b5a3560243e1bf8601ad1b6a5}{mpiExport}(&privateKey->\hyperlink{structEddsaPrivateKey_a58ef5164bc00df5a7ee8adc18fa2b63a}{d}, output, privateKeyLen,
+1505       \hyperlink{mpi_8h_a5fe4159c7c390c604067e854b41d337fa637c0a6e803a47db52875c6818674c60}{MPI\_FORMAT\_LITTLE\_ENDIAN});
+1506    \textcolor{comment}{//Any error to report?}
+1507    \textcolor{keywordflow}{if}(error)
+1508       \textcolor{keywordflow}{return} error;
+1509 
+1510    \textcolor{comment}{//The private key is encapsulated within an octet string}
+1511    tag.\hyperlink{structAsn1Tag_a93c64e611d57dfb59e6ebafe938f28c1}{constructed} = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+1512    tag.\hyperlink{structAsn1Tag_a9f35c291ffa22d903d9c66638bb225ea}{objClass} = \hyperlink{asn1_8h_ab3589ac11c049bfda069aa3ecf683578}{ASN1\_CLASS\_UNIVERSAL};
+1513    tag.\hyperlink{structAsn1Tag_a3ecdc4bbf328b5216521cb2114f45935}{objType} = \hyperlink{asn1_8h_a1b0f39cb3d87e425703ba389df9da1dfacdfe5b0b233bce2f5388d3693bf7b602}{ASN1\_TYPE\_OCTET\_STRING};
+1514    tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length} = privateKeyLen;
+1515    tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value} = output;
+1516 
+1517    \textcolor{comment}{//Write CurvePrivateKey structure}
+1518    error = \hyperlink{asn1_8c_a246f5e4192e8f064bd28d519a89d0207}{asn1WriteTag}(&tag, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, output, &n);
+1519    \textcolor{comment}{//Any error to report?}
+1520    \textcolor{keywordflow}{if}(error)
+1521       \textcolor{keywordflow}{return} error;
+1522 
+1523    \textcolor{comment}{//Total number of bytes that have been written}
+1524    *written = tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+1525 
+1526    \textcolor{comment}{//Successful processing}
+1527    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+1528 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{x509__key__format_8c_a81a4926b7df7e1564bcd24504a7d6e15}\label{x509__key__format_8c_a81a4926b7df7e1564bcd24504a7d6e15}} 
+\index{x509\+\_\+key\+\_\+format.\+c@{x509\+\_\+key\+\_\+format.\+c}!x509\+Export\+Eddsa\+Public\+Key@{x509\+Export\+Eddsa\+Public\+Key}}
+\index{x509\+Export\+Eddsa\+Public\+Key@{x509\+Export\+Eddsa\+Public\+Key}!x509\+\_\+key\+\_\+format.\+c@{x509\+\_\+key\+\_\+format.\+c}}
+\subsubsection{\texorpdfstring{x509\+Export\+Eddsa\+Public\+Key()}{x509ExportEddsaPublicKey()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} x509\+Export\+Eddsa\+Public\+Key (\begin{DoxyParamCaption}\item[{const \hyperlink{structEddsaPublicKey}{Eddsa\+Public\+Key} $\ast$}]{public\+Key,  }\item[{size\+\_\+t}]{public\+Key\+Len,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{output,  }\item[{size\+\_\+t $\ast$}]{written }\end{DoxyParamCaption})}
+
+
+
+Export an Ed\+D\+SA public key to A\+S\+N.\+1 format. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em public\+Key} & Pointer to the Ed\+D\+SA public key \\
+\hline
+\mbox{\tt in}  & {\em public\+Key\+Len} & Length of the Ed\+D\+SA public key, in bytes \\
+\hline
+\mbox{\tt out}  & {\em output} & Buffer where to store the A\+S\+N.\+1 structure \\
+\hline
+\mbox{\tt out}  & {\em written} & Length of the resulting A\+S\+N.\+1 structure \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 1467 of file x509\+\_\+key\+\_\+format.\+c.
+
+
+\begin{DoxyCode}
+1469 \{
+1470    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+1471 
+1472    \textcolor{comment}{//The SubjectPublicKey contains the byte stream of the public key}
+1473    error = \hyperlink{mpi_8c_aad846b0b5a3560243e1bf8601ad1b6a5}{mpiExport}(&publicKey->\hyperlink{structEddsaPublicKey_ad64b6fac961042422df3f17bd5f01f9e}{q}, output, publicKeyLen,
+1474       \hyperlink{mpi_8h_a5fe4159c7c390c604067e854b41d337fa637c0a6e803a47db52875c6818674c60}{MPI\_FORMAT\_LITTLE\_ENDIAN});
+1475    \textcolor{comment}{//Any error to report?}
+1476    \textcolor{keywordflow}{if}(error)
+1477       \textcolor{keywordflow}{return} error;
+1478 
+1479    \textcolor{comment}{//Total number of bytes that have been written}
+1480    *written = publicKeyLen;
+1481 
+1482    \textcolor{comment}{//Successful processing}
+1483    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+1484 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{x509__key__format_8c_ae62741137abd1b7a292ce95cb18a8a23}\label{x509__key__format_8c_ae62741137abd1b7a292ce95cb18a8a23}} 
+\index{x509\+\_\+key\+\_\+format.\+c@{x509\+\_\+key\+\_\+format.\+c}!x509\+Export\+Rsa\+Private\+Key@{x509\+Export\+Rsa\+Private\+Key}}
+\index{x509\+Export\+Rsa\+Private\+Key@{x509\+Export\+Rsa\+Private\+Key}!x509\+\_\+key\+\_\+format.\+c@{x509\+\_\+key\+\_\+format.\+c}}
+\subsubsection{\texorpdfstring{x509\+Export\+Rsa\+Private\+Key()}{x509ExportRsaPrivateKey()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} x509\+Export\+Rsa\+Private\+Key (\begin{DoxyParamCaption}\item[{const \hyperlink{structRsaPrivateKey}{Rsa\+Private\+Key} $\ast$}]{private\+Key,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{output,  }\item[{size\+\_\+t $\ast$}]{written }\end{DoxyParamCaption})}
+
+
+
+Export an R\+SA private key to A\+S\+N.\+1 format. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em private\+Key} & Pointer to the R\+SA private key \\
+\hline
+\mbox{\tt out}  & {\em output} & Buffer where to store the A\+S\+N.\+1 structure \\
+\hline
+\mbox{\tt out}  & {\em written} & Length of the resulting A\+S\+N.\+1 structure \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 1104 of file x509\+\_\+key\+\_\+format.\+c.
+
+
+\begin{DoxyCode}
+1106 \{
+1107    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+1108    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1109    \textcolor{keywordtype}{size\_t} \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length};
+1110    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *\hyperlink{ndp_8h_a6519522ad9a6f45e7a8d25d31392a977}{p};
+1111    \hyperlink{structAsn1Tag}{Asn1Tag} tag;
+1112 
+1113    \textcolor{comment}{//Point to the buffer where to write the ASN.1 structure}
+1114    p = output;
+1115    \textcolor{comment}{//Length of the ASN.1 structure}
+1116    length = 0;
+1117 
+1118    \textcolor{comment}{//Write Version field}
+1119    error = \hyperlink{asn1_8c_a150ad7208a84f75148cee37c949cc9d5}{asn1WriteInt32}(0, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, p, &n);
+1120    \textcolor{comment}{//Any error to report?}
+1121    \textcolor{keywordflow}{if}(error)
+1122       \textcolor{keywordflow}{return} error;
+1123 
+1124    \textcolor{comment}{//Update the length of the RSAPrivateKey structure}
+1125    length += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1126 
+1127    \textcolor{comment}{//Advance data pointer}
+1128    \textcolor{keywordflow}{if}(output != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1129    \{
+1130       p += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1131    \}
+1132 
+1133    \textcolor{comment}{//Write Modulus field}
+1134    error = \hyperlink{asn1_8c_a2232296cd470abd4077f4e61f102473f}{asn1WriteMpi}(&privateKey->\hyperlink{structRsaPrivateKey_aaccaccd76db1a21201bf06eb6ecdd8ac}{n}, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, p, &n);
+1135    \textcolor{comment}{//Any error to report?}
+1136    \textcolor{keywordflow}{if}(error)
+1137       \textcolor{keywordflow}{return} error;
+1138 
+1139    \textcolor{comment}{//Update the length of the RSAPrivateKey structure}
+1140    length += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1141 
+1142    \textcolor{comment}{//Advance data pointer}
+1143    \textcolor{keywordflow}{if}(output != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1144    \{
+1145       p += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1146    \}
+1147 
+1148    \textcolor{comment}{//Write PublicExponent field}
+1149    error = \hyperlink{asn1_8c_a2232296cd470abd4077f4e61f102473f}{asn1WriteMpi}(&privateKey->\hyperlink{structRsaPrivateKey_a590822495b6caceae5f8880cacc51b9c}{e}, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, p, &n);
+1150    \textcolor{comment}{//Any error to report?}
+1151    \textcolor{keywordflow}{if}(error)
+1152       \textcolor{keywordflow}{return} error;
+1153 
+1154    \textcolor{comment}{//Update the length of the RSAPrivateKey structure}
+1155    length += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1156 
+1157    \textcolor{comment}{//Advance data pointer}
+1158    \textcolor{keywordflow}{if}(output != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1159    \{
+1160       p += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1161    \}
+1162 
+1163    \textcolor{comment}{//Write PrivateExponent field}
+1164    error = \hyperlink{asn1_8c_a2232296cd470abd4077f4e61f102473f}{asn1WriteMpi}(&privateKey->\hyperlink{structRsaPrivateKey_aea064a2875da9d2a44c7e7c02e157728}{d}, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, p, &n);
+1165    \textcolor{comment}{//Any error to report?}
+1166    \textcolor{keywordflow}{if}(error)
+1167       \textcolor{keywordflow}{return} error;
+1168 
+1169    \textcolor{comment}{//Update the length of the RSAPrivateKey structure}
+1170    length += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1171 
+1172    \textcolor{comment}{//Advance data pointer}
+1173    \textcolor{keywordflow}{if}(output != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1174    \{
+1175       p += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1176    \}
+1177 
+1178    \textcolor{comment}{//Write Prime1 field}
+1179    error = \hyperlink{asn1_8c_a2232296cd470abd4077f4e61f102473f}{asn1WriteMpi}(&privateKey->\hyperlink{structRsaPrivateKey_a1fc8b1ca097c70244db691916f33f891}{p}, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, p, &n);
+1180    \textcolor{comment}{//Any error to report?}
+1181    \textcolor{keywordflow}{if}(error)
+1182       \textcolor{keywordflow}{return} error;
+1183 
+1184    \textcolor{comment}{//Update the length of the RSAPrivateKey structure}
+1185    length += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1186 
+1187    \textcolor{comment}{//Advance data pointer}
+1188    \textcolor{keywordflow}{if}(output != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1189    \{
+1190       p += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1191    \}
+1192 
+1193    \textcolor{comment}{//Write Prime2 field}
+1194    error = \hyperlink{asn1_8c_a2232296cd470abd4077f4e61f102473f}{asn1WriteMpi}(&privateKey->\hyperlink{structRsaPrivateKey_aefd3ef59482ac00637165b624625fef5}{q}, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, p, &n);
+1195    \textcolor{comment}{//Any error to report?}
+1196    \textcolor{keywordflow}{if}(error)
+1197       \textcolor{keywordflow}{return} error;
+1198 
+1199    \textcolor{comment}{//Update the length of the RSAPrivateKey structure}
+1200    length += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1201 
+1202    \textcolor{comment}{//Advance data pointer}
+1203    \textcolor{keywordflow}{if}(output != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1204    \{
+1205       p += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1206    \}
+1207 
+1208    \textcolor{comment}{//Write Exponent1 field}
+1209    error = \hyperlink{asn1_8c_a2232296cd470abd4077f4e61f102473f}{asn1WriteMpi}(&privateKey->\hyperlink{structRsaPrivateKey_ab101b4e579a4799f12d3acd237e72b34}{dp}, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, p, &n);
+1210    \textcolor{comment}{//Any error to report?}
+1211    \textcolor{keywordflow}{if}(error)
+1212       \textcolor{keywordflow}{return} error;
+1213 
+1214    \textcolor{comment}{//Update the length of the RSAPrivateKey structure}
+1215    length += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1216 
+1217    \textcolor{comment}{//Advance data pointer}
+1218    \textcolor{keywordflow}{if}(output != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1219    \{
+1220       p += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1221    \}
+1222 
+1223    \textcolor{comment}{//Write Exponent2 field}
+1224    error = \hyperlink{asn1_8c_a2232296cd470abd4077f4e61f102473f}{asn1WriteMpi}(&privateKey->\hyperlink{structRsaPrivateKey_a9e72909ef8af48ce9a813ba32ba0287d}{dq}, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, p, &n);
+1225    \textcolor{comment}{//Any error to report?}
+1226    \textcolor{keywordflow}{if}(error)
+1227       \textcolor{keywordflow}{return} error;
+1228 
+1229    \textcolor{comment}{//Update the length of the RSAPrivateKey structure}
+1230    length += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1231 
+1232    \textcolor{comment}{//Advance data pointer}
+1233    \textcolor{keywordflow}{if}(output != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1234    \{
+1235       p += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1236    \}
+1237 
+1238    \textcolor{comment}{//Write Coefficient field}
+1239    error = \hyperlink{asn1_8c_a2232296cd470abd4077f4e61f102473f}{asn1WriteMpi}(&privateKey->\hyperlink{structRsaPrivateKey_a3dac28e0d48293032c18c968faadf57c}{qinv}, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, p, &n);
+1240    \textcolor{comment}{//Any error to report?}
+1241    \textcolor{keywordflow}{if}(error)
+1242       \textcolor{keywordflow}{return} error;
+1243 
+1244    \textcolor{comment}{//Update the length of the RSAPrivateKey structure}
+1245    length += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1246 
+1247    \textcolor{comment}{//Advance data pointer}
+1248    \textcolor{keywordflow}{if}(output != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1249    \{
+1250       p += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1251    \}
+1252 
+1253    \textcolor{comment}{//The private key is encapsulated within a sequence}
+1254    tag.\hyperlink{structAsn1Tag_a93c64e611d57dfb59e6ebafe938f28c1}{constructed} = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+1255    tag.\hyperlink{structAsn1Tag_a9f35c291ffa22d903d9c66638bb225ea}{objClass} = \hyperlink{asn1_8h_ab3589ac11c049bfda069aa3ecf683578}{ASN1\_CLASS\_UNIVERSAL};
+1256    tag.\hyperlink{structAsn1Tag_a3ecdc4bbf328b5216521cb2114f45935}{objType} = \hyperlink{asn1_8h_a1b0f39cb3d87e425703ba389df9da1dfaf6223adf2132054146cf838b14c593ea}{ASN1\_TYPE\_SEQUENCE};
+1257    tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length} = \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length};
+1258    tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value} = output;
+1259 
+1260    \textcolor{comment}{//Write RSAPrivateKey structure}
+1261    error = \hyperlink{asn1_8c_a246f5e4192e8f064bd28d519a89d0207}{asn1WriteTag}(&tag, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, output, &n);
+1262    \textcolor{comment}{//Any error to report?}
+1263    \textcolor{keywordflow}{if}(error)
+1264       \textcolor{keywordflow}{return} error;
+1265 
+1266    \textcolor{comment}{//Total number of bytes that have been written}
+1267    *written = tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+1268 
+1269    \textcolor{comment}{//Successful processing}
+1270    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+1271 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{x509__key__format_8c_a45e4b2226b49bdacefba16326a724eab}\label{x509__key__format_8c_a45e4b2226b49bdacefba16326a724eab}} 
+\index{x509\+\_\+key\+\_\+format.\+c@{x509\+\_\+key\+\_\+format.\+c}!x509\+Export\+Rsa\+Public\+Key@{x509\+Export\+Rsa\+Public\+Key}}
+\index{x509\+Export\+Rsa\+Public\+Key@{x509\+Export\+Rsa\+Public\+Key}!x509\+\_\+key\+\_\+format.\+c@{x509\+\_\+key\+\_\+format.\+c}}
+\subsubsection{\texorpdfstring{x509\+Export\+Rsa\+Public\+Key()}{x509ExportRsaPublicKey()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} x509\+Export\+Rsa\+Public\+Key (\begin{DoxyParamCaption}\item[{const \hyperlink{structRsaPublicKey}{Rsa\+Public\+Key} $\ast$}]{public\+Key,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{output,  }\item[{size\+\_\+t $\ast$}]{written }\end{DoxyParamCaption})}
+
+
+
+Export an R\+SA public key to A\+S\+N.\+1 format. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em public\+Key} & Pointer to the R\+SA public key \\
+\hline
+\mbox{\tt out}  & {\em output} & Buffer where to store the A\+S\+N.\+1 structure \\
+\hline
+\mbox{\tt out}  & {\em written} & Length of the resulting A\+S\+N.\+1 structure \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 1041 of file x509\+\_\+key\+\_\+format.\+c.
+
+
+\begin{DoxyCode}
+1043 \{
+1044    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+1045    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1046    \textcolor{keywordtype}{size\_t} \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length};
+1047    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *\hyperlink{ndp_8h_a6519522ad9a6f45e7a8d25d31392a977}{p};
+1048    \hyperlink{structAsn1Tag}{Asn1Tag} tag;
+1049 
+1050    \textcolor{comment}{//Point to the buffer where to write the ASN.1 structure}
+1051    p = output;
+1052    \textcolor{comment}{//Length of the ASN.1 structure}
+1053    length = 0;
+1054 
+1055    \textcolor{comment}{//Write Modulus field}
+1056    error = \hyperlink{asn1_8c_a2232296cd470abd4077f4e61f102473f}{asn1WriteMpi}(&publicKey->\hyperlink{structRsaPublicKey_a51b3d236796d7d46c15d3e6bc7e5acb2}{n}, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, p, &n);
+1057    \textcolor{comment}{//Any error to report?}
+1058    \textcolor{keywordflow}{if}(error)
+1059       \textcolor{keywordflow}{return} error;
+1060 
+1061    \textcolor{comment}{//Advance data pointer}
+1062    p += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1063    length += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1064 
+1065    \textcolor{comment}{//Write PublicExponent field}
+1066    error = \hyperlink{asn1_8c_a2232296cd470abd4077f4e61f102473f}{asn1WriteMpi}(&publicKey->\hyperlink{structRsaPublicKey_af293e256864ab9ac9f80d1e6552693da}{e}, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, p, &n);
+1067    \textcolor{comment}{//Any error to report?}
+1068    \textcolor{keywordflow}{if}(error)
+1069       \textcolor{keywordflow}{return} error;
+1070 
+1071    \textcolor{comment}{//Advance data pointer}
+1072    p += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1073    length += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1074 
+1075    \textcolor{comment}{//The public key is encapsulated within a sequence}
+1076    tag.\hyperlink{structAsn1Tag_a93c64e611d57dfb59e6ebafe938f28c1}{constructed} = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+1077    tag.\hyperlink{structAsn1Tag_a9f35c291ffa22d903d9c66638bb225ea}{objClass} = \hyperlink{asn1_8h_ab3589ac11c049bfda069aa3ecf683578}{ASN1\_CLASS\_UNIVERSAL};
+1078    tag.\hyperlink{structAsn1Tag_a3ecdc4bbf328b5216521cb2114f45935}{objType} = \hyperlink{asn1_8h_a1b0f39cb3d87e425703ba389df9da1dfaf6223adf2132054146cf838b14c593ea}{ASN1\_TYPE\_SEQUENCE};
+1079    tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length} = \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length};
+1080    tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value} = output;
+1081 
+1082    \textcolor{comment}{//Write RSAPublicKey structure}
+1083    error = \hyperlink{asn1_8c_a246f5e4192e8f064bd28d519a89d0207}{asn1WriteTag}(&tag, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, output, &n);
+1084    \textcolor{comment}{//Any error to report?}
+1085    \textcolor{keywordflow}{if}(error)
+1086       \textcolor{keywordflow}{return} error;
+1087 
+1088    \textcolor{comment}{//Total number of bytes that have been written}
+1089    *written = \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1090 
+1091    \textcolor{comment}{//Successful processing}
+1092    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+1093 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{x509__key__format_8c_aa1b4eacfd7bb96848894d6acf5cd5256}\label{x509__key__format_8c_aa1b4eacfd7bb96848894d6acf5cd5256}} 
+\index{x509\+\_\+key\+\_\+format.\+c@{x509\+\_\+key\+\_\+format.\+c}!x509\+Format\+Algorithm\+Identifier@{x509\+Format\+Algorithm\+Identifier}}
+\index{x509\+Format\+Algorithm\+Identifier@{x509\+Format\+Algorithm\+Identifier}!x509\+\_\+key\+\_\+format.\+c@{x509\+\_\+key\+\_\+format.\+c}}
+\subsubsection{\texorpdfstring{x509\+Format\+Algorithm\+Identifier()}{x509FormatAlgorithmIdentifier()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} x509\+Format\+Algorithm\+Identifier (\begin{DoxyParamCaption}\item[{const \hyperlink{structX509SubjectPublicKeyInfo}{X509\+Subject\+Public\+Key\+Info} $\ast$}]{public\+Key\+Info,  }\item[{const void $\ast$}]{params,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{output,  }\item[{size\+\_\+t $\ast$}]{written }\end{DoxyParamCaption})}
+
+
+
+Format Algorithm\+Identifier structure. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em public\+Key\+Info} & Subject\textquotesingle{}s public key information \\
+\hline
+\mbox{\tt in}  & {\em params} & Pointer to the domain parameters (D\+SA or E\+C\+D\+SA) \\
+\hline
+\mbox{\tt out}  & {\em output} & Buffer where to format the A\+S\+N.\+1 structure \\
+\hline
+\mbox{\tt out}  & {\em written} & Length of the resulting A\+S\+N.\+1 structure \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 279 of file x509\+\_\+key\+\_\+format.\+c.
+
+
+\begin{DoxyCode}
+281 \{
+282    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+283    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+284    \textcolor{keywordtype}{size\_t} \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length};
+285    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *\hyperlink{ndp_8h_a6519522ad9a6f45e7a8d25d31392a977}{p};
+286    \textcolor{keywordtype}{size\_t} oidLen;
+287    \textcolor{keyword}{const} \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *\hyperlink{mib__common_8h_a5d78f42b3545deb9bbd305138506c7a7}{oid};
+288    \hyperlink{structAsn1Tag}{Asn1Tag} tag;
+289 
+290    \textcolor{comment}{//Get the public key identifier}
+291    oid = publicKeyInfo->\hyperlink{structX509SubjectPublicKeyInfo_a90a8b808782b18de901306acd49b0706}{oid};
+292    oidLen = publicKeyInfo->\hyperlink{structX509SubjectPublicKeyInfo_a7c5d6f507f653f6085ba56e6b4b55912}{oidLen};
+293 
+294    \textcolor{comment}{//Point to the buffer where to write the ASN.1 structure}
+295    p = output;
+296    \textcolor{comment}{//Length of the ASN.1 structure}
+297    length = 0;
+298 
+299    \textcolor{comment}{//Format algorithm OID}
+300    tag.\hyperlink{structAsn1Tag_a93c64e611d57dfb59e6ebafe938f28c1}{constructed} = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+301    tag.\hyperlink{structAsn1Tag_a9f35c291ffa22d903d9c66638bb225ea}{objClass} = \hyperlink{asn1_8h_ab3589ac11c049bfda069aa3ecf683578}{ASN1\_CLASS\_UNIVERSAL};
+302    tag.\hyperlink{structAsn1Tag_a3ecdc4bbf328b5216521cb2114f45935}{objType} = \hyperlink{asn1_8h_a1b0f39cb3d87e425703ba389df9da1dfa586ebdd8b160ea2185cff78381dfe4b0}{ASN1\_TYPE\_OBJECT\_IDENTIFIER};
+303    tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length} = oidLen;
+304    tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value} = \hyperlink{mib__common_8h_a5d78f42b3545deb9bbd305138506c7a7}{oid};
+305 
+306    \textcolor{comment}{//Write the corresponding ASN.1 tag}
+307    error = \hyperlink{asn1_8c_a246f5e4192e8f064bd28d519a89d0207}{asn1WriteTag}(&tag, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, p, &n);
+308    \textcolor{comment}{//Any error to report?}
+309    \textcolor{keywordflow}{if}(error)
+310       \textcolor{keywordflow}{return} error;
+311 
+312    \textcolor{comment}{//Advance data pointer}
+313    p += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+314    length += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+315 
+316 \textcolor{preprocessor}{#if (RSA\_SUPPORT == ENABLED)}
+317    \textcolor{comment}{//RSA algorithm identifier?}
+318    \textcolor{keywordflow}{if}(!\hyperlink{oid_8c_a3f24a7995a2a7aa587379ec6e1922e36}{oidComp}(oid, oidLen, \hyperlink{rsa_8c_a05da0bdcba7d0be3da2cc921a8a0dd50}{RSA\_ENCRYPTION\_OID}, \textcolor{keyword}{sizeof}(
+      \hyperlink{rsa_8c_a05da0bdcba7d0be3da2cc921a8a0dd50}{RSA\_ENCRYPTION\_OID})))
+319    \{
+320       \textcolor{comment}{//The parameters field must have ASN.1 type NULL for this algorithm}
+321       \textcolor{comment}{//identifier (refer to RFC 3279, section 2.3.1)}
+322       tag.\hyperlink{structAsn1Tag_a93c64e611d57dfb59e6ebafe938f28c1}{constructed} = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+323       tag.\hyperlink{structAsn1Tag_a9f35c291ffa22d903d9c66638bb225ea}{objClass} = \hyperlink{asn1_8h_ab3589ac11c049bfda069aa3ecf683578}{ASN1\_CLASS\_UNIVERSAL};
+324       tag.\hyperlink{structAsn1Tag_a3ecdc4bbf328b5216521cb2114f45935}{objType} = \hyperlink{asn1_8h_a1b0f39cb3d87e425703ba389df9da1dfac7b5ab1acfd186cfa72328495cc5261a}{ASN1\_TYPE\_NULL};
+325       tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length} = 0;
+326       tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value} = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+327 
+328       \textcolor{comment}{//Write the corresponding ASN.1 tag}
+329       error = \hyperlink{asn1_8c_a246f5e4192e8f064bd28d519a89d0207}{asn1WriteTag}(&tag, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, p, &n);
+330    \}
+331    \textcolor{comment}{//RSA-PSS algorithm identifier?}
+332    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!\hyperlink{oid_8c_a3f24a7995a2a7aa587379ec6e1922e36}{oidComp}(oid, oidLen, \hyperlink{rsa_8c_ac136e2cc009f56598c67cf31f37c0d2b}{RSASSA\_PSS\_OID}, \textcolor{keyword}{sizeof}(
+      \hyperlink{rsa_8c_ac136e2cc009f56598c67cf31f37c0d2b}{RSASSA\_PSS\_OID})))
+333    \{
+334       \textcolor{comment}{//The parameters may be either absent or present when used as subject}
+335       \textcolor{comment}{//public key information (refer to RFC 4055, section 3.1)}
+336       n = 0;
+337    \}
+338    \textcolor{keywordflow}{else}
+339 \textcolor{preprocessor}{#endif}
+340 \textcolor{preprocessor}{#if (DSA\_SUPPORT == ENABLED)}
+341    \textcolor{comment}{//DSA algorithm identifier?}
+342    \textcolor{keywordflow}{if}(!\hyperlink{oid_8c_a3f24a7995a2a7aa587379ec6e1922e36}{oidComp}(oid, oidLen, \hyperlink{dsa_8c_aec62d423add8486c829eacb574ebe4f3}{DSA\_OID}, \textcolor{keyword}{sizeof}(\hyperlink{dsa_8c_aec62d423add8486c829eacb574ebe4f3}{DSA\_OID})))
+343    \{
+344       \textcolor{comment}{//Valid DSA domain parameters?}
+345       \textcolor{keywordflow}{if}(params != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+346       \{
+347          \textcolor{comment}{//Export the DSA domain parameters to ASN.1 format}
+348          error = \hyperlink{x509__key__format_8c_aba5fd11d3f0d08825e0355bfbfce6857}{x509ExportDsaParameters}(params, p, &n);
+349       \}
+350       \textcolor{keywordflow}{else}
+351       \{
+352          \textcolor{comment}{//Format DSAParameters structure}
+353          error = \hyperlink{x509__key__format_8c_a5d1fa3dbbeef608f7ce0024785eaf634}{x509FormatDsaParameters}(&publicKeyInfo->
+      \hyperlink{structX509SubjectPublicKeyInfo_a2a4f7c14413231aa4a09a59390b4f6c0}{dsaParams}, p, &n);
+354       \}
+355    \}
+356    \textcolor{keywordflow}{else}
+357 \textcolor{preprocessor}{#endif}
+358 \textcolor{preprocessor}{#if (ECDSA\_SUPPORT == ENABLED)}
+359    \textcolor{comment}{//ECDSA algorithm identifier?}
+360    \textcolor{keywordflow}{if}(!\hyperlink{oid_8c_a3f24a7995a2a7aa587379ec6e1922e36}{oidComp}(oid, oidLen, \hyperlink{ec_8c_a5ff93c201b1e50b6fda04774a2fa537c}{EC\_PUBLIC\_KEY\_OID}, \textcolor{keyword}{sizeof}(
+      \hyperlink{ec_8c_a5ff93c201b1e50b6fda04774a2fa537c}{EC\_PUBLIC\_KEY\_OID})))
+361    \{
+362       \textcolor{comment}{//Format ECParameters structure}
+363       error = \hyperlink{x509__key__format_8c_af750d46c465091c8d4c9ab18bf181764}{x509FormatEcParameters}(&publicKeyInfo->
+      \hyperlink{structX509SubjectPublicKeyInfo_af45ca47e19db60631c9fdb4d4b62ed10}{ecParams}, p, &n);
+364    \}
+365    \textcolor{keywordflow}{else}
+366 \textcolor{preprocessor}{#endif}
+367 \textcolor{preprocessor}{#if (ED25519\_SUPPORT == ENABLED)}
+368    \textcolor{comment}{//X25519 or Ed25519 algorithm identifier?}
+369    \textcolor{keywordflow}{if}(!\hyperlink{oid_8c_a3f24a7995a2a7aa587379ec6e1922e36}{oidComp}(oid, oidLen, \hyperlink{ec__curves_8c_ab59e2fc8d4de54edaf7bb4866a57beae}{X25519\_OID}, \textcolor{keyword}{sizeof}(\hyperlink{ec__curves_8c_ab59e2fc8d4de54edaf7bb4866a57beae}{X25519\_OID})) ||
+370       !\hyperlink{oid_8c_a3f24a7995a2a7aa587379ec6e1922e36}{oidComp}(oid, oidLen, \hyperlink{ec__curves_8c_a0c0db5ac9072998c05e021d51fd03992}{ED25519\_OID}, \textcolor{keyword}{sizeof}(\hyperlink{ec__curves_8c_a0c0db5ac9072998c05e021d51fd03992}{ED25519\_OID})))
+371    \{
+372       \textcolor{comment}{//For all of the OIDs, the parameters must be absent (refer to RFC 8410,}
+373       \textcolor{comment}{//section 3)}
+374       n = 0;
+375    \}
+376    \textcolor{keywordflow}{else}
+377 \textcolor{preprocessor}{#endif}
+378 \textcolor{preprocessor}{#if (ED448\_SUPPORT == ENABLED)}
+379    \textcolor{comment}{//X448 or Ed448 algorithm identifier?}
+380    \textcolor{keywordflow}{if}(!\hyperlink{oid_8c_a3f24a7995a2a7aa587379ec6e1922e36}{oidComp}(oid, oidLen, \hyperlink{ec__curves_8c_a6f5d28c07c26ec1d021c2eb40067a892}{X448\_OID}, \textcolor{keyword}{sizeof}(\hyperlink{ec__curves_8c_a6f5d28c07c26ec1d021c2eb40067a892}{X448\_OID})) ||
+381       !\hyperlink{oid_8c_a3f24a7995a2a7aa587379ec6e1922e36}{oidComp}(oid, oidLen, \hyperlink{ec__curves_8c_ad355985d25e281438e8d813c171aea13}{ED448\_OID}, \textcolor{keyword}{sizeof}(\hyperlink{ec__curves_8c_ad355985d25e281438e8d813c171aea13}{ED448\_OID})))
+382    \{
+383       \textcolor{comment}{//For all of the OIDs, the parameters must be absent (refer to RFC 8410,}
+384       \textcolor{comment}{//section 3)}
+385       n = 0;
+386    \}
+387    \textcolor{keywordflow}{else}
+388 \textcolor{preprocessor}{#endif}
+389    \textcolor{comment}{//Unknown algorithm identifier?}
+390    \{
+391       \textcolor{comment}{//Report an error}
+392       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+393    \}
+394 
+395    \textcolor{comment}{//Any error to report?}
+396    \textcolor{keywordflow}{if}(error)
+397       \textcolor{keywordflow}{return} error;
+398 
+399    \textcolor{comment}{//Advance data pointer}
+400    p += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+401    length += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+402 
+403    \textcolor{comment}{//The AlgorithmIdentifier structure is encapsulated within a sequence}
+404    tag.\hyperlink{structAsn1Tag_a93c64e611d57dfb59e6ebafe938f28c1}{constructed} = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+405    tag.\hyperlink{structAsn1Tag_a9f35c291ffa22d903d9c66638bb225ea}{objClass} = \hyperlink{asn1_8h_ab3589ac11c049bfda069aa3ecf683578}{ASN1\_CLASS\_UNIVERSAL};
+406    tag.\hyperlink{structAsn1Tag_a3ecdc4bbf328b5216521cb2114f45935}{objType} = \hyperlink{asn1_8h_a1b0f39cb3d87e425703ba389df9da1dfaf6223adf2132054146cf838b14c593ea}{ASN1\_TYPE\_SEQUENCE};
+407    tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length} = \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length};
+408    tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value} = output;
+409 
+410    \textcolor{comment}{//Write the corresponding ASN.1 tag}
+411    error = \hyperlink{asn1_8c_a246f5e4192e8f064bd28d519a89d0207}{asn1WriteTag}(&tag, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, output, &n);
+412    \textcolor{comment}{//Any error to report?}
+413    \textcolor{keywordflow}{if}(error)
+414       \textcolor{keywordflow}{return} error;
+415 
+416    \textcolor{comment}{//Total number of bytes that have been written}
+417    *written = \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+418 
+419    \textcolor{comment}{//Successful processing}
+420    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+421 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{x509__key__format_8c_a5d1fa3dbbeef608f7ce0024785eaf634}\label{x509__key__format_8c_a5d1fa3dbbeef608f7ce0024785eaf634}} 
+\index{x509\+\_\+key\+\_\+format.\+c@{x509\+\_\+key\+\_\+format.\+c}!x509\+Format\+Dsa\+Parameters@{x509\+Format\+Dsa\+Parameters}}
+\index{x509\+Format\+Dsa\+Parameters@{x509\+Format\+Dsa\+Parameters}!x509\+\_\+key\+\_\+format.\+c@{x509\+\_\+key\+\_\+format.\+c}}
+\subsubsection{\texorpdfstring{x509\+Format\+Dsa\+Parameters()}{x509FormatDsaParameters()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} x509\+Format\+Dsa\+Parameters (\begin{DoxyParamCaption}\item[{const \hyperlink{structX509DsaParameters}{X509\+Dsa\+Parameters} $\ast$}]{dsa\+Params,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{output,  }\item[{size\+\_\+t $\ast$}]{written }\end{DoxyParamCaption})}
+
+
+
+Format D\+SA domain parameters. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em dsa\+Params} & Pointer to the D\+SA domain parameters \\
+\hline
+\mbox{\tt out}  & {\em output} & Buffer where to format the A\+S\+N.\+1 structure \\
+\hline
+\mbox{\tt out}  & {\em written} & Length of the resulting A\+S\+N.\+1 structure \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 882 of file x509\+\_\+key\+\_\+format.\+c.
+
+
+\begin{DoxyCode}
+884 \{
+885    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+886    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+887    \textcolor{keywordtype}{size\_t} \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length};
+888    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *\hyperlink{ndp_8h_a6519522ad9a6f45e7a8d25d31392a977}{p};
+889    \hyperlink{structAsn1Tag}{Asn1Tag} tag;
+890 
+891    \textcolor{comment}{//Point to the buffer where to write the ASN.1 structure}
+892    p = output;
+893    \textcolor{comment}{//Length of the ASN.1 structure}
+894    length = 0;
+895 
+896    \textcolor{comment}{//Write parameter p}
+897    tag.\hyperlink{structAsn1Tag_a93c64e611d57dfb59e6ebafe938f28c1}{constructed} = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+898    tag.\hyperlink{structAsn1Tag_a9f35c291ffa22d903d9c66638bb225ea}{objClass} = \hyperlink{asn1_8h_ab3589ac11c049bfda069aa3ecf683578}{ASN1\_CLASS\_UNIVERSAL};
+899    tag.\hyperlink{structAsn1Tag_a3ecdc4bbf328b5216521cb2114f45935}{objType} = \hyperlink{asn1_8h_a1b0f39cb3d87e425703ba389df9da1dfaf49fe8465a80ebfbe92fe0f0622ec994}{ASN1\_TYPE\_INTEGER};
+900    tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length} = dsaParams->\hyperlink{structX509DsaParameters_a492453aa50210c40372c6d76ff955c7f}{pLen};
+901    tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value} = dsaParams->\hyperlink{structX509DsaParameters_adf55df7def4d98995045e1c23e995cde}{p};
+902 
+903    \textcolor{comment}{//Write the corresponding ASN.1 tag}
+904    error = \hyperlink{asn1_8c_a246f5e4192e8f064bd28d519a89d0207}{asn1WriteTag}(&tag, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, p, &n);
+905    \textcolor{comment}{//Any error to report?}
+906    \textcolor{keywordflow}{if}(error)
+907       \textcolor{keywordflow}{return} error;
+908 
+909    \textcolor{comment}{//Advance data pointer}
+910    p += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+911    length += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+912 
+913    \textcolor{comment}{//Write parameter q}
+914    tag.\hyperlink{structAsn1Tag_a93c64e611d57dfb59e6ebafe938f28c1}{constructed} = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+915    tag.\hyperlink{structAsn1Tag_a9f35c291ffa22d903d9c66638bb225ea}{objClass} = \hyperlink{asn1_8h_ab3589ac11c049bfda069aa3ecf683578}{ASN1\_CLASS\_UNIVERSAL};
+916    tag.\hyperlink{structAsn1Tag_a3ecdc4bbf328b5216521cb2114f45935}{objType} = \hyperlink{asn1_8h_a1b0f39cb3d87e425703ba389df9da1dfaf49fe8465a80ebfbe92fe0f0622ec994}{ASN1\_TYPE\_INTEGER};
+917    tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length} = dsaParams->\hyperlink{structX509DsaParameters_a2cb0e6cf41cb0b07dfccedc79bce007e}{qLen};
+918    tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value} = dsaParams->\hyperlink{structX509DsaParameters_a8d55a808e46108ce0b7c2af09926f913}{q};
+919 
+920    \textcolor{comment}{//Write the corresponding ASN.1 tag}
+921    error = \hyperlink{asn1_8c_a246f5e4192e8f064bd28d519a89d0207}{asn1WriteTag}(&tag, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, p, &n);
+922    \textcolor{comment}{//Any error to report?}
+923    \textcolor{keywordflow}{if}(error)
+924       \textcolor{keywordflow}{return} error;
+925 
+926    \textcolor{comment}{//Advance data pointer}
+927    p += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+928    length += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+929 
+930    \textcolor{comment}{//Write parameter g}
+931    tag.\hyperlink{structAsn1Tag_a93c64e611d57dfb59e6ebafe938f28c1}{constructed} = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+932    tag.\hyperlink{structAsn1Tag_a9f35c291ffa22d903d9c66638bb225ea}{objClass} = \hyperlink{asn1_8h_ab3589ac11c049bfda069aa3ecf683578}{ASN1\_CLASS\_UNIVERSAL};
+933    tag.\hyperlink{structAsn1Tag_a3ecdc4bbf328b5216521cb2114f45935}{objType} = \hyperlink{asn1_8h_a1b0f39cb3d87e425703ba389df9da1dfaf49fe8465a80ebfbe92fe0f0622ec994}{ASN1\_TYPE\_INTEGER};
+934    tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length} = dsaParams->\hyperlink{structX509DsaParameters_a84e6f3a0159da3fff5bf9315be4cf5f7}{gLen};
+935    tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value} = dsaParams->\hyperlink{structX509DsaParameters_ae79dacfe9617adf9d672aa48fe40a3ea}{g};
+936 
+937    \textcolor{comment}{//Write the corresponding ASN.1 tag}
+938    error = \hyperlink{asn1_8c_a246f5e4192e8f064bd28d519a89d0207}{asn1WriteTag}(&tag, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, p, &n);
+939    \textcolor{comment}{//Any error to report?}
+940    \textcolor{keywordflow}{if}(error)
+941       \textcolor{keywordflow}{return} error;
+942 
+943    \textcolor{comment}{//Advance data pointer}
+944    p += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+945    length += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+946 
+947    \textcolor{comment}{//The DSA domain parameters are encapsulated within a sequence}
+948    tag.\hyperlink{structAsn1Tag_a93c64e611d57dfb59e6ebafe938f28c1}{constructed} = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+949    tag.\hyperlink{structAsn1Tag_a9f35c291ffa22d903d9c66638bb225ea}{objClass} = \hyperlink{asn1_8h_ab3589ac11c049bfda069aa3ecf683578}{ASN1\_CLASS\_UNIVERSAL};
+950    tag.\hyperlink{structAsn1Tag_a3ecdc4bbf328b5216521cb2114f45935}{objType} = \hyperlink{asn1_8h_a1b0f39cb3d87e425703ba389df9da1dfaf6223adf2132054146cf838b14c593ea}{ASN1\_TYPE\_SEQUENCE};
+951    tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length} = \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length};
+952    tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value} = output;
+953 
+954    \textcolor{comment}{//Write DSAParameters structure}
+955    error = \hyperlink{asn1_8c_a246f5e4192e8f064bd28d519a89d0207}{asn1WriteTag}(&tag, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, output, &n);
+956    \textcolor{comment}{//Any error to report?}
+957    \textcolor{keywordflow}{if}(error)
+958       \textcolor{keywordflow}{return} error;
+959 
+960    \textcolor{comment}{//Total number of bytes that have been written}
+961    *written = \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+962 
+963    \textcolor{comment}{//Successful processing}
+964    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+965 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{x509__key__format_8c_a22cc8b9da833724eef56e39e3f3555c1}\label{x509__key__format_8c_a22cc8b9da833724eef56e39e3f3555c1}} 
+\index{x509\+\_\+key\+\_\+format.\+c@{x509\+\_\+key\+\_\+format.\+c}!x509\+Format\+Dsa\+Public\+Key@{x509\+Format\+Dsa\+Public\+Key}}
+\index{x509\+Format\+Dsa\+Public\+Key@{x509\+Format\+Dsa\+Public\+Key}!x509\+\_\+key\+\_\+format.\+c@{x509\+\_\+key\+\_\+format.\+c}}
+\subsubsection{\texorpdfstring{x509\+Format\+Dsa\+Public\+Key()}{x509FormatDsaPublicKey()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} x509\+Format\+Dsa\+Public\+Key (\begin{DoxyParamCaption}\item[{const \hyperlink{structX509DsaPublicKey}{X509\+Dsa\+Public\+Key} $\ast$}]{dsa\+Public\+Key,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{output,  }\item[{size\+\_\+t $\ast$}]{written }\end{DoxyParamCaption})}
+
+
+
+Format D\+S\+A\+Public\+Key structure. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em dsa\+Public\+Key} & Pointer to the D\+SA public key \\
+\hline
+\mbox{\tt out}  & {\em output} & Buffer where to format the D\+S\+A\+Public\+Key structure \\
+\hline
+\mbox{\tt out}  & {\em written} & Length of the D\+S\+A\+Public\+Key structure \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 846 of file x509\+\_\+key\+\_\+format.\+c.
+
+
+\begin{DoxyCode}
+848 \{
+849    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+850    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+851    \hyperlink{structAsn1Tag}{Asn1Tag} tag;
+852 
+853    \textcolor{comment}{//Write public key}
+854    tag.\hyperlink{structAsn1Tag_a93c64e611d57dfb59e6ebafe938f28c1}{constructed} = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+855    tag.\hyperlink{structAsn1Tag_a9f35c291ffa22d903d9c66638bb225ea}{objClass} = \hyperlink{asn1_8h_ab3589ac11c049bfda069aa3ecf683578}{ASN1\_CLASS\_UNIVERSAL};
+856    tag.\hyperlink{structAsn1Tag_a3ecdc4bbf328b5216521cb2114f45935}{objType} = \hyperlink{asn1_8h_a1b0f39cb3d87e425703ba389df9da1dfaf49fe8465a80ebfbe92fe0f0622ec994}{ASN1\_TYPE\_INTEGER};
+857    tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length} = dsaPublicKey->\hyperlink{structX509DsaPublicKey_ae8ad5e10e6090c0b95a083b49efe18b2}{yLen};
+858    tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value} = dsaPublicKey->\hyperlink{structX509DsaPublicKey_a8a2e4dd10c344dfeae0d55487b2bfce8}{y};
+859 
+860    \textcolor{comment}{//Write the corresponding ASN.1 tag}
+861    error = \hyperlink{asn1_8c_a246f5e4192e8f064bd28d519a89d0207}{asn1WriteTag}(&tag, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, output, &n);
+862    \textcolor{comment}{//Any error to report?}
+863    \textcolor{keywordflow}{if}(error)
+864       \textcolor{keywordflow}{return} error;
+865 
+866    \textcolor{comment}{//Total number of bytes that have been written}
+867    *written = \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+868 
+869    \textcolor{comment}{//Successful processing}
+870    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+871 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{x509__key__format_8c_af750d46c465091c8d4c9ab18bf181764}\label{x509__key__format_8c_af750d46c465091c8d4c9ab18bf181764}} 
+\index{x509\+\_\+key\+\_\+format.\+c@{x509\+\_\+key\+\_\+format.\+c}!x509\+Format\+Ec\+Parameters@{x509\+Format\+Ec\+Parameters}}
+\index{x509\+Format\+Ec\+Parameters@{x509\+Format\+Ec\+Parameters}!x509\+\_\+key\+\_\+format.\+c@{x509\+\_\+key\+\_\+format.\+c}}
+\subsubsection{\texorpdfstring{x509\+Format\+Ec\+Parameters()}{x509FormatEcParameters()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} x509\+Format\+Ec\+Parameters (\begin{DoxyParamCaption}\item[{const \hyperlink{structX509EcParameters}{X509\+Ec\+Parameters} $\ast$}]{ec\+Params,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{output,  }\item[{size\+\_\+t $\ast$}]{written }\end{DoxyParamCaption})}
+
+
+
+Format E\+C\+Parameters structure. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em ec\+Params} & Pointer to the EC parameters \\
+\hline
+\mbox{\tt out}  & {\em output} & Buffer where to format the E\+C\+Parameters structure \\
+\hline
+\mbox{\tt out}  & {\em written} & Length of the E\+C\+Parameters structure \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 1003 of file x509\+\_\+key\+\_\+format.\+c.
+
+
+\begin{DoxyCode}
+1005 \{
+1006    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+1007    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1008    \hyperlink{structAsn1Tag}{Asn1Tag} tag;
+1009 
+1010    \textcolor{comment}{//The namedCurve field identifies all the required values for a particular}
+1011    \textcolor{comment}{//set of elliptic curve domain parameters to be represented by an object}
+1012    \textcolor{comment}{//identifier}
+1013    tag.\hyperlink{structAsn1Tag_a93c64e611d57dfb59e6ebafe938f28c1}{constructed} = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+1014    tag.\hyperlink{structAsn1Tag_a9f35c291ffa22d903d9c66638bb225ea}{objClass} = \hyperlink{asn1_8h_ab3589ac11c049bfda069aa3ecf683578}{ASN1\_CLASS\_UNIVERSAL};
+1015    tag.\hyperlink{structAsn1Tag_a3ecdc4bbf328b5216521cb2114f45935}{objType} = \hyperlink{asn1_8h_a1b0f39cb3d87e425703ba389df9da1dfa586ebdd8b160ea2185cff78381dfe4b0}{ASN1\_TYPE\_OBJECT\_IDENTIFIER};
+1016    tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length} = ecParams->\hyperlink{structX509EcParameters_ac58081bd63ed68d0cb101ff7e65667ec}{namedCurveLen};
+1017    tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value} = ecParams->\hyperlink{structX509EcParameters_a122c5387fb2f12374a905ecfd2ca4c86}{namedCurve};
+1018 
+1019    \textcolor{comment}{//Write the corresponding ASN.1 tag}
+1020    error = \hyperlink{asn1_8c_a246f5e4192e8f064bd28d519a89d0207}{asn1WriteTag}(&tag, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, output, &n);
+1021    \textcolor{comment}{//Any error to report?}
+1022    \textcolor{keywordflow}{if}(error)
+1023       \textcolor{keywordflow}{return} error;
+1024 
+1025    \textcolor{comment}{//Total number of bytes that have been written}
+1026    *written = \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1027 
+1028    \textcolor{comment}{//Successful processing}
+1029    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+1030 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{x509__key__format_8c_ae868b08390041bc5b7c7d38778008b5e}\label{x509__key__format_8c_ae868b08390041bc5b7c7d38778008b5e}} 
+\index{x509\+\_\+key\+\_\+format.\+c@{x509\+\_\+key\+\_\+format.\+c}!x509\+Format\+Ec\+Public\+Key@{x509\+Format\+Ec\+Public\+Key}}
+\index{x509\+Format\+Ec\+Public\+Key@{x509\+Format\+Ec\+Public\+Key}!x509\+\_\+key\+\_\+format.\+c@{x509\+\_\+key\+\_\+format.\+c}}
+\subsubsection{\texorpdfstring{x509\+Format\+Ec\+Public\+Key()}{x509FormatEcPublicKey()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} x509\+Format\+Ec\+Public\+Key (\begin{DoxyParamCaption}\item[{const \hyperlink{structX509EcPublicKey}{X509\+Ec\+Public\+Key} $\ast$}]{ec\+Public\+Key,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{output,  }\item[{size\+\_\+t $\ast$}]{written }\end{DoxyParamCaption})}
+
+
+
+Format E\+C\+Public\+Key structure. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em ec\+Public\+Key} & Pointer to the EC public key \\
+\hline
+\mbox{\tt out}  & {\em output} & Buffer where to format the A\+S\+N.\+1 structure \\
+\hline
+\mbox{\tt out}  & {\em written} & Length of the resulting A\+S\+N.\+1 structure \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 976 of file x509\+\_\+key\+\_\+format.\+c.
+
+
+\begin{DoxyCode}
+978 \{
+979    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+980 
+981    \textcolor{comment}{//Retrieve the length of the EC public key}
+982    n = ecPublicKey->\hyperlink{structX509EcPublicKey_a62e05abdaa08ec4418a624e44b84a5b8}{qLen};
+983 
+984    \textcolor{comment}{//Copy the EC public key}
+985    \hyperlink{cyclone__crypto_2core_2crypto_8h_a6724616c4014bb7e21f2660bd7b88be8}{cryptoMemcpy}(output, ecPublicKey->\hyperlink{structX509EcPublicKey_a40d2e839059193580054d744529d0131}{q}, n);
+986 
+987    \textcolor{comment}{//Total number of bytes that have been written}
+988    *written = \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+989 
+990    \textcolor{comment}{//Successful processing}
+991    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+992 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{x509__key__format_8c_abb9bb43fc9af429f6deb031f143f4249}\label{x509__key__format_8c_abb9bb43fc9af429f6deb031f143f4249}} 
+\index{x509\+\_\+key\+\_\+format.\+c@{x509\+\_\+key\+\_\+format.\+c}!x509\+Format\+Rsa\+Pss\+Hash\+Algo@{x509\+Format\+Rsa\+Pss\+Hash\+Algo}}
+\index{x509\+Format\+Rsa\+Pss\+Hash\+Algo@{x509\+Format\+Rsa\+Pss\+Hash\+Algo}!x509\+\_\+key\+\_\+format.\+c@{x509\+\_\+key\+\_\+format.\+c}}
+\subsubsection{\texorpdfstring{x509\+Format\+Rsa\+Pss\+Hash\+Algo()}{x509FormatRsaPssHashAlgo()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} x509\+Format\+Rsa\+Pss\+Hash\+Algo (\begin{DoxyParamCaption}\item[{const \hyperlink{structX509RsaPssParameters}{X509\+Rsa\+Pss\+Parameters} $\ast$}]{rsa\+Pss\+Params,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{output,  }\item[{size\+\_\+t $\ast$}]{written }\end{DoxyParamCaption})}
+
+
+
+Format R\+S\+A\+S\+S\+A-\/\+P\+SS hash algorithm. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em rsa\+Pss\+Params} & Pointer to the R\+S\+A-\/\+P\+SS parameters \\
+\hline
+\mbox{\tt out}  & {\em output} & Buffer where to format the A\+S\+N.\+1 structure \\
+\hline
+\mbox{\tt out}  & {\em written} & Length of the resulting A\+S\+N.\+1 structure \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 582 of file x509\+\_\+key\+\_\+format.\+c.
+
+
+\begin{DoxyCode}
+584 \{
+585    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+586    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+587    \hyperlink{structAsn1Tag}{Asn1Tag} tag;
+588 
+589    \textcolor{comment}{//Length of the ASN.1 structure}
+590    n = 0;
+591 
+592    \textcolor{comment}{//The default hash algorithm is SHA-1}
+593    \textcolor{keywordflow}{if}(rsaPssParams->\hyperlink{structX509RsaPssParameters_a21f002c671582b73f60617bc23116db3}{hashAlgo} != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} && rsaPssParams->\hyperlink{structX509RsaPssParameters_a91b731f749a7d1bfafbb8595f898ff2e}{hashAlgoLen} > 0)
+594    \{
+595       \textcolor{comment}{//Write the hash algorithm identifier}
+596       tag.\hyperlink{structAsn1Tag_a93c64e611d57dfb59e6ebafe938f28c1}{constructed} = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+597       tag.\hyperlink{structAsn1Tag_a9f35c291ffa22d903d9c66638bb225ea}{objClass} = \hyperlink{asn1_8h_ab3589ac11c049bfda069aa3ecf683578}{ASN1\_CLASS\_UNIVERSAL};
+598       tag.\hyperlink{structAsn1Tag_a3ecdc4bbf328b5216521cb2114f45935}{objType} = \hyperlink{asn1_8h_a1b0f39cb3d87e425703ba389df9da1dfa586ebdd8b160ea2185cff78381dfe4b0}{ASN1\_TYPE\_OBJECT\_IDENTIFIER};
+599       tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length} = rsaPssParams->\hyperlink{structX509RsaPssParameters_a91b731f749a7d1bfafbb8595f898ff2e}{hashAlgoLen};
+600       tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value} = rsaPssParams->\hyperlink{structX509RsaPssParameters_a21f002c671582b73f60617bc23116db3}{hashAlgo};
+601 
+602       \textcolor{comment}{//Write the corresponding ASN.1 tag}
+603       error = \hyperlink{asn1_8c_a246f5e4192e8f064bd28d519a89d0207}{asn1WriteTag}(&tag, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, output, &n);
+604       \textcolor{comment}{//Any error to report?}
+605       \textcolor{keywordflow}{if}(error)
+606          \textcolor{keywordflow}{return} error;
+607 
+608       \textcolor{comment}{//The hashAlgorithm parameter is encapsulated within a sequence}
+609       tag.\hyperlink{structAsn1Tag_a93c64e611d57dfb59e6ebafe938f28c1}{constructed} = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+610       tag.\hyperlink{structAsn1Tag_a9f35c291ffa22d903d9c66638bb225ea}{objClass} = \hyperlink{asn1_8h_ab3589ac11c049bfda069aa3ecf683578}{ASN1\_CLASS\_UNIVERSAL};
+611       tag.\hyperlink{structAsn1Tag_a3ecdc4bbf328b5216521cb2114f45935}{objType} = \hyperlink{asn1_8h_a1b0f39cb3d87e425703ba389df9da1dfaf6223adf2132054146cf838b14c593ea}{ASN1\_TYPE\_SEQUENCE};
+612       tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length} = \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+613       tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value} = output;
+614 
+615       \textcolor{comment}{//Write the corresponding ASN.1 tag}
+616       error = \hyperlink{asn1_8c_a246f5e4192e8f064bd28d519a89d0207}{asn1WriteTag}(&tag, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, output, &n);
+617       \textcolor{comment}{//Any error to report?}
+618       \textcolor{keywordflow}{if}(error)
+619          \textcolor{keywordflow}{return} error;
+620 
+621       \textcolor{comment}{//Explicit tagging shall be used to encode each parameter}
+622       tag.\hyperlink{structAsn1Tag_a93c64e611d57dfb59e6ebafe938f28c1}{constructed} = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+623       tag.\hyperlink{structAsn1Tag_a9f35c291ffa22d903d9c66638bb225ea}{objClass} = \hyperlink{asn1_8h_aed381d50c77b8c9f962b5359d6115c97}{ASN1\_CLASS\_CONTEXT\_SPECIFIC};
+624       tag.\hyperlink{structAsn1Tag_a3ecdc4bbf328b5216521cb2114f45935}{objType} = 0;
+625       tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length} = \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+626       tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value} = output;
+627 
+628       \textcolor{comment}{//Write the corresponding ASN.1 tag}
+629       error = \hyperlink{asn1_8c_a246f5e4192e8f064bd28d519a89d0207}{asn1WriteTag}(&tag, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, output, &n);
+630       \textcolor{comment}{//Any error to report?}
+631       \textcolor{keywordflow}{if}(error)
+632          \textcolor{keywordflow}{return} error;
+633    \}
+634 
+635    \textcolor{comment}{//Total number of bytes that have been written}
+636    *written = \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+637 
+638    \textcolor{comment}{//Successful processing}
+639    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+640 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{x509__key__format_8c_a910a7958675041d81fd48b3ab94e5323}\label{x509__key__format_8c_a910a7958675041d81fd48b3ab94e5323}} 
+\index{x509\+\_\+key\+\_\+format.\+c@{x509\+\_\+key\+\_\+format.\+c}!x509\+Format\+Rsa\+Pss\+Mask\+Gen\+Algo@{x509\+Format\+Rsa\+Pss\+Mask\+Gen\+Algo}}
+\index{x509\+Format\+Rsa\+Pss\+Mask\+Gen\+Algo@{x509\+Format\+Rsa\+Pss\+Mask\+Gen\+Algo}!x509\+\_\+key\+\_\+format.\+c@{x509\+\_\+key\+\_\+format.\+c}}
+\subsubsection{\texorpdfstring{x509\+Format\+Rsa\+Pss\+Mask\+Gen\+Algo()}{x509FormatRsaPssMaskGenAlgo()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} x509\+Format\+Rsa\+Pss\+Mask\+Gen\+Algo (\begin{DoxyParamCaption}\item[{const \hyperlink{structX509RsaPssParameters}{X509\+Rsa\+Pss\+Parameters} $\ast$}]{rsa\+Pss\+Params,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{output,  }\item[{size\+\_\+t $\ast$}]{written }\end{DoxyParamCaption})}
+
+
+
+Format R\+S\+A\+S\+S\+A-\/\+P\+SS mask generation algorithm. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em rsa\+Pss\+Params} & Pointer to the R\+S\+A-\/\+P\+SS parameters \\
+\hline
+\mbox{\tt out}  & {\em output} & Buffer where to format the A\+S\+N.\+1 structure \\
+\hline
+\mbox{\tt out}  & {\em written} & Length of the resulting A\+S\+N.\+1 structure \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 651 of file x509\+\_\+key\+\_\+format.\+c.
+
+
+\begin{DoxyCode}
+653 \{
+654    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+655    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+656    \textcolor{keywordtype}{size\_t} \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length};
+657    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *\hyperlink{ndp_8h_a6519522ad9a6f45e7a8d25d31392a977}{p};
+658    \hyperlink{structAsn1Tag}{Asn1Tag} tag;
+659 
+660    \textcolor{comment}{//Point to the buffer where to write the ASN.1 structure}
+661    p = output;
+662    \textcolor{comment}{//Length of the ASN.1 structure}
+663    length = 0;
+664 
+665    \textcolor{comment}{//The default mask generation function is MGF1}
+666    \textcolor{keywordflow}{if}(rsaPssParams->\hyperlink{structX509RsaPssParameters_a7f95c185598c0a6b7e69400d96898967}{maskGenAlgo} != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} && rsaPssParams->
+      \hyperlink{structX509RsaPssParameters_a212c882582b2c33fff6206a7a8872b7d}{maskGenAlgoLen} > 0)
+667    \{
+668       \textcolor{comment}{//Write the mask generation algorithm identifier}
+669       tag.\hyperlink{structAsn1Tag_a93c64e611d57dfb59e6ebafe938f28c1}{constructed} = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+670       tag.\hyperlink{structAsn1Tag_a9f35c291ffa22d903d9c66638bb225ea}{objClass} = \hyperlink{asn1_8h_ab3589ac11c049bfda069aa3ecf683578}{ASN1\_CLASS\_UNIVERSAL};
+671       tag.\hyperlink{structAsn1Tag_a3ecdc4bbf328b5216521cb2114f45935}{objType} = \hyperlink{asn1_8h_a1b0f39cb3d87e425703ba389df9da1dfa586ebdd8b160ea2185cff78381dfe4b0}{ASN1\_TYPE\_OBJECT\_IDENTIFIER};
+672       tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length} = rsaPssParams->\hyperlink{structX509RsaPssParameters_a212c882582b2c33fff6206a7a8872b7d}{maskGenAlgoLen};
+673       tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value} = rsaPssParams->\hyperlink{structX509RsaPssParameters_a7f95c185598c0a6b7e69400d96898967}{maskGenAlgo};
+674 
+675       \textcolor{comment}{//Write the corresponding ASN.1 tag}
+676       error = \hyperlink{asn1_8c_a246f5e4192e8f064bd28d519a89d0207}{asn1WriteTag}(&tag, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, p, &n);
+677       \textcolor{comment}{//Any error to report?}
+678       \textcolor{keywordflow}{if}(error)
+679          \textcolor{keywordflow}{return} error;
+680 
+681       \textcolor{comment}{//Advance data pointer}
+682       p += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+683       length += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+684 
+685       \textcolor{comment}{//Write the algorithm identifier of the one-way hash function employed}
+686       \textcolor{comment}{//with the mask generation function}
+687       error = \hyperlink{x509__key__format_8c_abfb690f68af342266e98721d5f874ca7}{x509FormatRsaPssMaskGenHashAlgo}(rsaPssParams, p, &n);
+688       \textcolor{comment}{//Any error to report?}
+689       \textcolor{keywordflow}{if}(error)
+690          \textcolor{keywordflow}{return} error;
+691 
+692       \textcolor{comment}{//Advance data pointer}
+693       p += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+694       length += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+695 
+696       \textcolor{comment}{//The maskGenAlgorithm parameter is encapsulated within a sequence}
+697       tag.\hyperlink{structAsn1Tag_a93c64e611d57dfb59e6ebafe938f28c1}{constructed} = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+698       tag.\hyperlink{structAsn1Tag_a9f35c291ffa22d903d9c66638bb225ea}{objClass} = \hyperlink{asn1_8h_ab3589ac11c049bfda069aa3ecf683578}{ASN1\_CLASS\_UNIVERSAL};
+699       tag.\hyperlink{structAsn1Tag_a3ecdc4bbf328b5216521cb2114f45935}{objType} = \hyperlink{asn1_8h_a1b0f39cb3d87e425703ba389df9da1dfaf6223adf2132054146cf838b14c593ea}{ASN1\_TYPE\_SEQUENCE};
+700       tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length} = \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length};
+701       tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value} = output;
+702 
+703       \textcolor{comment}{//Write the corresponding ASN.1 tag}
+704       error = \hyperlink{asn1_8c_a246f5e4192e8f064bd28d519a89d0207}{asn1WriteTag}(&tag, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, output, &length);
+705       \textcolor{comment}{//Any error to report?}
+706       \textcolor{keywordflow}{if}(error)
+707          \textcolor{keywordflow}{return} error;
+708 
+709       \textcolor{comment}{//Explicit tagging shall be used to encode each parameter}
+710       tag.\hyperlink{structAsn1Tag_a93c64e611d57dfb59e6ebafe938f28c1}{constructed} = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+711       tag.\hyperlink{structAsn1Tag_a9f35c291ffa22d903d9c66638bb225ea}{objClass} = \hyperlink{asn1_8h_aed381d50c77b8c9f962b5359d6115c97}{ASN1\_CLASS\_CONTEXT\_SPECIFIC};
+712       tag.\hyperlink{structAsn1Tag_a3ecdc4bbf328b5216521cb2114f45935}{objType} = 1;
+713       tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length} = \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length};
+714       tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value} = output;
+715 
+716       \textcolor{comment}{//Write the corresponding ASN.1 tag}
+717       error = \hyperlink{asn1_8c_a246f5e4192e8f064bd28d519a89d0207}{asn1WriteTag}(&tag, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, output, &length);
+718       \textcolor{comment}{//Any error to report?}
+719       \textcolor{keywordflow}{if}(error)
+720          \textcolor{keywordflow}{return} error;
+721    \}
+722 
+723    \textcolor{comment}{//Total number of bytes that have been written}
+724    *written = \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length};
+725 
+726    \textcolor{comment}{//Successful processing}
+727    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+728 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{x509__key__format_8c_abfb690f68af342266e98721d5f874ca7}\label{x509__key__format_8c_abfb690f68af342266e98721d5f874ca7}} 
+\index{x509\+\_\+key\+\_\+format.\+c@{x509\+\_\+key\+\_\+format.\+c}!x509\+Format\+Rsa\+Pss\+Mask\+Gen\+Hash\+Algo@{x509\+Format\+Rsa\+Pss\+Mask\+Gen\+Hash\+Algo}}
+\index{x509\+Format\+Rsa\+Pss\+Mask\+Gen\+Hash\+Algo@{x509\+Format\+Rsa\+Pss\+Mask\+Gen\+Hash\+Algo}!x509\+\_\+key\+\_\+format.\+c@{x509\+\_\+key\+\_\+format.\+c}}
+\subsubsection{\texorpdfstring{x509\+Format\+Rsa\+Pss\+Mask\+Gen\+Hash\+Algo()}{x509FormatRsaPssMaskGenHashAlgo()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} x509\+Format\+Rsa\+Pss\+Mask\+Gen\+Hash\+Algo (\begin{DoxyParamCaption}\item[{const \hyperlink{structX509RsaPssParameters}{X509\+Rsa\+Pss\+Parameters} $\ast$}]{rsa\+Pss\+Params,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{output,  }\item[{size\+\_\+t $\ast$}]{written }\end{DoxyParamCaption})}
+
+
+
+Format R\+S\+A\+S\+S\+A-\/\+P\+SS mask generation hash algorithm. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em rsa\+Pss\+Params} & Pointer to the R\+S\+A-\/\+P\+SS parameters \\
+\hline
+\mbox{\tt out}  & {\em output} & Buffer where to format the A\+S\+N.\+1 structure \\
+\hline
+\mbox{\tt out}  & {\em written} & Length of the resulting A\+S\+N.\+1 structure \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 739 of file x509\+\_\+key\+\_\+format.\+c.
+
+
+\begin{DoxyCode}
+741 \{
+742    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+743    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+744    \hyperlink{structAsn1Tag}{Asn1Tag} tag;
+745 
+746    \textcolor{comment}{//Length of the ASN.1 structure}
+747    n = 0;
+748 
+749    \textcolor{comment}{//The default hash algorithm is SHA-1}
+750    \textcolor{keywordflow}{if}(rsaPssParams->\hyperlink{structX509RsaPssParameters_aee2673db47b0dce26a8bc9e2c2a51942}{maskGenHashAlgo} != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} &&
+751       rsaPssParams->\hyperlink{structX509RsaPssParameters_a10553f3c1ae38188028f4dbd33f5fb8a}{maskGenHashAlgoLen} > 0)
+752    \{
+753       \textcolor{comment}{//Write the algorithm identifier of the one-way hash function employed}
+754       \textcolor{comment}{//with the mask generation function}
+755       tag.\hyperlink{structAsn1Tag_a93c64e611d57dfb59e6ebafe938f28c1}{constructed} = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+756       tag.\hyperlink{structAsn1Tag_a9f35c291ffa22d903d9c66638bb225ea}{objClass} = \hyperlink{asn1_8h_ab3589ac11c049bfda069aa3ecf683578}{ASN1\_CLASS\_UNIVERSAL};
+757       tag.\hyperlink{structAsn1Tag_a3ecdc4bbf328b5216521cb2114f45935}{objType} = \hyperlink{asn1_8h_a1b0f39cb3d87e425703ba389df9da1dfa586ebdd8b160ea2185cff78381dfe4b0}{ASN1\_TYPE\_OBJECT\_IDENTIFIER};
+758       tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length} = rsaPssParams->\hyperlink{structX509RsaPssParameters_a10553f3c1ae38188028f4dbd33f5fb8a}{maskGenHashAlgoLen};
+759       tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value} = rsaPssParams->\hyperlink{structX509RsaPssParameters_aee2673db47b0dce26a8bc9e2c2a51942}{maskGenHashAlgo};
+760 
+761       \textcolor{comment}{//Write the corresponding ASN.1 tag}
+762       error = \hyperlink{asn1_8c_a246f5e4192e8f064bd28d519a89d0207}{asn1WriteTag}(&tag, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, output, &n);
+763       \textcolor{comment}{//Any error to report?}
+764       \textcolor{keywordflow}{if}(error)
+765          \textcolor{keywordflow}{return} error;
+766 
+767       \textcolor{comment}{//The hash algorithm identifier is encapsulated within a sequence}
+768       tag.\hyperlink{structAsn1Tag_a93c64e611d57dfb59e6ebafe938f28c1}{constructed} = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+769       tag.\hyperlink{structAsn1Tag_a9f35c291ffa22d903d9c66638bb225ea}{objClass} = \hyperlink{asn1_8h_ab3589ac11c049bfda069aa3ecf683578}{ASN1\_CLASS\_UNIVERSAL};
+770       tag.\hyperlink{structAsn1Tag_a3ecdc4bbf328b5216521cb2114f45935}{objType} = \hyperlink{asn1_8h_a1b0f39cb3d87e425703ba389df9da1dfaf6223adf2132054146cf838b14c593ea}{ASN1\_TYPE\_SEQUENCE};
+771       tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length} = \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+772       tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value} = output;
+773 
+774       \textcolor{comment}{//Write the corresponding ASN.1 tag}
+775       error = \hyperlink{asn1_8c_a246f5e4192e8f064bd28d519a89d0207}{asn1WriteTag}(&tag, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, output, &n);
+776       \textcolor{comment}{//Any error to report?}
+777       \textcolor{keywordflow}{if}(error)
+778          \textcolor{keywordflow}{return} error;
+779    \}
+780 
+781    \textcolor{comment}{//Total number of bytes that have been written}
+782    *written = \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+783 
+784    \textcolor{comment}{//Successful processing}
+785    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+786 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{x509__key__format_8c_ae2b4a6a59d622e8c77a4fb961aee2735}\label{x509__key__format_8c_ae2b4a6a59d622e8c77a4fb961aee2735}} 
+\index{x509\+\_\+key\+\_\+format.\+c@{x509\+\_\+key\+\_\+format.\+c}!x509\+Format\+Rsa\+Pss\+Parameters@{x509\+Format\+Rsa\+Pss\+Parameters}}
+\index{x509\+Format\+Rsa\+Pss\+Parameters@{x509\+Format\+Rsa\+Pss\+Parameters}!x509\+\_\+key\+\_\+format.\+c@{x509\+\_\+key\+\_\+format.\+c}}
+\subsubsection{\texorpdfstring{x509\+Format\+Rsa\+Pss\+Parameters()}{x509FormatRsaPssParameters()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} x509\+Format\+Rsa\+Pss\+Parameters (\begin{DoxyParamCaption}\item[{const \hyperlink{structX509RsaPssParameters}{X509\+Rsa\+Pss\+Parameters} $\ast$}]{rsa\+Pss\+Params,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{output,  }\item[{size\+\_\+t $\ast$}]{written }\end{DoxyParamCaption})}
+
+
+
+Format R\+S\+A\+S\+S\+A-\/\+P\+SS parameters. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em rsa\+Pss\+Params} & Pointer to the R\+S\+A-\/\+P\+SS parameters \\
+\hline
+\mbox{\tt out}  & {\em output} & Buffer where to format the A\+S\+N.\+1 structure \\
+\hline
+\mbox{\tt out}  & {\em written} & Length of the resulting A\+S\+N.\+1 structure \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 509 of file x509\+\_\+key\+\_\+format.\+c.
+
+
+\begin{DoxyCode}
+511 \{
+512    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+513    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+514    \textcolor{keywordtype}{size\_t} \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length};
+515    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *\hyperlink{ndp_8h_a6519522ad9a6f45e7a8d25d31392a977}{p};
+516    \hyperlink{structAsn1Tag}{Asn1Tag} tag;
+517 
+518    \textcolor{comment}{//Point to the buffer where to write the ASN.1 structure}
+519    p = output;
+520    \textcolor{comment}{//Length of the ASN.1 structure}
+521    length = 0;
+522 
+523    \textcolor{comment}{//Format hashAlgorithm parameter}
+524    error = \hyperlink{x509__key__format_8c_abb9bb43fc9af429f6deb031f143f4249}{x509FormatRsaPssHashAlgo}(rsaPssParams, p, &n);
+525    \textcolor{comment}{//Any error to report?}
+526    \textcolor{keywordflow}{if}(error)
+527       \textcolor{keywordflow}{return} error;
+528 
+529    \textcolor{comment}{//Advance data pointer}
+530    p += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+531    length += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+532 
+533    \textcolor{comment}{//Format maskGenAlgorithm parameter}
+534    error = \hyperlink{x509__key__format_8c_a910a7958675041d81fd48b3ab94e5323}{x509FormatRsaPssMaskGenAlgo}(rsaPssParams, p, &n);
+535    \textcolor{comment}{//Any error to report?}
+536    \textcolor{keywordflow}{if}(error)
+537       \textcolor{keywordflow}{return} error;
+538 
+539    \textcolor{comment}{//Advance data pointer}
+540    p += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+541    length += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+542 
+543    \textcolor{comment}{//Format saltLength parameter}
+544    error = \hyperlink{x509__key__format_8c_a1bd7b4391eb570de0af47ea956443821}{x509FormatRsaPssSaltLength}(rsaPssParams, p, &n);
+545    \textcolor{comment}{//Any error to report?}
+546    \textcolor{keywordflow}{if}(error)
+547       \textcolor{keywordflow}{return} error;
+548 
+549    \textcolor{comment}{//Advance data pointer}
+550    p += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+551    length += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+552 
+553    \textcolor{comment}{//The RSASSA-PSS parameters are encapsulated within a sequence}
+554    tag.\hyperlink{structAsn1Tag_a93c64e611d57dfb59e6ebafe938f28c1}{constructed} = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+555    tag.\hyperlink{structAsn1Tag_a9f35c291ffa22d903d9c66638bb225ea}{objClass} = \hyperlink{asn1_8h_ab3589ac11c049bfda069aa3ecf683578}{ASN1\_CLASS\_UNIVERSAL};
+556    tag.\hyperlink{structAsn1Tag_a3ecdc4bbf328b5216521cb2114f45935}{objType} = \hyperlink{asn1_8h_a1b0f39cb3d87e425703ba389df9da1dfaf6223adf2132054146cf838b14c593ea}{ASN1\_TYPE\_SEQUENCE};
+557    tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length} = \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length};
+558    tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value} = output;
+559 
+560    \textcolor{comment}{//Write the corresponding ASN.1 tag}
+561    error = \hyperlink{asn1_8c_a246f5e4192e8f064bd28d519a89d0207}{asn1WriteTag}(&tag, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, output, &n);
+562    \textcolor{comment}{//Any error to report?}
+563    \textcolor{keywordflow}{if}(error)
+564       \textcolor{keywordflow}{return} error;
+565 
+566    \textcolor{comment}{//Total number of bytes that have been written}
+567    *written = \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+568 
+569    \textcolor{comment}{//Successful processing}
+570    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+571 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{x509__key__format_8c_a1bd7b4391eb570de0af47ea956443821}\label{x509__key__format_8c_a1bd7b4391eb570de0af47ea956443821}} 
+\index{x509\+\_\+key\+\_\+format.\+c@{x509\+\_\+key\+\_\+format.\+c}!x509\+Format\+Rsa\+Pss\+Salt\+Length@{x509\+Format\+Rsa\+Pss\+Salt\+Length}}
+\index{x509\+Format\+Rsa\+Pss\+Salt\+Length@{x509\+Format\+Rsa\+Pss\+Salt\+Length}!x509\+\_\+key\+\_\+format.\+c@{x509\+\_\+key\+\_\+format.\+c}}
+\subsubsection{\texorpdfstring{x509\+Format\+Rsa\+Pss\+Salt\+Length()}{x509FormatRsaPssSaltLength()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} x509\+Format\+Rsa\+Pss\+Salt\+Length (\begin{DoxyParamCaption}\item[{const \hyperlink{structX509RsaPssParameters}{X509\+Rsa\+Pss\+Parameters} $\ast$}]{rsa\+Pss\+Params,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{output,  }\item[{size\+\_\+t $\ast$}]{written }\end{DoxyParamCaption})}
+
+
+
+Format R\+S\+A\+S\+S\+A-\/\+P\+SS salt length. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em rsa\+Pss\+Params} & Pointer to the R\+S\+A-\/\+P\+SS parameters \\
+\hline
+\mbox{\tt out}  & {\em output} & Buffer where to format the A\+S\+N.\+1 structure \\
+\hline
+\mbox{\tt out}  & {\em written} & Length of the resulting A\+S\+N.\+1 structure \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 797 of file x509\+\_\+key\+\_\+format.\+c.
+
+
+\begin{DoxyCode}
+799 \{
+800    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+801    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+802    \hyperlink{structAsn1Tag}{Asn1Tag} tag;
+803 
+804    \textcolor{comment}{//Length of the ASN.1 structure}
+805    n = 0;
+806 
+807    \textcolor{comment}{//The default length of the salt is 20}
+808    \textcolor{keywordflow}{if}(rsaPssParams->\hyperlink{structX509RsaPssParameters_a0472b015828361df56b2550e4c1ac220}{saltLen} != 20)
+809    \{
+810       \textcolor{comment}{//Write the length of the salt}
+811       error = \hyperlink{asn1_8c_a150ad7208a84f75148cee37c949cc9d5}{asn1WriteInt32}((\hyperlink{stdint_8h_ab1967d8591af1a4e48c37fd2b0f184d0}{int32\_t}) rsaPssParams->
+      \hyperlink{structX509RsaPssParameters_a0472b015828361df56b2550e4c1ac220}{saltLen}, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, output, &n);
+812       \textcolor{comment}{//Any error to report?}
+813       \textcolor{keywordflow}{if}(error)
+814          \textcolor{keywordflow}{return} error;
+815 
+816       \textcolor{comment}{//Explicit tagging shall be used to encode the saltLength parameter}
+817       tag.\hyperlink{structAsn1Tag_a93c64e611d57dfb59e6ebafe938f28c1}{constructed} = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+818       tag.\hyperlink{structAsn1Tag_a9f35c291ffa22d903d9c66638bb225ea}{objClass} = \hyperlink{asn1_8h_aed381d50c77b8c9f962b5359d6115c97}{ASN1\_CLASS\_CONTEXT\_SPECIFIC};
+819       tag.\hyperlink{structAsn1Tag_a3ecdc4bbf328b5216521cb2114f45935}{objType} = 2;
+820       tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length} = \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+821       tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value} = output;
+822 
+823       \textcolor{comment}{//Write the corresponding ASN.1 tag}
+824       error = \hyperlink{asn1_8c_a246f5e4192e8f064bd28d519a89d0207}{asn1WriteTag}(&tag, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, output, &n);
+825       \textcolor{comment}{//Any error to report?}
+826       \textcolor{keywordflow}{if}(error)
+827          \textcolor{keywordflow}{return} error;
+828    \}
+829 
+830    \textcolor{comment}{//Total number of bytes that have been written}
+831    *written = \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+832 
+833    \textcolor{comment}{//Successful processing}
+834    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+835 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{x509__key__format_8c_a4b6b2d32fcf51078e4a07f5652c6997e}\label{x509__key__format_8c_a4b6b2d32fcf51078e4a07f5652c6997e}} 
+\index{x509\+\_\+key\+\_\+format.\+c@{x509\+\_\+key\+\_\+format.\+c}!x509\+Format\+Rsa\+Public\+Key@{x509\+Format\+Rsa\+Public\+Key}}
+\index{x509\+Format\+Rsa\+Public\+Key@{x509\+Format\+Rsa\+Public\+Key}!x509\+\_\+key\+\_\+format.\+c@{x509\+\_\+key\+\_\+format.\+c}}
+\subsubsection{\texorpdfstring{x509\+Format\+Rsa\+Public\+Key()}{x509FormatRsaPublicKey()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} x509\+Format\+Rsa\+Public\+Key (\begin{DoxyParamCaption}\item[{const \hyperlink{structX509RsaPublicKey}{X509\+Rsa\+Public\+Key} $\ast$}]{rsa\+Public\+Key,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{output,  }\item[{size\+\_\+t $\ast$}]{written }\end{DoxyParamCaption})}
+
+
+
+Format R\+S\+A\+Public\+Key structure. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em rsa\+Public\+Key} & Pointer to the R\+SA public key \\
+\hline
+\mbox{\tt out}  & {\em output} & Buffer where to format the A\+S\+N.\+1 structure \\
+\hline
+\mbox{\tt out}  & {\em written} & Length of the resulting A\+S\+N.\+1 structure \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 432 of file x509\+\_\+key\+\_\+format.\+c.
+
+
+\begin{DoxyCode}
+434 \{
+435    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+436    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+437    \textcolor{keywordtype}{size\_t} \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length};
+438    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *\hyperlink{ndp_8h_a6519522ad9a6f45e7a8d25d31392a977}{p};
+439    \hyperlink{structAsn1Tag}{Asn1Tag} tag;
+440 
+441    \textcolor{comment}{//Point to the buffer where to write the ASN.1 structure}
+442    p = output;
+443    \textcolor{comment}{//Length of the ASN.1 structure}
+444    length = 0;
+445 
+446    \textcolor{comment}{//Write Modulus field}
+447    tag.\hyperlink{structAsn1Tag_a93c64e611d57dfb59e6ebafe938f28c1}{constructed} = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+448    tag.\hyperlink{structAsn1Tag_a9f35c291ffa22d903d9c66638bb225ea}{objClass} = \hyperlink{asn1_8h_ab3589ac11c049bfda069aa3ecf683578}{ASN1\_CLASS\_UNIVERSAL};
+449    tag.\hyperlink{structAsn1Tag_a3ecdc4bbf328b5216521cb2114f45935}{objType} = \hyperlink{asn1_8h_a1b0f39cb3d87e425703ba389df9da1dfaf49fe8465a80ebfbe92fe0f0622ec994}{ASN1\_TYPE\_INTEGER};
+450    tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length} = rsaPublicKey->\hyperlink{structX509RsaPublicKey_a8311e7f5f00c9faaf36640f9dbd7cdb5}{nLen};
+451    tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value} = rsaPublicKey->\hyperlink{structX509RsaPublicKey_acda40dfd0c6f2b68e0ba227e59bfb727}{n};
+452 
+453    \textcolor{comment}{//Write the corresponding ASN.1 tag}
+454    error = \hyperlink{asn1_8c_a246f5e4192e8f064bd28d519a89d0207}{asn1WriteTag}(&tag, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, p, &n);
+455    \textcolor{comment}{//Any error to report?}
+456    \textcolor{keywordflow}{if}(error)
+457       \textcolor{keywordflow}{return} error;
+458 
+459    \textcolor{comment}{//Advance data pointer}
+460    p += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+461    length += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+462 
+463    \textcolor{comment}{//Write PublicExponent field}
+464    tag.\hyperlink{structAsn1Tag_a93c64e611d57dfb59e6ebafe938f28c1}{constructed} = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+465    tag.\hyperlink{structAsn1Tag_a9f35c291ffa22d903d9c66638bb225ea}{objClass} = \hyperlink{asn1_8h_ab3589ac11c049bfda069aa3ecf683578}{ASN1\_CLASS\_UNIVERSAL};
+466    tag.\hyperlink{structAsn1Tag_a3ecdc4bbf328b5216521cb2114f45935}{objType} = \hyperlink{asn1_8h_a1b0f39cb3d87e425703ba389df9da1dfaf49fe8465a80ebfbe92fe0f0622ec994}{ASN1\_TYPE\_INTEGER};
+467    tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length} = rsaPublicKey->\hyperlink{structX509RsaPublicKey_af531c21f55e40fb06165cd151dd96fa4}{eLen};
+468    tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value} = rsaPublicKey->\hyperlink{structX509RsaPublicKey_a13db0b045295934879aa34cea8996ef6}{e};
+469 
+470    \textcolor{comment}{//Write the corresponding ASN.1 tag}
+471    error = \hyperlink{asn1_8c_a246f5e4192e8f064bd28d519a89d0207}{asn1WriteTag}(&tag, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, p, &n);
+472    \textcolor{comment}{//Any error to report?}
+473    \textcolor{keywordflow}{if}(error)
+474       \textcolor{keywordflow}{return} error;
+475 
+476    \textcolor{comment}{//Advance data pointer}
+477    p += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+478    length += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+479 
+480    \textcolor{comment}{//The public key is encapsulated within a sequence}
+481    tag.\hyperlink{structAsn1Tag_a93c64e611d57dfb59e6ebafe938f28c1}{constructed} = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+482    tag.\hyperlink{structAsn1Tag_a9f35c291ffa22d903d9c66638bb225ea}{objClass} = \hyperlink{asn1_8h_ab3589ac11c049bfda069aa3ecf683578}{ASN1\_CLASS\_UNIVERSAL};
+483    tag.\hyperlink{structAsn1Tag_a3ecdc4bbf328b5216521cb2114f45935}{objType} = \hyperlink{asn1_8h_a1b0f39cb3d87e425703ba389df9da1dfaf6223adf2132054146cf838b14c593ea}{ASN1\_TYPE\_SEQUENCE};
+484    tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length} = \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length};
+485    tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value} = output;
+486 
+487    \textcolor{comment}{//Write RSAPublicKey structure}
+488    error = \hyperlink{asn1_8c_a246f5e4192e8f064bd28d519a89d0207}{asn1WriteTag}(&tag, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, output, &n);
+489    \textcolor{comment}{//Any error to report?}
+490    \textcolor{keywordflow}{if}(error)
+491       \textcolor{keywordflow}{return} error;
+492 
+493    \textcolor{comment}{//Total number of bytes that have been written}
+494    *written = \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+495 
+496    \textcolor{comment}{//Successful processing}
+497    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+498 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{x509__key__format_8c_abbb03bcffd2633f46b56044c90372cd3}\label{x509__key__format_8c_abbb03bcffd2633f46b56044c90372cd3}} 
+\index{x509\+\_\+key\+\_\+format.\+c@{x509\+\_\+key\+\_\+format.\+c}!x509\+Format\+Subject\+Public\+Key\+Info@{x509\+Format\+Subject\+Public\+Key\+Info}}
+\index{x509\+Format\+Subject\+Public\+Key\+Info@{x509\+Format\+Subject\+Public\+Key\+Info}!x509\+\_\+key\+\_\+format.\+c@{x509\+\_\+key\+\_\+format.\+c}}
+\subsubsection{\texorpdfstring{x509\+Format\+Subject\+Public\+Key\+Info()}{x509FormatSubjectPublicKeyInfo()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} x509\+Format\+Subject\+Public\+Key\+Info (\begin{DoxyParamCaption}\item[{const \hyperlink{structX509SubjectPublicKeyInfo}{X509\+Subject\+Public\+Key\+Info} $\ast$}]{public\+Key\+Info,  }\item[{const void $\ast$}]{public\+Key,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{key\+Id,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{output,  }\item[{size\+\_\+t $\ast$}]{written }\end{DoxyParamCaption})}
+
+
+
+Format Subject\+Public\+Key\+Info structure. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em public\+Key\+Info} & Subject\textquotesingle{}s public key information \\
+\hline
+\mbox{\tt in}  & {\em public\+Key} & Pointer to the public key (R\+SA, D\+SA, E\+C\+D\+SA or Ed\+D\+SA) \\
+\hline
+\mbox{\tt out}  & {\em key\+Id} & Subject\textquotesingle{}s key identifier (optional parameter) \\
+\hline
+\mbox{\tt out}  & {\em output} & Buffer where to format the A\+S\+N.\+1 structure \\
+\hline
+\mbox{\tt out}  & {\em written} & Length of the resulting A\+S\+N.\+1 structure \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 58 of file x509\+\_\+key\+\_\+format.\+c.
+
+
+\begin{DoxyCode}
+60 \{
+61    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+62    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+63    \textcolor{keywordtype}{size\_t} \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length};
+64    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *\hyperlink{ndp_8h_a6519522ad9a6f45e7a8d25d31392a977}{p};
+65    \textcolor{keywordtype}{size\_t} oidLen;
+66    \textcolor{keyword}{const} \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *\hyperlink{mib__common_8h_a5d78f42b3545deb9bbd305138506c7a7}{oid};
+67    \hyperlink{structAsn1Tag}{Asn1Tag} tag;
+68 
+69    \textcolor{comment}{//Get the public key identifier}
+70    oid = publicKeyInfo->\hyperlink{structX509SubjectPublicKeyInfo_a90a8b808782b18de901306acd49b0706}{oid};
+71    oidLen = publicKeyInfo->\hyperlink{structX509SubjectPublicKeyInfo_a7c5d6f507f653f6085ba56e6b4b55912}{oidLen};
+72 
+73    \textcolor{comment}{//Point to the buffer where to write the ASN.1 structure}
+74    p = output;
+75    \textcolor{comment}{//Length of the ASN.1 structure}
+76    length = 0;
+77 
+78 \textcolor{preprocessor}{#if (DSA\_SUPPORT == ENABLED)}
+79    \textcolor{comment}{//Valid DSA public key?}
+80    \textcolor{keywordflow}{if}(publicKey != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} && !\hyperlink{oid_8c_a3f24a7995a2a7aa587379ec6e1922e36}{oidComp}(oid, oidLen, \hyperlink{dsa_8c_aec62d423add8486c829eacb574ebe4f3}{DSA\_OID}, \textcolor{keyword}{sizeof}(
+      \hyperlink{dsa_8c_aec62d423add8486c829eacb574ebe4f3}{DSA\_OID})))
+81    \{
+82       \hyperlink{structDsaDomainParameters}{DsaDomainParameters} params;
+83 
+84       \textcolor{comment}{//Retrieve DSA domain parameters}
+85       params.\hyperlink{structDsaDomainParameters_a651791ea6179f2fa29caa4e8f7870bf8}{p} = ((\hyperlink{structDsaPublicKey}{DsaPublicKey} *) publicKey)->p;
+86       params.\hyperlink{structDsaDomainParameters_aa9078cd4d84fbe43a0661f9b50b78894}{q} = ((\hyperlink{structDsaPublicKey}{DsaPublicKey} *) publicKey)->q;
+87       params.\hyperlink{structDsaDomainParameters_a4c63bdcea59ab75967b3a4cff15ed3c9}{g} = ((\hyperlink{structDsaPublicKey}{DsaPublicKey} *) publicKey)->g;
+88 
+89       \textcolor{comment}{//Format AlgorithmIdentifier field}
+90       error = \hyperlink{x509__key__format_8c_aa1b4eacfd7bb96848894d6acf5cd5256}{x509FormatAlgorithmIdentifier}(publicKeyInfo, &params, p, &n);
+91    \}
+92    \textcolor{keywordflow}{else}
+93 \textcolor{preprocessor}{#endif}
+94    \{
+95       \textcolor{comment}{//Format AlgorithmIdentifier field}
+96       error = \hyperlink{x509__key__format_8c_aa1b4eacfd7bb96848894d6acf5cd5256}{x509FormatAlgorithmIdentifier}(publicKeyInfo, 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, p, &n);
+97    \}
+98 
+99    \textcolor{comment}{//Any error to report?}
+100    \textcolor{keywordflow}{if}(error)
+101       \textcolor{keywordflow}{return} error;
+102 
+103    \textcolor{comment}{//Advance data pointer}
+104    p += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+105    length += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+106 
+107    \textcolor{comment}{//The bit string shall contain an initial octet which encodes the number}
+108    \textcolor{comment}{//of unused bits in the final subsequent octet}
+109    p[0] = 0;
+110 
+111 \textcolor{preprocessor}{#if (RSA\_SUPPORT == ENABLED)}
+112    \textcolor{comment}{//RSA or RSA-PSS algorithm identifier?}
+113    \textcolor{keywordflow}{if}(!\hyperlink{oid_8c_a3f24a7995a2a7aa587379ec6e1922e36}{oidComp}(oid, oidLen, \hyperlink{rsa_8c_a05da0bdcba7d0be3da2cc921a8a0dd50}{RSA\_ENCRYPTION\_OID}, \textcolor{keyword}{sizeof}(
+      \hyperlink{rsa_8c_a05da0bdcba7d0be3da2cc921a8a0dd50}{RSA\_ENCRYPTION\_OID})) ||
+114       !\hyperlink{oid_8c_a3f24a7995a2a7aa587379ec6e1922e36}{oidComp}(oid, oidLen, \hyperlink{rsa_8c_ac136e2cc009f56598c67cf31f37c0d2b}{RSASSA\_PSS\_OID}, \textcolor{keyword}{sizeof}(
+      \hyperlink{rsa_8c_ac136e2cc009f56598c67cf31f37c0d2b}{RSASSA\_PSS\_OID})))
+115    \{
+116       \textcolor{comment}{//Valid RSA public key?}
+117       \textcolor{keywordflow}{if}(publicKey != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+118       \{
+119          \textcolor{comment}{//Export the RSA public key to ASN.1 format}
+120          error = \hyperlink{x509__key__format_8c_a45e4b2226b49bdacefba16326a724eab}{x509ExportRsaPublicKey}(publicKey, p + 1, &n);
+121       \}
+122       \textcolor{keywordflow}{else}
+123       \{
+124          \textcolor{comment}{//Format RSAPublicKey structure}
+125          error = \hyperlink{x509__key__format_8c_a4b6b2d32fcf51078e4a07f5652c6997e}{x509FormatRsaPublicKey}(&publicKeyInfo->
+      \hyperlink{structX509SubjectPublicKeyInfo_ab8bc6398001418fd21271ff8b791caab}{rsaPublicKey},
+126             p + 1, &n);
+127       \}
+128    \}
+129    \textcolor{keywordflow}{else}
+130 \textcolor{preprocessor}{#endif}
+131 \textcolor{preprocessor}{#if (DSA\_SUPPORT == ENABLED)}
+132    \textcolor{comment}{//DSA algorithm identifier?}
+133    \textcolor{keywordflow}{if}(!\hyperlink{oid_8c_a3f24a7995a2a7aa587379ec6e1922e36}{oidComp}(oid, oidLen, \hyperlink{dsa_8c_aec62d423add8486c829eacb574ebe4f3}{DSA\_OID}, \textcolor{keyword}{sizeof}(\hyperlink{dsa_8c_aec62d423add8486c829eacb574ebe4f3}{DSA\_OID})))
+134    \{
+135       \textcolor{comment}{//Valid DSA public key?}
+136       \textcolor{keywordflow}{if}(publicKey != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+137       \{
+138          \textcolor{comment}{//Export the DSA public key to ASN.1 format}
+139          error = \hyperlink{x509__key__format_8c_ac07b39a72c5abce0fb80c391d42ec46b}{x509ExportDsaPublicKey}(publicKey, p + 1, &n);
+140       \}
+141       \textcolor{keywordflow}{else}
+142       \{
+143          \textcolor{comment}{//Format DSAPublicKey structure}
+144          error = \hyperlink{x509__key__format_8c_a22cc8b9da833724eef56e39e3f3555c1}{x509FormatDsaPublicKey}(&publicKeyInfo->
+      \hyperlink{structX509SubjectPublicKeyInfo_aca3c9dc2e4fefc2e5ac0f1db6baedccc}{dsaPublicKey},
+145             p + 1, &n);
+146       \}
+147    \}
+148    \textcolor{keywordflow}{else}
+149 \textcolor{preprocessor}{#endif}
+150 \textcolor{preprocessor}{#if (ECDSA\_SUPPORT == ENABLED)}
+151    \textcolor{comment}{//EC public key identifier?}
+152    \textcolor{keywordflow}{if}(!\hyperlink{oid_8c_a3f24a7995a2a7aa587379ec6e1922e36}{oidComp}(oid, oidLen, \hyperlink{ec_8c_a5ff93c201b1e50b6fda04774a2fa537c}{EC\_PUBLIC\_KEY\_OID}, \textcolor{keyword}{sizeof}(
+      \hyperlink{ec_8c_a5ff93c201b1e50b6fda04774a2fa537c}{EC\_PUBLIC\_KEY\_OID})))
+153    \{
+154       \textcolor{comment}{//Valid EC public key?}
+155       \textcolor{keywordflow}{if}(publicKey != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+156       \{
+157          \textcolor{comment}{//Export the EC public key to ASN.1 format}
+158          error = \hyperlink{x509__key__format_8c_a0ff2c6a084599f69f04581699fedece5}{x509ExportEcPublicKey}(publicKeyInfo, publicKey,
+159             p + 1, &n);
+160       \}
+161       \textcolor{keywordflow}{else}
+162       \{
+163          \textcolor{comment}{//Format ECPublicKey structure}
+164          error = \hyperlink{x509__key__format_8c_ae868b08390041bc5b7c7d38778008b5e}{x509FormatEcPublicKey}(&publicKeyInfo->
+      \hyperlink{structX509SubjectPublicKeyInfo_af9b3b1e9d01c44192f01edbf14001622}{ecPublicKey},
+165             p + 1, &n);
+166       \}
+167    \}
+168    \textcolor{keywordflow}{else}
+169 \textcolor{preprocessor}{#endif}
+170 \textcolor{preprocessor}{#if (ED25519\_SUPPORT == ENABLED)}
+171    \textcolor{comment}{//Ed25519 algorithm identifier?}
+172    \textcolor{keywordflow}{if}(!\hyperlink{oid_8c_a3f24a7995a2a7aa587379ec6e1922e36}{oidComp}(oid, oidLen, \hyperlink{ec__curves_8c_a0c0db5ac9072998c05e021d51fd03992}{ED25519\_OID}, \textcolor{keyword}{sizeof}(\hyperlink{ec__curves_8c_a0c0db5ac9072998c05e021d51fd03992}{ED25519\_OID})))
+173    \{
+174       \textcolor{comment}{//Valid EdDSA public key?}
+175       \textcolor{keywordflow}{if}(publicKey != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+176       \{
+177          \textcolor{comment}{//Export the EdDSA public key to ASN.1 format}
+178          error = \hyperlink{x509__key__format_8c_a81a4926b7df7e1564bcd24504a7d6e15}{x509ExportEddsaPublicKey}(publicKey, 
+      \hyperlink{ed25519_8h_a5fdd1f73dec2be868a8ed5d2e129bb5e}{ED25519\_PUBLIC\_KEY\_LEN},
+179             p + 1, &n);
+180       \}
+181       \textcolor{keywordflow}{else}
+182       \{
+183          \textcolor{comment}{//The SubjectPublicKey contains the byte stream of the public key}
+184          error = \hyperlink{x509__key__format_8c_ae868b08390041bc5b7c7d38778008b5e}{x509FormatEcPublicKey}(&publicKeyInfo->
+      \hyperlink{structX509SubjectPublicKeyInfo_af9b3b1e9d01c44192f01edbf14001622}{ecPublicKey},
+185             p + 1, &n);
+186       \}
+187    \}
+188    \textcolor{keywordflow}{else}
+189 \textcolor{preprocessor}{#endif}
+190 \textcolor{preprocessor}{#if (ED448\_SUPPORT == ENABLED)}
+191    \textcolor{comment}{//Ed448 algorithm identifier?}
+192    \textcolor{keywordflow}{if}(!\hyperlink{oid_8c_a3f24a7995a2a7aa587379ec6e1922e36}{oidComp}(oid, oidLen, \hyperlink{ec__curves_8c_ad355985d25e281438e8d813c171aea13}{ED448\_OID}, \textcolor{keyword}{sizeof}(\hyperlink{ec__curves_8c_ad355985d25e281438e8d813c171aea13}{ED448\_OID})))
+193    \{
+194       \textcolor{comment}{//Valid EdDSA public key?}
+195       \textcolor{keywordflow}{if}(publicKey != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+196       \{
+197          \textcolor{comment}{//Export the EdDSA public key to ASN.1 format}
+198          error = \hyperlink{x509__key__format_8c_a81a4926b7df7e1564bcd24504a7d6e15}{x509ExportEddsaPublicKey}(publicKey, 
+      \hyperlink{ed448_8h_a452cd73807c6a5607ede7ba57cbc3e6a}{ED448\_PUBLIC\_KEY\_LEN},
+199             p + 1, &n);
+200       \}
+201       \textcolor{keywordflow}{else}
+202       \{
+203          \textcolor{comment}{//The SubjectPublicKey contains the byte stream of the public key}
+204          error = \hyperlink{x509__key__format_8c_ae868b08390041bc5b7c7d38778008b5e}{x509FormatEcPublicKey}(&publicKeyInfo->
+      \hyperlink{structX509SubjectPublicKeyInfo_af9b3b1e9d01c44192f01edbf14001622}{ecPublicKey},
+205             p + 1, &n);
+206       \}
+207    \}
+208    \textcolor{keywordflow}{else}
+209 \textcolor{preprocessor}{#endif}
+210    \textcolor{comment}{//Unknown algorithm identifier?}
+211    \{
+212       \textcolor{comment}{//Report an error}
+213       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+214    \}
+215 
+216    \textcolor{comment}{//Any error to report?}
+217    \textcolor{keywordflow}{if}(error)
+218       \textcolor{keywordflow}{return} error;
+219 
+220    \textcolor{comment}{//The keyIdentifier parameter is optional}
+221    \textcolor{keywordflow}{if}(\hyperlink{ntp__common_8h_a6746c280135f32ec3fe8a04c9df42258}{keyId} != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+222    \{
+223       \textcolor{comment}{//The keyIdentifier is composed of the 160-bit SHA-1 hash of the value}
+224       \textcolor{comment}{//of the bit string subjectPublicKey (excluding the tag, length, and}
+225       \textcolor{comment}{//number of unused bits)}
+226       error = \hyperlink{sha1_8c_ae2dbc37309b92ca025e75239907d2c89}{sha1Compute}(p + 1, n, \hyperlink{ntp__common_8h_a6746c280135f32ec3fe8a04c9df42258}{keyId});
+227       \textcolor{comment}{//Any error to report?}
+228       \textcolor{keywordflow}{if}(error)
+229          \textcolor{keywordflow}{return} error;
+230    \}
+231 
+232    \textcolor{comment}{//The public key is encapsulated within a bit string}
+233    tag.\hyperlink{structAsn1Tag_a93c64e611d57dfb59e6ebafe938f28c1}{constructed} = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+234    tag.\hyperlink{structAsn1Tag_a9f35c291ffa22d903d9c66638bb225ea}{objClass} = \hyperlink{asn1_8h_ab3589ac11c049bfda069aa3ecf683578}{ASN1\_CLASS\_UNIVERSAL};
+235    tag.\hyperlink{structAsn1Tag_a3ecdc4bbf328b5216521cb2114f45935}{objType} = \hyperlink{asn1_8h_a1b0f39cb3d87e425703ba389df9da1dfab40c213cd2fda439f157e8e4523d020c}{ASN1\_TYPE\_BIT\_STRING};
+236    tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length} = n + 1;
+237    tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value} = \hyperlink{ndp_8h_a6519522ad9a6f45e7a8d25d31392a977}{p};
+238 
+239    \textcolor{comment}{//Write the corresponding ASN.1 tag}
+240    error = \hyperlink{asn1_8c_a246f5e4192e8f064bd28d519a89d0207}{asn1WriteTag}(&tag, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, p, &n);
+241    \textcolor{comment}{//Any error to report?}
+242    \textcolor{keywordflow}{if}(error)
+243       \textcolor{keywordflow}{return} error;
+244 
+245    \textcolor{comment}{//Advance data pointer}
+246    p += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+247    length += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+248 
+249    \textcolor{comment}{//The SubjectPublicKeyInfo structure is encapsulated within a sequence}
+250    tag.\hyperlink{structAsn1Tag_a93c64e611d57dfb59e6ebafe938f28c1}{constructed} = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+251    tag.\hyperlink{structAsn1Tag_a9f35c291ffa22d903d9c66638bb225ea}{objClass} = \hyperlink{asn1_8h_ab3589ac11c049bfda069aa3ecf683578}{ASN1\_CLASS\_UNIVERSAL};
+252    tag.\hyperlink{structAsn1Tag_a3ecdc4bbf328b5216521cb2114f45935}{objType} = \hyperlink{asn1_8h_a1b0f39cb3d87e425703ba389df9da1dfaf6223adf2132054146cf838b14c593ea}{ASN1\_TYPE\_SEQUENCE};
+253    tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length} = \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length};
+254    tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value} = output;
+255 
+256    \textcolor{comment}{//Write the corresponding ASN.1 tag}
+257    error = \hyperlink{asn1_8c_a246f5e4192e8f064bd28d519a89d0207}{asn1WriteTag}(&tag, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, output, &n);
+258    \textcolor{comment}{//Any error to report?}
+259    \textcolor{keywordflow}{if}(error)
+260       \textcolor{keywordflow}{return} error;
+261 
+262    \textcolor{comment}{//Total number of bytes that have been written}
+263    *written = \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+264 
+265    \textcolor{comment}{//Successful processing}
+266    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+267 \}
+\end{DoxyCode}

@@ -1,0 +1,78 @@
+\hypertarget{group__NmBspRegisterFn}{}\section{nm\+\_\+bsp\+\_\+register\+\_\+isr}
+\label{group__NmBspRegisterFn}\index{nm\+\_\+bsp\+\_\+register\+\_\+isr@{nm\+\_\+bsp\+\_\+register\+\_\+isr}}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{group__NmBspRegisterFn_ga1b42af0f91da07772d2d5c871c9c3e62}{nm\+\_\+bsp\+\_\+register\+\_\+isr} (\hyperlink{group__BSPDefine_gab061a1639662a3114b4c8b3b39bd6848}{tpf\+Nm\+Bsp\+Isr} pf\+Isr)
+\begin{DoxyCompactList}\small\item\em Register interrupt service routine. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Register I\+SR ({\itshape Interrupt} {\itshape Service} {\itshape Routine}) in the initialization of H\+IF ({\itshape Host} {\itshape Interface}) Layer. 
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group__NmBspRegisterFn_ga1b42af0f91da07772d2d5c871c9c3e62}\label{group__NmBspRegisterFn_ga1b42af0f91da07772d2d5c871c9c3e62}} 
+\index{nm\+\_\+bsp\+\_\+register\+\_\+isr@{nm\+\_\+bsp\+\_\+register\+\_\+isr}!nm\+\_\+bsp\+\_\+register\+\_\+isr@{nm\+\_\+bsp\+\_\+register\+\_\+isr}}
+\index{nm\+\_\+bsp\+\_\+register\+\_\+isr@{nm\+\_\+bsp\+\_\+register\+\_\+isr}!nm\+\_\+bsp\+\_\+register\+\_\+isr@{nm\+\_\+bsp\+\_\+register\+\_\+isr}}
+\subsubsection{\texorpdfstring{nm\+\_\+bsp\+\_\+register\+\_\+isr()}{nm\_bsp\_register\_isr()}}
+{\footnotesize\ttfamily void nm\+\_\+bsp\+\_\+register\+\_\+isr (\begin{DoxyParamCaption}\item[{\hyperlink{group__BSPDefine_gab061a1639662a3114b4c8b3b39bd6848}{tpf\+Nm\+Bsp\+Isr}}]{pf\+Isr }\end{DoxyParamCaption})}
+
+
+
+{\ttfamily \#include $<$\hyperlink{nm__bsp_8h}{third\+\_\+party/atmel/devices/wilc1000/bsp/include/nm\+\_\+bsp.\+h}$>$}
+
+
+
+Register interrupt service routine. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em pf\+Isr} & Pointer to I\+SR handler in H\+IF \\
+\hline
+\end{DoxyParams}
+\begin{DoxyWarning}{Warning}
+Make sure that I\+SR for I\+RQ pin for W\+I\+LC is disabled by default in your implementation. 
+\end{DoxyWarning}
+\begin{DoxyNote}{Note}
+Implementation of this function is host dependent and called by H\+IF layer. 
+\end{DoxyNote}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{group__BSPDefine_gab061a1639662a3114b4c8b3b39bd6848}{tpf\+Nm\+Bsp\+Isr} 
+\end{DoxySeeAlso}
+\begin{DoxyReturn}{Returns}
+None
+\end{DoxyReturn}
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em pf\+Isr} & I\+SR handler \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 183 of file nm\+\_\+bsp\+\_\+pic32mz.\+c.
+
+
+\begin{DoxyCode}
+184 \{
+185    \textcolor{comment}{//Save ISR handler}
+186    \hyperlink{nm__bsp__pic32mz_8c_a1fc16160cd8e35ab3f77abb4bc40477e}{gpfIsr} = pfIsr;
+187 
+188    \textcolor{comment}{//Configure edge polarity (falling edge)}
+189    INTCONCLR = \hyperlink{nm__bsp__pic32mz_8c_a7df53133a378ae15fbe8f42fbfb9d507}{\_INTCON\_INTxEP\_MASK};
+190 
+191    \textcolor{comment}{//Set interrupt priority}
+192    \hyperlink{nm__bsp__pic32mz_8c_ab78bf9afd3abd7d7338d0b34f31ea242}{IPCxCLR} = \hyperlink{nm__bsp__pic32mz_8c_a56280648522388be3028f1bf4b4c65f5}{\_IPCx\_INTxIP\_MASK};
+193    \hyperlink{nm__bsp__pic32mz_8c_accc6f72c2ad0d4b00b241f291e7db861}{IPCxSET} = (\hyperlink{wilc1000__config_8h_ad49c3ad20158998cf64742a769570a31}{CONF\_WILC\_IRQ\_PRIORITY} << 
+      \hyperlink{nm__bsp__pic32mz_8c_a31250062a2278d623f84361a2dfc129b}{\_IPCx\_INTxIP\_POSITION});
+194 
+195    \textcolor{comment}{//Set interrupt subpriority}
+196    \hyperlink{nm__bsp__pic32mz_8c_ab78bf9afd3abd7d7338d0b34f31ea242}{IPCxCLR} = \hyperlink{nm__bsp__pic32mz_8c_aa74dc1e257bb2ec81ab6489b5e24fef8}{\_IPCx\_INTxIS\_MASK};
+197    \hyperlink{nm__bsp__pic32mz_8c_accc6f72c2ad0d4b00b241f291e7db861}{IPCxSET} = (\hyperlink{wilc1000__config_8h_a279e1127940b388b4833244554bc2351}{CONF\_WILC\_IRQ\_SUB\_PRIORITY} << 
+      \hyperlink{nm__bsp__pic32mz_8c_ae95ac6e56bf07d47a11ba692d718c8a4}{\_IPCx\_INTxIS\_POSITION});
+198 
+199    \textcolor{comment}{//Enable interrupt}
+200    IEC0SET = \hyperlink{nm__bsp__pic32mz_8c_a12a4929e9d91972bb84c11475533c977}{\_IEC0\_INTxIE\_MASK};
+201    \textcolor{comment}{//Set interrupt flag}
+202    IFS0SET = \hyperlink{nm__bsp__pic32mz_8c_ac8292a659a93351a40133250bcce3f4a}{\_IFS0\_INTxIF\_MASK};
+203 \}
+\end{DoxyCode}

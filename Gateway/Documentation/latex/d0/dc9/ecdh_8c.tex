@@ -1,0 +1,700 @@
+\hypertarget{ecdh_8c}{}\section{cyclone\+\_\+crypto/ecc/ecdh.c File Reference}
+\label{ecdh_8c}\index{cyclone\+\_\+crypto/ecc/ecdh.\+c@{cyclone\+\_\+crypto/ecc/ecdh.\+c}}
+
+
+E\+C\+DH (Elliptic Curve Diffie-\/\+Hellman) key exchange.  
+
+
+{\ttfamily \#include \char`\"{}core/crypto.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ecc/ecdh.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ecc/x25519.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ecc/x448.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}debug.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{ecdh_8c_afcdf5e66fd927a7f4cc64295acd20407}{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}~\hyperlink{crypto__config_8h_a6afae3a9b63f9b55d979e667ee0e881d}{C\+R\+Y\+P\+T\+O\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{ecdh_8c_adec624dbfb95d70bb35295938575141a}{ecdh\+Init} (\hyperlink{structEcdhContext}{Ecdh\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Initialize E\+C\+DH context. \end{DoxyCompactList}\item 
+void \hyperlink{ecdh_8c_a6691dcfa7a6fc9d143579ce2455699c7}{ecdh\+Free} (\hyperlink{structEcdhContext}{Ecdh\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Release E\+C\+DH context. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ecdh_8c_a84bbbc2b2072c6e845457f4a58602889}{ecdh\+Generate\+Key\+Pair} (\hyperlink{structEcdhContext}{Ecdh\+Context} $\ast$context, const \hyperlink{structPrngAlgo}{Prng\+Algo} $\ast$prng\+Algo, void $\ast$prng\+Context)
+\begin{DoxyCompactList}\small\item\em E\+C\+DH key pair generation. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ecdh_8c_a91d3e413ca085581761f40ce6215925b}{ecdh\+Check\+Public\+Key} (const \hyperlink{structEcDomainParameters}{Ec\+Domain\+Parameters} $\ast$params, \hyperlink{structEcPoint}{Ec\+Point} $\ast$public\+Key)
+\begin{DoxyCompactList}\small\item\em Check E\+C\+DH public key. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ecdh_8c_a53821d9d049c084309e152dbea880db1}{ecdh\+Compute\+Shared\+Secret} (\hyperlink{structEcdhContext}{Ecdh\+Context} $\ast$context, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$output, size\+\_\+t output\+Size, size\+\_\+t $\ast$output\+Len)
+\begin{DoxyCompactList}\small\item\em Compute E\+C\+DH shared secret. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+E\+C\+DH (Elliptic Curve Diffie-\/\+Hellman) key exchange. 
+
+\hypertarget{pic32mz__ef__curiosity_8h_License}{}\subsection{License}\label{pic32mz__ef__curiosity_8h_License}
+S\+P\+D\+X-\/\+License-\/\+Identifier\+: G\+P\+L-\/2.\+0-\/or-\/later
+
+Copyright (C) 2010-\/2019 Oryx Embedded S\+A\+RL. All rights reserved.
+
+This file is part of Cyclone\+Crypto Open.
+
+This program is free software; you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+
+You should have received a copy of the G\+NU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-\/1301, U\+SA.
+
+\begin{DoxyAuthor}{Author}
+Oryx Embedded S\+A\+RL (www.\+oryx-\/embedded.\+com) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+9.\+6 
+\end{DoxyVersion}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{ecdh_8c_afcdf5e66fd927a7f4cc64295acd20407}\label{ecdh_8c_afcdf5e66fd927a7f4cc64295acd20407}} 
+\index{ecdh.\+c@{ecdh.\+c}!T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+\index{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}!ecdh.\+c@{ecdh.\+c}}
+\subsubsection{\texorpdfstring{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}{TRACE\_LEVEL}}
+{\footnotesize\ttfamily \#define T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL~\hyperlink{crypto__config_8h_a6afae3a9b63f9b55d979e667ee0e881d}{C\+R\+Y\+P\+T\+O\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+
+
+
+Definition at line 32 of file ecdh.\+c.
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{ecdh_8c_a91d3e413ca085581761f40ce6215925b}\label{ecdh_8c_a91d3e413ca085581761f40ce6215925b}} 
+\index{ecdh.\+c@{ecdh.\+c}!ecdh\+Check\+Public\+Key@{ecdh\+Check\+Public\+Key}}
+\index{ecdh\+Check\+Public\+Key@{ecdh\+Check\+Public\+Key}!ecdh.\+c@{ecdh.\+c}}
+\subsubsection{\texorpdfstring{ecdh\+Check\+Public\+Key()}{ecdhCheckPublicKey()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ecdh\+Check\+Public\+Key (\begin{DoxyParamCaption}\item[{const \hyperlink{structEcDomainParameters}{Ec\+Domain\+Parameters} $\ast$}]{params,  }\item[{\hyperlink{structEcPoint}{Ec\+Point} $\ast$}]{public\+Key }\end{DoxyParamCaption})}
+
+
+
+Check E\+C\+DH public key. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em params} & EC domain parameters \\
+\hline
+\mbox{\tt in}  & {\em public\+Key} & Public key to be checked \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 272 of file ecdh.\+c.
+
+
+\begin{DoxyCode}
+273 \{
+274    \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\_t} valid;
+275 
+276    \textcolor{comment}{//Initialize flag}
+277    valid = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+278 
+279    \textcolor{comment}{//Weierstrass elliptic curve?}
+280    \textcolor{keywordflow}{if}(params->\hyperlink{structEcDomainParameters_a7e42fa63fdb0ee92990c05b0771ac383}{type} == \hyperlink{ec__curves_8h_af38fa6633c02444318870a309134ca21ae3b7002937d7fc1988f424c669fd0319}{EC\_CURVE\_TYPE\_SECT\_K1} ||
+281       params->\hyperlink{structEcDomainParameters_a7e42fa63fdb0ee92990c05b0771ac383}{type} == \hyperlink{ec__curves_8h_af38fa6633c02444318870a309134ca21afbf11bc2681a2347e047179e6112805b}{EC\_CURVE\_TYPE\_SECT\_R1} ||
+282       params->\hyperlink{structEcDomainParameters_a7e42fa63fdb0ee92990c05b0771ac383}{type} == \hyperlink{ec__curves_8h_af38fa6633c02444318870a309134ca21a4e358b2e613b1c31dbe84a5659385454}{EC\_CURVE\_TYPE\_SECT\_R2} ||
+283       params->\hyperlink{structEcDomainParameters_a7e42fa63fdb0ee92990c05b0771ac383}{type} == \hyperlink{ec__curves_8h_af38fa6633c02444318870a309134ca21acb3e0a98a9b02dbc1f2571cb81803be5}{EC\_CURVE\_TYPE\_SECP\_K1} ||
+284       params->\hyperlink{structEcDomainParameters_a7e42fa63fdb0ee92990c05b0771ac383}{type} == \hyperlink{ec__curves_8h_af38fa6633c02444318870a309134ca21a6b7d19ff105076c689968bd272b23ddf}{EC\_CURVE\_TYPE\_SECP\_R1} ||
+285       params->\hyperlink{structEcDomainParameters_a7e42fa63fdb0ee92990c05b0771ac383}{type} == \hyperlink{ec__curves_8h_af38fa6633c02444318870a309134ca21ad2a3c0d902228c966e0469da167bff2d}{EC\_CURVE\_TYPE\_SECP\_R2} ||
+286       params->\hyperlink{structEcDomainParameters_a7e42fa63fdb0ee92990c05b0771ac383}{type} == \hyperlink{ec__curves_8h_af38fa6633c02444318870a309134ca21a867f3633eb68c5e0ed895577aec50909}{EC\_CURVE\_TYPE\_BRAINPOOLP\_R1})
+287    \{
+288       \textcolor{comment}{//Verify that 0 <= Qx < p}
+289       \textcolor{keywordflow}{if}(\hyperlink{mpi_8c_a46c2ff9f6fd5aa944ad4d41833ebef50}{mpiCompInt}(&publicKey->\hyperlink{structEcPoint_a08f3fbb7a7d07607306bd8d6200629af}{x}, 0) >= 0 &&
+290          \hyperlink{mpi_8c_a54cf7aedd99e130971849eb21eb578c9}{mpiComp}(&publicKey->\hyperlink{structEcPoint_a08f3fbb7a7d07607306bd8d6200629af}{x}, &params->\hyperlink{structEcDomainParameters_a497e7494540878b966444dc4ad973cdc}{p}) < 0)
+291       \{
+292          \textcolor{comment}{//Verify that 0 <= Qy < p}
+293          \textcolor{keywordflow}{if}(\hyperlink{mpi_8c_a46c2ff9f6fd5aa944ad4d41833ebef50}{mpiCompInt}(&publicKey->\hyperlink{structEcPoint_a2102dff813849bd0eaed8a1a5e64ec1f}{y}, 0) >= 0 &&
+294             \hyperlink{mpi_8c_a54cf7aedd99e130971849eb21eb578c9}{mpiComp}(&publicKey->\hyperlink{structEcPoint_a2102dff813849bd0eaed8a1a5e64ec1f}{y}, &params->\hyperlink{structEcDomainParameters_a497e7494540878b966444dc4ad973cdc}{p}) < 0)
+295          \{
+296             \textcolor{comment}{//Check whether the point is on the curve}
+297             valid = \hyperlink{ec_8c_a40e3e0d1c6641c70cc4320ce009ceeaf}{ecIsPointAffine}(params, publicKey);
+298          \}
+299       \}
+300 
+301       \textcolor{comment}{//Valid point?}
+302       \textcolor{keywordflow}{if}(valid)
+303       \{
+304          \textcolor{comment}{//If the cofactor is not 1, the implementation must verify that n.Q}
+305          \textcolor{comment}{//is the point at the infinity}
+306          \textcolor{keywordflow}{if}(params->\hyperlink{structEcDomainParameters_a1dce92caa10cbc17456426098ff7faea}{h} != 1)
+307          \{
+308             \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+309             \hyperlink{structEcPoint}{EcPoint} \hyperlink{ndp_8h_a4c5c6ceb8ed33456261fa907136e0c3a}{r};
+310 
+311             \textcolor{comment}{//Initialize flag}
+312             valid = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+313             \textcolor{comment}{//Initialize EC points}
+314             \hyperlink{ec_8c_ac038e67dcc04d6d94bb930f9475f3ff8}{ecInit}(&r);
+315 
+316             \textcolor{comment}{//Convert the peer's public key to projective representation}
+317             error = \hyperlink{ec_8c_a1dbdfb4f5689eb88092fa08bc50eda00}{ecProjectify}(params, publicKey, publicKey);
+318 
+319             \textcolor{comment}{//Check status code}
+320             \textcolor{keywordflow}{if}(!error)
+321             \{
+322                \textcolor{comment}{//Compute R = n.Q}
+323                error = \hyperlink{ec_8c_adfdc61723278833b0c8cecbb10185233}{ecMult}(params, &r, &params->\hyperlink{structEcDomainParameters_afcdd8e7ec1aa29476df4e2ae13882a12}{q}, publicKey);
+324             \}
+325 
+326             \textcolor{comment}{//Check status code}
+327             \textcolor{keywordflow}{if}(!error)
+328             \{
+329                \textcolor{comment}{//Verify that the result is the point at the infinity}
+330                \textcolor{keywordflow}{if}(\hyperlink{mpi_8c_a46c2ff9f6fd5aa944ad4d41833ebef50}{mpiCompInt}(&r.\hyperlink{structEcPoint_ac53a6ff4888f818509027e37004635f5}{z}, 0) == 0)
+331                \{
+332                   valid = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+333                \}
+334             \}
+335 
+336             \textcolor{comment}{//Release EC point}
+337             \hyperlink{ec_8c_ae4a9276eac491f8acbb6d0916287411b}{ecFree}(&r);
+338          \}
+339       \}
+340    \}
+341 \textcolor{preprocessor}{#if (X25519\_SUPPORT == ENABLED)}
+342    \textcolor{comment}{//Curve25519 elliptic curve?}
+343    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(params->\hyperlink{structEcDomainParameters_a7e42fa63fdb0ee92990c05b0771ac383}{type} == \hyperlink{ec__curves_8h_af38fa6633c02444318870a309134ca21a305ec79ddded0b086f533321ece697b8}{EC\_CURVE\_TYPE\_X25519})
+344    \{
+345       \textcolor{comment}{//The public key does not need to be validated}
+346       valid = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+347    \}
+348 \textcolor{preprocessor}{#endif}
+349 \textcolor{preprocessor}{#if (X448\_SUPPORT == ENABLED)}
+350    \textcolor{comment}{//Curve448 elliptic curve?}
+351    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(params->\hyperlink{structEcDomainParameters_a7e42fa63fdb0ee92990c05b0771ac383}{type} == \hyperlink{ec__curves_8h_af38fa6633c02444318870a309134ca21a7610f3e0b5df86a629dd8d2f7f1ce4ef}{EC\_CURVE\_TYPE\_X448})
+352    \{
+353       \textcolor{comment}{//The public key does not need to be validated}
+354       valid = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+355    \}
+356 \textcolor{preprocessor}{#endif}
+357    \textcolor{comment}{//Invalid elliptic curve?}
+358    \textcolor{keywordflow}{else}
+359    \{
+360       \textcolor{comment}{//Just for sanity}
+361       valid = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+362    \}
+363 
+364    \textcolor{comment}{//Return status code}
+365    \textcolor{keywordflow}{if}(valid)
+366    \{
+367       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+368    \}
+369    \textcolor{keywordflow}{else}
+370    \{
+371       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca152b24f57c941cb736772696416eb7c2}{ERROR\_ILLEGAL\_PARAMETER};
+372    \}
+373 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ecdh_8c_a53821d9d049c084309e152dbea880db1}\label{ecdh_8c_a53821d9d049c084309e152dbea880db1}} 
+\index{ecdh.\+c@{ecdh.\+c}!ecdh\+Compute\+Shared\+Secret@{ecdh\+Compute\+Shared\+Secret}}
+\index{ecdh\+Compute\+Shared\+Secret@{ecdh\+Compute\+Shared\+Secret}!ecdh.\+c@{ecdh.\+c}}
+\subsubsection{\texorpdfstring{ecdh\+Compute\+Shared\+Secret()}{ecdhComputeSharedSecret()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ecdh\+Compute\+Shared\+Secret (\begin{DoxyParamCaption}\item[{\hyperlink{structEcdhContext}{Ecdh\+Context} $\ast$}]{context,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{output,  }\item[{size\+\_\+t}]{output\+Size,  }\item[{size\+\_\+t $\ast$}]{output\+Len }\end{DoxyParamCaption})}
+
+
+
+Compute E\+C\+DH shared secret. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the E\+C\+DH context \\
+\hline
+\mbox{\tt out}  & {\em output} & Buffer where to store the shared secret \\
+\hline
+\mbox{\tt in}  & {\em output\+Size} & Size of the buffer in bytes \\
+\hline
+\mbox{\tt out}  & {\em output\+Len} & Length of the resulting shared secret \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 385 of file ecdh.\+c.
+
+
+\begin{DoxyCode}
+387 \{
+388    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+389 
+390    \textcolor{comment}{//Debug message}
+391    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"Computing Diffie-Hellman shared secret...\(\backslash\)r\(\backslash\)n"});
+392 
+393    \textcolor{comment}{//Weierstrass elliptic curve?}
+394    \textcolor{keywordflow}{if}(context->\hyperlink{structEcdhContext_ad7a1d278081f5d47410da42c58e248df}{params}.\hyperlink{structEcDomainParameters_a7e42fa63fdb0ee92990c05b0771ac383}{type} == \hyperlink{ec__curves_8h_af38fa6633c02444318870a309134ca21ae3b7002937d7fc1988f424c669fd0319}{EC\_CURVE\_TYPE\_SECT\_K1} ||
+395       context->\hyperlink{structEcdhContext_ad7a1d278081f5d47410da42c58e248df}{params}.\hyperlink{structEcDomainParameters_a7e42fa63fdb0ee92990c05b0771ac383}{type} == \hyperlink{ec__curves_8h_af38fa6633c02444318870a309134ca21afbf11bc2681a2347e047179e6112805b}{EC\_CURVE\_TYPE\_SECT\_R1} ||
+396       context->\hyperlink{structEcdhContext_ad7a1d278081f5d47410da42c58e248df}{params}.\hyperlink{structEcDomainParameters_a7e42fa63fdb0ee92990c05b0771ac383}{type} == \hyperlink{ec__curves_8h_af38fa6633c02444318870a309134ca21a4e358b2e613b1c31dbe84a5659385454}{EC\_CURVE\_TYPE\_SECT\_R2} ||
+397       context->\hyperlink{structEcdhContext_ad7a1d278081f5d47410da42c58e248df}{params}.\hyperlink{structEcDomainParameters_a7e42fa63fdb0ee92990c05b0771ac383}{type} == \hyperlink{ec__curves_8h_af38fa6633c02444318870a309134ca21acb3e0a98a9b02dbc1f2571cb81803be5}{EC\_CURVE\_TYPE\_SECP\_K1} ||
+398       context->\hyperlink{structEcdhContext_ad7a1d278081f5d47410da42c58e248df}{params}.\hyperlink{structEcDomainParameters_a7e42fa63fdb0ee92990c05b0771ac383}{type} == \hyperlink{ec__curves_8h_af38fa6633c02444318870a309134ca21a6b7d19ff105076c689968bd272b23ddf}{EC\_CURVE\_TYPE\_SECP\_R1} ||
+399       context->\hyperlink{structEcdhContext_ad7a1d278081f5d47410da42c58e248df}{params}.\hyperlink{structEcDomainParameters_a7e42fa63fdb0ee92990c05b0771ac383}{type} == \hyperlink{ec__curves_8h_af38fa6633c02444318870a309134ca21ad2a3c0d902228c966e0469da167bff2d}{EC\_CURVE\_TYPE\_SECP\_R2} ||
+400       context->\hyperlink{structEcdhContext_ad7a1d278081f5d47410da42c58e248df}{params}.\hyperlink{structEcDomainParameters_a7e42fa63fdb0ee92990c05b0771ac383}{type} == \hyperlink{ec__curves_8h_af38fa6633c02444318870a309134ca21a867f3633eb68c5e0ed895577aec50909}{EC\_CURVE\_TYPE\_BRAINPOOLP\_R1})
+401    \{
+402       \textcolor{keywordtype}{size\_t} \hyperlink{md5_8c_af11ea3cdbca7345eb6a4a8ac5ce0434d}{k};
+403       \hyperlink{structEcPoint}{EcPoint} \hyperlink{dns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z};
+404 
+405       \textcolor{comment}{//Get the length in octets of the prime modulus}
+406       k = \hyperlink{mpi_8c_a8599cb7537c854ae3b2442144c7f853b}{mpiGetByteLength}(&context->\hyperlink{structEcdhContext_ad7a1d278081f5d47410da42c58e248df}{params}.\hyperlink{structEcDomainParameters_a497e7494540878b966444dc4ad973cdc}{p});
+407 
+408       \textcolor{comment}{//Make sure that the output buffer is large enough}
+409       \textcolor{keywordflow}{if}(outputSize >= k)
+410       \{
+411          \textcolor{comment}{//Length of the resulting shared secret}
+412          *outputLen = \hyperlink{md5_8c_af11ea3cdbca7345eb6a4a8ac5ce0434d}{k};
+413 
+414          \textcolor{comment}{//Initialize EC points}
+415          \hyperlink{ec_8c_ac038e67dcc04d6d94bb930f9475f3ff8}{ecInit}(&z);
+416 
+417          \textcolor{comment}{//Convert the peer's public key to projective representation}
+418          error = \hyperlink{ec_8c_a1dbdfb4f5689eb88092fa08bc50eda00}{ecProjectify}(&context->\hyperlink{structEcdhContext_ad7a1d278081f5d47410da42c58e248df}{params}, &context->\hyperlink{structEcdhContext_a1de1436bb839104e2a7be87598a33a5d}{qb}, &context->
+      \hyperlink{structEcdhContext_a1de1436bb839104e2a7be87598a33a5d}{qb});
+419 
+420          \textcolor{comment}{//Check status code}
+421          \textcolor{keywordflow}{if}(!error)
+422          \{
+423             \textcolor{comment}{//Compute Z = da.Qb}
+424             error = \hyperlink{ec_8c_adfdc61723278833b0c8cecbb10185233}{ecMult}(&context->\hyperlink{structEcdhContext_ad7a1d278081f5d47410da42c58e248df}{params}, &z, &context->\hyperlink{structEcdhContext_a0af39ae4834d4f4106c7c0224e6a52bd}{da}, &context->
+      \hyperlink{structEcdhContext_a1de1436bb839104e2a7be87598a33a5d}{qb});
+425          \}
+426 
+427          \textcolor{comment}{//Check status code}
+428          \textcolor{keywordflow}{if}(!error)
+429          \{
+430             \textcolor{comment}{//Convert Z to affine representation}
+431             error = \hyperlink{ec_8c_af156298aca268c06f7708d4c4d700757}{ecAffinify}(&context->\hyperlink{structEcdhContext_ad7a1d278081f5d47410da42c58e248df}{params}, &z, &z);
+432          \}
+433 
+434          \textcolor{comment}{//Check status code}
+435          \textcolor{keywordflow}{if}(!error)
+436          \{
+437             \textcolor{comment}{//The shared secret is the x-coordinate of Z}
+438             error = \hyperlink{mpi_8c_aad846b0b5a3560243e1bf8601ad1b6a5}{mpiExport}(&z.\hyperlink{structEcPoint_a08f3fbb7a7d07607306bd8d6200629af}{x}, output, k, \hyperlink{mpi_8h_a5fe4159c7c390c604067e854b41d337fa0912b5922ecee206ec51e40d5285f77e}{MPI\_FORMAT\_BIG\_ENDIAN});
+439          \}
+440 
+441          \textcolor{comment}{//Release EC point}
+442          \hyperlink{ec_8c_ae4a9276eac491f8acbb6d0916287411b}{ecFree}(&z);
+443       \}
+444       \textcolor{keywordflow}{else}
+445       \{
+446          \textcolor{comment}{//Report an error}
+447          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cae5c014519c3ac2540447887ddca1bd28}{ERROR\_INVALID\_LENGTH};
+448       \}
+449    \}
+450 \textcolor{preprocessor}{#if (X25519\_SUPPORT == ENABLED)}
+451    \textcolor{comment}{//Curve25519 elliptic curve?}
+452    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->\hyperlink{structEcdhContext_ad7a1d278081f5d47410da42c58e248df}{params}.\hyperlink{structEcDomainParameters_a7e42fa63fdb0ee92990c05b0771ac383}{type} == \hyperlink{ec__curves_8h_af38fa6633c02444318870a309134ca21a305ec79ddded0b086f533321ece697b8}{EC\_CURVE\_TYPE\_X25519})
+453    \{
+454       \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+455       \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} \hyperlink{web__socket_8h_a8a74907784be6c7786c2d060c8d7e10b}{mask};
+456       \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} da[\hyperlink{curve25519_8h_acfa5fc6d5ea73b0a2efd5821d4412bde}{CURVE25519\_BYTE\_LEN}];
+457       \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} qb[\hyperlink{curve25519_8h_acfa5fc6d5ea73b0a2efd5821d4412bde}{CURVE25519\_BYTE\_LEN}];
+458 
+459       \textcolor{comment}{//Make sure that the output buffer is large enough}
+460       \textcolor{keywordflow}{if}(outputSize >= \hyperlink{curve25519_8h_acfa5fc6d5ea73b0a2efd5821d4412bde}{CURVE25519\_BYTE\_LEN})
+461       \{
+462          \textcolor{comment}{//Length of the resulting shared secret}
+463          *outputLen = \hyperlink{curve25519_8h_acfa5fc6d5ea73b0a2efd5821d4412bde}{CURVE25519\_BYTE\_LEN};
+464 
+465          \textcolor{comment}{//Retrieve private key}
+466          error = \hyperlink{mpi_8c_aad846b0b5a3560243e1bf8601ad1b6a5}{mpiExport}(&context->\hyperlink{structEcdhContext_a0af39ae4834d4f4106c7c0224e6a52bd}{da}, da, \hyperlink{curve25519_8h_acfa5fc6d5ea73b0a2efd5821d4412bde}{CURVE25519\_BYTE\_LEN},
+467             \hyperlink{mpi_8h_a5fe4159c7c390c604067e854b41d337fa637c0a6e803a47db52875c6818674c60}{MPI\_FORMAT\_LITTLE\_ENDIAN});
+468 
+469          \textcolor{comment}{//Check status code}
+470          \textcolor{keywordflow}{if}(!error)
+471          \{
+472             \textcolor{comment}{//Get peer's public key}
+473             error = \hyperlink{mpi_8c_aad846b0b5a3560243e1bf8601ad1b6a5}{mpiExport}(&context->\hyperlink{structEcdhContext_a1de1436bb839104e2a7be87598a33a5d}{qb}.\hyperlink{structEcPoint_a08f3fbb7a7d07607306bd8d6200629af}{x}, qb, 
+      \hyperlink{curve25519_8h_acfa5fc6d5ea73b0a2efd5821d4412bde}{CURVE25519\_BYTE\_LEN},
+474                \hyperlink{mpi_8h_a5fe4159c7c390c604067e854b41d337fa637c0a6e803a47db52875c6818674c60}{MPI\_FORMAT\_LITTLE\_ENDIAN});
+475          \}
+476 
+477          \textcolor{comment}{//Check status code}
+478          \textcolor{keywordflow}{if}(!error)
+479          \{
+480             \textcolor{comment}{//Generate shared secret K using X25519 function}
+481             error = \hyperlink{x25519_8c_a8d10ea2dc277316216a85163251af12f}{x25519}(output, da, qb);
+482          \}
+483 
+484          \textcolor{comment}{//Since Curve25519 has a cofactor of 8, an input point of small order}
+485          \textcolor{comment}{//will eliminate any contribution from the other party's private key}
+486          \textcolor{keywordflow}{if}(!error)
+487          \{
+488             \textcolor{comment}{//This situation can be detected by checking for the all-zero output}
+489             \textcolor{keywordflow}{for}(mask = 0, i = 0; i < \hyperlink{curve25519_8h_acfa5fc6d5ea73b0a2efd5821d4412bde}{CURVE25519\_BYTE\_LEN}; i++)
+490             \{
+491                mask |= output[i];
+492             \}
+493 
+494             \textcolor{comment}{//Check whether K is the all-zero value and abort if so (refer to}
+495             \textcolor{comment}{//RFC 8422, sections 5.10 and 5.11)}
+496             \textcolor{keywordflow}{if}(mask == 0)
+497             \{
+498                error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca152b24f57c941cb736772696416eb7c2}{ERROR\_ILLEGAL\_PARAMETER};
+499             \}
+500          \}
+501       \}
+502       \textcolor{keywordflow}{else}
+503       \{
+504          \textcolor{comment}{//Report an error}
+505          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cae5c014519c3ac2540447887ddca1bd28}{ERROR\_INVALID\_LENGTH};
+506       \}
+507    \}
+508 \textcolor{preprocessor}{#endif}
+509 \textcolor{preprocessor}{#if (X448\_SUPPORT == ENABLED)}
+510    \textcolor{comment}{//Curve448 elliptic curve?}
+511    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->\hyperlink{structEcdhContext_ad7a1d278081f5d47410da42c58e248df}{params}.\hyperlink{structEcDomainParameters_a7e42fa63fdb0ee92990c05b0771ac383}{type} == \hyperlink{ec__curves_8h_af38fa6633c02444318870a309134ca21a7610f3e0b5df86a629dd8d2f7f1ce4ef}{EC\_CURVE\_TYPE\_X448})
+512    \{
+513       \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+514       \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} \hyperlink{web__socket_8h_a8a74907784be6c7786c2d060c8d7e10b}{mask};
+515       \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} da[\hyperlink{curve448_8h_a9352f9ae5f467c69283aa8bce8bf4d57}{CURVE448\_BYTE\_LEN}];
+516       \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} qb[\hyperlink{curve448_8h_a9352f9ae5f467c69283aa8bce8bf4d57}{CURVE448\_BYTE\_LEN}];
+517 
+518       \textcolor{comment}{//Make sure that the output buffer is large enough}
+519       \textcolor{keywordflow}{if}(outputSize >= \hyperlink{curve448_8h_a9352f9ae5f467c69283aa8bce8bf4d57}{CURVE448\_BYTE\_LEN})
+520       \{
+521          \textcolor{comment}{//Length of the resulting shared secret}
+522          *outputLen = \hyperlink{curve448_8h_a9352f9ae5f467c69283aa8bce8bf4d57}{CURVE448\_BYTE\_LEN};
+523 
+524          \textcolor{comment}{//Retrieve private key}
+525          error = \hyperlink{mpi_8c_aad846b0b5a3560243e1bf8601ad1b6a5}{mpiExport}(&context->\hyperlink{structEcdhContext_a0af39ae4834d4f4106c7c0224e6a52bd}{da}, da, \hyperlink{curve448_8h_a9352f9ae5f467c69283aa8bce8bf4d57}{CURVE448\_BYTE\_LEN},
+526             \hyperlink{mpi_8h_a5fe4159c7c390c604067e854b41d337fa637c0a6e803a47db52875c6818674c60}{MPI\_FORMAT\_LITTLE\_ENDIAN});
+527 
+528          \textcolor{comment}{//Check status code}
+529          \textcolor{keywordflow}{if}(!error)
+530          \{
+531             \textcolor{comment}{//Get peer's public key}
+532             error = \hyperlink{mpi_8c_aad846b0b5a3560243e1bf8601ad1b6a5}{mpiExport}(&context->\hyperlink{structEcdhContext_a1de1436bb839104e2a7be87598a33a5d}{qb}.\hyperlink{structEcPoint_a08f3fbb7a7d07607306bd8d6200629af}{x}, qb, \hyperlink{curve448_8h_a9352f9ae5f467c69283aa8bce8bf4d57}{CURVE448\_BYTE\_LEN},
+533                \hyperlink{mpi_8h_a5fe4159c7c390c604067e854b41d337fa637c0a6e803a47db52875c6818674c60}{MPI\_FORMAT\_LITTLE\_ENDIAN});
+534          \}
+535 
+536          \textcolor{comment}{//Check status code}
+537          \textcolor{keywordflow}{if}(!error)
+538          \{
+539             \textcolor{comment}{//Generate shared secret K using X448 function}
+540             error = \hyperlink{x448_8c_a6a03d7671dfcb72f00572d8fba52c91a}{x448}(output, da, qb);
+541          \}
+542 
+543          \textcolor{comment}{//Since Curve448 has a cofactor of 4, an input point of small order}
+544          \textcolor{comment}{//will eliminate any contribution from the other party's private key}
+545          \textcolor{keywordflow}{if}(!error)
+546          \{
+547             \textcolor{comment}{//This situation can be detected by checking for the all-zero output}
+548             \textcolor{keywordflow}{for}(mask = 0, i = 0; i < \hyperlink{curve448_8h_a9352f9ae5f467c69283aa8bce8bf4d57}{CURVE448\_BYTE\_LEN}; i++)
+549             \{
+550                mask |= output[i];
+551             \}
+552 
+553             \textcolor{comment}{//Check whether K is the all-zero value and abort if so (refer to}
+554             \textcolor{comment}{//RFC 8422, sections 5.10 and 5.11)}
+555             \textcolor{keywordflow}{if}(mask == 0)
+556             \{
+557                error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca152b24f57c941cb736772696416eb7c2}{ERROR\_ILLEGAL\_PARAMETER};
+558             \}
+559          \}
+560       \}
+561       \textcolor{keywordflow}{else}
+562       \{
+563          \textcolor{comment}{//Report an error}
+564          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cae5c014519c3ac2540447887ddca1bd28}{ERROR\_INVALID\_LENGTH};
+565       \}
+566    \}
+567 \textcolor{preprocessor}{#endif}
+568    \textcolor{comment}{//Invalid elliptic curve?}
+569    \textcolor{keywordflow}{else}
+570    \{
+571       \textcolor{comment}{//Report an error}
+572       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca2daa3c161edaa4477d1ae954c2136008}{ERROR\_INVALID\_TYPE};
+573    \}
+574 
+575    \textcolor{comment}{//Check status code}
+576    \textcolor{keywordflow}{if}(!error)
+577    \{
+578       \textcolor{comment}{//Debug message}
+579       \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  Shared secret (%"} \hyperlink{compiler__port_8h_a2b7b0557dc6cd786df02dafbb51f5292}{PRIuSIZE} \textcolor{stringliteral}{" bytes):\(\backslash\)r\(\backslash\)n"}, *outputLen);
+580       \hyperlink{debug_8h_a1f71019169d85407d8827300ed43bdf0}{TRACE\_DEBUG\_ARRAY}(\textcolor{stringliteral}{"    "}, output, *outputLen);
+581    \}
+582 
+583    \textcolor{comment}{//Return status code}
+584    \textcolor{keywordflow}{return} error;
+585 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ecdh_8c_a6691dcfa7a6fc9d143579ce2455699c7}\label{ecdh_8c_a6691dcfa7a6fc9d143579ce2455699c7}} 
+\index{ecdh.\+c@{ecdh.\+c}!ecdh\+Free@{ecdh\+Free}}
+\index{ecdh\+Free@{ecdh\+Free}!ecdh.\+c@{ecdh.\+c}}
+\subsubsection{\texorpdfstring{ecdh\+Free()}{ecdhFree()}}
+{\footnotesize\ttfamily void ecdh\+Free (\begin{DoxyParamCaption}\item[{\hyperlink{structEcdhContext}{Ecdh\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Release E\+C\+DH context. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the E\+C\+DH context \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 67 of file ecdh.\+c.
+
+
+\begin{DoxyCode}
+68 \{
+69    \textcolor{comment}{//Release EC domain parameters}
+70    \hyperlink{ec_8c_a256993c154cf87c3d9d18138a1365eca}{ecFreeDomainParameters}(&context->\hyperlink{structEcdhContext_ad7a1d278081f5d47410da42c58e248df}{params});
+71 
+72    \textcolor{comment}{//Release private and public keys}
+73    \hyperlink{mpi_8c_a9dc5be2f62d37d3854fa61beab3a61ad}{mpiFree}(&context->\hyperlink{structEcdhContext_a0af39ae4834d4f4106c7c0224e6a52bd}{da});
+74    \hyperlink{ec_8c_ae4a9276eac491f8acbb6d0916287411b}{ecFree}(&context->\hyperlink{structEcdhContext_aee88c6acd90bffb45a74fa3280b0328a}{qa});
+75    \hyperlink{ec_8c_ae4a9276eac491f8acbb6d0916287411b}{ecFree}(&context->\hyperlink{structEcdhContext_a1de1436bb839104e2a7be87598a33a5d}{qb});
+76 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ecdh_8c_a84bbbc2b2072c6e845457f4a58602889}\label{ecdh_8c_a84bbbc2b2072c6e845457f4a58602889}} 
+\index{ecdh.\+c@{ecdh.\+c}!ecdh\+Generate\+Key\+Pair@{ecdh\+Generate\+Key\+Pair}}
+\index{ecdh\+Generate\+Key\+Pair@{ecdh\+Generate\+Key\+Pair}!ecdh.\+c@{ecdh.\+c}}
+\subsubsection{\texorpdfstring{ecdh\+Generate\+Key\+Pair()}{ecdhGenerateKeyPair()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ecdh\+Generate\+Key\+Pair (\begin{DoxyParamCaption}\item[{\hyperlink{structEcdhContext}{Ecdh\+Context} $\ast$}]{context,  }\item[{const \hyperlink{structPrngAlgo}{Prng\+Algo} $\ast$}]{prng\+Algo,  }\item[{void $\ast$}]{prng\+Context }\end{DoxyParamCaption})}
+
+
+
+E\+C\+DH key pair generation. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the E\+C\+DH context \\
+\hline
+\mbox{\tt in}  & {\em prng\+Algo} & P\+R\+NG algorithm \\
+\hline
+\mbox{\tt in}  & {\em prng\+Context} & Pointer to the P\+R\+NG context \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 87 of file ecdh.\+c.
+
+
+\begin{DoxyCode}
+89 \{
+90    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+91 
+92    \textcolor{comment}{//Debug message}
+93    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"Generating ECDH key pair...\(\backslash\)r\(\backslash\)n"});
+94 
+95    \textcolor{comment}{//Weierstrass elliptic curve?}
+96    \textcolor{keywordflow}{if}(context->\hyperlink{structEcdhContext_ad7a1d278081f5d47410da42c58e248df}{params}.\hyperlink{structEcDomainParameters_a7e42fa63fdb0ee92990c05b0771ac383}{type} == \hyperlink{ec__curves_8h_af38fa6633c02444318870a309134ca21ae3b7002937d7fc1988f424c669fd0319}{EC\_CURVE\_TYPE\_SECT\_K1} ||
+97       context->\hyperlink{structEcdhContext_ad7a1d278081f5d47410da42c58e248df}{params}.\hyperlink{structEcDomainParameters_a7e42fa63fdb0ee92990c05b0771ac383}{type} == \hyperlink{ec__curves_8h_af38fa6633c02444318870a309134ca21afbf11bc2681a2347e047179e6112805b}{EC\_CURVE\_TYPE\_SECT\_R1} ||
+98       context->\hyperlink{structEcdhContext_ad7a1d278081f5d47410da42c58e248df}{params}.\hyperlink{structEcDomainParameters_a7e42fa63fdb0ee92990c05b0771ac383}{type} == \hyperlink{ec__curves_8h_af38fa6633c02444318870a309134ca21a4e358b2e613b1c31dbe84a5659385454}{EC\_CURVE\_TYPE\_SECT\_R2} ||
+99       context->\hyperlink{structEcdhContext_ad7a1d278081f5d47410da42c58e248df}{params}.\hyperlink{structEcDomainParameters_a7e42fa63fdb0ee92990c05b0771ac383}{type} == \hyperlink{ec__curves_8h_af38fa6633c02444318870a309134ca21acb3e0a98a9b02dbc1f2571cb81803be5}{EC\_CURVE\_TYPE\_SECP\_K1} ||
+100       context->\hyperlink{structEcdhContext_ad7a1d278081f5d47410da42c58e248df}{params}.\hyperlink{structEcDomainParameters_a7e42fa63fdb0ee92990c05b0771ac383}{type} == \hyperlink{ec__curves_8h_af38fa6633c02444318870a309134ca21a6b7d19ff105076c689968bd272b23ddf}{EC\_CURVE\_TYPE\_SECP\_R1} ||
+101       context->\hyperlink{structEcdhContext_ad7a1d278081f5d47410da42c58e248df}{params}.\hyperlink{structEcDomainParameters_a7e42fa63fdb0ee92990c05b0771ac383}{type} == \hyperlink{ec__curves_8h_af38fa6633c02444318870a309134ca21ad2a3c0d902228c966e0469da167bff2d}{EC\_CURVE\_TYPE\_SECP\_R2} ||
+102       context->\hyperlink{structEcdhContext_ad7a1d278081f5d47410da42c58e248df}{params}.\hyperlink{structEcDomainParameters_a7e42fa63fdb0ee92990c05b0771ac383}{type} == \hyperlink{ec__curves_8h_af38fa6633c02444318870a309134ca21a867f3633eb68c5e0ed895577aec50909}{EC\_CURVE\_TYPE\_BRAINPOOLP\_R1})
+103    \{
+104       \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+105 
+106       \textcolor{comment}{//Let N be the bit length of q}
+107       n = \hyperlink{mpi_8c_a2e540eb4b5d15ea9755fb3e138990c1c}{mpiGetBitLength}(&context->\hyperlink{structEcdhContext_ad7a1d278081f5d47410da42c58e248df}{params}.\hyperlink{structEcDomainParameters_afcdd8e7ec1aa29476df4e2ae13882a12}{q});
+108 
+109       \textcolor{comment}{//Generated a pseudorandom number}
+110       error = \hyperlink{mpi_8c_a9753c7bf919b7c41e48512ba572c3bbb}{mpiRand}(&context->\hyperlink{structEcdhContext_a0af39ae4834d4f4106c7c0224e6a52bd}{da}, n, prngAlgo, prngContext);
+111 
+112       \textcolor{comment}{//Check status code}
+113       \textcolor{keywordflow}{if}(!error)
+114       \{
+115          \textcolor{comment}{//Make sure that 0 < da < q}
+116          \textcolor{keywordflow}{if}(\hyperlink{mpi_8c_a54cf7aedd99e130971849eb21eb578c9}{mpiComp}(&context->\hyperlink{structEcdhContext_a0af39ae4834d4f4106c7c0224e6a52bd}{da}, &context->\hyperlink{structEcdhContext_ad7a1d278081f5d47410da42c58e248df}{params}.\hyperlink{structEcDomainParameters_afcdd8e7ec1aa29476df4e2ae13882a12}{q}) >= 0)
+117          \{
+118             error = \hyperlink{mpi_8c_a550a7330971d895957015b810b25c805}{mpiShiftRight}(&context->\hyperlink{structEcdhContext_a0af39ae4834d4f4106c7c0224e6a52bd}{da}, 1);
+119          \}
+120       \}
+121 
+122       \textcolor{comment}{//Check status code}
+123       \textcolor{keywordflow}{if}(!error)
+124       \{
+125          \textcolor{comment}{//Debug message}
+126          \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  Private key:\(\backslash\)r\(\backslash\)n"});
+127          \hyperlink{debug_8h_a9c9f3b28f2daf14d77b401512c189d93}{TRACE\_DEBUG\_MPI}(\textcolor{stringliteral}{"    "}, &context->\hyperlink{structEcdhContext_a0af39ae4834d4f4106c7c0224e6a52bd}{da});
+128 
+129          \textcolor{comment}{//Compute Qa = da.G}
+130          error = \hyperlink{ec_8c_adfdc61723278833b0c8cecbb10185233}{ecMult}(&context->\hyperlink{structEcdhContext_ad7a1d278081f5d47410da42c58e248df}{params}, &context->\hyperlink{structEcdhContext_aee88c6acd90bffb45a74fa3280b0328a}{qa}, &context->
+      \hyperlink{structEcdhContext_a0af39ae4834d4f4106c7c0224e6a52bd}{da},
+131             &context->\hyperlink{structEcdhContext_ad7a1d278081f5d47410da42c58e248df}{params}.\hyperlink{structEcDomainParameters_a48b4ef67c6d94e7be182ae6b73708511}{g});
+132       \}
+133 
+134       \textcolor{comment}{//Check status code}
+135       \textcolor{keywordflow}{if}(!error)
+136       \{
+137          \textcolor{comment}{//Convert the public key to affine representation}
+138          error = \hyperlink{ec_8c_af156298aca268c06f7708d4c4d700757}{ecAffinify}(&context->\hyperlink{structEcdhContext_ad7a1d278081f5d47410da42c58e248df}{params}, &context->\hyperlink{structEcdhContext_aee88c6acd90bffb45a74fa3280b0328a}{qa}, &context->
+      \hyperlink{structEcdhContext_aee88c6acd90bffb45a74fa3280b0328a}{qa});
+139       \}
+140 
+141       \textcolor{comment}{//Check status code}
+142       \textcolor{keywordflow}{if}(!error)
+143       \{
+144          \textcolor{comment}{//Debug message}
+145          \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  Public key X:\(\backslash\)r\(\backslash\)n"});
+146          \hyperlink{debug_8h_a9c9f3b28f2daf14d77b401512c189d93}{TRACE\_DEBUG\_MPI}(\textcolor{stringliteral}{"    "}, &context->\hyperlink{structEcdhContext_aee88c6acd90bffb45a74fa3280b0328a}{qa}.\hyperlink{structEcPoint_a08f3fbb7a7d07607306bd8d6200629af}{x});
+147          \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  Public key Y:\(\backslash\)r\(\backslash\)n"});
+148          \hyperlink{debug_8h_a9c9f3b28f2daf14d77b401512c189d93}{TRACE\_DEBUG\_MPI}(\textcolor{stringliteral}{"    "}, &context->\hyperlink{structEcdhContext_aee88c6acd90bffb45a74fa3280b0328a}{qa}.\hyperlink{structEcPoint_a2102dff813849bd0eaed8a1a5e64ec1f}{y});
+149       \}
+150    \}
+151 \textcolor{preprocessor}{#if (X25519\_SUPPORT == ENABLED)}
+152    \textcolor{comment}{//Curve25519 elliptic curve?}
+153    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->\hyperlink{structEcdhContext_ad7a1d278081f5d47410da42c58e248df}{params}.\hyperlink{structEcDomainParameters_a7e42fa63fdb0ee92990c05b0771ac383}{type} == \hyperlink{ec__curves_8h_af38fa6633c02444318870a309134ca21a305ec79ddded0b086f533321ece697b8}{EC\_CURVE\_TYPE\_X25519})
+154    \{
+155       \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} da[\hyperlink{curve25519_8h_acfa5fc6d5ea73b0a2efd5821d4412bde}{CURVE25519\_BYTE\_LEN}];
+156       \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} qa[\hyperlink{curve25519_8h_acfa5fc6d5ea73b0a2efd5821d4412bde}{CURVE25519\_BYTE\_LEN}];
+157       \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} g[\hyperlink{curve25519_8h_acfa5fc6d5ea73b0a2efd5821d4412bde}{CURVE25519\_BYTE\_LEN}];
+158 
+159       \textcolor{comment}{//Generate 32 random bytes}
+160       error = prngAlgo->\hyperlink{structPrngAlgo_a079621740ef14faacfcd05b84c9036eb}{read}(prngContext, da, \hyperlink{curve25519_8h_acfa5fc6d5ea73b0a2efd5821d4412bde}{CURVE25519\_BYTE\_LEN});
+161 
+162       \textcolor{comment}{//Check status code}
+163       \textcolor{keywordflow}{if}(!error)
+164       \{
+165          \textcolor{comment}{//Debug message}
+166          \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  Private key:\(\backslash\)r\(\backslash\)n"});
+167          \hyperlink{debug_8h_a1f71019169d85407d8827300ed43bdf0}{TRACE\_DEBUG\_ARRAY}(\textcolor{stringliteral}{"    "}, da, \hyperlink{curve25519_8h_acfa5fc6d5ea73b0a2efd5821d4412bde}{CURVE25519\_BYTE\_LEN});
+168 
+169          \textcolor{comment}{//Get the u-coordinate of the base point}
+170          error = \hyperlink{mpi_8c_aad846b0b5a3560243e1bf8601ad1b6a5}{mpiExport}(&context->\hyperlink{structEcdhContext_ad7a1d278081f5d47410da42c58e248df}{params}.\hyperlink{structEcDomainParameters_a48b4ef67c6d94e7be182ae6b73708511}{g}.\hyperlink{structEcPoint_a08f3fbb7a7d07607306bd8d6200629af}{x}, g, 
+      \hyperlink{curve25519_8h_acfa5fc6d5ea73b0a2efd5821d4412bde}{CURVE25519\_BYTE\_LEN},
+171             \hyperlink{mpi_8h_a5fe4159c7c390c604067e854b41d337fa637c0a6e803a47db52875c6818674c60}{MPI\_FORMAT\_LITTLE\_ENDIAN});
+172       \}
+173 
+174       \textcolor{comment}{//Check status code}
+175       \textcolor{keywordflow}{if}(!error)
+176       \{
+177          \textcolor{comment}{//Generate the public value using X25519 function}
+178          error = \hyperlink{x25519_8c_a8d10ea2dc277316216a85163251af12f}{x25519}(qa, da, g);
+179       \}
+180 
+181       \textcolor{comment}{//Check status code}
+182       \textcolor{keywordflow}{if}(!error)
+183       \{
+184          \textcolor{comment}{//Save private key}
+185          error = \hyperlink{mpi_8c_a844d59498f4acce9d69ae55570b521f3}{mpiImport}(&context->\hyperlink{structEcdhContext_a0af39ae4834d4f4106c7c0224e6a52bd}{da}, da, \hyperlink{curve25519_8h_acfa5fc6d5ea73b0a2efd5821d4412bde}{CURVE25519\_BYTE\_LEN},
+186             \hyperlink{mpi_8h_a5fe4159c7c390c604067e854b41d337fa637c0a6e803a47db52875c6818674c60}{MPI\_FORMAT\_LITTLE\_ENDIAN});
+187       \}
+188 
+189       \textcolor{comment}{//Check status code}
+190       \textcolor{keywordflow}{if}(!error)
+191       \{
+192          \textcolor{comment}{//Debug message}
+193          \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  Public key:\(\backslash\)r\(\backslash\)n"});
+194          \hyperlink{debug_8h_a1f71019169d85407d8827300ed43bdf0}{TRACE\_DEBUG\_ARRAY}(\textcolor{stringliteral}{"    "}, qa, \hyperlink{curve25519_8h_acfa5fc6d5ea73b0a2efd5821d4412bde}{CURVE25519\_BYTE\_LEN});
+195 
+196          \textcolor{comment}{//Save public key}
+197          error = \hyperlink{mpi_8c_a844d59498f4acce9d69ae55570b521f3}{mpiImport}(&context->\hyperlink{structEcdhContext_aee88c6acd90bffb45a74fa3280b0328a}{qa}.\hyperlink{structEcPoint_a08f3fbb7a7d07607306bd8d6200629af}{x}, qa, \hyperlink{curve25519_8h_acfa5fc6d5ea73b0a2efd5821d4412bde}{CURVE25519\_BYTE\_LEN},
+198             \hyperlink{mpi_8h_a5fe4159c7c390c604067e854b41d337fa637c0a6e803a47db52875c6818674c60}{MPI\_FORMAT\_LITTLE\_ENDIAN});
+199       \}
+200    \}
+201 \textcolor{preprocessor}{#endif}
+202 \textcolor{preprocessor}{#if (X448\_SUPPORT == ENABLED)}
+203    \textcolor{comment}{//Curve448 elliptic curve?}
+204    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->\hyperlink{structEcdhContext_ad7a1d278081f5d47410da42c58e248df}{params}.\hyperlink{structEcDomainParameters_a7e42fa63fdb0ee92990c05b0771ac383}{type} == \hyperlink{ec__curves_8h_af38fa6633c02444318870a309134ca21a7610f3e0b5df86a629dd8d2f7f1ce4ef}{EC\_CURVE\_TYPE\_X448})
+205    \{
+206       \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} da[\hyperlink{curve448_8h_a9352f9ae5f467c69283aa8bce8bf4d57}{CURVE448\_BYTE\_LEN}];
+207       \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} qa[\hyperlink{curve448_8h_a9352f9ae5f467c69283aa8bce8bf4d57}{CURVE448\_BYTE\_LEN}];
+208       \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} g[\hyperlink{curve448_8h_a9352f9ae5f467c69283aa8bce8bf4d57}{CURVE448\_BYTE\_LEN}];
+209 
+210       \textcolor{comment}{//Generate 56 random bytes}
+211       error = prngAlgo->\hyperlink{structPrngAlgo_a079621740ef14faacfcd05b84c9036eb}{read}(prngContext, da, \hyperlink{curve448_8h_a9352f9ae5f467c69283aa8bce8bf4d57}{CURVE448\_BYTE\_LEN});
+212 
+213       \textcolor{comment}{//Check status code}
+214       \textcolor{keywordflow}{if}(!error)
+215       \{
+216          \textcolor{comment}{//Debug message}
+217          \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  Private key:\(\backslash\)r\(\backslash\)n"});
+218          \hyperlink{debug_8h_a1f71019169d85407d8827300ed43bdf0}{TRACE\_DEBUG\_ARRAY}(\textcolor{stringliteral}{"    "}, da, \hyperlink{curve448_8h_a9352f9ae5f467c69283aa8bce8bf4d57}{CURVE448\_BYTE\_LEN});
+219 
+220          \textcolor{comment}{//Get the u-coordinate of the base point}
+221          error = \hyperlink{mpi_8c_aad846b0b5a3560243e1bf8601ad1b6a5}{mpiExport}(&context->\hyperlink{structEcdhContext_ad7a1d278081f5d47410da42c58e248df}{params}.\hyperlink{structEcDomainParameters_a48b4ef67c6d94e7be182ae6b73708511}{g}.\hyperlink{structEcPoint_a08f3fbb7a7d07607306bd8d6200629af}{x}, g, 
+      \hyperlink{curve448_8h_a9352f9ae5f467c69283aa8bce8bf4d57}{CURVE448\_BYTE\_LEN},
+222             \hyperlink{mpi_8h_a5fe4159c7c390c604067e854b41d337fa637c0a6e803a47db52875c6818674c60}{MPI\_FORMAT\_LITTLE\_ENDIAN});
+223       \}
+224 
+225       \textcolor{comment}{//Check status code}
+226       \textcolor{keywordflow}{if}(!error)
+227       \{
+228          \textcolor{comment}{//Generate the public value using X448 function}
+229          error = \hyperlink{x448_8c_a6a03d7671dfcb72f00572d8fba52c91a}{x448}(qa, da, g);
+230       \}
+231 
+232       \textcolor{comment}{//Check status code}
+233       \textcolor{keywordflow}{if}(!error)
+234       \{
+235          \textcolor{comment}{//Save private key}
+236          error = \hyperlink{mpi_8c_a844d59498f4acce9d69ae55570b521f3}{mpiImport}(&context->\hyperlink{structEcdhContext_a0af39ae4834d4f4106c7c0224e6a52bd}{da}, da, \hyperlink{curve448_8h_a9352f9ae5f467c69283aa8bce8bf4d57}{CURVE448\_BYTE\_LEN},
+237             \hyperlink{mpi_8h_a5fe4159c7c390c604067e854b41d337fa637c0a6e803a47db52875c6818674c60}{MPI\_FORMAT\_LITTLE\_ENDIAN});
+238       \}
+239 
+240       \textcolor{comment}{//Check status code}
+241       \textcolor{keywordflow}{if}(!error)
+242       \{
+243          \textcolor{comment}{//Debug message}
+244          \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  Public key:\(\backslash\)r\(\backslash\)n"});
+245          \hyperlink{debug_8h_a1f71019169d85407d8827300ed43bdf0}{TRACE\_DEBUG\_ARRAY}(\textcolor{stringliteral}{"    "}, qa, \hyperlink{curve448_8h_a9352f9ae5f467c69283aa8bce8bf4d57}{CURVE448\_BYTE\_LEN});
+246 
+247          \textcolor{comment}{//Save public key}
+248          error = \hyperlink{mpi_8c_a844d59498f4acce9d69ae55570b521f3}{mpiImport}(&context->\hyperlink{structEcdhContext_aee88c6acd90bffb45a74fa3280b0328a}{qa}.\hyperlink{structEcPoint_a08f3fbb7a7d07607306bd8d6200629af}{x}, qa, \hyperlink{curve448_8h_a9352f9ae5f467c69283aa8bce8bf4d57}{CURVE448\_BYTE\_LEN},
+249             \hyperlink{mpi_8h_a5fe4159c7c390c604067e854b41d337fa637c0a6e803a47db52875c6818674c60}{MPI\_FORMAT\_LITTLE\_ENDIAN});
+250       \}
+251    \}
+252 \textcolor{preprocessor}{#endif}
+253    \textcolor{comment}{//Invalid elliptic curve?}
+254    \textcolor{keywordflow}{else}
+255    \{
+256       \textcolor{comment}{//Report an error}
+257       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca2daa3c161edaa4477d1ae954c2136008}{ERROR\_INVALID\_TYPE};
+258    \}
+259 
+260    \textcolor{comment}{//Return status code}
+261    \textcolor{keywordflow}{return} error;
+262 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ecdh_8c_adec624dbfb95d70bb35295938575141a}\label{ecdh_8c_adec624dbfb95d70bb35295938575141a}} 
+\index{ecdh.\+c@{ecdh.\+c}!ecdh\+Init@{ecdh\+Init}}
+\index{ecdh\+Init@{ecdh\+Init}!ecdh.\+c@{ecdh.\+c}}
+\subsubsection{\texorpdfstring{ecdh\+Init()}{ecdhInit()}}
+{\footnotesize\ttfamily void ecdh\+Init (\begin{DoxyParamCaption}\item[{\hyperlink{structEcdhContext}{Ecdh\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Initialize E\+C\+DH context. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the E\+C\+DH context \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 50 of file ecdh.\+c.
+
+
+\begin{DoxyCode}
+51 \{
+52    \textcolor{comment}{//Initialize EC domain parameters}
+53    \hyperlink{ec_8c_a5b5132fb8adf668ffa74ec10e7e63441}{ecInitDomainParameters}(&context->\hyperlink{structEcdhContext_ad7a1d278081f5d47410da42c58e248df}{params});
+54 
+55    \textcolor{comment}{//Initialize private and public keys}
+56    \hyperlink{mpi_8c_a6f30959dcaabfb16e96cc47ef90515a6}{mpiInit}(&context->\hyperlink{structEcdhContext_a0af39ae4834d4f4106c7c0224e6a52bd}{da});
+57    \hyperlink{ec_8c_ac038e67dcc04d6d94bb930f9475f3ff8}{ecInit}(&context->\hyperlink{structEcdhContext_aee88c6acd90bffb45a74fa3280b0328a}{qa});
+58    \hyperlink{ec_8c_ac038e67dcc04d6d94bb930f9475f3ff8}{ecInit}(&context->\hyperlink{structEcdhContext_a1de1436bb839104e2a7be87598a33a5d}{qb});
+59 \}
+\end{DoxyCode}

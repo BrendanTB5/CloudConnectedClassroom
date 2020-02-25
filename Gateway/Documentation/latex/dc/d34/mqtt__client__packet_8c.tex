@@ -1,0 +1,1898 @@
+\hypertarget{mqtt__client__packet_8c}{}\section{cyclone\+\_\+tcp/mqtt/mqtt\+\_\+client\+\_\+packet.c File Reference}
+\label{mqtt__client__packet_8c}\index{cyclone\+\_\+tcp/mqtt/mqtt\+\_\+client\+\_\+packet.\+c@{cyclone\+\_\+tcp/mqtt/mqtt\+\_\+client\+\_\+packet.\+c}}
+
+
+M\+Q\+TT packet parsing and formatting.  
+
+
+{\ttfamily \#include \char`\"{}core/net.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}mqtt/mqtt\+\_\+client.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}mqtt/mqtt\+\_\+client\+\_\+packet.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}mqtt/mqtt\+\_\+client\+\_\+transport.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}mqtt/mqtt\+\_\+client\+\_\+misc.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}debug.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{mqtt__client__packet_8c_afcdf5e66fd927a7f4cc64295acd20407}{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}~\hyperlink{net__config_8h_aa3a1432707eaba04c3ba082436b7a767}{M\+Q\+T\+T\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{mqtt__client__packet_8c_af4078e92d28f721d3bcbab8ab50eef61}{mqtt\+Client\+Receive\+Packet} (\hyperlink{mqtt__client_8h_ac90ac46c748d19a3d358acc142237f2e}{Mqtt\+Client\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Receive M\+Q\+TT packet. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{mqtt__client__packet_8c_a5d0906bb4b0c38feb6aa4b0ba80387e5}{mqtt\+Client\+Process\+Packet} (\hyperlink{mqtt__client_8h_ac90ac46c748d19a3d358acc142237f2e}{Mqtt\+Client\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Process incoming M\+Q\+TT packet. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{mqtt__client__packet_8c_a33cb7b7253def90e7cd86f80b7c11283}{mqtt\+Client\+Process\+Conn\+Ack} (\hyperlink{mqtt__client_8h_ac90ac46c748d19a3d358acc142237f2e}{Mqtt\+Client\+Context} $\ast$context, \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} \hyperlink{mqtt__sn__common_8h_a4e198deb57c49dad652a61d21ad478e6}{dup}, \hyperlink{mqtt__common_8h_a79ec1e304b7f2ed51b12f489f642f0bb}{Mqtt\+Qos\+Level} \hyperlink{mqtt__sn__common_8h_a65ee2b4b16f25052c441ff9959dcc7e7}{qos}, \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} \hyperlink{mqtt__sn__common_8h_ae25d47ab22bd975ad97012eddb6bbfce}{retain}, size\+\_\+t remaining\+Len)
+\begin{DoxyCompactList}\small\item\em Process incoming C\+O\+N\+N\+A\+CK packet. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{mqtt__client__packet_8c_afe22d6ef074ae2d61842cdc8a98db9f4}{mqtt\+Client\+Process\+Publish} (\hyperlink{mqtt__client_8h_ac90ac46c748d19a3d358acc142237f2e}{Mqtt\+Client\+Context} $\ast$context, \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} \hyperlink{mqtt__sn__common_8h_a4e198deb57c49dad652a61d21ad478e6}{dup}, \hyperlink{mqtt__common_8h_a79ec1e304b7f2ed51b12f489f642f0bb}{Mqtt\+Qos\+Level} \hyperlink{mqtt__sn__common_8h_a65ee2b4b16f25052c441ff9959dcc7e7}{qos}, \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} \hyperlink{mqtt__sn__common_8h_ae25d47ab22bd975ad97012eddb6bbfce}{retain}, size\+\_\+t remaining\+Len)
+\begin{DoxyCompactList}\small\item\em Process incoming P\+U\+B\+L\+I\+SH packet. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{mqtt__client__packet_8c_a64e5289010391076842cd49010595453}{mqtt\+Client\+Process\+Pub\+Ack} (\hyperlink{mqtt__client_8h_ac90ac46c748d19a3d358acc142237f2e}{Mqtt\+Client\+Context} $\ast$context, \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} \hyperlink{mqtt__sn__common_8h_a4e198deb57c49dad652a61d21ad478e6}{dup}, \hyperlink{mqtt__common_8h_a79ec1e304b7f2ed51b12f489f642f0bb}{Mqtt\+Qos\+Level} \hyperlink{mqtt__sn__common_8h_a65ee2b4b16f25052c441ff9959dcc7e7}{qos}, \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} \hyperlink{mqtt__sn__common_8h_ae25d47ab22bd975ad97012eddb6bbfce}{retain}, size\+\_\+t remaining\+Len)
+\begin{DoxyCompactList}\small\item\em Process incoming P\+U\+B\+A\+CK packet. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{mqtt__client__packet_8c_a43c9c57e91809b67aee5983e18f97018}{mqtt\+Client\+Process\+Pub\+Rec} (\hyperlink{mqtt__client_8h_ac90ac46c748d19a3d358acc142237f2e}{Mqtt\+Client\+Context} $\ast$context, \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} \hyperlink{mqtt__sn__common_8h_a4e198deb57c49dad652a61d21ad478e6}{dup}, \hyperlink{mqtt__common_8h_a79ec1e304b7f2ed51b12f489f642f0bb}{Mqtt\+Qos\+Level} \hyperlink{mqtt__sn__common_8h_a65ee2b4b16f25052c441ff9959dcc7e7}{qos}, \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} \hyperlink{mqtt__sn__common_8h_ae25d47ab22bd975ad97012eddb6bbfce}{retain}, size\+\_\+t remaining\+Len)
+\begin{DoxyCompactList}\small\item\em Process incoming P\+U\+B\+R\+EC packet. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{mqtt__client__packet_8c_afb57cebac3de3cf9e1626b1f7f48fd80}{mqtt\+Client\+Process\+Pub\+Rel} (\hyperlink{mqtt__client_8h_ac90ac46c748d19a3d358acc142237f2e}{Mqtt\+Client\+Context} $\ast$context, \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} \hyperlink{mqtt__sn__common_8h_a4e198deb57c49dad652a61d21ad478e6}{dup}, \hyperlink{mqtt__common_8h_a79ec1e304b7f2ed51b12f489f642f0bb}{Mqtt\+Qos\+Level} \hyperlink{mqtt__sn__common_8h_a65ee2b4b16f25052c441ff9959dcc7e7}{qos}, \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} \hyperlink{mqtt__sn__common_8h_ae25d47ab22bd975ad97012eddb6bbfce}{retain}, size\+\_\+t remaining\+Len)
+\begin{DoxyCompactList}\small\item\em Process incoming P\+U\+B\+R\+EL packet. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{mqtt__client__packet_8c_a13adb35c01cc778ee0b8e1ce4a44fb6b}{mqtt\+Client\+Process\+Pub\+Comp} (\hyperlink{mqtt__client_8h_ac90ac46c748d19a3d358acc142237f2e}{Mqtt\+Client\+Context} $\ast$context, \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} \hyperlink{mqtt__sn__common_8h_a4e198deb57c49dad652a61d21ad478e6}{dup}, \hyperlink{mqtt__common_8h_a79ec1e304b7f2ed51b12f489f642f0bb}{Mqtt\+Qos\+Level} \hyperlink{mqtt__sn__common_8h_a65ee2b4b16f25052c441ff9959dcc7e7}{qos}, \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} \hyperlink{mqtt__sn__common_8h_ae25d47ab22bd975ad97012eddb6bbfce}{retain}, size\+\_\+t remaining\+Len)
+\begin{DoxyCompactList}\small\item\em Process incoming P\+U\+B\+C\+O\+MP packet. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{mqtt__client__packet_8c_a1a8c728ccd0d4fc74d0aa7c27936be5b}{mqtt\+Client\+Process\+Sub\+Ack} (\hyperlink{mqtt__client_8h_ac90ac46c748d19a3d358acc142237f2e}{Mqtt\+Client\+Context} $\ast$context, \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} \hyperlink{mqtt__sn__common_8h_a4e198deb57c49dad652a61d21ad478e6}{dup}, \hyperlink{mqtt__common_8h_a79ec1e304b7f2ed51b12f489f642f0bb}{Mqtt\+Qos\+Level} \hyperlink{mqtt__sn__common_8h_a65ee2b4b16f25052c441ff9959dcc7e7}{qos}, \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} \hyperlink{mqtt__sn__common_8h_ae25d47ab22bd975ad97012eddb6bbfce}{retain}, size\+\_\+t remaining\+Len)
+\begin{DoxyCompactList}\small\item\em Process incoming S\+U\+B\+A\+CK packet. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{mqtt__client__packet_8c_a5ed80bbfc09e8bb961afcf0e1258f138}{mqtt\+Client\+Process\+Unsub\+Ack} (\hyperlink{mqtt__client_8h_ac90ac46c748d19a3d358acc142237f2e}{Mqtt\+Client\+Context} $\ast$context, \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} \hyperlink{mqtt__sn__common_8h_a4e198deb57c49dad652a61d21ad478e6}{dup}, \hyperlink{mqtt__common_8h_a79ec1e304b7f2ed51b12f489f642f0bb}{Mqtt\+Qos\+Level} \hyperlink{mqtt__sn__common_8h_a65ee2b4b16f25052c441ff9959dcc7e7}{qos}, \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} \hyperlink{mqtt__sn__common_8h_ae25d47ab22bd975ad97012eddb6bbfce}{retain}, size\+\_\+t remaining\+Len)
+\begin{DoxyCompactList}\small\item\em Process incoming U\+N\+S\+U\+B\+A\+CK packet. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{mqtt__client__packet_8c_adab50bcfb9b52695fcfe47d461509e87}{mqtt\+Client\+Process\+Ping\+Resp} (\hyperlink{mqtt__client_8h_ac90ac46c748d19a3d358acc142237f2e}{Mqtt\+Client\+Context} $\ast$context, \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} \hyperlink{mqtt__sn__common_8h_a4e198deb57c49dad652a61d21ad478e6}{dup}, \hyperlink{mqtt__common_8h_a79ec1e304b7f2ed51b12f489f642f0bb}{Mqtt\+Qos\+Level} \hyperlink{mqtt__sn__common_8h_a65ee2b4b16f25052c441ff9959dcc7e7}{qos}, \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} \hyperlink{mqtt__sn__common_8h_ae25d47ab22bd975ad97012eddb6bbfce}{retain}, size\+\_\+t remaining\+Len)
+\begin{DoxyCompactList}\small\item\em Process incoming P\+I\+N\+G\+R\+E\+SP packet. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{mqtt__client__packet_8c_a238bd30402526d5c3a654e2cf81cbf39}{mqtt\+Client\+Format\+Connect} (\hyperlink{mqtt__client_8h_ac90ac46c748d19a3d358acc142237f2e}{Mqtt\+Client\+Context} $\ast$context, \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} \hyperlink{mqtt__sn__common_8h_a34fa00ac0448386d644eb92f070aadb6}{clean\+Session})
+\begin{DoxyCompactList}\small\item\em Format C\+O\+N\+N\+E\+CT packet. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{mqtt__client__packet_8c_a07f5d2da1e3f2c23b8442cda29add6b8}{mqtt\+Client\+Format\+Publish} (\hyperlink{mqtt__client_8h_ac90ac46c748d19a3d358acc142237f2e}{Mqtt\+Client\+Context} $\ast$context, const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$topic, const void $\ast$\hyperlink{pap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length}, \hyperlink{mqtt__common_8h_a79ec1e304b7f2ed51b12f489f642f0bb}{Mqtt\+Qos\+Level} \hyperlink{mqtt__sn__common_8h_a65ee2b4b16f25052c441ff9959dcc7e7}{qos}, \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} \hyperlink{mqtt__sn__common_8h_ae25d47ab22bd975ad97012eddb6bbfce}{retain})
+\begin{DoxyCompactList}\small\item\em Format P\+U\+B\+L\+I\+SH packet. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{mqtt__client__packet_8c_a9a08688170f8f848fa8479523199b295}{mqtt\+Client\+Format\+Pub\+Ack} (\hyperlink{mqtt__client_8h_ac90ac46c748d19a3d358acc142237f2e}{Mqtt\+Client\+Context} $\ast$context, \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} packet\+Id)
+\begin{DoxyCompactList}\small\item\em Format P\+U\+B\+A\+CK packet. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{mqtt__client__packet_8c_a9e5f8e61115539674a5b983c99af0ea2}{mqtt\+Client\+Format\+Pub\+Rec} (\hyperlink{mqtt__client_8h_ac90ac46c748d19a3d358acc142237f2e}{Mqtt\+Client\+Context} $\ast$context, \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} packet\+Id)
+\begin{DoxyCompactList}\small\item\em Format P\+U\+B\+R\+EC packet. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{mqtt__client__packet_8c_a2973c4eb750201f4758a17190dc32b19}{mqtt\+Client\+Format\+Pub\+Rel} (\hyperlink{mqtt__client_8h_ac90ac46c748d19a3d358acc142237f2e}{Mqtt\+Client\+Context} $\ast$context, \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} packet\+Id)
+\begin{DoxyCompactList}\small\item\em Format P\+U\+B\+R\+EL packet. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{mqtt__client__packet_8c_aebd217333ea7a832669196410ab3d136}{mqtt\+Client\+Format\+Pub\+Comp} (\hyperlink{mqtt__client_8h_ac90ac46c748d19a3d358acc142237f2e}{Mqtt\+Client\+Context} $\ast$context, \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} packet\+Id)
+\begin{DoxyCompactList}\small\item\em Format P\+U\+B\+C\+O\+MP packet. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{mqtt__client__packet_8c_a0d04bc53c57b69dbfdebd85776c6efee}{mqtt\+Client\+Format\+Subscribe} (\hyperlink{mqtt__client_8h_ac90ac46c748d19a3d358acc142237f2e}{Mqtt\+Client\+Context} $\ast$context, const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$topic, \hyperlink{mqtt__common_8h_a79ec1e304b7f2ed51b12f489f642f0bb}{Mqtt\+Qos\+Level} \hyperlink{mqtt__sn__common_8h_a65ee2b4b16f25052c441ff9959dcc7e7}{qos})
+\begin{DoxyCompactList}\small\item\em Format S\+U\+B\+S\+C\+R\+I\+BE packet. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{mqtt__client__packet_8c_a0870137aa3acfe4b48a8c46fa0d09111}{mqtt\+Client\+Format\+Unsubscribe} (\hyperlink{mqtt__client_8h_ac90ac46c748d19a3d358acc142237f2e}{Mqtt\+Client\+Context} $\ast$context, const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$topic)
+\begin{DoxyCompactList}\small\item\em Format U\+N\+S\+U\+B\+S\+C\+R\+I\+BE packet. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{mqtt__client__packet_8c_a59b464bad1251d6a85127beb462e0e73}{mqtt\+Client\+Format\+Ping\+Req} (\hyperlink{mqtt__client_8h_ac90ac46c748d19a3d358acc142237f2e}{Mqtt\+Client\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Format P\+I\+N\+G\+R\+EQ packet. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{mqtt__client__packet_8c_a75c2c4d7ec1e903694f92e89e1c89006}{mqtt\+Client\+Format\+Disconnect} (\hyperlink{mqtt__client_8h_ac90ac46c748d19a3d358acc142237f2e}{Mqtt\+Client\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Format D\+I\+S\+C\+O\+N\+N\+E\+CT packet. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$ \hyperlink{mqtt__client__packet_8c_a6816ecc431201511c2b70ddc4f577945}{packet\+Label} \mbox{[}16\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+M\+Q\+TT packet parsing and formatting. 
+
+\hypertarget{pic32mz__ef__curiosity_8h_License}{}\subsection{License}\label{pic32mz__ef__curiosity_8h_License}
+S\+P\+D\+X-\/\+License-\/\+Identifier\+: G\+P\+L-\/2.\+0-\/or-\/later
+
+Copyright (C) 2010-\/2019 Oryx Embedded S\+A\+RL. All rights reserved.
+
+This file is part of Cyclone\+T\+CP Open.
+
+This program is free software; you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+
+You should have received a copy of the G\+NU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-\/1301, U\+SA.
+
+\begin{DoxyAuthor}{Author}
+Oryx Embedded S\+A\+RL (www.\+oryx-\/embedded.\+com) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+9.\+6 
+\end{DoxyVersion}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{mqtt__client__packet_8c_afcdf5e66fd927a7f4cc64295acd20407}\label{mqtt__client__packet_8c_afcdf5e66fd927a7f4cc64295acd20407}} 
+\index{mqtt\+\_\+client\+\_\+packet.\+c@{mqtt\+\_\+client\+\_\+packet.\+c}!T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+\index{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}!mqtt\+\_\+client\+\_\+packet.\+c@{mqtt\+\_\+client\+\_\+packet.\+c}}
+\subsubsection{\texorpdfstring{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}{TRACE\_LEVEL}}
+{\footnotesize\ttfamily \#define T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL~\hyperlink{net__config_8h_aa3a1432707eaba04c3ba082436b7a767}{M\+Q\+T\+T\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+
+
+
+Definition at line 32 of file mqtt\+\_\+client\+\_\+packet.\+c.
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{mqtt__client__packet_8c_a238bd30402526d5c3a654e2cf81cbf39}\label{mqtt__client__packet_8c_a238bd30402526d5c3a654e2cf81cbf39}} 
+\index{mqtt\+\_\+client\+\_\+packet.\+c@{mqtt\+\_\+client\+\_\+packet.\+c}!mqtt\+Client\+Format\+Connect@{mqtt\+Client\+Format\+Connect}}
+\index{mqtt\+Client\+Format\+Connect@{mqtt\+Client\+Format\+Connect}!mqtt\+\_\+client\+\_\+packet.\+c@{mqtt\+\_\+client\+\_\+packet.\+c}}
+\subsubsection{\texorpdfstring{mqtt\+Client\+Format\+Connect()}{mqttClientFormatConnect()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} mqtt\+Client\+Format\+Connect (\begin{DoxyParamCaption}\item[{\hyperlink{mqtt__client_8h_ac90ac46c748d19a3d358acc142237f2e}{Mqtt\+Client\+Context} $\ast$}]{context,  }\item[{\hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t}}]{clean\+Session }\end{DoxyParamCaption})}
+
+
+
+Format C\+O\+N\+N\+E\+CT packet. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the M\+Q\+TT client context \\
+\hline
+\mbox{\tt in}  & {\em clean\+Session} & If this flag is set, then the client and server must discard any previous session and start a new one \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 758 of file mqtt\+\_\+client\+\_\+packet.\+c.
+
+
+\begin{DoxyCode}
+760 \{
+761    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+762    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+763    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} connectFlags;
+764    \hyperlink{structMqttClientWillMessage}{MqttClientWillMessage} *willMessage;
+765 
+766    \textcolor{comment}{//Make room for the fixed header}
+767    n = \hyperlink{mqtt__common_8h_a979b4fc18388bc4f25631fbae542db8d}{MQTT\_MAX\_HEADER\_SIZE};
+768 
+769    \textcolor{comment}{//Check protocol version}
+770    \textcolor{keywordflow}{if}(context->settings.version == \hyperlink{mqtt__common_8h_ad475ca94d77bcab80ad53eb7b047ce57a7c630ef935e48e7144421dfd867b0434}{MQTT\_VERSION\_3\_1})
+771    \{
+772       \textcolor{comment}{//The Protocol Name is a UTF-8 encoded string that represents the}
+773       \textcolor{comment}{//protocol name "MQIsdp"}
+774       error = \hyperlink{mqtt__client__misc_8c_a7cdabc6df81fb790ef977d811bf6c8a6}{mqttSerializeString}(context->buffer, 
+      \hyperlink{mqtt__client_8h_a37c50db66771a2d524105033ca66ee7c}{MQTT\_CLIENT\_BUFFER\_SIZE},
+775          &n, \hyperlink{mqtt__common_8h_a16d6a5a20f1ba1761bc158544333ba25}{MQTT\_PROTOCOL\_NAME\_3\_1}, strlen(
+      \hyperlink{mqtt__common_8h_a16d6a5a20f1ba1761bc158544333ba25}{MQTT\_PROTOCOL\_NAME\_3\_1}));
+776    \}
+777    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->settings.version == \hyperlink{mqtt__common_8h_ad475ca94d77bcab80ad53eb7b047ce57ad2926cb14db1fcfb95a47f45d2f5b08e}{MQTT\_VERSION\_3\_1\_1})
+778    \{
+779       \textcolor{comment}{//The Protocol Name is a UTF-8 encoded string that represents the}
+780       \textcolor{comment}{//protocol name "MQTT"}
+781       error = \hyperlink{mqtt__client__misc_8c_a7cdabc6df81fb790ef977d811bf6c8a6}{mqttSerializeString}(context->buffer, 
+      \hyperlink{mqtt__client_8h_a37c50db66771a2d524105033ca66ee7c}{MQTT\_CLIENT\_BUFFER\_SIZE},
+782          &n, \hyperlink{mqtt__common_8h_a048a5792f4e5ae14687fedd3f17bd67e}{MQTT\_PROTOCOL\_NAME\_3\_1\_1}, strlen(
+      \hyperlink{mqtt__common_8h_a048a5792f4e5ae14687fedd3f17bd67e}{MQTT\_PROTOCOL\_NAME\_3\_1\_1}));
+783    \}
+784    \textcolor{keywordflow}{else}
+785    \{
+786       \textcolor{comment}{//Invalid protocol level}
+787       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cafc403a048723cbb5e5ade33caa70c48b}{ERROR\_INVALID\_VERSION};
+788    \}
+789 
+790    \textcolor{comment}{//Any error to report?}
+791    \textcolor{keywordflow}{if}(error)
+792       \textcolor{keywordflow}{return} error;
+793 
+794    \textcolor{comment}{//The Protocol Level represents the revision level of the protocol}
+795    \textcolor{comment}{//used by the client}
+796    error = \hyperlink{mqtt__client__misc_8c_ad20ce540ff897e5aa78a58820bd60f6d}{mqttSerializeByte}(context->buffer, 
+      \hyperlink{mqtt__client_8h_a37c50db66771a2d524105033ca66ee7c}{MQTT\_CLIENT\_BUFFER\_SIZE},
+797       &n, context->settings.version);
+798 
+799    \textcolor{comment}{//Failed to serialize data?}
+800    \textcolor{keywordflow}{if}(error)
+801       \textcolor{keywordflow}{return} error;
+802 
+803    \textcolor{comment}{//The Connect Flags byte contains a number of parameters specifying}
+804    \textcolor{comment}{//the behavior of the MQTT connection}
+805    connectFlags = 0;
+806 
+807    \textcolor{comment}{//If CleanSession is set to 1, the client and server must discard any}
+808    \textcolor{comment}{//previous session and start a new one}
+809    \textcolor{keywordflow}{if}(\hyperlink{mqtt__sn__common_8h_a34fa00ac0448386d644eb92f070aadb6}{cleanSession})
+810       connectFlags |= \hyperlink{mqtt__common_8h_a1a9a1c8f4acf544f4b0fc6c84e490508a6d6edd4d8901942912ba622581812031}{MQTT\_CONNECT\_FLAG\_CLEAN\_SESSION};
+811 
+812    \textcolor{comment}{//If the client supplies a zero-byte Client Identifier, the client must}
+813    \textcolor{comment}{//also set CleanSession to 1}
+814    \textcolor{keywordflow}{if}(context->settings.clientId[0] == \textcolor{charliteral}{'\(\backslash\)0'})
+815       connectFlags |= \hyperlink{mqtt__common_8h_a1a9a1c8f4acf544f4b0fc6c84e490508a6d6edd4d8901942912ba622581812031}{MQTT\_CONNECT\_FLAG\_CLEAN\_SESSION};
+816 
+817    \textcolor{comment}{//Point to the Will message}
+818    willMessage = &context->settings.willMessage;
+819 
+820    \textcolor{comment}{//Check whether a valid Will message has been specified}
+821    \textcolor{keywordflow}{if}(willMessage->\hyperlink{structMqttClientWillMessage_ab15e9ab89804063a8f96bfef47861bcd}{topic}[0] != \textcolor{charliteral}{'\(\backslash\)0'})
+822    \{
+823       \textcolor{comment}{//Set the Will flag}
+824       connectFlags |= \hyperlink{mqtt__common_8h_a1a9a1c8f4acf544f4b0fc6c84e490508a585b3548332ebdbf37447e4005e35f02}{MQTT\_CONNECT\_FLAG\_WILL};
+825 
+826       \textcolor{comment}{//Check the Will QoS level}
+827       \textcolor{keywordflow}{if}(willMessage->\hyperlink{structMqttClientWillMessage_acd54a5da3775c6207a49abf737782cf3}{qos} == \hyperlink{mqtt__common_8h_a79ec1e304b7f2ed51b12f489f642f0bbab6aacd476a4dc16c4d8820fb7a9ca3ac}{MQTT\_QOS\_LEVEL\_1})
+828          connectFlags |= \hyperlink{mqtt__common_8h_a1a9a1c8f4acf544f4b0fc6c84e490508aae3efdc0cb3581fde3088419648dc3b7}{MQTT\_CONNECT\_FLAG\_WILL\_QOS\_1};
+829       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(willMessage->\hyperlink{structMqttClientWillMessage_acd54a5da3775c6207a49abf737782cf3}{qos} == \hyperlink{mqtt__common_8h_a79ec1e304b7f2ed51b12f489f642f0bbaa6eb8ad9f596787ee0f8933f6539f9e8}{MQTT\_QOS\_LEVEL\_2})
+830          connectFlags |= \hyperlink{mqtt__common_8h_a1a9a1c8f4acf544f4b0fc6c84e490508ab0c3e8ae4855ac8465b38594f36f85cb}{MQTT\_CONNECT\_FLAG\_WILL\_QOS\_2};
+831 
+832       \textcolor{comment}{//The Will Retain flag specifies if the Will Message is to be}
+833       \textcolor{comment}{//retained when it is published}
+834       \textcolor{keywordflow}{if}(willMessage->\hyperlink{structMqttClientWillMessage_a3f803c4c50217dc7205ca4e95c9303f7}{retain})
+835          connectFlags |= \hyperlink{mqtt__common_8h_a1a9a1c8f4acf544f4b0fc6c84e490508a36740a72c28844f88b329a4430719c2e}{MQTT\_CONNECT\_FLAG\_WILL\_RETAIN};
+836    \}
+837 
+838    \textcolor{comment}{//Check whether a valid user name has been specified}
+839    \textcolor{keywordflow}{if}(context->settings.username[0] != \textcolor{charliteral}{'\(\backslash\)0'})
+840       connectFlags |= \hyperlink{mqtt__common_8h_a1a9a1c8f4acf544f4b0fc6c84e490508a754e942419526da564f584f4c0ceb9e4}{MQTT\_CONNECT\_FLAG\_USERNAME};
+841 
+842    \textcolor{comment}{//Check whether a valid password has been specified}
+843    \textcolor{keywordflow}{if}(context->settings.password[0] != \textcolor{charliteral}{'\(\backslash\)0'})
+844       connectFlags |= \hyperlink{mqtt__common_8h_a1a9a1c8f4acf544f4b0fc6c84e490508a33478b74e541765b720db749834f6345}{MQTT\_CONNECT\_FLAG\_PASSWORD};
+845 
+846    \textcolor{comment}{//Write the Connect Flags to the output buffer}
+847    error = \hyperlink{mqtt__client__misc_8c_ad20ce540ff897e5aa78a58820bd60f6d}{mqttSerializeByte}(context->buffer, 
+      \hyperlink{mqtt__client_8h_a37c50db66771a2d524105033ca66ee7c}{MQTT\_CLIENT\_BUFFER\_SIZE},
+848       &n, connectFlags);
+849 
+850    \textcolor{comment}{//Failed to serialize data?}
+851    \textcolor{keywordflow}{if}(error)
+852       \textcolor{keywordflow}{return} error;
+853 
+854    \textcolor{comment}{//The Keep Alive is a time interval measured in seconds. It is the maximum}
+855    \textcolor{comment}{//time interval that is permitted to elapse between the point at which the}
+856    \textcolor{comment}{//client finishes transmitting one control packet and the point it starts}
+857    \textcolor{comment}{//sending the next}
+858    error = \hyperlink{mqtt__client__misc_8c_abfb1aa77533be466e3082ae817ccdde6}{mqttSerializeShort}(context->buffer, 
+      \hyperlink{mqtt__client_8h_a37c50db66771a2d524105033ca66ee7c}{MQTT\_CLIENT\_BUFFER\_SIZE},
+859       &n, context->settings.keepAlive);
+860 
+861    \textcolor{comment}{//Failed to serialize data?}
+862    \textcolor{keywordflow}{if}(error)
+863       \textcolor{keywordflow}{return} error;
+864 
+865    \textcolor{comment}{//The Client Identifier identifies the client to the server. The Client}
+866    \textcolor{comment}{//Identifier must be present and must be the first field in the CONNECT}
+867    \textcolor{comment}{//packet payload}
+868    error = \hyperlink{mqtt__client__misc_8c_a7cdabc6df81fb790ef977d811bf6c8a6}{mqttSerializeString}(context->buffer, 
+      \hyperlink{mqtt__client_8h_a37c50db66771a2d524105033ca66ee7c}{MQTT\_CLIENT\_BUFFER\_SIZE},
+869       &n, context->settings.clientId, strlen(context->settings.clientId));
+870 
+871    \textcolor{comment}{//Failed to serialize data?}
+872    \textcolor{keywordflow}{if}(error)
+873       \textcolor{keywordflow}{return} error;
+874 
+875    \textcolor{comment}{//If the Will Flag is set to 1, the Will Topic is the next field in}
+876    \textcolor{comment}{//the payload}
+877    \textcolor{keywordflow}{if}(willMessage->\hyperlink{structMqttClientWillMessage_ab15e9ab89804063a8f96bfef47861bcd}{topic}[0] != \textcolor{charliteral}{'\(\backslash\)0'})
+878    \{
+879       \textcolor{comment}{//Write the Will Topic to the output buffer}
+880       error = \hyperlink{mqtt__client__misc_8c_a7cdabc6df81fb790ef977d811bf6c8a6}{mqttSerializeString}(context->buffer, 
+      \hyperlink{mqtt__client_8h_a37c50db66771a2d524105033ca66ee7c}{MQTT\_CLIENT\_BUFFER\_SIZE},
+881          &n, willMessage->\hyperlink{structMqttClientWillMessage_ab15e9ab89804063a8f96bfef47861bcd}{topic}, strlen(willMessage->\hyperlink{structMqttClientWillMessage_ab15e9ab89804063a8f96bfef47861bcd}{topic}));
+882 
+883       \textcolor{comment}{//Failed to serialize data?}
+884       \textcolor{keywordflow}{if}(error)
+885          \textcolor{keywordflow}{return} error;
+886 
+887       \textcolor{comment}{//Write the Will message to the output buffer}
+888       error = \hyperlink{mqtt__client__misc_8c_a7cdabc6df81fb790ef977d811bf6c8a6}{mqttSerializeString}(context->buffer, 
+      \hyperlink{mqtt__client_8h_a37c50db66771a2d524105033ca66ee7c}{MQTT\_CLIENT\_BUFFER\_SIZE},
+889          &n, willMessage->\hyperlink{structMqttClientWillMessage_a5c019bc3159b7c7cb82382cd66ae8180}{payload}, willMessage->\hyperlink{structMqttClientWillMessage_a9a77e5a108a85c2242f7d9f5333cde34}{length});
+890 
+891       \textcolor{comment}{//Failed to serialize data?}
+892       \textcolor{keywordflow}{if}(error)
+893          \textcolor{keywordflow}{return} error;
+894    \}
+895 
+896    \textcolor{comment}{//If the User Name Flag is set to 1, this is the next field in the payload}
+897    \textcolor{keywordflow}{if}(context->settings.username[0] != \textcolor{charliteral}{'\(\backslash\)0'})
+898    \{
+899       \textcolor{comment}{//Write the User Name to the output buffer}
+900       error = \hyperlink{mqtt__client__misc_8c_a7cdabc6df81fb790ef977d811bf6c8a6}{mqttSerializeString}(context->buffer, 
+      \hyperlink{mqtt__client_8h_a37c50db66771a2d524105033ca66ee7c}{MQTT\_CLIENT\_BUFFER\_SIZE},
+901          &n, context->settings.username, strlen(context->settings.username));
+902 
+903       \textcolor{comment}{//Failed to serialize data?}
+904       \textcolor{keywordflow}{if}(error)
+905          \textcolor{keywordflow}{return} error;
+906    \}
+907 
+908    \textcolor{comment}{//If the Password Flag is set to 1, this is the next field in the payload}
+909    \textcolor{keywordflow}{if}(context->settings.password[0] != \textcolor{charliteral}{'\(\backslash\)0'})
+910    \{
+911       \textcolor{comment}{//Write the Password to the output buffer}
+912       error = \hyperlink{mqtt__client__misc_8c_a7cdabc6df81fb790ef977d811bf6c8a6}{mqttSerializeString}(context->buffer, 
+      \hyperlink{mqtt__client_8h_a37c50db66771a2d524105033ca66ee7c}{MQTT\_CLIENT\_BUFFER\_SIZE},
+913          &n, context->settings.password, strlen(context->settings.password));
+914 
+915       \textcolor{comment}{//Failed to serialize data?}
+916       \textcolor{keywordflow}{if}(error)
+917          \textcolor{keywordflow}{return} error;
+918    \}
+919 
+920    \textcolor{comment}{//Calculate the length of the variable header and the payload}
+921    context->packetLen = n - \hyperlink{mqtt__common_8h_a979b4fc18388bc4f25631fbae542db8d}{MQTT\_MAX\_HEADER\_SIZE};
+922 
+923    \textcolor{comment}{//The fixed header will be encoded in reverse order}
+924    n = \hyperlink{mqtt__common_8h_a979b4fc18388bc4f25631fbae542db8d}{MQTT\_MAX\_HEADER\_SIZE};
+925 
+926    \textcolor{comment}{//Prepend the variable header and the payload with the fixed header}
+927    error = \hyperlink{mqtt__client__misc_8c_aaf7ce18e001d1e585d3d82ae35951eaa}{mqttSerializeHeader}(context->buffer, &n, 
+      \hyperlink{mqtt__common_8h_af26b642b7ef813ac269f70aa245cc796ab74b556cbb80972ea992b2e3e76d38e3}{MQTT\_PACKET\_TYPE\_CONNECT},
+928       \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, \hyperlink{mqtt__common_8h_a79ec1e304b7f2ed51b12f489f642f0bbaf15c80f5281046b460b215cb4b1128e1}{MQTT\_QOS\_LEVEL\_0}, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, context->packetLen);
+929 
+930    \textcolor{comment}{//Failed to serialize fixed header?}
+931    \textcolor{keywordflow}{if}(error)
+932       \textcolor{keywordflow}{return} error;
+933 
+934    \textcolor{comment}{//Point to the first byte of the MQTT packet}
+935    context->packet = context->buffer + \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+936    \textcolor{comment}{//Calculate the length of the MQTT packet}
+937    context->packetLen += MQTT\_MAX\_HEADER\_SIZE - \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+938 
+939    \textcolor{comment}{//Successful processing}
+940    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+941 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{mqtt__client__packet_8c_a75c2c4d7ec1e903694f92e89e1c89006}\label{mqtt__client__packet_8c_a75c2c4d7ec1e903694f92e89e1c89006}} 
+\index{mqtt\+\_\+client\+\_\+packet.\+c@{mqtt\+\_\+client\+\_\+packet.\+c}!mqtt\+Client\+Format\+Disconnect@{mqtt\+Client\+Format\+Disconnect}}
+\index{mqtt\+Client\+Format\+Disconnect@{mqtt\+Client\+Format\+Disconnect}!mqtt\+\_\+client\+\_\+packet.\+c@{mqtt\+\_\+client\+\_\+packet.\+c}}
+\subsubsection{\texorpdfstring{mqtt\+Client\+Format\+Disconnect()}{mqttClientFormatDisconnect()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} mqtt\+Client\+Format\+Disconnect (\begin{DoxyParamCaption}\item[{\hyperlink{mqtt__client_8h_ac90ac46c748d19a3d358acc142237f2e}{Mqtt\+Client\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Format D\+I\+S\+C\+O\+N\+N\+E\+CT packet. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the M\+Q\+TT client context \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 1382 of file mqtt\+\_\+client\+\_\+packet.\+c.
+
+
+\begin{DoxyCode}
+1383 \{
+1384    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+1385    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1386 
+1387    \textcolor{comment}{//The fixed header will be encoded in reverse order}
+1388    n = \hyperlink{mqtt__common_8h_a979b4fc18388bc4f25631fbae542db8d}{MQTT\_MAX\_HEADER\_SIZE};
+1389 
+1390    \textcolor{comment}{//The DISCONNECT packet does not contain any variable header nor payload}
+1391    error = \hyperlink{mqtt__client__misc_8c_aaf7ce18e001d1e585d3d82ae35951eaa}{mqttSerializeHeader}(context->buffer, &n, 
+      \hyperlink{mqtt__common_8h_af26b642b7ef813ac269f70aa245cc796a0ae7c20af4e50e19e0c7171a1dc62af7}{MQTT\_PACKET\_TYPE\_DISCONNECT},
+1392       \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, \hyperlink{mqtt__common_8h_a79ec1e304b7f2ed51b12f489f642f0bbaf15c80f5281046b460b215cb4b1128e1}{MQTT\_QOS\_LEVEL\_0}, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, 0);
+1393 
+1394    \textcolor{comment}{//Failed to serialize fixed header?}
+1395    \textcolor{keywordflow}{if}(error)
+1396       \textcolor{keywordflow}{return} error;
+1397 
+1398    \textcolor{comment}{//Point to the first byte of the MQTT packet}
+1399    context->packet = context->buffer + \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1400    \textcolor{comment}{//Calculate the length of the MQTT packet}
+1401    context->packetLen = \hyperlink{mqtt__common_8h_a979b4fc18388bc4f25631fbae542db8d}{MQTT\_MAX\_HEADER\_SIZE} - \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1402 
+1403    \textcolor{comment}{//Successful processing}
+1404    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+1405 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{mqtt__client__packet_8c_a59b464bad1251d6a85127beb462e0e73}\label{mqtt__client__packet_8c_a59b464bad1251d6a85127beb462e0e73}} 
+\index{mqtt\+\_\+client\+\_\+packet.\+c@{mqtt\+\_\+client\+\_\+packet.\+c}!mqtt\+Client\+Format\+Ping\+Req@{mqtt\+Client\+Format\+Ping\+Req}}
+\index{mqtt\+Client\+Format\+Ping\+Req@{mqtt\+Client\+Format\+Ping\+Req}!mqtt\+\_\+client\+\_\+packet.\+c@{mqtt\+\_\+client\+\_\+packet.\+c}}
+\subsubsection{\texorpdfstring{mqtt\+Client\+Format\+Ping\+Req()}{mqttClientFormatPingReq()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} mqtt\+Client\+Format\+Ping\+Req (\begin{DoxyParamCaption}\item[{\hyperlink{mqtt__client_8h_ac90ac46c748d19a3d358acc142237f2e}{Mqtt\+Client\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Format P\+I\+N\+G\+R\+EQ packet. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the M\+Q\+TT client context \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 1350 of file mqtt\+\_\+client\+\_\+packet.\+c.
+
+
+\begin{DoxyCode}
+1351 \{
+1352    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+1353    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1354 
+1355    \textcolor{comment}{//The fixed header will be encoded in reverse order}
+1356    n = \hyperlink{mqtt__common_8h_a979b4fc18388bc4f25631fbae542db8d}{MQTT\_MAX\_HEADER\_SIZE};
+1357 
+1358    \textcolor{comment}{//The PINGREQ packet does not contain any variable header nor payload}
+1359    error = \hyperlink{mqtt__client__misc_8c_aaf7ce18e001d1e585d3d82ae35951eaa}{mqttSerializeHeader}(context->buffer, &n, 
+      \hyperlink{mqtt__common_8h_af26b642b7ef813ac269f70aa245cc796ab390e40e3c01e8c35f428935d1c2e276}{MQTT\_PACKET\_TYPE\_PINGREQ},
+1360       \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, \hyperlink{mqtt__common_8h_a79ec1e304b7f2ed51b12f489f642f0bbaf15c80f5281046b460b215cb4b1128e1}{MQTT\_QOS\_LEVEL\_0}, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, 0);
+1361 
+1362    \textcolor{comment}{//Failed to serialize fixed header?}
+1363    \textcolor{keywordflow}{if}(error)
+1364       \textcolor{keywordflow}{return} error;
+1365 
+1366    \textcolor{comment}{//Point to the first byte of the MQTT packet}
+1367    context->packet = context->buffer + \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1368    \textcolor{comment}{//Calculate the length of the MQTT packet}
+1369    context->packetLen = \hyperlink{mqtt__common_8h_a979b4fc18388bc4f25631fbae542db8d}{MQTT\_MAX\_HEADER\_SIZE} - \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1370 
+1371    \textcolor{comment}{//Successful processing}
+1372    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+1373 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{mqtt__client__packet_8c_a9a08688170f8f848fa8479523199b295}\label{mqtt__client__packet_8c_a9a08688170f8f848fa8479523199b295}} 
+\index{mqtt\+\_\+client\+\_\+packet.\+c@{mqtt\+\_\+client\+\_\+packet.\+c}!mqtt\+Client\+Format\+Pub\+Ack@{mqtt\+Client\+Format\+Pub\+Ack}}
+\index{mqtt\+Client\+Format\+Pub\+Ack@{mqtt\+Client\+Format\+Pub\+Ack}!mqtt\+\_\+client\+\_\+packet.\+c@{mqtt\+\_\+client\+\_\+packet.\+c}}
+\subsubsection{\texorpdfstring{mqtt\+Client\+Format\+Pub\+Ack()}{mqttClientFormatPubAck()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} mqtt\+Client\+Format\+Pub\+Ack (\begin{DoxyParamCaption}\item[{\hyperlink{mqtt__client_8h_ac90ac46c748d19a3d358acc142237f2e}{Mqtt\+Client\+Context} $\ast$}]{context,  }\item[{\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t}}]{packet\+Id }\end{DoxyParamCaption})}
+
+
+
+Format P\+U\+B\+A\+CK packet. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the M\+Q\+TT client context \\
+\hline
+\mbox{\tt in}  & {\em packet\+Id} & Packet identifier \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 1029 of file mqtt\+\_\+client\+\_\+packet.\+c.
+
+
+\begin{DoxyCode}
+1030 \{
+1031    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+1032    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1033 
+1034    \textcolor{comment}{//Make room for the fixed header}
+1035    n = \hyperlink{mqtt__common_8h_a979b4fc18388bc4f25631fbae542db8d}{MQTT\_MAX\_HEADER\_SIZE};
+1036 
+1037    \textcolor{comment}{//The variable header contains the Packet Identifier from the PUBLISH}
+1038    \textcolor{comment}{//packet that is being acknowledged}
+1039    error = \hyperlink{mqtt__client__misc_8c_abfb1aa77533be466e3082ae817ccdde6}{mqttSerializeShort}(context->buffer, 
+      \hyperlink{mqtt__client_8h_a37c50db66771a2d524105033ca66ee7c}{MQTT\_CLIENT\_BUFFER\_SIZE},
+1040       &n, packetId);
+1041 
+1042    \textcolor{comment}{//Failed to serialize Packet Identifier field?}
+1043    \textcolor{keywordflow}{if}(error)
+1044       \textcolor{keywordflow}{return} error;
+1045 
+1046    \textcolor{comment}{//Calculate the length of the variable header and the payload}
+1047    context->packetLen = n - \hyperlink{mqtt__common_8h_a979b4fc18388bc4f25631fbae542db8d}{MQTT\_MAX\_HEADER\_SIZE};
+1048 
+1049    \textcolor{comment}{//The fixed header will be encoded in reverse order}
+1050    n = \hyperlink{mqtt__common_8h_a979b4fc18388bc4f25631fbae542db8d}{MQTT\_MAX\_HEADER\_SIZE};
+1051 
+1052    \textcolor{comment}{//Prepend the variable header and the payload with the fixed header}
+1053    error = \hyperlink{mqtt__client__misc_8c_aaf7ce18e001d1e585d3d82ae35951eaa}{mqttSerializeHeader}(context->buffer, &n, 
+      \hyperlink{mqtt__common_8h_af26b642b7ef813ac269f70aa245cc796a26179df5100c4143be9db76b5fa68279}{MQTT\_PACKET\_TYPE\_PUBACK},
+1054       \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, \hyperlink{mqtt__common_8h_a79ec1e304b7f2ed51b12f489f642f0bbaf15c80f5281046b460b215cb4b1128e1}{MQTT\_QOS\_LEVEL\_0}, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, context->packetLen);
+1055 
+1056    \textcolor{comment}{//Failed to serialize fixed header?}
+1057    \textcolor{keywordflow}{if}(error)
+1058       \textcolor{keywordflow}{return} error;
+1059 
+1060    \textcolor{comment}{//Point to the first byte of the MQTT packet}
+1061    context->packet = context->buffer + \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1062    \textcolor{comment}{//Calculate the length of the MQTT packet}
+1063    context->packetLen += MQTT\_MAX\_HEADER\_SIZE - \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1064 
+1065    \textcolor{comment}{//Successful processing}
+1066    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+1067 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{mqtt__client__packet_8c_aebd217333ea7a832669196410ab3d136}\label{mqtt__client__packet_8c_aebd217333ea7a832669196410ab3d136}} 
+\index{mqtt\+\_\+client\+\_\+packet.\+c@{mqtt\+\_\+client\+\_\+packet.\+c}!mqtt\+Client\+Format\+Pub\+Comp@{mqtt\+Client\+Format\+Pub\+Comp}}
+\index{mqtt\+Client\+Format\+Pub\+Comp@{mqtt\+Client\+Format\+Pub\+Comp}!mqtt\+\_\+client\+\_\+packet.\+c@{mqtt\+\_\+client\+\_\+packet.\+c}}
+\subsubsection{\texorpdfstring{mqtt\+Client\+Format\+Pub\+Comp()}{mqttClientFormatPubComp()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} mqtt\+Client\+Format\+Pub\+Comp (\begin{DoxyParamCaption}\item[{\hyperlink{mqtt__client_8h_ac90ac46c748d19a3d358acc142237f2e}{Mqtt\+Client\+Context} $\ast$}]{context,  }\item[{\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t}}]{packet\+Id }\end{DoxyParamCaption})}
+
+
+
+Format P\+U\+B\+C\+O\+MP packet. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the M\+Q\+TT client context \\
+\hline
+\mbox{\tt in}  & {\em packet\+Id} & Packet identifier \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 1173 of file mqtt\+\_\+client\+\_\+packet.\+c.
+
+
+\begin{DoxyCode}
+1174 \{
+1175    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+1176    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1177 
+1178    \textcolor{comment}{//Make room for the fixed header}
+1179    n = \hyperlink{mqtt__common_8h_a979b4fc18388bc4f25631fbae542db8d}{MQTT\_MAX\_HEADER\_SIZE};
+1180 
+1181    \textcolor{comment}{//The variable header contains the same Packet Identifier as the PUBREL}
+1182    \textcolor{comment}{//packet that is being acknowledged}
+1183    error = \hyperlink{mqtt__client__misc_8c_abfb1aa77533be466e3082ae817ccdde6}{mqttSerializeShort}(context->buffer, 
+      \hyperlink{mqtt__client_8h_a37c50db66771a2d524105033ca66ee7c}{MQTT\_CLIENT\_BUFFER\_SIZE},
+1184       &n, packetId);
+1185 
+1186    \textcolor{comment}{//Failed to serialize Packet Identifier field?}
+1187    \textcolor{keywordflow}{if}(error)
+1188       \textcolor{keywordflow}{return} error;
+1189 
+1190    \textcolor{comment}{//Calculate the length of the variable header and the payload}
+1191    context->packetLen = n - \hyperlink{mqtt__common_8h_a979b4fc18388bc4f25631fbae542db8d}{MQTT\_MAX\_HEADER\_SIZE};
+1192 
+1193    \textcolor{comment}{//The fixed header will be encoded in reverse order}
+1194    n = \hyperlink{mqtt__common_8h_a979b4fc18388bc4f25631fbae542db8d}{MQTT\_MAX\_HEADER\_SIZE};
+1195 
+1196    \textcolor{comment}{//Prepend the variable header and the payload with the fixed header}
+1197    error = \hyperlink{mqtt__client__misc_8c_aaf7ce18e001d1e585d3d82ae35951eaa}{mqttSerializeHeader}(context->buffer, &n, 
+      \hyperlink{mqtt__common_8h_af26b642b7ef813ac269f70aa245cc796a91795eb00d39a1e8edd0dce5d1fe6fe5}{MQTT\_PACKET\_TYPE\_PUBCOMP},
+1198       \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, \hyperlink{mqtt__common_8h_a79ec1e304b7f2ed51b12f489f642f0bbaf15c80f5281046b460b215cb4b1128e1}{MQTT\_QOS\_LEVEL\_0}, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, context->packetLen);
+1199 
+1200    \textcolor{comment}{//Failed to serialize fixed header?}
+1201    \textcolor{keywordflow}{if}(error)
+1202       \textcolor{keywordflow}{return} error;
+1203 
+1204    \textcolor{comment}{//Point to the first byte of the MQTT packet}
+1205    context->packet = context->buffer + \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1206    \textcolor{comment}{//Calculate the length of the MQTT packet}
+1207    context->packetLen += MQTT\_MAX\_HEADER\_SIZE - \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1208 
+1209    \textcolor{comment}{//Successful processing}
+1210    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+1211 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{mqtt__client__packet_8c_a07f5d2da1e3f2c23b8442cda29add6b8}\label{mqtt__client__packet_8c_a07f5d2da1e3f2c23b8442cda29add6b8}} 
+\index{mqtt\+\_\+client\+\_\+packet.\+c@{mqtt\+\_\+client\+\_\+packet.\+c}!mqtt\+Client\+Format\+Publish@{mqtt\+Client\+Format\+Publish}}
+\index{mqtt\+Client\+Format\+Publish@{mqtt\+Client\+Format\+Publish}!mqtt\+\_\+client\+\_\+packet.\+c@{mqtt\+\_\+client\+\_\+packet.\+c}}
+\subsubsection{\texorpdfstring{mqtt\+Client\+Format\+Publish()}{mqttClientFormatPublish()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} mqtt\+Client\+Format\+Publish (\begin{DoxyParamCaption}\item[{\hyperlink{mqtt__client_8h_ac90ac46c748d19a3d358acc142237f2e}{Mqtt\+Client\+Context} $\ast$}]{context,  }\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{topic,  }\item[{const void $\ast$}]{message,  }\item[{size\+\_\+t}]{length,  }\item[{\hyperlink{mqtt__common_8h_a79ec1e304b7f2ed51b12f489f642f0bb}{Mqtt\+Qos\+Level}}]{qos,  }\item[{\hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t}}]{retain }\end{DoxyParamCaption})}
+
+
+
+Format P\+U\+B\+L\+I\+SH packet. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the M\+Q\+TT client context \\
+\hline
+\mbox{\tt in}  & {\em topic} & Topic name \\
+\hline
+\mbox{\tt in}  & {\em message} & Message payload \\
+\hline
+\mbox{\tt in}  & {\em length} & Length of the message payload \\
+\hline
+\mbox{\tt in}  & {\em qos} & QoS level to be used when publishing the message \\
+\hline
+\mbox{\tt in}  & {\em retain} & This flag specifies if the message is to be retained \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 955 of file mqtt\+\_\+client\+\_\+packet.\+c.
+
+
+\begin{DoxyCode}
+957 \{
+958    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+959    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+960 
+961    \textcolor{comment}{//Make room for the fixed header}
+962    n = \hyperlink{mqtt__common_8h_a979b4fc18388bc4f25631fbae542db8d}{MQTT\_MAX\_HEADER\_SIZE};
+963 
+964    \textcolor{comment}{//The Topic Name must be present as the first field in the PUBLISH}
+965    \textcolor{comment}{//packet variable header}
+966    error = \hyperlink{mqtt__client__misc_8c_a7cdabc6df81fb790ef977d811bf6c8a6}{mqttSerializeString}(context->buffer, 
+      \hyperlink{mqtt__client_8h_a37c50db66771a2d524105033ca66ee7c}{MQTT\_CLIENT\_BUFFER\_SIZE},
+967       &n, topic, strlen(topic));
+968 
+969    \textcolor{comment}{//Failed to serialize Topic Name?}
+970    \textcolor{keywordflow}{if}(error)
+971       \textcolor{keywordflow}{return} error;
+972 
+973    \textcolor{comment}{//Check QoS level}
+974    \textcolor{keywordflow}{if}(\hyperlink{mqtt__common_8h_a65ee2b4b16f25052c441ff9959dcc7e7}{qos} != \hyperlink{mqtt__common_8h_a79ec1e304b7f2ed51b12f489f642f0bbaf15c80f5281046b460b215cb4b1128e1}{MQTT\_QOS\_LEVEL\_0})
+975    \{
+976       \textcolor{comment}{//Each time a client sends a new PUBLISH packet it must assign it}
+977       \textcolor{comment}{//a currently unused packet identifier}
+978       context->packetId++;
+979 
+980       \textcolor{comment}{//The Packet Identifier field is only present in PUBLISH packets}
+981       \textcolor{comment}{//where the QoS level is 1 or 2}
+982       error = \hyperlink{mqtt__client__misc_8c_abfb1aa77533be466e3082ae817ccdde6}{mqttSerializeShort}(context->buffer, 
+      \hyperlink{mqtt__client_8h_a37c50db66771a2d524105033ca66ee7c}{MQTT\_CLIENT\_BUFFER\_SIZE},
+983          &n, context->packetId);
+984 
+985       \textcolor{comment}{//Failed to serialize Packet Identifier field?}
+986       \textcolor{keywordflow}{if}(error)
+987          \textcolor{keywordflow}{return} error;
+988    \}
+989 
+990    \textcolor{comment}{//The payload contains the Application Message that is being published}
+991    error = \hyperlink{mqtt__client__misc_8c_a6c69ea12b178140e3323e9711ec8728a}{mqttSerializeData}(context->buffer, 
+      \hyperlink{mqtt__client_8h_a37c50db66771a2d524105033ca66ee7c}{MQTT\_CLIENT\_BUFFER\_SIZE},
+992       &n, \hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length});
+993 
+994    \textcolor{comment}{//Failed to serialize Application Message?}
+995    \textcolor{keywordflow}{if}(error)
+996       \textcolor{keywordflow}{return} error;
+997 
+998    \textcolor{comment}{//Calculate the length of the variable header and the payload}
+999    context->packetLen = n - \hyperlink{mqtt__common_8h_a979b4fc18388bc4f25631fbae542db8d}{MQTT\_MAX\_HEADER\_SIZE};
+1000 
+1001    \textcolor{comment}{//The fixed header will be encoded in reverse order}
+1002    n = \hyperlink{mqtt__common_8h_a979b4fc18388bc4f25631fbae542db8d}{MQTT\_MAX\_HEADER\_SIZE};
+1003 
+1004    \textcolor{comment}{//Prepend the variable header and the payload with the fixed header}
+1005    error = \hyperlink{mqtt__client__misc_8c_aaf7ce18e001d1e585d3d82ae35951eaa}{mqttSerializeHeader}(context->buffer, &n, 
+      \hyperlink{mqtt__common_8h_af26b642b7ef813ac269f70aa245cc796abe363fe85989de579975b69f72f01027}{MQTT\_PACKET\_TYPE\_PUBLISH},
+1006       \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, \hyperlink{mqtt__common_8h_a65ee2b4b16f25052c441ff9959dcc7e7}{qos}, \hyperlink{mqtt__common_8h_ae25d47ab22bd975ad97012eddb6bbfce}{retain}, context->packetLen);
+1007 
+1008    \textcolor{comment}{//Failed to serialize fixed header?}
+1009    \textcolor{keywordflow}{if}(error)
+1010       \textcolor{keywordflow}{return} error;
+1011 
+1012    \textcolor{comment}{//Point to the first byte of the MQTT packet}
+1013    context->packet = context->buffer + \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1014    \textcolor{comment}{//Calculate the length of the MQTT packet}
+1015    context->packetLen += MQTT\_MAX\_HEADER\_SIZE - \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1016 
+1017    \textcolor{comment}{//Successful processing}
+1018    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+1019 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{mqtt__client__packet_8c_a9e5f8e61115539674a5b983c99af0ea2}\label{mqtt__client__packet_8c_a9e5f8e61115539674a5b983c99af0ea2}} 
+\index{mqtt\+\_\+client\+\_\+packet.\+c@{mqtt\+\_\+client\+\_\+packet.\+c}!mqtt\+Client\+Format\+Pub\+Rec@{mqtt\+Client\+Format\+Pub\+Rec}}
+\index{mqtt\+Client\+Format\+Pub\+Rec@{mqtt\+Client\+Format\+Pub\+Rec}!mqtt\+\_\+client\+\_\+packet.\+c@{mqtt\+\_\+client\+\_\+packet.\+c}}
+\subsubsection{\texorpdfstring{mqtt\+Client\+Format\+Pub\+Rec()}{mqttClientFormatPubRec()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} mqtt\+Client\+Format\+Pub\+Rec (\begin{DoxyParamCaption}\item[{\hyperlink{mqtt__client_8h_ac90ac46c748d19a3d358acc142237f2e}{Mqtt\+Client\+Context} $\ast$}]{context,  }\item[{\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t}}]{packet\+Id }\end{DoxyParamCaption})}
+
+
+
+Format P\+U\+B\+R\+EC packet. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the M\+Q\+TT client context \\
+\hline
+\mbox{\tt in}  & {\em packet\+Id} & Packet identifier \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 1077 of file mqtt\+\_\+client\+\_\+packet.\+c.
+
+
+\begin{DoxyCode}
+1078 \{
+1079    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+1080    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1081 
+1082    \textcolor{comment}{//Make room for the fixed header}
+1083    n = \hyperlink{mqtt__common_8h_a979b4fc18388bc4f25631fbae542db8d}{MQTT\_MAX\_HEADER\_SIZE};
+1084 
+1085    \textcolor{comment}{//The variable header contains the Packet Identifier from the PUBLISH}
+1086    \textcolor{comment}{//packet that is being acknowledged}
+1087    error = \hyperlink{mqtt__client__misc_8c_abfb1aa77533be466e3082ae817ccdde6}{mqttSerializeShort}(context->buffer, 
+      \hyperlink{mqtt__client_8h_a37c50db66771a2d524105033ca66ee7c}{MQTT\_CLIENT\_BUFFER\_SIZE},
+1088       &n, packetId);
+1089 
+1090    \textcolor{comment}{//Failed to serialize Packet Identifier field?}
+1091    \textcolor{keywordflow}{if}(error)
+1092       \textcolor{keywordflow}{return} error;
+1093 
+1094    \textcolor{comment}{//Calculate the length of the variable header and the payload}
+1095    context->packetLen = n - \hyperlink{mqtt__common_8h_a979b4fc18388bc4f25631fbae542db8d}{MQTT\_MAX\_HEADER\_SIZE};
+1096 
+1097    \textcolor{comment}{//The fixed header will be encoded in reverse order}
+1098    n = \hyperlink{mqtt__common_8h_a979b4fc18388bc4f25631fbae542db8d}{MQTT\_MAX\_HEADER\_SIZE};
+1099 
+1100    \textcolor{comment}{//Prepend the variable header and the payload with the fixed header}
+1101    error = \hyperlink{mqtt__client__misc_8c_aaf7ce18e001d1e585d3d82ae35951eaa}{mqttSerializeHeader}(context->buffer, &n, 
+      \hyperlink{mqtt__common_8h_af26b642b7ef813ac269f70aa245cc796a99b5c8edecee6343e17e39c39c14bdf6}{MQTT\_PACKET\_TYPE\_PUBREC},
+1102       \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, \hyperlink{mqtt__common_8h_a79ec1e304b7f2ed51b12f489f642f0bbaf15c80f5281046b460b215cb4b1128e1}{MQTT\_QOS\_LEVEL\_0}, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, context->packetLen);
+1103 
+1104    \textcolor{comment}{//Failed to serialize fixed header?}
+1105    \textcolor{keywordflow}{if}(error)
+1106       \textcolor{keywordflow}{return} error;
+1107 
+1108    \textcolor{comment}{//Point to the first byte of the MQTT packet}
+1109    context->packet = context->buffer + \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1110    \textcolor{comment}{//Calculate the length of the MQTT packet}
+1111    context->packetLen += MQTT\_MAX\_HEADER\_SIZE - \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1112 
+1113    \textcolor{comment}{//Successful processing}
+1114    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+1115 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{mqtt__client__packet_8c_a2973c4eb750201f4758a17190dc32b19}\label{mqtt__client__packet_8c_a2973c4eb750201f4758a17190dc32b19}} 
+\index{mqtt\+\_\+client\+\_\+packet.\+c@{mqtt\+\_\+client\+\_\+packet.\+c}!mqtt\+Client\+Format\+Pub\+Rel@{mqtt\+Client\+Format\+Pub\+Rel}}
+\index{mqtt\+Client\+Format\+Pub\+Rel@{mqtt\+Client\+Format\+Pub\+Rel}!mqtt\+\_\+client\+\_\+packet.\+c@{mqtt\+\_\+client\+\_\+packet.\+c}}
+\subsubsection{\texorpdfstring{mqtt\+Client\+Format\+Pub\+Rel()}{mqttClientFormatPubRel()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} mqtt\+Client\+Format\+Pub\+Rel (\begin{DoxyParamCaption}\item[{\hyperlink{mqtt__client_8h_ac90ac46c748d19a3d358acc142237f2e}{Mqtt\+Client\+Context} $\ast$}]{context,  }\item[{\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t}}]{packet\+Id }\end{DoxyParamCaption})}
+
+
+
+Format P\+U\+B\+R\+EL packet. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the M\+Q\+TT client context \\
+\hline
+\mbox{\tt in}  & {\em packet\+Id} & Packet identifier \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 1125 of file mqtt\+\_\+client\+\_\+packet.\+c.
+
+
+\begin{DoxyCode}
+1126 \{
+1127    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+1128    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1129 
+1130    \textcolor{comment}{//Make room for the fixed header}
+1131    n = \hyperlink{mqtt__common_8h_a979b4fc18388bc4f25631fbae542db8d}{MQTT\_MAX\_HEADER\_SIZE};
+1132 
+1133    \textcolor{comment}{//The variable header contains the same Packet Identifier as the PUBREC}
+1134    \textcolor{comment}{//packet that is being acknowledged}
+1135    error = \hyperlink{mqtt__client__misc_8c_abfb1aa77533be466e3082ae817ccdde6}{mqttSerializeShort}(context->buffer, 
+      \hyperlink{mqtt__client_8h_a37c50db66771a2d524105033ca66ee7c}{MQTT\_CLIENT\_BUFFER\_SIZE},
+1136       &n, packetId);
+1137 
+1138    \textcolor{comment}{//Failed to serialize Packet Identifier field?}
+1139    \textcolor{keywordflow}{if}(error)
+1140       \textcolor{keywordflow}{return} error;
+1141 
+1142    \textcolor{comment}{//Calculate the length of the variable header and the payload}
+1143    context->packetLen = n - \hyperlink{mqtt__common_8h_a979b4fc18388bc4f25631fbae542db8d}{MQTT\_MAX\_HEADER\_SIZE};
+1144 
+1145    \textcolor{comment}{//The fixed header will be encoded in reverse order}
+1146    n = \hyperlink{mqtt__common_8h_a979b4fc18388bc4f25631fbae542db8d}{MQTT\_MAX\_HEADER\_SIZE};
+1147 
+1148    \textcolor{comment}{//Prepend the variable header and the payload with the fixed header}
+1149    error = \hyperlink{mqtt__client__misc_8c_aaf7ce18e001d1e585d3d82ae35951eaa}{mqttSerializeHeader}(context->buffer, &n, 
+      \hyperlink{mqtt__common_8h_af26b642b7ef813ac269f70aa245cc796afae7d2c57ca274f156ade187954cafe7}{MQTT\_PACKET\_TYPE\_PUBREL},
+1150       \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, \hyperlink{mqtt__common_8h_a79ec1e304b7f2ed51b12f489f642f0bbab6aacd476a4dc16c4d8820fb7a9ca3ac}{MQTT\_QOS\_LEVEL\_1}, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, context->packetLen);
+1151 
+1152    \textcolor{comment}{//Failed to serialize fixed header?}
+1153    \textcolor{keywordflow}{if}(error)
+1154       \textcolor{keywordflow}{return} error;
+1155 
+1156    \textcolor{comment}{//Point to the first byte of the MQTT packet}
+1157    context->packet = context->buffer + \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1158    \textcolor{comment}{//Calculate the length of the MQTT packet}
+1159    context->packetLen += MQTT\_MAX\_HEADER\_SIZE - \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1160 
+1161    \textcolor{comment}{//Successful processing}
+1162    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+1163 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{mqtt__client__packet_8c_a0d04bc53c57b69dbfdebd85776c6efee}\label{mqtt__client__packet_8c_a0d04bc53c57b69dbfdebd85776c6efee}} 
+\index{mqtt\+\_\+client\+\_\+packet.\+c@{mqtt\+\_\+client\+\_\+packet.\+c}!mqtt\+Client\+Format\+Subscribe@{mqtt\+Client\+Format\+Subscribe}}
+\index{mqtt\+Client\+Format\+Subscribe@{mqtt\+Client\+Format\+Subscribe}!mqtt\+\_\+client\+\_\+packet.\+c@{mqtt\+\_\+client\+\_\+packet.\+c}}
+\subsubsection{\texorpdfstring{mqtt\+Client\+Format\+Subscribe()}{mqttClientFormatSubscribe()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} mqtt\+Client\+Format\+Subscribe (\begin{DoxyParamCaption}\item[{\hyperlink{mqtt__client_8h_ac90ac46c748d19a3d358acc142237f2e}{Mqtt\+Client\+Context} $\ast$}]{context,  }\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{topic,  }\item[{\hyperlink{mqtt__common_8h_a79ec1e304b7f2ed51b12f489f642f0bb}{Mqtt\+Qos\+Level}}]{qos }\end{DoxyParamCaption})}
+
+
+
+Format S\+U\+B\+S\+C\+R\+I\+BE packet. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the M\+Q\+TT client context \\
+\hline
+\mbox{\tt in}  & {\em topic} & Topic filter \\
+\hline
+\mbox{\tt in}  & {\em qos} & Maximum QoS level at which the server can send application messages to the client \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 1223 of file mqtt\+\_\+client\+\_\+packet.\+c.
+
+
+\begin{DoxyCode}
+1225 \{
+1226    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+1227    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1228 
+1229    \textcolor{comment}{//Make room for the fixed header}
+1230    n = \hyperlink{mqtt__common_8h_a979b4fc18388bc4f25631fbae542db8d}{MQTT\_MAX\_HEADER\_SIZE};
+1231 
+1232    \textcolor{comment}{//Each time a client sends a new SUBSCRIBE packet it must assign it}
+1233    \textcolor{comment}{//a currently unused packet identifier}
+1234    context->packetId++;
+1235 
+1236    \textcolor{comment}{//Write Packet Identifier to the output buffer}
+1237    error = \hyperlink{mqtt__client__misc_8c_abfb1aa77533be466e3082ae817ccdde6}{mqttSerializeShort}(context->buffer, 
+      \hyperlink{mqtt__client_8h_a37c50db66771a2d524105033ca66ee7c}{MQTT\_CLIENT\_BUFFER\_SIZE},
+1238       &n, context->packetId);
+1239 
+1240    \textcolor{comment}{//Failed to serialize data?}
+1241    \textcolor{keywordflow}{if}(error)
+1242       \textcolor{keywordflow}{return} error;
+1243 
+1244    \textcolor{comment}{//Write the Topic Filter to the output buffer}
+1245    error = \hyperlink{mqtt__client__misc_8c_a7cdabc6df81fb790ef977d811bf6c8a6}{mqttSerializeString}(context->buffer, 
+      \hyperlink{mqtt__client_8h_a37c50db66771a2d524105033ca66ee7c}{MQTT\_CLIENT\_BUFFER\_SIZE},
+1246       &n, topic, strlen(topic));
+1247 
+1248    \textcolor{comment}{//Failed to serialize data?}
+1249    \textcolor{keywordflow}{if}(error)
+1250       \textcolor{keywordflow}{return} error;
+1251 
+1252    \textcolor{comment}{//Write the Requested QoS to the output buffer}
+1253    error = \hyperlink{mqtt__client__misc_8c_ad20ce540ff897e5aa78a58820bd60f6d}{mqttSerializeByte}(context->buffer, 
+      \hyperlink{mqtt__client_8h_a37c50db66771a2d524105033ca66ee7c}{MQTT\_CLIENT\_BUFFER\_SIZE},
+1254       &n, \hyperlink{mqtt__common_8h_a65ee2b4b16f25052c441ff9959dcc7e7}{qos});
+1255 
+1256    \textcolor{comment}{//Failed to serialize data?}
+1257    \textcolor{keywordflow}{if}(error)
+1258       \textcolor{keywordflow}{return} error;
+1259 
+1260    \textcolor{comment}{//Calculate the length of the variable header and the payload}
+1261    context->packetLen = n - \hyperlink{mqtt__common_8h_a979b4fc18388bc4f25631fbae542db8d}{MQTT\_MAX\_HEADER\_SIZE};
+1262 
+1263    \textcolor{comment}{//The fixed header will be encoded in reverse order}
+1264    n = \hyperlink{mqtt__common_8h_a979b4fc18388bc4f25631fbae542db8d}{MQTT\_MAX\_HEADER\_SIZE};
+1265 
+1266    \textcolor{comment}{//Prepend the variable header and the payload with the fixed header}
+1267    error = \hyperlink{mqtt__client__misc_8c_aaf7ce18e001d1e585d3d82ae35951eaa}{mqttSerializeHeader}(context->buffer, &n, 
+      \hyperlink{mqtt__common_8h_af26b642b7ef813ac269f70aa245cc796a303ad083499c8ae4a29dece8faea025e}{MQTT\_PACKET\_TYPE\_SUBSCRIBE},
+1268       \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, \hyperlink{mqtt__common_8h_a79ec1e304b7f2ed51b12f489f642f0bbab6aacd476a4dc16c4d8820fb7a9ca3ac}{MQTT\_QOS\_LEVEL\_1}, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, context->packetLen);
+1269 
+1270    \textcolor{comment}{//Failed to serialize fixed header?}
+1271    \textcolor{keywordflow}{if}(error)
+1272       \textcolor{keywordflow}{return} error;
+1273 
+1274    \textcolor{comment}{//Point to the first byte of the MQTT packet}
+1275    context->packet = context->buffer + \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1276    \textcolor{comment}{//Calculate the length of the MQTT packet}
+1277    context->packetLen += MQTT\_MAX\_HEADER\_SIZE - \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1278 
+1279    \textcolor{comment}{//Successful processing}
+1280    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+1281 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{mqtt__client__packet_8c_a0870137aa3acfe4b48a8c46fa0d09111}\label{mqtt__client__packet_8c_a0870137aa3acfe4b48a8c46fa0d09111}} 
+\index{mqtt\+\_\+client\+\_\+packet.\+c@{mqtt\+\_\+client\+\_\+packet.\+c}!mqtt\+Client\+Format\+Unsubscribe@{mqtt\+Client\+Format\+Unsubscribe}}
+\index{mqtt\+Client\+Format\+Unsubscribe@{mqtt\+Client\+Format\+Unsubscribe}!mqtt\+\_\+client\+\_\+packet.\+c@{mqtt\+\_\+client\+\_\+packet.\+c}}
+\subsubsection{\texorpdfstring{mqtt\+Client\+Format\+Unsubscribe()}{mqttClientFormatUnsubscribe()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} mqtt\+Client\+Format\+Unsubscribe (\begin{DoxyParamCaption}\item[{\hyperlink{mqtt__client_8h_ac90ac46c748d19a3d358acc142237f2e}{Mqtt\+Client\+Context} $\ast$}]{context,  }\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{topic }\end{DoxyParamCaption})}
+
+
+
+Format U\+N\+S\+U\+B\+S\+C\+R\+I\+BE packet. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the M\+Q\+TT client context \\
+\hline
+\mbox{\tt in}  & {\em topic} & Topic filter \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 1291 of file mqtt\+\_\+client\+\_\+packet.\+c.
+
+
+\begin{DoxyCode}
+1293 \{
+1294    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+1295    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1296 
+1297    \textcolor{comment}{//Make room for the fixed header}
+1298    n = \hyperlink{mqtt__common_8h_a979b4fc18388bc4f25631fbae542db8d}{MQTT\_MAX\_HEADER\_SIZE};
+1299 
+1300    \textcolor{comment}{//Each time a client sends a new UNSUBSCRIBE packet it must assign it}
+1301    \textcolor{comment}{//a currently unused packet identifier}
+1302    context->packetId++;
+1303 
+1304    \textcolor{comment}{//Write Packet Identifier to the output buffer}
+1305    error = \hyperlink{mqtt__client__misc_8c_abfb1aa77533be466e3082ae817ccdde6}{mqttSerializeShort}(context->buffer, 
+      \hyperlink{mqtt__client_8h_a37c50db66771a2d524105033ca66ee7c}{MQTT\_CLIENT\_BUFFER\_SIZE},
+1306       &n, context->packetId);
+1307 
+1308    \textcolor{comment}{//Failed to serialize data?}
+1309    \textcolor{keywordflow}{if}(error)
+1310       \textcolor{keywordflow}{return} error;
+1311 
+1312    \textcolor{comment}{//Write the Topic Filter to the output buffer}
+1313    error = \hyperlink{mqtt__client__misc_8c_a7cdabc6df81fb790ef977d811bf6c8a6}{mqttSerializeString}(context->buffer, 
+      \hyperlink{mqtt__client_8h_a37c50db66771a2d524105033ca66ee7c}{MQTT\_CLIENT\_BUFFER\_SIZE},
+1314       &n, topic, strlen(topic));
+1315 
+1316    \textcolor{comment}{//Failed to serialize data?}
+1317    \textcolor{keywordflow}{if}(error)
+1318       \textcolor{keywordflow}{return} error;
+1319 
+1320    \textcolor{comment}{//Calculate the length of the variable header and the payload}
+1321    context->packetLen = n - \hyperlink{mqtt__common_8h_a979b4fc18388bc4f25631fbae542db8d}{MQTT\_MAX\_HEADER\_SIZE};
+1322 
+1323    \textcolor{comment}{//The fixed header will be encoded in reverse order}
+1324    n = \hyperlink{mqtt__common_8h_a979b4fc18388bc4f25631fbae542db8d}{MQTT\_MAX\_HEADER\_SIZE};
+1325 
+1326    \textcolor{comment}{//Prepend the variable header and the payload with the fixed header}
+1327    error = \hyperlink{mqtt__client__misc_8c_aaf7ce18e001d1e585d3d82ae35951eaa}{mqttSerializeHeader}(context->buffer, &n, 
+      \hyperlink{mqtt__common_8h_af26b642b7ef813ac269f70aa245cc796a38efb8ca1a2d274c3e9210abb69dd5ae}{MQTT\_PACKET\_TYPE\_UNSUBSCRIBE},
+1328       \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, \hyperlink{mqtt__common_8h_a79ec1e304b7f2ed51b12f489f642f0bbab6aacd476a4dc16c4d8820fb7a9ca3ac}{MQTT\_QOS\_LEVEL\_1}, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, context->packetLen);
+1329 
+1330    \textcolor{comment}{//Failed to serialize fixed header?}
+1331    \textcolor{keywordflow}{if}(error)
+1332       \textcolor{keywordflow}{return} error;
+1333 
+1334    \textcolor{comment}{//Point to the first byte of the MQTT packet}
+1335    context->packet = context->buffer + \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1336    \textcolor{comment}{//Calculate the length of the MQTT packet}
+1337    context->packetLen += MQTT\_MAX\_HEADER\_SIZE - \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1338 
+1339    \textcolor{comment}{//Successful processing}
+1340    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+1341 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{mqtt__client__packet_8c_a33cb7b7253def90e7cd86f80b7c11283}\label{mqtt__client__packet_8c_a33cb7b7253def90e7cd86f80b7c11283}} 
+\index{mqtt\+\_\+client\+\_\+packet.\+c@{mqtt\+\_\+client\+\_\+packet.\+c}!mqtt\+Client\+Process\+Conn\+Ack@{mqtt\+Client\+Process\+Conn\+Ack}}
+\index{mqtt\+Client\+Process\+Conn\+Ack@{mqtt\+Client\+Process\+Conn\+Ack}!mqtt\+\_\+client\+\_\+packet.\+c@{mqtt\+\_\+client\+\_\+packet.\+c}}
+\subsubsection{\texorpdfstring{mqtt\+Client\+Process\+Conn\+Ack()}{mqttClientProcessConnAck()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} mqtt\+Client\+Process\+Conn\+Ack (\begin{DoxyParamCaption}\item[{\hyperlink{mqtt__client_8h_ac90ac46c748d19a3d358acc142237f2e}{Mqtt\+Client\+Context} $\ast$}]{context,  }\item[{\hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t}}]{dup,  }\item[{\hyperlink{mqtt__common_8h_a79ec1e304b7f2ed51b12f489f642f0bb}{Mqtt\+Qos\+Level}}]{qos,  }\item[{\hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t}}]{retain,  }\item[{size\+\_\+t}]{remaining\+Len }\end{DoxyParamCaption})}
+
+
+
+Process incoming C\+O\+N\+N\+A\+CK packet. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the M\+Q\+TT client context \\
+\hline
+\mbox{\tt in}  & {\em dup} & D\+UP flag from the fixed header \\
+\hline
+\mbox{\tt in}  & {\em qos} & QoS field from the fixed header \\
+\hline
+\mbox{\tt in}  & {\em retain} & R\+E\+T\+A\+IN flag from the fixed header \\
+\hline
+\mbox{\tt in}  & {\em remaining\+Len} & Length of the variable header and the payload \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 264 of file mqtt\+\_\+client\+\_\+packet.\+c.
+
+
+\begin{DoxyCode}
+266 \{
+267    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+268    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} connectAckFlags;
+269    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} connectReturnCode;
+270 
+271    \textcolor{comment}{//If invalid flags are received, the receiver must close the network connection}
+272    \textcolor{keywordflow}{if}(\hyperlink{mqtt__common_8h_a4e198deb57c49dad652a61d21ad478e6}{dup} != \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE} && \hyperlink{mqtt__common_8h_a65ee2b4b16f25052c441ff9959dcc7e7}{qos} != \hyperlink{mqtt__common_8h_a79ec1e304b7f2ed51b12f489f642f0bbaf15c80f5281046b460b215cb4b1128e1}{MQTT\_QOS\_LEVEL\_0} && 
+      \hyperlink{mqtt__common_8h_ae25d47ab22bd975ad97012eddb6bbfce}{retain} != \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE})
+273       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caccf6070ae61f26a48b523757a3168ad2}{ERROR\_INVALID\_PACKET};
+274 
+275    \textcolor{comment}{//The first byte of the variable header is the Connect Acknowledge Flags}
+276    error = \hyperlink{mqtt__client__misc_8c_a65ea81722d769423b6bb3d74a5a7c984}{mqttDeserializeByte}(context->packet, context->packetLen,
+277       &context->packetPos, &connectAckFlags);
+278 
+279    \textcolor{comment}{//Failed to deserialize the Connect Acknowledge Flags?}
+280    \textcolor{keywordflow}{if}(error)
+281       \textcolor{keywordflow}{return} error;
+282 
+283    \textcolor{comment}{//The second byte of the variable header is the Connect Return Code}
+284    error = \hyperlink{mqtt__client__misc_8c_a65ea81722d769423b6bb3d74a5a7c984}{mqttDeserializeByte}(context->packet, context->packetLen,
+285       &context->packetPos, &connectReturnCode);
+286 
+287    \textcolor{comment}{//Failed to deserialize the Connect Return Code?}
+288    \textcolor{keywordflow}{if}(error)
+289       \textcolor{keywordflow}{return} error;
+290 
+291    \textcolor{comment}{//Any registered callback?}
+292    \textcolor{keywordflow}{if}(context->callbacks.connAckCallback != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+293    \{
+294       \textcolor{comment}{//Invoke user callback function}
+295       context->callbacks.connAckCallback(context,
+296          connectAckFlags, connectReturnCode);
+297    \}
+298 
+299    \textcolor{comment}{//Make sure the connection is accepted}
+300    \textcolor{keywordflow}{if}(connectReturnCode != \hyperlink{mqtt__common_8h_adf0aa7fcb4d9ff3369f29b4764fd0925a45c47f36a30c3cf415e0611400e8ed1e}{MQTT\_CONNECT\_RET\_CODE\_ACCEPTED})
+301       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca2ea4c0ffa5bc6943fcca76a501b3eb0f}{ERROR\_CONNECTION\_REFUSED};
+302 
+303    \textcolor{comment}{//Notify the application that a CONNACK packet has been received}
+304    \textcolor{keywordflow}{if}(context->packetType == \hyperlink{mqtt__common_8h_af26b642b7ef813ac269f70aa245cc796ab74b556cbb80972ea992b2e3e76d38e3}{MQTT\_PACKET\_TYPE\_CONNECT})
+305       \hyperlink{mqtt__client__misc_8c_af0194dc61b64f3b8990bcf0e412c932d}{mqttClientChangeState}(context, 
+      \hyperlink{mqtt__client_8h_a4962cf68fc8b67cdc2fdd8d5be59ff00a1eab5c88ae40381b12268b6d0b37fffe}{MQTT\_CLIENT\_STATE\_PACKET\_RECEIVED});
+306 
+307    \textcolor{comment}{//Successful processing}
+308    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+309 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{mqtt__client__packet_8c_a5d0906bb4b0c38feb6aa4b0ba80387e5}\label{mqtt__client__packet_8c_a5d0906bb4b0c38feb6aa4b0ba80387e5}} 
+\index{mqtt\+\_\+client\+\_\+packet.\+c@{mqtt\+\_\+client\+\_\+packet.\+c}!mqtt\+Client\+Process\+Packet@{mqtt\+Client\+Process\+Packet}}
+\index{mqtt\+Client\+Process\+Packet@{mqtt\+Client\+Process\+Packet}!mqtt\+\_\+client\+\_\+packet.\+c@{mqtt\+\_\+client\+\_\+packet.\+c}}
+\subsubsection{\texorpdfstring{mqtt\+Client\+Process\+Packet()}{mqttClientProcessPacket()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} mqtt\+Client\+Process\+Packet (\begin{DoxyParamCaption}\item[{\hyperlink{mqtt__client_8h_ac90ac46c748d19a3d358acc142237f2e}{Mqtt\+Client\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Process incoming M\+Q\+TT packet. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the M\+Q\+TT client context \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 169 of file mqtt\+\_\+client\+\_\+packet.\+c.
+
+
+\begin{DoxyCode}
+170 \{
+171    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+172    \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\_t} \hyperlink{mqtt__common_8h_a4e198deb57c49dad652a61d21ad478e6}{dup};
+173    \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\_t} \hyperlink{mqtt__common_8h_ae25d47ab22bd975ad97012eddb6bbfce}{retain};
+174    \textcolor{keywordtype}{size\_t} remainingLen;
+175    \hyperlink{mqtt__common_8h_a79ec1e304b7f2ed51b12f489f642f0bb}{MqttQosLevel} \hyperlink{mqtt__common_8h_a65ee2b4b16f25052c441ff9959dcc7e7}{qos};
+176    \hyperlink{mqtt__common_8h_af26b642b7ef813ac269f70aa245cc796}{MqttPacketType} \hyperlink{resource__manager_8h_a12e46a33bfe90638e58ef067c6fd4a6e}{type};
+177 
+178    \textcolor{comment}{//Point to the first byte of the packet}
+179    context->packetPos = 0;
+180 
+181    \textcolor{comment}{//Read the fixed header from the input buffer}
+182    error = \hyperlink{mqtt__client__misc_8c_a3588be0ed9b0709cfbaa0956cb006c5c}{mqttDeserializeHeader}(context->packet, context->packetLen,
+183       &context->packetPos, &type, &dup, &qos, &retain, &remainingLen);
+184 
+185    \textcolor{comment}{//Failed to deserialize fixed header?}
+186    \textcolor{keywordflow}{if}(error)
+187       \textcolor{keywordflow}{return} error;
+188 
+189    \textcolor{comment}{//Debug message}
+190    \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"MQTT: %s packet received (%"} \hyperlink{compiler__port_8h_a2b7b0557dc6cd786df02dafbb51f5292}{PRIuSIZE} \textcolor{stringliteral}{" bytes)...\(\backslash\)r\(\backslash\)n"},
+191       \hyperlink{mqtt__client__packet_8c_a6816ecc431201511c2b70ddc4f577945}{packetLabel}[type], context->packetLen);
+192 
+193    \textcolor{comment}{//Dump the contents of the packet}
+194    \hyperlink{debug_8h_a1f71019169d85407d8827300ed43bdf0}{TRACE\_DEBUG\_ARRAY}(\textcolor{stringliteral}{"  "}, context->packet, context->packetLen);
+195 
+196    \textcolor{comment}{//Check MQTT control packet type}
+197    \textcolor{keywordflow}{switch}(type)
+198    \{
+199    \textcolor{comment}{//CONNACK packet received?}
+200    \textcolor{keywordflow}{case} \hyperlink{mqtt__common_8h_af26b642b7ef813ac269f70aa245cc796a43a2fa47121a1b864c91938629cdd9d4}{MQTT\_PACKET\_TYPE\_CONNACK}:
+201       \textcolor{comment}{//Process incoming CONNACK packet}
+202       error = \hyperlink{mqtt__client__packet_8c_a33cb7b7253def90e7cd86f80b7c11283}{mqttClientProcessConnAck}(context, dup, qos, retain, remainingLen);
+203       \textcolor{keywordflow}{break};
+204    \textcolor{comment}{//PUBLISH packet received?}
+205    \textcolor{keywordflow}{case} \hyperlink{mqtt__common_8h_af26b642b7ef813ac269f70aa245cc796abe363fe85989de579975b69f72f01027}{MQTT\_PACKET\_TYPE\_PUBLISH}:
+206       \textcolor{comment}{//Process incoming PUBLISH packet}
+207       error = \hyperlink{mqtt__client__packet_8c_afe22d6ef074ae2d61842cdc8a98db9f4}{mqttClientProcessPublish}(context, dup, qos, retain, remainingLen);
+208       \textcolor{keywordflow}{break};
+209    \textcolor{comment}{//PUBACK packet received?}
+210    \textcolor{keywordflow}{case} \hyperlink{mqtt__common_8h_af26b642b7ef813ac269f70aa245cc796a26179df5100c4143be9db76b5fa68279}{MQTT\_PACKET\_TYPE\_PUBACK}:
+211       \textcolor{comment}{//Process incoming PUBACK packet}
+212       error = \hyperlink{mqtt__client__packet_8c_a64e5289010391076842cd49010595453}{mqttClientProcessPubAck}(context, dup, qos, retain, remainingLen);
+213       \textcolor{keywordflow}{break};
+214    \textcolor{comment}{//PUBREC packet received?}
+215    \textcolor{keywordflow}{case} \hyperlink{mqtt__common_8h_af26b642b7ef813ac269f70aa245cc796a99b5c8edecee6343e17e39c39c14bdf6}{MQTT\_PACKET\_TYPE\_PUBREC}:
+216       \textcolor{comment}{//Process incoming PUBREC packet}
+217       error = \hyperlink{mqtt__client__packet_8c_a43c9c57e91809b67aee5983e18f97018}{mqttClientProcessPubRec}(context, dup, qos, retain, remainingLen);
+218       \textcolor{keywordflow}{break};
+219    \textcolor{comment}{//PUBREL packet received?}
+220    \textcolor{keywordflow}{case} \hyperlink{mqtt__common_8h_af26b642b7ef813ac269f70aa245cc796afae7d2c57ca274f156ade187954cafe7}{MQTT\_PACKET\_TYPE\_PUBREL}:
+221       \textcolor{comment}{//Process incoming PUBREL packet}
+222       error = \hyperlink{mqtt__client__packet_8c_afb57cebac3de3cf9e1626b1f7f48fd80}{mqttClientProcessPubRel}(context, dup, qos, retain, remainingLen);
+223       \textcolor{keywordflow}{break};
+224    \textcolor{comment}{//PUBCOMP packet received?}
+225    \textcolor{keywordflow}{case} \hyperlink{mqtt__common_8h_af26b642b7ef813ac269f70aa245cc796a91795eb00d39a1e8edd0dce5d1fe6fe5}{MQTT\_PACKET\_TYPE\_PUBCOMP}:
+226       \textcolor{comment}{//Process incoming PUBCOMP packet}
+227       error = \hyperlink{mqtt__client__packet_8c_a13adb35c01cc778ee0b8e1ce4a44fb6b}{mqttClientProcessPubComp}(context, dup, qos, retain, remainingLen);
+228       \textcolor{keywordflow}{break};
+229    \textcolor{comment}{//SUBACK packet received?}
+230    \textcolor{keywordflow}{case} \hyperlink{mqtt__common_8h_af26b642b7ef813ac269f70aa245cc796a253198687ae2848e35607077960e334a}{MQTT\_PACKET\_TYPE\_SUBACK}:
+231       \textcolor{comment}{//Process incoming SUBACK packet}
+232       error = \hyperlink{mqtt__client__packet_8c_a1a8c728ccd0d4fc74d0aa7c27936be5b}{mqttClientProcessSubAck}(context, dup, qos, retain, remainingLen);
+233       \textcolor{keywordflow}{break};
+234    \textcolor{comment}{//UNSUBACK packet received?}
+235    \textcolor{keywordflow}{case} \hyperlink{mqtt__common_8h_af26b642b7ef813ac269f70aa245cc796accfcb1d90df87e93a028f27a35e4d18a}{MQTT\_PACKET\_TYPE\_UNSUBACK}:
+236       \textcolor{comment}{//Process incoming UNSUBACK packet}
+237       error = \hyperlink{mqtt__client__packet_8c_a5ed80bbfc09e8bb961afcf0e1258f138}{mqttClientProcessUnsubAck}(context, dup, qos, retain, remainingLen);
+238       \textcolor{keywordflow}{break};
+239    \textcolor{comment}{//PINGRESP packet received?}
+240    \textcolor{keywordflow}{case} \hyperlink{mqtt__common_8h_af26b642b7ef813ac269f70aa245cc796a7e4631675fdbeb1306d3a51f63977085}{MQTT\_PACKET\_TYPE\_PINGRESP}:
+241       \textcolor{comment}{//Process incoming PINGRESP packet}
+242       error = \hyperlink{mqtt__client__packet_8c_adab50bcfb9b52695fcfe47d461509e87}{mqttClientProcessPingResp}(context, dup, qos, retain, remainingLen);
+243       \textcolor{keywordflow}{break};
+244    \textcolor{comment}{//Unknown packet received?}
+245    \textcolor{keywordflow}{default}:
+246       \textcolor{comment}{//Report an error}
+247       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caccf6070ae61f26a48b523757a3168ad2}{ERROR\_INVALID\_PACKET};
+248    \}
+249 
+250    \textcolor{comment}{//Return status code}
+251    \textcolor{keywordflow}{return} error;
+252 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{mqtt__client__packet_8c_adab50bcfb9b52695fcfe47d461509e87}\label{mqtt__client__packet_8c_adab50bcfb9b52695fcfe47d461509e87}} 
+\index{mqtt\+\_\+client\+\_\+packet.\+c@{mqtt\+\_\+client\+\_\+packet.\+c}!mqtt\+Client\+Process\+Ping\+Resp@{mqtt\+Client\+Process\+Ping\+Resp}}
+\index{mqtt\+Client\+Process\+Ping\+Resp@{mqtt\+Client\+Process\+Ping\+Resp}!mqtt\+\_\+client\+\_\+packet.\+c@{mqtt\+\_\+client\+\_\+packet.\+c}}
+\subsubsection{\texorpdfstring{mqtt\+Client\+Process\+Ping\+Resp()}{mqttClientProcessPingResp()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} mqtt\+Client\+Process\+Ping\+Resp (\begin{DoxyParamCaption}\item[{\hyperlink{mqtt__client_8h_ac90ac46c748d19a3d358acc142237f2e}{Mqtt\+Client\+Context} $\ast$}]{context,  }\item[{\hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t}}]{dup,  }\item[{\hyperlink{mqtt__common_8h_a79ec1e304b7f2ed51b12f489f642f0bb}{Mqtt\+Qos\+Level}}]{qos,  }\item[{\hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t}}]{retain,  }\item[{size\+\_\+t}]{remaining\+Len }\end{DoxyParamCaption})}
+
+
+
+Process incoming P\+I\+N\+G\+R\+E\+SP packet. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the M\+Q\+TT client context \\
+\hline
+\mbox{\tt in}  & {\em dup} & D\+UP flag from the fixed header \\
+\hline
+\mbox{\tt in}  & {\em qos} & QoS field from the fixed header \\
+\hline
+\mbox{\tt in}  & {\em retain} & R\+E\+T\+A\+IN flag from the fixed header \\
+\hline
+\mbox{\tt in}  & {\em remaining\+Len} & Length of the variable header and the payload \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 727 of file mqtt\+\_\+client\+\_\+packet.\+c.
+
+
+\begin{DoxyCode}
+729 \{
+730    \textcolor{comment}{//If invalid flags are received, the receiver must close the network connection}
+731    \textcolor{keywordflow}{if}(\hyperlink{mqtt__common_8h_a4e198deb57c49dad652a61d21ad478e6}{dup} != \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE} && \hyperlink{mqtt__common_8h_a65ee2b4b16f25052c441ff9959dcc7e7}{qos} != \hyperlink{mqtt__common_8h_a79ec1e304b7f2ed51b12f489f642f0bbaf15c80f5281046b460b215cb4b1128e1}{MQTT\_QOS\_LEVEL\_0} && 
+      \hyperlink{mqtt__common_8h_ae25d47ab22bd975ad97012eddb6bbfce}{retain} != \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE})
+732       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caccf6070ae61f26a48b523757a3168ad2}{ERROR\_INVALID\_PACKET};
+733 
+734    \textcolor{comment}{//Any registered callback?}
+735    \textcolor{keywordflow}{if}(context->callbacks.pingRespCallback != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+736    \{
+737       \textcolor{comment}{//Invoke user callback function}
+738       context->callbacks.pingRespCallback(context);
+739    \}
+740 
+741    \textcolor{comment}{//Notify the application that an PINGRESP packet has been received}
+742    \textcolor{keywordflow}{if}(context->packetType == \hyperlink{mqtt__common_8h_af26b642b7ef813ac269f70aa245cc796ab390e40e3c01e8c35f428935d1c2e276}{MQTT\_PACKET\_TYPE\_PINGREQ})
+743       \hyperlink{mqtt__client__misc_8c_af0194dc61b64f3b8990bcf0e412c932d}{mqttClientChangeState}(context, 
+      \hyperlink{mqtt__client_8h_a4962cf68fc8b67cdc2fdd8d5be59ff00a1eab5c88ae40381b12268b6d0b37fffe}{MQTT\_CLIENT\_STATE\_PACKET\_RECEIVED});
+744 
+745    \textcolor{comment}{//Successful processing}
+746    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+747 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{mqtt__client__packet_8c_a64e5289010391076842cd49010595453}\label{mqtt__client__packet_8c_a64e5289010391076842cd49010595453}} 
+\index{mqtt\+\_\+client\+\_\+packet.\+c@{mqtt\+\_\+client\+\_\+packet.\+c}!mqtt\+Client\+Process\+Pub\+Ack@{mqtt\+Client\+Process\+Pub\+Ack}}
+\index{mqtt\+Client\+Process\+Pub\+Ack@{mqtt\+Client\+Process\+Pub\+Ack}!mqtt\+\_\+client\+\_\+packet.\+c@{mqtt\+\_\+client\+\_\+packet.\+c}}
+\subsubsection{\texorpdfstring{mqtt\+Client\+Process\+Pub\+Ack()}{mqttClientProcessPubAck()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} mqtt\+Client\+Process\+Pub\+Ack (\begin{DoxyParamCaption}\item[{\hyperlink{mqtt__client_8h_ac90ac46c748d19a3d358acc142237f2e}{Mqtt\+Client\+Context} $\ast$}]{context,  }\item[{\hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t}}]{dup,  }\item[{\hyperlink{mqtt__common_8h_a79ec1e304b7f2ed51b12f489f642f0bb}{Mqtt\+Qos\+Level}}]{qos,  }\item[{\hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t}}]{retain,  }\item[{size\+\_\+t}]{remaining\+Len }\end{DoxyParamCaption})}
+
+
+
+Process incoming P\+U\+B\+A\+CK packet. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the M\+Q\+TT client context \\
+\hline
+\mbox{\tt in}  & {\em dup} & D\+UP flag from the fixed header \\
+\hline
+\mbox{\tt in}  & {\em qos} & QoS field from the fixed header \\
+\hline
+\mbox{\tt in}  & {\em retain} & R\+E\+T\+A\+IN flag from the fixed header \\
+\hline
+\mbox{\tt in}  & {\em remaining\+Len} & Length of the variable header and the payload \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 435 of file mqtt\+\_\+client\+\_\+packet.\+c.
+
+
+\begin{DoxyCode}
+437 \{
+438    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+439    \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t} packetId;
+440 
+441    \textcolor{comment}{//If invalid flags are received, the receiver must close the network connection}
+442    \textcolor{keywordflow}{if}(\hyperlink{mqtt__common_8h_a4e198deb57c49dad652a61d21ad478e6}{dup} != \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE} && \hyperlink{mqtt__common_8h_a65ee2b4b16f25052c441ff9959dcc7e7}{qos} != \hyperlink{mqtt__common_8h_a79ec1e304b7f2ed51b12f489f642f0bbaf15c80f5281046b460b215cb4b1128e1}{MQTT\_QOS\_LEVEL\_0} && 
+      \hyperlink{mqtt__common_8h_ae25d47ab22bd975ad97012eddb6bbfce}{retain} != \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE})
+443       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caccf6070ae61f26a48b523757a3168ad2}{ERROR\_INVALID\_PACKET};
+444 
+445    \textcolor{comment}{//The variable header contains the Packet Identifier from the PUBLISH}
+446    \textcolor{comment}{//packet that is being acknowledged}
+447    error = \hyperlink{mqtt__client__misc_8c_aad98e4b63b2676bc9b0db9b093c50792}{mqttDeserializeShort}(context->packet, context->packetLen,
+448       &context->packetPos, &packetId);
+449 
+450    \textcolor{comment}{//Failed to deserialize Packet Identifier field?}
+451    \textcolor{keywordflow}{if}(error)
+452       \textcolor{keywordflow}{return} error;
+453 
+454    \textcolor{comment}{//Any registered callback?}
+455    \textcolor{keywordflow}{if}(context->callbacks.pubAckCallback != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+456    \{
+457       \textcolor{comment}{//Invoke user callback function}
+458       context->callbacks.pubAckCallback(context, packetId);
+459    \}
+460 
+461    \textcolor{comment}{//Notify the application that a PUBACK packet has been received}
+462    \textcolor{keywordflow}{if}(context->packetType == \hyperlink{mqtt__common_8h_af26b642b7ef813ac269f70aa245cc796abe363fe85989de579975b69f72f01027}{MQTT\_PACKET\_TYPE\_PUBLISH} && context->packetId == 
+      packetId)
+463       \hyperlink{mqtt__client__misc_8c_af0194dc61b64f3b8990bcf0e412c932d}{mqttClientChangeState}(context, 
+      \hyperlink{mqtt__client_8h_a4962cf68fc8b67cdc2fdd8d5be59ff00a1eab5c88ae40381b12268b6d0b37fffe}{MQTT\_CLIENT\_STATE\_PACKET\_RECEIVED});
+464 
+465    \textcolor{comment}{//Return status code}
+466    \textcolor{keywordflow}{return} error;
+467 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{mqtt__client__packet_8c_a13adb35c01cc778ee0b8e1ce4a44fb6b}\label{mqtt__client__packet_8c_a13adb35c01cc778ee0b8e1ce4a44fb6b}} 
+\index{mqtt\+\_\+client\+\_\+packet.\+c@{mqtt\+\_\+client\+\_\+packet.\+c}!mqtt\+Client\+Process\+Pub\+Comp@{mqtt\+Client\+Process\+Pub\+Comp}}
+\index{mqtt\+Client\+Process\+Pub\+Comp@{mqtt\+Client\+Process\+Pub\+Comp}!mqtt\+\_\+client\+\_\+packet.\+c@{mqtt\+\_\+client\+\_\+packet.\+c}}
+\subsubsection{\texorpdfstring{mqtt\+Client\+Process\+Pub\+Comp()}{mqttClientProcessPubComp()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} mqtt\+Client\+Process\+Pub\+Comp (\begin{DoxyParamCaption}\item[{\hyperlink{mqtt__client_8h_ac90ac46c748d19a3d358acc142237f2e}{Mqtt\+Client\+Context} $\ast$}]{context,  }\item[{\hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t}}]{dup,  }\item[{\hyperlink{mqtt__common_8h_a79ec1e304b7f2ed51b12f489f642f0bb}{Mqtt\+Qos\+Level}}]{qos,  }\item[{\hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t}}]{retain,  }\item[{size\+\_\+t}]{remaining\+Len }\end{DoxyParamCaption})}
+
+
+
+Process incoming P\+U\+B\+C\+O\+MP packet. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the M\+Q\+TT client context \\
+\hline
+\mbox{\tt in}  & {\em dup} & D\+UP flag from the fixed header \\
+\hline
+\mbox{\tt in}  & {\em qos} & QoS field from the fixed header \\
+\hline
+\mbox{\tt in}  & {\em retain} & R\+E\+T\+A\+IN flag from the fixed header \\
+\hline
+\mbox{\tt in}  & {\em remaining\+Len} & Length of the variable header and the payload \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 595 of file mqtt\+\_\+client\+\_\+packet.\+c.
+
+
+\begin{DoxyCode}
+597 \{
+598    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+599    \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t} packetId;
+600 
+601    \textcolor{comment}{//If invalid flags are received, the receiver must close the network connection}
+602    \textcolor{keywordflow}{if}(\hyperlink{mqtt__common_8h_a4e198deb57c49dad652a61d21ad478e6}{dup} != \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE} && \hyperlink{mqtt__common_8h_a65ee2b4b16f25052c441ff9959dcc7e7}{qos} != \hyperlink{mqtt__common_8h_a79ec1e304b7f2ed51b12f489f642f0bbaf15c80f5281046b460b215cb4b1128e1}{MQTT\_QOS\_LEVEL\_0} && 
+      \hyperlink{mqtt__common_8h_ae25d47ab22bd975ad97012eddb6bbfce}{retain} != \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE})
+603       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caccf6070ae61f26a48b523757a3168ad2}{ERROR\_INVALID\_PACKET};
+604 
+605    \textcolor{comment}{//The variable header contains the same Packet Identifier as the PUBREL}
+606    \textcolor{comment}{//packet that is being acknowledged}
+607    error = \hyperlink{mqtt__client__misc_8c_aad98e4b63b2676bc9b0db9b093c50792}{mqttDeserializeShort}(context->packet, context->packetLen,
+608       &context->packetPos, &packetId);
+609 
+610    \textcolor{comment}{//Failed to deserialize Packet Identifier field?}
+611    \textcolor{keywordflow}{if}(error)
+612       \textcolor{keywordflow}{return} error;
+613 
+614    \textcolor{comment}{//Any registered callback?}
+615    \textcolor{keywordflow}{if}(context->callbacks.pubCompCallback != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+616    \{
+617       \textcolor{comment}{//Invoke user callback function}
+618       context->callbacks.pubCompCallback(context, packetId);
+619    \}
+620 
+621    \textcolor{comment}{//Notify the application that a PUBCOMP packet has been received}
+622    \textcolor{keywordflow}{if}(context->packetType == \hyperlink{mqtt__common_8h_af26b642b7ef813ac269f70aa245cc796abe363fe85989de579975b69f72f01027}{MQTT\_PACKET\_TYPE\_PUBLISH} && context->packetId == 
+      packetId)
+623       \hyperlink{mqtt__client__misc_8c_af0194dc61b64f3b8990bcf0e412c932d}{mqttClientChangeState}(context, 
+      \hyperlink{mqtt__client_8h_a4962cf68fc8b67cdc2fdd8d5be59ff00a1eab5c88ae40381b12268b6d0b37fffe}{MQTT\_CLIENT\_STATE\_PACKET\_RECEIVED});
+624 
+625    \textcolor{comment}{//Successful processing}
+626    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+627 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{mqtt__client__packet_8c_afe22d6ef074ae2d61842cdc8a98db9f4}\label{mqtt__client__packet_8c_afe22d6ef074ae2d61842cdc8a98db9f4}} 
+\index{mqtt\+\_\+client\+\_\+packet.\+c@{mqtt\+\_\+client\+\_\+packet.\+c}!mqtt\+Client\+Process\+Publish@{mqtt\+Client\+Process\+Publish}}
+\index{mqtt\+Client\+Process\+Publish@{mqtt\+Client\+Process\+Publish}!mqtt\+\_\+client\+\_\+packet.\+c@{mqtt\+\_\+client\+\_\+packet.\+c}}
+\subsubsection{\texorpdfstring{mqtt\+Client\+Process\+Publish()}{mqttClientProcessPublish()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} mqtt\+Client\+Process\+Publish (\begin{DoxyParamCaption}\item[{\hyperlink{mqtt__client_8h_ac90ac46c748d19a3d358acc142237f2e}{Mqtt\+Client\+Context} $\ast$}]{context,  }\item[{\hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t}}]{dup,  }\item[{\hyperlink{mqtt__common_8h_a79ec1e304b7f2ed51b12f489f642f0bb}{Mqtt\+Qos\+Level}}]{qos,  }\item[{\hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t}}]{retain,  }\item[{size\+\_\+t}]{remaining\+Len }\end{DoxyParamCaption})}
+
+
+
+Process incoming P\+U\+B\+L\+I\+SH packet. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the M\+Q\+TT client context \\
+\hline
+\mbox{\tt in}  & {\em dup} & D\+UP flag from the fixed header \\
+\hline
+\mbox{\tt in}  & {\em qos} & QoS field from the fixed header \\
+\hline
+\mbox{\tt in}  & {\em retain} & R\+E\+T\+A\+IN flag from the fixed header \\
+\hline
+\mbox{\tt in}  & {\em remaining\+Len} & Length of the variable header and the payload \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 321 of file mqtt\+\_\+client\+\_\+packet.\+c.
+
+
+\begin{DoxyCode}
+323 \{
+324    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+325    \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t} packetId;
+326    \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\_t} *topic;
+327    \textcolor{keywordtype}{size\_t} topicLen;
+328    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *\hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message};
+329    \textcolor{keywordtype}{size\_t} messageLen;
+330 
+331    \textcolor{comment}{//The Topic Name must be present as the first field in the PUBLISH}
+332    \textcolor{comment}{//packet variable header}
+333    error = \hyperlink{mqtt__client__misc_8c_ac49cf0f6db605fc125fada9b529c4dc4}{mqttDeserializeString}(context->packet, context->packetLen,
+334       &context->packetPos, &topic, &topicLen);
+335 
+336    \textcolor{comment}{//Failed to deserialize Topic Name?}
+337    \textcolor{keywordflow}{if}(error)
+338       \textcolor{keywordflow}{return} error;
+339 
+340    \textcolor{comment}{//Check QoS level}
+341    \textcolor{keywordflow}{if}(\hyperlink{mqtt__common_8h_a65ee2b4b16f25052c441ff9959dcc7e7}{qos} != \hyperlink{mqtt__common_8h_a79ec1e304b7f2ed51b12f489f642f0bbaf15c80f5281046b460b215cb4b1128e1}{MQTT\_QOS\_LEVEL\_0})
+342    \{
+343       \textcolor{comment}{//The Packet Identifier field is only present in PUBLISH packets}
+344       \textcolor{comment}{//where the QoS level is 1 or 2}
+345       error = \hyperlink{mqtt__client__misc_8c_aad98e4b63b2676bc9b0db9b093c50792}{mqttDeserializeShort}(context->packet, context->packetLen,
+346          &context->packetPos, &packetId);
+347 
+348       \textcolor{comment}{//Failed to deserialize Packet Identifier field?}
+349       \textcolor{keywordflow}{if}(error)
+350          \textcolor{keywordflow}{return} error;
+351    \}
+352    \textcolor{keywordflow}{else}
+353    \{
+354       \textcolor{comment}{//No packet identifier}
+355       packetId = 0;
+356    \}
+357 
+358    \textcolor{comment}{//The payload contains the Application Message that is being published}
+359    message = context->packet + context->packetPos;
+360 
+361    \textcolor{comment}{//The length of the payload can be calculated by subtracting the length of the}
+362    \textcolor{comment}{//variable header from the Remaining Length field that is in the fixed header}
+363    messageLen = context->packetLen - context->packetPos;
+364 
+365    \textcolor{comment}{//Make room for the NULL character at the end of the Topic Name}
+366    memmove(topic - 1, topic, topicLen);
+367    \textcolor{comment}{//Properly terminate the string with a NULL character}
+368    topic[topicLen - 1] = \textcolor{charliteral}{'\(\backslash\)0'};
+369    \textcolor{comment}{//Point to the first character of the Topic Name}
+370    topic--;
+371 
+372    \textcolor{comment}{//Any registered callback?}
+373    \textcolor{keywordflow}{if}(context->callbacks.publishCallback != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+374    \{
+375       \textcolor{comment}{//Invoke user callback function}
+376       context->callbacks.publishCallback(context, topic,
+377          message, messageLen, \hyperlink{mqtt__common_8h_a4e198deb57c49dad652a61d21ad478e6}{dup}, \hyperlink{mqtt__common_8h_a65ee2b4b16f25052c441ff9959dcc7e7}{qos}, \hyperlink{mqtt__common_8h_ae25d47ab22bd975ad97012eddb6bbfce}{retain}, packetId);
+378    \}
+379 
+380    \textcolor{comment}{//Check QoS level}
+381    \textcolor{keywordflow}{if}(\hyperlink{mqtt__common_8h_a65ee2b4b16f25052c441ff9959dcc7e7}{qos} == \hyperlink{mqtt__common_8h_a79ec1e304b7f2ed51b12f489f642f0bbab6aacd476a4dc16c4d8820fb7a9ca3ac}{MQTT\_QOS\_LEVEL\_1})
+382    \{
+383       \textcolor{comment}{//A PUBACK packet is the response to a PUBLISH packet with QoS level 1}
+384       error = \hyperlink{mqtt__client__packet_8c_a9a08688170f8f848fa8479523199b295}{mqttClientFormatPubAck}(context, packetId);
+385 
+386       \textcolor{comment}{//Check status code}
+387       \textcolor{keywordflow}{if}(!error)
+388       \{
+389          \textcolor{comment}{//Debug message}
+390          \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"MQTT: Sending PUBACK packet (%"} \hyperlink{compiler__port_8h_a2b7b0557dc6cd786df02dafbb51f5292}{PRIuSIZE} \textcolor{stringliteral}{" bytes)...\(\backslash\)r\(\backslash\)n"}, context->
+      packetLen);
+391          \hyperlink{debug_8h_a1f71019169d85407d8827300ed43bdf0}{TRACE\_DEBUG\_ARRAY}(\textcolor{stringliteral}{"  "}, context->packet, context->packetLen);
+392 
+393          \textcolor{comment}{//Point to the beginning of the packet}
+394          context->packetPos = 0;
+395 
+396          \textcolor{comment}{//Send PUBACK packet}
+397          \hyperlink{mqtt__client__misc_8c_af0194dc61b64f3b8990bcf0e412c932d}{mqttClientChangeState}(context, 
+      \hyperlink{mqtt__client_8h_a4962cf68fc8b67cdc2fdd8d5be59ff00adf1e9ea5fb931a6b0fac4c40b39064ce}{MQTT\_CLIENT\_STATE\_SENDING\_PACKET});
+398       \}
+399    \}
+400    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(\hyperlink{mqtt__common_8h_a65ee2b4b16f25052c441ff9959dcc7e7}{qos} == \hyperlink{mqtt__common_8h_a79ec1e304b7f2ed51b12f489f642f0bbaa6eb8ad9f596787ee0f8933f6539f9e8}{MQTT\_QOS\_LEVEL\_2})
+401    \{
+402       \textcolor{comment}{//A PUBREC packet is the response to a PUBLISH packet with QoS 2. It is}
+403       \textcolor{comment}{//the second packet of the QoS 2 protocol exchange}
+404       error = \hyperlink{mqtt__client__packet_8c_a9e5f8e61115539674a5b983c99af0ea2}{mqttClientFormatPubRec}(context, packetId);
+405 
+406       \textcolor{comment}{//Check status code}
+407       \textcolor{keywordflow}{if}(!error)
+408       \{
+409          \textcolor{comment}{//Debug message}
+410          \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"MQTT: Sending PUBREC packet (%"} \hyperlink{compiler__port_8h_a2b7b0557dc6cd786df02dafbb51f5292}{PRIuSIZE} \textcolor{stringliteral}{" bytes)...\(\backslash\)r\(\backslash\)n"}, context->
+      packetLen);
+411          \hyperlink{debug_8h_a1f71019169d85407d8827300ed43bdf0}{TRACE\_DEBUG\_ARRAY}(\textcolor{stringliteral}{"  "}, context->packet, context->packetLen);
+412 
+413          \textcolor{comment}{//Point to the beginning of the packet}
+414          context->packetPos = 0;
+415 
+416          \textcolor{comment}{//Send PUBREC packet}
+417          \hyperlink{mqtt__client__misc_8c_af0194dc61b64f3b8990bcf0e412c932d}{mqttClientChangeState}(context, 
+      \hyperlink{mqtt__client_8h_a4962cf68fc8b67cdc2fdd8d5be59ff00adf1e9ea5fb931a6b0fac4c40b39064ce}{MQTT\_CLIENT\_STATE\_SENDING\_PACKET});
+418       \}
+419    \}
+420 
+421    \textcolor{comment}{//Return status code}
+422    \textcolor{keywordflow}{return} error;
+423 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{mqtt__client__packet_8c_a43c9c57e91809b67aee5983e18f97018}\label{mqtt__client__packet_8c_a43c9c57e91809b67aee5983e18f97018}} 
+\index{mqtt\+\_\+client\+\_\+packet.\+c@{mqtt\+\_\+client\+\_\+packet.\+c}!mqtt\+Client\+Process\+Pub\+Rec@{mqtt\+Client\+Process\+Pub\+Rec}}
+\index{mqtt\+Client\+Process\+Pub\+Rec@{mqtt\+Client\+Process\+Pub\+Rec}!mqtt\+\_\+client\+\_\+packet.\+c@{mqtt\+\_\+client\+\_\+packet.\+c}}
+\subsubsection{\texorpdfstring{mqtt\+Client\+Process\+Pub\+Rec()}{mqttClientProcessPubRec()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} mqtt\+Client\+Process\+Pub\+Rec (\begin{DoxyParamCaption}\item[{\hyperlink{mqtt__client_8h_ac90ac46c748d19a3d358acc142237f2e}{Mqtt\+Client\+Context} $\ast$}]{context,  }\item[{\hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t}}]{dup,  }\item[{\hyperlink{mqtt__common_8h_a79ec1e304b7f2ed51b12f489f642f0bb}{Mqtt\+Qos\+Level}}]{qos,  }\item[{\hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t}}]{retain,  }\item[{size\+\_\+t}]{remaining\+Len }\end{DoxyParamCaption})}
+
+
+
+Process incoming P\+U\+B\+R\+EC packet. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the M\+Q\+TT client context \\
+\hline
+\mbox{\tt in}  & {\em dup} & D\+UP flag from the fixed header \\
+\hline
+\mbox{\tt in}  & {\em qos} & QoS field from the fixed header \\
+\hline
+\mbox{\tt in}  & {\em retain} & R\+E\+T\+A\+IN flag from the fixed header \\
+\hline
+\mbox{\tt in}  & {\em remaining\+Len} & Length of the variable header and the payload \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 479 of file mqtt\+\_\+client\+\_\+packet.\+c.
+
+
+\begin{DoxyCode}
+481 \{
+482    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+483    \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t} packetId;
+484 
+485    \textcolor{comment}{//If invalid flags are received, the receiver must close the network connection}
+486    \textcolor{keywordflow}{if}(\hyperlink{mqtt__common_8h_a4e198deb57c49dad652a61d21ad478e6}{dup} != \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE} && \hyperlink{mqtt__common_8h_a65ee2b4b16f25052c441ff9959dcc7e7}{qos} != \hyperlink{mqtt__common_8h_a79ec1e304b7f2ed51b12f489f642f0bbaf15c80f5281046b460b215cb4b1128e1}{MQTT\_QOS\_LEVEL\_0} && 
+      \hyperlink{mqtt__common_8h_ae25d47ab22bd975ad97012eddb6bbfce}{retain} != \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE})
+487       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caccf6070ae61f26a48b523757a3168ad2}{ERROR\_INVALID\_PACKET};
+488 
+489    \textcolor{comment}{//The variable header contains the Packet Identifier from the PUBLISH}
+490    \textcolor{comment}{//packet that is being acknowledged}
+491    error = \hyperlink{mqtt__client__misc_8c_aad98e4b63b2676bc9b0db9b093c50792}{mqttDeserializeShort}(context->packet, context->packetLen,
+492       &context->packetPos, &packetId);
+493 
+494    \textcolor{comment}{//Failed to deserialize Packet Identifier field?}
+495    \textcolor{keywordflow}{if}(error)
+496       \textcolor{keywordflow}{return} error;
+497 
+498    \textcolor{comment}{//Any registered callback?}
+499    \textcolor{keywordflow}{if}(context->callbacks.pubRecCallback != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+500    \{
+501       \textcolor{comment}{//Invoke user callback function}
+502       context->callbacks.pubRecCallback(context, packetId);
+503    \}
+504 
+505    \textcolor{comment}{//A PUBREL packet is the response to a PUBREC packet. It is the third}
+506    \textcolor{comment}{//packet of the QoS 2 protocol exchange}
+507    error = \hyperlink{mqtt__client__packet_8c_a2973c4eb750201f4758a17190dc32b19}{mqttClientFormatPubRel}(context, packetId);
+508 
+509    \textcolor{comment}{//Check status code}
+510    \textcolor{keywordflow}{if}(!error)
+511    \{
+512       \textcolor{comment}{//Debug message}
+513       \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"MQTT: Sending PUBREL packet (%"} \hyperlink{compiler__port_8h_a2b7b0557dc6cd786df02dafbb51f5292}{PRIuSIZE} \textcolor{stringliteral}{" bytes)...\(\backslash\)r\(\backslash\)n"}, context->
+      packetLen);
+514       \hyperlink{debug_8h_a1f71019169d85407d8827300ed43bdf0}{TRACE\_DEBUG\_ARRAY}(\textcolor{stringliteral}{"  "}, context->packet, context->packetLen);
+515 
+516       \textcolor{comment}{//Point to the beginning of the packet}
+517       context->packetPos = 0;
+518 
+519       \textcolor{comment}{//Send PUBREL packet}
+520       \hyperlink{mqtt__client__misc_8c_af0194dc61b64f3b8990bcf0e412c932d}{mqttClientChangeState}(context, 
+      \hyperlink{mqtt__client_8h_a4962cf68fc8b67cdc2fdd8d5be59ff00adf1e9ea5fb931a6b0fac4c40b39064ce}{MQTT\_CLIENT\_STATE\_SENDING\_PACKET});
+521    \}
+522 
+523    \textcolor{comment}{//Return status code}
+524    \textcolor{keywordflow}{return} error;
+525 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{mqtt__client__packet_8c_afb57cebac3de3cf9e1626b1f7f48fd80}\label{mqtt__client__packet_8c_afb57cebac3de3cf9e1626b1f7f48fd80}} 
+\index{mqtt\+\_\+client\+\_\+packet.\+c@{mqtt\+\_\+client\+\_\+packet.\+c}!mqtt\+Client\+Process\+Pub\+Rel@{mqtt\+Client\+Process\+Pub\+Rel}}
+\index{mqtt\+Client\+Process\+Pub\+Rel@{mqtt\+Client\+Process\+Pub\+Rel}!mqtt\+\_\+client\+\_\+packet.\+c@{mqtt\+\_\+client\+\_\+packet.\+c}}
+\subsubsection{\texorpdfstring{mqtt\+Client\+Process\+Pub\+Rel()}{mqttClientProcessPubRel()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} mqtt\+Client\+Process\+Pub\+Rel (\begin{DoxyParamCaption}\item[{\hyperlink{mqtt__client_8h_ac90ac46c748d19a3d358acc142237f2e}{Mqtt\+Client\+Context} $\ast$}]{context,  }\item[{\hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t}}]{dup,  }\item[{\hyperlink{mqtt__common_8h_a79ec1e304b7f2ed51b12f489f642f0bb}{Mqtt\+Qos\+Level}}]{qos,  }\item[{\hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t}}]{retain,  }\item[{size\+\_\+t}]{remaining\+Len }\end{DoxyParamCaption})}
+
+
+
+Process incoming P\+U\+B\+R\+EL packet. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the M\+Q\+TT client context \\
+\hline
+\mbox{\tt in}  & {\em dup} & D\+UP flag from the fixed header \\
+\hline
+\mbox{\tt in}  & {\em qos} & QoS field from the fixed header \\
+\hline
+\mbox{\tt in}  & {\em retain} & R\+E\+T\+A\+IN flag from the fixed header \\
+\hline
+\mbox{\tt in}  & {\em remaining\+Len} & Length of the variable header and the payload \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 537 of file mqtt\+\_\+client\+\_\+packet.\+c.
+
+
+\begin{DoxyCode}
+539 \{
+540    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+541    \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t} packetId;
+542 
+543    \textcolor{comment}{//If invalid flags are received, the receiver must close the network connection}
+544    \textcolor{keywordflow}{if}(\hyperlink{mqtt__common_8h_a4e198deb57c49dad652a61d21ad478e6}{dup} != \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE} && \hyperlink{mqtt__common_8h_a65ee2b4b16f25052c441ff9959dcc7e7}{qos} != \hyperlink{mqtt__common_8h_a79ec1e304b7f2ed51b12f489f642f0bbab6aacd476a4dc16c4d8820fb7a9ca3ac}{MQTT\_QOS\_LEVEL\_1} && 
+      \hyperlink{mqtt__common_8h_ae25d47ab22bd975ad97012eddb6bbfce}{retain} != \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE})
+545       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caccf6070ae61f26a48b523757a3168ad2}{ERROR\_INVALID\_PACKET};
+546 
+547    \textcolor{comment}{//The variable header contains the same Packet Identifier as the PUBREC}
+548    \textcolor{comment}{//packet that is being acknowledged}
+549    error = \hyperlink{mqtt__client__misc_8c_aad98e4b63b2676bc9b0db9b093c50792}{mqttDeserializeShort}(context->packet, context->packetLen,
+550       &context->packetPos, &packetId);
+551 
+552    \textcolor{comment}{//Failed to deserialize Packet Identifier field?}
+553    \textcolor{keywordflow}{if}(error)
+554       \textcolor{keywordflow}{return} error;
+555 
+556    \textcolor{comment}{//Any registered callback?}
+557    \textcolor{keywordflow}{if}(context->callbacks.pubRelCallback != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+558    \{
+559       \textcolor{comment}{//Invoke user callback function}
+560       context->callbacks.pubRelCallback(context, packetId);
+561    \}
+562 
+563    \textcolor{comment}{//A PUBCOMP packet is the response to a PUBREL packet. It is the fourth and}
+564    \textcolor{comment}{//final packet of the QoS 2 protocol exchange}
+565    error = \hyperlink{mqtt__client__packet_8c_aebd217333ea7a832669196410ab3d136}{mqttClientFormatPubComp}(context, packetId);
+566 
+567    \textcolor{comment}{//Check status code}
+568    \textcolor{keywordflow}{if}(!error)
+569    \{
+570       \textcolor{comment}{//Debug message}
+571       \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"MQTT: Sending PUBCOMP packet (%"} \hyperlink{compiler__port_8h_a2b7b0557dc6cd786df02dafbb51f5292}{PRIuSIZE} \textcolor{stringliteral}{" bytes)...\(\backslash\)r\(\backslash\)n"}, context->
+      packetLen);
+572       \hyperlink{debug_8h_a1f71019169d85407d8827300ed43bdf0}{TRACE\_DEBUG\_ARRAY}(\textcolor{stringliteral}{"  "}, context->packet, context->packetLen);
+573 
+574       \textcolor{comment}{//Point to the beginning of the packet}
+575       context->packetPos = 0;
+576 
+577       \textcolor{comment}{//Send PUBCOMP packet}
+578       \hyperlink{mqtt__client__misc_8c_af0194dc61b64f3b8990bcf0e412c932d}{mqttClientChangeState}(context, 
+      \hyperlink{mqtt__client_8h_a4962cf68fc8b67cdc2fdd8d5be59ff00adf1e9ea5fb931a6b0fac4c40b39064ce}{MQTT\_CLIENT\_STATE\_SENDING\_PACKET});
+579    \}
+580 
+581    \textcolor{comment}{//Return status code}
+582    \textcolor{keywordflow}{return} error;
+583 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{mqtt__client__packet_8c_a1a8c728ccd0d4fc74d0aa7c27936be5b}\label{mqtt__client__packet_8c_a1a8c728ccd0d4fc74d0aa7c27936be5b}} 
+\index{mqtt\+\_\+client\+\_\+packet.\+c@{mqtt\+\_\+client\+\_\+packet.\+c}!mqtt\+Client\+Process\+Sub\+Ack@{mqtt\+Client\+Process\+Sub\+Ack}}
+\index{mqtt\+Client\+Process\+Sub\+Ack@{mqtt\+Client\+Process\+Sub\+Ack}!mqtt\+\_\+client\+\_\+packet.\+c@{mqtt\+\_\+client\+\_\+packet.\+c}}
+\subsubsection{\texorpdfstring{mqtt\+Client\+Process\+Sub\+Ack()}{mqttClientProcessSubAck()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} mqtt\+Client\+Process\+Sub\+Ack (\begin{DoxyParamCaption}\item[{\hyperlink{mqtt__client_8h_ac90ac46c748d19a3d358acc142237f2e}{Mqtt\+Client\+Context} $\ast$}]{context,  }\item[{\hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t}}]{dup,  }\item[{\hyperlink{mqtt__common_8h_a79ec1e304b7f2ed51b12f489f642f0bb}{Mqtt\+Qos\+Level}}]{qos,  }\item[{\hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t}}]{retain,  }\item[{size\+\_\+t}]{remaining\+Len }\end{DoxyParamCaption})}
+
+
+
+Process incoming S\+U\+B\+A\+CK packet. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the M\+Q\+TT client context \\
+\hline
+\mbox{\tt in}  & {\em dup} & D\+UP flag from the fixed header \\
+\hline
+\mbox{\tt in}  & {\em qos} & QoS field from the fixed header \\
+\hline
+\mbox{\tt in}  & {\em retain} & R\+E\+T\+A\+IN flag from the fixed header \\
+\hline
+\mbox{\tt in}  & {\em remaining\+Len} & Length of the variable header and the payload \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 639 of file mqtt\+\_\+client\+\_\+packet.\+c.
+
+
+\begin{DoxyCode}
+641 \{
+642    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+643    \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t} packetId;
+644 
+645    \textcolor{comment}{//If invalid flags are received, the receiver must close the network connection}
+646    \textcolor{keywordflow}{if}(\hyperlink{mqtt__common_8h_a4e198deb57c49dad652a61d21ad478e6}{dup} != \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE} && \hyperlink{mqtt__common_8h_a65ee2b4b16f25052c441ff9959dcc7e7}{qos} != \hyperlink{mqtt__common_8h_a79ec1e304b7f2ed51b12f489f642f0bbaf15c80f5281046b460b215cb4b1128e1}{MQTT\_QOS\_LEVEL\_0} && 
+      \hyperlink{mqtt__common_8h_ae25d47ab22bd975ad97012eddb6bbfce}{retain} != \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE})
+647       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caccf6070ae61f26a48b523757a3168ad2}{ERROR\_INVALID\_PACKET};
+648 
+649    \textcolor{comment}{//The variable header contains the Packet Identifier from the SUBSCRIBE}
+650    \textcolor{comment}{//packet that is being acknowledged}
+651    error = \hyperlink{mqtt__client__misc_8c_aad98e4b63b2676bc9b0db9b093c50792}{mqttDeserializeShort}(context->packet, context->packetLen,
+652       &context->packetPos, &packetId);
+653 
+654    \textcolor{comment}{//Failed to deserialize Packet Identifier field?}
+655    \textcolor{keywordflow}{if}(error)
+656       \textcolor{keywordflow}{return} error;
+657 
+658    \textcolor{comment}{//Any registered callback?}
+659    \textcolor{keywordflow}{if}(context->callbacks.subAckCallback != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+660    \{
+661       \textcolor{comment}{//Invoke user callback function}
+662       context->callbacks.subAckCallback(context, packetId);
+663    \}
+664 
+665    \textcolor{comment}{//Notify the application that a SUBACK packet has been received}
+666    \textcolor{keywordflow}{if}(context->packetType == \hyperlink{mqtt__common_8h_af26b642b7ef813ac269f70aa245cc796a303ad083499c8ae4a29dece8faea025e}{MQTT\_PACKET\_TYPE\_SUBSCRIBE} && context->packetId == 
+      packetId)
+667       \hyperlink{mqtt__client__misc_8c_af0194dc61b64f3b8990bcf0e412c932d}{mqttClientChangeState}(context, 
+      \hyperlink{mqtt__client_8h_a4962cf68fc8b67cdc2fdd8d5be59ff00a1eab5c88ae40381b12268b6d0b37fffe}{MQTT\_CLIENT\_STATE\_PACKET\_RECEIVED});
+668 
+669    \textcolor{comment}{//Successful processing}
+670    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+671 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{mqtt__client__packet_8c_a5ed80bbfc09e8bb961afcf0e1258f138}\label{mqtt__client__packet_8c_a5ed80bbfc09e8bb961afcf0e1258f138}} 
+\index{mqtt\+\_\+client\+\_\+packet.\+c@{mqtt\+\_\+client\+\_\+packet.\+c}!mqtt\+Client\+Process\+Unsub\+Ack@{mqtt\+Client\+Process\+Unsub\+Ack}}
+\index{mqtt\+Client\+Process\+Unsub\+Ack@{mqtt\+Client\+Process\+Unsub\+Ack}!mqtt\+\_\+client\+\_\+packet.\+c@{mqtt\+\_\+client\+\_\+packet.\+c}}
+\subsubsection{\texorpdfstring{mqtt\+Client\+Process\+Unsub\+Ack()}{mqttClientProcessUnsubAck()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} mqtt\+Client\+Process\+Unsub\+Ack (\begin{DoxyParamCaption}\item[{\hyperlink{mqtt__client_8h_ac90ac46c748d19a3d358acc142237f2e}{Mqtt\+Client\+Context} $\ast$}]{context,  }\item[{\hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t}}]{dup,  }\item[{\hyperlink{mqtt__common_8h_a79ec1e304b7f2ed51b12f489f642f0bb}{Mqtt\+Qos\+Level}}]{qos,  }\item[{\hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t}}]{retain,  }\item[{size\+\_\+t}]{remaining\+Len }\end{DoxyParamCaption})}
+
+
+
+Process incoming U\+N\+S\+U\+B\+A\+CK packet. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the M\+Q\+TT client context \\
+\hline
+\mbox{\tt in}  & {\em dup} & D\+UP flag from the fixed header \\
+\hline
+\mbox{\tt in}  & {\em qos} & QoS field from the fixed header \\
+\hline
+\mbox{\tt in}  & {\em retain} & R\+E\+T\+A\+IN flag from the fixed header \\
+\hline
+\mbox{\tt in}  & {\em remaining\+Len} & Length of the variable header and the payload \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 683 of file mqtt\+\_\+client\+\_\+packet.\+c.
+
+
+\begin{DoxyCode}
+685 \{
+686    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+687    \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t} packetId;
+688 
+689    \textcolor{comment}{//If invalid flags are received, the receiver must close the network connection}
+690    \textcolor{keywordflow}{if}(\hyperlink{mqtt__common_8h_a4e198deb57c49dad652a61d21ad478e6}{dup} != \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE} && \hyperlink{mqtt__common_8h_a65ee2b4b16f25052c441ff9959dcc7e7}{qos} != \hyperlink{mqtt__common_8h_a79ec1e304b7f2ed51b12f489f642f0bbaf15c80f5281046b460b215cb4b1128e1}{MQTT\_QOS\_LEVEL\_0} && 
+      \hyperlink{mqtt__common_8h_ae25d47ab22bd975ad97012eddb6bbfce}{retain} != \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE})
+691       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caccf6070ae61f26a48b523757a3168ad2}{ERROR\_INVALID\_PACKET};
+692 
+693    \textcolor{comment}{//The variable header contains the Packet Identifier from the UNSUBSCRIBE}
+694    \textcolor{comment}{//packet that is being acknowledged}
+695    error = \hyperlink{mqtt__client__misc_8c_aad98e4b63b2676bc9b0db9b093c50792}{mqttDeserializeShort}(context->packet, context->packetLen,
+696       &context->packetPos, &packetId);
+697 
+698    \textcolor{comment}{//Failed to deserialize Packet Identifier field?}
+699    \textcolor{keywordflow}{if}(error)
+700       \textcolor{keywordflow}{return} error;
+701 
+702    \textcolor{comment}{//Any registered callback?}
+703    \textcolor{keywordflow}{if}(context->callbacks.unsubAckCallback != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+704    \{
+705       \textcolor{comment}{//Invoke user callback function}
+706       context->callbacks.unsubAckCallback(context, packetId);
+707    \}
+708 
+709    \textcolor{comment}{//Notify the application that an UNSUBACK packet has been received}
+710    \textcolor{keywordflow}{if}(context->packetType == \hyperlink{mqtt__common_8h_af26b642b7ef813ac269f70aa245cc796a38efb8ca1a2d274c3e9210abb69dd5ae}{MQTT\_PACKET\_TYPE\_UNSUBSCRIBE} && context->packetId 
+      == packetId)
+711       \hyperlink{mqtt__client__misc_8c_af0194dc61b64f3b8990bcf0e412c932d}{mqttClientChangeState}(context, 
+      \hyperlink{mqtt__client_8h_a4962cf68fc8b67cdc2fdd8d5be59ff00a1eab5c88ae40381b12268b6d0b37fffe}{MQTT\_CLIENT\_STATE\_PACKET\_RECEIVED});
+712 
+713    \textcolor{comment}{//Successful processing}
+714    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+715 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{mqtt__client__packet_8c_af4078e92d28f721d3bcbab8ab50eef61}\label{mqtt__client__packet_8c_af4078e92d28f721d3bcbab8ab50eef61}} 
+\index{mqtt\+\_\+client\+\_\+packet.\+c@{mqtt\+\_\+client\+\_\+packet.\+c}!mqtt\+Client\+Receive\+Packet@{mqtt\+Client\+Receive\+Packet}}
+\index{mqtt\+Client\+Receive\+Packet@{mqtt\+Client\+Receive\+Packet}!mqtt\+\_\+client\+\_\+packet.\+c@{mqtt\+\_\+client\+\_\+packet.\+c}}
+\subsubsection{\texorpdfstring{mqtt\+Client\+Receive\+Packet()}{mqttClientReceivePacket()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} mqtt\+Client\+Receive\+Packet (\begin{DoxyParamCaption}\item[{\hyperlink{mqtt__client_8h_ac90ac46c748d19a3d358acc142237f2e}{Mqtt\+Client\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Receive M\+Q\+TT packet. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the M\+Q\+TT client context \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 73 of file mqtt\+\_\+client\+\_\+packet.\+c.
+
+
+\begin{DoxyCode}
+74 \{
+75    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+76    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+77    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value};
+78 
+79    \textcolor{comment}{//Initialize status code}
+80    error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+81 
+82    \textcolor{comment}{//Receive incoming packet}
+83    \textcolor{keywordflow}{while}(1)
+84    \{
+85       \textcolor{comment}{//Packet header is being received?}
+86       \textcolor{keywordflow}{if}(context->packetLen == 0)
+87       \{
+88          \textcolor{comment}{//Read a single byte}
+89          error = \hyperlink{mqtt__client__transport_8c_a37a762b6d95ddaa2c0ad439489b93832}{mqttClientReceiveData}(context, &value, \textcolor{keyword}{sizeof}(
+      \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t}), &n, 0);
+90 
+91          \textcolor{comment}{//Any data received?}
+92          \textcolor{keywordflow}{if}(!error)
+93          \{
+94             \textcolor{comment}{//Save the current byte}
+95             context->packet[context->packetPos] = \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value};
+96 
+97             \textcolor{comment}{//The Remaining Length is encoded using a variable length encoding scheme}
+98             \textcolor{keywordflow}{if}(context->packetPos > 0)
+99             \{
+100                \textcolor{comment}{//The most significant bit is used to indicate that there are}
+101                \textcolor{comment}{//following bytes in the representation}
+102                \textcolor{keywordflow}{if}(value & 0x80)
+103                \{
+104                   \textcolor{comment}{//Applications can send control packets of size up to 256 MB}
+105                   \textcolor{keywordflow}{if}(context->packetPos < 4)
+106                   \{
+107                      \textcolor{comment}{//The least significant seven bits of each byte encode the data}
+108                      context->remainingLen |= (value & 0x7F) << (7 * (context->packetPos - 1));
+109                   \}
+110                   \textcolor{keywordflow}{else}
+111                   \{
+112                      \textcolor{comment}{//Report an error}
+113                      error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca92e7b26953f11d1bc4f4526fad39aed0}{ERROR\_INVALID\_SYNTAX};
+114                   \}
+115                \}
+116                \textcolor{keywordflow}{else}
+117                \{
+118                   \textcolor{comment}{//The least significant seven bits of each byte encode the data}
+119                   context->remainingLen |= value << (7 * (context->packetPos - 1));
+120                   \textcolor{comment}{//Calculate the length of the control packet}
+121                   context->packetLen = context->packetPos + 1 + context->remainingLen;
+122 
+123                   \textcolor{comment}{//Sanity check}
+124                   \textcolor{keywordflow}{if}(context->packetLen > \hyperlink{mqtt__client_8h_a37c50db66771a2d524105033ca66ee7c}{MQTT\_CLIENT\_BUFFER\_SIZE})
+125                      error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cae5c014519c3ac2540447887ddca1bd28}{ERROR\_INVALID\_LENGTH};
+126                \}
+127             \}
+128 
+129             \textcolor{comment}{//Advance data pointer}
+130             context->packetPos++;
+131          \}
+132       \}
+133       \textcolor{comment}{//Variable header or payload is being received?}
+134       \textcolor{keywordflow}{else}
+135       \{
+136          \textcolor{comment}{//Any remaining data?}
+137          \textcolor{keywordflow}{if}(context->packetPos < context->packetLen)
+138          \{
+139             \textcolor{comment}{//Read more data}
+140             error = \hyperlink{mqtt__client__transport_8c_a37a762b6d95ddaa2c0ad439489b93832}{mqttClientReceiveData}(context, context->packet + context->
+      packetPos,
+141                context->packetLen - context->packetPos, &n, 0);
+142 
+143             \textcolor{comment}{//Advance data pointer}
+144             context->packetPos += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+145          \}
+146          \textcolor{keywordflow}{else}
+147          \{
+148             \textcolor{comment}{//The packet has been successfully received}
+149             \textcolor{keywordflow}{break};
+150          \}
+151       \}
+152 
+153       \textcolor{comment}{//Any error to report?}
+154       \textcolor{keywordflow}{if}(error)
+155          \textcolor{keywordflow}{break};
+156    \}
+157 
+158    \textcolor{comment}{//Return status code}
+159    \textcolor{keywordflow}{return} error;
+160 \}
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{mqtt__client__packet_8c_a6816ecc431201511c2b70ddc4f577945}\label{mqtt__client__packet_8c_a6816ecc431201511c2b70ddc4f577945}} 
+\index{mqtt\+\_\+client\+\_\+packet.\+c@{mqtt\+\_\+client\+\_\+packet.\+c}!packet\+Label@{packet\+Label}}
+\index{packet\+Label@{packet\+Label}!mqtt\+\_\+client\+\_\+packet.\+c@{mqtt\+\_\+client\+\_\+packet.\+c}}
+\subsubsection{\texorpdfstring{packet\+Label}{packetLabel}}
+{\footnotesize\ttfamily const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t}$\ast$ packet\+Label\mbox{[}16\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=
+\{
+   \textcolor{stringliteral}{"Reserved"},    
+   \textcolor{stringliteral}{"CONNECT"},     
+   \textcolor{stringliteral}{"CONNACK"},     
+   \textcolor{stringliteral}{"PUBLISH"},     
+   \textcolor{stringliteral}{"PUBACK"},      
+   \textcolor{stringliteral}{"PUBREC"},      
+   \textcolor{stringliteral}{"PUBREL"},      
+   \textcolor{stringliteral}{"PUBCOMP"},     
+   \textcolor{stringliteral}{"SUBSCRIBE"},   
+   \textcolor{stringliteral}{"SUBACK"},      
+   \textcolor{stringliteral}{"UNSUBSCRIBE"}, 
+   \textcolor{stringliteral}{"UNSUBACK"},    
+   \textcolor{stringliteral}{"PINGREQ"},     
+   \textcolor{stringliteral}{"PINGRESP"},    
+   \textcolor{stringliteral}{"DISCONNECT"},  
+   \textcolor{stringliteral}{"Reserved"}     
+\}
+\end{DoxyCode}
+
+
+Definition at line 46 of file mqtt\+\_\+client\+\_\+packet.\+c.
+

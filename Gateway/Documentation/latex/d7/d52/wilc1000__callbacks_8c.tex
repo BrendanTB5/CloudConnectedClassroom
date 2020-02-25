@@ -1,0 +1,362 @@
+\hypertarget{wilc1000__callbacks_8c}{}\section{demo/microchip/pic32mz\+\_\+ef\+\_\+curiosity/wifi\+\_\+http\+\_\+server\+\_\+demo/src/wilc1000\+\_\+callbacks.c File Reference}
+\label{wilc1000__callbacks_8c}\index{demo/microchip/pic32mz\+\_\+ef\+\_\+curiosity/wifi\+\_\+http\+\_\+server\+\_\+demo/src/wilc1000\+\_\+callbacks.\+c@{demo/microchip/pic32mz\+\_\+ef\+\_\+curiosity/wifi\+\_\+http\+\_\+server\+\_\+demo/src/wilc1000\+\_\+callbacks.\+c}}
+
+
+W\+I\+L\+C1000 user callbacks.  
+
+
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}driver/include/m2m\+\_\+wifi.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}os/include/m2m\+\_\+wifi\+\_\+ex.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}debug.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}node\+Types.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{wilc1000__callbacks_8c_aa05cd6027412d91b07ec1e383332a00e}{A\+P\+P\+\_\+\+W\+I\+F\+I\+\_\+\+A\+P\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}~\hyperlink{os__port_8h_abd5c8ab57c190a6522ccdbf0ed7577da}{D\+I\+S\+A\+B\+L\+ED}
+\item 
+\#define \hyperlink{wilc1000__callbacks_8c_ac2c8ad400d2a1dcab785712e5316f5f2}{A\+P\+P\+\_\+\+W\+I\+F\+I\+\_\+\+A\+P\+\_\+\+S\+S\+ID}~\char`\"{}T\+E\+S\+T\+\_\+\+W\+I\+L\+C1000\+\_\+\+AP\char`\"{}
+\item 
+\#define \hyperlink{wilc1000__callbacks_8c_a3357146765d89577111e124c952e982c}{A\+P\+P\+\_\+\+W\+I\+F\+I\+\_\+\+A\+P\+\_\+\+S\+E\+C\+U\+R\+I\+TY}~\hyperlink{group__WlanEnums_ggaa232a09c953ec8200c13774f94107b05a0bb64825e9635113bbab91934b214780}{M2\+M\+\_\+\+W\+I\+F\+I\+\_\+\+S\+E\+C\+\_\+\+W\+EP}
+\item 
+\#define \hyperlink{wilc1000__callbacks_8c_a6b585d330d8f82987ebddda402b28230}{A\+P\+P\+\_\+\+W\+I\+F\+I\+\_\+\+A\+P\+\_\+\+K\+EY}~\char`\"{}1122334455\char`\"{}
+\item 
+\#define \hyperlink{wilc1000__callbacks_8c_a957b113e7d619e8d42412d84ba8ace70}{A\+P\+P\+\_\+\+W\+I\+F\+I\+\_\+\+A\+P\+\_\+\+C\+H\+A\+N\+N\+EL}~\hyperlink{group__WlanEnums_gga2a91dd671e2672dba1a7ed45230f3a99a8517af2d89289a385bb223c31bc40aef}{M2\+M\+\_\+\+W\+I\+F\+I\+\_\+\+C\+H\+\_\+6}
+\item 
+\#define \hyperlink{wilc1000__callbacks_8c_ab0b7fbbbd470cd4a1b375b58eee989e0}{A\+P\+P\+\_\+\+W\+I\+F\+I\+\_\+\+S\+T\+A\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}~\hyperlink{os__port_8h_a73c228f87e038e8295ee8ea8eceaa5ac}{E\+N\+A\+B\+L\+ED}
+\item 
+\#define \hyperlink{wilc1000__callbacks_8c_a7f99a4f689259b1994b9e78542852b76}{A\+P\+P\+\_\+\+W\+I\+F\+I\+\_\+\+S\+T\+A\+\_\+\+S\+S\+ID}~\char`\"{}microchip\char`\"{}
+\item 
+\#define \hyperlink{wilc1000__callbacks_8c_a482ca3d42e58e30c18b13619a605d979}{A\+P\+P\+\_\+\+W\+I\+F\+I\+\_\+\+S\+T\+A\+\_\+\+S\+E\+C\+U\+R\+I\+TY}~\hyperlink{group__WlanEnums_ggaa232a09c953ec8200c13774f94107b05a951d0504fc8e173e60df8ee871f16697}{M2\+M\+\_\+\+W\+I\+F\+I\+\_\+\+S\+E\+C\+\_\+\+W\+P\+A\+\_\+\+P\+SK}
+\item 
+\#define \hyperlink{wilc1000__callbacks_8c_a05a66ed07c58ca79188d21e4ad487374}{A\+P\+P\+\_\+\+W\+I\+F\+I\+\_\+\+S\+T\+A\+\_\+\+K\+EY}~\char`\"{}microchip\char`\"{}
+\item 
+\#define \hyperlink{wilc1000__callbacks_8c_a5e9cbd684236116e8a48b73031e67568}{A\+P\+P\+\_\+\+W\+I\+F\+I\+\_\+\+S\+T\+A\+\_\+\+C\+H\+A\+N\+N\+EL}~\hyperlink{group__WlanEnums_gga2a91dd671e2672dba1a7ed45230f3a99a9ab262cc4f83b59a0710ffb80134c637}{M2\+M\+\_\+\+W\+I\+F\+I\+\_\+\+C\+H\+\_\+\+A\+LL}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{wilc1000__callbacks_8c_a5ba1d2c98b64085f489595f21d51ccc7}{wilc1000\+Connect} (void)
+\begin{DoxyCompactList}\small\item\em Connect to Wi-\/\+Fi network (S\+TA mode) \end{DoxyCompactList}\item 
+void \hyperlink{wilc1000__callbacks_8c_a385b06d89963f29c0ce04ed8cb443b5c}{wilc100\+Connect\+Logic} (void)
+\begin{DoxyCompactList}\small\item\em Handles the connection logic for the Node communication routine. \end{DoxyCompactList}\item 
+void \hyperlink{wilc1000__callbacks_8c_a14ded0de78471c0d24a9ec31ac2ad6ba}{wilc1000\+Event\+Hook} (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} \hyperlink{mqtt__sn__common_8h_a9d7facd71a8c8355a77006f5a6dcd420}{msg\+Type}, void $\ast$msg)
+\begin{DoxyCompactList}\small\item\em Callback function that processes Wi-\/\+Fi event notifications. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{wilc1000__callbacks_8c_a67e75d0fbfd56e4680dcb57b27127faa}{A\+P\+Connected} = false
+\item 
+int \hyperlink{wilc1000__callbacks_8c_a0c94d6a5c5a9b3b656ab5d5bf79bd24c}{num\+Times\+Attempted} = 0
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+W\+I\+L\+C1000 user callbacks. 
+
+\hypertarget{pic32mz__ef__curiosity_8h_License}{}\subsection{License}\label{pic32mz__ef__curiosity_8h_License}
+S\+P\+D\+X-\/\+License-\/\+Identifier\+: G\+P\+L-\/2.\+0-\/or-\/later
+
+Copyright (C) 2010-\/2019 Oryx Embedded S\+A\+RL. All rights reserved.
+
+This program is free software; you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+
+You should have received a copy of the G\+NU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-\/1301, U\+SA.
+
+\begin{DoxyAuthor}{Author}
+Oryx Embedded S\+A\+RL (www.\+oryx-\/embedded.\+com) and Brendan Mulholland 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+9.\+4 
+\end{DoxyVersion}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{wilc1000__callbacks_8c_a957b113e7d619e8d42412d84ba8ace70}\label{wilc1000__callbacks_8c_a957b113e7d619e8d42412d84ba8ace70}} 
+\index{wilc1000\+\_\+callbacks.\+c@{wilc1000\+\_\+callbacks.\+c}!A\+P\+P\+\_\+\+W\+I\+F\+I\+\_\+\+A\+P\+\_\+\+C\+H\+A\+N\+N\+EL@{A\+P\+P\+\_\+\+W\+I\+F\+I\+\_\+\+A\+P\+\_\+\+C\+H\+A\+N\+N\+EL}}
+\index{A\+P\+P\+\_\+\+W\+I\+F\+I\+\_\+\+A\+P\+\_\+\+C\+H\+A\+N\+N\+EL@{A\+P\+P\+\_\+\+W\+I\+F\+I\+\_\+\+A\+P\+\_\+\+C\+H\+A\+N\+N\+EL}!wilc1000\+\_\+callbacks.\+c@{wilc1000\+\_\+callbacks.\+c}}
+\subsubsection{\texorpdfstring{A\+P\+P\+\_\+\+W\+I\+F\+I\+\_\+\+A\+P\+\_\+\+C\+H\+A\+N\+N\+EL}{APP\_WIFI\_AP\_CHANNEL}}
+{\footnotesize\ttfamily \#define A\+P\+P\+\_\+\+W\+I\+F\+I\+\_\+\+A\+P\+\_\+\+C\+H\+A\+N\+N\+EL~\hyperlink{group__WlanEnums_gga2a91dd671e2672dba1a7ed45230f3a99a8517af2d89289a385bb223c31bc40aef}{M2\+M\+\_\+\+W\+I\+F\+I\+\_\+\+C\+H\+\_\+6}}
+
+
+
+Definition at line 42 of file wilc1000\+\_\+callbacks.\+c.
+
+\mbox{\Hypertarget{wilc1000__callbacks_8c_aa05cd6027412d91b07ec1e383332a00e}\label{wilc1000__callbacks_8c_aa05cd6027412d91b07ec1e383332a00e}} 
+\index{wilc1000\+\_\+callbacks.\+c@{wilc1000\+\_\+callbacks.\+c}!A\+P\+P\+\_\+\+W\+I\+F\+I\+\_\+\+A\+P\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE@{A\+P\+P\+\_\+\+W\+I\+F\+I\+\_\+\+A\+P\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}}
+\index{A\+P\+P\+\_\+\+W\+I\+F\+I\+\_\+\+A\+P\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE@{A\+P\+P\+\_\+\+W\+I\+F\+I\+\_\+\+A\+P\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}!wilc1000\+\_\+callbacks.\+c@{wilc1000\+\_\+callbacks.\+c}}
+\subsubsection{\texorpdfstring{A\+P\+P\+\_\+\+W\+I\+F\+I\+\_\+\+A\+P\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}{APP\_WIFI\_AP\_INTERFACE}}
+{\footnotesize\ttfamily \#define A\+P\+P\+\_\+\+W\+I\+F\+I\+\_\+\+A\+P\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE~\hyperlink{os__port_8h_abd5c8ab57c190a6522ccdbf0ed7577da}{D\+I\+S\+A\+B\+L\+ED}}
+
+
+
+Definition at line 38 of file wilc1000\+\_\+callbacks.\+c.
+
+\mbox{\Hypertarget{wilc1000__callbacks_8c_a6b585d330d8f82987ebddda402b28230}\label{wilc1000__callbacks_8c_a6b585d330d8f82987ebddda402b28230}} 
+\index{wilc1000\+\_\+callbacks.\+c@{wilc1000\+\_\+callbacks.\+c}!A\+P\+P\+\_\+\+W\+I\+F\+I\+\_\+\+A\+P\+\_\+\+K\+EY@{A\+P\+P\+\_\+\+W\+I\+F\+I\+\_\+\+A\+P\+\_\+\+K\+EY}}
+\index{A\+P\+P\+\_\+\+W\+I\+F\+I\+\_\+\+A\+P\+\_\+\+K\+EY@{A\+P\+P\+\_\+\+W\+I\+F\+I\+\_\+\+A\+P\+\_\+\+K\+EY}!wilc1000\+\_\+callbacks.\+c@{wilc1000\+\_\+callbacks.\+c}}
+\subsubsection{\texorpdfstring{A\+P\+P\+\_\+\+W\+I\+F\+I\+\_\+\+A\+P\+\_\+\+K\+EY}{APP\_WIFI\_AP\_KEY}}
+{\footnotesize\ttfamily \#define A\+P\+P\+\_\+\+W\+I\+F\+I\+\_\+\+A\+P\+\_\+\+K\+EY~\char`\"{}1122334455\char`\"{}}
+
+
+
+Definition at line 41 of file wilc1000\+\_\+callbacks.\+c.
+
+\mbox{\Hypertarget{wilc1000__callbacks_8c_a3357146765d89577111e124c952e982c}\label{wilc1000__callbacks_8c_a3357146765d89577111e124c952e982c}} 
+\index{wilc1000\+\_\+callbacks.\+c@{wilc1000\+\_\+callbacks.\+c}!A\+P\+P\+\_\+\+W\+I\+F\+I\+\_\+\+A\+P\+\_\+\+S\+E\+C\+U\+R\+I\+TY@{A\+P\+P\+\_\+\+W\+I\+F\+I\+\_\+\+A\+P\+\_\+\+S\+E\+C\+U\+R\+I\+TY}}
+\index{A\+P\+P\+\_\+\+W\+I\+F\+I\+\_\+\+A\+P\+\_\+\+S\+E\+C\+U\+R\+I\+TY@{A\+P\+P\+\_\+\+W\+I\+F\+I\+\_\+\+A\+P\+\_\+\+S\+E\+C\+U\+R\+I\+TY}!wilc1000\+\_\+callbacks.\+c@{wilc1000\+\_\+callbacks.\+c}}
+\subsubsection{\texorpdfstring{A\+P\+P\+\_\+\+W\+I\+F\+I\+\_\+\+A\+P\+\_\+\+S\+E\+C\+U\+R\+I\+TY}{APP\_WIFI\_AP\_SECURITY}}
+{\footnotesize\ttfamily \#define A\+P\+P\+\_\+\+W\+I\+F\+I\+\_\+\+A\+P\+\_\+\+S\+E\+C\+U\+R\+I\+TY~\hyperlink{group__WlanEnums_ggaa232a09c953ec8200c13774f94107b05a0bb64825e9635113bbab91934b214780}{M2\+M\+\_\+\+W\+I\+F\+I\+\_\+\+S\+E\+C\+\_\+\+W\+EP}}
+
+
+
+Definition at line 40 of file wilc1000\+\_\+callbacks.\+c.
+
+\mbox{\Hypertarget{wilc1000__callbacks_8c_ac2c8ad400d2a1dcab785712e5316f5f2}\label{wilc1000__callbacks_8c_ac2c8ad400d2a1dcab785712e5316f5f2}} 
+\index{wilc1000\+\_\+callbacks.\+c@{wilc1000\+\_\+callbacks.\+c}!A\+P\+P\+\_\+\+W\+I\+F\+I\+\_\+\+A\+P\+\_\+\+S\+S\+ID@{A\+P\+P\+\_\+\+W\+I\+F\+I\+\_\+\+A\+P\+\_\+\+S\+S\+ID}}
+\index{A\+P\+P\+\_\+\+W\+I\+F\+I\+\_\+\+A\+P\+\_\+\+S\+S\+ID@{A\+P\+P\+\_\+\+W\+I\+F\+I\+\_\+\+A\+P\+\_\+\+S\+S\+ID}!wilc1000\+\_\+callbacks.\+c@{wilc1000\+\_\+callbacks.\+c}}
+\subsubsection{\texorpdfstring{A\+P\+P\+\_\+\+W\+I\+F\+I\+\_\+\+A\+P\+\_\+\+S\+S\+ID}{APP\_WIFI\_AP\_SSID}}
+{\footnotesize\ttfamily \#define A\+P\+P\+\_\+\+W\+I\+F\+I\+\_\+\+A\+P\+\_\+\+S\+S\+ID~\char`\"{}T\+E\+S\+T\+\_\+\+W\+I\+L\+C1000\+\_\+\+AP\char`\"{}}
+
+
+
+Definition at line 39 of file wilc1000\+\_\+callbacks.\+c.
+
+\mbox{\Hypertarget{wilc1000__callbacks_8c_a5e9cbd684236116e8a48b73031e67568}\label{wilc1000__callbacks_8c_a5e9cbd684236116e8a48b73031e67568}} 
+\index{wilc1000\+\_\+callbacks.\+c@{wilc1000\+\_\+callbacks.\+c}!A\+P\+P\+\_\+\+W\+I\+F\+I\+\_\+\+S\+T\+A\+\_\+\+C\+H\+A\+N\+N\+EL@{A\+P\+P\+\_\+\+W\+I\+F\+I\+\_\+\+S\+T\+A\+\_\+\+C\+H\+A\+N\+N\+EL}}
+\index{A\+P\+P\+\_\+\+W\+I\+F\+I\+\_\+\+S\+T\+A\+\_\+\+C\+H\+A\+N\+N\+EL@{A\+P\+P\+\_\+\+W\+I\+F\+I\+\_\+\+S\+T\+A\+\_\+\+C\+H\+A\+N\+N\+EL}!wilc1000\+\_\+callbacks.\+c@{wilc1000\+\_\+callbacks.\+c}}
+\subsubsection{\texorpdfstring{A\+P\+P\+\_\+\+W\+I\+F\+I\+\_\+\+S\+T\+A\+\_\+\+C\+H\+A\+N\+N\+EL}{APP\_WIFI\_STA\_CHANNEL}}
+{\footnotesize\ttfamily \#define A\+P\+P\+\_\+\+W\+I\+F\+I\+\_\+\+S\+T\+A\+\_\+\+C\+H\+A\+N\+N\+EL~\hyperlink{group__WlanEnums_gga2a91dd671e2672dba1a7ed45230f3a99a9ab262cc4f83b59a0710ffb80134c637}{M2\+M\+\_\+\+W\+I\+F\+I\+\_\+\+C\+H\+\_\+\+A\+LL}}
+
+
+
+Definition at line 49 of file wilc1000\+\_\+callbacks.\+c.
+
+\mbox{\Hypertarget{wilc1000__callbacks_8c_ab0b7fbbbd470cd4a1b375b58eee989e0}\label{wilc1000__callbacks_8c_ab0b7fbbbd470cd4a1b375b58eee989e0}} 
+\index{wilc1000\+\_\+callbacks.\+c@{wilc1000\+\_\+callbacks.\+c}!A\+P\+P\+\_\+\+W\+I\+F\+I\+\_\+\+S\+T\+A\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE@{A\+P\+P\+\_\+\+W\+I\+F\+I\+\_\+\+S\+T\+A\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}}
+\index{A\+P\+P\+\_\+\+W\+I\+F\+I\+\_\+\+S\+T\+A\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE@{A\+P\+P\+\_\+\+W\+I\+F\+I\+\_\+\+S\+T\+A\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}!wilc1000\+\_\+callbacks.\+c@{wilc1000\+\_\+callbacks.\+c}}
+\subsubsection{\texorpdfstring{A\+P\+P\+\_\+\+W\+I\+F\+I\+\_\+\+S\+T\+A\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}{APP\_WIFI\_STA\_INTERFACE}}
+{\footnotesize\ttfamily \#define A\+P\+P\+\_\+\+W\+I\+F\+I\+\_\+\+S\+T\+A\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE~\hyperlink{os__port_8h_a73c228f87e038e8295ee8ea8eceaa5ac}{E\+N\+A\+B\+L\+ED}}
+
+
+
+Definition at line 45 of file wilc1000\+\_\+callbacks.\+c.
+
+\mbox{\Hypertarget{wilc1000__callbacks_8c_a05a66ed07c58ca79188d21e4ad487374}\label{wilc1000__callbacks_8c_a05a66ed07c58ca79188d21e4ad487374}} 
+\index{wilc1000\+\_\+callbacks.\+c@{wilc1000\+\_\+callbacks.\+c}!A\+P\+P\+\_\+\+W\+I\+F\+I\+\_\+\+S\+T\+A\+\_\+\+K\+EY@{A\+P\+P\+\_\+\+W\+I\+F\+I\+\_\+\+S\+T\+A\+\_\+\+K\+EY}}
+\index{A\+P\+P\+\_\+\+W\+I\+F\+I\+\_\+\+S\+T\+A\+\_\+\+K\+EY@{A\+P\+P\+\_\+\+W\+I\+F\+I\+\_\+\+S\+T\+A\+\_\+\+K\+EY}!wilc1000\+\_\+callbacks.\+c@{wilc1000\+\_\+callbacks.\+c}}
+\subsubsection{\texorpdfstring{A\+P\+P\+\_\+\+W\+I\+F\+I\+\_\+\+S\+T\+A\+\_\+\+K\+EY}{APP\_WIFI\_STA\_KEY}}
+{\footnotesize\ttfamily \#define A\+P\+P\+\_\+\+W\+I\+F\+I\+\_\+\+S\+T\+A\+\_\+\+K\+EY~\char`\"{}microchip\char`\"{}}
+
+
+
+Definition at line 48 of file wilc1000\+\_\+callbacks.\+c.
+
+\mbox{\Hypertarget{wilc1000__callbacks_8c_a482ca3d42e58e30c18b13619a605d979}\label{wilc1000__callbacks_8c_a482ca3d42e58e30c18b13619a605d979}} 
+\index{wilc1000\+\_\+callbacks.\+c@{wilc1000\+\_\+callbacks.\+c}!A\+P\+P\+\_\+\+W\+I\+F\+I\+\_\+\+S\+T\+A\+\_\+\+S\+E\+C\+U\+R\+I\+TY@{A\+P\+P\+\_\+\+W\+I\+F\+I\+\_\+\+S\+T\+A\+\_\+\+S\+E\+C\+U\+R\+I\+TY}}
+\index{A\+P\+P\+\_\+\+W\+I\+F\+I\+\_\+\+S\+T\+A\+\_\+\+S\+E\+C\+U\+R\+I\+TY@{A\+P\+P\+\_\+\+W\+I\+F\+I\+\_\+\+S\+T\+A\+\_\+\+S\+E\+C\+U\+R\+I\+TY}!wilc1000\+\_\+callbacks.\+c@{wilc1000\+\_\+callbacks.\+c}}
+\subsubsection{\texorpdfstring{A\+P\+P\+\_\+\+W\+I\+F\+I\+\_\+\+S\+T\+A\+\_\+\+S\+E\+C\+U\+R\+I\+TY}{APP\_WIFI\_STA\_SECURITY}}
+{\footnotesize\ttfamily \#define A\+P\+P\+\_\+\+W\+I\+F\+I\+\_\+\+S\+T\+A\+\_\+\+S\+E\+C\+U\+R\+I\+TY~\hyperlink{group__WlanEnums_ggaa232a09c953ec8200c13774f94107b05a951d0504fc8e173e60df8ee871f16697}{M2\+M\+\_\+\+W\+I\+F\+I\+\_\+\+S\+E\+C\+\_\+\+W\+P\+A\+\_\+\+P\+SK}}
+
+
+
+Definition at line 47 of file wilc1000\+\_\+callbacks.\+c.
+
+\mbox{\Hypertarget{wilc1000__callbacks_8c_a7f99a4f689259b1994b9e78542852b76}\label{wilc1000__callbacks_8c_a7f99a4f689259b1994b9e78542852b76}} 
+\index{wilc1000\+\_\+callbacks.\+c@{wilc1000\+\_\+callbacks.\+c}!A\+P\+P\+\_\+\+W\+I\+F\+I\+\_\+\+S\+T\+A\+\_\+\+S\+S\+ID@{A\+P\+P\+\_\+\+W\+I\+F\+I\+\_\+\+S\+T\+A\+\_\+\+S\+S\+ID}}
+\index{A\+P\+P\+\_\+\+W\+I\+F\+I\+\_\+\+S\+T\+A\+\_\+\+S\+S\+ID@{A\+P\+P\+\_\+\+W\+I\+F\+I\+\_\+\+S\+T\+A\+\_\+\+S\+S\+ID}!wilc1000\+\_\+callbacks.\+c@{wilc1000\+\_\+callbacks.\+c}}
+\subsubsection{\texorpdfstring{A\+P\+P\+\_\+\+W\+I\+F\+I\+\_\+\+S\+T\+A\+\_\+\+S\+S\+ID}{APP\_WIFI\_STA\_SSID}}
+{\footnotesize\ttfamily \#define A\+P\+P\+\_\+\+W\+I\+F\+I\+\_\+\+S\+T\+A\+\_\+\+S\+S\+ID~\char`\"{}microchip\char`\"{}}
+
+
+
+Definition at line 46 of file wilc1000\+\_\+callbacks.\+c.
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{wilc1000__callbacks_8c_a5ba1d2c98b64085f489595f21d51ccc7}\label{wilc1000__callbacks_8c_a5ba1d2c98b64085f489595f21d51ccc7}} 
+\index{wilc1000\+\_\+callbacks.\+c@{wilc1000\+\_\+callbacks.\+c}!wilc1000\+Connect@{wilc1000\+Connect}}
+\index{wilc1000\+Connect@{wilc1000\+Connect}!wilc1000\+\_\+callbacks.\+c@{wilc1000\+\_\+callbacks.\+c}}
+\subsubsection{\texorpdfstring{wilc1000\+Connect()}{wilc1000Connect()}}
+{\footnotesize\ttfamily void wilc1000\+Connect (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Connect to Wi-\/\+Fi network (S\+TA mode) 
+
+
+
+Definition at line 69 of file wilc1000\+\_\+callbacks.\+c.
+
+
+\begin{DoxyCode}
+69                            \{
+70 \textcolor{preprocessor}{#if (APP\_WIFI\_STA\_INTERFACE == ENABLED)}
+71     \hyperlink{stdint_8h_aef44329758059c91c76d334e8fc09700}{int8\_t} status;
+72 
+73     \textcolor{comment}{//while(!httpInitialized)\{}
+74     \textcolor{comment}{//  osDelayTask(200);}
+75     \textcolor{comment}{//\}}
+76 
+77 
+78     \textcolor{comment}{//Debug message}
+79     \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"WILC1000: Connecting to Wi-Fi network (%s), this is connection %d.\(\backslash\)r\(\backslash\)nPassword:%s
+      \(\backslash\)r\(\backslash\)n"}, \hyperlink{demo_2microchip_2pic32mz__ef__curiosity_2wifi__http__server__demo_2src_2main_8c_a96f59e17ee63ef2870b5ecca75a4527e}{devList}[\hyperlink{demo_2microchip_2pic32mz__ef__curiosity_2wifi__http__server__demo_2src_2main_8c_aae10d8edd94af5099550102ec5942632}{currentDevice}].node->SSID, currentDevice, 
+      \hyperlink{demo_2microchip_2pic32mz__ef__curiosity_2wifi__http__server__demo_2src_2main_8c_a96f59e17ee63ef2870b5ecca75a4527e}{devList}[currentDevice].\hyperlink{structdevice__list_ad0990a0ea9bbf15244aeff7af1d24de3}{node}->\hyperlink{structnode__t_a02df80f8b236ada854aa6040a7267cde}{Password});
+80 
+81 
+82     \textcolor{comment}{//Connect to the specified network (WPA/WPA2 personal)}
+83     status = \hyperlink{m2m__wifi__ex_8h_ade6a5b43af4c3a2adf411a99f9739356}{os\_m2m\_wifi\_connect}(\hyperlink{demo_2microchip_2pic32mz__ef__curiosity_2wifi__http__server__demo_2src_2main_8c_a96f59e17ee63ef2870b5ecca75a4527e}{devList}[\hyperlink{demo_2microchip_2pic32mz__ef__curiosity_2wifi__http__server__demo_2src_2main_8c_aae10d8edd94af5099550102ec5942632}{currentDevice}].node->SSID, 
+      strlen(\hyperlink{demo_2microchip_2pic32mz__ef__curiosity_2wifi__http__server__demo_2src_2main_8c_a96f59e17ee63ef2870b5ecca75a4527e}{devList}[currentDevice].node->SSID),
+84             \hyperlink{group__WlanEnums_ggaa232a09c953ec8200c13774f94107b05a951d0504fc8e173e60df8ee871f16697}{M2M\_WIFI\_SEC\_WPA\_PSK}, (\textcolor{keywordtype}{void} *) \hyperlink{demo_2microchip_2pic32mz__ef__curiosity_2wifi__http__server__demo_2src_2main_8c_a96f59e17ee63ef2870b5ecca75a4527e}{devList}[currentDevice].
+      \hyperlink{structdevice__list_ad0990a0ea9bbf15244aeff7af1d24de3}{node}->\hyperlink{structnode__t_a02df80f8b236ada854aa6040a7267cde}{Password}, \hyperlink{wilc1000__callbacks_8c_a5e9cbd684236116e8a48b73031e67568}{APP\_WIFI\_STA\_CHANNEL});
+85 
+86 
+87     \textcolor{comment}{//Debug message}
+88 
+89     \hyperlink{wilc1000__callbacks_8c_a0c94d6a5c5a9b3b656ab5d5bf79bd24c}{numTimesAttempted}++;
+90 
+91     \textcolor{comment}{//Delay required before sending a new command}
+92     \hyperlink{os__port__chibios_8c_a69608590db97c707277aebf15be010e5}{osDelayTask}(200);
+93 
+94     \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"  os\_m2m\_wifi\_connect = %d\(\backslash\)r\(\backslash\)n"}, status);
+95 
+96 \textcolor{preprocessor}{#endif}
+97 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{wilc1000__callbacks_8c_a14ded0de78471c0d24a9ec31ac2ad6ba}\label{wilc1000__callbacks_8c_a14ded0de78471c0d24a9ec31ac2ad6ba}} 
+\index{wilc1000\+\_\+callbacks.\+c@{wilc1000\+\_\+callbacks.\+c}!wilc1000\+Event\+Hook@{wilc1000\+Event\+Hook}}
+\index{wilc1000\+Event\+Hook@{wilc1000\+Event\+Hook}!wilc1000\+\_\+callbacks.\+c@{wilc1000\+\_\+callbacks.\+c}}
+\subsubsection{\texorpdfstring{wilc1000\+Event\+Hook()}{wilc1000EventHook()}}
+{\footnotesize\ttfamily void wilc1000\+Event\+Hook (\begin{DoxyParamCaption}\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}}]{msg\+Type,  }\item[{void $\ast$}]{msg }\end{DoxyParamCaption})}
+
+
+
+Callback function that processes Wi-\/\+Fi event notifications. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em msg\+Type} & Type of notification \\
+\hline
+\mbox{\tt in}  & {\em msg} & Pointer to the buffer containing the notification parameters \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 149 of file wilc1000\+\_\+callbacks.\+c.
+
+
+\begin{DoxyCode}
+149                                                    \{
+150     \hyperlink{structtstrM2mWifiStateChanged}{tstrM2mWifiStateChanged} *stateChangedMsg;
+151     \textcolor{comment}{//Debug message}
+152     \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"WILC1000: Wi-Fi event hook\(\backslash\)r\(\backslash\)n"});
+153 
+154     \textcolor{comment}{//Check message type}
+155     \textcolor{keywordflow}{if} (\hyperlink{dtls__misc_8h_a9d7facd71a8c8355a77006f5a6dcd420}{msgType} == \hyperlink{group__WlanEnums_gga57466b36df595c593e7ccc9892e14b20a71745d4c66d95eca1782fa6fa3ba0cac}{M2M\_WIFI\_RESP\_FIRMWARE\_STRTED}) \{
+156         \textcolor{comment}{//Connect to the specified Wi-Fi network (STA mode)}
+157         \hyperlink{wilc1000__callbacks_8c_a5ba1d2c98b64085f489595f21d51ccc7}{wilc1000Connect}();
+158     \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{dtls__misc_8h_a9d7facd71a8c8355a77006f5a6dcd420}{msgType} == \hyperlink{group__WlanEnums_gga064de09dec1d5e88ed8d075fa40f57deabb42b3025c56c51d915a1fa4abd2dbd0}{M2M\_WIFI\_RESP\_CON\_STATE\_CHANGED}) \{
+159         \textcolor{comment}{//Connection state}
+160         stateChangedMsg = (\hyperlink{structtstrM2mWifiStateChanged}{tstrM2mWifiStateChanged} *) msg;
+161 
+162         \textcolor{comment}{//STA interface?}
+163         \textcolor{keywordflow}{if} (stateChangedMsg->\hyperlink{structtstrM2mWifiStateChanged_a51cd59eb757ed24fcbc2dc7e3a0facfb}{u8IfcId} == \hyperlink{group__WlanEnums_gga21dc8518e48f99cdf9cf68eebcfcf982af1332c69b03c8077d76b6652e4b6b67d}{STATION\_INTERFACE}) \{
+164             \textcolor{comment}{//Check link state}
+165             \textcolor{keywordflow}{if} (stateChangedMsg->\hyperlink{structtstrM2mWifiStateChanged_a8cf6acc2d9640b20629c6b8383534dfa}{u8CurrState} == \hyperlink{group__WlanEnums_gga460c311f58f4c40c3d20eec9e99db586a9196649c19ee10e2168e08a5b4785938}{M2M\_WIFI\_CONNECTED}) \{
+166                 \hyperlink{wilc1000__callbacks_8c_a67e75d0fbfd56e4680dcb57b27127faa}{APConnected} = \textcolor{keyword}{true};
+167 
+168             \} \textcolor{keywordflow}{else} \{
+169                 \hyperlink{wilc1000__callbacks_8c_a385b06d89963f29c0ce04ed8cb443b5c}{wilc100ConnectLogic}();
+170             \}
+171         \}
+172     \}
+173 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{wilc1000__callbacks_8c_a385b06d89963f29c0ce04ed8cb443b5c}\label{wilc1000__callbacks_8c_a385b06d89963f29c0ce04ed8cb443b5c}} 
+\index{wilc1000\+\_\+callbacks.\+c@{wilc1000\+\_\+callbacks.\+c}!wilc100\+Connect\+Logic@{wilc100\+Connect\+Logic}}
+\index{wilc100\+Connect\+Logic@{wilc100\+Connect\+Logic}!wilc1000\+\_\+callbacks.\+c@{wilc1000\+\_\+callbacks.\+c}}
+\subsubsection{\texorpdfstring{wilc100\+Connect\+Logic()}{wilc100ConnectLogic()}}
+{\footnotesize\ttfamily void wilc100\+Connect\+Logic (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Handles the connection logic for the Node communication routine. 
+
+
+
+Definition at line 103 of file wilc1000\+\_\+callbacks.\+c.
+
+
+\begin{DoxyCode}
+103                                \{
+104     \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"WILC1000: Wi-Fi state change!!!\(\backslash\)r\(\backslash\)n"});
+105     \textcolor{keywordflow}{if} (\hyperlink{wilc1000__callbacks_8c_a67e75d0fbfd56e4680dcb57b27127faa}{APConnected} == \textcolor{keyword}{true}) \{
+106         \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"WILC1000: Disconnected From AP\(\backslash\)r\(\backslash\)n"});
+107 
+108         \hyperlink{demo_2microchip_2pic32mz__ef__curiosity_2wifi__http__server__demo_2src_2main_8c_aae10d8edd94af5099550102ec5942632}{currentDevice}++;
+109         \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"WILC1000: DEVICE VALID1?: %d\(\backslash\)r\(\backslash\)n"}, \hyperlink{demo_2microchip_2pic32mz__ef__curiosity_2wifi__http__server__demo_2src_2main_8c_a96f59e17ee63ef2870b5ecca75a4527e}{devList}[
+      \hyperlink{demo_2microchip_2pic32mz__ef__curiosity_2wifi__http__server__demo_2src_2main_8c_aae10d8edd94af5099550102ec5942632}{currentDevice}].valid);
+110 
+111         \textcolor{keywordflow}{if} (\hyperlink{demo_2microchip_2pic32mz__ef__curiosity_2wifi__http__server__demo_2src_2main_8c_aae10d8edd94af5099550102ec5942632}{currentDevice} >= \hyperlink{wilc1000__config_8h_ac220e42d6600ba117747554e6c39b4bc}{NUM\_CONNECTIONS} || !
+      \hyperlink{demo_2microchip_2pic32mz__ef__curiosity_2wifi__http__server__demo_2src_2main_8c_a96f59e17ee63ef2870b5ecca75a4527e}{devList}[\hyperlink{demo_2microchip_2pic32mz__ef__curiosity_2wifi__http__server__demo_2src_2main_8c_aae10d8edd94af5099550102ec5942632}{currentDevice}].valid) \{
+112             \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"WILC1000: Gone through the list of Connections\(\backslash\)r\(\backslash\)n"});
+113             \hyperlink{demo_2microchip_2pic32mz__ef__curiosity_2wifi__http__server__demo_2src_2main_8c_a3ea426a47b5d3f590bc884ec0bf5a3d2}{gatewayFinished} = \textcolor{keyword}{true};
+114             \hyperlink{wilc1000__callbacks_8c_a67e75d0fbfd56e4680dcb57b27127faa}{APConnected} = \textcolor{keyword}{false};
+115             \hyperlink{wilc1000__callbacks_8c_a0c94d6a5c5a9b3b656ab5d5bf79bd24c}{numTimesAttempted} = 0;
+116         \} \textcolor{keywordflow}{else} \{
+117             \hyperlink{wilc1000__callbacks_8c_a67e75d0fbfd56e4680dcb57b27127faa}{APConnected} = \textcolor{keyword}{false};
+118             \hyperlink{wilc1000__callbacks_8c_a0c94d6a5c5a9b3b656ab5d5bf79bd24c}{numTimesAttempted} = 0;
+119             \hyperlink{wilc1000__callbacks_8c_a5ba1d2c98b64085f489595f21d51ccc7}{wilc1000Connect}();
+120         \}
+121 
+122     \} \textcolor{keywordflow}{else} \{
+123         \textcolor{keywordflow}{if} (\hyperlink{wilc1000__callbacks_8c_a0c94d6a5c5a9b3b656ab5d5bf79bd24c}{numTimesAttempted} >= 10) \{
+124             \hyperlink{wilc1000__callbacks_8c_a0c94d6a5c5a9b3b656ab5d5bf79bd24c}{numTimesAttempted} = 0;
+125             \hyperlink{demo_2microchip_2pic32mz__ef__curiosity_2wifi__http__server__demo_2src_2main_8c_a1588145061ceca98ed6c6e1c749f432f}{failedDevice} = \hyperlink{demo_2microchip_2pic32mz__ef__curiosity_2wifi__http__server__demo_2src_2main_8c_aae10d8edd94af5099550102ec5942632}{currentDevice};
+126             \hyperlink{demo_2microchip_2pic32mz__ef__curiosity_2wifi__http__server__demo_2src_2main_8c_aae10d8edd94af5099550102ec5942632}{currentDevice}++;
+127             \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"WILC1000: DEVICE VALID2?: %d\(\backslash\)r\(\backslash\)n"}, \hyperlink{demo_2microchip_2pic32mz__ef__curiosity_2wifi__http__server__demo_2src_2main_8c_a96f59e17ee63ef2870b5ecca75a4527e}{devList}[
+      \hyperlink{demo_2microchip_2pic32mz__ef__curiosity_2wifi__http__server__demo_2src_2main_8c_aae10d8edd94af5099550102ec5942632}{currentDevice}].valid);
+128             
+129             \hyperlink{demo_2microchip_2pic32mz__ef__curiosity_2wifi__http__server__demo_2src_2main_8c_a581c4cff1f16915161f242e29c8378df}{nodeFailed} = \textcolor{keyword}{true};
+130             \textcolor{keywordflow}{if} (\hyperlink{demo_2microchip_2pic32mz__ef__curiosity_2wifi__http__server__demo_2src_2main_8c_aae10d8edd94af5099550102ec5942632}{currentDevice} >= \hyperlink{wilc1000__config_8h_ac220e42d6600ba117747554e6c39b4bc}{NUM\_CONNECTIONS} || !
+      \hyperlink{demo_2microchip_2pic32mz__ef__curiosity_2wifi__http__server__demo_2src_2main_8c_a96f59e17ee63ef2870b5ecca75a4527e}{devList}[\hyperlink{demo_2microchip_2pic32mz__ef__curiosity_2wifi__http__server__demo_2src_2main_8c_aae10d8edd94af5099550102ec5942632}{currentDevice}].valid) \{
+131                 \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"WILC1000: Gone through the list of Connections\(\backslash\)r\(\backslash\)n"});
+132                 \hyperlink{demo_2microchip_2pic32mz__ef__curiosity_2wifi__http__server__demo_2src_2main_8c_a3ea426a47b5d3f590bc884ec0bf5a3d2}{gatewayFinished} = \textcolor{keyword}{true};
+133             \} \textcolor{keywordflow}{else} \{
+134                 \hyperlink{wilc1000__callbacks_8c_a5ba1d2c98b64085f489595f21d51ccc7}{wilc1000Connect}();
+135             \}
+136         \} \textcolor{keywordflow}{else} \{
+137 
+138             \hyperlink{wilc1000__callbacks_8c_a5ba1d2c98b64085f489595f21d51ccc7}{wilc1000Connect}();
+139         \}
+140     \}
+141 \}
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{wilc1000__callbacks_8c_a67e75d0fbfd56e4680dcb57b27127faa}\label{wilc1000__callbacks_8c_a67e75d0fbfd56e4680dcb57b27127faa}} 
+\index{wilc1000\+\_\+callbacks.\+c@{wilc1000\+\_\+callbacks.\+c}!A\+P\+Connected@{A\+P\+Connected}}
+\index{A\+P\+Connected@{A\+P\+Connected}!wilc1000\+\_\+callbacks.\+c@{wilc1000\+\_\+callbacks.\+c}}
+\subsubsection{\texorpdfstring{A\+P\+Connected}{APConnected}}
+{\footnotesize\ttfamily bool A\+P\+Connected = false}
+
+
+
+Definition at line 59 of file wilc1000\+\_\+callbacks.\+c.
+
+\mbox{\Hypertarget{wilc1000__callbacks_8c_a0c94d6a5c5a9b3b656ab5d5bf79bd24c}\label{wilc1000__callbacks_8c_a0c94d6a5c5a9b3b656ab5d5bf79bd24c}} 
+\index{wilc1000\+\_\+callbacks.\+c@{wilc1000\+\_\+callbacks.\+c}!num\+Times\+Attempted@{num\+Times\+Attempted}}
+\index{num\+Times\+Attempted@{num\+Times\+Attempted}!wilc1000\+\_\+callbacks.\+c@{wilc1000\+\_\+callbacks.\+c}}
+\subsubsection{\texorpdfstring{num\+Times\+Attempted}{numTimesAttempted}}
+{\footnotesize\ttfamily int num\+Times\+Attempted = 0}
+
+
+
+Definition at line 63 of file wilc1000\+\_\+callbacks.\+c.
+

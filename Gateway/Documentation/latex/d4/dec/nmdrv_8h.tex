@@ -1,0 +1,162 @@
+\hypertarget{nmdrv_8h}{}\section{third\+\_\+party/atmel/devices/wilc1000/driver/source/nmdrv.h File Reference}
+\label{nmdrv_8h}\index{third\+\_\+party/atmel/devices/wilc1000/driver/source/nmdrv.\+h@{third\+\_\+party/atmel/devices/wilc1000/driver/source/nmdrv.\+h}}
+
+
+This module contains W\+I\+LC M2M driver A\+P\+Is declarations.  
+
+
+{\ttfamily \#include \char`\"{}common/include/nm\+\_\+common.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}driver/include/m2m\+\_\+wifi.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}driver/source/m2m\+\_\+hif.\+h\char`\"{}}\newline
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} \hyperlink{nmdrv_8h_a5b11f44fa8edd600cccd32ece263e3eb}{nm\+\_\+drv\+\_\+init} (void $\ast$arg)
+\item 
+\hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} \hyperlink{nmdrv_8h_a444c8058e44c2381fcceac93a5f53a3c}{nm\+\_\+drv\+\_\+deinit} (void $\ast$arg)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This module contains W\+I\+LC M2M driver A\+P\+Is declarations. 
+
+Copyright (c) 2016-\/2018 Microchip Technology Inc. and its subsidiaries.
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{nmdrv_8h_a444c8058e44c2381fcceac93a5f53a3c}\label{nmdrv_8h_a444c8058e44c2381fcceac93a5f53a3c}} 
+\index{nmdrv.\+h@{nmdrv.\+h}!nm\+\_\+drv\+\_\+deinit@{nm\+\_\+drv\+\_\+deinit}}
+\index{nm\+\_\+drv\+\_\+deinit@{nm\+\_\+drv\+\_\+deinit}!nmdrv.\+h@{nmdrv.\+h}}
+\subsubsection{\texorpdfstring{nm\+\_\+drv\+\_\+deinit()}{nm\_drv\_deinit()}}
+{\footnotesize\ttfamily \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} nm\+\_\+drv\+\_\+deinit (\begin{DoxyParamCaption}\item[{void $\ast$}]{arg }\end{DoxyParamCaption})}
+
+
+
+Definition at line 198 of file nmdrv.\+c.
+
+
+\begin{DoxyCode}
+199 \{
+200     \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} ret;
+201     
+202     ret = \hyperlink{nmasic_8c_a56e8f10481e53eb5895a15b565f0a40e}{chip\_deinit}();
+203     \textcolor{keywordflow}{if} (\hyperlink{nm__common_8h_a9ef27ba27aafdd1aa3a79d3ba2c36b8f}{M2M\_SUCCESS} != ret) \{
+204         \hyperlink{nm__common_8h_a34d005df494e50b05cd38b80f318d7ac}{M2M\_ERR}(\textcolor{stringliteral}{"[nmi stop]: chip\_deinit fail\(\backslash\)r\(\backslash\)n"});
+205         \textcolor{keywordflow}{goto} ERR1;
+206     \}
+207 
+208 \textcolor{preprocessor}{#ifdef CONF\_WILC\_USE\_SDIO}
+209     \hyperlink{nmsdio_8h_a5b8a1a0a1d47fd9ed7e4d2a6e53d4e9d}{nm\_sdio\_init}();
+210 \textcolor{preprocessor}{#endif}
+211 
+212     ret = \hyperlink{nmbus_8c_afd8c7289de1cbf00464909c5c491b088}{nm\_bus\_iface\_deinit}();
+213     \textcolor{keywordflow}{if} (\hyperlink{nm__common_8h_a9ef27ba27aafdd1aa3a79d3ba2c36b8f}{M2M\_SUCCESS} != ret) \{
+214         \hyperlink{nm__common_8h_a34d005df494e50b05cd38b80f318d7ac}{M2M\_ERR}(\textcolor{stringliteral}{"[nmi stop]: fail init bus\(\backslash\)r\(\backslash\)n"});
+215         \textcolor{keywordflow}{goto} ERR1;
+216     \}
+217 
+218 ERR1:
+219     \textcolor{keywordflow}{return} ret;
+220 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{nmdrv_8h_a5b11f44fa8edd600cccd32ece263e3eb}\label{nmdrv_8h_a5b11f44fa8edd600cccd32ece263e3eb}} 
+\index{nmdrv.\+h@{nmdrv.\+h}!nm\+\_\+drv\+\_\+init@{nm\+\_\+drv\+\_\+init}}
+\index{nm\+\_\+drv\+\_\+init@{nm\+\_\+drv\+\_\+init}!nmdrv.\+h@{nmdrv.\+h}}
+\subsubsection{\texorpdfstring{nm\+\_\+drv\+\_\+init()}{nm\_drv\_init()}}
+{\footnotesize\ttfamily \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} nm\+\_\+drv\+\_\+init (\begin{DoxyParamCaption}\item[{void $\ast$}]{arg }\end{DoxyParamCaption})}
+
+
+
+Definition at line 105 of file nmdrv.\+c.
+
+
+\begin{DoxyCode}
+106 \{
+107     \hyperlink{structtstrM2mRev}{tstrM2mRev} strtmp;
+108     \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} ret = \hyperlink{nm__common_8h_a9ef27ba27aafdd1aa3a79d3ba2c36b8f}{M2M\_SUCCESS};
+109     
+110     ret = \hyperlink{nmbus_8c_aaafc1bd52ccd798c512173f18543b966}{nm\_bus\_iface\_init}(\hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+111     \textcolor{keywordflow}{if} (\hyperlink{nm__common_8h_a9ef27ba27aafdd1aa3a79d3ba2c36b8f}{M2M\_SUCCESS} != ret) \{
+112         \hyperlink{nm__common_8h_a34d005df494e50b05cd38b80f318d7ac}{M2M\_ERR}(\textcolor{stringliteral}{"[nmi start]: fail init bus\(\backslash\)r\(\backslash\)n"});
+113         \textcolor{keywordflow}{goto} ERR1;
+114     \}
+115 
+116 \textcolor{preprocessor}{#ifdef BUS\_ONLY}
+117     \textcolor{keywordflow}{return};
+118 \textcolor{preprocessor}{#endif}
+119 
+120 \textcolor{preprocessor}{#ifdef CONF\_WILC\_USE\_SPI}
+121     \hyperlink{nmspi_8h_ad47b5973430e547dd904b98a542b9ece}{nm\_spi\_init}();
+122 \textcolor{preprocessor}{#elif defined CONF\_WILC\_USE\_SDIO}
+123     \hyperlink{nmsdio_8h_a5b8a1a0a1d47fd9ed7e4d2a6e53d4e9d}{nm\_sdio\_init}();
+124 \textcolor{preprocessor}{#endif}
+125 
+126 \textcolor{preprocessor}{#ifdef WILC\_SERIAL\_BRIDGE\_INTERFACE}
+127     \textcolor{keywordflow}{return} \hyperlink{nm__common_8h_a9ef27ba27aafdd1aa3a79d3ba2c36b8f}{M2M\_SUCCESS};
+128 \textcolor{preprocessor}{#endif}
+129     \hyperlink{nm__common_8h_a84108eca2655e811179386a39c62acf2}{M2M\_INFO}(\textcolor{stringliteral}{"Chip ID %lx\(\backslash\)r\(\backslash\)n"}, \hyperlink{nmasic_8h_a2325ac5878275e4ca3f99675cf78be72}{nmi\_get\_chipid}());
+130 \textcolor{preprocessor}{#ifndef CONF\_WILC\_FW\_IN\_FLASH}
+131     ret = \hyperlink{nmasic_8c_a40dd2b726ea75385c90df269f69658f9}{firmware\_download}();
+132     \textcolor{keywordflow}{if} (\hyperlink{nm__common_8h_a9ef27ba27aafdd1aa3a79d3ba2c36b8f}{M2M\_SUCCESS} != ret) \{
+133         \textcolor{keywordflow}{goto} ERR2;
+134     \}
+135 \textcolor{preprocessor}{#endif }\textcolor{comment}{/* CONF\_WILC\_FW\_IN\_FLASH */}\textcolor{preprocessor}{}
+136     \hyperlink{nmdrv_8c_ac2d1015fb5134b5bc114ecb6af839f89}{chip\_apply\_conf}();
+137 
+138     ret = \hyperlink{nmasic_8c_a271a40a292bea52b7b7223738d38d971}{cpu\_start}();
+139     \textcolor{keywordflow}{if} (\hyperlink{nm__common_8h_a9ef27ba27aafdd1aa3a79d3ba2c36b8f}{M2M\_SUCCESS} != ret) \{
+140         \textcolor{keywordflow}{goto} ERR2;
+141     \}
+142 
+143 \textcolor{preprocessor}{#ifdef CONF\_WILC\_FW\_IN\_FLASH}
+144     ret = \hyperlink{nmasic_8h_ae0e326b339c77bdea4a3c6feac778e2e}{wait\_for\_bootrom}();
+145     \textcolor{keywordflow}{if} (\hyperlink{nm__common_8h_a9ef27ba27aafdd1aa3a79d3ba2c36b8f}{M2M\_SUCCESS} != ret) \{
+146         \textcolor{keywordflow}{goto} ERR2;
+147     \}
+148 \textcolor{preprocessor}{#endif }\textcolor{comment}{/*CONF\_WILC\_FW\_IN\_FLASH */}\textcolor{preprocessor}{}
+149     ret = \hyperlink{nmasic_8c_a12d3b4ba49cbe3075b6ecbfe9fb58d4c}{wait\_for\_firmware\_start}();
+150     \textcolor{keywordflow}{if} (\hyperlink{nm__common_8h_a9ef27ba27aafdd1aa3a79d3ba2c36b8f}{M2M\_SUCCESS} != ret) \{
+151         \textcolor{keywordflow}{goto} ERR2;
+152     \}
+153 
+154 \textcolor{preprocessor}{#if (defined CONF\_WILC\_USE\_3000\_REV\_A && !defined WILC\_SERIAL\_BRIDGE\_INTERFACE)}
+155 \textcolor{preprocessor}{#ifndef CONF\_WILC\_FW\_IN\_FLASH}
+156     ret = firmware\_download\_bt();
+157     \textcolor{keywordflow}{if} (\hyperlink{nm__common_8h_a9ef27ba27aafdd1aa3a79d3ba2c36b8f}{M2M\_SUCCESS} != ret) \{
+158         \textcolor{keywordflow}{goto} ERR2;
+159     \}
+160 \textcolor{preprocessor}{#endif }\textcolor{comment}{/* CONF\_WILC\_FW\_IN\_FLASH */}\textcolor{preprocessor}{}
+161     ret = cpu\_start\_bt();
+162     \textcolor{keywordflow}{if} (\hyperlink{nm__common_8h_a9ef27ba27aafdd1aa3a79d3ba2c36b8f}{M2M\_SUCCESS} != ret) \{
+163         \textcolor{keywordflow}{goto} ERR2;
+164     \}
+165 \textcolor{preprocessor}{#endif }\textcolor{comment}{/* (defined CONF\_WILC\_USE\_3000\_REV\_A && !defined WILC\_SERIAL\_BRIDGE\_INTERFACE) */}\textcolor{preprocessor}{}
+166     ret = \hyperlink{nmasic_8c_af3c5f659f6097d385b50070d4c67fa11}{enable\_interrupts}();
+167     \textcolor{keywordflow}{if} (\hyperlink{nm__common_8h_a9ef27ba27aafdd1aa3a79d3ba2c36b8f}{M2M\_SUCCESS} != ret) \{
+168         \hyperlink{nm__common_8h_a34d005df494e50b05cd38b80f318d7ac}{M2M\_ERR}(\textcolor{stringliteral}{"failed to enable interrupts..\(\backslash\)r\(\backslash\)n"});
+169         \textcolor{keywordflow}{goto} ERR2;
+170     \}
+171         
+172     \textcolor{keywordflow}{if}(\hyperlink{nm__common_8h_a589113b133769b3e1ef49b515d85364c}{M2M\_ERR\_FW\_VER\_MISMATCH} == \hyperlink{nmdrv_8c_a4b54fcde1c6d7a97c831cea8af5a27ef}{nm\_get\_firmware\_info}(&strtmp))
+173     \{
+174         ret = \hyperlink{nm__common_8h_a589113b133769b3e1ef49b515d85364c}{M2M\_ERR\_FW\_VER\_MISMATCH};
+175         \hyperlink{nm__common_8h_a34d005df494e50b05cd38b80f318d7ac}{M2M\_ERR}(\textcolor{stringliteral}{"Mismatch Firmawre Version\(\backslash\)r\(\backslash\)n"});
+176         \hyperlink{nm__common_8h_a84108eca2655e811179386a39c62acf2}{M2M\_INFO}(\textcolor{stringliteral}{"Firmware ver   : %u.%u.%u\(\backslash\)r\(\backslash\)n"}, strtmp.\hyperlink{structtstrM2mRev_af17c74f7ee2a0612a3321fd3d1297e8e}{u8FirmwareMajor}, strtmp.
+      \hyperlink{structtstrM2mRev_a9647011c59d10a38acd1ab70c26353aa}{u8FirmwareMinor}, strtmp.\hyperlink{structtstrM2mRev_ad67217ead03e5230092147bea0d8e9d3}{u8DriverPatch});
+177         \hyperlink{nm__common_8h_a84108eca2655e811179386a39c62acf2}{M2M\_INFO}(\textcolor{stringliteral}{"Min driver ver : %u.%u.%u\(\backslash\)r\(\backslash\)n"}, strtmp.\hyperlink{structtstrM2mRev_aec68edb68ce1a472a6703ed709f7ae30}{u8DriverMajor}, strtmp.
+      \hyperlink{structtstrM2mRev_a8e1f683bdcfc41fc133cecc73e9de4ed}{u8DriverMinor}, strtmp.\hyperlink{structtstrM2mRev_ad67217ead03e5230092147bea0d8e9d3}{u8DriverPatch});
+178         \hyperlink{nm__common_8h_a84108eca2655e811179386a39c62acf2}{M2M\_INFO}(\textcolor{stringliteral}{"Curr driver ver: %u.%u.%u\(\backslash\)r\(\backslash\)n"}, 
+      \hyperlink{group__WlanDefines_ga841654a809488d03e49e3ae02435751f}{M2M\_DRIVER\_VERSION\_MAJOR\_NO}, 
+      \hyperlink{group__WlanDefines_ga9165dca612db5f17f11e9a5b2abe1290}{M2M\_DRIVER\_VERSION\_MINOR\_NO}, 
+      \hyperlink{group__WlanDefines_ga57f6c956ee5e267cd064d281bc1df051}{M2M\_DRIVER\_VERSION\_PATCH\_NO});
+179     \}
+180 
+181     \textcolor{keywordflow}{return} ret;
+182 ERR2:
+183 \textcolor{preprocessor}{#ifdef CONF\_WILC\_USE\_SDIO}
+184     \hyperlink{nmsdio_8h_a41ac9842a605667de142f1e75651d9cb}{nm\_sdio\_deinit}();
+185 \textcolor{preprocessor}{#endif}
+186     \hyperlink{nmbus_8c_afd8c7289de1cbf00464909c5c491b088}{nm\_bus\_iface\_deinit}();
+187 ERR1:   
+188     \textcolor{keywordflow}{return} ret;
+189 \}
+\end{DoxyCode}

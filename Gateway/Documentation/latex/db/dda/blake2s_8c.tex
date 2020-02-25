@@ -1,0 +1,497 @@
+\hypertarget{blake2s_8c}{}\section{cyclone\+\_\+crypto/hash/blake2s.c File Reference}
+\label{blake2s_8c}\index{cyclone\+\_\+crypto/hash/blake2s.\+c@{cyclone\+\_\+crypto/hash/blake2s.\+c}}
+
+
+B\+L\+A\+K\+E2 cryptographic hash and M\+AC (B\+L\+A\+K\+E2s variant)  
+
+
+{\ttfamily \#include \char`\"{}core/crypto.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}hash/blake2s.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{blake2s_8c_afcdf5e66fd927a7f4cc64295acd20407}{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}~\hyperlink{crypto__config_8h_a6afae3a9b63f9b55d979e667ee0e881d}{C\+R\+Y\+P\+T\+O\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}
+\item 
+\#define \hyperlink{blake2s_8c_a517da2b48479be603314a96aca4e9db8}{G}(\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a},  \hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b},  \hyperlink{llmnr__common_8h_a2e5a04327b5658199f0f7bda2acceee1}{c},  d,  x,  y)
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{blake2s_8c_a59894a3fb0f9ba89cf60231690bf2c1a}{blake2s\+Compute} (const void $\ast$key, size\+\_\+t key\+Len, const void $\ast$\hyperlink{tftp__common_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, size\+\_\+t data\+Len, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$digest, size\+\_\+t digest\+Len)
+\begin{DoxyCompactList}\small\item\em Digest a message using B\+L\+A\+K\+E2s. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{blake2s_8c_ade6401e3847990cf9bf926216d2980b5}{blake2s\+Init} (\hyperlink{structBlake2sContext}{Blake2s\+Context} $\ast$context, const void $\ast$key, size\+\_\+t key\+Len, size\+\_\+t digest\+Len)
+\begin{DoxyCompactList}\small\item\em Initialize B\+L\+A\+K\+E2s message digest context. \end{DoxyCompactList}\item 
+void \hyperlink{blake2s_8c_a04a3a2ad2af0314a947a122044748fa6}{blake2s\+Update} (\hyperlink{structBlake2sContext}{Blake2s\+Context} $\ast$context, const void $\ast$\hyperlink{tftp__common_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length})
+\begin{DoxyCompactList}\small\item\em Update the B\+L\+A\+K\+E2s context with a portion of the message being hashed. \end{DoxyCompactList}\item 
+void \hyperlink{blake2s_8c_aec9098d7fde81b4d009d441d894a9810}{blake2s\+Final} (\hyperlink{structBlake2sContext}{Blake2s\+Context} $\ast$context, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$digest)
+\begin{DoxyCompactList}\small\item\em Finish the B\+L\+A\+K\+E2s message digest. \end{DoxyCompactList}\item 
+void \hyperlink{blake2s_8c_a9aa49a3040745969eb35a4fe11043416}{blake2s\+Process\+Block} (\hyperlink{structBlake2sContext}{Blake2s\+Context} $\ast$context, \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} \hyperlink{ipv6__frag_8h_a7179af054cf318941e1a12e964965935}{last})
+\begin{DoxyCompactList}\small\item\em Compression function F. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} \hyperlink{blake2s_8c_a2e7901d09e9f4e7e1f08d805cb9dc9d5}{sigma} \mbox{[}10\mbox{]}\mbox{[}16\mbox{]}
+\item 
+static const \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t} \hyperlink{blake2s_8c_aec72267c81ad465adfa55640a636cd0b}{iv} \mbox{[}8\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+B\+L\+A\+K\+E2 cryptographic hash and M\+AC (B\+L\+A\+K\+E2s variant) 
+
+\hypertarget{pic32mz__ef__curiosity_8h_License}{}\subsection{License}\label{pic32mz__ef__curiosity_8h_License}
+S\+P\+D\+X-\/\+License-\/\+Identifier\+: G\+P\+L-\/2.\+0-\/or-\/later
+
+Copyright (C) 2010-\/2019 Oryx Embedded S\+A\+RL. All rights reserved.
+
+This file is part of Cyclone\+Crypto Open.
+
+This program is free software; you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+
+You should have received a copy of the G\+NU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-\/1301, U\+SA.\hypertarget{tftp__server_8c_Description}{}\subsection{Description}\label{tftp__server_8c_Description}
+B\+L\+A\+K\+E2s is cryptographic hash function optimized for 8-\/ to 32-\/bit platforms that produces digests of any size between 1 and 32 bytes. Refer to R\+FC 7693 for more details
+
+\begin{DoxyAuthor}{Author}
+Oryx Embedded S\+A\+RL (www.\+oryx-\/embedded.\+com) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+9.\+6 
+\end{DoxyVersion}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{blake2s_8c_a517da2b48479be603314a96aca4e9db8}\label{blake2s_8c_a517da2b48479be603314a96aca4e9db8}} 
+\index{blake2s.\+c@{blake2s.\+c}!G@{G}}
+\index{G@{G}!blake2s.\+c@{blake2s.\+c}}
+\subsubsection{\texorpdfstring{G}{G}}
+{\footnotesize\ttfamily \#define G(\begin{DoxyParamCaption}\item[{}]{\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a},  }\item[{}]{\hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b},  }\item[{}]{\hyperlink{llmnr__common_8h_a2e5a04327b5658199f0f7bda2acceee1}{c},  }\item[{}]{d,  }\item[{}]{x,  }\item[{}]{y }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}
+\{ \(\backslash\)
+   a += \hyperlink{dtls__misc_8h_ab590318ac859d0e57e15c3dd6c62a605}{b} + x; \(\backslash\)
+   d ^= \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}; \(\backslash\)
+   d = \hyperlink{cyclone__crypto_2core_2crypto_8h_a1e84182b178c5f242e4ba717e6dcd0e5}{ROR32}(d, 16); \(\backslash\)
+   c += d; \(\backslash\)
+   b ^= \hyperlink{aria_8c_a5dadc28804036d1b82e1dc027e95c9a6}{c}; \(\backslash\)
+   b = \hyperlink{cyclone__crypto_2core_2crypto_8h_a1e84182b178c5f242e4ba717e6dcd0e5}{ROR32}(\hyperlink{dtls__misc_8h_ab590318ac859d0e57e15c3dd6c62a605}{b}, 12); \(\backslash\)
+   a += \hyperlink{dtls__misc_8h_ab590318ac859d0e57e15c3dd6c62a605}{b} + y; \(\backslash\)
+   d ^= \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}; \(\backslash\)
+   d = \hyperlink{cyclone__crypto_2core_2crypto_8h_a1e84182b178c5f242e4ba717e6dcd0e5}{ROR32}(d, 8); \(\backslash\)
+   c += d; \(\backslash\)
+   b ^= \hyperlink{aria_8c_a5dadc28804036d1b82e1dc027e95c9a6}{c}; \(\backslash\)
+   b = \hyperlink{cyclone__crypto_2core_2crypto_8h_a1e84182b178c5f242e4ba717e6dcd0e5}{ROR32}(\hyperlink{dtls__misc_8h_ab590318ac859d0e57e15c3dd6c62a605}{b}, 7); \(\backslash\)
+\}
+\end{DoxyCode}
+
+
+Definition at line 48 of file blake2s.\+c.
+
+\mbox{\Hypertarget{blake2s_8c_afcdf5e66fd927a7f4cc64295acd20407}\label{blake2s_8c_afcdf5e66fd927a7f4cc64295acd20407}} 
+\index{blake2s.\+c@{blake2s.\+c}!T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+\index{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}!blake2s.\+c@{blake2s.\+c}}
+\subsubsection{\texorpdfstring{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}{TRACE\_LEVEL}}
+{\footnotesize\ttfamily \#define T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL~\hyperlink{crypto__config_8h_a6afae3a9b63f9b55d979e667ee0e881d}{C\+R\+Y\+P\+T\+O\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+
+
+
+Definition at line 38 of file blake2s.\+c.
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{blake2s_8c_a59894a3fb0f9ba89cf60231690bf2c1a}\label{blake2s_8c_a59894a3fb0f9ba89cf60231690bf2c1a}} 
+\index{blake2s.\+c@{blake2s.\+c}!blake2s\+Compute@{blake2s\+Compute}}
+\index{blake2s\+Compute@{blake2s\+Compute}!blake2s.\+c@{blake2s.\+c}}
+\subsubsection{\texorpdfstring{blake2s\+Compute()}{blake2sCompute()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} blake2s\+Compute (\begin{DoxyParamCaption}\item[{const void $\ast$}]{key,  }\item[{size\+\_\+t}]{key\+Len,  }\item[{const void $\ast$}]{data,  }\item[{size\+\_\+t}]{data\+Len,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{digest,  }\item[{size\+\_\+t}]{digest\+Len }\end{DoxyParamCaption})}
+
+
+
+Digest a message using B\+L\+A\+K\+E2s. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em key} & Pointer to the key \\
+\hline
+\mbox{\tt in}  & {\em key\+Len} & Length of the key \\
+\hline
+\mbox{\tt in}  & {\em data} & Pointer to the message being hashed \\
+\hline
+\mbox{\tt in}  & {\em data\+Len} & Length of the message \\
+\hline
+\mbox{\tt out}  & {\em digest} & Pointer to the calculated digest \\
+\hline
+\mbox{\tt in}  & {\em digest\+Len} & Expected length of the digest \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 98 of file blake2s.\+c.
+
+
+\begin{DoxyCode}
+100 \{
+101    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+102    \hyperlink{structBlake2sContext}{Blake2sContext} *context;
+103 
+104    \textcolor{comment}{//Allocate a memory buffer to hold the BLAKE2s context}
+105    context = \hyperlink{cyclone__crypto_2core_2crypto_8h_a48b53d16f66d31e5dcf82db3c1b882ba}{cryptoAllocMem}(\textcolor{keyword}{sizeof}(\hyperlink{structBlake2sContext}{Blake2sContext}));
+106 
+107    \textcolor{comment}{//Successful memory allocation?}
+108    \textcolor{keywordflow}{if}(context != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+109    \{
+110       \textcolor{comment}{//Initialize the hashing context}
+111       error = \hyperlink{blake2s_8c_ade6401e3847990cf9bf926216d2980b5}{blake2sInit}(context, key, keyLen, digestLen);
+112 
+113       \textcolor{comment}{//Check status code}
+114       \textcolor{keywordflow}{if}(!error)
+115       \{
+116          \textcolor{comment}{//Digest the message}
+117          \hyperlink{blake2s_8c_a04a3a2ad2af0314a947a122044748fa6}{blake2sUpdate}(context, \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, dataLen);
+118          \textcolor{comment}{//Finalize the BLAKE2s message digest}
+119          \hyperlink{blake2s_8c_aec9098d7fde81b4d009d441d894a9810}{blake2sFinal}(context, digest);
+120       \}
+121 
+122       \textcolor{comment}{//Free previously allocated memory}
+123       \hyperlink{cyclone__crypto_2core_2crypto_8h_ac8a223b176683db4e9eed4162774f870}{cryptoFreeMem}(context);
+124    \}
+125    \textcolor{keywordflow}{else}
+126    \{
+127       \textcolor{comment}{//Failed to allocate memory}
+128       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac0a554045048d2fb61387cf735676f69}{ERROR\_OUT\_OF\_MEMORY};
+129    \}
+130 
+131    \textcolor{comment}{//Return status code}
+132    \textcolor{keywordflow}{return} error;
+133 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{blake2s_8c_aec9098d7fde81b4d009d441d894a9810}\label{blake2s_8c_aec9098d7fde81b4d009d441d894a9810}} 
+\index{blake2s.\+c@{blake2s.\+c}!blake2s\+Final@{blake2s\+Final}}
+\index{blake2s\+Final@{blake2s\+Final}!blake2s.\+c@{blake2s.\+c}}
+\subsubsection{\texorpdfstring{blake2s\+Final()}{blake2sFinal()}}
+{\footnotesize\ttfamily void blake2s\+Final (\begin{DoxyParamCaption}\item[{\hyperlink{structBlake2sContext}{Blake2s\+Context} $\ast$}]{context,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{digest }\end{DoxyParamCaption})}
+
+
+
+Finish the B\+L\+A\+K\+E2s message digest. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the B\+L\+A\+K\+E2s context \\
+\hline
+\mbox{\tt out}  & {\em digest} & Calculated digest (optional parameter) \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 243 of file blake2s.\+c.
+
+
+\begin{DoxyCode}
+244 \{
+245    \textcolor{keywordtype}{size\_t} i;
+246 
+247    \textcolor{comment}{//The last block is padded with zeros to full block size, if required}
+248    \textcolor{keywordflow}{for}(i = context->\hyperlink{structBlake2sContext_ab531fb32432b92ca49a83f04e841c0b3}{size}; i < 64; i++)
+249    \{
+250       context->\hyperlink{structBlake2sContext_a2d534fac8f53f3181220a31a2e1257a8}{buffer}[i] = 0;
+251    \}
+252 
+253    \textcolor{comment}{//Compress the last block}
+254    \hyperlink{blake2s_8c_a9aa49a3040745969eb35a4fe11043416}{blake2sProcessBlock}(context, \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE});
+255 
+256    \textcolor{comment}{//Convert from host byte order to big-endian byte order}
+257    \textcolor{keywordflow}{for}(i = 0; i < 8; i++)
+258    \{
+259       context->\hyperlink{structBlake2sContext_acc8853d757da93c10c7c68a48150a5b7}{h}[i] = \hyperlink{cpu__endian_8h_a336f132f175f47bfab3fa57f6a00276d}{htole32}(context->\hyperlink{structBlake2sContext_acc8853d757da93c10c7c68a48150a5b7}{h}[i]);
+260    \}
+261 
+262    \textcolor{comment}{//Copy the resulting digest}
+263    \textcolor{keywordflow}{if}(digest != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+264    \{
+265       \hyperlink{cyclone__crypto_2core_2crypto_8h_a6724616c4014bb7e21f2660bd7b88be8}{cryptoMemcpy}(digest, context->\hyperlink{structBlake2sContext_add237f41dfbeda19b07ae437331e69b1}{digest}, context->
+      \hyperlink{structBlake2sContext_af889060008a4abca5aeaa642d9de3e27}{digestSize});
+266    \}
+267 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{blake2s_8c_ade6401e3847990cf9bf926216d2980b5}\label{blake2s_8c_ade6401e3847990cf9bf926216d2980b5}} 
+\index{blake2s.\+c@{blake2s.\+c}!blake2s\+Init@{blake2s\+Init}}
+\index{blake2s\+Init@{blake2s\+Init}!blake2s.\+c@{blake2s.\+c}}
+\subsubsection{\texorpdfstring{blake2s\+Init()}{blake2sInit()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} blake2s\+Init (\begin{DoxyParamCaption}\item[{\hyperlink{structBlake2sContext}{Blake2s\+Context} $\ast$}]{context,  }\item[{const void $\ast$}]{key,  }\item[{size\+\_\+t}]{key\+Len,  }\item[{size\+\_\+t}]{digest\+Len }\end{DoxyParamCaption})}
+
+
+
+Initialize B\+L\+A\+K\+E2s message digest context. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the B\+L\+A\+K\+E2s context to initialize \\
+\hline
+\mbox{\tt in}  & {\em key} & Pointer to the key \\
+\hline
+\mbox{\tt in}  & {\em key\+Len} & Length of the key \\
+\hline
+\mbox{\tt in}  & {\em digest\+Len} & Expected length of the digest \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 145 of file blake2s.\+c.
+
+
+\begin{DoxyCode}
+147 \{
+148    \textcolor{keywordtype}{size\_t} i;
+149 
+150    \textcolor{comment}{//Check the length of the key}
+151    \textcolor{keywordflow}{if}(keyLen > 32)
+152       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+153 
+154    \textcolor{comment}{//Check the length of the hash}
+155    \textcolor{keywordflow}{if}(digestLen < 1 || digestLen > 32)
+156       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+157 
+158    \textcolor{comment}{//Initialize state vector}
+159    \textcolor{keywordflow}{for}(i = 0; i < 8; i++)
+160    \{
+161       context->\hyperlink{structBlake2sContext_acc8853d757da93c10c7c68a48150a5b7}{h}[i] = \hyperlink{blake2s_8c_aec72267c81ad465adfa55640a636cd0b}{iv}[i];
+162    \}
+163 
+164    \textcolor{comment}{//The first byte of the parameter block is the hash size in bytes}
+165    context->\hyperlink{structBlake2sContext_acc8853d757da93c10c7c68a48150a5b7}{h}[0] ^= digestLen;
+166    \textcolor{comment}{//The second byte of the parameter block is the key size in bytes}
+167    context->\hyperlink{structBlake2sContext_acc8853d757da93c10c7c68a48150a5b7}{h}[0] ^= keyLen << 8;
+168    \textcolor{comment}{//Bytes 2 and 3 are set as 01}
+169    context->\hyperlink{structBlake2sContext_acc8853d757da93c10c7c68a48150a5b7}{h}[0] ^= 0x01010000;
+170 
+171    \textcolor{comment}{//Number of bytes in the buffer}
+172    context->\hyperlink{structBlake2sContext_ab531fb32432b92ca49a83f04e841c0b3}{size} = 0;
+173 
+174    \textcolor{comment}{//Total number of bytes}
+175    context->\hyperlink{structBlake2sContext_a8db8eadcbe516527d006ef965f5f2245}{totalSize}[0] = 0;
+176    context->\hyperlink{structBlake2sContext_a8db8eadcbe516527d006ef965f5f2245}{totalSize}[1] = 0;
+177 
+178    \textcolor{comment}{//Size of the digest}
+179    context->\hyperlink{structBlake2sContext_af889060008a4abca5aeaa642d9de3e27}{digestSize} = digestLen;
+180 
+181    \textcolor{comment}{//Clear input buffer}
+182    \hyperlink{cyclone__crypto_2core_2crypto_8h_ad4465436e4ff353300fba4896012e18b}{cryptoMemset}(context->\hyperlink{structBlake2sContext_a2d534fac8f53f3181220a31a2e1257a8}{buffer}, 0, 64);
+183 
+184    \textcolor{comment}{//Any secret key?}
+185    \textcolor{keywordflow}{if}(keyLen > 0)
+186    \{
+187       \textcolor{comment}{//Copy the secret key}
+188       \hyperlink{cyclone__crypto_2core_2crypto_8h_a6724616c4014bb7e21f2660bd7b88be8}{cryptoMemcpy}(context->\hyperlink{structBlake2sContext_a2d534fac8f53f3181220a31a2e1257a8}{buffer}, key, keyLen);
+189       \textcolor{comment}{//The secret key is padded with zero bytes}
+190       context->\hyperlink{structBlake2sContext_ab531fb32432b92ca49a83f04e841c0b3}{size} = 64;
+191    \}
+192 
+193    \textcolor{comment}{//Successful initialization}
+194    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+195 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{blake2s_8c_a9aa49a3040745969eb35a4fe11043416}\label{blake2s_8c_a9aa49a3040745969eb35a4fe11043416}} 
+\index{blake2s.\+c@{blake2s.\+c}!blake2s\+Process\+Block@{blake2s\+Process\+Block}}
+\index{blake2s\+Process\+Block@{blake2s\+Process\+Block}!blake2s.\+c@{blake2s.\+c}}
+\subsubsection{\texorpdfstring{blake2s\+Process\+Block()}{blake2sProcessBlock()}}
+{\footnotesize\ttfamily void blake2s\+Process\+Block (\begin{DoxyParamCaption}\item[{\hyperlink{structBlake2sContext}{Blake2s\+Context} $\ast$}]{context,  }\item[{\hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t}}]{last }\end{DoxyParamCaption})}
+
+
+
+Compression function F. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the B\+L\+A\+K\+E2s context \\
+\hline
+\mbox{\tt in}  & {\em last} & Flag indicating the last block \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 276 of file blake2s.\+c.
+
+
+\begin{DoxyCode}
+277 \{
+278    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+279    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} *\hyperlink{ndp_8h_a6b3284d8492267a77ca46948daf5545e}{m};
+280    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} v[16];
+281 
+282    \textcolor{comment}{//Initialize the working vector}
+283    \textcolor{keywordflow}{for}(i = 0; i < 8; i++)
+284    \{
+285       \textcolor{comment}{//First half from state}
+286       v[i] = context->\hyperlink{structBlake2sContext_acc8853d757da93c10c7c68a48150a5b7}{h}[i];
+287       \textcolor{comment}{//Second half from IV}
+288       v[i + 8] = \hyperlink{blake2s_8c_aec72267c81ad465adfa55640a636cd0b}{iv}[i];
+289    \}
+290 
+291    \textcolor{comment}{//Increment offset counter}
+292    context->\hyperlink{structBlake2sContext_a8db8eadcbe516527d006ef965f5f2245}{totalSize}[0] += context->\hyperlink{structBlake2sContext_ab531fb32432b92ca49a83f04e841c0b3}{size};
+293 
+294    \textcolor{comment}{//Propagate the carry if necessary}
+295    \textcolor{keywordflow}{if}(context->\hyperlink{structBlake2sContext_a8db8eadcbe516527d006ef965f5f2245}{totalSize}[0] < context->\hyperlink{structBlake2sContext_ab531fb32432b92ca49a83f04e841c0b3}{size})
+296    \{
+297       context->\hyperlink{structBlake2sContext_a8db8eadcbe516527d006ef965f5f2245}{totalSize}[1]++;
+298    \}
+299 
+300    \textcolor{comment}{//Low word of the offset}
+301    v[12] ^= context->\hyperlink{structBlake2sContext_a8db8eadcbe516527d006ef965f5f2245}{totalSize}[0];
+302    \textcolor{comment}{//High word of the offset}
+303    v[13] ^= context->\hyperlink{structBlake2sContext_a8db8eadcbe516527d006ef965f5f2245}{totalSize}[1];
+304 
+305    \textcolor{comment}{//Last block flag?}
+306    \textcolor{keywordflow}{if}(\hyperlink{ipv4__frag_8h_a7179af054cf318941e1a12e964965935}{last})
+307    \{
+308       \textcolor{comment}{//Invert all bits}
+309       v[14] = ~v[14];
+310    \}
+311 
+312    \textcolor{comment}{//Point to the message block vector}
+313    m = context->\hyperlink{structBlake2sContext_ad27d2ff046f98cc55347641763639aef}{m};
+314 
+315    \textcolor{comment}{//Convert from little-endian byte order to host byte order}
+316    \textcolor{keywordflow}{for}(i = 0; i < 16; i++)
+317    \{
+318       m[i] = \hyperlink{cpu__endian_8h_a637984da0e96437b4bff8b68108256c6}{letoh32}(m[i]);
+319    \}
+320 
+321    \textcolor{comment}{//Cryptographic mixing}
+322    \textcolor{keywordflow}{for}(i = 0; i < 10; i++)
+323    \{
+324       \textcolor{comment}{//The column rounds apply the quarter-round function to the four}
+325       \textcolor{comment}{//columns, from left to right}
+326       \hyperlink{blake2s_8c_a517da2b48479be603314a96aca4e9db8}{G}(v[0], v[4], v[8],  v[12], m[\hyperlink{blake2s_8c_a2e7901d09e9f4e7e1f08d805cb9dc9d5}{sigma}[i][0]], m[\hyperlink{blake2s_8c_a2e7901d09e9f4e7e1f08d805cb9dc9d5}{sigma}[i][1]]);
+327       \hyperlink{blake2s_8c_a517da2b48479be603314a96aca4e9db8}{G}(v[1], v[5], v[9],  v[13], m[\hyperlink{blake2s_8c_a2e7901d09e9f4e7e1f08d805cb9dc9d5}{sigma}[i][2]], m[\hyperlink{blake2s_8c_a2e7901d09e9f4e7e1f08d805cb9dc9d5}{sigma}[i][3]]);
+328       \hyperlink{blake2s_8c_a517da2b48479be603314a96aca4e9db8}{G}(v[2], v[6], v[10], v[14], m[\hyperlink{blake2s_8c_a2e7901d09e9f4e7e1f08d805cb9dc9d5}{sigma}[i][4]], m[\hyperlink{blake2s_8c_a2e7901d09e9f4e7e1f08d805cb9dc9d5}{sigma}[i][5]]);
+329       \hyperlink{blake2s_8c_a517da2b48479be603314a96aca4e9db8}{G}(v[3], v[7], v[11], v[15], m[\hyperlink{blake2s_8c_a2e7901d09e9f4e7e1f08d805cb9dc9d5}{sigma}[i][6]], m[\hyperlink{blake2s_8c_a2e7901d09e9f4e7e1f08d805cb9dc9d5}{sigma}[i][7]]);
+330 
+331       \textcolor{comment}{//The diagonal rounds apply the quarter-round function to the top-left,}
+332       \textcolor{comment}{//bottom-right diagonal, followed by the pattern shifted one place to}
+333       \textcolor{comment}{//the right, for three more quarter-rounds}
+334       \hyperlink{blake2s_8c_a517da2b48479be603314a96aca4e9db8}{G}(v[0], v[5], v[10], v[15], m[\hyperlink{blake2s_8c_a2e7901d09e9f4e7e1f08d805cb9dc9d5}{sigma}[i][8]],  m[\hyperlink{blake2s_8c_a2e7901d09e9f4e7e1f08d805cb9dc9d5}{sigma}[i][9]]);
+335       \hyperlink{blake2s_8c_a517da2b48479be603314a96aca4e9db8}{G}(v[1], v[6], v[11], v[12], m[\hyperlink{blake2s_8c_a2e7901d09e9f4e7e1f08d805cb9dc9d5}{sigma}[i][10]], m[\hyperlink{blake2s_8c_a2e7901d09e9f4e7e1f08d805cb9dc9d5}{sigma}[i][11]]);
+336       \hyperlink{blake2s_8c_a517da2b48479be603314a96aca4e9db8}{G}(v[2], v[7], v[8],  v[13], m[\hyperlink{blake2s_8c_a2e7901d09e9f4e7e1f08d805cb9dc9d5}{sigma}[i][12]], m[\hyperlink{blake2s_8c_a2e7901d09e9f4e7e1f08d805cb9dc9d5}{sigma}[i][13]]);
+337       \hyperlink{blake2s_8c_a517da2b48479be603314a96aca4e9db8}{G}(v[3], v[4], v[9],  v[14], m[\hyperlink{blake2s_8c_a2e7901d09e9f4e7e1f08d805cb9dc9d5}{sigma}[i][14]], m[\hyperlink{blake2s_8c_a2e7901d09e9f4e7e1f08d805cb9dc9d5}{sigma}[i][15]]);
+338    \}
+339 
+340    \textcolor{comment}{//XOR the two halves}
+341    \textcolor{keywordflow}{for}(i = 0; i < 8; i++)
+342    \{
+343       context->\hyperlink{structBlake2sContext_acc8853d757da93c10c7c68a48150a5b7}{h}[i] ^= v[i] ^ v[i + 8];
+344    \}
+345 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{blake2s_8c_a04a3a2ad2af0314a947a122044748fa6}\label{blake2s_8c_a04a3a2ad2af0314a947a122044748fa6}} 
+\index{blake2s.\+c@{blake2s.\+c}!blake2s\+Update@{blake2s\+Update}}
+\index{blake2s\+Update@{blake2s\+Update}!blake2s.\+c@{blake2s.\+c}}
+\subsubsection{\texorpdfstring{blake2s\+Update()}{blake2sUpdate()}}
+{\footnotesize\ttfamily void blake2s\+Update (\begin{DoxyParamCaption}\item[{\hyperlink{structBlake2sContext}{Blake2s\+Context} $\ast$}]{context,  }\item[{const void $\ast$}]{data,  }\item[{size\+\_\+t}]{length }\end{DoxyParamCaption})}
+
+
+
+Update the B\+L\+A\+K\+E2s context with a portion of the message being hashed. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the B\+L\+A\+K\+E2s context \\
+\hline
+\mbox{\tt in}  & {\em data} & Pointer to the buffer being hashed \\
+\hline
+\mbox{\tt in}  & {\em length} & Length of the buffer \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 205 of file blake2s.\+c.
+
+
+\begin{DoxyCode}
+206 \{
+207    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+208 
+209    \textcolor{comment}{//Process the incoming data}
+210    \textcolor{keywordflow}{while}(\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} > 0)
+211    \{
+212       \textcolor{comment}{//Each message block consists of 16 words}
+213       \textcolor{keywordflow}{if}(context->\hyperlink{structBlake2sContext_ab531fb32432b92ca49a83f04e841c0b3}{size} == 64)
+214       \{
+215          \textcolor{comment}{//Compress the 16-word block}
+216          \hyperlink{blake2s_8c_a9aa49a3040745969eb35a4fe11043416}{blake2sProcessBlock}(context, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE});
+217          \textcolor{comment}{//Empty the buffer}
+218          context->\hyperlink{structBlake2sContext_ab531fb32432b92ca49a83f04e841c0b3}{size} = 0;
+219       \}
+220 
+221       \textcolor{comment}{//The buffer can hold at most 64 bytes}
+222       n = \hyperlink{os__port_8h_a3acffbd305ee72dcd4593c0d8af64a4f}{MIN}(\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, 64 - context->\hyperlink{structBlake2sContext_ab531fb32432b92ca49a83f04e841c0b3}{size});
+223 
+224       \textcolor{comment}{//Copy the data to the buffer}
+225       \hyperlink{cyclone__crypto_2core_2crypto_8h_a6724616c4014bb7e21f2660bd7b88be8}{cryptoMemcpy}(context->\hyperlink{structBlake2sContext_a2d534fac8f53f3181220a31a2e1257a8}{buffer} + context->\hyperlink{structBlake2sContext_ab531fb32432b92ca49a83f04e841c0b3}{size}, \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, n);
+226       \textcolor{comment}{//Update the length of the buffer}
+227       context->\hyperlink{structBlake2sContext_ab531fb32432b92ca49a83f04e841c0b3}{size} += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+228 
+229       \textcolor{comment}{//Advance the data pointer}
+230       \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data} = (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *) \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data} + n;
+231       \textcolor{comment}{//Remaining bytes to process}
+232       \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} -= \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+233    \}
+234 \}
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{blake2s_8c_aec72267c81ad465adfa55640a636cd0b}\label{blake2s_8c_aec72267c81ad465adfa55640a636cd0b}} 
+\index{blake2s.\+c@{blake2s.\+c}!iv@{iv}}
+\index{iv@{iv}!blake2s.\+c@{blake2s.\+c}}
+\subsubsection{\texorpdfstring{iv}{iv}}
+{\footnotesize\ttfamily const \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t} iv\mbox{[}8\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=
+\{
+   0x6A09E667, 0xBB67AE85, 0x3C6EF372, 0xA54FF53A,
+   0x510E527F, 0x9B05688C, 0x1F83D9AB, 0x5BE0CD19
+\}
+\end{DoxyCode}
+
+
+Definition at line 80 of file blake2s.\+c.
+
+\mbox{\Hypertarget{blake2s_8c_a2e7901d09e9f4e7e1f08d805cb9dc9d5}\label{blake2s_8c_a2e7901d09e9f4e7e1f08d805cb9dc9d5}} 
+\index{blake2s.\+c@{blake2s.\+c}!sigma@{sigma}}
+\index{sigma@{sigma}!blake2s.\+c@{blake2s.\+c}}
+\subsubsection{\texorpdfstring{sigma}{sigma}}
+{\footnotesize\ttfamily const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} sigma\mbox{[}10\mbox{]}\mbox{[}16\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=
+\{
+   \{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15\},
+   \{14, 10, 4, 8, 9, 15, 13, 6, 1, 12, 0, 2, 11, 7, 5, 3\},
+   \{11, 8, 12, 0, 5, 2, 15, 13, 10, 14, 3, 6, 7, 1, 9, 4\},
+   \{7, 9, 3, 1, 13, 12, 11, 14, 2, 6, 5, 10, 4, 0, 15, 8\},
+   \{9, 0, 5, 7, 2, 4, 10, 15, 14, 1, 11, 12, 6, 8, 3, 13\},
+   \{2, 12, 6, 10, 0, 11, 8, 3, 4, 13, 7, 5, 15, 14, 1, 9\},
+   \{12, 5, 1, 15, 14, 13, 4, 10, 0, 7, 6, 3, 9, 2, 8, 11\},
+   \{13, 11, 7, 14, 12, 1, 3, 9, 5, 0, 15, 4, 8, 6, 2, 10\},
+   \{6, 15, 14, 9, 11, 3, 0, 8, 12, 2, 13, 7, 1, 4, 10, 5\},
+   \{10, 2, 8, 4, 7, 6, 1, 5, 15, 11, 9, 14, 3, 12, 13, 0\}
+\}
+\end{DoxyCode}
+
+
+Definition at line 65 of file blake2s.\+c.
+

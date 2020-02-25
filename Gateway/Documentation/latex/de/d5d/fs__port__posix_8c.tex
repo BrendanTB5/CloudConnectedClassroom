@@ -1,0 +1,961 @@
+\hypertarget{fs__port__posix_8c}{}\section{common/fs\+\_\+port\+\_\+posix.c File Reference}
+\label{fs__port__posix_8c}\index{common/fs\+\_\+port\+\_\+posix.\+c@{common/fs\+\_\+port\+\_\+posix.\+c}}
+
+
+File system abstraction layer (P\+O\+S\+IX)  
+
+
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}fs\+\_\+port.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}fs\+\_\+port\+\_\+posix.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}str.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}path.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}error.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}debug.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$dirent.\+h$>$}\newline
+{\ttfamily \#include $<$direct.\+h$>$}\newline
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{fs__port__posix_8c_a2977e522a7c095073fd25be43907f80e}{fs\+Init} (void)
+\begin{DoxyCompactList}\small\item\em File system initialization. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{fs__port__posix_8c_a2a43af14ca84e5c0b784852a50b703ce}{fs\+Get\+File\+Attr} (const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$path, \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t} $\ast$attributes, \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t} $\ast$size, \hyperlink{structDateTime}{Date\+Time} $\ast$modified)
+\begin{DoxyCompactList}\small\item\em Retrieve the attributes of the specified file. \end{DoxyCompactList}\item 
+\hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} \hyperlink{fs__port__posix_8c_a0f43e535a49aaffcf54631257427f8d5}{fs\+File\+Exists} (const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$path)
+\begin{DoxyCompactList}\small\item\em Check whether a file exists. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{fs__port__posix_8c_a468b8c15424a76f8f28be14d37a1fc6f}{fs\+Get\+File\+Size} (const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$path, \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t} $\ast$size)
+\begin{DoxyCompactList}\small\item\em Retrieve the size of the specified file. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{fs__port__posix_8c_a6fcffd5686bb23325786719055d4e5fd}{fs\+Rename\+File} (const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$old\+Path, const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$new\+Path)
+\begin{DoxyCompactList}\small\item\em Rename the specified file. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{fs__port__posix_8c_a38d6ddafe3180ad55d036e2d0d86f230}{fs\+Delete\+File} (const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$path)
+\begin{DoxyCompactList}\small\item\em Delete a file. \end{DoxyCompactList}\item 
+\hyperlink{fs__port__fatfs_8h_a913e2a93cbf8ed241fe05fb6abc3f316}{Fs\+File} $\ast$ \hyperlink{fs__port__posix_8c_aba7fcc4f174dcf4652a8b84cdfff22b5}{fs\+Open\+File} (const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$path, \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} \hyperlink{ntp__common_8h_a37e90f5e3bd99fac2021fb3a326607d4}{mode})
+\begin{DoxyCompactList}\small\item\em Open the specified file for reading or writing. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{fs__port__posix_8c_a08306362eac6d9e1bf1c7f2a0f622597}{fs\+Seek\+File} (\hyperlink{fs__port__fatfs_8h_a913e2a93cbf8ed241fe05fb6abc3f316}{Fs\+File} $\ast$\hyperlink{dhcp__common_8h_a5c7003134e7a7486271d4f33c2e7b7de}{file}, \hyperlink{compiler__port_8h_a022c65af7f6c8d3947e8a37d64db6ad6}{int\+\_\+t} \hyperlink{pic32mz_2isr__support_8h_ac0542d92dfcd62c19170fd963f9e5052}{offset}, \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} origin)
+\begin{DoxyCompactList}\small\item\em Move to specified position in file. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{fs__port__posix_8c_aa5372052eff813ade8102cff497ad739}{fs\+Write\+File} (\hyperlink{fs__port__fatfs_8h_a913e2a93cbf8ed241fe05fb6abc3f316}{Fs\+File} $\ast$\hyperlink{dhcp__common_8h_a5c7003134e7a7486271d4f33c2e7b7de}{file}, void $\ast$\hyperlink{tftp__common_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length})
+\begin{DoxyCompactList}\small\item\em Write data to the specified file. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{fs__port__posix_8c_af802c67ab60bcc6273bcc65a967d99ab}{fs\+Read\+File} (\hyperlink{fs__port__fatfs_8h_a913e2a93cbf8ed241fe05fb6abc3f316}{Fs\+File} $\ast$\hyperlink{dhcp__common_8h_a5c7003134e7a7486271d4f33c2e7b7de}{file}, void $\ast$\hyperlink{tftp__common_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, size\+\_\+t size, size\+\_\+t $\ast$\hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length})
+\begin{DoxyCompactList}\small\item\em Read data from the specified file. \end{DoxyCompactList}\item 
+void \hyperlink{fs__port__posix_8c_a563173066eb2924f61e00e87fbf9d0bc}{fs\+Close\+File} (\hyperlink{fs__port__fatfs_8h_a913e2a93cbf8ed241fe05fb6abc3f316}{Fs\+File} $\ast$\hyperlink{dhcp__common_8h_a5c7003134e7a7486271d4f33c2e7b7de}{file})
+\begin{DoxyCompactList}\small\item\em Close a file. \end{DoxyCompactList}\item 
+\hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} \hyperlink{fs__port__posix_8c_a3c2f29449435d964e8526e891a256d6b}{fs\+Dir\+Exists} (const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$path)
+\begin{DoxyCompactList}\small\item\em Check whether a directory exists. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{fs__port__posix_8c_a8d60b93ce5be8adc8e376cc514c3bfe7}{fs\+Create\+Dir} (const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$path)
+\begin{DoxyCompactList}\small\item\em Create a directory. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{fs__port__posix_8c_a2bb050753f999ec003b278fa58730e7f}{fs\+Remove\+Dir} (const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$path)
+\begin{DoxyCompactList}\small\item\em Remove a directory. \end{DoxyCompactList}\item 
+\hyperlink{structFsDir}{Fs\+Dir} $\ast$ \hyperlink{fs__port__posix_8c_a7a412e5f03b92f85eb09448b72c46cc9}{fs\+Open\+Dir} (const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$path)
+\begin{DoxyCompactList}\small\item\em Open a directory stream. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{fs__port__posix_8c_af9286e05d7b1032502ef39874a5b85ee}{fs\+Read\+Dir} (\hyperlink{structFsDir}{Fs\+Dir} $\ast$dir, \hyperlink{structFsDirEntry}{Fs\+Dir\+Entry} $\ast$dir\+Entry)
+\begin{DoxyCompactList}\small\item\em Read an entry from the specified directory stream. \end{DoxyCompactList}\item 
+void \hyperlink{fs__port__posix_8c_a94bfd6c1ae79880d0a5cbe3b491368f2}{fs\+Close\+Dir} (\hyperlink{structFsDir}{Fs\+Dir} $\ast$dir)
+\begin{DoxyCompactList}\small\item\em Close a directory stream. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+File system abstraction layer (P\+O\+S\+IX) 
+
+\hypertarget{pic32mz__ef__curiosity_8h_License}{}\subsection{License}\label{pic32mz__ef__curiosity_8h_License}
+S\+P\+D\+X-\/\+License-\/\+Identifier\+: G\+P\+L-\/2.\+0-\/or-\/later
+
+Copyright (C) 2010-\/2019 Oryx Embedded S\+A\+RL. All rights reserved.
+
+This program is free software; you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+
+You should have received a copy of the G\+NU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-\/1301, U\+SA.
+
+\begin{DoxyAuthor}{Author}
+Oryx Embedded S\+A\+RL (www.\+oryx-\/embedded.\+com) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+9.\+6 
+\end{DoxyVersion}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{fs__port__posix_8c_a94bfd6c1ae79880d0a5cbe3b491368f2}\label{fs__port__posix_8c_a94bfd6c1ae79880d0a5cbe3b491368f2}} 
+\index{fs\+\_\+port\+\_\+posix.\+c@{fs\+\_\+port\+\_\+posix.\+c}!fs\+Close\+Dir@{fs\+Close\+Dir}}
+\index{fs\+Close\+Dir@{fs\+Close\+Dir}!fs\+\_\+port\+\_\+posix.\+c@{fs\+\_\+port\+\_\+posix.\+c}}
+\subsubsection{\texorpdfstring{fs\+Close\+Dir()}{fsCloseDir()}}
+{\footnotesize\ttfamily void fs\+Close\+Dir (\begin{DoxyParamCaption}\item[{\hyperlink{structFsDir}{Fs\+Dir} $\ast$}]{dir }\end{DoxyParamCaption})}
+
+
+
+Close a directory stream. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em dir} & Handle that identifies the directory to be closed \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 634 of file fs\+\_\+port\+\_\+posix.\+c.
+
+
+\begin{DoxyCode}
+635 \{
+636    \textcolor{comment}{//Make sure the directory pointer is valid}
+637    \textcolor{keywordflow}{if}(dir != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+638    \{
+639       \textcolor{comment}{//Close the specified directory}
+640       closedir(dir->\hyperlink{structFsDir_a5ab11d71e8bc7dd828d5d08c44452ea7}{handle});
+641 
+642       \textcolor{comment}{//Release directory descriptor}
+643       \hyperlink{os__port__chibios_8c_a68e4fa4326f2031eab28b92a25f2d68d}{osFreeMem}(dir);
+644    \}
+645 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{fs__port__posix_8c_a563173066eb2924f61e00e87fbf9d0bc}\label{fs__port__posix_8c_a563173066eb2924f61e00e87fbf9d0bc}} 
+\index{fs\+\_\+port\+\_\+posix.\+c@{fs\+\_\+port\+\_\+posix.\+c}!fs\+Close\+File@{fs\+Close\+File}}
+\index{fs\+Close\+File@{fs\+Close\+File}!fs\+\_\+port\+\_\+posix.\+c@{fs\+\_\+port\+\_\+posix.\+c}}
+\subsubsection{\texorpdfstring{fs\+Close\+File()}{fsCloseFile()}}
+{\footnotesize\ttfamily void fs\+Close\+File (\begin{DoxyParamCaption}\item[{\hyperlink{fs__port__fatfs_8h_a913e2a93cbf8ed241fe05fb6abc3f316}{Fs\+File} $\ast$}]{file }\end{DoxyParamCaption})}
+
+
+
+Close a file. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em file} & Handle that identifies the file to be closed \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 392 of file fs\+\_\+port\+\_\+posix.\+c.
+
+
+\begin{DoxyCode}
+393 \{
+394    \textcolor{comment}{//Make sure the file pointer is valid}
+395    \textcolor{keywordflow}{if}(\hyperlink{dhcp__common_8h_a5c7003134e7a7486271d4f33c2e7b7de}{file} != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+396    \{
+397       \textcolor{comment}{//Close the specified file}
+398       fclose(\hyperlink{dhcp__common_8h_a5c7003134e7a7486271d4f33c2e7b7de}{file});
+399    \}
+400 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{fs__port__posix_8c_a8d60b93ce5be8adc8e376cc514c3bfe7}\label{fs__port__posix_8c_a8d60b93ce5be8adc8e376cc514c3bfe7}} 
+\index{fs\+\_\+port\+\_\+posix.\+c@{fs\+\_\+port\+\_\+posix.\+c}!fs\+Create\+Dir@{fs\+Create\+Dir}}
+\index{fs\+Create\+Dir@{fs\+Create\+Dir}!fs\+\_\+port\+\_\+posix.\+c@{fs\+\_\+port\+\_\+posix.\+c}}
+\subsubsection{\texorpdfstring{fs\+Create\+Dir()}{fsCreateDir()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} fs\+Create\+Dir (\begin{DoxyParamCaption}\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{path }\end{DoxyParamCaption})}
+
+
+
+Create a directory. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em path} & N\+U\+L\+L-\/terminated string specifying the directory path \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 442 of file fs\+\_\+port\+\_\+posix.\+c.
+
+
+\begin{DoxyCode}
+443 \{
+444    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+445    \hyperlink{compiler__port_8h_a022c65af7f6c8d3947e8a37d64db6ad6}{int\_t} ret;
+446 
+447    \textcolor{comment}{//Make sure the pathname is valid}
+448    \textcolor{keywordflow}{if}(path == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+449       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+450 
+451    \textcolor{comment}{//Create a new directory}
+452    ret = \_mkdir(path);
+453 
+454    \textcolor{comment}{//On success, zero is returned}
+455    \textcolor{keywordflow}{if}(ret == 0)
+456       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+457    \textcolor{keywordflow}{else}
+458       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cae9be6449970fca5714ab9957b16562a5}{ERROR\_FAILURE};
+459 
+460    \textcolor{comment}{//Return status code}
+461    \textcolor{keywordflow}{return} error;
+462 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{fs__port__posix_8c_a38d6ddafe3180ad55d036e2d0d86f230}\label{fs__port__posix_8c_a38d6ddafe3180ad55d036e2d0d86f230}} 
+\index{fs\+\_\+port\+\_\+posix.\+c@{fs\+\_\+port\+\_\+posix.\+c}!fs\+Delete\+File@{fs\+Delete\+File}}
+\index{fs\+Delete\+File@{fs\+Delete\+File}!fs\+\_\+port\+\_\+posix.\+c@{fs\+\_\+port\+\_\+posix.\+c}}
+\subsubsection{\texorpdfstring{fs\+Delete\+File()}{fsDeleteFile()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} fs\+Delete\+File (\begin{DoxyParamCaption}\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{path }\end{DoxyParamCaption})}
+
+
+
+Delete a file. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em path} & N\+U\+L\+L-\/terminated string specifying the filename \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 213 of file fs\+\_\+port\+\_\+posix.\+c.
+
+
+\begin{DoxyCode}
+214 \{
+215    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+216    \hyperlink{compiler__port_8h_a022c65af7f6c8d3947e8a37d64db6ad6}{int\_t} ret;
+217 
+218    \textcolor{comment}{//Make sure the pathname is valid}
+219    \textcolor{keywordflow}{if}(path == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+220       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+221 
+222    \textcolor{comment}{//Delete the specified file}
+223    ret = \textcolor{keyword}{remove}(path);
+224 
+225    \textcolor{comment}{//On success, zero is returned}
+226    \textcolor{keywordflow}{if}(ret == 0)
+227       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+228    \textcolor{keywordflow}{else}
+229       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cae9be6449970fca5714ab9957b16562a5}{ERROR\_FAILURE};
+230 
+231    \textcolor{comment}{//Return status code}
+232    \textcolor{keywordflow}{return} error;
+233 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{fs__port__posix_8c_a3c2f29449435d964e8526e891a256d6b}\label{fs__port__posix_8c_a3c2f29449435d964e8526e891a256d6b}} 
+\index{fs\+\_\+port\+\_\+posix.\+c@{fs\+\_\+port\+\_\+posix.\+c}!fs\+Dir\+Exists@{fs\+Dir\+Exists}}
+\index{fs\+Dir\+Exists@{fs\+Dir\+Exists}!fs\+\_\+port\+\_\+posix.\+c@{fs\+\_\+port\+\_\+posix.\+c}}
+\subsubsection{\texorpdfstring{fs\+Dir\+Exists()}{fsDirExists()}}
+{\footnotesize\ttfamily \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} fs\+Dir\+Exists (\begin{DoxyParamCaption}\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{path }\end{DoxyParamCaption})}
+
+
+
+Check whether a directory exists. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em path} & N\+U\+L\+L-\/terminated string specifying the directory path \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The function returns T\+R\+UE if the directory exists. Otherwise F\+A\+L\+SE is returned 
+\end{DoxyReturn}
+
+
+Definition at line 409 of file fs\+\_\+port\+\_\+posix.\+c.
+
+
+\begin{DoxyCode}
+410 \{
+411    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+412    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} attributes;
+413    \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\_t} found;
+414 
+415    \textcolor{comment}{//Clear flag}
+416    found = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+417 
+418    \textcolor{comment}{//Retrieve the attributes of the specified file}
+419    error = \hyperlink{fs__port__posix_8c_a2a43af14ca84e5c0b784852a50b703ce}{fsGetFileAttr}(path, &attributes, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+420 
+421    \textcolor{comment}{//Check whether the file exists}
+422    \textcolor{keywordflow}{if}(!error)
+423    \{
+424       \textcolor{comment}{//Valid directory?}
+425       \textcolor{keywordflow}{if}((attributes & \hyperlink{fs__port_8h_a2edaa29f659eebea8cf331b1066405a3a24f8258160b4e054c565570b6260db96}{FS\_FILE\_ATTR\_DIRECTORY}) != 0)
+426       \{
+427          found = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+428       \}
+429    \}
+430 
+431    \textcolor{comment}{//The function returns TRUE if the file exists}
+432    \textcolor{keywordflow}{return} found;
+433 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{fs__port__posix_8c_a0f43e535a49aaffcf54631257427f8d5}\label{fs__port__posix_8c_a0f43e535a49aaffcf54631257427f8d5}} 
+\index{fs\+\_\+port\+\_\+posix.\+c@{fs\+\_\+port\+\_\+posix.\+c}!fs\+File\+Exists@{fs\+File\+Exists}}
+\index{fs\+File\+Exists@{fs\+File\+Exists}!fs\+\_\+port\+\_\+posix.\+c@{fs\+\_\+port\+\_\+posix.\+c}}
+\subsubsection{\texorpdfstring{fs\+File\+Exists()}{fsFileExists()}}
+{\footnotesize\ttfamily \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} fs\+File\+Exists (\begin{DoxyParamCaption}\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{path }\end{DoxyParamCaption})}
+
+
+
+Check whether a file exists. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em path} & N\+U\+L\+L-\/terminated string specifying the filename \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The function returns T\+R\+UE if the file exists. Otherwise F\+A\+L\+SE is returned 
+\end{DoxyReturn}
+
+
+Definition at line 123 of file fs\+\_\+port\+\_\+posix.\+c.
+
+
+\begin{DoxyCode}
+124 \{
+125    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+126    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} attributes;
+127    \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\_t} found;
+128 
+129    \textcolor{comment}{//Clear flag}
+130    found = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+131 
+132    \textcolor{comment}{//Make sure the pathname is valid}
+133    \textcolor{keywordflow}{if}(path != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+134    \{
+135       \textcolor{comment}{//Retrieve the attributes of the specified file}
+136       error = \hyperlink{fs__port__posix_8c_a2a43af14ca84e5c0b784852a50b703ce}{fsGetFileAttr}(path, &attributes, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+137 
+138       \textcolor{comment}{//Check whether the file exists}
+139       \textcolor{keywordflow}{if}(!error)
+140       \{
+141          \textcolor{comment}{//Valid file?}
+142          \textcolor{keywordflow}{if}((attributes & \hyperlink{fs__port_8h_a2edaa29f659eebea8cf331b1066405a3a24f8258160b4e054c565570b6260db96}{FS\_FILE\_ATTR\_DIRECTORY}) == 0)
+143          \{
+144             found = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+145          \}
+146       \}
+147    \}
+148 
+149    \textcolor{comment}{//The function returns TRUE if the file exists}
+150    \textcolor{keywordflow}{return} found;
+151 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{fs__port__posix_8c_a2a43af14ca84e5c0b784852a50b703ce}\label{fs__port__posix_8c_a2a43af14ca84e5c0b784852a50b703ce}} 
+\index{fs\+\_\+port\+\_\+posix.\+c@{fs\+\_\+port\+\_\+posix.\+c}!fs\+Get\+File\+Attr@{fs\+Get\+File\+Attr}}
+\index{fs\+Get\+File\+Attr@{fs\+Get\+File\+Attr}!fs\+\_\+port\+\_\+posix.\+c@{fs\+\_\+port\+\_\+posix.\+c}}
+\subsubsection{\texorpdfstring{fs\+Get\+File\+Attr()}{fsGetFileAttr()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} fs\+Get\+File\+Attr (\begin{DoxyParamCaption}\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{path,  }\item[{\hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t} $\ast$}]{attributes,  }\item[{\hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t} $\ast$}]{size,  }\item[{\hyperlink{structDateTime}{Date\+Time} $\ast$}]{modified }\end{DoxyParamCaption})}
+
+
+
+Retrieve the attributes of the specified file. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em path} & N\+U\+L\+L-\/terminated string specifying the filename \\
+\hline
+\mbox{\tt out}  & {\em attributes} & File attributes (optional parameter) \\
+\hline
+\mbox{\tt out}  & {\em size} & Size of the file in bytes (optional parameter) \\
+\hline
+\mbox{\tt out}  & {\em modified} & Time of last modification (optional parameter) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 62 of file fs\+\_\+port\+\_\+posix.\+c.
+
+
+\begin{DoxyCode}
+64 \{
+65    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+66    \hyperlink{compiler__port_8h_a022c65af7f6c8d3947e8a37d64db6ad6}{int\_t} ret;
+67    \textcolor{keyword}{struct }stat fileStat;
+68 
+69    \textcolor{comment}{//Make sure the pathname is valid}
+70    \textcolor{keywordflow}{if}(path == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+71       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+72 
+73    \textcolor{comment}{//Get file status}
+74    ret = stat(path, &fileStat);
+75 
+76    \textcolor{comment}{//On success, zero is returned}
+77    \textcolor{keywordflow}{if}(ret == 0)
+78    \{
+79       \textcolor{comment}{//File attributes}
+80       \textcolor{keywordflow}{if}(attributes != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+81       \{
+82          \textcolor{comment}{//Check file attributes}
+83          \textcolor{keywordflow}{if}(S\_ISDIR(fileStat.st\_mode))
+84             *attributes = \hyperlink{fs__port_8h_a2edaa29f659eebea8cf331b1066405a3a24f8258160b4e054c565570b6260db96}{FS\_FILE\_ATTR\_DIRECTORY};
+85          \textcolor{keywordflow}{else}
+86             *attributes = 0;
+87       \}
+88 
+89       \textcolor{comment}{//The parameter is optional}
+90       \textcolor{keywordflow}{if}(size != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+91       \{
+92          \textcolor{comment}{//Save the size of the file}
+93          *size = fileStat.st\_size;
+94       \}
+95 
+96       \textcolor{comment}{//The parameter is optional}
+97       \textcolor{keywordflow}{if}(modified != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+98       \{
+99          \textcolor{comment}{//Save the time of last modification}
+100          \hyperlink{date__time_8c_adf6672c66ed1b93ea8bba616ae630a4b}{convertUnixTimeToDate}(fileStat.st\_mtime, modified);
+101       \}
+102 
+103       \textcolor{comment}{//Sucessful processing}
+104       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+105    \}
+106    \textcolor{keywordflow}{else}
+107    \{
+108       \textcolor{comment}{//The specified file does not exist}
+109       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca25792ced3439733c593173a3b7420ba6}{ERROR\_FILE\_NOT\_FOUND};
+110    \}
+111 
+112    \textcolor{comment}{//Return status code}
+113    \textcolor{keywordflow}{return} error;
+114 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{fs__port__posix_8c_a468b8c15424a76f8f28be14d37a1fc6f}\label{fs__port__posix_8c_a468b8c15424a76f8f28be14d37a1fc6f}} 
+\index{fs\+\_\+port\+\_\+posix.\+c@{fs\+\_\+port\+\_\+posix.\+c}!fs\+Get\+File\+Size@{fs\+Get\+File\+Size}}
+\index{fs\+Get\+File\+Size@{fs\+Get\+File\+Size}!fs\+\_\+port\+\_\+posix.\+c@{fs\+\_\+port\+\_\+posix.\+c}}
+\subsubsection{\texorpdfstring{fs\+Get\+File\+Size()}{fsGetFileSize()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} fs\+Get\+File\+Size (\begin{DoxyParamCaption}\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{path,  }\item[{\hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t} $\ast$}]{size }\end{DoxyParamCaption})}
+
+
+
+Retrieve the size of the specified file. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em path} & N\+U\+L\+L-\/terminated string specifying the filename \\
+\hline
+\mbox{\tt out}  & {\em size} & Size of the file in bytes \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 161 of file fs\+\_\+port\+\_\+posix.\+c.
+
+
+\begin{DoxyCode}
+162 \{
+163    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+164 
+165    \textcolor{comment}{//Check parameters}
+166    \textcolor{keywordflow}{if}(path == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || size == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+167       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+168 
+169    \textcolor{comment}{//Retrieve the attributes of the specified file}
+170    error = \hyperlink{fs__port__posix_8c_a2a43af14ca84e5c0b784852a50b703ce}{fsGetFileAttr}(path, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, size, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+171 
+172    \textcolor{comment}{//Return status code}
+173    \textcolor{keywordflow}{return} error;
+174 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{fs__port__posix_8c_a2977e522a7c095073fd25be43907f80e}\label{fs__port__posix_8c_a2977e522a7c095073fd25be43907f80e}} 
+\index{fs\+\_\+port\+\_\+posix.\+c@{fs\+\_\+port\+\_\+posix.\+c}!fs\+Init@{fs\+Init}}
+\index{fs\+Init@{fs\+Init}!fs\+\_\+port\+\_\+posix.\+c@{fs\+\_\+port\+\_\+posix.\+c}}
+\subsubsection{\texorpdfstring{fs\+Init()}{fsInit()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} fs\+Init (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+File system initialization. 
+
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 46 of file fs\+\_\+port\+\_\+posix.\+c.
+
+
+\begin{DoxyCode}
+47 \{
+48    \textcolor{comment}{//Successful processing}
+49    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+50 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{fs__port__posix_8c_a7a412e5f03b92f85eb09448b72c46cc9}\label{fs__port__posix_8c_a7a412e5f03b92f85eb09448b72c46cc9}} 
+\index{fs\+\_\+port\+\_\+posix.\+c@{fs\+\_\+port\+\_\+posix.\+c}!fs\+Open\+Dir@{fs\+Open\+Dir}}
+\index{fs\+Open\+Dir@{fs\+Open\+Dir}!fs\+\_\+port\+\_\+posix.\+c@{fs\+\_\+port\+\_\+posix.\+c}}
+\subsubsection{\texorpdfstring{fs\+Open\+Dir()}{fsOpenDir()}}
+{\footnotesize\ttfamily \hyperlink{structFsDir}{Fs\+Dir}$\ast$ fs\+Open\+Dir (\begin{DoxyParamCaption}\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{path }\end{DoxyParamCaption})}
+
+
+
+Open a directory stream. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em path} & N\+U\+L\+L-\/terminated string specifying the directory path \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Directory handle 
+\end{DoxyReturn}
+
+
+Definition at line 500 of file fs\+\_\+port\+\_\+posix.\+c.
+
+
+\begin{DoxyCode}
+501 \{
+502    \hyperlink{structFsDir}{FsDir} *dir;
+503 
+504    \textcolor{comment}{//Valid directory path?}
+505    \textcolor{keywordflow}{if}(path != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+506    \{
+507       \textcolor{comment}{//Allocate a memory buffer to hold the directory descriptor}
+508       dir = \hyperlink{os__port__chibios_8c_ae86758dcd9fc3c98247ae19815987c9a}{osAllocMem}(\textcolor{keyword}{sizeof}(\hyperlink{structFsDir}{FsDir}));
+509 
+510       \textcolor{comment}{//Successful memory allocation?}
+511       \textcolor{keywordflow}{if}(dir != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+512       \{
+513          \textcolor{comment}{//Open the specified directory}
+514          dir->\hyperlink{structFsDir_a5ab11d71e8bc7dd828d5d08c44452ea7}{handle} = opendir(path);
+515 
+516          \textcolor{comment}{//The function returns a pointer to the directory stream. On error,}
+517          \textcolor{comment}{//NULL is returned}
+518          \textcolor{keywordflow}{if}(dir->\hyperlink{structFsDir_a5ab11d71e8bc7dd828d5d08c44452ea7}{handle} != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+519          \{
+520             \textcolor{comment}{//Save the directory path}
+521             \hyperlink{str_8c_ac10cb0bca1fb0c39b2c765afd068486d}{strSafeCopy}(dir->\hyperlink{structFsDir_aec37a6a581778a8fc92e8e475599d2c6}{path}, path, \hyperlink{fs__port__posix_8h_aa0c6c8abe007b3bb148f7fa90f8efb39}{FS\_MAX\_PATH\_LEN});
+522             \hyperlink{path_8c_a64519f81386b6ece797fb51f06e3052d}{pathCanonicalize}(dir->\hyperlink{structFsDir_aec37a6a581778a8fc92e8e475599d2c6}{path});
+523          \}
+524          \textcolor{keywordflow}{else}
+525          \{
+526             \textcolor{comment}{//Clean up side effects}
+527             \hyperlink{os__port__chibios_8c_a68e4fa4326f2031eab28b92a25f2d68d}{osFreeMem}(dir);
+528             dir = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+529          \}
+530       \}
+531    \}
+532    \textcolor{keywordflow}{else}
+533    \{
+534       \textcolor{comment}{//Invalid parameter}
+535       dir = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+536    \}
+537 
+538    \textcolor{comment}{//Return a handle to the directory}
+539    \textcolor{keywordflow}{return} dir;
+540 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{fs__port__posix_8c_aba7fcc4f174dcf4652a8b84cdfff22b5}\label{fs__port__posix_8c_aba7fcc4f174dcf4652a8b84cdfff22b5}} 
+\index{fs\+\_\+port\+\_\+posix.\+c@{fs\+\_\+port\+\_\+posix.\+c}!fs\+Open\+File@{fs\+Open\+File}}
+\index{fs\+Open\+File@{fs\+Open\+File}!fs\+\_\+port\+\_\+posix.\+c@{fs\+\_\+port\+\_\+posix.\+c}}
+\subsubsection{\texorpdfstring{fs\+Open\+File()}{fsOpenFile()}}
+{\footnotesize\ttfamily \hyperlink{fs__port__fatfs_8h_a913e2a93cbf8ed241fe05fb6abc3f316}{Fs\+File}$\ast$ fs\+Open\+File (\begin{DoxyParamCaption}\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{path,  }\item[{\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t}}]{mode }\end{DoxyParamCaption})}
+
+
+
+Open the specified file for reading or writing. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em path} & N\+U\+L\+L-\/terminated string specifying the filename \\
+\hline
+\mbox{\tt in}  & {\em mode} & Type of access permitted (F\+S\+\_\+\+F\+I\+L\+E\+\_\+\+M\+O\+D\+E\+\_\+\+R\+E\+AD, F\+S\+\_\+\+F\+I\+L\+E\+\_\+\+M\+O\+D\+E\+\_\+\+W\+R\+I\+TE or F\+S\+\_\+\+F\+I\+L\+E\+\_\+\+M\+O\+D\+E\+\_\+\+C\+R\+E\+A\+TE) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+File handle 
+\end{DoxyReturn}
+
+
+Definition at line 244 of file fs\+\_\+port\+\_\+posix.\+c.
+
+
+\begin{DoxyCode}
+245 \{
+246    \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\_t} \hyperlink{md2_8c_adf356ff381033f761b7de5f76e763a45}{s}[4];
+247 
+248    \textcolor{comment}{//File pointer}
+249    FILE *fp = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+250 
+251    \textcolor{comment}{//Make sure the pathname is valid}
+252    \textcolor{keywordflow}{if}(path == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+253       \textcolor{keywordflow}{return} \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+254 
+255    \textcolor{comment}{//Check file access mode}
+256    \textcolor{keywordflow}{if}(\hyperlink{ntp__common_8h_a37e90f5e3bd99fac2021fb3a326607d4}{mode} & \hyperlink{fs__port_8h_a086887b0800535e5a06340d3fc76c51caed4c8b2994951eeb8d60d929444fb8cb}{FS\_FILE\_MODE\_WRITE})
+257       strcpy(s, \textcolor{stringliteral}{"wb"});
+258    \textcolor{keywordflow}{else}
+259       strcpy(s, \textcolor{stringliteral}{"rb"});
+260 
+261    \textcolor{comment}{//Open the specified file}
+262    fp = fopen(path, s);
+263 
+264    \textcolor{comment}{//Return a handle to the file}
+265    \textcolor{keywordflow}{return} fp;
+266 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{fs__port__posix_8c_af9286e05d7b1032502ef39874a5b85ee}\label{fs__port__posix_8c_af9286e05d7b1032502ef39874a5b85ee}} 
+\index{fs\+\_\+port\+\_\+posix.\+c@{fs\+\_\+port\+\_\+posix.\+c}!fs\+Read\+Dir@{fs\+Read\+Dir}}
+\index{fs\+Read\+Dir@{fs\+Read\+Dir}!fs\+\_\+port\+\_\+posix.\+c@{fs\+\_\+port\+\_\+posix.\+c}}
+\subsubsection{\texorpdfstring{fs\+Read\+Dir()}{fsReadDir()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} fs\+Read\+Dir (\begin{DoxyParamCaption}\item[{\hyperlink{structFsDir}{Fs\+Dir} $\ast$}]{dir,  }\item[{\hyperlink{structFsDirEntry}{Fs\+Dir\+Entry} $\ast$}]{dir\+Entry }\end{DoxyParamCaption})}
+
+
+
+Read an entry from the specified directory stream. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em dir} & Handle that identifies the directory \\
+\hline
+\mbox{\tt out}  & {\em dir\+Entry} & Pointer to a directory entry \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 550 of file fs\+\_\+port\+\_\+posix.\+c.
+
+
+\begin{DoxyCode}
+551 \{
+552    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+553    \hyperlink{compiler__port_8h_a022c65af7f6c8d3947e8a37d64db6ad6}{int\_t} ret;
+554    \textcolor{keyword}{struct }dirent *entry;
+555    \textcolor{keyword}{struct }stat fileStat;
+556    \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\_t} path[\hyperlink{fs__port__posix_8h_aa0c6c8abe007b3bb148f7fa90f8efb39}{FS\_MAX\_PATH\_LEN} + 1];
+557 
+558    \textcolor{comment}{//Check parameters}
+559    \textcolor{keywordflow}{if}(dir == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || dirEntry == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+560       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+561 
+562    \textcolor{comment}{//Clear directory entry}
+563    memset(dirEntry, 0, \textcolor{keyword}{sizeof}(\hyperlink{structFsDirEntry}{FsDirEntry}));
+564 
+565    \textcolor{comment}{//Read the specified directory}
+566    entry = readdir(dir->\hyperlink{structFsDir_a5ab11d71e8bc7dd828d5d08c44452ea7}{handle});
+567 
+568    \textcolor{comment}{//Valid directory entry?}
+569    \textcolor{keywordflow}{if}(entry != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+570    \{
+571       \textcolor{comment}{//Copy the file name component}
+572       \hyperlink{str_8c_ac10cb0bca1fb0c39b2c765afd068486d}{strSafeCopy}(dirEntry->\hyperlink{structFsDirEntry_ab2a81b6bc89dc202e25448d2afdbae5b}{name}, entry->d\_name, \hyperlink{fs__port_8h_a17f57e73738b6fd8b600eb2b4e0e5c71}{FS\_MAX\_NAME\_LEN});
+573 
+574       \textcolor{comment}{//Check file attributes}
+575       \textcolor{keywordflow}{if}(entry->d\_type == DT\_DIR)
+576       \{
+577          dirEntry->\hyperlink{structFsDirEntry_ae6bc73c8708ef8541ed7dc2c5f802e96}{attributes} |= \hyperlink{fs__port_8h_a2edaa29f659eebea8cf331b1066405a3a24f8258160b4e054c565570b6260db96}{FS\_FILE\_ATTR\_DIRECTORY};
+578       \}
+579 
+580       \textcolor{comment}{//Get the pathname of the directory being listed}
+581       \hyperlink{str_8c_ac10cb0bca1fb0c39b2c765afd068486d}{strSafeCopy}(path, dir->\hyperlink{structFsDir_aec37a6a581778a8fc92e8e475599d2c6}{path}, \hyperlink{fs__port__posix_8h_aa0c6c8abe007b3bb148f7fa90f8efb39}{FS\_MAX\_PATH\_LEN});
+582 
+583       \textcolor{comment}{//Retrieve the full pathname}
+584       \hyperlink{path_8c_a38625df4e9abd106fb932b8ff308adc3}{pathCombine}(path, entry->d\_name, \hyperlink{fs__port__posix_8h_aa0c6c8abe007b3bb148f7fa90f8efb39}{FS\_MAX\_PATH\_LEN});
+585       \hyperlink{path_8c_a64519f81386b6ece797fb51f06e3052d}{pathCanonicalize}(path);
+586 
+587       \textcolor{comment}{//Get file status}
+588       ret = stat(path, &fileStat);
+589 
+590       \textcolor{comment}{//On success, zero is returned}
+591       \textcolor{keywordflow}{if}(ret == 0)
+592       \{
+593          \textcolor{comment}{//File size}
+594          dirEntry->\hyperlink{structFsDirEntry_acface51e05962d480c731d0b0c7b1d0e}{size} = fileStat.st\_size;
+595 
+596          \textcolor{comment}{//Time of last modification}
+597          \hyperlink{date__time_8c_adf6672c66ed1b93ea8bba616ae630a4b}{convertUnixTimeToDate}(fileStat.st\_mtime, &dirEntry->
+      \hyperlink{structFsDirEntry_abd332197750fa0d7181d206355a86b99}{modified});
+598       \}
+599       \textcolor{keywordflow}{else}
+600       \{
+601          \textcolor{comment}{//File size}
+602          dirEntry->\hyperlink{structFsDirEntry_acface51e05962d480c731d0b0c7b1d0e}{size} = 0;
+603 
+604          \textcolor{comment}{//Time of last modification}
+605          dirEntry->\hyperlink{structFsDirEntry_abd332197750fa0d7181d206355a86b99}{modified}.\hyperlink{structDateTime_a0a61d60280541502e47f9a7fd6e1c8d2}{year} = 1970;
+606          dirEntry->\hyperlink{structFsDirEntry_abd332197750fa0d7181d206355a86b99}{modified}.\hyperlink{structDateTime_ac895afb51c74941c50205f746b709148}{month} = 1;
+607          dirEntry->\hyperlink{structFsDirEntry_abd332197750fa0d7181d206355a86b99}{modified}.\hyperlink{structDateTime_a727866b5ecdfda1edf946efe86aa74af}{day} = 1;
+608          dirEntry->\hyperlink{structFsDirEntry_abd332197750fa0d7181d206355a86b99}{modified}.\hyperlink{structDateTime_a4bcfa5ccbae6858247fce0ddc0fbc47c}{dayOfWeek} = 0;
+609          dirEntry->\hyperlink{structFsDirEntry_abd332197750fa0d7181d206355a86b99}{modified}.\hyperlink{structDateTime_a46fa4e0c13c7fc19c8ae97a5642c4a15}{hours} = 0;
+610          dirEntry->\hyperlink{structFsDirEntry_abd332197750fa0d7181d206355a86b99}{modified}.\hyperlink{structDateTime_a9e705a28fc51e333616553313107d579}{minutes} = 0;
+611          dirEntry->\hyperlink{structFsDirEntry_abd332197750fa0d7181d206355a86b99}{modified}.\hyperlink{structDateTime_a428828f757146b36432b4669e8b27eeb}{seconds} = 0;
+612          dirEntry->\hyperlink{structFsDirEntry_abd332197750fa0d7181d206355a86b99}{modified}.\hyperlink{structDateTime_a8b3982e7347da9a62c2bfc6c273da909}{milliseconds} = 0;
+613       \}
+614 
+615       \textcolor{comment}{//Successful processing}
+616       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+617    \}
+618    \textcolor{keywordflow}{else}
+619    \{
+620       \textcolor{comment}{//End of the directory stream}
+621       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca8b7223773301a4f3dd811f1d35e13ce4}{ERROR\_END\_OF\_STREAM};
+622    \}
+623 
+624    \textcolor{comment}{//Return status code}
+625    \textcolor{keywordflow}{return} error;
+626 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{fs__port__posix_8c_af802c67ab60bcc6273bcc65a967d99ab}\label{fs__port__posix_8c_af802c67ab60bcc6273bcc65a967d99ab}} 
+\index{fs\+\_\+port\+\_\+posix.\+c@{fs\+\_\+port\+\_\+posix.\+c}!fs\+Read\+File@{fs\+Read\+File}}
+\index{fs\+Read\+File@{fs\+Read\+File}!fs\+\_\+port\+\_\+posix.\+c@{fs\+\_\+port\+\_\+posix.\+c}}
+\subsubsection{\texorpdfstring{fs\+Read\+File()}{fsReadFile()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} fs\+Read\+File (\begin{DoxyParamCaption}\item[{\hyperlink{fs__port__fatfs_8h_a913e2a93cbf8ed241fe05fb6abc3f316}{Fs\+File} $\ast$}]{file,  }\item[{void $\ast$}]{data,  }\item[{size\+\_\+t}]{size,  }\item[{size\+\_\+t $\ast$}]{length }\end{DoxyParamCaption})}
+
+
+
+Read data from the specified file. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em file} & Handle that identifies the file to be read \\
+\hline
+\mbox{\tt in}  & {\em data} & Pointer to the buffer where to copy the data \\
+\hline
+\mbox{\tt in}  & {\em size} & Size of the buffer, in bytes \\
+\hline
+\mbox{\tt out}  & {\em length} & Number of data bytes that have been read \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 350 of file fs\+\_\+port\+\_\+posix.\+c.
+
+
+\begin{DoxyCode}
+351 \{
+352    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+353    \hyperlink{compiler__port_8h_a022c65af7f6c8d3947e8a37d64db6ad6}{int\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+354 
+355    \textcolor{comment}{//Check parameters}
+356    \textcolor{keywordflow}{if}(\hyperlink{dhcp__common_8h_a5c7003134e7a7486271d4f33c2e7b7de}{file} == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+357       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+358 
+359    \textcolor{comment}{//No data has been read yet}
+360    *\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} = 0;
+361 
+362    \textcolor{comment}{//Read data}
+363    n = fread(\hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, \textcolor{keyword}{sizeof}(\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t}), size, \hyperlink{dhcp__common_8h_a5c7003134e7a7486271d4f33c2e7b7de}{file});
+364 
+365    \textcolor{comment}{//The total number of elements successfully read is returned. If this}
+366    \textcolor{comment}{//number differs from the count parameter, either a reading error occurred}
+367    \textcolor{comment}{//or the end-of-file was reached while reading}
+368    \textcolor{keywordflow}{if}(n != 0)
+369    \{
+370       \textcolor{comment}{//Total number of data that have been read}
+371       *\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} = \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+372 
+373       \textcolor{comment}{//Successful processing}
+374       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+375    \}
+376    \textcolor{keywordflow}{else}
+377    \{
+378       \textcolor{comment}{//Report an error}
+379       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca488b657f8cc2e6c29df47f282e8ff3ad}{ERROR\_END\_OF\_FILE};
+380    \}
+381 
+382    \textcolor{comment}{//Return status code}
+383    \textcolor{keywordflow}{return} error;
+384 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{fs__port__posix_8c_a2bb050753f999ec003b278fa58730e7f}\label{fs__port__posix_8c_a2bb050753f999ec003b278fa58730e7f}} 
+\index{fs\+\_\+port\+\_\+posix.\+c@{fs\+\_\+port\+\_\+posix.\+c}!fs\+Remove\+Dir@{fs\+Remove\+Dir}}
+\index{fs\+Remove\+Dir@{fs\+Remove\+Dir}!fs\+\_\+port\+\_\+posix.\+c@{fs\+\_\+port\+\_\+posix.\+c}}
+\subsubsection{\texorpdfstring{fs\+Remove\+Dir()}{fsRemoveDir()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} fs\+Remove\+Dir (\begin{DoxyParamCaption}\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{path }\end{DoxyParamCaption})}
+
+
+
+Remove a directory. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em path} & N\+U\+L\+L-\/terminated string specifying the directory path \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 471 of file fs\+\_\+port\+\_\+posix.\+c.
+
+
+\begin{DoxyCode}
+472 \{
+473    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+474    \hyperlink{compiler__port_8h_a022c65af7f6c8d3947e8a37d64db6ad6}{int\_t} ret;
+475 
+476    \textcolor{comment}{//Make sure the pathname is valid}
+477    \textcolor{keywordflow}{if}(path == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+478       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+479 
+480    \textcolor{comment}{//Remove the specified directory}
+481    ret = \_rmdir(path);
+482 
+483    \textcolor{comment}{//On success, zero is returned}
+484    \textcolor{keywordflow}{if}(ret == 0)
+485       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+486    \textcolor{keywordflow}{else}
+487       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cae9be6449970fca5714ab9957b16562a5}{ERROR\_FAILURE};
+488 
+489    \textcolor{comment}{//Return status code}
+490    \textcolor{keywordflow}{return} error;
+491 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{fs__port__posix_8c_a6fcffd5686bb23325786719055d4e5fd}\label{fs__port__posix_8c_a6fcffd5686bb23325786719055d4e5fd}} 
+\index{fs\+\_\+port\+\_\+posix.\+c@{fs\+\_\+port\+\_\+posix.\+c}!fs\+Rename\+File@{fs\+Rename\+File}}
+\index{fs\+Rename\+File@{fs\+Rename\+File}!fs\+\_\+port\+\_\+posix.\+c@{fs\+\_\+port\+\_\+posix.\+c}}
+\subsubsection{\texorpdfstring{fs\+Rename\+File()}{fsRenameFile()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} fs\+Rename\+File (\begin{DoxyParamCaption}\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{old\+Path,  }\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{new\+Path }\end{DoxyParamCaption})}
+
+
+
+Rename the specified file. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em old\+Path} & N\+U\+L\+L-\/terminated string specifying the pathname of the file to be renamed \\
+\hline
+\mbox{\tt in}  & {\em new\+Path} & N\+U\+L\+L-\/terminated string specifying the new filename \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 184 of file fs\+\_\+port\+\_\+posix.\+c.
+
+
+\begin{DoxyCode}
+185 \{
+186    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+187    \hyperlink{compiler__port_8h_a022c65af7f6c8d3947e8a37d64db6ad6}{int\_t} ret;
+188 
+189    \textcolor{comment}{//Check parameters}
+190    \textcolor{keywordflow}{if}(oldPath == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || newPath == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+191       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+192 
+193    \textcolor{comment}{//Rename the specified file}
+194    ret = rename(oldPath, newPath);
+195 
+196    \textcolor{comment}{//On success, zero is returned}
+197    \textcolor{keywordflow}{if}(ret == 0)
+198       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+199    \textcolor{keywordflow}{else}
+200       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cae9be6449970fca5714ab9957b16562a5}{ERROR\_FAILURE};
+201 
+202    \textcolor{comment}{//Return status code}
+203    \textcolor{keywordflow}{return} error;
+204 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{fs__port__posix_8c_a08306362eac6d9e1bf1c7f2a0f622597}\label{fs__port__posix_8c_a08306362eac6d9e1bf1c7f2a0f622597}} 
+\index{fs\+\_\+port\+\_\+posix.\+c@{fs\+\_\+port\+\_\+posix.\+c}!fs\+Seek\+File@{fs\+Seek\+File}}
+\index{fs\+Seek\+File@{fs\+Seek\+File}!fs\+\_\+port\+\_\+posix.\+c@{fs\+\_\+port\+\_\+posix.\+c}}
+\subsubsection{\texorpdfstring{fs\+Seek\+File()}{fsSeekFile()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} fs\+Seek\+File (\begin{DoxyParamCaption}\item[{\hyperlink{fs__port__fatfs_8h_a913e2a93cbf8ed241fe05fb6abc3f316}{Fs\+File} $\ast$}]{file,  }\item[{\hyperlink{compiler__port_8h_a022c65af7f6c8d3947e8a37d64db6ad6}{int\+\_\+t}}]{offset,  }\item[{\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t}}]{origin }\end{DoxyParamCaption})}
+
+
+
+Move to specified position in file. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em file} & Handle that identifies the file \\
+\hline
+\mbox{\tt in}  & {\em offset} & Number of bytes to move from origin \\
+\hline
+\mbox{\tt in}  & {\em origin} & Position used as reference for the offset (F\+S\+\_\+\+S\+E\+E\+K\+\_\+\+S\+ET, F\+S\+\_\+\+S\+E\+E\+K\+\_\+\+C\+UR or F\+S\+\_\+\+S\+E\+E\+K\+\_\+\+E\+ND) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 278 of file fs\+\_\+port\+\_\+posix.\+c.
+
+
+\begin{DoxyCode}
+279 \{
+280    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+281    \hyperlink{compiler__port_8h_a022c65af7f6c8d3947e8a37d64db6ad6}{int\_t} ret;
+282 
+283    \textcolor{comment}{//Make sure the file pointer is valid}
+284    \textcolor{keywordflow}{if}(\hyperlink{dhcp__common_8h_a5c7003134e7a7486271d4f33c2e7b7de}{file} == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+285       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+286 
+287    \textcolor{keywordflow}{if}(origin == \hyperlink{fs__port_8h_a96b63216b3c538b63de1928e54b5d013ab7f080d71bee180296706c77d2cf3383}{FS\_SEEK\_CUR})
+288       origin = SEEK\_SET;
+289    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(origin == \hyperlink{fs__port_8h_a96b63216b3c538b63de1928e54b5d013a36dd416e193650f2c191423d3e3dad6d}{FS\_SEEK\_END})
+290       origin = SEEK\_END;
+291    \textcolor{keywordflow}{else}
+292       origin = SEEK\_CUR;
+293 
+294    \textcolor{comment}{//Move read/write pointer}
+295    ret = fseek(\hyperlink{dhcp__common_8h_a5c7003134e7a7486271d4f33c2e7b7de}{file}, \hyperlink{pic32mz_2isr__support_8h_a12a5aed8a193ebbf9a641104a310610d}{offset}, origin);
+296 
+297    \textcolor{comment}{//On success, zero is returned}
+298    \textcolor{keywordflow}{if}(ret == 0)
+299       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+300    \textcolor{keywordflow}{else}
+301       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cae9be6449970fca5714ab9957b16562a5}{ERROR\_FAILURE};
+302 
+303    \textcolor{comment}{//Return status code}
+304    \textcolor{keywordflow}{return} error;
+305 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{fs__port__posix_8c_aa5372052eff813ade8102cff497ad739}\label{fs__port__posix_8c_aa5372052eff813ade8102cff497ad739}} 
+\index{fs\+\_\+port\+\_\+posix.\+c@{fs\+\_\+port\+\_\+posix.\+c}!fs\+Write\+File@{fs\+Write\+File}}
+\index{fs\+Write\+File@{fs\+Write\+File}!fs\+\_\+port\+\_\+posix.\+c@{fs\+\_\+port\+\_\+posix.\+c}}
+\subsubsection{\texorpdfstring{fs\+Write\+File()}{fsWriteFile()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} fs\+Write\+File (\begin{DoxyParamCaption}\item[{\hyperlink{fs__port__fatfs_8h_a913e2a93cbf8ed241fe05fb6abc3f316}{Fs\+File} $\ast$}]{file,  }\item[{void $\ast$}]{data,  }\item[{size\+\_\+t}]{length }\end{DoxyParamCaption})}
+
+
+
+Write data to the specified file. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em file} & Handle that identifies the file to be written \\
+\hline
+\mbox{\tt in}  & {\em data} & Pointer to a buffer containing the data to be written \\
+\hline
+\mbox{\tt in}  & {\em length} & Number of data bytes to write \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 316 of file fs\+\_\+port\+\_\+posix.\+c.
+
+
+\begin{DoxyCode}
+317 \{
+318    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+319    \hyperlink{compiler__port_8h_a022c65af7f6c8d3947e8a37d64db6ad6}{int\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+320 
+321    \textcolor{comment}{//Make sure the file pointer is valid}
+322    \textcolor{keywordflow}{if}(\hyperlink{dhcp__common_8h_a5c7003134e7a7486271d4f33c2e7b7de}{file} == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+323       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+324 
+325    \textcolor{comment}{//Write data}
+326    n = fwrite(\hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, \textcolor{keyword}{sizeof}(\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t}), \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \hyperlink{dhcp__common_8h_a5c7003134e7a7486271d4f33c2e7b7de}{file});
+327 
+328    \textcolor{comment}{//The total number of elements successfully written is returned. If this}
+329    \textcolor{comment}{//number differs from the count parameter, a writing error prevented the}
+330    \textcolor{comment}{//function from completing}
+331    \textcolor{keywordflow}{if}(n == \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length})
+332       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+333    \textcolor{keywordflow}{else}
+334       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cae9be6449970fca5714ab9957b16562a5}{ERROR\_FAILURE};
+335 
+336    \textcolor{comment}{//Return status code}
+337    \textcolor{keywordflow}{return} error;
+338 \}
+\end{DoxyCode}

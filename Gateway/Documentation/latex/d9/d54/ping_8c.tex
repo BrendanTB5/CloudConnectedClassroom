@@ -1,0 +1,750 @@
+\hypertarget{ping_8c}{}\section{cyclone\+\_\+tcp/core/ping.c File Reference}
+\label{ping_8c}\index{cyclone\+\_\+tcp/core/ping.\+c@{cyclone\+\_\+tcp/core/ping.\+c}}
+
+
+Ping utility.  
+
+
+{\ttfamily \#include \char`\"{}core/net.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}core/ping.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}core/ip.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ipv4/ipv4.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ipv4/ipv4\+\_\+misc.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ipv4/icmp.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ipv6/ipv6.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ipv6/ipv6\+\_\+misc.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ipv6/icmpv6.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}core/socket.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}debug.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{ping_8c_afcdf5e66fd927a7f4cc64295acd20407}{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}~P\+I\+N\+G\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ping_8c_adeb52c3e9d2918096033a8c68b1be1f1}{ping} (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface, const \hyperlink{structIpAddr}{Ip\+Addr} $\ast$target\+Ip\+Addr, size\+\_\+t size, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} \hyperlink{dns__common_8h_a48b9f3382e0929bbd75cda2bf2838126}{ttl}, \hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\+\_\+t} timeout, \hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\+\_\+t} $\ast$rtt)
+\begin{DoxyCompactList}\small\item\em Test the reachability of a host. \end{DoxyCompactList}\item 
+void \hyperlink{ping_8c_a90f1bd294f92988713525bbe214c6df1}{ping\+Init} (\hyperlink{structPingContext}{Ping\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Initialize ping context. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ping_8c_adeedd321a750b178a4cdd1c28415539e}{ping\+Set\+Timeout} (\hyperlink{structPingContext}{Ping\+Context} $\ast$context, \hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\+\_\+t} timeout)
+\begin{DoxyCompactList}\small\item\em Set timeout value. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ping_8c_a41e9a8631186a550a5dc35e8bf131ca2}{ping\+Bind\+To\+Interface} (\hyperlink{structPingContext}{Ping\+Context} $\ast$context, \hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface)
+\begin{DoxyCompactList}\small\item\em Select a particular network interface. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ping_8c_a0a5d0887018b70d9d492b43d06268a05}{ping\+Send\+Request} (\hyperlink{structPingContext}{Ping\+Context} $\ast$context, const \hyperlink{structIpAddr}{Ip\+Addr} $\ast$target\+Ip\+Addr, size\+\_\+t size, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} \hyperlink{dns__common_8h_a48b9f3382e0929bbd75cda2bf2838126}{ttl})
+\begin{DoxyCompactList}\small\item\em Send an I\+C\+MP Echo Request message. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ping_8c_ae1f6e23cfcc20b9729337dc339e5ab95}{ping\+Check\+Reply} (\hyperlink{structPingContext}{Ping\+Context} $\ast$context, const \hyperlink{structIpAddr}{Ip\+Addr} $\ast$\hyperlink{ipcp_8h_a8ddffb4d02fcd8ad856313d3e208c34f}{src\+Ip\+Addr}, const \hyperlink{structIpAddr}{Ip\+Addr} $\ast$\hyperlink{ipcp_8h_a752e1719cf65f78dfec6274352cb56df}{dest\+Ip\+Addr}, const \hyperlink{icmp_8h_a3a2d01bc5809641dfb0d13f0881f3bfd}{Icmp\+Echo\+Message} $\ast$\hyperlink{pap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length})
+\begin{DoxyCompactList}\small\item\em Check whether an incoming I\+C\+MP message is acceptable. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ping_8c_a68d337e1e67f2f9d4434f0ef71173407}{ping\+Wait\+For\+Reply} (\hyperlink{structPingContext}{Ping\+Context} $\ast$context, \hyperlink{structIpAddr}{Ip\+Addr} $\ast$target\+Ip\+Addr, \hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\+\_\+t} $\ast$rtt)
+\begin{DoxyCompactList}\small\item\em Wait for a matching I\+C\+MP Echo Reply message. \end{DoxyCompactList}\item 
+void \hyperlink{ping_8c_a121030fafe8ed0c715465b6949123eca}{ping\+Release} (\hyperlink{structPingContext}{Ping\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Release ping context. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} \hyperlink{ping_8c_ac1333095d799138bc8458acfba15722a}{ping\+Sequence\+Number} = 0
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Ping utility. 
+
+\hypertarget{pic32mz__ef__curiosity_8h_License}{}\subsection{License}\label{pic32mz__ef__curiosity_8h_License}
+S\+P\+D\+X-\/\+License-\/\+Identifier\+: G\+P\+L-\/2.\+0-\/or-\/later
+
+Copyright (C) 2010-\/2019 Oryx Embedded S\+A\+RL. All rights reserved.
+
+This file is part of Cyclone\+T\+CP Open.
+
+This program is free software; you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+
+You should have received a copy of the G\+NU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-\/1301, U\+SA.
+
+\begin{DoxyAuthor}{Author}
+Oryx Embedded S\+A\+RL (www.\+oryx-\/embedded.\+com) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+9.\+6 
+\end{DoxyVersion}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{ping_8c_afcdf5e66fd927a7f4cc64295acd20407}\label{ping_8c_afcdf5e66fd927a7f4cc64295acd20407}} 
+\index{ping.\+c@{ping.\+c}!T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+\index{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}!ping.\+c@{ping.\+c}}
+\subsubsection{\texorpdfstring{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}{TRACE\_LEVEL}}
+{\footnotesize\ttfamily \#define T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL~P\+I\+N\+G\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}
+
+
+
+Definition at line 32 of file ping.\+c.
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{ping_8c_adeb52c3e9d2918096033a8c68b1be1f1}\label{ping_8c_adeb52c3e9d2918096033a8c68b1be1f1}} 
+\index{ping.\+c@{ping.\+c}!ping@{ping}}
+\index{ping@{ping}!ping.\+c@{ping.\+c}}
+\subsubsection{\texorpdfstring{ping()}{ping()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ping (\begin{DoxyParamCaption}\item[{\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$}]{interface,  }\item[{const \hyperlink{structIpAddr}{Ip\+Addr} $\ast$}]{target\+Ip\+Addr,  }\item[{size\+\_\+t}]{size,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}}]{ttl,  }\item[{\hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\+\_\+t}}]{timeout,  }\item[{\hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\+\_\+t} $\ast$}]{rtt }\end{DoxyParamCaption})}
+
+
+
+Test the reachability of a host. 
+
+Ping operates by sending an I\+C\+MP Echo Request message to the target host and waiting for an I\+C\+MP Echo Reply message
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em interface} & Underlying network interface (optional parameter) \\
+\hline
+\mbox{\tt in}  & {\em target\+Ip\+Addr} & IP address of the host to reach \\
+\hline
+\mbox{\tt in}  & {\em size} & Size of the data payload in bytes \\
+\hline
+\mbox{\tt in}  & {\em ttl} & Time-\/\+To-\/\+Live value to be used \\
+\hline
+\mbox{\tt in}  & {\em timeout} & Maximum time to wait before giving up \\
+\hline
+\mbox{\tt out}  & {\em rtt} & Round-\/trip time (optional parameter) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 69 of file ping.\+c.
+
+
+\begin{DoxyCode}
+71 \{
+72    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+73    \hyperlink{structPingContext}{PingContext} context;
+74 
+75    \textcolor{comment}{//Check parameters}
+76    \textcolor{keywordflow}{if}(targetIpAddr == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+77       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+78 
+79    \textcolor{comment}{//Initialize context}
+80    \hyperlink{ping_8c_a90f1bd294f92988713525bbe214c6df1}{pingInit}(&context);
+81 
+82    \textcolor{comment}{//Start of exception handling block}
+83    \textcolor{keywordflow}{do}
+84    \{
+85       \textcolor{comment}{//Select the specified network interface}
+86       error = \hyperlink{ping_8c_a41e9a8631186a550a5dc35e8bf131ca2}{pingBindToInterface}(&context, interface);
+87       \textcolor{comment}{//Any error to report?}
+88       \textcolor{keywordflow}{if}(error)
+89          \textcolor{keywordflow}{break};
+90 
+91       \textcolor{comment}{//Set timeout value}
+92       error = \hyperlink{ping_8c_adeedd321a750b178a4cdd1c28415539e}{pingSetTimeout}(&context, timeout);
+93       \textcolor{comment}{//Any error to report?}
+94       \textcolor{keywordflow}{if}(error)
+95          \textcolor{keywordflow}{break};
+96 
+97       \textcolor{comment}{//Send an ICMP Echo Request message}
+98       error = \hyperlink{ping_8c_a0a5d0887018b70d9d492b43d06268a05}{pingSendRequest}(&context, targetIpAddr, size, \hyperlink{dns__common_8h_a48b9f3382e0929bbd75cda2bf2838126}{ttl});
+99       \textcolor{comment}{//Any error to report?}
+100       \textcolor{keywordflow}{if}(error)
+101          \textcolor{keywordflow}{break};
+102 
+103       \textcolor{comment}{//Wait for a matching Echo Reply message}
+104       error = \hyperlink{ping_8c_a68d337e1e67f2f9d4434f0ef71173407}{pingWaitForReply}(&context, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, rtt);
+105       \textcolor{comment}{//Any error to report?}
+106       \textcolor{keywordflow}{if}(error)
+107          \textcolor{keywordflow}{break};
+108 
+109       \textcolor{comment}{//End of exception handling block}
+110    \} \textcolor{keywordflow}{while}(0);
+111 
+112    \textcolor{comment}{//Release resources}
+113    \hyperlink{ping_8c_a121030fafe8ed0c715465b6949123eca}{pingRelease}(&context);
+114 
+115    \textcolor{comment}{//Return status code}
+116    \textcolor{keywordflow}{return} error;
+117 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ping_8c_a41e9a8631186a550a5dc35e8bf131ca2}\label{ping_8c_a41e9a8631186a550a5dc35e8bf131ca2}} 
+\index{ping.\+c@{ping.\+c}!ping\+Bind\+To\+Interface@{ping\+Bind\+To\+Interface}}
+\index{ping\+Bind\+To\+Interface@{ping\+Bind\+To\+Interface}!ping.\+c@{ping.\+c}}
+\subsubsection{\texorpdfstring{ping\+Bind\+To\+Interface()}{pingBindToInterface()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ping\+Bind\+To\+Interface (\begin{DoxyParamCaption}\item[{\hyperlink{structPingContext}{Ping\+Context} $\ast$}]{context,  }\item[{\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$}]{interface }\end{DoxyParamCaption})}
+
+
+
+Select a particular network interface. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the ping context \\
+\hline
+\mbox{\tt in}  & {\em interface} & Network interface to be used \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 167 of file ping.\+c.
+
+
+\begin{DoxyCode}
+168 \{
+169    \textcolor{comment}{//Invalid context?}
+170    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+171       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+172 
+173    \textcolor{comment}{//Select the specified network interface}
+174    context->\hyperlink{structPingContext_a073a54777f8695b78d92e4dd1e65f50f}{interface} = interface;
+175 
+176    \textcolor{comment}{//Successful processing}
+177    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+178 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ping_8c_ae1f6e23cfcc20b9729337dc339e5ab95}\label{ping_8c_ae1f6e23cfcc20b9729337dc339e5ab95}} 
+\index{ping.\+c@{ping.\+c}!ping\+Check\+Reply@{ping\+Check\+Reply}}
+\index{ping\+Check\+Reply@{ping\+Check\+Reply}!ping.\+c@{ping.\+c}}
+\subsubsection{\texorpdfstring{ping\+Check\+Reply()}{pingCheckReply()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ping\+Check\+Reply (\begin{DoxyParamCaption}\item[{\hyperlink{structPingContext}{Ping\+Context} $\ast$}]{context,  }\item[{const \hyperlink{structIpAddr}{Ip\+Addr} $\ast$}]{src\+Ip\+Addr,  }\item[{const \hyperlink{structIpAddr}{Ip\+Addr} $\ast$}]{dest\+Ip\+Addr,  }\item[{const \hyperlink{icmp_8h_a3a2d01bc5809641dfb0d13f0881f3bfd}{Icmp\+Echo\+Message} $\ast$}]{message,  }\item[{size\+\_\+t}]{length }\end{DoxyParamCaption})}
+
+
+
+Check whether an incoming I\+C\+MP message is acceptable. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the ping context \\
+\hline
+\mbox{\tt in}  & {\em src\+Ip\+Addr} & Source IP address \\
+\hline
+\mbox{\tt in}  & {\em dest\+Ip\+Addr} & Destination IP address \\
+\hline
+\mbox{\tt in}  & {\em message} & Pointer to the incoming I\+C\+MP message \\
+\hline
+\mbox{\tt in}  & {\em length} & Length of the message, in bytes \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 361 of file ping.\+c.
+
+
+\begin{DoxyCode}
+363 \{
+364    \textcolor{keywordtype}{size\_t} i;
+365 
+366    \textcolor{comment}{//Check message length}
+367    \textcolor{keywordflow}{if}(\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} != (\textcolor{keyword}{sizeof}(\hyperlink{icmp_8h_a3a2d01bc5809641dfb0d13f0881f3bfd}{IcmpEchoMessage}) + context->
+      \hyperlink{structPingContext_ae06fb21c6e63db031f631068a10d546f}{dataPayloadSize}))
+368       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca6b1c5652c82e48ada5b4348c0ebb95e6}{ERROR\_INVALID\_MESSAGE};
+369 
+370 \textcolor{preprocessor}{#if (IPV4\_SUPPORT == ENABLED)}
+371    \textcolor{comment}{//Is target address an IPv4 address?}
+372    \textcolor{keywordflow}{if}(context->\hyperlink{structPingContext_a7350625b099ef9d224098259f713dc80}{socket}->protocol == \hyperlink{socket_8h_a56eb0e60bda5d1d8a2e702228405d969af988f9440d0e06b9e58c9851e8ace1ea}{SOCKET\_IP\_PROTO\_ICMP})
+373    \{
+374       \textcolor{comment}{//Check address type}
+375       \textcolor{keywordflow}{if}(destIpAddr->\hyperlink{structIpAddr_ae61478bd1e79361fca7dd04a21aeb2f8}{length} != \textcolor{keyword}{sizeof}(\hyperlink{ipv4_8h_a411debb3d770caa0c06d3f73367da37f}{Ipv4Addr}))
+376          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca6b1c5652c82e48ada5b4348c0ebb95e6}{ERROR\_INVALID\_MESSAGE};
+377 
+378       \textcolor{comment}{//Check message type}
+379       \textcolor{keywordflow}{if}(\hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}->type != \hyperlink{icmp_8h_a19857c9f7d9a5734a6256d79d5abcf80a8fcd1da1c798421c28f9098da07af8ee}{ICMP\_TYPE\_ECHO\_REPLY})
+380          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca6b1c5652c82e48ada5b4348c0ebb95e6}{ERROR\_INVALID\_MESSAGE};
+381 
+382       \textcolor{comment}{//Verify checksum value}
+383       \textcolor{keywordflow}{if}(\hyperlink{ip_8c_afd9054199d0e6af3029f7326d9b4c2f1}{ipCalcChecksum}(\hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}) != 0x0000)
+384          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca6b1c5652c82e48ada5b4348c0ebb95e6}{ERROR\_INVALID\_MESSAGE};
+385    \}
+386    \textcolor{keywordflow}{else}
+387 \textcolor{preprocessor}{#endif}
+388 \textcolor{preprocessor}{#if (IPV6\_SUPPORT == ENABLED)}
+389    \textcolor{comment}{//Is target address an IPv6 address?}
+390    \textcolor{keywordflow}{if}(context->\hyperlink{structPingContext_a7350625b099ef9d224098259f713dc80}{socket}->protocol == \hyperlink{socket_8h_a56eb0e60bda5d1d8a2e702228405d969a579122100c3d6914189900067c8f335d}{SOCKET\_IP\_PROTO\_ICMPV6})
+391    \{
+392       \hyperlink{ipv6_8h_a68061e0a0b502d880cbe60b645cfa2b7}{Ipv6PseudoHeader} pseudoHeader;
+393 
+394       \textcolor{comment}{//Check address type}
+395       \textcolor{keywordflow}{if}(destIpAddr->\hyperlink{structIpAddr_ae61478bd1e79361fca7dd04a21aeb2f8}{length} != \textcolor{keyword}{sizeof}(\hyperlink{ipv6_8h_aed0cbc40c61ed5b4fb681ebc55237e89}{Ipv6Addr}))
+396          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca6b1c5652c82e48ada5b4348c0ebb95e6}{ERROR\_INVALID\_MESSAGE};
+397 
+398       \textcolor{comment}{//Check message type}
+399       \textcolor{keywordflow}{if}(\hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}->type != \hyperlink{icmpv6_8h_a6bd3724b797b492017d0264d1ae5c609afbf550cb8772e3f9066f803abbeef4c9}{ICMPV6\_TYPE\_ECHO\_REPLY})
+400          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca6b1c5652c82e48ada5b4348c0ebb95e6}{ERROR\_INVALID\_MESSAGE};
+401 
+402       \textcolor{comment}{//Format IPv6 pseudo header}
+403       pseudoHeader.srcAddr = srcIpAddr->\hyperlink{structIpAddr_a9bc2340a9c0bc5a0b8aa9695b74e2ee6}{ipv6Addr};
+404       pseudoHeader.destAddr = destIpAddr->\hyperlink{structIpAddr_a9bc2340a9c0bc5a0b8aa9695b74e2ee6}{ipv6Addr};
+405       pseudoHeader.length = \hyperlink{cpu__endian_8h_a63baf217625b15caa7246af75b027380}{htonl}(\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length});
+406       pseudoHeader.reserved = 0;
+407       pseudoHeader.nextHeader = \hyperlink{ipv6_8h_a551bec2628dfcc3b67c0fff52e486fa5a1abdcf5760ff2904781383db26717c83}{IPV6\_ICMPV6\_HEADER};
+408 
+409       \textcolor{comment}{//Verify checksum value}
+410       \textcolor{keywordflow}{if}(\hyperlink{ip_8c_add813cf9f7b42d261b87ee5488aa8bb4}{ipCalcUpperLayerChecksum}(&pseudoHeader,
+411          \textcolor{keyword}{sizeof}(\hyperlink{ipv6_8h_a68061e0a0b502d880cbe60b645cfa2b7}{Ipv6PseudoHeader}), \hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}) != 0x0000)
+412       \{
+413          \textcolor{comment}{//The checksum is not valid}
+414          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca6b1c5652c82e48ada5b4348c0ebb95e6}{ERROR\_INVALID\_MESSAGE};
+415       \}
+416    \}
+417    \textcolor{keywordflow}{else}
+418 \textcolor{preprocessor}{#endif}
+419    \textcolor{comment}{//Invalid target address?}
+420    \{
+421       \textcolor{comment}{//Report an error}
+422       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca21cbabf2c791471c05a9bc2710638aec}{ERROR\_INVALID\_ADDRESS};
+423    \}
+424 
+425    \textcolor{comment}{//Make sure the response identifier matches the request identifier}
+426    \textcolor{keywordflow}{if}(\hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}->identifier != context->\hyperlink{structPingContext_a589a580b784d48c631cc623957872fbd}{identifier})
+427       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca6b1c5652c82e48ada5b4348c0ebb95e6}{ERROR\_INVALID\_MESSAGE};
+428    \textcolor{comment}{//Make sure the sequence number is correct}
+429    \textcolor{keywordflow}{if}(\hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}->sequenceNumber != context->\hyperlink{structPingContext_ab01b982ba9fd139a366a34a7ff3deda1}{sequenceNumber})
+430       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca6b1c5652c82e48ada5b4348c0ebb95e6}{ERROR\_INVALID\_MESSAGE};
+431 
+432    \textcolor{comment}{//Verify data payload}
+433    \textcolor{keywordflow}{for}(i = 0; i < context->\hyperlink{structPingContext_ae06fb21c6e63db031f631068a10d546f}{dataPayloadSize}; i++)
+434    \{
+435       \textcolor{comment}{//Compare received data against expected data pattern}
+436       \textcolor{keywordflow}{if}(\hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}->data[i] != (i & 0xFF))
+437          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca6b1c5652c82e48ada5b4348c0ebb95e6}{ERROR\_INVALID\_MESSAGE};
+438    \}
+439 
+440    \textcolor{comment}{//The ICMP Echo Reply message is acceptable}
+441    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+442 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ping_8c_a90f1bd294f92988713525bbe214c6df1}\label{ping_8c_a90f1bd294f92988713525bbe214c6df1}} 
+\index{ping.\+c@{ping.\+c}!ping\+Init@{ping\+Init}}
+\index{ping\+Init@{ping\+Init}!ping.\+c@{ping.\+c}}
+\subsubsection{\texorpdfstring{ping\+Init()}{pingInit()}}
+{\footnotesize\ttfamily void ping\+Init (\begin{DoxyParamCaption}\item[{\hyperlink{structPingContext}{Ping\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Initialize ping context. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the ping context \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 125 of file ping.\+c.
+
+
+\begin{DoxyCode}
+126 \{
+127    \textcolor{comment}{//Make sure the context is valid}
+128    \textcolor{keywordflow}{if}(context != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+129    \{
+130       \textcolor{comment}{//Initialize context}
+131       memset(context, 0, \textcolor{keyword}{sizeof}(\hyperlink{structPingContext}{PingContext}));
+132 
+133       \textcolor{comment}{//Set the default timeout to be used}
+134       context->\hyperlink{structPingContext_a54b3e386313823853f73dc5d6ec1758c}{timeout} = \hyperlink{ping_8h_a306e1cfb535a38e53c925cddc40e46e0}{PING\_DEFAULT\_TIMEOUT};
+135    \}
+136 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ping_8c_a121030fafe8ed0c715465b6949123eca}\label{ping_8c_a121030fafe8ed0c715465b6949123eca}} 
+\index{ping.\+c@{ping.\+c}!ping\+Release@{ping\+Release}}
+\index{ping\+Release@{ping\+Release}!ping.\+c@{ping.\+c}}
+\subsubsection{\texorpdfstring{ping\+Release()}{pingRelease()}}
+{\footnotesize\ttfamily void ping\+Release (\begin{DoxyParamCaption}\item[{\hyperlink{structPingContext}{Ping\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Release ping context. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the ping context \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 547 of file ping.\+c.
+
+
+\begin{DoxyCode}
+548 \{
+549    \textcolor{comment}{//Make sure the context is valid}
+550    \textcolor{keywordflow}{if}(context != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+551    \{
+552       \textcolor{comment}{//Close underlying socket}
+553       \textcolor{keywordflow}{if}(context->\hyperlink{structPingContext_a7350625b099ef9d224098259f713dc80}{socket} != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+554       \{
+555          \hyperlink{socket_8c_ac5012e9f71c97e2ea0410f2c5baccb0e}{socketClose}(context->\hyperlink{structPingContext_a7350625b099ef9d224098259f713dc80}{socket});
+556          context->\hyperlink{structPingContext_a7350625b099ef9d224098259f713dc80}{socket} = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+557       \}
+558    \}
+559 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ping_8c_a0a5d0887018b70d9d492b43d06268a05}\label{ping_8c_a0a5d0887018b70d9d492b43d06268a05}} 
+\index{ping.\+c@{ping.\+c}!ping\+Send\+Request@{ping\+Send\+Request}}
+\index{ping\+Send\+Request@{ping\+Send\+Request}!ping.\+c@{ping.\+c}}
+\subsubsection{\texorpdfstring{ping\+Send\+Request()}{pingSendRequest()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ping\+Send\+Request (\begin{DoxyParamCaption}\item[{\hyperlink{structPingContext}{Ping\+Context} $\ast$}]{context,  }\item[{const \hyperlink{structIpAddr}{Ip\+Addr} $\ast$}]{target\+Ip\+Addr,  }\item[{size\+\_\+t}]{size,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}}]{ttl }\end{DoxyParamCaption})}
+
+
+
+Send an I\+C\+MP Echo Request message. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the ping context \\
+\hline
+\mbox{\tt in}  & {\em target\+Ip\+Addr} & IP address of the host to reach \\
+\hline
+\mbox{\tt in}  & {\em size} & Size of the data payload, in bytes \\
+\hline
+\mbox{\tt in}  & {\em ttl} & Time-\/\+To-\/\+Live value to be used \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 190 of file ping.\+c.
+
+
+\begin{DoxyCode}
+192 \{
+193    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+194    \textcolor{keywordtype}{size\_t} i;
+195    \textcolor{keywordtype}{size\_t} \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length};
+196    \hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{NetInterface} *interface;
+197    \hyperlink{icmp_8h_a3a2d01bc5809641dfb0d13f0881f3bfd}{IcmpEchoMessage} *\hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message};
+198 
+199    \textcolor{comment}{//Invalid context?}
+200    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+201       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+202 
+203    \textcolor{comment}{//Limit the size of the data payload}
+204    context->\hyperlink{structPingContext_ae06fb21c6e63db031f631068a10d546f}{dataPayloadSize} = \hyperlink{os__port_8h_a3acffbd305ee72dcd4593c0d8af64a4f}{MIN} (size, \hyperlink{ping_8h_a2e110a628a79e737f9581e5f7a0f6406}{PING\_MAX\_DATA\_SIZE});
+205 
+206    \textcolor{comment}{//Close existing socket, if necessary}
+207    \textcolor{keywordflow}{if}(context->\hyperlink{structPingContext_a7350625b099ef9d224098259f713dc80}{socket} != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+208    \{
+209       \hyperlink{socket_8c_ac5012e9f71c97e2ea0410f2c5baccb0e}{socketClose}(context->\hyperlink{structPingContext_a7350625b099ef9d224098259f713dc80}{socket});
+210       context->\hyperlink{structPingContext_a7350625b099ef9d224098259f713dc80}{socket} = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+211    \}
+212 
+213    \textcolor{comment}{//Identifier field is used to help matching requests and replies}
+214    context->\hyperlink{structPingContext_a589a580b784d48c631cc623957872fbd}{identifier} = \hyperlink{net_8c_a7bb00b31d641749ac8ce742261eb1f6d}{netGetRand}();
+215 
+216    \textcolor{comment}{//Get exclusive access}
+217    \hyperlink{os__port__chibios_8c_a58485224df4bfa522246d55b35bbd83a}{osAcquireMutex}(&\hyperlink{net_8c_afe31551ad26115fae8e575654346d441}{netMutex});
+218    \textcolor{comment}{//Sequence Number field is increment each time an Echo Request is sent}
+219    context->\hyperlink{structPingContext_ab01b982ba9fd139a366a34a7ff3deda1}{sequenceNumber} = \hyperlink{ping_8c_ac1333095d799138bc8458acfba15722a}{pingSequenceNumber}++;
+220    \textcolor{comment}{//Release exclusive access}
+221    \hyperlink{os__port__chibios_8c_a8e10e5b2c6d3877b5ba60e375ac45d79}{osReleaseMutex}(&\hyperlink{net_8c_afe31551ad26115fae8e575654346d441}{netMutex});
+222 
+223    \textcolor{comment}{//Point to the buffer where to format the ICMP message}
+224    message = (\hyperlink{icmp_8h_a3a2d01bc5809641dfb0d13f0881f3bfd}{IcmpEchoMessage} *) context->\hyperlink{structPingContext_aed5669c080545d5f0ef2d655d08bf685}{buffer};
+225 
+226    \textcolor{comment}{//Format ICMP Echo Request message}
+227    message->type = \hyperlink{icmp_8h_a19857c9f7d9a5734a6256d79d5abcf80a9625766a2a7b525a89a43044093e4199}{ICMP\_TYPE\_ECHO\_REQUEST};
+228    message->code = 0;
+229    message->checksum = 0;
+230    message->identifier = context->\hyperlink{structPingContext_a589a580b784d48c631cc623957872fbd}{identifier};
+231    message->sequenceNumber = context->\hyperlink{structPingContext_ab01b982ba9fd139a366a34a7ff3deda1}{sequenceNumber};
+232 
+233    \textcolor{comment}{//Initialize data payload}
+234    \textcolor{keywordflow}{for}(i = 0; i < context->dataPayloadSize; i++)
+235       message->data[i] = i & 0xFF;
+236 
+237    \textcolor{comment}{//Length of the complete ICMP message including header and data}
+238    length = \textcolor{keyword}{sizeof}(\hyperlink{icmp_8h_a3a2d01bc5809641dfb0d13f0881f3bfd}{IcmpEchoMessage}) + context->\hyperlink{structPingContext_ae06fb21c6e63db031f631068a10d546f}{dataPayloadSize};
+239 
+240    \textcolor{comment}{//Select the relevant network interface}
+241    interface = context->\hyperlink{structPingContext_a073a54777f8695b78d92e4dd1e65f50f}{interface};
+242 
+243 #if (\hyperlink{ipv4_8h_aecbc609aa296c67cbd82e64942d5eacc}{IPV4\_SUPPORT} == \hyperlink{os__port_8h_a73c228f87e038e8295ee8ea8eceaa5ac}{ENABLED})
+244    \textcolor{comment}{//Is target address an IPv4 address?}
+245    \textcolor{keywordflow}{if}(targetIpAddr->\hyperlink{structIpAddr_ae61478bd1e79361fca7dd04a21aeb2f8}{length} == \textcolor{keyword}{sizeof}(\hyperlink{ipv4_8h_a411debb3d770caa0c06d3f73367da37f}{Ipv4Addr}))
+246    \{
+247       \hyperlink{ipv4_8h_a411debb3d770caa0c06d3f73367da37f}{Ipv4Addr} \hyperlink{ipcp_8h_a8ddffb4d02fcd8ad856313d3e208c34f}{srcIpAddr};
+248 
+249       \textcolor{comment}{//Select the source IPv4 address and the relevant network}
+250       \textcolor{comment}{//interface to use when pinging the specified host}
+251       error = \hyperlink{ipv4__misc_8c_af1ec532996ca54986f87e67a354e03e1}{ipv4SelectSourceAddr}(&interface, targetIpAddr->
+      \hyperlink{structIpAddr_a8de6f49cb0461f57c1eda49bb1088916}{ipv4Addr},
+252          &srcIpAddr);
+253       \textcolor{comment}{//Any error to report?}
+254       \textcolor{keywordflow}{if}(error)
+255          \textcolor{keywordflow}{return} error;
+256 
+257       \textcolor{comment}{//ICMP Echo Request message}
+258       message->type = \hyperlink{icmp_8h_a19857c9f7d9a5734a6256d79d5abcf80a9625766a2a7b525a89a43044093e4199}{ICMP\_TYPE\_ECHO\_REQUEST};
+259       \textcolor{comment}{//Message checksum calculation}
+260       message->checksum = \hyperlink{ip_8c_afd9054199d0e6af3029f7326d9b4c2f1}{ipCalcChecksum}(message, length);
+261 
+262       \textcolor{comment}{//Open a raw socket}
+263       context->\hyperlink{structPingContext_a7350625b099ef9d224098259f713dc80}{socket} = \hyperlink{socket_8c_aa139bbf42b326b52eb08cf52771ac337}{socketOpen}(\hyperlink{socket_8h_aa78c7398fa81f7f62aa233159d4d8d97a3db886c9e1e99cf877623ee040af71c5}{SOCKET\_TYPE\_RAW\_IP}, 
+      \hyperlink{socket_8h_a56eb0e60bda5d1d8a2e702228405d969af988f9440d0e06b9e58c9851e8ace1ea}{SOCKET\_IP\_PROTO\_ICMP});
+264    \}
+265    \textcolor{keywordflow}{else}
+266 \textcolor{preprocessor}{#endif}
+267 \textcolor{preprocessor}{#if (IPV6\_SUPPORT == ENABLED)}
+268    \textcolor{comment}{//Is target address an IPv6 address?}
+269    \textcolor{keywordflow}{if}(targetIpAddr->\hyperlink{structIpAddr_ae61478bd1e79361fca7dd04a21aeb2f8}{length} == \textcolor{keyword}{sizeof}(\hyperlink{ipv6_8h_aed0cbc40c61ed5b4fb681ebc55237e89}{Ipv6Addr}))
+270    \{
+271       \hyperlink{ipv6_8h_a68061e0a0b502d880cbe60b645cfa2b7}{Ipv6PseudoHeader} pseudoHeader;
+272 
+273       \textcolor{comment}{//Select the source IPv6 address and the relevant network interface}
+274       \textcolor{comment}{//to use when pinging the specified host}
+275       error = \hyperlink{ipv6__misc_8c_a1d69e11a455ee8895ec67061f554a174}{ipv6SelectSourceAddr}(&interface, &targetIpAddr->
+      \hyperlink{structIpAddr_a9bc2340a9c0bc5a0b8aa9695b74e2ee6}{ipv6Addr},
+276          &pseudoHeader.srcAddr);
+277       \textcolor{comment}{//Any error to report?}
+278       \textcolor{keywordflow}{if}(error)
+279          \textcolor{keywordflow}{return} error;
+280 
+281       \textcolor{comment}{//ICMPv6 Echo Request message}
+282       message->type = \hyperlink{icmpv6_8h_a6bd3724b797b492017d0264d1ae5c609aedbd1b97f6d8cfbcca7337b08228c50c}{ICMPV6\_TYPE\_ECHO\_REQUEST};
+283 
+284       \textcolor{comment}{//Format IPv6 pseudo header}
+285       pseudoHeader.destAddr = targetIpAddr->\hyperlink{structIpAddr_a9bc2340a9c0bc5a0b8aa9695b74e2ee6}{ipv6Addr};
+286       pseudoHeader.length = \hyperlink{cpu__endian_8h_a63baf217625b15caa7246af75b027380}{htonl}(length);
+287       pseudoHeader.reserved = 0;
+288       pseudoHeader.nextHeader = \hyperlink{ipv6_8h_a551bec2628dfcc3b67c0fff52e486fa5a1abdcf5760ff2904781383db26717c83}{IPV6\_ICMPV6\_HEADER};
+289 
+290       \textcolor{comment}{//Message checksum calculation}
+291       message->checksum = \hyperlink{ip_8c_add813cf9f7b42d261b87ee5488aa8bb4}{ipCalcUpperLayerChecksum}(&pseudoHeader,
+292          \textcolor{keyword}{sizeof}(\hyperlink{ipv6_8h_a68061e0a0b502d880cbe60b645cfa2b7}{Ipv6PseudoHeader}), message, length);
+293 
+294       \textcolor{comment}{//Open a raw socket}
+295       context->\hyperlink{structPingContext_a7350625b099ef9d224098259f713dc80}{socket} = \hyperlink{socket_8c_aa139bbf42b326b52eb08cf52771ac337}{socketOpen}(\hyperlink{socket_8h_aa78c7398fa81f7f62aa233159d4d8d97a3db886c9e1e99cf877623ee040af71c5}{SOCKET\_TYPE\_RAW\_IP}, 
+      \hyperlink{socket_8h_a56eb0e60bda5d1d8a2e702228405d969a579122100c3d6914189900067c8f335d}{SOCKET\_IP\_PROTO\_ICMPV6});
+296    \}
+297    \textcolor{keywordflow}{else}
+298 \textcolor{preprocessor}{#endif}
+299    \textcolor{comment}{//Invalid target address?}
+300    \{
+301       \textcolor{comment}{//Report an error}
+302       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca21cbabf2c791471c05a9bc2710638aec}{ERROR\_INVALID\_ADDRESS};
+303    \}
+304 
+305    \textcolor{comment}{//Failed to open socket?}
+306    \textcolor{keywordflow}{if}(context->\hyperlink{structPingContext_a7350625b099ef9d224098259f713dc80}{socket} == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+307       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cab721230e985e398cc0977dd729a12c61}{ERROR\_OPEN\_FAILED};
+308 
+309    \textcolor{comment}{//Set the TTL value to be used}
+310    context->\hyperlink{structPingContext_a7350625b099ef9d224098259f713dc80}{socket}->ttl = \hyperlink{dns__common_8h_a48b9f3382e0929bbd75cda2bf2838126}{ttl};
+311 
+312    \textcolor{comment}{//Start of exception handling block}
+313    \textcolor{keywordflow}{do}
+314    \{
+315       \textcolor{comment}{//Associate the newly created socket with the relevant interface}
+316       error = \hyperlink{net__legacy_8h_a80bc49fa99e5654d8c345cd5c70d36d3}{socketBindToInterface}(context->\hyperlink{structPingContext_a7350625b099ef9d224098259f713dc80}{socket}, interface);
+317       \textcolor{comment}{//Unable to bind the socket to the desired interface?}
+318       \textcolor{keywordflow}{if}(error)
+319          \textcolor{keywordflow}{break};
+320 
+321       \textcolor{comment}{//Debug message}
+322       \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"Sending ICMP echo request to %s (%"} \hyperlink{compiler__port_8h_a2b7b0557dc6cd786df02dafbb51f5292}{PRIuSIZE} \textcolor{stringliteral}{" bytes)...\(\backslash\)r\(\backslash\)n"},
+323          \hyperlink{ip_8c_aecdb577de79f65f8c814d5f101c7c6ae}{ipAddrToString}(targetIpAddr, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}), length);
+324 
+325       \textcolor{comment}{//Send Echo Request message}
+326       error = \hyperlink{socket_8c_a5985321fef9f287f84c4004aaa78920e}{socketSendTo}(context->\hyperlink{structPingContext_a7350625b099ef9d224098259f713dc80}{socket}, targetIpAddr, 0,
+327          message, length, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, 0);
+328       \textcolor{comment}{//Failed to send message ?}
+329       \textcolor{keywordflow}{if}(error)
+330          \textcolor{keywordflow}{break};
+331 
+332       \textcolor{comment}{//Save the time at which the request was sent}
+333       context->\hyperlink{structPingContext_a0da9c1f437ccff2b8084a2f8f76d2766}{timestamp} = \hyperlink{os__port__chibios_8c_ab66a11272d40a916fa69dd8e4dc443d4}{osGetSystemTime}();
+334 
+335       \textcolor{comment}{//End of exception handling block}
+336    \} \textcolor{keywordflow}{while}(0);
+337 
+338    \textcolor{comment}{//Any error to report?}
+339    \textcolor{keywordflow}{if}(error)
+340    \{
+341       \textcolor{comment}{//Clean up side effects}
+342       \hyperlink{socket_8c_ac5012e9f71c97e2ea0410f2c5baccb0e}{socketClose}(context->\hyperlink{structPingContext_a7350625b099ef9d224098259f713dc80}{socket});
+343       context->\hyperlink{structPingContext_a7350625b099ef9d224098259f713dc80}{socket} = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+344    \}
+345 
+346    \textcolor{comment}{//Return status code}
+347    \textcolor{keywordflow}{return} error;
+348 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ping_8c_adeedd321a750b178a4cdd1c28415539e}\label{ping_8c_adeedd321a750b178a4cdd1c28415539e}} 
+\index{ping.\+c@{ping.\+c}!ping\+Set\+Timeout@{ping\+Set\+Timeout}}
+\index{ping\+Set\+Timeout@{ping\+Set\+Timeout}!ping.\+c@{ping.\+c}}
+\subsubsection{\texorpdfstring{ping\+Set\+Timeout()}{pingSetTimeout()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ping\+Set\+Timeout (\begin{DoxyParamCaption}\item[{\hyperlink{structPingContext}{Ping\+Context} $\ast$}]{context,  }\item[{\hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\+\_\+t}}]{timeout }\end{DoxyParamCaption})}
+
+
+
+Set timeout value. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the ping context \\
+\hline
+\mbox{\tt in}  & {\em timeout} & Maximum time to wait \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 146 of file ping.\+c.
+
+
+\begin{DoxyCode}
+147 \{
+148    \textcolor{comment}{//Invalid context?}
+149    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+150       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+151 
+152    \textcolor{comment}{//Save timeout value}
+153    context->\hyperlink{structPingContext_a54b3e386313823853f73dc5d6ec1758c}{timeout} = timeout;
+154 
+155    \textcolor{comment}{//Successful processing}
+156    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+157 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ping_8c_a68d337e1e67f2f9d4434f0ef71173407}\label{ping_8c_a68d337e1e67f2f9d4434f0ef71173407}} 
+\index{ping.\+c@{ping.\+c}!ping\+Wait\+For\+Reply@{ping\+Wait\+For\+Reply}}
+\index{ping\+Wait\+For\+Reply@{ping\+Wait\+For\+Reply}!ping.\+c@{ping.\+c}}
+\subsubsection{\texorpdfstring{ping\+Wait\+For\+Reply()}{pingWaitForReply()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ping\+Wait\+For\+Reply (\begin{DoxyParamCaption}\item[{\hyperlink{structPingContext}{Ping\+Context} $\ast$}]{context,  }\item[{\hyperlink{structIpAddr}{Ip\+Addr} $\ast$}]{target\+Ip\+Addr,  }\item[{\hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\+\_\+t} $\ast$}]{rtt }\end{DoxyParamCaption})}
+
+
+
+Wait for a matching I\+C\+MP Echo Reply message. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the ping context \\
+\hline
+\mbox{\tt out}  & {\em target\+Ip\+Addr} & IP address of the remote host (optional parameter) \\
+\hline
+\mbox{\tt out}  & {\em rtt} & Round-\/trip time (optional parameter) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 453 of file ping.\+c.
+
+
+\begin{DoxyCode}
+455 \{
+456    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+457    \textcolor{keywordtype}{size\_t} \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length};
+458    \hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\_t} \hyperlink{dhcpv6__common_8h_ae73654f333e4363463ad8c594eca1905}{time};
+459    \hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\_t} timeout;
+460    \hyperlink{structIpAddr}{IpAddr} \hyperlink{ipcp_8h_a8ddffb4d02fcd8ad856313d3e208c34f}{srcIpAddr};
+461    \hyperlink{structIpAddr}{IpAddr} \hyperlink{ipcp_8h_a752e1719cf65f78dfec6274352cb56df}{destIpAddr};
+462 
+463    \textcolor{comment}{//Invalid context?}
+464    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+465       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+466 
+467    \textcolor{comment}{//Wait for an ICMP Echo Reply message}
+468    \textcolor{keywordflow}{do}
+469    \{
+470       \textcolor{comment}{//Get current time}
+471       time = \hyperlink{os__port__chibios_8c_ab66a11272d40a916fa69dd8e4dc443d4}{osGetSystemTime}();
+472 
+473       \textcolor{comment}{//Compute the timeout to be used}
+474       \textcolor{keywordflow}{if}(\hyperlink{os__port_8h_a25c13833ef003da02045a91b1080263a}{timeCompare}(time, context->\hyperlink{structPingContext_a0da9c1f437ccff2b8084a2f8f76d2766}{timestamp} + context->
+      \hyperlink{structPingContext_a54b3e386313823853f73dc5d6ec1758c}{timeout}) < 0)
+475          timeout = context->\hyperlink{structPingContext_a0da9c1f437ccff2b8084a2f8f76d2766}{timestamp} + context->\hyperlink{structPingContext_a54b3e386313823853f73dc5d6ec1758c}{timeout} - \hyperlink{dhcpv6__common_8h_ae73654f333e4363463ad8c594eca1905}{time};
+476       \textcolor{keywordflow}{else}
+477          timeout = 0;
+478 
+479       \textcolor{comment}{//Adjust receive timeout}
+480       error = \hyperlink{socket_8c_abdd29ac0ba4a644c726f5b1280680099}{socketSetTimeout}(context->\hyperlink{structPingContext_a7350625b099ef9d224098259f713dc80}{socket}, timeout);
+481       \textcolor{comment}{//Any error to report?}
+482       \textcolor{keywordflow}{if}(error)
+483          \textcolor{keywordflow}{break};
+484 
+485       \textcolor{comment}{//Wait for an incoming ICMP message}
+486       error = \hyperlink{socket_8c_a8417ca0c48a905179e0275603a98a849}{socketReceiveEx}(context->\hyperlink{structPingContext_a7350625b099ef9d224098259f713dc80}{socket}, &srcIpAddr, 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL},
+487          &destIpAddr, context->\hyperlink{structPingContext_aed5669c080545d5f0ef2d655d08bf685}{buffer}, \hyperlink{ping_8h_a01bcde96ad86fbab0faceac74cfb9c19}{PING\_BUFFER\_SIZE}, &length, 0);
+488 
+489 \textcolor{preprocessor}{#if (NET\_RTOS\_SUPPORT == DISABLED)}
+490       \textcolor{comment}{//Catch timeout exception}
+491       \textcolor{keywordflow}{if}(error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4d0f7be53b837f004379ac6bbd56f1e2}{ERROR\_TIMEOUT})
+492          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca16f356a669fbb42deb27f59e9054f6d6}{ERROR\_WOULD\_BLOCK};
+493 \textcolor{preprocessor}{#endif}
+494 
+495       \textcolor{comment}{//Get current time}
+496       time = \hyperlink{os__port__chibios_8c_ab66a11272d40a916fa69dd8e4dc443d4}{osGetSystemTime}();
+497 
+498       \textcolor{comment}{//Check status code}
+499       \textcolor{keywordflow}{if}(!error)
+500       \{
+501          \textcolor{comment}{//Check whether the incoming ICMP message is acceptable}
+502          error = \hyperlink{ping_8c_ae1f6e23cfcc20b9729337dc339e5ab95}{pingCheckReply}(context, &srcIpAddr, &destIpAddr,
+503             (\hyperlink{icmp_8h_a3a2d01bc5809641dfb0d13f0881f3bfd}{IcmpEchoMessage} *) context->\hyperlink{structPingContext_aed5669c080545d5f0ef2d655d08bf685}{buffer}, length);
+504       \}
+505 
+506       \textcolor{comment}{//Check status code}
+507       \textcolor{keywordflow}{if}(!error)
+508       \{
+509          \textcolor{comment}{//Calculate round-trip time}
+510          context->\hyperlink{structPingContext_a0849999bf979c232761d6cd831278822}{rtt} = time - context->\hyperlink{structPingContext_a0da9c1f437ccff2b8084a2f8f76d2766}{timestamp};
+511 
+512          \textcolor{comment}{//Debug message}
+513          \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"ICMP echo reply received from %s (%"} PRIu32 \textcolor{stringliteral}{" ms)...\(\backslash\)r\(\backslash\)n"},
+514             \hyperlink{ip_8c_aecdb577de79f65f8c814d5f101c7c6ae}{ipAddrToString}(&srcIpAddr, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}), context->\hyperlink{structPingContext_a0849999bf979c232761d6cd831278822}{rtt});
+515 
+516          \textcolor{comment}{//Return the IP address of the host}
+517          \textcolor{keywordflow}{if}(targetIpAddr != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+518             *targetIpAddr = \hyperlink{ipcp_8h_a8ddffb4d02fcd8ad856313d3e208c34f}{srcIpAddr};
+519 
+520          \textcolor{comment}{//Return the round-trip time}
+521          \textcolor{keywordflow}{if}(rtt != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+522             *rtt = context->\hyperlink{structPingContext_a0849999bf979c232761d6cd831278822}{rtt};
+523       \}
+524       \textcolor{keywordflow}{else}
+525       \{
+526          \textcolor{comment}{//Timeout value exceeded?}
+527          \textcolor{keywordflow}{if}(\hyperlink{os__port_8h_a25c13833ef003da02045a91b1080263a}{timeCompare}(time, context->\hyperlink{structPingContext_a0da9c1f437ccff2b8084a2f8f76d2766}{timestamp} + context->
+      \hyperlink{structPingContext_a54b3e386313823853f73dc5d6ec1758c}{timeout}) >= 0)
+528          \{
+529             \textcolor{comment}{//Report an error}
+530             error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4d0f7be53b837f004379ac6bbd56f1e2}{ERROR\_TIMEOUT};
+531          \}
+532       \}
+533 
+534       \textcolor{comment}{//Wait for the next incoming ICMP message}
+535    \} \textcolor{keywordflow}{while}(error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca6b1c5652c82e48ada5b4348c0ebb95e6}{ERROR\_INVALID\_MESSAGE});
+536 
+537    \textcolor{comment}{//Return status code}
+538    \textcolor{keywordflow}{return} error;
+539 \}
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{ping_8c_ac1333095d799138bc8458acfba15722a}\label{ping_8c_ac1333095d799138bc8458acfba15722a}} 
+\index{ping.\+c@{ping.\+c}!ping\+Sequence\+Number@{ping\+Sequence\+Number}}
+\index{ping\+Sequence\+Number@{ping\+Sequence\+Number}!ping.\+c@{ping.\+c}}
+\subsubsection{\texorpdfstring{ping\+Sequence\+Number}{pingSequenceNumber}}
+{\footnotesize\ttfamily \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} ping\+Sequence\+Number = 0\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 51 of file ping.\+c.
+

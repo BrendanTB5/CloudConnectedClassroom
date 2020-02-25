@@ -1,0 +1,595 @@
+\hypertarget{blowfish_8c}{}\section{cyclone\+\_\+crypto/cipher/blowfish.c File Reference}
+\label{blowfish_8c}\index{cyclone\+\_\+crypto/cipher/blowfish.\+c@{cyclone\+\_\+crypto/cipher/blowfish.\+c}}
+
+
+Blowfish encryption algorithm.  
+
+
+{\ttfamily \#include \char`\"{}core/crypto.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}cipher/blowfish.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}debug.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{blowfish_8c_afcdf5e66fd927a7f4cc64295acd20407}{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}~\hyperlink{crypto__config_8h_a6afae3a9b63f9b55d979e667ee0e881d}{C\+R\+Y\+P\+T\+O\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{blowfish_8c_abddcf10b04113da33038f0108f2f2c96}{blowfish\+Init} (\hyperlink{structBlowfishContext}{Blowfish\+Context} $\ast$context, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$key, size\+\_\+t key\+Len)
+\begin{DoxyCompactList}\small\item\em Initialize a Blowfish context using the supplied key. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{blowfish_8c_a394433d9ac7e83d189df314cd47f3b67}{blowfish\+Init\+State} (\hyperlink{structBlowfishContext}{Blowfish\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Blowfish state initialization. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{blowfish_8c_ad348348e42675b5bcc82be2585f9451f}{blowfish\+Expand\+Key} (\hyperlink{structBlowfishContext}{Blowfish\+Context} $\ast$context, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$salt, size\+\_\+t salt\+Len, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$key, size\+\_\+t key\+Len)
+\begin{DoxyCompactList}\small\item\em Key expansion. \end{DoxyCompactList}\item 
+void \hyperlink{blowfish_8c_aa2351a0e00e6ba233e5bc659c35a628a}{blowfish\+Encrypt\+Block} (\hyperlink{structBlowfishContext}{Blowfish\+Context} $\ast$context, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$input, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$output)
+\begin{DoxyCompactList}\small\item\em Encrypt a 16-\/byte block using Blowfish algorithm. \end{DoxyCompactList}\item 
+void \hyperlink{blowfish_8c_af5e9c724d040845ab11df3a9cbc27e42}{blowfish\+Decrypt\+Block} (\hyperlink{structBlowfishContext}{Blowfish\+Context} $\ast$context, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$input, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$output)
+\begin{DoxyCompactList}\small\item\em Decrypt a 16-\/byte block using Blowfish algorithm. \end{DoxyCompactList}\item 
+void \hyperlink{blowfish_8c_a5c0e71ffaff1fecc8acf6d3747e44488}{blowfish\+Xor\+Block} (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{tftp__common_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$salt, size\+\_\+t salt\+Len, size\+\_\+t $\ast$salt\+Index)
+\begin{DoxyCompactList}\small\item\em X\+OR data block with random salt. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static const \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t} \hyperlink{blowfish_8c_aef371f30d610e29e8fd3ccfb74de1edb}{parray} \mbox{[}18\mbox{]}
+\item 
+static const \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t} \hyperlink{blowfish_8c_aca4c6cf7fdb9b1a78e25ec4b224b83bc}{sbox1} \mbox{[}256\mbox{]}
+\item 
+static const \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t} \hyperlink{blowfish_8c_acb5a5ed2baeda4f9a641112894903f7b}{sbox2} \mbox{[}256\mbox{]}
+\item 
+static const \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t} \hyperlink{blowfish_8c_ac6e01976076c1df2d18e8bdbbf7fc9dd}{sbox3} \mbox{[}256\mbox{]}
+\item 
+static const \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t} \hyperlink{blowfish_8c_aead9da888970b3cf9d2f414aaa507142}{sbox4} \mbox{[}256\mbox{]}
+\item 
+const \hyperlink{structCipherAlgo}{Cipher\+Algo} \hyperlink{blowfish_8c_a56cb2a13ebec5889cafd6ef5b67f9809}{blowfish\+Cipher\+Algo}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Blowfish encryption algorithm. 
+
+\hypertarget{pic32mz__ef__curiosity_8h_License}{}\subsection{License}\label{pic32mz__ef__curiosity_8h_License}
+S\+P\+D\+X-\/\+License-\/\+Identifier\+: G\+P\+L-\/2.\+0-\/or-\/later
+
+Copyright (C) 2010-\/2019 Oryx Embedded S\+A\+RL. All rights reserved.
+
+This file is part of Cyclone\+Crypto Open.
+
+This program is free software; you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+
+You should have received a copy of the G\+NU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-\/1301, U\+SA.\hypertarget{tftp__server_8c_Description}{}\subsection{Description}\label{tftp__server_8c_Description}
+Blowfish is an encryption algorithm designed to encipher and decipher blocks of 128 bits under control of a 128/192/256-\/bit secret key
+
+\begin{DoxyAuthor}{Author}
+Oryx Embedded S\+A\+RL (www.\+oryx-\/embedded.\+com) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+9.\+6 
+\end{DoxyVersion}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{blowfish_8c_afcdf5e66fd927a7f4cc64295acd20407}\label{blowfish_8c_afcdf5e66fd927a7f4cc64295acd20407}} 
+\index{blowfish.\+c@{blowfish.\+c}!T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+\index{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}!blowfish.\+c@{blowfish.\+c}}
+\subsubsection{\texorpdfstring{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}{TRACE\_LEVEL}}
+{\footnotesize\ttfamily \#define T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL~\hyperlink{crypto__config_8h_a6afae3a9b63f9b55d979e667ee0e881d}{C\+R\+Y\+P\+T\+O\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+
+
+
+Definition at line 37 of file blowfish.\+c.
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{blowfish_8c_af5e9c724d040845ab11df3a9cbc27e42}\label{blowfish_8c_af5e9c724d040845ab11df3a9cbc27e42}} 
+\index{blowfish.\+c@{blowfish.\+c}!blowfish\+Decrypt\+Block@{blowfish\+Decrypt\+Block}}
+\index{blowfish\+Decrypt\+Block@{blowfish\+Decrypt\+Block}!blowfish.\+c@{blowfish.\+c}}
+\subsubsection{\texorpdfstring{blowfish\+Decrypt\+Block()}{blowfishDecryptBlock()}}
+{\footnotesize\ttfamily void blowfish\+Decrypt\+Block (\begin{DoxyParamCaption}\item[{\hyperlink{structBlowfishContext}{Blowfish\+Context} $\ast$}]{context,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{input,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{output }\end{DoxyParamCaption})}
+
+
+
+Decrypt a 16-\/byte block using Blowfish algorithm. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the Blowfish context \\
+\hline
+\mbox{\tt in}  & {\em input} & Ciphertext block to decrypt \\
+\hline
+\mbox{\tt out}  & {\em output} & Plaintext block resulting from decryption \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 460 of file blowfish.\+c.
+
+
+\begin{DoxyCode}
+462 \{
+463    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+464    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} left;
+465    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} right;
+466    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} temp;
+467 
+468    \textcolor{comment}{//Divide the ciphertext into two 32-bit halves (L and R)}
+469    right = \hyperlink{cpu__endian_8h_a1be529d679835eda85cf5541e7926ca7}{LOAD32BE}(input + 0);
+470    left = \hyperlink{cpu__endian_8h_a1be529d679835eda85cf5541e7926ca7}{LOAD32BE}(input + 4);
+471 
+472    \textcolor{comment}{//16 rounds of computation are needed}
+473    \textcolor{keywordflow}{for}(i = 16; i > 0; i -= 2)
+474    \{
+475       \textcolor{comment}{//Apply even round function}
+476       right ^= context->\hyperlink{structBlowfishContext_aa0723217b39dd858e6944f98f5b2e048}{p}[i + 1];
+477       temp = context->\hyperlink{structBlowfishContext_a5ea9975a381f6f68d9f779fb4bd4435e}{s1}[(right >> 24) & 0xFF];
+478       temp += context->\hyperlink{structBlowfishContext_a02c1fa70573583c95087509ec5d80a51}{s2}[(right >> 16) & 0xFF];
+479       temp ^= context->\hyperlink{structBlowfishContext_a3a258e0ef25ed4d5690c846da3ffd5dd}{s3}[(right >> 8) & 0xFF];
+480       temp += context->\hyperlink{structBlowfishContext_a752acc62c38eea0d09e491d2bd23d67e}{s4}[right & 0xFF];
+481       left ^= temp;
+482 
+483       \textcolor{comment}{//Apply odd round function}
+484       left ^= context->\hyperlink{structBlowfishContext_aa0723217b39dd858e6944f98f5b2e048}{p}[i];
+485       temp = context->\hyperlink{structBlowfishContext_a5ea9975a381f6f68d9f779fb4bd4435e}{s1}[(left >> 24) & 0xFF];
+486       temp += context->\hyperlink{structBlowfishContext_a02c1fa70573583c95087509ec5d80a51}{s2}[(left >> 16) & 0xFF];
+487       temp ^= context->\hyperlink{structBlowfishContext_a3a258e0ef25ed4d5690c846da3ffd5dd}{s3}[(left >> 8) & 0xFF];
+488       temp += context->\hyperlink{structBlowfishContext_a752acc62c38eea0d09e491d2bd23d67e}{s4}[left & 0xFF];
+489       right ^= temp;
+490    \}
+491 
+492    \textcolor{comment}{//The rounds are followed by two final XOR's with the first elements of}
+493    \textcolor{comment}{//the P-array}
+494    right ^= context->\hyperlink{structBlowfishContext_aa0723217b39dd858e6944f98f5b2e048}{p}[1];
+495    left ^= context->\hyperlink{structBlowfishContext_aa0723217b39dd858e6944f98f5b2e048}{p}[0];
+496 
+497    \textcolor{comment}{//Recombine L and R}
+498    \hyperlink{cpu__endian_8h_a8663906e08e818efa91dd6f65a7e636d}{STORE32BE}(left, output + 0);
+499    \hyperlink{cpu__endian_8h_a8663906e08e818efa91dd6f65a7e636d}{STORE32BE}(right, output + 4);
+500 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{blowfish_8c_aa2351a0e00e6ba233e5bc659c35a628a}\label{blowfish_8c_aa2351a0e00e6ba233e5bc659c35a628a}} 
+\index{blowfish.\+c@{blowfish.\+c}!blowfish\+Encrypt\+Block@{blowfish\+Encrypt\+Block}}
+\index{blowfish\+Encrypt\+Block@{blowfish\+Encrypt\+Block}!blowfish.\+c@{blowfish.\+c}}
+\subsubsection{\texorpdfstring{blowfish\+Encrypt\+Block()}{blowfishEncryptBlock()}}
+{\footnotesize\ttfamily void blowfish\+Encrypt\+Block (\begin{DoxyParamCaption}\item[{\hyperlink{structBlowfishContext}{Blowfish\+Context} $\ast$}]{context,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{input,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{output }\end{DoxyParamCaption})}
+
+
+
+Encrypt a 16-\/byte block using Blowfish algorithm. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the Blowfish context \\
+\hline
+\mbox{\tt in}  & {\em input} & Plaintext block to encrypt \\
+\hline
+\mbox{\tt out}  & {\em output} & Ciphertext block resulting from encryption \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 410 of file blowfish.\+c.
+
+
+\begin{DoxyCode}
+412 \{
+413    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+414    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} left;
+415    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} right;
+416    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} temp;
+417 
+418    \textcolor{comment}{//Divide the plaintext into two 32-bit halves (L and R)}
+419    left = \hyperlink{cpu__endian_8h_a1be529d679835eda85cf5541e7926ca7}{LOAD32BE}(input + 0);
+420    right = \hyperlink{cpu__endian_8h_a1be529d679835eda85cf5541e7926ca7}{LOAD32BE}(input + 4);
+421 
+422    \textcolor{comment}{//16 rounds of computation are needed}
+423    \textcolor{keywordflow}{for}(i = 0; i < 16; i += 2)
+424    \{
+425       \textcolor{comment}{//Apply odd round function}
+426       left ^= context->\hyperlink{structBlowfishContext_aa0723217b39dd858e6944f98f5b2e048}{p}[i];
+427       temp = context->\hyperlink{structBlowfishContext_a5ea9975a381f6f68d9f779fb4bd4435e}{s1}[(left >> 24) & 0xFF];
+428       temp += context->\hyperlink{structBlowfishContext_a02c1fa70573583c95087509ec5d80a51}{s2}[(left >> 16) & 0xFF];
+429       temp ^= context->\hyperlink{structBlowfishContext_a3a258e0ef25ed4d5690c846da3ffd5dd}{s3}[(left >> 8) & 0xFF];
+430       temp += context->\hyperlink{structBlowfishContext_a752acc62c38eea0d09e491d2bd23d67e}{s4}[left & 0xFF];
+431       right ^= temp;
+432 
+433       \textcolor{comment}{//Apply even round function}
+434       right ^= context->\hyperlink{structBlowfishContext_aa0723217b39dd858e6944f98f5b2e048}{p}[i + 1];
+435       temp = context->\hyperlink{structBlowfishContext_a5ea9975a381f6f68d9f779fb4bd4435e}{s1}[(right >> 24) & 0xFF];
+436       temp += context->\hyperlink{structBlowfishContext_a02c1fa70573583c95087509ec5d80a51}{s2}[(right >> 16) & 0xFF];
+437       temp ^= context->\hyperlink{structBlowfishContext_a3a258e0ef25ed4d5690c846da3ffd5dd}{s3}[(right >> 8) & 0xFF];
+438       temp += context->\hyperlink{structBlowfishContext_a752acc62c38eea0d09e491d2bd23d67e}{s4}[right & 0xFF];
+439       left ^= temp;
+440    \}
+441 
+442    \textcolor{comment}{//The rounds are followed by two final XOR's with the last elements of}
+443    \textcolor{comment}{//the P-array}
+444    left ^= context->\hyperlink{structBlowfishContext_aa0723217b39dd858e6944f98f5b2e048}{p}[16];
+445    right ^= context->\hyperlink{structBlowfishContext_aa0723217b39dd858e6944f98f5b2e048}{p}[17];
+446 
+447    \textcolor{comment}{//Recombine L and R}
+448    \hyperlink{cpu__endian_8h_a8663906e08e818efa91dd6f65a7e636d}{STORE32BE}(right, output + 0);
+449    \hyperlink{cpu__endian_8h_a8663906e08e818efa91dd6f65a7e636d}{STORE32BE}(left, output + 4);
+450 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{blowfish_8c_ad348348e42675b5bcc82be2585f9451f}\label{blowfish_8c_ad348348e42675b5bcc82be2585f9451f}} 
+\index{blowfish.\+c@{blowfish.\+c}!blowfish\+Expand\+Key@{blowfish\+Expand\+Key}}
+\index{blowfish\+Expand\+Key@{blowfish\+Expand\+Key}!blowfish.\+c@{blowfish.\+c}}
+\subsubsection{\texorpdfstring{blowfish\+Expand\+Key()}{blowfishExpandKey()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} blowfish\+Expand\+Key (\begin{DoxyParamCaption}\item[{\hyperlink{structBlowfishContext}{Blowfish\+Context} $\ast$}]{context,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{salt,  }\item[{size\+\_\+t}]{salt\+Len,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{key,  }\item[{size\+\_\+t}]{key\+Len }\end{DoxyParamCaption})}
+
+
+
+Key expansion. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the Blowfish context \\
+\hline
+\mbox{\tt in}  & {\em salt} & Random salt \\
+\hline
+\mbox{\tt in}  & {\em salt\+Len} & Length of the random salt, in bytes \\
+\hline
+\mbox{\tt in}  & {\em key} & Secret key \\
+\hline
+\mbox{\tt in}  & {\em key\+Len} & Length of the secret key, in bytes \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 290 of file blowfish.\+c.
+
+
+\begin{DoxyCode}
+292 \{
+293    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+294    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} j;
+295    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value};
+296    \textcolor{keywordtype}{size\_t} keyIndex;
+297    \textcolor{keywordtype}{size\_t} saltIndex;
+298    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}[\hyperlink{blowfish_8h_a134c4627832703d9f85a8defb6516953}{BLOWFISH\_BLOCK\_SIZE}];
+299 
+300    \textcolor{comment}{//Check the length of the salt}
+301    \textcolor{keywordflow}{if}(saltLen != 0 && saltLen < \hyperlink{blowfish_8h_a134c4627832703d9f85a8defb6516953}{BLOWFISH\_BLOCK\_SIZE})
+302       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+303 
+304    \textcolor{comment}{//Check the length of the key}
+305    \textcolor{keywordflow}{if}(keyLen == 0)
+306       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca3764b2929469f1eb1bf7af50b40df62f}{ERROR\_INVALID\_KEY\_LENGTH};
+307 
+308    \textcolor{comment}{//Initialize variables}
+309    keyIndex = 0;
+310    saltIndex = 0;
+311 
+312    \textcolor{comment}{//In the first phase of setting up the P-array, the secret key K is}
+313    \textcolor{comment}{//cyclically XOR'd into the P-array}
+314    \textcolor{keywordflow}{for}(i = 0; i < 18; i++)
+315    \{
+316       \textcolor{comment}{//This is done by taking successive 32-bit quantities of K}
+317       \textcolor{keywordflow}{for}(value = 0, j = 0; j < 4; j++)
+318       \{
+319          \textcolor{comment}{//Read current byte}
+320          value = (value << 8) | key[keyIndex];
+321 
+322          \textcolor{comment}{//Wrap around to the start if the end of the key is reached}
+323          \textcolor{keywordflow}{if}(++keyIndex >= keyLen)
+324          \{
+325             keyIndex = 0;
+326          \}
+327       \}
+328 
+329       \textcolor{comment}{//XOR the 32-bit quantities of K with the P-array elements}
+330       context->\hyperlink{structBlowfishContext_aa0723217b39dd858e6944f98f5b2e048}{p}[i] ^= \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value};
+331    \}
+332 
+333    \textcolor{comment}{//Initialize the 64-bit data block to all zeroes}
+334    \hyperlink{cyclone__crypto_2core_2crypto_8h_ad4465436e4ff353300fba4896012e18b}{cryptoMemset}(data, 0, \hyperlink{blowfish_8h_a134c4627832703d9f85a8defb6516953}{BLOWFISH\_BLOCK\_SIZE});
+335 
+336    \textcolor{comment}{//In the second phase, the 64-bit data block is repeatedly encrypted to}
+337    \textcolor{comment}{//yield the final P-array}
+338    \textcolor{keywordflow}{for}(i = 0; i < 18; i += 2)
+339    \{
+340       \textcolor{comment}{//The data block is XOR'd with the salt}
+341       \hyperlink{blowfish_8c_a5c0e71ffaff1fecc8acf6d3747e44488}{blowfishXorBlock}(data, salt, saltLen, &saltIndex);
+342 
+343       \textcolor{comment}{//Encrypt the data block}
+344       \hyperlink{blowfish_8c_aa2351a0e00e6ba233e5bc659c35a628a}{blowfishEncryptBlock}(context, data, data);
+345       context->\hyperlink{structBlowfishContext_aa0723217b39dd858e6944f98f5b2e048}{p}[i] = \hyperlink{cpu__endian_8h_a1be529d679835eda85cf5541e7926ca7}{LOAD32BE}(data);
+346       context->\hyperlink{structBlowfishContext_aa0723217b39dd858e6944f98f5b2e048}{p}[i + 1] = \hyperlink{cpu__endian_8h_a1be529d679835eda85cf5541e7926ca7}{LOAD32BE}(data + 4);
+347    \}
+348 
+349    \textcolor{comment}{//The process used for the second phase of the P-array initialisation is}
+350    \textcolor{comment}{//now repeated to initialize the S-boxes}
+351    \textcolor{keywordflow}{for}(i = 0; i < 256; i += 2)
+352    \{
+353       \textcolor{comment}{//The data block is XOR'd with the salt}
+354       \hyperlink{blowfish_8c_a5c0e71ffaff1fecc8acf6d3747e44488}{blowfishXorBlock}(data, salt, saltLen, &saltIndex);
+355 
+356       \textcolor{comment}{//Encrypt the data block}
+357       \hyperlink{blowfish_8c_aa2351a0e00e6ba233e5bc659c35a628a}{blowfishEncryptBlock}(context, data, data);
+358       context->\hyperlink{structBlowfishContext_a5ea9975a381f6f68d9f779fb4bd4435e}{s1}[i] = \hyperlink{cpu__endian_8h_a1be529d679835eda85cf5541e7926ca7}{LOAD32BE}(data);
+359       context->\hyperlink{structBlowfishContext_a5ea9975a381f6f68d9f779fb4bd4435e}{s1}[i + 1] = \hyperlink{cpu__endian_8h_a1be529d679835eda85cf5541e7926ca7}{LOAD32BE}(data + 4);
+360    \}
+361 
+362    \textcolor{comment}{//Initialize S-box 2}
+363    \textcolor{keywordflow}{for}(i = 0; i < 256; i += 2)
+364    \{
+365       \textcolor{comment}{//The data block is XOR'd with the salt}
+366       \hyperlink{blowfish_8c_a5c0e71ffaff1fecc8acf6d3747e44488}{blowfishXorBlock}(data, salt, saltLen, &saltIndex);
+367 
+368       \textcolor{comment}{//Encrypt the data block}
+369       \hyperlink{blowfish_8c_aa2351a0e00e6ba233e5bc659c35a628a}{blowfishEncryptBlock}(context, data, data);
+370       context->\hyperlink{structBlowfishContext_a02c1fa70573583c95087509ec5d80a51}{s2}[i] = \hyperlink{cpu__endian_8h_a1be529d679835eda85cf5541e7926ca7}{LOAD32BE}(data);
+371       context->\hyperlink{structBlowfishContext_a02c1fa70573583c95087509ec5d80a51}{s2}[i + 1] = \hyperlink{cpu__endian_8h_a1be529d679835eda85cf5541e7926ca7}{LOAD32BE}(data + 4);
+372    \}
+373 
+374    \textcolor{comment}{//Initialize S-box 3}
+375    \textcolor{keywordflow}{for}(i = 0; i < 256; i += 2)
+376    \{
+377       \textcolor{comment}{//The data block is XOR'd with the salt}
+378       \hyperlink{blowfish_8c_a5c0e71ffaff1fecc8acf6d3747e44488}{blowfishXorBlock}(data, salt, saltLen, &saltIndex);
+379 
+380       \textcolor{comment}{//Encrypt the data block}
+381       \hyperlink{blowfish_8c_aa2351a0e00e6ba233e5bc659c35a628a}{blowfishEncryptBlock}(context, data, data);
+382       context->\hyperlink{structBlowfishContext_a3a258e0ef25ed4d5690c846da3ffd5dd}{s3}[i] = \hyperlink{cpu__endian_8h_a1be529d679835eda85cf5541e7926ca7}{LOAD32BE}(data);
+383       context->\hyperlink{structBlowfishContext_a3a258e0ef25ed4d5690c846da3ffd5dd}{s3}[i + 1] = \hyperlink{cpu__endian_8h_a1be529d679835eda85cf5541e7926ca7}{LOAD32BE}(data + 4);
+384    \}
+385 
+386    \textcolor{comment}{//Initialize S-box 4}
+387    \textcolor{keywordflow}{for}(i = 0; i < 256; i += 2)
+388    \{
+389       \textcolor{comment}{//The data block is XOR'd with the salt}
+390       \hyperlink{blowfish_8c_a5c0e71ffaff1fecc8acf6d3747e44488}{blowfishXorBlock}(data, salt, saltLen, &saltIndex);
+391 
+392       \textcolor{comment}{//Encrypt the data block}
+393       \hyperlink{blowfish_8c_aa2351a0e00e6ba233e5bc659c35a628a}{blowfishEncryptBlock}(context, data, data);
+394       context->\hyperlink{structBlowfishContext_a752acc62c38eea0d09e491d2bd23d67e}{s4}[i] = \hyperlink{cpu__endian_8h_a1be529d679835eda85cf5541e7926ca7}{LOAD32BE}(data);
+395       context->\hyperlink{structBlowfishContext_a752acc62c38eea0d09e491d2bd23d67e}{s4}[i + 1] = \hyperlink{cpu__endian_8h_a1be529d679835eda85cf5541e7926ca7}{LOAD32BE}(data + 4);
+396    \}
+397 
+398    \textcolor{comment}{//Successful processing}
+399    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+400 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{blowfish_8c_abddcf10b04113da33038f0108f2f2c96}\label{blowfish_8c_abddcf10b04113da33038f0108f2f2c96}} 
+\index{blowfish.\+c@{blowfish.\+c}!blowfish\+Init@{blowfish\+Init}}
+\index{blowfish\+Init@{blowfish\+Init}!blowfish.\+c@{blowfish.\+c}}
+\subsubsection{\texorpdfstring{blowfish\+Init()}{blowfishInit()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} blowfish\+Init (\begin{DoxyParamCaption}\item[{\hyperlink{structBlowfishContext}{Blowfish\+Context} $\ast$}]{context,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{key,  }\item[{size\+\_\+t}]{key\+Len }\end{DoxyParamCaption})}
+
+
+
+Initialize a Blowfish context using the supplied key. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the Blowfish context to initialize \\
+\hline
+\mbox{\tt in}  & {\em key} & Pointer to the key \\
+\hline
+\mbox{\tt in}  & {\em key\+Len} & Length of the key \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 226 of file blowfish.\+c.
+
+
+\begin{DoxyCode}
+228 \{
+229    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+230 
+231    \textcolor{comment}{//Check parameters}
+232    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || key == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+233       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+234 
+235    \textcolor{comment}{//Initialize Blowfish state}
+236    error = \hyperlink{blowfish_8c_a394433d9ac7e83d189df314cd47f3b67}{blowfishInitState}(context);
+237 
+238    \textcolor{comment}{//Check status code}
+239    \textcolor{keywordflow}{if}(!error)
+240    \{
+241       \textcolor{comment}{//Perform key expansion}
+242       error = \hyperlink{blowfish_8c_ad348348e42675b5bcc82be2585f9451f}{blowfishExpandKey}(context, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, 0, key, keyLen);
+243    \}
+244 
+245    \textcolor{comment}{//Return status code}
+246    \textcolor{keywordflow}{return} error;
+247 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{blowfish_8c_a394433d9ac7e83d189df314cd47f3b67}\label{blowfish_8c_a394433d9ac7e83d189df314cd47f3b67}} 
+\index{blowfish.\+c@{blowfish.\+c}!blowfish\+Init\+State@{blowfish\+Init\+State}}
+\index{blowfish\+Init\+State@{blowfish\+Init\+State}!blowfish.\+c@{blowfish.\+c}}
+\subsubsection{\texorpdfstring{blowfish\+Init\+State()}{blowfishInitState()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} blowfish\+Init\+State (\begin{DoxyParamCaption}\item[{\hyperlink{structBlowfishContext}{Blowfish\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Blowfish state initialization. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the Blowfish context \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 256 of file blowfish.\+c.
+
+
+\begin{DoxyCode}
+257 \{
+258    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+259 
+260    \textcolor{comment}{//Blowfish uses an initial P-array derived from the hexadecimal digits of pi}
+261    \textcolor{keywordflow}{for}(i = 0; i < 18; i++)
+262    \{
+263       context->\hyperlink{structBlowfishContext_aa0723217b39dd858e6944f98f5b2e048}{p}[i] = \hyperlink{blowfish_8c_aef371f30d610e29e8fd3ccfb74de1edb}{parray}[i];
+264    \}
+265 
+266    \textcolor{comment}{//Blowfish uses initial S-boxes derived from the hexadecimal digits of pi}
+267    \textcolor{keywordflow}{for}(i = 0; i < 256; i++)
+268    \{
+269       context->\hyperlink{structBlowfishContext_a5ea9975a381f6f68d9f779fb4bd4435e}{s1}[i] = \hyperlink{blowfish_8c_aca4c6cf7fdb9b1a78e25ec4b224b83bc}{sbox1}[i];
+270       context->\hyperlink{structBlowfishContext_a02c1fa70573583c95087509ec5d80a51}{s2}[i] = \hyperlink{blowfish_8c_acb5a5ed2baeda4f9a641112894903f7b}{sbox2}[i];
+271       context->\hyperlink{structBlowfishContext_a3a258e0ef25ed4d5690c846da3ffd5dd}{s3}[i] = \hyperlink{blowfish_8c_ac6e01976076c1df2d18e8bdbbf7fc9dd}{sbox3}[i];
+272       context->\hyperlink{structBlowfishContext_a752acc62c38eea0d09e491d2bd23d67e}{s4}[i] = \hyperlink{blowfish_8c_aead9da888970b3cf9d2f414aaa507142}{sbox4}[i];
+273    \}
+274 
+275    \textcolor{comment}{//Successful processing}
+276    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+277 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{blowfish_8c_a5c0e71ffaff1fecc8acf6d3747e44488}\label{blowfish_8c_a5c0e71ffaff1fecc8acf6d3747e44488}} 
+\index{blowfish.\+c@{blowfish.\+c}!blowfish\+Xor\+Block@{blowfish\+Xor\+Block}}
+\index{blowfish\+Xor\+Block@{blowfish\+Xor\+Block}!blowfish.\+c@{blowfish.\+c}}
+\subsubsection{\texorpdfstring{blowfish\+Xor\+Block()}{blowfishXorBlock()}}
+{\footnotesize\ttfamily void blowfish\+Xor\+Block (\begin{DoxyParamCaption}\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{data,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{salt,  }\item[{size\+\_\+t}]{salt\+Len,  }\item[{size\+\_\+t $\ast$}]{salt\+Index }\end{DoxyParamCaption})}
+
+
+
+X\+OR data block with random salt. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in,out}  & {\em data} & Pointer the data block (16 bytes) \\
+\hline
+\mbox{\tt in}  & {\em salt} & Pointer to the random salt (16 bytes) \\
+\hline
+\mbox{\tt in}  & {\em salt\+Len} & Length of the salt, in bytes \\
+\hline
+\mbox{\tt in,out}  & {\em salt\+Index} & Current salt index \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 511 of file blowfish.\+c.
+
+
+\begin{DoxyCode}
+513 \{
+514    \textcolor{keywordtype}{size\_t} i;
+515    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+516 
+517    \textcolor{comment}{//The salt parameter is optional}
+518    \textcolor{keywordflow}{if}(saltLen > 0)
+519    \{
+520       \textcolor{comment}{//Get current salt index}
+521       n = *saltIndex;
+522 
+523       \textcolor{comment}{//XOR the data block with the random salt}
+524       \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{blowfish_8h_a134c4627832703d9f85a8defb6516953}{BLOWFISH\_BLOCK\_SIZE}; i++)
+525       \{
+526          \textcolor{comment}{//Perform XOR operation}
+527          \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}[i] ^= salt[\hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n}];
+528 
+529          \textcolor{comment}{//Treat the salt as cyclic}
+530          \textcolor{keywordflow}{if}(++n >= saltLen)
+531          \{
+532             n = 0;
+533          \}
+534       \}
+535 
+536       \textcolor{comment}{//Save current salt index}
+537       *saltIndex = \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+538    \}
+539 \}
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{blowfish_8c_a56cb2a13ebec5889cafd6ef5b67f9809}\label{blowfish_8c_a56cb2a13ebec5889cafd6ef5b67f9809}} 
+\index{blowfish.\+c@{blowfish.\+c}!blowfish\+Cipher\+Algo@{blowfish\+Cipher\+Algo}}
+\index{blowfish\+Cipher\+Algo@{blowfish\+Cipher\+Algo}!blowfish.\+c@{blowfish.\+c}}
+\subsubsection{\texorpdfstring{blowfish\+Cipher\+Algo}{blowfishCipherAlgo}}
+{\footnotesize\ttfamily const \hyperlink{structCipherAlgo}{Cipher\+Algo} blowfish\+Cipher\+Algo}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=
+\{
+   \textcolor{stringliteral}{"Blowfish"},
+   \textcolor{keyword}{sizeof}(\hyperlink{structBlowfishContext}{BlowfishContext}),
+   \hyperlink{cyclone__crypto_2core_2crypto_8h_ae03a6c8f32ed798857924d908aacc49bac347f6aa82618d4d57fe85cba6520ce9}{CIPHER\_ALGO\_TYPE\_BLOCK},
+   \hyperlink{blowfish_8h_a134c4627832703d9f85a8defb6516953}{BLOWFISH\_BLOCK\_SIZE},
+   (\hyperlink{cyclone__crypto_2core_2crypto_8h_a1a0f02cdb8a3295caa1b87db2785e678}{CipherAlgoInit}) \hyperlink{blowfish_8c_abddcf10b04113da33038f0108f2f2c96}{blowfishInit},
+   \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL},
+   \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL},
+   (\hyperlink{cyclone__crypto_2core_2crypto_8h_a4b511302b7e4f6ff51dd72f5abde7077}{CipherAlgoEncryptBlock}) \hyperlink{blowfish_8c_aa2351a0e00e6ba233e5bc659c35a628a}{blowfishEncryptBlock},
+   (\hyperlink{cyclone__crypto_2core_2crypto_8h_a15510227bd1c7721d1e3af2480069990}{CipherAlgoDecryptBlock}) \hyperlink{blowfish_8c_af5e9c724d040845ab11df3a9cbc27e42}{blowfishDecryptBlock}
+\}
+\end{DoxyCode}
+
+
+Definition at line 204 of file blowfish.\+c.
+
+\mbox{\Hypertarget{blowfish_8c_aef371f30d610e29e8fd3ccfb74de1edb}\label{blowfish_8c_aef371f30d610e29e8fd3ccfb74de1edb}} 
+\index{blowfish.\+c@{blowfish.\+c}!parray@{parray}}
+\index{parray@{parray}!blowfish.\+c@{blowfish.\+c}}
+\subsubsection{\texorpdfstring{parray}{parray}}
+{\footnotesize\ttfamily const \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t} parray\mbox{[}18\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=
+\{
+   0x243F6A88, 0x85A308D3, 0x13198A2E, 0x03707344, 0xA4093822, 0x299F31D0, 0x082EFA98, 0xEC4E6C89,
+   0x452821E6, 0x38D01377, 0xBE5466CF, 0x34E90C6C, 0xC0AC29B7, 0xC97C50DD, 0x3F84D5B5, 0xB5470917,
+   0x9216D5D9, 0x8979FB1B
+\}
+\end{DoxyCode}
+
+
+Definition at line 48 of file blowfish.\+c.
+
+\mbox{\Hypertarget{blowfish_8c_aca4c6cf7fdb9b1a78e25ec4b224b83bc}\label{blowfish_8c_aca4c6cf7fdb9b1a78e25ec4b224b83bc}} 
+\index{blowfish.\+c@{blowfish.\+c}!sbox1@{sbox1}}
+\index{sbox1@{sbox1}!blowfish.\+c@{blowfish.\+c}}
+\subsubsection{\texorpdfstring{sbox1}{sbox1}}
+{\footnotesize\ttfamily const \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t} sbox1\mbox{[}256\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 56 of file blowfish.\+c.
+
+\mbox{\Hypertarget{blowfish_8c_acb5a5ed2baeda4f9a641112894903f7b}\label{blowfish_8c_acb5a5ed2baeda4f9a641112894903f7b}} 
+\index{blowfish.\+c@{blowfish.\+c}!sbox2@{sbox2}}
+\index{sbox2@{sbox2}!blowfish.\+c@{blowfish.\+c}}
+\subsubsection{\texorpdfstring{sbox2}{sbox2}}
+{\footnotesize\ttfamily const \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t} sbox2\mbox{[}256\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 93 of file blowfish.\+c.
+
+\mbox{\Hypertarget{blowfish_8c_ac6e01976076c1df2d18e8bdbbf7fc9dd}\label{blowfish_8c_ac6e01976076c1df2d18e8bdbbf7fc9dd}} 
+\index{blowfish.\+c@{blowfish.\+c}!sbox3@{sbox3}}
+\index{sbox3@{sbox3}!blowfish.\+c@{blowfish.\+c}}
+\subsubsection{\texorpdfstring{sbox3}{sbox3}}
+{\footnotesize\ttfamily const \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t} sbox3\mbox{[}256\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 130 of file blowfish.\+c.
+
+\mbox{\Hypertarget{blowfish_8c_aead9da888970b3cf9d2f414aaa507142}\label{blowfish_8c_aead9da888970b3cf9d2f414aaa507142}} 
+\index{blowfish.\+c@{blowfish.\+c}!sbox4@{sbox4}}
+\index{sbox4@{sbox4}!blowfish.\+c@{blowfish.\+c}}
+\subsubsection{\texorpdfstring{sbox4}{sbox4}}
+{\footnotesize\ttfamily const \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t} sbox4\mbox{[}256\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 167 of file blowfish.\+c.
+

@@ -1,0 +1,68 @@
+\hypertarget{group__NmBspResetFn}{}\section{nm\+\_\+bsp\+\_\+reset}
+\label{group__NmBspResetFn}\index{nm\+\_\+bsp\+\_\+reset@{nm\+\_\+bsp\+\_\+reset}}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{group__NmBspResetFn_ga3e540428a9246a27c61999ecb7e13d05}{nm\+\_\+bsp\+\_\+reset} (void)
+\begin{DoxyCompactList}\small\item\em Reset chip. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Reinitialization for bsp ({\itshape Board} {\itshape Support} {\itshape Package}) by resetting N\+M\+C1500 SoC by setting C\+H\+I\+P\+\_\+\+EN and R\+E\+S\+E\+T\+\_\+N signals low, C\+H\+I\+P\+\_\+\+EN high then R\+E\+S\+E\+T\+\_\+N high 
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group__NmBspResetFn_ga3e540428a9246a27c61999ecb7e13d05}\label{group__NmBspResetFn_ga3e540428a9246a27c61999ecb7e13d05}} 
+\index{nm\+\_\+bsp\+\_\+reset@{nm\+\_\+bsp\+\_\+reset}!nm\+\_\+bsp\+\_\+reset@{nm\+\_\+bsp\+\_\+reset}}
+\index{nm\+\_\+bsp\+\_\+reset@{nm\+\_\+bsp\+\_\+reset}!nm\+\_\+bsp\+\_\+reset@{nm\+\_\+bsp\+\_\+reset}}
+\subsubsection{\texorpdfstring{nm\+\_\+bsp\+\_\+reset()}{nm\_bsp\_reset()}}
+{\footnotesize\ttfamily void nm\+\_\+bsp\+\_\+reset (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+{\ttfamily \#include $<$\hyperlink{nm__bsp_8h}{third\+\_\+party/atmel/devices/wilc1000/bsp/include/nm\+\_\+bsp.\+h}$>$}
+
+
+
+Reset chip. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em None} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyPrecond}{Precondition}
+Initialize \hyperlink{group__NmBspInitFn_ga91533a50cf3da832110a746b4a57789e}{nm\+\_\+bsp\+\_\+init} first 
+\end{DoxyPrecond}
+\begin{DoxyNote}{Note}
+Implementation of this function is host dependent and called by H\+IF layer. 
+\end{DoxyNote}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{group__NmBspInitFn_ga91533a50cf3da832110a746b4a57789e}{nm\+\_\+bsp\+\_\+init} 
+\end{DoxySeeAlso}
+\begin{DoxyReturn}{Returns}
+None 
+\end{DoxyReturn}
+
+
+Definition at line 145 of file nm\+\_\+bsp\+\_\+pic32mz.\+c.
+
+
+\begin{DoxyCode}
+146 \{
+147    \textcolor{comment}{//Debug message}
+148    \hyperlink{nm__common_8h_a151ceaaab8f30c48e1e6aec3f3eff194}{M2M\_PRINT}(\textcolor{stringliteral}{"nm\_bsp\_reset\(\backslash\)r\(\backslash\)n"});
+149 
+150    \textcolor{comment}{//Set CE and RST pins low}
+151    \hyperlink{wilc1000__config_8h_a2c7452c304b06d0a3de20581649d5366}{CONF\_WILC\_CE\_CLR}();
+152    \hyperlink{wilc1000__config_8h_a3f7b23697dd49e31cf71def127f47f59}{CONF\_WILC\_RST\_CLR}();
+153    \hyperlink{group__NmBspSleepFn_gadbf38ddf0138d8e0a4e4720909a7b081}{nm\_bsp\_sleep}(100);
+154 
+155    \textcolor{comment}{//Set CE pin high}
+156    \hyperlink{wilc1000__config_8h_a48c14428083b7fe8b3a843a6d22b1909}{CONF\_WILC\_CE\_SET}();
+157    \hyperlink{group__NmBspSleepFn_gadbf38ddf0138d8e0a4e4720909a7b081}{nm\_bsp\_sleep}(100);
+158 
+159    \textcolor{comment}{//Set RST pin high}
+160    \hyperlink{wilc1000__config_8h_a7607648f71dcb5ea8cf40d436de55dab}{CONF\_WILC\_RST\_SET}();
+161    \hyperlink{group__NmBspSleepFn_gadbf38ddf0138d8e0a4e4720909a7b081}{nm\_bsp\_sleep}(100);
+162 \}
+\end{DoxyCode}

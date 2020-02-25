@@ -1,0 +1,964 @@
+\hypertarget{dsa_8c}{}\section{cyclone\+\_\+crypto/pkc/dsa.c File Reference}
+\label{dsa_8c}\index{cyclone\+\_\+crypto/pkc/dsa.\+c@{cyclone\+\_\+crypto/pkc/dsa.\+c}}
+
+
+D\+SA (Digital Signature Algorithm)  
+
+
+{\ttfamily \#include \char`\"{}core/crypto.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}pkc/dsa.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}mpi/mpi.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}encoding/asn1.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}debug.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{dsa_8c_afcdf5e66fd927a7f4cc64295acd20407}{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}~\hyperlink{crypto__config_8h_a6afae3a9b63f9b55d979e667ee0e881d}{C\+R\+Y\+P\+T\+O\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{dsa_8c_ab058852057768fc18904ba5796f5af4d}{dsa\+Init\+Public\+Key} (\hyperlink{structDsaPublicKey}{Dsa\+Public\+Key} $\ast$key)
+\begin{DoxyCompactList}\small\item\em Initialize a D\+SA public key. \end{DoxyCompactList}\item 
+void \hyperlink{dsa_8c_aecb06a7f6d0f7df028b6a30284fa0016}{dsa\+Free\+Public\+Key} (\hyperlink{structDsaPublicKey}{Dsa\+Public\+Key} $\ast$key)
+\begin{DoxyCompactList}\small\item\em Release a D\+SA public key. \end{DoxyCompactList}\item 
+void \hyperlink{dsa_8c_aaa7e172f2b82c9c31a9a6638cecb2a4c}{dsa\+Init\+Private\+Key} (\hyperlink{structDsaPrivateKey}{Dsa\+Private\+Key} $\ast$key)
+\begin{DoxyCompactList}\small\item\em Initialize a D\+SA private key. \end{DoxyCompactList}\item 
+void \hyperlink{dsa_8c_a028cb6faf1b5384b57e740fe95f58c60}{dsa\+Free\+Private\+Key} (\hyperlink{structDsaPrivateKey}{Dsa\+Private\+Key} $\ast$key)
+\begin{DoxyCompactList}\small\item\em Release a D\+SA private key. \end{DoxyCompactList}\item 
+void \hyperlink{dsa_8c_a6ebbad1e693d6967da33e2a1338912c7}{dsa\+Init\+Signature} (\hyperlink{structDsaSignature}{Dsa\+Signature} $\ast$\hyperlink{tls_8h_af27e6d4ea3add14cd8cc9aa275d716ad}{signature})
+\begin{DoxyCompactList}\small\item\em Initialize a D\+SA signature. \end{DoxyCompactList}\item 
+void \hyperlink{dsa_8c_a78f8ff9636dd1677e22b637476c88e9d}{dsa\+Free\+Signature} (\hyperlink{structDsaSignature}{Dsa\+Signature} $\ast$\hyperlink{tls_8h_af27e6d4ea3add14cd8cc9aa275d716ad}{signature})
+\begin{DoxyCompactList}\small\item\em Release a D\+SA signature. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{dsa_8c_af4e812722524ed43ff16494d2f4ffbb5}{dsa\+Write\+Signature} (const \hyperlink{structDsaSignature}{Dsa\+Signature} $\ast$\hyperlink{tls_8h_af27e6d4ea3add14cd8cc9aa275d716ad}{signature}, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{tftp__common_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, size\+\_\+t $\ast$\hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length})
+\begin{DoxyCompactList}\small\item\em Encode D\+SA signature using A\+S\+N.\+1. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{dsa_8c_a05526f7cfcf22483963264e0500bc724}{dsa\+Read\+Signature} (const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{tftp__common_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length}, \hyperlink{structDsaSignature}{Dsa\+Signature} $\ast$\hyperlink{tls_8h_af27e6d4ea3add14cd8cc9aa275d716ad}{signature})
+\begin{DoxyCompactList}\small\item\em Read an A\+S\+N.\+1 encoded D\+SA signature. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{dsa_8c_a8fd22ce221e40d536537ec45c8e89895}{dsa\+Generate\+Signature} (const \hyperlink{structPrngAlgo}{Prng\+Algo} $\ast$prng\+Algo, void $\ast$prng\+Context, const \hyperlink{structDsaPrivateKey}{Dsa\+Private\+Key} $\ast$key, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$digest, size\+\_\+t digest\+Len, \hyperlink{structDsaSignature}{Dsa\+Signature} $\ast$\hyperlink{tls_8h_af27e6d4ea3add14cd8cc9aa275d716ad}{signature})
+\begin{DoxyCompactList}\small\item\em D\+SA signature generation. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{dsa_8c_a551e9301249e713b9925e2a7f6d7ed79}{dsa\+Verify\+Signature} (const \hyperlink{structDsaPublicKey}{Dsa\+Public\+Key} $\ast$key, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$digest, size\+\_\+t digest\+Len, const \hyperlink{structDsaSignature}{Dsa\+Signature} $\ast$\hyperlink{tls_8h_af27e6d4ea3add14cd8cc9aa275d716ad}{signature})
+\begin{DoxyCompactList}\small\item\em D\+SA signature verification. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} \hyperlink{dsa_8c_aec62d423add8486c829eacb574ebe4f3}{D\+S\+A\+\_\+\+O\+ID} \mbox{[}7\mbox{]} = \{0x2\+A, 0x86, 0x48, 0x\+C\+E, 0x38, 0x04, 0x01\}
+\item 
+const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} \hyperlink{dsa_8c_aa08eebc141e54bba0dbfda5c08eb2f6e}{D\+S\+A\+\_\+\+W\+I\+T\+H\+\_\+\+S\+H\+A1\+\_\+\+O\+ID} \mbox{[}7\mbox{]} = \{0x2\+A, 0x86, 0x48, 0x\+C\+E, 0x38, 0x04, 0x03\}
+\item 
+const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} \hyperlink{dsa_8c_ae66f1af58648440726b52b520b0a4cd8}{D\+S\+A\+\_\+\+W\+I\+T\+H\+\_\+\+S\+H\+A224\+\_\+\+O\+ID} \mbox{[}9\mbox{]} = \{0x60, 0x86, 0x48, 0x01, 0x65, 0x03, 0x04, 0x03, 0x01\}
+\item 
+const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} \hyperlink{dsa_8c_aff83cbf5cb752485af12bddc1df12938}{D\+S\+A\+\_\+\+W\+I\+T\+H\+\_\+\+S\+H\+A256\+\_\+\+O\+ID} \mbox{[}9\mbox{]} = \{0x60, 0x86, 0x48, 0x01, 0x65, 0x03, 0x04, 0x03, 0x02\}
+\item 
+const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} \hyperlink{dsa_8c_a3f6853b327c39297800ceff3a2fb8a73}{D\+S\+A\+\_\+\+W\+I\+T\+H\+\_\+\+S\+H\+A384\+\_\+\+O\+ID} \mbox{[}9\mbox{]} = \{0x60, 0x86, 0x48, 0x01, 0x65, 0x03, 0x04, 0x03, 0x03\}
+\item 
+const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} \hyperlink{dsa_8c_a9fba73d1b73c70fb99793ea6647c7b65}{D\+S\+A\+\_\+\+W\+I\+T\+H\+\_\+\+S\+H\+A512\+\_\+\+O\+ID} \mbox{[}9\mbox{]} = \{0x60, 0x86, 0x48, 0x01, 0x65, 0x03, 0x04, 0x03, 0x04\}
+\item 
+const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} \hyperlink{dsa_8c_a15f447cd0a7d96fc289d70b549fc74db}{D\+S\+A\+\_\+\+W\+I\+T\+H\+\_\+\+S\+H\+A3\+\_\+224\+\_\+\+O\+ID} \mbox{[}9\mbox{]} = \{0x60, 0x86, 0x48, 0x01, 0x65, 0x03, 0x04, 0x03, 0x05\}
+\item 
+const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} \hyperlink{dsa_8c_a0acb48540d84759e08c34f539752c67c}{D\+S\+A\+\_\+\+W\+I\+T\+H\+\_\+\+S\+H\+A3\+\_\+256\+\_\+\+O\+ID} \mbox{[}9\mbox{]} = \{0x60, 0x86, 0x48, 0x01, 0x65, 0x03, 0x04, 0x03, 0x06\}
+\item 
+const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} \hyperlink{dsa_8c_a01e93748133e4fe02341e3f88a3ac3cf}{D\+S\+A\+\_\+\+W\+I\+T\+H\+\_\+\+S\+H\+A3\+\_\+384\+\_\+\+O\+ID} \mbox{[}9\mbox{]} = \{0x60, 0x86, 0x48, 0x01, 0x65, 0x03, 0x04, 0x03, 0x07\}
+\item 
+const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} \hyperlink{dsa_8c_ada4ed9fe933d7311e84816484cc126b5}{D\+S\+A\+\_\+\+W\+I\+T\+H\+\_\+\+S\+H\+A3\+\_\+512\+\_\+\+O\+ID} \mbox{[}9\mbox{]} = \{0x60, 0x86, 0x48, 0x01, 0x65, 0x03, 0x04, 0x03, 0x08\}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+D\+SA (Digital Signature Algorithm) 
+
+\hypertarget{pic32mz__ef__curiosity_8h_License}{}\subsection{License}\label{pic32mz__ef__curiosity_8h_License}
+S\+P\+D\+X-\/\+License-\/\+Identifier\+: G\+P\+L-\/2.\+0-\/or-\/later
+
+Copyright (C) 2010-\/2019 Oryx Embedded S\+A\+RL. All rights reserved.
+
+This file is part of Cyclone\+Crypto Open.
+
+This program is free software; you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+
+You should have received a copy of the G\+NU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-\/1301, U\+SA.\hypertarget{tftp__server_8c_Description}{}\subsection{Description}\label{tftp__server_8c_Description}
+The Digital Signature Algorithm (D\+SA) is a an algorithm developed by the N\+SA to generate a digital signature for the authentication of electronic documents. Refer to F\+I\+PS 186-\/3 for more details
+
+\begin{DoxyAuthor}{Author}
+Oryx Embedded S\+A\+RL (www.\+oryx-\/embedded.\+com) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+9.\+6 
+\end{DoxyVersion}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{dsa_8c_afcdf5e66fd927a7f4cc64295acd20407}\label{dsa_8c_afcdf5e66fd927a7f4cc64295acd20407}} 
+\index{dsa.\+c@{dsa.\+c}!T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+\index{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}!dsa.\+c@{dsa.\+c}}
+\subsubsection{\texorpdfstring{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}{TRACE\_LEVEL}}
+{\footnotesize\ttfamily \#define T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL~\hyperlink{crypto__config_8h_a6afae3a9b63f9b55d979e667ee0e881d}{C\+R\+Y\+P\+T\+O\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+
+
+
+Definition at line 38 of file dsa.\+c.
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{dsa_8c_a028cb6faf1b5384b57e740fe95f58c60}\label{dsa_8c_a028cb6faf1b5384b57e740fe95f58c60}} 
+\index{dsa.\+c@{dsa.\+c}!dsa\+Free\+Private\+Key@{dsa\+Free\+Private\+Key}}
+\index{dsa\+Free\+Private\+Key@{dsa\+Free\+Private\+Key}!dsa.\+c@{dsa.\+c}}
+\subsubsection{\texorpdfstring{dsa\+Free\+Private\+Key()}{dsaFreePrivateKey()}}
+{\footnotesize\ttfamily void dsa\+Free\+Private\+Key (\begin{DoxyParamCaption}\item[{\hyperlink{structDsaPrivateKey}{Dsa\+Private\+Key} $\ast$}]{key }\end{DoxyParamCaption})}
+
+
+
+Release a D\+SA private key. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em key} & Pointer to the D\+SA public key to free \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 122 of file dsa.\+c.
+
+
+\begin{DoxyCode}
+123 \{
+124    \textcolor{comment}{//Free multiple precision integers}
+125    \hyperlink{mpi_8c_a9dc5be2f62d37d3854fa61beab3a61ad}{mpiFree}(&key->\hyperlink{structDsaPrivateKey_a8f8fd999b327a6bbff828cb04e31772e}{p});
+126    \hyperlink{mpi_8c_a9dc5be2f62d37d3854fa61beab3a61ad}{mpiFree}(&key->\hyperlink{structDsaPrivateKey_a57748f022f498aaf35d7b30f562af7ca}{q});
+127    \hyperlink{mpi_8c_a9dc5be2f62d37d3854fa61beab3a61ad}{mpiFree}(&key->\hyperlink{structDsaPrivateKey_a78da170adbc7f1a7eeb95e6bc52d4124}{g});
+128    \hyperlink{mpi_8c_a9dc5be2f62d37d3854fa61beab3a61ad}{mpiFree}(&key->\hyperlink{structDsaPrivateKey_ac5b101c89f19f59b4cddd85429f1c30e}{x});
+129 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{dsa_8c_aecb06a7f6d0f7df028b6a30284fa0016}\label{dsa_8c_aecb06a7f6d0f7df028b6a30284fa0016}} 
+\index{dsa.\+c@{dsa.\+c}!dsa\+Free\+Public\+Key@{dsa\+Free\+Public\+Key}}
+\index{dsa\+Free\+Public\+Key@{dsa\+Free\+Public\+Key}!dsa.\+c@{dsa.\+c}}
+\subsubsection{\texorpdfstring{dsa\+Free\+Public\+Key()}{dsaFreePublicKey()}}
+{\footnotesize\ttfamily void dsa\+Free\+Public\+Key (\begin{DoxyParamCaption}\item[{\hyperlink{structDsaPublicKey}{Dsa\+Public\+Key} $\ast$}]{key }\end{DoxyParamCaption})}
+
+
+
+Release a D\+SA public key. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em key} & Pointer to the D\+SA public key to free \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 92 of file dsa.\+c.
+
+
+\begin{DoxyCode}
+93 \{
+94    \textcolor{comment}{//Free multiple precision integers}
+95    \hyperlink{mpi_8c_a9dc5be2f62d37d3854fa61beab3a61ad}{mpiFree}(&key->\hyperlink{structDsaPublicKey_a273f5bed06a946fd672c94283f49fc3e}{p});
+96    \hyperlink{mpi_8c_a9dc5be2f62d37d3854fa61beab3a61ad}{mpiFree}(&key->\hyperlink{structDsaPublicKey_a7961fbb82f0c5c56b577d2247ffc9172}{q});
+97    \hyperlink{mpi_8c_a9dc5be2f62d37d3854fa61beab3a61ad}{mpiFree}(&key->\hyperlink{structDsaPublicKey_a910d43db2650efb256373b06521a23bf}{g});
+98    \hyperlink{mpi_8c_a9dc5be2f62d37d3854fa61beab3a61ad}{mpiFree}(&key->\hyperlink{structDsaPublicKey_a47d0a3368a5a61e48cc36ed0414392a6}{y});
+99 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{dsa_8c_a78f8ff9636dd1677e22b637476c88e9d}\label{dsa_8c_a78f8ff9636dd1677e22b637476c88e9d}} 
+\index{dsa.\+c@{dsa.\+c}!dsa\+Free\+Signature@{dsa\+Free\+Signature}}
+\index{dsa\+Free\+Signature@{dsa\+Free\+Signature}!dsa.\+c@{dsa.\+c}}
+\subsubsection{\texorpdfstring{dsa\+Free\+Signature()}{dsaFreeSignature()}}
+{\footnotesize\ttfamily void dsa\+Free\+Signature (\begin{DoxyParamCaption}\item[{\hyperlink{structDsaSignature}{Dsa\+Signature} $\ast$}]{signature }\end{DoxyParamCaption})}
+
+
+
+Release a D\+SA signature. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em signature} & Pointer to the D\+SA signature to free \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 150 of file dsa.\+c.
+
+
+\begin{DoxyCode}
+151 \{
+152    \textcolor{comment}{//Release multiple precision integers}
+153    \hyperlink{mpi_8c_a9dc5be2f62d37d3854fa61beab3a61ad}{mpiFree}(&signature->\hyperlink{structDsaSignature_a6a84eb5166120562ac3ab6de751d2093}{r});
+154    \hyperlink{mpi_8c_a9dc5be2f62d37d3854fa61beab3a61ad}{mpiFree}(&signature->\hyperlink{structDsaSignature_a95c9d3b0fb1ca6bed79f0971cbe2e38b}{s});
+155 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{dsa_8c_a8fd22ce221e40d536537ec45c8e89895}\label{dsa_8c_a8fd22ce221e40d536537ec45c8e89895}} 
+\index{dsa.\+c@{dsa.\+c}!dsa\+Generate\+Signature@{dsa\+Generate\+Signature}}
+\index{dsa\+Generate\+Signature@{dsa\+Generate\+Signature}!dsa.\+c@{dsa.\+c}}
+\subsubsection{\texorpdfstring{dsa\+Generate\+Signature()}{dsaGenerateSignature()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} dsa\+Generate\+Signature (\begin{DoxyParamCaption}\item[{const \hyperlink{structPrngAlgo}{Prng\+Algo} $\ast$}]{prng\+Algo,  }\item[{void $\ast$}]{prng\+Context,  }\item[{const \hyperlink{structDsaPrivateKey}{Dsa\+Private\+Key} $\ast$}]{key,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{digest,  }\item[{size\+\_\+t}]{digest\+Len,  }\item[{\hyperlink{structDsaSignature}{Dsa\+Signature} $\ast$}]{signature }\end{DoxyParamCaption})}
+
+
+
+D\+SA signature generation. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em prng\+Algo} & P\+R\+NG algorithm \\
+\hline
+\mbox{\tt in}  & {\em prng\+Context} & Pointer to the P\+R\+NG context \\
+\hline
+\mbox{\tt in}  & {\em key} & Signer\textquotesingle{}s D\+SA private key \\
+\hline
+\mbox{\tt in}  & {\em digest} & Digest of the message to be signed \\
+\hline
+\mbox{\tt in}  & {\em digest\+Len} & Length in octets of the digest \\
+\hline
+\mbox{\tt out}  & {\em signature} & (R, S) integer pair \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 457 of file dsa.\+c.
+
+
+\begin{DoxyCode}
+460 \{
+461    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+462    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+463    \hyperlink{structMpi}{Mpi} \hyperlink{md5_8c_af11ea3cdbca7345eb6a4a8ac5ce0434d}{k};
+464    \hyperlink{structMpi}{Mpi} \hyperlink{dns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z};
+465 
+466    \textcolor{comment}{//Check parameters}
+467    \textcolor{keywordflow}{if}(key == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || digest == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || signature == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+468       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+469 
+470    \textcolor{comment}{//Debug message}
+471    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"DSA signature generation...\(\backslash\)r\(\backslash\)n"});
+472    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  p:\(\backslash\)r\(\backslash\)n"});
+473    \hyperlink{debug_8h_a9c9f3b28f2daf14d77b401512c189d93}{TRACE\_DEBUG\_MPI}(\textcolor{stringliteral}{"    "}, &key->\hyperlink{structDsaPrivateKey_a8f8fd999b327a6bbff828cb04e31772e}{p});
+474    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  q:\(\backslash\)r\(\backslash\)n"});
+475    \hyperlink{debug_8h_a9c9f3b28f2daf14d77b401512c189d93}{TRACE\_DEBUG\_MPI}(\textcolor{stringliteral}{"    "}, &key->\hyperlink{structDsaPrivateKey_a57748f022f498aaf35d7b30f562af7ca}{q});
+476    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  g:\(\backslash\)r\(\backslash\)n"});
+477    \hyperlink{debug_8h_a9c9f3b28f2daf14d77b401512c189d93}{TRACE\_DEBUG\_MPI}(\textcolor{stringliteral}{"    "}, &key->\hyperlink{structDsaPrivateKey_a78da170adbc7f1a7eeb95e6bc52d4124}{g});
+478    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  x:\(\backslash\)r\(\backslash\)n"});
+479    \hyperlink{debug_8h_a9c9f3b28f2daf14d77b401512c189d93}{TRACE\_DEBUG\_MPI}(\textcolor{stringliteral}{"    "}, &key->\hyperlink{structDsaPrivateKey_ac5b101c89f19f59b4cddd85429f1c30e}{x});
+480    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  digest:\(\backslash\)r\(\backslash\)n"});
+481    \hyperlink{debug_8h_a1f71019169d85407d8827300ed43bdf0}{TRACE\_DEBUG\_ARRAY}(\textcolor{stringliteral}{"    "}, digest, digestLen);
+482 
+483    \textcolor{comment}{//Initialize multiple precision integers}
+484    \hyperlink{mpi_8c_a6f30959dcaabfb16e96cc47ef90515a6}{mpiInit}(&k);
+485    \hyperlink{mpi_8c_a6f30959dcaabfb16e96cc47ef90515a6}{mpiInit}(&z);
+486 
+487    \textcolor{comment}{//Let N be the bit length of q}
+488    n = \hyperlink{mpi_8c_a2e540eb4b5d15ea9755fb3e138990c1c}{mpiGetBitLength}(&key->\hyperlink{structDsaPrivateKey_a57748f022f498aaf35d7b30f562af7ca}{q});
+489 
+490    \textcolor{comment}{//Generated a pseudorandom number}
+491    \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_a9753c7bf919b7c41e48512ba572c3bbb}{mpiRand}(&k, n, prngAlgo, prngContext));
+492 
+493    \textcolor{comment}{//Make sure that 0 < k < q}
+494    \textcolor{keywordflow}{if}(\hyperlink{mpi_8c_a54cf7aedd99e130971849eb21eb578c9}{mpiComp}(&k, &key->\hyperlink{structDsaPrivateKey_a57748f022f498aaf35d7b30f562af7ca}{q}) >= 0)
+495       \hyperlink{mpi_8c_a550a7330971d895957015b810b25c805}{mpiShiftRight}(&k, 1);
+496 
+497    \textcolor{comment}{//Debug message}
+498    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  k:\(\backslash\)r\(\backslash\)n"});
+499    \hyperlink{debug_8h_a9c9f3b28f2daf14d77b401512c189d93}{TRACE\_DEBUG\_MPI}(\textcolor{stringliteral}{"    "}, &k);
+500 
+501    \textcolor{comment}{//Compute N = MIN(N, outlen)}
+502    n = \hyperlink{os__port_8h_a3acffbd305ee72dcd4593c0d8af64a4f}{MIN}(n, digestLen * 8);
+503 
+504    \textcolor{comment}{//Convert the digest to a multiple precision integer}
+505    \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{crypto__legacy_8h_abcebe7f916d9073a85492596ec3924fa}{mpiReadRaw}(&z, digest, (n + 7) / 8));
+506 
+507    \textcolor{comment}{//Keep the leftmost N bits of the hash value}
+508    \textcolor{keywordflow}{if}((n % 8) != 0)
+509    \{
+510       \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_a550a7330971d895957015b810b25c805}{mpiShiftRight}(&z, 8 - (n % 8)));
+511    \}
+512 
+513    \textcolor{comment}{//Debug message}
+514    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  z:\(\backslash\)r\(\backslash\)n"});
+515    \hyperlink{debug_8h_a9c9f3b28f2daf14d77b401512c189d93}{TRACE\_DEBUG\_MPI}(\textcolor{stringliteral}{"    "}, &z);
+516 
+517    \textcolor{comment}{//Compute r = (g ^ k mod p) mod q}
+518    \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{samd51__crypto__pukcc_8c_ae18482447f7293c8bb44899ce236b72e}{mpiExpMod}(&signature->\hyperlink{structDsaSignature_a6a84eb5166120562ac3ab6de751d2093}{r}, &key->\hyperlink{structDsaPrivateKey_a78da170adbc7f1a7eeb95e6bc52d4124}{g}, &k, &key->\hyperlink{structDsaPrivateKey_a8f8fd999b327a6bbff828cb04e31772e}{p}));
+519    \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_ac1ddf7a0ceb3cb9c2490edaef9878bf9}{mpiMod}(&signature->\hyperlink{structDsaSignature_a6a84eb5166120562ac3ab6de751d2093}{r}, &signature->\hyperlink{structDsaSignature_a6a84eb5166120562ac3ab6de751d2093}{r}, &key->\hyperlink{structDsaPrivateKey_a57748f022f498aaf35d7b30f562af7ca}{q}));
+520 
+521    \textcolor{comment}{//Compute k ^ -1 mod q}
+522    \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{samd51__crypto__pukcc_8c_a2195ea62b59019943aa5bfa4d309028f}{mpiInvMod}(&k, &k, &key->\hyperlink{structDsaPrivateKey_a57748f022f498aaf35d7b30f562af7ca}{q}));
+523 
+524    \textcolor{comment}{//Compute s = k ^ -1 * (z + x * r) mod q}
+525    \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{samd51__crypto__pukcc_8c_a5ce82adaded4af385feef6b79aaad6d2}{mpiMul}(&signature->\hyperlink{structDsaSignature_a95c9d3b0fb1ca6bed79f0971cbe2e38b}{s}, &key->\hyperlink{structDsaPrivateKey_ac5b101c89f19f59b4cddd85429f1c30e}{x}, &signature->\hyperlink{structDsaSignature_a6a84eb5166120562ac3ab6de751d2093}{r}));
+526    \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_abd7700302eaf9c1a7929b0d4362f43a5}{mpiAdd}(&signature->\hyperlink{structDsaSignature_a95c9d3b0fb1ca6bed79f0971cbe2e38b}{s}, &signature->\hyperlink{structDsaSignature_a95c9d3b0fb1ca6bed79f0971cbe2e38b}{s}, &z));
+527    \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_ac1ddf7a0ceb3cb9c2490edaef9878bf9}{mpiMod}(&signature->\hyperlink{structDsaSignature_a95c9d3b0fb1ca6bed79f0971cbe2e38b}{s}, &signature->\hyperlink{structDsaSignature_a95c9d3b0fb1ca6bed79f0971cbe2e38b}{s}, &key->\hyperlink{structDsaPrivateKey_a57748f022f498aaf35d7b30f562af7ca}{q}));
+528    \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_ab94435373793a664364ccd91dbd808b7}{mpiMulMod}(&signature->\hyperlink{structDsaSignature_a95c9d3b0fb1ca6bed79f0971cbe2e38b}{s}, &signature->\hyperlink{structDsaSignature_a95c9d3b0fb1ca6bed79f0971cbe2e38b}{s}, &k, &key->
+      \hyperlink{structDsaPrivateKey_a57748f022f498aaf35d7b30f562af7ca}{q}));
+529 
+530    \textcolor{comment}{//Dump DSA signature}
+531    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  r:\(\backslash\)r\(\backslash\)n"});
+532    \hyperlink{debug_8h_a9c9f3b28f2daf14d77b401512c189d93}{TRACE\_DEBUG\_MPI}(\textcolor{stringliteral}{"    "}, &signature->\hyperlink{structDsaSignature_a6a84eb5166120562ac3ab6de751d2093}{r});
+533    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  s:\(\backslash\)r\(\backslash\)n"});
+534    \hyperlink{debug_8h_a9c9f3b28f2daf14d77b401512c189d93}{TRACE\_DEBUG\_MPI}(\textcolor{stringliteral}{"    "}, &signature->\hyperlink{structDsaSignature_a95c9d3b0fb1ca6bed79f0971cbe2e38b}{s});
+535 
+536 end:
+537    \textcolor{comment}{//Release multiple precision integers}
+538    \hyperlink{mpi_8c_a9dc5be2f62d37d3854fa61beab3a61ad}{mpiFree}(&k);
+539    \hyperlink{mpi_8c_a9dc5be2f62d37d3854fa61beab3a61ad}{mpiFree}(&z);
+540 
+541    \textcolor{comment}{//Clean up side effects if necessary}
+542    \textcolor{keywordflow}{if}(error)
+543    \{
+544       \textcolor{comment}{//Release (R, S) integer pair}
+545       \hyperlink{mpi_8c_a9dc5be2f62d37d3854fa61beab3a61ad}{mpiFree}(&signature->\hyperlink{structDsaSignature_a6a84eb5166120562ac3ab6de751d2093}{r});
+546       \hyperlink{mpi_8c_a9dc5be2f62d37d3854fa61beab3a61ad}{mpiFree}(&signature->\hyperlink{structDsaSignature_a6a84eb5166120562ac3ab6de751d2093}{r});
+547    \}
+548 
+549    \textcolor{comment}{//Return status code}
+550    \textcolor{keywordflow}{return} error;
+551 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{dsa_8c_aaa7e172f2b82c9c31a9a6638cecb2a4c}\label{dsa_8c_aaa7e172f2b82c9c31a9a6638cecb2a4c}} 
+\index{dsa.\+c@{dsa.\+c}!dsa\+Init\+Private\+Key@{dsa\+Init\+Private\+Key}}
+\index{dsa\+Init\+Private\+Key@{dsa\+Init\+Private\+Key}!dsa.\+c@{dsa.\+c}}
+\subsubsection{\texorpdfstring{dsa\+Init\+Private\+Key()}{dsaInitPrivateKey()}}
+{\footnotesize\ttfamily void dsa\+Init\+Private\+Key (\begin{DoxyParamCaption}\item[{\hyperlink{structDsaPrivateKey}{Dsa\+Private\+Key} $\ast$}]{key }\end{DoxyParamCaption})}
+
+
+
+Initialize a D\+SA private key. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em key} & Pointer to the D\+SA private key to initialize \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 107 of file dsa.\+c.
+
+
+\begin{DoxyCode}
+108 \{
+109    \textcolor{comment}{//Initialize multiple precision integers}
+110    \hyperlink{mpi_8c_a6f30959dcaabfb16e96cc47ef90515a6}{mpiInit}(&key->\hyperlink{structDsaPrivateKey_a8f8fd999b327a6bbff828cb04e31772e}{p});
+111    \hyperlink{mpi_8c_a6f30959dcaabfb16e96cc47ef90515a6}{mpiInit}(&key->\hyperlink{structDsaPrivateKey_a57748f022f498aaf35d7b30f562af7ca}{q});
+112    \hyperlink{mpi_8c_a6f30959dcaabfb16e96cc47ef90515a6}{mpiInit}(&key->\hyperlink{structDsaPrivateKey_a78da170adbc7f1a7eeb95e6bc52d4124}{g});
+113    \hyperlink{mpi_8c_a6f30959dcaabfb16e96cc47ef90515a6}{mpiInit}(&key->\hyperlink{structDsaPrivateKey_ac5b101c89f19f59b4cddd85429f1c30e}{x});
+114 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{dsa_8c_ab058852057768fc18904ba5796f5af4d}\label{dsa_8c_ab058852057768fc18904ba5796f5af4d}} 
+\index{dsa.\+c@{dsa.\+c}!dsa\+Init\+Public\+Key@{dsa\+Init\+Public\+Key}}
+\index{dsa\+Init\+Public\+Key@{dsa\+Init\+Public\+Key}!dsa.\+c@{dsa.\+c}}
+\subsubsection{\texorpdfstring{dsa\+Init\+Public\+Key()}{dsaInitPublicKey()}}
+{\footnotesize\ttfamily void dsa\+Init\+Public\+Key (\begin{DoxyParamCaption}\item[{\hyperlink{structDsaPublicKey}{Dsa\+Public\+Key} $\ast$}]{key }\end{DoxyParamCaption})}
+
+
+
+Initialize a D\+SA public key. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em key} & Pointer to the D\+SA public key to initialize \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 77 of file dsa.\+c.
+
+
+\begin{DoxyCode}
+78 \{
+79    \textcolor{comment}{//Initialize multiple precision integers}
+80    \hyperlink{mpi_8c_a6f30959dcaabfb16e96cc47ef90515a6}{mpiInit}(&key->\hyperlink{structDsaPublicKey_a273f5bed06a946fd672c94283f49fc3e}{p});
+81    \hyperlink{mpi_8c_a6f30959dcaabfb16e96cc47ef90515a6}{mpiInit}(&key->\hyperlink{structDsaPublicKey_a7961fbb82f0c5c56b577d2247ffc9172}{q});
+82    \hyperlink{mpi_8c_a6f30959dcaabfb16e96cc47ef90515a6}{mpiInit}(&key->\hyperlink{structDsaPublicKey_a910d43db2650efb256373b06521a23bf}{g});
+83    \hyperlink{mpi_8c_a6f30959dcaabfb16e96cc47ef90515a6}{mpiInit}(&key->\hyperlink{structDsaPublicKey_a47d0a3368a5a61e48cc36ed0414392a6}{y});
+84 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{dsa_8c_a6ebbad1e693d6967da33e2a1338912c7}\label{dsa_8c_a6ebbad1e693d6967da33e2a1338912c7}} 
+\index{dsa.\+c@{dsa.\+c}!dsa\+Init\+Signature@{dsa\+Init\+Signature}}
+\index{dsa\+Init\+Signature@{dsa\+Init\+Signature}!dsa.\+c@{dsa.\+c}}
+\subsubsection{\texorpdfstring{dsa\+Init\+Signature()}{dsaInitSignature()}}
+{\footnotesize\ttfamily void dsa\+Init\+Signature (\begin{DoxyParamCaption}\item[{\hyperlink{structDsaSignature}{Dsa\+Signature} $\ast$}]{signature }\end{DoxyParamCaption})}
+
+
+
+Initialize a D\+SA signature. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em signature} & Pointer to the D\+SA signature to initialize \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 137 of file dsa.\+c.
+
+
+\begin{DoxyCode}
+138 \{
+139    \textcolor{comment}{//Initialize multiple precision integers}
+140    \hyperlink{mpi_8c_a6f30959dcaabfb16e96cc47ef90515a6}{mpiInit}(&signature->\hyperlink{structDsaSignature_a6a84eb5166120562ac3ab6de751d2093}{r});
+141    \hyperlink{mpi_8c_a6f30959dcaabfb16e96cc47ef90515a6}{mpiInit}(&signature->\hyperlink{structDsaSignature_a95c9d3b0fb1ca6bed79f0971cbe2e38b}{s});
+142 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{dsa_8c_a05526f7cfcf22483963264e0500bc724}\label{dsa_8c_a05526f7cfcf22483963264e0500bc724}} 
+\index{dsa.\+c@{dsa.\+c}!dsa\+Read\+Signature@{dsa\+Read\+Signature}}
+\index{dsa\+Read\+Signature@{dsa\+Read\+Signature}!dsa.\+c@{dsa.\+c}}
+\subsubsection{\texorpdfstring{dsa\+Read\+Signature()}{dsaReadSignature()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} dsa\+Read\+Signature (\begin{DoxyParamCaption}\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{data,  }\item[{size\+\_\+t}]{length,  }\item[{\hyperlink{structDsaSignature}{Dsa\+Signature} $\ast$}]{signature }\end{DoxyParamCaption})}
+
+
+
+Read an A\+S\+N.\+1 encoded D\+SA signature. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em data} & Pointer to the A\+S\+N.\+1 structure to decode \\
+\hline
+\mbox{\tt in}  & {\em length} & Length of the A\+S\+N.\+1 structure \\
+\hline
+\mbox{\tt out}  & {\em signature} & (R, S) integer pair \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 322 of file dsa.\+c.
+
+
+\begin{DoxyCode}
+323 \{
+324    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+325    \hyperlink{structAsn1Tag}{Asn1Tag} tag;
+326 
+327    \textcolor{comment}{//Debug message}
+328    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"Reading DSA signature...\(\backslash\)r\(\backslash\)n"});
+329 
+330    \textcolor{comment}{//Dump DSA signature}
+331    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  signature:\(\backslash\)r\(\backslash\)n"});
+332    \hyperlink{debug_8h_a1f71019169d85407d8827300ed43bdf0}{TRACE\_DEBUG\_ARRAY}(\textcolor{stringliteral}{"    "}, \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length});
+333 
+334    \textcolor{comment}{//Start of exception handling block}
+335    \textcolor{keywordflow}{do}
+336    \{
+337       \textcolor{comment}{//Display ASN.1 structure}
+338       error = \hyperlink{asn1_8c_adfebd6c0e21cc4d23414ff98aa9e9a69}{asn1DumpObject}(\hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, 0);
+339       \textcolor{comment}{//Any error to report?}
+340       \textcolor{keywordflow}{if}(error)
+341          \textcolor{keywordflow}{break};
+342 
+343       \textcolor{comment}{//Read the contents of the ASN.1 structure}
+344       error = \hyperlink{asn1_8c_a5df4a5a14b22837b3dea3525608a9122}{asn1ReadSequence}(\hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, &tag);
+345       \textcolor{comment}{//Failed to decode ASN.1 tag?}
+346       \textcolor{keywordflow}{if}(error)
+347          \textcolor{keywordflow}{break};
+348 
+349       \textcolor{comment}{//Malformed DSA signature?}
+350       \textcolor{keywordflow}{if}(\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} != tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength})
+351       \{
+352          \textcolor{comment}{//Report an error}
+353          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca92e7b26953f11d1bc4f4526fad39aed0}{ERROR\_INVALID\_SYNTAX};
+354          \textcolor{keywordflow}{break};
+355       \}
+356 
+357       \textcolor{comment}{//Point to the first field}
+358       \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data} = tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value};
+359       \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} = tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length};
+360 
+361       \textcolor{comment}{//Read the parameter R}
+362       error = \hyperlink{asn1_8c_a1abd5e2bb0488ff85fb1d94392f80dc4}{asn1ReadTag}(\hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, &tag);
+363       \textcolor{comment}{//Failed to decode ASN.1 tag?}
+364       \textcolor{keywordflow}{if}(error)
+365          \textcolor{keywordflow}{break};
+366 
+367       \textcolor{comment}{//Enforce encoding, class and type}
+368       error = \hyperlink{asn1_8c_a73fa06e5d71abe974aa6ad8fb53ecaa2}{asn1CheckTag}(&tag, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, \hyperlink{asn1_8h_ab3589ac11c049bfda069aa3ecf683578}{ASN1\_CLASS\_UNIVERSAL}, 
+      \hyperlink{asn1_8h_a1b0f39cb3d87e425703ba389df9da1dfaf49fe8465a80ebfbe92fe0f0622ec994}{ASN1\_TYPE\_INTEGER});
+369       \textcolor{comment}{//Invalid tag?}
+370       \textcolor{keywordflow}{if}(error)
+371          \textcolor{keywordflow}{break};
+372 
+373       \textcolor{comment}{//Make sure R is a positive integer}
+374       \textcolor{keywordflow}{if}(tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length} == 0 || (tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value}[0] & 0x80) != 0)
+375       \{
+376          \textcolor{comment}{//Report an error}
+377          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca92e7b26953f11d1bc4f4526fad39aed0}{ERROR\_INVALID\_SYNTAX};
+378          \textcolor{keywordflow}{break};
+379       \}
+380 
+381       \textcolor{comment}{//Convert the octet string to a multiple precision integer}
+382       error = \hyperlink{crypto__legacy_8h_abcebe7f916d9073a85492596ec3924fa}{mpiReadRaw}(&signature->\hyperlink{structDsaSignature_a6a84eb5166120562ac3ab6de751d2093}{r}, tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value}, tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length});
+383       \textcolor{comment}{//Any error to report?}
+384       \textcolor{keywordflow}{if}(error)
+385          \textcolor{keywordflow}{break};
+386 
+387       \textcolor{comment}{//Point to the next field}
+388       \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data} += tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+389       \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} -= tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+390 
+391       \textcolor{comment}{//Read the parameter S}
+392       error = \hyperlink{asn1_8c_a1abd5e2bb0488ff85fb1d94392f80dc4}{asn1ReadTag}(\hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, &tag);
+393       \textcolor{comment}{//Failed to decode ASN.1 tag?}
+394       \textcolor{keywordflow}{if}(error)
+395          \textcolor{keywordflow}{break};
+396 
+397       \textcolor{comment}{//Enforce encoding, class and type}
+398       error = \hyperlink{asn1_8c_a73fa06e5d71abe974aa6ad8fb53ecaa2}{asn1CheckTag}(&tag, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, \hyperlink{asn1_8h_ab3589ac11c049bfda069aa3ecf683578}{ASN1\_CLASS\_UNIVERSAL}, 
+      \hyperlink{asn1_8h_a1b0f39cb3d87e425703ba389df9da1dfaf49fe8465a80ebfbe92fe0f0622ec994}{ASN1\_TYPE\_INTEGER});
+399       \textcolor{comment}{//Invalid tag?}
+400       \textcolor{keywordflow}{if}(error)
+401          \textcolor{keywordflow}{break};
+402 
+403       \textcolor{comment}{//Make sure S is a positive integer}
+404       \textcolor{keywordflow}{if}(tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length} == 0 || (tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value}[0] & 0x80) != 0)
+405       \{
+406          \textcolor{comment}{//Report an error}
+407          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca92e7b26953f11d1bc4f4526fad39aed0}{ERROR\_INVALID\_SYNTAX};
+408          \textcolor{keywordflow}{break};
+409       \}
+410 
+411       \textcolor{comment}{//Convert the octet string to a multiple precision integer}
+412       error = \hyperlink{crypto__legacy_8h_abcebe7f916d9073a85492596ec3924fa}{mpiReadRaw}(&signature->\hyperlink{structDsaSignature_a95c9d3b0fb1ca6bed79f0971cbe2e38b}{s}, tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value}, tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length});
+413       \textcolor{comment}{//Any error to report?}
+414       \textcolor{keywordflow}{if}(error)
+415          \textcolor{keywordflow}{break};
+416 
+417       \textcolor{comment}{//Malformed DSA signature?}
+418       \textcolor{keywordflow}{if}(\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} != tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength})
+419       \{
+420          \textcolor{comment}{//Report an error}
+421          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca92e7b26953f11d1bc4f4526fad39aed0}{ERROR\_INVALID\_SYNTAX};
+422          \textcolor{keywordflow}{break};
+423       \}
+424 
+425       \textcolor{comment}{//Dump (R, S) integer pair}
+426       \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  r:\(\backslash\)r\(\backslash\)n"});
+427       \hyperlink{debug_8h_a9c9f3b28f2daf14d77b401512c189d93}{TRACE\_DEBUG\_MPI}(\textcolor{stringliteral}{"    "}, &signature->\hyperlink{structDsaSignature_a6a84eb5166120562ac3ab6de751d2093}{r});
+428       \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  s:\(\backslash\)r\(\backslash\)n"});
+429       \hyperlink{debug_8h_a9c9f3b28f2daf14d77b401512c189d93}{TRACE\_DEBUG\_MPI}(\textcolor{stringliteral}{"    "}, &signature->\hyperlink{structDsaSignature_a95c9d3b0fb1ca6bed79f0971cbe2e38b}{s});
+430 
+431       \textcolor{comment}{//End of exception handling block}
+432    \} \textcolor{keywordflow}{while}(0);
+433 
+434    \textcolor{comment}{//Any error to report?}
+435    \textcolor{keywordflow}{if}(error)
+436    \{
+437       \textcolor{comment}{//Clean up side effects}
+438       \hyperlink{dsa_8c_a78f8ff9636dd1677e22b637476c88e9d}{dsaFreeSignature}(signature);
+439    \}
+440 
+441    \textcolor{comment}{//Return status code}
+442    \textcolor{keywordflow}{return} error;
+443 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{dsa_8c_a551e9301249e713b9925e2a7f6d7ed79}\label{dsa_8c_a551e9301249e713b9925e2a7f6d7ed79}} 
+\index{dsa.\+c@{dsa.\+c}!dsa\+Verify\+Signature@{dsa\+Verify\+Signature}}
+\index{dsa\+Verify\+Signature@{dsa\+Verify\+Signature}!dsa.\+c@{dsa.\+c}}
+\subsubsection{\texorpdfstring{dsa\+Verify\+Signature()}{dsaVerifySignature()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} dsa\+Verify\+Signature (\begin{DoxyParamCaption}\item[{const \hyperlink{structDsaPublicKey}{Dsa\+Public\+Key} $\ast$}]{key,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{digest,  }\item[{size\+\_\+t}]{digest\+Len,  }\item[{const \hyperlink{structDsaSignature}{Dsa\+Signature} $\ast$}]{signature }\end{DoxyParamCaption})}
+
+
+
+D\+SA signature verification. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em key} & Signer\textquotesingle{}s D\+SA public key \\
+\hline
+\mbox{\tt in}  & {\em digest} & Digest of the message whose signature is to be verified \\
+\hline
+\mbox{\tt in}  & {\em digest\+Len} & Length in octets of the digest \\
+\hline
+\mbox{\tt in}  & {\em signature} & (R, S) integer pair \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 563 of file dsa.\+c.
+
+
+\begin{DoxyCode}
+565 \{
+566    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+567    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+568    \hyperlink{structMpi}{Mpi} \hyperlink{ethernet_8h_aaa9bda35d7b2e3d98ecec180d3f628c0}{w};
+569    \hyperlink{structMpi}{Mpi} \hyperlink{dns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z};
+570    \hyperlink{structMpi}{Mpi} u1;
+571    \hyperlink{structMpi}{Mpi} u2;
+572    \hyperlink{structMpi}{Mpi} v;
+573 
+574    \textcolor{comment}{//Check parameters}
+575    \textcolor{keywordflow}{if}(key == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || digest == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || signature == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+576       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+577 
+578    \textcolor{comment}{//Debug message}
+579    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"DSA signature verification...\(\backslash\)r\(\backslash\)n"});
+580    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  p:\(\backslash\)r\(\backslash\)n"});
+581    \hyperlink{debug_8h_a9c9f3b28f2daf14d77b401512c189d93}{TRACE\_DEBUG\_MPI}(\textcolor{stringliteral}{"    "}, &key->\hyperlink{structDsaPublicKey_a273f5bed06a946fd672c94283f49fc3e}{p});
+582    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  q:\(\backslash\)r\(\backslash\)n"});
+583    \hyperlink{debug_8h_a9c9f3b28f2daf14d77b401512c189d93}{TRACE\_DEBUG\_MPI}(\textcolor{stringliteral}{"    "}, &key->\hyperlink{structDsaPublicKey_a7961fbb82f0c5c56b577d2247ffc9172}{q});
+584    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  g:\(\backslash\)r\(\backslash\)n"});
+585    \hyperlink{debug_8h_a9c9f3b28f2daf14d77b401512c189d93}{TRACE\_DEBUG\_MPI}(\textcolor{stringliteral}{"    "}, &key->\hyperlink{structDsaPublicKey_a910d43db2650efb256373b06521a23bf}{g});
+586    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  y:\(\backslash\)r\(\backslash\)n"});
+587    \hyperlink{debug_8h_a9c9f3b28f2daf14d77b401512c189d93}{TRACE\_DEBUG\_MPI}(\textcolor{stringliteral}{"    "}, &key->\hyperlink{structDsaPublicKey_a47d0a3368a5a61e48cc36ed0414392a6}{y});
+588    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  digest:\(\backslash\)r\(\backslash\)n"});
+589    \hyperlink{debug_8h_a1f71019169d85407d8827300ed43bdf0}{TRACE\_DEBUG\_ARRAY}(\textcolor{stringliteral}{"    "}, digest, digestLen);
+590    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  r:\(\backslash\)r\(\backslash\)n"});
+591    \hyperlink{debug_8h_a9c9f3b28f2daf14d77b401512c189d93}{TRACE\_DEBUG\_MPI}(\textcolor{stringliteral}{"    "}, &signature->\hyperlink{structDsaSignature_a6a84eb5166120562ac3ab6de751d2093}{r});
+592    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  s:\(\backslash\)r\(\backslash\)n"});
+593    \hyperlink{debug_8h_a9c9f3b28f2daf14d77b401512c189d93}{TRACE\_DEBUG\_MPI}(\textcolor{stringliteral}{"    "}, &signature->\hyperlink{structDsaSignature_a95c9d3b0fb1ca6bed79f0971cbe2e38b}{s});
+594 
+595    \textcolor{comment}{//The verifier shall check that 0 < r < q}
+596    \textcolor{keywordflow}{if}(\hyperlink{mpi_8c_a46c2ff9f6fd5aa944ad4d41833ebef50}{mpiCompInt}(&signature->\hyperlink{structDsaSignature_a6a84eb5166120562ac3ab6de751d2093}{r}, 0) <= 0 || \hyperlink{mpi_8c_a54cf7aedd99e130971849eb21eb578c9}{mpiComp}(&signature->
+      \hyperlink{structDsaSignature_a6a84eb5166120562ac3ab6de751d2093}{r}, &key->\hyperlink{structDsaPublicKey_a7961fbb82f0c5c56b577d2247ffc9172}{q}) >= 0)
+597    \{
+598       \textcolor{comment}{//If the condition is violated, the signature shall be rejected as invalid}
+599       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca6e8db1d17e3aad53ecc5a4ff62df6f48}{ERROR\_INVALID\_SIGNATURE};
+600    \}
+601 
+602    \textcolor{comment}{//The verifier shall check that 0 < s < q}
+603    \textcolor{keywordflow}{if}(\hyperlink{mpi_8c_a46c2ff9f6fd5aa944ad4d41833ebef50}{mpiCompInt}(&signature->\hyperlink{structDsaSignature_a95c9d3b0fb1ca6bed79f0971cbe2e38b}{s}, 0) <= 0 || \hyperlink{mpi_8c_a54cf7aedd99e130971849eb21eb578c9}{mpiComp}(&signature->
+      \hyperlink{structDsaSignature_a95c9d3b0fb1ca6bed79f0971cbe2e38b}{s}, &key->\hyperlink{structDsaPublicKey_a7961fbb82f0c5c56b577d2247ffc9172}{q}) >= 0)
+604    \{
+605       \textcolor{comment}{//If the condition is violated, the signature shall be rejected as invalid}
+606       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca6e8db1d17e3aad53ecc5a4ff62df6f48}{ERROR\_INVALID\_SIGNATURE};
+607    \}
+608 
+609    \textcolor{comment}{//Initialize multiple precision integers}
+610    \hyperlink{mpi_8c_a6f30959dcaabfb16e96cc47ef90515a6}{mpiInit}(&w);
+611    \hyperlink{mpi_8c_a6f30959dcaabfb16e96cc47ef90515a6}{mpiInit}(&z);
+612    \hyperlink{mpi_8c_a6f30959dcaabfb16e96cc47ef90515a6}{mpiInit}(&u1);
+613    \hyperlink{mpi_8c_a6f30959dcaabfb16e96cc47ef90515a6}{mpiInit}(&u2);
+614    \hyperlink{mpi_8c_a6f30959dcaabfb16e96cc47ef90515a6}{mpiInit}(&v);
+615 
+616    \textcolor{comment}{//Let N be the bit length of q}
+617    n = \hyperlink{mpi_8c_a2e540eb4b5d15ea9755fb3e138990c1c}{mpiGetBitLength}(&key->\hyperlink{structDsaPublicKey_a7961fbb82f0c5c56b577d2247ffc9172}{q});
+618    \textcolor{comment}{//Compute N = MIN(N, outlen)}
+619    n = \hyperlink{os__port_8h_a3acffbd305ee72dcd4593c0d8af64a4f}{MIN}(n, digestLen * 8);
+620 
+621    \textcolor{comment}{//Convert the digest to a multiple precision integer}
+622    \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{crypto__legacy_8h_abcebe7f916d9073a85492596ec3924fa}{mpiReadRaw}(&z, digest, (n + 7) / 8));
+623 
+624    \textcolor{comment}{//Keep the leftmost N bits of the hash value}
+625    \textcolor{keywordflow}{if}((n % 8) != 0)
+626    \{
+627       \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_a550a7330971d895957015b810b25c805}{mpiShiftRight}(&z, 8 - (n % 8)));
+628    \}
+629 
+630    \textcolor{comment}{//Compute w = s ^ -1 mod q}
+631    \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{samd51__crypto__pukcc_8c_a2195ea62b59019943aa5bfa4d309028f}{mpiInvMod}(&w, &signature->\hyperlink{structDsaSignature_a95c9d3b0fb1ca6bed79f0971cbe2e38b}{s}, &key->\hyperlink{structDsaPublicKey_a7961fbb82f0c5c56b577d2247ffc9172}{q}));
+632    \textcolor{comment}{//Compute u1 = z * w mod q}
+633    \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_ab94435373793a664364ccd91dbd808b7}{mpiMulMod}(&u1, &z, &w, &key->\hyperlink{structDsaPublicKey_a7961fbb82f0c5c56b577d2247ffc9172}{q}));
+634    \textcolor{comment}{//Compute u2 = r * w mod q}
+635    \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_ab94435373793a664364ccd91dbd808b7}{mpiMulMod}(&u2, &signature->\hyperlink{structDsaSignature_a6a84eb5166120562ac3ab6de751d2093}{r}, &w, &key->\hyperlink{structDsaPublicKey_a7961fbb82f0c5c56b577d2247ffc9172}{q}));
+636 
+637    \textcolor{comment}{//Compute v = ((g ^ u1) * (y ^ u2) mod p) mod q}
+638    \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{samd51__crypto__pukcc_8c_ae18482447f7293c8bb44899ce236b72e}{mpiExpMod}(&v, &key->\hyperlink{structDsaPublicKey_a910d43db2650efb256373b06521a23bf}{g}, &u1, &key->\hyperlink{structDsaPublicKey_a273f5bed06a946fd672c94283f49fc3e}{p}));
+639    \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{samd51__crypto__pukcc_8c_ae18482447f7293c8bb44899ce236b72e}{mpiExpMod}(&w, &key->\hyperlink{structDsaPublicKey_a47d0a3368a5a61e48cc36ed0414392a6}{y}, &u2, &key->\hyperlink{structDsaPublicKey_a273f5bed06a946fd672c94283f49fc3e}{p}));
+640    \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_ab94435373793a664364ccd91dbd808b7}{mpiMulMod}(&v, &v, &w, &key->\hyperlink{structDsaPublicKey_a273f5bed06a946fd672c94283f49fc3e}{p}));
+641    \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_ac1ddf7a0ceb3cb9c2490edaef9878bf9}{mpiMod}(&v, &v, &key->\hyperlink{structDsaPublicKey_a7961fbb82f0c5c56b577d2247ffc9172}{q}));
+642 
+643    \textcolor{comment}{//Debug message}
+644    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  v:\(\backslash\)r\(\backslash\)n"});
+645    \hyperlink{debug_8h_a9c9f3b28f2daf14d77b401512c189d93}{TRACE\_DEBUG\_MPI}(\textcolor{stringliteral}{"    "}, &v);
+646 
+647    \textcolor{comment}{//If v = r, then the signature is verified. If v does not equal r,}
+648    \textcolor{comment}{//then the message or the signature may have been modified}
+649    \textcolor{keywordflow}{if}(!\hyperlink{mpi_8c_a54cf7aedd99e130971849eb21eb578c9}{mpiComp}(&v, &signature->\hyperlink{structDsaSignature_a6a84eb5166120562ac3ab6de751d2093}{r}))
+650       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+651    \textcolor{keywordflow}{else}
+652       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca6e8db1d17e3aad53ecc5a4ff62df6f48}{ERROR\_INVALID\_SIGNATURE};
+653 
+654 end:
+655    \textcolor{comment}{//Release multiple precision integers}
+656    \hyperlink{mpi_8c_a9dc5be2f62d37d3854fa61beab3a61ad}{mpiFree}(&w);
+657    \hyperlink{mpi_8c_a9dc5be2f62d37d3854fa61beab3a61ad}{mpiFree}(&z);
+658    \hyperlink{mpi_8c_a9dc5be2f62d37d3854fa61beab3a61ad}{mpiFree}(&u1);
+659    \hyperlink{mpi_8c_a9dc5be2f62d37d3854fa61beab3a61ad}{mpiFree}(&u2);
+660    \hyperlink{mpi_8c_a9dc5be2f62d37d3854fa61beab3a61ad}{mpiFree}(&v);
+661 
+662    \textcolor{comment}{//Return status code}
+663    \textcolor{keywordflow}{return} error;
+664 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{dsa_8c_af4e812722524ed43ff16494d2f4ffbb5}\label{dsa_8c_af4e812722524ed43ff16494d2f4ffbb5}} 
+\index{dsa.\+c@{dsa.\+c}!dsa\+Write\+Signature@{dsa\+Write\+Signature}}
+\index{dsa\+Write\+Signature@{dsa\+Write\+Signature}!dsa.\+c@{dsa.\+c}}
+\subsubsection{\texorpdfstring{dsa\+Write\+Signature()}{dsaWriteSignature()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} dsa\+Write\+Signature (\begin{DoxyParamCaption}\item[{const \hyperlink{structDsaSignature}{Dsa\+Signature} $\ast$}]{signature,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{data,  }\item[{size\+\_\+t $\ast$}]{length }\end{DoxyParamCaption})}
+
+
+
+Encode D\+SA signature using A\+S\+N.\+1. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em signature} & (R, S) integer pair \\
+\hline
+\mbox{\tt out}  & {\em data} & Pointer to the buffer where to store the resulting A\+S\+N.\+1 structure \\
+\hline
+\mbox{\tt out}  & {\em length} & Length of the A\+S\+N.\+1 structure \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 166 of file dsa.\+c.
+
+
+\begin{DoxyCode}
+167 \{
+168    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+169    \textcolor{keywordtype}{size\_t} \hyperlink{md5_8c_af11ea3cdbca7345eb6a4a8ac5ce0434d}{k};
+170    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+171    \textcolor{keywordtype}{size\_t} rLen;
+172    \textcolor{keywordtype}{size\_t} sLen;
+173    \hyperlink{structAsn1Tag}{Asn1Tag} tag;
+174 
+175    \textcolor{comment}{//Debug message}
+176    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"Writing DSA signature...\(\backslash\)r\(\backslash\)n"});
+177 
+178    \textcolor{comment}{//Dump (R, S) integer pair}
+179    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  r:\(\backslash\)r\(\backslash\)n"});
+180    \hyperlink{debug_8h_a9c9f3b28f2daf14d77b401512c189d93}{TRACE\_DEBUG\_MPI}(\textcolor{stringliteral}{"    "}, &signature->\hyperlink{structDsaSignature_a6a84eb5166120562ac3ab6de751d2093}{r});
+181    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  s:\(\backslash\)r\(\backslash\)n"});
+182    \hyperlink{debug_8h_a9c9f3b28f2daf14d77b401512c189d93}{TRACE\_DEBUG\_MPI}(\textcolor{stringliteral}{"    "}, &signature->\hyperlink{structDsaSignature_a95c9d3b0fb1ca6bed79f0971cbe2e38b}{s});
+183 
+184    \textcolor{comment}{//Calculate the length of R}
+185    rLen = \hyperlink{mpi_8c_a8599cb7537c854ae3b2442144c7f853b}{mpiGetByteLength}(&signature->\hyperlink{structDsaSignature_a6a84eb5166120562ac3ab6de751d2093}{r});
+186    \textcolor{comment}{//Calculate the length of S}
+187    sLen = \hyperlink{mpi_8c_a8599cb7537c854ae3b2442144c7f853b}{mpiGetByteLength}(&signature->\hyperlink{structDsaSignature_a95c9d3b0fb1ca6bed79f0971cbe2e38b}{s});
+188 
+189    \textcolor{comment}{//Make sure the (R, S) integer pair is valid}
+190    \textcolor{keywordflow}{if}(rLen == 0 || sLen == 0)
+191       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cae5c014519c3ac2540447887ddca1bd28}{ERROR\_INVALID\_LENGTH};
+192 
+193    \textcolor{comment}{//R and S are always encoded in the smallest possible number of octets}
+194    \textcolor{keywordflow}{if}(\hyperlink{mpi_8c_ad62c1f7143a1cc46b080bea217f20ede}{mpiGetBitValue}(&signature->\hyperlink{structDsaSignature_a6a84eb5166120562ac3ab6de751d2093}{r}, (rLen * 8) - 1))
+195       rLen++;
+196    \textcolor{keywordflow}{if}(\hyperlink{mpi_8c_ad62c1f7143a1cc46b080bea217f20ede}{mpiGetBitValue}(&signature->\hyperlink{structDsaSignature_a95c9d3b0fb1ca6bed79f0971cbe2e38b}{s}, (sLen * 8) - 1))
+197       sLen++;
+198 
+199    \textcolor{comment}{//The first pass computes the length of the ASN.1 sequence}
+200    n = 0;
+201 
+202    \textcolor{comment}{//The parameter R is encapsulated within an ASN.1 structure}
+203    tag.\hyperlink{structAsn1Tag_a93c64e611d57dfb59e6ebafe938f28c1}{constructed} = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+204    tag.\hyperlink{structAsn1Tag_a9f35c291ffa22d903d9c66638bb225ea}{objClass} = \hyperlink{asn1_8h_ab3589ac11c049bfda069aa3ecf683578}{ASN1\_CLASS\_UNIVERSAL};
+205    tag.\hyperlink{structAsn1Tag_a3ecdc4bbf328b5216521cb2114f45935}{objType} = \hyperlink{asn1_8h_a1b0f39cb3d87e425703ba389df9da1dfaf49fe8465a80ebfbe92fe0f0622ec994}{ASN1\_TYPE\_INTEGER};
+206    tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length} = rLen;
+207    tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value} = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+208 
+209    \textcolor{comment}{//Compute the length of the corresponding ASN.1 structure}
+210    error = \hyperlink{asn1_8c_a246f5e4192e8f064bd28d519a89d0207}{asn1WriteTag}(&tag, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+211    \textcolor{comment}{//Any error to report?}
+212    \textcolor{keywordflow}{if}(error)
+213       \textcolor{keywordflow}{return} error;
+214 
+215    \textcolor{comment}{//Update the length of the ASN.1 sequence}
+216    n += tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+217 
+218    \textcolor{comment}{//The parameter S is encapsulated within an ASN.1 structure}
+219    tag.\hyperlink{structAsn1Tag_a93c64e611d57dfb59e6ebafe938f28c1}{constructed} = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+220    tag.\hyperlink{structAsn1Tag_a9f35c291ffa22d903d9c66638bb225ea}{objClass} = \hyperlink{asn1_8h_ab3589ac11c049bfda069aa3ecf683578}{ASN1\_CLASS\_UNIVERSAL};
+221    tag.\hyperlink{structAsn1Tag_a3ecdc4bbf328b5216521cb2114f45935}{objType} = \hyperlink{asn1_8h_a1b0f39cb3d87e425703ba389df9da1dfaf49fe8465a80ebfbe92fe0f0622ec994}{ASN1\_TYPE\_INTEGER};
+222    tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length} = sLen;
+223    tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value} = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+224 
+225    \textcolor{comment}{//Compute the length of the corresponding ASN.1 structure}
+226    error = \hyperlink{asn1_8c_a246f5e4192e8f064bd28d519a89d0207}{asn1WriteTag}(&tag, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+227    \textcolor{comment}{//Any error to report?}
+228    \textcolor{keywordflow}{if}(error)
+229       \textcolor{keywordflow}{return} error;
+230 
+231    \textcolor{comment}{//Update the length of the ASN.1 sequence}
+232    n += tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+233 
+234    \textcolor{comment}{//The second pass encodes the ASN.1 structure}
+235    k = 0;
+236 
+237    \textcolor{comment}{//The (R, S) integer pair is encapsulated within a sequence}
+238    tag.\hyperlink{structAsn1Tag_a93c64e611d57dfb59e6ebafe938f28c1}{constructed} = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+239    tag.\hyperlink{structAsn1Tag_a9f35c291ffa22d903d9c66638bb225ea}{objClass} = \hyperlink{asn1_8h_ab3589ac11c049bfda069aa3ecf683578}{ASN1\_CLASS\_UNIVERSAL};
+240    tag.\hyperlink{structAsn1Tag_a3ecdc4bbf328b5216521cb2114f45935}{objType} = \hyperlink{asn1_8h_a1b0f39cb3d87e425703ba389df9da1dfaf6223adf2132054146cf838b14c593ea}{ASN1\_TYPE\_SEQUENCE};
+241    tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length} = \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+242    tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value} = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+243 
+244    \textcolor{comment}{//Write the corresponding ASN.1 tag}
+245    error = \hyperlink{asn1_8c_a246f5e4192e8f064bd28d519a89d0207}{asn1WriteTag}(&tag, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data} + k, &n);
+246    \textcolor{comment}{//Any error to report?}
+247    \textcolor{keywordflow}{if}(error)
+248       \textcolor{keywordflow}{return} error;
+249 
+250    \textcolor{comment}{//Advance write pointer}
+251    k += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+252 
+253    \textcolor{comment}{//Encode the parameter R using ASN.1}
+254    tag.\hyperlink{structAsn1Tag_a93c64e611d57dfb59e6ebafe938f28c1}{constructed} = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+255    tag.\hyperlink{structAsn1Tag_a9f35c291ffa22d903d9c66638bb225ea}{objClass} = \hyperlink{asn1_8h_ab3589ac11c049bfda069aa3ecf683578}{ASN1\_CLASS\_UNIVERSAL};
+256    tag.\hyperlink{structAsn1Tag_a3ecdc4bbf328b5216521cb2114f45935}{objType} = \hyperlink{asn1_8h_a1b0f39cb3d87e425703ba389df9da1dfaf49fe8465a80ebfbe92fe0f0622ec994}{ASN1\_TYPE\_INTEGER};
+257    tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length} = rLen;
+258    tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value} = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+259 
+260    \textcolor{comment}{//Write the corresponding ASN.1 tag}
+261    error = \hyperlink{asn1_8c_a246f5e4192e8f064bd28d519a89d0207}{asn1WriteTag}(&tag, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data} + k, &n);
+262    \textcolor{comment}{//Any error to report?}
+263    \textcolor{keywordflow}{if}(error)
+264       \textcolor{keywordflow}{return} error;
+265 
+266    \textcolor{comment}{//Advance write pointer}
+267    k += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+268 
+269    \textcolor{comment}{//Convert R to an octet string}
+270    error = \hyperlink{crypto__legacy_8h_ae5151562c07814ce486b94bf0035ad12}{mpiWriteRaw}(&signature->\hyperlink{structDsaSignature_a6a84eb5166120562ac3ab6de751d2093}{r}, \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data} + k, rLen);
+271    \textcolor{comment}{//Any error to report?}
+272    \textcolor{keywordflow}{if}(error)
+273       \textcolor{keywordflow}{return} error;
+274 
+275    \textcolor{comment}{//Advance write pointer}
+276    k += rLen;
+277 
+278    \textcolor{comment}{//Encode the parameter S using ASN.1}
+279    tag.\hyperlink{structAsn1Tag_a93c64e611d57dfb59e6ebafe938f28c1}{constructed} = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+280    tag.\hyperlink{structAsn1Tag_a9f35c291ffa22d903d9c66638bb225ea}{objClass} = \hyperlink{asn1_8h_ab3589ac11c049bfda069aa3ecf683578}{ASN1\_CLASS\_UNIVERSAL};
+281    tag.\hyperlink{structAsn1Tag_a3ecdc4bbf328b5216521cb2114f45935}{objType} = \hyperlink{asn1_8h_a1b0f39cb3d87e425703ba389df9da1dfaf49fe8465a80ebfbe92fe0f0622ec994}{ASN1\_TYPE\_INTEGER};
+282    tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length} = sLen;
+283    tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value} = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+284 
+285    \textcolor{comment}{//Write the corresponding ASN.1 tag}
+286    error = \hyperlink{asn1_8c_a246f5e4192e8f064bd28d519a89d0207}{asn1WriteTag}(&tag, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data} + k, &n);
+287    \textcolor{comment}{//Any error to report?}
+288    \textcolor{keywordflow}{if}(error)
+289       \textcolor{keywordflow}{return} error;
+290 
+291    \textcolor{comment}{//Advance write pointer}
+292    k += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+293 
+294    \textcolor{comment}{//Convert S to an octet string}
+295    error = \hyperlink{crypto__legacy_8h_ae5151562c07814ce486b94bf0035ad12}{mpiWriteRaw}(&signature->\hyperlink{structDsaSignature_a95c9d3b0fb1ca6bed79f0971cbe2e38b}{s}, \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data} + k, sLen);
+296    \textcolor{comment}{//Any error to report?}
+297    \textcolor{keywordflow}{if}(error)
+298       \textcolor{keywordflow}{return} error;
+299 
+300    \textcolor{comment}{//Advance write pointer}
+301    k += sLen;
+302 
+303    \textcolor{comment}{//Dump DSA signature}
+304    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  signature:\(\backslash\)r\(\backslash\)n"});
+305    \hyperlink{debug_8h_a1f71019169d85407d8827300ed43bdf0}{TRACE\_DEBUG\_ARRAY}(\textcolor{stringliteral}{"    "}, \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, k);
+306 
+307    \textcolor{comment}{//Total length of the ASN.1 structure}
+308    *\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} = \hyperlink{md5_8c_af11ea3cdbca7345eb6a4a8ac5ce0434d}{k};
+309    \textcolor{comment}{//Successful processing}
+310    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+311 \}
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{dsa_8c_aec62d423add8486c829eacb574ebe4f3}\label{dsa_8c_aec62d423add8486c829eacb574ebe4f3}} 
+\index{dsa.\+c@{dsa.\+c}!D\+S\+A\+\_\+\+O\+ID@{D\+S\+A\+\_\+\+O\+ID}}
+\index{D\+S\+A\+\_\+\+O\+ID@{D\+S\+A\+\_\+\+O\+ID}!dsa.\+c@{dsa.\+c}}
+\subsubsection{\texorpdfstring{D\+S\+A\+\_\+\+O\+ID}{DSA\_OID}}
+{\footnotesize\ttfamily const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} D\+S\+A\+\_\+\+O\+ID\mbox{[}7\mbox{]} = \{0x2\+A, 0x86, 0x48, 0x\+C\+E, 0x38, 0x04, 0x01\}}
+
+
+
+Definition at line 51 of file dsa.\+c.
+
+\mbox{\Hypertarget{dsa_8c_aa08eebc141e54bba0dbfda5c08eb2f6e}\label{dsa_8c_aa08eebc141e54bba0dbfda5c08eb2f6e}} 
+\index{dsa.\+c@{dsa.\+c}!D\+S\+A\+\_\+\+W\+I\+T\+H\+\_\+\+S\+H\+A1\+\_\+\+O\+ID@{D\+S\+A\+\_\+\+W\+I\+T\+H\+\_\+\+S\+H\+A1\+\_\+\+O\+ID}}
+\index{D\+S\+A\+\_\+\+W\+I\+T\+H\+\_\+\+S\+H\+A1\+\_\+\+O\+ID@{D\+S\+A\+\_\+\+W\+I\+T\+H\+\_\+\+S\+H\+A1\+\_\+\+O\+ID}!dsa.\+c@{dsa.\+c}}
+\subsubsection{\texorpdfstring{D\+S\+A\+\_\+\+W\+I\+T\+H\+\_\+\+S\+H\+A1\+\_\+\+O\+ID}{DSA\_WITH\_SHA1\_OID}}
+{\footnotesize\ttfamily const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} D\+S\+A\+\_\+\+W\+I\+T\+H\+\_\+\+S\+H\+A1\+\_\+\+O\+ID\mbox{[}7\mbox{]} = \{0x2\+A, 0x86, 0x48, 0x\+C\+E, 0x38, 0x04, 0x03\}}
+
+
+
+Definition at line 53 of file dsa.\+c.
+
+\mbox{\Hypertarget{dsa_8c_ae66f1af58648440726b52b520b0a4cd8}\label{dsa_8c_ae66f1af58648440726b52b520b0a4cd8}} 
+\index{dsa.\+c@{dsa.\+c}!D\+S\+A\+\_\+\+W\+I\+T\+H\+\_\+\+S\+H\+A224\+\_\+\+O\+ID@{D\+S\+A\+\_\+\+W\+I\+T\+H\+\_\+\+S\+H\+A224\+\_\+\+O\+ID}}
+\index{D\+S\+A\+\_\+\+W\+I\+T\+H\+\_\+\+S\+H\+A224\+\_\+\+O\+ID@{D\+S\+A\+\_\+\+W\+I\+T\+H\+\_\+\+S\+H\+A224\+\_\+\+O\+ID}!dsa.\+c@{dsa.\+c}}
+\subsubsection{\texorpdfstring{D\+S\+A\+\_\+\+W\+I\+T\+H\+\_\+\+S\+H\+A224\+\_\+\+O\+ID}{DSA\_WITH\_SHA224\_OID}}
+{\footnotesize\ttfamily const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} D\+S\+A\+\_\+\+W\+I\+T\+H\+\_\+\+S\+H\+A224\+\_\+\+O\+ID\mbox{[}9\mbox{]} = \{0x60, 0x86, 0x48, 0x01, 0x65, 0x03, 0x04, 0x03, 0x01\}}
+
+
+
+Definition at line 55 of file dsa.\+c.
+
+\mbox{\Hypertarget{dsa_8c_aff83cbf5cb752485af12bddc1df12938}\label{dsa_8c_aff83cbf5cb752485af12bddc1df12938}} 
+\index{dsa.\+c@{dsa.\+c}!D\+S\+A\+\_\+\+W\+I\+T\+H\+\_\+\+S\+H\+A256\+\_\+\+O\+ID@{D\+S\+A\+\_\+\+W\+I\+T\+H\+\_\+\+S\+H\+A256\+\_\+\+O\+ID}}
+\index{D\+S\+A\+\_\+\+W\+I\+T\+H\+\_\+\+S\+H\+A256\+\_\+\+O\+ID@{D\+S\+A\+\_\+\+W\+I\+T\+H\+\_\+\+S\+H\+A256\+\_\+\+O\+ID}!dsa.\+c@{dsa.\+c}}
+\subsubsection{\texorpdfstring{D\+S\+A\+\_\+\+W\+I\+T\+H\+\_\+\+S\+H\+A256\+\_\+\+O\+ID}{DSA\_WITH\_SHA256\_OID}}
+{\footnotesize\ttfamily const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} D\+S\+A\+\_\+\+W\+I\+T\+H\+\_\+\+S\+H\+A256\+\_\+\+O\+ID\mbox{[}9\mbox{]} = \{0x60, 0x86, 0x48, 0x01, 0x65, 0x03, 0x04, 0x03, 0x02\}}
+
+
+
+Definition at line 57 of file dsa.\+c.
+
+\mbox{\Hypertarget{dsa_8c_a3f6853b327c39297800ceff3a2fb8a73}\label{dsa_8c_a3f6853b327c39297800ceff3a2fb8a73}} 
+\index{dsa.\+c@{dsa.\+c}!D\+S\+A\+\_\+\+W\+I\+T\+H\+\_\+\+S\+H\+A384\+\_\+\+O\+ID@{D\+S\+A\+\_\+\+W\+I\+T\+H\+\_\+\+S\+H\+A384\+\_\+\+O\+ID}}
+\index{D\+S\+A\+\_\+\+W\+I\+T\+H\+\_\+\+S\+H\+A384\+\_\+\+O\+ID@{D\+S\+A\+\_\+\+W\+I\+T\+H\+\_\+\+S\+H\+A384\+\_\+\+O\+ID}!dsa.\+c@{dsa.\+c}}
+\subsubsection{\texorpdfstring{D\+S\+A\+\_\+\+W\+I\+T\+H\+\_\+\+S\+H\+A384\+\_\+\+O\+ID}{DSA\_WITH\_SHA384\_OID}}
+{\footnotesize\ttfamily const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} D\+S\+A\+\_\+\+W\+I\+T\+H\+\_\+\+S\+H\+A384\+\_\+\+O\+ID\mbox{[}9\mbox{]} = \{0x60, 0x86, 0x48, 0x01, 0x65, 0x03, 0x04, 0x03, 0x03\}}
+
+
+
+Definition at line 59 of file dsa.\+c.
+
+\mbox{\Hypertarget{dsa_8c_a15f447cd0a7d96fc289d70b549fc74db}\label{dsa_8c_a15f447cd0a7d96fc289d70b549fc74db}} 
+\index{dsa.\+c@{dsa.\+c}!D\+S\+A\+\_\+\+W\+I\+T\+H\+\_\+\+S\+H\+A3\+\_\+224\+\_\+\+O\+ID@{D\+S\+A\+\_\+\+W\+I\+T\+H\+\_\+\+S\+H\+A3\+\_\+224\+\_\+\+O\+ID}}
+\index{D\+S\+A\+\_\+\+W\+I\+T\+H\+\_\+\+S\+H\+A3\+\_\+224\+\_\+\+O\+ID@{D\+S\+A\+\_\+\+W\+I\+T\+H\+\_\+\+S\+H\+A3\+\_\+224\+\_\+\+O\+ID}!dsa.\+c@{dsa.\+c}}
+\subsubsection{\texorpdfstring{D\+S\+A\+\_\+\+W\+I\+T\+H\+\_\+\+S\+H\+A3\+\_\+224\+\_\+\+O\+ID}{DSA\_WITH\_SHA3\_224\_OID}}
+{\footnotesize\ttfamily const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} D\+S\+A\+\_\+\+W\+I\+T\+H\+\_\+\+S\+H\+A3\+\_\+224\+\_\+\+O\+ID\mbox{[}9\mbox{]} = \{0x60, 0x86, 0x48, 0x01, 0x65, 0x03, 0x04, 0x03, 0x05\}}
+
+
+
+Definition at line 63 of file dsa.\+c.
+
+\mbox{\Hypertarget{dsa_8c_a0acb48540d84759e08c34f539752c67c}\label{dsa_8c_a0acb48540d84759e08c34f539752c67c}} 
+\index{dsa.\+c@{dsa.\+c}!D\+S\+A\+\_\+\+W\+I\+T\+H\+\_\+\+S\+H\+A3\+\_\+256\+\_\+\+O\+ID@{D\+S\+A\+\_\+\+W\+I\+T\+H\+\_\+\+S\+H\+A3\+\_\+256\+\_\+\+O\+ID}}
+\index{D\+S\+A\+\_\+\+W\+I\+T\+H\+\_\+\+S\+H\+A3\+\_\+256\+\_\+\+O\+ID@{D\+S\+A\+\_\+\+W\+I\+T\+H\+\_\+\+S\+H\+A3\+\_\+256\+\_\+\+O\+ID}!dsa.\+c@{dsa.\+c}}
+\subsubsection{\texorpdfstring{D\+S\+A\+\_\+\+W\+I\+T\+H\+\_\+\+S\+H\+A3\+\_\+256\+\_\+\+O\+ID}{DSA\_WITH\_SHA3\_256\_OID}}
+{\footnotesize\ttfamily const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} D\+S\+A\+\_\+\+W\+I\+T\+H\+\_\+\+S\+H\+A3\+\_\+256\+\_\+\+O\+ID\mbox{[}9\mbox{]} = \{0x60, 0x86, 0x48, 0x01, 0x65, 0x03, 0x04, 0x03, 0x06\}}
+
+
+
+Definition at line 65 of file dsa.\+c.
+
+\mbox{\Hypertarget{dsa_8c_a01e93748133e4fe02341e3f88a3ac3cf}\label{dsa_8c_a01e93748133e4fe02341e3f88a3ac3cf}} 
+\index{dsa.\+c@{dsa.\+c}!D\+S\+A\+\_\+\+W\+I\+T\+H\+\_\+\+S\+H\+A3\+\_\+384\+\_\+\+O\+ID@{D\+S\+A\+\_\+\+W\+I\+T\+H\+\_\+\+S\+H\+A3\+\_\+384\+\_\+\+O\+ID}}
+\index{D\+S\+A\+\_\+\+W\+I\+T\+H\+\_\+\+S\+H\+A3\+\_\+384\+\_\+\+O\+ID@{D\+S\+A\+\_\+\+W\+I\+T\+H\+\_\+\+S\+H\+A3\+\_\+384\+\_\+\+O\+ID}!dsa.\+c@{dsa.\+c}}
+\subsubsection{\texorpdfstring{D\+S\+A\+\_\+\+W\+I\+T\+H\+\_\+\+S\+H\+A3\+\_\+384\+\_\+\+O\+ID}{DSA\_WITH\_SHA3\_384\_OID}}
+{\footnotesize\ttfamily const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} D\+S\+A\+\_\+\+W\+I\+T\+H\+\_\+\+S\+H\+A3\+\_\+384\+\_\+\+O\+ID\mbox{[}9\mbox{]} = \{0x60, 0x86, 0x48, 0x01, 0x65, 0x03, 0x04, 0x03, 0x07\}}
+
+
+
+Definition at line 67 of file dsa.\+c.
+
+\mbox{\Hypertarget{dsa_8c_ada4ed9fe933d7311e84816484cc126b5}\label{dsa_8c_ada4ed9fe933d7311e84816484cc126b5}} 
+\index{dsa.\+c@{dsa.\+c}!D\+S\+A\+\_\+\+W\+I\+T\+H\+\_\+\+S\+H\+A3\+\_\+512\+\_\+\+O\+ID@{D\+S\+A\+\_\+\+W\+I\+T\+H\+\_\+\+S\+H\+A3\+\_\+512\+\_\+\+O\+ID}}
+\index{D\+S\+A\+\_\+\+W\+I\+T\+H\+\_\+\+S\+H\+A3\+\_\+512\+\_\+\+O\+ID@{D\+S\+A\+\_\+\+W\+I\+T\+H\+\_\+\+S\+H\+A3\+\_\+512\+\_\+\+O\+ID}!dsa.\+c@{dsa.\+c}}
+\subsubsection{\texorpdfstring{D\+S\+A\+\_\+\+W\+I\+T\+H\+\_\+\+S\+H\+A3\+\_\+512\+\_\+\+O\+ID}{DSA\_WITH\_SHA3\_512\_OID}}
+{\footnotesize\ttfamily const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} D\+S\+A\+\_\+\+W\+I\+T\+H\+\_\+\+S\+H\+A3\+\_\+512\+\_\+\+O\+ID\mbox{[}9\mbox{]} = \{0x60, 0x86, 0x48, 0x01, 0x65, 0x03, 0x04, 0x03, 0x08\}}
+
+
+
+Definition at line 69 of file dsa.\+c.
+
+\mbox{\Hypertarget{dsa_8c_a9fba73d1b73c70fb99793ea6647c7b65}\label{dsa_8c_a9fba73d1b73c70fb99793ea6647c7b65}} 
+\index{dsa.\+c@{dsa.\+c}!D\+S\+A\+\_\+\+W\+I\+T\+H\+\_\+\+S\+H\+A512\+\_\+\+O\+ID@{D\+S\+A\+\_\+\+W\+I\+T\+H\+\_\+\+S\+H\+A512\+\_\+\+O\+ID}}
+\index{D\+S\+A\+\_\+\+W\+I\+T\+H\+\_\+\+S\+H\+A512\+\_\+\+O\+ID@{D\+S\+A\+\_\+\+W\+I\+T\+H\+\_\+\+S\+H\+A512\+\_\+\+O\+ID}!dsa.\+c@{dsa.\+c}}
+\subsubsection{\texorpdfstring{D\+S\+A\+\_\+\+W\+I\+T\+H\+\_\+\+S\+H\+A512\+\_\+\+O\+ID}{DSA\_WITH\_SHA512\_OID}}
+{\footnotesize\ttfamily const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} D\+S\+A\+\_\+\+W\+I\+T\+H\+\_\+\+S\+H\+A512\+\_\+\+O\+ID\mbox{[}9\mbox{]} = \{0x60, 0x86, 0x48, 0x01, 0x65, 0x03, 0x04, 0x03, 0x04\}}
+
+
+
+Definition at line 61 of file dsa.\+c.
+

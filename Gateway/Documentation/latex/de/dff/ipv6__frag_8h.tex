@@ -1,0 +1,1064 @@
+\hypertarget{ipv6__frag_8h}{}\section{cyclone\+\_\+tcp/ipv6/ipv6\+\_\+frag.h File Reference}
+\label{ipv6__frag_8h}\index{cyclone\+\_\+tcp/ipv6/ipv6\+\_\+frag.\+h@{cyclone\+\_\+tcp/ipv6/ipv6\+\_\+frag.\+h}}
+
+
+I\+Pv6 fragmentation and reassembly.  
+
+
+{\ttfamily \#include \char`\"{}core/net.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ipv6/ipv6.\+h\char`\"{}}\newline
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structIpv6ReassemblyBuffer}{Ipv6\+Reassembly\+Buffer}
+\begin{DoxyCompactList}\small\item\em Reassembly buffer. \end{DoxyCompactList}\item 
+struct \hyperlink{structIpv6FragDesc}{Ipv6\+Frag\+Desc}
+\begin{DoxyCompactList}\small\item\em Fragmented packet descriptor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{ipv6__frag_8h_a28ea95c91103d605a53749f057329b36}{I\+P\+V6\+\_\+\+F\+R\+A\+G\+\_\+\+S\+U\+P\+P\+O\+RT}~\hyperlink{os__port_8h_a73c228f87e038e8295ee8ea8eceaa5ac}{E\+N\+A\+B\+L\+ED}
+\item 
+\#define \hyperlink{ipv6__frag_8h_aa72a0280309fe175ce1da097922976ca}{I\+P\+V6\+\_\+\+O\+V\+E\+R\+L\+A\+P\+P\+I\+N\+G\+\_\+\+F\+R\+A\+G\+\_\+\+S\+U\+P\+P\+O\+RT}~\hyperlink{os__port_8h_a73c228f87e038e8295ee8ea8eceaa5ac}{E\+N\+A\+B\+L\+ED}
+\item 
+\#define \hyperlink{ipv6__frag_8h_a8982ccaff9d25b43041eb0da95b93700}{I\+P\+V6\+\_\+\+F\+R\+A\+G\+\_\+\+T\+I\+C\+K\+\_\+\+I\+N\+T\+E\+R\+V\+AL}~1000
+\item 
+\#define \hyperlink{ipv6__frag_8h_a32fb76378a9b006c9aff62f2f40ac143}{I\+P\+V6\+\_\+\+M\+A\+X\+\_\+\+F\+R\+A\+G\+\_\+\+D\+A\+T\+A\+G\+R\+A\+MS}~4
+\item 
+\#define \hyperlink{ipv6__frag_8h_ac016101236364e74fc7e0729bf2d8d16}{I\+P\+V6\+\_\+\+M\+A\+X\+\_\+\+F\+R\+A\+G\+\_\+\+D\+A\+T\+A\+G\+R\+A\+M\+\_\+\+S\+I\+ZE}~8192
+\item 
+\#define \hyperlink{ipv6__frag_8h_a6d64298944bf4a5d80eb6e0110b5781f}{I\+P\+V6\+\_\+\+F\+R\+A\+G\+\_\+\+T\+I\+M\+E\+\_\+\+T\+O\+\_\+\+L\+I\+VE}~15000
+\item 
+\#define \hyperlink{ipv6__frag_8h_a586b96ded65dacef0b4888a45c2a390a}{I\+P\+V6\+\_\+\+I\+N\+F\+I\+N\+I\+TY}~0x\+F\+F\+FF
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+struct \{\\
+\>\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t} \hyperlink{ipv6__frag_8h_ac641ca9cfab7c4966cdd47e13c7ec87a}{first}\\
+\>\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t} \hyperlink{ipv6__frag_8h_a7179af054cf318941e1a12e964965935}{last}\\
+\>\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t} \hyperlink{ipv6__frag_8h_a31925c52841f891fabf5043c49d0306b}{next}\\
+\} \hyperlink{ipv6__frag_8h_a578b35e34bbeda1095d6139b8046e127}{Ipv6HoleDesc}\\
+
+\end{tabbing}\begin{DoxyCompactList}\small\item\em Hole descriptor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ipv6__frag_8h_a9268cb1af957e9d1fa5dc72d0eab67f8}{ipv6\+Fragment\+Datagram} (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface, \hyperlink{ipv6_8h_a68061e0a0b502d880cbe60b645cfa2b7}{Ipv6\+Pseudo\+Header} $\ast$pseudo\+Header, const \hyperlink{structNetBuffer}{Net\+Buffer} $\ast$payload, size\+\_\+t payload\+Offset, size\+\_\+t path\+Mtu, \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} \hyperlink{nbns__common_8h_a1e87af3c18a2fd36c61faf89949bdc3f}{flags})
+\begin{DoxyCompactList}\small\item\em Fragment I\+Pv6 datagram into smaller packets. \end{DoxyCompactList}\item 
+void \hyperlink{ipv6__frag_8h_aa017ac6f43b99df244b5263352cf484b}{ipv6\+Parse\+Fragment\+Header} (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface, const \hyperlink{structNetBuffer}{Net\+Buffer} $\ast$\hyperlink{ndp_8h_a6c97f605f59d957e1720030e1b1058e5}{ip\+Packet}, size\+\_\+t ip\+Packet\+Offset, size\+\_\+t frag\+Header\+Offset, size\+\_\+t next\+Header\+Offset)
+\begin{DoxyCompactList}\small\item\em Parse Fragment header and reassemble original datagram. \end{DoxyCompactList}\item 
+void \hyperlink{ipv6__frag_8h_adf90e1f10b8402f9ec7b4afa09458f7f}{ipv6\+Frag\+Tick} (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface)
+\begin{DoxyCompactList}\small\item\em Fragment reassembly timeout handler. \end{DoxyCompactList}\item 
+\hyperlink{structIpv6FragDesc}{Ipv6\+Frag\+Desc} $\ast$ \hyperlink{ipv6__frag_8h_a6064926176bf3e4dcc94f406c2fe5996}{ipv6\+Search\+Frag\+Queue} (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface, \hyperlink{ipv6_8h_ad553284c12e3a0d96dc8a4da1c5f6ea0}{Ipv6\+Header} $\ast$packet, \hyperlink{ipv6_8h_a913212d430a91f9afdf68306327c7cb3}{Ipv6\+Fragment\+Header} $\ast$header)
+\begin{DoxyCompactList}\small\item\em Search for a matching datagram in the reassembly queue. \end{DoxyCompactList}\item 
+void \hyperlink{ipv6__frag_8h_a7fd69b37030c6e8be6c82e3a9137e39d}{ipv6\+Flush\+Frag\+Queue} (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface)
+\begin{DoxyCompactList}\small\item\em Flush I\+Pv6 reassembly queue. \end{DoxyCompactList}\item 
+\hyperlink{ipv6__frag_8h_a578b35e34bbeda1095d6139b8046e127}{Ipv6\+Hole\+Desc} $\ast$ \hyperlink{ipv6__frag_8h_a6c0f45744b01564242e285b4a5140a1a}{ipv6\+Find\+Hole} (\hyperlink{structIpv6FragDesc}{Ipv6\+Frag\+Desc} $\ast$frag, \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} \hyperlink{pic32mz_2isr__support_8h_ac0542d92dfcd62c19170fd963f9e5052}{offset})
+\begin{DoxyCompactList}\small\item\em Retrieve hole descriptor. \end{DoxyCompactList}\item 
+void \hyperlink{ipv6__frag_8h_acb606f0feb84afae509dfe3e5ef9dee4}{ipv6\+Dump\+Hole\+List} (\hyperlink{structIpv6FragDesc}{Ipv6\+Frag\+Desc} $\ast$frag)
+\begin{DoxyCompactList}\small\item\em Dump hole descriptor list. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\+\_\+t} \hyperlink{ipv6__frag_8h_af16e836bc6a4132381b1eaf2fa7a0564}{ipv6\+Frag\+Tick\+Counter}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+I\+Pv6 fragmentation and reassembly. 
+
+\hypertarget{pic32mz__ef__curiosity_8h_License}{}\subsection{License}\label{pic32mz__ef__curiosity_8h_License}
+S\+P\+D\+X-\/\+License-\/\+Identifier\+: G\+P\+L-\/2.\+0-\/or-\/later
+
+Copyright (C) 2010-\/2019 Oryx Embedded S\+A\+RL. All rights reserved.
+
+This file is part of Cyclone\+T\+CP Open.
+
+This program is free software; you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+
+You should have received a copy of the G\+NU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-\/1301, U\+SA.
+
+\begin{DoxyAuthor}{Author}
+Oryx Embedded S\+A\+RL (www.\+oryx-\/embedded.\+com) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+9.\+6 
+\end{DoxyVersion}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{ipv6__frag_8h_a28ea95c91103d605a53749f057329b36}\label{ipv6__frag_8h_a28ea95c91103d605a53749f057329b36}} 
+\index{ipv6\+\_\+frag.\+h@{ipv6\+\_\+frag.\+h}!I\+P\+V6\+\_\+\+F\+R\+A\+G\+\_\+\+S\+U\+P\+P\+O\+RT@{I\+P\+V6\+\_\+\+F\+R\+A\+G\+\_\+\+S\+U\+P\+P\+O\+RT}}
+\index{I\+P\+V6\+\_\+\+F\+R\+A\+G\+\_\+\+S\+U\+P\+P\+O\+RT@{I\+P\+V6\+\_\+\+F\+R\+A\+G\+\_\+\+S\+U\+P\+P\+O\+RT}!ipv6\+\_\+frag.\+h@{ipv6\+\_\+frag.\+h}}
+\subsubsection{\texorpdfstring{I\+P\+V6\+\_\+\+F\+R\+A\+G\+\_\+\+S\+U\+P\+P\+O\+RT}{IPV6\_FRAG\_SUPPORT}}
+{\footnotesize\ttfamily \#define I\+P\+V6\+\_\+\+F\+R\+A\+G\+\_\+\+S\+U\+P\+P\+O\+RT~\hyperlink{os__port_8h_a73c228f87e038e8295ee8ea8eceaa5ac}{E\+N\+A\+B\+L\+ED}}
+
+
+
+Definition at line 40 of file ipv6\+\_\+frag.\+h.
+
+\mbox{\Hypertarget{ipv6__frag_8h_a8982ccaff9d25b43041eb0da95b93700}\label{ipv6__frag_8h_a8982ccaff9d25b43041eb0da95b93700}} 
+\index{ipv6\+\_\+frag.\+h@{ipv6\+\_\+frag.\+h}!I\+P\+V6\+\_\+\+F\+R\+A\+G\+\_\+\+T\+I\+C\+K\+\_\+\+I\+N\+T\+E\+R\+V\+AL@{I\+P\+V6\+\_\+\+F\+R\+A\+G\+\_\+\+T\+I\+C\+K\+\_\+\+I\+N\+T\+E\+R\+V\+AL}}
+\index{I\+P\+V6\+\_\+\+F\+R\+A\+G\+\_\+\+T\+I\+C\+K\+\_\+\+I\+N\+T\+E\+R\+V\+AL@{I\+P\+V6\+\_\+\+F\+R\+A\+G\+\_\+\+T\+I\+C\+K\+\_\+\+I\+N\+T\+E\+R\+V\+AL}!ipv6\+\_\+frag.\+h@{ipv6\+\_\+frag.\+h}}
+\subsubsection{\texorpdfstring{I\+P\+V6\+\_\+\+F\+R\+A\+G\+\_\+\+T\+I\+C\+K\+\_\+\+I\+N\+T\+E\+R\+V\+AL}{IPV6\_FRAG\_TICK\_INTERVAL}}
+{\footnotesize\ttfamily \#define I\+P\+V6\+\_\+\+F\+R\+A\+G\+\_\+\+T\+I\+C\+K\+\_\+\+I\+N\+T\+E\+R\+V\+AL~1000}
+
+
+
+Definition at line 54 of file ipv6\+\_\+frag.\+h.
+
+\mbox{\Hypertarget{ipv6__frag_8h_a6d64298944bf4a5d80eb6e0110b5781f}\label{ipv6__frag_8h_a6d64298944bf4a5d80eb6e0110b5781f}} 
+\index{ipv6\+\_\+frag.\+h@{ipv6\+\_\+frag.\+h}!I\+P\+V6\+\_\+\+F\+R\+A\+G\+\_\+\+T\+I\+M\+E\+\_\+\+T\+O\+\_\+\+L\+I\+VE@{I\+P\+V6\+\_\+\+F\+R\+A\+G\+\_\+\+T\+I\+M\+E\+\_\+\+T\+O\+\_\+\+L\+I\+VE}}
+\index{I\+P\+V6\+\_\+\+F\+R\+A\+G\+\_\+\+T\+I\+M\+E\+\_\+\+T\+O\+\_\+\+L\+I\+VE@{I\+P\+V6\+\_\+\+F\+R\+A\+G\+\_\+\+T\+I\+M\+E\+\_\+\+T\+O\+\_\+\+L\+I\+VE}!ipv6\+\_\+frag.\+h@{ipv6\+\_\+frag.\+h}}
+\subsubsection{\texorpdfstring{I\+P\+V6\+\_\+\+F\+R\+A\+G\+\_\+\+T\+I\+M\+E\+\_\+\+T\+O\+\_\+\+L\+I\+VE}{IPV6\_FRAG\_TIME\_TO\_LIVE}}
+{\footnotesize\ttfamily \#define I\+P\+V6\+\_\+\+F\+R\+A\+G\+\_\+\+T\+I\+M\+E\+\_\+\+T\+O\+\_\+\+L\+I\+VE~15000}
+
+
+
+Definition at line 76 of file ipv6\+\_\+frag.\+h.
+
+\mbox{\Hypertarget{ipv6__frag_8h_a586b96ded65dacef0b4888a45c2a390a}\label{ipv6__frag_8h_a586b96ded65dacef0b4888a45c2a390a}} 
+\index{ipv6\+\_\+frag.\+h@{ipv6\+\_\+frag.\+h}!I\+P\+V6\+\_\+\+I\+N\+F\+I\+N\+I\+TY@{I\+P\+V6\+\_\+\+I\+N\+F\+I\+N\+I\+TY}}
+\index{I\+P\+V6\+\_\+\+I\+N\+F\+I\+N\+I\+TY@{I\+P\+V6\+\_\+\+I\+N\+F\+I\+N\+I\+TY}!ipv6\+\_\+frag.\+h@{ipv6\+\_\+frag.\+h}}
+\subsubsection{\texorpdfstring{I\+P\+V6\+\_\+\+I\+N\+F\+I\+N\+I\+TY}{IPV6\_INFINITY}}
+{\footnotesize\ttfamily \#define I\+P\+V6\+\_\+\+I\+N\+F\+I\+N\+I\+TY~0x\+F\+F\+FF}
+
+
+
+Definition at line 82 of file ipv6\+\_\+frag.\+h.
+
+\mbox{\Hypertarget{ipv6__frag_8h_ac016101236364e74fc7e0729bf2d8d16}\label{ipv6__frag_8h_ac016101236364e74fc7e0729bf2d8d16}} 
+\index{ipv6\+\_\+frag.\+h@{ipv6\+\_\+frag.\+h}!I\+P\+V6\+\_\+\+M\+A\+X\+\_\+\+F\+R\+A\+G\+\_\+\+D\+A\+T\+A\+G\+R\+A\+M\+\_\+\+S\+I\+ZE@{I\+P\+V6\+\_\+\+M\+A\+X\+\_\+\+F\+R\+A\+G\+\_\+\+D\+A\+T\+A\+G\+R\+A\+M\+\_\+\+S\+I\+ZE}}
+\index{I\+P\+V6\+\_\+\+M\+A\+X\+\_\+\+F\+R\+A\+G\+\_\+\+D\+A\+T\+A\+G\+R\+A\+M\+\_\+\+S\+I\+ZE@{I\+P\+V6\+\_\+\+M\+A\+X\+\_\+\+F\+R\+A\+G\+\_\+\+D\+A\+T\+A\+G\+R\+A\+M\+\_\+\+S\+I\+ZE}!ipv6\+\_\+frag.\+h@{ipv6\+\_\+frag.\+h}}
+\subsubsection{\texorpdfstring{I\+P\+V6\+\_\+\+M\+A\+X\+\_\+\+F\+R\+A\+G\+\_\+\+D\+A\+T\+A\+G\+R\+A\+M\+\_\+\+S\+I\+ZE}{IPV6\_MAX\_FRAG\_DATAGRAM\_SIZE}}
+{\footnotesize\ttfamily \#define I\+P\+V6\+\_\+\+M\+A\+X\+\_\+\+F\+R\+A\+G\+\_\+\+D\+A\+T\+A\+G\+R\+A\+M\+\_\+\+S\+I\+ZE~8192}
+
+
+
+Definition at line 69 of file ipv6\+\_\+frag.\+h.
+
+\mbox{\Hypertarget{ipv6__frag_8h_a32fb76378a9b006c9aff62f2f40ac143}\label{ipv6__frag_8h_a32fb76378a9b006c9aff62f2f40ac143}} 
+\index{ipv6\+\_\+frag.\+h@{ipv6\+\_\+frag.\+h}!I\+P\+V6\+\_\+\+M\+A\+X\+\_\+\+F\+R\+A\+G\+\_\+\+D\+A\+T\+A\+G\+R\+A\+MS@{I\+P\+V6\+\_\+\+M\+A\+X\+\_\+\+F\+R\+A\+G\+\_\+\+D\+A\+T\+A\+G\+R\+A\+MS}}
+\index{I\+P\+V6\+\_\+\+M\+A\+X\+\_\+\+F\+R\+A\+G\+\_\+\+D\+A\+T\+A\+G\+R\+A\+MS@{I\+P\+V6\+\_\+\+M\+A\+X\+\_\+\+F\+R\+A\+G\+\_\+\+D\+A\+T\+A\+G\+R\+A\+MS}!ipv6\+\_\+frag.\+h@{ipv6\+\_\+frag.\+h}}
+\subsubsection{\texorpdfstring{I\+P\+V6\+\_\+\+M\+A\+X\+\_\+\+F\+R\+A\+G\+\_\+\+D\+A\+T\+A\+G\+R\+A\+MS}{IPV6\_MAX\_FRAG\_DATAGRAMS}}
+{\footnotesize\ttfamily \#define I\+P\+V6\+\_\+\+M\+A\+X\+\_\+\+F\+R\+A\+G\+\_\+\+D\+A\+T\+A\+G\+R\+A\+MS~4}
+
+
+
+Definition at line 62 of file ipv6\+\_\+frag.\+h.
+
+\mbox{\Hypertarget{ipv6__frag_8h_aa72a0280309fe175ce1da097922976ca}\label{ipv6__frag_8h_aa72a0280309fe175ce1da097922976ca}} 
+\index{ipv6\+\_\+frag.\+h@{ipv6\+\_\+frag.\+h}!I\+P\+V6\+\_\+\+O\+V\+E\+R\+L\+A\+P\+P\+I\+N\+G\+\_\+\+F\+R\+A\+G\+\_\+\+S\+U\+P\+P\+O\+RT@{I\+P\+V6\+\_\+\+O\+V\+E\+R\+L\+A\+P\+P\+I\+N\+G\+\_\+\+F\+R\+A\+G\+\_\+\+S\+U\+P\+P\+O\+RT}}
+\index{I\+P\+V6\+\_\+\+O\+V\+E\+R\+L\+A\+P\+P\+I\+N\+G\+\_\+\+F\+R\+A\+G\+\_\+\+S\+U\+P\+P\+O\+RT@{I\+P\+V6\+\_\+\+O\+V\+E\+R\+L\+A\+P\+P\+I\+N\+G\+\_\+\+F\+R\+A\+G\+\_\+\+S\+U\+P\+P\+O\+RT}!ipv6\+\_\+frag.\+h@{ipv6\+\_\+frag.\+h}}
+\subsubsection{\texorpdfstring{I\+P\+V6\+\_\+\+O\+V\+E\+R\+L\+A\+P\+P\+I\+N\+G\+\_\+\+F\+R\+A\+G\+\_\+\+S\+U\+P\+P\+O\+RT}{IPV6\_OVERLAPPING\_FRAG\_SUPPORT}}
+{\footnotesize\ttfamily \#define I\+P\+V6\+\_\+\+O\+V\+E\+R\+L\+A\+P\+P\+I\+N\+G\+\_\+\+F\+R\+A\+G\+\_\+\+S\+U\+P\+P\+O\+RT~\hyperlink{os__port_8h_a73c228f87e038e8295ee8ea8eceaa5ac}{E\+N\+A\+B\+L\+ED}}
+
+
+
+Definition at line 47 of file ipv6\+\_\+frag.\+h.
+
+
+
+\subsection{Typedef Documentation}
+\mbox{\Hypertarget{ipv6__frag_8h_a578b35e34bbeda1095d6139b8046e127}\label{ipv6__frag_8h_a578b35e34bbeda1095d6139b8046e127}} 
+\index{ipv6\+\_\+frag.\+h@{ipv6\+\_\+frag.\+h}!Ipv6\+Hole\+Desc@{Ipv6\+Hole\+Desc}}
+\index{Ipv6\+Hole\+Desc@{Ipv6\+Hole\+Desc}!ipv6\+\_\+frag.\+h@{ipv6\+\_\+frag.\+h}}
+\subsubsection{\texorpdfstring{Ipv6\+Hole\+Desc}{Ipv6HoleDesc}}
+{\footnotesize\ttfamily typedef \{ ... \}  \hyperlink{ipv6__frag_8h_a578b35e34bbeda1095d6139b8046e127}{Ipv6\+Hole\+Desc}}
+
+
+
+Hole descriptor. 
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{ipv6__frag_8h_acb606f0feb84afae509dfe3e5ef9dee4}\label{ipv6__frag_8h_acb606f0feb84afae509dfe3e5ef9dee4}} 
+\index{ipv6\+\_\+frag.\+h@{ipv6\+\_\+frag.\+h}!ipv6\+Dump\+Hole\+List@{ipv6\+Dump\+Hole\+List}}
+\index{ipv6\+Dump\+Hole\+List@{ipv6\+Dump\+Hole\+List}!ipv6\+\_\+frag.\+h@{ipv6\+\_\+frag.\+h}}
+\subsubsection{\texorpdfstring{ipv6\+Dump\+Hole\+List()}{ipv6DumpHoleList()}}
+{\footnotesize\ttfamily void ipv6\+Dump\+Hole\+List (\begin{DoxyParamCaption}\item[{\hyperlink{structIpv6FragDesc}{Ipv6\+Frag\+Desc} $\ast$}]{frag }\end{DoxyParamCaption})}
+
+
+
+Dump hole descriptor list. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em frag} & I\+Pv6 fragment descriptor \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 731 of file ipv6\+\_\+frag.\+c.
+
+
+\begin{DoxyCode}
+732 \{
+733 \textcolor{comment}{//Check debugging level}
+734 \textcolor{preprocessor}{#if (TRACE\_LEVEL >= TRACE\_LEVEL\_DEBUG)}
+735    \hyperlink{ipv6__frag_8h_a578b35e34bbeda1095d6139b8046e127}{Ipv6HoleDesc} *hole;
+736 
+737    \textcolor{comment}{//Debug message}
+738    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"Hole descriptor list:\(\backslash\)r\(\backslash\)n"});
+739    \textcolor{comment}{//Select the first hole descriptor from the list}
+740    hole = \hyperlink{ipv6__frag_8c_a6c0f45744b01564242e285b4a5140a1a}{ipv6FindHole}(frag, frag->\hyperlink{structIpv6FragDesc_a9e51e5d6a1717ca6d115fac412a72515}{firstHole});
+741 
+742    \textcolor{comment}{//Loop through the hole descriptor list}
+743    \textcolor{keywordflow}{while}(hole != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+744    \{
+745       \textcolor{comment}{//Display current hole}
+746       \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  %"} PRIu16 \textcolor{stringliteral}{" - %"} PRIu16 \textcolor{stringliteral}{"\(\backslash\)r\(\backslash\)n"}, hole->first, hole->last);
+747       \textcolor{comment}{//Select the next hole descriptor from the list}
+748       hole = \hyperlink{ipv6__frag_8c_a6c0f45744b01564242e285b4a5140a1a}{ipv6FindHole}(frag, hole->next);
+749    \}
+750 \textcolor{preprocessor}{#endif}
+751 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ipv6__frag_8h_a6c0f45744b01564242e285b4a5140a1a}\label{ipv6__frag_8h_a6c0f45744b01564242e285b4a5140a1a}} 
+\index{ipv6\+\_\+frag.\+h@{ipv6\+\_\+frag.\+h}!ipv6\+Find\+Hole@{ipv6\+Find\+Hole}}
+\index{ipv6\+Find\+Hole@{ipv6\+Find\+Hole}!ipv6\+\_\+frag.\+h@{ipv6\+\_\+frag.\+h}}
+\subsubsection{\texorpdfstring{ipv6\+Find\+Hole()}{ipv6FindHole()}}
+{\footnotesize\ttfamily \hyperlink{ipv6__frag_8h_a578b35e34bbeda1095d6139b8046e127}{Ipv6\+Hole\+Desc}$\ast$ ipv6\+Find\+Hole (\begin{DoxyParamCaption}\item[{\hyperlink{structIpv6FragDesc}{Ipv6\+Frag\+Desc} $\ast$}]{frag,  }\item[{\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t}}]{offset }\end{DoxyParamCaption})}
+
+
+
+Retrieve hole descriptor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em frag} & I\+Pv6 fragment descriptor \\
+\hline
+\mbox{\tt in}  & {\em offset} & Offset of the hole \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A pointer to the hole descriptor is returned if the specified offset is valid. Otherwise N\+U\+LL is returned 
+\end{DoxyReturn}
+
+
+Definition at line 719 of file ipv6\+\_\+frag.\+c.
+
+
+\begin{DoxyCode}
+720 \{
+721    \textcolor{comment}{//Return a pointer to the hole descriptor}
+722    \textcolor{keywordflow}{return} \hyperlink{net__mem_8c_a20d30c9db547b3b2743368b589cf482b}{netBufferAt}((\hyperlink{structNetBuffer}{NetBuffer} *) &frag->\hyperlink{structIpv6FragDesc_ac1c2c93db751730aa55d827f14c5ba60}{buffer}, frag->
+      \hyperlink{structIpv6FragDesc_a8304cd1b608d13d100617e40f170a079}{unfragPartLength} + \hyperlink{pic32mz_2isr__support_8h_a12a5aed8a193ebbf9a641104a310610d}{offset});
+723 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ipv6__frag_8h_a7fd69b37030c6e8be6c82e3a9137e39d}\label{ipv6__frag_8h_a7fd69b37030c6e8be6c82e3a9137e39d}} 
+\index{ipv6\+\_\+frag.\+h@{ipv6\+\_\+frag.\+h}!ipv6\+Flush\+Frag\+Queue@{ipv6\+Flush\+Frag\+Queue}}
+\index{ipv6\+Flush\+Frag\+Queue@{ipv6\+Flush\+Frag\+Queue}!ipv6\+\_\+frag.\+h@{ipv6\+\_\+frag.\+h}}
+\subsubsection{\texorpdfstring{ipv6\+Flush\+Frag\+Queue()}{ipv6FlushFragQueue()}}
+{\footnotesize\ttfamily void ipv6\+Flush\+Frag\+Queue (\begin{DoxyParamCaption}\item[{\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$}]{interface }\end{DoxyParamCaption})}
+
+
+
+Flush I\+Pv6 reassembly queue. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em interface} & Underlying network interface \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 698 of file ipv6\+\_\+frag.\+c.
+
+
+\begin{DoxyCode}
+699 \{
+700    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+701 
+702    \textcolor{comment}{//Loop through the reassembly queue}
+703    \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{ipv6__frag_8h_a32fb76378a9b006c9aff62f2f40ac143}{IPV6\_MAX\_FRAG\_DATAGRAMS}; i++)
+704    \{
+705       \textcolor{comment}{//Drop any partially reconstructed datagram}
+706       \hyperlink{net__mem_8c_ac0a46f396754e069dd1ee65cdc559b28}{netBufferSetLength}((\hyperlink{structNetBuffer}{NetBuffer} *) &interface->ipv6Context.fragQueue[i].
+      buffer, 0);
+707    \}
+708 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ipv6__frag_8h_a9268cb1af957e9d1fa5dc72d0eab67f8}\label{ipv6__frag_8h_a9268cb1af957e9d1fa5dc72d0eab67f8}} 
+\index{ipv6\+\_\+frag.\+h@{ipv6\+\_\+frag.\+h}!ipv6\+Fragment\+Datagram@{ipv6\+Fragment\+Datagram}}
+\index{ipv6\+Fragment\+Datagram@{ipv6\+Fragment\+Datagram}!ipv6\+\_\+frag.\+h@{ipv6\+\_\+frag.\+h}}
+\subsubsection{\texorpdfstring{ipv6\+Fragment\+Datagram()}{ipv6FragmentDatagram()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ipv6\+Fragment\+Datagram (\begin{DoxyParamCaption}\item[{\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$}]{interface,  }\item[{\hyperlink{ipv6_8h_a68061e0a0b502d880cbe60b645cfa2b7}{Ipv6\+Pseudo\+Header} $\ast$}]{pseudo\+Header,  }\item[{const \hyperlink{structNetBuffer}{Net\+Buffer} $\ast$}]{payload,  }\item[{size\+\_\+t}]{payload\+Offset,  }\item[{size\+\_\+t}]{path\+Mtu,  }\item[{\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t}}]{flags }\end{DoxyParamCaption})}
+
+
+
+Fragment I\+Pv6 datagram into smaller packets. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em interface} & Underlying network interface \\
+\hline
+\mbox{\tt in}  & {\em pseudo\+Header} & I\+Pv6 pseudo header \\
+\hline
+\mbox{\tt in}  & {\em payload} & Multi-\/part buffer containing the payload \\
+\hline
+\mbox{\tt in}  & {\em payload\+Offset} & Offset to the first payload byte \\
+\hline
+\mbox{\tt in}  & {\em path\+Mtu} & P\+M\+TU value \\
+\hline
+\mbox{\tt in}  & {\em flags} & Set of flags that influences the behavior of this function \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 61 of file ipv6\+\_\+frag.\+c.
+
+
+\begin{DoxyCode}
+64 \{
+65    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+66    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} \hyperlink{dns__common_8h_a4fc3a0c58dfbd1e68224521185cb9384}{id};
+67    \textcolor{keywordtype}{size\_t} \hyperlink{pic32mz_2isr__support_8h_a12a5aed8a193ebbf9a641104a310610d}{offset};
+68    \textcolor{keywordtype}{size\_t} \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length};
+69    \textcolor{keywordtype}{size\_t} \hyperlink{ipv6_8h_ae4d38aba40b6dddf544612da0726cd7e}{payloadLen};
+70    \textcolor{keywordtype}{size\_t} fragmentOffset;
+71    \textcolor{keywordtype}{size\_t} maxFragmentSize;
+72    \hyperlink{structNetBuffer}{NetBuffer} *fragment;
+73 
+74    \textcolor{comment}{//Number of IP datagrams that would require fragmentation in order to be transmitted}
+75    \hyperlink{ip__mib__module_8h_abbb1f41624dcbd4f21b44932e338a479}{IP\_MIB\_INC\_COUNTER32}(ipv6SystemStats.ipSystemStatsOutFragReqds, 1);
+76    \hyperlink{ip__mib__module_8h_abbb1f41624dcbd4f21b44932e338a479}{IP\_MIB\_INC\_COUNTER32}(ipv6IfStatsTable[interface->index].ipIfStatsOutFragReqds, 1);
+77 
+78    \textcolor{comment}{//Retrieve the length of the payload}
+79    payloadLen = \hyperlink{net__mem_8c_ac9dbcd9e28e61d8f4f6d2e9af2607b68}{netBufferGetLength}(payload) - payloadOffset;
+80 
+81    \textcolor{comment}{//Allocate a memory buffer to hold IP fragments}
+82    fragment = \hyperlink{ip_8c_a2222fb64b1b18140283119eea309c1b3}{ipAllocBuffer}(0, &fragmentOffset);
+83    \textcolor{comment}{//Failed to allocate memory?}
+84    \textcolor{keywordflow}{if}(!fragment)
+85       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac0a554045048d2fb61387cf735676f69}{ERROR\_OUT\_OF\_MEMORY};
+86 
+87    \textcolor{comment}{//Identification field is used to identify fragments of an original IP datagram}
+88    \textcolor{keywordtype}{id} = interface->ipv6Context.identification++;
+89 
+90    \textcolor{comment}{//The node should never set its PMTU estimate below the IPv6 minimum link MTU}
+91    pathMtu = \hyperlink{os__port_8h_afa99ec4acc4ecb2dc3c2d05da15d0e3f}{MAX}(pathMtu, \hyperlink{ipv6_8h_a34a355847abfca977d0ca4ed43dd05ae}{IPV6\_DEFAULT\_MTU});
+92 
+93    \textcolor{comment}{//Determine the maximum payload size for fragmented packets}
+94    maxFragmentSize = pathMtu - \textcolor{keyword}{sizeof}(\hyperlink{ipv6_8h_ad553284c12e3a0d96dc8a4da1c5f6ea0}{Ipv6Header}) - \textcolor{keyword}{sizeof}(
+      \hyperlink{ipv6_8h_a913212d430a91f9afdf68306327c7cb3}{Ipv6FragmentHeader});
+95    \textcolor{comment}{//The size shall be a multiple of 8-byte blocks}
+96    maxFragmentSize -= (maxFragmentSize % 8);
+97 
+98    \textcolor{comment}{//Initialize error code}
+99    error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+100 
+101    \textcolor{comment}{//Split the payload into multiple IP fragments}
+102    \textcolor{keywordflow}{for}(offset = 0; offset < \hyperlink{ipv6_8h_ae4d38aba40b6dddf544612da0726cd7e}{payloadLen}; offset += \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length})
+103    \{
+104       \textcolor{comment}{//Flush the contents of the fragment}
+105       error = \hyperlink{net__mem_8c_ac0a46f396754e069dd1ee65cdc559b28}{netBufferSetLength}(fragment, fragmentOffset);
+106       \textcolor{comment}{//Sanity check}
+107       \textcolor{keywordflow}{if}(error)
+108          \textcolor{keywordflow}{break};
+109 
+110       \textcolor{comment}{//Process the last fragment?}
+111       \textcolor{keywordflow}{if}((payloadLen - offset) <= maxFragmentSize)
+112       \{
+113          \textcolor{comment}{//Size of the current fragment}
+114          length = payloadLen - \hyperlink{pic32mz_2isr__support_8h_a12a5aed8a193ebbf9a641104a310610d}{offset};
+115          \textcolor{comment}{//Copy fragment data}
+116          \hyperlink{net__mem_8c_aba4fe2d850142e40a9a668afeb2a0c8a}{netBufferConcat}(fragment, payload, payloadOffset + offset, length);
+117 
+118          \textcolor{comment}{//Do not set the MF flag for the last fragment}
+119          error = \hyperlink{ipv6_8c_aafedf2ad9d41e4ee7e30c6713420b90e}{ipv6SendPacket}(interface, pseudoHeader, \textcolor{keywordtype}{id},
+120             offset, fragment, fragmentOffset, \hyperlink{tcp_8h_aa2585d779da0ab21273a8d92de9a0ebe}{flags});
+121       \}
+122       \textcolor{keywordflow}{else}
+123       \{
+124          \textcolor{comment}{//Size of the current fragment (must be a multiple of 8-byte blocks)}
+125          length = maxFragmentSize;
+126          \textcolor{comment}{//Copy fragment data}
+127          \hyperlink{net__mem_8c_aba4fe2d850142e40a9a668afeb2a0c8a}{netBufferConcat}(fragment, payload, payloadOffset + offset, length);
+128 
+129          \textcolor{comment}{//Fragmented packets must have the M flag set}
+130          error = \hyperlink{ipv6_8c_aafedf2ad9d41e4ee7e30c6713420b90e}{ipv6SendPacket}(interface, pseudoHeader, \textcolor{keywordtype}{id},
+131             offset | \hyperlink{ipv6_8h_ac0ea1ac6358d4ad5119f76fe2ed54dd7a84b7ad01e0128e31d679df5f67e552f6}{IPV6\_FLAG\_M}, fragment, fragmentOffset, \hyperlink{tcp_8h_aa2585d779da0ab21273a8d92de9a0ebe}{flags});
+132       \}
+133 
+134       \textcolor{comment}{//Failed to send current IP fragment?}
+135       \textcolor{keywordflow}{if}(error)
+136          \textcolor{keywordflow}{break};
+137 
+138       \textcolor{comment}{//Number of IP datagram fragments that have been generated as a result}
+139       \textcolor{comment}{//of fragmentation at this entity}
+140       \hyperlink{ip__mib__module_8h_abbb1f41624dcbd4f21b44932e338a479}{IP\_MIB\_INC\_COUNTER32}(ipv6SystemStats.ipSystemStatsOutFragCreates, 1);
+141       \hyperlink{ip__mib__module_8h_abbb1f41624dcbd4f21b44932e338a479}{IP\_MIB\_INC\_COUNTER32}(ipv6IfStatsTable[interface->index].ipIfStatsOutFragCreates, 
+      1);
+142    \}
+143 
+144    \textcolor{comment}{//Check status code}
+145    \textcolor{keywordflow}{if}(error)
+146    \{
+147       \textcolor{comment}{//Number of IP datagrams that have been discarded because they needed}
+148       \textcolor{comment}{//to be fragmented at this entity but could not be}
+149       \hyperlink{ip__mib__module_8h_abbb1f41624dcbd4f21b44932e338a479}{IP\_MIB\_INC\_COUNTER32}(ipv6SystemStats.ipSystemStatsOutFragFails, 1);
+150       \hyperlink{ip__mib__module_8h_abbb1f41624dcbd4f21b44932e338a479}{IP\_MIB\_INC\_COUNTER32}(ipv6IfStatsTable[interface->index].ipIfStatsOutFragFails, 1)
+      ;
+151    \}
+152    \textcolor{keywordflow}{else}
+153    \{
+154       \textcolor{comment}{//Number of IP datagrams that have been successfully fragmented at this entity}
+155       \hyperlink{ip__mib__module_8h_abbb1f41624dcbd4f21b44932e338a479}{IP\_MIB\_INC\_COUNTER32}(ipv6SystemStats.ipSystemStatsOutFragOKs, 1);
+156       \hyperlink{ip__mib__module_8h_abbb1f41624dcbd4f21b44932e338a479}{IP\_MIB\_INC\_COUNTER32}(ipv6IfStatsTable[interface->index].ipIfStatsOutFragOKs, 1);
+157    \}
+158 
+159    \textcolor{comment}{//Free previously allocated memory}
+160    \hyperlink{net__mem_8c_aa33fc4dd2a71649194052f297c707d08}{netBufferFree}(fragment);
+161    \textcolor{comment}{//Return status code}
+162    \textcolor{keywordflow}{return} error;
+163 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ipv6__frag_8h_adf90e1f10b8402f9ec7b4afa09458f7f}\label{ipv6__frag_8h_adf90e1f10b8402f9ec7b4afa09458f7f}} 
+\index{ipv6\+\_\+frag.\+h@{ipv6\+\_\+frag.\+h}!ipv6\+Frag\+Tick@{ipv6\+Frag\+Tick}}
+\index{ipv6\+Frag\+Tick@{ipv6\+Frag\+Tick}!ipv6\+\_\+frag.\+h@{ipv6\+\_\+frag.\+h}}
+\subsubsection{\texorpdfstring{ipv6\+Frag\+Tick()}{ipv6FragTick()}}
+{\footnotesize\ttfamily void ipv6\+Frag\+Tick (\begin{DoxyParamCaption}\item[{\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$}]{interface }\end{DoxyParamCaption})}
+
+
+
+Fragment reassembly timeout handler. 
+
+This routine must be periodically called by the T\+C\+P/\+IP stack to handle I\+Pv6 fragment reassembly timeout
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em interface} & Underlying network interface \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 527 of file ipv6\+\_\+frag.\+c.
+
+
+\begin{DoxyCode}
+528 \{
+529    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+530    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+531    \hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\_t} \hyperlink{dhcpv6__common_8h_ae73654f333e4363463ad8c594eca1905}{time};
+532    \hyperlink{ipv6__frag_8h_a578b35e34bbeda1095d6139b8046e127}{Ipv6HoleDesc} *hole;
+533 
+534    \textcolor{comment}{//Get current time}
+535    time = \hyperlink{os__port__chibios_8c_ab66a11272d40a916fa69dd8e4dc443d4}{osGetSystemTime}();
+536 
+537    \textcolor{comment}{//Loop through the reassembly queue}
+538    \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{ipv6__frag_8h_a32fb76378a9b006c9aff62f2f40ac143}{IPV6\_MAX\_FRAG\_DATAGRAMS}; i++)
+539    \{
+540       \textcolor{comment}{//Point to the current entry in the reassembly queue}
+541       \hyperlink{structIpv6FragDesc}{Ipv6FragDesc} *frag = &interface->ipv6Context.fragQueue[i];
+542 
+543       \textcolor{comment}{//Make sure the entry is currently in use}
+544       \textcolor{keywordflow}{if}(frag->\hyperlink{structIpv6FragDesc_ac1c2c93db751730aa55d827f14c5ba60}{buffer}.\hyperlink{structIpv6ReassemblyBuffer_ae4cd44718d4c80b83fe7e0decdb51cc3}{chunkCount} > 0)
+545       \{
+546          \textcolor{comment}{//If the timer runs out, the partially-reassembled datagram must be}
+547          \textcolor{comment}{//discarded and ICMPv6 Time Exceeded message sent to the source host}
+548          \textcolor{keywordflow}{if}((time - frag->\hyperlink{structIpv6FragDesc_ab6e5ead9ee6cc2e4e026b6aef89d76a1}{timestamp}) >= \hyperlink{ipv6__frag_8h_a6d64298944bf4a5d80eb6e0110b5781f}{IPV6\_FRAG\_TIME\_TO\_LIVE})
+549          \{
+550             \textcolor{comment}{//Debug message}
+551             \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"IPv6 fragment reassembly timeout...\(\backslash\)r\(\backslash\)n"});
+552             \textcolor{comment}{//Dump IP header contents for debugging purpose}
+553             \hyperlink{ipv6_8c_ad377f2e5653e13df4df2867038626fc6}{ipv6DumpHeader}(frag->\hyperlink{structIpv6FragDesc_ac1c2c93db751730aa55d827f14c5ba60}{buffer}.\hyperlink{structIpv6ReassemblyBuffer_a71fc099ccf3935c677607c9fcc5bbbc8}{chunk}[0].
+      \hyperlink{structChunkDesc_a014aac6efdc5722e058a9b67ca5f8358}{address});
+554 
+555             \textcolor{comment}{//Number of failures detected by the IP reassembly algorithm}
+556             \hyperlink{ip__mib__module_8h_abbb1f41624dcbd4f21b44932e338a479}{IP\_MIB\_INC\_COUNTER32}(ipv6SystemStats.ipSystemStatsReasmFails, 1);
+557             \hyperlink{ip__mib__module_8h_abbb1f41624dcbd4f21b44932e338a479}{IP\_MIB\_INC\_COUNTER32}(ipv6IfStatsTable[interface->index].ipIfStatsReasmFails
+      , 1);
+558 
+559             \textcolor{comment}{//Point to the first hole descriptor}
+560             hole = \hyperlink{ipv6__frag_8c_a6c0f45744b01564242e285b4a5140a1a}{ipv6FindHole}(frag, frag->\hyperlink{structIpv6FragDesc_a9e51e5d6a1717ca6d115fac412a72515}{firstHole});
+561 
+562             \textcolor{comment}{//Make sure the fragment zero has been received}
+563             \textcolor{comment}{//before sending an ICMPv6 message}
+564             \textcolor{keywordflow}{if}(hole != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} && hole->first > 0)
+565             \{
+566                \textcolor{comment}{//Fix the size of the reconstructed datagram}
+567                error = \hyperlink{net__mem_8c_ac0a46f396754e069dd1ee65cdc559b28}{netBufferSetLength}((\hyperlink{structNetBuffer}{NetBuffer} *) &frag->
+      \hyperlink{structIpv6FragDesc_ac1c2c93db751730aa55d827f14c5ba60}{buffer},
+568                   frag->\hyperlink{structIpv6FragDesc_a8304cd1b608d13d100617e40f170a079}{unfragPartLength} + hole->first);
+569 
+570                \textcolor{comment}{//Check status code}
+571                \textcolor{keywordflow}{if}(!error)
+572                \{
+573                   \textcolor{comment}{//Send an ICMPv6 Time Exceeded message}
+574                   \hyperlink{icmpv6_8c_a8243f4f8b640432620ed384e865a32cd}{icmpv6SendErrorMessage}(interface, 
+      \hyperlink{icmpv6_8h_a6bd3724b797b492017d0264d1ae5c609aa5b348b9c2abd7c47211e3e877583868}{ICMPV6\_TYPE\_TIME\_EXCEEDED},
+575                      \hyperlink{icmpv6_8h_ae6d0d1de2d71fd96ff9bfe10bbabdfeda449658c36119a5ef4967d0a92a76f986}{ICMPV6\_CODE\_REASSEMBLY\_TIME\_EXCEEDED}, 0, (
+      \hyperlink{structNetBuffer}{NetBuffer} *) &frag->\hyperlink{structIpv6FragDesc_ac1c2c93db751730aa55d827f14c5ba60}{buffer}, 0);
+576                \}
+577             \}
+578 
+579             \textcolor{comment}{//Drop the partially reconstructed datagram}
+580             \hyperlink{net__mem_8c_ac0a46f396754e069dd1ee65cdc559b28}{netBufferSetLength}((\hyperlink{structNetBuffer}{NetBuffer} *) &frag->
+      \hyperlink{structIpv6FragDesc_ac1c2c93db751730aa55d827f14c5ba60}{buffer}, 0);
+581          \}
+582       \}
+583    \}
+584 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ipv6__frag_8h_aa017ac6f43b99df244b5263352cf484b}\label{ipv6__frag_8h_aa017ac6f43b99df244b5263352cf484b}} 
+\index{ipv6\+\_\+frag.\+h@{ipv6\+\_\+frag.\+h}!ipv6\+Parse\+Fragment\+Header@{ipv6\+Parse\+Fragment\+Header}}
+\index{ipv6\+Parse\+Fragment\+Header@{ipv6\+Parse\+Fragment\+Header}!ipv6\+\_\+frag.\+h@{ipv6\+\_\+frag.\+h}}
+\subsubsection{\texorpdfstring{ipv6\+Parse\+Fragment\+Header()}{ipv6ParseFragmentHeader()}}
+{\footnotesize\ttfamily void ipv6\+Parse\+Fragment\+Header (\begin{DoxyParamCaption}\item[{\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$}]{interface,  }\item[{const \hyperlink{structNetBuffer}{Net\+Buffer} $\ast$}]{ip\+Packet,  }\item[{size\+\_\+t}]{ip\+Packet\+Offset,  }\item[{size\+\_\+t}]{frag\+Header\+Offset,  }\item[{size\+\_\+t}]{next\+Header\+Offset }\end{DoxyParamCaption})}
+
+
+
+Parse Fragment header and reassemble original datagram. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em interface} & Underlying network interface \\
+\hline
+\mbox{\tt in}  & {\em ip\+Packet} & Multi-\/part buffer containing the incoming I\+Pv6 packet \\
+\hline
+\mbox{\tt in}  & {\em ip\+Packet\+Offset} & Offset to the first byte of the I\+Pv6 packet \\
+\hline
+\mbox{\tt in}  & {\em frag\+Header\+Offset} & Offset to the Fragment header \\
+\hline
+\mbox{\tt in}  & {\em next\+Header\+Offset} & Offset to the Next Header field of the previous header \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 175 of file ipv6\+\_\+frag.\+c.
+
+
+\begin{DoxyCode}
+177 \{
+178    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+179    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+180    \textcolor{keywordtype}{size\_t} \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length};
+181    \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t} \hyperlink{pic32mz_2isr__support_8h_a12a5aed8a193ebbf9a641104a310610d}{offset};
+182    \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t} dataFirst;
+183    \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t} dataLast;
+184    \hyperlink{structIpv6FragDesc}{Ipv6FragDesc} *frag;
+185    \hyperlink{ipv6__frag_8h_a578b35e34bbeda1095d6139b8046e127}{Ipv6HoleDesc} *hole;
+186    \hyperlink{ipv6__frag_8h_a578b35e34bbeda1095d6139b8046e127}{Ipv6HoleDesc} *prevHole;
+187    \hyperlink{ipv6_8h_ad553284c12e3a0d96dc8a4da1c5f6ea0}{Ipv6Header} *ipHeader;
+188    \hyperlink{ipv6_8h_a913212d430a91f9afdf68306327c7cb3}{Ipv6FragmentHeader} *fragHeader;
+189 
+190    \textcolor{comment}{//Number of IP fragments received which needed to be reassembled}
+191    \hyperlink{ip__mib__module_8h_abbb1f41624dcbd4f21b44932e338a479}{IP\_MIB\_INC\_COUNTER32}(ipv6SystemStats.ipSystemStatsReasmReqds, 1);
+192    \hyperlink{ip__mib__module_8h_abbb1f41624dcbd4f21b44932e338a479}{IP\_MIB\_INC\_COUNTER32}(ipv6IfStatsTable[interface->index].ipIfStatsReasmReqds, 1);
+193 
+194    \textcolor{comment}{//Remaining bytes to process in the payload}
+195    length = \hyperlink{net__mem_8c_ac9dbcd9e28e61d8f4f6d2e9af2607b68}{netBufferGetLength}(ipPacket) - fragHeaderOffset;
+196 
+197    \textcolor{comment}{//Ensure the fragment header is valid}
+198    \textcolor{keywordflow}{if}(length < \textcolor{keyword}{sizeof}(\hyperlink{ipv6_8h_a913212d430a91f9afdf68306327c7cb3}{Ipv6FragmentHeader}))
+199    \{
+200       \textcolor{comment}{//Number of failures detected by the IP reassembly algorithm}
+201       \hyperlink{ip__mib__module_8h_abbb1f41624dcbd4f21b44932e338a479}{IP\_MIB\_INC\_COUNTER32}(ipv6SystemStats.ipSystemStatsReasmFails, 1);
+202       \hyperlink{ip__mib__module_8h_abbb1f41624dcbd4f21b44932e338a479}{IP\_MIB\_INC\_COUNTER32}(ipv6IfStatsTable[interface->index].ipIfStatsReasmFails, 1);
+203 
+204       \textcolor{comment}{//Drop the incoming fragment}
+205       \textcolor{keywordflow}{return};
+206    \}
+207 
+208    \textcolor{comment}{//Point to the IPv6 header}
+209    ipHeader = \hyperlink{net__mem_8c_a20d30c9db547b3b2743368b589cf482b}{netBufferAt}(ipPacket, ipPacketOffset);
+210    \textcolor{comment}{//Sanity check}
+211    \textcolor{keywordflow}{if}(ipHeader == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+212       \textcolor{keywordflow}{return};
+213 
+214    \textcolor{comment}{//Point to the Fragment header}
+215    fragHeader = \hyperlink{net__mem_8c_a20d30c9db547b3b2743368b589cf482b}{netBufferAt}(ipPacket, fragHeaderOffset);
+216    \textcolor{comment}{//Sanity check}
+217    \textcolor{keywordflow}{if}(fragHeader == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+218       \textcolor{keywordflow}{return};
+219 
+220    \textcolor{comment}{//Calculate the length of the fragment}
+221    length -= \textcolor{keyword}{sizeof}(\hyperlink{ipv6_8h_a913212d430a91f9afdf68306327c7cb3}{Ipv6FragmentHeader});
+222    \textcolor{comment}{//Convert the fragment offset from network byte order}
+223    offset = \hyperlink{cpu__endian_8h_a9312c6eb72e64f748ae0d0e0dc3ec9b9}{ntohs}(fragHeader->fragmentOffset);
+224 
+225    \textcolor{comment}{//Every fragment except the last must contain a multiple of 8 bytes of data}
+226    \textcolor{keywordflow}{if}((offset & \hyperlink{ipv6_8h_ac0ea1ac6358d4ad5119f76fe2ed54dd7a84b7ad01e0128e31d679df5f67e552f6}{IPV6\_FLAG\_M}) && (length % 8))
+227    \{
+228       \textcolor{comment}{//Number of failures detected by the IP reassembly algorithm}
+229       \hyperlink{ip__mib__module_8h_abbb1f41624dcbd4f21b44932e338a479}{IP\_MIB\_INC\_COUNTER32}(ipv6SystemStats.ipSystemStatsReasmFails, 1);
+230       \hyperlink{ip__mib__module_8h_abbb1f41624dcbd4f21b44932e338a479}{IP\_MIB\_INC\_COUNTER32}(ipv6IfStatsTable[interface->index].ipIfStatsReasmFails, 1);
+231 
+232       \textcolor{comment}{//Compute the offset of the Payload Length field within the packet}
+233       n = (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *) &ipHeader->payloadLen - (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *) ipHeader;
+234 
+235       \textcolor{comment}{//The fragment must be discarded and an ICMP Parameter Problem}
+236       \textcolor{comment}{//message should be sent to the source of the fragment, pointing}
+237       \textcolor{comment}{//to the Payload Length field of the fragment packet}
+238       \hyperlink{icmpv6_8c_a8243f4f8b640432620ed384e865a32cd}{icmpv6SendErrorMessage}(interface, 
+      \hyperlink{icmpv6_8h_a6bd3724b797b492017d0264d1ae5c609afa30d783d8dc3461acab3c04ca741fe6}{ICMPV6\_TYPE\_PARAM\_PROBLEM},
+239          \hyperlink{icmpv6_8h_abcea0b4fd39f4856a89fb89bce0c022ea4dffeb5af842a10670ec3a3c37242f2c}{ICMPV6\_CODE\_INVALID\_HEADER\_FIELD}, n, ipPacket, ipPacketOffset);
+240 
+241       \textcolor{comment}{//Drop the incoming fragment}
+242       \textcolor{keywordflow}{return};
+243    \}
+244 
+245    \textcolor{comment}{//Calculate the index of the first byte}
+246    dataFirst = offset & \hyperlink{ipv6_8h_ac0ea1ac6358d4ad5119f76fe2ed54dd7a1485a51b4fc559bd78c7a4f133144b83}{IPV6\_OFFSET\_MASK};
+247    \textcolor{comment}{//Calculate the index immediately following the last byte}
+248    dataLast = dataFirst + (\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t}) length;
+249 
+250    \textcolor{comment}{//Search for a matching IP datagram being reassembled}
+251    frag = \hyperlink{ipv6__frag_8c_a6064926176bf3e4dcc94f406c2fe5996}{ipv6SearchFragQueue}(interface, ipHeader, fragHeader);
+252 
+253    \textcolor{comment}{//No matching entry in the reassembly queue?}
+254    \textcolor{keywordflow}{if}(frag == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+255    \{
+256       \textcolor{comment}{//Number of failures detected by the IP reassembly algorithm}
+257       \hyperlink{ip__mib__module_8h_abbb1f41624dcbd4f21b44932e338a479}{IP\_MIB\_INC\_COUNTER32}(ipv6SystemStats.ipSystemStatsReasmFails, 1);
+258       \hyperlink{ip__mib__module_8h_abbb1f41624dcbd4f21b44932e338a479}{IP\_MIB\_INC\_COUNTER32}(ipv6IfStatsTable[interface->index].ipIfStatsReasmFails, 1);
+259 
+260       \textcolor{comment}{//Drop the incoming fragment}
+261       \textcolor{keywordflow}{return};
+262    \}
+263 
+264    \textcolor{comment}{//The very first fragment requires special handling}
+265    \textcolor{keywordflow}{if}(!(offset & IPV6\_OFFSET\_MASK))
+266    \{
+267       \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *\hyperlink{ndp_8h_a6519522ad9a6f45e7a8d25d31392a977}{p};
+268 
+269       \textcolor{comment}{//Calculate the length of the unfragmentable part}
+270       frag->unfragPartLength = fragHeaderOffset - ipPacketOffset;
+271 
+272       \textcolor{comment}{//The size of the reconstructed datagram exceeds the maximum value?}
+273       \textcolor{keywordflow}{if}((frag->unfragPartLength + frag->fragPartLength) > 
+      \hyperlink{ipv6__frag_8h_ac016101236364e74fc7e0729bf2d8d16}{IPV6\_MAX\_FRAG\_DATAGRAM\_SIZE})
+274       \{
+275          \textcolor{comment}{//Number of failures detected by the IP reassembly algorithm}
+276          \hyperlink{ip__mib__module_8h_abbb1f41624dcbd4f21b44932e338a479}{IP\_MIB\_INC\_COUNTER32}(ipv6SystemStats.ipSystemStatsReasmFails, 1);
+277          \hyperlink{ip__mib__module_8h_abbb1f41624dcbd4f21b44932e338a479}{IP\_MIB\_INC\_COUNTER32}(ipv6IfStatsTable[interface->index].ipIfStatsReasmFails, 1
+      );
+278 
+279          \textcolor{comment}{//Retrieve the offset of the Fragment header within the packet}
+280          n = fragHeaderOffset - ipPacketOffset;
+281          \textcolor{comment}{//Compute the exact offset of the Fragment Offset field}
+282          n += (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *) &fragHeader->fragmentOffset - (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *) fragHeader;
+283 
+284          \textcolor{comment}{//The fragment must be discarded and an ICMP Parameter Problem}
+285          \textcolor{comment}{//message should be sent to the source of the fragment, pointing}
+286          \textcolor{comment}{//to the Fragment Offset field of the fragment packet}
+287          \hyperlink{icmpv6_8c_a8243f4f8b640432620ed384e865a32cd}{icmpv6SendErrorMessage}(interface, 
+      \hyperlink{icmpv6_8h_a6bd3724b797b492017d0264d1ae5c609afa30d783d8dc3461acab3c04ca741fe6}{ICMPV6\_TYPE\_PARAM\_PROBLEM},
+288             \hyperlink{icmpv6_8h_abcea0b4fd39f4856a89fb89bce0c022ea4dffeb5af842a10670ec3a3c37242f2c}{ICMPV6\_CODE\_INVALID\_HEADER\_FIELD}, n, ipPacket, ipPacketOffset);
+289 
+290          \textcolor{comment}{//Drop the reconstructed datagram}
+291          \hyperlink{net__mem_8c_ac0a46f396754e069dd1ee65cdc559b28}{netBufferSetLength}((\hyperlink{structNetBuffer}{NetBuffer} *) &frag->buffer, 0);
+292          \textcolor{comment}{//Exit immediately}
+293          \textcolor{keywordflow}{return};
+294       \}
+295 
+296       \textcolor{comment}{//Make sure the unfragmentable part entirely fits in the first chunk}
+297       \textcolor{keywordflow}{if}(frag->unfragPartLength > frag->buffer.chunk[0].size)
+298       \{
+299          \textcolor{comment}{//Number of failures detected by the IP reassembly algorithm}
+300          \hyperlink{ip__mib__module_8h_abbb1f41624dcbd4f21b44932e338a479}{IP\_MIB\_INC\_COUNTER32}(ipv6SystemStats.ipSystemStatsReasmFails, 1);
+301          \hyperlink{ip__mib__module_8h_abbb1f41624dcbd4f21b44932e338a479}{IP\_MIB\_INC\_COUNTER32}(ipv6IfStatsTable[interface->index].ipIfStatsReasmFails, 1
+      );
+302 
+303          \textcolor{comment}{//Drop the reconstructed datagram}
+304          \hyperlink{net__mem_8c_ac0a46f396754e069dd1ee65cdc559b28}{netBufferSetLength}((\hyperlink{structNetBuffer}{NetBuffer} *) &frag->buffer, 0);
+305          \textcolor{comment}{//Exit immediately}
+306          \textcolor{keywordflow}{return};
+307       \}
+308 
+309       \textcolor{comment}{//Fix the length of the first chunk}
+310       frag->buffer.chunk[0].length = (\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t}) frag->unfragPartLength;
+311 
+312       \textcolor{comment}{//The unfragmentable part of the reassembled packet consists}
+313       \textcolor{comment}{//of all headers up to, but not including, the Fragment header}
+314       \textcolor{comment}{//of the first fragment packet}
+315       \hyperlink{net__mem_8c_a553a02631efd217192800ad3cdf9bbba}{netBufferCopy}((\hyperlink{structNetBuffer}{NetBuffer} *) &frag->buffer, 0, 
+      \hyperlink{ndp_8h_a6c97f605f59d957e1720030e1b1058e5}{ipPacket},
+316          ipPacketOffset, frag->unfragPartLength);
+317 
+318       \textcolor{comment}{//Point to the Next Header field of the last header}
+319       p = \hyperlink{net__mem_8c_a20d30c9db547b3b2743368b589cf482b}{netBufferAt}((\hyperlink{structNetBuffer}{NetBuffer} *) &frag->buffer,
+320          nextHeaderOffset - ipPacketOffset);
+321 
+322       \textcolor{comment}{//The Next Header field of the last header of the unfragmentable}
+323       \textcolor{comment}{//part is obtained from the Next Header field of the first}
+324       \textcolor{comment}{//fragment's Fragment header}
+325       *p = fragHeader->nextHeader;
+326    \}
+327 
+328    \textcolor{comment}{//It may be necessary to increase the size of the buffer...}
+329    \textcolor{keywordflow}{if}(dataLast > frag->fragPartLength)
+330    \{
+331       \textcolor{comment}{//The size of the reconstructed datagram exceeds the maximum value?}
+332       \textcolor{keywordflow}{if}((frag->unfragPartLength + dataLast) > \hyperlink{ipv6__frag_8h_ac016101236364e74fc7e0729bf2d8d16}{IPV6\_MAX\_FRAG\_DATAGRAM\_SIZE})
+333       \{
+334          \textcolor{comment}{//Number of failures detected by the IP reassembly algorithm}
+335          \hyperlink{ip__mib__module_8h_abbb1f41624dcbd4f21b44932e338a479}{IP\_MIB\_INC\_COUNTER32}(ipv6SystemStats.ipSystemStatsReasmFails, 1);
+336          \hyperlink{ip__mib__module_8h_abbb1f41624dcbd4f21b44932e338a479}{IP\_MIB\_INC\_COUNTER32}(ipv6IfStatsTable[interface->index].ipIfStatsReasmFails, 1
+      );
+337 
+338          \textcolor{comment}{//Retrieve the offset of the Fragment header within the packet}
+339          n = fragHeaderOffset - ipPacketOffset;
+340          \textcolor{comment}{//Compute the exact offset of the Fragment Offset field}
+341          n += (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *) &fragHeader->fragmentOffset - (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *) fragHeader;
+342 
+343          \textcolor{comment}{//The fragment must be discarded and an ICMP Parameter Problem}
+344          \textcolor{comment}{//message should be sent to the source of the fragment, pointing}
+345          \textcolor{comment}{//to the Fragment Offset field of the fragment packet}
+346          \hyperlink{icmpv6_8c_a8243f4f8b640432620ed384e865a32cd}{icmpv6SendErrorMessage}(interface, 
+      \hyperlink{icmpv6_8h_a6bd3724b797b492017d0264d1ae5c609afa30d783d8dc3461acab3c04ca741fe6}{ICMPV6\_TYPE\_PARAM\_PROBLEM},
+347             \hyperlink{icmpv6_8h_abcea0b4fd39f4856a89fb89bce0c022ea4dffeb5af842a10670ec3a3c37242f2c}{ICMPV6\_CODE\_INVALID\_HEADER\_FIELD}, n, ipPacket, ipPacketOffset);
+348 
+349          \textcolor{comment}{//Drop the reconstructed datagram}
+350          \hyperlink{net__mem_8c_ac0a46f396754e069dd1ee65cdc559b28}{netBufferSetLength}((\hyperlink{structNetBuffer}{NetBuffer} *) &frag->buffer, 0);
+351          \textcolor{comment}{//Exit immediately}
+352          \textcolor{keywordflow}{return};
+353       \}
+354 
+355       \textcolor{comment}{//Adjust the size of the reconstructed datagram}
+356       error = \hyperlink{net__mem_8c_ac0a46f396754e069dd1ee65cdc559b28}{netBufferSetLength}((\hyperlink{structNetBuffer}{NetBuffer} *) &frag->buffer,
+357          frag->unfragPartLength + dataLast + \textcolor{keyword}{sizeof}(\hyperlink{ipv6__frag_8h_a578b35e34bbeda1095d6139b8046e127}{Ipv6HoleDesc}));
+358 
+359       \textcolor{comment}{//Any error to report?}
+360       \textcolor{keywordflow}{if}(error)
+361       \{
+362          \textcolor{comment}{//Number of failures detected by the IP reassembly algorithm}
+363          \hyperlink{ip__mib__module_8h_abbb1f41624dcbd4f21b44932e338a479}{IP\_MIB\_INC\_COUNTER32}(ipv6SystemStats.ipSystemStatsReasmFails, 1);
+364          \hyperlink{ip__mib__module_8h_abbb1f41624dcbd4f21b44932e338a479}{IP\_MIB\_INC\_COUNTER32}(ipv6IfStatsTable[interface->index].ipIfStatsReasmFails, 1
+      );
+365 
+366          \textcolor{comment}{//Drop the reconstructed datagram}
+367          \hyperlink{net__mem_8c_ac0a46f396754e069dd1ee65cdc559b28}{netBufferSetLength}((\hyperlink{structNetBuffer}{NetBuffer} *) &frag->buffer, 0);
+368          \textcolor{comment}{//Exit immediately}
+369          \textcolor{keywordflow}{return};
+370       \}
+371 
+372       \textcolor{comment}{//Actual length of the fragmentable part}
+373       frag->fragPartLength = dataLast;
+374    \}
+375 
+376    \textcolor{comment}{//Select the first hole descriptor from the list}
+377    hole = \hyperlink{ipv6__frag_8c_a6c0f45744b01564242e285b4a5140a1a}{ipv6FindHole}(frag, frag->firstHole);
+378    \textcolor{comment}{//Keep track of the previous hole in the list}
+379    prevHole = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+380 
+381    \textcolor{comment}{//Iterate through the hole descriptors}
+382    \textcolor{keywordflow}{while}(hole != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+383    \{
+384       \textcolor{comment}{//Save lower and upper boundaries for later use}
+385       \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t} holeFirst = hole->first;
+386       \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t} holeLast = hole->last;
+387 
+388       \textcolor{comment}{//Check whether the newly arrived fragment interacts with this hole}
+389       \textcolor{comment}{//in some way}
+390       \textcolor{keywordflow}{if}(dataFirst < holeLast && dataLast > holeFirst)
+391       \{
+392 \textcolor{preprocessor}{#if (IPV6\_OVERLAPPING\_FRAG\_SUPPORT == DISABLED)}
+393          \textcolor{comment}{//When reassembling an IPv6 datagram, if one or more its constituent}
+394          \textcolor{comment}{//fragments is determined to be an overlapping fragment, the entire}
+395          \textcolor{comment}{//datagram must be silently discarded (refer to RFC 5722, section 4)}
+396          \textcolor{keywordflow}{if}(dataFirst < holeFirst || dataLast > holeLast)
+397          \{
+398             \textcolor{comment}{//Number of failures detected by the IP reassembly algorithm}
+399             \hyperlink{ip__mib__module_8h_abbb1f41624dcbd4f21b44932e338a479}{IP\_MIB\_INC\_COUNTER32}(ipv6SystemStats.ipSystemStatsReasmFails, 1);
+400             \hyperlink{ip__mib__module_8h_abbb1f41624dcbd4f21b44932e338a479}{IP\_MIB\_INC\_COUNTER32}(ipv6IfStatsTable[interface->index].ipIfStatsReasmFails
+      , 1);
+401 
+402             \textcolor{comment}{//Drop the reconstructed datagram}
+403             \hyperlink{net__mem_8c_ac0a46f396754e069dd1ee65cdc559b28}{netBufferSetLength}((\hyperlink{structNetBuffer}{NetBuffer} *) &frag->buffer, 0);
+404             \textcolor{comment}{//Exit immediately}
+405             \textcolor{keywordflow}{return};
+406          \}
+407 \textcolor{preprocessor}{#endif}
+408          \textcolor{comment}{//The current descriptor is no longer valid. We will destroy it,}
+409          \textcolor{comment}{//and in the next two steps, we will determine whether or not it}
+410          \textcolor{comment}{//is necessary to create any new hole descriptors}
+411          \textcolor{keywordflow}{if}(prevHole != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+412             prevHole->next = hole->next;
+413          \textcolor{keywordflow}{else}
+414             frag->firstHole = hole->next;
+415 
+416          \textcolor{comment}{//Is there still a hole at the beginning of the segment?}
+417          \textcolor{keywordflow}{if}(dataFirst > holeFirst)
+418          \{
+419             \textcolor{comment}{//Create a new entry that describes this hole}
+420             hole = \hyperlink{ipv6__frag_8c_a6c0f45744b01564242e285b4a5140a1a}{ipv6FindHole}(frag, holeFirst);
+421             hole->first = holeFirst;
+422             hole->last = dataFirst;
+423 
+424             \textcolor{comment}{//Insert the newly created entry into the hole descriptor list}
+425             \textcolor{keywordflow}{if}(prevHole != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+426             \{
+427                hole->next = prevHole->next;
+428                prevHole->next = hole->first;
+429             \}
+430             \textcolor{keywordflow}{else}
+431             \{
+432                hole->next = frag->firstHole;
+433                frag->firstHole = hole->first;
+434             \}
+435 
+436             \textcolor{comment}{//Always keep track of the previous hole}
+437             prevHole = hole;
+438          \}
+439 
+440          \textcolor{comment}{//Is there still a hole at the end of the segment?}
+441          \textcolor{keywordflow}{if}(dataLast < holeLast && (offset & IPV6\_FLAG\_M))
+442          \{
+443             \textcolor{comment}{//Create a new entry that describes this hole}
+444             hole = \hyperlink{ipv6__frag_8c_a6c0f45744b01564242e285b4a5140a1a}{ipv6FindHole}(frag, dataLast);
+445             hole->first = dataLast;
+446             hole->last = holeLast;
+447 
+448             \textcolor{comment}{//Insert the newly created entry into the hole descriptor list}
+449             \textcolor{keywordflow}{if}(prevHole != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+450             \{
+451                hole->next = prevHole->next;
+452                prevHole->next = hole->first;
+453             \}
+454             \textcolor{keywordflow}{else}
+455             \{
+456                hole->next = frag->firstHole;
+457                frag->firstHole = hole->first;
+458             \}
+459 
+460             \textcolor{comment}{//Always keep track of the previous hole}
+461             prevHole = hole;
+462          \}
+463       \}
+464       \textcolor{keywordflow}{else}
+465       \{
+466          \textcolor{comment}{//The newly arrived fragment does not interact with the current hole}
+467          prevHole = hole;
+468       \}
+469 
+470       \textcolor{comment}{//Select the next hole descriptor from the list}
+471       hole = \hyperlink{ipv6__frag_8c_a6c0f45744b01564242e285b4a5140a1a}{ipv6FindHole}(frag, prevHole ? prevHole->next : frag->firstHole);
+472    \}
+473 
+474    \textcolor{comment}{//Copy data from the fragment to the reassembly buffer}
+475    \hyperlink{net__mem_8c_a553a02631efd217192800ad3cdf9bbba}{netBufferCopy}((\hyperlink{structNetBuffer}{NetBuffer} *) &frag->buffer, frag->unfragPartLength + dataFirst,
+476       ipPacket, fragHeaderOffset + \textcolor{keyword}{sizeof}(\hyperlink{ipv6_8h_a913212d430a91f9afdf68306327c7cb3}{Ipv6FragmentHeader}), length);
+477 
+478    \textcolor{comment}{//Dump hole descriptor list}
+479    \hyperlink{ipv6__frag_8c_acb606f0feb84afae509dfe3e5ef9dee4}{ipv6DumpHoleList}(frag);
+480 
+481    \textcolor{comment}{//If the hole descriptor list is empty, the reassembly process is now complete}
+482    \textcolor{keywordflow}{if}(!\hyperlink{ipv6__frag_8c_a6c0f45744b01564242e285b4a5140a1a}{ipv6FindHole}(frag, frag->firstHole))
+483    \{
+484       \textcolor{comment}{//Discard the extra hole descriptor that follows the reconstructed datagram}
+485       error = \hyperlink{net__mem_8c_ac0a46f396754e069dd1ee65cdc559b28}{netBufferSetLength}((\hyperlink{structNetBuffer}{NetBuffer} *) &frag->buffer,
+486          frag->unfragPartLength + frag->fragPartLength);
+487 
+488       \textcolor{comment}{//Check status code}
+489       \textcolor{keywordflow}{if}(error)
+490       \{
+491          \textcolor{comment}{//Number of failures detected by the IP reassembly algorithm}
+492          \hyperlink{ip__mib__module_8h_abbb1f41624dcbd4f21b44932e338a479}{IP\_MIB\_INC\_COUNTER32}(ipv6SystemStats.ipSystemStatsReasmFails, 1);
+493          \hyperlink{ip__mib__module_8h_abbb1f41624dcbd4f21b44932e338a479}{IP\_MIB\_INC\_COUNTER32}(ipv6IfStatsTable[interface->index].ipIfStatsReasmFails, 1
+      );
+494       \}
+495       \textcolor{keywordflow}{else}
+496       \{
+497          \textcolor{comment}{//Point to the IPv6 header}
+498          \hyperlink{ipv6_8h_ad553284c12e3a0d96dc8a4da1c5f6ea0}{Ipv6Header} *datagram = \hyperlink{net__mem_8c_a20d30c9db547b3b2743368b589cf482b}{netBufferAt}((\hyperlink{structNetBuffer}{NetBuffer} *) &frag->buffer, 0);
+499 
+500          \textcolor{comment}{//Fix the Payload Length field}
+501          datagram->payloadLen = \hyperlink{cpu__endian_8h_a800cdbf435a85a9b3ad4f0edc518472a}{htons}(frag->unfragPartLength +
+502             frag->fragPartLength - \textcolor{keyword}{sizeof}(\hyperlink{ipv6_8h_ad553284c12e3a0d96dc8a4da1c5f6ea0}{Ipv6Header}));
+503 
+504          \textcolor{comment}{//Number of IP datagrams successfully reassembled}
+505          \hyperlink{ip__mib__module_8h_abbb1f41624dcbd4f21b44932e338a479}{IP\_MIB\_INC\_COUNTER32}(ipv6SystemStats.ipSystemStatsReasmOKs, 1);
+506          \hyperlink{ip__mib__module_8h_abbb1f41624dcbd4f21b44932e338a479}{IP\_MIB\_INC\_COUNTER32}(ipv6IfStatsTable[interface->index].ipIfStatsReasmOKs, 1);
+507 
+508          \textcolor{comment}{//Pass the original IPv6 datagram to the higher protocol layer}
+509          \hyperlink{ipv6_8c_ae5a231be5cc78f474ac7fb73df8947bd}{ipv6ProcessPacket}(interface, (\hyperlink{structNetBuffer}{NetBuffer} *) &frag->buffer, 0);
+510       \}
+511 
+512       \textcolor{comment}{//Release previously allocated memory}
+513       \hyperlink{net__mem_8c_ac0a46f396754e069dd1ee65cdc559b28}{netBufferSetLength}((\hyperlink{structNetBuffer}{NetBuffer} *) &frag->buffer, 0);
+514    \}
+515 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ipv6__frag_8h_a6064926176bf3e4dcc94f406c2fe5996}\label{ipv6__frag_8h_a6064926176bf3e4dcc94f406c2fe5996}} 
+\index{ipv6\+\_\+frag.\+h@{ipv6\+\_\+frag.\+h}!ipv6\+Search\+Frag\+Queue@{ipv6\+Search\+Frag\+Queue}}
+\index{ipv6\+Search\+Frag\+Queue@{ipv6\+Search\+Frag\+Queue}!ipv6\+\_\+frag.\+h@{ipv6\+\_\+frag.\+h}}
+\subsubsection{\texorpdfstring{ipv6\+Search\+Frag\+Queue()}{ipv6SearchFragQueue()}}
+{\footnotesize\ttfamily \hyperlink{structIpv6FragDesc}{Ipv6\+Frag\+Desc}$\ast$ ipv6\+Search\+Frag\+Queue (\begin{DoxyParamCaption}\item[{\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$}]{interface,  }\item[{\hyperlink{ipv6_8h_ad553284c12e3a0d96dc8a4da1c5f6ea0}{Ipv6\+Header} $\ast$}]{packet,  }\item[{\hyperlink{ipv6_8h_a913212d430a91f9afdf68306327c7cb3}{Ipv6\+Fragment\+Header} $\ast$}]{header }\end{DoxyParamCaption})}
+
+
+
+Search for a matching datagram in the reassembly queue. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em interface} & Underlying network interface \\
+\hline
+\mbox{\tt in}  & {\em packet} & Incoming I\+Pv6 packet \\
+\hline
+\mbox{\tt in}  & {\em header} & Pointer to the Fragment header \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Matching fragment descriptor 
+\end{DoxyReturn}
+
+
+Definition at line 595 of file ipv6\+\_\+frag.\+c.
+
+
+\begin{DoxyCode}
+597 \{
+598    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+599    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+600    \hyperlink{ipv6_8h_ad553284c12e3a0d96dc8a4da1c5f6ea0}{Ipv6Header} *datagram;
+601    \hyperlink{structIpv6FragDesc}{Ipv6FragDesc} *frag;
+602    \hyperlink{ipv6__frag_8h_a578b35e34bbeda1095d6139b8046e127}{Ipv6HoleDesc} *hole;
+603 
+604    \textcolor{comment}{//Search for a matching IP datagram being reassembled}
+605    \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{ipv6__frag_8h_a32fb76378a9b006c9aff62f2f40ac143}{IPV6\_MAX\_FRAG\_DATAGRAMS}; i++)
+606    \{
+607       \textcolor{comment}{//Point to the current entry in the reassembly queue}
+608       frag = &interface->ipv6Context.fragQueue[i];
+609 
+610       \textcolor{comment}{//Check whether the current entry is used?}
+611       \textcolor{keywordflow}{if}(frag->\hyperlink{structIpv6FragDesc_ac1c2c93db751730aa55d827f14c5ba60}{buffer}.\hyperlink{structIpv6ReassemblyBuffer_ae4cd44718d4c80b83fe7e0decdb51cc3}{chunkCount} > 0)
+612       \{
+613          \textcolor{comment}{//Point to the corresponding datagram}
+614          datagram = \hyperlink{net__mem_8c_a20d30c9db547b3b2743368b589cf482b}{netBufferAt}((\hyperlink{structNetBuffer}{NetBuffer} *) &frag->\hyperlink{structIpv6FragDesc_ac1c2c93db751730aa55d827f14c5ba60}{buffer}, 0);
+615 
+616          \textcolor{comment}{//Check source and destination addresses}
+617          \textcolor{keywordflow}{if}(!\hyperlink{ipv6_8h_ab1e93bd2152bc3f3b5642fd0216384d7}{ipv6CompAddr}(&datagram->srcAddr, &packet->srcAddr))
+618             \textcolor{keywordflow}{continue};
+619          \textcolor{keywordflow}{if}(!\hyperlink{ipv6_8h_ab1e93bd2152bc3f3b5642fd0216384d7}{ipv6CompAddr}(&datagram->destAddr, &packet->destAddr))
+620             \textcolor{keywordflow}{continue};
+621          \textcolor{comment}{//Compare fragment identification fields}
+622          \textcolor{keywordflow}{if}(frag->\hyperlink{structIpv6FragDesc_a2c2575ed800af0856ec9f0db94039158}{identification} != header->identification)
+623             \textcolor{keywordflow}{continue};
+624 
+625          \textcolor{comment}{//A matching entry has been found in the reassembly queue}
+626          \textcolor{keywordflow}{return} frag;
+627       \}
+628    \}
+629 
+630    \textcolor{comment}{//If the current packet does not match an existing entry}
+631    \textcolor{comment}{//in the reassembly queue, then create a new entry}
+632    \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{ipv6__frag_8h_a32fb76378a9b006c9aff62f2f40ac143}{IPV6\_MAX\_FRAG\_DATAGRAMS}; i++)
+633    \{
+634       \textcolor{comment}{//Point to the current entry in the reassembly queue}
+635       frag = &interface->ipv6Context.fragQueue[i];
+636 
+637       \textcolor{comment}{//The current entry is free?}
+638       \textcolor{keywordflow}{if}(!frag->\hyperlink{structIpv6FragDesc_ac1c2c93db751730aa55d827f14c5ba60}{buffer}.\hyperlink{structIpv6ReassemblyBuffer_ae4cd44718d4c80b83fe7e0decdb51cc3}{chunkCount})
+639       \{
+640          \textcolor{comment}{//Number of chunks that comprise the reassembly buffer}
+641          frag->\hyperlink{structIpv6FragDesc_ac1c2c93db751730aa55d827f14c5ba60}{buffer}.\hyperlink{structIpv6ReassemblyBuffer_a78933f1f92c2e1c7d19cae869fa09b45}{maxChunkCount} = \hyperlink{os__port_8h_aa1394a41d43c0f3fd30febe41c7bb340}{arraysize}(frag->
+      \hyperlink{structIpv6FragDesc_ac1c2c93db751730aa55d827f14c5ba60}{buffer}.\hyperlink{structIpv6ReassemblyBuffer_a71fc099ccf3935c677607c9fcc5bbbc8}{chunk});
+642 
+643          \textcolor{comment}{//Allocate sufficient memory to hold the IPv6 header and}
+644          \textcolor{comment}{//the first hole descriptor}
+645          error = \hyperlink{net__mem_8c_ac0a46f396754e069dd1ee65cdc559b28}{netBufferSetLength}((\hyperlink{structNetBuffer}{NetBuffer} *) &frag->
+      \hyperlink{structIpv6FragDesc_ac1c2c93db751730aa55d827f14c5ba60}{buffer},
+646             \hyperlink{net__mem_8h_a8870c81bed70c77d981277a24c0174bc}{NET\_MEM\_POOL\_BUFFER\_SIZE} + \textcolor{keyword}{sizeof}(
+      \hyperlink{ipv6__frag_8h_a578b35e34bbeda1095d6139b8046e127}{Ipv6HoleDesc}));
+647 
+648          \textcolor{comment}{//Failed to allocate memory?}
+649          \textcolor{keywordflow}{if}(error)
+650          \{
+651             \textcolor{comment}{//Clean up side effects}
+652             \hyperlink{net__mem_8c_ac0a46f396754e069dd1ee65cdc559b28}{netBufferSetLength}((\hyperlink{structNetBuffer}{NetBuffer} *) &frag->
+      \hyperlink{structIpv6FragDesc_ac1c2c93db751730aa55d827f14c5ba60}{buffer}, 0);
+653             \textcolor{comment}{//Exit immediately}
+654             \textcolor{keywordflow}{return} \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+655          \}
+656 
+657          \textcolor{comment}{//Initial length of the reconstructed datagram}
+658          frag->\hyperlink{structIpv6FragDesc_a8304cd1b608d13d100617e40f170a079}{unfragPartLength} = \textcolor{keyword}{sizeof}(\hyperlink{ipv6_8h_ad553284c12e3a0d96dc8a4da1c5f6ea0}{Ipv6Header});
+659          frag->\hyperlink{structIpv6FragDesc_a211456cd7a2b9db9d3892b5c54b348df}{fragPartLength} = 0;
+660 
+661          \textcolor{comment}{//Fix the length of the first chunk}
+662          frag->\hyperlink{structIpv6FragDesc_ac1c2c93db751730aa55d827f14c5ba60}{buffer}.\hyperlink{structIpv6ReassemblyBuffer_a71fc099ccf3935c677607c9fcc5bbbc8}{chunk}[0].\hyperlink{structChunkDesc_a4bdd57a9363511126fe5cd6d30c51c81}{length} = (\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t}) frag->
+      \hyperlink{structIpv6FragDesc_a8304cd1b608d13d100617e40f170a079}{unfragPartLength};
+663          \textcolor{comment}{//Copy IPv6 header from the incoming fragment}
+664          \hyperlink{net__mem_8c_a977e79aab71b4b39772ff8256abb8b55}{netBufferWrite}((\hyperlink{structNetBuffer}{NetBuffer} *) &frag->\hyperlink{structIpv6FragDesc_ac1c2c93db751730aa55d827f14c5ba60}{buffer}, 0, packet, frag->
+      \hyperlink{structIpv6FragDesc_a8304cd1b608d13d100617e40f170a079}{unfragPartLength});
+665 
+666          \textcolor{comment}{//Save current time}
+667          frag->\hyperlink{structIpv6FragDesc_ab6e5ead9ee6cc2e4e026b6aef89d76a1}{timestamp} = \hyperlink{os__port__chibios_8c_ab66a11272d40a916fa69dd8e4dc443d4}{osGetSystemTime}();
+668          \textcolor{comment}{//Record fragment identification field}
+669          frag->\hyperlink{structIpv6FragDesc_a2c2575ed800af0856ec9f0db94039158}{identification} = header->identification;
+670          \textcolor{comment}{//Create a new entry in the hole descriptor list}
+671          frag->\hyperlink{structIpv6FragDesc_a9e51e5d6a1717ca6d115fac412a72515}{firstHole} = 0;
+672 
+673          \textcolor{comment}{//Point to first hole descriptor}
+674          hole = \hyperlink{ipv6__frag_8c_a6c0f45744b01564242e285b4a5140a1a}{ipv6FindHole}(frag, frag->\hyperlink{structIpv6FragDesc_a9e51e5d6a1717ca6d115fac412a72515}{firstHole});
+675          \textcolor{comment}{//The entry describes the datagram as being completely missing}
+676          hole->first = 0;
+677          hole->last = \hyperlink{ipv6__frag_8h_a586b96ded65dacef0b4888a45c2a390a}{IPV6\_INFINITY};
+678          hole->next = \hyperlink{ipv6__frag_8h_a586b96ded65dacef0b4888a45c2a390a}{IPV6\_INFINITY};
+679 
+680          \textcolor{comment}{//Dump hole descriptor list}
+681          \hyperlink{ipv6__frag_8c_acb606f0feb84afae509dfe3e5ef9dee4}{ipv6DumpHoleList}(frag);
+682 
+683          \textcolor{comment}{//Return the matching fragment descriptor}
+684          \textcolor{keywordflow}{return} frag;
+685       \}
+686    \}
+687 
+688    \textcolor{comment}{//The reassembly queue is full}
+689    \textcolor{keywordflow}{return} \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+690 \}
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{ipv6__frag_8h_ac641ca9cfab7c4966cdd47e13c7ec87a}\label{ipv6__frag_8h_ac641ca9cfab7c4966cdd47e13c7ec87a}} 
+\index{ipv6\+\_\+frag.\+h@{ipv6\+\_\+frag.\+h}!first@{first}}
+\index{first@{first}!ipv6\+\_\+frag.\+h@{ipv6\+\_\+frag.\+h}}
+\subsubsection{\texorpdfstring{first}{first}}
+{\footnotesize\ttfamily \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} first}
+
+
+
+Definition at line 102 of file ipv6\+\_\+frag.\+h.
+
+\mbox{\Hypertarget{ipv6__frag_8h_af16e836bc6a4132381b1eaf2fa7a0564}\label{ipv6__frag_8h_af16e836bc6a4132381b1eaf2fa7a0564}} 
+\index{ipv6\+\_\+frag.\+h@{ipv6\+\_\+frag.\+h}!ipv6\+Frag\+Tick\+Counter@{ipv6\+Frag\+Tick\+Counter}}
+\index{ipv6\+Frag\+Tick\+Counter@{ipv6\+Frag\+Tick\+Counter}!ipv6\+\_\+frag.\+h@{ipv6\+\_\+frag.\+h}}
+\subsubsection{\texorpdfstring{ipv6\+Frag\+Tick\+Counter}{ipv6FragTickCounter}}
+{\footnotesize\ttfamily \hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\+\_\+t} ipv6\+Frag\+Tick\+Counter}
+
+
+
+Definition at line 47 of file ipv6\+\_\+frag.\+c.
+
+\mbox{\Hypertarget{ipv6__frag_8h_a7179af054cf318941e1a12e964965935}\label{ipv6__frag_8h_a7179af054cf318941e1a12e964965935}} 
+\index{ipv6\+\_\+frag.\+h@{ipv6\+\_\+frag.\+h}!last@{last}}
+\index{last@{last}!ipv6\+\_\+frag.\+h@{ipv6\+\_\+frag.\+h}}
+\subsubsection{\texorpdfstring{last}{last}}
+{\footnotesize\ttfamily \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} last}
+
+
+
+Definition at line 103 of file ipv6\+\_\+frag.\+h.
+
+\mbox{\Hypertarget{ipv6__frag_8h_a31925c52841f891fabf5043c49d0306b}\label{ipv6__frag_8h_a31925c52841f891fabf5043c49d0306b}} 
+\index{ipv6\+\_\+frag.\+h@{ipv6\+\_\+frag.\+h}!next@{next}}
+\index{next@{next}!ipv6\+\_\+frag.\+h@{ipv6\+\_\+frag.\+h}}
+\subsubsection{\texorpdfstring{next}{next}}
+{\footnotesize\ttfamily \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} next}
+
+
+
+Definition at line 104 of file ipv6\+\_\+frag.\+h.
+

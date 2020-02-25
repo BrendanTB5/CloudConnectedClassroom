@@ -1,0 +1,751 @@
+\hypertarget{ripemd160_8c}{}\section{cyclone\+\_\+crypto/hash/ripemd160.c File Reference}
+\label{ripemd160_8c}\index{cyclone\+\_\+crypto/hash/ripemd160.\+c@{cyclone\+\_\+crypto/hash/ripemd160.\+c}}
+
+
+R\+I\+P\+E\+M\+D-\/160 hash function.  
+
+
+{\ttfamily \#include \char`\"{}core/crypto.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}hash/ripemd160.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{ripemd160_8c_afcdf5e66fd927a7f4cc64295acd20407}{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}~\hyperlink{crypto__config_8h_a6afae3a9b63f9b55d979e667ee0e881d}{C\+R\+Y\+P\+T\+O\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}
+\item 
+\#define \hyperlink{ripemd160_8c_a96d73bbd7af15cb1fc38c3f4a3bd82e9}{F}(x,  y,  \hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z})~((x) $^\wedge$ (y) $^\wedge$ (\hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z}))
+\item 
+\#define \hyperlink{ripemd160_8c_ad96b7cf3182ce2ba85e5a7a93b12c441}{G}(x,  y,  \hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z})~(((x) \& (y)) $\vert$ ($\sim$(x) \& (\hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z})))
+\item 
+\#define \hyperlink{ripemd160_8c_ae42219072d798876e6b08e6b78614ff6}{H}(x,  y,  \hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z})~(((x) $\vert$ $\sim$(y)) $^\wedge$ (\hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z}))
+\item 
+\#define \hyperlink{ripemd160_8c_ac0eafdc9ee161b71e7af98af736952fd}{I}(x,  y,  \hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z})~(((x) \& (\hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z})) $\vert$ ((y) \& $\sim$(\hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z})))
+\item 
+\#define \hyperlink{ripemd160_8c_a9259a005139dbff1bd22548f76efdb3d}{J}(x,  y,  \hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z})~((x) $^\wedge$ ((y) $\vert$ $\sim$(\hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z})))
+\item 
+\#define \hyperlink{ripemd160_8c_aa5dbd7fa3bd4eb069b2fe146f9a5dcfe}{FF}(\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a},  \hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b},  \hyperlink{llmnr__common_8h_a2e5a04327b5658199f0f7bda2acceee1}{c},  d,  e,  x,  \hyperlink{ndp_8h_a2dee666f0c1fe072c549ff86b1d0a8ab}{s})~\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a} += \hyperlink{ripemd160_8c_a96d73bbd7af15cb1fc38c3f4a3bd82e9}{F}(\hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b}, \hyperlink{llmnr__common_8h_a2e5a04327b5658199f0f7bda2acceee1}{c}, d) + (x), \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a} = \hyperlink{cyclone__crypto_2core_2crypto_8h_ad5e52b5ea688101f11d0bf34dc3a8b4b}{R\+O\+L32}(\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}, \hyperlink{ndp_8h_a2dee666f0c1fe072c549ff86b1d0a8ab}{s}) + (e), \hyperlink{llmnr__common_8h_a2e5a04327b5658199f0f7bda2acceee1}{c} = \hyperlink{cyclone__crypto_2core_2crypto_8h_ad5e52b5ea688101f11d0bf34dc3a8b4b}{R\+O\+L32}(\hyperlink{llmnr__common_8h_a2e5a04327b5658199f0f7bda2acceee1}{c}, 10)
+\item 
+\#define \hyperlink{ripemd160_8c_a074254272cdeaa73a5e1608465dca5a4}{GG}(\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a},  \hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b},  \hyperlink{llmnr__common_8h_a2e5a04327b5658199f0f7bda2acceee1}{c},  d,  e,  x,  \hyperlink{ndp_8h_a2dee666f0c1fe072c549ff86b1d0a8ab}{s})~\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a} += \hyperlink{ripemd160_8c_ad96b7cf3182ce2ba85e5a7a93b12c441}{G}(\hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b}, \hyperlink{llmnr__common_8h_a2e5a04327b5658199f0f7bda2acceee1}{c}, d) + (x) + 0x5\+A827999, a = R\+O\+L32(a, s) + (e), c = R\+O\+L32(c, 10)
+\item 
+\#define \hyperlink{ripemd160_8c_a48ddf6b12e029853afc53364d2497d5c}{HH}(\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a},  \hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b},  \hyperlink{llmnr__common_8h_a2e5a04327b5658199f0f7bda2acceee1}{c},  d,  e,  x,  \hyperlink{ndp_8h_a2dee666f0c1fe072c549ff86b1d0a8ab}{s})~\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a} += \hyperlink{ripemd160_8c_ae42219072d798876e6b08e6b78614ff6}{H}(\hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b}, \hyperlink{llmnr__common_8h_a2e5a04327b5658199f0f7bda2acceee1}{c}, d) + (x) + 0x6\+E\+D9\+E\+B\+A1, a = R\+O\+L32(a, s) + (e), c = R\+O\+L32(c, 10)
+\item 
+\#define \hyperlink{ripemd160_8c_a5315fcda056b74868e1335ff27afd1c1}{II}(\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a},  \hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b},  \hyperlink{llmnr__common_8h_a2e5a04327b5658199f0f7bda2acceee1}{c},  d,  e,  x,  \hyperlink{ndp_8h_a2dee666f0c1fe072c549ff86b1d0a8ab}{s})~\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a} += \hyperlink{ripemd160_8c_ac0eafdc9ee161b71e7af98af736952fd}{I}(\hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b}, \hyperlink{llmnr__common_8h_a2e5a04327b5658199f0f7bda2acceee1}{c}, d) + (x) + 0x8\+F1\+B\+B\+C\+D\+C, a = R\+O\+L32(a, s) + (e), c = R\+O\+L32(c, 10)
+\item 
+\#define \hyperlink{ripemd160_8c_a29f8c607e8073605bc58ed2a4b0ac70f}{JJ}(\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a},  \hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b},  \hyperlink{llmnr__common_8h_a2e5a04327b5658199f0f7bda2acceee1}{c},  d,  e,  x,  \hyperlink{ndp_8h_a2dee666f0c1fe072c549ff86b1d0a8ab}{s})~\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a} += \hyperlink{ripemd160_8c_a9259a005139dbff1bd22548f76efdb3d}{J}(\hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b}, \hyperlink{llmnr__common_8h_a2e5a04327b5658199f0f7bda2acceee1}{c}, d) + (x) + 0x\+A953\+F\+D4\+E, a = R\+O\+L32(a, s) + (e), c = R\+O\+L32(c, 10)
+\item 
+\#define \hyperlink{ripemd160_8c_af2fefcf5d86fa1906a63e8576cb43c33}{F\+FF}(\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a},  \hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b},  \hyperlink{llmnr__common_8h_a2e5a04327b5658199f0f7bda2acceee1}{c},  d,  e,  x,  \hyperlink{ndp_8h_a2dee666f0c1fe072c549ff86b1d0a8ab}{s})~\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a} += \hyperlink{ripemd160_8c_a96d73bbd7af15cb1fc38c3f4a3bd82e9}{F}(\hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b}, \hyperlink{llmnr__common_8h_a2e5a04327b5658199f0f7bda2acceee1}{c}, d) + (x), \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a} = \hyperlink{cyclone__crypto_2core_2crypto_8h_ad5e52b5ea688101f11d0bf34dc3a8b4b}{R\+O\+L32}(\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}, \hyperlink{ndp_8h_a2dee666f0c1fe072c549ff86b1d0a8ab}{s}) + (e), \hyperlink{llmnr__common_8h_a2e5a04327b5658199f0f7bda2acceee1}{c} = \hyperlink{cyclone__crypto_2core_2crypto_8h_ad5e52b5ea688101f11d0bf34dc3a8b4b}{R\+O\+L32}(\hyperlink{llmnr__common_8h_a2e5a04327b5658199f0f7bda2acceee1}{c}, 10)
+\item 
+\#define \hyperlink{ripemd160_8c_aa5e45dabf94a8787eda58848007f4a4c}{G\+GG}(\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a},  \hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b},  \hyperlink{llmnr__common_8h_a2e5a04327b5658199f0f7bda2acceee1}{c},  d,  e,  x,  \hyperlink{ndp_8h_a2dee666f0c1fe072c549ff86b1d0a8ab}{s})~\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a} += \hyperlink{ripemd160_8c_ad96b7cf3182ce2ba85e5a7a93b12c441}{G}(\hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b}, \hyperlink{llmnr__common_8h_a2e5a04327b5658199f0f7bda2acceee1}{c}, d) + (x) + 0x7\+A6\+D76\+E9, a = R\+O\+L32(a, s) + (e), c = R\+O\+L32(c, 10)
+\item 
+\#define \hyperlink{ripemd160_8c_a66dec09df645dc7e8e2e6177b8c086f7}{H\+HH}(\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a},  \hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b},  \hyperlink{llmnr__common_8h_a2e5a04327b5658199f0f7bda2acceee1}{c},  d,  e,  x,  \hyperlink{ndp_8h_a2dee666f0c1fe072c549ff86b1d0a8ab}{s})~\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a} += \hyperlink{ripemd160_8c_ae42219072d798876e6b08e6b78614ff6}{H}(\hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b}, \hyperlink{llmnr__common_8h_a2e5a04327b5658199f0f7bda2acceee1}{c}, d) + (x) + 0x6\+D703\+E\+F3, a = R\+O\+L32(a, s) + (e), c = R\+O\+L32(c, 10)
+\item 
+\#define \hyperlink{ripemd160_8c_a18a1a017a4429faf357b9635f857ca36}{I\+II}(\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a},  \hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b},  \hyperlink{llmnr__common_8h_a2e5a04327b5658199f0f7bda2acceee1}{c},  d,  e,  x,  \hyperlink{ndp_8h_a2dee666f0c1fe072c549ff86b1d0a8ab}{s})~\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a} += \hyperlink{ripemd160_8c_ac0eafdc9ee161b71e7af98af736952fd}{I}(\hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b}, \hyperlink{llmnr__common_8h_a2e5a04327b5658199f0f7bda2acceee1}{c}, d) + (x) + 0x5\+C4\+D\+D124, a = R\+O\+L32(a, s) + (e), c = R\+O\+L32(c, 10)
+\item 
+\#define \hyperlink{ripemd160_8c_a0ffb970cde094644ff46e1699e608d98}{J\+JJ}(\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a},  \hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b},  \hyperlink{llmnr__common_8h_a2e5a04327b5658199f0f7bda2acceee1}{c},  d,  e,  x,  \hyperlink{ndp_8h_a2dee666f0c1fe072c549ff86b1d0a8ab}{s})~\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a} += \hyperlink{ripemd160_8c_a9259a005139dbff1bd22548f76efdb3d}{J}(\hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b}, \hyperlink{llmnr__common_8h_a2e5a04327b5658199f0f7bda2acceee1}{c}, d) + (x) + 0x50\+A28\+B\+E6, a = R\+O\+L32(a, s) + (e), c = R\+O\+L32(c, 10)
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ripemd160_8c_a936432bf6081b1b69c38dbb36560eec1}{ripemd160\+Compute} (const void $\ast$\hyperlink{tftp__common_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length}, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$digest)
+\begin{DoxyCompactList}\small\item\em Digest a message using R\+I\+P\+E\+M\+D-\/160. \end{DoxyCompactList}\item 
+void \hyperlink{ripemd160_8c_a35c5ef0a2c7837051adc276dc669b12a}{ripemd160\+Init} (\hyperlink{structRipemd160Context}{Ripemd160\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Initialize R\+I\+P\+E\+M\+D-\/160 message digest context. \end{DoxyCompactList}\item 
+void \hyperlink{ripemd160_8c_a710fb60742b972498f8c50223cb12e03}{ripemd160\+Update} (\hyperlink{structRipemd160Context}{Ripemd160\+Context} $\ast$context, const void $\ast$\hyperlink{tftp__common_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length})
+\begin{DoxyCompactList}\small\item\em Update the R\+I\+P\+E\+M\+D-\/160 context with a portion of the message being hashed. \end{DoxyCompactList}\item 
+void \hyperlink{ripemd160_8c_abdce080087edda7da83c5e8c41c2c3a5}{ripemd160\+Final} (\hyperlink{structRipemd160Context}{Ripemd160\+Context} $\ast$context, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$digest)
+\begin{DoxyCompactList}\small\item\em Finish the R\+I\+P\+E\+M\+D-\/160 message digest. \end{DoxyCompactList}\item 
+void \hyperlink{ripemd160_8c_a84f6bd7ada496fb6310701851a16babb}{ripemd160\+Process\+Block} (\hyperlink{structRipemd160Context}{Ripemd160\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Process message in 16-\/word blocks. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} \hyperlink{ripemd160_8c_ae1cca62951c2df9f5bf77fda3dcdd423}{padding} \mbox{[}64\mbox{]}
+\item 
+const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} \hyperlink{ripemd160_8c_a7e111af21c2a33dc7a57a915bf13a8bf}{ripemd160\+Oid} \mbox{[}5\mbox{]} = \{0x2\+B, 0x24, 0x03, 0x02, 0x01\}
+\item 
+const \hyperlink{structHashAlgo}{Hash\+Algo} \hyperlink{ripemd160_8c_a55b107aa1878fed05e54d61a011b3d44}{ripemd160\+Hash\+Algo}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+R\+I\+P\+E\+M\+D-\/160 hash function. 
+
+\hypertarget{pic32mz__ef__curiosity_8h_License}{}\subsection{License}\label{pic32mz__ef__curiosity_8h_License}
+S\+P\+D\+X-\/\+License-\/\+Identifier\+: G\+P\+L-\/2.\+0-\/or-\/later
+
+Copyright (C) 2010-\/2019 Oryx Embedded S\+A\+RL. All rights reserved.
+
+This file is part of Cyclone\+Crypto Open.
+
+This program is free software; you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+
+You should have received a copy of the G\+NU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-\/1301, U\+SA.
+
+\begin{DoxyAuthor}{Author}
+Oryx Embedded S\+A\+RL (www.\+oryx-\/embedded.\+com) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+9.\+6 
+\end{DoxyVersion}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{ripemd160_8c_a96d73bbd7af15cb1fc38c3f4a3bd82e9}\label{ripemd160_8c_a96d73bbd7af15cb1fc38c3f4a3bd82e9}} 
+\index{ripemd160.\+c@{ripemd160.\+c}!F@{F}}
+\index{F@{F}!ripemd160.\+c@{ripemd160.\+c}}
+\subsubsection{\texorpdfstring{F}{F}}
+{\footnotesize\ttfamily \#define F(\begin{DoxyParamCaption}\item[{}]{x,  }\item[{}]{y,  }\item[{}]{\hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z} }\end{DoxyParamCaption})~((x) $^\wedge$ (y) $^\wedge$ (\hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z}))}
+
+
+
+Definition at line 42 of file ripemd160.\+c.
+
+\mbox{\Hypertarget{ripemd160_8c_aa5dbd7fa3bd4eb069b2fe146f9a5dcfe}\label{ripemd160_8c_aa5dbd7fa3bd4eb069b2fe146f9a5dcfe}} 
+\index{ripemd160.\+c@{ripemd160.\+c}!FF@{FF}}
+\index{FF@{FF}!ripemd160.\+c@{ripemd160.\+c}}
+\subsubsection{\texorpdfstring{FF}{FF}}
+{\footnotesize\ttfamily \#define FF(\begin{DoxyParamCaption}\item[{}]{\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a},  }\item[{}]{\hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b},  }\item[{}]{\hyperlink{llmnr__common_8h_a2e5a04327b5658199f0f7bda2acceee1}{c},  }\item[{}]{d,  }\item[{}]{e,  }\item[{}]{x,  }\item[{}]{\hyperlink{ndp_8h_a2dee666f0c1fe072c549ff86b1d0a8ab}{s} }\end{DoxyParamCaption})~\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a} += \hyperlink{ripemd160_8c_a96d73bbd7af15cb1fc38c3f4a3bd82e9}{F}(\hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b}, \hyperlink{llmnr__common_8h_a2e5a04327b5658199f0f7bda2acceee1}{c}, d) + (x), \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a} = \hyperlink{cyclone__crypto_2core_2crypto_8h_ad5e52b5ea688101f11d0bf34dc3a8b4b}{R\+O\+L32}(\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}, \hyperlink{ndp_8h_a2dee666f0c1fe072c549ff86b1d0a8ab}{s}) + (e), \hyperlink{llmnr__common_8h_a2e5a04327b5658199f0f7bda2acceee1}{c} = \hyperlink{cyclone__crypto_2core_2crypto_8h_ad5e52b5ea688101f11d0bf34dc3a8b4b}{R\+O\+L32}(\hyperlink{llmnr__common_8h_a2e5a04327b5658199f0f7bda2acceee1}{c}, 10)}
+
+
+
+Definition at line 48 of file ripemd160.\+c.
+
+\mbox{\Hypertarget{ripemd160_8c_af2fefcf5d86fa1906a63e8576cb43c33}\label{ripemd160_8c_af2fefcf5d86fa1906a63e8576cb43c33}} 
+\index{ripemd160.\+c@{ripemd160.\+c}!F\+FF@{F\+FF}}
+\index{F\+FF@{F\+FF}!ripemd160.\+c@{ripemd160.\+c}}
+\subsubsection{\texorpdfstring{F\+FF}{FFF}}
+{\footnotesize\ttfamily \#define F\+FF(\begin{DoxyParamCaption}\item[{}]{\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a},  }\item[{}]{\hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b},  }\item[{}]{\hyperlink{llmnr__common_8h_a2e5a04327b5658199f0f7bda2acceee1}{c},  }\item[{}]{d,  }\item[{}]{e,  }\item[{}]{x,  }\item[{}]{\hyperlink{ndp_8h_a2dee666f0c1fe072c549ff86b1d0a8ab}{s} }\end{DoxyParamCaption})~\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a} += \hyperlink{ripemd160_8c_a96d73bbd7af15cb1fc38c3f4a3bd82e9}{F}(\hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b}, \hyperlink{llmnr__common_8h_a2e5a04327b5658199f0f7bda2acceee1}{c}, d) + (x), \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a} = \hyperlink{cyclone__crypto_2core_2crypto_8h_ad5e52b5ea688101f11d0bf34dc3a8b4b}{R\+O\+L32}(\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}, \hyperlink{ndp_8h_a2dee666f0c1fe072c549ff86b1d0a8ab}{s}) + (e), \hyperlink{llmnr__common_8h_a2e5a04327b5658199f0f7bda2acceee1}{c} = \hyperlink{cyclone__crypto_2core_2crypto_8h_ad5e52b5ea688101f11d0bf34dc3a8b4b}{R\+O\+L32}(\hyperlink{llmnr__common_8h_a2e5a04327b5658199f0f7bda2acceee1}{c}, 10)}
+
+
+
+Definition at line 54 of file ripemd160.\+c.
+
+\mbox{\Hypertarget{ripemd160_8c_ad96b7cf3182ce2ba85e5a7a93b12c441}\label{ripemd160_8c_ad96b7cf3182ce2ba85e5a7a93b12c441}} 
+\index{ripemd160.\+c@{ripemd160.\+c}!G@{G}}
+\index{G@{G}!ripemd160.\+c@{ripemd160.\+c}}
+\subsubsection{\texorpdfstring{G}{G}}
+{\footnotesize\ttfamily \#define G(\begin{DoxyParamCaption}\item[{}]{x,  }\item[{}]{y,  }\item[{}]{\hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z} }\end{DoxyParamCaption})~(((x) \& (y)) $\vert$ ($\sim$(x) \& (\hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z})))}
+
+
+
+Definition at line 43 of file ripemd160.\+c.
+
+\mbox{\Hypertarget{ripemd160_8c_a074254272cdeaa73a5e1608465dca5a4}\label{ripemd160_8c_a074254272cdeaa73a5e1608465dca5a4}} 
+\index{ripemd160.\+c@{ripemd160.\+c}!GG@{GG}}
+\index{GG@{GG}!ripemd160.\+c@{ripemd160.\+c}}
+\subsubsection{\texorpdfstring{GG}{GG}}
+{\footnotesize\ttfamily \#define GG(\begin{DoxyParamCaption}\item[{}]{\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a},  }\item[{}]{\hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b},  }\item[{}]{\hyperlink{llmnr__common_8h_a2e5a04327b5658199f0f7bda2acceee1}{c},  }\item[{}]{d,  }\item[{}]{e,  }\item[{}]{x,  }\item[{}]{\hyperlink{ndp_8h_a2dee666f0c1fe072c549ff86b1d0a8ab}{s} }\end{DoxyParamCaption})~\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a} += \hyperlink{ripemd160_8c_ad96b7cf3182ce2ba85e5a7a93b12c441}{G}(\hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b}, \hyperlink{llmnr__common_8h_a2e5a04327b5658199f0f7bda2acceee1}{c}, d) + (x) + 0x5\+A827999, a = R\+O\+L32(a, s) + (e), c = R\+O\+L32(c, 10)}
+
+
+
+Definition at line 49 of file ripemd160.\+c.
+
+\mbox{\Hypertarget{ripemd160_8c_aa5e45dabf94a8787eda58848007f4a4c}\label{ripemd160_8c_aa5e45dabf94a8787eda58848007f4a4c}} 
+\index{ripemd160.\+c@{ripemd160.\+c}!G\+GG@{G\+GG}}
+\index{G\+GG@{G\+GG}!ripemd160.\+c@{ripemd160.\+c}}
+\subsubsection{\texorpdfstring{G\+GG}{GGG}}
+{\footnotesize\ttfamily \#define G\+GG(\begin{DoxyParamCaption}\item[{}]{\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a},  }\item[{}]{\hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b},  }\item[{}]{\hyperlink{llmnr__common_8h_a2e5a04327b5658199f0f7bda2acceee1}{c},  }\item[{}]{d,  }\item[{}]{e,  }\item[{}]{x,  }\item[{}]{\hyperlink{ndp_8h_a2dee666f0c1fe072c549ff86b1d0a8ab}{s} }\end{DoxyParamCaption})~\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a} += \hyperlink{ripemd160_8c_ad96b7cf3182ce2ba85e5a7a93b12c441}{G}(\hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b}, \hyperlink{llmnr__common_8h_a2e5a04327b5658199f0f7bda2acceee1}{c}, d) + (x) + 0x7\+A6\+D76\+E9, a = R\+O\+L32(a, s) + (e), c = R\+O\+L32(c, 10)}
+
+
+
+Definition at line 55 of file ripemd160.\+c.
+
+\mbox{\Hypertarget{ripemd160_8c_ae42219072d798876e6b08e6b78614ff6}\label{ripemd160_8c_ae42219072d798876e6b08e6b78614ff6}} 
+\index{ripemd160.\+c@{ripemd160.\+c}!H@{H}}
+\index{H@{H}!ripemd160.\+c@{ripemd160.\+c}}
+\subsubsection{\texorpdfstring{H}{H}}
+{\footnotesize\ttfamily \#define H(\begin{DoxyParamCaption}\item[{}]{x,  }\item[{}]{y,  }\item[{}]{\hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z} }\end{DoxyParamCaption})~(((x) $\vert$ $\sim$(y)) $^\wedge$ (\hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z}))}
+
+
+
+Definition at line 44 of file ripemd160.\+c.
+
+\mbox{\Hypertarget{ripemd160_8c_a48ddf6b12e029853afc53364d2497d5c}\label{ripemd160_8c_a48ddf6b12e029853afc53364d2497d5c}} 
+\index{ripemd160.\+c@{ripemd160.\+c}!HH@{HH}}
+\index{HH@{HH}!ripemd160.\+c@{ripemd160.\+c}}
+\subsubsection{\texorpdfstring{HH}{HH}}
+{\footnotesize\ttfamily \#define HH(\begin{DoxyParamCaption}\item[{}]{\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a},  }\item[{}]{\hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b},  }\item[{}]{\hyperlink{llmnr__common_8h_a2e5a04327b5658199f0f7bda2acceee1}{c},  }\item[{}]{d,  }\item[{}]{e,  }\item[{}]{x,  }\item[{}]{\hyperlink{ndp_8h_a2dee666f0c1fe072c549ff86b1d0a8ab}{s} }\end{DoxyParamCaption})~\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a} += \hyperlink{ripemd160_8c_ae42219072d798876e6b08e6b78614ff6}{H}(\hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b}, \hyperlink{llmnr__common_8h_a2e5a04327b5658199f0f7bda2acceee1}{c}, d) + (x) + 0x6\+E\+D9\+E\+B\+A1, a = R\+O\+L32(a, s) + (e), c = R\+O\+L32(c, 10)}
+
+
+
+Definition at line 50 of file ripemd160.\+c.
+
+\mbox{\Hypertarget{ripemd160_8c_a66dec09df645dc7e8e2e6177b8c086f7}\label{ripemd160_8c_a66dec09df645dc7e8e2e6177b8c086f7}} 
+\index{ripemd160.\+c@{ripemd160.\+c}!H\+HH@{H\+HH}}
+\index{H\+HH@{H\+HH}!ripemd160.\+c@{ripemd160.\+c}}
+\subsubsection{\texorpdfstring{H\+HH}{HHH}}
+{\footnotesize\ttfamily \#define H\+HH(\begin{DoxyParamCaption}\item[{}]{\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a},  }\item[{}]{\hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b},  }\item[{}]{\hyperlink{llmnr__common_8h_a2e5a04327b5658199f0f7bda2acceee1}{c},  }\item[{}]{d,  }\item[{}]{e,  }\item[{}]{x,  }\item[{}]{\hyperlink{ndp_8h_a2dee666f0c1fe072c549ff86b1d0a8ab}{s} }\end{DoxyParamCaption})~\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a} += \hyperlink{ripemd160_8c_ae42219072d798876e6b08e6b78614ff6}{H}(\hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b}, \hyperlink{llmnr__common_8h_a2e5a04327b5658199f0f7bda2acceee1}{c}, d) + (x) + 0x6\+D703\+E\+F3, a = R\+O\+L32(a, s) + (e), c = R\+O\+L32(c, 10)}
+
+
+
+Definition at line 56 of file ripemd160.\+c.
+
+\mbox{\Hypertarget{ripemd160_8c_ac0eafdc9ee161b71e7af98af736952fd}\label{ripemd160_8c_ac0eafdc9ee161b71e7af98af736952fd}} 
+\index{ripemd160.\+c@{ripemd160.\+c}!I@{I}}
+\index{I@{I}!ripemd160.\+c@{ripemd160.\+c}}
+\subsubsection{\texorpdfstring{I}{I}}
+{\footnotesize\ttfamily \#define I(\begin{DoxyParamCaption}\item[{}]{x,  }\item[{}]{y,  }\item[{}]{\hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z} }\end{DoxyParamCaption})~(((x) \& (\hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z})) $\vert$ ((y) \& $\sim$(\hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z})))}
+
+
+
+Definition at line 45 of file ripemd160.\+c.
+
+\mbox{\Hypertarget{ripemd160_8c_a5315fcda056b74868e1335ff27afd1c1}\label{ripemd160_8c_a5315fcda056b74868e1335ff27afd1c1}} 
+\index{ripemd160.\+c@{ripemd160.\+c}!II@{II}}
+\index{II@{II}!ripemd160.\+c@{ripemd160.\+c}}
+\subsubsection{\texorpdfstring{II}{II}}
+{\footnotesize\ttfamily \#define II(\begin{DoxyParamCaption}\item[{}]{\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a},  }\item[{}]{\hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b},  }\item[{}]{\hyperlink{llmnr__common_8h_a2e5a04327b5658199f0f7bda2acceee1}{c},  }\item[{}]{d,  }\item[{}]{e,  }\item[{}]{x,  }\item[{}]{\hyperlink{ndp_8h_a2dee666f0c1fe072c549ff86b1d0a8ab}{s} }\end{DoxyParamCaption})~\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a} += \hyperlink{ripemd160_8c_ac0eafdc9ee161b71e7af98af736952fd}{I}(\hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b}, \hyperlink{llmnr__common_8h_a2e5a04327b5658199f0f7bda2acceee1}{c}, d) + (x) + 0x8\+F1\+B\+B\+C\+D\+C, a = R\+O\+L32(a, s) + (e), c = R\+O\+L32(c, 10)}
+
+
+
+Definition at line 51 of file ripemd160.\+c.
+
+\mbox{\Hypertarget{ripemd160_8c_a18a1a017a4429faf357b9635f857ca36}\label{ripemd160_8c_a18a1a017a4429faf357b9635f857ca36}} 
+\index{ripemd160.\+c@{ripemd160.\+c}!I\+II@{I\+II}}
+\index{I\+II@{I\+II}!ripemd160.\+c@{ripemd160.\+c}}
+\subsubsection{\texorpdfstring{I\+II}{III}}
+{\footnotesize\ttfamily \#define I\+II(\begin{DoxyParamCaption}\item[{}]{\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a},  }\item[{}]{\hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b},  }\item[{}]{\hyperlink{llmnr__common_8h_a2e5a04327b5658199f0f7bda2acceee1}{c},  }\item[{}]{d,  }\item[{}]{e,  }\item[{}]{x,  }\item[{}]{\hyperlink{ndp_8h_a2dee666f0c1fe072c549ff86b1d0a8ab}{s} }\end{DoxyParamCaption})~\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a} += \hyperlink{ripemd160_8c_ac0eafdc9ee161b71e7af98af736952fd}{I}(\hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b}, \hyperlink{llmnr__common_8h_a2e5a04327b5658199f0f7bda2acceee1}{c}, d) + (x) + 0x5\+C4\+D\+D124, a = R\+O\+L32(a, s) + (e), c = R\+O\+L32(c, 10)}
+
+
+
+Definition at line 57 of file ripemd160.\+c.
+
+\mbox{\Hypertarget{ripemd160_8c_a9259a005139dbff1bd22548f76efdb3d}\label{ripemd160_8c_a9259a005139dbff1bd22548f76efdb3d}} 
+\index{ripemd160.\+c@{ripemd160.\+c}!J@{J}}
+\index{J@{J}!ripemd160.\+c@{ripemd160.\+c}}
+\subsubsection{\texorpdfstring{J}{J}}
+{\footnotesize\ttfamily \#define J(\begin{DoxyParamCaption}\item[{}]{x,  }\item[{}]{y,  }\item[{}]{\hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z} }\end{DoxyParamCaption})~((x) $^\wedge$ ((y) $\vert$ $\sim$(\hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z})))}
+
+
+
+Definition at line 46 of file ripemd160.\+c.
+
+\mbox{\Hypertarget{ripemd160_8c_a29f8c607e8073605bc58ed2a4b0ac70f}\label{ripemd160_8c_a29f8c607e8073605bc58ed2a4b0ac70f}} 
+\index{ripemd160.\+c@{ripemd160.\+c}!JJ@{JJ}}
+\index{JJ@{JJ}!ripemd160.\+c@{ripemd160.\+c}}
+\subsubsection{\texorpdfstring{JJ}{JJ}}
+{\footnotesize\ttfamily \#define JJ(\begin{DoxyParamCaption}\item[{}]{\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a},  }\item[{}]{\hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b},  }\item[{}]{\hyperlink{llmnr__common_8h_a2e5a04327b5658199f0f7bda2acceee1}{c},  }\item[{}]{d,  }\item[{}]{e,  }\item[{}]{x,  }\item[{}]{\hyperlink{ndp_8h_a2dee666f0c1fe072c549ff86b1d0a8ab}{s} }\end{DoxyParamCaption})~\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a} += \hyperlink{ripemd160_8c_a9259a005139dbff1bd22548f76efdb3d}{J}(\hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b}, \hyperlink{llmnr__common_8h_a2e5a04327b5658199f0f7bda2acceee1}{c}, d) + (x) + 0x\+A953\+F\+D4\+E, a = R\+O\+L32(a, s) + (e), c = R\+O\+L32(c, 10)}
+
+
+
+Definition at line 52 of file ripemd160.\+c.
+
+\mbox{\Hypertarget{ripemd160_8c_a0ffb970cde094644ff46e1699e608d98}\label{ripemd160_8c_a0ffb970cde094644ff46e1699e608d98}} 
+\index{ripemd160.\+c@{ripemd160.\+c}!J\+JJ@{J\+JJ}}
+\index{J\+JJ@{J\+JJ}!ripemd160.\+c@{ripemd160.\+c}}
+\subsubsection{\texorpdfstring{J\+JJ}{JJJ}}
+{\footnotesize\ttfamily \#define J\+JJ(\begin{DoxyParamCaption}\item[{}]{\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a},  }\item[{}]{\hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b},  }\item[{}]{\hyperlink{llmnr__common_8h_a2e5a04327b5658199f0f7bda2acceee1}{c},  }\item[{}]{d,  }\item[{}]{e,  }\item[{}]{x,  }\item[{}]{\hyperlink{ndp_8h_a2dee666f0c1fe072c549ff86b1d0a8ab}{s} }\end{DoxyParamCaption})~\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a} += \hyperlink{ripemd160_8c_a9259a005139dbff1bd22548f76efdb3d}{J}(\hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b}, \hyperlink{llmnr__common_8h_a2e5a04327b5658199f0f7bda2acceee1}{c}, d) + (x) + 0x50\+A28\+B\+E6, a = R\+O\+L32(a, s) + (e), c = R\+O\+L32(c, 10)}
+
+
+
+Definition at line 58 of file ripemd160.\+c.
+
+\mbox{\Hypertarget{ripemd160_8c_afcdf5e66fd927a7f4cc64295acd20407}\label{ripemd160_8c_afcdf5e66fd927a7f4cc64295acd20407}} 
+\index{ripemd160.\+c@{ripemd160.\+c}!T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+\index{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}!ripemd160.\+c@{ripemd160.\+c}}
+\subsubsection{\texorpdfstring{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}{TRACE\_LEVEL}}
+{\footnotesize\ttfamily \#define T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL~\hyperlink{crypto__config_8h_a6afae3a9b63f9b55d979e667ee0e881d}{C\+R\+Y\+P\+T\+O\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+
+
+
+Definition at line 32 of file ripemd160.\+c.
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{ripemd160_8c_a936432bf6081b1b69c38dbb36560eec1}\label{ripemd160_8c_a936432bf6081b1b69c38dbb36560eec1}} 
+\index{ripemd160.\+c@{ripemd160.\+c}!ripemd160\+Compute@{ripemd160\+Compute}}
+\index{ripemd160\+Compute@{ripemd160\+Compute}!ripemd160.\+c@{ripemd160.\+c}}
+\subsubsection{\texorpdfstring{ripemd160\+Compute()}{ripemd160Compute()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ripemd160\+Compute (\begin{DoxyParamCaption}\item[{const void $\ast$}]{data,  }\item[{size\+\_\+t}]{length,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{digest }\end{DoxyParamCaption})}
+
+
+
+Digest a message using R\+I\+P\+E\+M\+D-\/160. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em data} & Pointer to the message being hashed \\
+\hline
+\mbox{\tt in}  & {\em length} & Length of the message \\
+\hline
+\mbox{\tt out}  & {\em digest} & Pointer to the calculated digest \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 99 of file ripemd160.\+c.
+
+
+\begin{DoxyCode}
+100 \{
+101    \textcolor{comment}{//Allocate a memory buffer to hold the RIPEMD-160 context}
+102    \hyperlink{structRipemd160Context}{Ripemd160Context} *context = \hyperlink{cyclone__crypto_2core_2crypto_8h_a48b53d16f66d31e5dcf82db3c1b882ba}{cryptoAllocMem}(\textcolor{keyword}{sizeof}(
+      \hyperlink{structRipemd160Context}{Ripemd160Context}));
+103    \textcolor{comment}{//Failed to allocate memory?}
+104    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+105       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac0a554045048d2fb61387cf735676f69}{ERROR\_OUT\_OF\_MEMORY};
+106 
+107    \textcolor{comment}{//Initialize the RIPEMD-160 context}
+108    \hyperlink{ripemd160_8c_a35c5ef0a2c7837051adc276dc669b12a}{ripemd160Init}(context);
+109    \textcolor{comment}{//Digest the message}
+110    \hyperlink{ripemd160_8c_a710fb60742b972498f8c50223cb12e03}{ripemd160Update}(context, \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length});
+111    \textcolor{comment}{//Finalize the RIPEMD-160 message digest}
+112    \hyperlink{ripemd160_8c_abdce080087edda7da83c5e8c41c2c3a5}{ripemd160Final}(context, digest);
+113 
+114    \textcolor{comment}{//Free previously allocated memory}
+115    \hyperlink{cyclone__crypto_2core_2crypto_8h_ac8a223b176683db4e9eed4162774f870}{cryptoFreeMem}(context);
+116    \textcolor{comment}{//Successful processing}
+117    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+118 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ripemd160_8c_abdce080087edda7da83c5e8c41c2c3a5}\label{ripemd160_8c_abdce080087edda7da83c5e8c41c2c3a5}} 
+\index{ripemd160.\+c@{ripemd160.\+c}!ripemd160\+Final@{ripemd160\+Final}}
+\index{ripemd160\+Final@{ripemd160\+Final}!ripemd160.\+c@{ripemd160.\+c}}
+\subsubsection{\texorpdfstring{ripemd160\+Final()}{ripemd160Final()}}
+{\footnotesize\ttfamily void ripemd160\+Final (\begin{DoxyParamCaption}\item[{\hyperlink{structRipemd160Context}{Ripemd160\+Context} $\ast$}]{context,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{digest }\end{DoxyParamCaption})}
+
+
+
+Finish the R\+I\+P\+E\+M\+D-\/160 message digest. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the R\+I\+P\+E\+M\+D-\/160 context \\
+\hline
+\mbox{\tt out}  & {\em digest} & Calculated digest (optional parameter) \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 188 of file ripemd160.\+c.
+
+
+\begin{DoxyCode}
+189 \{
+190    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+191    \textcolor{keywordtype}{size\_t} paddingSize;
+192    \hyperlink{stdint_8h_aec6fcb673ff035718c238c8c9d544c47}{uint64\_t} \hyperlink{resource__manager_8h_afd8a6a01e3b212857df6efb82e06f682}{totalSize};
+193 
+194    \textcolor{comment}{//Length of the original message (before padding)}
+195    totalSize = context->\hyperlink{structRipemd160Context_a0667a665699002d8b5020c0ee40ef829}{totalSize} * 8;
+196 
+197    \textcolor{comment}{//Pad the message so that its length is congruent to 56 modulo 64}
+198    \textcolor{keywordflow}{if}(context->\hyperlink{structRipemd160Context_aaa2e817af0eb5951231c1c68593e979c}{size} < 56)
+199       paddingSize = 56 - context->\hyperlink{structRipemd160Context_aaa2e817af0eb5951231c1c68593e979c}{size};
+200    \textcolor{keywordflow}{else}
+201       paddingSize = 64 + 56 - context->\hyperlink{structRipemd160Context_aaa2e817af0eb5951231c1c68593e979c}{size};
+202 
+203    \textcolor{comment}{//Append padding}
+204    \hyperlink{ripemd160_8c_a710fb60742b972498f8c50223cb12e03}{ripemd160Update}(context, \hyperlink{ripemd160_8c_ae1cca62951c2df9f5bf77fda3dcdd423}{padding}, paddingSize);
+205 
+206    \textcolor{comment}{//Append the length of the original message}
+207    context->\hyperlink{structRipemd160Context_a379a476500ffa72b9aab1492bfa7dd7a}{x}[14] = \hyperlink{cpu__endian_8h_a336f132f175f47bfab3fa57f6a00276d}{htole32}((\hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t}) totalSize);
+208    context->\hyperlink{structRipemd160Context_a379a476500ffa72b9aab1492bfa7dd7a}{x}[15] = \hyperlink{cpu__endian_8h_a336f132f175f47bfab3fa57f6a00276d}{htole32}((\hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t}) (totalSize >> 32));
+209 
+210    \textcolor{comment}{//Calculate the message digest}
+211    \hyperlink{ripemd160_8c_a84f6bd7ada496fb6310701851a16babb}{ripemd160ProcessBlock}(context);
+212 
+213    \textcolor{comment}{//Convert from host byte order to little-endian byte order}
+214    \textcolor{keywordflow}{for}(i = 0; i < 4; i++)
+215    \{
+216       context->\hyperlink{structRipemd160Context_a6c5ff8f0ea800ef3d9fc426d316556e4}{h}[i] = \hyperlink{cpu__endian_8h_a336f132f175f47bfab3fa57f6a00276d}{htole32}(context->\hyperlink{structRipemd160Context_a6c5ff8f0ea800ef3d9fc426d316556e4}{h}[i]);
+217    \}
+218 
+219    \textcolor{comment}{//Copy the resulting digest}
+220    \textcolor{keywordflow}{if}(digest != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+221       \hyperlink{cyclone__crypto_2core_2crypto_8h_a6724616c4014bb7e21f2660bd7b88be8}{cryptoMemcpy}(digest, context->\hyperlink{structRipemd160Context_adc5a38ab33e19b025767fce363b2b90a}{digest}, 
+      \hyperlink{ripemd160_8h_a6a01a216bc375e3769520df42151b523}{RIPEMD160\_DIGEST\_SIZE});
+222 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ripemd160_8c_a35c5ef0a2c7837051adc276dc669b12a}\label{ripemd160_8c_a35c5ef0a2c7837051adc276dc669b12a}} 
+\index{ripemd160.\+c@{ripemd160.\+c}!ripemd160\+Init@{ripemd160\+Init}}
+\index{ripemd160\+Init@{ripemd160\+Init}!ripemd160.\+c@{ripemd160.\+c}}
+\subsubsection{\texorpdfstring{ripemd160\+Init()}{ripemd160Init()}}
+{\footnotesize\ttfamily void ripemd160\+Init (\begin{DoxyParamCaption}\item[{\hyperlink{structRipemd160Context}{Ripemd160\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Initialize R\+I\+P\+E\+M\+D-\/160 message digest context. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the R\+I\+P\+E\+M\+D-\/160 context to initialize \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 126 of file ripemd160.\+c.
+
+
+\begin{DoxyCode}
+127 \{
+128    \textcolor{comment}{//Set initial hash value}
+129    context->\hyperlink{structRipemd160Context_a6c5ff8f0ea800ef3d9fc426d316556e4}{h}[0] = 0x67452301;
+130    context->\hyperlink{structRipemd160Context_a6c5ff8f0ea800ef3d9fc426d316556e4}{h}[1] = 0xEFCDAB89;
+131    context->\hyperlink{structRipemd160Context_a6c5ff8f0ea800ef3d9fc426d316556e4}{h}[2] = 0x98BADCFE;
+132    context->\hyperlink{structRipemd160Context_a6c5ff8f0ea800ef3d9fc426d316556e4}{h}[3] = 0x10325476;
+133    context->\hyperlink{structRipemd160Context_a6c5ff8f0ea800ef3d9fc426d316556e4}{h}[4] = 0xC3D2E1F0;
+134 
+135    \textcolor{comment}{//Number of bytes in the buffer}
+136    context->\hyperlink{structRipemd160Context_aaa2e817af0eb5951231c1c68593e979c}{size} = 0;
+137    \textcolor{comment}{//Total length of the message}
+138    context->\hyperlink{structRipemd160Context_a0667a665699002d8b5020c0ee40ef829}{totalSize} = 0;
+139 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ripemd160_8c_a84f6bd7ada496fb6310701851a16babb}\label{ripemd160_8c_a84f6bd7ada496fb6310701851a16babb}} 
+\index{ripemd160.\+c@{ripemd160.\+c}!ripemd160\+Process\+Block@{ripemd160\+Process\+Block}}
+\index{ripemd160\+Process\+Block@{ripemd160\+Process\+Block}!ripemd160.\+c@{ripemd160.\+c}}
+\subsubsection{\texorpdfstring{ripemd160\+Process\+Block()}{ripemd160ProcessBlock()}}
+{\footnotesize\ttfamily void ripemd160\+Process\+Block (\begin{DoxyParamCaption}\item[{\hyperlink{structRipemd160Context}{Ripemd160\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Process message in 16-\/word blocks. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the R\+I\+P\+E\+M\+D-\/160 context \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 230 of file ripemd160.\+c.
+
+
+\begin{DoxyCode}
+231 \{
+232    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+233 
+234    \textcolor{comment}{//Initialize the working registers}
+235    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} \hyperlink{dns__common_8h_a43db0a12061a1ee8cfe8e6f7be5db78f}{aa}= context->\hyperlink{structRipemd160Context_a6c5ff8f0ea800ef3d9fc426d316556e4}{h}[0];
+236    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} bb = context->\hyperlink{structRipemd160Context_a6c5ff8f0ea800ef3d9fc426d316556e4}{h}[1];
+237    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} cc = context->\hyperlink{structRipemd160Context_a6c5ff8f0ea800ef3d9fc426d316556e4}{h}[2];
+238    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} dd = context->\hyperlink{structRipemd160Context_a6c5ff8f0ea800ef3d9fc426d316556e4}{h}[3];
+239    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} ee = context->\hyperlink{structRipemd160Context_a6c5ff8f0ea800ef3d9fc426d316556e4}{h}[4];
+240    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} aaa = context->\hyperlink{structRipemd160Context_a6c5ff8f0ea800ef3d9fc426d316556e4}{h}[0];
+241    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} bbb = context->\hyperlink{structRipemd160Context_a6c5ff8f0ea800ef3d9fc426d316556e4}{h}[1];
+242    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} ccc = context->\hyperlink{structRipemd160Context_a6c5ff8f0ea800ef3d9fc426d316556e4}{h}[2];
+243    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} ddd = context->\hyperlink{structRipemd160Context_a6c5ff8f0ea800ef3d9fc426d316556e4}{h}[3];
+244    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} eee = context->\hyperlink{structRipemd160Context_a6c5ff8f0ea800ef3d9fc426d316556e4}{h}[4];
+245 
+246    \textcolor{comment}{//Process message in 16-word blocks}
+247    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} *x = context->\hyperlink{structRipemd160Context_a379a476500ffa72b9aab1492bfa7dd7a}{x};
+248 
+249    \textcolor{comment}{//Convert from little-endian byte order to host byte order}
+250    \textcolor{keywordflow}{for}(i = 0; i < 16; i++)
+251    \{
+252       x[i] = \hyperlink{cpu__endian_8h_a637984da0e96437b4bff8b68108256c6}{letoh32}(x[i]);
+253    \}
+254 
+255    \textcolor{comment}{//Round 1}
+256    \hyperlink{ripemd160_8c_aa5dbd7fa3bd4eb069b2fe146f9a5dcfe}{FF}(aa, bb, cc, dd, ee, x[0],  11);
+257    \hyperlink{ripemd160_8c_aa5dbd7fa3bd4eb069b2fe146f9a5dcfe}{FF}(ee, aa, bb, cc, dd, x[1],  14);
+258    \hyperlink{ripemd160_8c_aa5dbd7fa3bd4eb069b2fe146f9a5dcfe}{FF}(dd, ee, aa, bb, cc, x[2],  15);
+259    \hyperlink{ripemd160_8c_aa5dbd7fa3bd4eb069b2fe146f9a5dcfe}{FF}(cc, dd, ee, aa, bb, x[3],  12);
+260    \hyperlink{ripemd160_8c_aa5dbd7fa3bd4eb069b2fe146f9a5dcfe}{FF}(bb, cc, dd, ee, aa, x[4],  5);
+261    \hyperlink{ripemd160_8c_aa5dbd7fa3bd4eb069b2fe146f9a5dcfe}{FF}(aa, bb, cc, dd, ee, x[5],  8);
+262    \hyperlink{ripemd160_8c_aa5dbd7fa3bd4eb069b2fe146f9a5dcfe}{FF}(ee, aa, bb, cc, dd, x[6],  7);
+263    \hyperlink{ripemd160_8c_aa5dbd7fa3bd4eb069b2fe146f9a5dcfe}{FF}(dd, ee, aa, bb, cc, x[7],  9);
+264    \hyperlink{ripemd160_8c_aa5dbd7fa3bd4eb069b2fe146f9a5dcfe}{FF}(cc, dd, ee, aa, bb, x[8],  11);
+265    \hyperlink{ripemd160_8c_aa5dbd7fa3bd4eb069b2fe146f9a5dcfe}{FF}(bb, cc, dd, ee, aa, x[9],  13);
+266    \hyperlink{ripemd160_8c_aa5dbd7fa3bd4eb069b2fe146f9a5dcfe}{FF}(aa, bb, cc, dd, ee, x[10], 14);
+267    \hyperlink{ripemd160_8c_aa5dbd7fa3bd4eb069b2fe146f9a5dcfe}{FF}(ee, aa, bb, cc, dd, x[11], 15);
+268    \hyperlink{ripemd160_8c_aa5dbd7fa3bd4eb069b2fe146f9a5dcfe}{FF}(dd, ee, aa, bb, cc, x[12], 6);
+269    \hyperlink{ripemd160_8c_aa5dbd7fa3bd4eb069b2fe146f9a5dcfe}{FF}(cc, dd, ee, aa, bb, x[13], 7);
+270    \hyperlink{ripemd160_8c_aa5dbd7fa3bd4eb069b2fe146f9a5dcfe}{FF}(bb, cc, dd, ee, aa, x[14], 9);
+271    \hyperlink{ripemd160_8c_aa5dbd7fa3bd4eb069b2fe146f9a5dcfe}{FF}(aa, bb, cc, dd, ee, x[15], 8);
+272 
+273    \textcolor{comment}{//Round 2}
+274    \hyperlink{ripemd160_8c_a074254272cdeaa73a5e1608465dca5a4}{GG}(ee, aa, bb, cc, dd, x[7],  7);
+275    \hyperlink{ripemd160_8c_a074254272cdeaa73a5e1608465dca5a4}{GG}(dd, ee, aa, bb, cc, x[4],  6);
+276    \hyperlink{ripemd160_8c_a074254272cdeaa73a5e1608465dca5a4}{GG}(cc, dd, ee, aa, bb, x[13], 8);
+277    \hyperlink{ripemd160_8c_a074254272cdeaa73a5e1608465dca5a4}{GG}(bb, cc, dd, ee, aa, x[1],  13);
+278    \hyperlink{ripemd160_8c_a074254272cdeaa73a5e1608465dca5a4}{GG}(aa, bb, cc, dd, ee, x[10], 11);
+279    \hyperlink{ripemd160_8c_a074254272cdeaa73a5e1608465dca5a4}{GG}(ee, aa, bb, cc, dd, x[6],  9);
+280    \hyperlink{ripemd160_8c_a074254272cdeaa73a5e1608465dca5a4}{GG}(dd, ee, aa, bb, cc, x[15], 7);
+281    \hyperlink{ripemd160_8c_a074254272cdeaa73a5e1608465dca5a4}{GG}(cc, dd, ee, aa, bb, x[3],  15);
+282    \hyperlink{ripemd160_8c_a074254272cdeaa73a5e1608465dca5a4}{GG}(bb, cc, dd, ee, aa, x[12], 7);
+283    \hyperlink{ripemd160_8c_a074254272cdeaa73a5e1608465dca5a4}{GG}(aa, bb, cc, dd, ee, x[0],  12);
+284    \hyperlink{ripemd160_8c_a074254272cdeaa73a5e1608465dca5a4}{GG}(ee, aa, bb, cc, dd, x[9],  15);
+285    \hyperlink{ripemd160_8c_a074254272cdeaa73a5e1608465dca5a4}{GG}(dd, ee, aa, bb, cc, x[5],  9);
+286    \hyperlink{ripemd160_8c_a074254272cdeaa73a5e1608465dca5a4}{GG}(cc, dd, ee, aa, bb, x[2],  11);
+287    \hyperlink{ripemd160_8c_a074254272cdeaa73a5e1608465dca5a4}{GG}(bb, cc, dd, ee, aa, x[14], 7);
+288    \hyperlink{ripemd160_8c_a074254272cdeaa73a5e1608465dca5a4}{GG}(aa, bb, cc, dd, ee, x[11], 13);
+289    \hyperlink{ripemd160_8c_a074254272cdeaa73a5e1608465dca5a4}{GG}(ee, aa, bb, cc, dd, x[8],  12);
+290 
+291    \textcolor{comment}{//Round 3}
+292    \hyperlink{ripemd160_8c_a48ddf6b12e029853afc53364d2497d5c}{HH}(dd, ee, aa, bb, cc, x[3],  11);
+293    \hyperlink{ripemd160_8c_a48ddf6b12e029853afc53364d2497d5c}{HH}(cc, dd, ee, aa, bb, x[10], 13);
+294    \hyperlink{ripemd160_8c_a48ddf6b12e029853afc53364d2497d5c}{HH}(bb, cc, dd, ee, aa, x[14], 6);
+295    \hyperlink{ripemd160_8c_a48ddf6b12e029853afc53364d2497d5c}{HH}(aa, bb, cc, dd, ee, x[4],  7);
+296    \hyperlink{ripemd160_8c_a48ddf6b12e029853afc53364d2497d5c}{HH}(ee, aa, bb, cc, dd, x[9],  14);
+297    \hyperlink{ripemd160_8c_a48ddf6b12e029853afc53364d2497d5c}{HH}(dd, ee, aa, bb, cc, x[15], 9);
+298    \hyperlink{ripemd160_8c_a48ddf6b12e029853afc53364d2497d5c}{HH}(cc, dd, ee, aa, bb, x[8],  13);
+299    \hyperlink{ripemd160_8c_a48ddf6b12e029853afc53364d2497d5c}{HH}(bb, cc, dd, ee, aa, x[1],  15);
+300    \hyperlink{ripemd160_8c_a48ddf6b12e029853afc53364d2497d5c}{HH}(aa, bb, cc, dd, ee, x[2],  14);
+301    \hyperlink{ripemd160_8c_a48ddf6b12e029853afc53364d2497d5c}{HH}(ee, aa, bb, cc, dd, x[7],  8);
+302    \hyperlink{ripemd160_8c_a48ddf6b12e029853afc53364d2497d5c}{HH}(dd, ee, aa, bb, cc, x[0],  13);
+303    \hyperlink{ripemd160_8c_a48ddf6b12e029853afc53364d2497d5c}{HH}(cc, dd, ee, aa, bb, x[6],  6);
+304    \hyperlink{ripemd160_8c_a48ddf6b12e029853afc53364d2497d5c}{HH}(bb, cc, dd, ee, aa, x[13], 5);
+305    \hyperlink{ripemd160_8c_a48ddf6b12e029853afc53364d2497d5c}{HH}(aa, bb, cc, dd, ee, x[11], 12);
+306    \hyperlink{ripemd160_8c_a48ddf6b12e029853afc53364d2497d5c}{HH}(ee, aa, bb, cc, dd, x[5],  7);
+307    \hyperlink{ripemd160_8c_a48ddf6b12e029853afc53364d2497d5c}{HH}(dd, ee, aa, bb, cc, x[12], 5);
+308 
+309    \textcolor{comment}{//Round 4}
+310    \hyperlink{ripemd160_8c_a5315fcda056b74868e1335ff27afd1c1}{II}(cc, dd, ee, aa, bb, x[1],  11);
+311    \hyperlink{ripemd160_8c_a5315fcda056b74868e1335ff27afd1c1}{II}(bb, cc, dd, ee, aa, x[9],  12);
+312    \hyperlink{ripemd160_8c_a5315fcda056b74868e1335ff27afd1c1}{II}(aa, bb, cc, dd, ee, x[11], 14);
+313    \hyperlink{ripemd160_8c_a5315fcda056b74868e1335ff27afd1c1}{II}(ee, aa, bb, cc, dd, x[10], 15);
+314    \hyperlink{ripemd160_8c_a5315fcda056b74868e1335ff27afd1c1}{II}(dd, ee, aa, bb, cc, x[0],  14);
+315    \hyperlink{ripemd160_8c_a5315fcda056b74868e1335ff27afd1c1}{II}(cc, dd, ee, aa, bb, x[8],  15);
+316    \hyperlink{ripemd160_8c_a5315fcda056b74868e1335ff27afd1c1}{II}(bb, cc, dd, ee, aa, x[12], 9);
+317    \hyperlink{ripemd160_8c_a5315fcda056b74868e1335ff27afd1c1}{II}(aa, bb, cc, dd, ee, x[4],  8);
+318    \hyperlink{ripemd160_8c_a5315fcda056b74868e1335ff27afd1c1}{II}(ee, aa, bb, cc, dd, x[13], 9);
+319    \hyperlink{ripemd160_8c_a5315fcda056b74868e1335ff27afd1c1}{II}(dd, ee, aa, bb, cc, x[3],  14);
+320    \hyperlink{ripemd160_8c_a5315fcda056b74868e1335ff27afd1c1}{II}(cc, dd, ee, aa, bb, x[7],  5);
+321    \hyperlink{ripemd160_8c_a5315fcda056b74868e1335ff27afd1c1}{II}(bb, cc, dd, ee, aa, x[15], 6);
+322    \hyperlink{ripemd160_8c_a5315fcda056b74868e1335ff27afd1c1}{II}(aa, bb, cc, dd, ee, x[14], 8);
+323    \hyperlink{ripemd160_8c_a5315fcda056b74868e1335ff27afd1c1}{II}(ee, aa, bb, cc, dd, x[5],  6);
+324    \hyperlink{ripemd160_8c_a5315fcda056b74868e1335ff27afd1c1}{II}(dd, ee, aa, bb, cc, x[6],  5);
+325    \hyperlink{ripemd160_8c_a5315fcda056b74868e1335ff27afd1c1}{II}(cc, dd, ee, aa, bb, x[2],  12);
+326 
+327    \textcolor{comment}{//Round 5}
+328    \hyperlink{ripemd160_8c_a29f8c607e8073605bc58ed2a4b0ac70f}{JJ}(bb, cc, dd, ee, aa, x[4],  9);
+329    \hyperlink{ripemd160_8c_a29f8c607e8073605bc58ed2a4b0ac70f}{JJ}(aa, bb, cc, dd, ee, x[0],  15);
+330    \hyperlink{ripemd160_8c_a29f8c607e8073605bc58ed2a4b0ac70f}{JJ}(ee, aa, bb, cc, dd, x[5],  5);
+331    \hyperlink{ripemd160_8c_a29f8c607e8073605bc58ed2a4b0ac70f}{JJ}(dd, ee, aa, bb, cc, x[9],  11);
+332    \hyperlink{ripemd160_8c_a29f8c607e8073605bc58ed2a4b0ac70f}{JJ}(cc, dd, ee, aa, bb, x[7],  6);
+333    \hyperlink{ripemd160_8c_a29f8c607e8073605bc58ed2a4b0ac70f}{JJ}(bb, cc, dd, ee, aa, x[12], 8);
+334    \hyperlink{ripemd160_8c_a29f8c607e8073605bc58ed2a4b0ac70f}{JJ}(aa, bb, cc, dd, ee, x[2],  13);
+335    \hyperlink{ripemd160_8c_a29f8c607e8073605bc58ed2a4b0ac70f}{JJ}(ee, aa, bb, cc, dd, x[10], 12);
+336    \hyperlink{ripemd160_8c_a29f8c607e8073605bc58ed2a4b0ac70f}{JJ}(dd, ee, aa, bb, cc, x[14], 5);
+337    \hyperlink{ripemd160_8c_a29f8c607e8073605bc58ed2a4b0ac70f}{JJ}(cc, dd, ee, aa, bb, x[1],  12);
+338    \hyperlink{ripemd160_8c_a29f8c607e8073605bc58ed2a4b0ac70f}{JJ}(bb, cc, dd, ee, aa, x[3],  13);
+339    \hyperlink{ripemd160_8c_a29f8c607e8073605bc58ed2a4b0ac70f}{JJ}(aa, bb, cc, dd, ee, x[8],  14);
+340    \hyperlink{ripemd160_8c_a29f8c607e8073605bc58ed2a4b0ac70f}{JJ}(ee, aa, bb, cc, dd, x[11], 11);
+341    \hyperlink{ripemd160_8c_a29f8c607e8073605bc58ed2a4b0ac70f}{JJ}(dd, ee, aa, bb, cc, x[6],  8);
+342    \hyperlink{ripemd160_8c_a29f8c607e8073605bc58ed2a4b0ac70f}{JJ}(cc, dd, ee, aa, bb, x[15], 5);
+343    \hyperlink{ripemd160_8c_a29f8c607e8073605bc58ed2a4b0ac70f}{JJ}(bb, cc, dd, ee, aa, x[13], 6);
+344 
+345    \textcolor{comment}{//Parallel round 1}
+346    \hyperlink{ripemd160_8c_a0ffb970cde094644ff46e1699e608d98}{JJJ}(aaa, bbb, ccc, ddd, eee, x[5],  8);
+347    \hyperlink{ripemd160_8c_a0ffb970cde094644ff46e1699e608d98}{JJJ}(eee, aaa, bbb, ccc, ddd, x[14], 9);
+348    \hyperlink{ripemd160_8c_a0ffb970cde094644ff46e1699e608d98}{JJJ}(ddd, eee, aaa, bbb, ccc, x[7],  9);
+349    \hyperlink{ripemd160_8c_a0ffb970cde094644ff46e1699e608d98}{JJJ}(ccc, ddd, eee, aaa, bbb, x[0],  11);
+350    \hyperlink{ripemd160_8c_a0ffb970cde094644ff46e1699e608d98}{JJJ}(bbb, ccc, ddd, eee, aaa, x[9],  13);
+351    \hyperlink{ripemd160_8c_a0ffb970cde094644ff46e1699e608d98}{JJJ}(aaa, bbb, ccc, ddd, eee, x[2],  15);
+352    \hyperlink{ripemd160_8c_a0ffb970cde094644ff46e1699e608d98}{JJJ}(eee, aaa, bbb, ccc, ddd, x[11], 15);
+353    \hyperlink{ripemd160_8c_a0ffb970cde094644ff46e1699e608d98}{JJJ}(ddd, eee, aaa, bbb, ccc, x[4],  5);
+354    \hyperlink{ripemd160_8c_a0ffb970cde094644ff46e1699e608d98}{JJJ}(ccc, ddd, eee, aaa, bbb, x[13], 7);
+355    \hyperlink{ripemd160_8c_a0ffb970cde094644ff46e1699e608d98}{JJJ}(bbb, ccc, ddd, eee, aaa, x[6],  7);
+356    \hyperlink{ripemd160_8c_a0ffb970cde094644ff46e1699e608d98}{JJJ}(aaa, bbb, ccc, ddd, eee, x[15], 8);
+357    \hyperlink{ripemd160_8c_a0ffb970cde094644ff46e1699e608d98}{JJJ}(eee, aaa, bbb, ccc, ddd, x[8],  11);
+358    \hyperlink{ripemd160_8c_a0ffb970cde094644ff46e1699e608d98}{JJJ}(ddd, eee, aaa, bbb, ccc, x[1],  14);
+359    \hyperlink{ripemd160_8c_a0ffb970cde094644ff46e1699e608d98}{JJJ}(ccc, ddd, eee, aaa, bbb, x[10], 14);
+360    \hyperlink{ripemd160_8c_a0ffb970cde094644ff46e1699e608d98}{JJJ}(bbb, ccc, ddd, eee, aaa, x[3],  12);
+361    \hyperlink{ripemd160_8c_a0ffb970cde094644ff46e1699e608d98}{JJJ}(aaa, bbb, ccc, ddd, eee, x[12], 6);
+362 
+363    \textcolor{comment}{//Parallel round 2}
+364    \hyperlink{ripemd160_8c_a18a1a017a4429faf357b9635f857ca36}{III}(eee, aaa, bbb, ccc, ddd, x[6],   9);
+365    \hyperlink{ripemd160_8c_a18a1a017a4429faf357b9635f857ca36}{III}(ddd, eee, aaa, bbb, ccc, x[11], 13);
+366    \hyperlink{ripemd160_8c_a18a1a017a4429faf357b9635f857ca36}{III}(ccc, ddd, eee, aaa, bbb, x[3],  15);
+367    \hyperlink{ripemd160_8c_a18a1a017a4429faf357b9635f857ca36}{III}(bbb, ccc, ddd, eee, aaa, x[7],  7);
+368    \hyperlink{ripemd160_8c_a18a1a017a4429faf357b9635f857ca36}{III}(aaa, bbb, ccc, ddd, eee, x[0],  12);
+369    \hyperlink{ripemd160_8c_a18a1a017a4429faf357b9635f857ca36}{III}(eee, aaa, bbb, ccc, ddd, x[13], 8);
+370    \hyperlink{ripemd160_8c_a18a1a017a4429faf357b9635f857ca36}{III}(ddd, eee, aaa, bbb, ccc, x[5],  9);
+371    \hyperlink{ripemd160_8c_a18a1a017a4429faf357b9635f857ca36}{III}(ccc, ddd, eee, aaa, bbb, x[10], 11);
+372    \hyperlink{ripemd160_8c_a18a1a017a4429faf357b9635f857ca36}{III}(bbb, ccc, ddd, eee, aaa, x[14], 7);
+373    \hyperlink{ripemd160_8c_a18a1a017a4429faf357b9635f857ca36}{III}(aaa, bbb, ccc, ddd, eee, x[15], 7);
+374    \hyperlink{ripemd160_8c_a18a1a017a4429faf357b9635f857ca36}{III}(eee, aaa, bbb, ccc, ddd, x[8],  12);
+375    \hyperlink{ripemd160_8c_a18a1a017a4429faf357b9635f857ca36}{III}(ddd, eee, aaa, bbb, ccc, x[12], 7);
+376    \hyperlink{ripemd160_8c_a18a1a017a4429faf357b9635f857ca36}{III}(ccc, ddd, eee, aaa, bbb, x[4],  6);
+377    \hyperlink{ripemd160_8c_a18a1a017a4429faf357b9635f857ca36}{III}(bbb, ccc, ddd, eee, aaa, x[9],  15);
+378    \hyperlink{ripemd160_8c_a18a1a017a4429faf357b9635f857ca36}{III}(aaa, bbb, ccc, ddd, eee, x[1],  13);
+379    \hyperlink{ripemd160_8c_a18a1a017a4429faf357b9635f857ca36}{III}(eee, aaa, bbb, ccc, ddd, x[2],  11);
+380 
+381    \textcolor{comment}{//Parallel round 3}
+382    \hyperlink{ripemd160_8c_a66dec09df645dc7e8e2e6177b8c086f7}{HHH}(ddd, eee, aaa, bbb, ccc, x[15], 9);
+383    \hyperlink{ripemd160_8c_a66dec09df645dc7e8e2e6177b8c086f7}{HHH}(ccc, ddd, eee, aaa, bbb, x[5],  7);
+384    \hyperlink{ripemd160_8c_a66dec09df645dc7e8e2e6177b8c086f7}{HHH}(bbb, ccc, ddd, eee, aaa, x[1],  15);
+385    \hyperlink{ripemd160_8c_a66dec09df645dc7e8e2e6177b8c086f7}{HHH}(aaa, bbb, ccc, ddd, eee, x[3],  11);
+386    \hyperlink{ripemd160_8c_a66dec09df645dc7e8e2e6177b8c086f7}{HHH}(eee, aaa, bbb, ccc, ddd, x[7],  8);
+387    \hyperlink{ripemd160_8c_a66dec09df645dc7e8e2e6177b8c086f7}{HHH}(ddd, eee, aaa, bbb, ccc, x[14], 6);
+388    \hyperlink{ripemd160_8c_a66dec09df645dc7e8e2e6177b8c086f7}{HHH}(ccc, ddd, eee, aaa, bbb, x[6],  6);
+389    \hyperlink{ripemd160_8c_a66dec09df645dc7e8e2e6177b8c086f7}{HHH}(bbb, ccc, ddd, eee, aaa, x[9],  14);
+390    \hyperlink{ripemd160_8c_a66dec09df645dc7e8e2e6177b8c086f7}{HHH}(aaa, bbb, ccc, ddd, eee, x[11], 12);
+391    \hyperlink{ripemd160_8c_a66dec09df645dc7e8e2e6177b8c086f7}{HHH}(eee, aaa, bbb, ccc, ddd, x[8],  13);
+392    \hyperlink{ripemd160_8c_a66dec09df645dc7e8e2e6177b8c086f7}{HHH}(ddd, eee, aaa, bbb, ccc, x[12], 5);
+393    \hyperlink{ripemd160_8c_a66dec09df645dc7e8e2e6177b8c086f7}{HHH}(ccc, ddd, eee, aaa, bbb, x[2],  14);
+394    \hyperlink{ripemd160_8c_a66dec09df645dc7e8e2e6177b8c086f7}{HHH}(bbb, ccc, ddd, eee, aaa, x[10], 13);
+395    \hyperlink{ripemd160_8c_a66dec09df645dc7e8e2e6177b8c086f7}{HHH}(aaa, bbb, ccc, ddd, eee, x[0],  13);
+396    \hyperlink{ripemd160_8c_a66dec09df645dc7e8e2e6177b8c086f7}{HHH}(eee, aaa, bbb, ccc, ddd, x[4],  7);
+397    \hyperlink{ripemd160_8c_a66dec09df645dc7e8e2e6177b8c086f7}{HHH}(ddd, eee, aaa, bbb, ccc, x[13], 5);
+398 
+399    \textcolor{comment}{//Parallel round 4}
+400    \hyperlink{ripemd160_8c_aa5e45dabf94a8787eda58848007f4a4c}{GGG}(ccc, ddd, eee, aaa, bbb, x[8],  15);
+401    \hyperlink{ripemd160_8c_aa5e45dabf94a8787eda58848007f4a4c}{GGG}(bbb, ccc, ddd, eee, aaa, x[6],  5);
+402    \hyperlink{ripemd160_8c_aa5e45dabf94a8787eda58848007f4a4c}{GGG}(aaa, bbb, ccc, ddd, eee, x[4],  8);
+403    \hyperlink{ripemd160_8c_aa5e45dabf94a8787eda58848007f4a4c}{GGG}(eee, aaa, bbb, ccc, ddd, x[1],  11);
+404    \hyperlink{ripemd160_8c_aa5e45dabf94a8787eda58848007f4a4c}{GGG}(ddd, eee, aaa, bbb, ccc, x[3],  14);
+405    \hyperlink{ripemd160_8c_aa5e45dabf94a8787eda58848007f4a4c}{GGG}(ccc, ddd, eee, aaa, bbb, x[11], 14);
+406    \hyperlink{ripemd160_8c_aa5e45dabf94a8787eda58848007f4a4c}{GGG}(bbb, ccc, ddd, eee, aaa, x[15], 6);
+407    \hyperlink{ripemd160_8c_aa5e45dabf94a8787eda58848007f4a4c}{GGG}(aaa, bbb, ccc, ddd, eee, x[0],  14);
+408    \hyperlink{ripemd160_8c_aa5e45dabf94a8787eda58848007f4a4c}{GGG}(eee, aaa, bbb, ccc, ddd, x[5],  6);
+409    \hyperlink{ripemd160_8c_aa5e45dabf94a8787eda58848007f4a4c}{GGG}(ddd, eee, aaa, bbb, ccc, x[12], 9);
+410    \hyperlink{ripemd160_8c_aa5e45dabf94a8787eda58848007f4a4c}{GGG}(ccc, ddd, eee, aaa, bbb, x[2],  12);
+411    \hyperlink{ripemd160_8c_aa5e45dabf94a8787eda58848007f4a4c}{GGG}(bbb, ccc, ddd, eee, aaa, x[13], 9);
+412    \hyperlink{ripemd160_8c_aa5e45dabf94a8787eda58848007f4a4c}{GGG}(aaa, bbb, ccc, ddd, eee, x[9],  12);
+413    \hyperlink{ripemd160_8c_aa5e45dabf94a8787eda58848007f4a4c}{GGG}(eee, aaa, bbb, ccc, ddd, x[7],  5);
+414    \hyperlink{ripemd160_8c_aa5e45dabf94a8787eda58848007f4a4c}{GGG}(ddd, eee, aaa, bbb, ccc, x[10], 15);
+415    \hyperlink{ripemd160_8c_aa5e45dabf94a8787eda58848007f4a4c}{GGG}(ccc, ddd, eee, aaa, bbb, x[14], 8);
+416 
+417    \textcolor{comment}{//Parallel round 5}
+418    \hyperlink{ripemd160_8c_af2fefcf5d86fa1906a63e8576cb43c33}{FFF}(bbb, ccc, ddd, eee, aaa, x[12], 8);
+419    \hyperlink{ripemd160_8c_af2fefcf5d86fa1906a63e8576cb43c33}{FFF}(aaa, bbb, ccc, ddd, eee, x[15], 5);
+420    \hyperlink{ripemd160_8c_af2fefcf5d86fa1906a63e8576cb43c33}{FFF}(eee, aaa, bbb, ccc, ddd, x[10], 12);
+421    \hyperlink{ripemd160_8c_af2fefcf5d86fa1906a63e8576cb43c33}{FFF}(ddd, eee, aaa, bbb, ccc, x[4],  9);
+422    \hyperlink{ripemd160_8c_af2fefcf5d86fa1906a63e8576cb43c33}{FFF}(ccc, ddd, eee, aaa, bbb, x[1],  12);
+423    \hyperlink{ripemd160_8c_af2fefcf5d86fa1906a63e8576cb43c33}{FFF}(bbb, ccc, ddd, eee, aaa, x[5],  5);
+424    \hyperlink{ripemd160_8c_af2fefcf5d86fa1906a63e8576cb43c33}{FFF}(aaa, bbb, ccc, ddd, eee, x[8],  14);
+425    \hyperlink{ripemd160_8c_af2fefcf5d86fa1906a63e8576cb43c33}{FFF}(eee, aaa, bbb, ccc, ddd, x[7],  6);
+426    \hyperlink{ripemd160_8c_af2fefcf5d86fa1906a63e8576cb43c33}{FFF}(ddd, eee, aaa, bbb, ccc, x[6],  8);
+427    \hyperlink{ripemd160_8c_af2fefcf5d86fa1906a63e8576cb43c33}{FFF}(ccc, ddd, eee, aaa, bbb, x[2],  13);
+428    \hyperlink{ripemd160_8c_af2fefcf5d86fa1906a63e8576cb43c33}{FFF}(bbb, ccc, ddd, eee, aaa, x[13], 6);
+429    \hyperlink{ripemd160_8c_af2fefcf5d86fa1906a63e8576cb43c33}{FFF}(aaa, bbb, ccc, ddd, eee, x[14], 5);
+430    \hyperlink{ripemd160_8c_af2fefcf5d86fa1906a63e8576cb43c33}{FFF}(eee, aaa, bbb, ccc, ddd, x[0],  15);
+431    \hyperlink{ripemd160_8c_af2fefcf5d86fa1906a63e8576cb43c33}{FFF}(ddd, eee, aaa, bbb, ccc, x[3],  13);
+432    \hyperlink{ripemd160_8c_af2fefcf5d86fa1906a63e8576cb43c33}{FFF}(ccc, ddd, eee, aaa, bbb, x[9],  11);
+433    \hyperlink{ripemd160_8c_af2fefcf5d86fa1906a63e8576cb43c33}{FFF}(bbb, ccc, ddd, eee, aaa, x[11], 11);
+434 
+435    \textcolor{comment}{//Combine results}
+436    ddd = context->\hyperlink{structRipemd160Context_a6c5ff8f0ea800ef3d9fc426d316556e4}{h}[1] + cc + ddd;
+437    context->\hyperlink{structRipemd160Context_a6c5ff8f0ea800ef3d9fc426d316556e4}{h}[1] = context->\hyperlink{structRipemd160Context_a6c5ff8f0ea800ef3d9fc426d316556e4}{h}[2] + dd + eee;
+438    context->\hyperlink{structRipemd160Context_a6c5ff8f0ea800ef3d9fc426d316556e4}{h}[2] = context->\hyperlink{structRipemd160Context_a6c5ff8f0ea800ef3d9fc426d316556e4}{h}[3] + ee + aaa;
+439    context->\hyperlink{structRipemd160Context_a6c5ff8f0ea800ef3d9fc426d316556e4}{h}[3] = context->\hyperlink{structRipemd160Context_a6c5ff8f0ea800ef3d9fc426d316556e4}{h}[4] + aa + bbb;
+440    context->\hyperlink{structRipemd160Context_a6c5ff8f0ea800ef3d9fc426d316556e4}{h}[4] = context->\hyperlink{structRipemd160Context_a6c5ff8f0ea800ef3d9fc426d316556e4}{h}[0] + bb + ccc;
+441    context->\hyperlink{structRipemd160Context_a6c5ff8f0ea800ef3d9fc426d316556e4}{h}[0] = ddd;
+442 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ripemd160_8c_a710fb60742b972498f8c50223cb12e03}\label{ripemd160_8c_a710fb60742b972498f8c50223cb12e03}} 
+\index{ripemd160.\+c@{ripemd160.\+c}!ripemd160\+Update@{ripemd160\+Update}}
+\index{ripemd160\+Update@{ripemd160\+Update}!ripemd160.\+c@{ripemd160.\+c}}
+\subsubsection{\texorpdfstring{ripemd160\+Update()}{ripemd160Update()}}
+{\footnotesize\ttfamily void ripemd160\+Update (\begin{DoxyParamCaption}\item[{\hyperlink{structRipemd160Context}{Ripemd160\+Context} $\ast$}]{context,  }\item[{const void $\ast$}]{data,  }\item[{size\+\_\+t}]{length }\end{DoxyParamCaption})}
+
+
+
+Update the R\+I\+P\+E\+M\+D-\/160 context with a portion of the message being hashed. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the R\+I\+P\+E\+M\+D-\/160 context \\
+\hline
+\mbox{\tt in}  & {\em data} & Pointer to the buffer being hashed \\
+\hline
+\mbox{\tt in}  & {\em length} & Length of the buffer \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 149 of file ripemd160.\+c.
+
+
+\begin{DoxyCode}
+150 \{
+151    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+152 
+153    \textcolor{comment}{//Process the incoming data}
+154    \textcolor{keywordflow}{while}(\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} > 0)
+155    \{
+156       \textcolor{comment}{//The buffer can hold at most 64 bytes}
+157       n = \hyperlink{os__port_8h_a3acffbd305ee72dcd4593c0d8af64a4f}{MIN}(\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, 64 - context->\hyperlink{structRipemd160Context_aaa2e817af0eb5951231c1c68593e979c}{size});
+158 
+159       \textcolor{comment}{//Copy the data to the buffer}
+160       \hyperlink{cyclone__crypto_2core_2crypto_8h_a6724616c4014bb7e21f2660bd7b88be8}{cryptoMemcpy}(context->\hyperlink{structRipemd160Context_a5edd8e76546b440a0f2b9918288c8d75}{buffer} + context->\hyperlink{structRipemd160Context_aaa2e817af0eb5951231c1c68593e979c}{size}, \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, n);
+161 
+162       \textcolor{comment}{//Update the RIPEMD-160 context}
+163       context->\hyperlink{structRipemd160Context_aaa2e817af0eb5951231c1c68593e979c}{size} += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+164       context->\hyperlink{structRipemd160Context_a0667a665699002d8b5020c0ee40ef829}{totalSize} += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+165       \textcolor{comment}{//Advance the data pointer}
+166       \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data} = (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *) \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data} + n;
+167       \textcolor{comment}{//Remaining bytes to process}
+168       \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} -= \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+169 
+170       \textcolor{comment}{//Process message in 16-word blocks}
+171       \textcolor{keywordflow}{if}(context->\hyperlink{structRipemd160Context_aaa2e817af0eb5951231c1c68593e979c}{size} == 64)
+172       \{
+173          \textcolor{comment}{//Transform the 16-word block}
+174          \hyperlink{ripemd160_8c_a84f6bd7ada496fb6310701851a16babb}{ripemd160ProcessBlock}(context);
+175          \textcolor{comment}{//Empty the buffer}
+176          context->\hyperlink{structRipemd160Context_aaa2e817af0eb5951231c1c68593e979c}{size} = 0;
+177       \}
+178    \}
+179 \}
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{ripemd160_8c_ae1cca62951c2df9f5bf77fda3dcdd423}\label{ripemd160_8c_ae1cca62951c2df9f5bf77fda3dcdd423}} 
+\index{ripemd160.\+c@{ripemd160.\+c}!padding@{padding}}
+\index{padding@{padding}!ripemd160.\+c@{ripemd160.\+c}}
+\subsubsection{\texorpdfstring{padding}{padding}}
+{\footnotesize\ttfamily const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} padding\mbox{[}64\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=
+\{
+   0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+\}
+\end{DoxyCode}
+
+
+Definition at line 61 of file ripemd160.\+c.
+
+\mbox{\Hypertarget{ripemd160_8c_a55b107aa1878fed05e54d61a011b3d44}\label{ripemd160_8c_a55b107aa1878fed05e54d61a011b3d44}} 
+\index{ripemd160.\+c@{ripemd160.\+c}!ripemd160\+Hash\+Algo@{ripemd160\+Hash\+Algo}}
+\index{ripemd160\+Hash\+Algo@{ripemd160\+Hash\+Algo}!ripemd160.\+c@{ripemd160.\+c}}
+\subsubsection{\texorpdfstring{ripemd160\+Hash\+Algo}{ripemd160HashAlgo}}
+{\footnotesize\ttfamily const \hyperlink{structHashAlgo}{Hash\+Algo} ripemd160\+Hash\+Algo}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=
+\{
+   \textcolor{stringliteral}{"RIPEMD-160"},
+   \hyperlink{ripemd160_8c_a7e111af21c2a33dc7a57a915bf13a8bf}{ripemd160Oid},
+   \textcolor{keyword}{sizeof}(\hyperlink{ripemd160_8c_a7e111af21c2a33dc7a57a915bf13a8bf}{ripemd160Oid}),
+   \textcolor{keyword}{sizeof}(\hyperlink{structRipemd160Context}{Ripemd160Context}),
+   \hyperlink{ripemd160_8h_a03d9a6c08837b6035b02ce998053043f}{RIPEMD160\_BLOCK\_SIZE},
+   \hyperlink{ripemd160_8h_a6a01a216bc375e3769520df42151b523}{RIPEMD160\_DIGEST\_SIZE},
+   \hyperlink{ripemd160_8h_a70955e75027a65ec1b492032f813922e}{RIPEMD160\_MIN\_PAD\_SIZE},
+   \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE},
+   (\hyperlink{cyclone__crypto_2core_2crypto_8h_a02fe893af436f6d8a574897a59748592}{HashAlgoCompute}) \hyperlink{ripemd160_8c_a936432bf6081b1b69c38dbb36560eec1}{ripemd160Compute},
+   (\hyperlink{cyclone__crypto_2core_2crypto_8h_afc5ce55917bd80825aa610848f402caf}{HashAlgoInit}) \hyperlink{ripemd160_8c_a35c5ef0a2c7837051adc276dc669b12a}{ripemd160Init},
+   (\hyperlink{cyclone__crypto_2core_2crypto_8h_a3d1fb45d6ca7822d20873ddbc8e39b89}{HashAlgoUpdate}) \hyperlink{ripemd160_8c_a710fb60742b972498f8c50223cb12e03}{ripemd160Update},
+   (\hyperlink{cyclone__crypto_2core_2crypto_8h_a0a272470b5f95692d2e2e882f75844b3}{HashAlgoFinal}) \hyperlink{ripemd160_8c_abdce080087edda7da83c5e8c41c2c3a5}{ripemd160Final},
+   \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}
+\}
+\end{DoxyCode}
+
+
+Definition at line 73 of file ripemd160.\+c.
+
+\mbox{\Hypertarget{ripemd160_8c_a7e111af21c2a33dc7a57a915bf13a8bf}\label{ripemd160_8c_a7e111af21c2a33dc7a57a915bf13a8bf}} 
+\index{ripemd160.\+c@{ripemd160.\+c}!ripemd160\+Oid@{ripemd160\+Oid}}
+\index{ripemd160\+Oid@{ripemd160\+Oid}!ripemd160.\+c@{ripemd160.\+c}}
+\subsubsection{\texorpdfstring{ripemd160\+Oid}{ripemd160Oid}}
+{\footnotesize\ttfamily const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} ripemd160\+Oid\mbox{[}5\mbox{]} = \{0x2\+B, 0x24, 0x03, 0x02, 0x01\}}
+
+
+
+Definition at line 70 of file ripemd160.\+c.
+

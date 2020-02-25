@@ -1,0 +1,595 @@
+\hypertarget{heap__5_8c}{}\section{third\+\_\+party/freertos/portable/memmang/heap\+\_\+5.c File Reference}
+\label{heap__5_8c}\index{third\+\_\+party/freertos/portable/memmang/heap\+\_\+5.\+c@{third\+\_\+party/freertos/portable/memmang/heap\+\_\+5.\+c}}
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}Free\+R\+T\+O\+S.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}task.\+h\char`\"{}}\newline
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structA__BLOCK__LINK}{A\+\_\+\+B\+L\+O\+C\+K\+\_\+\+L\+I\+NK}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{heap__5_8c_ab622d8c674f2a417a666a7ed89109e79}{M\+P\+U\+\_\+\+W\+R\+A\+P\+P\+E\+R\+S\+\_\+\+I\+N\+C\+L\+U\+D\+E\+D\+\_\+\+F\+R\+O\+M\+\_\+\+A\+P\+I\+\_\+\+F\+I\+LE}
+\item 
+\#define \hyperlink{heap__5_8c_ab71bae5a95671265c828339d44c44b25}{heap\+M\+I\+N\+I\+M\+U\+M\+\_\+\+B\+L\+O\+C\+K\+\_\+\+S\+I\+ZE}~( ( size\+\_\+t ) ( \hyperlink{heap__5_8c_aff7bec0da6b44e3634d215b40eb1db76}{x\+Heap\+Struct\+Size} $<$$<$ 1 ) )
+\item 
+\#define \hyperlink{heap__5_8c_adcef0c4245ebe20ca2b08a574c1caac9}{heap\+B\+I\+T\+S\+\_\+\+P\+E\+R\+\_\+\+B\+Y\+TE}~( ( size\+\_\+t ) 8 )
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \hyperlink{structA__BLOCK__LINK}{A\+\_\+\+B\+L\+O\+C\+K\+\_\+\+L\+I\+NK} \hyperlink{heap__5_8c_ad9a44f586d03fc020ee6f5939defb314}{Block\+Link\+\_\+t}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{heap__5_8c_a1a70fdf86d8a603f45e9b93c14e0d24a}{prv\+Insert\+Block\+Into\+Free\+List} (\hyperlink{heap__2_8c_ad9a44f586d03fc020ee6f5939defb314}{Block\+Link\+\_\+t} $\ast$px\+Block\+To\+Insert)
+\item 
+void $\ast$ \hyperlink{heap__5_8c_a0379669d07d76cc81e3028123113b271}{pv\+Port\+Malloc} (size\+\_\+t x\+Wanted\+Size)
+\item 
+void \hyperlink{heap__5_8c_a1e7cea2fd1bc894ea3b5f5e8179d259b}{v\+Port\+Free} (void $\ast$pv)
+\item 
+size\+\_\+t \hyperlink{heap__5_8c_a0c28a12b313bc248be0cb7a37ed81bb7}{x\+Port\+Get\+Free\+Heap\+Size} (void)
+\item 
+size\+\_\+t \hyperlink{heap__5_8c_ab222e4545b8ff12b62fd000fea6b34eb}{x\+Port\+Get\+Minimum\+Ever\+Free\+Heap\+Size} (void)
+\item 
+void \hyperlink{heap__5_8c_ab13f7c55a8661da7bba3ef95f1282aee}{v\+Port\+Define\+Heap\+Regions} (const \hyperlink{portable_8h_a2496d40e3117c2f7c473d7fb6b77654d}{Heap\+Region\+\_\+t} $\ast$const px\+Heap\+Regions)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static const size\+\_\+t \hyperlink{heap__5_8c_aff7bec0da6b44e3634d215b40eb1db76}{x\+Heap\+Struct\+Size} = ( sizeof( \hyperlink{heap__2_8c_ad9a44f586d03fc020ee6f5939defb314}{Block\+Link\+\_\+t} ) + ( ( size\+\_\+t ) ( \hyperlink{pic32mz_2portmacro_8h_ab9091ce3940d8bd93ec850122a2c6a1c}{port\+B\+Y\+T\+E\+\_\+\+A\+L\+I\+G\+N\+M\+E\+NT} -\/ 1 ) ) ) \& $\sim$( ( size\+\_\+t ) port\+B\+Y\+T\+E\+\_\+\+A\+L\+I\+G\+N\+M\+E\+N\+T\+\_\+\+M\+A\+SK )
+\item 
+static \hyperlink{heap__2_8c_ad9a44f586d03fc020ee6f5939defb314}{Block\+Link\+\_\+t} \hyperlink{heap__5_8c_a02f2ab4cbfe2167dc3bbdaf9b6c629c9}{x\+Start}
+\item 
+static \hyperlink{heap__2_8c_ad9a44f586d03fc020ee6f5939defb314}{Block\+Link\+\_\+t} $\ast$ \hyperlink{heap__5_8c_a9e133e4e5cd5400005b1378227cbdf7e}{px\+End} = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{N\+U\+LL}
+\item 
+static size\+\_\+t \hyperlink{heap__5_8c_a338244e3e604d3b290a3ef1903e97e4b}{x\+Free\+Bytes\+Remaining} = 0U
+\item 
+static size\+\_\+t \hyperlink{heap__5_8c_ae88e8dc4d81326f752232a0a39eb119f}{x\+Minimum\+Ever\+Free\+Bytes\+Remaining} = 0U
+\item 
+static size\+\_\+t \hyperlink{heap__5_8c_ad7d272a4def963ce2d0185bb02fc7da4}{x\+Block\+Allocated\+Bit} = 0
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{heap__5_8c_adcef0c4245ebe20ca2b08a574c1caac9}\label{heap__5_8c_adcef0c4245ebe20ca2b08a574c1caac9}} 
+\index{heap\+\_\+5.\+c@{heap\+\_\+5.\+c}!heap\+B\+I\+T\+S\+\_\+\+P\+E\+R\+\_\+\+B\+Y\+TE@{heap\+B\+I\+T\+S\+\_\+\+P\+E\+R\+\_\+\+B\+Y\+TE}}
+\index{heap\+B\+I\+T\+S\+\_\+\+P\+E\+R\+\_\+\+B\+Y\+TE@{heap\+B\+I\+T\+S\+\_\+\+P\+E\+R\+\_\+\+B\+Y\+TE}!heap\+\_\+5.\+c@{heap\+\_\+5.\+c}}
+\subsubsection{\texorpdfstring{heap\+B\+I\+T\+S\+\_\+\+P\+E\+R\+\_\+\+B\+Y\+TE}{heapBITS\_PER\_BYTE}}
+{\footnotesize\ttfamily \#define heap\+B\+I\+T\+S\+\_\+\+P\+E\+R\+\_\+\+B\+Y\+TE~( ( size\+\_\+t ) 8 )}
+
+
+
+Definition at line 90 of file heap\+\_\+5.\+c.
+
+\mbox{\Hypertarget{heap__5_8c_ab71bae5a95671265c828339d44c44b25}\label{heap__5_8c_ab71bae5a95671265c828339d44c44b25}} 
+\index{heap\+\_\+5.\+c@{heap\+\_\+5.\+c}!heap\+M\+I\+N\+I\+M\+U\+M\+\_\+\+B\+L\+O\+C\+K\+\_\+\+S\+I\+ZE@{heap\+M\+I\+N\+I\+M\+U\+M\+\_\+\+B\+L\+O\+C\+K\+\_\+\+S\+I\+ZE}}
+\index{heap\+M\+I\+N\+I\+M\+U\+M\+\_\+\+B\+L\+O\+C\+K\+\_\+\+S\+I\+ZE@{heap\+M\+I\+N\+I\+M\+U\+M\+\_\+\+B\+L\+O\+C\+K\+\_\+\+S\+I\+ZE}!heap\+\_\+5.\+c@{heap\+\_\+5.\+c}}
+\subsubsection{\texorpdfstring{heap\+M\+I\+N\+I\+M\+U\+M\+\_\+\+B\+L\+O\+C\+K\+\_\+\+S\+I\+ZE}{heapMINIMUM\_BLOCK\_SIZE}}
+{\footnotesize\ttfamily \#define heap\+M\+I\+N\+I\+M\+U\+M\+\_\+\+B\+L\+O\+C\+K\+\_\+\+S\+I\+ZE~( ( size\+\_\+t ) ( \hyperlink{heap__5_8c_aff7bec0da6b44e3634d215b40eb1db76}{x\+Heap\+Struct\+Size} $<$$<$ 1 ) )}
+
+
+
+Definition at line 87 of file heap\+\_\+5.\+c.
+
+\mbox{\Hypertarget{heap__5_8c_ab622d8c674f2a417a666a7ed89109e79}\label{heap__5_8c_ab622d8c674f2a417a666a7ed89109e79}} 
+\index{heap\+\_\+5.\+c@{heap\+\_\+5.\+c}!M\+P\+U\+\_\+\+W\+R\+A\+P\+P\+E\+R\+S\+\_\+\+I\+N\+C\+L\+U\+D\+E\+D\+\_\+\+F\+R\+O\+M\+\_\+\+A\+P\+I\+\_\+\+F\+I\+LE@{M\+P\+U\+\_\+\+W\+R\+A\+P\+P\+E\+R\+S\+\_\+\+I\+N\+C\+L\+U\+D\+E\+D\+\_\+\+F\+R\+O\+M\+\_\+\+A\+P\+I\+\_\+\+F\+I\+LE}}
+\index{M\+P\+U\+\_\+\+W\+R\+A\+P\+P\+E\+R\+S\+\_\+\+I\+N\+C\+L\+U\+D\+E\+D\+\_\+\+F\+R\+O\+M\+\_\+\+A\+P\+I\+\_\+\+F\+I\+LE@{M\+P\+U\+\_\+\+W\+R\+A\+P\+P\+E\+R\+S\+\_\+\+I\+N\+C\+L\+U\+D\+E\+D\+\_\+\+F\+R\+O\+M\+\_\+\+A\+P\+I\+\_\+\+F\+I\+LE}!heap\+\_\+5.\+c@{heap\+\_\+5.\+c}}
+\subsubsection{\texorpdfstring{M\+P\+U\+\_\+\+W\+R\+A\+P\+P\+E\+R\+S\+\_\+\+I\+N\+C\+L\+U\+D\+E\+D\+\_\+\+F\+R\+O\+M\+\_\+\+A\+P\+I\+\_\+\+F\+I\+LE}{MPU\_WRAPPERS\_INCLUDED\_FROM\_API\_FILE}}
+{\footnotesize\ttfamily \#define M\+P\+U\+\_\+\+W\+R\+A\+P\+P\+E\+R\+S\+\_\+\+I\+N\+C\+L\+U\+D\+E\+D\+\_\+\+F\+R\+O\+M\+\_\+\+A\+P\+I\+\_\+\+F\+I\+LE}
+
+
+
+Definition at line 75 of file heap\+\_\+5.\+c.
+
+
+
+\subsection{Typedef Documentation}
+\mbox{\Hypertarget{heap__5_8c_ad9a44f586d03fc020ee6f5939defb314}\label{heap__5_8c_ad9a44f586d03fc020ee6f5939defb314}} 
+\index{heap\+\_\+5.\+c@{heap\+\_\+5.\+c}!Block\+Link\+\_\+t@{Block\+Link\+\_\+t}}
+\index{Block\+Link\+\_\+t@{Block\+Link\+\_\+t}!heap\+\_\+5.\+c@{heap\+\_\+5.\+c}}
+\subsubsection{\texorpdfstring{Block\+Link\+\_\+t}{BlockLink\_t}}
+{\footnotesize\ttfamily typedef struct \hyperlink{structA__BLOCK__LINK}{A\+\_\+\+B\+L\+O\+C\+K\+\_\+\+L\+I\+NK}  \hyperlink{heap__2_8c_ad9a44f586d03fc020ee6f5939defb314}{Block\+Link\+\_\+t}}
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{heap__5_8c_a1a70fdf86d8a603f45e9b93c14e0d24a}\label{heap__5_8c_a1a70fdf86d8a603f45e9b93c14e0d24a}} 
+\index{heap\+\_\+5.\+c@{heap\+\_\+5.\+c}!prv\+Insert\+Block\+Into\+Free\+List@{prv\+Insert\+Block\+Into\+Free\+List}}
+\index{prv\+Insert\+Block\+Into\+Free\+List@{prv\+Insert\+Block\+Into\+Free\+List}!heap\+\_\+5.\+c@{heap\+\_\+5.\+c}}
+\subsubsection{\texorpdfstring{prv\+Insert\+Block\+Into\+Free\+List()}{prvInsertBlockIntoFreeList()}}
+{\footnotesize\ttfamily static void prv\+Insert\+Block\+Into\+Free\+List (\begin{DoxyParamCaption}\item[{\hyperlink{heap__2_8c_ad9a44f586d03fc020ee6f5939defb314}{Block\+Link\+\_\+t} $\ast$}]{px\+Block\+To\+Insert }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 332 of file heap\+\_\+5.\+c.
+
+
+\begin{DoxyCode}
+333 \{
+334 \hyperlink{structA__BLOCK__LINK}{BlockLink\_t} *pxIterator;
+335 \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *puc;
+336 
+337     \textcolor{comment}{/* Iterate through the list until a block is found that has a higher address}
+338 \textcolor{comment}{    than the block being inserted. */}
+339     \textcolor{keywordflow}{for}( pxIterator = &\hyperlink{heap__5_8c_a02f2ab4cbfe2167dc3bbdaf9b6c629c9}{xStart}; pxIterator->\hyperlink{structA__BLOCK__LINK_aaef1b26e95b0b7b7ebffc91fa6ce874f}{pxNextFreeBlock} < pxBlockToInsert; 
+      pxIterator = pxIterator->\hyperlink{structA__BLOCK__LINK_aaef1b26e95b0b7b7ebffc91fa6ce874f}{pxNextFreeBlock} )
+340     \{
+341         \textcolor{comment}{/* Nothing to do here, just iterate to the right position. */}
+342     \}
+343 
+344     \textcolor{comment}{/* Do the block being inserted, and the block it is being inserted after}
+345 \textcolor{comment}{    make a contiguous block of memory? */}
+346     puc = ( \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} * ) pxIterator;
+347     \textcolor{keywordflow}{if}( ( puc + pxIterator->\hyperlink{structA__BLOCK__LINK_ad5dcf5df03d8be6186c567be9e2c657b}{xBlockSize} ) == ( \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} * ) pxBlockToInsert )
+348     \{
+349         pxIterator->\hyperlink{structA__BLOCK__LINK_ad5dcf5df03d8be6186c567be9e2c657b}{xBlockSize} += pxBlockToInsert->\hyperlink{structA__BLOCK__LINK_ad5dcf5df03d8be6186c567be9e2c657b}{xBlockSize};
+350         pxBlockToInsert = pxIterator;
+351     \}
+352     \textcolor{keywordflow}{else}
+353     \{
+354         \hyperlink{FreeRTOS_8h_ac77e2af1a6b0d38fbab36cf2aa96f1a8}{mtCOVERAGE\_TEST\_MARKER}();
+355     \}
+356 
+357     \textcolor{comment}{/* Do the block being inserted, and the block it is being inserted before}
+358 \textcolor{comment}{    make a contiguous block of memory? */}
+359     puc = ( \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} * ) pxBlockToInsert;
+360     \textcolor{keywordflow}{if}( ( puc + pxBlockToInsert->\hyperlink{structA__BLOCK__LINK_ad5dcf5df03d8be6186c567be9e2c657b}{xBlockSize} ) == ( \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} * ) pxIterator->
+      \hyperlink{structA__BLOCK__LINK_aaef1b26e95b0b7b7ebffc91fa6ce874f}{pxNextFreeBlock} )
+361     \{
+362         \textcolor{keywordflow}{if}( pxIterator->\hyperlink{structA__BLOCK__LINK_aaef1b26e95b0b7b7ebffc91fa6ce874f}{pxNextFreeBlock} != \hyperlink{heap__5_8c_a9e133e4e5cd5400005b1378227cbdf7e}{pxEnd} )
+363         \{
+364             \textcolor{comment}{/* Form one big block from the two blocks. */}
+365             pxBlockToInsert->\hyperlink{structA__BLOCK__LINK_ad5dcf5df03d8be6186c567be9e2c657b}{xBlockSize} += pxIterator->\hyperlink{structA__BLOCK__LINK_aaef1b26e95b0b7b7ebffc91fa6ce874f}{pxNextFreeBlock}->
+      \hyperlink{structA__BLOCK__LINK_ad5dcf5df03d8be6186c567be9e2c657b}{xBlockSize};
+366             pxBlockToInsert->\hyperlink{structA__BLOCK__LINK_aaef1b26e95b0b7b7ebffc91fa6ce874f}{pxNextFreeBlock} = pxIterator->
+      \hyperlink{structA__BLOCK__LINK_aaef1b26e95b0b7b7ebffc91fa6ce874f}{pxNextFreeBlock}->\hyperlink{structA__BLOCK__LINK_aaef1b26e95b0b7b7ebffc91fa6ce874f}{pxNextFreeBlock};
+367         \}
+368         \textcolor{keywordflow}{else}
+369         \{
+370             pxBlockToInsert->\hyperlink{structA__BLOCK__LINK_aaef1b26e95b0b7b7ebffc91fa6ce874f}{pxNextFreeBlock} = \hyperlink{heap__5_8c_a9e133e4e5cd5400005b1378227cbdf7e}{pxEnd};
+371         \}
+372     \}
+373     \textcolor{keywordflow}{else}
+374     \{
+375         pxBlockToInsert->\hyperlink{structA__BLOCK__LINK_aaef1b26e95b0b7b7ebffc91fa6ce874f}{pxNextFreeBlock} = pxIterator->
+      \hyperlink{structA__BLOCK__LINK_aaef1b26e95b0b7b7ebffc91fa6ce874f}{pxNextFreeBlock};
+376     \}
+377 
+378     \textcolor{comment}{/* If the block being inserted plugged a gab, so was merged with the block}
+379 \textcolor{comment}{    before and the block after, then it's pxNextFreeBlock pointer will have}
+380 \textcolor{comment}{    already been set, and should not be set here as that would make it point}
+381 \textcolor{comment}{    to itself. */}
+382     \textcolor{keywordflow}{if}( pxIterator != pxBlockToInsert )
+383     \{
+384         pxIterator->\hyperlink{structA__BLOCK__LINK_aaef1b26e95b0b7b7ebffc91fa6ce874f}{pxNextFreeBlock} = pxBlockToInsert;
+385     \}
+386     \textcolor{keywordflow}{else}
+387     \{
+388         \hyperlink{FreeRTOS_8h_ac77e2af1a6b0d38fbab36cf2aa96f1a8}{mtCOVERAGE\_TEST\_MARKER}();
+389     \}
+390 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{heap__5_8c_a0379669d07d76cc81e3028123113b271}\label{heap__5_8c_a0379669d07d76cc81e3028123113b271}} 
+\index{heap\+\_\+5.\+c@{heap\+\_\+5.\+c}!pv\+Port\+Malloc@{pv\+Port\+Malloc}}
+\index{pv\+Port\+Malloc@{pv\+Port\+Malloc}!heap\+\_\+5.\+c@{heap\+\_\+5.\+c}}
+\subsubsection{\texorpdfstring{pv\+Port\+Malloc()}{pvPortMalloc()}}
+{\footnotesize\ttfamily void$\ast$ pv\+Port\+Malloc (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{x\+Wanted\+Size }\end{DoxyParamCaption})}
+
+
+
+Definition at line 132 of file heap\+\_\+5.\+c.
+
+
+\begin{DoxyCode}
+133 \{
+134 \hyperlink{structA__BLOCK__LINK}{BlockLink\_t} *pxBlock, *pxPreviousBlock, *pxNewBlockLink;
+135 \textcolor{keywordtype}{void} *pvReturn = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+136 
+137     \textcolor{comment}{/* The heap must be initialised before the first call to}
+138 \textcolor{comment}{    prvPortMalloc(). */}
+139     \hyperlink{FreeRTOS_8h_a228c70cd48927d6ab730ed1a6dfbe35f}{configASSERT}( \hyperlink{heap__5_8c_a9e133e4e5cd5400005b1378227cbdf7e}{pxEnd} );
+140 
+141     \hyperlink{task_8h_a366b302eba79d10b5ee2a3756f0fcc43}{vTaskSuspendAll}();
+142     \{
+143         \textcolor{comment}{/* Check the requested block size is not so large that the top bit is}
+144 \textcolor{comment}{        set.  The top bit of the block size member of the BlockLink\_t structure}
+145 \textcolor{comment}{        is used to determine who owns the block - the application or the}
+146 \textcolor{comment}{        kernel, so it must be free. */}
+147         \textcolor{keywordflow}{if}( ( xWantedSize & \hyperlink{heap__5_8c_ad7d272a4def963ce2d0185bb02fc7da4}{xBlockAllocatedBit} ) == 0 )
+148         \{
+149             \textcolor{comment}{/* The wanted size is increased so it can contain a BlockLink\_t}
+150 \textcolor{comment}{            structure in addition to the requested amount of bytes. */}
+151             \textcolor{keywordflow}{if}( xWantedSize > 0 )
+152             \{
+153                 xWantedSize += \hyperlink{heap__5_8c_aff7bec0da6b44e3634d215b40eb1db76}{xHeapStructSize};
+154 
+155                 \textcolor{comment}{/* Ensure that blocks are always aligned to the required number}
+156 \textcolor{comment}{                of bytes. */}
+157                 \textcolor{keywordflow}{if}( ( xWantedSize & portBYTE\_ALIGNMENT\_MASK ) != 0x00 )
+158                 \{
+159                     \textcolor{comment}{/* Byte alignment required. */}
+160                     xWantedSize += ( \hyperlink{pic32mx_2portmacro_8h_ab9091ce3940d8bd93ec850122a2c6a1c}{portBYTE\_ALIGNMENT} - ( xWantedSize & 
+      portBYTE\_ALIGNMENT\_MASK ) );
+161                 \}
+162                 \textcolor{keywordflow}{else}
+163                 \{
+164                     \hyperlink{FreeRTOS_8h_ac77e2af1a6b0d38fbab36cf2aa96f1a8}{mtCOVERAGE\_TEST\_MARKER}();
+165                 \}
+166             \}
+167             \textcolor{keywordflow}{else}
+168             \{
+169                 \hyperlink{FreeRTOS_8h_ac77e2af1a6b0d38fbab36cf2aa96f1a8}{mtCOVERAGE\_TEST\_MARKER}();
+170             \}
+171 
+172             \textcolor{keywordflow}{if}( ( xWantedSize > 0 ) && ( xWantedSize <= \hyperlink{heap__5_8c_a338244e3e604d3b290a3ef1903e97e4b}{xFreeBytesRemaining} ) )
+173             \{
+174                 \textcolor{comment}{/* Traverse the list from the start (lowest address) block until}
+175 \textcolor{comment}{                one of adequate size is found. */}
+176                 pxPreviousBlock = &\hyperlink{heap__5_8c_a02f2ab4cbfe2167dc3bbdaf9b6c629c9}{xStart};
+177                 pxBlock = \hyperlink{heap__5_8c_a02f2ab4cbfe2167dc3bbdaf9b6c629c9}{xStart}.\hyperlink{structA__BLOCK__LINK_aaef1b26e95b0b7b7ebffc91fa6ce874f}{pxNextFreeBlock};
+178                 \textcolor{keywordflow}{while}( ( pxBlock->\hyperlink{structA__BLOCK__LINK_ad5dcf5df03d8be6186c567be9e2c657b}{xBlockSize} < xWantedSize ) && ( pxBlock->
+      \hyperlink{structA__BLOCK__LINK_aaef1b26e95b0b7b7ebffc91fa6ce874f}{pxNextFreeBlock} != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} ) )
+179                 \{
+180                     pxPreviousBlock = pxBlock;
+181                     pxBlock = pxBlock->\hyperlink{structA__BLOCK__LINK_aaef1b26e95b0b7b7ebffc91fa6ce874f}{pxNextFreeBlock};
+182                 \}
+183 
+184                 \textcolor{comment}{/* If the end marker was reached then a block of adequate size}
+185 \textcolor{comment}{                was not found. */}
+186                 \textcolor{keywordflow}{if}( pxBlock != \hyperlink{heap__5_8c_a9e133e4e5cd5400005b1378227cbdf7e}{pxEnd} )
+187                 \{
+188                     \textcolor{comment}{/* Return the memory space pointed to - jumping over the}
+189 \textcolor{comment}{                    BlockLink\_t structure at its start. */}
+190                     pvReturn = ( \textcolor{keywordtype}{void} * ) ( ( ( \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} * ) pxPreviousBlock->
+      \hyperlink{structA__BLOCK__LINK_aaef1b26e95b0b7b7ebffc91fa6ce874f}{pxNextFreeBlock} ) + \hyperlink{heap__5_8c_aff7bec0da6b44e3634d215b40eb1db76}{xHeapStructSize} );
+191 
+192                     \textcolor{comment}{/* This block is being returned for use so must be taken out}
+193 \textcolor{comment}{                    of the list of free blocks. */}
+194                     pxPreviousBlock->\hyperlink{structA__BLOCK__LINK_aaef1b26e95b0b7b7ebffc91fa6ce874f}{pxNextFreeBlock} = pxBlock->
+      \hyperlink{structA__BLOCK__LINK_aaef1b26e95b0b7b7ebffc91fa6ce874f}{pxNextFreeBlock};
+195 
+196                     \textcolor{comment}{/* If the block is larger than required it can be split into}
+197 \textcolor{comment}{                    two. */}
+198                     \textcolor{keywordflow}{if}( ( pxBlock->\hyperlink{structA__BLOCK__LINK_ad5dcf5df03d8be6186c567be9e2c657b}{xBlockSize} - xWantedSize ) > 
+      \hyperlink{heap__5_8c_ab71bae5a95671265c828339d44c44b25}{heapMINIMUM\_BLOCK\_SIZE} )
+199                     \{
+200                         \textcolor{comment}{/* This block is to be split into two.  Create a new}
+201 \textcolor{comment}{                        block following the number of bytes requested. The void}
+202 \textcolor{comment}{                        cast is used to prevent byte alignment warnings from the}
+203 \textcolor{comment}{                        compiler. */}
+204                         pxNewBlockLink = ( \textcolor{keywordtype}{void} * ) ( ( ( \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} * ) pxBlock ) + xWantedSize );
+205 
+206                         \textcolor{comment}{/* Calculate the sizes of two blocks split from the}
+207 \textcolor{comment}{                        single block. */}
+208                         pxNewBlockLink->\hyperlink{structA__BLOCK__LINK_ad5dcf5df03d8be6186c567be9e2c657b}{xBlockSize} = pxBlock->
+      \hyperlink{structA__BLOCK__LINK_ad5dcf5df03d8be6186c567be9e2c657b}{xBlockSize} - xWantedSize;
+209                         pxBlock->\hyperlink{structA__BLOCK__LINK_ad5dcf5df03d8be6186c567be9e2c657b}{xBlockSize} = xWantedSize;
+210 
+211                         \textcolor{comment}{/* Insert the new block into the list of free blocks. */}
+212                         \hyperlink{heap__5_8c_a1a70fdf86d8a603f45e9b93c14e0d24a}{prvInsertBlockIntoFreeList}( ( pxNewBlockLink ) );
+213                     \}
+214                     \textcolor{keywordflow}{else}
+215                     \{
+216                         \hyperlink{FreeRTOS_8h_ac77e2af1a6b0d38fbab36cf2aa96f1a8}{mtCOVERAGE\_TEST\_MARKER}();
+217                     \}
+218 
+219                     \hyperlink{heap__5_8c_a338244e3e604d3b290a3ef1903e97e4b}{xFreeBytesRemaining} -= pxBlock->
+      \hyperlink{structA__BLOCK__LINK_ad5dcf5df03d8be6186c567be9e2c657b}{xBlockSize};
+220 
+221                     \textcolor{keywordflow}{if}( \hyperlink{heap__5_8c_a338244e3e604d3b290a3ef1903e97e4b}{xFreeBytesRemaining} < 
+      \hyperlink{heap__5_8c_ae88e8dc4d81326f752232a0a39eb119f}{xMinimumEverFreeBytesRemaining} )
+222                     \{
+223                         \hyperlink{heap__5_8c_ae88e8dc4d81326f752232a0a39eb119f}{xMinimumEverFreeBytesRemaining} = 
+      \hyperlink{heap__5_8c_a338244e3e604d3b290a3ef1903e97e4b}{xFreeBytesRemaining};
+224                     \}
+225                     \textcolor{keywordflow}{else}
+226                     \{
+227                         \hyperlink{FreeRTOS_8h_ac77e2af1a6b0d38fbab36cf2aa96f1a8}{mtCOVERAGE\_TEST\_MARKER}();
+228                     \}
+229 
+230                     \textcolor{comment}{/* The block is being returned - it is allocated and owned}
+231 \textcolor{comment}{                    by the application and has no "next" block. */}
+232                     pxBlock->\hyperlink{structA__BLOCK__LINK_ad5dcf5df03d8be6186c567be9e2c657b}{xBlockSize} |= \hyperlink{heap__5_8c_ad7d272a4def963ce2d0185bb02fc7da4}{xBlockAllocatedBit};
+233                     pxBlock->\hyperlink{structA__BLOCK__LINK_aaef1b26e95b0b7b7ebffc91fa6ce874f}{pxNextFreeBlock} = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+234                 \}
+235                 \textcolor{keywordflow}{else}
+236                 \{
+237                     \hyperlink{FreeRTOS_8h_ac77e2af1a6b0d38fbab36cf2aa96f1a8}{mtCOVERAGE\_TEST\_MARKER}();
+238                 \}
+239             \}
+240             \textcolor{keywordflow}{else}
+241             \{
+242                 \hyperlink{FreeRTOS_8h_ac77e2af1a6b0d38fbab36cf2aa96f1a8}{mtCOVERAGE\_TEST\_MARKER}();
+243             \}
+244         \}
+245         \textcolor{keywordflow}{else}
+246         \{
+247             \hyperlink{FreeRTOS_8h_ac77e2af1a6b0d38fbab36cf2aa96f1a8}{mtCOVERAGE\_TEST\_MARKER}();
+248         \}
+249 
+250         \hyperlink{FreeRTOS_8h_af326afe922ffa6da245c98dc227a3293}{traceMALLOC}( pvReturn, xWantedSize );
+251     \}
+252     ( void ) \hyperlink{task_8h_a003f8ae6d649225abd030cc76e1c7d0e}{xTaskResumeAll}();
+253 
+254 \textcolor{preprocessor}{    #if( configUSE\_MALLOC\_FAILED\_HOOK == 1 )}
+255     \{
+256         \textcolor{keywordflow}{if}( pvReturn == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} )
+257         \{
+258             \textcolor{keyword}{extern} \textcolor{keywordtype}{void} vApplicationMallocFailedHook( \textcolor{keywordtype}{void} );
+259             vApplicationMallocFailedHook();
+260         \}
+261         \textcolor{keywordflow}{else}
+262         \{
+263             \hyperlink{FreeRTOS_8h_ac77e2af1a6b0d38fbab36cf2aa96f1a8}{mtCOVERAGE\_TEST\_MARKER}();
+264         \}
+265     \}
+266 \textcolor{preprocessor}{    #endif}
+267 
+268     \textcolor{keywordflow}{return} pvReturn;
+269 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{heap__5_8c_ab13f7c55a8661da7bba3ef95f1282aee}\label{heap__5_8c_ab13f7c55a8661da7bba3ef95f1282aee}} 
+\index{heap\+\_\+5.\+c@{heap\+\_\+5.\+c}!v\+Port\+Define\+Heap\+Regions@{v\+Port\+Define\+Heap\+Regions}}
+\index{v\+Port\+Define\+Heap\+Regions@{v\+Port\+Define\+Heap\+Regions}!heap\+\_\+5.\+c@{heap\+\_\+5.\+c}}
+\subsubsection{\texorpdfstring{v\+Port\+Define\+Heap\+Regions()}{vPortDefineHeapRegions()}}
+{\footnotesize\ttfamily void v\+Port\+Define\+Heap\+Regions (\begin{DoxyParamCaption}\item[{const \hyperlink{portable_8h_a2496d40e3117c2f7c473d7fb6b77654d}{Heap\+Region\+\_\+t} $\ast$const}]{px\+Heap\+Regions }\end{DoxyParamCaption})}
+
+
+
+Definition at line 393 of file heap\+\_\+5.\+c.
+
+
+\begin{DoxyCode}
+394 \{
+395 \hyperlink{structA__BLOCK__LINK}{BlockLink\_t} *pxFirstFreeBlockInRegion = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, *pxPreviousFreeBlock;
+396 \textcolor{keywordtype}{size\_t} xAlignedHeap;
+397 \textcolor{keywordtype}{size\_t} xTotalRegionSize, xTotalHeapSize = 0;
+398 \hyperlink{pic32mx_2portmacro_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t} xDefinedRegions = 0;
+399 \textcolor{keywordtype}{size\_t} xAddress;
+400 \textcolor{keyword}{const} \hyperlink{structHeapRegion}{HeapRegion\_t} *pxHeapRegion;
+401 
+402     \textcolor{comment}{/* Can only call once! */}
+403     \hyperlink{FreeRTOS_8h_a228c70cd48927d6ab730ed1a6dfbe35f}{configASSERT}( \hyperlink{heap__5_8c_a9e133e4e5cd5400005b1378227cbdf7e}{pxEnd} == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} );
+404 
+405     pxHeapRegion = &( pxHeapRegions[ xDefinedRegions ] );
+406 
+407     \textcolor{keywordflow}{while}( pxHeapRegion->\hyperlink{structHeapRegion_a5933b0fd422e70a92ceef839b89a757f}{xSizeInBytes} > 0 )
+408     \{
+409         xTotalRegionSize = pxHeapRegion->\hyperlink{structHeapRegion_a5933b0fd422e70a92ceef839b89a757f}{xSizeInBytes};
+410 
+411         \textcolor{comment}{/* Ensure the heap region starts on a correctly aligned boundary. */}
+412         xAddress = ( size\_t ) pxHeapRegion->\hyperlink{structHeapRegion_aab323508c34642ebfb884a68441d97fc}{pucStartAddress};
+413         \textcolor{keywordflow}{if}( ( xAddress & portBYTE\_ALIGNMENT\_MASK ) != 0 )
+414         \{
+415             xAddress += ( \hyperlink{pic32mx_2portmacro_8h_ab9091ce3940d8bd93ec850122a2c6a1c}{portBYTE\_ALIGNMENT} - 1 );
+416             xAddress &= ~portBYTE\_ALIGNMENT\_MASK;
+417 
+418             \textcolor{comment}{/* Adjust the size for the bytes lost to alignment. */}
+419             xTotalRegionSize -= xAddress - ( size\_t ) pxHeapRegion->
+      \hyperlink{structHeapRegion_aab323508c34642ebfb884a68441d97fc}{pucStartAddress};
+420         \}
+421 
+422         xAlignedHeap = xAddress;
+423 
+424         \textcolor{comment}{/* Set xStart if it has not already been set. */}
+425         \textcolor{keywordflow}{if}( xDefinedRegions == 0 )
+426         \{
+427             \textcolor{comment}{/* xStart is used to hold a pointer to the first item in the list of}
+428 \textcolor{comment}{            free blocks.  The void cast is used to prevent compiler warnings. */}
+429             \hyperlink{heap__5_8c_a02f2ab4cbfe2167dc3bbdaf9b6c629c9}{xStart}.\hyperlink{structA__BLOCK__LINK_aaef1b26e95b0b7b7ebffc91fa6ce874f}{pxNextFreeBlock} = ( \hyperlink{structA__BLOCK__LINK}{BlockLink\_t} * ) xAlignedHeap;
+430             \hyperlink{heap__5_8c_a02f2ab4cbfe2167dc3bbdaf9b6c629c9}{xStart}.\hyperlink{structA__BLOCK__LINK_ad5dcf5df03d8be6186c567be9e2c657b}{xBlockSize} = ( size\_t ) 0;
+431         \}
+432         \textcolor{keywordflow}{else}
+433         \{
+434             \textcolor{comment}{/* Should only get here if one region has already been added to the}
+435 \textcolor{comment}{            heap. */}
+436             \hyperlink{FreeRTOS_8h_a228c70cd48927d6ab730ed1a6dfbe35f}{configASSERT}( \hyperlink{heap__5_8c_a9e133e4e5cd5400005b1378227cbdf7e}{pxEnd} != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} );
+437 
+438             \textcolor{comment}{/* Check blocks are passed in with increasing start addresses. */}
+439             \hyperlink{FreeRTOS_8h_a228c70cd48927d6ab730ed1a6dfbe35f}{configASSERT}( xAddress > ( \textcolor{keywordtype}{size\_t} ) \hyperlink{heap__5_8c_a9e133e4e5cd5400005b1378227cbdf7e}{pxEnd} );
+440         \}
+441 
+442         \textcolor{comment}{/* Remember the location of the end marker in the previous region, if}
+443 \textcolor{comment}{        any. */}
+444         pxPreviousFreeBlock = \hyperlink{heap__5_8c_a9e133e4e5cd5400005b1378227cbdf7e}{pxEnd};
+445 
+446         \textcolor{comment}{/* pxEnd is used to mark the end of the list of free blocks and is}
+447 \textcolor{comment}{        inserted at the end of the region space. */}
+448         xAddress = xAlignedHeap + xTotalRegionSize;
+449         xAddress -= \hyperlink{heap__5_8c_aff7bec0da6b44e3634d215b40eb1db76}{xHeapStructSize};
+450         xAddress &= ~portBYTE\_ALIGNMENT\_MASK;
+451         \hyperlink{heap__5_8c_a9e133e4e5cd5400005b1378227cbdf7e}{pxEnd} = ( \hyperlink{structA__BLOCK__LINK}{BlockLink\_t} * ) xAddress;
+452         \hyperlink{heap__5_8c_a9e133e4e5cd5400005b1378227cbdf7e}{pxEnd}->\hyperlink{structA__BLOCK__LINK_ad5dcf5df03d8be6186c567be9e2c657b}{xBlockSize} = 0;
+453         \hyperlink{heap__5_8c_a9e133e4e5cd5400005b1378227cbdf7e}{pxEnd}->\hyperlink{structA__BLOCK__LINK_aaef1b26e95b0b7b7ebffc91fa6ce874f}{pxNextFreeBlock} = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+454 
+455         \textcolor{comment}{/* To start with there is a single free block in this region that is}
+456 \textcolor{comment}{        sized to take up the entire heap region minus the space taken by the}
+457 \textcolor{comment}{        free block structure. */}
+458         pxFirstFreeBlockInRegion = ( \hyperlink{structA__BLOCK__LINK}{BlockLink\_t} * ) xAlignedHeap;
+459         pxFirstFreeBlockInRegion->\hyperlink{structA__BLOCK__LINK_ad5dcf5df03d8be6186c567be9e2c657b}{xBlockSize} = xAddress - ( size\_t ) pxFirstFreeBlockInRegion;
+460         pxFirstFreeBlockInRegion->\hyperlink{structA__BLOCK__LINK_aaef1b26e95b0b7b7ebffc91fa6ce874f}{pxNextFreeBlock} = \hyperlink{heap__5_8c_a9e133e4e5cd5400005b1378227cbdf7e}{pxEnd};
+461 
+462         \textcolor{comment}{/* If this is not the first region that makes up the entire heap space}
+463 \textcolor{comment}{        then link the previous region to this region. */}
+464         \textcolor{keywordflow}{if}( pxPreviousFreeBlock != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} )
+465         \{
+466             pxPreviousFreeBlock->\hyperlink{structA__BLOCK__LINK_aaef1b26e95b0b7b7ebffc91fa6ce874f}{pxNextFreeBlock} = pxFirstFreeBlockInRegion;
+467         \}
+468 
+469         xTotalHeapSize += pxFirstFreeBlockInRegion->\hyperlink{structA__BLOCK__LINK_ad5dcf5df03d8be6186c567be9e2c657b}{xBlockSize};
+470 
+471         \textcolor{comment}{/* Move onto the next HeapRegion\_t structure. */}
+472         xDefinedRegions++;
+473         pxHeapRegion = &( pxHeapRegions[ xDefinedRegions ] );
+474     \}
+475 
+476     \hyperlink{heap__5_8c_ae88e8dc4d81326f752232a0a39eb119f}{xMinimumEverFreeBytesRemaining} = xTotalHeapSize;
+477     \hyperlink{heap__5_8c_a338244e3e604d3b290a3ef1903e97e4b}{xFreeBytesRemaining} = xTotalHeapSize;
+478 
+479     \textcolor{comment}{/* Check something was actually defined before it is accessed. */}
+480     \hyperlink{FreeRTOS_8h_a228c70cd48927d6ab730ed1a6dfbe35f}{configASSERT}( xTotalHeapSize );
+481 
+482     \textcolor{comment}{/* Work out the position of the top bit in a size\_t variable. */}
+483     \hyperlink{heap__5_8c_ad7d272a4def963ce2d0185bb02fc7da4}{xBlockAllocatedBit} = ( ( size\_t ) 1 ) << ( ( \textcolor{keyword}{sizeof}( size\_t ) * 
+      \hyperlink{heap__5_8c_adcef0c4245ebe20ca2b08a574c1caac9}{heapBITS\_PER\_BYTE} ) - 1 );
+484 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{heap__5_8c_a1e7cea2fd1bc894ea3b5f5e8179d259b}\label{heap__5_8c_a1e7cea2fd1bc894ea3b5f5e8179d259b}} 
+\index{heap\+\_\+5.\+c@{heap\+\_\+5.\+c}!v\+Port\+Free@{v\+Port\+Free}}
+\index{v\+Port\+Free@{v\+Port\+Free}!heap\+\_\+5.\+c@{heap\+\_\+5.\+c}}
+\subsubsection{\texorpdfstring{v\+Port\+Free()}{vPortFree()}}
+{\footnotesize\ttfamily void v\+Port\+Free (\begin{DoxyParamCaption}\item[{void $\ast$}]{pv }\end{DoxyParamCaption})}
+
+
+
+Definition at line 272 of file heap\+\_\+5.\+c.
+
+
+\begin{DoxyCode}
+273 \{
+274 \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *puc = ( \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} * ) pv;
+275 \hyperlink{structA__BLOCK__LINK}{BlockLink\_t} *pxLink;
+276 
+277     \textcolor{keywordflow}{if}( pv != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} )
+278     \{
+279         \textcolor{comment}{/* The memory being freed will have an BlockLink\_t structure immediately}
+280 \textcolor{comment}{        before it. */}
+281         puc -= \hyperlink{heap__5_8c_aff7bec0da6b44e3634d215b40eb1db76}{xHeapStructSize};
+282 
+283         \textcolor{comment}{/* This casting is to keep the compiler from issuing warnings. */}
+284         pxLink = ( \textcolor{keywordtype}{void} * ) puc;
+285 
+286         \textcolor{comment}{/* Check the block is actually allocated. */}
+287         \hyperlink{FreeRTOS_8h_a228c70cd48927d6ab730ed1a6dfbe35f}{configASSERT}( ( pxLink->\hyperlink{structA__BLOCK__LINK_ad5dcf5df03d8be6186c567be9e2c657b}{xBlockSize} & 
+      \hyperlink{heap__5_8c_ad7d272a4def963ce2d0185bb02fc7da4}{xBlockAllocatedBit} ) != 0 );
+288         \hyperlink{FreeRTOS_8h_a228c70cd48927d6ab730ed1a6dfbe35f}{configASSERT}( pxLink->\hyperlink{structA__BLOCK__LINK_aaef1b26e95b0b7b7ebffc91fa6ce874f}{pxNextFreeBlock} == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} );
+289 
+290         \textcolor{keywordflow}{if}( ( pxLink->\hyperlink{structA__BLOCK__LINK_ad5dcf5df03d8be6186c567be9e2c657b}{xBlockSize} & \hyperlink{heap__5_8c_ad7d272a4def963ce2d0185bb02fc7da4}{xBlockAllocatedBit} ) != 0 )
+291         \{
+292             \textcolor{keywordflow}{if}( pxLink->\hyperlink{structA__BLOCK__LINK_aaef1b26e95b0b7b7ebffc91fa6ce874f}{pxNextFreeBlock} == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} )
+293             \{
+294                 \textcolor{comment}{/* The block is being returned to the heap - it is no longer}
+295 \textcolor{comment}{                allocated. */}
+296                 pxLink->\hyperlink{structA__BLOCK__LINK_ad5dcf5df03d8be6186c567be9e2c657b}{xBlockSize} &= ~\hyperlink{heap__5_8c_ad7d272a4def963ce2d0185bb02fc7da4}{xBlockAllocatedBit};
+297 
+298                 \hyperlink{task_8h_a366b302eba79d10b5ee2a3756f0fcc43}{vTaskSuspendAll}();
+299                 \{
+300                     \textcolor{comment}{/* Add this block to the list of free blocks. */}
+301                     \hyperlink{heap__5_8c_a338244e3e604d3b290a3ef1903e97e4b}{xFreeBytesRemaining} += pxLink->\hyperlink{structA__BLOCK__LINK_ad5dcf5df03d8be6186c567be9e2c657b}{xBlockSize};
+302                     \hyperlink{FreeRTOS_8h_a941bb09090b5788f0c27d9690118eed2}{traceFREE}( pv, pxLink->\hyperlink{structA__BLOCK__LINK_ad5dcf5df03d8be6186c567be9e2c657b}{xBlockSize} );
+303                     \hyperlink{heap__5_8c_a1a70fdf86d8a603f45e9b93c14e0d24a}{prvInsertBlockIntoFreeList}( ( ( 
+      \hyperlink{structA__BLOCK__LINK}{BlockLink\_t} * ) pxLink ) );
+304                 \}
+305                 ( void ) \hyperlink{task_8h_a003f8ae6d649225abd030cc76e1c7d0e}{xTaskResumeAll}();
+306             \}
+307             \textcolor{keywordflow}{else}
+308             \{
+309                 \hyperlink{FreeRTOS_8h_ac77e2af1a6b0d38fbab36cf2aa96f1a8}{mtCOVERAGE\_TEST\_MARKER}();
+310             \}
+311         \}
+312         \textcolor{keywordflow}{else}
+313         \{
+314             \hyperlink{FreeRTOS_8h_ac77e2af1a6b0d38fbab36cf2aa96f1a8}{mtCOVERAGE\_TEST\_MARKER}();
+315         \}
+316     \}
+317 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{heap__5_8c_a0c28a12b313bc248be0cb7a37ed81bb7}\label{heap__5_8c_a0c28a12b313bc248be0cb7a37ed81bb7}} 
+\index{heap\+\_\+5.\+c@{heap\+\_\+5.\+c}!x\+Port\+Get\+Free\+Heap\+Size@{x\+Port\+Get\+Free\+Heap\+Size}}
+\index{x\+Port\+Get\+Free\+Heap\+Size@{x\+Port\+Get\+Free\+Heap\+Size}!heap\+\_\+5.\+c@{heap\+\_\+5.\+c}}
+\subsubsection{\texorpdfstring{x\+Port\+Get\+Free\+Heap\+Size()}{xPortGetFreeHeapSize()}}
+{\footnotesize\ttfamily size\+\_\+t x\+Port\+Get\+Free\+Heap\+Size (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 320 of file heap\+\_\+5.\+c.
+
+
+\begin{DoxyCode}
+321 \{
+322     \textcolor{keywordflow}{return} \hyperlink{heap__5_8c_a338244e3e604d3b290a3ef1903e97e4b}{xFreeBytesRemaining};
+323 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{heap__5_8c_ab222e4545b8ff12b62fd000fea6b34eb}\label{heap__5_8c_ab222e4545b8ff12b62fd000fea6b34eb}} 
+\index{heap\+\_\+5.\+c@{heap\+\_\+5.\+c}!x\+Port\+Get\+Minimum\+Ever\+Free\+Heap\+Size@{x\+Port\+Get\+Minimum\+Ever\+Free\+Heap\+Size}}
+\index{x\+Port\+Get\+Minimum\+Ever\+Free\+Heap\+Size@{x\+Port\+Get\+Minimum\+Ever\+Free\+Heap\+Size}!heap\+\_\+5.\+c@{heap\+\_\+5.\+c}}
+\subsubsection{\texorpdfstring{x\+Port\+Get\+Minimum\+Ever\+Free\+Heap\+Size()}{xPortGetMinimumEverFreeHeapSize()}}
+{\footnotesize\ttfamily size\+\_\+t x\+Port\+Get\+Minimum\+Ever\+Free\+Heap\+Size (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 326 of file heap\+\_\+5.\+c.
+
+
+\begin{DoxyCode}
+327 \{
+328     \textcolor{keywordflow}{return} \hyperlink{heap__5_8c_ae88e8dc4d81326f752232a0a39eb119f}{xMinimumEverFreeBytesRemaining};
+329 \}
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{heap__5_8c_a9e133e4e5cd5400005b1378227cbdf7e}\label{heap__5_8c_a9e133e4e5cd5400005b1378227cbdf7e}} 
+\index{heap\+\_\+5.\+c@{heap\+\_\+5.\+c}!px\+End@{px\+End}}
+\index{px\+End@{px\+End}!heap\+\_\+5.\+c@{heap\+\_\+5.\+c}}
+\subsubsection{\texorpdfstring{px\+End}{pxEnd}}
+{\footnotesize\ttfamily \hyperlink{heap__2_8c_ad9a44f586d03fc020ee6f5939defb314}{Block\+Link\+\_\+t} $\ast$ px\+End = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{N\+U\+LL}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 117 of file heap\+\_\+5.\+c.
+
+\mbox{\Hypertarget{heap__5_8c_ad7d272a4def963ce2d0185bb02fc7da4}\label{heap__5_8c_ad7d272a4def963ce2d0185bb02fc7da4}} 
+\index{heap\+\_\+5.\+c@{heap\+\_\+5.\+c}!x\+Block\+Allocated\+Bit@{x\+Block\+Allocated\+Bit}}
+\index{x\+Block\+Allocated\+Bit@{x\+Block\+Allocated\+Bit}!heap\+\_\+5.\+c@{heap\+\_\+5.\+c}}
+\subsubsection{\texorpdfstring{x\+Block\+Allocated\+Bit}{xBlockAllocatedBit}}
+{\footnotesize\ttfamily size\+\_\+t x\+Block\+Allocated\+Bit = 0\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 128 of file heap\+\_\+5.\+c.
+
+\mbox{\Hypertarget{heap__5_8c_a338244e3e604d3b290a3ef1903e97e4b}\label{heap__5_8c_a338244e3e604d3b290a3ef1903e97e4b}} 
+\index{heap\+\_\+5.\+c@{heap\+\_\+5.\+c}!x\+Free\+Bytes\+Remaining@{x\+Free\+Bytes\+Remaining}}
+\index{x\+Free\+Bytes\+Remaining@{x\+Free\+Bytes\+Remaining}!heap\+\_\+5.\+c@{heap\+\_\+5.\+c}}
+\subsubsection{\texorpdfstring{x\+Free\+Bytes\+Remaining}{xFreeBytesRemaining}}
+{\footnotesize\ttfamily size\+\_\+t x\+Free\+Bytes\+Remaining = 0U\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 121 of file heap\+\_\+5.\+c.
+
+\mbox{\Hypertarget{heap__5_8c_aff7bec0da6b44e3634d215b40eb1db76}\label{heap__5_8c_aff7bec0da6b44e3634d215b40eb1db76}} 
+\index{heap\+\_\+5.\+c@{heap\+\_\+5.\+c}!x\+Heap\+Struct\+Size@{x\+Heap\+Struct\+Size}}
+\index{x\+Heap\+Struct\+Size@{x\+Heap\+Struct\+Size}!heap\+\_\+5.\+c@{heap\+\_\+5.\+c}}
+\subsubsection{\texorpdfstring{x\+Heap\+Struct\+Size}{xHeapStructSize}}
+{\footnotesize\ttfamily const size\+\_\+t x\+Heap\+Struct\+Size = ( sizeof( \hyperlink{heap__2_8c_ad9a44f586d03fc020ee6f5939defb314}{Block\+Link\+\_\+t} ) + ( ( size\+\_\+t ) ( \hyperlink{pic32mz_2portmacro_8h_ab9091ce3940d8bd93ec850122a2c6a1c}{port\+B\+Y\+T\+E\+\_\+\+A\+L\+I\+G\+N\+M\+E\+NT} -\/ 1 ) ) ) \& $\sim$( ( size\+\_\+t ) port\+B\+Y\+T\+E\+\_\+\+A\+L\+I\+G\+N\+M\+E\+N\+T\+\_\+\+M\+A\+SK )\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 114 of file heap\+\_\+5.\+c.
+
+\mbox{\Hypertarget{heap__5_8c_ae88e8dc4d81326f752232a0a39eb119f}\label{heap__5_8c_ae88e8dc4d81326f752232a0a39eb119f}} 
+\index{heap\+\_\+5.\+c@{heap\+\_\+5.\+c}!x\+Minimum\+Ever\+Free\+Bytes\+Remaining@{x\+Minimum\+Ever\+Free\+Bytes\+Remaining}}
+\index{x\+Minimum\+Ever\+Free\+Bytes\+Remaining@{x\+Minimum\+Ever\+Free\+Bytes\+Remaining}!heap\+\_\+5.\+c@{heap\+\_\+5.\+c}}
+\subsubsection{\texorpdfstring{x\+Minimum\+Ever\+Free\+Bytes\+Remaining}{xMinimumEverFreeBytesRemaining}}
+{\footnotesize\ttfamily size\+\_\+t x\+Minimum\+Ever\+Free\+Bytes\+Remaining = 0U\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 122 of file heap\+\_\+5.\+c.
+
+\mbox{\Hypertarget{heap__5_8c_a02f2ab4cbfe2167dc3bbdaf9b6c629c9}\label{heap__5_8c_a02f2ab4cbfe2167dc3bbdaf9b6c629c9}} 
+\index{heap\+\_\+5.\+c@{heap\+\_\+5.\+c}!x\+Start@{x\+Start}}
+\index{x\+Start@{x\+Start}!heap\+\_\+5.\+c@{heap\+\_\+5.\+c}}
+\subsubsection{\texorpdfstring{x\+Start}{xStart}}
+{\footnotesize\ttfamily \hyperlink{heap__2_8c_ad9a44f586d03fc020ee6f5939defb314}{Block\+Link\+\_\+t} x\+Start\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 117 of file heap\+\_\+5.\+c.
+

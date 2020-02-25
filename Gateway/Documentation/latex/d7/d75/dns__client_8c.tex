@@ -1,0 +1,639 @@
+\hypertarget{dns__client_8c}{}\section{cyclone\+\_\+tcp/dns/dns\+\_\+client.c File Reference}
+\label{dns__client_8c}\index{cyclone\+\_\+tcp/dns/dns\+\_\+client.\+c@{cyclone\+\_\+tcp/dns/dns\+\_\+client.\+c}}
+
+
+D\+NS client (Domain Name System)  
+
+
+{\ttfamily \#include \char`\"{}core/net.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}dns/dns\+\_\+cache.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}dns/dns\+\_\+client.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}dns/dns\+\_\+common.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}dns/dns\+\_\+debug.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}debug.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{dns__client_8c_afcdf5e66fd927a7f4cc64295acd20407}{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}~\hyperlink{net__config_8h_ac9a922c1d0cd796bab6e76bfa73b5ee7}{D\+N\+S\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{dns__client_8c_a75f9826a5944cbdcf9656fe5e0657788}{dns\+Resolve} (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface, const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$\hyperlink{resource__manager_8h_a26532d7194d592ae8da35222073f36d6}{name}, \hyperlink{socket_8h_ab5e32e6fb9dfb43706584ab98de9a7bd}{Host\+Type} \hyperlink{ppp_8h_a1d127017fb298b889f4ba24752d08b8e}{type}, \hyperlink{structIpAddr}{Ip\+Addr} $\ast$\hyperlink{ipcp_8h_a11542dd5a4de5976a89188df3d53b42d}{ip\+Addr})
+\begin{DoxyCompactList}\small\item\em Resolve a host name using D\+NS. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{dns__client_8c_a71fc5f544d54cd6dbf45c45292de4719}{dns\+Send\+Query} (\hyperlink{structDnsCacheEntry}{Dns\+Cache\+Entry} $\ast$entry)
+\begin{DoxyCompactList}\small\item\em Send a D\+NS query message. \end{DoxyCompactList}\item 
+void \hyperlink{dns__client_8c_ac0d34d1d180678e2e136f8b8d67047b5}{dns\+Process\+Response} (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface, const \hyperlink{structIpPseudoHeader}{Ip\+Pseudo\+Header} $\ast$pseudo\+Header, const \hyperlink{udp_8h_a6877bae1da8326482f5e311875e52bce}{Udp\+Header} $\ast$udp\+Header, const \hyperlink{structNetBuffer}{Net\+Buffer} $\ast$buffer, size\+\_\+t \hyperlink{pic32mz_2isr__support_8h_ac0542d92dfcd62c19170fd963f9e5052}{offset}, void $\ast$param)
+\begin{DoxyCompactList}\small\item\em Process incoming D\+NS response message. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+D\+NS client (Domain Name System) 
+
+\hypertarget{pic32mz__ef__curiosity_8h_License}{}\subsection{License}\label{pic32mz__ef__curiosity_8h_License}
+S\+P\+D\+X-\/\+License-\/\+Identifier\+: G\+P\+L-\/2.\+0-\/or-\/later
+
+Copyright (C) 2010-\/2019 Oryx Embedded S\+A\+RL. All rights reserved.
+
+This file is part of Cyclone\+T\+CP Open.
+
+This program is free software; you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+
+You should have received a copy of the G\+NU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-\/1301, U\+SA.
+
+\begin{DoxyAuthor}{Author}
+Oryx Embedded S\+A\+RL (www.\+oryx-\/embedded.\+com) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+9.\+6 
+\end{DoxyVersion}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{dns__client_8c_afcdf5e66fd927a7f4cc64295acd20407}\label{dns__client_8c_afcdf5e66fd927a7f4cc64295acd20407}} 
+\index{dns\+\_\+client.\+c@{dns\+\_\+client.\+c}!T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+\index{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}!dns\+\_\+client.\+c@{dns\+\_\+client.\+c}}
+\subsubsection{\texorpdfstring{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}{TRACE\_LEVEL}}
+{\footnotesize\ttfamily \#define T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL~\hyperlink{net__config_8h_ac9a922c1d0cd796bab6e76bfa73b5ee7}{D\+N\+S\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+
+
+
+Definition at line 32 of file dns\+\_\+client.\+c.
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{dns__client_8c_ac0d34d1d180678e2e136f8b8d67047b5}\label{dns__client_8c_ac0d34d1d180678e2e136f8b8d67047b5}} 
+\index{dns\+\_\+client.\+c@{dns\+\_\+client.\+c}!dns\+Process\+Response@{dns\+Process\+Response}}
+\index{dns\+Process\+Response@{dns\+Process\+Response}!dns\+\_\+client.\+c@{dns\+\_\+client.\+c}}
+\subsubsection{\texorpdfstring{dns\+Process\+Response()}{dnsProcessResponse()}}
+{\footnotesize\ttfamily void dns\+Process\+Response (\begin{DoxyParamCaption}\item[{\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$}]{interface,  }\item[{const \hyperlink{structIpPseudoHeader}{Ip\+Pseudo\+Header} $\ast$}]{pseudo\+Header,  }\item[{const \hyperlink{udp_8h_a6877bae1da8326482f5e311875e52bce}{Udp\+Header} $\ast$}]{udp\+Header,  }\item[{const \hyperlink{structNetBuffer}{Net\+Buffer} $\ast$}]{buffer,  }\item[{size\+\_\+t}]{offset,  }\item[{void $\ast$}]{param }\end{DoxyParamCaption})}
+
+
+
+Process incoming D\+NS response message. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em interface} & Underlying network interface \\
+\hline
+\mbox{\tt in}  & {\em pseudo\+Header} & U\+DP pseudo header \\
+\hline
+\mbox{\tt in}  & {\em udp\+Header} & U\+DP header \\
+\hline
+\mbox{\tt in}  & {\em buffer} & Multi-\/part buffer containing the incoming D\+NS message \\
+\hline
+\mbox{\tt in}  & {\em offset} & Offset to the first byte of the D\+NS message \\
+\hline
+\mbox{\tt in}  & {\em param} & Callback function parameter (not used) \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 361 of file dns\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+363 \{
+364    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+365    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} j;
+366    \textcolor{keywordtype}{size\_t} pos;
+367    \textcolor{keywordtype}{size\_t} \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length};
+368    \hyperlink{dns__common_8h_a5caa7816ce531b3920054e974a0679f3}{DnsHeader} *\hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message};
+369    \hyperlink{dns__common_8h_ac1ef063cc8bc932118463092c282f188}{DnsQuestion} *question;
+370    \hyperlink{dns__common_8h_a801d4a933cd802d56c5450013b4c0969}{DnsResourceRecord} *record;
+371    \hyperlink{structDnsCacheEntry}{DnsCacheEntry} *entry;
+372 
+373    \textcolor{comment}{//Retrieve the length of the DNS message}
+374    length = \hyperlink{net__mem_8c_ac9dbcd9e28e61d8f4f6d2e9af2607b68}{netBufferGetLength}(buffer) - \hyperlink{pic32mz_2isr__support_8h_a12a5aed8a193ebbf9a641104a310610d}{offset};
+375 
+376    \textcolor{comment}{//Ensure the DNS message is valid}
+377    \textcolor{keywordflow}{if}(length < \textcolor{keyword}{sizeof}(\hyperlink{dns__common_8h_a5caa7816ce531b3920054e974a0679f3}{DnsHeader}))
+378       \textcolor{keywordflow}{return};
+379    \textcolor{keywordflow}{if}(length > \hyperlink{dns__common_8h_a8578d0d73531c18ef02299543f9b232e}{DNS\_MESSAGE\_MAX\_SIZE})
+380       \textcolor{keywordflow}{return};
+381 
+382    \textcolor{comment}{//Point to the DNS message header}
+383    message = \hyperlink{net__mem_8c_a20d30c9db547b3b2743368b589cf482b}{netBufferAt}(buffer, \hyperlink{pic32mz_2isr__support_8h_a12a5aed8a193ebbf9a641104a310610d}{offset});
+384    \textcolor{comment}{//Sanity check}
+385    \textcolor{keywordflow}{if}(message == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+386       \textcolor{keywordflow}{return};
+387 
+388    \textcolor{comment}{//Debug message}
+389    \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"DNS message received (%"} \hyperlink{compiler__port_8h_a2b7b0557dc6cd786df02dafbb51f5292}{PRIuSIZE} \textcolor{stringliteral}{" bytes)...\(\backslash\)r\(\backslash\)n"}, length);
+390    \textcolor{comment}{//Dump message}
+391    \hyperlink{dns__debug_8c_aa6a38c4e74d8b059c64c30456d5c26ad}{dnsDumpMessage}(message, length);
+392 
+393    \textcolor{comment}{//Check message type}
+394    \textcolor{keywordflow}{if}(!message->qr)
+395       \textcolor{keywordflow}{return};
+396 
+397    \textcolor{comment}{//The DNS message shall contain one question}
+398    \textcolor{keywordflow}{if}(\hyperlink{cpu__endian_8h_a9312c6eb72e64f748ae0d0e0dc3ec9b9}{ntohs}(message->qdcount) != 1)
+399       \textcolor{keywordflow}{return};
+400 
+401    \textcolor{comment}{//Loop through DNS cache entries}
+402    \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{dns__cache_8h_a0559240be0228278dd24ac2103aa0c66}{DNS\_CACHE\_SIZE}; i++)
+403    \{
+404       \textcolor{comment}{//Point to the current entry}
+405       entry = &\hyperlink{dns__cache_8c_a459576a3a6c3ed0c90f544dabacc8377}{dnsCache}[i];
+406 
+407       \textcolor{comment}{//DNS name resolution in progress?}
+408       \textcolor{keywordflow}{if}(entry->\hyperlink{structDnsCacheEntry_ac0f0a02b2f1fece9d83ec3345bb618c0}{state} == \hyperlink{dns__cache_8h_a57ef307e25adab4205cf584115875ef3affcd994aeea92ea47ae5be4f6a2f7511}{DNS\_STATE\_IN\_PROGRESS} &&
+409          entry->\hyperlink{structDnsCacheEntry_aeb800b57a9593f4749e3ae8ac03f4a71}{protocol} == \hyperlink{socket_8h_adb58068eb0cfd0e54798ac480eb19f94a7289eef0101ef470c06bfb1c96d37396}{HOST\_NAME\_RESOLVER\_DNS})
+410       \{
+411          \textcolor{comment}{//Check destination port number}
+412          \textcolor{keywordflow}{if}(entry->\hyperlink{structDnsCacheEntry_a694ec8e23fd08f447e85244478ace829}{port} == \hyperlink{cpu__endian_8h_a9312c6eb72e64f748ae0d0e0dc3ec9b9}{ntohs}(udpHeader->destPort))
+413          \{
+414             \textcolor{comment}{//Compare identifier against the expected one}
+415             \textcolor{keywordflow}{if}(\hyperlink{cpu__endian_8h_a9312c6eb72e64f748ae0d0e0dc3ec9b9}{ntohs}(message->id) != entry->\hyperlink{structDnsCacheEntry_ab32547b4942b2db0f0c0bcb41458856d}{id})
+416                \textcolor{keywordflow}{break};
+417 
+418             \textcolor{comment}{//Point to the first question}
+419             pos = \textcolor{keyword}{sizeof}(\hyperlink{dns__common_8h_a5caa7816ce531b3920054e974a0679f3}{DnsHeader});
+420             \textcolor{comment}{//Parse domain name}
+421             pos = \hyperlink{dns__common_8c_a6a5df1aead8f61467e9bf5e739ea5de0}{dnsParseName}(message, length, pos, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, 0);
+422 
+423             \textcolor{comment}{//Invalid name?}
+424             \textcolor{keywordflow}{if}(!pos)
+425                \textcolor{keywordflow}{break};
+426             \textcolor{comment}{//Malformed DNS message?}
+427             \textcolor{keywordflow}{if}((pos + \textcolor{keyword}{sizeof}(\hyperlink{dns__common_8h_ac1ef063cc8bc932118463092c282f188}{DnsQuestion})) > length)
+428                \textcolor{keywordflow}{break};
+429 
+430             \textcolor{comment}{//Compare domain name}
+431             \textcolor{keywordflow}{if}(\hyperlink{dns__common_8c_a09647d0528e53280cc0a35866cb2b224}{dnsCompareName}(message, length, \textcolor{keyword}{sizeof}(\hyperlink{dns__common_8h_a5caa7816ce531b3920054e974a0679f3}{DnsHeader}), entry->
+      \hyperlink{structDnsCacheEntry_a81b2ed3b8465dd82a249f7141865dae6}{name}, 0))
+432                \textcolor{keywordflow}{break};
+433 
+434             \textcolor{comment}{//Point to the corresponding entry}
+435             question = \hyperlink{dns__common_8h_a66ca704f3f850dcbb2f3ceefe90afcc5}{DNS\_GET\_QUESTION}(message, pos);
+436 
+437             \textcolor{comment}{//Check the class of the query}
+438             \textcolor{keywordflow}{if}(\hyperlink{cpu__endian_8h_a9312c6eb72e64f748ae0d0e0dc3ec9b9}{ntohs}(question->qclass) != \hyperlink{dns__common_8h_aa541e7289dae8934f7f37e74c15cc5a5ae4d96c0329f035328ba190627f2782e9}{DNS\_RR\_CLASS\_IN})
+439                \textcolor{keywordflow}{break};
+440 
+441             \textcolor{comment}{//Check the type of the query}
+442             \textcolor{keywordflow}{if}(entry->\hyperlink{structDnsCacheEntry_a5520082c9b81d8244f858641785ac01e}{type} == \hyperlink{socket_8h_ab5e32e6fb9dfb43706584ab98de9a7bdaebe58bd51c617e7f9024189e369dc8e9}{HOST\_TYPE\_IPV4} && \hyperlink{cpu__endian_8h_a9312c6eb72e64f748ae0d0e0dc3ec9b9}{ntohs}(question->qtype) != 
+      \hyperlink{dns__common_8h_aa24a9fb31b6fb3858a24a8d8682e23d1a420fd47ef427589e0f1961e35b46756b}{DNS\_RR\_TYPE\_A})
+443                \textcolor{keywordflow}{break};
+444             \textcolor{keywordflow}{if}(entry->\hyperlink{structDnsCacheEntry_a5520082c9b81d8244f858641785ac01e}{type} == \hyperlink{socket_8h_ab5e32e6fb9dfb43706584ab98de9a7bdaa1f89753ef33b5e8efcc253208e11c61}{HOST\_TYPE\_IPV6} && \hyperlink{cpu__endian_8h_a9312c6eb72e64f748ae0d0e0dc3ec9b9}{ntohs}(question->qtype) != 
+      \hyperlink{dns__common_8h_aa24a9fb31b6fb3858a24a8d8682e23d1a4d0fc3b547030a6a0f32b3ca455927fe}{DNS\_RR\_TYPE\_AAAA})
+445                \textcolor{keywordflow}{break};
+446 
+447             \textcolor{comment}{//Check return code}
+448             \textcolor{keywordflow}{if}(message->rcode != \hyperlink{dns__common_8h_a4e14ab5567efbae42f570bc5bbd1d209a3673e53909ca3bf211abc3f0600158e0}{DNS\_RCODE\_NO\_ERROR})
+449             \{
+450                \textcolor{comment}{//The entry should be deleted since name resolution has failed}
+451                \hyperlink{dns__cache_8c_a8bd5944a21fc50810a1592a028bd1a62}{dnsDeleteEntry}(entry);
+452                \textcolor{comment}{//Exit immediately}
+453                \textcolor{keywordflow}{break};
+454             \}
+455 
+456             \textcolor{comment}{//Point to the first answer}
+457             pos += \textcolor{keyword}{sizeof}(\hyperlink{dns__common_8h_ac1ef063cc8bc932118463092c282f188}{DnsQuestion});
+458 
+459             \textcolor{comment}{//Parse answer resource records}
+460             \textcolor{keywordflow}{for}(j = 0; j < \hyperlink{cpu__endian_8h_a9312c6eb72e64f748ae0d0e0dc3ec9b9}{ntohs}(message->ancount); j++)
+461             \{
+462                \textcolor{comment}{//Parse domain name}
+463                pos = \hyperlink{dns__common_8c_a6a5df1aead8f61467e9bf5e739ea5de0}{dnsParseName}(message, length, pos, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, 0);
+464                \textcolor{comment}{//Invalid name?}
+465                \textcolor{keywordflow}{if}(!pos)
+466                   \textcolor{keywordflow}{break};
+467 
+468                \textcolor{comment}{//Point to the associated resource record}
+469                record = \hyperlink{dns__common_8h_a4f1a2722ba292be26060ec5693e1f280}{DNS\_GET\_RESOURCE\_RECORD}(message, pos);
+470                \textcolor{comment}{//Point to the resource data}
+471                pos += \textcolor{keyword}{sizeof}(\hyperlink{dns__common_8h_a801d4a933cd802d56c5450013b4c0969}{DnsResourceRecord});
+472 
+473                \textcolor{comment}{//Make sure the resource record is valid}
+474                \textcolor{keywordflow}{if}(pos > length)
+475                   \textcolor{keywordflow}{break};
+476                \textcolor{keywordflow}{if}((pos + \hyperlink{cpu__endian_8h_a9312c6eb72e64f748ae0d0e0dc3ec9b9}{ntohs}(record->rdlength)) > \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length})
+477                   \textcolor{keywordflow}{break};
+478 
+479 \textcolor{preprocessor}{#if (IPV4\_SUPPORT == ENABLED)}
+480                \textcolor{comment}{//IPv4 address expected?}
+481                \textcolor{keywordflow}{if}(entry->\hyperlink{structDnsCacheEntry_a5520082c9b81d8244f858641785ac01e}{type} == \hyperlink{socket_8h_ab5e32e6fb9dfb43706584ab98de9a7bdaebe58bd51c617e7f9024189e369dc8e9}{HOST\_TYPE\_IPV4})
+482                \{
+483                   \textcolor{comment}{//A resource record found?}
+484                   \textcolor{keywordflow}{if}(\hyperlink{cpu__endian_8h_a9312c6eb72e64f748ae0d0e0dc3ec9b9}{ntohs}(record->rtype) == \hyperlink{dns__common_8h_aa24a9fb31b6fb3858a24a8d8682e23d1a420fd47ef427589e0f1961e35b46756b}{DNS\_RR\_TYPE\_A} &&
+485                      \hyperlink{cpu__endian_8h_a9312c6eb72e64f748ae0d0e0dc3ec9b9}{ntohs}(record->rdlength) == \textcolor{keyword}{sizeof}(\hyperlink{ipv4_8h_a411debb3d770caa0c06d3f73367da37f}{Ipv4Addr}))
+486                   \{
+487                      \textcolor{comment}{//Copy the IPv4 address}
+488                      entry->\hyperlink{structDnsCacheEntry_aad3958e8dcdeb2eea1a99089b2a8f5b1}{ipAddr}.\hyperlink{structIpAddr_ae61478bd1e79361fca7dd04a21aeb2f8}{length} = \textcolor{keyword}{sizeof}(\hyperlink{ipv4_8h_a411debb3d770caa0c06d3f73367da37f}{Ipv4Addr});
+489                      \hyperlink{ipv4_8h_a36a3af47ec7eec9b1781964eb0494b6f}{ipv4CopyAddr}(&entry->\hyperlink{structDnsCacheEntry_aad3958e8dcdeb2eea1a99089b2a8f5b1}{ipAddr}.\hyperlink{structIpAddr_a8de6f49cb0461f57c1eda49bb1088916}{ipv4Addr}, record->rdata);
+490 
+491                      \textcolor{comment}{//Save current time}
+492                      entry->\hyperlink{structDnsCacheEntry_ae149514d2ade99ae033ecedd03a5daf0}{timestamp} = \hyperlink{os__port__chibios_8c_ab66a11272d40a916fa69dd8e4dc443d4}{osGetSystemTime}();
+493                      \textcolor{comment}{//Save TTL value}
+494                      entry->\hyperlink{structDnsCacheEntry_a5bf3981653624c3e313f7f364b526cdb}{timeout} = \hyperlink{cpu__endian_8h_a22f92ea3318059b7d88dfbd98d0cbc3e}{ntohl}(record->ttl) * 1000;
+495 
+496                      \textcolor{comment}{//Limit the lifetime of the DNS cache entries}
+497                      \textcolor{keywordflow}{if}(entry->\hyperlink{structDnsCacheEntry_a5bf3981653624c3e313f7f364b526cdb}{timeout} >= \hyperlink{dns__client_8h_a94e81a673f71c1c64afc239cd2acbe01}{DNS\_MAX\_LIFETIME})
+498                         entry->\hyperlink{structDnsCacheEntry_a5bf3981653624c3e313f7f364b526cdb}{timeout} = \hyperlink{dns__client_8h_a94e81a673f71c1c64afc239cd2acbe01}{DNS\_MAX\_LIFETIME};
+499                      \textcolor{keywordflow}{if}(entry->\hyperlink{structDnsCacheEntry_a5bf3981653624c3e313f7f364b526cdb}{timeout} <= \hyperlink{dns__client_8h_ae9bf55206a447d29051d5c306269c17d}{DNS\_MIN\_LIFETIME})
+500                         entry->\hyperlink{structDnsCacheEntry_a5bf3981653624c3e313f7f364b526cdb}{timeout} = \hyperlink{dns__client_8h_ae9bf55206a447d29051d5c306269c17d}{DNS\_MIN\_LIFETIME};
+501 
+502                      \textcolor{comment}{//Unregister UDP callback function}
+503                      \hyperlink{udp_8c_a1d915e0747de1926d096062048111e66}{udpDetachRxCallback}(interface, entry->
+      \hyperlink{structDnsCacheEntry_a694ec8e23fd08f447e85244478ace829}{port});
+504                      \textcolor{comment}{//Host name successfully resolved}
+505                      entry->\hyperlink{structDnsCacheEntry_ac0f0a02b2f1fece9d83ec3345bb618c0}{state} = \hyperlink{dns__cache_8h_a57ef307e25adab4205cf584115875ef3a29c9441f0fda002de6ba63d19b20f334}{DNS\_STATE\_RESOLVED};
+506                      \textcolor{comment}{//Exit immediately}
+507                      \textcolor{keywordflow}{break};
+508                   \}
+509                \}
+510 \textcolor{preprocessor}{#endif}
+511 \textcolor{preprocessor}{#if (IPV6\_SUPPORT == ENABLED)}
+512                \textcolor{comment}{//IPv6 address expected?}
+513                \textcolor{keywordflow}{if}(entry->\hyperlink{structDnsCacheEntry_a5520082c9b81d8244f858641785ac01e}{type} == \hyperlink{socket_8h_ab5e32e6fb9dfb43706584ab98de9a7bdaa1f89753ef33b5e8efcc253208e11c61}{HOST\_TYPE\_IPV6})
+514                \{
+515                   \textcolor{comment}{//AAAA resource record found?}
+516                   \textcolor{keywordflow}{if}(\hyperlink{cpu__endian_8h_a9312c6eb72e64f748ae0d0e0dc3ec9b9}{ntohs}(record->rtype) == \hyperlink{dns__common_8h_aa24a9fb31b6fb3858a24a8d8682e23d1a4d0fc3b547030a6a0f32b3ca455927fe}{DNS\_RR\_TYPE\_AAAA} &&
+517                      \hyperlink{cpu__endian_8h_a9312c6eb72e64f748ae0d0e0dc3ec9b9}{ntohs}(record->rdlength) == \textcolor{keyword}{sizeof}(\hyperlink{ipv6_8h_aed0cbc40c61ed5b4fb681ebc55237e89}{Ipv6Addr}))
+518                   \{
+519                      \textcolor{comment}{//Copy the IPv6 address}
+520                      entry->\hyperlink{structDnsCacheEntry_aad3958e8dcdeb2eea1a99089b2a8f5b1}{ipAddr}.\hyperlink{structIpAddr_ae61478bd1e79361fca7dd04a21aeb2f8}{length} = \textcolor{keyword}{sizeof}(\hyperlink{ipv6_8h_aed0cbc40c61ed5b4fb681ebc55237e89}{Ipv6Addr});
+521                      \hyperlink{ipv6_8h_ac22b1fcd381d1c288e269cb8d164bfec}{ipv6CopyAddr}(&entry->\hyperlink{structDnsCacheEntry_aad3958e8dcdeb2eea1a99089b2a8f5b1}{ipAddr}.\hyperlink{structIpAddr_a9bc2340a9c0bc5a0b8aa9695b74e2ee6}{ipv6Addr}, record->rdata);
+522 
+523                      \textcolor{comment}{//Save current time}
+524                      entry->\hyperlink{structDnsCacheEntry_ae149514d2ade99ae033ecedd03a5daf0}{timestamp} = \hyperlink{os__port__chibios_8c_ab66a11272d40a916fa69dd8e4dc443d4}{osGetSystemTime}();
+525                      \textcolor{comment}{//Save TTL value}
+526                      entry->\hyperlink{structDnsCacheEntry_a5bf3981653624c3e313f7f364b526cdb}{timeout} = \hyperlink{cpu__endian_8h_a22f92ea3318059b7d88dfbd98d0cbc3e}{ntohl}(record->ttl) * 1000;
+527 
+528                      \textcolor{comment}{//Limit the lifetime of the DNS cache entries}
+529                      \textcolor{keywordflow}{if}(entry->\hyperlink{structDnsCacheEntry_a5bf3981653624c3e313f7f364b526cdb}{timeout} >= \hyperlink{dns__client_8h_a94e81a673f71c1c64afc239cd2acbe01}{DNS\_MAX\_LIFETIME})
+530                         entry->\hyperlink{structDnsCacheEntry_a5bf3981653624c3e313f7f364b526cdb}{timeout} = \hyperlink{dns__client_8h_a94e81a673f71c1c64afc239cd2acbe01}{DNS\_MAX\_LIFETIME};
+531                      \textcolor{keywordflow}{if}(entry->\hyperlink{structDnsCacheEntry_a5bf3981653624c3e313f7f364b526cdb}{timeout} <= \hyperlink{dns__client_8h_ae9bf55206a447d29051d5c306269c17d}{DNS\_MIN\_LIFETIME})
+532                         entry->\hyperlink{structDnsCacheEntry_a5bf3981653624c3e313f7f364b526cdb}{timeout} = \hyperlink{dns__client_8h_ae9bf55206a447d29051d5c306269c17d}{DNS\_MIN\_LIFETIME};
+533 
+534                      \textcolor{comment}{//Unregister UDP callback function}
+535                      \hyperlink{udp_8c_a1d915e0747de1926d096062048111e66}{udpDetachRxCallback}(interface, entry->
+      \hyperlink{structDnsCacheEntry_a694ec8e23fd08f447e85244478ace829}{port});
+536                      \textcolor{comment}{//Host name successfully resolved}
+537                      entry->\hyperlink{structDnsCacheEntry_ac0f0a02b2f1fece9d83ec3345bb618c0}{state} = \hyperlink{dns__cache_8h_a57ef307e25adab4205cf584115875ef3a29c9441f0fda002de6ba63d19b20f334}{DNS\_STATE\_RESOLVED};
+538                      \textcolor{comment}{//Exit immediately}
+539                      \textcolor{keywordflow}{break};
+540                   \}
+541                \}
+542 \textcolor{preprocessor}{#endif}
+543                \textcolor{comment}{//Point to the next resource record}
+544                pos += \hyperlink{cpu__endian_8h_a9312c6eb72e64f748ae0d0e0dc3ec9b9}{ntohs}(record->rdlength);
+545             \}
+546 
+547             \textcolor{comment}{//We are done}
+548             \textcolor{keywordflow}{break};
+549          \}
+550       \}
+551    \}
+552 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{dns__client_8c_a75f9826a5944cbdcf9656fe5e0657788}\label{dns__client_8c_a75f9826a5944cbdcf9656fe5e0657788}} 
+\index{dns\+\_\+client.\+c@{dns\+\_\+client.\+c}!dns\+Resolve@{dns\+Resolve}}
+\index{dns\+Resolve@{dns\+Resolve}!dns\+\_\+client.\+c@{dns\+\_\+client.\+c}}
+\subsubsection{\texorpdfstring{dns\+Resolve()}{dnsResolve()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} dns\+Resolve (\begin{DoxyParamCaption}\item[{\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$}]{interface,  }\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{name,  }\item[{\hyperlink{socket_8h_ab5e32e6fb9dfb43706584ab98de9a7bd}{Host\+Type}}]{type,  }\item[{\hyperlink{structIpAddr}{Ip\+Addr} $\ast$}]{ip\+Addr }\end{DoxyParamCaption})}
+
+
+
+Resolve a host name using D\+NS. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em interface} & Underlying network interface \\
+\hline
+\mbox{\tt in}  & {\em name} & Name of the host to be resolved \\
+\hline
+\mbox{\tt in}  & {\em type} & Host type (I\+Pv4 or I\+Pv6) \\
+\hline
+\mbox{\tt out}  & {\em ip\+Addr} & IP address corresponding to the specified host name \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 54 of file dns\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+56 \{
+57    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+58    \hyperlink{structDnsCacheEntry}{DnsCacheEntry} *entry;
+59 
+60 \textcolor{preprocessor}{#if (NET\_RTOS\_SUPPORT == ENABLED)}
+61    \hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\_t} delay;
+62 
+63    \textcolor{comment}{//Debug message}
+64    \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"Resolving host name %s (DNS resolver)...\(\backslash\)r\(\backslash\)n"}, \hyperlink{resource__manager_8h_a26532d7194d592ae8da35222073f36d6}{name});
+65 \textcolor{preprocessor}{#endif}
+66 
+67    \textcolor{comment}{//Get exclusive access}
+68    \hyperlink{os__port__chibios_8c_a58485224df4bfa522246d55b35bbd83a}{osAcquireMutex}(&\hyperlink{net_8c_afe31551ad26115fae8e575654346d441}{netMutex});
+69 
+70    \textcolor{comment}{//Search the DNS cache for the specified host name}
+71    entry = \hyperlink{dns__cache_8c_a079712e25d65a0e902068e6fea3141ae}{dnsFindEntry}(interface, \hyperlink{resource__manager_8h_a26532d7194d592ae8da35222073f36d6}{name}, \hyperlink{resource__manager_8h_a12e46a33bfe90638e58ef067c6fd4a6e}{type}, 
+      \hyperlink{socket_8h_adb58068eb0cfd0e54798ac480eb19f94a7289eef0101ef470c06bfb1c96d37396}{HOST\_NAME\_RESOLVER\_DNS});
+72 
+73    \textcolor{comment}{//Check whether a matching entry has been found}
+74    \textcolor{keywordflow}{if}(entry)
+75    \{
+76       \textcolor{comment}{//Host name already resolved?}
+77       \textcolor{keywordflow}{if}(entry->\hyperlink{structDnsCacheEntry_ac0f0a02b2f1fece9d83ec3345bb618c0}{state} == \hyperlink{dns__cache_8h_a57ef307e25adab4205cf584115875ef3a29c9441f0fda002de6ba63d19b20f334}{DNS\_STATE\_RESOLVED} ||
+78          entry->\hyperlink{structDnsCacheEntry_ac0f0a02b2f1fece9d83ec3345bb618c0}{state} == \hyperlink{dns__cache_8h_a57ef307e25adab4205cf584115875ef3ada34e46aacf8dc68d5c86add93157ea2}{DNS\_STATE\_PERMANENT})
+79       \{
+80          \textcolor{comment}{//Return the corresponding IP address}
+81          *ipAddr = entry->\hyperlink{structDnsCacheEntry_aad3958e8dcdeb2eea1a99089b2a8f5b1}{ipAddr};
+82          \textcolor{comment}{//Successful host name resolution}
+83          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+84       \}
+85       \textcolor{keywordflow}{else}
+86       \{
+87          \textcolor{comment}{//Host name resolution is in progress...}
+88          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca14596397b69ee6fd1d74ca77fb55e186}{ERROR\_IN\_PROGRESS};
+89       \}
+90    \}
+91    \textcolor{keywordflow}{else}
+92    \{
+93       \textcolor{comment}{//If no entry exists, then create a new one}
+94       entry = \hyperlink{dns__cache_8c_ac154126efa899c325ee537727c9f5174}{dnsCreateEntry}();
+95 
+96       \textcolor{comment}{//Record the host name whose IP address is unknown}
+97       strcpy(entry->\hyperlink{structDnsCacheEntry_a81b2ed3b8465dd82a249f7141865dae6}{name}, \hyperlink{resource__manager_8h_a26532d7194d592ae8da35222073f36d6}{name});
+98 
+99       \textcolor{comment}{//Initialize DNS cache entry}
+100       entry->\hyperlink{structDnsCacheEntry_a5520082c9b81d8244f858641785ac01e}{type} = \hyperlink{resource__manager_8h_a12e46a33bfe90638e58ef067c6fd4a6e}{type};
+101       entry->\hyperlink{structDnsCacheEntry_aeb800b57a9593f4749e3ae8ac03f4a71}{protocol} = \hyperlink{socket_8h_adb58068eb0cfd0e54798ac480eb19f94a7289eef0101ef470c06bfb1c96d37396}{HOST\_NAME\_RESOLVER\_DNS};
+102       entry->\hyperlink{structDnsCacheEntry_ad0d0a0228fc29308f59f4b2d402758e6}{interface} = interface;
+103       \textcolor{comment}{//Select primary DNS server}
+104       entry->\hyperlink{structDnsCacheEntry_a64c746516176b9ecc93492623e951a5c}{dnsServerNum} = 0;
+105 
+106       \textcolor{comment}{//Get an ephemeral port number}
+107       entry->\hyperlink{structDnsCacheEntry_a694ec8e23fd08f447e85244478ace829}{port} = \hyperlink{udp_8c_a9c0d754bee24d4408903597b0fd57fea}{udpGetDynamicPort}();
+108 
+109       \textcolor{comment}{//An identifier is used by the DNS client to match replies}
+110       \textcolor{comment}{//with corresponding requests}
+111       entry->\hyperlink{structDnsCacheEntry_ab32547b4942b2db0f0c0bcb41458856d}{id} = (\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t}) \hyperlink{net_8c_a7bb00b31d641749ac8ce742261eb1f6d}{netGetRand}();
+112 
+113       \textcolor{comment}{//Callback function to be called when a DNS response is received}
+114       error = \hyperlink{udp_8c_a38370e246c2908c710db4773a6423cee}{udpAttachRxCallback}(interface, entry->\hyperlink{structDnsCacheEntry_a694ec8e23fd08f447e85244478ace829}{port}, 
+      \hyperlink{dns__client_8c_ac0d34d1d180678e2e136f8b8d67047b5}{dnsProcessResponse},
+115          \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+116 
+117       \textcolor{comment}{//Check status code}
+118       \textcolor{keywordflow}{if}(!error)
+119       \{
+120          \textcolor{comment}{//Initialize retransmission counter}
+121          entry->\hyperlink{structDnsCacheEntry_aa1813da7ebe162f069a6079aa2365db1}{retransmitCount} = \hyperlink{dns__client_8h_acea30f639d3d2500b385045ba776793d}{DNS\_CLIENT\_MAX\_RETRIES};
+122          \textcolor{comment}{//Send DNS query}
+123          error = \hyperlink{dns__client_8c_a71fc5f544d54cd6dbf45c45292de4719}{dnsSendQuery}(entry);
+124 
+125          \textcolor{comment}{//DNS message successfully sent?}
+126          \textcolor{keywordflow}{if}(!error)
+127          \{
+128             \textcolor{comment}{//Save the time at which the query message was sent}
+129             entry->\hyperlink{structDnsCacheEntry_ae149514d2ade99ae033ecedd03a5daf0}{timestamp} = \hyperlink{os__port__chibios_8c_ab66a11272d40a916fa69dd8e4dc443d4}{osGetSystemTime}();
+130             \textcolor{comment}{//Set timeout value}
+131             entry->\hyperlink{structDnsCacheEntry_a5bf3981653624c3e313f7f364b526cdb}{timeout} = \hyperlink{dns__client_8h_ac3020fc20ede400fa6670fc6f7546ee4}{DNS\_CLIENT\_INIT\_TIMEOUT};
+132             entry->\hyperlink{structDnsCacheEntry_a4167197fb96cd19e4efdcd25184749c1}{maxTimeout} = \hyperlink{dns__client_8h_a88891e76ef0b86231e96da226a42bbd7}{DNS\_CLIENT\_MAX\_TIMEOUT};
+133             \textcolor{comment}{//Decrement retransmission counter}
+134             entry->\hyperlink{structDnsCacheEntry_aa1813da7ebe162f069a6079aa2365db1}{retransmitCount}--;
+135 
+136             \textcolor{comment}{//Switch state}
+137             entry->\hyperlink{structDnsCacheEntry_ac0f0a02b2f1fece9d83ec3345bb618c0}{state} = \hyperlink{dns__cache_8h_a57ef307e25adab4205cf584115875ef3affcd994aeea92ea47ae5be4f6a2f7511}{DNS\_STATE\_IN\_PROGRESS};
+138             \textcolor{comment}{//Host name resolution is in progress}
+139             error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca14596397b69ee6fd1d74ca77fb55e186}{ERROR\_IN\_PROGRESS};
+140          \}
+141          \textcolor{keywordflow}{else}
+142          \{
+143             \textcolor{comment}{//Unregister callback function}
+144             \hyperlink{udp_8c_a1d915e0747de1926d096062048111e66}{udpDetachRxCallback}(interface, entry->\hyperlink{structDnsCacheEntry_a694ec8e23fd08f447e85244478ace829}{port});
+145          \}
+146       \}
+147    \}
+148 
+149    \textcolor{comment}{//Release exclusive access}
+150    \hyperlink{os__port__chibios_8c_a8e10e5b2c6d3877b5ba60e375ac45d79}{osReleaseMutex}(&\hyperlink{net_8c_afe31551ad26115fae8e575654346d441}{netMutex});
+151 
+152 \textcolor{preprocessor}{#if (NET\_RTOS\_SUPPORT == ENABLED)}
+153    \textcolor{comment}{//Set default polling interval}
+154    delay = \hyperlink{dns__cache_8h_a437dbba366682cad097edc5d6e463d06}{DNS\_CACHE\_INIT\_POLLING\_INTERVAL};
+155 
+156    \textcolor{comment}{//Wait the host name resolution to complete}
+157    \textcolor{keywordflow}{while}(error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca14596397b69ee6fd1d74ca77fb55e186}{ERROR\_IN\_PROGRESS})
+158    \{
+159       \textcolor{comment}{//Wait until the next polling period}
+160       \hyperlink{os__port__chibios_8c_a69608590db97c707277aebf15be010e5}{osDelayTask}(delay);
+161 
+162       \textcolor{comment}{//Get exclusive access}
+163       \hyperlink{os__port__chibios_8c_a58485224df4bfa522246d55b35bbd83a}{osAcquireMutex}(&\hyperlink{net_8c_afe31551ad26115fae8e575654346d441}{netMutex});
+164 
+165       \textcolor{comment}{//Search the DNS cache for the specified host name}
+166       entry = \hyperlink{dns__cache_8c_a079712e25d65a0e902068e6fea3141ae}{dnsFindEntry}(interface, \hyperlink{resource__manager_8h_a26532d7194d592ae8da35222073f36d6}{name}, \hyperlink{resource__manager_8h_a12e46a33bfe90638e58ef067c6fd4a6e}{type}, 
+      \hyperlink{socket_8h_adb58068eb0cfd0e54798ac480eb19f94a7289eef0101ef470c06bfb1c96d37396}{HOST\_NAME\_RESOLVER\_DNS});
+167 
+168       \textcolor{comment}{//Check whether a matching entry has been found}
+169       \textcolor{keywordflow}{if}(entry)
+170       \{
+171          \textcolor{comment}{//Host name successfully resolved?}
+172          \textcolor{keywordflow}{if}(entry->\hyperlink{structDnsCacheEntry_ac0f0a02b2f1fece9d83ec3345bb618c0}{state} == \hyperlink{dns__cache_8h_a57ef307e25adab4205cf584115875ef3a29c9441f0fda002de6ba63d19b20f334}{DNS\_STATE\_RESOLVED})
+173          \{
+174             \textcolor{comment}{//Return the corresponding IP address}
+175             *ipAddr = entry->\hyperlink{structDnsCacheEntry_aad3958e8dcdeb2eea1a99089b2a8f5b1}{ipAddr};
+176             \textcolor{comment}{//Successful host name resolution}
+177             error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+178          \}
+179       \}
+180       \textcolor{keywordflow}{else}
+181       \{
+182          \textcolor{comment}{//Host name resolution failed}
+183          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cae9be6449970fca5714ab9957b16562a5}{ERROR\_FAILURE};
+184       \}
+185 
+186       \textcolor{comment}{//Release exclusive access}
+187       \hyperlink{os__port__chibios_8c_a8e10e5b2c6d3877b5ba60e375ac45d79}{osReleaseMutex}(&\hyperlink{net_8c_afe31551ad26115fae8e575654346d441}{netMutex});
+188 
+189       \textcolor{comment}{//Backoff support for less aggressive polling}
+190       delay = \hyperlink{os__port_8h_a3acffbd305ee72dcd4593c0d8af64a4f}{MIN}(delay * 2, \hyperlink{dns__cache_8h_aec92c7ec467dd08af86f9b5c77473b0e}{DNS\_CACHE\_MAX\_POLLING\_INTERVAL});
+191    \}
+192 
+193    \textcolor{comment}{//Check status code}
+194    \textcolor{keywordflow}{if}(error)
+195    \{
+196       \textcolor{comment}{//Failed to resolve host name}
+197       \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"Host name resolution failed!\(\backslash\)r\(\backslash\)n"});
+198    \}
+199    \textcolor{keywordflow}{else}
+200    \{
+201       \textcolor{comment}{//Successful host name resolution}
+202       \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"Host name resolved to %s...\(\backslash\)r\(\backslash\)n"}, \hyperlink{ip_8c_aecdb577de79f65f8c814d5f101c7c6ae}{ipAddrToString}(ipAddr, 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}));
+203    \}
+204 \textcolor{preprocessor}{#endif}
+205 
+206    \textcolor{comment}{//Return status code}
+207    \textcolor{keywordflow}{return} error;
+208 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{dns__client_8c_a71fc5f544d54cd6dbf45c45292de4719}\label{dns__client_8c_a71fc5f544d54cd6dbf45c45292de4719}} 
+\index{dns\+\_\+client.\+c@{dns\+\_\+client.\+c}!dns\+Send\+Query@{dns\+Send\+Query}}
+\index{dns\+Send\+Query@{dns\+Send\+Query}!dns\+\_\+client.\+c@{dns\+\_\+client.\+c}}
+\subsubsection{\texorpdfstring{dns\+Send\+Query()}{dnsSendQuery()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} dns\+Send\+Query (\begin{DoxyParamCaption}\item[{\hyperlink{structDnsCacheEntry}{Dns\+Cache\+Entry} $\ast$}]{entry }\end{DoxyParamCaption})}
+
+
+
+Send a D\+NS query message. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em entry} & Pointer to a valid D\+NS cache entry \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 217 of file dns\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+218 \{
+219    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+220    \textcolor{keywordtype}{size\_t} \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length};
+221    \textcolor{keywordtype}{size\_t} \hyperlink{pic32mz_2isr__support_8h_a12a5aed8a193ebbf9a641104a310610d}{offset};
+222    \hyperlink{structNetBuffer}{NetBuffer} *buffer;
+223    \hyperlink{dns__common_8h_a5caa7816ce531b3920054e974a0679f3}{DnsHeader} *\hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message};
+224    \hyperlink{dns__common_8h_ac1ef063cc8bc932118463092c282f188}{DnsQuestion} *dnsQuestion;
+225    \hyperlink{structIpAddr}{IpAddr} \hyperlink{ipcp_8h_a752e1719cf65f78dfec6274352cb56df}{destIpAddr};
+226 
+227 \textcolor{preprocessor}{#if (IPV4\_SUPPORT == ENABLED)}
+228    \textcolor{comment}{//An IPv4 address is expected?}
+229    \textcolor{keywordflow}{if}(entry->\hyperlink{structDnsCacheEntry_a5520082c9b81d8244f858641785ac01e}{type} == \hyperlink{socket_8h_ab5e32e6fb9dfb43706584ab98de9a7bdaebe58bd51c617e7f9024189e369dc8e9}{HOST\_TYPE\_IPV4})
+230    \{
+231       \textcolor{comment}{//Point to the IPv4 context}
+232       \hyperlink{structIpv4Context}{Ipv4Context} *ipv4Context = &entry->\hyperlink{structDnsCacheEntry_ad0d0a0228fc29308f59f4b2d402758e6}{interface}->ipv4Context;
+233 
+234       \textcolor{comment}{//Out of range index?}
+235       \textcolor{keywordflow}{if}(entry->\hyperlink{structDnsCacheEntry_a64c746516176b9ecc93492623e951a5c}{dnsServerNum} >= \hyperlink{ipv4_8h_abc304c5d041be75e0bbe48aa44523487}{IPV4\_DNS\_SERVER\_LIST\_SIZE})
+236          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca59be661b72c2a42a1dab82bed2a76039}{ERROR\_NO\_DNS\_SERVER};
+237 
+238       \textcolor{comment}{//Select the relevant DNS server}
+239       destIpAddr.\hyperlink{structIpAddr_ae61478bd1e79361fca7dd04a21aeb2f8}{length} = \textcolor{keyword}{sizeof}(\hyperlink{ipv4_8h_a411debb3d770caa0c06d3f73367da37f}{Ipv4Addr});
+240       destIpAddr.\hyperlink{structIpAddr_a8de6f49cb0461f57c1eda49bb1088916}{ipv4Addr} = ipv4Context->\hyperlink{structIpv4Context_a35af49229f86907500e3d181a95568be}{dnsServerList}[entry->
+      \hyperlink{structDnsCacheEntry_a64c746516176b9ecc93492623e951a5c}{dnsServerNum}];
+241 
+242       \textcolor{comment}{//Make sure the IP address is valid}
+243       \textcolor{keywordflow}{if}(destIpAddr.\hyperlink{structIpAddr_a8de6f49cb0461f57c1eda49bb1088916}{ipv4Addr} == \hyperlink{ipv4_8h_aa9d277a6ff68d361eaf48d6af73e78e8}{IPV4\_UNSPECIFIED\_ADDR})
+244          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca59be661b72c2a42a1dab82bed2a76039}{ERROR\_NO\_DNS\_SERVER};
+245    \}
+246    \textcolor{keywordflow}{else}
+247 \textcolor{preprocessor}{#endif}
+248 \textcolor{preprocessor}{#if (IPV6\_SUPPORT == ENABLED)}
+249    \textcolor{comment}{//An IPv6 address is expected?}
+250    \textcolor{keywordflow}{if}(entry->\hyperlink{structDnsCacheEntry_a5520082c9b81d8244f858641785ac01e}{type} == \hyperlink{socket_8h_ab5e32e6fb9dfb43706584ab98de9a7bdaa1f89753ef33b5e8efcc253208e11c61}{HOST\_TYPE\_IPV6})
+251    \{
+252       \textcolor{comment}{//Point to the IPv6 context}
+253       \hyperlink{structIpv6Context}{Ipv6Context} *ipv6Context = &entry->\hyperlink{structDnsCacheEntry_ad0d0a0228fc29308f59f4b2d402758e6}{interface}->ipv6Context;
+254 
+255       \textcolor{comment}{//Out of range index?}
+256       \textcolor{keywordflow}{if}(entry->\hyperlink{structDnsCacheEntry_a64c746516176b9ecc93492623e951a5c}{dnsServerNum} >= \hyperlink{ipv6_8h_a7ef30c7f719916efa14b509b7ef707a1}{IPV6\_DNS\_SERVER\_LIST\_SIZE})
+257          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca59be661b72c2a42a1dab82bed2a76039}{ERROR\_NO\_DNS\_SERVER};
+258 
+259       \textcolor{comment}{//Select the relevant DNS server}
+260       destIpAddr.\hyperlink{structIpAddr_ae61478bd1e79361fca7dd04a21aeb2f8}{length} = \textcolor{keyword}{sizeof}(\hyperlink{ipv6_8h_aed0cbc40c61ed5b4fb681ebc55237e89}{Ipv6Addr});
+261       destIpAddr.\hyperlink{structIpAddr_a9bc2340a9c0bc5a0b8aa9695b74e2ee6}{ipv6Addr} = ipv6Context->\hyperlink{structIpv6Context_a62347c5c24f0c65b5055395f08612ae3}{dnsServerList}[entry->
+      \hyperlink{structDnsCacheEntry_a64c746516176b9ecc93492623e951a5c}{dnsServerNum}];
+262 
+263       \textcolor{comment}{//Make sure the IP address is valid}
+264       \textcolor{keywordflow}{if}(\hyperlink{ipv6_8h_ab1e93bd2152bc3f3b5642fd0216384d7}{ipv6CompAddr}(&destIpAddr.\hyperlink{structIpAddr_a9bc2340a9c0bc5a0b8aa9695b74e2ee6}{ipv6Addr}, &
+      \hyperlink{ipv6_8c_aa4baeec4f7b8b166d2457787fb9eddf9}{IPV6\_UNSPECIFIED\_ADDR}))
+265          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca59be661b72c2a42a1dab82bed2a76039}{ERROR\_NO\_DNS\_SERVER};
+266    \}
+267    \textcolor{keywordflow}{else}
+268 \textcolor{preprocessor}{#endif}
+269    \textcolor{comment}{//Invalid host type?}
+270    \{
+271       \textcolor{comment}{//Report an error}
+272       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+273    \}
+274 
+275    \textcolor{comment}{//Allocate a memory buffer to hold the DNS query message}
+276    buffer = \hyperlink{udp_8c_a2c65cad7c5665fe03f94364e7e52b2be}{udpAllocBuffer}(\hyperlink{dns__common_8h_a8578d0d73531c18ef02299543f9b232e}{DNS\_MESSAGE\_MAX\_SIZE}, &offset);
+277    \textcolor{comment}{//Failed to allocate buffer?}
+278    \textcolor{keywordflow}{if}(buffer == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+279       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac0a554045048d2fb61387cf735676f69}{ERROR\_OUT\_OF\_MEMORY};
+280 
+281    \textcolor{comment}{//Point to the DNS header}
+282    message = \hyperlink{net__mem_8c_a20d30c9db547b3b2743368b589cf482b}{netBufferAt}(buffer, offset);
+283 
+284    \textcolor{comment}{//Format DNS query message}
+285    message->id = \hyperlink{cpu__endian_8h_a800cdbf435a85a9b3ad4f0edc518472a}{htons}(entry->\hyperlink{structDnsCacheEntry_ab32547b4942b2db0f0c0bcb41458856d}{id});
+286    message->qr = 0;
+287    message->opcode = \hyperlink{dns__common_8h_a9f7c2277e233fdeda3757e48282d3314af37862c9f8865288e6df0392930ec0a3}{DNS\_OPCODE\_QUERY};
+288    message->aa = 0;
+289    message->tc = 0;
+290    message->rd = 1;
+291    message->ra = 0;
+292    message->z = 0;
+293    message->rcode = \hyperlink{dns__common_8h_a4e14ab5567efbae42f570bc5bbd1d209a3673e53909ca3bf211abc3f0600158e0}{DNS\_RCODE\_NO\_ERROR};
+294 
+295    \textcolor{comment}{//The DNS query contains one question}
+296    message->qdcount = \hyperlink{cpu__endian_8h_a15540dbaeee98b6df80805f92e2f6759}{HTONS}(1);
+297    message->ancount = 0;
+298    message->nscount = 0;
+299    message->arcount = 0;
+300 
+301    \textcolor{comment}{//Length of the DNS query message}
+302    length = \textcolor{keyword}{sizeof}(\hyperlink{dns__common_8h_a5caa7816ce531b3920054e974a0679f3}{DnsHeader});
+303 
+304    \textcolor{comment}{//Encode the host name using the DNS name notation}
+305    length += \hyperlink{dns__common_8c_aa375505b90ab1f2473b3084c97ace370}{dnsEncodeName}(entry->\hyperlink{structDnsCacheEntry_a81b2ed3b8465dd82a249f7141865dae6}{name}, message->questions);
+306 
+307    \textcolor{comment}{//Point to the corresponding question structure}
+308    dnsQuestion = \hyperlink{dns__common_8h_a66ca704f3f850dcbb2f3ceefe90afcc5}{DNS\_GET\_QUESTION}(message, length);
+309 
+310 \textcolor{preprocessor}{#if (IPV4\_SUPPORT == ENABLED)}
+311    \textcolor{comment}{//An IPv4 address is expected?}
+312    \textcolor{keywordflow}{if}(entry->\hyperlink{structDnsCacheEntry_a5520082c9b81d8244f858641785ac01e}{type} == \hyperlink{socket_8h_ab5e32e6fb9dfb43706584ab98de9a7bdaebe58bd51c617e7f9024189e369dc8e9}{HOST\_TYPE\_IPV4})
+313    \{
+314       \textcolor{comment}{//Fill in question structure}
+315       dnsQuestion->qtype = \hyperlink{cpu__endian_8h_a15540dbaeee98b6df80805f92e2f6759}{HTONS}(\hyperlink{dns__common_8h_aa24a9fb31b6fb3858a24a8d8682e23d1a420fd47ef427589e0f1961e35b46756b}{DNS\_RR\_TYPE\_A});
+316       dnsQuestion->qclass = \hyperlink{cpu__endian_8h_a15540dbaeee98b6df80805f92e2f6759}{HTONS}(\hyperlink{dns__common_8h_aa541e7289dae8934f7f37e74c15cc5a5ae4d96c0329f035328ba190627f2782e9}{DNS\_RR\_CLASS\_IN});
+317    \}
+318 \textcolor{preprocessor}{#endif}
+319 \textcolor{preprocessor}{#if (IPV6\_SUPPORT == ENABLED)}
+320    \textcolor{comment}{//An IPv6 address is expected?}
+321    \textcolor{keywordflow}{if}(entry->\hyperlink{structDnsCacheEntry_a5520082c9b81d8244f858641785ac01e}{type} == \hyperlink{socket_8h_ab5e32e6fb9dfb43706584ab98de9a7bdaa1f89753ef33b5e8efcc253208e11c61}{HOST\_TYPE\_IPV6})
+322    \{
+323       \textcolor{comment}{//Fill in question structure}
+324       dnsQuestion->qtype = \hyperlink{cpu__endian_8h_a15540dbaeee98b6df80805f92e2f6759}{HTONS}(\hyperlink{dns__common_8h_aa24a9fb31b6fb3858a24a8d8682e23d1a4d0fc3b547030a6a0f32b3ca455927fe}{DNS\_RR\_TYPE\_AAAA});
+325       dnsQuestion->qclass = \hyperlink{cpu__endian_8h_a15540dbaeee98b6df80805f92e2f6759}{HTONS}(\hyperlink{dns__common_8h_aa541e7289dae8934f7f37e74c15cc5a5ae4d96c0329f035328ba190627f2782e9}{DNS\_RR\_CLASS\_IN});
+326    \}
+327 \textcolor{preprocessor}{#endif}
+328 
+329    \textcolor{comment}{//Update the length of the DNS query message}
+330    length += \textcolor{keyword}{sizeof}(\hyperlink{dns__common_8h_ac1ef063cc8bc932118463092c282f188}{DnsQuestion});
+331 
+332    \textcolor{comment}{//Adjust the length of the multi-part buffer}
+333    \hyperlink{net__mem_8c_ac0a46f396754e069dd1ee65cdc559b28}{netBufferSetLength}(buffer, offset + length);
+334 
+335    \textcolor{comment}{//Debug message}
+336    \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"Sending DNS message (%"} \hyperlink{compiler__port_8h_a2b7b0557dc6cd786df02dafbb51f5292}{PRIuSIZE} \textcolor{stringliteral}{" bytes)...\(\backslash\)r\(\backslash\)n"}, length);
+337    \textcolor{comment}{//Dump message}
+338    \hyperlink{dns__debug_8c_aa6a38c4e74d8b059c64c30456d5c26ad}{dnsDumpMessage}(message, length);
+339 
+340    \textcolor{comment}{//Send DNS query message}
+341    error = \hyperlink{udp_8c_a72a529f723ed1b75bfe98d0708f28eb1}{udpSendDatagramEx}(entry->\hyperlink{structDnsCacheEntry_ad0d0a0228fc29308f59f4b2d402758e6}{interface}, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, entry->
+      \hyperlink{structDnsCacheEntry_a694ec8e23fd08f447e85244478ace829}{port},
+342       &destIpAddr, \hyperlink{dns__common_8h_ab1d3f5c08428c20521a92ca2fa20f46c}{DNS\_PORT}, buffer, offset, 0);
+343 
+344    \textcolor{comment}{//Free previously allocated memory}
+345    \hyperlink{net__mem_8c_aa33fc4dd2a71649194052f297c707d08}{netBufferFree}(buffer);
+346    \textcolor{comment}{//Return status code}
+347    \textcolor{keywordflow}{return} error;
+348 \}
+\end{DoxyCode}

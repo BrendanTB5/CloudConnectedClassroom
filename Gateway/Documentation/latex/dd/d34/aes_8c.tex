@@ -1,0 +1,597 @@
+\hypertarget{aes_8c}{}\section{cyclone\+\_\+crypto/cipher/aes.c File Reference}
+\label{aes_8c}\index{cyclone\+\_\+crypto/cipher/aes.\+c@{cyclone\+\_\+crypto/cipher/aes.\+c}}
+
+
+A\+ES (Advanced Encryption Standard)  
+
+
+{\ttfamily \#include \char`\"{}core/crypto.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}cipher/aes.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{aes_8c_afcdf5e66fd927a7f4cc64295acd20407}{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}~\hyperlink{crypto__config_8h_a6afae3a9b63f9b55d979e667ee0e881d}{C\+R\+Y\+P\+T\+O\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{aes_8c_a1786debf48f536d5dd454e4a8f7ecd0f}{aes\+Init} (\hyperlink{structAesContext}{Aes\+Context} $\ast$context, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$key, size\+\_\+t key\+Len)
+\begin{DoxyCompactList}\small\item\em Key expansion. \end{DoxyCompactList}\item 
+void \hyperlink{aes_8c_aa524ebbb575c847bcceb7260d3da9245}{aes\+Encrypt\+Block} (\hyperlink{structAesContext}{Aes\+Context} $\ast$context, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$input, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$output)
+\begin{DoxyCompactList}\small\item\em Encrypt a 16-\/byte block using A\+ES algorithm. \end{DoxyCompactList}\item 
+void \hyperlink{aes_8c_a885ae24ee80d48243736f06d6abcae0a}{aes\+Decrypt\+Block} (\hyperlink{structAesContext}{Aes\+Context} $\ast$context, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$input, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$output)
+\begin{DoxyCompactList}\small\item\em Decrypt a 16-\/byte block using A\+ES algorithm. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} \hyperlink{aes_8c_adc15aeb43c81de1162045eedf437f407}{sbox} \mbox{[}256\mbox{]}
+\item 
+static const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} \hyperlink{aes_8c_a7937f1040dcd7aea8595768cc6d95e8e}{isbox} \mbox{[}256\mbox{]}
+\item 
+static const \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t} \hyperlink{aes_8c_ad449d120251b159561b8af081db6ab10}{te} \mbox{[}256\mbox{]}
+\item 
+static const \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t} \hyperlink{aes_8c_a8aa09d2cb5b9d58af1cf9b65cef9a86c}{td} \mbox{[}256\mbox{]}
+\item 
+static const \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t} \hyperlink{aes_8c_a5cac100dab65b0797627a0d31b5bc5f2}{rcon} \mbox{[}11\mbox{]}
+\item 
+const \hyperlink{structCipherAlgo}{Cipher\+Algo} \hyperlink{aes_8c_a7990fc0fb5988ad3d893ae079644d32e}{aes\+Cipher\+Algo}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A\+ES (Advanced Encryption Standard) 
+
+\hypertarget{pic32mz__ef__curiosity_8h_License}{}\subsection{License}\label{pic32mz__ef__curiosity_8h_License}
+S\+P\+D\+X-\/\+License-\/\+Identifier\+: G\+P\+L-\/2.\+0-\/or-\/later
+
+Copyright (C) 2010-\/2019 Oryx Embedded S\+A\+RL. All rights reserved.
+
+This file is part of Cyclone\+Crypto Open.
+
+This program is free software; you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+
+You should have received a copy of the G\+NU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-\/1301, U\+SA.\hypertarget{tftp__server_8c_Description}{}\subsection{Description}\label{tftp__server_8c_Description}
+A\+ES is an encryption standard based on Rijndael algorithm, a symmetric block cipher that can process data blocks of 128 bits, using cipher keys with lengths of 128, 192, and 256 bits. Refer to F\+I\+PS 197 for more details
+
+\begin{DoxyAuthor}{Author}
+Oryx Embedded S\+A\+RL (www.\+oryx-\/embedded.\+com) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+9.\+6 
+\end{DoxyVersion}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{aes_8c_afcdf5e66fd927a7f4cc64295acd20407}\label{aes_8c_afcdf5e66fd927a7f4cc64295acd20407}} 
+\index{aes.\+c@{aes.\+c}!T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+\index{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}!aes.\+c@{aes.\+c}}
+\subsubsection{\texorpdfstring{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}{TRACE\_LEVEL}}
+{\footnotesize\ttfamily \#define T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL~\hyperlink{crypto__config_8h_a6afae3a9b63f9b55d979e667ee0e881d}{C\+R\+Y\+P\+T\+O\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+
+
+
+Definition at line 38 of file aes.\+c.
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{aes_8c_a885ae24ee80d48243736f06d6abcae0a}\label{aes_8c_a885ae24ee80d48243736f06d6abcae0a}} 
+\index{aes.\+c@{aes.\+c}!aes\+Decrypt\+Block@{aes\+Decrypt\+Block}}
+\index{aes\+Decrypt\+Block@{aes\+Decrypt\+Block}!aes.\+c@{aes.\+c}}
+\subsubsection{\texorpdfstring{aes\+Decrypt\+Block()}{aesDecryptBlock()}}
+{\footnotesize\ttfamily void aes\+Decrypt\+Block (\begin{DoxyParamCaption}\item[{\hyperlink{structAesContext}{Aes\+Context} $\ast$}]{context,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{input,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{output }\end{DoxyParamCaption})}
+
+
+
+Decrypt a 16-\/byte block using A\+ES algorithm. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the A\+ES context \\
+\hline
+\mbox{\tt in}  & {\em input} & Ciphertext block to decrypt \\
+\hline
+\mbox{\tt out}  & {\em output} & Plaintext block resulting from decryption \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 420 of file aes.\+c.
+
+
+\begin{DoxyCode}
+421 \{
+422    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+423    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} s0;
+424    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} s1;
+425    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} s2;
+426    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} s3;
+427    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} \hyperlink{pic32mx_2isr__support_8h_ae498df5bf6f1a461a5434c073031e229}{t0};
+428    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} \hyperlink{tiger_8c_a5017152cac85e29a2dc5d8d74de9e07c}{t1};
+429    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} \hyperlink{tiger_8c_a42a80c4c472115c0fcb04a076526ecf5}{t2};
+430    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} \hyperlink{tiger_8c_a275db56faf9780608afff7d4fb462caf}{t3};
+431    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} temp;
+432 
+433    \textcolor{comment}{//Copy the ciphertext to the state array}
+434    s0 = \hyperlink{cpu__endian_8h_a7a6ecaee0bc600cae5a7dead20594920}{LOAD32LE}(input + 0);
+435    s1 = \hyperlink{cpu__endian_8h_a7a6ecaee0bc600cae5a7dead20594920}{LOAD32LE}(input + 4);
+436    s2 = \hyperlink{cpu__endian_8h_a7a6ecaee0bc600cae5a7dead20594920}{LOAD32LE}(input + 8);
+437    s3 = \hyperlink{cpu__endian_8h_a7a6ecaee0bc600cae5a7dead20594920}{LOAD32LE}(input + 12);
+438 
+439    \textcolor{comment}{//Initial round key addition}
+440    s0 ^= context->\hyperlink{structAesContext_a39944caefcfd380dd50aa6a089c981e6}{dk}[context->\hyperlink{structAesContext_aabd0cf2167c7b59f419dda6d0ed9c9ad}{nr} * 4];
+441    s1 ^= context->\hyperlink{structAesContext_a39944caefcfd380dd50aa6a089c981e6}{dk}[context->\hyperlink{structAesContext_aabd0cf2167c7b59f419dda6d0ed9c9ad}{nr} * 4 + 1];
+442    s2 ^= context->\hyperlink{structAesContext_a39944caefcfd380dd50aa6a089c981e6}{dk}[context->\hyperlink{structAesContext_aabd0cf2167c7b59f419dda6d0ed9c9ad}{nr} * 4 + 2];
+443    s3 ^= context->\hyperlink{structAesContext_a39944caefcfd380dd50aa6a089c981e6}{dk}[context->\hyperlink{structAesContext_aabd0cf2167c7b59f419dda6d0ed9c9ad}{nr} * 4 + 3];
+444 
+445    \textcolor{comment}{//The number of rounds depends on the key length}
+446    \textcolor{keywordflow}{for}(i = context->\hyperlink{structAesContext_aabd0cf2167c7b59f419dda6d0ed9c9ad}{nr} - 1; i >= 1; i--)
+447    \{
+448       \textcolor{comment}{//Apply round function}
+449       t0 = \hyperlink{aes_8c_a8aa09d2cb5b9d58af1cf9b65cef9a86c}{td}[s0 & 0xFF];
+450       temp = \hyperlink{aes_8c_a8aa09d2cb5b9d58af1cf9b65cef9a86c}{td}[(s3 >> 8) & 0xFF];
+451       t0 ^= \hyperlink{cyclone__crypto_2core_2crypto_8h_ad5e52b5ea688101f11d0bf34dc3a8b4b}{ROL32}(temp, 8);
+452       temp = \hyperlink{aes_8c_a8aa09d2cb5b9d58af1cf9b65cef9a86c}{td}[(s2 >> 16) & 0xFF];
+453       t0 ^= \hyperlink{cyclone__crypto_2core_2crypto_8h_ad5e52b5ea688101f11d0bf34dc3a8b4b}{ROL32}(temp, 16);
+454       temp = \hyperlink{aes_8c_a8aa09d2cb5b9d58af1cf9b65cef9a86c}{td}[(s1 >> 24) & 0xFF];
+455       t0 ^= \hyperlink{cyclone__crypto_2core_2crypto_8h_ad5e52b5ea688101f11d0bf34dc3a8b4b}{ROL32}(temp, 24);
+456 
+457       t1 = \hyperlink{aes_8c_a8aa09d2cb5b9d58af1cf9b65cef9a86c}{td}[s1 & 0xFF];
+458       temp = \hyperlink{aes_8c_a8aa09d2cb5b9d58af1cf9b65cef9a86c}{td}[(s0 >> 8) & 0xFF];
+459       t1 ^= \hyperlink{cyclone__crypto_2core_2crypto_8h_ad5e52b5ea688101f11d0bf34dc3a8b4b}{ROL32}(temp, 8);
+460       temp = \hyperlink{aes_8c_a8aa09d2cb5b9d58af1cf9b65cef9a86c}{td}[(s3 >> 16) & 0xFF];
+461       t1 ^= \hyperlink{cyclone__crypto_2core_2crypto_8h_ad5e52b5ea688101f11d0bf34dc3a8b4b}{ROL32}(temp, 16);
+462       temp = \hyperlink{aes_8c_a8aa09d2cb5b9d58af1cf9b65cef9a86c}{td}[(s2 >> 24) & 0xFF];
+463       t1 ^= \hyperlink{cyclone__crypto_2core_2crypto_8h_ad5e52b5ea688101f11d0bf34dc3a8b4b}{ROL32}(temp, 24);
+464 
+465       t2 = \hyperlink{aes_8c_a8aa09d2cb5b9d58af1cf9b65cef9a86c}{td}[s2 & 0xFF];
+466       temp = \hyperlink{aes_8c_a8aa09d2cb5b9d58af1cf9b65cef9a86c}{td}[(s1 >> 8) & 0xFF];
+467       t2 ^= \hyperlink{cyclone__crypto_2core_2crypto_8h_ad5e52b5ea688101f11d0bf34dc3a8b4b}{ROL32}(temp, 8);
+468       temp = \hyperlink{aes_8c_a8aa09d2cb5b9d58af1cf9b65cef9a86c}{td}[(s0 >> 16) & 0xFF];
+469       t2 ^= \hyperlink{cyclone__crypto_2core_2crypto_8h_ad5e52b5ea688101f11d0bf34dc3a8b4b}{ROL32}(temp, 16);
+470       temp = \hyperlink{aes_8c_a8aa09d2cb5b9d58af1cf9b65cef9a86c}{td}[(s3 >> 24) & 0xFF];
+471       t2 ^= \hyperlink{cyclone__crypto_2core_2crypto_8h_ad5e52b5ea688101f11d0bf34dc3a8b4b}{ROL32}(temp, 24);
+472 
+473       t3 = \hyperlink{aes_8c_a8aa09d2cb5b9d58af1cf9b65cef9a86c}{td}[s3 & 0xFF];
+474       temp = \hyperlink{aes_8c_a8aa09d2cb5b9d58af1cf9b65cef9a86c}{td}[(s2 >> 8) & 0xFF];
+475       t3 ^= \hyperlink{cyclone__crypto_2core_2crypto_8h_ad5e52b5ea688101f11d0bf34dc3a8b4b}{ROL32}(temp, 8);
+476       temp = \hyperlink{aes_8c_a8aa09d2cb5b9d58af1cf9b65cef9a86c}{td}[(s1 >> 16) & 0xFF];
+477       t3 ^= \hyperlink{cyclone__crypto_2core_2crypto_8h_ad5e52b5ea688101f11d0bf34dc3a8b4b}{ROL32}(temp, 16);
+478       temp = \hyperlink{aes_8c_a8aa09d2cb5b9d58af1cf9b65cef9a86c}{td}[(s0 >> 24) & 0xFF];
+479       t3 ^= \hyperlink{cyclone__crypto_2core_2crypto_8h_ad5e52b5ea688101f11d0bf34dc3a8b4b}{ROL32}(temp, 24);
+480 
+481       \textcolor{comment}{//Round key addition}
+482       s0 = t0 ^ context->\hyperlink{structAesContext_a39944caefcfd380dd50aa6a089c981e6}{dk}[i * 4];
+483       s1 = t1 ^ context->\hyperlink{structAesContext_a39944caefcfd380dd50aa6a089c981e6}{dk}[i * 4 + 1];
+484       s2 = t2 ^ context->\hyperlink{structAesContext_a39944caefcfd380dd50aa6a089c981e6}{dk}[i * 4 + 2];
+485       s3 = t3 ^ context->\hyperlink{structAesContext_a39944caefcfd380dd50aa6a089c981e6}{dk}[i * 4 + 3];
+486    \}
+487 
+488    \textcolor{comment}{//The last round differs slightly from the first rounds}
+489    t0 = \hyperlink{aes_8c_a7937f1040dcd7aea8595768cc6d95e8e}{isbox}[s0 & 0xFF];
+490    t0 |= \hyperlink{aes_8c_a7937f1040dcd7aea8595768cc6d95e8e}{isbox}[(s3 >> 8) & 0xFF] << 8;
+491    t0 |= \hyperlink{aes_8c_a7937f1040dcd7aea8595768cc6d95e8e}{isbox}[(s2 >> 16) & 0xFF] << 16;
+492    t0 |= \hyperlink{aes_8c_a7937f1040dcd7aea8595768cc6d95e8e}{isbox}[(s1 >> 24) & 0xFF] << 24;
+493 
+494    t1 = \hyperlink{aes_8c_a7937f1040dcd7aea8595768cc6d95e8e}{isbox}[s1 & 0xFF];
+495    t1 |= \hyperlink{aes_8c_a7937f1040dcd7aea8595768cc6d95e8e}{isbox}[(s0 >> 8) & 0xFF] << 8;
+496    t1 |= \hyperlink{aes_8c_a7937f1040dcd7aea8595768cc6d95e8e}{isbox}[(s3 >> 16) & 0xFF] << 16;
+497    t1 |= \hyperlink{aes_8c_a7937f1040dcd7aea8595768cc6d95e8e}{isbox}[(s2 >> 24) & 0xFF] << 24;
+498 
+499    t2 = \hyperlink{aes_8c_a7937f1040dcd7aea8595768cc6d95e8e}{isbox}[s2 & 0xFF];
+500    t2 |= \hyperlink{aes_8c_a7937f1040dcd7aea8595768cc6d95e8e}{isbox}[(s1 >> 8) & 0xFF] << 8;
+501    t2 |= \hyperlink{aes_8c_a7937f1040dcd7aea8595768cc6d95e8e}{isbox}[(s0 >> 16) & 0xFF] << 16;
+502    t2 |= \hyperlink{aes_8c_a7937f1040dcd7aea8595768cc6d95e8e}{isbox}[(s3 >> 24) & 0xFF] << 24;
+503 
+504    t3 = \hyperlink{aes_8c_a7937f1040dcd7aea8595768cc6d95e8e}{isbox}[s3 & 0xFF];
+505    t3 |= \hyperlink{aes_8c_a7937f1040dcd7aea8595768cc6d95e8e}{isbox}[(s2 >> 8) & 0xFF] << 8;
+506    t3 |= \hyperlink{aes_8c_a7937f1040dcd7aea8595768cc6d95e8e}{isbox}[(s1 >> 16) & 0xFF] << 16;
+507    t3 |= \hyperlink{aes_8c_a7937f1040dcd7aea8595768cc6d95e8e}{isbox}[(s0 >> 24) & 0xFF] << 24;
+508 
+509    \textcolor{comment}{//Last round key addition}
+510    s0 = t0 ^ context->\hyperlink{structAesContext_a39944caefcfd380dd50aa6a089c981e6}{dk}[0];
+511    s1 = t1 ^ context->\hyperlink{structAesContext_a39944caefcfd380dd50aa6a089c981e6}{dk}[1];
+512    s2 = t2 ^ context->\hyperlink{structAesContext_a39944caefcfd380dd50aa6a089c981e6}{dk}[2];
+513    s3 = t3 ^ context->\hyperlink{structAesContext_a39944caefcfd380dd50aa6a089c981e6}{dk}[3];
+514 
+515    \textcolor{comment}{//The final state is then copied to the output}
+516    \hyperlink{cpu__endian_8h_a9dc2aacccbeaa4c76dc3870ef4486a88}{STORE32LE}(s0, output + 0);
+517    \hyperlink{cpu__endian_8h_a9dc2aacccbeaa4c76dc3870ef4486a88}{STORE32LE}(s1, output + 4);
+518    \hyperlink{cpu__endian_8h_a9dc2aacccbeaa4c76dc3870ef4486a88}{STORE32LE}(s2, output + 8);
+519    \hyperlink{cpu__endian_8h_a9dc2aacccbeaa4c76dc3870ef4486a88}{STORE32LE}(s3, output + 12);
+520 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{aes_8c_aa524ebbb575c847bcceb7260d3da9245}\label{aes_8c_aa524ebbb575c847bcceb7260d3da9245}} 
+\index{aes.\+c@{aes.\+c}!aes\+Encrypt\+Block@{aes\+Encrypt\+Block}}
+\index{aes\+Encrypt\+Block@{aes\+Encrypt\+Block}!aes.\+c@{aes.\+c}}
+\subsubsection{\texorpdfstring{aes\+Encrypt\+Block()}{aesEncryptBlock()}}
+{\footnotesize\ttfamily void aes\+Encrypt\+Block (\begin{DoxyParamCaption}\item[{\hyperlink{structAesContext}{Aes\+Context} $\ast$}]{context,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{input,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{output }\end{DoxyParamCaption})}
+
+
+
+Encrypt a 16-\/byte block using A\+ES algorithm. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the A\+ES context \\
+\hline
+\mbox{\tt in}  & {\em input} & Plaintext block to encrypt \\
+\hline
+\mbox{\tt out}  & {\em output} & Ciphertext block resulting from encryption \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 310 of file aes.\+c.
+
+
+\begin{DoxyCode}
+311 \{
+312    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+313    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} s0;
+314    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} s1;
+315    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} s2;
+316    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} s3;
+317    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} \hyperlink{pic32mx_2isr__support_8h_ae498df5bf6f1a461a5434c073031e229}{t0};
+318    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} \hyperlink{tiger_8c_a5017152cac85e29a2dc5d8d74de9e07c}{t1};
+319    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} \hyperlink{tiger_8c_a42a80c4c472115c0fcb04a076526ecf5}{t2};
+320    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} \hyperlink{tiger_8c_a275db56faf9780608afff7d4fb462caf}{t3};
+321    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} temp;
+322 
+323    \textcolor{comment}{//Copy the plaintext to the state array}
+324    s0 = \hyperlink{cpu__endian_8h_a7a6ecaee0bc600cae5a7dead20594920}{LOAD32LE}(input + 0);
+325    s1 = \hyperlink{cpu__endian_8h_a7a6ecaee0bc600cae5a7dead20594920}{LOAD32LE}(input + 4);
+326    s2 = \hyperlink{cpu__endian_8h_a7a6ecaee0bc600cae5a7dead20594920}{LOAD32LE}(input + 8);
+327    s3 = \hyperlink{cpu__endian_8h_a7a6ecaee0bc600cae5a7dead20594920}{LOAD32LE}(input + 12);
+328 
+329    \textcolor{comment}{//Initial round key addition}
+330    s0 ^= context->\hyperlink{structAesContext_ad8944ec0ee52c01192e26e18120dfab4}{ek}[0];
+331    s1 ^= context->\hyperlink{structAesContext_ad8944ec0ee52c01192e26e18120dfab4}{ek}[1];
+332    s2 ^= context->\hyperlink{structAesContext_ad8944ec0ee52c01192e26e18120dfab4}{ek}[2];
+333    s3 ^= context->\hyperlink{structAesContext_ad8944ec0ee52c01192e26e18120dfab4}{ek}[3];
+334 
+335    \textcolor{comment}{//The number of rounds depends on the key length}
+336    \textcolor{keywordflow}{for}(i = 1; i < context->\hyperlink{structAesContext_aabd0cf2167c7b59f419dda6d0ed9c9ad}{nr}; i++)
+337    \{
+338       \textcolor{comment}{//Apply round function}
+339       t0 = \hyperlink{aes_8c_ad449d120251b159561b8af081db6ab10}{te}[s0 & 0xFF];
+340       temp = \hyperlink{aes_8c_ad449d120251b159561b8af081db6ab10}{te}[(s1 >> 8) & 0xFF];
+341       t0 ^= \hyperlink{cyclone__crypto_2core_2crypto_8h_ad5e52b5ea688101f11d0bf34dc3a8b4b}{ROL32}(temp, 8);
+342       temp = \hyperlink{aes_8c_ad449d120251b159561b8af081db6ab10}{te}[(s2 >> 16) & 0xFF];
+343       t0 ^= \hyperlink{cyclone__crypto_2core_2crypto_8h_ad5e52b5ea688101f11d0bf34dc3a8b4b}{ROL32}(temp, 16);
+344       temp = \hyperlink{aes_8c_ad449d120251b159561b8af081db6ab10}{te}[(s3 >> 24) & 0xFF];
+345       t0 ^= \hyperlink{cyclone__crypto_2core_2crypto_8h_ad5e52b5ea688101f11d0bf34dc3a8b4b}{ROL32}(temp, 24);
+346 
+347       t1 = \hyperlink{aes_8c_ad449d120251b159561b8af081db6ab10}{te}[s1 & 0xFF];
+348       temp = \hyperlink{aes_8c_ad449d120251b159561b8af081db6ab10}{te}[(s2 >> 8) & 0xFF];
+349       t1 ^= \hyperlink{cyclone__crypto_2core_2crypto_8h_ad5e52b5ea688101f11d0bf34dc3a8b4b}{ROL32}(temp, 8);
+350       temp = \hyperlink{aes_8c_ad449d120251b159561b8af081db6ab10}{te}[(s3 >> 16) & 0xFF];
+351       t1 ^= \hyperlink{cyclone__crypto_2core_2crypto_8h_ad5e52b5ea688101f11d0bf34dc3a8b4b}{ROL32}(temp, 16);
+352       temp = \hyperlink{aes_8c_ad449d120251b159561b8af081db6ab10}{te}[(s0 >> 24) & 0xFF];
+353       t1 ^= \hyperlink{cyclone__crypto_2core_2crypto_8h_ad5e52b5ea688101f11d0bf34dc3a8b4b}{ROL32}(temp, 24);
+354 
+355       t2 = \hyperlink{aes_8c_ad449d120251b159561b8af081db6ab10}{te}[s2 & 0xFF];
+356       temp = \hyperlink{aes_8c_ad449d120251b159561b8af081db6ab10}{te}[(s3 >> 8) & 0xFF];
+357       t2 ^= \hyperlink{cyclone__crypto_2core_2crypto_8h_ad5e52b5ea688101f11d0bf34dc3a8b4b}{ROL32}(temp, 8);
+358       temp = \hyperlink{aes_8c_ad449d120251b159561b8af081db6ab10}{te}[(s0 >> 16) & 0xFF];
+359       t2 ^= \hyperlink{cyclone__crypto_2core_2crypto_8h_ad5e52b5ea688101f11d0bf34dc3a8b4b}{ROL32}(temp, 16);
+360       temp = \hyperlink{aes_8c_ad449d120251b159561b8af081db6ab10}{te}[(s1 >> 24) & 0xFF];
+361       t2 ^= \hyperlink{cyclone__crypto_2core_2crypto_8h_ad5e52b5ea688101f11d0bf34dc3a8b4b}{ROL32}(temp, 24);
+362 
+363       t3 = \hyperlink{aes_8c_ad449d120251b159561b8af081db6ab10}{te}[s3 & 0xFF];
+364       temp = \hyperlink{aes_8c_ad449d120251b159561b8af081db6ab10}{te}[(s0 >> 8) & 0xFF];
+365       t3 ^= \hyperlink{cyclone__crypto_2core_2crypto_8h_ad5e52b5ea688101f11d0bf34dc3a8b4b}{ROL32}(temp, 8);
+366       temp = \hyperlink{aes_8c_ad449d120251b159561b8af081db6ab10}{te}[(s1 >> 16) & 0xFF];
+367       t3 ^= \hyperlink{cyclone__crypto_2core_2crypto_8h_ad5e52b5ea688101f11d0bf34dc3a8b4b}{ROL32}(temp, 16);
+368       temp = \hyperlink{aes_8c_ad449d120251b159561b8af081db6ab10}{te}[(s2 >> 24) & 0xFF];
+369       t3 ^= \hyperlink{cyclone__crypto_2core_2crypto_8h_ad5e52b5ea688101f11d0bf34dc3a8b4b}{ROL32}(temp, 24);
+370 
+371       \textcolor{comment}{//Round key addition}
+372       s0 = t0 ^ context->\hyperlink{structAesContext_ad8944ec0ee52c01192e26e18120dfab4}{ek}[i * 4];
+373       s1 = t1 ^ context->\hyperlink{structAesContext_ad8944ec0ee52c01192e26e18120dfab4}{ek}[i * 4 + 1];
+374       s2 = t2 ^ context->\hyperlink{structAesContext_ad8944ec0ee52c01192e26e18120dfab4}{ek}[i * 4 + 2];
+375       s3 = t3 ^ context->\hyperlink{structAesContext_ad8944ec0ee52c01192e26e18120dfab4}{ek}[i * 4 + 3];
+376    \}
+377 
+378    \textcolor{comment}{//The last round differs slightly from the first rounds}
+379    t0 = \hyperlink{aes_8c_adc15aeb43c81de1162045eedf437f407}{sbox}[s0 & 0xFF];
+380    t0 |= \hyperlink{aes_8c_adc15aeb43c81de1162045eedf437f407}{sbox}[(s1 >> 8) & 0xFF] << 8;
+381    t0 |= \hyperlink{aes_8c_adc15aeb43c81de1162045eedf437f407}{sbox}[(s2 >> 16) & 0xFF] << 16;
+382    t0 |= \hyperlink{aes_8c_adc15aeb43c81de1162045eedf437f407}{sbox}[(s3 >> 24) & 0xFF] << 24;
+383 
+384    t1 = \hyperlink{aes_8c_adc15aeb43c81de1162045eedf437f407}{sbox}[s1 & 0xFF];
+385    t1 |= \hyperlink{aes_8c_adc15aeb43c81de1162045eedf437f407}{sbox}[(s2 >> 8) & 0xFF] << 8;
+386    t1 |= \hyperlink{aes_8c_adc15aeb43c81de1162045eedf437f407}{sbox}[(s3 >> 16) & 0xFF] << 16;
+387    t1 |= \hyperlink{aes_8c_adc15aeb43c81de1162045eedf437f407}{sbox}[(s0 >> 24) & 0xFF] << 24;
+388 
+389    t2 = \hyperlink{aes_8c_adc15aeb43c81de1162045eedf437f407}{sbox}[s2 & 0xFF];
+390    t2 |= \hyperlink{aes_8c_adc15aeb43c81de1162045eedf437f407}{sbox}[(s3 >> 8) & 0xFF] << 8;
+391    t2 |= \hyperlink{aes_8c_adc15aeb43c81de1162045eedf437f407}{sbox}[(s0 >> 16) & 0xFF] << 16;
+392    t2 |= \hyperlink{aes_8c_adc15aeb43c81de1162045eedf437f407}{sbox}[(s1 >> 24) & 0xFF] << 24;
+393 
+394    t3 = \hyperlink{aes_8c_adc15aeb43c81de1162045eedf437f407}{sbox}[s3 & 0xFF];
+395    t3 |= \hyperlink{aes_8c_adc15aeb43c81de1162045eedf437f407}{sbox}[(s0 >> 8) & 0xFF] << 8;
+396    t3 |= \hyperlink{aes_8c_adc15aeb43c81de1162045eedf437f407}{sbox}[(s1 >> 16) & 0xFF] << 16;
+397    t3 |= \hyperlink{aes_8c_adc15aeb43c81de1162045eedf437f407}{sbox}[(s2 >> 24) & 0xFF] << 24;
+398 
+399    \textcolor{comment}{//Last round key addition}
+400    s0 = t0 ^ context->\hyperlink{structAesContext_ad8944ec0ee52c01192e26e18120dfab4}{ek}[context->\hyperlink{structAesContext_aabd0cf2167c7b59f419dda6d0ed9c9ad}{nr} * 4];
+401    s1 = t1 ^ context->\hyperlink{structAesContext_ad8944ec0ee52c01192e26e18120dfab4}{ek}[context->\hyperlink{structAesContext_aabd0cf2167c7b59f419dda6d0ed9c9ad}{nr} * 4 + 1];
+402    s2 = t2 ^ context->\hyperlink{structAesContext_ad8944ec0ee52c01192e26e18120dfab4}{ek}[context->\hyperlink{structAesContext_aabd0cf2167c7b59f419dda6d0ed9c9ad}{nr} * 4 + 2];
+403    s3 = t3 ^ context->\hyperlink{structAesContext_ad8944ec0ee52c01192e26e18120dfab4}{ek}[context->\hyperlink{structAesContext_aabd0cf2167c7b59f419dda6d0ed9c9ad}{nr} * 4 + 3];
+404 
+405    \textcolor{comment}{//The final state is then copied to the output}
+406    \hyperlink{cpu__endian_8h_a9dc2aacccbeaa4c76dc3870ef4486a88}{STORE32LE}(s0, output + 0);
+407    \hyperlink{cpu__endian_8h_a9dc2aacccbeaa4c76dc3870ef4486a88}{STORE32LE}(s1, output + 4);
+408    \hyperlink{cpu__endian_8h_a9dc2aacccbeaa4c76dc3870ef4486a88}{STORE32LE}(s2, output + 8);
+409    \hyperlink{cpu__endian_8h_a9dc2aacccbeaa4c76dc3870ef4486a88}{STORE32LE}(s3, output + 12);
+410 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{aes_8c_a1786debf48f536d5dd454e4a8f7ecd0f}\label{aes_8c_a1786debf48f536d5dd454e4a8f7ecd0f}} 
+\index{aes.\+c@{aes.\+c}!aes\+Init@{aes\+Init}}
+\index{aes\+Init@{aes\+Init}!aes.\+c@{aes.\+c}}
+\subsubsection{\texorpdfstring{aes\+Init()}{aesInit()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} aes\+Init (\begin{DoxyParamCaption}\item[{\hyperlink{structAesContext}{Aes\+Context} $\ast$}]{context,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{key,  }\item[{size\+\_\+t}]{key\+Len }\end{DoxyParamCaption})}
+
+
+
+Key expansion. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the A\+ES context to initialize \\
+\hline
+\mbox{\tt in}  & {\em key} & Pointer to the key \\
+\hline
+\mbox{\tt in}  & {\em key\+Len} & Length of the key \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 202 of file aes.\+c.
+
+
+\begin{DoxyCode}
+203 \{
+204    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+205    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} temp;
+206    \textcolor{keywordtype}{size\_t} keyScheduleSize;
+207 
+208    \textcolor{comment}{//Check parameters}
+209    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || key == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+210       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+211 
+212    \textcolor{comment}{//Check the length of the key}
+213    \textcolor{keywordflow}{if}(keyLen == 16)
+214    \{
+215       \textcolor{comment}{//10 rounds are required for 128-bit key}
+216       context->\hyperlink{structAesContext_aabd0cf2167c7b59f419dda6d0ed9c9ad}{nr} = 10;
+217    \}
+218    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(keyLen == 24)
+219    \{
+220       \textcolor{comment}{//12 rounds are required for 192-bit key}
+221       context->\hyperlink{structAesContext_aabd0cf2167c7b59f419dda6d0ed9c9ad}{nr} = 12;
+222    \}
+223    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(keyLen == 32)
+224    \{
+225       \textcolor{comment}{//14 rounds are required for 256-bit key}
+226       context->\hyperlink{structAesContext_aabd0cf2167c7b59f419dda6d0ed9c9ad}{nr} = 14;
+227    \}
+228    \textcolor{keywordflow}{else}
+229    \{
+230       \textcolor{comment}{//Report an error}
+231       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca3764b2929469f1eb1bf7af50b40df62f}{ERROR\_INVALID\_KEY\_LENGTH};
+232    \}
+233 
+234    \textcolor{comment}{//Determine the number of 32-bit words in the key}
+235    keyLen /= 4;
+236 
+237    \textcolor{comment}{//Copy the original key}
+238    \textcolor{keywordflow}{for}(i = 0; i < keyLen; i++)
+239    \{
+240       context->\hyperlink{structAesContext_ad8944ec0ee52c01192e26e18120dfab4}{ek}[i] = \hyperlink{cpu__endian_8h_a7a6ecaee0bc600cae5a7dead20594920}{LOAD32LE}(key + (i * 4));
+241    \}
+242 
+243    \textcolor{comment}{//The size of the key schedule depends on the number of rounds}
+244    keyScheduleSize = 4 * (context->\hyperlink{structAesContext_aabd0cf2167c7b59f419dda6d0ed9c9ad}{nr} + 1);
+245 
+246    \textcolor{comment}{//Generate the key schedule (encryption)}
+247    \textcolor{keywordflow}{for}(i = keyLen; i < keyScheduleSize; i++)
+248    \{
+249       \textcolor{comment}{//Save previous word}
+250       temp = context->\hyperlink{structAesContext_ad8944ec0ee52c01192e26e18120dfab4}{ek}[i - 1];
+251 
+252       \textcolor{comment}{//Apply transformation}
+253       \textcolor{keywordflow}{if}((i % keyLen) == 0)
+254       \{
+255          context->\hyperlink{structAesContext_ad8944ec0ee52c01192e26e18120dfab4}{ek}[i] = \hyperlink{aes_8c_adc15aeb43c81de1162045eedf437f407}{sbox}[(temp >> 8) & 0xFF];
+256          context->\hyperlink{structAesContext_ad8944ec0ee52c01192e26e18120dfab4}{ek}[i] |= (\hyperlink{aes_8c_adc15aeb43c81de1162045eedf437f407}{sbox}[(temp >> 16) & 0xFF] << 8);
+257          context->\hyperlink{structAesContext_ad8944ec0ee52c01192e26e18120dfab4}{ek}[i] |= (\hyperlink{aes_8c_adc15aeb43c81de1162045eedf437f407}{sbox}[(temp >> 24) & 0xFF] << 16);
+258          context->\hyperlink{structAesContext_ad8944ec0ee52c01192e26e18120dfab4}{ek}[i] |= (\hyperlink{aes_8c_adc15aeb43c81de1162045eedf437f407}{sbox}[temp & 0xFF] << 24);
+259          context->\hyperlink{structAesContext_ad8944ec0ee52c01192e26e18120dfab4}{ek}[i] ^= \hyperlink{aes_8c_a5cac100dab65b0797627a0d31b5bc5f2}{rcon}[i / keyLen];
+260       \}
+261       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(keyLen > 6 && (i % keyLen) == 4)
+262       \{
+263          context->\hyperlink{structAesContext_ad8944ec0ee52c01192e26e18120dfab4}{ek}[i] = \hyperlink{aes_8c_adc15aeb43c81de1162045eedf437f407}{sbox}[temp & 0xFF];
+264          context->\hyperlink{structAesContext_ad8944ec0ee52c01192e26e18120dfab4}{ek}[i] |= (\hyperlink{aes_8c_adc15aeb43c81de1162045eedf437f407}{sbox}[(temp >> 8) & 0xFF] << 8);
+265          context->\hyperlink{structAesContext_ad8944ec0ee52c01192e26e18120dfab4}{ek}[i] |= (\hyperlink{aes_8c_adc15aeb43c81de1162045eedf437f407}{sbox}[(temp >> 16) & 0xFF] << 16);
+266          context->\hyperlink{structAesContext_ad8944ec0ee52c01192e26e18120dfab4}{ek}[i] |= (\hyperlink{aes_8c_adc15aeb43c81de1162045eedf437f407}{sbox}[(temp >> 24) & 0xFF] << 24);
+267       \}
+268       \textcolor{keywordflow}{else}
+269       \{
+270          context->\hyperlink{structAesContext_ad8944ec0ee52c01192e26e18120dfab4}{ek}[i] = temp;
+271       \}
+272 
+273       \textcolor{comment}{//Update the key schedule}
+274       context->\hyperlink{structAesContext_ad8944ec0ee52c01192e26e18120dfab4}{ek}[i] ^= context->\hyperlink{structAesContext_ad8944ec0ee52c01192e26e18120dfab4}{ek}[i - keyLen];
+275    \}
+276 
+277    \textcolor{comment}{//Generate the key schedule (decryption)}
+278    \textcolor{keywordflow}{for}(i = 0; i < keyScheduleSize; i++)
+279    \{
+280       \textcolor{comment}{//Apply the InvMixColumns transformation to all round keys}
+281       \textcolor{comment}{//but the first and the last}
+282       \textcolor{keywordflow}{if}(i < 4 || i >= (keyScheduleSize - 4))
+283       \{
+284          context->\hyperlink{structAesContext_a39944caefcfd380dd50aa6a089c981e6}{dk}[i] = context->\hyperlink{structAesContext_ad8944ec0ee52c01192e26e18120dfab4}{ek}[i];
+285       \}
+286       \textcolor{keywordflow}{else}
+287       \{
+288          context->\hyperlink{structAesContext_a39944caefcfd380dd50aa6a089c981e6}{dk}[i] = \hyperlink{aes_8c_a8aa09d2cb5b9d58af1cf9b65cef9a86c}{td}[\hyperlink{aes_8c_adc15aeb43c81de1162045eedf437f407}{sbox}[context->\hyperlink{structAesContext_ad8944ec0ee52c01192e26e18120dfab4}{ek}[i] & 0xFF]];
+289          temp = \hyperlink{aes_8c_a8aa09d2cb5b9d58af1cf9b65cef9a86c}{td}[\hyperlink{aes_8c_adc15aeb43c81de1162045eedf437f407}{sbox}[(context->\hyperlink{structAesContext_ad8944ec0ee52c01192e26e18120dfab4}{ek}[i] >> 8) & 0xFF]];
+290          context->\hyperlink{structAesContext_a39944caefcfd380dd50aa6a089c981e6}{dk}[i] ^= \hyperlink{cyclone__crypto_2core_2crypto_8h_ad5e52b5ea688101f11d0bf34dc3a8b4b}{ROL32}(temp, 8);
+291          temp = \hyperlink{aes_8c_a8aa09d2cb5b9d58af1cf9b65cef9a86c}{td}[\hyperlink{aes_8c_adc15aeb43c81de1162045eedf437f407}{sbox}[(context->\hyperlink{structAesContext_ad8944ec0ee52c01192e26e18120dfab4}{ek}[i] >> 16) & 0xFF]];
+292          context->\hyperlink{structAesContext_a39944caefcfd380dd50aa6a089c981e6}{dk}[i] ^= \hyperlink{cyclone__crypto_2core_2crypto_8h_ad5e52b5ea688101f11d0bf34dc3a8b4b}{ROL32}(temp, 16);
+293          temp = \hyperlink{aes_8c_a8aa09d2cb5b9d58af1cf9b65cef9a86c}{td}[\hyperlink{aes_8c_adc15aeb43c81de1162045eedf437f407}{sbox}[(context->\hyperlink{structAesContext_ad8944ec0ee52c01192e26e18120dfab4}{ek}[i] >> 24) & 0xFF]];
+294          context->\hyperlink{structAesContext_a39944caefcfd380dd50aa6a089c981e6}{dk}[i] ^= \hyperlink{cyclone__crypto_2core_2crypto_8h_ad5e52b5ea688101f11d0bf34dc3a8b4b}{ROL32}(temp, 24);
+295       \}
+296    \}
+297 
+298    \textcolor{comment}{//No error to report}
+299    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+300 \}
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{aes_8c_a7990fc0fb5988ad3d893ae079644d32e}\label{aes_8c_a7990fc0fb5988ad3d893ae079644d32e}} 
+\index{aes.\+c@{aes.\+c}!aes\+Cipher\+Algo@{aes\+Cipher\+Algo}}
+\index{aes\+Cipher\+Algo@{aes\+Cipher\+Algo}!aes.\+c@{aes.\+c}}
+\subsubsection{\texorpdfstring{aes\+Cipher\+Algo}{aesCipherAlgo}}
+{\footnotesize\ttfamily const \hyperlink{structCipherAlgo}{Cipher\+Algo} aes\+Cipher\+Algo}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=
+\{
+   \textcolor{stringliteral}{"AES"},
+   \textcolor{keyword}{sizeof}(\hyperlink{structAesContext}{AesContext}),
+   \hyperlink{cyclone__crypto_2core_2crypto_8h_ae03a6c8f32ed798857924d908aacc49bac347f6aa82618d4d57fe85cba6520ce9}{CIPHER\_ALGO\_TYPE\_BLOCK},
+   \hyperlink{aes_8h_af19ab913a847ad1e91c5291215116de1}{AES\_BLOCK\_SIZE},
+   (\hyperlink{cyclone__crypto_2core_2crypto_8h_a1a0f02cdb8a3295caa1b87db2785e678}{CipherAlgoInit}) \hyperlink{aes_8c_a1786debf48f536d5dd454e4a8f7ecd0f}{aesInit},
+   \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL},
+   \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL},
+   (\hyperlink{cyclone__crypto_2core_2crypto_8h_a4b511302b7e4f6ff51dd72f5abde7077}{CipherAlgoEncryptBlock}) \hyperlink{aes_8c_aa524ebbb575c847bcceb7260d3da9245}{aesEncryptBlock},
+   (\hyperlink{cyclone__crypto_2core_2crypto_8h_a15510227bd1c7721d1e3af2480069990}{CipherAlgoDecryptBlock}) \hyperlink{aes_8c_a885ae24ee80d48243736f06d6abcae0a}{aesDecryptBlock}
+\}
+\end{DoxyCode}
+
+
+Definition at line 180 of file aes.\+c.
+
+\mbox{\Hypertarget{aes_8c_a7937f1040dcd7aea8595768cc6d95e8e}\label{aes_8c_a7937f1040dcd7aea8595768cc6d95e8e}} 
+\index{aes.\+c@{aes.\+c}!isbox@{isbox}}
+\index{isbox@{isbox}!aes.\+c@{aes.\+c}}
+\subsubsection{\texorpdfstring{isbox}{isbox}}
+{\footnotesize\ttfamily const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} isbox\mbox{[}256\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=
+\{
+   0x52, 0x09, 0x6A, 0xD5, 0x30, 0x36, 0xA5, 0x38, 0xBF, 0x40, 0xA3, 0x9E, 0x81, 0xF3, 0xD7, 0xFB,
+   0x7C, 0xE3, 0x39, 0x82, 0x9B, 0x2F, 0xFF, 0x87, 0x34, 0x8E, 0x43, 0x44, 0xC4, 0xDE, 0xE9, 0xCB,
+   0x54, 0x7B, 0x94, 0x32, 0xA6, 0xC2, 0x23, 0x3D, 0xEE, 0x4C, 0x95, 0x0B, 0x42, 0xFA, 0xC3, 0x4E,
+   0x08, 0x2E, 0xA1, 0x66, 0x28, 0xD9, 0x24, 0xB2, 0x76, 0x5B, 0xA2, 0x49, 0x6D, 0x8B, 0xD1, 0x25,
+   0x72, 0xF8, 0xF6, 0x64, 0x86, 0x68, 0x98, 0x16, 0xD4, 0xA4, 0x5C, 0xCC, 0x5D, 0x65, 0xB6, 0x92,
+   0x6C, 0x70, 0x48, 0x50, 0xFD, 0xED, 0xB9, 0xDA, 0x5E, 0x15, 0x46, 0x57, 0xA7, 0x8D, 0x9D, 0x84,
+   0x90, 0xD8, 0xAB, 0x00, 0x8C, 0xBC, 0xD3, 0x0A, 0xF7, 0xE4, 0x58, 0x05, 0xB8, 0xB3, 0x45, 0x06,
+   0xD0, 0x2C, 0x1E, 0x8F, 0xCA, 0x3F, 0x0F, 0x02, 0xC1, 0xAF, 0xBD, 0x03, 0x01, 0x13, 0x8A, 0x6B,
+   0x3A, 0x91, 0x11, 0x41, 0x4F, 0x67, 0xDC, 0xEA, 0x97, 0xF2, 0xCF, 0xCE, 0xF0, 0xB4, 0xE6, 0x73,
+   0x96, 0xAC, 0x74, 0x22, 0xE7, 0xAD, 0x35, 0x85, 0xE2, 0xF9, 0x37, 0xE8, 0x1C, 0x75, 0xDF, 0x6E,
+   0x47, 0xF1, 0x1A, 0x71, 0x1D, 0x29, 0xC5, 0x89, 0x6F, 0xB7, 0x62, 0x0E, 0xAA, 0x18, 0xBE, 0x1B,
+   0xFC, 0x56, 0x3E, 0x4B, 0xC6, 0xD2, 0x79, 0x20, 0x9A, 0xDB, 0xC0, 0xFE, 0x78, 0xCD, 0x5A, 0xF4,
+   0x1F, 0xDD, 0xA8, 0x33, 0x88, 0x07, 0xC7, 0x31, 0xB1, 0x12, 0x10, 0x59, 0x27, 0x80, 0xEC, 0x5F,
+   0x60, 0x51, 0x7F, 0xA9, 0x19, 0xB5, 0x4A, 0x0D, 0x2D, 0xE5, 0x7A, 0x9F, 0x93, 0xC9, 0x9C, 0xEF,
+   0xA0, 0xE0, 0x3B, 0x4D, 0xAE, 0x2A, 0xF5, 0xB0, 0xC8, 0xEB, 0xBB, 0x3C, 0x83, 0x53, 0x99, 0x61,
+   0x17, 0x2B, 0x04, 0x7E, 0xBA, 0x77, 0xD6, 0x26, 0xE1, 0x69, 0x14, 0x63, 0x55, 0x21, 0x0C, 0x7D
+\}
+\end{DoxyCode}
+
+
+Definition at line 69 of file aes.\+c.
+
+\mbox{\Hypertarget{aes_8c_a5cac100dab65b0797627a0d31b5bc5f2}\label{aes_8c_a5cac100dab65b0797627a0d31b5bc5f2}} 
+\index{aes.\+c@{aes.\+c}!rcon@{rcon}}
+\index{rcon@{rcon}!aes.\+c@{aes.\+c}}
+\subsubsection{\texorpdfstring{rcon}{rcon}}
+{\footnotesize\ttfamily const \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t} rcon\mbox{[}11\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=
+\{
+   0x00000000,
+   0x00000001,
+   0x00000002,
+   0x00000004,
+   0x00000008,
+   0x00000010,
+   0x00000020,
+   0x00000040,
+   0x00000080,
+   0x0000001B,
+   0x00000036
+\}
+\end{DoxyCode}
+
+
+Definition at line 164 of file aes.\+c.
+
+\mbox{\Hypertarget{aes_8c_adc15aeb43c81de1162045eedf437f407}\label{aes_8c_adc15aeb43c81de1162045eedf437f407}} 
+\index{aes.\+c@{aes.\+c}!sbox@{sbox}}
+\index{sbox@{sbox}!aes.\+c@{aes.\+c}}
+\subsubsection{\texorpdfstring{sbox}{sbox}}
+{\footnotesize\ttfamily const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} sbox\mbox{[}256\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=
+\{
+   0x63, 0x7C, 0x77, 0x7B, 0xF2, 0x6B, 0x6F, 0xC5, 0x30, 0x01, 0x67, 0x2B, 0xFE, 0xD7, 0xAB, 0x76,
+   0xCA, 0x82, 0xC9, 0x7D, 0xFA, 0x59, 0x47, 0xF0, 0xAD, 0xD4, 0xA2, 0xAF, 0x9C, 0xA4, 0x72, 0xC0,
+   0xB7, 0xFD, 0x93, 0x26, 0x36, 0x3F, 0xF7, 0xCC, 0x34, 0xA5, 0xE5, 0xF1, 0x71, 0xD8, 0x31, 0x15,
+   0x04, 0xC7, 0x23, 0xC3, 0x18, 0x96, 0x05, 0x9A, 0x07, 0x12, 0x80, 0xE2, 0xEB, 0x27, 0xB2, 0x75,
+   0x09, 0x83, 0x2C, 0x1A, 0x1B, 0x6E, 0x5A, 0xA0, 0x52, 0x3B, 0xD6, 0xB3, 0x29, 0xE3, 0x2F, 0x84,
+   0x53, 0xD1, 0x00, 0xED, 0x20, 0xFC, 0xB1, 0x5B, 0x6A, 0xCB, 0xBE, 0x39, 0x4A, 0x4C, 0x58, 0xCF,
+   0xD0, 0xEF, 0xAA, 0xFB, 0x43, 0x4D, 0x33, 0x85, 0x45, 0xF9, 0x02, 0x7F, 0x50, 0x3C, 0x9F, 0xA8,
+   0x51, 0xA3, 0x40, 0x8F, 0x92, 0x9D, 0x38, 0xF5, 0xBC, 0xB6, 0xDA, 0x21, 0x10, 0xFF, 0xF3, 0xD2,
+   0xCD, 0x0C, 0x13, 0xEC, 0x5F, 0x97, 0x44, 0x17, 0xC4, 0xA7, 0x7E, 0x3D, 0x64, 0x5D, 0x19, 0x73,
+   0x60, 0x81, 0x4F, 0xDC, 0x22, 0x2A, 0x90, 0x88, 0x46, 0xEE, 0xB8, 0x14, 0xDE, 0x5E, 0x0B, 0xDB,
+   0xE0, 0x32, 0x3A, 0x0A, 0x49, 0x06, 0x24, 0x5C, 0xC2, 0xD3, 0xAC, 0x62, 0x91, 0x95, 0xE4, 0x79,
+   0xE7, 0xC8, 0x37, 0x6D, 0x8D, 0xD5, 0x4E, 0xA9, 0x6C, 0x56, 0xF4, 0xEA, 0x65, 0x7A, 0xAE, 0x08,
+   0xBA, 0x78, 0x25, 0x2E, 0x1C, 0xA6, 0xB4, 0xC6, 0xE8, 0xDD, 0x74, 0x1F, 0x4B, 0xBD, 0x8B, 0x8A,
+   0x70, 0x3E, 0xB5, 0x66, 0x48, 0x03, 0xF6, 0x0E, 0x61, 0x35, 0x57, 0xB9, 0x86, 0xC1, 0x1D, 0x9E,
+   0xE1, 0xF8, 0x98, 0x11, 0x69, 0xD9, 0x8E, 0x94, 0x9B, 0x1E, 0x87, 0xE9, 0xCE, 0x55, 0x28, 0xDF,
+   0x8C, 0xA1, 0x89, 0x0D, 0xBF, 0xE6, 0x42, 0x68, 0x41, 0x99, 0x2D, 0x0F, 0xB0, 0x54, 0xBB, 0x16
+\}
+\end{DoxyCode}
+
+
+Definition at line 48 of file aes.\+c.
+
+\mbox{\Hypertarget{aes_8c_a8aa09d2cb5b9d58af1cf9b65cef9a86c}\label{aes_8c_a8aa09d2cb5b9d58af1cf9b65cef9a86c}} 
+\index{aes.\+c@{aes.\+c}!td@{td}}
+\index{td@{td}!aes.\+c@{aes.\+c}}
+\subsubsection{\texorpdfstring{td}{td}}
+{\footnotesize\ttfamily const \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t} td\mbox{[}256\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 127 of file aes.\+c.
+
+\mbox{\Hypertarget{aes_8c_ad449d120251b159561b8af081db6ab10}\label{aes_8c_ad449d120251b159561b8af081db6ab10}} 
+\index{aes.\+c@{aes.\+c}!te@{te}}
+\index{te@{te}!aes.\+c@{aes.\+c}}
+\subsubsection{\texorpdfstring{te}{te}}
+{\footnotesize\ttfamily const \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t} te\mbox{[}256\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 90 of file aes.\+c.
+

@@ -1,0 +1,1075 @@
+\hypertarget{m2m__hif_8c}{}\section{third\+\_\+party/atmel/devices/wilc1000/driver/source/m2m\+\_\+hif.c File Reference}
+\label{m2m__hif_8c}\index{third\+\_\+party/atmel/devices/wilc1000/driver/source/m2m\+\_\+hif.\+c@{third\+\_\+party/atmel/devices/wilc1000/driver/source/m2m\+\_\+hif.\+c}}
+
+
+This module contains W\+I\+LC M2M host interface A\+P\+Is implementation.  
+
+
+{\ttfamily \#include \char`\"{}driver/source/nmbus.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}bsp/include/nm\+\_\+bsp.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}m2m\+\_\+hif.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}driver/include/m2m\+\_\+types.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}driver/source/nmasic.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}driver/include/m2m\+\_\+periph.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{m2m__hif_8c_ac94d8b34d01e3c139f68c6919d01698e}{N\+M\+I\+\_\+\+A\+H\+B\+\_\+\+D\+A\+T\+A\+\_\+\+M\+E\+M\+\_\+\+B\+A\+SE}~0x30000
+\item 
+\#define \hyperlink{m2m__hif_8c_ac193d9e8153908f95f0dc73a0c80ea58}{N\+M\+I\+\_\+\+A\+H\+B\+\_\+\+S\+H\+A\+R\+E\+\_\+\+M\+E\+M\+\_\+\+B\+A\+SE}~0xd0000
+\item 
+\#define \hyperlink{m2m__hif_8c_a3ede7567355b40c9565be5b24288122f}{W\+I\+F\+I\+\_\+\+H\+O\+S\+T\+\_\+\+R\+C\+V\+\_\+\+C\+T\+R\+L\+\_\+0}~(0x1070)
+\item 
+\#define \hyperlink{m2m__hif_8c_af8f826d3c40d2cb9ab9bec16a2df81d3}{W\+I\+F\+I\+\_\+\+H\+O\+S\+T\+\_\+\+R\+C\+V\+\_\+\+C\+T\+R\+L\+\_\+1}~(0x1084)
+\item 
+\#define \hyperlink{m2m__hif_8c_a450091092d63fab03511cb2b7be98107}{W\+I\+F\+I\+\_\+\+H\+O\+S\+T\+\_\+\+R\+C\+V\+\_\+\+C\+T\+R\+L\+\_\+2}~(0x1078)
+\item 
+\#define \hyperlink{m2m__hif_8c_afe04618587d8661decb3ee50df1b6853}{W\+I\+F\+I\+\_\+\+H\+O\+S\+T\+\_\+\+R\+C\+V\+\_\+\+C\+T\+R\+L\+\_\+3}~(0x106c)
+\item 
+\#define \hyperlink{m2m__hif_8c_a133cfc3a3d09d7f7defbac67236ed22c}{W\+I\+F\+I\+\_\+\+H\+O\+S\+T\+\_\+\+R\+C\+V\+\_\+\+C\+T\+R\+L\+\_\+4}~(0x150400)
+\item 
+\#define \hyperlink{m2m__hif_8c_ad1d4ccb8aa0b49fd392f1e2b51307d90}{W\+I\+F\+I\+\_\+\+H\+O\+S\+T\+\_\+\+R\+C\+V\+\_\+\+C\+T\+R\+L\+\_\+5}~(0x1088)
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{m2m__hif_8c_ad3c50b24a4b59659a8219108a080c7cc}{isr} (void)
+\item 
+static \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} \hyperlink{m2m__hif_8c_ac7a1ee6393c0c983c391233853164f84}{hif\+\_\+set\+\_\+rx\+\_\+done} (void)
+\item 
+static void \hyperlink{m2m__hif_8c_a586d455672ab6d1c931f14a7a5fb26c2}{m2m\+\_\+hif\+\_\+cb} (\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} u8\+Op\+Code, \hyperlink{group__DataT_ga1daa745171fc6e31d942c161422a76f9}{uint16} u16\+Data\+Size, \hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} $\ast$pu8\+Buff)
+\item 
+\hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} \hyperlink{m2m__hif_8c_a88c8f023679d14d6866b80c9275db686}{hif\+\_\+chip\+\_\+wake} (void)
+\begin{DoxyCompactList}\small\item\em To Wakeup the chip. \end{DoxyCompactList}\item 
+void \hyperlink{m2m__hif_8c_aea14bdeaac412fb26e8a550bbd06ef91}{hif\+\_\+set\+\_\+sleep\+\_\+mode} (\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} u8\+Pstype)
+\begin{DoxyCompactList}\small\item\em Set the sleep mode of the H\+IF layer. \end{DoxyCompactList}\item 
+\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} \hyperlink{m2m__hif_8c_ad32fe2e6813b9ecfdd54d200e498468c}{hif\+\_\+get\+\_\+sleep\+\_\+mode} (void)
+\begin{DoxyCompactList}\small\item\em Get the sleep mode of the H\+IF layer. \end{DoxyCompactList}\item 
+\hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} \hyperlink{m2m__hif_8c_a756a9c1154d55efd6c7924ef1ace5e75}{hif\+\_\+chip\+\_\+sleep\+\_\+sc} (void)
+\begin{DoxyCompactList}\small\item\em To clear the chip sleep but keep the chip sleep. \end{DoxyCompactList}\item 
+\hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} \hyperlink{m2m__hif_8c_a41d3f660265e122cbd7417ea8754e8dd}{hif\+\_\+chip\+\_\+sleep} (void)
+\begin{DoxyCompactList}\small\item\em To make the chip sleep. \end{DoxyCompactList}\item 
+\hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} \hyperlink{m2m__hif_8c_af9f7692c301ce176fe370b42682badbd}{hif\+\_\+init} (\hyperlink{structtstrHifinitParam}{tstr\+Hifinit\+Param} $\ast$pstr\+Init\+Param)
+\item 
+\hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} \hyperlink{m2m__hif_8c_a297b5d8edbc7f34eedb4992bf20b16ab}{hif\+\_\+deinit} (void $\ast$arg)
+\begin{DoxyCompactList}\small\item\em To Deinitialize H\+IF layer. \end{DoxyCompactList}\item 
+\hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} \hyperlink{m2m__hif_8c_a13ba8ad11b2ac39516ca787386d16ce0}{hif\+\_\+send} (\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} u8\+Gid, \hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} u8\+Opcode, \hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} $\ast$pu8\+Ctrl\+Buf, \hyperlink{group__DataT_ga1daa745171fc6e31d942c161422a76f9}{uint16} u16\+Ctrl\+Buf\+Size, \hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} $\ast$pu8\+Data\+Buf, \hyperlink{group__DataT_ga1daa745171fc6e31d942c161422a76f9}{uint16} u16\+Data\+Size, \hyperlink{group__DataT_ga1daa745171fc6e31d942c161422a76f9}{uint16} u16\+Data\+Offset)
+\begin{DoxyCompactList}\small\item\em Send packet using host interface. \end{DoxyCompactList}\item 
+\hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} \hyperlink{m2m__hif_8c_a8055cbaa8a24b713f6dcec6e9b721674}{hif\+\_\+send\+\_\+optimized} (\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} u8\+Gid, \hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} u8\+Opcode, \hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} $\ast$buffer, \hyperlink{group__DataT_ga1daa745171fc6e31d942c161422a76f9}{uint16} u16\+Data\+Size)
+\item 
+static \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} \hyperlink{m2m__hif_8c_a1523a85732c699292401c1a6c2f4f33b}{hif\+\_\+isr} (void)
+\begin{DoxyCompactList}\small\item\em Host interface interrupt service routine. \end{DoxyCompactList}\item 
+\hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} \hyperlink{m2m__hif_8c_af6391c4821ec23acf31785a5f49a7a3a}{hif\+\_\+handle\+\_\+isr} (void)
+\begin{DoxyCompactList}\small\item\em Handle interrupt received from N\+M\+C1500 firmware. \end{DoxyCompactList}\item 
+\hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} \hyperlink{m2m__hif_8c_a8170ed0e1b42ae496c6126a254457006}{hif\+\_\+receive} (\hyperlink{group__DataT_ga100e7c691a47d6978527c479a0158245}{uint32} u32\+Addr, \hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} $\ast$pu8\+Buf, \hyperlink{group__DataT_ga1daa745171fc6e31d942c161422a76f9}{uint16} u16\+Sz, \hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} is\+Done)
+\item 
+\hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} \hyperlink{m2m__hif_8c_a63f14be680fcf28f96912ee6e6f28be9}{hif\+\_\+register\+\_\+cb} (\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} u8\+Grp, \hyperlink{m2m__hif_8h_a78a3e5d59cea8566ca5c67c96f2215dc}{tpf\+Hif\+Call\+Back} fn)
+\item 
+\hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} \hyperlink{m2m__hif_8c_a449338133a24ecd39ba7c1066ec3df5c}{hif\+\_\+set\+\_\+receive\+\_\+buffer} (void $\ast$pv\+Buffer, \hyperlink{group__DataT_ga1daa745171fc6e31d942c161422a76f9}{uint16} u16\+Buffer\+Len)
+\begin{DoxyCompactList}\small\item\em Handle interrupt received from N\+M\+C1500 firmware. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static volatile \hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} \hyperlink{m2m__hif_8c_ae5f8d9d225a2e36df38feccb9db7384e}{gu8\+Chip\+Mode} = 0
+\item 
+static volatile \hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} \hyperlink{m2m__hif_8c_adb8704ba7e6d585352a20c499672c922}{gu8\+Chip\+Sleep} = 0
+\item 
+static volatile \hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} \hyperlink{m2m__hif_8c_a68512adc9785897313474136faa20777}{gu8\+Hif\+Size\+Done} = 0
+\item 
+static volatile \hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} \hyperlink{m2m__hif_8c_a4309a0f46145711222ae72d8971909d9}{gu8\+Interrupt} = 0
+\item 
+static volatile \hyperlink{structtstrHifHdr}{tstr\+Hif\+Hdr} gstr\+Hif \hyperlink{m2m__hif_8c_ab876ee3fc8abbaa759b9b1c7464aede0}{\+\_\+\+\_\+\+M2\+M\+\_\+\+D\+M\+A\+\_\+\+B\+U\+F\+\_\+\+A\+T\+T\+\_\+\+\_\+}
+\item 
+\hyperlink{m2m__hif_8h_a78a3e5d59cea8566ca5c67c96f2215dc}{tpf\+Hif\+Call\+Back} \hyperlink{m2m__hif_8c_a085d7c2c8a8434a558f7a2f929b27643}{pf\+Wifi\+Cb} = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{N\+U\+LL}
+\item 
+\hyperlink{m2m__hif_8h_a78a3e5d59cea8566ca5c67c96f2215dc}{tpf\+Hif\+Call\+Back} \hyperlink{m2m__hif_8c_a41845a0437e3fff496515f04d651af76}{pf\+Hif\+Cb} = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{N\+U\+LL}
+\item 
+\hyperlink{structtstrHifinitParam}{tstr\+Hifinit\+Param} \hyperlink{m2m__hif_8c_a6ae7b8f5c97ebf1c5775d9272af3f9e7}{str\+Hif\+Init\+Param}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This module contains W\+I\+LC M2M host interface A\+P\+Is implementation. 
+
+Copyright (c) 2016-\/2018 Microchip Technology Inc. and its subsidiaries.
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{m2m__hif_8c_ac94d8b34d01e3c139f68c6919d01698e}\label{m2m__hif_8c_ac94d8b34d01e3c139f68c6919d01698e}} 
+\index{m2m\+\_\+hif.\+c@{m2m\+\_\+hif.\+c}!N\+M\+I\+\_\+\+A\+H\+B\+\_\+\+D\+A\+T\+A\+\_\+\+M\+E\+M\+\_\+\+B\+A\+SE@{N\+M\+I\+\_\+\+A\+H\+B\+\_\+\+D\+A\+T\+A\+\_\+\+M\+E\+M\+\_\+\+B\+A\+SE}}
+\index{N\+M\+I\+\_\+\+A\+H\+B\+\_\+\+D\+A\+T\+A\+\_\+\+M\+E\+M\+\_\+\+B\+A\+SE@{N\+M\+I\+\_\+\+A\+H\+B\+\_\+\+D\+A\+T\+A\+\_\+\+M\+E\+M\+\_\+\+B\+A\+SE}!m2m\+\_\+hif.\+c@{m2m\+\_\+hif.\+c}}
+\subsubsection{\texorpdfstring{N\+M\+I\+\_\+\+A\+H\+B\+\_\+\+D\+A\+T\+A\+\_\+\+M\+E\+M\+\_\+\+B\+A\+SE}{NMI\_AHB\_DATA\_MEM\_BASE}}
+{\footnotesize\ttfamily \#define N\+M\+I\+\_\+\+A\+H\+B\+\_\+\+D\+A\+T\+A\+\_\+\+M\+E\+M\+\_\+\+B\+A\+SE~0x30000}
+
+
+
+Definition at line 54 of file m2m\+\_\+hif.\+c.
+
+\mbox{\Hypertarget{m2m__hif_8c_ac193d9e8153908f95f0dc73a0c80ea58}\label{m2m__hif_8c_ac193d9e8153908f95f0dc73a0c80ea58}} 
+\index{m2m\+\_\+hif.\+c@{m2m\+\_\+hif.\+c}!N\+M\+I\+\_\+\+A\+H\+B\+\_\+\+S\+H\+A\+R\+E\+\_\+\+M\+E\+M\+\_\+\+B\+A\+SE@{N\+M\+I\+\_\+\+A\+H\+B\+\_\+\+S\+H\+A\+R\+E\+\_\+\+M\+E\+M\+\_\+\+B\+A\+SE}}
+\index{N\+M\+I\+\_\+\+A\+H\+B\+\_\+\+S\+H\+A\+R\+E\+\_\+\+M\+E\+M\+\_\+\+B\+A\+SE@{N\+M\+I\+\_\+\+A\+H\+B\+\_\+\+S\+H\+A\+R\+E\+\_\+\+M\+E\+M\+\_\+\+B\+A\+SE}!m2m\+\_\+hif.\+c@{m2m\+\_\+hif.\+c}}
+\subsubsection{\texorpdfstring{N\+M\+I\+\_\+\+A\+H\+B\+\_\+\+S\+H\+A\+R\+E\+\_\+\+M\+E\+M\+\_\+\+B\+A\+SE}{NMI\_AHB\_SHARE\_MEM\_BASE}}
+{\footnotesize\ttfamily \#define N\+M\+I\+\_\+\+A\+H\+B\+\_\+\+S\+H\+A\+R\+E\+\_\+\+M\+E\+M\+\_\+\+B\+A\+SE~0xd0000}
+
+
+
+Definition at line 55 of file m2m\+\_\+hif.\+c.
+
+\mbox{\Hypertarget{m2m__hif_8c_a3ede7567355b40c9565be5b24288122f}\label{m2m__hif_8c_a3ede7567355b40c9565be5b24288122f}} 
+\index{m2m\+\_\+hif.\+c@{m2m\+\_\+hif.\+c}!W\+I\+F\+I\+\_\+\+H\+O\+S\+T\+\_\+\+R\+C\+V\+\_\+\+C\+T\+R\+L\+\_\+0@{W\+I\+F\+I\+\_\+\+H\+O\+S\+T\+\_\+\+R\+C\+V\+\_\+\+C\+T\+R\+L\+\_\+0}}
+\index{W\+I\+F\+I\+\_\+\+H\+O\+S\+T\+\_\+\+R\+C\+V\+\_\+\+C\+T\+R\+L\+\_\+0@{W\+I\+F\+I\+\_\+\+H\+O\+S\+T\+\_\+\+R\+C\+V\+\_\+\+C\+T\+R\+L\+\_\+0}!m2m\+\_\+hif.\+c@{m2m\+\_\+hif.\+c}}
+\subsubsection{\texorpdfstring{W\+I\+F\+I\+\_\+\+H\+O\+S\+T\+\_\+\+R\+C\+V\+\_\+\+C\+T\+R\+L\+\_\+0}{WIFI\_HOST\_RCV\_CTRL\_0}}
+{\footnotesize\ttfamily \#define W\+I\+F\+I\+\_\+\+H\+O\+S\+T\+\_\+\+R\+C\+V\+\_\+\+C\+T\+R\+L\+\_\+0~(0x1070)}
+
+
+
+Definition at line 57 of file m2m\+\_\+hif.\+c.
+
+\mbox{\Hypertarget{m2m__hif_8c_af8f826d3c40d2cb9ab9bec16a2df81d3}\label{m2m__hif_8c_af8f826d3c40d2cb9ab9bec16a2df81d3}} 
+\index{m2m\+\_\+hif.\+c@{m2m\+\_\+hif.\+c}!W\+I\+F\+I\+\_\+\+H\+O\+S\+T\+\_\+\+R\+C\+V\+\_\+\+C\+T\+R\+L\+\_\+1@{W\+I\+F\+I\+\_\+\+H\+O\+S\+T\+\_\+\+R\+C\+V\+\_\+\+C\+T\+R\+L\+\_\+1}}
+\index{W\+I\+F\+I\+\_\+\+H\+O\+S\+T\+\_\+\+R\+C\+V\+\_\+\+C\+T\+R\+L\+\_\+1@{W\+I\+F\+I\+\_\+\+H\+O\+S\+T\+\_\+\+R\+C\+V\+\_\+\+C\+T\+R\+L\+\_\+1}!m2m\+\_\+hif.\+c@{m2m\+\_\+hif.\+c}}
+\subsubsection{\texorpdfstring{W\+I\+F\+I\+\_\+\+H\+O\+S\+T\+\_\+\+R\+C\+V\+\_\+\+C\+T\+R\+L\+\_\+1}{WIFI\_HOST\_RCV\_CTRL\_1}}
+{\footnotesize\ttfamily \#define W\+I\+F\+I\+\_\+\+H\+O\+S\+T\+\_\+\+R\+C\+V\+\_\+\+C\+T\+R\+L\+\_\+1~(0x1084)}
+
+
+
+Definition at line 58 of file m2m\+\_\+hif.\+c.
+
+\mbox{\Hypertarget{m2m__hif_8c_a450091092d63fab03511cb2b7be98107}\label{m2m__hif_8c_a450091092d63fab03511cb2b7be98107}} 
+\index{m2m\+\_\+hif.\+c@{m2m\+\_\+hif.\+c}!W\+I\+F\+I\+\_\+\+H\+O\+S\+T\+\_\+\+R\+C\+V\+\_\+\+C\+T\+R\+L\+\_\+2@{W\+I\+F\+I\+\_\+\+H\+O\+S\+T\+\_\+\+R\+C\+V\+\_\+\+C\+T\+R\+L\+\_\+2}}
+\index{W\+I\+F\+I\+\_\+\+H\+O\+S\+T\+\_\+\+R\+C\+V\+\_\+\+C\+T\+R\+L\+\_\+2@{W\+I\+F\+I\+\_\+\+H\+O\+S\+T\+\_\+\+R\+C\+V\+\_\+\+C\+T\+R\+L\+\_\+2}!m2m\+\_\+hif.\+c@{m2m\+\_\+hif.\+c}}
+\subsubsection{\texorpdfstring{W\+I\+F\+I\+\_\+\+H\+O\+S\+T\+\_\+\+R\+C\+V\+\_\+\+C\+T\+R\+L\+\_\+2}{WIFI\_HOST\_RCV\_CTRL\_2}}
+{\footnotesize\ttfamily \#define W\+I\+F\+I\+\_\+\+H\+O\+S\+T\+\_\+\+R\+C\+V\+\_\+\+C\+T\+R\+L\+\_\+2~(0x1078)}
+
+
+
+Definition at line 59 of file m2m\+\_\+hif.\+c.
+
+\mbox{\Hypertarget{m2m__hif_8c_afe04618587d8661decb3ee50df1b6853}\label{m2m__hif_8c_afe04618587d8661decb3ee50df1b6853}} 
+\index{m2m\+\_\+hif.\+c@{m2m\+\_\+hif.\+c}!W\+I\+F\+I\+\_\+\+H\+O\+S\+T\+\_\+\+R\+C\+V\+\_\+\+C\+T\+R\+L\+\_\+3@{W\+I\+F\+I\+\_\+\+H\+O\+S\+T\+\_\+\+R\+C\+V\+\_\+\+C\+T\+R\+L\+\_\+3}}
+\index{W\+I\+F\+I\+\_\+\+H\+O\+S\+T\+\_\+\+R\+C\+V\+\_\+\+C\+T\+R\+L\+\_\+3@{W\+I\+F\+I\+\_\+\+H\+O\+S\+T\+\_\+\+R\+C\+V\+\_\+\+C\+T\+R\+L\+\_\+3}!m2m\+\_\+hif.\+c@{m2m\+\_\+hif.\+c}}
+\subsubsection{\texorpdfstring{W\+I\+F\+I\+\_\+\+H\+O\+S\+T\+\_\+\+R\+C\+V\+\_\+\+C\+T\+R\+L\+\_\+3}{WIFI\_HOST\_RCV\_CTRL\_3}}
+{\footnotesize\ttfamily \#define W\+I\+F\+I\+\_\+\+H\+O\+S\+T\+\_\+\+R\+C\+V\+\_\+\+C\+T\+R\+L\+\_\+3~(0x106c)}
+
+
+
+Definition at line 60 of file m2m\+\_\+hif.\+c.
+
+\mbox{\Hypertarget{m2m__hif_8c_a133cfc3a3d09d7f7defbac67236ed22c}\label{m2m__hif_8c_a133cfc3a3d09d7f7defbac67236ed22c}} 
+\index{m2m\+\_\+hif.\+c@{m2m\+\_\+hif.\+c}!W\+I\+F\+I\+\_\+\+H\+O\+S\+T\+\_\+\+R\+C\+V\+\_\+\+C\+T\+R\+L\+\_\+4@{W\+I\+F\+I\+\_\+\+H\+O\+S\+T\+\_\+\+R\+C\+V\+\_\+\+C\+T\+R\+L\+\_\+4}}
+\index{W\+I\+F\+I\+\_\+\+H\+O\+S\+T\+\_\+\+R\+C\+V\+\_\+\+C\+T\+R\+L\+\_\+4@{W\+I\+F\+I\+\_\+\+H\+O\+S\+T\+\_\+\+R\+C\+V\+\_\+\+C\+T\+R\+L\+\_\+4}!m2m\+\_\+hif.\+c@{m2m\+\_\+hif.\+c}}
+\subsubsection{\texorpdfstring{W\+I\+F\+I\+\_\+\+H\+O\+S\+T\+\_\+\+R\+C\+V\+\_\+\+C\+T\+R\+L\+\_\+4}{WIFI\_HOST\_RCV\_CTRL\_4}}
+{\footnotesize\ttfamily \#define W\+I\+F\+I\+\_\+\+H\+O\+S\+T\+\_\+\+R\+C\+V\+\_\+\+C\+T\+R\+L\+\_\+4~(0x150400)}
+
+
+
+Definition at line 61 of file m2m\+\_\+hif.\+c.
+
+\mbox{\Hypertarget{m2m__hif_8c_ad1d4ccb8aa0b49fd392f1e2b51307d90}\label{m2m__hif_8c_ad1d4ccb8aa0b49fd392f1e2b51307d90}} 
+\index{m2m\+\_\+hif.\+c@{m2m\+\_\+hif.\+c}!W\+I\+F\+I\+\_\+\+H\+O\+S\+T\+\_\+\+R\+C\+V\+\_\+\+C\+T\+R\+L\+\_\+5@{W\+I\+F\+I\+\_\+\+H\+O\+S\+T\+\_\+\+R\+C\+V\+\_\+\+C\+T\+R\+L\+\_\+5}}
+\index{W\+I\+F\+I\+\_\+\+H\+O\+S\+T\+\_\+\+R\+C\+V\+\_\+\+C\+T\+R\+L\+\_\+5@{W\+I\+F\+I\+\_\+\+H\+O\+S\+T\+\_\+\+R\+C\+V\+\_\+\+C\+T\+R\+L\+\_\+5}!m2m\+\_\+hif.\+c@{m2m\+\_\+hif.\+c}}
+\subsubsection{\texorpdfstring{W\+I\+F\+I\+\_\+\+H\+O\+S\+T\+\_\+\+R\+C\+V\+\_\+\+C\+T\+R\+L\+\_\+5}{WIFI\_HOST\_RCV\_CTRL\_5}}
+{\footnotesize\ttfamily \#define W\+I\+F\+I\+\_\+\+H\+O\+S\+T\+\_\+\+R\+C\+V\+\_\+\+C\+T\+R\+L\+\_\+5~(0x1088)}
+
+
+
+Definition at line 62 of file m2m\+\_\+hif.\+c.
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{m2m__hif_8c_a41d3f660265e122cbd7417ea8754e8dd}\label{m2m__hif_8c_a41d3f660265e122cbd7417ea8754e8dd}} 
+\index{m2m\+\_\+hif.\+c@{m2m\+\_\+hif.\+c}!hif\+\_\+chip\+\_\+sleep@{hif\+\_\+chip\+\_\+sleep}}
+\index{hif\+\_\+chip\+\_\+sleep@{hif\+\_\+chip\+\_\+sleep}!m2m\+\_\+hif.\+c@{m2m\+\_\+hif.\+c}}
+\subsubsection{\texorpdfstring{hif\+\_\+chip\+\_\+sleep()}{hif\_chip\_sleep()}}
+{\footnotesize\ttfamily \hyperlink{group__BSPDefine_gaecc0323d771e41ef81a76b5f12783e22}{N\+M\+I\+\_\+\+A\+PI} \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} hif\+\_\+chip\+\_\+sleep (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+To make the chip sleep. 
+
+\begin{DoxyReturn}{Returns}
+The function shall return Z\+E\+RO for successful operation and a negative value otherwise. 
+\end{DoxyReturn}
+
+
+Definition at line 227 of file m2m\+\_\+hif.\+c.
+
+
+\begin{DoxyCode}
+228 \{
+229     \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} ret = \hyperlink{nm__common_8h_a9ef27ba27aafdd1aa3a79d3ba2c36b8f}{M2M\_SUCCESS};
+230 
+231     \textcolor{keywordflow}{if}(\hyperlink{m2m__hif_8c_adb8704ba7e6d585352a20c499672c922}{gu8ChipSleep} >= 1)
+232     \{
+233         \hyperlink{m2m__hif_8c_adb8704ba7e6d585352a20c499672c922}{gu8ChipSleep}--;
+234     \}
+235     
+236     \textcolor{keywordflow}{if}(\hyperlink{m2m__hif_8c_adb8704ba7e6d585352a20c499672c922}{gu8ChipSleep} == 0)
+237     \{
+238         \textcolor{keywordflow}{if}(\hyperlink{m2m__hif_8c_ae5f8d9d225a2e36df38feccb9db7384e}{gu8ChipMode} != \hyperlink{group__WlanEnums_ggae6bd0ac78bfca4cda17d9dbedf79ad7ea3981eb69690432d09abdf1c5dd75d435}{M2M\_NO\_PS})
+239         \{
+240             ret = \hyperlink{nmasic_8c_a624e7923184968631a2eb86938d6f3ba}{chip\_sleep}();
+241             \textcolor{keywordflow}{if}(ret != \hyperlink{nm__common_8h_a9ef27ba27aafdd1aa3a79d3ba2c36b8f}{M2M\_SUCCESS})\textcolor{keywordflow}{goto} ERR1;
+242 
+243         \}
+244         \textcolor{keywordflow}{else}
+245         \{
+246         \}
+247     \}
+248 ERR1:
+249     \textcolor{keywordflow}{return} ret;
+250 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{m2m__hif_8c_a756a9c1154d55efd6c7924ef1ace5e75}\label{m2m__hif_8c_a756a9c1154d55efd6c7924ef1ace5e75}} 
+\index{m2m\+\_\+hif.\+c@{m2m\+\_\+hif.\+c}!hif\+\_\+chip\+\_\+sleep\+\_\+sc@{hif\+\_\+chip\+\_\+sleep\+\_\+sc}}
+\index{hif\+\_\+chip\+\_\+sleep\+\_\+sc@{hif\+\_\+chip\+\_\+sleep\+\_\+sc}!m2m\+\_\+hif.\+c@{m2m\+\_\+hif.\+c}}
+\subsubsection{\texorpdfstring{hif\+\_\+chip\+\_\+sleep\+\_\+sc()}{hif\_chip\_sleep\_sc()}}
+{\footnotesize\ttfamily \hyperlink{group__BSPDefine_gaecc0323d771e41ef81a76b5f12783e22}{N\+M\+I\+\_\+\+A\+PI} \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} hif\+\_\+chip\+\_\+sleep\+\_\+sc (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+To clear the chip sleep but keep the chip sleep. 
+
+To clear the chip count only but keep the chip awake.
+
+\begin{DoxyReturn}{Returns}
+The function shall return Z\+E\+RO for successful operation and a negative value otherwise. 
+\end{DoxyReturn}
+
+
+Definition at line 213 of file m2m\+\_\+hif.\+c.
+
+
+\begin{DoxyCode}
+214 \{
+215     \textcolor{keywordflow}{if}(\hyperlink{m2m__hif_8c_adb8704ba7e6d585352a20c499672c922}{gu8ChipSleep} >= 1)
+216     \{
+217         \hyperlink{m2m__hif_8c_adb8704ba7e6d585352a20c499672c922}{gu8ChipSleep}--;
+218     \}
+219     \textcolor{keywordflow}{return} \hyperlink{nm__common_8h_a9ef27ba27aafdd1aa3a79d3ba2c36b8f}{M2M\_SUCCESS};
+220 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{m2m__hif_8c_a88c8f023679d14d6866b80c9275db686}\label{m2m__hif_8c_a88c8f023679d14d6866b80c9275db686}} 
+\index{m2m\+\_\+hif.\+c@{m2m\+\_\+hif.\+c}!hif\+\_\+chip\+\_\+wake@{hif\+\_\+chip\+\_\+wake}}
+\index{hif\+\_\+chip\+\_\+wake@{hif\+\_\+chip\+\_\+wake}!m2m\+\_\+hif.\+c@{m2m\+\_\+hif.\+c}}
+\subsubsection{\texorpdfstring{hif\+\_\+chip\+\_\+wake()}{hif\_chip\_wake()}}
+{\footnotesize\ttfamily \hyperlink{group__BSPDefine_gaecc0323d771e41ef81a76b5f12783e22}{N\+M\+I\+\_\+\+A\+PI} \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} hif\+\_\+chip\+\_\+wake (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+To Wakeup the chip. 
+
+\begin{DoxyReturn}{Returns}
+The function shall return Z\+E\+RO for successful operation and a negative value otherwise. 
+\end{DoxyReturn}
+
+
+Definition at line 150 of file m2m\+\_\+hif.\+c.
+
+
+\begin{DoxyCode}
+151 \{
+152     \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} ret = \hyperlink{nm__common_8h_a9ef27ba27aafdd1aa3a79d3ba2c36b8f}{M2M\_SUCCESS};
+153     \textcolor{keywordflow}{if}(\hyperlink{m2m__hif_8c_a68512adc9785897313474136faa20777}{gu8HifSizeDone})
+154     \{
+155         \textcolor{comment}{/*chip already wake for the rx not done no need to send wake request*/}
+156         \textcolor{keywordflow}{return} ret;
+157     \}
+158     \textcolor{keywordflow}{if}(\hyperlink{m2m__hif_8c_adb8704ba7e6d585352a20c499672c922}{gu8ChipSleep} == 0)
+159     \{
+160         \textcolor{keywordflow}{if}(\hyperlink{m2m__hif_8c_ae5f8d9d225a2e36df38feccb9db7384e}{gu8ChipMode} != \hyperlink{group__WlanEnums_ggae6bd0ac78bfca4cda17d9dbedf79ad7ea3981eb69690432d09abdf1c5dd75d435}{M2M\_NO\_PS})
+161         \{
+162             ret = \hyperlink{nmasic_8c_abe05d6f4afa80ace3bd105d63dceda52}{chip\_wake}();
+163             \textcolor{keywordflow}{if}(ret != \hyperlink{nm__common_8h_a9ef27ba27aafdd1aa3a79d3ba2c36b8f}{M2M\_SUCCESS})\textcolor{keywordflow}{goto} ERR1;
+164         \}
+165         \textcolor{keywordflow}{else}
+166         \{
+167         \}
+168     \}
+169     \hyperlink{m2m__hif_8c_adb8704ba7e6d585352a20c499672c922}{gu8ChipSleep}++;
+170 ERR1:
+171     \textcolor{keywordflow}{return} ret;
+172 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{m2m__hif_8c_a297b5d8edbc7f34eedb4992bf20b16ab}\label{m2m__hif_8c_a297b5d8edbc7f34eedb4992bf20b16ab}} 
+\index{m2m\+\_\+hif.\+c@{m2m\+\_\+hif.\+c}!hif\+\_\+deinit@{hif\+\_\+deinit}}
+\index{hif\+\_\+deinit@{hif\+\_\+deinit}!m2m\+\_\+hif.\+c@{m2m\+\_\+hif.\+c}}
+\subsubsection{\texorpdfstring{hif\+\_\+deinit()}{hif\_deinit()}}
+{\footnotesize\ttfamily \hyperlink{group__BSPDefine_gaecc0323d771e41ef81a76b5f12783e22}{N\+M\+I\+\_\+\+A\+PI} \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} hif\+\_\+deinit (\begin{DoxyParamCaption}\item[{void $\ast$}]{arg }\end{DoxyParamCaption})}
+
+
+
+To Deinitialize H\+IF layer. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em arg} & Pointer to the arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The function shall return Z\+E\+RO for successful operation and a negative value otherwise. 
+\end{DoxyReturn}
+
+
+Definition at line 282 of file m2m\+\_\+hif.\+c.
+
+
+\begin{DoxyCode}
+283 \{
+284     \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} ret = \hyperlink{nm__common_8h_a9ef27ba27aafdd1aa3a79d3ba2c36b8f}{M2M\_SUCCESS};
+285 \textcolor{preprocessor}{#if 0}
+286     \hyperlink{group__DataT_ga100e7c691a47d6978527c479a0158245}{uint32} reg = 0, cnt=0;
+287     \textcolor{keywordflow}{while} (reg != \hyperlink{nmasic_8c_a041fc16e321a3e5fca0c7a58a1974874}{M2M\_DISABLE\_PS})
+288     \{
+289         \hyperlink{group__NmBspSleepFn_gadbf38ddf0138d8e0a4e4720909a7b081}{nm\_bsp\_sleep}(1);
+290         reg = \hyperlink{nmbus_8c_a40095d9f8d9cd502b40d93015c93af24}{nm\_read\_reg}(STATE\_REG);
+291         \textcolor{keywordflow}{if}(++cnt > 1000)
+292         \{
+293             \hyperlink{nm__common_8h_a8655326906c24b60e7cce33a0f1e932b}{M2M\_DBG}(\textcolor{stringliteral}{"failed to stop power save\(\backslash\)r\(\backslash\)n"});
+294             \textcolor{keywordflow}{break};
+295         \}
+296     \}
+297 \textcolor{preprocessor}{#endif}
+298     ret = \hyperlink{m2m__hif_8c_a88c8f023679d14d6866b80c9275db686}{hif\_chip\_wake}();
+299     
+300     \textcolor{keywordflow}{return} ret;
+301 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{m2m__hif_8c_ad32fe2e6813b9ecfdd54d200e498468c}\label{m2m__hif_8c_ad32fe2e6813b9ecfdd54d200e498468c}} 
+\index{m2m\+\_\+hif.\+c@{m2m\+\_\+hif.\+c}!hif\+\_\+get\+\_\+sleep\+\_\+mode@{hif\+\_\+get\+\_\+sleep\+\_\+mode}}
+\index{hif\+\_\+get\+\_\+sleep\+\_\+mode@{hif\+\_\+get\+\_\+sleep\+\_\+mode}!m2m\+\_\+hif.\+c@{m2m\+\_\+hif.\+c}}
+\subsubsection{\texorpdfstring{hif\+\_\+get\+\_\+sleep\+\_\+mode()}{hif\_get\_sleep\_mode()}}
+{\footnotesize\ttfamily \hyperlink{group__BSPDefine_gaecc0323d771e41ef81a76b5f12783e22}{N\+M\+I\+\_\+\+A\+PI} \hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} hif\+\_\+get\+\_\+sleep\+\_\+mode (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Get the sleep mode of the H\+IF layer. 
+
+\begin{DoxyReturn}{Returns}
+The function S\+H\+A\+LL return the sleep mode of the H\+IF layer. 
+\end{DoxyReturn}
+
+
+Definition at line 202 of file m2m\+\_\+hif.\+c.
+
+
+\begin{DoxyCode}
+203 \{
+204     \textcolor{keywordflow}{return} \hyperlink{m2m__hif_8c_ae5f8d9d225a2e36df38feccb9db7384e}{gu8ChipMode};
+205 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{m2m__hif_8c_af6391c4821ec23acf31785a5f49a7a3a}\label{m2m__hif_8c_af6391c4821ec23acf31785a5f49a7a3a}} 
+\index{m2m\+\_\+hif.\+c@{m2m\+\_\+hif.\+c}!hif\+\_\+handle\+\_\+isr@{hif\+\_\+handle\+\_\+isr}}
+\index{hif\+\_\+handle\+\_\+isr@{hif\+\_\+handle\+\_\+isr}!m2m\+\_\+hif.\+c@{m2m\+\_\+hif.\+c}}
+\subsubsection{\texorpdfstring{hif\+\_\+handle\+\_\+isr()}{hif\_handle\_isr()}}
+{\footnotesize\ttfamily hif\+\_\+handle\+\_\+isr (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Handle interrupt received from N\+M\+C1500 firmware. 
+
+\begin{DoxyReturn}{Returns}
+The function S\+H\+A\+LL return 0 for success and a negative value otherwise. 
+\end{DoxyReturn}
+
+
+Definition at line 601 of file m2m\+\_\+hif.\+c.
+
+
+\begin{DoxyCode}
+602 \{
+603     \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} ret = \hyperlink{nm__common_8h_a9ef27ba27aafdd1aa3a79d3ba2c36b8f}{M2M\_SUCCESS};
+604     
+605     \textcolor{keywordflow}{while} (\hyperlink{m2m__hif_8c_a4309a0f46145711222ae72d8971909d9}{gu8Interrupt}) \{
+606         \textcolor{comment}{/*must be at that place because of the race of interrupt increment and that decrement*/}
+607         \textcolor{comment}{/*when the interrupt enabled*/}
+608         \hyperlink{m2m__hif_8c_a4309a0f46145711222ae72d8971909d9}{gu8Interrupt}--;
+609         \textcolor{keywordflow}{while}(1)
+610         \{
+611             ret = \hyperlink{m2m__hif_8c_a1523a85732c699292401c1a6c2f4f33b}{hif\_isr}();
+612             \textcolor{keywordflow}{if}(ret == \hyperlink{nm__common_8h_a9ef27ba27aafdd1aa3a79d3ba2c36b8f}{M2M\_SUCCESS}) \{
+613                 \textcolor{comment}{/*we will try forever untill we get that interrupt*/}
+614                 \textcolor{comment}{/*Fail return errors here due to bus errors (reading expected values)*/}
+615                 \textcolor{keywordflow}{break};
+616             \} \textcolor{keywordflow}{else} \{
+617                 \hyperlink{nm__common_8h_a34d005df494e50b05cd38b80f318d7ac}{M2M\_ERR}(\textcolor{stringliteral}{"(HIF) Fail to handle interrupt %d try Again..\(\backslash\)r\(\backslash\)n"},ret);
+618             \}
+619         \}
+620     \}
+621 
+622     \textcolor{keywordflow}{return} ret;
+623 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{m2m__hif_8c_af9f7692c301ce176fe370b42682badbd}\label{m2m__hif_8c_af9f7692c301ce176fe370b42682badbd}} 
+\index{m2m\+\_\+hif.\+c@{m2m\+\_\+hif.\+c}!hif\+\_\+init@{hif\+\_\+init}}
+\index{hif\+\_\+init@{hif\+\_\+init}!m2m\+\_\+hif.\+c@{m2m\+\_\+hif.\+c}}
+\subsubsection{\texorpdfstring{hif\+\_\+init()}{hif\_init()}}
+{\footnotesize\ttfamily \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} hif\+\_\+init (\begin{DoxyParamCaption}\item[{\hyperlink{structtstrHifinitParam}{tstr\+Hifinit\+Param} $\ast$}]{pstr\+Init\+Param }\end{DoxyParamCaption})}
+
+
+
+Definition at line 259 of file m2m\+\_\+hif.\+c.
+
+
+\begin{DoxyCode}
+260 \{
+261     \hyperlink{m2m__hif_8c_a085d7c2c8a8434a558f7a2f929b27643}{pfWifiCb} = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+262     
+263     \hyperlink{m2m__hif_8c_adb8704ba7e6d585352a20c499672c922}{gu8ChipSleep} = 0;
+264     \hyperlink{m2m__hif_8c_ae5f8d9d225a2e36df38feccb9db7384e}{gu8ChipMode} = \hyperlink{group__WlanEnums_ggae6bd0ac78bfca4cda17d9dbedf79ad7ea3981eb69690432d09abdf1c5dd75d435}{M2M\_NO\_PS};
+265 
+266     \hyperlink{m2m__hif_8c_a4309a0f46145711222ae72d8971909d9}{gu8Interrupt} = 0;
+267     \hyperlink{group__NmBspRegisterFn_ga1b42af0f91da07772d2d5c871c9c3e62}{nm\_bsp\_register\_isr}(\hyperlink{m2m__hif_8c_ad3c50b24a4b59659a8219108a080c7cc}{isr});
+268 
+269     \hyperlink{m2m__hif_8c_a63f14be680fcf28f96912ee6e6f28be9}{hif\_register\_cb}(\hyperlink{nm__common_8h_a9ab02eb1aea02a75c3f5aade4eef1276a0a1440badab09fd63989415a7b051133}{M2M\_REQ\_GRP\_HIF},\hyperlink{m2m__hif_8c_a586d455672ab6d1c931f14a7a5fb26c2}{m2m\_hif\_cb});
+270 
+271     \hyperlink{nm__common_8h_a62b30b611dfcc58e190254d1f663470a}{m2m\_memcpy}((\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8}*)(&\hyperlink{m2m__hif_8c_a6ae7b8f5c97ebf1c5775d9272af3f9e7}{strHifInitParam}), (\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8}*)pstrInitParam, \textcolor{keyword}{sizeof}
+      (\hyperlink{structtstrHifinitParam}{tstrHifinitParam}));
+272     
+273     \textcolor{keywordflow}{return} \hyperlink{nm__common_8h_a9ef27ba27aafdd1aa3a79d3ba2c36b8f}{M2M\_SUCCESS};
+274 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{m2m__hif_8c_a1523a85732c699292401c1a6c2f4f33b}\label{m2m__hif_8c_a1523a85732c699292401c1a6c2f4f33b}} 
+\index{m2m\+\_\+hif.\+c@{m2m\+\_\+hif.\+c}!hif\+\_\+isr@{hif\+\_\+isr}}
+\index{hif\+\_\+isr@{hif\+\_\+isr}!m2m\+\_\+hif.\+c@{m2m\+\_\+hif.\+c}}
+\subsubsection{\texorpdfstring{hif\+\_\+isr()}{hif\_isr()}}
+{\footnotesize\ttfamily hif\+\_\+isr (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Host interface interrupt service routine. 
+
+\begin{DoxyAuthor}{Author}
+M. Abdelmawla 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+15 July 2012 
+\end{DoxyDate}
+\begin{DoxyReturn}{Returns}
+1 in case of interrupt received else 0 will be returned 
+\end{DoxyReturn}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+start bus transfer
+
+Definition at line 484 of file m2m\+\_\+hif.\+c.
+
+
+\begin{DoxyCode}
+485 \{
+486     \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} ret = \hyperlink{nm__common_8h_a1337ea19161996276a331dc168c6b24b}{M2M\_ERR\_BUS\_FAIL};
+487     \textcolor{keyword}{volatile} \hyperlink{group__DataT_ga100e7c691a47d6978527c479a0158245}{uint32} reg,int\_stat;
+488     \textcolor{keyword}{volatile} \hyperlink{structtstrHifHdr}{tstrHifHdr}* pstrHif;
+489     
+490     \textcolor{comment}{/*read int status*/}
+491     ret = \hyperlink{nmbus_8c_a475d273d8342f3f5c2a00e2887bf1b4f}{nm\_read\_reg\_with\_ret}(WILC\_INT\_STATUS\_REG, (\hyperlink{group__DataT_ga100e7c691a47d6978527c479a0158245}{uint32}*)&int\_stat);
+492     int\_stat >>= \hyperlink{nmasic_8h_aa81fb65606bc3ff01291d64ecd2ccce2}{IRG\_FLAGS\_OFFSET};
+493     \textcolor{comment}{/*clear the read status*/}       
+494     ret |= \hyperlink{nmbus_8c_a6a7d6b943cea86630575707ef80e09f9}{nm\_write\_reg}(WILC\_INT\_CLEAR\_REG,int\_stat);
+495     \textcolor{keywordflow}{if}(\hyperlink{nm__common_8h_a9ef27ba27aafdd1aa3a79d3ba2c36b8f}{M2M\_SUCCESS} == ret)
+496     \{
+497 \textcolor{preprocessor}{#ifdef INT\_BASED\_TX}
+498         \textcolor{keywordflow}{if}(int\_stat & 0x2)  \textcolor{comment}{/* Packet sent. Host can now send more packets*/}
+499         \{
+500             \textcolor{keywordflow}{if}( (int\_stat&1) == 0)
+501                 \hyperlink{group__NmBspInterruptCtrl_gad08e47a941e87d631200f990000323dc}{nm\_bsp\_interrupt\_ctrl}(1);
+502                 
+503             \textcolor{keywordflow}{if}(\hyperlink{m2m__hif_8c_a085d7c2c8a8434a558f7a2f929b27643}{pfWifiCb})
+504                 \hyperlink{m2m__hif_8c_a085d7c2c8a8434a558f7a2f929b27643}{pfWifiCb}(\hyperlink{group__WlanEnums_gga064de09dec1d5e88ed8d075fa40f57dea6b3c32fea678ae3b3d764238a476c6c4}{M2M\_WIFI\_RESP\_PACKET\_SENT},0,0);               
+505         \}
+506 \textcolor{preprocessor}{#endif}
+507         \textcolor{keywordflow}{if}(int\_stat & 0x1)  \textcolor{comment}{/* New interrupt has been received */}
+508         \{
+509             \hyperlink{group__DataT_ga1daa745171fc6e31d942c161422a76f9}{uint16} size;
+510             \textcolor{comment}{/*read packet size*/}
+511             ret = \hyperlink{nmbus_8c_a475d273d8342f3f5c2a00e2887bf1b4f}{nm\_read\_reg\_with\_ret}(\hyperlink{m2m__hif_8c_a3ede7567355b40c9565be5b24288122f}{WIFI\_HOST\_RCV\_CTRL\_0}, (
+      \hyperlink{group__DataT_ga100e7c691a47d6978527c479a0158245}{uint32}*)&reg);
+512             \hyperlink{group__NmBspInterruptCtrl_gad08e47a941e87d631200f990000323dc}{nm\_bsp\_interrupt\_ctrl}(0);              
+513             \hyperlink{m2m__hif_8c_a68512adc9785897313474136faa20777}{gu8HifSizeDone} = 1;
+514             size = (\hyperlink{group__DataT_ga1daa745171fc6e31d942c161422a76f9}{uint16})((reg >> 2) & 0xfff);  
+515             \textcolor{keywordflow}{if} (size > 0) \{
+516                 \hyperlink{group__DataT_ga100e7c691a47d6978527c479a0158245}{uint32} \hyperlink{dhcpv6__common_8h_aaee906fadd211e863c2e29a3690b25c4}{address} = 0;
+520                 ret = \hyperlink{nmbus_8c_a475d273d8342f3f5c2a00e2887bf1b4f}{nm\_read\_reg\_with\_ret}(
+      \hyperlink{m2m__hif_8c_af8f826d3c40d2cb9ab9bec16a2df81d3}{WIFI\_HOST\_RCV\_CTRL\_1}, &address);
+521                 \textcolor{keywordflow}{if}((\hyperlink{nm__common_8h_a9ef27ba27aafdd1aa3a79d3ba2c36b8f}{M2M\_SUCCESS} != ret) || (size > \hyperlink{m2m__hif_8c_a6ae7b8f5c97ebf1c5775d9272af3f9e7}{strHifInitParam}.
+      \hyperlink{structtstrHifinitParam_a0a0ef27c7b11c7e708fc4a4e694edec2}{u32RcvBuffSize}))
+522                 \{
+523                     \hyperlink{nm__common_8h_a34d005df494e50b05cd38b80f318d7ac}{M2M\_ERR}(\textcolor{stringliteral}{"(hif) WIFI\_HOST\_RCV\_CTRL\_1 bus fail or buffer is too small. packet
+       Discarded\(\backslash\)r\(\backslash\)n"});
+524                     \hyperlink{nm__common_8h_a34d005df494e50b05cd38b80f318d7ac}{M2M\_ERR}(\textcolor{stringliteral}{"ret: %d, size: %d, buffersize: %lu\(\backslash\)r\(\backslash\)n"}, ret, size, 
+      \hyperlink{m2m__hif_8c_a6ae7b8f5c97ebf1c5775d9272af3f9e7}{strHifInitParam}.\hyperlink{structtstrHifinitParam_a0a0ef27c7b11c7e708fc4a4e694edec2}{u32RcvBuffSize});
+525                     \hyperlink{m2m__hif_8c_ac7a1ee6393c0c983c391233853164f84}{hif\_set\_rx\_done}();
+526                     \hyperlink{group__NmBspInterruptCtrl_gad08e47a941e87d631200f990000323dc}{nm\_bsp\_interrupt\_ctrl}(1);
+527                     \textcolor{keywordflow}{goto} ERR1;
+528                 \}
+529                 ret = \hyperlink{nmbus_8c_af1e8ce2caa79fdd112216a9f36f103a0}{nm\_read\_block}(address, \hyperlink{m2m__hif_8c_a6ae7b8f5c97ebf1c5775d9272af3f9e7}{strHifInitParam}.
+      \hyperlink{structtstrHifinitParam_a8fba7791bb370e1824b8a0d0365c71c5}{pu8RcvBuff}, size);
+530                 \textcolor{keywordflow}{if}(\hyperlink{nm__common_8h_a9ef27ba27aafdd1aa3a79d3ba2c36b8f}{M2M\_SUCCESS} != ret)
+531                 \{
+532                     \hyperlink{nm__common_8h_a34d005df494e50b05cd38b80f318d7ac}{M2M\_ERR}(\textcolor{stringliteral}{"(hif) address bus fail\(\backslash\)r\(\backslash\)n"});
+533                     \hyperlink{m2m__hif_8c_ac7a1ee6393c0c983c391233853164f84}{hif\_set\_rx\_done}();
+534                     \hyperlink{group__NmBspInterruptCtrl_gad08e47a941e87d631200f990000323dc}{nm\_bsp\_interrupt\_ctrl}(1);
+535                     \textcolor{keywordflow}{goto} ERR1;
+536                 \}
+537                 pstrHif = (\hyperlink{structtstrHifHdr}{tstrHifHdr}*)\hyperlink{m2m__hif_8c_a6ae7b8f5c97ebf1c5775d9272af3f9e7}{strHifInitParam}.
+      \hyperlink{structtstrHifinitParam_a8fba7791bb370e1824b8a0d0365c71c5}{pu8RcvBuff};
+538                 pstrHif->\hyperlink{structtstrHifHdr_a3f30ba8842ea1373d6c1514524704e09}{u16Length} = \hyperlink{nm__bsp_8h_a22348273616354c0ac8a3de5ce4fb963}{NM\_BSP\_B\_L\_16}(pstrHif->
+      \hyperlink{structtstrHifHdr_a3f30ba8842ea1373d6c1514524704e09}{u16Length});
+539                 \textcolor{keywordflow}{if}(pstrHif->\hyperlink{structtstrHifHdr_a3f30ba8842ea1373d6c1514524704e09}{u16Length} != size)
+540                 \{
+541                     \textcolor{keywordflow}{if}((size - pstrHif->\hyperlink{structtstrHifHdr_a3f30ba8842ea1373d6c1514524704e09}{u16Length}) > 4)
+542                     \{
+543                         \hyperlink{nm__common_8h_a34d005df494e50b05cd38b80f318d7ac}{M2M\_ERR}(\textcolor{stringliteral}{"(hif) Corrupted packet Address: %08lx, xSize = %u <L = %u, G = %u,
+       OP = %02X>\(\backslash\)r\(\backslash\)n"},
+544                             address, size, pstrHif->\hyperlink{structtstrHifHdr_a3f30ba8842ea1373d6c1514524704e09}{u16Length}, pstrHif->
+      \hyperlink{structtstrHifHdr_a7a12aaca5b72583aa35959eba923e466}{u8Gid}, pstrHif->\hyperlink{structtstrHifHdr_a95b0cece0166052ed10341584a2bda3f}{u8Opcode});
+545                         \hyperlink{m2m__hif_8c_ac7a1ee6393c0c983c391233853164f84}{hif\_set\_rx\_done}();
+546                         \hyperlink{group__NmBspInterruptCtrl_gad08e47a941e87d631200f990000323dc}{nm\_bsp\_interrupt\_ctrl}(1);
+547                         ret = \hyperlink{nm__common_8h_a1337ea19161996276a331dc168c6b24b}{M2M\_ERR\_BUS\_FAIL};
+548                         \textcolor{keywordflow}{goto} ERR1;
+549                     \}
+550                 \}
+551 
+552                 \textcolor{keywordflow}{if}(\hyperlink{nm__common_8h_a9ab02eb1aea02a75c3f5aade4eef1276aeb9a7d57324ba4b8a6c2a5f46dd499c2}{M2M\_REQ\_GRP\_WIFI} == pstrHif->\hyperlink{structtstrHifHdr_a7a12aaca5b72583aa35959eba923e466}{u8Gid})
+553                 \{
+554                     \textcolor{keywordflow}{if}(\hyperlink{m2m__hif_8c_a085d7c2c8a8434a558f7a2f929b27643}{pfWifiCb})
+555                         \hyperlink{m2m__hif_8c_a085d7c2c8a8434a558f7a2f929b27643}{pfWifiCb}(pstrHif->\hyperlink{structtstrHifHdr_a95b0cece0166052ed10341584a2bda3f}{u8Opcode},pstrHif->
+      \hyperlink{structtstrHifHdr_a3f30ba8842ea1373d6c1514524704e09}{u16Length} - \hyperlink{m2m__hif_8h_a374fe954dffb43612aa5579e1bb340fe}{M2M\_HIF\_HDR\_OFFSET}, \hyperlink{m2m__hif_8c_a6ae7b8f5c97ebf1c5775d9272af3f9e7}{strHifInitParam}.
+      \hyperlink{structtstrHifinitParam_a8fba7791bb370e1824b8a0d0365c71c5}{pu8RcvBuff} + \hyperlink{m2m__hif_8h_a374fe954dffb43612aa5579e1bb340fe}{M2M\_HIF\_HDR\_OFFSET});
+556                     
+557                 \} 
+558                 \textcolor{keywordflow}{else}
+559                 \{
+560                     \hyperlink{nm__common_8h_a34d005df494e50b05cd38b80f318d7ac}{M2M\_ERR}(\textcolor{stringliteral}{"(hif) invalid group ID\(\backslash\)r\(\backslash\)n"});
+561                     \hyperlink{m2m__hif_8c_ac7a1ee6393c0c983c391233853164f84}{hif\_set\_rx\_done}();
+562                     \hyperlink{group__NmBspInterruptCtrl_gad08e47a941e87d631200f990000323dc}{nm\_bsp\_interrupt\_ctrl}(1);
+563                     ret = \hyperlink{nm__common_8h_a1337ea19161996276a331dc168c6b24b}{M2M\_ERR\_BUS\_FAIL};
+564                     \textcolor{keywordflow}{goto} ERR1;
+565                 \}
+566                 ret = \hyperlink{m2m__hif_8c_ac7a1ee6393c0c983c391233853164f84}{hif\_set\_rx\_done}();
+567             \}
+568             \textcolor{keywordflow}{else}
+569             \{
+570                 \hyperlink{nm__common_8h_a34d005df494e50b05cd38b80f318d7ac}{M2M\_ERR}(\textcolor{stringliteral}{"(hif) Wrong Size\(\backslash\)r\(\backslash\)n"});
+571                 ret = \hyperlink{nm__common_8h_ad3684f41188470699bf98cdef430abf6}{M2M\_ERR\_RCV};
+572                 \textcolor{keywordflow}{goto} ERR1;
+573             \}
+574         \}
+575         \textcolor{keywordflow}{if} (int\_stat > 3 || int\_stat == 0)
+576         \{
+577 \textcolor{preprocessor}{#ifndef WIN32}
+578             \hyperlink{nm__common_8h_a34d005df494e50b05cd38b80f318d7ac}{M2M\_ERR}(\textcolor{stringliteral}{"(hif) False interrupt %lx"},int\_stat);
+579 \textcolor{preprocessor}{#ifdef NM\_LEVEL\_INTERRUPT}
+580             \hyperlink{group__NmBspInterruptCtrl_gad08e47a941e87d631200f990000323dc}{nm\_bsp\_interrupt\_ctrl}(1);
+581 
+582 \textcolor{preprocessor}{#endif}
+583 \textcolor{preprocessor}{#endif}
+584         \}
+585     \}
+586     \textcolor{keywordflow}{else}
+587     \{
+588         \hyperlink{nm__common_8h_a34d005df494e50b05cd38b80f318d7ac}{M2M\_ERR}(\textcolor{stringliteral}{"(hif) Fail to Read interrupt reg\(\backslash\)r\(\backslash\)n"});
+589         \textcolor{keywordflow}{goto} ERR1;
+590     \}
+591 ERR1:
+592     \textcolor{keywordflow}{return} ret;
+593 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{m2m__hif_8c_a8170ed0e1b42ae496c6126a254457006}\label{m2m__hif_8c_a8170ed0e1b42ae496c6126a254457006}} 
+\index{m2m\+\_\+hif.\+c@{m2m\+\_\+hif.\+c}!hif\+\_\+receive@{hif\+\_\+receive}}
+\index{hif\+\_\+receive@{hif\+\_\+receive}!m2m\+\_\+hif.\+c@{m2m\+\_\+hif.\+c}}
+\subsubsection{\texorpdfstring{hif\+\_\+receive()}{hif\_receive()}}
+{\footnotesize\ttfamily \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} hif\+\_\+receive (\begin{DoxyParamCaption}\item[{\hyperlink{group__DataT_ga100e7c691a47d6978527c479a0158245}{uint32}}]{u32\+Addr,  }\item[{\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} $\ast$}]{pu8\+Buf,  }\item[{\hyperlink{group__DataT_ga1daa745171fc6e31d942c161422a76f9}{uint16}}]{u16\+Sz,  }\item[{\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8}}]{is\+Done }\end{DoxyParamCaption})}
+
+
+
+Definition at line 637 of file m2m\+\_\+hif.\+c.
+
+
+\begin{DoxyCode}
+638 \{
+639     \hyperlink{group__DataT_ga100e7c691a47d6978527c479a0158245}{uint32} \hyperlink{dhcpv6__common_8h_aaee906fadd211e863c2e29a3690b25c4}{address}, reg;
+640     \hyperlink{group__DataT_ga1daa745171fc6e31d942c161422a76f9}{uint16} size;
+641     \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} ret = \hyperlink{nm__common_8h_a9ef27ba27aafdd1aa3a79d3ba2c36b8f}{M2M\_SUCCESS};
+642 
+643     ret = \hyperlink{nmbus_8c_a475d273d8342f3f5c2a00e2887bf1b4f}{nm\_read\_reg\_with\_ret}(\hyperlink{m2m__hif_8c_a3ede7567355b40c9565be5b24288122f}{WIFI\_HOST\_RCV\_CTRL\_0},&reg);
+644     \textcolor{keywordflow}{if}(ret != \hyperlink{nm__common_8h_a9ef27ba27aafdd1aa3a79d3ba2c36b8f}{M2M\_SUCCESS})\textcolor{keywordflow}{goto} ERR1; 
+645 
+646 
+647     size = (\hyperlink{group__DataT_ga1daa745171fc6e31d942c161422a76f9}{uint16})((reg >> 2) & 0xfff);  
+648     ret = \hyperlink{nmbus_8c_a475d273d8342f3f5c2a00e2887bf1b4f}{nm\_read\_reg\_with\_ret}(\hyperlink{m2m__hif_8c_af8f826d3c40d2cb9ab9bec16a2df81d3}{WIFI\_HOST\_RCV\_CTRL\_1},&address);
+649     \textcolor{keywordflow}{if}(ret != \hyperlink{nm__common_8h_a9ef27ba27aafdd1aa3a79d3ba2c36b8f}{M2M\_SUCCESS})\textcolor{keywordflow}{goto} ERR1; 
+650 
+651     \textcolor{comment}{/* Receive the payload */}
+652     ret = \hyperlink{nmbus_8c_af1e8ce2caa79fdd112216a9f36f103a0}{nm\_read\_block}(u32Addr, pu8Buf, u16Sz);
+653     \textcolor{keywordflow}{if}(ret != \hyperlink{nm__common_8h_a9ef27ba27aafdd1aa3a79d3ba2c36b8f}{M2M\_SUCCESS})\textcolor{keywordflow}{goto} ERR1;
+654 
+655     \textcolor{keywordflow}{if}(u16Sz > size)
+656     \{
+657         ret = \hyperlink{nm__common_8h_a39ed05df730834f2255971ca9879996e}{M2M\_ERR\_FAIL};
+658         \hyperlink{nm__common_8h_a34d005df494e50b05cd38b80f318d7ac}{M2M\_ERR}(\textcolor{stringliteral}{"APP Requested Size is larger than the recived buffer size <%d><%d>\(\backslash\)r\(\backslash\)n"},u16Sz, size
+      );
+659         \textcolor{keywordflow}{goto} ERR1;
+660     \}
+661     \textcolor{keywordflow}{if}((u32Addr < address)||((u32Addr + u16Sz)>(address+size)))
+662     \{
+663         ret = \hyperlink{nm__common_8h_a39ed05df730834f2255971ca9879996e}{M2M\_ERR\_FAIL};
+664         \hyperlink{nm__common_8h_a34d005df494e50b05cd38b80f318d7ac}{M2M\_ERR}(\textcolor{stringliteral}{"APP Requested Address beyond the recived buffer address and length\(\backslash\)r\(\backslash\)n"});
+665         \textcolor{keywordflow}{goto} ERR1;
+666     \}
+667 
+668     \textcolor{comment}{/* check if this is the last packet */}
+669     \textcolor{keywordflow}{if}((((address+size) - (u32Addr+u16Sz)) < 4) || isDone)
+670     \{
+671         
+672         \textcolor{comment}{/* set RX done */}
+673         ret = \hyperlink{m2m__hif_8c_ac7a1ee6393c0c983c391233853164f84}{hif\_set\_rx\_done}();
+674     \}
+675     
+676 
+677 
+678 ERR1:
+679     \textcolor{keywordflow}{return} ret;
+680 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{m2m__hif_8c_a63f14be680fcf28f96912ee6e6f28be9}\label{m2m__hif_8c_a63f14be680fcf28f96912ee6e6f28be9}} 
+\index{m2m\+\_\+hif.\+c@{m2m\+\_\+hif.\+c}!hif\+\_\+register\+\_\+cb@{hif\+\_\+register\+\_\+cb}}
+\index{hif\+\_\+register\+\_\+cb@{hif\+\_\+register\+\_\+cb}!m2m\+\_\+hif.\+c@{m2m\+\_\+hif.\+c}}
+\subsubsection{\texorpdfstring{hif\+\_\+register\+\_\+cb()}{hif\_register\_cb()}}
+{\footnotesize\ttfamily \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} hif\+\_\+register\+\_\+cb (\begin{DoxyParamCaption}\item[{\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8}}]{u8\+Grp,  }\item[{\hyperlink{m2m__hif_8h_a78a3e5d59cea8566ca5c67c96f2215dc}{tpf\+Hif\+Call\+Back}}]{fn }\end{DoxyParamCaption})}
+
+
+
+Definition at line 692 of file m2m\+\_\+hif.\+c.
+
+
+\begin{DoxyCode}
+693 \{
+694     \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} ret = \hyperlink{nm__common_8h_a9ef27ba27aafdd1aa3a79d3ba2c36b8f}{M2M\_SUCCESS};
+695     \textcolor{keywordflow}{switch}(u8Grp)
+696     \{
+697         \textcolor{keywordflow}{case} \hyperlink{nm__common_8h_a9ab02eb1aea02a75c3f5aade4eef1276aeb9a7d57324ba4b8a6c2a5f46dd499c2}{M2M\_REQ\_GRP\_WIFI}:
+698             \hyperlink{m2m__hif_8c_a085d7c2c8a8434a558f7a2f929b27643}{pfWifiCb} = fn;
+699             \textcolor{keywordflow}{break};
+700         \textcolor{keywordflow}{case} \hyperlink{nm__common_8h_a9ab02eb1aea02a75c3f5aade4eef1276a0a1440badab09fd63989415a7b051133}{M2M\_REQ\_GRP\_HIF}:
+701             \hyperlink{m2m__hif_8c_a41845a0437e3fff496515f04d651af76}{pfHifCb} = fn;
+702             \textcolor{keywordflow}{break};
+703         \textcolor{keywordflow}{default}:
+704             \hyperlink{nm__common_8h_a34d005df494e50b05cd38b80f318d7ac}{M2M\_ERR}(\textcolor{stringliteral}{"GRp ? %d\(\backslash\)r\(\backslash\)n"},u8Grp);
+705             ret = \hyperlink{nm__common_8h_a39ed05df730834f2255971ca9879996e}{M2M\_ERR\_FAIL};
+706             \textcolor{keywordflow}{break};
+707     \}
+708     \textcolor{keywordflow}{return} ret;
+709 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{m2m__hif_8c_a13ba8ad11b2ac39516ca787386d16ce0}\label{m2m__hif_8c_a13ba8ad11b2ac39516ca787386d16ce0}} 
+\index{m2m\+\_\+hif.\+c@{m2m\+\_\+hif.\+c}!hif\+\_\+send@{hif\+\_\+send}}
+\index{hif\+\_\+send@{hif\+\_\+send}!m2m\+\_\+hif.\+c@{m2m\+\_\+hif.\+c}}
+\subsubsection{\texorpdfstring{hif\+\_\+send()}{hif\_send()}}
+{\footnotesize\ttfamily \hyperlink{group__BSPDefine_gaecc0323d771e41ef81a76b5f12783e22}{N\+M\+I\+\_\+\+A\+PI} \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} hif\+\_\+send (\begin{DoxyParamCaption}\item[{\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8}}]{u8\+Gid,  }\item[{\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8}}]{u8\+Opcode,  }\item[{\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} $\ast$}]{pu8\+Ctrl\+Buf,  }\item[{\hyperlink{group__DataT_ga1daa745171fc6e31d942c161422a76f9}{uint16}}]{u16\+Ctrl\+Buf\+Size,  }\item[{\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} $\ast$}]{pu8\+Data\+Buf,  }\item[{\hyperlink{group__DataT_ga1daa745171fc6e31d942c161422a76f9}{uint16}}]{u16\+Data\+Size,  }\item[{\hyperlink{group__DataT_ga1daa745171fc6e31d942c161422a76f9}{uint16}}]{u16\+Data\+Offset }\end{DoxyParamCaption})}
+
+
+
+Send packet using host interface. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em u8\+Gid} & Group ID. \\
+\hline
+\mbox{\tt in}  & {\em u8\+Opcode} & Operation ID. \\
+\hline
+\mbox{\tt in}  & {\em pu8\+Ctrl\+Buf} & Pointer to the Control buffer. \\
+\hline
+\mbox{\tt in}  & {\em u16\+Ctrl\+Buf\+Size} & Control buffer size. \\
+\hline
+\mbox{\tt in}  & {\em u16\+Data\+Offset} & Packet Data offset. \\
+\hline
+\mbox{\tt in}  & {\em pu8\+Data\+Buf} & Packet buffer Allocated by the caller. \\
+\hline
+\mbox{\tt in}  & {\em u16\+Data\+Size} & Packet buffer size (including the H\+IF header). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The function shall return Z\+E\+RO for successful operation and a negative value otherwise. 
+\end{DoxyReturn}
+
+
+Definition at line 324 of file m2m\+\_\+hif.\+c.
+
+
+\begin{DoxyCode}
+326 \{
+327     \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8}      ret = \hyperlink{nm__common_8h_a83f12b45e2e04282453990ba8eb9eeb6}{M2M\_ERR\_SEND};
+328 \textcolor{preprocessor}{#ifndef INT\_BASED\_TX}
+329     \textcolor{keywordtype}{int} count = 0;
+330 \textcolor{preprocessor}{#endif}
+331     gstrHif.u8Opcode        = u8Opcode&(~\hyperlink{nm__common_8h_a12c8e796d1a5f24bf8d9ae8c25f6cc0c}{NBIT7});
+332     gstrHif.u8Gid       = u8Gid;
+333     gstrHif.u16Length   = \hyperlink{m2m__hif_8h_a374fe954dffb43612aa5579e1bb340fe}{M2M\_HIF\_HDR\_OFFSET};
+334     \textcolor{keywordflow}{if}(pu8DataBuf != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+335     \{
+336         gstrHif.u16Length += u16DataOffset + u16DataSize;
+337     \}
+338     \textcolor{keywordflow}{else}
+339     \{
+340         gstrHif.u16Length += u16CtrlBufSize;
+341     \}
+342     ret = \hyperlink{m2m__hif_8c_a88c8f023679d14d6866b80c9275db686}{hif\_chip\_wake}();
+343     \textcolor{keywordflow}{if}(ret == \hyperlink{nm__common_8h_a9ef27ba27aafdd1aa3a79d3ba2c36b8f}{M2M\_SUCCESS})
+344     \{
+345         \textcolor{keyword}{volatile} \hyperlink{group__DataT_ga100e7c691a47d6978527c479a0158245}{uint32} reg, dma\_addr = 0;
+346 \textcolor{preprocessor}{#ifndef INT\_BASED\_TX}
+347         \textcolor{keywordflow}{for} (count = 0; count < 1000 && dma\_addr == 0; count++)
+348 #endif
+349         \{
+350             ret = \hyperlink{nmbus_8c_a475d273d8342f3f5c2a00e2887bf1b4f}{nm\_read\_reg\_with\_ret}(0x150400,(\hyperlink{group__DataT_ga100e7c691a47d6978527c479a0158245}{uint32} *)&dma\_addr);         
+351         \}       
+352         \textcolor{keywordflow}{if} (dma\_addr != 0) 
+353         \{
+354             \textcolor{keyword}{volatile} \hyperlink{group__DataT_ga100e7c691a47d6978527c479a0158245}{uint32}   u32CurrAddr;
+355             \hyperlink{nmbus_8c_a6a7d6b943cea86630575707ef80e09f9}{nm\_write\_reg}(0x150400,0);
+356             u32CurrAddr = dma\_addr;
+357             gstrHif.u16Length=\hyperlink{nm__bsp_8h_a22348273616354c0ac8a3de5ce4fb963}{NM\_BSP\_B\_L\_16}(gstrHif.u16Length);
+358             ret = \hyperlink{nmbus_8c_afb924df7f944a8137cd51069512661cf}{nm\_write\_block}(u32CurrAddr, (\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8}*)&gstrHif, 
+      \hyperlink{m2m__hif_8h_a374fe954dffb43612aa5579e1bb340fe}{M2M\_HIF\_HDR\_OFFSET});
+359             \textcolor{keywordflow}{if}(\hyperlink{nm__common_8h_a9ef27ba27aafdd1aa3a79d3ba2c36b8f}{M2M\_SUCCESS} != ret) \textcolor{keywordflow}{goto} ERR1;
+360             u32CurrAddr += \hyperlink{m2m__hif_8h_a374fe954dffb43612aa5579e1bb340fe}{M2M\_HIF\_HDR\_OFFSET};
+361             \textcolor{keywordflow}{if}(pu8CtrlBuf != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+362             \{
+363                 ret = \hyperlink{nmbus_8c_afb924df7f944a8137cd51069512661cf}{nm\_write\_block}(u32CurrAddr, pu8CtrlBuf, u16CtrlBufSize);
+364                 \textcolor{keywordflow}{if}(\hyperlink{nm__common_8h_a9ef27ba27aafdd1aa3a79d3ba2c36b8f}{M2M\_SUCCESS} != ret) \textcolor{keywordflow}{goto} ERR1;
+365                 u32CurrAddr += u16CtrlBufSize;
+366             \}
+367             \textcolor{keywordflow}{if}(pu8DataBuf != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+368             \{
+369                 u32CurrAddr += (u16DataOffset - u16CtrlBufSize);
+370                 ret = \hyperlink{nmbus_8c_afb924df7f944a8137cd51069512661cf}{nm\_write\_block}(u32CurrAddr, pu8DataBuf, u16DataSize);
+371                 \textcolor{keywordflow}{if}(\hyperlink{nm__common_8h_a9ef27ba27aafdd1aa3a79d3ba2c36b8f}{M2M\_SUCCESS} != ret) \textcolor{keywordflow}{goto} ERR1;
+372                 u32CurrAddr += u16DataSize;
+373             \}
+374             reg = dma\_addr << 2;
+375             reg |= (1 << 1);
+376             ret = \hyperlink{nmbus_8c_a6a7d6b943cea86630575707ef80e09f9}{nm\_write\_reg}(\hyperlink{m2m__hif_8c_afe04618587d8661decb3ee50df1b6853}{WIFI\_HOST\_RCV\_CTRL\_3}, reg);
+377             \textcolor{keywordflow}{if}(\hyperlink{nm__common_8h_a9ef27ba27aafdd1aa3a79d3ba2c36b8f}{M2M\_SUCCESS} != ret) \textcolor{keywordflow}{goto} ERR1;
+378 \textcolor{preprocessor}{#if defined CONF\_WILC\_USE\_3000\_REV\_A}
+379             ret = \hyperlink{nmbus_8c_a6a7d6b943cea86630575707ef80e09f9}{nm\_write\_reg}(INTERRUPT\_CORTUS\_2\_3000D0, 1);
+380             \textcolor{keywordflow}{if}(\hyperlink{nm__common_8h_a9ef27ba27aafdd1aa3a79d3ba2c36b8f}{M2M\_SUCCESS} != ret) \textcolor{keywordflow}{goto} ERR1;
+381 \textcolor{preprocessor}{#endif}
+382         \}
+383         \textcolor{keywordflow}{else}
+384         \{
+385             ret = \hyperlink{m2m__hif_8c_a41d3f660265e122cbd7417ea8754e8dd}{hif\_chip\_sleep}();
+386             \hyperlink{nm__common_8h_a8655326906c24b60e7cce33a0f1e932b}{M2M\_DBG}(\textcolor{stringliteral}{"Failed to alloc rx size %d\(\backslash\)r\(\backslash\)n"},ret);
+387             ret = \hyperlink{nm__common_8h_a819c60cc53e1159dea4754fa4092243b}{M2M\_ERR\_MEM\_ALLOC};
+388             \textcolor{keywordflow}{goto} ERR2;
+389         \}
+390 
+391     \}
+392     \textcolor{keywordflow}{else}
+393     \{
+394         \hyperlink{nm__common_8h_a34d005df494e50b05cd38b80f318d7ac}{M2M\_ERR}(\textcolor{stringliteral}{"(HIF)Fail to wakup the chip\(\backslash\)r\(\backslash\)n"});
+395         \textcolor{keywordflow}{goto} ERR2;
+396     \}
+397     \textcolor{comment}{/*actual sleep ret = M2M\_SUCCESS*/}
+398     ret = \hyperlink{m2m__hif_8c_a41d3f660265e122cbd7417ea8754e8dd}{hif\_chip\_sleep}();
+399     \textcolor{keywordflow}{return} ret;
+400 ERR1:
+401     \textcolor{comment}{/*reset the count but no actual sleep as it already bus error*/}
+402     \hyperlink{m2m__hif_8c_a756a9c1154d55efd6c7924ef1ace5e75}{hif\_chip\_sleep\_sc}();
+403 ERR2:
+404     \textcolor{comment}{/*logical error*/}
+405     \textcolor{keywordflow}{return} ret;
+406 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{m2m__hif_8c_a8055cbaa8a24b713f6dcec6e9b721674}\label{m2m__hif_8c_a8055cbaa8a24b713f6dcec6e9b721674}} 
+\index{m2m\+\_\+hif.\+c@{m2m\+\_\+hif.\+c}!hif\+\_\+send\+\_\+optimized@{hif\+\_\+send\+\_\+optimized}}
+\index{hif\+\_\+send\+\_\+optimized@{hif\+\_\+send\+\_\+optimized}!m2m\+\_\+hif.\+c@{m2m\+\_\+hif.\+c}}
+\subsubsection{\texorpdfstring{hif\+\_\+send\+\_\+optimized()}{hif\_send\_optimized()}}
+{\footnotesize\ttfamily \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} hif\+\_\+send\+\_\+optimized (\begin{DoxyParamCaption}\item[{\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8}}]{u8\+Gid,  }\item[{\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8}}]{u8\+Opcode,  }\item[{\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} $\ast$}]{buffer,  }\item[{\hyperlink{group__DataT_ga1daa745171fc6e31d942c161422a76f9}{uint16}}]{u16\+Data\+Size }\end{DoxyParamCaption})}
+
+
+
+Definition at line 427 of file m2m\+\_\+hif.\+c.
+
+
+\begin{DoxyCode}
+427                                                                                          \{
+428     \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} ret = \hyperlink{nm__common_8h_a83f12b45e2e04282453990ba8eb9eeb6}{M2M\_ERR\_SEND};
+429     \textcolor{keyword}{volatile} \hyperlink{structtstrHifHdr}{tstrHifHdr}* strHif = (\hyperlink{structtstrHifHdr}{tstrHifHdr}*) (buffer);
+430 \textcolor{preprocessor}{#ifndef INT\_BASED\_TX}
+431     \textcolor{keywordtype}{int} count = 0;
+432 \textcolor{preprocessor}{#endif}
+433     strHif->\hyperlink{structtstrHifHdr_a95b0cece0166052ed10341584a2bda3f}{u8Opcode} = u8Opcode & (~\hyperlink{nm__common_8h_a12c8e796d1a5f24bf8d9ae8c25f6cc0c}{NBIT7});
+434     strHif->\hyperlink{structtstrHifHdr_a7a12aaca5b72583aa35959eba923e466}{u8Gid} = u8Gid;
+435     strHif->\hyperlink{structtstrHifHdr_a3f30ba8842ea1373d6c1514524704e09}{u16Length} = u16DataSize;
+436     ret = \hyperlink{m2m__hif_8c_a88c8f023679d14d6866b80c9275db686}{hif\_chip\_wake}();
+437     \textcolor{keywordflow}{if} (ret == \hyperlink{nm__common_8h_a9ef27ba27aafdd1aa3a79d3ba2c36b8f}{M2M\_SUCCESS}) \{
+438         \textcolor{keyword}{volatile} \hyperlink{group__DataT_ga100e7c691a47d6978527c479a0158245}{uint32} reg, dma\_addr = 0;
+439 \textcolor{preprocessor}{#ifndef INT\_BASED\_TX}
+440         \textcolor{keywordflow}{for} (count = 0; count < 1000 && dma\_addr == 0; count++)
+441 #endif
+442                 \{
+443             ret = \hyperlink{nmbus_8c_a475d273d8342f3f5c2a00e2887bf1b4f}{nm\_read\_reg\_with\_ret}(0x150400, (\hyperlink{group__DataT_ga100e7c691a47d6978527c479a0158245}{uint32} *) &dma\_addr);
+444         \}
+445         \textcolor{keywordflow}{if} (dma\_addr != 0) \{
+446             \textcolor{keyword}{volatile} \hyperlink{group__DataT_ga100e7c691a47d6978527c479a0158245}{uint32} u32CurrAddr;
+447             \hyperlink{nmbus_8c_a6a7d6b943cea86630575707ef80e09f9}{nm\_write\_reg}(0x150400, 0);
+448             u32CurrAddr = dma\_addr;
+449             strHif->\hyperlink{structtstrHifHdr_a3f30ba8842ea1373d6c1514524704e09}{u16Length} = \hyperlink{nm__bsp_8h_a22348273616354c0ac8a3de5ce4fb963}{NM\_BSP\_B\_L\_16}(strHif->
+      \hyperlink{structtstrHifHdr_a3f30ba8842ea1373d6c1514524704e09}{u16Length});
+450             ret = \hyperlink{nmbus_8c_afb924df7f944a8137cd51069512661cf}{nm\_write\_block}(u32CurrAddr, buffer, u16DataSize);
+451             \textcolor{keywordflow}{if} (\hyperlink{nm__common_8h_a9ef27ba27aafdd1aa3a79d3ba2c36b8f}{M2M\_SUCCESS} != ret)
+452                 \textcolor{keywordflow}{return} ret;
+453             u32CurrAddr += u16DataSize;
+454             reg = dma\_addr << 2;
+455             reg |= (1 << 1);
+456             ret = \hyperlink{nmbus_8c_a6a7d6b943cea86630575707ef80e09f9}{nm\_write\_reg}(\hyperlink{m2m__hif_8c_afe04618587d8661decb3ee50df1b6853}{WIFI\_HOST\_RCV\_CTRL\_3}, reg);
+457             \textcolor{keywordflow}{if} (\hyperlink{nm__common_8h_a9ef27ba27aafdd1aa3a79d3ba2c36b8f}{M2M\_SUCCESS} != ret)
+458                 \textcolor{keywordflow}{return} ret;
+459 \textcolor{preprocessor}{#if defined CONF\_WILC\_USE\_3000\_REV\_A}
+460             ret = \hyperlink{nmbus_8c_a6a7d6b943cea86630575707ef80e09f9}{nm\_write\_reg}(INTERRUPT\_CORTUS\_2\_3000D0, 1);
+461             \textcolor{keywordflow}{if}(\hyperlink{nm__common_8h_a9ef27ba27aafdd1aa3a79d3ba2c36b8f}{M2M\_SUCCESS} != ret) \textcolor{keywordflow}{return} ret;
+462 \textcolor{preprocessor}{#endif}
+463         \} \textcolor{keywordflow}{else} \{
+464             \hyperlink{nm__common_8h_a8655326906c24b60e7cce33a0f1e932b}{M2M\_DBG}(\textcolor{stringliteral}{"Failed to alloc rx size\(\backslash\)r\(\backslash\)n"});
+465             ret = \hyperlink{nm__common_8h_a819c60cc53e1159dea4754fa4092243b}{M2M\_ERR\_MEM\_ALLOC};
+466             \textcolor{keywordflow}{return} ret;
+467         \}
+468     \} \textcolor{keywordflow}{else} \{
+469         \hyperlink{nm__common_8h_a34d005df494e50b05cd38b80f318d7ac}{M2M\_ERR}(\textcolor{stringliteral}{"(HIF)Fail to wakup the chip\(\backslash\)r\(\backslash\)n"});
+470         \textcolor{keywordflow}{return} ret;
+471     \}
+472     ret = \hyperlink{m2m__hif_8c_a41d3f660265e122cbd7417ea8754e8dd}{hif\_chip\_sleep}();
+473     \textcolor{keywordflow}{return} ret;
+474 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{m2m__hif_8c_a449338133a24ecd39ba7c1066ec3df5c}\label{m2m__hif_8c_a449338133a24ecd39ba7c1066ec3df5c}} 
+\index{m2m\+\_\+hif.\+c@{m2m\+\_\+hif.\+c}!hif\+\_\+set\+\_\+receive\+\_\+buffer@{hif\+\_\+set\+\_\+receive\+\_\+buffer}}
+\index{hif\+\_\+set\+\_\+receive\+\_\+buffer@{hif\+\_\+set\+\_\+receive\+\_\+buffer}!m2m\+\_\+hif.\+c@{m2m\+\_\+hif.\+c}}
+\subsubsection{\texorpdfstring{hif\+\_\+set\+\_\+receive\+\_\+buffer()}{hif\_set\_receive\_buffer()}}
+{\footnotesize\ttfamily hif\+\_\+set\+\_\+receive\+\_\+buffer (\begin{DoxyParamCaption}\item[{void $\ast$}]{pv\+Buffer,  }\item[{\hyperlink{group__DataT_ga1daa745171fc6e31d942c161422a76f9}{uint16}}]{u16\+Buffer\+Len }\end{DoxyParamCaption})}
+
+
+
+Handle interrupt received from N\+M\+C1500 firmware. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em pv\+Buffer} & Pointer to the buffer. \\
+\hline
+\mbox{\tt in}  & {\em u16\+Buffer\+Len} & Size of the buffer. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The function S\+H\+A\+LL return 0 for success and a negative value otherwise. 
+\end{DoxyReturn}
+
+
+Definition at line 711 of file m2m\+\_\+hif.\+c.
+
+
+\begin{DoxyCode}
+712 \{
+713     \textcolor{keywordflow}{if} ((((\hyperlink{group__DataT_ga100e7c691a47d6978527c479a0158245}{uint32})pvBuffer)%4) != 0) \{
+714         \hyperlink{nm__common_8h_a34d005df494e50b05cd38b80f318d7ac}{M2M\_ERR}(\textcolor{stringliteral}{"Error: unaligned buffer!\(\backslash\)r\(\backslash\)n"});
+715         \textcolor{keywordflow}{return} -1;
+716     \}
+717     \hyperlink{m2m__hif_8c_a6ae7b8f5c97ebf1c5775d9272af3f9e7}{strHifInitParam}.\hyperlink{structtstrHifinitParam_a8fba7791bb370e1824b8a0d0365c71c5}{pu8RcvBuff} = pvBuffer;
+718     \hyperlink{m2m__hif_8c_a6ae7b8f5c97ebf1c5775d9272af3f9e7}{strHifInitParam}.\hyperlink{structtstrHifinitParam_a0a0ef27c7b11c7e708fc4a4e694edec2}{u32RcvBuffSize} = u16BufferLen;
+719     \textcolor{keywordflow}{return} 0;
+720 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{m2m__hif_8c_ac7a1ee6393c0c983c391233853164f84}\label{m2m__hif_8c_ac7a1ee6393c0c983c391233853164f84}} 
+\index{m2m\+\_\+hif.\+c@{m2m\+\_\+hif.\+c}!hif\+\_\+set\+\_\+rx\+\_\+done@{hif\+\_\+set\+\_\+rx\+\_\+done}}
+\index{hif\+\_\+set\+\_\+rx\+\_\+done@{hif\+\_\+set\+\_\+rx\+\_\+done}!m2m\+\_\+hif.\+c@{m2m\+\_\+hif.\+c}}
+\subsubsection{\texorpdfstring{hif\+\_\+set\+\_\+rx\+\_\+done()}{hif\_set\_rx\_done()}}
+{\footnotesize\ttfamily static \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} hif\+\_\+set\+\_\+rx\+\_\+done (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 93 of file m2m\+\_\+hif.\+c.
+
+
+\begin{DoxyCode}
+94 \{
+95 \textcolor{preprocessor}{#ifdef CONF\_WILC\_USE\_1000\_REV\_B}
+96     \hyperlink{group__DataT_ga100e7c691a47d6978527c479a0158245}{uint32} reg;
+97 \textcolor{preprocessor}{#endif}
+98     \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} ret = \hyperlink{nm__common_8h_a9ef27ba27aafdd1aa3a79d3ba2c36b8f}{M2M\_SUCCESS};
+99     \hyperlink{m2m__hif_8c_a68512adc9785897313474136faa20777}{gu8HifSizeDone}  = 0;
+100 \textcolor{preprocessor}{#ifdef NM\_EDGE\_INTERRUPT}
+101     \hyperlink{group__NmBspInterruptCtrl_gad08e47a941e87d631200f990000323dc}{nm\_bsp\_interrupt\_ctrl}(1);
+102 \textcolor{preprocessor}{#endif}
+103 
+104 \textcolor{preprocessor}{#ifdef CONF\_WILC\_USE\_1000\_REV\_B}
+105     ret = \hyperlink{nmbus_8c_a475d273d8342f3f5c2a00e2887bf1b4f}{nm\_read\_reg\_with\_ret}(\hyperlink{m2m__hif_8c_a3ede7567355b40c9565be5b24288122f}{WIFI\_HOST\_RCV\_CTRL\_0},&reg);
+106     \textcolor{keywordflow}{if}(ret != \hyperlink{nm__common_8h_a9ef27ba27aafdd1aa3a79d3ba2c36b8f}{M2M\_SUCCESS})\textcolor{keywordflow}{goto} ERR1;
+107     \textcolor{comment}{//reg &= ~(1<<0);}
+108 
+109     \textcolor{comment}{/* Set RX Done */}
+110     reg |= (1<<1);      
+111     ret = \hyperlink{nmbus_8c_a6a7d6b943cea86630575707ef80e09f9}{nm\_write\_reg}(\hyperlink{m2m__hif_8c_a3ede7567355b40c9565be5b24288122f}{WIFI\_HOST\_RCV\_CTRL\_0},reg);
+112     \textcolor{keywordflow}{if}(ret != \hyperlink{nm__common_8h_a9ef27ba27aafdd1aa3a79d3ba2c36b8f}{M2M\_SUCCESS})\textcolor{keywordflow}{goto} ERR1;
+113 \textcolor{preprocessor}{#elif defined CONF\_WILC\_USE\_3000\_REV\_A}
+114     ret = \hyperlink{nmbus_8c_a6a7d6b943cea86630575707ef80e09f9}{nm\_write\_reg}(INTERRUPT\_CORTUS\_0\_3000D0,1);
+115     \textcolor{keywordflow}{if}(ret != \hyperlink{nm__common_8h_a9ef27ba27aafdd1aa3a79d3ba2c36b8f}{M2M\_SUCCESS})\textcolor{keywordflow}{goto} ERR1;
+116 \textcolor{preprocessor}{#endif}
+117 \textcolor{preprocessor}{#ifdef NM\_LEVEL\_INTERRUPT}
+118     \hyperlink{group__NmBspInterruptCtrl_gad08e47a941e87d631200f990000323dc}{nm\_bsp\_interrupt\_ctrl}(1);
+119 \textcolor{preprocessor}{#endif}
+120 ERR1:
+121     \textcolor{keywordflow}{return} ret;
+122     
+123 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{m2m__hif_8c_aea14bdeaac412fb26e8a550bbd06ef91}\label{m2m__hif_8c_aea14bdeaac412fb26e8a550bbd06ef91}} 
+\index{m2m\+\_\+hif.\+c@{m2m\+\_\+hif.\+c}!hif\+\_\+set\+\_\+sleep\+\_\+mode@{hif\+\_\+set\+\_\+sleep\+\_\+mode}}
+\index{hif\+\_\+set\+\_\+sleep\+\_\+mode@{hif\+\_\+set\+\_\+sleep\+\_\+mode}!m2m\+\_\+hif.\+c@{m2m\+\_\+hif.\+c}}
+\subsubsection{\texorpdfstring{hif\+\_\+set\+\_\+sleep\+\_\+mode()}{hif\_set\_sleep\_mode()}}
+{\footnotesize\ttfamily \hyperlink{group__BSPDefine_gaecc0323d771e41ef81a76b5f12783e22}{N\+M\+I\+\_\+\+A\+PI} void hif\+\_\+set\+\_\+sleep\+\_\+mode (\begin{DoxyParamCaption}\item[{\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8}}]{u8\+Pstype }\end{DoxyParamCaption})}
+
+
+
+Set the sleep mode of the H\+IF layer. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em u8\+Pstype} & Sleep mode.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The function S\+H\+A\+LL return 0 for success and a negative value otherwise. 
+\end{DoxyReturn}
+
+
+Definition at line 187 of file m2m\+\_\+hif.\+c.
+
+
+\begin{DoxyCode}
+188 \{
+189     \hyperlink{m2m__hif_8c_ae5f8d9d225a2e36df38feccb9db7384e}{gu8ChipMode} = u8Pstype;
+190 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{m2m__hif_8c_ad3c50b24a4b59659a8219108a080c7cc}\label{m2m__hif_8c_ad3c50b24a4b59659a8219108a080c7cc}} 
+\index{m2m\+\_\+hif.\+c@{m2m\+\_\+hif.\+c}!isr@{isr}}
+\index{isr@{isr}!m2m\+\_\+hif.\+c@{m2m\+\_\+hif.\+c}}
+\subsubsection{\texorpdfstring{isr()}{isr()}}
+{\footnotesize\ttfamily static void isr (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 83 of file m2m\+\_\+hif.\+c.
+
+
+\begin{DoxyCode}
+84 \{
+85     \hyperlink{m2m__hif_8c_a4309a0f46145711222ae72d8971909d9}{gu8Interrupt}++;
+86 \textcolor{preprocessor}{#ifdef NM\_LEVEL\_INTERRUPT}
+87     \hyperlink{group__NmBspInterruptCtrl_gad08e47a941e87d631200f990000323dc}{nm\_bsp\_interrupt\_ctrl}(0);
+88 \textcolor{preprocessor}{#endif}
+89 \textcolor{preprocessor}{#ifdef \_\_FREERTOS\_\_}
+90     DRIVER\_SIGNAL\_ISR();
+91 \textcolor{preprocessor}{#endif}
+92 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{m2m__hif_8c_a586d455672ab6d1c931f14a7a5fb26c2}\label{m2m__hif_8c_a586d455672ab6d1c931f14a7a5fb26c2}} 
+\index{m2m\+\_\+hif.\+c@{m2m\+\_\+hif.\+c}!m2m\+\_\+hif\+\_\+cb@{m2m\+\_\+hif\+\_\+cb}}
+\index{m2m\+\_\+hif\+\_\+cb@{m2m\+\_\+hif\+\_\+cb}!m2m\+\_\+hif.\+c@{m2m\+\_\+hif.\+c}}
+\subsubsection{\texorpdfstring{m2m\+\_\+hif\+\_\+cb()}{m2m\_hif\_cb()}}
+{\footnotesize\ttfamily static void m2m\+\_\+hif\+\_\+cb (\begin{DoxyParamCaption}\item[{\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8}}]{u8\+Op\+Code,  }\item[{\hyperlink{group__DataT_ga1daa745171fc6e31d942c161422a76f9}{uint16}}]{u16\+Data\+Size,  }\item[{\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} $\ast$}]{pu8\+Buff }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 139 of file m2m\+\_\+hif.\+c.
+
+
+\begin{DoxyCode}
+140 \{
+141 
+142 
+143 \}
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{m2m__hif_8c_ab876ee3fc8abbaa759b9b1c7464aede0}\label{m2m__hif_8c_ab876ee3fc8abbaa759b9b1c7464aede0}} 
+\index{m2m\+\_\+hif.\+c@{m2m\+\_\+hif.\+c}!\+\_\+\+\_\+\+M2\+M\+\_\+\+D\+M\+A\+\_\+\+B\+U\+F\+\_\+\+A\+T\+T\+\_\+\+\_\+@{\+\_\+\+\_\+\+M2\+M\+\_\+\+D\+M\+A\+\_\+\+B\+U\+F\+\_\+\+A\+T\+T\+\_\+\+\_\+}}
+\index{\+\_\+\+\_\+\+M2\+M\+\_\+\+D\+M\+A\+\_\+\+B\+U\+F\+\_\+\+A\+T\+T\+\_\+\+\_\+@{\+\_\+\+\_\+\+M2\+M\+\_\+\+D\+M\+A\+\_\+\+B\+U\+F\+\_\+\+A\+T\+T\+\_\+\+\_\+}!m2m\+\_\+hif.\+c@{m2m\+\_\+hif.\+c}}
+\subsubsection{\texorpdfstring{\+\_\+\+\_\+\+M2\+M\+\_\+\+D\+M\+A\+\_\+\+B\+U\+F\+\_\+\+A\+T\+T\+\_\+\+\_\+}{\_\_M2M\_DMA\_BUF\_ATT\_\_}}
+{\footnotesize\ttfamily volatile \hyperlink{structtstrHifHdr}{tstr\+Hif\+Hdr} gstr\+Hif \+\_\+\+\_\+\+M2\+M\+\_\+\+D\+M\+A\+\_\+\+B\+U\+F\+\_\+\+A\+T\+T\+\_\+\+\_\+\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 76 of file m2m\+\_\+hif.\+c.
+
+\mbox{\Hypertarget{m2m__hif_8c_ae5f8d9d225a2e36df38feccb9db7384e}\label{m2m__hif_8c_ae5f8d9d225a2e36df38feccb9db7384e}} 
+\index{m2m\+\_\+hif.\+c@{m2m\+\_\+hif.\+c}!gu8\+Chip\+Mode@{gu8\+Chip\+Mode}}
+\index{gu8\+Chip\+Mode@{gu8\+Chip\+Mode}!m2m\+\_\+hif.\+c@{m2m\+\_\+hif.\+c}}
+\subsubsection{\texorpdfstring{gu8\+Chip\+Mode}{gu8ChipMode}}
+{\footnotesize\ttfamily volatile \hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} gu8\+Chip\+Mode = 0\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 71 of file m2m\+\_\+hif.\+c.
+
+\mbox{\Hypertarget{m2m__hif_8c_adb8704ba7e6d585352a20c499672c922}\label{m2m__hif_8c_adb8704ba7e6d585352a20c499672c922}} 
+\index{m2m\+\_\+hif.\+c@{m2m\+\_\+hif.\+c}!gu8\+Chip\+Sleep@{gu8\+Chip\+Sleep}}
+\index{gu8\+Chip\+Sleep@{gu8\+Chip\+Sleep}!m2m\+\_\+hif.\+c@{m2m\+\_\+hif.\+c}}
+\subsubsection{\texorpdfstring{gu8\+Chip\+Sleep}{gu8ChipSleep}}
+{\footnotesize\ttfamily volatile \hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} gu8\+Chip\+Sleep = 0\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 72 of file m2m\+\_\+hif.\+c.
+
+\mbox{\Hypertarget{m2m__hif_8c_a68512adc9785897313474136faa20777}\label{m2m__hif_8c_a68512adc9785897313474136faa20777}} 
+\index{m2m\+\_\+hif.\+c@{m2m\+\_\+hif.\+c}!gu8\+Hif\+Size\+Done@{gu8\+Hif\+Size\+Done}}
+\index{gu8\+Hif\+Size\+Done@{gu8\+Hif\+Size\+Done}!m2m\+\_\+hif.\+c@{m2m\+\_\+hif.\+c}}
+\subsubsection{\texorpdfstring{gu8\+Hif\+Size\+Done}{gu8HifSizeDone}}
+{\footnotesize\ttfamily volatile \hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} gu8\+Hif\+Size\+Done = 0\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 73 of file m2m\+\_\+hif.\+c.
+
+\mbox{\Hypertarget{m2m__hif_8c_a4309a0f46145711222ae72d8971909d9}\label{m2m__hif_8c_a4309a0f46145711222ae72d8971909d9}} 
+\index{m2m\+\_\+hif.\+c@{m2m\+\_\+hif.\+c}!gu8\+Interrupt@{gu8\+Interrupt}}
+\index{gu8\+Interrupt@{gu8\+Interrupt}!m2m\+\_\+hif.\+c@{m2m\+\_\+hif.\+c}}
+\subsubsection{\texorpdfstring{gu8\+Interrupt}{gu8Interrupt}}
+{\footnotesize\ttfamily volatile \hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} gu8\+Interrupt = 0\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 74 of file m2m\+\_\+hif.\+c.
+
+\mbox{\Hypertarget{m2m__hif_8c_a41845a0437e3fff496515f04d651af76}\label{m2m__hif_8c_a41845a0437e3fff496515f04d651af76}} 
+\index{m2m\+\_\+hif.\+c@{m2m\+\_\+hif.\+c}!pf\+Hif\+Cb@{pf\+Hif\+Cb}}
+\index{pf\+Hif\+Cb@{pf\+Hif\+Cb}!m2m\+\_\+hif.\+c@{m2m\+\_\+hif.\+c}}
+\subsubsection{\texorpdfstring{pf\+Hif\+Cb}{pfHifCb}}
+{\footnotesize\ttfamily \hyperlink{m2m__hif_8h_a78a3e5d59cea8566ca5c67c96f2215dc}{tpf\+Hif\+Call\+Back} pf\+Hif\+Cb = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{N\+U\+LL}}
+
+
+
+Definition at line 79 of file m2m\+\_\+hif.\+c.
+
+\mbox{\Hypertarget{m2m__hif_8c_a085d7c2c8a8434a558f7a2f929b27643}\label{m2m__hif_8c_a085d7c2c8a8434a558f7a2f929b27643}} 
+\index{m2m\+\_\+hif.\+c@{m2m\+\_\+hif.\+c}!pf\+Wifi\+Cb@{pf\+Wifi\+Cb}}
+\index{pf\+Wifi\+Cb@{pf\+Wifi\+Cb}!m2m\+\_\+hif.\+c@{m2m\+\_\+hif.\+c}}
+\subsubsection{\texorpdfstring{pf\+Wifi\+Cb}{pfWifiCb}}
+{\footnotesize\ttfamily \hyperlink{m2m__hif_8h_a78a3e5d59cea8566ca5c67c96f2215dc}{tpf\+Hif\+Call\+Back} pf\+Wifi\+Cb = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{N\+U\+LL}}
+
+pointer to Wi-\/\+Fi call back function 
+
+Definition at line 78 of file m2m\+\_\+hif.\+c.
+
+\mbox{\Hypertarget{m2m__hif_8c_a6ae7b8f5c97ebf1c5775d9272af3f9e7}\label{m2m__hif_8c_a6ae7b8f5c97ebf1c5775d9272af3f9e7}} 
+\index{m2m\+\_\+hif.\+c@{m2m\+\_\+hif.\+c}!str\+Hif\+Init\+Param@{str\+Hif\+Init\+Param}}
+\index{str\+Hif\+Init\+Param@{str\+Hif\+Init\+Param}!m2m\+\_\+hif.\+c@{m2m\+\_\+hif.\+c}}
+\subsubsection{\texorpdfstring{str\+Hif\+Init\+Param}{strHifInitParam}}
+{\footnotesize\ttfamily \hyperlink{structtstrHifinitParam}{tstr\+Hifinit\+Param} str\+Hif\+Init\+Param}
+
+
+
+Definition at line 81 of file m2m\+\_\+hif.\+c.
+

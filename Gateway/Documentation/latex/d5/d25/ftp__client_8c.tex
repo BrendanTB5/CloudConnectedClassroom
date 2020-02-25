@@ -1,0 +1,2316 @@
+\hypertarget{ftp__client_8c}{}\section{cyclone\+\_\+tcp/ftp/ftp\+\_\+client.c File Reference}
+\label{ftp__client_8c}\index{cyclone\+\_\+tcp/ftp/ftp\+\_\+client.\+c@{cyclone\+\_\+tcp/ftp/ftp\+\_\+client.\+c}}
+
+
+F\+TP client (File Transfer Protocol)  
+
+
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$ctype.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}ftp/ftp\+\_\+client.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ftp/ftp\+\_\+client\+\_\+transport.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ftp/ftp\+\_\+client\+\_\+misc.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}str.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}error.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}debug.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{ftp__client_8c_afcdf5e66fd927a7f4cc64295acd20407}{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}~\hyperlink{net__config_8h_ae398facab6ce5126fa3b23996aafefa5}{F\+T\+P\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ftp__client_8c_a85a2c2a2619a1b35b3551351157a0d98}{ftp\+Client\+Init} (\hyperlink{ftp__client_8h_a416e53a7e79ecd46ffcbeb50db323252}{Ftp\+Client\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Initialize F\+TP client context. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ftp__client_8c_a29bf1ab09a3a897e6ffbe58345dac933}{ftp\+Client\+Register\+Tls\+Init\+Callback} (\hyperlink{ftp__client_8h_a416e53a7e79ecd46ffcbeb50db323252}{Ftp\+Client\+Context} $\ast$context, \hyperlink{ftp__client_8h_ad03bcd2ffc64881b3f7c0aaa09b14535}{Ftp\+Client\+Tls\+Init\+Callback} callback)
+\begin{DoxyCompactList}\small\item\em Register T\+LS initialization callback function. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ftp__client_8c_af41a2d4af2a90d02a43e9fce8f027b3c}{ftp\+Client\+Set\+Timeout} (\hyperlink{ftp__client_8h_a416e53a7e79ecd46ffcbeb50db323252}{Ftp\+Client\+Context} $\ast$context, \hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\+\_\+t} timeout)
+\begin{DoxyCompactList}\small\item\em Set communication timeout. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ftp__client_8c_acb971cbb22a91dad79dda3705bce9cae}{ftp\+Client\+Bind\+To\+Interface} (\hyperlink{ftp__client_8h_a416e53a7e79ecd46ffcbeb50db323252}{Ftp\+Client\+Context} $\ast$context, \hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface)
+\begin{DoxyCompactList}\small\item\em Bind the F\+TP client to a particular network interface. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ftp__client_8c_a12397439a3664f1fc493484d02e8b0bc}{ftp\+Client\+Connect} (\hyperlink{ftp__client_8h_a416e53a7e79ecd46ffcbeb50db323252}{Ftp\+Client\+Context} $\ast$context, const \hyperlink{structIpAddr}{Ip\+Addr} $\ast$server\+Ip\+Addr, \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} server\+Port, \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} \hyperlink{ntp__common_8h_a37e90f5e3bd99fac2021fb3a326607d4}{mode})
+\begin{DoxyCompactList}\small\item\em Establish a connection with the specified F\+TP server. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ftp__client_8c_a1808b5fe70ee40165f066d46a8136340}{ftp\+Client\+Login} (\hyperlink{ftp__client_8h_a416e53a7e79ecd46ffcbeb50db323252}{Ftp\+Client\+Context} $\ast$context, const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$username, const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$password)
+\begin{DoxyCompactList}\small\item\em Login to the F\+TP server using the provided user name and password. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ftp__client_8c_a48ae86d66cfe6a4b09d62fa258014562}{ftp\+Client\+Login\+Ex} (\hyperlink{ftp__client_8h_a416e53a7e79ecd46ffcbeb50db323252}{Ftp\+Client\+Context} $\ast$context, const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$username, const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$password, const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$account)
+\begin{DoxyCompactList}\small\item\em Login to the F\+TP server using user name, password and account. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ftp__client_8c_a3082050dec2e065796d03b01a88f59c7}{ftp\+Client\+Get\+Working\+Dir} (\hyperlink{ftp__client_8h_a416e53a7e79ecd46ffcbeb50db323252}{Ftp\+Client\+Context} $\ast$context, \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$path, size\+\_\+t max\+Len)
+\begin{DoxyCompactList}\small\item\em Get current working directory. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ftp__client_8c_aca36677e49e52717783b8278cd6a4d17}{ftp\+Client\+Change\+Working\+Dir} (\hyperlink{ftp__client_8h_a416e53a7e79ecd46ffcbeb50db323252}{Ftp\+Client\+Context} $\ast$context, const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$path)
+\begin{DoxyCompactList}\small\item\em Change working directory. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ftp__client_8c_a52ebbd0348481d3f9be4508376f7ed0c}{ftp\+Client\+Change\+To\+Parent\+Dir} (\hyperlink{ftp__client_8h_a416e53a7e79ecd46ffcbeb50db323252}{Ftp\+Client\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Change to parent directory. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ftp__client_8c_ac36901bc961b2c93ea9b463d9fec7dd2}{ftp\+Client\+Open\+Dir} (\hyperlink{ftp__client_8h_a416e53a7e79ecd46ffcbeb50db323252}{Ftp\+Client\+Context} $\ast$context, const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$path)
+\begin{DoxyCompactList}\small\item\em Open a directory. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ftp__client_8c_a65a48a16339c4a3fd8b7f581d14227b1}{ftp\+Client\+Read\+Dir} (\hyperlink{ftp__client_8h_a416e53a7e79ecd46ffcbeb50db323252}{Ftp\+Client\+Context} $\ast$context, \hyperlink{structFtpDirEntry}{Ftp\+Dir\+Entry} $\ast$dir\+Entry)
+\begin{DoxyCompactList}\small\item\em Read an entry from the directory. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ftp__client_8c_a8be983813e6bb67bc5d1b7f3a5ce916f}{ftp\+Client\+Close\+Dir} (\hyperlink{ftp__client_8h_a416e53a7e79ecd46ffcbeb50db323252}{Ftp\+Client\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Close directory. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ftp__client_8c_abcb94285f096265e8d2306e35416a3d0}{ftp\+Client\+Create\+Dir} (\hyperlink{ftp__client_8h_a416e53a7e79ecd46ffcbeb50db323252}{Ftp\+Client\+Context} $\ast$context, const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$path)
+\begin{DoxyCompactList}\small\item\em Create a new directory. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ftp__client_8c_a556b289b7a8d81bcb6137dc3725a1f43}{ftp\+Client\+Delete\+Dir} (\hyperlink{ftp__client_8h_a416e53a7e79ecd46ffcbeb50db323252}{Ftp\+Client\+Context} $\ast$context, const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$path)
+\begin{DoxyCompactList}\small\item\em Remove a directory. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ftp__client_8c_a4c515c6942f4bbd8c6c87fd8deab7fe0}{ftp\+Client\+Open\+File} (\hyperlink{ftp__client_8h_a416e53a7e79ecd46ffcbeb50db323252}{Ftp\+Client\+Context} $\ast$context, const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$path, \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} \hyperlink{ntp__common_8h_a37e90f5e3bd99fac2021fb3a326607d4}{mode})
+\begin{DoxyCompactList}\small\item\em Open a file for reading, writing, or appending. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ftp__client_8c_ae0747a5507b24dd7553168626ccc8cb8}{ftp\+Client\+Write\+File} (\hyperlink{ftp__client_8h_a416e53a7e79ecd46ffcbeb50db323252}{Ftp\+Client\+Context} $\ast$context, const void $\ast$\hyperlink{tftp__common_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length}, size\+\_\+t $\ast$written, \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} \hyperlink{nbns__common_8h_a1e87af3c18a2fd36c61faf89949bdc3f}{flags})
+\begin{DoxyCompactList}\small\item\em Write to a remote file. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ftp__client_8c_a413a9e377e2c482a577d7e3a4d43dc98}{ftp\+Client\+Read\+File} (\hyperlink{ftp__client_8h_a416e53a7e79ecd46ffcbeb50db323252}{Ftp\+Client\+Context} $\ast$context, void $\ast$\hyperlink{tftp__common_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, size\+\_\+t size, size\+\_\+t $\ast$received, \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} \hyperlink{nbns__common_8h_a1e87af3c18a2fd36c61faf89949bdc3f}{flags})
+\begin{DoxyCompactList}\small\item\em Read from a remote file. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ftp__client_8c_a0120a492837da044f222d5872a145230}{ftp\+Client\+Close\+File} (\hyperlink{ftp__client_8h_a416e53a7e79ecd46ffcbeb50db323252}{Ftp\+Client\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Close file. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ftp__client_8c_af11db8e1982ffa9a056b6fd9f09b8c72}{ftp\+Client\+Rename\+File} (\hyperlink{ftp__client_8h_a416e53a7e79ecd46ffcbeb50db323252}{Ftp\+Client\+Context} $\ast$context, const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$old\+Path, const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$new\+Path)
+\begin{DoxyCompactList}\small\item\em Rename a file. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ftp__client_8c_ab7ba86b048320a971b3cdfecdda4d644}{ftp\+Client\+Delete\+File} (\hyperlink{ftp__client_8h_a416e53a7e79ecd46ffcbeb50db323252}{Ftp\+Client\+Context} $\ast$context, const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$path)
+\begin{DoxyCompactList}\small\item\em Delete a file. \end{DoxyCompactList}\item 
+\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} \hyperlink{ftp__client_8c_ae61e8f2003403a3a1c5fda3253cafc20}{ftp\+Client\+Get\+Reply\+Code} (\hyperlink{ftp__client_8h_a416e53a7e79ecd46ffcbeb50db323252}{Ftp\+Client\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Retrieve server\textquotesingle{}s reply code. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ftp__client_8c_ad2d64f47336ff396b1358a0a41de4651}{ftp\+Client\+Disconnect} (\hyperlink{ftp__client_8h_a416e53a7e79ecd46ffcbeb50db323252}{Ftp\+Client\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Gracefully disconnect from the F\+TP server. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ftp__client_8c_a0ee4e1fba6290c840990ecb6c290e89f}{ftp\+Client\+Close} (\hyperlink{ftp__client_8h_a416e53a7e79ecd46ffcbeb50db323252}{Ftp\+Client\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Close the connection with the F\+TP server. \end{DoxyCompactList}\item 
+void \hyperlink{ftp__client_8c_ad3c3f2f1cd1c689a789cadc6ef417618}{ftp\+Client\+Deinit} (\hyperlink{ftp__client_8h_a416e53a7e79ecd46ffcbeb50db323252}{Ftp\+Client\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Release F\+TP client context. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+F\+TP client (File Transfer Protocol) 
+
+\hypertarget{pic32mz__ef__curiosity_8h_License}{}\subsection{License}\label{pic32mz__ef__curiosity_8h_License}
+S\+P\+D\+X-\/\+License-\/\+Identifier\+: G\+P\+L-\/2.\+0-\/or-\/later
+
+Copyright (C) 2010-\/2019 Oryx Embedded S\+A\+RL. All rights reserved.
+
+This file is part of Cyclone\+T\+CP Open.
+
+This program is free software; you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+
+You should have received a copy of the G\+NU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-\/1301, U\+SA.\hypertarget{tftp__server_8c_Description}{}\subsection{Description}\label{tftp__server_8c_Description}
+File Transfer Protocol (F\+TP) is a standard network protocol used to transfer files from one host to another host over a T\+C\+P-\/based network. Refer to the following R\+F\+Cs for complete details\+:
+\begin{DoxyItemize}
+\item R\+FC 959\+: File Transfer Protocol (F\+TP)
+\item R\+FC 2428\+: F\+TP Extensions for I\+Pv6 and N\+A\+Ts
+\end{DoxyItemize}
+
+\begin{DoxyAuthor}{Author}
+Oryx Embedded S\+A\+RL (www.\+oryx-\/embedded.\+com) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+9.\+6 
+\end{DoxyVersion}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{ftp__client_8c_afcdf5e66fd927a7f4cc64295acd20407}\label{ftp__client_8c_afcdf5e66fd927a7f4cc64295acd20407}} 
+\index{ftp\+\_\+client.\+c@{ftp\+\_\+client.\+c}!T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+\index{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}!ftp\+\_\+client.\+c@{ftp\+\_\+client.\+c}}
+\subsubsection{\texorpdfstring{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}{TRACE\_LEVEL}}
+{\footnotesize\ttfamily \#define T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL~\hyperlink{net__config_8h_ae398facab6ce5126fa3b23996aafefa5}{F\+T\+P\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+
+
+
+Definition at line 40 of file ftp\+\_\+client.\+c.
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{ftp__client_8c_acb971cbb22a91dad79dda3705bce9cae}\label{ftp__client_8c_acb971cbb22a91dad79dda3705bce9cae}} 
+\index{ftp\+\_\+client.\+c@{ftp\+\_\+client.\+c}!ftp\+Client\+Bind\+To\+Interface@{ftp\+Client\+Bind\+To\+Interface}}
+\index{ftp\+Client\+Bind\+To\+Interface@{ftp\+Client\+Bind\+To\+Interface}!ftp\+\_\+client.\+c@{ftp\+\_\+client.\+c}}
+\subsubsection{\texorpdfstring{ftp\+Client\+Bind\+To\+Interface()}{ftpClientBindToInterface()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ftp\+Client\+Bind\+To\+Interface (\begin{DoxyParamCaption}\item[{\hyperlink{ftp__client_8h_a416e53a7e79ecd46ffcbeb50db323252}{Ftp\+Client\+Context} $\ast$}]{context,  }\item[{\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$}]{interface }\end{DoxyParamCaption})}
+
+
+
+Bind the F\+TP client to a particular network interface. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the F\+TP client context \\
+\hline
+\mbox{\tt in}  & {\em interface} & Network interface to be used \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 147 of file ftp\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+149 \{
+150    \textcolor{comment}{//Make sure the FTP client context is valid}
+151    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+152       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+153 
+154    \textcolor{comment}{//Explicitly associate the FTP client with the specified interface}
+155    context->interface = interface;
+156 
+157    \textcolor{comment}{//Successful processing}
+158    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+159 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ftp__client_8c_a52ebbd0348481d3f9be4508376f7ed0c}\label{ftp__client_8c_a52ebbd0348481d3f9be4508376f7ed0c}} 
+\index{ftp\+\_\+client.\+c@{ftp\+\_\+client.\+c}!ftp\+Client\+Change\+To\+Parent\+Dir@{ftp\+Client\+Change\+To\+Parent\+Dir}}
+\index{ftp\+Client\+Change\+To\+Parent\+Dir@{ftp\+Client\+Change\+To\+Parent\+Dir}!ftp\+\_\+client.\+c@{ftp\+\_\+client.\+c}}
+\subsubsection{\texorpdfstring{ftp\+Client\+Change\+To\+Parent\+Dir()}{ftpClientChangeToParentDir()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ftp\+Client\+Change\+To\+Parent\+Dir (\begin{DoxyParamCaption}\item[{\hyperlink{ftp__client_8h_a416e53a7e79ecd46ffcbeb50db323252}{Ftp\+Client\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Change to parent directory. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the F\+TP client context \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 697 of file ftp\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+698 \{
+699    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+700 
+701    \textcolor{comment}{//Make sure the FTP client context is valid}
+702    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+703       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+704 
+705    \textcolor{comment}{//Initialize status code}
+706    error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+707 
+708    \textcolor{comment}{//Execute FTP command}
+709    \textcolor{keywordflow}{while}(!error)
+710    \{
+711       \textcolor{comment}{//Check current state}
+712       \textcolor{keywordflow}{if}(context->state == \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fa3174f58da917af93a38b144a1e0d2527}{FTP\_CLIENT\_STATE\_CONNECTED})
+713       \{
+714          \textcolor{comment}{//Format CDUP command}
+715          error = \hyperlink{ftp__client__misc_8c_a76c2f71fc8ddb8c7f14b5b7d14ab3437}{ftpClientFormatCommand}(context, \textcolor{stringliteral}{"CDUP"}, 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+716 
+717          \textcolor{comment}{//Check status code}
+718          \textcolor{keywordflow}{if}(!error)
+719          \{
+720             \textcolor{comment}{//Send CDUP command and wait for the server's response}
+721             \hyperlink{ftp__client__misc_8c_ac32e3c219bd538aae5fd6f92002db7c9}{ftpClientChangeState}(context, 
+      \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fad41efafde5188577bede053e2d80eb97}{FTP\_CLIENT\_STATE\_SUB\_COMMAND\_1});
+722          \}
+723       \}
+724       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->state == \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fad41efafde5188577bede053e2d80eb97}{FTP\_CLIENT\_STATE\_SUB\_COMMAND\_1})
+725       \{
+726          \textcolor{comment}{//Send CDUP command and wait for the server's response}
+727          error = \hyperlink{ftp__client__misc_8c_a649a89ff88deef2eeb980a4265da37f7}{ftpClientSendCommand}(context);
+728 
+729          \textcolor{comment}{//Check status code}
+730          \textcolor{keywordflow}{if}(!error)
+731          \{
+732             \textcolor{comment}{//Check FTP response code}
+733             \textcolor{keywordflow}{if}(!\hyperlink{ftp__client_8h_a8af0e6630256513516df045fb43012e7}{FTP\_REPLY\_CODE\_2YZ}(context->replyCode))
+734             \{
+735                \textcolor{comment}{//Report an error}
+736                error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caa71f5ec9e991d033d622bd5fb6f6633f}{ERROR\_UNEXPECTED\_RESPONSE};
+737             \}
+738 
+739             \textcolor{comment}{//Update FTP client state}
+740             \hyperlink{ftp__client__misc_8c_ac32e3c219bd538aae5fd6f92002db7c9}{ftpClientChangeState}(context, 
+      \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fa3174f58da917af93a38b144a1e0d2527}{FTP\_CLIENT\_STATE\_CONNECTED});
+741             \textcolor{comment}{//We are done}
+742             \textcolor{keywordflow}{break};
+743          \}
+744       \}
+745       \textcolor{keywordflow}{else}
+746       \{
+747          \textcolor{comment}{//Invalid state}
+748          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac3190fa1f36c6acf147c7ce453a655e2}{ERROR\_WRONG\_STATE};
+749       \}
+750    \}
+751 
+752    \textcolor{comment}{//Check status code}
+753    \textcolor{keywordflow}{if}(error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca16f356a669fbb42deb27f59e9054f6d6}{ERROR\_WOULD\_BLOCK} || error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4d0f7be53b837f004379ac6bbd56f1e2}{ERROR\_TIMEOUT})
+754    \{
+755       \textcolor{comment}{//Check whether the timeout has elapsed}
+756       error = \hyperlink{ftp__client__misc_8c_ae6a4a166626630754fdeae2b17e611de}{ftpClientCheckTimeout}(context);
+757    \}
+758 
+759    \textcolor{comment}{//Return status code}
+760    \textcolor{keywordflow}{return} error;
+761 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ftp__client_8c_aca36677e49e52717783b8278cd6a4d17}\label{ftp__client_8c_aca36677e49e52717783b8278cd6a4d17}} 
+\index{ftp\+\_\+client.\+c@{ftp\+\_\+client.\+c}!ftp\+Client\+Change\+Working\+Dir@{ftp\+Client\+Change\+Working\+Dir}}
+\index{ftp\+Client\+Change\+Working\+Dir@{ftp\+Client\+Change\+Working\+Dir}!ftp\+\_\+client.\+c@{ftp\+\_\+client.\+c}}
+\subsubsection{\texorpdfstring{ftp\+Client\+Change\+Working\+Dir()}{ftpClientChangeWorkingDir()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ftp\+Client\+Change\+Working\+Dir (\begin{DoxyParamCaption}\item[{\hyperlink{ftp__client_8h_a416e53a7e79ecd46ffcbeb50db323252}{Ftp\+Client\+Context} $\ast$}]{context,  }\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{path }\end{DoxyParamCaption})}
+
+
+
+Change working directory. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the F\+TP client context \\
+\hline
+\mbox{\tt in}  & {\em path} & New current working directory \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 623 of file ftp\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+625 \{
+626    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+627 
+628    \textcolor{comment}{//Check parameters}
+629    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || path == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+630       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+631 
+632    \textcolor{comment}{//Initialize status code}
+633    error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+634 
+635    \textcolor{comment}{//Execute FTP command}
+636    \textcolor{keywordflow}{while}(!error)
+637    \{
+638       \textcolor{comment}{//Check current state}
+639       \textcolor{keywordflow}{if}(context->state == \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fa3174f58da917af93a38b144a1e0d2527}{FTP\_CLIENT\_STATE\_CONNECTED})
+640       \{
+641          \textcolor{comment}{//Format CWD command}
+642          error = \hyperlink{ftp__client__misc_8c_a76c2f71fc8ddb8c7f14b5b7d14ab3437}{ftpClientFormatCommand}(context, \textcolor{stringliteral}{"CWD"}, path);
+643 
+644          \textcolor{comment}{//Check status code}
+645          \textcolor{keywordflow}{if}(!error)
+646          \{
+647             \textcolor{comment}{//Send CWD command and wait for the server's response}
+648             \hyperlink{ftp__client__misc_8c_ac32e3c219bd538aae5fd6f92002db7c9}{ftpClientChangeState}(context, 
+      \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fad41efafde5188577bede053e2d80eb97}{FTP\_CLIENT\_STATE\_SUB\_COMMAND\_1});
+649          \}
+650       \}
+651       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->state == \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fad41efafde5188577bede053e2d80eb97}{FTP\_CLIENT\_STATE\_SUB\_COMMAND\_1})
+652       \{
+653          \textcolor{comment}{//Send CWD command and wait for the server's response}
+654          error = \hyperlink{ftp__client__misc_8c_a649a89ff88deef2eeb980a4265da37f7}{ftpClientSendCommand}(context);
+655 
+656          \textcolor{comment}{//Check status code}
+657          \textcolor{keywordflow}{if}(!error)
+658          \{
+659             \textcolor{comment}{//Check FTP response code}
+660             \textcolor{keywordflow}{if}(!\hyperlink{ftp__client_8h_a8af0e6630256513516df045fb43012e7}{FTP\_REPLY\_CODE\_2YZ}(context->replyCode))
+661             \{
+662                \textcolor{comment}{//Report an error}
+663                error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caa71f5ec9e991d033d622bd5fb6f6633f}{ERROR\_UNEXPECTED\_RESPONSE};
+664             \}
+665 
+666             \textcolor{comment}{//Update FTP client state}
+667             \hyperlink{ftp__client__misc_8c_ac32e3c219bd538aae5fd6f92002db7c9}{ftpClientChangeState}(context, 
+      \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fa3174f58da917af93a38b144a1e0d2527}{FTP\_CLIENT\_STATE\_CONNECTED});
+668             \textcolor{comment}{//We are done}
+669             \textcolor{keywordflow}{break};
+670          \}
+671       \}
+672       \textcolor{keywordflow}{else}
+673       \{
+674          \textcolor{comment}{//Invalid state}
+675          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac3190fa1f36c6acf147c7ce453a655e2}{ERROR\_WRONG\_STATE};
+676       \}
+677    \}
+678 
+679    \textcolor{comment}{//Check status code}
+680    \textcolor{keywordflow}{if}(error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca16f356a669fbb42deb27f59e9054f6d6}{ERROR\_WOULD\_BLOCK} || error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4d0f7be53b837f004379ac6bbd56f1e2}{ERROR\_TIMEOUT})
+681    \{
+682       \textcolor{comment}{//Check whether the timeout has elapsed}
+683       error = \hyperlink{ftp__client__misc_8c_ae6a4a166626630754fdeae2b17e611de}{ftpClientCheckTimeout}(context);
+684    \}
+685 
+686    \textcolor{comment}{//Return status code}
+687    \textcolor{keywordflow}{return} error;
+688 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ftp__client_8c_a0ee4e1fba6290c840990ecb6c290e89f}\label{ftp__client_8c_a0ee4e1fba6290c840990ecb6c290e89f}} 
+\index{ftp\+\_\+client.\+c@{ftp\+\_\+client.\+c}!ftp\+Client\+Close@{ftp\+Client\+Close}}
+\index{ftp\+Client\+Close@{ftp\+Client\+Close}!ftp\+\_\+client.\+c@{ftp\+\_\+client.\+c}}
+\subsubsection{\texorpdfstring{ftp\+Client\+Close()}{ftpClientClose()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ftp\+Client\+Close (\begin{DoxyParamCaption}\item[{\hyperlink{ftp__client_8h_a416e53a7e79ecd46ffcbeb50db323252}{Ftp\+Client\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Close the connection with the F\+TP server. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the F\+TP client context \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 1734 of file ftp\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+1735 \{
+1736    \textcolor{comment}{//Make sure the FTP client context is valid}
+1737    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1738       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+1739 
+1740    \textcolor{comment}{//Close data and control connections}
+1741    \hyperlink{ftp__client__transport_8c_afb29bfd2ee65af8f4526777355c3a171}{ftpClientCloseChannel}(&context->dataChannel);
+1742    \hyperlink{ftp__client__transport_8c_afb29bfd2ee65af8f4526777355c3a171}{ftpClientCloseChannel}(&context->controlChannel);
+1743 
+1744    \textcolor{comment}{//Update FTP client state}
+1745    \hyperlink{ftp__client__misc_8c_ac32e3c219bd538aae5fd6f92002db7c9}{ftpClientChangeState}(context, 
+      \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fafc86c0744a7900040e83f9aed1bbd5b7}{FTP\_CLIENT\_STATE\_DISCONNECTED});
+1746 
+1747    \textcolor{comment}{//Successful processing}
+1748    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+1749 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ftp__client_8c_a8be983813e6bb67bc5d1b7f3a5ce916f}\label{ftp__client_8c_a8be983813e6bb67bc5d1b7f3a5ce916f}} 
+\index{ftp\+\_\+client.\+c@{ftp\+\_\+client.\+c}!ftp\+Client\+Close\+Dir@{ftp\+Client\+Close\+Dir}}
+\index{ftp\+Client\+Close\+Dir@{ftp\+Client\+Close\+Dir}!ftp\+\_\+client.\+c@{ftp\+\_\+client.\+c}}
+\subsubsection{\texorpdfstring{ftp\+Client\+Close\+Dir()}{ftpClientCloseDir()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ftp\+Client\+Close\+Dir (\begin{DoxyParamCaption}\item[{\hyperlink{ftp__client_8h_a416e53a7e79ecd46ffcbeb50db323252}{Ftp\+Client\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Close directory. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the F\+TP client context \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 992 of file ftp\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+993 \{
+994    \textcolor{comment}{//Make sure the FTP client context is valid}
+995    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+996       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+997 
+998    \textcolor{comment}{//Close data connection and get transfer status}
+999    \textcolor{keywordflow}{return} \hyperlink{ftp__client__misc_8c_a243badf54f4ee24b2575991fd4d7d01d}{ftpClientTerminateDataTransfer}(context);
+1000 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ftp__client_8c_a0120a492837da044f222d5872a145230}\label{ftp__client_8c_a0120a492837da044f222d5872a145230}} 
+\index{ftp\+\_\+client.\+c@{ftp\+\_\+client.\+c}!ftp\+Client\+Close\+File@{ftp\+Client\+Close\+File}}
+\index{ftp\+Client\+Close\+File@{ftp\+Client\+Close\+File}!ftp\+\_\+client.\+c@{ftp\+\_\+client.\+c}}
+\subsubsection{\texorpdfstring{ftp\+Client\+Close\+File()}{ftpClientCloseFile()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ftp\+Client\+Close\+File (\begin{DoxyParamCaption}\item[{\hyperlink{ftp__client_8h_a416e53a7e79ecd46ffcbeb50db323252}{Ftp\+Client\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Close file. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the F\+TP client context \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 1421 of file ftp\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+1422 \{
+1423    \textcolor{comment}{//Make sure the FTP client context is valid}
+1424    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1425       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+1426 
+1427    \textcolor{comment}{//Close data connection and get transfer status}
+1428    \textcolor{keywordflow}{return} \hyperlink{ftp__client__misc_8c_a243badf54f4ee24b2575991fd4d7d01d}{ftpClientTerminateDataTransfer}(context);
+1429 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ftp__client_8c_a12397439a3664f1fc493484d02e8b0bc}\label{ftp__client_8c_a12397439a3664f1fc493484d02e8b0bc}} 
+\index{ftp\+\_\+client.\+c@{ftp\+\_\+client.\+c}!ftp\+Client\+Connect@{ftp\+Client\+Connect}}
+\index{ftp\+Client\+Connect@{ftp\+Client\+Connect}!ftp\+\_\+client.\+c@{ftp\+\_\+client.\+c}}
+\subsubsection{\texorpdfstring{ftp\+Client\+Connect()}{ftpClientConnect()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ftp\+Client\+Connect (\begin{DoxyParamCaption}\item[{\hyperlink{ftp__client_8h_a416e53a7e79ecd46ffcbeb50db323252}{Ftp\+Client\+Context} $\ast$}]{context,  }\item[{const \hyperlink{structIpAddr}{Ip\+Addr} $\ast$}]{server\+Ip\+Addr,  }\item[{\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t}}]{server\+Port,  }\item[{\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t}}]{mode }\end{DoxyParamCaption})}
+
+
+
+Establish a connection with the specified F\+TP server. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the F\+TP client context \\
+\hline
+\mbox{\tt in}  & {\em server\+Ip\+Addr} & IP address of the F\+TP server to connect to \\
+\hline
+\mbox{\tt in}  & {\em server\+Port} & Port number \\
+\hline
+\mbox{\tt in}  & {\em mode} & F\+TP connection mode \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 171 of file ftp\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+173 \{
+174    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+175 
+176    \textcolor{comment}{//Check parameters}
+177    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || serverIpAddr == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+178       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+179 
+180    \textcolor{comment}{//Initialize status code}
+181    error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+182 
+183    \textcolor{comment}{//Establish connection with the FTP server}
+184    \textcolor{keywordflow}{while}(!error)
+185    \{
+186       \textcolor{comment}{//Check current state}
+187       \textcolor{keywordflow}{if}(context->state == \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fafc86c0744a7900040e83f9aed1bbd5b7}{FTP\_CLIENT\_STATE\_DISCONNECTED})
+188       \{
+189          \textcolor{comment}{//Save the IP address of the FTP server}
+190          context->serverIpAddr = *serverIpAddr;
+191 
+192          \textcolor{comment}{//Use passive mode?}
+193          context->passiveMode = (\hyperlink{ntp__common_8h_a37e90f5e3bd99fac2021fb3a326607d4}{mode} & \hyperlink{ftp__client_8h_ad184a52fa44a585f09cb284b68b9eb00aff82bc76a091c9172f8aa50e7a80597d}{FTP\_MODE\_PASSIVE}) ? 
+      \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE} : \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+194 
+195          \textcolor{comment}{//Open control socket}
+196          error = \hyperlink{ftp__client__transport_8c_aaa807208fbb7ea7d5c66f81c672f6049}{ftpClientOpenChannel}(context, &context->controlChannel,
+197             \hyperlink{ftp__client_8h_a861f579f177610c6aad23f30c480df16}{FTP\_CLIENT\_MIN\_TCP\_BUFFER\_SIZE}, 
+      \hyperlink{ftp__client_8h_a861f579f177610c6aad23f30c480df16}{FTP\_CLIENT\_MIN\_TCP\_BUFFER\_SIZE});
+198 
+199          \textcolor{comment}{//Check status code}
+200          \textcolor{keywordflow}{if}(!error)
+201          \{
+202             \textcolor{comment}{//Establish TCP connection}
+203             \hyperlink{ftp__client__misc_8c_ac32e3c219bd538aae5fd6f92002db7c9}{ftpClientChangeState}(context, 
+      \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fa24afa64a4115d1d4ca0ae9492c04de45}{FTP\_CLIENT\_STATE\_CONNECTING\_TCP});
+204          \}
+205       \}
+206       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->state == \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fa24afa64a4115d1d4ca0ae9492c04de45}{FTP\_CLIENT\_STATE\_CONNECTING\_TCP})
+207       \{
+208          \textcolor{comment}{//Establish TCP connection}
+209          error = \hyperlink{socket_8c_aff3e3c0abc332f42189fce8f362fbd63}{socketConnect}(context->controlChannel.socket, serverIpAddr,
+210             serverPort);
+211 
+212          \textcolor{comment}{//Check status code}
+213          \textcolor{keywordflow}{if}(!error)
+214          \{
+215             \textcolor{comment}{//Implicit FTPS?}
+216             \textcolor{keywordflow}{if}(\hyperlink{ntp__common_8h_a37e90f5e3bd99fac2021fb3a326607d4}{mode} & \hyperlink{ftp__client_8h_ad184a52fa44a585f09cb284b68b9eb00a792697a0a9a1196d4c4e8f4c0f27e835}{FTP\_MODE\_IMPLICIT\_TLS})
+217             \{
+218                \textcolor{comment}{//TLS initialization}
+219                error = \hyperlink{ftp__client__transport_8c_a4b2ce1a2547da977bc2e8cef2c3bf733}{ftpClientOpenSecureChannel}(context,
+220                   &context->controlChannel, \hyperlink{ftp__client_8h_a16e96dcb837dd6a2abadefb614eb1ab2}{FTP\_CLIENT\_TLS\_TX\_BUFFER\_SIZE},
+221                   \hyperlink{ftp__client_8h_aecc713f96f6b886d0d8f9f689100b2d2}{FTP\_CLIENT\_MIN\_TLS\_RX\_BUFFER\_SIZE});
+222 
+223                \textcolor{comment}{//Check status code}
+224                \textcolor{keywordflow}{if}(!error)
+225                \{
+226                   \textcolor{comment}{//Perform TLS handshake}
+227                   \hyperlink{ftp__client__misc_8c_ac32e3c219bd538aae5fd6f92002db7c9}{ftpClientChangeState}(context, 
+      \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32faf3242b1228a16b3a667a094e462ab176}{FTP\_CLIENT\_STATE\_CONNECTING\_TLS});
+228                \}
+229             \}
+230             \textcolor{keywordflow}{else}
+231             \{
+232                \textcolor{comment}{//Flush buffer}
+233                context->bufferPos = 0;
+234                context->commandLen = 0;
+235                context->replyLen = 0;
+236 
+237                \textcolor{comment}{//Wait for the connection greeting reply}
+238                \hyperlink{ftp__client__misc_8c_ac32e3c219bd538aae5fd6f92002db7c9}{ftpClientChangeState}(context, 
+      \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fad41efafde5188577bede053e2d80eb97}{FTP\_CLIENT\_STATE\_SUB\_COMMAND\_1});
+239             \}
+240          \}
+241       \}
+242       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->state == \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32faf3242b1228a16b3a667a094e462ab176}{FTP\_CLIENT\_STATE\_CONNECTING\_TLS})
+243       \{
+244          \textcolor{comment}{//Perform TLS handshake}
+245          error = \hyperlink{ftp__client__transport_8c_abc76a2bf28a5663e909f042693b79fe0}{ftpClientEstablishSecureChannel}(&context->controlChannel);
+246 
+247          \textcolor{comment}{//Check status code}
+248          \textcolor{keywordflow}{if}(!error)
+249          \{
+250             \textcolor{comment}{//Implicit FTPS?}
+251             \textcolor{keywordflow}{if}(\hyperlink{ntp__common_8h_a37e90f5e3bd99fac2021fb3a326607d4}{mode} & \hyperlink{ftp__client_8h_ad184a52fa44a585f09cb284b68b9eb00a792697a0a9a1196d4c4e8f4c0f27e835}{FTP\_MODE\_IMPLICIT\_TLS})
+252             \{
+253                \textcolor{comment}{//Flush buffer}
+254                context->bufferPos = 0;
+255                context->commandLen = 0;
+256                context->replyLen = 0;
+257 
+258                \textcolor{comment}{//Wait for the connection greeting reply}
+259                \hyperlink{ftp__client__misc_8c_ac32e3c219bd538aae5fd6f92002db7c9}{ftpClientChangeState}(context, 
+      \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fad41efafde5188577bede053e2d80eb97}{FTP\_CLIENT\_STATE\_SUB\_COMMAND\_1});
+260             \}
+261             \textcolor{keywordflow}{else}
+262             \{
+263                \textcolor{comment}{//The FTP client is connected}
+264                \hyperlink{ftp__client__misc_8c_ac32e3c219bd538aae5fd6f92002db7c9}{ftpClientChangeState}(context, 
+      \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fa3174f58da917af93a38b144a1e0d2527}{FTP\_CLIENT\_STATE\_CONNECTED});
+265             \}
+266          \}
+267       \}
+268       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->state == \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fad41efafde5188577bede053e2d80eb97}{FTP\_CLIENT\_STATE\_SUB\_COMMAND\_1})
+269       \{
+270          \textcolor{comment}{//Wait for the connection greeting reply}
+271          error = \hyperlink{ftp__client__misc_8c_a649a89ff88deef2eeb980a4265da37f7}{ftpClientSendCommand}(context);
+272 
+273          \textcolor{comment}{//Check status code}
+274          \textcolor{keywordflow}{if}(!error)
+275          \{
+276             \textcolor{comment}{//Check FTP response code}
+277             \textcolor{keywordflow}{if}(\hyperlink{ftp__client_8h_a8af0e6630256513516df045fb43012e7}{FTP\_REPLY\_CODE\_2YZ}(context->replyCode))
+278             \{
+279                \textcolor{comment}{//Explicit FTPS?}
+280                \textcolor{keywordflow}{if}(\hyperlink{ntp__common_8h_a37e90f5e3bd99fac2021fb3a326607d4}{mode} & \hyperlink{ftp__client_8h_ad184a52fa44a585f09cb284b68b9eb00a7ba5fbc89faf2213219ff228988dd5e2}{FTP\_MODE\_EXPLICIT\_TLS})
+281                \{
+282                   \textcolor{comment}{//Format AUTH TLS command}
+283                   error = \hyperlink{ftp__client__misc_8c_a76c2f71fc8ddb8c7f14b5b7d14ab3437}{ftpClientFormatCommand}(context, \textcolor{stringliteral}{"AUTH TLS"}, 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+284 
+285                   \textcolor{comment}{//Check status code}
+286                   \textcolor{keywordflow}{if}(!error)
+287                   \{
+288                      \textcolor{comment}{//Send AUTH TLS command and wait for the server's response}
+289                      \hyperlink{ftp__client__misc_8c_ac32e3c219bd538aae5fd6f92002db7c9}{ftpClientChangeState}(context, 
+      \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fa2e4d355339e5c264d559e05a9ebcdfe4}{FTP\_CLIENT\_STATE\_SUB\_COMMAND\_2});
+290                   \}
+291                \}
+292                \textcolor{keywordflow}{else}
+293                \{
+294                   \textcolor{comment}{//The FTP client is connected}
+295                   \hyperlink{ftp__client__misc_8c_ac32e3c219bd538aae5fd6f92002db7c9}{ftpClientChangeState}(context, 
+      \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fa3174f58da917af93a38b144a1e0d2527}{FTP\_CLIENT\_STATE\_CONNECTED});
+296                \}
+297             \}
+298             \textcolor{keywordflow}{else}
+299             \{
+300                \textcolor{comment}{//Report an error}
+301                error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caa71f5ec9e991d033d622bd5fb6f6633f}{ERROR\_UNEXPECTED\_RESPONSE};
+302             \}
+303          \}
+304       \}
+305       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->state == \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fa2e4d355339e5c264d559e05a9ebcdfe4}{FTP\_CLIENT\_STATE\_SUB\_COMMAND\_2})
+306       \{
+307          \textcolor{comment}{//Send AUTH TLS command and wait for the server's response}
+308          error = \hyperlink{ftp__client__misc_8c_a649a89ff88deef2eeb980a4265da37f7}{ftpClientSendCommand}(context);
+309 
+310          \textcolor{comment}{//Check status code}
+311          \textcolor{keywordflow}{if}(!error)
+312          \{
+313             \textcolor{comment}{//Check FTP response code}
+314             \textcolor{keywordflow}{if}(\hyperlink{ftp__client_8h_a8af0e6630256513516df045fb43012e7}{FTP\_REPLY\_CODE\_2YZ}(context->replyCode))
+315             \{
+316                \textcolor{comment}{//TLS initialization}
+317                error = \hyperlink{ftp__client__transport_8c_a4b2ce1a2547da977bc2e8cef2c3bf733}{ftpClientOpenSecureChannel}(context,
+318                   &context->controlChannel, \hyperlink{ftp__client_8h_a16e96dcb837dd6a2abadefb614eb1ab2}{FTP\_CLIENT\_TLS\_TX\_BUFFER\_SIZE},
+319                   \hyperlink{ftp__client_8h_aecc713f96f6b886d0d8f9f689100b2d2}{FTP\_CLIENT\_MIN\_TLS\_RX\_BUFFER\_SIZE});
+320 
+321                \textcolor{comment}{//Check status code}
+322                \textcolor{keywordflow}{if}(!error)
+323                \{
+324                   \textcolor{comment}{//Perform TLS handshake}
+325                   \hyperlink{ftp__client__misc_8c_ac32e3c219bd538aae5fd6f92002db7c9}{ftpClientChangeState}(context, 
+      \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32faf3242b1228a16b3a667a094e462ab176}{FTP\_CLIENT\_STATE\_CONNECTING\_TLS});
+326                \}
+327             \}
+328             \textcolor{keywordflow}{else}
+329             \{
+330                \textcolor{comment}{//Report an error}
+331                error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caa71f5ec9e991d033d622bd5fb6f6633f}{ERROR\_UNEXPECTED\_RESPONSE};
+332             \}
+333          \}
+334       \}
+335       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->state == \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fa3174f58da917af93a38b144a1e0d2527}{FTP\_CLIENT\_STATE\_CONNECTED})
+336       \{
+337          \textcolor{comment}{//The FTP client is connected}
+338          \textcolor{keywordflow}{break};
+339       \}
+340       \textcolor{keywordflow}{else}
+341       \{
+342          \textcolor{comment}{//Invalid state}
+343          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac3190fa1f36c6acf147c7ce453a655e2}{ERROR\_WRONG\_STATE};
+344       \}
+345    \}
+346 
+347    \textcolor{comment}{//Check status code}
+348    \textcolor{keywordflow}{if}(error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca16f356a669fbb42deb27f59e9054f6d6}{ERROR\_WOULD\_BLOCK} || error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4d0f7be53b837f004379ac6bbd56f1e2}{ERROR\_TIMEOUT})
+349    \{
+350       \textcolor{comment}{//Check whether the timeout has elapsed}
+351       error = \hyperlink{ftp__client__misc_8c_ae6a4a166626630754fdeae2b17e611de}{ftpClientCheckTimeout}(context);
+352    \}
+353 
+354    \textcolor{comment}{//Failed to establish connection with the FTP server?}
+355    \textcolor{keywordflow}{if}(error != \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR} && error != \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca16f356a669fbb42deb27f59e9054f6d6}{ERROR\_WOULD\_BLOCK})
+356    \{
+357       \textcolor{comment}{//Clean up side effects}
+358       \hyperlink{ftp__client__transport_8c_afb29bfd2ee65af8f4526777355c3a171}{ftpClientCloseChannel}(&context->controlChannel);
+359       \textcolor{comment}{//Update FTP client state}
+360       \hyperlink{ftp__client__misc_8c_ac32e3c219bd538aae5fd6f92002db7c9}{ftpClientChangeState}(context, 
+      \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fafc86c0744a7900040e83f9aed1bbd5b7}{FTP\_CLIENT\_STATE\_DISCONNECTED});
+361    \}
+362 
+363    \textcolor{comment}{//Return status code}
+364    \textcolor{keywordflow}{return} error;
+365 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ftp__client_8c_abcb94285f096265e8d2306e35416a3d0}\label{ftp__client_8c_abcb94285f096265e8d2306e35416a3d0}} 
+\index{ftp\+\_\+client.\+c@{ftp\+\_\+client.\+c}!ftp\+Client\+Create\+Dir@{ftp\+Client\+Create\+Dir}}
+\index{ftp\+Client\+Create\+Dir@{ftp\+Client\+Create\+Dir}!ftp\+\_\+client.\+c@{ftp\+\_\+client.\+c}}
+\subsubsection{\texorpdfstring{ftp\+Client\+Create\+Dir()}{ftpClientCreateDir()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ftp\+Client\+Create\+Dir (\begin{DoxyParamCaption}\item[{\hyperlink{ftp__client_8h_a416e53a7e79ecd46ffcbeb50db323252}{Ftp\+Client\+Context} $\ast$}]{context,  }\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{path }\end{DoxyParamCaption})}
+
+
+
+Create a new directory. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the F\+TP client context \\
+\hline
+\mbox{\tt in}  & {\em path} & Name of the new directory \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 1010 of file ftp\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+1011 \{
+1012    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+1013 
+1014    \textcolor{comment}{//Check parameters}
+1015    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || path == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1016       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+1017 
+1018    \textcolor{comment}{//Initialize status code}
+1019    error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+1020 
+1021    \textcolor{comment}{//Execute FTP command}
+1022    \textcolor{keywordflow}{while}(!error)
+1023    \{
+1024       \textcolor{comment}{//Check current state}
+1025       \textcolor{keywordflow}{if}(context->state == \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fa3174f58da917af93a38b144a1e0d2527}{FTP\_CLIENT\_STATE\_CONNECTED})
+1026       \{
+1027          \textcolor{comment}{//Format MKD command}
+1028          error = \hyperlink{ftp__client__misc_8c_a76c2f71fc8ddb8c7f14b5b7d14ab3437}{ftpClientFormatCommand}(context, \textcolor{stringliteral}{"MKD"}, path);
+1029 
+1030          \textcolor{comment}{//Check status code}
+1031          \textcolor{keywordflow}{if}(!error)
+1032          \{
+1033             \textcolor{comment}{//Send MKD command and wait for the server's response}
+1034             \hyperlink{ftp__client__misc_8c_ac32e3c219bd538aae5fd6f92002db7c9}{ftpClientChangeState}(context, 
+      \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fad41efafde5188577bede053e2d80eb97}{FTP\_CLIENT\_STATE\_SUB\_COMMAND\_1});
+1035          \}
+1036       \}
+1037       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->state == \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fad41efafde5188577bede053e2d80eb97}{FTP\_CLIENT\_STATE\_SUB\_COMMAND\_1})
+1038       \{
+1039          \textcolor{comment}{//Send MKD command and wait for the server's response}
+1040          error = \hyperlink{ftp__client__misc_8c_a649a89ff88deef2eeb980a4265da37f7}{ftpClientSendCommand}(context);
+1041 
+1042          \textcolor{comment}{//Check status code}
+1043          \textcolor{keywordflow}{if}(!error)
+1044          \{
+1045             \textcolor{comment}{//Check FTP response code}
+1046             \textcolor{keywordflow}{if}(!\hyperlink{ftp__client_8h_a8af0e6630256513516df045fb43012e7}{FTP\_REPLY\_CODE\_2YZ}(context->replyCode))
+1047             \{
+1048                \textcolor{comment}{//Report an error}
+1049                error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caa71f5ec9e991d033d622bd5fb6f6633f}{ERROR\_UNEXPECTED\_RESPONSE};
+1050             \}
+1051 
+1052             \textcolor{comment}{//Update FTP client state}
+1053             \hyperlink{ftp__client__misc_8c_ac32e3c219bd538aae5fd6f92002db7c9}{ftpClientChangeState}(context, 
+      \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fa3174f58da917af93a38b144a1e0d2527}{FTP\_CLIENT\_STATE\_CONNECTED});
+1054             \textcolor{comment}{//We are done}
+1055             \textcolor{keywordflow}{break};
+1056          \}
+1057       \}
+1058       \textcolor{keywordflow}{else}
+1059       \{
+1060          \textcolor{comment}{//Invalid state}
+1061          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac3190fa1f36c6acf147c7ce453a655e2}{ERROR\_WRONG\_STATE};
+1062       \}
+1063    \}
+1064 
+1065    \textcolor{comment}{//Check status code}
+1066    \textcolor{keywordflow}{if}(error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca16f356a669fbb42deb27f59e9054f6d6}{ERROR\_WOULD\_BLOCK} || error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4d0f7be53b837f004379ac6bbd56f1e2}{ERROR\_TIMEOUT})
+1067    \{
+1068       \textcolor{comment}{//Check whether the timeout has elapsed}
+1069       error = \hyperlink{ftp__client__misc_8c_ae6a4a166626630754fdeae2b17e611de}{ftpClientCheckTimeout}(context);
+1070    \}
+1071 
+1072    \textcolor{comment}{//Return status code}
+1073    \textcolor{keywordflow}{return} error;
+1074 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ftp__client_8c_ad3c3f2f1cd1c689a789cadc6ef417618}\label{ftp__client_8c_ad3c3f2f1cd1c689a789cadc6ef417618}} 
+\index{ftp\+\_\+client.\+c@{ftp\+\_\+client.\+c}!ftp\+Client\+Deinit@{ftp\+Client\+Deinit}}
+\index{ftp\+Client\+Deinit@{ftp\+Client\+Deinit}!ftp\+\_\+client.\+c@{ftp\+\_\+client.\+c}}
+\subsubsection{\texorpdfstring{ftp\+Client\+Deinit()}{ftpClientDeinit()}}
+{\footnotesize\ttfamily void ftp\+Client\+Deinit (\begin{DoxyParamCaption}\item[{\hyperlink{ftp__client_8h_a416e53a7e79ecd46ffcbeb50db323252}{Ftp\+Client\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Release F\+TP client context. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the F\+TP client context \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 1757 of file ftp\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+1758 \{
+1759    \textcolor{comment}{//Make sure the FTP client context is valid}
+1760    \textcolor{keywordflow}{if}(context != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1761    \{
+1762       \textcolor{comment}{//Close data and control connections}
+1763       \hyperlink{ftp__client__transport_8c_afb29bfd2ee65af8f4526777355c3a171}{ftpClientCloseChannel}(&context->dataChannel);
+1764       \hyperlink{ftp__client__transport_8c_afb29bfd2ee65af8f4526777355c3a171}{ftpClientCloseChannel}(&context->controlChannel);
+1765 
+1766 \textcolor{preprocessor}{#if (FTP\_CLIENT\_TLS\_SUPPORT == ENABLED)}
+1767       \textcolor{comment}{//Release TLS session state}
+1768       \hyperlink{tls_8c_a6e78d966a9bcd9eb6210c996389f6551}{tlsFreeSessionState}(&context->tlsSession);
+1769 \textcolor{preprocessor}{#endif}
+1770 
+1771       \textcolor{comment}{//Clear FTP client context}
+1772       memset(context, 0, \textcolor{keyword}{sizeof}(\hyperlink{ftp__client_8h_a416e53a7e79ecd46ffcbeb50db323252}{FtpClientContext}));
+1773    \}
+1774 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ftp__client_8c_a556b289b7a8d81bcb6137dc3725a1f43}\label{ftp__client_8c_a556b289b7a8d81bcb6137dc3725a1f43}} 
+\index{ftp\+\_\+client.\+c@{ftp\+\_\+client.\+c}!ftp\+Client\+Delete\+Dir@{ftp\+Client\+Delete\+Dir}}
+\index{ftp\+Client\+Delete\+Dir@{ftp\+Client\+Delete\+Dir}!ftp\+\_\+client.\+c@{ftp\+\_\+client.\+c}}
+\subsubsection{\texorpdfstring{ftp\+Client\+Delete\+Dir()}{ftpClientDeleteDir()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ftp\+Client\+Delete\+Dir (\begin{DoxyParamCaption}\item[{\hyperlink{ftp__client_8h_a416e53a7e79ecd46ffcbeb50db323252}{Ftp\+Client\+Context} $\ast$}]{context,  }\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{path }\end{DoxyParamCaption})}
+
+
+
+Remove a directory. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the F\+TP client context \\
+\hline
+\mbox{\tt in}  & {\em path} & Path to the directory to be removed \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 1084 of file ftp\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+1085 \{
+1086    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+1087 
+1088    \textcolor{comment}{//Check parameters}
+1089    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || path == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1090       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+1091 
+1092    \textcolor{comment}{//Initialize status code}
+1093    error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+1094 
+1095    \textcolor{comment}{//Execute FTP command}
+1096    \textcolor{keywordflow}{while}(!error)
+1097    \{
+1098       \textcolor{comment}{//Check current state}
+1099       \textcolor{keywordflow}{if}(context->state == \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fa3174f58da917af93a38b144a1e0d2527}{FTP\_CLIENT\_STATE\_CONNECTED})
+1100       \{
+1101          \textcolor{comment}{//Format RMD command}
+1102          error = \hyperlink{ftp__client__misc_8c_a76c2f71fc8ddb8c7f14b5b7d14ab3437}{ftpClientFormatCommand}(context, \textcolor{stringliteral}{"RMD"}, path);
+1103 
+1104          \textcolor{comment}{//Check status code}
+1105          \textcolor{keywordflow}{if}(!error)
+1106          \{
+1107             \textcolor{comment}{//Send RMD command and wait for the server's response}
+1108             \hyperlink{ftp__client__misc_8c_ac32e3c219bd538aae5fd6f92002db7c9}{ftpClientChangeState}(context, 
+      \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fad41efafde5188577bede053e2d80eb97}{FTP\_CLIENT\_STATE\_SUB\_COMMAND\_1});
+1109          \}
+1110       \}
+1111       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->state == \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fad41efafde5188577bede053e2d80eb97}{FTP\_CLIENT\_STATE\_SUB\_COMMAND\_1})
+1112       \{
+1113          \textcolor{comment}{//Send RMD command and wait for the server's response}
+1114          error = \hyperlink{ftp__client__misc_8c_a649a89ff88deef2eeb980a4265da37f7}{ftpClientSendCommand}(context);
+1115 
+1116          \textcolor{comment}{//Check status code}
+1117          \textcolor{keywordflow}{if}(!error)
+1118          \{
+1119             \textcolor{comment}{//Check FTP response code}
+1120             \textcolor{keywordflow}{if}(!\hyperlink{ftp__client_8h_a8af0e6630256513516df045fb43012e7}{FTP\_REPLY\_CODE\_2YZ}(context->replyCode))
+1121             \{
+1122                \textcolor{comment}{//Report an error}
+1123                error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caa71f5ec9e991d033d622bd5fb6f6633f}{ERROR\_UNEXPECTED\_RESPONSE};
+1124             \}
+1125 
+1126             \textcolor{comment}{//Update FTP client state}
+1127             \hyperlink{ftp__client__misc_8c_ac32e3c219bd538aae5fd6f92002db7c9}{ftpClientChangeState}(context, 
+      \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fa3174f58da917af93a38b144a1e0d2527}{FTP\_CLIENT\_STATE\_CONNECTED});
+1128             \textcolor{comment}{//We are done}
+1129             \textcolor{keywordflow}{break};
+1130          \}
+1131       \}
+1132       \textcolor{keywordflow}{else}
+1133       \{
+1134          \textcolor{comment}{//Invalid state}
+1135          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac3190fa1f36c6acf147c7ce453a655e2}{ERROR\_WRONG\_STATE};
+1136       \}
+1137    \}
+1138 
+1139    \textcolor{comment}{//Check status code}
+1140    \textcolor{keywordflow}{if}(error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca16f356a669fbb42deb27f59e9054f6d6}{ERROR\_WOULD\_BLOCK} || error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4d0f7be53b837f004379ac6bbd56f1e2}{ERROR\_TIMEOUT})
+1141    \{
+1142       \textcolor{comment}{//Check whether the timeout has elapsed}
+1143       error = \hyperlink{ftp__client__misc_8c_ae6a4a166626630754fdeae2b17e611de}{ftpClientCheckTimeout}(context);
+1144    \}
+1145 
+1146    \textcolor{comment}{//Return status code}
+1147    \textcolor{keywordflow}{return} error;
+1148 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ftp__client_8c_ab7ba86b048320a971b3cdfecdda4d644}\label{ftp__client_8c_ab7ba86b048320a971b3cdfecdda4d644}} 
+\index{ftp\+\_\+client.\+c@{ftp\+\_\+client.\+c}!ftp\+Client\+Delete\+File@{ftp\+Client\+Delete\+File}}
+\index{ftp\+Client\+Delete\+File@{ftp\+Client\+Delete\+File}!ftp\+\_\+client.\+c@{ftp\+\_\+client.\+c}}
+\subsubsection{\texorpdfstring{ftp\+Client\+Delete\+File()}{ftpClientDeleteFile()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ftp\+Client\+Delete\+File (\begin{DoxyParamCaption}\item[{\hyperlink{ftp__client_8h_a416e53a7e79ecd46ffcbeb50db323252}{Ftp\+Client\+Context} $\ast$}]{context,  }\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{path }\end{DoxyParamCaption})}
+
+
+
+Delete a file. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the F\+TP client context \\
+\hline
+\mbox{\tt in}  & {\em path} & Path to the file to be be deleted \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 1545 of file ftp\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+1546 \{
+1547    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+1548 
+1549    \textcolor{comment}{//Check parameters}
+1550    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || path == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1551       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+1552 
+1553    \textcolor{comment}{//Initialize status code}
+1554    error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+1555 
+1556    \textcolor{comment}{//Execute FTP command}
+1557    \textcolor{keywordflow}{while}(!error)
+1558    \{
+1559       \textcolor{comment}{//Check current state}
+1560       \textcolor{keywordflow}{if}(context->state == \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fa3174f58da917af93a38b144a1e0d2527}{FTP\_CLIENT\_STATE\_CONNECTED})
+1561       \{
+1562          \textcolor{comment}{//Format DELE command}
+1563          error = \hyperlink{ftp__client__misc_8c_a76c2f71fc8ddb8c7f14b5b7d14ab3437}{ftpClientFormatCommand}(context, \textcolor{stringliteral}{"DELE"}, path);
+1564 
+1565          \textcolor{comment}{//Check status code}
+1566          \textcolor{keywordflow}{if}(!error)
+1567          \{
+1568             \textcolor{comment}{//Send DELE command and wait for the server's response}
+1569             \hyperlink{ftp__client__misc_8c_ac32e3c219bd538aae5fd6f92002db7c9}{ftpClientChangeState}(context, 
+      \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fad41efafde5188577bede053e2d80eb97}{FTP\_CLIENT\_STATE\_SUB\_COMMAND\_1});
+1570          \}
+1571       \}
+1572       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->state == \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fad41efafde5188577bede053e2d80eb97}{FTP\_CLIENT\_STATE\_SUB\_COMMAND\_1})
+1573       \{
+1574          \textcolor{comment}{//Send DELE command and wait for the server's response}
+1575          error = \hyperlink{ftp__client__misc_8c_a649a89ff88deef2eeb980a4265da37f7}{ftpClientSendCommand}(context);
+1576 
+1577          \textcolor{comment}{//Check status code}
+1578          \textcolor{keywordflow}{if}(!error)
+1579          \{
+1580             \textcolor{comment}{//Check FTP response code}
+1581             \textcolor{keywordflow}{if}(!\hyperlink{ftp__client_8h_a8af0e6630256513516df045fb43012e7}{FTP\_REPLY\_CODE\_2YZ}(context->replyCode))
+1582             \{
+1583                \textcolor{comment}{//Report an error}
+1584                error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caa71f5ec9e991d033d622bd5fb6f6633f}{ERROR\_UNEXPECTED\_RESPONSE};
+1585             \}
+1586 
+1587             \textcolor{comment}{//Update FTP client state}
+1588             \hyperlink{ftp__client__misc_8c_ac32e3c219bd538aae5fd6f92002db7c9}{ftpClientChangeState}(context, 
+      \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fa3174f58da917af93a38b144a1e0d2527}{FTP\_CLIENT\_STATE\_CONNECTED});
+1589             \textcolor{comment}{//We are done}
+1590             \textcolor{keywordflow}{break};
+1591          \}
+1592       \}
+1593       \textcolor{keywordflow}{else}
+1594       \{
+1595          \textcolor{comment}{//Invalid state}
+1596          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac3190fa1f36c6acf147c7ce453a655e2}{ERROR\_WRONG\_STATE};
+1597       \}
+1598    \}
+1599 
+1600    \textcolor{comment}{//Check status code}
+1601    \textcolor{keywordflow}{if}(error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca16f356a669fbb42deb27f59e9054f6d6}{ERROR\_WOULD\_BLOCK} || error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4d0f7be53b837f004379ac6bbd56f1e2}{ERROR\_TIMEOUT})
+1602    \{
+1603       \textcolor{comment}{//Check whether the timeout has elapsed}
+1604       error = \hyperlink{ftp__client__misc_8c_ae6a4a166626630754fdeae2b17e611de}{ftpClientCheckTimeout}(context);
+1605    \}
+1606 
+1607    \textcolor{comment}{//Return status code}
+1608    \textcolor{keywordflow}{return} error;
+1609 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ftp__client_8c_ad2d64f47336ff396b1358a0a41de4651}\label{ftp__client_8c_ad2d64f47336ff396b1358a0a41de4651}} 
+\index{ftp\+\_\+client.\+c@{ftp\+\_\+client.\+c}!ftp\+Client\+Disconnect@{ftp\+Client\+Disconnect}}
+\index{ftp\+Client\+Disconnect@{ftp\+Client\+Disconnect}!ftp\+\_\+client.\+c@{ftp\+\_\+client.\+c}}
+\subsubsection{\texorpdfstring{ftp\+Client\+Disconnect()}{ftpClientDisconnect()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ftp\+Client\+Disconnect (\begin{DoxyParamCaption}\item[{\hyperlink{ftp__client_8h_a416e53a7e79ecd46ffcbeb50db323252}{Ftp\+Client\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Gracefully disconnect from the F\+TP server. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the F\+TP client context \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 1645 of file ftp\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+1646 \{
+1647    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+1648 
+1649    \textcolor{comment}{//Make sure the FTP client context is valid}
+1650    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1651       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+1652 
+1653    \textcolor{comment}{//Initialize status code}
+1654    error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+1655 
+1656    \textcolor{comment}{//Execute FTP command sequence}
+1657    \textcolor{keywordflow}{while}(!error)
+1658    \{
+1659       \textcolor{comment}{//Check current state}
+1660       \textcolor{keywordflow}{if}(context->state == \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fa3174f58da917af93a38b144a1e0d2527}{FTP\_CLIENT\_STATE\_CONNECTED})
+1661       \{
+1662          \textcolor{comment}{//Update FTP client state}
+1663          \hyperlink{ftp__client__misc_8c_ac32e3c219bd538aae5fd6f92002db7c9}{ftpClientChangeState}(context, 
+      \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fa6a105a2c6fa25af8035317b857ca1f68}{FTP\_CLIENT\_STATE\_DISCONNECTING\_1});
+1664       \}
+1665       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->state == \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fa6a105a2c6fa25af8035317b857ca1f68}{FTP\_CLIENT\_STATE\_DISCONNECTING\_1})
+1666       \{
+1667          \textcolor{comment}{//Shutdown data connection}
+1668          error = \hyperlink{ftp__client__transport_8c_afa869ec7d2815eb9a74ed79022f10369}{ftpClientShutdownChannel}(&context->dataChannel);
+1669 
+1670          \textcolor{comment}{//Check status code}
+1671          \textcolor{keywordflow}{if}(!error)
+1672          \{
+1673             \textcolor{comment}{//Close data connection}
+1674             \hyperlink{ftp__client__transport_8c_afb29bfd2ee65af8f4526777355c3a171}{ftpClientCloseChannel}(&context->dataChannel);
+1675             \textcolor{comment}{//Update FTP client state}
+1676             \hyperlink{ftp__client__misc_8c_ac32e3c219bd538aae5fd6f92002db7c9}{ftpClientChangeState}(context, 
+      \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fa81ac021124ba15a068ec55d0ea4150d6}{FTP\_CLIENT\_STATE\_DISCONNECTING\_2});
+1677          \}
+1678       \}
+1679       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->state == \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fa81ac021124ba15a068ec55d0ea4150d6}{FTP\_CLIENT\_STATE\_DISCONNECTING\_2})
+1680       \{
+1681          \textcolor{comment}{//Shutdown control connection}
+1682          error = \hyperlink{ftp__client__transport_8c_afa869ec7d2815eb9a74ed79022f10369}{ftpClientShutdownChannel}(&context->controlChannel);
+1683 
+1684          \textcolor{comment}{//Check status code}
+1685          \textcolor{keywordflow}{if}(!error)
+1686          \{
+1687             \textcolor{comment}{//Close control connection}
+1688             \hyperlink{ftp__client__transport_8c_afb29bfd2ee65af8f4526777355c3a171}{ftpClientCloseChannel}(&context->controlChannel);
+1689             \textcolor{comment}{//Update FTP client state}
+1690             \hyperlink{ftp__client__misc_8c_ac32e3c219bd538aae5fd6f92002db7c9}{ftpClientChangeState}(context, 
+      \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fafc86c0744a7900040e83f9aed1bbd5b7}{FTP\_CLIENT\_STATE\_DISCONNECTED});
+1691          \}
+1692       \}
+1693       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->state == \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fafc86c0744a7900040e83f9aed1bbd5b7}{FTP\_CLIENT\_STATE\_DISCONNECTED})
+1694       \{
+1695          \textcolor{comment}{//We are done}
+1696          \textcolor{keywordflow}{break};
+1697       \}
+1698       \textcolor{keywordflow}{else}
+1699       \{
+1700          \textcolor{comment}{//Invalid state}
+1701          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac3190fa1f36c6acf147c7ce453a655e2}{ERROR\_WRONG\_STATE};
+1702       \}
+1703    \}
+1704 
+1705    \textcolor{comment}{//Check status code}
+1706    \textcolor{keywordflow}{if}(error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca16f356a669fbb42deb27f59e9054f6d6}{ERROR\_WOULD\_BLOCK} || error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4d0f7be53b837f004379ac6bbd56f1e2}{ERROR\_TIMEOUT})
+1707    \{
+1708       \textcolor{comment}{//Check whether the timeout has elapsed}
+1709       error = \hyperlink{ftp__client__misc_8c_ae6a4a166626630754fdeae2b17e611de}{ftpClientCheckTimeout}(context);
+1710    \}
+1711 
+1712    \textcolor{comment}{//Failed to gracefully disconnect from the FTP server?}
+1713    \textcolor{keywordflow}{if}(error != \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR} && error != \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca16f356a669fbb42deb27f59e9054f6d6}{ERROR\_WOULD\_BLOCK})
+1714    \{
+1715       \textcolor{comment}{//Close data and control connections}
+1716       \hyperlink{ftp__client__transport_8c_afb29bfd2ee65af8f4526777355c3a171}{ftpClientCloseChannel}(&context->dataChannel);
+1717       \hyperlink{ftp__client__transport_8c_afb29bfd2ee65af8f4526777355c3a171}{ftpClientCloseChannel}(&context->controlChannel);
+1718 
+1719       \textcolor{comment}{//Update FTP client state}
+1720       \hyperlink{ftp__client__misc_8c_ac32e3c219bd538aae5fd6f92002db7c9}{ftpClientChangeState}(context, 
+      \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fafc86c0744a7900040e83f9aed1bbd5b7}{FTP\_CLIENT\_STATE\_DISCONNECTED});
+1721    \}
+1722 
+1723    \textcolor{comment}{//Return status code}
+1724    \textcolor{keywordflow}{return} error;
+1725 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ftp__client_8c_ae61e8f2003403a3a1c5fda3253cafc20}\label{ftp__client_8c_ae61e8f2003403a3a1c5fda3253cafc20}} 
+\index{ftp\+\_\+client.\+c@{ftp\+\_\+client.\+c}!ftp\+Client\+Get\+Reply\+Code@{ftp\+Client\+Get\+Reply\+Code}}
+\index{ftp\+Client\+Get\+Reply\+Code@{ftp\+Client\+Get\+Reply\+Code}!ftp\+\_\+client.\+c@{ftp\+\_\+client.\+c}}
+\subsubsection{\texorpdfstring{ftp\+Client\+Get\+Reply\+Code()}{ftpClientGetReplyCode()}}
+{\footnotesize\ttfamily \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} ftp\+Client\+Get\+Reply\+Code (\begin{DoxyParamCaption}\item[{\hyperlink{ftp__client_8h_a416e53a7e79ecd46ffcbeb50db323252}{Ftp\+Client\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Retrieve server\textquotesingle{}s reply code. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the F\+TP client context \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+F\+TP reply code 
+\end{DoxyReturn}
+
+
+Definition at line 1618 of file ftp\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+1619 \{
+1620    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} replyCode;
+1621 
+1622    \textcolor{comment}{//Make sure the FTP client context is valid}
+1623    \textcolor{keywordflow}{if}(context != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1624    \{
+1625       \textcolor{comment}{//Get server's reply code}
+1626       replyCode = context->replyCode;
+1627    \}
+1628    \textcolor{keywordflow}{else}
+1629    \{
+1630       \textcolor{comment}{//The FTP client context is not valid}
+1631       replyCode = 0;
+1632    \}
+1633 
+1634    \textcolor{comment}{//Return FTP reply code}
+1635    \textcolor{keywordflow}{return} replyCode;
+1636 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ftp__client_8c_a3082050dec2e065796d03b01a88f59c7}\label{ftp__client_8c_a3082050dec2e065796d03b01a88f59c7}} 
+\index{ftp\+\_\+client.\+c@{ftp\+\_\+client.\+c}!ftp\+Client\+Get\+Working\+Dir@{ftp\+Client\+Get\+Working\+Dir}}
+\index{ftp\+Client\+Get\+Working\+Dir@{ftp\+Client\+Get\+Working\+Dir}!ftp\+\_\+client.\+c@{ftp\+\_\+client.\+c}}
+\subsubsection{\texorpdfstring{ftp\+Client\+Get\+Working\+Dir()}{ftpClientGetWorkingDir()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ftp\+Client\+Get\+Working\+Dir (\begin{DoxyParamCaption}\item[{\hyperlink{ftp__client_8h_a416e53a7e79ecd46ffcbeb50db323252}{Ftp\+Client\+Context} $\ast$}]{context,  }\item[{\hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{path,  }\item[{size\+\_\+t}]{max\+Len }\end{DoxyParamCaption})}
+
+
+
+Get current working directory. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the F\+TP client context \\
+\hline
+\mbox{\tt out}  & {\em path} & Output buffer where to store the current directory \\
+\hline
+\mbox{\tt in}  & {\em max\+Len} & Maximum number of characters the buffer can hold \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 543 of file ftp\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+545 \{
+546    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+547 
+548    \textcolor{comment}{//Check parameters}
+549    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || path == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+550       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+551 
+552    \textcolor{comment}{//Initialize status code}
+553    error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+554 
+555    \textcolor{comment}{//Execute FTP command}
+556    \textcolor{keywordflow}{while}(!error)
+557    \{
+558       \textcolor{comment}{//Check current state}
+559       \textcolor{keywordflow}{if}(context->state == \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fa3174f58da917af93a38b144a1e0d2527}{FTP\_CLIENT\_STATE\_CONNECTED})
+560       \{
+561          \textcolor{comment}{//Format PWD command}
+562          error = \hyperlink{ftp__client__misc_8c_a76c2f71fc8ddb8c7f14b5b7d14ab3437}{ftpClientFormatCommand}(context, \textcolor{stringliteral}{"PWD"}, 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+563 
+564          \textcolor{comment}{//Check status code}
+565          \textcolor{keywordflow}{if}(!error)
+566          \{
+567             \textcolor{comment}{//Send PWD command and wait for the server's response}
+568             \hyperlink{ftp__client__misc_8c_ac32e3c219bd538aae5fd6f92002db7c9}{ftpClientChangeState}(context, 
+      \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fad41efafde5188577bede053e2d80eb97}{FTP\_CLIENT\_STATE\_SUB\_COMMAND\_1});
+569          \}
+570       \}
+571       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->state == \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fad41efafde5188577bede053e2d80eb97}{FTP\_CLIENT\_STATE\_SUB\_COMMAND\_1})
+572       \{
+573          \textcolor{comment}{//Send PWD command and wait for the server's response}
+574          error = \hyperlink{ftp__client__misc_8c_a649a89ff88deef2eeb980a4265da37f7}{ftpClientSendCommand}(context);
+575 
+576          \textcolor{comment}{//Check status code}
+577          \textcolor{keywordflow}{if}(!error)
+578          \{
+579             \textcolor{comment}{//Check FTP response code}
+580             \textcolor{keywordflow}{if}(\hyperlink{ftp__client_8h_a8af0e6630256513516df045fb43012e7}{FTP\_REPLY\_CODE\_2YZ}(context->replyCode))
+581             \{
+582                \textcolor{comment}{//Parse server's response}
+583                error = \hyperlink{ftp__client__misc_8c_a56a1ac3a81b06fcb5ff851ea80cb5a6d}{ftpClientParsePwdReply}(context, path, maxLen);
+584             \}
+585             \textcolor{keywordflow}{else}
+586             \{
+587                \textcolor{comment}{//Report an error}
+588                error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caa71f5ec9e991d033d622bd5fb6f6633f}{ERROR\_UNEXPECTED\_RESPONSE};
+589             \}
+590 
+591             \textcolor{comment}{//Update FTP client state}
+592             \hyperlink{ftp__client__misc_8c_ac32e3c219bd538aae5fd6f92002db7c9}{ftpClientChangeState}(context, 
+      \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fa3174f58da917af93a38b144a1e0d2527}{FTP\_CLIENT\_STATE\_CONNECTED});
+593             \textcolor{comment}{//We are done}
+594             \textcolor{keywordflow}{break};
+595          \}
+596       \}
+597       \textcolor{keywordflow}{else}
+598       \{
+599          \textcolor{comment}{//Invalid state}
+600          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac3190fa1f36c6acf147c7ce453a655e2}{ERROR\_WRONG\_STATE};
+601       \}
+602    \}
+603 
+604    \textcolor{comment}{//Check status code}
+605    \textcolor{keywordflow}{if}(error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca16f356a669fbb42deb27f59e9054f6d6}{ERROR\_WOULD\_BLOCK} || error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4d0f7be53b837f004379ac6bbd56f1e2}{ERROR\_TIMEOUT})
+606    \{
+607       \textcolor{comment}{//Check whether the timeout has elapsed}
+608       error = \hyperlink{ftp__client__misc_8c_ae6a4a166626630754fdeae2b17e611de}{ftpClientCheckTimeout}(context);
+609    \}
+610 
+611    \textcolor{comment}{//Return status code}
+612    \textcolor{keywordflow}{return} error;
+613 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ftp__client_8c_a85a2c2a2619a1b35b3551351157a0d98}\label{ftp__client_8c_a85a2c2a2619a1b35b3551351157a0d98}} 
+\index{ftp\+\_\+client.\+c@{ftp\+\_\+client.\+c}!ftp\+Client\+Init@{ftp\+Client\+Init}}
+\index{ftp\+Client\+Init@{ftp\+Client\+Init}!ftp\+\_\+client.\+c@{ftp\+\_\+client.\+c}}
+\subsubsection{\texorpdfstring{ftp\+Client\+Init()}{ftpClientInit()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ftp\+Client\+Init (\begin{DoxyParamCaption}\item[{\hyperlink{ftp__client_8h_a416e53a7e79ecd46ffcbeb50db323252}{Ftp\+Client\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Initialize F\+TP client context. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the F\+TP client context \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 62 of file ftp\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+63 \{
+64 \textcolor{preprocessor}{#if (FTP\_CLIENT\_TLS\_SUPPORT == ENABLED)}
+65    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+66 \textcolor{preprocessor}{#endif}
+67 
+68    \textcolor{comment}{//Make sure the FTP client context is valid}
+69    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+70       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+71 
+72    \textcolor{comment}{//Clear FTP client context}
+73    memset(context, 0, \textcolor{keyword}{sizeof}(\hyperlink{ftp__client_8h_a416e53a7e79ecd46ffcbeb50db323252}{FtpClientContext}));
+74 
+75 \textcolor{preprocessor}{#if (FTP\_CLIENT\_TLS\_SUPPORT == ENABLED)}
+76    \textcolor{comment}{//Initialize TLS session state}
+77    error = \hyperlink{tls_8c_aea7b98b4b876fe45322df04583f7c1b4}{tlsInitSessionState}(&context->tlsSession);
+78    \textcolor{comment}{//Any error to report?}
+79    \textcolor{keywordflow}{if}(error)
+80       \textcolor{keywordflow}{return} error;
+81 \textcolor{preprocessor}{#endif}
+82 
+83    \textcolor{comment}{//Initialize FTP client state}
+84    context->state = \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fafc86c0744a7900040e83f9aed1bbd5b7}{FTP\_CLIENT\_STATE\_DISCONNECTED};
+85    \textcolor{comment}{//Default timeout}
+86    context->timeout = \hyperlink{ftp__client_8h_a9ba740145e05b89a8293a6c786dc7968}{FTP\_CLIENT\_DEFAULT\_TIMEOUT};
+87 
+88    \textcolor{comment}{//Successful initialization}
+89    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+90 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ftp__client_8c_a1808b5fe70ee40165f066d46a8136340}\label{ftp__client_8c_a1808b5fe70ee40165f066d46a8136340}} 
+\index{ftp\+\_\+client.\+c@{ftp\+\_\+client.\+c}!ftp\+Client\+Login@{ftp\+Client\+Login}}
+\index{ftp\+Client\+Login@{ftp\+Client\+Login}!ftp\+\_\+client.\+c@{ftp\+\_\+client.\+c}}
+\subsubsection{\texorpdfstring{ftp\+Client\+Login()}{ftpClientLogin()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ftp\+Client\+Login (\begin{DoxyParamCaption}\item[{\hyperlink{ftp__client_8h_a416e53a7e79ecd46ffcbeb50db323252}{Ftp\+Client\+Context} $\ast$}]{context,  }\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{username,  }\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{password }\end{DoxyParamCaption})}
+
+
+
+Login to the F\+TP server using the provided user name and password. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the F\+TP client context \\
+\hline
+\mbox{\tt in}  & {\em username} & N\+U\+L\+L-\/terminated string containing the user name \\
+\hline
+\mbox{\tt in}  & {\em password} & N\+U\+L\+L-\/terminated string containing the user\textquotesingle{}s password \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 376 of file ftp\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+378 \{
+379    \textcolor{comment}{//The USER, PASS and ACCT commands specify access control identifiers}
+380    \textcolor{keywordflow}{return} \hyperlink{ftp__client_8c_a48ae86d66cfe6a4b09d62fa258014562}{ftpClientLoginEx}(context, username, password, \textcolor{stringliteral}{""});
+381 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ftp__client_8c_a48ae86d66cfe6a4b09d62fa258014562}\label{ftp__client_8c_a48ae86d66cfe6a4b09d62fa258014562}} 
+\index{ftp\+\_\+client.\+c@{ftp\+\_\+client.\+c}!ftp\+Client\+Login\+Ex@{ftp\+Client\+Login\+Ex}}
+\index{ftp\+Client\+Login\+Ex@{ftp\+Client\+Login\+Ex}!ftp\+\_\+client.\+c@{ftp\+\_\+client.\+c}}
+\subsubsection{\texorpdfstring{ftp\+Client\+Login\+Ex()}{ftpClientLoginEx()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ftp\+Client\+Login\+Ex (\begin{DoxyParamCaption}\item[{\hyperlink{ftp__client_8h_a416e53a7e79ecd46ffcbeb50db323252}{Ftp\+Client\+Context} $\ast$}]{context,  }\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{username,  }\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{password,  }\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{account }\end{DoxyParamCaption})}
+
+
+
+Login to the F\+TP server using user name, password and account. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the F\+TP client context \\
+\hline
+\mbox{\tt in}  & {\em username} & N\+U\+L\+L-\/terminated string containing the user name \\
+\hline
+\mbox{\tt in}  & {\em password} & N\+U\+L\+L-\/terminated string containing the user\textquotesingle{}s password \\
+\hline
+\mbox{\tt in}  & {\em account} & N\+U\+L\+L-\/terminated string containing the user\textquotesingle{}s account \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 393 of file ftp\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+395 \{
+396    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+397 
+398    \textcolor{comment}{//Check parameters}
+399    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || username == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || password == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || account == 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+400       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+401 
+402    \textcolor{comment}{//Initialize status code}
+403    error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+404 
+405    \textcolor{comment}{//Execute FTP command sequence}
+406    \textcolor{keywordflow}{while}(!error)
+407    \{
+408       \textcolor{comment}{//Check current state}
+409       \textcolor{keywordflow}{if}(context->state == \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fa3174f58da917af93a38b144a1e0d2527}{FTP\_CLIENT\_STATE\_CONNECTED})
+410       \{
+411          \textcolor{comment}{//Format USER command}
+412          error = \hyperlink{ftp__client__misc_8c_a76c2f71fc8ddb8c7f14b5b7d14ab3437}{ftpClientFormatCommand}(context, \textcolor{stringliteral}{"USER"}, username);
+413 
+414          \textcolor{comment}{//Check status code}
+415          \textcolor{keywordflow}{if}(!error)
+416          \{
+417             \textcolor{comment}{//Send USER command and wait for the server's response}
+418             \hyperlink{ftp__client__misc_8c_ac32e3c219bd538aae5fd6f92002db7c9}{ftpClientChangeState}(context, 
+      \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fad41efafde5188577bede053e2d80eb97}{FTP\_CLIENT\_STATE\_SUB\_COMMAND\_1});
+419          \}
+420       \}
+421       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->state == \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fad41efafde5188577bede053e2d80eb97}{FTP\_CLIENT\_STATE\_SUB\_COMMAND\_1})
+422       \{
+423          \textcolor{comment}{//Send USER command and wait for the server's response}
+424          error = \hyperlink{ftp__client__misc_8c_a649a89ff88deef2eeb980a4265da37f7}{ftpClientSendCommand}(context);
+425 
+426          \textcolor{comment}{//Check status code}
+427          \textcolor{keywordflow}{if}(!error)
+428          \{
+429             \textcolor{comment}{//Check FTP response code}
+430             \textcolor{keywordflow}{if}(\hyperlink{ftp__client_8h_a8af0e6630256513516df045fb43012e7}{FTP\_REPLY\_CODE\_2YZ}(context->replyCode))
+431             \{
+432                \textcolor{comment}{//Update FTP client state}
+433                \hyperlink{ftp__client__misc_8c_ac32e3c219bd538aae5fd6f92002db7c9}{ftpClientChangeState}(context, 
+      \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fa3174f58da917af93a38b144a1e0d2527}{FTP\_CLIENT\_STATE\_CONNECTED});
+434                \textcolor{comment}{//Successful user identification}
+435                \textcolor{keywordflow}{break};
+436             \}
+437             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(\hyperlink{ftp__client_8h_a24e94924aa59a549b083b79662d84a84}{FTP\_REPLY\_CODE\_3YZ}(context->replyCode))
+438             \{
+439                \textcolor{comment}{//Format PASS command}
+440                error = \hyperlink{ftp__client__misc_8c_a76c2f71fc8ddb8c7f14b5b7d14ab3437}{ftpClientFormatCommand}(context, \textcolor{stringliteral}{"PASS"}, password);
+441 
+442                \textcolor{comment}{//Check status code}
+443                \textcolor{keywordflow}{if}(!error)
+444                \{
+445                   \textcolor{comment}{//Send PASS command and wait for the server's response}
+446                   \hyperlink{ftp__client__misc_8c_ac32e3c219bd538aae5fd6f92002db7c9}{ftpClientChangeState}(context, 
+      \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fa2e4d355339e5c264d559e05a9ebcdfe4}{FTP\_CLIENT\_STATE\_SUB\_COMMAND\_2});
+447                \}
+448             \}
+449             \textcolor{keywordflow}{else}
+450             \{
+451                \textcolor{comment}{//Update FTP client state}
+452                \hyperlink{ftp__client__misc_8c_ac32e3c219bd538aae5fd6f92002db7c9}{ftpClientChangeState}(context, 
+      \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fa3174f58da917af93a38b144a1e0d2527}{FTP\_CLIENT\_STATE\_CONNECTED});
+453                \textcolor{comment}{//Report an error}
+454                error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caa71f5ec9e991d033d622bd5fb6f6633f}{ERROR\_UNEXPECTED\_RESPONSE};
+455             \}
+456          \}
+457       \}
+458       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->state == \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fa2e4d355339e5c264d559e05a9ebcdfe4}{FTP\_CLIENT\_STATE\_SUB\_COMMAND\_2})
+459       \{
+460          \textcolor{comment}{//Send PASS command and wait for the server's response}
+461          error = \hyperlink{ftp__client__misc_8c_a649a89ff88deef2eeb980a4265da37f7}{ftpClientSendCommand}(context);
+462 
+463          \textcolor{comment}{//Check status code}
+464          \textcolor{keywordflow}{if}(!error)
+465          \{
+466             \textcolor{comment}{//Check FTP response code}
+467             \textcolor{keywordflow}{if}(\hyperlink{ftp__client_8h_a8af0e6630256513516df045fb43012e7}{FTP\_REPLY\_CODE\_2YZ}(context->replyCode))
+468             \{
+469                \textcolor{comment}{//Update FTP client state}
+470                \hyperlink{ftp__client__misc_8c_ac32e3c219bd538aae5fd6f92002db7c9}{ftpClientChangeState}(context, 
+      \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fa3174f58da917af93a38b144a1e0d2527}{FTP\_CLIENT\_STATE\_CONNECTED});
+471                \textcolor{comment}{//Successful user identification}
+472                \textcolor{keywordflow}{break};
+473             \}
+474             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(\hyperlink{ftp__client_8h_a24e94924aa59a549b083b79662d84a84}{FTP\_REPLY\_CODE\_3YZ}(context->replyCode))
+475             \{
+476                \textcolor{comment}{//Format ACCT command}
+477                error = \hyperlink{ftp__client__misc_8c_a76c2f71fc8ddb8c7f14b5b7d14ab3437}{ftpClientFormatCommand}(context, \textcolor{stringliteral}{"ACCT"}, account);
+478 
+479                \textcolor{comment}{//Check status code}
+480                \textcolor{keywordflow}{if}(!error)
+481                \{
+482                   \textcolor{comment}{//Send ACCT command and wait for the server's response}
+483                   \hyperlink{ftp__client__misc_8c_ac32e3c219bd538aae5fd6f92002db7c9}{ftpClientChangeState}(context, 
+      \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fa1806c8b99d233854c982c58e1585004e}{FTP\_CLIENT\_STATE\_SUB\_COMMAND\_3});
+484                \}
+485             \}
+486             \textcolor{keywordflow}{else}
+487             \{
+488                \textcolor{comment}{//Update FTP client state}
+489                \hyperlink{ftp__client__misc_8c_ac32e3c219bd538aae5fd6f92002db7c9}{ftpClientChangeState}(context, 
+      \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fa3174f58da917af93a38b144a1e0d2527}{FTP\_CLIENT\_STATE\_CONNECTED});
+490                \textcolor{comment}{//Report an error}
+491                error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caa71f5ec9e991d033d622bd5fb6f6633f}{ERROR\_UNEXPECTED\_RESPONSE};
+492             \}
+493          \}
+494       \}
+495       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->state == \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fa1806c8b99d233854c982c58e1585004e}{FTP\_CLIENT\_STATE\_SUB\_COMMAND\_3})
+496       \{
+497          \textcolor{comment}{//Send ACCT command and wait for the server's response}
+498          error = \hyperlink{ftp__client__misc_8c_a649a89ff88deef2eeb980a4265da37f7}{ftpClientSendCommand}(context);
+499 
+500          \textcolor{comment}{//Check status code}
+501          \textcolor{keywordflow}{if}(!error)
+502          \{
+503             \textcolor{comment}{//Check FTP response code}
+504             \textcolor{keywordflow}{if}(!\hyperlink{ftp__client_8h_a8af0e6630256513516df045fb43012e7}{FTP\_REPLY\_CODE\_2YZ}(context->replyCode))
+505             \{
+506                \textcolor{comment}{//Report an error}
+507                error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caa71f5ec9e991d033d622bd5fb6f6633f}{ERROR\_UNEXPECTED\_RESPONSE};
+508             \}
+509 
+510             \textcolor{comment}{//Update FTP client state}
+511             \hyperlink{ftp__client__misc_8c_ac32e3c219bd538aae5fd6f92002db7c9}{ftpClientChangeState}(context, 
+      \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fa3174f58da917af93a38b144a1e0d2527}{FTP\_CLIENT\_STATE\_CONNECTED});
+512             \textcolor{comment}{//We are done}
+513             \textcolor{keywordflow}{break};
+514          \}
+515       \}
+516       \textcolor{keywordflow}{else}
+517       \{
+518          \textcolor{comment}{//Invalid state}
+519          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac3190fa1f36c6acf147c7ce453a655e2}{ERROR\_WRONG\_STATE};
+520       \}
+521    \}
+522 
+523    \textcolor{comment}{//Check status code}
+524    \textcolor{keywordflow}{if}(error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca16f356a669fbb42deb27f59e9054f6d6}{ERROR\_WOULD\_BLOCK} || error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4d0f7be53b837f004379ac6bbd56f1e2}{ERROR\_TIMEOUT})
+525    \{
+526       \textcolor{comment}{//Check whether the timeout has elapsed}
+527       error = \hyperlink{ftp__client__misc_8c_ae6a4a166626630754fdeae2b17e611de}{ftpClientCheckTimeout}(context);
+528    \}
+529 
+530    \textcolor{comment}{//Return status code}
+531    \textcolor{keywordflow}{return} error;
+532 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ftp__client_8c_ac36901bc961b2c93ea9b463d9fec7dd2}\label{ftp__client_8c_ac36901bc961b2c93ea9b463d9fec7dd2}} 
+\index{ftp\+\_\+client.\+c@{ftp\+\_\+client.\+c}!ftp\+Client\+Open\+Dir@{ftp\+Client\+Open\+Dir}}
+\index{ftp\+Client\+Open\+Dir@{ftp\+Client\+Open\+Dir}!ftp\+\_\+client.\+c@{ftp\+\_\+client.\+c}}
+\subsubsection{\texorpdfstring{ftp\+Client\+Open\+Dir()}{ftpClientOpenDir()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ftp\+Client\+Open\+Dir (\begin{DoxyParamCaption}\item[{\hyperlink{ftp__client_8h_a416e53a7e79ecd46ffcbeb50db323252}{Ftp\+Client\+Context} $\ast$}]{context,  }\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{path }\end{DoxyParamCaption})}
+
+
+
+Open a directory. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the F\+TP client context \\
+\hline
+\mbox{\tt in}  & {\em path} & Path to the directory to be be opened \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Directory handle 
+\end{DoxyReturn}
+
+
+Definition at line 771 of file ftp\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+772 \{
+773    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+774 
+775    \textcolor{comment}{//Check parameters}
+776    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || path == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+777       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+778 
+779    \textcolor{comment}{//Initialize status code}
+780    error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+781 
+782    \textcolor{comment}{//Execute FTP command sequence}
+783    \textcolor{keywordflow}{while}(!error)
+784    \{
+785       \textcolor{comment}{//Check current state}
+786       \textcolor{keywordflow}{if}(context->state == \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fa3174f58da917af93a38b144a1e0d2527}{FTP\_CLIENT\_STATE\_CONNECTED})
+787       \{
+788          \textcolor{comment}{//The data transfer is over the data connection in type ASCII or}
+789          \textcolor{comment}{//type EBCDIC (refer to RFC 959, section 4.1.3)}
+790          error = \hyperlink{ftp__client__misc_8c_a76c2f71fc8ddb8c7f14b5b7d14ab3437}{ftpClientFormatCommand}(context, \textcolor{stringliteral}{"TYPE"}, \textcolor{stringliteral}{"A"});
+791 
+792          \textcolor{comment}{//Check status code}
+793          \textcolor{keywordflow}{if}(!error)
+794          \{
+795             \textcolor{comment}{//Send TYPE command and wait for the server's response}
+796             \hyperlink{ftp__client__misc_8c_ac32e3c219bd538aae5fd6f92002db7c9}{ftpClientChangeState}(context, 
+      \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fad41efafde5188577bede053e2d80eb97}{FTP\_CLIENT\_STATE\_SUB\_COMMAND\_1});
+797          \}
+798       \}
+799       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->state == \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fad41efafde5188577bede053e2d80eb97}{FTP\_CLIENT\_STATE\_SUB\_COMMAND\_1})
+800       \{
+801          \textcolor{comment}{//Send TYPE command and wait for the server's response}
+802          error = \hyperlink{ftp__client__misc_8c_a649a89ff88deef2eeb980a4265da37f7}{ftpClientSendCommand}(context);
+803 
+804          \textcolor{comment}{//Check status code}
+805          \textcolor{keywordflow}{if}(!error)
+806          \{
+807             \textcolor{comment}{//Check FTP response code}
+808             \textcolor{keywordflow}{if}(\hyperlink{ftp__client_8h_a8af0e6630256513516df045fb43012e7}{FTP\_REPLY\_CODE\_2YZ}(context->replyCode))
+809             \{
+810                \textcolor{comment}{//Update FTP client state}
+811                \hyperlink{ftp__client__misc_8c_ac32e3c219bd538aae5fd6f92002db7c9}{ftpClientChangeState}(context, 
+      \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fa2e4d355339e5c264d559e05a9ebcdfe4}{FTP\_CLIENT\_STATE\_SUB\_COMMAND\_2});
+812             \}
+813             \textcolor{keywordflow}{else}
+814             \{
+815                \textcolor{comment}{//Report an error}
+816                error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caa71f5ec9e991d033d622bd5fb6f6633f}{ERROR\_UNEXPECTED\_RESPONSE};
+817             \}
+818          \}
+819       \}
+820       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->state == \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fa2e4d355339e5c264d559e05a9ebcdfe4}{FTP\_CLIENT\_STATE\_SUB\_COMMAND\_2} ||
+821          context->state == \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fa1806c8b99d233854c982c58e1585004e}{FTP\_CLIENT\_STATE\_SUB\_COMMAND\_3} ||
+822          context->state == \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fa77a6285324fb149d8fe889bcf8ce3438}{FTP\_CLIENT\_STATE\_SUB\_COMMAND\_4} ||
+823          context->state == \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fa1fb8b7d6675ce730ecf86001251b4060}{FTP\_CLIENT\_STATE\_SUB\_COMMAND\_5} ||
+824          context->state == \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fa4beba177d9e600bd1876434ac2645f2c}{FTP\_CLIENT\_STATE\_SUB\_COMMAND\_6} ||
+825          context->state == \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fa24afa64a4115d1d4ca0ae9492c04de45}{FTP\_CLIENT\_STATE\_CONNECTING\_TCP} ||
+826          context->state == \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fa4f4457f5e04d4c3e70cfe9d835611669}{FTP\_CLIENT\_STATE\_SUB\_COMMAND\_8} ||
+827          context->state == \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32faf5f5133f943d08c1331ae055a612f2a7}{FTP\_CLIENT\_STATE\_ACCEPTING\_TCP} ||
+828          context->state == \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32faf3242b1228a16b3a667a094e462ab176}{FTP\_CLIENT\_STATE\_CONNECTING\_TLS})
+829       \{
+830          \textcolor{comment}{//Initiate data transfer}
+831          error = \hyperlink{ftp__client__misc_8c_a54b9ae93bd843cdaa71ddae086ca024a}{ftpClientInitDataTransfer}(context, 
+      \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE});
+832       \}
+833       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->state == \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fa166cfbe8775d76927440d0fa3cb12b39}{FTP\_CLIENT\_STATE\_SUB\_COMMAND\_7})
+834       \{
+835          \textcolor{comment}{//Format LIST command}
+836          \textcolor{keywordflow}{if}(!strcmp(path, \textcolor{stringliteral}{"."}))
+837             \hyperlink{ftp__client__misc_8c_a76c2f71fc8ddb8c7f14b5b7d14ab3437}{ftpClientFormatCommand}(context, \textcolor{stringliteral}{"LIST"}, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+838          \textcolor{keywordflow}{else}
+839             \hyperlink{ftp__client__misc_8c_a76c2f71fc8ddb8c7f14b5b7d14ab3437}{ftpClientFormatCommand}(context, \textcolor{stringliteral}{"LIST"}, path);
+840 
+841          \textcolor{comment}{//Check status code}
+842          \textcolor{keywordflow}{if}(!error)
+843          \{
+844             \textcolor{comment}{//Send LIST command and wait for the server's response}
+845             \hyperlink{ftp__client__misc_8c_ac32e3c219bd538aae5fd6f92002db7c9}{ftpClientChangeState}(context, 
+      \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fa4f4457f5e04d4c3e70cfe9d835611669}{FTP\_CLIENT\_STATE\_SUB\_COMMAND\_8});
+846          \}
+847       \}
+848       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->state == \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fa42bc805eaf83619710da7f5aee8a56e8}{FTP\_CLIENT\_STATE\_SUB\_COMMAND\_9})
+849       \{
+850          \textcolor{comment}{//Flush buffer}
+851          context->bufferPos = 0;
+852          context->commandLen = 0;
+853          context->replyLen = 0;
+854 
+855          \textcolor{comment}{//The content of the directory can be transferred via the data}
+856          \textcolor{comment}{//connection}
+857          \hyperlink{ftp__client__misc_8c_ac32e3c219bd538aae5fd6f92002db7c9}{ftpClientChangeState}(context, 
+      \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fa008316382d31e1f518b1f7f21f54ad91}{FTP\_CLIENT\_STATE\_READING\_DATA});
+858 
+859          \textcolor{comment}{//We are done}
+860          \textcolor{keywordflow}{break};
+861       \}
+862       \textcolor{keywordflow}{else}
+863       \{
+864          \textcolor{comment}{//Invalid state}
+865          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac3190fa1f36c6acf147c7ce453a655e2}{ERROR\_WRONG\_STATE};
+866       \}
+867    \}
+868 
+869    \textcolor{comment}{//Check status code}
+870    \textcolor{keywordflow}{if}(error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca16f356a669fbb42deb27f59e9054f6d6}{ERROR\_WOULD\_BLOCK} || error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4d0f7be53b837f004379ac6bbd56f1e2}{ERROR\_TIMEOUT})
+871    \{
+872       \textcolor{comment}{//Check whether the timeout has elapsed}
+873       error = \hyperlink{ftp__client__misc_8c_ae6a4a166626630754fdeae2b17e611de}{ftpClientCheckTimeout}(context);
+874    \}
+875 
+876    \textcolor{comment}{//Failed to open directory?}
+877    \textcolor{keywordflow}{if}(error != \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR} && error != \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca16f356a669fbb42deb27f59e9054f6d6}{ERROR\_WOULD\_BLOCK})
+878    \{
+879       \textcolor{comment}{//Close data connection}
+880       \hyperlink{ftp__client__transport_8c_afb29bfd2ee65af8f4526777355c3a171}{ftpClientCloseChannel}(&context->dataChannel);
+881       \textcolor{comment}{//Update FTP client state}
+882       \hyperlink{ftp__client__misc_8c_ac32e3c219bd538aae5fd6f92002db7c9}{ftpClientChangeState}(context, 
+      \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fa3174f58da917af93a38b144a1e0d2527}{FTP\_CLIENT\_STATE\_CONNECTED});
+883    \}
+884 
+885    \textcolor{comment}{//Return status code}
+886    \textcolor{keywordflow}{return} error;
+887 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ftp__client_8c_a4c515c6942f4bbd8c6c87fd8deab7fe0}\label{ftp__client_8c_a4c515c6942f4bbd8c6c87fd8deab7fe0}} 
+\index{ftp\+\_\+client.\+c@{ftp\+\_\+client.\+c}!ftp\+Client\+Open\+File@{ftp\+Client\+Open\+File}}
+\index{ftp\+Client\+Open\+File@{ftp\+Client\+Open\+File}!ftp\+\_\+client.\+c@{ftp\+\_\+client.\+c}}
+\subsubsection{\texorpdfstring{ftp\+Client\+Open\+File()}{ftpClientOpenFile()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ftp\+Client\+Open\+File (\begin{DoxyParamCaption}\item[{\hyperlink{ftp__client_8h_a416e53a7e79ecd46ffcbeb50db323252}{Ftp\+Client\+Context} $\ast$}]{context,  }\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{path,  }\item[{\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t}}]{mode }\end{DoxyParamCaption})}
+
+
+
+Open a file for reading, writing, or appending. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the F\+TP client context \\
+\hline
+\mbox{\tt in}  & {\em path} & Path to the file to be be opened \\
+\hline
+\mbox{\tt in}  & {\em mode} & File access mode \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 1159 of file ftp\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+1161 \{
+1162    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+1163 
+1164    \textcolor{comment}{//Check parameters}
+1165    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || path == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1166       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+1167 
+1168    \textcolor{comment}{//Initialize status code}
+1169    error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+1170 
+1171    \textcolor{comment}{//Execute FTP command sequence}
+1172    \textcolor{keywordflow}{while}(!error)
+1173    \{
+1174       \textcolor{comment}{//Check current state}
+1175       \textcolor{keywordflow}{if}(context->state == \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fa3174f58da917af93a38b144a1e0d2527}{FTP\_CLIENT\_STATE\_CONNECTED})
+1176       \{
+1177          \textcolor{comment}{//Set representation type}
+1178          \textcolor{keywordflow}{if}(\hyperlink{ntp__common_8h_a37e90f5e3bd99fac2021fb3a326607d4}{mode} & \hyperlink{ftp__client_8h_ae5ffca6b1a5b7eabcc3b237264d72e7fa3d056cb7c411235608dfb6803d5829ba}{FTP\_FILE\_MODE\_TEXT})
+1179          \{
+1180             \textcolor{comment}{//Use ASCII type}
+1181             error = \hyperlink{ftp__client__misc_8c_a76c2f71fc8ddb8c7f14b5b7d14ab3437}{ftpClientFormatCommand}(context, \textcolor{stringliteral}{"TYPE"}, \textcolor{stringliteral}{"A"});
+1182          \}
+1183          \textcolor{keywordflow}{else}
+1184          \{
+1185             \textcolor{comment}{//Use image type}
+1186             error = \hyperlink{ftp__client__misc_8c_a76c2f71fc8ddb8c7f14b5b7d14ab3437}{ftpClientFormatCommand}(context, \textcolor{stringliteral}{"TYPE"}, \textcolor{stringliteral}{"I"});
+1187          \}
+1188 
+1189          \textcolor{comment}{//Check status code}
+1190          \textcolor{keywordflow}{if}(!error)
+1191          \{
+1192             \textcolor{comment}{//Send TYPE command and wait for the server's response}
+1193             \hyperlink{ftp__client__misc_8c_ac32e3c219bd538aae5fd6f92002db7c9}{ftpClientChangeState}(context, 
+      \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fad41efafde5188577bede053e2d80eb97}{FTP\_CLIENT\_STATE\_SUB\_COMMAND\_1});
+1194          \}
+1195       \}
+1196       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->state == \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fad41efafde5188577bede053e2d80eb97}{FTP\_CLIENT\_STATE\_SUB\_COMMAND\_1})
+1197       \{
+1198          \textcolor{comment}{//Send TYPE command and wait for the server's response}
+1199          error = \hyperlink{ftp__client__misc_8c_a649a89ff88deef2eeb980a4265da37f7}{ftpClientSendCommand}(context);
+1200 
+1201          \textcolor{comment}{//Check status code}
+1202          \textcolor{keywordflow}{if}(!error)
+1203          \{
+1204             \textcolor{comment}{//Check FTP response code}
+1205             \textcolor{keywordflow}{if}(\hyperlink{ftp__client_8h_a8af0e6630256513516df045fb43012e7}{FTP\_REPLY\_CODE\_2YZ}(context->replyCode))
+1206             \{
+1207                \textcolor{comment}{//Update FTP client state}
+1208                \hyperlink{ftp__client__misc_8c_ac32e3c219bd538aae5fd6f92002db7c9}{ftpClientChangeState}(context, 
+      \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fa2e4d355339e5c264d559e05a9ebcdfe4}{FTP\_CLIENT\_STATE\_SUB\_COMMAND\_2});
+1209             \}
+1210             \textcolor{keywordflow}{else}
+1211             \{
+1212                \textcolor{comment}{//Report an error}
+1213                error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caa71f5ec9e991d033d622bd5fb6f6633f}{ERROR\_UNEXPECTED\_RESPONSE};
+1214             \}
+1215          \}
+1216       \}
+1217       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->state == \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fa2e4d355339e5c264d559e05a9ebcdfe4}{FTP\_CLIENT\_STATE\_SUB\_COMMAND\_2} ||
+1218          context->state == \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fa1806c8b99d233854c982c58e1585004e}{FTP\_CLIENT\_STATE\_SUB\_COMMAND\_3} ||
+1219          context->state == \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fa77a6285324fb149d8fe889bcf8ce3438}{FTP\_CLIENT\_STATE\_SUB\_COMMAND\_4} ||
+1220          context->state == \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fa1fb8b7d6675ce730ecf86001251b4060}{FTP\_CLIENT\_STATE\_SUB\_COMMAND\_5} ||
+1221          context->state == \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fa4beba177d9e600bd1876434ac2645f2c}{FTP\_CLIENT\_STATE\_SUB\_COMMAND\_6} ||
+1222          context->state == \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fa24afa64a4115d1d4ca0ae9492c04de45}{FTP\_CLIENT\_STATE\_CONNECTING\_TCP} ||
+1223          context->state == \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fa4f4457f5e04d4c3e70cfe9d835611669}{FTP\_CLIENT\_STATE\_SUB\_COMMAND\_8} ||
+1224          context->state == \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32faf5f5133f943d08c1331ae055a612f2a7}{FTP\_CLIENT\_STATE\_ACCEPTING\_TCP} ||
+1225          context->state == \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32faf3242b1228a16b3a667a094e462ab176}{FTP\_CLIENT\_STATE\_CONNECTING\_TLS})
+1226       \{
+1227          \textcolor{comment}{//Initiate data transfer}
+1228          \textcolor{keywordflow}{if}(\hyperlink{ntp__common_8h_a37e90f5e3bd99fac2021fb3a326607d4}{mode} & (\hyperlink{ftp__client_8h_ae5ffca6b1a5b7eabcc3b237264d72e7fae5323b2605cd3da653e5c2094a0245a7}{FTP\_FILE\_MODE\_WRITE} | 
+      \hyperlink{ftp__client_8h_ae5ffca6b1a5b7eabcc3b237264d72e7fa826f575cd00aa2df852ba94bc2487bf8}{FTP\_FILE\_MODE\_APPEND}))
+1229             error = \hyperlink{ftp__client__misc_8c_a54b9ae93bd843cdaa71ddae086ca024a}{ftpClientInitDataTransfer}(context, 
+      \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE});
+1230          \textcolor{keywordflow}{else}
+1231             error = \hyperlink{ftp__client__misc_8c_a54b9ae93bd843cdaa71ddae086ca024a}{ftpClientInitDataTransfer}(context, 
+      \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE});
+1232       \}
+1233       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->state == \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fa166cfbe8775d76927440d0fa3cb12b39}{FTP\_CLIENT\_STATE\_SUB\_COMMAND\_7})
+1234       \{
+1235          \textcolor{comment}{//Format STOR/APPE/RETR command}
+1236          \textcolor{keywordflow}{if}(\hyperlink{ntp__common_8h_a37e90f5e3bd99fac2021fb3a326607d4}{mode} & \hyperlink{ftp__client_8h_ae5ffca6b1a5b7eabcc3b237264d72e7fae5323b2605cd3da653e5c2094a0245a7}{FTP\_FILE\_MODE\_WRITE})
+1237             \hyperlink{ftp__client__misc_8c_a76c2f71fc8ddb8c7f14b5b7d14ab3437}{ftpClientFormatCommand}(context, \textcolor{stringliteral}{"STOR"}, path);
+1238          \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(\hyperlink{ntp__common_8h_a37e90f5e3bd99fac2021fb3a326607d4}{mode} & \hyperlink{ftp__client_8h_ae5ffca6b1a5b7eabcc3b237264d72e7fa826f575cd00aa2df852ba94bc2487bf8}{FTP\_FILE\_MODE\_APPEND})
+1239             \hyperlink{ftp__client__misc_8c_a76c2f71fc8ddb8c7f14b5b7d14ab3437}{ftpClientFormatCommand}(context, \textcolor{stringliteral}{"APPE"}, path);
+1240          \textcolor{keywordflow}{else}
+1241             \hyperlink{ftp__client__misc_8c_a76c2f71fc8ddb8c7f14b5b7d14ab3437}{ftpClientFormatCommand}(context, \textcolor{stringliteral}{"RETR"}, path);
+1242 
+1243          \textcolor{comment}{//Check status code}
+1244          \textcolor{keywordflow}{if}(!error)
+1245          \{
+1246             \textcolor{comment}{//Send STOR/APPE/RETR command and wait for the server's response}
+1247             \hyperlink{ftp__client__misc_8c_ac32e3c219bd538aae5fd6f92002db7c9}{ftpClientChangeState}(context, 
+      \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fa4f4457f5e04d4c3e70cfe9d835611669}{FTP\_CLIENT\_STATE\_SUB\_COMMAND\_8});
+1248          \}
+1249       \}
+1250       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->state == \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fa42bc805eaf83619710da7f5aee8a56e8}{FTP\_CLIENT\_STATE\_SUB\_COMMAND\_9})
+1251       \{
+1252          \textcolor{comment}{//Check data transfer direction}
+1253          \textcolor{keywordflow}{if}(\hyperlink{ntp__common_8h_a37e90f5e3bd99fac2021fb3a326607d4}{mode} & (FTP\_FILE\_MODE\_WRITE | FTP\_FILE\_MODE\_APPEND))
+1254          \{
+1255             \textcolor{comment}{//The content of the file can be written via the data connection}
+1256             \hyperlink{ftp__client__misc_8c_ac32e3c219bd538aae5fd6f92002db7c9}{ftpClientChangeState}(context, 
+      \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fa11d90c2ee78b510440317a3488c77741}{FTP\_CLIENT\_STATE\_WRITING\_DATA});
+1257          \}
+1258          \textcolor{keywordflow}{else}
+1259          \{
+1260             \textcolor{comment}{//The content of the file can be read via the data connection}
+1261             \hyperlink{ftp__client__misc_8c_ac32e3c219bd538aae5fd6f92002db7c9}{ftpClientChangeState}(context, 
+      \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fa008316382d31e1f518b1f7f21f54ad91}{FTP\_CLIENT\_STATE\_READING\_DATA});
+1262          \}
+1263 
+1264          \textcolor{comment}{//We are done}
+1265          \textcolor{keywordflow}{break};
+1266       \}
+1267       \textcolor{keywordflow}{else}
+1268       \{
+1269          \textcolor{comment}{//Invalid state}
+1270          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac3190fa1f36c6acf147c7ce453a655e2}{ERROR\_WRONG\_STATE};
+1271       \}
+1272    \}
+1273 
+1274    \textcolor{comment}{//Check status code}
+1275    \textcolor{keywordflow}{if}(error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca16f356a669fbb42deb27f59e9054f6d6}{ERROR\_WOULD\_BLOCK} || error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4d0f7be53b837f004379ac6bbd56f1e2}{ERROR\_TIMEOUT})
+1276    \{
+1277       \textcolor{comment}{//Check whether the timeout has elapsed}
+1278       error = \hyperlink{ftp__client__misc_8c_ae6a4a166626630754fdeae2b17e611de}{ftpClientCheckTimeout}(context);
+1279    \}
+1280 
+1281    \textcolor{comment}{//Failed to open file?}
+1282    \textcolor{keywordflow}{if}(error != \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR} && error != \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca16f356a669fbb42deb27f59e9054f6d6}{ERROR\_WOULD\_BLOCK})
+1283    \{
+1284       \textcolor{comment}{//Close data connection}
+1285       \hyperlink{ftp__client__transport_8c_afb29bfd2ee65af8f4526777355c3a171}{ftpClientCloseChannel}(&context->dataChannel);
+1286       \textcolor{comment}{//Update FTP client state}
+1287       \hyperlink{ftp__client__misc_8c_ac32e3c219bd538aae5fd6f92002db7c9}{ftpClientChangeState}(context, 
+      \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fa3174f58da917af93a38b144a1e0d2527}{FTP\_CLIENT\_STATE\_CONNECTED});
+1288    \}
+1289 
+1290    \textcolor{comment}{//Return status code}
+1291    \textcolor{keywordflow}{return} error;
+1292 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ftp__client_8c_a65a48a16339c4a3fd8b7f581d14227b1}\label{ftp__client_8c_a65a48a16339c4a3fd8b7f581d14227b1}} 
+\index{ftp\+\_\+client.\+c@{ftp\+\_\+client.\+c}!ftp\+Client\+Read\+Dir@{ftp\+Client\+Read\+Dir}}
+\index{ftp\+Client\+Read\+Dir@{ftp\+Client\+Read\+Dir}!ftp\+\_\+client.\+c@{ftp\+\_\+client.\+c}}
+\subsubsection{\texorpdfstring{ftp\+Client\+Read\+Dir()}{ftpClientReadDir()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ftp\+Client\+Read\+Dir (\begin{DoxyParamCaption}\item[{\hyperlink{ftp__client_8h_a416e53a7e79ecd46ffcbeb50db323252}{Ftp\+Client\+Context} $\ast$}]{context,  }\item[{\hyperlink{structFtpDirEntry}{Ftp\+Dir\+Entry} $\ast$}]{dir\+Entry }\end{DoxyParamCaption})}
+
+
+
+Read an entry from the directory. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the F\+TP client context \\
+\hline
+\mbox{\tt out}  & {\em dir\+Entry} & Pointer to a directory entry \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 897 of file ftp\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+898 \{
+899    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+900    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+901 
+902    \textcolor{comment}{//Check parameters}
+903    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || dirEntry == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+904       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+905 
+906    \textcolor{comment}{//Initialize status code}
+907    error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+908 
+909    \textcolor{comment}{//Erase the contents of the entry}
+910    memset(dirEntry, 0, \textcolor{keyword}{sizeof}(\hyperlink{structFtpDirEntry}{FtpDirEntry}));
+911 
+912    \textcolor{comment}{//Check current state}
+913    \textcolor{keywordflow}{if}(context->state == \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fa008316382d31e1f518b1f7f21f54ad91}{FTP\_CLIENT\_STATE\_READING\_DATA})
+914    \{
+915       \textcolor{comment}{//Loop through directory entries}
+916       \textcolor{keywordflow}{while}(!error)
+917       \{
+918          \textcolor{comment}{//Determine whether more data should be collected}
+919          \textcolor{keywordflow}{if}(context->replyLen < (\hyperlink{ftp__client_8h_a686faf7a79b419726b351d164f0f14c4}{FTP\_CLIENT\_BUFFER\_SIZE} - 1))
+920          \{
+921             \textcolor{comment}{//Receive data from the FTP server}
+922             error = \hyperlink{ftp__client__transport_8c_ab044b2eba7eac515c754805151d24176}{ftpClientReadChannel}(&context->dataChannel,
+923                context->buffer + context->replyLen,
+924                \hyperlink{ftp__client_8h_a686faf7a79b419726b351d164f0f14c4}{FTP\_CLIENT\_BUFFER\_SIZE} - 1 - context->replyLen,
+925                &n, \hyperlink{socket_8h_a36c1d45d435e2f0ebe609c31d0c2da16a8a9906d4aacdf7dd4b7203c86271006b}{SOCKET\_FLAG\_BREAK\_CRLF});
+926 
+927             \textcolor{comment}{//Check status code}
+928             \textcolor{keywordflow}{if}(error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR})
+929             \{
+930                \textcolor{comment}{//Advance data pointer}
+931                context->replyLen += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+932 
+933                \textcolor{comment}{//Check whether the string is terminated by a CRLF sequence}
+934                \textcolor{keywordflow}{if}(context->replyLen != 0 &&
+935                   context->buffer[context->replyLen - 1] == \textcolor{charliteral}{'\(\backslash\)n'})
+936                \{
+937                   \textcolor{comment}{//Save current time}
+938                   context->timestamp = \hyperlink{os__port__chibios_8c_ab66a11272d40a916fa69dd8e4dc443d4}{osGetSystemTime}();
+939 
+940                   \textcolor{comment}{//Properly terminate the string with a NULL character}
+941                   context->buffer[context->replyLen] = \textcolor{charliteral}{'\(\backslash\)0'};
+942                   \textcolor{comment}{//Flush buffer}
+943                   context->replyLen = 0;
+944 
+945                   \textcolor{comment}{//Remove trailing whitespace characters}
+946                   \hyperlink{str_8c_a213a401a08b4083cbddd0fb4673ba430}{strRemoveTrailingSpace}(context->buffer);
+947 
+948                   \textcolor{comment}{//Discard empty lines}
+949                   \textcolor{keywordflow}{if}(context->buffer[0] != \textcolor{charliteral}{'\(\backslash\)0'})
+950                   \{
+951                      \textcolor{comment}{//Parse current directory entry}
+952                      error = \hyperlink{ftp__client__misc_8c_a1a1d50512c554596deefde727b660c19}{ftpClientParseDirEntry}(context->buffer, dirEntry);
+953                      \textcolor{comment}{//We are done}
+954                      \textcolor{keywordflow}{break};
+955                   \}
+956                \}
+957             \}
+958             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca16f356a669fbb42deb27f59e9054f6d6}{ERROR\_WOULD\_BLOCK} || error == 
+      \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4d0f7be53b837f004379ac6bbd56f1e2}{ERROR\_TIMEOUT})
+959             \{
+960                \textcolor{comment}{//Check whether the timeout has elapsed}
+961                error = \hyperlink{ftp__client__misc_8c_ae6a4a166626630754fdeae2b17e611de}{ftpClientCheckTimeout}(context);
+962             \}
+963             \textcolor{keywordflow}{else}
+964             \{
+965                \textcolor{comment}{//Communication error}
+966             \}
+967          \}
+968          \textcolor{keywordflow}{else}
+969          \{
+970             \textcolor{comment}{//Flush buffer}
+971             context->replyLen = 0;
+972          \}
+973       \}
+974    \}
+975    \textcolor{keywordflow}{else}
+976    \{
+977       \textcolor{comment}{//Invalid state}
+978       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac3190fa1f36c6acf147c7ce453a655e2}{ERROR\_WRONG\_STATE};
+979    \}
+980 
+981    \textcolor{comment}{//Return status code}
+982    \textcolor{keywordflow}{return} error;
+983 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ftp__client_8c_a413a9e377e2c482a577d7e3a4d43dc98}\label{ftp__client_8c_a413a9e377e2c482a577d7e3a4d43dc98}} 
+\index{ftp\+\_\+client.\+c@{ftp\+\_\+client.\+c}!ftp\+Client\+Read\+File@{ftp\+Client\+Read\+File}}
+\index{ftp\+Client\+Read\+File@{ftp\+Client\+Read\+File}!ftp\+\_\+client.\+c@{ftp\+\_\+client.\+c}}
+\subsubsection{\texorpdfstring{ftp\+Client\+Read\+File()}{ftpClientReadFile()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ftp\+Client\+Read\+File (\begin{DoxyParamCaption}\item[{\hyperlink{ftp__client_8h_a416e53a7e79ecd46ffcbeb50db323252}{Ftp\+Client\+Context} $\ast$}]{context,  }\item[{void $\ast$}]{data,  }\item[{size\+\_\+t}]{size,  }\item[{size\+\_\+t $\ast$}]{received,  }\item[{\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t}}]{flags }\end{DoxyParamCaption})}
+
+
+
+Read from a remote file. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the F\+TP client context \\
+\hline
+\mbox{\tt out}  & {\em data} & Buffer where to store the incoming data \\
+\hline
+\mbox{\tt in}  & {\em size} & Maximum number of bytes that can be read \\
+\hline
+\mbox{\tt out}  & {\em received} & Actual number of bytes that have been read \\
+\hline
+\mbox{\tt in}  & {\em flags} & Set of flags that influences the behavior of this function \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 1372 of file ftp\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+1374 \{
+1375    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+1376 
+1377    \textcolor{comment}{//Check parameters}
+1378    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data} == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || received == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1379       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+1380 
+1381    \textcolor{comment}{//Check current state}
+1382    \textcolor{keywordflow}{if}(context->state == \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fa008316382d31e1f518b1f7f21f54ad91}{FTP\_CLIENT\_STATE\_READING\_DATA})
+1383    \{
+1384       \textcolor{comment}{//Receive data from the FTP server}
+1385       error = \hyperlink{ftp__client__transport_8c_ab044b2eba7eac515c754805151d24176}{ftpClientReadChannel}(&context->dataChannel, 
+      \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, size,
+1386          received, \hyperlink{tcp_8h_aa2585d779da0ab21273a8d92de9a0ebe}{flags});
+1387 
+1388       \textcolor{comment}{//Check status code}
+1389       \textcolor{keywordflow}{if}(error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR})
+1390       \{
+1391          \textcolor{comment}{//Save current time}
+1392          context->timestamp = \hyperlink{os__port__chibios_8c_ab66a11272d40a916fa69dd8e4dc443d4}{osGetSystemTime}();
+1393       \}
+1394       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca16f356a669fbb42deb27f59e9054f6d6}{ERROR\_WOULD\_BLOCK} || error == 
+      \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4d0f7be53b837f004379ac6bbd56f1e2}{ERROR\_TIMEOUT})
+1395       \{
+1396          \textcolor{comment}{//Check whether the timeout has elapsed}
+1397          error = \hyperlink{ftp__client__misc_8c_ae6a4a166626630754fdeae2b17e611de}{ftpClientCheckTimeout}(context);
+1398       \}
+1399       \textcolor{keywordflow}{else}
+1400       \{
+1401          \textcolor{comment}{//Communication error}
+1402       \}
+1403    \}
+1404    \textcolor{keywordflow}{else}
+1405    \{
+1406       \textcolor{comment}{//Invalid state}
+1407       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac3190fa1f36c6acf147c7ce453a655e2}{ERROR\_WRONG\_STATE};
+1408    \}
+1409 
+1410    \textcolor{comment}{//Return status code}
+1411    \textcolor{keywordflow}{return} error;
+1412 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ftp__client_8c_a29bf1ab09a3a897e6ffbe58345dac933}\label{ftp__client_8c_a29bf1ab09a3a897e6ffbe58345dac933}} 
+\index{ftp\+\_\+client.\+c@{ftp\+\_\+client.\+c}!ftp\+Client\+Register\+Tls\+Init\+Callback@{ftp\+Client\+Register\+Tls\+Init\+Callback}}
+\index{ftp\+Client\+Register\+Tls\+Init\+Callback@{ftp\+Client\+Register\+Tls\+Init\+Callback}!ftp\+\_\+client.\+c@{ftp\+\_\+client.\+c}}
+\subsubsection{\texorpdfstring{ftp\+Client\+Register\+Tls\+Init\+Callback()}{ftpClientRegisterTlsInitCallback()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ftp\+Client\+Register\+Tls\+Init\+Callback (\begin{DoxyParamCaption}\item[{\hyperlink{ftp__client_8h_a416e53a7e79ecd46ffcbeb50db323252}{Ftp\+Client\+Context} $\ast$}]{context,  }\item[{\hyperlink{ftp__client_8h_ad03bcd2ffc64881b3f7c0aaa09b14535}{Ftp\+Client\+Tls\+Init\+Callback}}]{callback }\end{DoxyParamCaption})}
+
+
+
+Register T\+LS initialization callback function. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the F\+TP client context \\
+\hline
+\mbox{\tt in}  & {\em callback} & T\+LS initialization callback function \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 102 of file ftp\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+104 \{
+105    \textcolor{comment}{//Check parameters}
+106    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || callback == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+107       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+108 
+109    \textcolor{comment}{//Save callback function}
+110    context->tlsInitCallback = callback;
+111 
+112    \textcolor{comment}{//Successful processing}
+113    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+114 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ftp__client_8c_af11db8e1982ffa9a056b6fd9f09b8c72}\label{ftp__client_8c_af11db8e1982ffa9a056b6fd9f09b8c72}} 
+\index{ftp\+\_\+client.\+c@{ftp\+\_\+client.\+c}!ftp\+Client\+Rename\+File@{ftp\+Client\+Rename\+File}}
+\index{ftp\+Client\+Rename\+File@{ftp\+Client\+Rename\+File}!ftp\+\_\+client.\+c@{ftp\+\_\+client.\+c}}
+\subsubsection{\texorpdfstring{ftp\+Client\+Rename\+File()}{ftpClientRenameFile()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ftp\+Client\+Rename\+File (\begin{DoxyParamCaption}\item[{\hyperlink{ftp__client_8h_a416e53a7e79ecd46ffcbeb50db323252}{Ftp\+Client\+Context} $\ast$}]{context,  }\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{old\+Path,  }\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{new\+Path }\end{DoxyParamCaption})}
+
+
+
+Rename a file. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the F\+TP client context \\
+\hline
+\mbox{\tt in}  & {\em old\+Path} & Name of an existing file or directory \\
+\hline
+\mbox{\tt in}  & {\em new\+Path} & New name for the file or directory \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 1440 of file ftp\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+1442 \{
+1443    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+1444 
+1445    \textcolor{comment}{//Check parameters}
+1446    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || oldPath == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || newPath == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1447       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+1448 
+1449    \textcolor{comment}{//Initialize status code}
+1450    error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+1451 
+1452    \textcolor{comment}{//Execute FTP command sequence}
+1453    \textcolor{keywordflow}{while}(!error)
+1454    \{
+1455       \textcolor{comment}{//Check current state}
+1456       \textcolor{keywordflow}{if}(context->state == \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fa3174f58da917af93a38b144a1e0d2527}{FTP\_CLIENT\_STATE\_CONNECTED})
+1457       \{
+1458          \textcolor{comment}{//Format RNFR command}
+1459          error = \hyperlink{ftp__client__misc_8c_a76c2f71fc8ddb8c7f14b5b7d14ab3437}{ftpClientFormatCommand}(context, \textcolor{stringliteral}{"RNFR"}, oldPath);
+1460 
+1461          \textcolor{comment}{//Check status code}
+1462          \textcolor{keywordflow}{if}(!error)
+1463          \{
+1464             \textcolor{comment}{//Send USER command and wait for the server's response}
+1465             \hyperlink{ftp__client__misc_8c_ac32e3c219bd538aae5fd6f92002db7c9}{ftpClientChangeState}(context, 
+      \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fad41efafde5188577bede053e2d80eb97}{FTP\_CLIENT\_STATE\_SUB\_COMMAND\_1});
+1466          \}
+1467       \}
+1468       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->state == \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fad41efafde5188577bede053e2d80eb97}{FTP\_CLIENT\_STATE\_SUB\_COMMAND\_1})
+1469       \{
+1470          \textcolor{comment}{//Send RNFR command and wait for the server's response}
+1471          error = \hyperlink{ftp__client__misc_8c_a649a89ff88deef2eeb980a4265da37f7}{ftpClientSendCommand}(context);
+1472 
+1473          \textcolor{comment}{//Check status code}
+1474          \textcolor{keywordflow}{if}(!error)
+1475          \{
+1476             \textcolor{comment}{//Check FTP response code}
+1477             \textcolor{keywordflow}{if}(\hyperlink{ftp__client_8h_a24e94924aa59a549b083b79662d84a84}{FTP\_REPLY\_CODE\_3YZ}(context->replyCode))
+1478             \{
+1479                \textcolor{comment}{//Format RNTO command}
+1480                error = \hyperlink{ftp__client__misc_8c_a76c2f71fc8ddb8c7f14b5b7d14ab3437}{ftpClientFormatCommand}(context, \textcolor{stringliteral}{"RNTO"}, newPath);
+1481 
+1482                \textcolor{comment}{//Check status code}
+1483                \textcolor{keywordflow}{if}(!error)
+1484                \{
+1485                   \textcolor{comment}{//Send RNTO command and wait for the server's response}
+1486                   \hyperlink{ftp__client__misc_8c_ac32e3c219bd538aae5fd6f92002db7c9}{ftpClientChangeState}(context, 
+      \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fa2e4d355339e5c264d559e05a9ebcdfe4}{FTP\_CLIENT\_STATE\_SUB\_COMMAND\_2});
+1487                \}
+1488             \}
+1489             \textcolor{keywordflow}{else}
+1490             \{
+1491                \textcolor{comment}{//Update FTP client state}
+1492                \hyperlink{ftp__client__misc_8c_ac32e3c219bd538aae5fd6f92002db7c9}{ftpClientChangeState}(context, 
+      \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fa3174f58da917af93a38b144a1e0d2527}{FTP\_CLIENT\_STATE\_CONNECTED});
+1493                \textcolor{comment}{//Report an error}
+1494                error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caa71f5ec9e991d033d622bd5fb6f6633f}{ERROR\_UNEXPECTED\_RESPONSE};
+1495             \}
+1496          \}
+1497       \}
+1498       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->state == \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fa2e4d355339e5c264d559e05a9ebcdfe4}{FTP\_CLIENT\_STATE\_SUB\_COMMAND\_2})
+1499       \{
+1500          \textcolor{comment}{//Send RNTO command and wait for the server's response}
+1501          error = \hyperlink{ftp__client__misc_8c_a649a89ff88deef2eeb980a4265da37f7}{ftpClientSendCommand}(context);
+1502 
+1503          \textcolor{comment}{//Check status code}
+1504          \textcolor{keywordflow}{if}(!error)
+1505          \{
+1506             \textcolor{comment}{//Check FTP response code}
+1507             \textcolor{keywordflow}{if}(!\hyperlink{ftp__client_8h_a8af0e6630256513516df045fb43012e7}{FTP\_REPLY\_CODE\_2YZ}(context->replyCode))
+1508             \{
+1509                \textcolor{comment}{//Report an error}
+1510                error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caa71f5ec9e991d033d622bd5fb6f6633f}{ERROR\_UNEXPECTED\_RESPONSE};
+1511             \}
+1512 
+1513             \textcolor{comment}{//Update FTP client state}
+1514             \hyperlink{ftp__client__misc_8c_ac32e3c219bd538aae5fd6f92002db7c9}{ftpClientChangeState}(context, 
+      \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fa3174f58da917af93a38b144a1e0d2527}{FTP\_CLIENT\_STATE\_CONNECTED});
+1515             \textcolor{comment}{//We are done}
+1516             \textcolor{keywordflow}{break};
+1517          \}
+1518       \}
+1519       \textcolor{keywordflow}{else}
+1520       \{
+1521          \textcolor{comment}{//Invalid state}
+1522          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac3190fa1f36c6acf147c7ce453a655e2}{ERROR\_WRONG\_STATE};
+1523       \}
+1524    \}
+1525 
+1526    \textcolor{comment}{//Check status code}
+1527    \textcolor{keywordflow}{if}(error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca16f356a669fbb42deb27f59e9054f6d6}{ERROR\_WOULD\_BLOCK} || error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4d0f7be53b837f004379ac6bbd56f1e2}{ERROR\_TIMEOUT})
+1528    \{
+1529       \textcolor{comment}{//Check whether the timeout has elapsed}
+1530       error = \hyperlink{ftp__client__misc_8c_ae6a4a166626630754fdeae2b17e611de}{ftpClientCheckTimeout}(context);
+1531    \}
+1532 
+1533    \textcolor{comment}{//Return status code}
+1534    \textcolor{keywordflow}{return} error;
+1535 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ftp__client_8c_af41a2d4af2a90d02a43e9fce8f027b3c}\label{ftp__client_8c_af41a2d4af2a90d02a43e9fce8f027b3c}} 
+\index{ftp\+\_\+client.\+c@{ftp\+\_\+client.\+c}!ftp\+Client\+Set\+Timeout@{ftp\+Client\+Set\+Timeout}}
+\index{ftp\+Client\+Set\+Timeout@{ftp\+Client\+Set\+Timeout}!ftp\+\_\+client.\+c@{ftp\+\_\+client.\+c}}
+\subsubsection{\texorpdfstring{ftp\+Client\+Set\+Timeout()}{ftpClientSetTimeout()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ftp\+Client\+Set\+Timeout (\begin{DoxyParamCaption}\item[{\hyperlink{ftp__client_8h_a416e53a7e79ecd46ffcbeb50db323252}{Ftp\+Client\+Context} $\ast$}]{context,  }\item[{\hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\+\_\+t}}]{timeout }\end{DoxyParamCaption})}
+
+
+
+Set communication timeout. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the F\+TP client context \\
+\hline
+\mbox{\tt in}  & {\em timeout} & Timeout value, in milliseconds \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 126 of file ftp\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+127 \{
+128    \textcolor{comment}{//Make sure the FTP client context is valid}
+129    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+130       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+131 
+132    \textcolor{comment}{//Save timeout value}
+133    context->timeout = timeout;
+134 
+135    \textcolor{comment}{//Successful processing}
+136    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+137 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ftp__client_8c_ae0747a5507b24dd7553168626ccc8cb8}\label{ftp__client_8c_ae0747a5507b24dd7553168626ccc8cb8}} 
+\index{ftp\+\_\+client.\+c@{ftp\+\_\+client.\+c}!ftp\+Client\+Write\+File@{ftp\+Client\+Write\+File}}
+\index{ftp\+Client\+Write\+File@{ftp\+Client\+Write\+File}!ftp\+\_\+client.\+c@{ftp\+\_\+client.\+c}}
+\subsubsection{\texorpdfstring{ftp\+Client\+Write\+File()}{ftpClientWriteFile()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ftp\+Client\+Write\+File (\begin{DoxyParamCaption}\item[{\hyperlink{ftp__client_8h_a416e53a7e79ecd46ffcbeb50db323252}{Ftp\+Client\+Context} $\ast$}]{context,  }\item[{const void $\ast$}]{data,  }\item[{size\+\_\+t}]{length,  }\item[{size\+\_\+t $\ast$}]{written,  }\item[{\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t}}]{flags }\end{DoxyParamCaption})}
+
+
+
+Write to a remote file. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the F\+TP client context \\
+\hline
+\mbox{\tt in}  & {\em data} & Pointer to a buffer containing the data to be written \\
+\hline
+\mbox{\tt in}  & {\em length} & Number of data bytes to write \\
+\hline
+\mbox{\tt in}  & {\em written} & Number of bytes that have been written (optional parameter) \\
+\hline
+\mbox{\tt in}  & {\em flags} & Set of flags that influences the behavior of this function \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 1305 of file ftp\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+1307 \{
+1308    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+1309    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1310 
+1311    \textcolor{comment}{//Make sure the FTP client context is valid}
+1312    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1313       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+1314 
+1315    \textcolor{comment}{//Check parameters}
+1316    \textcolor{keywordflow}{if}(\hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data} == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} && \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} != 0)
+1317       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+1318 
+1319    \textcolor{comment}{//Actual number of bytes written}
+1320    n = 0;
+1321 
+1322    \textcolor{comment}{//Check current state}
+1323    \textcolor{keywordflow}{if}(context->state == \hyperlink{ftp__client_8h_a27b79c28175d6b10ba3395f09b15d32fa11d90c2ee78b510440317a3488c77741}{FTP\_CLIENT\_STATE\_WRITING\_DATA})
+1324    \{
+1325       \textcolor{comment}{//Transmit data to the FTP server}
+1326       error = \hyperlink{ftp__client__transport_8c_a24f702fa1973795506a38654502758dd}{ftpClientWriteChannel}(&context->dataChannel, 
+      \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, &n,
+1327          \hyperlink{tcp_8h_aa2585d779da0ab21273a8d92de9a0ebe}{flags});
+1328 
+1329       \textcolor{comment}{//Check status code}
+1330       \textcolor{keywordflow}{if}(error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR} || error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4d0f7be53b837f004379ac6bbd56f1e2}{ERROR\_TIMEOUT})
+1331       \{
+1332          \textcolor{comment}{//Any data transmitted?}
+1333          \textcolor{keywordflow}{if}(n > 0)
+1334          \{
+1335             \textcolor{comment}{//Save current time}
+1336             context->timestamp = \hyperlink{os__port__chibios_8c_ab66a11272d40a916fa69dd8e4dc443d4}{osGetSystemTime}();
+1337          \}
+1338       \}
+1339    \}
+1340    \textcolor{keywordflow}{else}
+1341    \{
+1342       \textcolor{comment}{//Invalid state}
+1343       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac3190fa1f36c6acf147c7ce453a655e2}{ERROR\_WRONG\_STATE};
+1344    \}
+1345 
+1346    \textcolor{comment}{//Check status code}
+1347    \textcolor{keywordflow}{if}(error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca16f356a669fbb42deb27f59e9054f6d6}{ERROR\_WOULD\_BLOCK} || error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4d0f7be53b837f004379ac6bbd56f1e2}{ERROR\_TIMEOUT})
+1348    \{
+1349       \textcolor{comment}{//Check whether the timeout has elapsed}
+1350       error = \hyperlink{ftp__client__misc_8c_ae6a4a166626630754fdeae2b17e611de}{ftpClientCheckTimeout}(context);
+1351    \}
+1352 
+1353    \textcolor{comment}{//Total number of data that have been written}
+1354    \textcolor{keywordflow}{if}(written != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1355       *written = \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1356 
+1357    \textcolor{comment}{//Return status code}
+1358    \textcolor{keywordflow}{return} error;
+1359 \}
+\end{DoxyCode}

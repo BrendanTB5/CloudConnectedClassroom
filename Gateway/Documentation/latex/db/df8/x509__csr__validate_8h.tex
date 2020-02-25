@@ -1,0 +1,85 @@
+\hypertarget{x509__csr__validate_8h}{}\section{cyclone\+\_\+crypto/pkix/x509\+\_\+csr\+\_\+validate.h File Reference}
+\label{x509__csr__validate_8h}\index{cyclone\+\_\+crypto/pkix/x509\+\_\+csr\+\_\+validate.\+h@{cyclone\+\_\+crypto/pkix/x509\+\_\+csr\+\_\+validate.\+h}}
+
+
+C\+SR validation.  
+
+
+{\ttfamily \#include \char`\"{}core/crypto.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}pkix/x509\+\_\+common.\+h\char`\"{}}\newline
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{x509__csr__validate_8h_aebe065c044484b2092bfaeb5c9d370fe}{x509\+Validate\+Csr} (const \hyperlink{structX509CsrInfo}{X509\+Csr\+Info} $\ast$csr\+Info)
+\begin{DoxyCompactList}\small\item\em C\+SR validation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+C\+SR validation. 
+
+\hypertarget{pic32mz__ef__curiosity_8h_License}{}\subsection{License}\label{pic32mz__ef__curiosity_8h_License}
+S\+P\+D\+X-\/\+License-\/\+Identifier\+: G\+P\+L-\/2.\+0-\/or-\/later
+
+Copyright (C) 2010-\/2019 Oryx Embedded S\+A\+RL. All rights reserved.
+
+This file is part of Cyclone\+Crypto Open.
+
+This program is free software; you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+
+You should have received a copy of the G\+NU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-\/1301, U\+SA.
+
+\begin{DoxyAuthor}{Author}
+Oryx Embedded S\+A\+RL (www.\+oryx-\/embedded.\+com) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+9.\+6 
+\end{DoxyVersion}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{x509__csr__validate_8h_aebe065c044484b2092bfaeb5c9d370fe}\label{x509__csr__validate_8h_aebe065c044484b2092bfaeb5c9d370fe}} 
+\index{x509\+\_\+csr\+\_\+validate.\+h@{x509\+\_\+csr\+\_\+validate.\+h}!x509\+Validate\+Csr@{x509\+Validate\+Csr}}
+\index{x509\+Validate\+Csr@{x509\+Validate\+Csr}!x509\+\_\+csr\+\_\+validate.\+h@{x509\+\_\+csr\+\_\+validate.\+h}}
+\subsubsection{\texorpdfstring{x509\+Validate\+Csr()}{x509ValidateCsr()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} x509\+Validate\+Csr (\begin{DoxyParamCaption}\item[{const \hyperlink{structX509CsrInfo}{X509\+Csr\+Info} $\ast$}]{csr\+Info }\end{DoxyParamCaption})}
+
+
+
+C\+SR validation. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em csr\+Info} & Pointer to the C\+SR to be verified \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 50 of file x509\+\_\+csr\+\_\+validate.\+c.
+
+
+\begin{DoxyCode}
+51 \{
+52    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+53 
+54    \textcolor{comment}{//Check parameters}
+55    \textcolor{keywordflow}{if}(csrInfo == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+56       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+57 
+58    \textcolor{comment}{//The ASN.1 DER-encoded certificationRequestInfo is used as the input}
+59    \textcolor{comment}{//to the signature function}
+60    error = \hyperlink{pkix_2x509__cert__validate_8c_a1d8215100a2199ceac838bb36ad392bf}{x509VerifySignature}(csrInfo->\hyperlink{structX509CsrInfo_a5988c516e1e7ca0c52daf81f02f0cb6c}{certReqInfo}.
+      \hyperlink{structX509CertRequestInfo_ad9090d83592df4b2e2ffe1a670fb0a65}{rawData},
+61       csrInfo->\hyperlink{structX509CsrInfo_a5988c516e1e7ca0c52daf81f02f0cb6c}{certReqInfo}.\hyperlink{structX509CertRequestInfo_a74cd4d14596bbf4331b6e05f02ad8e53}{rawDataLen}, &csrInfo->
+      \hyperlink{structX509CsrInfo_aa0f75c78d019367fab5baeb5475ac5a1}{signatureAlgo},
+62       &csrInfo->\hyperlink{structX509CsrInfo_a5988c516e1e7ca0c52daf81f02f0cb6c}{certReqInfo}.\hyperlink{structX509CertRequestInfo_ab1c561b08bbbb942b684423343363e22}{subjectPublicKeyInfo}, &csrInfo->
+      \hyperlink{structX509CsrInfo_a843a90077fa750f9eaf4027436f39d9c}{signatureValue});
+63 
+64    \textcolor{comment}{//Return status code}
+65    \textcolor{keywordflow}{return} error;
+66 \}
+\end{DoxyCode}

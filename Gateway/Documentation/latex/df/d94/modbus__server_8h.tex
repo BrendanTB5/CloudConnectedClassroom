@@ -1,0 +1,846 @@
+\hypertarget{modbus__server_8h}{}\section{cyclone\+\_\+tcp/modbus/modbus\+\_\+server.h File Reference}
+\label{modbus__server_8h}\index{cyclone\+\_\+tcp/modbus/modbus\+\_\+server.\+h@{cyclone\+\_\+tcp/modbus/modbus\+\_\+server.\+h}}
+
+
+Modbus/\+T\+CP server.  
+
+
+{\ttfamily \#include \char`\"{}core/net.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}modbus/modbus\+\_\+common.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}core/crypto.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}tls.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}tls\+\_\+ticket.\+h\char`\"{}}\newline
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structModbusServerSettings}{Modbus\+Server\+Settings}
+\begin{DoxyCompactList}\small\item\em Modbus/\+T\+CP server settings. \end{DoxyCompactList}\item 
+struct \hyperlink{struct__ModbusClientConnection}{\+\_\+\+Modbus\+Client\+Connection}
+\begin{DoxyCompactList}\small\item\em Modbus/\+T\+CP client connection. \end{DoxyCompactList}\item 
+struct \hyperlink{struct__ModbusServerContext}{\+\_\+\+Modbus\+Server\+Context}
+\begin{DoxyCompactList}\small\item\em Modbus/\+T\+CP server context. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{modbus__server_8h_aa35d8a10e9bea8bebc5eace8edc99f03}{M\+O\+D\+B\+U\+S\+\_\+\+S\+E\+R\+V\+E\+R\+\_\+\+S\+U\+P\+P\+O\+RT}~\hyperlink{os__port_8h_a73c228f87e038e8295ee8ea8eceaa5ac}{E\+N\+A\+B\+L\+ED}
+\item 
+\#define \hyperlink{modbus__server_8h_a39fb282bbdd0d62beaac75b3df29971b}{M\+O\+D\+B\+U\+S\+\_\+\+S\+E\+R\+V\+E\+R\+\_\+\+T\+L\+S\+\_\+\+S\+U\+P\+P\+O\+RT}~\hyperlink{os__port_8h_abd5c8ab57c190a6522ccdbf0ed7577da}{D\+I\+S\+A\+B\+L\+ED}
+\item 
+\#define \hyperlink{modbus__server_8h_a32b1a4f1b72c75adadd9570be65cd2cf}{M\+O\+D\+B\+U\+S\+\_\+\+S\+E\+R\+V\+E\+R\+\_\+\+S\+T\+A\+C\+K\+\_\+\+S\+I\+ZE}~650
+\item 
+\#define \hyperlink{modbus__server_8h_a903cdffb4de169f9476ec04a7066222d}{M\+O\+D\+B\+U\+S\+\_\+\+S\+E\+R\+V\+E\+R\+\_\+\+P\+R\+I\+O\+R\+I\+TY}~\hyperlink{os__port__windows_8h_ae4b7ebcd4846aef06e5dff1d322a8df1}{O\+S\+\_\+\+T\+A\+S\+K\+\_\+\+P\+R\+I\+O\+R\+I\+T\+Y\+\_\+\+N\+O\+R\+M\+AL}
+\item 
+\#define \hyperlink{modbus__server_8h_ae256368c84a889cda6e1e67109c23ee6}{M\+O\+D\+B\+U\+S\+\_\+\+S\+E\+R\+V\+E\+R\+\_\+\+M\+A\+X\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+O\+NS}~2
+\item 
+\#define \hyperlink{modbus__server_8h_a499c34fda45ee3411764d3da3900233e}{M\+O\+D\+B\+U\+S\+\_\+\+S\+E\+R\+V\+E\+R\+\_\+\+T\+I\+M\+E\+O\+UT}~60000
+\item 
+\#define \hyperlink{modbus__server_8h_a1c5f07ff57d0b40825d47ad6652094fa}{M\+O\+D\+B\+U\+S\+\_\+\+S\+E\+R\+V\+E\+R\+\_\+\+T\+I\+C\+K\+\_\+\+I\+N\+T\+E\+R\+V\+AL}~1000
+\item 
+\#define \hyperlink{modbus__server_8h_a18f3737b4ba763212426e715d8df8a00}{M\+O\+D\+B\+U\+S\+\_\+\+S\+E\+R\+V\+E\+R\+\_\+\+T\+L\+S\+\_\+\+T\+X\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE}~2048
+\item 
+\#define \hyperlink{modbus__server_8h_a28ce4f1eb176fc27a942be8717ec26b2}{M\+O\+D\+B\+U\+S\+\_\+\+S\+E\+R\+V\+E\+R\+\_\+\+T\+L\+S\+\_\+\+R\+X\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE}~2048
+\item 
+\#define \hyperlink{modbus__server_8h_a947b1c390d76861c92c77fe57d9d1a37}{M\+O\+D\+B\+U\+S\+\_\+\+S\+E\+R\+V\+E\+R\+\_\+\+M\+A\+X\+\_\+\+R\+O\+L\+E\+\_\+\+L\+EN}~32
+\item 
+\#define \hyperlink{modbus__server_8h_a3a5f2957951349d3c053b1ebe94fe4f7}{Modbus\+Server\+Context}~struct \hyperlink{struct__ModbusServerContext}{\+\_\+\+Modbus\+Server\+Context}
+\item 
+\#define \hyperlink{modbus__server_8h_a9bb52dfbcf1ed2f018736b720a3b0748}{Modbus\+Client\+Connection}~struct \hyperlink{struct__ModbusClientConnection}{\+\_\+\+Modbus\+Client\+Connection}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t}($\ast$ \hyperlink{modbus__server_8h_adc1985b28525307a7cd3eeb66f61c949}{Modbus\+Server\+Tls\+Init\+Callback}) (\hyperlink{modbus__server_8h_a9bb52dfbcf1ed2f018736b720a3b0748}{Modbus\+Client\+Connection} $\ast$connection, \hyperlink{tls_8h_ac09f7a286c0cdf9b07ee1edd107946f5}{Tls\+Context} $\ast$tls\+Context)
+\begin{DoxyCompactList}\small\item\em T\+LS initialization callback function. \end{DoxyCompactList}\item 
+typedef void($\ast$ \hyperlink{modbus__server_8h_a81193c898fb5f09885891ee3d7bcda85}{Modbus\+Server\+Lock\+Callback}) (void)
+\begin{DoxyCompactList}\small\item\em Lock Modbus table callback function. \end{DoxyCompactList}\item 
+typedef void($\ast$ \hyperlink{modbus__server_8h_ac238025fdae42e739fef8f16b2507444}{Modbus\+Server\+Unlock\+Callback}) (void)
+\begin{DoxyCompactList}\small\item\em Unlock Modbus table callback function. \end{DoxyCompactList}\item 
+typedef \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t}($\ast$ \hyperlink{modbus__server_8h_a163e3ddadc2ead9869a527e3c2fe1d02}{Modbus\+Server\+Read\+Coil\+Callback}) (const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$role, \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} \hyperlink{ndp_8h_a1b452a6c3ab338d73213b321b6750f2b}{address}, \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} $\ast$state)
+\begin{DoxyCompactList}\small\item\em Get coil state callback function. \end{DoxyCompactList}\item 
+typedef \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t}($\ast$ \hyperlink{modbus__server_8h_a2116bb4e6258e6e41dd97272d1211cfd}{Modbus\+Server\+Write\+Coil\+Callback}) (const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$role, \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} \hyperlink{ndp_8h_a1b452a6c3ab338d73213b321b6750f2b}{address}, \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} state, \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} commit)
+\begin{DoxyCompactList}\small\item\em Set coil state callback function. \end{DoxyCompactList}\item 
+typedef \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t}($\ast$ \hyperlink{modbus__server_8h_a3d9a52f0b248469bb1e36927cdb5ce91}{Modbus\+Server\+Read\+Reg\+Callback}) (const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$role, \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} \hyperlink{ndp_8h_a1b452a6c3ab338d73213b321b6750f2b}{address}, \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} $\ast$\hyperlink{chap_8h_adfa040d04d16520129a735fff8fb1628}{value})
+\begin{DoxyCompactList}\small\item\em Get register value callback function. \end{DoxyCompactList}\item 
+typedef \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t}($\ast$ \hyperlink{modbus__server_8h_a5ca8502fc8d19f45c85f28fdddb89d3e}{Modbus\+Server\+Write\+Reg\+Callback}) (const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$role, \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} \hyperlink{ndp_8h_a1b452a6c3ab338d73213b321b6750f2b}{address}, \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} \hyperlink{chap_8h_adfa040d04d16520129a735fff8fb1628}{value}, \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} commit)
+\begin{DoxyCompactList}\small\item\em Set register value callback function. \end{DoxyCompactList}\item 
+typedef \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t}($\ast$ \hyperlink{modbus__server_8h_a2ff9165ebf9788f21015a64c92cb6075}{Modbus\+Server\+Process\+Pdu\+Callback}) (const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$request, size\+\_\+t request\+Len, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$response, size\+\_\+t $\ast$response\+Len)
+\begin{DoxyCompactList}\small\item\em P\+DU processing callback function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{modbus__server_8h_a833fbe8b8a0937e5fd644bcad5b11fbc}{Modbus\+Connection\+State} \{ \newline
+\hyperlink{modbus__server_8h_a833fbe8b8a0937e5fd644bcad5b11fbcafd635128f09907421773ddeaf15196bb}{M\+O\+D\+B\+U\+S\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+O\+N\+\_\+\+S\+T\+A\+T\+E\+\_\+\+C\+L\+O\+S\+ED} = 0, 
+\hyperlink{modbus__server_8h_a833fbe8b8a0937e5fd644bcad5b11fbca6c28a65402d48838ba46c3b4895aea2a}{M\+O\+D\+B\+U\+S\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+O\+N\+\_\+\+S\+T\+A\+T\+E\+\_\+\+C\+O\+N\+N\+E\+C\+T\+\_\+\+T\+LS} = 1, 
+\hyperlink{modbus__server_8h_a833fbe8b8a0937e5fd644bcad5b11fbca695ff92b63e218a16af678dfb23d39fe}{M\+O\+D\+B\+U\+S\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+O\+N\+\_\+\+S\+T\+A\+T\+E\+\_\+\+R\+E\+C\+E\+I\+VE} = 2, 
+\hyperlink{modbus__server_8h_a833fbe8b8a0937e5fd644bcad5b11fbca1ca6f65bfb319297513e97e29860d88e}{M\+O\+D\+B\+U\+S\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+O\+N\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+E\+ND} = 3, 
+\newline
+\hyperlink{modbus__server_8h_a833fbe8b8a0937e5fd644bcad5b11fbca71d3d4f43ce3f104b57faecd7f13f00d}{M\+O\+D\+B\+U\+S\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+O\+N\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+H\+U\+T\+D\+O\+W\+N\+\_\+\+T\+LS} = 4, 
+\hyperlink{modbus__server_8h_a833fbe8b8a0937e5fd644bcad5b11fbcadce5cb26624490f2c00f0fcb745ec8e7}{M\+O\+D\+B\+U\+S\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+O\+N\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+H\+U\+T\+D\+O\+W\+N\+\_\+\+TX} = 5, 
+\hyperlink{modbus__server_8h_a833fbe8b8a0937e5fd644bcad5b11fbcaa138bd6f722ab8588e3b5e8e0d3b4420}{M\+O\+D\+B\+U\+S\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+O\+N\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+H\+U\+T\+D\+O\+W\+N\+\_\+\+RX} = 6
+ \}\begin{DoxyCompactList}\small\item\em Modbus/\+T\+CP connection state. \end{DoxyCompactList}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{modbus__server_8h_ae348601a0d2848071613d31f949aeeff}{modbus\+Server\+Get\+Default\+Settings} (\hyperlink{structModbusServerSettings}{Modbus\+Server\+Settings} $\ast$settings)
+\begin{DoxyCompactList}\small\item\em Initialize settings with default values. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{modbus__server_8h_a87dce7b985dfa115bd53370aeb49406e}{modbus\+Server\+Init} (\hyperlink{modbus__server_8h_a3a5f2957951349d3c053b1ebe94fe4f7}{Modbus\+Server\+Context} $\ast$context, const \hyperlink{structModbusServerSettings}{Modbus\+Server\+Settings} $\ast$settings)
+\begin{DoxyCompactList}\small\item\em Initialize Modbus/\+T\+CP server context. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{modbus__server_8h_afb397fdb07ab1e5e74b655c6216c8017}{modbus\+Server\+Start} (\hyperlink{modbus__server_8h_a3a5f2957951349d3c053b1ebe94fe4f7}{Modbus\+Server\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Start Modbus/\+T\+CP server. \end{DoxyCompactList}\item 
+void \hyperlink{modbus__server_8h_acbfb544af77674615158e7f9c32125a0}{modbus\+Server\+Task} (\hyperlink{modbus__server_8h_a3a5f2957951349d3c053b1ebe94fe4f7}{Modbus\+Server\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Modbus/\+T\+CP server task. \end{DoxyCompactList}\item 
+void \hyperlink{modbus__server_8h_a3da58c1f01ea19e884dfd727e4dac602}{modbus\+Server\+Deinit} (\hyperlink{modbus__server_8h_a3a5f2957951349d3c053b1ebe94fe4f7}{Modbus\+Server\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Release Modbus/\+T\+CP server context. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Modbus/\+T\+CP server. 
+
+\hypertarget{pic32mz__ef__curiosity_8h_License}{}\subsection{License}\label{pic32mz__ef__curiosity_8h_License}
+S\+P\+D\+X-\/\+License-\/\+Identifier\+: G\+P\+L-\/2.\+0-\/or-\/later
+
+Copyright (C) 2010-\/2019 Oryx Embedded S\+A\+RL. All rights reserved.
+
+This file is part of Cyclone\+T\+CP Open.
+
+This program is free software; you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+
+You should have received a copy of the G\+NU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-\/1301, U\+SA.
+
+\begin{DoxyAuthor}{Author}
+Oryx Embedded S\+A\+RL (www.\+oryx-\/embedded.\+com) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+9.\+6 
+\end{DoxyVersion}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{modbus__server_8h_ae256368c84a889cda6e1e67109c23ee6}\label{modbus__server_8h_ae256368c84a889cda6e1e67109c23ee6}} 
+\index{modbus\+\_\+server.\+h@{modbus\+\_\+server.\+h}!M\+O\+D\+B\+U\+S\+\_\+\+S\+E\+R\+V\+E\+R\+\_\+\+M\+A\+X\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+O\+NS@{M\+O\+D\+B\+U\+S\+\_\+\+S\+E\+R\+V\+E\+R\+\_\+\+M\+A\+X\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+O\+NS}}
+\index{M\+O\+D\+B\+U\+S\+\_\+\+S\+E\+R\+V\+E\+R\+\_\+\+M\+A\+X\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+O\+NS@{M\+O\+D\+B\+U\+S\+\_\+\+S\+E\+R\+V\+E\+R\+\_\+\+M\+A\+X\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+O\+NS}!modbus\+\_\+server.\+h@{modbus\+\_\+server.\+h}}
+\subsubsection{\texorpdfstring{M\+O\+D\+B\+U\+S\+\_\+\+S\+E\+R\+V\+E\+R\+\_\+\+M\+A\+X\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+O\+NS}{MODBUS\_SERVER\_MAX\_CONNECTIONS}}
+{\footnotesize\ttfamily \#define M\+O\+D\+B\+U\+S\+\_\+\+S\+E\+R\+V\+E\+R\+\_\+\+M\+A\+X\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+O\+NS~2}
+
+
+
+Definition at line 66 of file modbus\+\_\+server.\+h.
+
+\mbox{\Hypertarget{modbus__server_8h_a947b1c390d76861c92c77fe57d9d1a37}\label{modbus__server_8h_a947b1c390d76861c92c77fe57d9d1a37}} 
+\index{modbus\+\_\+server.\+h@{modbus\+\_\+server.\+h}!M\+O\+D\+B\+U\+S\+\_\+\+S\+E\+R\+V\+E\+R\+\_\+\+M\+A\+X\+\_\+\+R\+O\+L\+E\+\_\+\+L\+EN@{M\+O\+D\+B\+U\+S\+\_\+\+S\+E\+R\+V\+E\+R\+\_\+\+M\+A\+X\+\_\+\+R\+O\+L\+E\+\_\+\+L\+EN}}
+\index{M\+O\+D\+B\+U\+S\+\_\+\+S\+E\+R\+V\+E\+R\+\_\+\+M\+A\+X\+\_\+\+R\+O\+L\+E\+\_\+\+L\+EN@{M\+O\+D\+B\+U\+S\+\_\+\+S\+E\+R\+V\+E\+R\+\_\+\+M\+A\+X\+\_\+\+R\+O\+L\+E\+\_\+\+L\+EN}!modbus\+\_\+server.\+h@{modbus\+\_\+server.\+h}}
+\subsubsection{\texorpdfstring{M\+O\+D\+B\+U\+S\+\_\+\+S\+E\+R\+V\+E\+R\+\_\+\+M\+A\+X\+\_\+\+R\+O\+L\+E\+\_\+\+L\+EN}{MODBUS\_SERVER\_MAX\_ROLE\_LEN}}
+{\footnotesize\ttfamily \#define M\+O\+D\+B\+U\+S\+\_\+\+S\+E\+R\+V\+E\+R\+\_\+\+M\+A\+X\+\_\+\+R\+O\+L\+E\+\_\+\+L\+EN~32}
+
+
+
+Definition at line 101 of file modbus\+\_\+server.\+h.
+
+\mbox{\Hypertarget{modbus__server_8h_a903cdffb4de169f9476ec04a7066222d}\label{modbus__server_8h_a903cdffb4de169f9476ec04a7066222d}} 
+\index{modbus\+\_\+server.\+h@{modbus\+\_\+server.\+h}!M\+O\+D\+B\+U\+S\+\_\+\+S\+E\+R\+V\+E\+R\+\_\+\+P\+R\+I\+O\+R\+I\+TY@{M\+O\+D\+B\+U\+S\+\_\+\+S\+E\+R\+V\+E\+R\+\_\+\+P\+R\+I\+O\+R\+I\+TY}}
+\index{M\+O\+D\+B\+U\+S\+\_\+\+S\+E\+R\+V\+E\+R\+\_\+\+P\+R\+I\+O\+R\+I\+TY@{M\+O\+D\+B\+U\+S\+\_\+\+S\+E\+R\+V\+E\+R\+\_\+\+P\+R\+I\+O\+R\+I\+TY}!modbus\+\_\+server.\+h@{modbus\+\_\+server.\+h}}
+\subsubsection{\texorpdfstring{M\+O\+D\+B\+U\+S\+\_\+\+S\+E\+R\+V\+E\+R\+\_\+\+P\+R\+I\+O\+R\+I\+TY}{MODBUS\_SERVER\_PRIORITY}}
+{\footnotesize\ttfamily \#define M\+O\+D\+B\+U\+S\+\_\+\+S\+E\+R\+V\+E\+R\+\_\+\+P\+R\+I\+O\+R\+I\+TY~\hyperlink{os__port__windows_8h_ae4b7ebcd4846aef06e5dff1d322a8df1}{O\+S\+\_\+\+T\+A\+S\+K\+\_\+\+P\+R\+I\+O\+R\+I\+T\+Y\+\_\+\+N\+O\+R\+M\+AL}}
+
+
+
+Definition at line 61 of file modbus\+\_\+server.\+h.
+
+\mbox{\Hypertarget{modbus__server_8h_a32b1a4f1b72c75adadd9570be65cd2cf}\label{modbus__server_8h_a32b1a4f1b72c75adadd9570be65cd2cf}} 
+\index{modbus\+\_\+server.\+h@{modbus\+\_\+server.\+h}!M\+O\+D\+B\+U\+S\+\_\+\+S\+E\+R\+V\+E\+R\+\_\+\+S\+T\+A\+C\+K\+\_\+\+S\+I\+ZE@{M\+O\+D\+B\+U\+S\+\_\+\+S\+E\+R\+V\+E\+R\+\_\+\+S\+T\+A\+C\+K\+\_\+\+S\+I\+ZE}}
+\index{M\+O\+D\+B\+U\+S\+\_\+\+S\+E\+R\+V\+E\+R\+\_\+\+S\+T\+A\+C\+K\+\_\+\+S\+I\+ZE@{M\+O\+D\+B\+U\+S\+\_\+\+S\+E\+R\+V\+E\+R\+\_\+\+S\+T\+A\+C\+K\+\_\+\+S\+I\+ZE}!modbus\+\_\+server.\+h@{modbus\+\_\+server.\+h}}
+\subsubsection{\texorpdfstring{M\+O\+D\+B\+U\+S\+\_\+\+S\+E\+R\+V\+E\+R\+\_\+\+S\+T\+A\+C\+K\+\_\+\+S\+I\+ZE}{MODBUS\_SERVER\_STACK\_SIZE}}
+{\footnotesize\ttfamily \#define M\+O\+D\+B\+U\+S\+\_\+\+S\+E\+R\+V\+E\+R\+\_\+\+S\+T\+A\+C\+K\+\_\+\+S\+I\+ZE~650}
+
+
+
+Definition at line 54 of file modbus\+\_\+server.\+h.
+
+\mbox{\Hypertarget{modbus__server_8h_aa35d8a10e9bea8bebc5eace8edc99f03}\label{modbus__server_8h_aa35d8a10e9bea8bebc5eace8edc99f03}} 
+\index{modbus\+\_\+server.\+h@{modbus\+\_\+server.\+h}!M\+O\+D\+B\+U\+S\+\_\+\+S\+E\+R\+V\+E\+R\+\_\+\+S\+U\+P\+P\+O\+RT@{M\+O\+D\+B\+U\+S\+\_\+\+S\+E\+R\+V\+E\+R\+\_\+\+S\+U\+P\+P\+O\+RT}}
+\index{M\+O\+D\+B\+U\+S\+\_\+\+S\+E\+R\+V\+E\+R\+\_\+\+S\+U\+P\+P\+O\+RT@{M\+O\+D\+B\+U\+S\+\_\+\+S\+E\+R\+V\+E\+R\+\_\+\+S\+U\+P\+P\+O\+RT}!modbus\+\_\+server.\+h@{modbus\+\_\+server.\+h}}
+\subsubsection{\texorpdfstring{M\+O\+D\+B\+U\+S\+\_\+\+S\+E\+R\+V\+E\+R\+\_\+\+S\+U\+P\+P\+O\+RT}{MODBUS\_SERVER\_SUPPORT}}
+{\footnotesize\ttfamily \#define M\+O\+D\+B\+U\+S\+\_\+\+S\+E\+R\+V\+E\+R\+\_\+\+S\+U\+P\+P\+O\+RT~\hyperlink{os__port_8h_a73c228f87e038e8295ee8ea8eceaa5ac}{E\+N\+A\+B\+L\+ED}}
+
+
+
+Definition at line 40 of file modbus\+\_\+server.\+h.
+
+\mbox{\Hypertarget{modbus__server_8h_a1c5f07ff57d0b40825d47ad6652094fa}\label{modbus__server_8h_a1c5f07ff57d0b40825d47ad6652094fa}} 
+\index{modbus\+\_\+server.\+h@{modbus\+\_\+server.\+h}!M\+O\+D\+B\+U\+S\+\_\+\+S\+E\+R\+V\+E\+R\+\_\+\+T\+I\+C\+K\+\_\+\+I\+N\+T\+E\+R\+V\+AL@{M\+O\+D\+B\+U\+S\+\_\+\+S\+E\+R\+V\+E\+R\+\_\+\+T\+I\+C\+K\+\_\+\+I\+N\+T\+E\+R\+V\+AL}}
+\index{M\+O\+D\+B\+U\+S\+\_\+\+S\+E\+R\+V\+E\+R\+\_\+\+T\+I\+C\+K\+\_\+\+I\+N\+T\+E\+R\+V\+AL@{M\+O\+D\+B\+U\+S\+\_\+\+S\+E\+R\+V\+E\+R\+\_\+\+T\+I\+C\+K\+\_\+\+I\+N\+T\+E\+R\+V\+AL}!modbus\+\_\+server.\+h@{modbus\+\_\+server.\+h}}
+\subsubsection{\texorpdfstring{M\+O\+D\+B\+U\+S\+\_\+\+S\+E\+R\+V\+E\+R\+\_\+\+T\+I\+C\+K\+\_\+\+I\+N\+T\+E\+R\+V\+AL}{MODBUS\_SERVER\_TICK\_INTERVAL}}
+{\footnotesize\ttfamily \#define M\+O\+D\+B\+U\+S\+\_\+\+S\+E\+R\+V\+E\+R\+\_\+\+T\+I\+C\+K\+\_\+\+I\+N\+T\+E\+R\+V\+AL~1000}
+
+
+
+Definition at line 80 of file modbus\+\_\+server.\+h.
+
+\mbox{\Hypertarget{modbus__server_8h_a499c34fda45ee3411764d3da3900233e}\label{modbus__server_8h_a499c34fda45ee3411764d3da3900233e}} 
+\index{modbus\+\_\+server.\+h@{modbus\+\_\+server.\+h}!M\+O\+D\+B\+U\+S\+\_\+\+S\+E\+R\+V\+E\+R\+\_\+\+T\+I\+M\+E\+O\+UT@{M\+O\+D\+B\+U\+S\+\_\+\+S\+E\+R\+V\+E\+R\+\_\+\+T\+I\+M\+E\+O\+UT}}
+\index{M\+O\+D\+B\+U\+S\+\_\+\+S\+E\+R\+V\+E\+R\+\_\+\+T\+I\+M\+E\+O\+UT@{M\+O\+D\+B\+U\+S\+\_\+\+S\+E\+R\+V\+E\+R\+\_\+\+T\+I\+M\+E\+O\+UT}!modbus\+\_\+server.\+h@{modbus\+\_\+server.\+h}}
+\subsubsection{\texorpdfstring{M\+O\+D\+B\+U\+S\+\_\+\+S\+E\+R\+V\+E\+R\+\_\+\+T\+I\+M\+E\+O\+UT}{MODBUS\_SERVER\_TIMEOUT}}
+{\footnotesize\ttfamily \#define M\+O\+D\+B\+U\+S\+\_\+\+S\+E\+R\+V\+E\+R\+\_\+\+T\+I\+M\+E\+O\+UT~60000}
+
+
+
+Definition at line 73 of file modbus\+\_\+server.\+h.
+
+\mbox{\Hypertarget{modbus__server_8h_a28ce4f1eb176fc27a942be8717ec26b2}\label{modbus__server_8h_a28ce4f1eb176fc27a942be8717ec26b2}} 
+\index{modbus\+\_\+server.\+h@{modbus\+\_\+server.\+h}!M\+O\+D\+B\+U\+S\+\_\+\+S\+E\+R\+V\+E\+R\+\_\+\+T\+L\+S\+\_\+\+R\+X\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE@{M\+O\+D\+B\+U\+S\+\_\+\+S\+E\+R\+V\+E\+R\+\_\+\+T\+L\+S\+\_\+\+R\+X\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE}}
+\index{M\+O\+D\+B\+U\+S\+\_\+\+S\+E\+R\+V\+E\+R\+\_\+\+T\+L\+S\+\_\+\+R\+X\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE@{M\+O\+D\+B\+U\+S\+\_\+\+S\+E\+R\+V\+E\+R\+\_\+\+T\+L\+S\+\_\+\+R\+X\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE}!modbus\+\_\+server.\+h@{modbus\+\_\+server.\+h}}
+\subsubsection{\texorpdfstring{M\+O\+D\+B\+U\+S\+\_\+\+S\+E\+R\+V\+E\+R\+\_\+\+T\+L\+S\+\_\+\+R\+X\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE}{MODBUS\_SERVER\_TLS\_RX\_BUFFER\_SIZE}}
+{\footnotesize\ttfamily \#define M\+O\+D\+B\+U\+S\+\_\+\+S\+E\+R\+V\+E\+R\+\_\+\+T\+L\+S\+\_\+\+R\+X\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE~2048}
+
+
+
+Definition at line 94 of file modbus\+\_\+server.\+h.
+
+\mbox{\Hypertarget{modbus__server_8h_a39fb282bbdd0d62beaac75b3df29971b}\label{modbus__server_8h_a39fb282bbdd0d62beaac75b3df29971b}} 
+\index{modbus\+\_\+server.\+h@{modbus\+\_\+server.\+h}!M\+O\+D\+B\+U\+S\+\_\+\+S\+E\+R\+V\+E\+R\+\_\+\+T\+L\+S\+\_\+\+S\+U\+P\+P\+O\+RT@{M\+O\+D\+B\+U\+S\+\_\+\+S\+E\+R\+V\+E\+R\+\_\+\+T\+L\+S\+\_\+\+S\+U\+P\+P\+O\+RT}}
+\index{M\+O\+D\+B\+U\+S\+\_\+\+S\+E\+R\+V\+E\+R\+\_\+\+T\+L\+S\+\_\+\+S\+U\+P\+P\+O\+RT@{M\+O\+D\+B\+U\+S\+\_\+\+S\+E\+R\+V\+E\+R\+\_\+\+T\+L\+S\+\_\+\+S\+U\+P\+P\+O\+RT}!modbus\+\_\+server.\+h@{modbus\+\_\+server.\+h}}
+\subsubsection{\texorpdfstring{M\+O\+D\+B\+U\+S\+\_\+\+S\+E\+R\+V\+E\+R\+\_\+\+T\+L\+S\+\_\+\+S\+U\+P\+P\+O\+RT}{MODBUS\_SERVER\_TLS\_SUPPORT}}
+{\footnotesize\ttfamily \#define M\+O\+D\+B\+U\+S\+\_\+\+S\+E\+R\+V\+E\+R\+\_\+\+T\+L\+S\+\_\+\+S\+U\+P\+P\+O\+RT~\hyperlink{os__port_8h_abd5c8ab57c190a6522ccdbf0ed7577da}{D\+I\+S\+A\+B\+L\+ED}}
+
+
+
+Definition at line 47 of file modbus\+\_\+server.\+h.
+
+\mbox{\Hypertarget{modbus__server_8h_a18f3737b4ba763212426e715d8df8a00}\label{modbus__server_8h_a18f3737b4ba763212426e715d8df8a00}} 
+\index{modbus\+\_\+server.\+h@{modbus\+\_\+server.\+h}!M\+O\+D\+B\+U\+S\+\_\+\+S\+E\+R\+V\+E\+R\+\_\+\+T\+L\+S\+\_\+\+T\+X\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE@{M\+O\+D\+B\+U\+S\+\_\+\+S\+E\+R\+V\+E\+R\+\_\+\+T\+L\+S\+\_\+\+T\+X\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE}}
+\index{M\+O\+D\+B\+U\+S\+\_\+\+S\+E\+R\+V\+E\+R\+\_\+\+T\+L\+S\+\_\+\+T\+X\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE@{M\+O\+D\+B\+U\+S\+\_\+\+S\+E\+R\+V\+E\+R\+\_\+\+T\+L\+S\+\_\+\+T\+X\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE}!modbus\+\_\+server.\+h@{modbus\+\_\+server.\+h}}
+\subsubsection{\texorpdfstring{M\+O\+D\+B\+U\+S\+\_\+\+S\+E\+R\+V\+E\+R\+\_\+\+T\+L\+S\+\_\+\+T\+X\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE}{MODBUS\_SERVER\_TLS\_TX\_BUFFER\_SIZE}}
+{\footnotesize\ttfamily \#define M\+O\+D\+B\+U\+S\+\_\+\+S\+E\+R\+V\+E\+R\+\_\+\+T\+L\+S\+\_\+\+T\+X\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE~2048}
+
+
+
+Definition at line 87 of file modbus\+\_\+server.\+h.
+
+\mbox{\Hypertarget{modbus__server_8h_a9bb52dfbcf1ed2f018736b720a3b0748}\label{modbus__server_8h_a9bb52dfbcf1ed2f018736b720a3b0748}} 
+\index{modbus\+\_\+server.\+h@{modbus\+\_\+server.\+h}!Modbus\+Client\+Connection@{Modbus\+Client\+Connection}}
+\index{Modbus\+Client\+Connection@{Modbus\+Client\+Connection}!modbus\+\_\+server.\+h@{modbus\+\_\+server.\+h}}
+\subsubsection{\texorpdfstring{Modbus\+Client\+Connection}{ModbusClientConnection}}
+{\footnotesize\ttfamily \#define Modbus\+Client\+Connection~struct \hyperlink{struct__ModbusClientConnection}{\+\_\+\+Modbus\+Client\+Connection}}
+
+
+
+Definition at line 119 of file modbus\+\_\+server.\+h.
+
+\mbox{\Hypertarget{modbus__server_8h_a3a5f2957951349d3c053b1ebe94fe4f7}\label{modbus__server_8h_a3a5f2957951349d3c053b1ebe94fe4f7}} 
+\index{modbus\+\_\+server.\+h@{modbus\+\_\+server.\+h}!Modbus\+Server\+Context@{Modbus\+Server\+Context}}
+\index{Modbus\+Server\+Context@{Modbus\+Server\+Context}!modbus\+\_\+server.\+h@{modbus\+\_\+server.\+h}}
+\subsubsection{\texorpdfstring{Modbus\+Server\+Context}{ModbusServerContext}}
+{\footnotesize\ttfamily \#define Modbus\+Server\+Context~struct \hyperlink{struct__ModbusServerContext}{\+\_\+\+Modbus\+Server\+Context}}
+
+
+
+Definition at line 115 of file modbus\+\_\+server.\+h.
+
+
+
+\subsection{Typedef Documentation}
+\mbox{\Hypertarget{modbus__server_8h_a81193c898fb5f09885891ee3d7bcda85}\label{modbus__server_8h_a81193c898fb5f09885891ee3d7bcda85}} 
+\index{modbus\+\_\+server.\+h@{modbus\+\_\+server.\+h}!Modbus\+Server\+Lock\+Callback@{Modbus\+Server\+Lock\+Callback}}
+\index{Modbus\+Server\+Lock\+Callback@{Modbus\+Server\+Lock\+Callback}!modbus\+\_\+server.\+h@{modbus\+\_\+server.\+h}}
+\subsubsection{\texorpdfstring{Modbus\+Server\+Lock\+Callback}{ModbusServerLockCallback}}
+{\footnotesize\ttfamily typedef void($\ast$ Modbus\+Server\+Lock\+Callback) (void)}
+
+
+
+Lock Modbus table callback function. 
+
+
+
+Definition at line 160 of file modbus\+\_\+server.\+h.
+
+\mbox{\Hypertarget{modbus__server_8h_a2ff9165ebf9788f21015a64c92cb6075}\label{modbus__server_8h_a2ff9165ebf9788f21015a64c92cb6075}} 
+\index{modbus\+\_\+server.\+h@{modbus\+\_\+server.\+h}!Modbus\+Server\+Process\+Pdu\+Callback@{Modbus\+Server\+Process\+Pdu\+Callback}}
+\index{Modbus\+Server\+Process\+Pdu\+Callback@{Modbus\+Server\+Process\+Pdu\+Callback}!modbus\+\_\+server.\+h@{modbus\+\_\+server.\+h}}
+\subsubsection{\texorpdfstring{Modbus\+Server\+Process\+Pdu\+Callback}{ModbusServerProcessPduCallback}}
+{\footnotesize\ttfamily typedef \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t}($\ast$ Modbus\+Server\+Process\+Pdu\+Callback) (const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$request, size\+\_\+t request\+Len, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$response, size\+\_\+t $\ast$response\+Len)}
+
+
+
+P\+DU processing callback function. 
+
+
+
+Definition at line 206 of file modbus\+\_\+server.\+h.
+
+\mbox{\Hypertarget{modbus__server_8h_a163e3ddadc2ead9869a527e3c2fe1d02}\label{modbus__server_8h_a163e3ddadc2ead9869a527e3c2fe1d02}} 
+\index{modbus\+\_\+server.\+h@{modbus\+\_\+server.\+h}!Modbus\+Server\+Read\+Coil\+Callback@{Modbus\+Server\+Read\+Coil\+Callback}}
+\index{Modbus\+Server\+Read\+Coil\+Callback@{Modbus\+Server\+Read\+Coil\+Callback}!modbus\+\_\+server.\+h@{modbus\+\_\+server.\+h}}
+\subsubsection{\texorpdfstring{Modbus\+Server\+Read\+Coil\+Callback}{ModbusServerReadCoilCallback}}
+{\footnotesize\ttfamily typedef \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t}($\ast$ Modbus\+Server\+Read\+Coil\+Callback) (const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$role, \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} \hyperlink{ndp_8h_a1b452a6c3ab338d73213b321b6750f2b}{address}, \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} $\ast$state)}
+
+
+
+Get coil state callback function. 
+
+
+
+Definition at line 174 of file modbus\+\_\+server.\+h.
+
+\mbox{\Hypertarget{modbus__server_8h_a3d9a52f0b248469bb1e36927cdb5ce91}\label{modbus__server_8h_a3d9a52f0b248469bb1e36927cdb5ce91}} 
+\index{modbus\+\_\+server.\+h@{modbus\+\_\+server.\+h}!Modbus\+Server\+Read\+Reg\+Callback@{Modbus\+Server\+Read\+Reg\+Callback}}
+\index{Modbus\+Server\+Read\+Reg\+Callback@{Modbus\+Server\+Read\+Reg\+Callback}!modbus\+\_\+server.\+h@{modbus\+\_\+server.\+h}}
+\subsubsection{\texorpdfstring{Modbus\+Server\+Read\+Reg\+Callback}{ModbusServerReadRegCallback}}
+{\footnotesize\ttfamily typedef \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t}($\ast$ Modbus\+Server\+Read\+Reg\+Callback) (const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$role, \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} \hyperlink{ndp_8h_a1b452a6c3ab338d73213b321b6750f2b}{address}, \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} $\ast$\hyperlink{chap_8h_adfa040d04d16520129a735fff8fb1628}{value})}
+
+
+
+Get register value callback function. 
+
+
+
+Definition at line 190 of file modbus\+\_\+server.\+h.
+
+\mbox{\Hypertarget{modbus__server_8h_adc1985b28525307a7cd3eeb66f61c949}\label{modbus__server_8h_adc1985b28525307a7cd3eeb66f61c949}} 
+\index{modbus\+\_\+server.\+h@{modbus\+\_\+server.\+h}!Modbus\+Server\+Tls\+Init\+Callback@{Modbus\+Server\+Tls\+Init\+Callback}}
+\index{Modbus\+Server\+Tls\+Init\+Callback@{Modbus\+Server\+Tls\+Init\+Callback}!modbus\+\_\+server.\+h@{modbus\+\_\+server.\+h}}
+\subsubsection{\texorpdfstring{Modbus\+Server\+Tls\+Init\+Callback}{ModbusServerTlsInitCallback}}
+{\footnotesize\ttfamily typedef \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t}($\ast$ Modbus\+Server\+Tls\+Init\+Callback) (\hyperlink{modbus__server_8h_a9bb52dfbcf1ed2f018736b720a3b0748}{Modbus\+Client\+Connection} $\ast$connection, \hyperlink{tls_8h_ac09f7a286c0cdf9b07ee1edd107946f5}{Tls\+Context} $\ast$tls\+Context)}
+
+
+
+T\+LS initialization callback function. 
+
+
+
+Definition at line 150 of file modbus\+\_\+server.\+h.
+
+\mbox{\Hypertarget{modbus__server_8h_ac238025fdae42e739fef8f16b2507444}\label{modbus__server_8h_ac238025fdae42e739fef8f16b2507444}} 
+\index{modbus\+\_\+server.\+h@{modbus\+\_\+server.\+h}!Modbus\+Server\+Unlock\+Callback@{Modbus\+Server\+Unlock\+Callback}}
+\index{Modbus\+Server\+Unlock\+Callback@{Modbus\+Server\+Unlock\+Callback}!modbus\+\_\+server.\+h@{modbus\+\_\+server.\+h}}
+\subsubsection{\texorpdfstring{Modbus\+Server\+Unlock\+Callback}{ModbusServerUnlockCallback}}
+{\footnotesize\ttfamily typedef void($\ast$ Modbus\+Server\+Unlock\+Callback) (void)}
+
+
+
+Unlock Modbus table callback function. 
+
+
+
+Definition at line 167 of file modbus\+\_\+server.\+h.
+
+\mbox{\Hypertarget{modbus__server_8h_a2116bb4e6258e6e41dd97272d1211cfd}\label{modbus__server_8h_a2116bb4e6258e6e41dd97272d1211cfd}} 
+\index{modbus\+\_\+server.\+h@{modbus\+\_\+server.\+h}!Modbus\+Server\+Write\+Coil\+Callback@{Modbus\+Server\+Write\+Coil\+Callback}}
+\index{Modbus\+Server\+Write\+Coil\+Callback@{Modbus\+Server\+Write\+Coil\+Callback}!modbus\+\_\+server.\+h@{modbus\+\_\+server.\+h}}
+\subsubsection{\texorpdfstring{Modbus\+Server\+Write\+Coil\+Callback}{ModbusServerWriteCoilCallback}}
+{\footnotesize\ttfamily typedef \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t}($\ast$ Modbus\+Server\+Write\+Coil\+Callback) (const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$role, \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} \hyperlink{ndp_8h_a1b452a6c3ab338d73213b321b6750f2b}{address}, \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} state, \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} commit)}
+
+
+
+Set coil state callback function. 
+
+
+
+Definition at line 182 of file modbus\+\_\+server.\+h.
+
+\mbox{\Hypertarget{modbus__server_8h_a5ca8502fc8d19f45c85f28fdddb89d3e}\label{modbus__server_8h_a5ca8502fc8d19f45c85f28fdddb89d3e}} 
+\index{modbus\+\_\+server.\+h@{modbus\+\_\+server.\+h}!Modbus\+Server\+Write\+Reg\+Callback@{Modbus\+Server\+Write\+Reg\+Callback}}
+\index{Modbus\+Server\+Write\+Reg\+Callback@{Modbus\+Server\+Write\+Reg\+Callback}!modbus\+\_\+server.\+h@{modbus\+\_\+server.\+h}}
+\subsubsection{\texorpdfstring{Modbus\+Server\+Write\+Reg\+Callback}{ModbusServerWriteRegCallback}}
+{\footnotesize\ttfamily typedef \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t}($\ast$ Modbus\+Server\+Write\+Reg\+Callback) (const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$role, \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} \hyperlink{ndp_8h_a1b452a6c3ab338d73213b321b6750f2b}{address}, \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} \hyperlink{chap_8h_adfa040d04d16520129a735fff8fb1628}{value}, \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} commit)}
+
+
+
+Set register value callback function. 
+
+
+
+Definition at line 198 of file modbus\+\_\+server.\+h.
+
+
+
+\subsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{modbus__server_8h_a833fbe8b8a0937e5fd644bcad5b11fbc}\label{modbus__server_8h_a833fbe8b8a0937e5fd644bcad5b11fbc}} 
+\index{modbus\+\_\+server.\+h@{modbus\+\_\+server.\+h}!Modbus\+Connection\+State@{Modbus\+Connection\+State}}
+\index{Modbus\+Connection\+State@{Modbus\+Connection\+State}!modbus\+\_\+server.\+h@{modbus\+\_\+server.\+h}}
+\subsubsection{\texorpdfstring{Modbus\+Connection\+State}{ModbusConnectionState}}
+{\footnotesize\ttfamily enum \hyperlink{modbus__server_8h_a833fbe8b8a0937e5fd644bcad5b11fbc}{Modbus\+Connection\+State}}
+
+
+
+Modbus/\+T\+CP connection state. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{M\+O\+D\+B\+U\+S\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+O\+N\+\_\+\+S\+T\+A\+T\+E\+\_\+\+C\+L\+O\+S\+ED@{M\+O\+D\+B\+U\+S\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+O\+N\+\_\+\+S\+T\+A\+T\+E\+\_\+\+C\+L\+O\+S\+ED}!modbus\+\_\+server.\+h@{modbus\+\_\+server.\+h}}\index{modbus\+\_\+server.\+h@{modbus\+\_\+server.\+h}!M\+O\+D\+B\+U\+S\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+O\+N\+\_\+\+S\+T\+A\+T\+E\+\_\+\+C\+L\+O\+S\+ED@{M\+O\+D\+B\+U\+S\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+O\+N\+\_\+\+S\+T\+A\+T\+E\+\_\+\+C\+L\+O\+S\+ED}}}\mbox{\Hypertarget{modbus__server_8h_a833fbe8b8a0937e5fd644bcad5b11fbcafd635128f09907421773ddeaf15196bb}\label{modbus__server_8h_a833fbe8b8a0937e5fd644bcad5b11fbcafd635128f09907421773ddeaf15196bb}} 
+M\+O\+D\+B\+U\+S\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+O\+N\+\_\+\+S\+T\+A\+T\+E\+\_\+\+C\+L\+O\+S\+ED&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{M\+O\+D\+B\+U\+S\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+O\+N\+\_\+\+S\+T\+A\+T\+E\+\_\+\+C\+O\+N\+N\+E\+C\+T\+\_\+\+T\+LS@{M\+O\+D\+B\+U\+S\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+O\+N\+\_\+\+S\+T\+A\+T\+E\+\_\+\+C\+O\+N\+N\+E\+C\+T\+\_\+\+T\+LS}!modbus\+\_\+server.\+h@{modbus\+\_\+server.\+h}}\index{modbus\+\_\+server.\+h@{modbus\+\_\+server.\+h}!M\+O\+D\+B\+U\+S\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+O\+N\+\_\+\+S\+T\+A\+T\+E\+\_\+\+C\+O\+N\+N\+E\+C\+T\+\_\+\+T\+LS@{M\+O\+D\+B\+U\+S\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+O\+N\+\_\+\+S\+T\+A\+T\+E\+\_\+\+C\+O\+N\+N\+E\+C\+T\+\_\+\+T\+LS}}}\mbox{\Hypertarget{modbus__server_8h_a833fbe8b8a0937e5fd644bcad5b11fbca6c28a65402d48838ba46c3b4895aea2a}\label{modbus__server_8h_a833fbe8b8a0937e5fd644bcad5b11fbca6c28a65402d48838ba46c3b4895aea2a}} 
+M\+O\+D\+B\+U\+S\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+O\+N\+\_\+\+S\+T\+A\+T\+E\+\_\+\+C\+O\+N\+N\+E\+C\+T\+\_\+\+T\+LS&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{M\+O\+D\+B\+U\+S\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+O\+N\+\_\+\+S\+T\+A\+T\+E\+\_\+\+R\+E\+C\+E\+I\+VE@{M\+O\+D\+B\+U\+S\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+O\+N\+\_\+\+S\+T\+A\+T\+E\+\_\+\+R\+E\+C\+E\+I\+VE}!modbus\+\_\+server.\+h@{modbus\+\_\+server.\+h}}\index{modbus\+\_\+server.\+h@{modbus\+\_\+server.\+h}!M\+O\+D\+B\+U\+S\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+O\+N\+\_\+\+S\+T\+A\+T\+E\+\_\+\+R\+E\+C\+E\+I\+VE@{M\+O\+D\+B\+U\+S\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+O\+N\+\_\+\+S\+T\+A\+T\+E\+\_\+\+R\+E\+C\+E\+I\+VE}}}\mbox{\Hypertarget{modbus__server_8h_a833fbe8b8a0937e5fd644bcad5b11fbca695ff92b63e218a16af678dfb23d39fe}\label{modbus__server_8h_a833fbe8b8a0937e5fd644bcad5b11fbca695ff92b63e218a16af678dfb23d39fe}} 
+M\+O\+D\+B\+U\+S\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+O\+N\+\_\+\+S\+T\+A\+T\+E\+\_\+\+R\+E\+C\+E\+I\+VE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{M\+O\+D\+B\+U\+S\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+O\+N\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+E\+ND@{M\+O\+D\+B\+U\+S\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+O\+N\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+E\+ND}!modbus\+\_\+server.\+h@{modbus\+\_\+server.\+h}}\index{modbus\+\_\+server.\+h@{modbus\+\_\+server.\+h}!M\+O\+D\+B\+U\+S\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+O\+N\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+E\+ND@{M\+O\+D\+B\+U\+S\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+O\+N\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+E\+ND}}}\mbox{\Hypertarget{modbus__server_8h_a833fbe8b8a0937e5fd644bcad5b11fbca1ca6f65bfb319297513e97e29860d88e}\label{modbus__server_8h_a833fbe8b8a0937e5fd644bcad5b11fbca1ca6f65bfb319297513e97e29860d88e}} 
+M\+O\+D\+B\+U\+S\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+O\+N\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+E\+ND&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{M\+O\+D\+B\+U\+S\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+O\+N\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+H\+U\+T\+D\+O\+W\+N\+\_\+\+T\+LS@{M\+O\+D\+B\+U\+S\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+O\+N\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+H\+U\+T\+D\+O\+W\+N\+\_\+\+T\+LS}!modbus\+\_\+server.\+h@{modbus\+\_\+server.\+h}}\index{modbus\+\_\+server.\+h@{modbus\+\_\+server.\+h}!M\+O\+D\+B\+U\+S\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+O\+N\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+H\+U\+T\+D\+O\+W\+N\+\_\+\+T\+LS@{M\+O\+D\+B\+U\+S\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+O\+N\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+H\+U\+T\+D\+O\+W\+N\+\_\+\+T\+LS}}}\mbox{\Hypertarget{modbus__server_8h_a833fbe8b8a0937e5fd644bcad5b11fbca71d3d4f43ce3f104b57faecd7f13f00d}\label{modbus__server_8h_a833fbe8b8a0937e5fd644bcad5b11fbca71d3d4f43ce3f104b57faecd7f13f00d}} 
+M\+O\+D\+B\+U\+S\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+O\+N\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+H\+U\+T\+D\+O\+W\+N\+\_\+\+T\+LS&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{M\+O\+D\+B\+U\+S\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+O\+N\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+H\+U\+T\+D\+O\+W\+N\+\_\+\+TX@{M\+O\+D\+B\+U\+S\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+O\+N\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+H\+U\+T\+D\+O\+W\+N\+\_\+\+TX}!modbus\+\_\+server.\+h@{modbus\+\_\+server.\+h}}\index{modbus\+\_\+server.\+h@{modbus\+\_\+server.\+h}!M\+O\+D\+B\+U\+S\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+O\+N\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+H\+U\+T\+D\+O\+W\+N\+\_\+\+TX@{M\+O\+D\+B\+U\+S\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+O\+N\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+H\+U\+T\+D\+O\+W\+N\+\_\+\+TX}}}\mbox{\Hypertarget{modbus__server_8h_a833fbe8b8a0937e5fd644bcad5b11fbcadce5cb26624490f2c00f0fcb745ec8e7}\label{modbus__server_8h_a833fbe8b8a0937e5fd644bcad5b11fbcadce5cb26624490f2c00f0fcb745ec8e7}} 
+M\+O\+D\+B\+U\+S\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+O\+N\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+H\+U\+T\+D\+O\+W\+N\+\_\+\+TX&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{M\+O\+D\+B\+U\+S\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+O\+N\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+H\+U\+T\+D\+O\+W\+N\+\_\+\+RX@{M\+O\+D\+B\+U\+S\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+O\+N\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+H\+U\+T\+D\+O\+W\+N\+\_\+\+RX}!modbus\+\_\+server.\+h@{modbus\+\_\+server.\+h}}\index{modbus\+\_\+server.\+h@{modbus\+\_\+server.\+h}!M\+O\+D\+B\+U\+S\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+O\+N\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+H\+U\+T\+D\+O\+W\+N\+\_\+\+RX@{M\+O\+D\+B\+U\+S\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+O\+N\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+H\+U\+T\+D\+O\+W\+N\+\_\+\+RX}}}\mbox{\Hypertarget{modbus__server_8h_a833fbe8b8a0937e5fd644bcad5b11fbcaa138bd6f722ab8588e3b5e8e0d3b4420}\label{modbus__server_8h_a833fbe8b8a0937e5fd644bcad5b11fbcaa138bd6f722ab8588e3b5e8e0d3b4420}} 
+M\+O\+D\+B\+U\+S\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+O\+N\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+H\+U\+T\+D\+O\+W\+N\+\_\+\+RX&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line 131 of file modbus\+\_\+server.\+h.
+
+
+\begin{DoxyCode}
+132 \{
+133    \hyperlink{modbus__server_8h_a833fbe8b8a0937e5fd644bcad5b11fbcafd635128f09907421773ddeaf15196bb}{MODBUS\_CONNECTION\_STATE\_CLOSED}       = 0,
+134    \hyperlink{modbus__server_8h_a833fbe8b8a0937e5fd644bcad5b11fbca6c28a65402d48838ba46c3b4895aea2a}{MODBUS\_CONNECTION\_STATE\_CONNECT\_TLS}  = 1,
+135    \hyperlink{modbus__server_8h_a833fbe8b8a0937e5fd644bcad5b11fbca695ff92b63e218a16af678dfb23d39fe}{MODBUS\_CONNECTION\_STATE\_RECEIVE}      = 2,
+136    \hyperlink{modbus__server_8h_a833fbe8b8a0937e5fd644bcad5b11fbca1ca6f65bfb319297513e97e29860d88e}{MODBUS\_CONNECTION\_STATE\_SEND}         = 3,
+137    \hyperlink{modbus__server_8h_a833fbe8b8a0937e5fd644bcad5b11fbca71d3d4f43ce3f104b57faecd7f13f00d}{MODBUS\_CONNECTION\_STATE\_SHUTDOWN\_TLS} = 4,
+138    \hyperlink{modbus__server_8h_a833fbe8b8a0937e5fd644bcad5b11fbcadce5cb26624490f2c00f0fcb745ec8e7}{MODBUS\_CONNECTION\_STATE\_SHUTDOWN\_TX}  = 5,
+139    \hyperlink{modbus__server_8h_a833fbe8b8a0937e5fd644bcad5b11fbcaa138bd6f722ab8588e3b5e8e0d3b4420}{MODBUS\_CONNECTION\_STATE\_SHUTDOWN\_RX}  = 6
+140 \} \hyperlink{modbus__server_8h_a833fbe8b8a0937e5fd644bcad5b11fbc}{ModbusConnectionState};
+\end{DoxyCode}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{modbus__server_8h_a3da58c1f01ea19e884dfd727e4dac602}\label{modbus__server_8h_a3da58c1f01ea19e884dfd727e4dac602}} 
+\index{modbus\+\_\+server.\+h@{modbus\+\_\+server.\+h}!modbus\+Server\+Deinit@{modbus\+Server\+Deinit}}
+\index{modbus\+Server\+Deinit@{modbus\+Server\+Deinit}!modbus\+\_\+server.\+h@{modbus\+\_\+server.\+h}}
+\subsubsection{\texorpdfstring{modbus\+Server\+Deinit()}{modbusServerDeinit()}}
+{\footnotesize\ttfamily void modbus\+Server\+Deinit (\begin{DoxyParamCaption}\item[{\hyperlink{modbus__server_8h_a3a5f2957951349d3c053b1ebe94fe4f7}{Modbus\+Server\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Release Modbus/\+T\+CP server context. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the Modbus/\+T\+CP server context \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 357 of file modbus\+\_\+server.\+c.
+
+
+\begin{DoxyCode}
+358 \{
+359    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+360 
+361    \textcolor{comment}{//Make sure the Modbus/TCP server context is valid}
+362    \textcolor{keywordflow}{if}(context != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+363    \{
+364       \textcolor{comment}{//Loop through the connection table}
+365       \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{modbus__server_8h_ae256368c84a889cda6e1e67109c23ee6}{MODBUS\_SERVER\_MAX\_CONNECTIONS}; i++)
+366       \{
+367          \textcolor{comment}{//Close client connection}
+368          \hyperlink{modbus__server__transport_8c_a9e14f681b81e91e9dfbe259c4bd63c04}{modbusServerCloseConnection}(&context->connection[i]);
+369       \}
+370 
+371       \textcolor{comment}{//Close listening socket}
+372       \hyperlink{socket_8c_ac5012e9f71c97e2ea0410f2c5baccb0e}{socketClose}(context->socket);
+373 
+374 \textcolor{preprocessor}{#if (MODBUS\_SERVER\_TLS\_SUPPORT == ENABLED && TLS\_TICKET\_SUPPORT == ENABLED)}
+375       \textcolor{comment}{//Release ticket encryption context}
+376       \hyperlink{tls__ticket_8c_ad3813e8c1e07d368b1aa50d0e7028fe3}{tlsFreeTicketContext}(&context->tlsTicketContext);
+377 \textcolor{preprocessor}{#endif}
+378 
+379       \textcolor{comment}{//Free previously allocated resources}
+380       \hyperlink{os__port__chibios_8c_a25827a49278bad6150b04b47165fda3d}{osDeleteEvent}(&context->event);
+381 
+382       \textcolor{comment}{//Clear Modbus/TCP server context}
+383       memset(context, 0, \textcolor{keyword}{sizeof}(\hyperlink{modbus__server_8h_a3a5f2957951349d3c053b1ebe94fe4f7}{ModbusServerContext}));
+384    \}
+385 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{modbus__server_8h_ae348601a0d2848071613d31f949aeeff}\label{modbus__server_8h_ae348601a0d2848071613d31f949aeeff}} 
+\index{modbus\+\_\+server.\+h@{modbus\+\_\+server.\+h}!modbus\+Server\+Get\+Default\+Settings@{modbus\+Server\+Get\+Default\+Settings}}
+\index{modbus\+Server\+Get\+Default\+Settings@{modbus\+Server\+Get\+Default\+Settings}!modbus\+\_\+server.\+h@{modbus\+\_\+server.\+h}}
+\subsubsection{\texorpdfstring{modbus\+Server\+Get\+Default\+Settings()}{modbusServerGetDefaultSettings()}}
+{\footnotesize\ttfamily void modbus\+Server\+Get\+Default\+Settings (\begin{DoxyParamCaption}\item[{\hyperlink{structModbusServerSettings}{Modbus\+Server\+Settings} $\ast$}]{settings }\end{DoxyParamCaption})}
+
+
+
+Initialize settings with default values. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em settings} & Structure that contains Modbus/\+T\+CP server settings \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 49 of file modbus\+\_\+server.\+c.
+
+
+\begin{DoxyCode}
+50 \{
+51    \textcolor{comment}{//The Modbus/TCP server is not bound to any interface}
+52    settings->\hyperlink{structModbusServerSettings_a8a5b5283989b576e26a24e970b70eb32}{interface} = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+53 
+54    \textcolor{comment}{//Modbus/TCP port number}
+55    settings->\hyperlink{structModbusServerSettings_a0da7876580b2d9302e1d3a3b85ec9060}{port} = \hyperlink{modbus__common_8h_a4cf155351ba2d9f16240cb2e43aa6b50}{MODBUS\_TCP\_PORT};
+56    \textcolor{comment}{//Default unit identifier}
+57    settings->\hyperlink{structModbusServerSettings_ad120c4c503d9d0a0c696393b6d1dd0c4}{unitId} = \hyperlink{modbus__common_8h_abd7ccef87881102e441acb30ab051d01}{MODBUS\_DEFAULT\_UNIT\_ID};
+58 
+59 \textcolor{preprocessor}{#if (MODBUS\_SERVER\_TLS\_SUPPORT == ENABLED)}
+60    \textcolor{comment}{//TLS initialization callback function}
+61    settings->\hyperlink{structModbusServerSettings_a47ec2e1ff36693be192539cd5543a742}{tlsInitCallback} = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+62 \textcolor{preprocessor}{#endif}
+63 
+64    \textcolor{comment}{//Lock Modbus table callback function}
+65    settings->\hyperlink{structModbusServerSettings_ab5fc3a85c04473ffc6f99fd769c4030e}{lockCallback} = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+66    \textcolor{comment}{//Unlock Modbus table callback function}
+67    settings->\hyperlink{structModbusServerSettings_ae3ae55909a636d05e82be40b638797ac}{unlockCallback} = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+68    \textcolor{comment}{//Get coil state callback function}
+69    settings->\hyperlink{structModbusServerSettings_a5447c4373d3859174ebc5cf30d355ff4}{readCoilCallback} = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+70    \textcolor{comment}{//Get discrete input state callback function}
+71    settings->\hyperlink{structModbusServerSettings_a559d5de77d56d25a06e2bc04c72e08fd}{readDiscreteInputCallback} = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+72    \textcolor{comment}{//Set coil state callback function}
+73    settings->\hyperlink{structModbusServerSettings_a387f80bcdb0b1140d3f3e46b308be59d}{writeCoilCallback} = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+74    \textcolor{comment}{//Get register value callback function}
+75    settings->\hyperlink{structModbusServerSettings_aaa25139042e2337576526848e05a4a5d}{readRegCallback} = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+76    \textcolor{comment}{//Get holding register value callback function}
+77    settings->\hyperlink{structModbusServerSettings_a859712883e372e00b39a4ac270a402bf}{readHoldingRegCallback} = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+78    \textcolor{comment}{//Get input register value callback function}
+79    settings->\hyperlink{structModbusServerSettings_a1657429226ae26f0c0fe0c4f81d8c05f}{readInputRegCallback} = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+80    \textcolor{comment}{//Set register value callback function}
+81    settings->\hyperlink{structModbusServerSettings_ab35e47bf928ab662f9c4782dddb05527}{writeRegCallback} = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+82    \textcolor{comment}{//PDU processing callback}
+83    settings->\hyperlink{structModbusServerSettings_afec0a1863beec0c5d46bf137cf00d570}{processPduCallback} = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+84 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{modbus__server_8h_a87dce7b985dfa115bd53370aeb49406e}\label{modbus__server_8h_a87dce7b985dfa115bd53370aeb49406e}} 
+\index{modbus\+\_\+server.\+h@{modbus\+\_\+server.\+h}!modbus\+Server\+Init@{modbus\+Server\+Init}}
+\index{modbus\+Server\+Init@{modbus\+Server\+Init}!modbus\+\_\+server.\+h@{modbus\+\_\+server.\+h}}
+\subsubsection{\texorpdfstring{modbus\+Server\+Init()}{modbusServerInit()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} modbus\+Server\+Init (\begin{DoxyParamCaption}\item[{\hyperlink{modbus__server_8h_a3a5f2957951349d3c053b1ebe94fe4f7}{Modbus\+Server\+Context} $\ast$}]{context,  }\item[{const \hyperlink{structModbusServerSettings}{Modbus\+Server\+Settings} $\ast$}]{settings }\end{DoxyParamCaption})}
+
+
+
+Initialize Modbus/\+T\+CP server context. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the Modbus/\+T\+CP server context \\
+\hline
+\mbox{\tt in}  & {\em settings} & Modbus/\+T\+CP server specific settings \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 94 of file modbus\+\_\+server.\+c.
+
+
+\begin{DoxyCode}
+96 \{
+97    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+98 
+99    \textcolor{comment}{//Debug message}
+100    \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"Initializing Modbus/TCP server...\(\backslash\)r\(\backslash\)n"});
+101 
+102    \textcolor{comment}{//Ensure the parameters are valid}
+103    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || settings == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+104       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+105 
+106    \textcolor{comment}{//Clear Modbus/TCP server context}
+107    memset(context, 0, \textcolor{keyword}{sizeof}(\hyperlink{modbus__server_8h_a3a5f2957951349d3c053b1ebe94fe4f7}{ModbusServerContext}));
+108 
+109    \textcolor{comment}{//Save user settings}
+110    context->settings = *settings;
+111 
+112    \textcolor{comment}{//Create an event object to poll the state of sockets}
+113    \textcolor{keywordflow}{if}(!\hyperlink{os__port__chibios_8c_ac1658f3fed1eb64efcd47e4503a9ef2e}{osCreateEvent}(&context->event))
+114    \{
+115       \textcolor{comment}{//Failed to create event}
+116       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca528efe91b7a7e4bcc9a6de7d4b778c67}{ERROR\_OUT\_OF\_RESOURCES};
+117    \}
+118 
+119    \textcolor{comment}{//Start of exception handling block}
+120    \textcolor{keywordflow}{do}
+121    \{
+122       \textcolor{comment}{//Open a TCP socket}
+123       context->socket = \hyperlink{socket_8c_aa139bbf42b326b52eb08cf52771ac337}{socketOpen}(\hyperlink{socket_8h_aa78c7398fa81f7f62aa233159d4d8d97a9dab003c4dc9f7279e806241534d4859}{SOCKET\_TYPE\_STREAM}, 
+      \hyperlink{socket_8h_a56eb0e60bda5d1d8a2e702228405d969ae0f38a6f025bce7700b3cf0ddd04bb2a}{SOCKET\_IP\_PROTO\_TCP});
+124 
+125       \textcolor{comment}{//Failed to open socket?}
+126       \textcolor{keywordflow}{if}(context->socket == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+127       \{
+128          \textcolor{comment}{//Report an error}
+129          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cab721230e985e398cc0977dd729a12c61}{ERROR\_OPEN\_FAILED};
+130          \textcolor{comment}{//Exit immediately}
+131          \textcolor{keywordflow}{break};
+132       \}
+133 
+134       \textcolor{comment}{//Force the socket to operate in non-blocking mode}
+135       error = \hyperlink{socket_8c_abdd29ac0ba4a644c726f5b1280680099}{socketSetTimeout}(context->socket, 0);
+136       \textcolor{comment}{//Any error to report?}
+137       \textcolor{keywordflow}{if}(error)
+138          \textcolor{keywordflow}{break};
+139 
+140       \textcolor{comment}{//Associate the socket with the relevant interface}
+141       error = \hyperlink{net__legacy_8h_a80bc49fa99e5654d8c345cd5c70d36d3}{socketBindToInterface}(context->socket, settings->
+      \hyperlink{structModbusServerSettings_a8a5b5283989b576e26a24e970b70eb32}{interface});
+142       \textcolor{comment}{//Any error to report?}
+143       \textcolor{keywordflow}{if}(error)
+144          \textcolor{keywordflow}{break};
+145 
+146       \textcolor{comment}{//The Modbus/TCP server listens for connection requests on port 502}
+147       error = \hyperlink{socket_8c_a56de93ca9f66782811dbe151d6da0b9c}{socketBind}(context->socket, &\hyperlink{ip_8c_a132481a9d89ddf554ea8bbbe342e5d5a}{IP\_ADDR\_ANY}, settings->
+      \hyperlink{structModbusServerSettings_a0da7876580b2d9302e1d3a3b85ec9060}{port});
+148       \textcolor{comment}{//Any error to report?}
+149       \textcolor{keywordflow}{if}(error)
+150          \textcolor{keywordflow}{break};
+151 
+152       \textcolor{comment}{//Place socket in listening state}
+153       error = \hyperlink{socket_8c_a96b275d0dd033cf5fc36ba1a9c4543e3}{socketListen}(context->socket, 0);
+154       \textcolor{comment}{//Any error to report?}
+155       \textcolor{keywordflow}{if}(error)
+156          \textcolor{keywordflow}{break};
+157 
+158 \textcolor{preprocessor}{#if (MODBUS\_SERVER\_TLS\_SUPPORT == ENABLED && TLS\_TICKET\_SUPPORT == ENABLED)}
+159       \textcolor{comment}{//Initialize ticket encryption context}
+160       error = \hyperlink{tls__ticket_8c_a900454bf2fd13397d121c59265d93365}{tlsInitTicketContext}(&context->tlsTicketContext);
+161       \textcolor{comment}{//Any error to report?}
+162       \textcolor{keywordflow}{if}(error)
+163          \textcolor{keywordflow}{return} error;
+164 \textcolor{preprocessor}{#endif}
+165 
+166       \textcolor{comment}{//End of exception handling block}
+167    \} \textcolor{keywordflow}{while}(0);
+168 
+169    \textcolor{comment}{//Check status code}
+170    \textcolor{keywordflow}{if}(error)
+171    \{
+172       \textcolor{comment}{//Clean up side effects}
+173       \hyperlink{modbus__server_8c_a3da58c1f01ea19e884dfd727e4dac602}{modbusServerDeinit}(context);
+174    \}
+175 
+176    \textcolor{comment}{//Return status code}
+177    \textcolor{keywordflow}{return} error;
+178 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{modbus__server_8h_afb397fdb07ab1e5e74b655c6216c8017}\label{modbus__server_8h_afb397fdb07ab1e5e74b655c6216c8017}} 
+\index{modbus\+\_\+server.\+h@{modbus\+\_\+server.\+h}!modbus\+Server\+Start@{modbus\+Server\+Start}}
+\index{modbus\+Server\+Start@{modbus\+Server\+Start}!modbus\+\_\+server.\+h@{modbus\+\_\+server.\+h}}
+\subsubsection{\texorpdfstring{modbus\+Server\+Start()}{modbusServerStart()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} modbus\+Server\+Start (\begin{DoxyParamCaption}\item[{\hyperlink{modbus__server_8h_a3a5f2957951349d3c053b1ebe94fe4f7}{Modbus\+Server\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Start Modbus/\+T\+CP server. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the Modbus/\+T\+CP server context \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 186 of file modbus\+\_\+server.\+c.
+
+
+\begin{DoxyCode}
+187 \{
+188    \hyperlink{structOsTask}{OsTask} *task;
+189 
+190    \textcolor{comment}{//Debug message}
+191    \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"Starting Modbus/TCP server...\(\backslash\)r\(\backslash\)n"});
+192 
+193    \textcolor{comment}{//Make sure the Modbus/TCP server context is valid}
+194    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+195       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+196 
+197    \textcolor{comment}{//Create the Modbus/TCP server task}
+198    task = \hyperlink{os__port__chibios_8c_aef8c6fe13a0df9e5cfaeb0501ecbac3e}{osCreateTask}(\textcolor{stringliteral}{"Modbus/TCP Server"}, (\hyperlink{os__port__chibios_8h_a52a4e1975bb554c2ce70aaac35b752d2}{OsTaskCode}) 
+      \hyperlink{modbus__server_8c_acbfb544af77674615158e7f9c32125a0}{modbusServerTask},
+199       context, \hyperlink{modbus__server_8h_a32b1a4f1b72c75adadd9570be65cd2cf}{MODBUS\_SERVER\_STACK\_SIZE}, 
+      \hyperlink{modbus__server_8h_a903cdffb4de169f9476ec04a7066222d}{MODBUS\_SERVER\_PRIORITY});
+200 
+201    \textcolor{comment}{//Unable to create the task?}
+202    \textcolor{keywordflow}{if}(task == \hyperlink{os__port_8h_aa673e52d8b286c3b613ad127aa85d536}{OS\_INVALID\_HANDLE})
+203       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca528efe91b7a7e4bcc9a6de7d4b778c67}{ERROR\_OUT\_OF\_RESOURCES};
+204 
+205    \textcolor{comment}{//Successful processing}
+206    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+207 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{modbus__server_8h_acbfb544af77674615158e7f9c32125a0}\label{modbus__server_8h_acbfb544af77674615158e7f9c32125a0}} 
+\index{modbus\+\_\+server.\+h@{modbus\+\_\+server.\+h}!modbus\+Server\+Task@{modbus\+Server\+Task}}
+\index{modbus\+Server\+Task@{modbus\+Server\+Task}!modbus\+\_\+server.\+h@{modbus\+\_\+server.\+h}}
+\subsubsection{\texorpdfstring{modbus\+Server\+Task()}{modbusServerTask()}}
+{\footnotesize\ttfamily void modbus\+Server\+Task (\begin{DoxyParamCaption}\item[{\hyperlink{modbus__server_8h_a3a5f2957951349d3c053b1ebe94fe4f7}{Modbus\+Server\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Modbus/\+T\+CP server task. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the Modbus/\+T\+CP server context \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 215 of file modbus\+\_\+server.\+c.
+
+
+\begin{DoxyCode}
+216 \{
+217    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+218    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+219    \hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\_t} timeout;
+220    \hyperlink{modbus__server_8h_a9bb52dfbcf1ed2f018736b720a3b0748}{ModbusClientConnection} *connection;
+221    \hyperlink{structSocketEventDesc}{SocketEventDesc} eventDesc[\hyperlink{modbus__server_8h_ae256368c84a889cda6e1e67109c23ee6}{MODBUS\_SERVER\_MAX\_CONNECTIONS} + 1]
+      ;
+222 
+223 \textcolor{preprocessor}{#if (NET\_RTOS\_SUPPORT == ENABLED)}
+224    \textcolor{comment}{//Task prologue}
+225    \hyperlink{os__port__chibios_8h_abd3485ee30ab6a2de1208b0498a449cf}{osEnterTask}();
+226 
+227    \textcolor{comment}{//Process events}
+228    \textcolor{keywordflow}{while}(1)
+229    \{
+230 \textcolor{preprocessor}{#endif}
+231       \textcolor{comment}{//Set polling timeout}
+232       timeout = \hyperlink{modbus__server_8h_a1c5f07ff57d0b40825d47ad6652094fa}{MODBUS\_SERVER\_TICK\_INTERVAL};
+233 
+234       \textcolor{comment}{//Clear event descriptor set}
+235       memset(eventDesc, 0, \textcolor{keyword}{sizeof}(eventDesc));
+236 
+237       \textcolor{comment}{//Specify the events the application is interested in}
+238       \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{modbus__server_8h_ae256368c84a889cda6e1e67109c23ee6}{MODBUS\_SERVER\_MAX\_CONNECTIONS}; i++)
+239       \{
+240          \textcolor{comment}{//Point to the structure describing the current connection}
+241          connection = &context->connection[i];
+242 
+243          \textcolor{comment}{//Check the state of the connection}
+244          \textcolor{keywordflow}{if}(connection->state == \hyperlink{modbus__server_8h_a833fbe8b8a0937e5fd644bcad5b11fbca6c28a65402d48838ba46c3b4895aea2a}{MODBUS\_CONNECTION\_STATE\_CONNECT\_TLS})
+245          \{
+246 \textcolor{preprocessor}{#if (MODBUS\_SERVER\_TLS\_SUPPORT == ENABLED)}
+247             \textcolor{comment}{//Any data pending in the send buffer?}
+248             \textcolor{keywordflow}{if}(\hyperlink{tls_8c_a54064670848f38f025bc40d612179890}{tlsIsTxReady}(connection->tlsContext))
+249             \{
+250                \textcolor{comment}{//Wait until there is more room in the send buffer}
+251                eventDesc[i].\hyperlink{structSocketEventDesc_a31fbff5c4d515c81ff43934e8aeba08c}{socket} = connection->socket;
+252                eventDesc[i].\hyperlink{structSocketEventDesc_ac979f02c9bb6b9517ed9c2d1b17e6201}{eventMask} = \hyperlink{socket_8h_add8a4c36456f478ab23bd4372aebde6ea078fc309f8e29689ee08e584f00a73b6}{SOCKET\_EVENT\_TX\_READY};
+253             \}
+254             \textcolor{keywordflow}{else}
+255             \{
+256                \textcolor{comment}{//Wait for data to be available for reading}
+257                eventDesc[i].\hyperlink{structSocketEventDesc_a31fbff5c4d515c81ff43934e8aeba08c}{socket} = connection->socket;
+258                eventDesc[i].\hyperlink{structSocketEventDesc_ac979f02c9bb6b9517ed9c2d1b17e6201}{eventMask} = \hyperlink{socket_8h_add8a4c36456f478ab23bd4372aebde6ea72985d7e82625f037ca8a6734f49996c}{SOCKET\_EVENT\_RX\_READY};
+259             \}
+260 \textcolor{preprocessor}{#endif}
+261          \}
+262          \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(connection->state == \hyperlink{modbus__server_8h_a833fbe8b8a0937e5fd644bcad5b11fbca695ff92b63e218a16af678dfb23d39fe}{MODBUS\_CONNECTION\_STATE\_RECEIVE})
+263          \{
+264 \textcolor{preprocessor}{#if (MODBUS\_SERVER\_TLS\_SUPPORT == ENABLED)}
+265             \textcolor{comment}{//Any data available in the receive buffer?}
+266             \textcolor{keywordflow}{if}(connection->tlsContext != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} &&
+267                \hyperlink{tls_8c_ae3de9c47e92455f6dd4739d54bc6981c}{tlsIsRxReady}(connection->tlsContext))
+268             \{
+269                \textcolor{comment}{//No need to poll the underlying socket for incoming traffic}
+270                eventDesc[i].\hyperlink{structSocketEventDesc_aca8e460cfc75c58870239584437a3c1d}{eventFlags} |= \hyperlink{socket_8h_add8a4c36456f478ab23bd4372aebde6ea72985d7e82625f037ca8a6734f49996c}{SOCKET\_EVENT\_RX\_READY};
+271                timeout = 0;
+272             \}
+273             \textcolor{keywordflow}{else}
+274 \textcolor{preprocessor}{#endif}
+275             \{
+276                \textcolor{comment}{//Wait for data to be available for reading}
+277                eventDesc[i].\hyperlink{structSocketEventDesc_a31fbff5c4d515c81ff43934e8aeba08c}{socket} = connection->socket;
+278                eventDesc[i].\hyperlink{structSocketEventDesc_ac979f02c9bb6b9517ed9c2d1b17e6201}{eventMask} = \hyperlink{socket_8h_add8a4c36456f478ab23bd4372aebde6ea72985d7e82625f037ca8a6734f49996c}{SOCKET\_EVENT\_RX\_READY};
+279             \}
+280          \}
+281          \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(connection->state == \hyperlink{modbus__server_8h_a833fbe8b8a0937e5fd644bcad5b11fbca1ca6f65bfb319297513e97e29860d88e}{MODBUS\_CONNECTION\_STATE\_SEND} ||
+282             connection->state == \hyperlink{modbus__server_8h_a833fbe8b8a0937e5fd644bcad5b11fbca71d3d4f43ce3f104b57faecd7f13f00d}{MODBUS\_CONNECTION\_STATE\_SHUTDOWN\_TLS})
+283          \{
+284             \textcolor{comment}{//Wait until there is more room in the send buffer}
+285             eventDesc[i].\hyperlink{structSocketEventDesc_a31fbff5c4d515c81ff43934e8aeba08c}{socket} = connection->socket;
+286             eventDesc[i].\hyperlink{structSocketEventDesc_ac979f02c9bb6b9517ed9c2d1b17e6201}{eventMask} = \hyperlink{socket_8h_add8a4c36456f478ab23bd4372aebde6ea078fc309f8e29689ee08e584f00a73b6}{SOCKET\_EVENT\_TX\_READY};
+287          \}
+288          \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(connection->state == \hyperlink{modbus__server_8h_a833fbe8b8a0937e5fd644bcad5b11fbcadce5cb26624490f2c00f0fcb745ec8e7}{MODBUS\_CONNECTION\_STATE\_SHUTDOWN\_TX}
+      )
+289          \{
+290             \textcolor{comment}{//Wait for the FIN to be acknowledged}
+291             eventDesc[i].\hyperlink{structSocketEventDesc_a31fbff5c4d515c81ff43934e8aeba08c}{socket} = connection->socket;
+292             eventDesc[i].\hyperlink{structSocketEventDesc_ac979f02c9bb6b9517ed9c2d1b17e6201}{eventMask} = \hyperlink{socket_8h_add8a4c36456f478ab23bd4372aebde6ea7c192744b90c583effbac921fe00c4a0}{SOCKET\_EVENT\_TX\_SHUTDOWN};
+293          \}
+294          \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(connection->state == \hyperlink{modbus__server_8h_a833fbe8b8a0937e5fd644bcad5b11fbcaa138bd6f722ab8588e3b5e8e0d3b4420}{MODBUS\_CONNECTION\_STATE\_SHUTDOWN\_RX}
+      )
+295          \{
+296             \textcolor{comment}{//Wait for a FIN to be received}
+297             eventDesc[i].\hyperlink{structSocketEventDesc_a31fbff5c4d515c81ff43934e8aeba08c}{socket} = connection->socket;
+298             eventDesc[i].\hyperlink{structSocketEventDesc_ac979f02c9bb6b9517ed9c2d1b17e6201}{eventMask} = \hyperlink{socket_8h_add8a4c36456f478ab23bd4372aebde6ea0578189399787b74acb9636b9eef30fc}{SOCKET\_EVENT\_RX\_SHUTDOWN};
+299          \}
+300          \textcolor{keywordflow}{else}
+301          \{
+302             \textcolor{comment}{//Just for sanity}
+303          \}
+304       \}
+305 
+306       \textcolor{comment}{//The Modbus/TCP server listens for connection requests on port 502}
+307       eventDesc[i].\hyperlink{structSocketEventDesc_a31fbff5c4d515c81ff43934e8aeba08c}{socket} = context->socket;
+308       eventDesc[i].\hyperlink{structSocketEventDesc_ac979f02c9bb6b9517ed9c2d1b17e6201}{eventMask} = \hyperlink{socket_8h_add8a4c36456f478ab23bd4372aebde6ea72985d7e82625f037ca8a6734f49996c}{SOCKET\_EVENT\_RX\_READY};
+309 
+310       \textcolor{comment}{//Wait for one of the set of sockets to become ready to perform I/O}
+311       error = \hyperlink{socket_8c_a57ec969d9a3deee2dae93fe0a891e583}{socketPoll}(eventDesc, MODBUS\_SERVER\_MAX\_CONNECTIONS + 1,
+312          &context->event, timeout);
+313 
+314       \textcolor{comment}{//Check status code}
+315       \textcolor{keywordflow}{if}(error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR} || error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4d0f7be53b837f004379ac6bbd56f1e2}{ERROR\_TIMEOUT})
+316       \{
+317          \textcolor{comment}{//Event-driven processing}
+318          \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{modbus__server_8h_ae256368c84a889cda6e1e67109c23ee6}{MODBUS\_SERVER\_MAX\_CONNECTIONS}; i++)
+319          \{
+320             \textcolor{comment}{//Point to the structure describing the current connection}
+321             connection = &context->connection[i];
+322 
+323             \textcolor{comment}{//Loop through active connections only}
+324             \textcolor{keywordflow}{if}(connection->state != \hyperlink{modbus__server_8h_a833fbe8b8a0937e5fd644bcad5b11fbcafd635128f09907421773ddeaf15196bb}{MODBUS\_CONNECTION\_STATE\_CLOSED})
+325             \{
+326                \textcolor{comment}{//Check whether the socket is ready to perform I/O}
+327                \textcolor{keywordflow}{if}(eventDesc[i].eventFlags != 0)
+328                \{
+329                   \textcolor{comment}{//Connection event handler}
+330                   \hyperlink{modbus__server__misc_8c_a9d1e16a5acf533e708f0d7e240bca868}{modbusServerProcessConnectionEvents}(context, 
+      connection);
+331                \}
+332             \}
+333          \}
+334 
+335          \textcolor{comment}{//Any connection request received on port 502?}
+336          \textcolor{keywordflow}{if}(eventDesc[i].eventFlags != 0)
+337          \{
+338             \textcolor{comment}{//Accept connection request}
+339             \hyperlink{modbus__server__transport_8c_a032f78cca9279673cd876e5ad16ec0c3}{modbusServerAcceptConnection}(context);
+340          \}
+341       \}
+342 
+343       \textcolor{comment}{//Handle periodic operations}
+344       \hyperlink{modbus__server__misc_8c_a839382ddf99808cd6d4c3ea3afe34083}{modbusServerTick}(context);
+345 
+346 \textcolor{preprocessor}{#if (NET\_RTOS\_SUPPORT == ENABLED)}
+347    \}
+348 \textcolor{preprocessor}{#endif}
+349 \}
+\end{DoxyCode}

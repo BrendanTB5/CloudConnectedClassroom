@@ -1,0 +1,130 @@
+\hypertarget{group__WifiWpsFn}{}\section{m2m\+\_\+wifi\+\_\+wps}
+\label{group__WifiWpsFn}\index{m2m\+\_\+wifi\+\_\+wps@{m2m\+\_\+wifi\+\_\+wps}}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group__BSPDefine_gaecc0323d771e41ef81a76b5f12783e22}{N\+M\+I\+\_\+\+A\+PI} \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} \hyperlink{group__WifiWpsFn_ga2130dab81af44784dac78e2ae8c2601c}{m2m\+\_\+wifi\+\_\+wps} (\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} u8\+Trigger\+Type, const char $\ast$pc\+Pin\+Number)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Asynchronous W\+PS triggering function. This function is called for the W\+I\+LC to enter the W\+PS (Wi-\/\+Fi Protected Setup) mode. The result is passed to the Wi-\/\+Fi notification callback with the event M2\+M\+\_\+\+W\+I\+F\+I\+\_\+\+R\+E\+Q\+\_\+\+W\+PS. 
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group__WifiWpsFn_ga2130dab81af44784dac78e2ae8c2601c}\label{group__WifiWpsFn_ga2130dab81af44784dac78e2ae8c2601c}} 
+\index{m2m\+\_\+wifi\+\_\+wps@{m2m\+\_\+wifi\+\_\+wps}!m2m\+\_\+wifi\+\_\+wps@{m2m\+\_\+wifi\+\_\+wps}}
+\index{m2m\+\_\+wifi\+\_\+wps@{m2m\+\_\+wifi\+\_\+wps}!m2m\+\_\+wifi\+\_\+wps@{m2m\+\_\+wifi\+\_\+wps}}
+\subsubsection{\texorpdfstring{m2m\+\_\+wifi\+\_\+wps()}{m2m\_wifi\_wps()}}
+{\footnotesize\ttfamily \hyperlink{group__BSPDefine_gaecc0323d771e41ef81a76b5f12783e22}{N\+M\+I\+\_\+\+A\+PI} \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} m2m\+\_\+wifi\+\_\+wps (\begin{DoxyParamCaption}\item[{\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8}}]{u8\+Trigger\+Type,  }\item[{const char $\ast$}]{pc\+Pin\+Number }\end{DoxyParamCaption})}
+
+
+
+{\ttfamily \#include $<$\hyperlink{m2m__wifi_8h}{third\+\_\+party/atmel/devices/wilc1000/driver/include/m2m\+\_\+wifi.\+h}$>$}
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em u8\+Trigger\+Type} & W\+PS Trigger method. Could be\+:
+\begin{DoxyItemize}
+\item \hyperlink{group__WlanEnums_gga5bbde63fb908694883507ec7295f74f6ae52305c62b5997a9f4f85b039062465c}{W\+P\+S\+\_\+\+P\+I\+N\+\_\+\+T\+R\+I\+G\+G\+ER} Push button method
+\item \hyperlink{group__WlanEnums_gga5bbde63fb908694883507ec7295f74f6aa578860ada0f036843221e9a5e87d934}{W\+P\+S\+\_\+\+P\+B\+C\+\_\+\+T\+R\+I\+G\+G\+ER} Pin method
+\end{DoxyItemize}\\
+\hline
+\mbox{\tt in}  & {\em pc\+Pin\+Number} & P\+IN number for W\+PS P\+IN method. It is not used if the trigger type is W\+P\+S\+\_\+\+P\+B\+C\+\_\+\+T\+R\+I\+G\+G\+ER. It must follow the rules stated by the W\+PS Standard.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyWarning}{Warning}
+This function is not allowed in AP or P2P modes.
+\end{DoxyWarning}
+\begin{DoxyPrecond}{Precondition}
+
+\begin{DoxyItemize}
+\item A Wi-\/\+Fi notification callback of type (\hyperlink{group__WlanEnums_gac5302f32839285fe8375c159087aa8a1}{tpf\+App\+Wifi\+Cb} M\+U\+ST be implemented and registered at startup. Registering the callback is done through passing it to the \hyperlink{group__WifiInitFn_ga73c734812e844d96d860c4e93e9daf35}{m2m\+\_\+wifi\+\_\+init}.
+\item The event M2\+M\+\_\+\+W\+I\+F\+I\+\_\+\+R\+E\+Q\+\_\+\+W\+PS must be handled in the callback to receive the W\+PS status.
+\item The W\+I\+LC device M\+U\+ST be in I\+D\+LE or S\+TA mode. If AP or P2P mode is active, the W\+PS will not be performed.
+\item The \hyperlink{group__WifiHandleEventsFn_ga461a4edc057cec8c00cf124a07aa3b02}{m2m\+\_\+wifi\+\_\+handle\+\_\+events} M\+U\+ST be called to receive the responses in the callback. 
+\end{DoxyItemize}
+\end{DoxyPrecond}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{group__WlanEnums_gac5302f32839285fe8375c159087aa8a1}{tpf\+App\+Wifi\+Cb} \hyperlink{group__WifiInitFn_ga73c734812e844d96d860c4e93e9daf35}{m2m\+\_\+wifi\+\_\+init} M2\+M\+\_\+\+W\+I\+F\+I\+\_\+\+R\+E\+Q\+\_\+\+W\+PS \hyperlink{group__WlanEnums_ga5bbde63fb908694883507ec7295f74f6}{tenu\+W\+P\+S\+Trigger} \hyperlink{structtstrM2MWPSInfo}{tstr\+M2\+M\+W\+P\+S\+Info}
+\end{DoxySeeAlso}
+\begin{DoxyReturn}{Returns}
+The function returns \hyperlink{nm__common_8h_a9ef27ba27aafdd1aa3a79d3ba2c36b8f}{M2\+M\+\_\+\+S\+U\+C\+C\+E\+SS} for successful operations and a negative value otherwise. 
+\end{DoxyReturn}
+\hypertarget{group__WifiEnableMonitorModeFn_Example}{}\subsection{Example}\label{group__WifiEnableMonitorModeFn_Example}
+The code snippet shows an example of how wifi wps is triggered . 
+\begin{DoxyCode}
+\textcolor{preprocessor}{#include "\hyperlink{m2m__wifi_8h}{m2m\_wifi.h}"}
+\textcolor{preprocessor}{#include "\hyperlink{m2m__types_8h}{m2m\_types.h}"}
+
+\textcolor{keywordtype}{void} wifi\_event\_cb(\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} u8WiFiEvent, \textcolor{keywordtype}{void} * pvMsg)
+\{
+    \textcolor{keywordflow}{switch}(u8WiFiEvent)
+    \{
+    \textcolor{keywordflow}{case} M2M\_WIFI\_REQ\_WPS:
+        \{
+            \hyperlink{structtstrM2MWPSInfo}{tstrM2MWPSInfo}  *pstrWPS = (\hyperlink{structtstrM2MWPSInfo}{tstrM2MWPSInfo}*)pvMsg;
+            \textcolor{keywordflow}{if}(pstrWPS->\hyperlink{structtstrM2MWPSInfo_a6d61ebf61a47c7a83231fac0800c49c9}{u8AuthType} != 0)
+            \{
+                printf(\textcolor{stringliteral}{"WPS SSID           : %s\(\backslash\)r\(\backslash\)n"},pstrWPS->\hyperlink{structtstrM2MWPSInfo_a679b8247d9099096deffa1522dccbbde}{au8SSID});
+                printf(\textcolor{stringliteral}{"WPS PSK            : %s\(\backslash\)r\(\backslash\)n"},pstrWPS->\hyperlink{structtstrM2MWPSInfo_a38d83b9735bd2ebc5304d1f6d3c6c879}{au8PSK});
+                printf(\textcolor{stringliteral}{"WPS SSID Auth Type : %s\(\backslash\)r\(\backslash\)n"},pstrWPS->\hyperlink{structtstrM2MWPSInfo_a6d61ebf61a47c7a83231fac0800c49c9}{u8AuthType} == 
+      \hyperlink{group__WlanEnums_ggaa232a09c953ec8200c13774f94107b05a81b513753be791c13b73d0b2d3639b69}{M2M\_WIFI\_SEC\_OPEN} ? \textcolor{stringliteral}{"OPEN"} : \textcolor{stringliteral}{"WPA/WPA2"});
+                printf(\textcolor{stringliteral}{"WPS Channel        : %d\(\backslash\)r\(\backslash\)n"},pstrWPS->\hyperlink{structtstrM2MWPSInfo_a693e6204dbbe233cbf7aaa26e33d9f5c}{u8Ch} + 1);
+                
+                \textcolor{comment}{// establish Wi-Fi connection}
+                \hyperlink{group__WifiConnectFn_ga19c9871147efe70f5d9c2cc2cdd5bff0}{m2m\_wifi\_connect}((\textcolor{keywordtype}{char}*)pstrWPS->\hyperlink{structtstrM2MWPSInfo_a679b8247d9099096deffa1522dccbbde}{au8SSID}, (
+      \hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8})\hyperlink{nm__common_8h_a3c10c83b6b5eda6b18bbc40ca411eeb4}{m2m\_strlen}(pstrWPS->\hyperlink{structtstrM2MWPSInfo_a679b8247d9099096deffa1522dccbbde}{au8SSID}),
+                    pstrWPS->\hyperlink{structtstrM2MWPSInfo_a6d61ebf61a47c7a83231fac0800c49c9}{u8AuthType}, pstrWPS->\hyperlink{structtstrM2MWPSInfo_a38d83b9735bd2ebc5304d1f6d3c6c879}{au8PSK}, pstrWPS->
+      \hyperlink{structtstrM2MWPSInfo_a693e6204dbbe233cbf7aaa26e33d9f5c}{u8Ch});
+            \}
+            \textcolor{keywordflow}{else}
+            \{
+                printf(\textcolor{stringliteral}{"(ERR) WPS Is not enabled OR Timedout\(\backslash\)r\(\backslash\)n"});
+            \}
+        \}
+        \textcolor{keywordflow}{break};
+        
+    \textcolor{keywordflow}{default}:
+        \textcolor{keywordflow}{break};
+    \}
+\}
+
+\textcolor{keywordtype}{int} \hyperlink{demo_2microchip_2pic32mz__ef__curiosity_2wifi__http__server__demo_2src_2main_8c_ac5a1eca594b063e0d2dbccf86f96f221}{main}()
+\{
+    \hyperlink{structtstrWifiInitParam}{tstrWifiInitParam}   param;
+    
+    param.\hyperlink{group__WifiSetCustInfoElementFn_ga13d5fa7a0c71fd59bbf36a61923835cc}{pfAppWifiCb}   = wifi\_event\_cb;
+    \textcolor{keywordflow}{if}(!\hyperlink{group__WifiInitFn_ga73c734812e844d96d860c4e93e9daf35}{m2m\_wifi\_init}(&param))
+    \{
+        \textcolor{comment}{// Trigger WPS in Push button mode.}
+        \hyperlink{group__WifiWpsFn_ga2130dab81af44784dac78e2ae8c2601c}{m2m\_wifi\_wps}(\hyperlink{group__WlanEnums_gga5bbde63fb908694883507ec7295f74f6aa578860ada0f036843221e9a5e87d934}{WPS\_PBC\_TRIGGER}, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+        
+        \textcolor{keywordflow}{while}(1)
+        \{
+            \hyperlink{group__WifiHandleEventsFn_ga461a4edc057cec8c00cf124a07aa3b02}{m2m\_wifi\_handle\_events}(\hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+        \}
+    \}
+\}
+\end{DoxyCode}
+ 
+
+Definition at line 502 of file m2m\+\_\+wifi.\+c.
+
+
+\begin{DoxyCode}
+503 \{
+504     \hyperlink{structtstrM2MWPSConnect}{tstrM2MWPSConnect}* pstrtmp = &guCtrlStruct.strM2MWPSConnect;
+505 
+506     \textcolor{comment}{/* Stop Scan if it is ongoing.}
+507 \textcolor{comment}{    */}
+508     \hyperlink{m2m__wifi_8c_a76295f775841fc0f6533603c99da618e}{gu8scanInProgress} = 0;
+509     pstrtmp->\hyperlink{structtstrM2MWPSConnect_a13e9ccc529ced2695c513e26af9bb052}{u8TriggerType} = u8TriggerType;
+510     \textcolor{comment}{/*If WPS is using PIN METHOD*/}
+511     \textcolor{keywordflow}{if} (u8TriggerType == \hyperlink{group__WlanEnums_gga5bbde63fb908694883507ec7295f74f6ae52305c62b5997a9f4f85b039062465c}{WPS\_PIN\_TRIGGER})
+512         \hyperlink{nm__common_8h_a62b30b611dfcc58e190254d1f663470a}{m2m\_memcpy} ((\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8}*)pstrtmp->\hyperlink{structtstrM2MWPSConnect_a19e29b3be2a41d0fc275cac6751a43c1}{acPinNumber},(
+      \hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8}*) pcPinNumber,8);
+513     \textcolor{keywordflow}{return} \hyperlink{m2m__hif_8c_a13ba8ad11b2ac39516ca787386d16ce0}{hif\_send}(\hyperlink{nm__common_8h_a9ab02eb1aea02a75c3f5aade4eef1276aeb9a7d57324ba4b8a6c2a5f46dd499c2}{M2M\_REQ\_GRP\_WIFI}, 
+      \hyperlink{group__WlanEnums_gga064de09dec1d5e88ed8d075fa40f57dea7fa5a9396b98ab08dbae53c17623f280}{M2M\_WIFI\_REQ\_START\_WPS}, (\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8}*)pstrtmp,\textcolor{keyword}{sizeof}(
+      \hyperlink{structtstrM2MWPSConnect}{tstrM2MWPSConnect}), \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, 0,0);
+514 \}
+\end{DoxyCode}

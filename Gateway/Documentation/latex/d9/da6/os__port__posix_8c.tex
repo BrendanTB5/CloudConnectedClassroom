@@ -1,0 +1,933 @@
+\hypertarget{os__port__posix_8c}{}\section{common/os\+\_\+port\+\_\+posix.c File Reference}
+\label{os__port__posix_8c}\index{common/os\+\_\+port\+\_\+posix.\+c@{common/os\+\_\+port\+\_\+posix.\+c}}
+
+
+R\+T\+OS abstraction layer (P\+O\+S\+IX Threads)  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$sys/time.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}os\+\_\+port.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}os\+\_\+port\+\_\+posix.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}debug.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{os__port__posix_8c_afcdf5e66fd927a7f4cc64295acd20407}{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}~\hyperlink{debug_8h_abe394dff8dc1f8684894410f2ffa9160}{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+E\+L\+\_\+\+O\+FF}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef void $\ast$($\ast$ \hyperlink{os__port__posix_8c_a9ec12226a65dbc807b48a13086cee7e0}{Pthread\+Task\+Code}) (void $\ast$param)
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{os__port__posix_8c_af1819038a84a0c1b18edbc8421d594ba}{os\+Init\+Kernel} (void)
+\begin{DoxyCompactList}\small\item\em Kernel initialization. \end{DoxyCompactList}\item 
+void \hyperlink{os__port__posix_8c_ae09f7770c80e669e765b9f22a837ed18}{os\+Start\+Kernel} (void)
+\begin{DoxyCompactList}\small\item\em Start kernel. \end{DoxyCompactList}\item 
+\hyperlink{structOsTask}{Os\+Task} $\ast$ \hyperlink{os__port__posix_8c_aef8c6fe13a0df9e5cfaeb0501ecbac3e}{os\+Create\+Task} (const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$\hyperlink{resource__manager_8h_a26532d7194d592ae8da35222073f36d6}{name}, \hyperlink{os__port__windows_8h_a52a4e1975bb554c2ce70aaac35b752d2}{Os\+Task\+Code} task\+Code, void $\ast$param, size\+\_\+t stack\+Size, \hyperlink{compiler__port_8h_a022c65af7f6c8d3947e8a37d64db6ad6}{int\+\_\+t} \hyperlink{dns__common_8h_a0815784d41b3c13d42ce22367abfba1d}{priority})
+\begin{DoxyCompactList}\small\item\em Create a new task. \end{DoxyCompactList}\item 
+void \hyperlink{os__port__posix_8c_ae19a41c2cb0f1e7242f48c2dbbc36e8e}{os\+Delete\+Task} (\hyperlink{structOsTask}{Os\+Task} $\ast$task)
+\begin{DoxyCompactList}\small\item\em Delete a task. \end{DoxyCompactList}\item 
+void \hyperlink{os__port__posix_8c_a69608590db97c707277aebf15be010e5}{os\+Delay\+Task} (\hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\+\_\+t} delay)
+\begin{DoxyCompactList}\small\item\em Delay routine. \end{DoxyCompactList}\item 
+void \hyperlink{os__port__posix_8c_a0f90518dbc8cd7221762e1acf29e8d27}{os\+Switch\+Task} (void)
+\begin{DoxyCompactList}\small\item\em Yield control to the next task. \end{DoxyCompactList}\item 
+void \hyperlink{os__port__posix_8c_abb64215d94a3d144b27a7f1509386366}{os\+Suspend\+All\+Tasks} (void)
+\begin{DoxyCompactList}\small\item\em Suspend scheduler activity. \end{DoxyCompactList}\item 
+void \hyperlink{os__port__posix_8c_a1116ffd72c17afc85cc9c6ac00f1b06c}{os\+Resume\+All\+Tasks} (void)
+\begin{DoxyCompactList}\small\item\em Resume scheduler activity. \end{DoxyCompactList}\item 
+\hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} \hyperlink{os__port__posix_8c_ac1658f3fed1eb64efcd47e4503a9ef2e}{os\+Create\+Event} (\hyperlink{structOsEvent}{Os\+Event} $\ast$event)
+\begin{DoxyCompactList}\small\item\em Create an event object. \end{DoxyCompactList}\item 
+void \hyperlink{os__port__posix_8c_a25827a49278bad6150b04b47165fda3d}{os\+Delete\+Event} (\hyperlink{structOsEvent}{Os\+Event} $\ast$event)
+\begin{DoxyCompactList}\small\item\em Delete an event object. \end{DoxyCompactList}\item 
+void \hyperlink{os__port__posix_8c_afc1d64fc90afbf03baecfa636bb99ff7}{os\+Set\+Event} (\hyperlink{structOsEvent}{Os\+Event} $\ast$event)
+\begin{DoxyCompactList}\small\item\em Set the specified event object to the signaled state. \end{DoxyCompactList}\item 
+void \hyperlink{os__port__posix_8c_a9122a1cf258caef553a6b224ef8ef6bf}{os\+Reset\+Event} (\hyperlink{structOsEvent}{Os\+Event} $\ast$event)
+\begin{DoxyCompactList}\small\item\em Set the specified event object to the nonsignaled state. \end{DoxyCompactList}\item 
+\hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} \hyperlink{os__port__posix_8c_a1dc707247e44dfefae5bec4a322fc78a}{os\+Wait\+For\+Event} (\hyperlink{structOsEvent}{Os\+Event} $\ast$event, \hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\+\_\+t} timeout)
+\begin{DoxyCompactList}\small\item\em Wait until the specified event is in the signaled state. \end{DoxyCompactList}\item 
+\hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} \hyperlink{os__port__posix_8c_aa30d505571a03dd645af374f40bd7016}{os\+Set\+Event\+From\+Isr} (\hyperlink{structOsEvent}{Os\+Event} $\ast$event)
+\begin{DoxyCompactList}\small\item\em Set an event object to the signaled state from an interrupt service routine. \end{DoxyCompactList}\item 
+\hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} \hyperlink{os__port__posix_8c_ab40200616c2421cd9baf2a9ec26de7b4}{os\+Create\+Semaphore} (\hyperlink{structOsSemaphore}{Os\+Semaphore} $\ast$semaphore, \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} count)
+\begin{DoxyCompactList}\small\item\em Create a semaphore object. \end{DoxyCompactList}\item 
+void \hyperlink{os__port__posix_8c_a501b470967cd2cc9caf2fdee107e8590}{os\+Delete\+Semaphore} (\hyperlink{structOsSemaphore}{Os\+Semaphore} $\ast$semaphore)
+\begin{DoxyCompactList}\small\item\em Delete a semaphore object. \end{DoxyCompactList}\item 
+\hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} \hyperlink{os__port__posix_8c_a77807eaba2cdb91423e0b238f5282e50}{os\+Wait\+For\+Semaphore} (\hyperlink{structOsSemaphore}{Os\+Semaphore} $\ast$semaphore, \hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\+\_\+t} timeout)
+\begin{DoxyCompactList}\small\item\em Wait for the specified semaphore to be available. \end{DoxyCompactList}\item 
+void \hyperlink{os__port__posix_8c_a33555fb6374f981567026d77e3b687fc}{os\+Release\+Semaphore} (\hyperlink{structOsSemaphore}{Os\+Semaphore} $\ast$semaphore)
+\begin{DoxyCompactList}\small\item\em Release the specified semaphore object. \end{DoxyCompactList}\item 
+\hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} \hyperlink{os__port__posix_8c_a16627f901c807c29adf29a38fb1af16a}{os\+Create\+Mutex} (\hyperlink{structOsMutex}{Os\+Mutex} $\ast$mutex)
+\begin{DoxyCompactList}\small\item\em Create a mutex object. \end{DoxyCompactList}\item 
+void \hyperlink{os__port__posix_8c_a2b0ba1e39227e4a4d52ee46bbee15c11}{os\+Delete\+Mutex} (\hyperlink{structOsMutex}{Os\+Mutex} $\ast$mutex)
+\begin{DoxyCompactList}\small\item\em Delete a mutex object. \end{DoxyCompactList}\item 
+void \hyperlink{os__port__posix_8c_a58485224df4bfa522246d55b35bbd83a}{os\+Acquire\+Mutex} (\hyperlink{structOsMutex}{Os\+Mutex} $\ast$mutex)
+\begin{DoxyCompactList}\small\item\em Acquire ownership of the specified mutex object. \end{DoxyCompactList}\item 
+void \hyperlink{os__port__posix_8c_a8e10e5b2c6d3877b5ba60e375ac45d79}{os\+Release\+Mutex} (\hyperlink{structOsMutex}{Os\+Mutex} $\ast$mutex)
+\begin{DoxyCompactList}\small\item\em Release ownership of the specified mutex object. \end{DoxyCompactList}\item 
+\hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\+\_\+t} \hyperlink{os__port__posix_8c_ab66a11272d40a916fa69dd8e4dc443d4}{os\+Get\+System\+Time} (void)
+\begin{DoxyCompactList}\small\item\em Retrieve system time. \end{DoxyCompactList}\item 
+void $\ast$ \hyperlink{os__port__posix_8c_ae86758dcd9fc3c98247ae19815987c9a}{os\+Alloc\+Mem} (size\+\_\+t size)
+\begin{DoxyCompactList}\small\item\em Allocate a memory block. \end{DoxyCompactList}\item 
+void \hyperlink{os__port__posix_8c_a68e4fa4326f2031eab28b92a25f2d68d}{os\+Free\+Mem} (void $\ast$\hyperlink{ndp_8h_a6519522ad9a6f45e7a8d25d31392a977}{p})
+\begin{DoxyCompactList}\small\item\em Release a previously allocated memory block. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+R\+T\+OS abstraction layer (P\+O\+S\+IX Threads) 
+
+\hypertarget{pic32mz__ef__curiosity_8h_License}{}\subsection{License}\label{pic32mz__ef__curiosity_8h_License}
+S\+P\+D\+X-\/\+License-\/\+Identifier\+: G\+P\+L-\/2.\+0-\/or-\/later
+
+Copyright (C) 2010-\/2019 Oryx Embedded S\+A\+RL. All rights reserved.
+
+This program is free software; you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+
+You should have received a copy of the G\+NU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-\/1301, U\+SA.
+
+\begin{DoxyAuthor}{Author}
+Oryx Embedded S\+A\+RL (www.\+oryx-\/embedded.\+com) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+9.\+6 
+\end{DoxyVersion}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{os__port__posix_8c_afcdf5e66fd927a7f4cc64295acd20407}\label{os__port__posix_8c_afcdf5e66fd927a7f4cc64295acd20407}} 
+\index{os\+\_\+port\+\_\+posix.\+c@{os\+\_\+port\+\_\+posix.\+c}!T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+\index{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}!os\+\_\+port\+\_\+posix.\+c@{os\+\_\+port\+\_\+posix.\+c}}
+\subsubsection{\texorpdfstring{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}{TRACE\_LEVEL}}
+{\footnotesize\ttfamily \#define T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL~\hyperlink{debug_8h_abe394dff8dc1f8684894410f2ffa9160}{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+E\+L\+\_\+\+O\+FF}}
+
+
+
+Definition at line 30 of file os\+\_\+port\+\_\+posix.\+c.
+
+
+
+\subsection{Typedef Documentation}
+\mbox{\Hypertarget{os__port__posix_8c_a9ec12226a65dbc807b48a13086cee7e0}\label{os__port__posix_8c_a9ec12226a65dbc807b48a13086cee7e0}} 
+\index{os\+\_\+port\+\_\+posix.\+c@{os\+\_\+port\+\_\+posix.\+c}!Pthread\+Task\+Code@{Pthread\+Task\+Code}}
+\index{Pthread\+Task\+Code@{Pthread\+Task\+Code}!os\+\_\+port\+\_\+posix.\+c@{os\+\_\+port\+\_\+posix.\+c}}
+\subsubsection{\texorpdfstring{Pthread\+Task\+Code}{PthreadTaskCode}}
+{\footnotesize\ttfamily typedef void$\ast$($\ast$ Pthread\+Task\+Code) (void $\ast$param)}
+
+
+
+Definition at line 41 of file os\+\_\+port\+\_\+posix.\+c.
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{os__port__posix_8c_a58485224df4bfa522246d55b35bbd83a}\label{os__port__posix_8c_a58485224df4bfa522246d55b35bbd83a}} 
+\index{os\+\_\+port\+\_\+posix.\+c@{os\+\_\+port\+\_\+posix.\+c}!os\+Acquire\+Mutex@{os\+Acquire\+Mutex}}
+\index{os\+Acquire\+Mutex@{os\+Acquire\+Mutex}!os\+\_\+port\+\_\+posix.\+c@{os\+\_\+port\+\_\+posix.\+c}}
+\subsubsection{\texorpdfstring{os\+Acquire\+Mutex()}{osAcquireMutex()}}
+{\footnotesize\ttfamily void os\+Acquire\+Mutex (\begin{DoxyParamCaption}\item[{\hyperlink{structOsMutex}{Os\+Mutex} $\ast$}]{mutex }\end{DoxyParamCaption})}
+
+
+
+Acquire ownership of the specified mutex object. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em mutex} & A handle to the mutex object \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 447 of file os\+\_\+port\+\_\+posix.\+c.
+
+
+\begin{DoxyCode}
+448 \{
+449    \textcolor{comment}{//Obtain ownership of the mutex object}
+450    pthread\_mutex\_lock(mutex);
+451 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{os__port__posix_8c_ae86758dcd9fc3c98247ae19815987c9a}\label{os__port__posix_8c_ae86758dcd9fc3c98247ae19815987c9a}} 
+\index{os\+\_\+port\+\_\+posix.\+c@{os\+\_\+port\+\_\+posix.\+c}!os\+Alloc\+Mem@{os\+Alloc\+Mem}}
+\index{os\+Alloc\+Mem@{os\+Alloc\+Mem}!os\+\_\+port\+\_\+posix.\+c@{os\+\_\+port\+\_\+posix.\+c}}
+\subsubsection{\texorpdfstring{os\+Alloc\+Mem()}{osAllocMem()}}
+{\footnotesize\ttfamily void$\ast$ os\+Alloc\+Mem (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{size }\end{DoxyParamCaption})}
+
+
+
+Allocate a memory block. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em size} & Bytes to allocate \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A pointer to the allocated memory block or N\+U\+LL if there is insufficient memory available 
+\end{DoxyReturn}
+
+
+Definition at line 490 of file os\+\_\+port\+\_\+posix.\+c.
+
+
+\begin{DoxyCode}
+491 \{
+492    \textcolor{comment}{//Allocate a memory block}
+493    \textcolor{keywordflow}{return} malloc(size);
+494 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{os__port__posix_8c_ac1658f3fed1eb64efcd47e4503a9ef2e}\label{os__port__posix_8c_ac1658f3fed1eb64efcd47e4503a9ef2e}} 
+\index{os\+\_\+port\+\_\+posix.\+c@{os\+\_\+port\+\_\+posix.\+c}!os\+Create\+Event@{os\+Create\+Event}}
+\index{os\+Create\+Event@{os\+Create\+Event}!os\+\_\+port\+\_\+posix.\+c@{os\+\_\+port\+\_\+posix.\+c}}
+\subsubsection{\texorpdfstring{os\+Create\+Event()}{osCreateEvent()}}
+{\footnotesize\ttfamily \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} os\+Create\+Event (\begin{DoxyParamCaption}\item[{\hyperlink{structOsEvent}{Os\+Event} $\ast$}]{event }\end{DoxyParamCaption})}
+
+
+
+Create an event object. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em event} & Pointer to the event object \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The function returns T\+R\+UE if the event object was successfully created. Otherwise, F\+A\+L\+SE is returned 
+\end{DoxyReturn}
+
+
+Definition at line 157 of file os\+\_\+port\+\_\+posix.\+c.
+
+
+\begin{DoxyCode}
+158 \{
+159    \hyperlink{compiler__port_8h_a022c65af7f6c8d3947e8a37d64db6ad6}{int\_t} ret;
+160 
+161    \textcolor{comment}{//Create a semaphore object}
+162    ret = sem\_init(event, 0, 0);
+163 
+164    \textcolor{comment}{//Check whether the semaphore was successfully created}
+165    \textcolor{keywordflow}{if}(ret == 0)
+166       \textcolor{keywordflow}{return} \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+167    \textcolor{keywordflow}{else}
+168       \textcolor{keywordflow}{return} \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+169 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{os__port__posix_8c_a16627f901c807c29adf29a38fb1af16a}\label{os__port__posix_8c_a16627f901c807c29adf29a38fb1af16a}} 
+\index{os\+\_\+port\+\_\+posix.\+c@{os\+\_\+port\+\_\+posix.\+c}!os\+Create\+Mutex@{os\+Create\+Mutex}}
+\index{os\+Create\+Mutex@{os\+Create\+Mutex}!os\+\_\+port\+\_\+posix.\+c@{os\+\_\+port\+\_\+posix.\+c}}
+\subsubsection{\texorpdfstring{os\+Create\+Mutex()}{osCreateMutex()}}
+{\footnotesize\ttfamily \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} os\+Create\+Mutex (\begin{DoxyParamCaption}\item[{\hyperlink{structOsMutex}{Os\+Mutex} $\ast$}]{mutex }\end{DoxyParamCaption})}
+
+
+
+Create a mutex object. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em mutex} & Pointer to the mutex object \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The function returns T\+R\+UE if the mutex was successfully created. Otherwise, F\+A\+L\+SE is returned 
+\end{DoxyReturn}
+
+
+Definition at line 415 of file os\+\_\+port\+\_\+posix.\+c.
+
+
+\begin{DoxyCode}
+416 \{
+417    \hyperlink{compiler__port_8h_a022c65af7f6c8d3947e8a37d64db6ad6}{int\_t} ret;
+418 
+419    \textcolor{comment}{//Create a mutex object}
+420    ret = pthread\_mutex\_init(mutex, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+421 
+422    \textcolor{comment}{//Check whether the mutex was successfully created}
+423    \textcolor{keywordflow}{if}(ret == 0)
+424       \textcolor{keywordflow}{return} \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+425    \textcolor{keywordflow}{else}
+426       \textcolor{keywordflow}{return} \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+427 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{os__port__posix_8c_ab40200616c2421cd9baf2a9ec26de7b4}\label{os__port__posix_8c_ab40200616c2421cd9baf2a9ec26de7b4}} 
+\index{os\+\_\+port\+\_\+posix.\+c@{os\+\_\+port\+\_\+posix.\+c}!os\+Create\+Semaphore@{os\+Create\+Semaphore}}
+\index{os\+Create\+Semaphore@{os\+Create\+Semaphore}!os\+\_\+port\+\_\+posix.\+c@{os\+\_\+port\+\_\+posix.\+c}}
+\subsubsection{\texorpdfstring{os\+Create\+Semaphore()}{osCreateSemaphore()}}
+{\footnotesize\ttfamily \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} os\+Create\+Semaphore (\begin{DoxyParamCaption}\item[{\hyperlink{structOsSemaphore}{Os\+Semaphore} $\ast$}]{semaphore,  }\item[{\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t}}]{count }\end{DoxyParamCaption})}
+
+
+
+Create a semaphore object. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em semaphore} & Pointer to the semaphore object \\
+\hline
+\mbox{\tt in}  & {\em count} & The maximum count for the semaphore object. This value must be greater than zero \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The function returns T\+R\+UE if the semaphore was successfully created. Otherwise, F\+A\+L\+SE is returned 
+\end{DoxyReturn}
+
+
+Definition at line 317 of file os\+\_\+port\+\_\+posix.\+c.
+
+
+\begin{DoxyCode}
+318 \{
+319    \hyperlink{compiler__port_8h_a022c65af7f6c8d3947e8a37d64db6ad6}{int\_t} ret;
+320 
+321    \textcolor{comment}{//Create a semaphore object}
+322    ret = sem\_init(semaphore, 0, count);
+323 
+324    \textcolor{comment}{//Check whether the semaphore was successfully created}
+325    \textcolor{keywordflow}{if}(ret == 0)
+326       \textcolor{keywordflow}{return} \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+327    \textcolor{keywordflow}{else}
+328       \textcolor{keywordflow}{return} \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+329 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{os__port__posix_8c_aef8c6fe13a0df9e5cfaeb0501ecbac3e}\label{os__port__posix_8c_aef8c6fe13a0df9e5cfaeb0501ecbac3e}} 
+\index{os\+\_\+port\+\_\+posix.\+c@{os\+\_\+port\+\_\+posix.\+c}!os\+Create\+Task@{os\+Create\+Task}}
+\index{os\+Create\+Task@{os\+Create\+Task}!os\+\_\+port\+\_\+posix.\+c@{os\+\_\+port\+\_\+posix.\+c}}
+\subsubsection{\texorpdfstring{os\+Create\+Task()}{osCreateTask()}}
+{\footnotesize\ttfamily \hyperlink{structOsTask}{Os\+Task}$\ast$ os\+Create\+Task (\begin{DoxyParamCaption}\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{name,  }\item[{\hyperlink{os__port__windows_8h_a52a4e1975bb554c2ce70aaac35b752d2}{Os\+Task\+Code}}]{task\+Code,  }\item[{void $\ast$}]{param,  }\item[{size\+\_\+t}]{stack\+Size,  }\item[{\hyperlink{compiler__port_8h_a022c65af7f6c8d3947e8a37d64db6ad6}{int\+\_\+t}}]{priority }\end{DoxyParamCaption})}
+
+
+
+Create a new task. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em name} & A name identifying the task \\
+\hline
+\mbox{\tt in}  & {\em task\+Code} & Pointer to the task entry function \\
+\hline
+\mbox{\tt in}  & {\em param} & A pointer to a variable to be passed to the task \\
+\hline
+\mbox{\tt in}  & {\em stack\+Size} & The initial size of the stack, in words \\
+\hline
+\mbox{\tt in}  & {\em priority} & The priority at which the task should run \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+If the function succeeds, the return value is a pointer to the new task. If the function fails, the return value is N\+U\+LL 
+\end{DoxyReturn}
+
+
+Definition at line 75 of file os\+\_\+port\+\_\+posix.\+c.
+
+
+\begin{DoxyCode}
+77 \{
+78    \hyperlink{compiler__port_8h_a022c65af7f6c8d3947e8a37d64db6ad6}{int\_t} ret;
+79    pthread\_t thread;
+80 
+81    \textcolor{comment}{//Create a new thread}
+82    ret = pthread\_create(&thread, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, (\hyperlink{os__port__posix_8c_a9ec12226a65dbc807b48a13086cee7e0}{PthreadTaskCode}) taskCode, param);
+83 
+84    \textcolor{comment}{//Return a pointer to the newly created thread}
+85    \textcolor{keywordflow}{if}(ret == 0)
+86       \textcolor{keywordflow}{return} (\hyperlink{structOsTask}{OsTask} *) thread;
+87    \textcolor{keywordflow}{else}
+88       \textcolor{keywordflow}{return} \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+89 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{os__port__posix_8c_a69608590db97c707277aebf15be010e5}\label{os__port__posix_8c_a69608590db97c707277aebf15be010e5}} 
+\index{os\+\_\+port\+\_\+posix.\+c@{os\+\_\+port\+\_\+posix.\+c}!os\+Delay\+Task@{os\+Delay\+Task}}
+\index{os\+Delay\+Task@{os\+Delay\+Task}!os\+\_\+port\+\_\+posix.\+c@{os\+\_\+port\+\_\+posix.\+c}}
+\subsubsection{\texorpdfstring{os\+Delay\+Task()}{osDelayTask()}}
+{\footnotesize\ttfamily void os\+Delay\+Task (\begin{DoxyParamCaption}\item[{\hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\+\_\+t}}]{delay }\end{DoxyParamCaption})}
+
+
+
+Delay routine. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em delay} & Amount of time for which the calling task should block \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 113 of file os\+\_\+port\+\_\+posix.\+c.
+
+
+\begin{DoxyCode}
+114 \{
+115    \textcolor{comment}{//Delay the task for the specified duration}
+116    \hyperlink{os__port_8h_af36a7a9c1ad704d0da2e660dab735b2a}{sleep}(delay);
+117 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{os__port__posix_8c_a25827a49278bad6150b04b47165fda3d}\label{os__port__posix_8c_a25827a49278bad6150b04b47165fda3d}} 
+\index{os\+\_\+port\+\_\+posix.\+c@{os\+\_\+port\+\_\+posix.\+c}!os\+Delete\+Event@{os\+Delete\+Event}}
+\index{os\+Delete\+Event@{os\+Delete\+Event}!os\+\_\+port\+\_\+posix.\+c@{os\+\_\+port\+\_\+posix.\+c}}
+\subsubsection{\texorpdfstring{os\+Delete\+Event()}{osDeleteEvent()}}
+{\footnotesize\ttfamily void os\+Delete\+Event (\begin{DoxyParamCaption}\item[{\hyperlink{structOsEvent}{Os\+Event} $\ast$}]{event }\end{DoxyParamCaption})}
+
+
+
+Delete an event object. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em event} & Pointer to the event object \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 177 of file os\+\_\+port\+\_\+posix.\+c.
+
+
+\begin{DoxyCode}
+178 \{
+179    \textcolor{comment}{//Properly dispose the event object}
+180    sem\_destroy(event);
+181 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{os__port__posix_8c_a2b0ba1e39227e4a4d52ee46bbee15c11}\label{os__port__posix_8c_a2b0ba1e39227e4a4d52ee46bbee15c11}} 
+\index{os\+\_\+port\+\_\+posix.\+c@{os\+\_\+port\+\_\+posix.\+c}!os\+Delete\+Mutex@{os\+Delete\+Mutex}}
+\index{os\+Delete\+Mutex@{os\+Delete\+Mutex}!os\+\_\+port\+\_\+posix.\+c@{os\+\_\+port\+\_\+posix.\+c}}
+\subsubsection{\texorpdfstring{os\+Delete\+Mutex()}{osDeleteMutex()}}
+{\footnotesize\ttfamily void os\+Delete\+Mutex (\begin{DoxyParamCaption}\item[{\hyperlink{structOsMutex}{Os\+Mutex} $\ast$}]{mutex }\end{DoxyParamCaption})}
+
+
+
+Delete a mutex object. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em mutex} & Pointer to the mutex object \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 435 of file os\+\_\+port\+\_\+posix.\+c.
+
+
+\begin{DoxyCode}
+436 \{
+437    \textcolor{comment}{//Properly dispose the mutex object}
+438    pthread\_mutex\_destroy(mutex);
+439 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{os__port__posix_8c_a501b470967cd2cc9caf2fdee107e8590}\label{os__port__posix_8c_a501b470967cd2cc9caf2fdee107e8590}} 
+\index{os\+\_\+port\+\_\+posix.\+c@{os\+\_\+port\+\_\+posix.\+c}!os\+Delete\+Semaphore@{os\+Delete\+Semaphore}}
+\index{os\+Delete\+Semaphore@{os\+Delete\+Semaphore}!os\+\_\+port\+\_\+posix.\+c@{os\+\_\+port\+\_\+posix.\+c}}
+\subsubsection{\texorpdfstring{os\+Delete\+Semaphore()}{osDeleteSemaphore()}}
+{\footnotesize\ttfamily void os\+Delete\+Semaphore (\begin{DoxyParamCaption}\item[{\hyperlink{structOsSemaphore}{Os\+Semaphore} $\ast$}]{semaphore }\end{DoxyParamCaption})}
+
+
+
+Delete a semaphore object. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em semaphore} & Pointer to the semaphore object \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 337 of file os\+\_\+port\+\_\+posix.\+c.
+
+
+\begin{DoxyCode}
+338 \{
+339    \textcolor{comment}{//Properly dispose the semaphore object}
+340    sem\_destroy(semaphore);
+341 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{os__port__posix_8c_ae19a41c2cb0f1e7242f48c2dbbc36e8e}\label{os__port__posix_8c_ae19a41c2cb0f1e7242f48c2dbbc36e8e}} 
+\index{os\+\_\+port\+\_\+posix.\+c@{os\+\_\+port\+\_\+posix.\+c}!os\+Delete\+Task@{os\+Delete\+Task}}
+\index{os\+Delete\+Task@{os\+Delete\+Task}!os\+\_\+port\+\_\+posix.\+c@{os\+\_\+port\+\_\+posix.\+c}}
+\subsubsection{\texorpdfstring{os\+Delete\+Task()}{osDeleteTask()}}
+{\footnotesize\ttfamily void os\+Delete\+Task (\begin{DoxyParamCaption}\item[{\hyperlink{structOsTask}{Os\+Task} $\ast$}]{task }\end{DoxyParamCaption})}
+
+
+
+Delete a task. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em task} & Pointer to the task to be deleted \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 97 of file os\+\_\+port\+\_\+posix.\+c.
+
+
+\begin{DoxyCode}
+98 \{
+99    \textcolor{comment}{//Delete the calling thread?}
+100    \textcolor{keywordflow}{if}(task == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+101    \{
+102       \textcolor{comment}{//Kill ourselves}
+103       pthread\_exit(\hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+104    \}
+105 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{os__port__posix_8c_a68e4fa4326f2031eab28b92a25f2d68d}\label{os__port__posix_8c_a68e4fa4326f2031eab28b92a25f2d68d}} 
+\index{os\+\_\+port\+\_\+posix.\+c@{os\+\_\+port\+\_\+posix.\+c}!os\+Free\+Mem@{os\+Free\+Mem}}
+\index{os\+Free\+Mem@{os\+Free\+Mem}!os\+\_\+port\+\_\+posix.\+c@{os\+\_\+port\+\_\+posix.\+c}}
+\subsubsection{\texorpdfstring{os\+Free\+Mem()}{osFreeMem()}}
+{\footnotesize\ttfamily void os\+Free\+Mem (\begin{DoxyParamCaption}\item[{void $\ast$}]{p }\end{DoxyParamCaption})}
+
+
+
+Release a previously allocated memory block. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em p} & Previously allocated memory block to be freed \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 502 of file os\+\_\+port\+\_\+posix.\+c.
+
+
+\begin{DoxyCode}
+503 \{
+504    \textcolor{comment}{//Free memory block}
+505    free(\hyperlink{ndp_8h_a6519522ad9a6f45e7a8d25d31392a977}{p});
+506 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{os__port__posix_8c_ab66a11272d40a916fa69dd8e4dc443d4}\label{os__port__posix_8c_ab66a11272d40a916fa69dd8e4dc443d4}} 
+\index{os\+\_\+port\+\_\+posix.\+c@{os\+\_\+port\+\_\+posix.\+c}!os\+Get\+System\+Time@{os\+Get\+System\+Time}}
+\index{os\+Get\+System\+Time@{os\+Get\+System\+Time}!os\+\_\+port\+\_\+posix.\+c@{os\+\_\+port\+\_\+posix.\+c}}
+\subsubsection{\texorpdfstring{os\+Get\+System\+Time()}{osGetSystemTime()}}
+{\footnotesize\ttfamily \hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\+\_\+t} os\+Get\+System\+Time (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Retrieve system time. 
+
+\begin{DoxyReturn}{Returns}
+Number of milliseconds elapsed since the system was last started 
+\end{DoxyReturn}
+
+
+Definition at line 471 of file os\+\_\+port\+\_\+posix.\+c.
+
+
+\begin{DoxyCode}
+472 \{
+473    \textcolor{keyword}{struct }\hyperlink{structtimeval}{timeval} tv;
+474 
+475    \textcolor{comment}{//Get current time}
+476    gettimeofday(&tv, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+477 
+478    \textcolor{comment}{//Convert resulting value to milliseconds}
+479    \textcolor{keywordflow}{return} (tv.tv\_sec * 1000) + (tv.tv\_usec / 1000);
+480 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{os__port__posix_8c_af1819038a84a0c1b18edbc8421d594ba}\label{os__port__posix_8c_af1819038a84a0c1b18edbc8421d594ba}} 
+\index{os\+\_\+port\+\_\+posix.\+c@{os\+\_\+port\+\_\+posix.\+c}!os\+Init\+Kernel@{os\+Init\+Kernel}}
+\index{os\+Init\+Kernel@{os\+Init\+Kernel}!os\+\_\+port\+\_\+posix.\+c@{os\+\_\+port\+\_\+posix.\+c}}
+\subsubsection{\texorpdfstring{os\+Init\+Kernel()}{osInitKernel()}}
+{\footnotesize\ttfamily void os\+Init\+Kernel (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Kernel initialization. 
+
+
+
+Definition at line 48 of file os\+\_\+port\+\_\+posix.\+c.
+
+
+\begin{DoxyCode}
+49 \{
+50    \textcolor{comment}{//Not implemented}
+51 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{os__port__posix_8c_a8e10e5b2c6d3877b5ba60e375ac45d79}\label{os__port__posix_8c_a8e10e5b2c6d3877b5ba60e375ac45d79}} 
+\index{os\+\_\+port\+\_\+posix.\+c@{os\+\_\+port\+\_\+posix.\+c}!os\+Release\+Mutex@{os\+Release\+Mutex}}
+\index{os\+Release\+Mutex@{os\+Release\+Mutex}!os\+\_\+port\+\_\+posix.\+c@{os\+\_\+port\+\_\+posix.\+c}}
+\subsubsection{\texorpdfstring{os\+Release\+Mutex()}{osReleaseMutex()}}
+{\footnotesize\ttfamily void os\+Release\+Mutex (\begin{DoxyParamCaption}\item[{\hyperlink{structOsMutex}{Os\+Mutex} $\ast$}]{mutex }\end{DoxyParamCaption})}
+
+
+
+Release ownership of the specified mutex object. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em mutex} & Pointer to the mutex object \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 459 of file os\+\_\+port\+\_\+posix.\+c.
+
+
+\begin{DoxyCode}
+460 \{
+461    \textcolor{comment}{//Release ownership of the mutex object}
+462    pthread\_mutex\_unlock(mutex);
+463 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{os__port__posix_8c_a33555fb6374f981567026d77e3b687fc}\label{os__port__posix_8c_a33555fb6374f981567026d77e3b687fc}} 
+\index{os\+\_\+port\+\_\+posix.\+c@{os\+\_\+port\+\_\+posix.\+c}!os\+Release\+Semaphore@{os\+Release\+Semaphore}}
+\index{os\+Release\+Semaphore@{os\+Release\+Semaphore}!os\+\_\+port\+\_\+posix.\+c@{os\+\_\+port\+\_\+posix.\+c}}
+\subsubsection{\texorpdfstring{os\+Release\+Semaphore()}{osReleaseSemaphore()}}
+{\footnotesize\ttfamily void os\+Release\+Semaphore (\begin{DoxyParamCaption}\item[{\hyperlink{structOsSemaphore}{Os\+Semaphore} $\ast$}]{semaphore }\end{DoxyParamCaption})}
+
+
+
+Release the specified semaphore object. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em semaphore} & Pointer to the semaphore object \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 401 of file os\+\_\+port\+\_\+posix.\+c.
+
+
+\begin{DoxyCode}
+402 \{
+403    \textcolor{comment}{//Release the semaphore}
+404    sem\_post(semaphore);
+405 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{os__port__posix_8c_a9122a1cf258caef553a6b224ef8ef6bf}\label{os__port__posix_8c_a9122a1cf258caef553a6b224ef8ef6bf}} 
+\index{os\+\_\+port\+\_\+posix.\+c@{os\+\_\+port\+\_\+posix.\+c}!os\+Reset\+Event@{os\+Reset\+Event}}
+\index{os\+Reset\+Event@{os\+Reset\+Event}!os\+\_\+port\+\_\+posix.\+c@{os\+\_\+port\+\_\+posix.\+c}}
+\subsubsection{\texorpdfstring{os\+Reset\+Event()}{osResetEvent()}}
+{\footnotesize\ttfamily void os\+Reset\+Event (\begin{DoxyParamCaption}\item[{\hyperlink{structOsEvent}{Os\+Event} $\ast$}]{event }\end{DoxyParamCaption})}
+
+
+
+Set the specified event object to the nonsignaled state. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em event} & Pointer to the event object \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 211 of file os\+\_\+port\+\_\+posix.\+c.
+
+
+\begin{DoxyCode}
+212 \{
+213    \hyperlink{compiler__port_8h_a022c65af7f6c8d3947e8a37d64db6ad6}{int\_t} ret;
+214 
+215    \textcolor{comment}{//Force the specified event to the nonsignaled state}
+216    \textcolor{keywordflow}{do}
+217    \{
+218       \textcolor{comment}{//Decrement the semaphore's count by one}
+219       ret = sem\_trywait(event);
+220 
+221       \textcolor{comment}{//Check status}
+222    \} \textcolor{keywordflow}{while}(ret == 0);
+223 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{os__port__posix_8c_a1116ffd72c17afc85cc9c6ac00f1b06c}\label{os__port__posix_8c_a1116ffd72c17afc85cc9c6ac00f1b06c}} 
+\index{os\+\_\+port\+\_\+posix.\+c@{os\+\_\+port\+\_\+posix.\+c}!os\+Resume\+All\+Tasks@{os\+Resume\+All\+Tasks}}
+\index{os\+Resume\+All\+Tasks@{os\+Resume\+All\+Tasks}!os\+\_\+port\+\_\+posix.\+c@{os\+\_\+port\+\_\+posix.\+c}}
+\subsubsection{\texorpdfstring{os\+Resume\+All\+Tasks()}{osResumeAllTasks()}}
+{\footnotesize\ttfamily void os\+Resume\+All\+Tasks (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Resume scheduler activity. 
+
+
+
+Definition at line 144 of file os\+\_\+port\+\_\+posix.\+c.
+
+
+\begin{DoxyCode}
+145 \{
+146    \textcolor{comment}{//Not implemented}
+147 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{os__port__posix_8c_afc1d64fc90afbf03baecfa636bb99ff7}\label{os__port__posix_8c_afc1d64fc90afbf03baecfa636bb99ff7}} 
+\index{os\+\_\+port\+\_\+posix.\+c@{os\+\_\+port\+\_\+posix.\+c}!os\+Set\+Event@{os\+Set\+Event}}
+\index{os\+Set\+Event@{os\+Set\+Event}!os\+\_\+port\+\_\+posix.\+c@{os\+\_\+port\+\_\+posix.\+c}}
+\subsubsection{\texorpdfstring{os\+Set\+Event()}{osSetEvent()}}
+{\footnotesize\ttfamily void os\+Set\+Event (\begin{DoxyParamCaption}\item[{\hyperlink{structOsEvent}{Os\+Event} $\ast$}]{event }\end{DoxyParamCaption})}
+
+
+
+Set the specified event object to the signaled state. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em event} & Pointer to the event object \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 189 of file os\+\_\+port\+\_\+posix.\+c.
+
+
+\begin{DoxyCode}
+190 \{
+191    \hyperlink{compiler__port_8h_a022c65af7f6c8d3947e8a37d64db6ad6}{int\_t} ret;
+192    \hyperlink{compiler__port_8h_a022c65af7f6c8d3947e8a37d64db6ad6}{int\_t} \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value};
+193 
+194    \textcolor{comment}{//Get the current value of the semaphore}
+195    ret = sem\_getvalue(event, &value);
+196 
+197    \textcolor{comment}{//Nonsignaled state?}
+198    \textcolor{keywordflow}{if}(ret == 0 && value == 0)
+199    \{
+200       \textcolor{comment}{//Set the specified event to the signaled state}
+201       sem\_post(event);
+202    \}
+203 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{os__port__posix_8c_aa30d505571a03dd645af374f40bd7016}\label{os__port__posix_8c_aa30d505571a03dd645af374f40bd7016}} 
+\index{os\+\_\+port\+\_\+posix.\+c@{os\+\_\+port\+\_\+posix.\+c}!os\+Set\+Event\+From\+Isr@{os\+Set\+Event\+From\+Isr}}
+\index{os\+Set\+Event\+From\+Isr@{os\+Set\+Event\+From\+Isr}!os\+\_\+port\+\_\+posix.\+c@{os\+\_\+port\+\_\+posix.\+c}}
+\subsubsection{\texorpdfstring{os\+Set\+Event\+From\+Isr()}{osSetEventFromIsr()}}
+{\footnotesize\ttfamily \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} os\+Set\+Event\+From\+Isr (\begin{DoxyParamCaption}\item[{\hyperlink{structOsEvent}{Os\+Event} $\ast$}]{event }\end{DoxyParamCaption})}
+
+
+
+Set an event object to the signaled state from an interrupt service routine. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em event} & Pointer to the event object \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+T\+R\+UE if setting the event to signaled state caused a task to unblock and the unblocked task has a priority higher than the currently running task 
+\end{DoxyReturn}
+
+
+Definition at line 301 of file os\+\_\+port\+\_\+posix.\+c.
+
+
+\begin{DoxyCode}
+302 \{
+303    \textcolor{comment}{//Not implemented}
+304    \textcolor{keywordflow}{return} \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+305 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{os__port__posix_8c_ae09f7770c80e669e765b9f22a837ed18}\label{os__port__posix_8c_ae09f7770c80e669e765b9f22a837ed18}} 
+\index{os\+\_\+port\+\_\+posix.\+c@{os\+\_\+port\+\_\+posix.\+c}!os\+Start\+Kernel@{os\+Start\+Kernel}}
+\index{os\+Start\+Kernel@{os\+Start\+Kernel}!os\+\_\+port\+\_\+posix.\+c@{os\+\_\+port\+\_\+posix.\+c}}
+\subsubsection{\texorpdfstring{os\+Start\+Kernel()}{osStartKernel()}}
+{\footnotesize\ttfamily void os\+Start\+Kernel (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Start kernel. 
+
+
+
+Definition at line 58 of file os\+\_\+port\+\_\+posix.\+c.
+
+
+\begin{DoxyCode}
+59 \{
+60    \textcolor{comment}{//Not implemented}
+61 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{os__port__posix_8c_abb64215d94a3d144b27a7f1509386366}\label{os__port__posix_8c_abb64215d94a3d144b27a7f1509386366}} 
+\index{os\+\_\+port\+\_\+posix.\+c@{os\+\_\+port\+\_\+posix.\+c}!os\+Suspend\+All\+Tasks@{os\+Suspend\+All\+Tasks}}
+\index{os\+Suspend\+All\+Tasks@{os\+Suspend\+All\+Tasks}!os\+\_\+port\+\_\+posix.\+c@{os\+\_\+port\+\_\+posix.\+c}}
+\subsubsection{\texorpdfstring{os\+Suspend\+All\+Tasks()}{osSuspendAllTasks()}}
+{\footnotesize\ttfamily void os\+Suspend\+All\+Tasks (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Suspend scheduler activity. 
+
+
+
+Definition at line 134 of file os\+\_\+port\+\_\+posix.\+c.
+
+
+\begin{DoxyCode}
+135 \{
+136    \textcolor{comment}{//Not implemented}
+137 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{os__port__posix_8c_a0f90518dbc8cd7221762e1acf29e8d27}\label{os__port__posix_8c_a0f90518dbc8cd7221762e1acf29e8d27}} 
+\index{os\+\_\+port\+\_\+posix.\+c@{os\+\_\+port\+\_\+posix.\+c}!os\+Switch\+Task@{os\+Switch\+Task}}
+\index{os\+Switch\+Task@{os\+Switch\+Task}!os\+\_\+port\+\_\+posix.\+c@{os\+\_\+port\+\_\+posix.\+c}}
+\subsubsection{\texorpdfstring{os\+Switch\+Task()}{osSwitchTask()}}
+{\footnotesize\ttfamily void os\+Switch\+Task (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Yield control to the next task. 
+
+
+
+Definition at line 124 of file os\+\_\+port\+\_\+posix.\+c.
+
+
+\begin{DoxyCode}
+125 \{
+126    \textcolor{comment}{//Not implemented}
+127 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{os__port__posix_8c_a1dc707247e44dfefae5bec4a322fc78a}\label{os__port__posix_8c_a1dc707247e44dfefae5bec4a322fc78a}} 
+\index{os\+\_\+port\+\_\+posix.\+c@{os\+\_\+port\+\_\+posix.\+c}!os\+Wait\+For\+Event@{os\+Wait\+For\+Event}}
+\index{os\+Wait\+For\+Event@{os\+Wait\+For\+Event}!os\+\_\+port\+\_\+posix.\+c@{os\+\_\+port\+\_\+posix.\+c}}
+\subsubsection{\texorpdfstring{os\+Wait\+For\+Event()}{osWaitForEvent()}}
+{\footnotesize\ttfamily \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} os\+Wait\+For\+Event (\begin{DoxyParamCaption}\item[{\hyperlink{structOsEvent}{Os\+Event} $\ast$}]{event,  }\item[{\hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\+\_\+t}}]{timeout }\end{DoxyParamCaption})}
+
+
+
+Wait until the specified event is in the signaled state. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em event} & Pointer to the event object \\
+\hline
+\mbox{\tt in}  & {\em timeout} & Timeout interval \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The function returns T\+R\+UE if the state of the specified object is signaled. F\+A\+L\+SE is returned if the timeout interval elapsed 
+\end{DoxyReturn}
+
+
+Definition at line 234 of file os\+\_\+port\+\_\+posix.\+c.
+
+
+\begin{DoxyCode}
+235 \{
+236    \hyperlink{compiler__port_8h_a022c65af7f6c8d3947e8a37d64db6ad6}{int\_t} ret;
+237    \textcolor{keyword}{struct }timespec ts;
+238 
+239    \textcolor{comment}{//Wait until the specified event is in the signaled}
+240    \textcolor{comment}{//state or the timeout interval elapses}
+241    \textcolor{keywordflow}{if}(timeout == 0)
+242    \{
+243       \textcolor{comment}{//Non-blocking call}
+244       ret = sem\_trywait(event);
+245    \}
+246    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(timeout == \hyperlink{os__port_8h_ab893de6f8a0ec8b0e6dd8097ff398019}{INFINITE\_DELAY})
+247    \{
+248       \textcolor{comment}{//Infinite timeout period}
+249       ret = sem\_wait(event);
+250    \}
+251    \textcolor{keywordflow}{else}
+252    \{
+253       \textcolor{comment}{//Get current time}
+254       clock\_gettime(CLOCK\_REALTIME, &ts);
+255 
+256       \textcolor{comment}{//Set absolute timeout}
+257       ts.tv\_sec += timeout / 1000;
+258       ts.tv\_nsec += (timeout % 1000) * 1000000;
+259 
+260       \textcolor{comment}{//Normalize time stamp value}
+261       \textcolor{keywordflow}{if}(ts.tv\_nsec >= 1000000000)
+262       \{
+263          ts.tv\_sec += 1;
+264          ts.tv\_nsec -= 1000000000;
+265       \}
+266 
+267       \textcolor{comment}{//Wait until the specified event becomes set}
+268       ret = sem\_timedwait(event, &ts);
+269    \}
+270 
+271    \textcolor{comment}{//Check whether the specified event is set}
+272    \textcolor{keywordflow}{if}(ret == 0)
+273    \{
+274       \textcolor{comment}{//Force the event back to the nonsignaled state}
+275       \textcolor{keywordflow}{do}
+276       \{
+277          \textcolor{comment}{//Decrement the semaphore's count by one}
+278          ret = sem\_trywait(event);
+279 
+280          \textcolor{comment}{//Check status}
+281       \} \textcolor{keywordflow}{while}(ret == 0);
+282 
+283       \textcolor{comment}{//The specified event is in the signaled state}
+284       \textcolor{keywordflow}{return} \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+285    \}
+286    \textcolor{keywordflow}{else}
+287    \{
+288       \textcolor{comment}{//The timeout interval elapsed}
+289       \textcolor{keywordflow}{return} \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+290    \}
+291 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{os__port__posix_8c_a77807eaba2cdb91423e0b238f5282e50}\label{os__port__posix_8c_a77807eaba2cdb91423e0b238f5282e50}} 
+\index{os\+\_\+port\+\_\+posix.\+c@{os\+\_\+port\+\_\+posix.\+c}!os\+Wait\+For\+Semaphore@{os\+Wait\+For\+Semaphore}}
+\index{os\+Wait\+For\+Semaphore@{os\+Wait\+For\+Semaphore}!os\+\_\+port\+\_\+posix.\+c@{os\+\_\+port\+\_\+posix.\+c}}
+\subsubsection{\texorpdfstring{os\+Wait\+For\+Semaphore()}{osWaitForSemaphore()}}
+{\footnotesize\ttfamily \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} os\+Wait\+For\+Semaphore (\begin{DoxyParamCaption}\item[{\hyperlink{structOsSemaphore}{Os\+Semaphore} $\ast$}]{semaphore,  }\item[{\hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\+\_\+t}}]{timeout }\end{DoxyParamCaption})}
+
+
+
+Wait for the specified semaphore to be available. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em semaphore} & Pointer to the semaphore object \\
+\hline
+\mbox{\tt in}  & {\em timeout} & Timeout interval \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The function returns T\+R\+UE if the semaphore is available. F\+A\+L\+SE is returned if the timeout interval elapsed 
+\end{DoxyReturn}
+
+
+Definition at line 352 of file os\+\_\+port\+\_\+posix.\+c.
+
+
+\begin{DoxyCode}
+353 \{
+354    \hyperlink{compiler__port_8h_a022c65af7f6c8d3947e8a37d64db6ad6}{int\_t} ret;
+355    \textcolor{keyword}{struct }timespec ts;
+356 
+357    \textcolor{comment}{//Wait until the semaphore is available or the timeout interval elapses}
+358    \textcolor{keywordflow}{if}(timeout == 0)
+359    \{
+360       \textcolor{comment}{//Non-blocking call}
+361       ret = sem\_trywait(semaphore);
+362    \}
+363    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(timeout == \hyperlink{os__port_8h_ab893de6f8a0ec8b0e6dd8097ff398019}{INFINITE\_DELAY})
+364    \{
+365       \textcolor{comment}{//Infinite timeout period}
+366       ret = sem\_wait(semaphore);
+367    \}
+368    \textcolor{keywordflow}{else}
+369    \{
+370       \textcolor{comment}{//Get current time}
+371       clock\_gettime(CLOCK\_REALTIME, &ts);
+372 
+373       \textcolor{comment}{//Set absolute timeout}
+374       ts.tv\_sec += timeout / 1000;
+375       ts.tv\_nsec += (timeout % 1000) * 1000000;
+376 
+377       \textcolor{comment}{//Normalize time stamp value}
+378       \textcolor{keywordflow}{if}(ts.tv\_nsec >= 1000000000)
+379       \{
+380          ts.tv\_sec += 1;
+381          ts.tv\_nsec -= 1000000000;
+382       \}
+383 
+384       \textcolor{comment}{//Wait until the specified semaphore becomes available}
+385       ret = sem\_timedwait(semaphore, &ts);
+386    \}
+387 
+388    \textcolor{comment}{//Check whether the specified semaphore is available}
+389    \textcolor{keywordflow}{if}(ret == 0)
+390       \textcolor{keywordflow}{return} \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+391    \textcolor{keywordflow}{else}
+392       \textcolor{keywordflow}{return} \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+393 \}
+\end{DoxyCode}

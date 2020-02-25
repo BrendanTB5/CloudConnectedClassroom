@@ -1,0 +1,101 @@
+\hypertarget{salsa20_8h}{}\section{cyclone\+\_\+crypto/cipher/salsa20.h File Reference}
+\label{salsa20_8h}\index{cyclone\+\_\+crypto/cipher/salsa20.\+h@{cyclone\+\_\+crypto/cipher/salsa20.\+h}}
+
+
+Salsa20 encryption algorithm.  
+
+
+{\ttfamily \#include \char`\"{}core/crypto.\+h\char`\"{}}\newline
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{salsa20_8h_a5cf1a4e0c6b1809a86daf47ea08b7324}{salsa20\+Process\+Block} (const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$input, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$output, \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} nr)
+\begin{DoxyCompactList}\small\item\em Salsa20 core function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Salsa20 encryption algorithm. 
+
+\hypertarget{pic32mz__ef__curiosity_8h_License}{}\subsection{License}\label{pic32mz__ef__curiosity_8h_License}
+S\+P\+D\+X-\/\+License-\/\+Identifier\+: G\+P\+L-\/2.\+0-\/or-\/later
+
+Copyright (C) 2010-\/2019 Oryx Embedded S\+A\+RL. All rights reserved.
+
+This file is part of Cyclone\+Crypto Open.
+
+This program is free software; you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+
+You should have received a copy of the G\+NU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-\/1301, U\+SA.
+
+\begin{DoxyAuthor}{Author}
+Oryx Embedded S\+A\+RL (www.\+oryx-\/embedded.\+com) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+9.\+6 
+\end{DoxyVersion}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{salsa20_8h_a5cf1a4e0c6b1809a86daf47ea08b7324}\label{salsa20_8h_a5cf1a4e0c6b1809a86daf47ea08b7324}} 
+\index{salsa20.\+h@{salsa20.\+h}!salsa20\+Process\+Block@{salsa20\+Process\+Block}}
+\index{salsa20\+Process\+Block@{salsa20\+Process\+Block}!salsa20.\+h@{salsa20.\+h}}
+\subsubsection{\texorpdfstring{salsa20\+Process\+Block()}{salsa20ProcessBlock()}}
+{\footnotesize\ttfamily void salsa20\+Process\+Block (\begin{DoxyParamCaption}\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{input,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{output,  }\item[{\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t}}]{nr }\end{DoxyParamCaption})}
+
+
+
+Salsa20 core function. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em input} & Pointer to the 64-\/octet input block \\
+\hline
+\mbox{\tt out}  & {\em output} & Pointer to the 64-\/octet output block \\
+\hline
+\mbox{\tt in}  & {\em nr} & Number of rounds to be applied (8, 12 or 20) \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 58 of file salsa20.\+c.
+
+
+\begin{DoxyCode}
+59 \{
+60    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+61    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} x[16];
+62 
+63    \textcolor{comment}{//Copy the input words to the working state}
+64    \textcolor{keywordflow}{for}(i = 0; i < 16; i++)
+65    \{
+66       x[i] = \hyperlink{cpu__endian_8h_a7a6ecaee0bc600cae5a7dead20594920}{LOAD32LE}(input + i * 4);
+67    \}
+68 
+69    \textcolor{comment}{//The Salsa20 core function alternates between column rounds and row rounds}
+70    \textcolor{keywordflow}{for}(i = 0; i < nr; i += 2)
+71    \{
+72       \textcolor{comment}{//The column round function modifies the columns of the matrix in parallel}
+73       \textcolor{comment}{//by feeding a permutation of each column through the quarter round function}
+74       \hyperlink{salsa20_8c_a0cf121ef6d40c31e1d5a7a93fd40e1ac}{SALSA20\_QUARTER\_ROUND}(x[0], x[4], x[8], x[12]);
+75       \hyperlink{salsa20_8c_a0cf121ef6d40c31e1d5a7a93fd40e1ac}{SALSA20\_QUARTER\_ROUND}(x[5], x[9], x[13], x[1]);
+76       \hyperlink{salsa20_8c_a0cf121ef6d40c31e1d5a7a93fd40e1ac}{SALSA20\_QUARTER\_ROUND}(x[10], x[14], x[2], x[6]);
+77       \hyperlink{salsa20_8c_a0cf121ef6d40c31e1d5a7a93fd40e1ac}{SALSA20\_QUARTER\_ROUND}(x[15], x[3], x[7], x[11]);
+78 
+79       \textcolor{comment}{//The row round function modifies the rows of the matrix in parallel by}
+80       \textcolor{comment}{//feeding a permutation of each row through the quarter round function}
+81       \hyperlink{salsa20_8c_a0cf121ef6d40c31e1d5a7a93fd40e1ac}{SALSA20\_QUARTER\_ROUND}(x[0], x[1], x[2], x[3]);
+82       \hyperlink{salsa20_8c_a0cf121ef6d40c31e1d5a7a93fd40e1ac}{SALSA20\_QUARTER\_ROUND}(x[5], x[6], x[7], x[4]);
+83       \hyperlink{salsa20_8c_a0cf121ef6d40c31e1d5a7a93fd40e1ac}{SALSA20\_QUARTER\_ROUND}(x[10], x[11], x[8], x[9]);
+84       \hyperlink{salsa20_8c_a0cf121ef6d40c31e1d5a7a93fd40e1ac}{SALSA20\_QUARTER\_ROUND}(x[15], x[12], x[13], x[14]);
+85    \}
+86 
+87    \textcolor{comment}{//Add the original input words to the output words}
+88    \textcolor{keywordflow}{for}(i = 0; i < 16; i++)
+89    \{
+90       x[i] += \hyperlink{cpu__endian_8h_a7a6ecaee0bc600cae5a7dead20594920}{LOAD32LE}(input + i * 4);
+91       \hyperlink{cpu__endian_8h_a9dc2aacccbeaa4c76dc3870ef4486a88}{STORE32LE}(x[i], output + i * 4);
+92    \}
+93 \}
+\end{DoxyCode}

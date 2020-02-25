@@ -1,0 +1,1498 @@
+\hypertarget{snmp__usm__mib__impl_8c}{}\section{cyclone\+\_\+tcp/mibs/snmp\+\_\+usm\+\_\+mib\+\_\+impl.c File Reference}
+\label{snmp__usm__mib__impl_8c}\index{cyclone\+\_\+tcp/mibs/snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c@{cyclone\+\_\+tcp/mibs/snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c}}
+
+
+S\+N\+MP U\+SM M\+IB module implementation.  
+
+
+{\ttfamily \#include \char`\"{}core/net.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}mibs/mib\+\_\+common.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}mibs/snmp\+\_\+usm\+\_\+mib\+\_\+module.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}mibs/snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}snmp/snmp\+\_\+agent.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}core/crypto.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}encoding/asn1.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}encoding/oid.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}debug.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{snmp__usm__mib__impl_8c_afcdf5e66fd927a7f4cc64295acd20407}{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}~\hyperlink{net__config_8h_af5cf34762d7114743a58dd8a05289bd9}{S\+N\+M\+P\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{snmp__usm__mib__impl_8c_a6aba7a167556d6b944fd51cae240dcb3}{snmp\+Usm\+Mib\+Init} (void)
+\begin{DoxyCompactList}\small\item\em S\+N\+MP U\+SM M\+IB module initialization. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{snmp__usm__mib__impl_8c_a19afb1b80822788d5a9729c3bcb5b82a}{snmp\+Usm\+Mib\+Load} (void $\ast$context)
+\begin{DoxyCompactList}\small\item\em Load S\+N\+MP U\+SM M\+IB module. \end{DoxyCompactList}\item 
+void \hyperlink{snmp__usm__mib__impl_8c_a0d2bf8eac6abd8252dd7aebba4085774}{snmp\+Usm\+Mib\+Unload} (void $\ast$context)
+\begin{DoxyCompactList}\small\item\em Unload S\+N\+MP U\+SM M\+IB module. \end{DoxyCompactList}\item 
+void \hyperlink{snmp__usm__mib__impl_8c_a1c5d94b7fb85fb23453e3c24425577a9}{snmp\+Usm\+Mib\+Lock} (void)
+\begin{DoxyCompactList}\small\item\em Lock S\+N\+MP U\+SM M\+IB base. \end{DoxyCompactList}\item 
+void \hyperlink{snmp__usm__mib__impl_8c_a532db8b3cbfe174d858873981bcf77fa}{snmp\+Usm\+Mib\+Unlock} (void)
+\begin{DoxyCompactList}\small\item\em Unlock S\+N\+MP U\+SM M\+IB base. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{snmp__usm__mib__impl_8c_ad726fc07b4f30743a477b03a400f20b8}{snmp\+Usm\+Mib\+Set\+User\+Spin\+Lock} (const \hyperlink{mib__common_8h_a2bc33cee6dd90a0ee8eeb92976a1c479}{Mib\+Object} $\ast$object, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{mib__common_8h_a5d78f42b3545deb9bbd305138506c7a7}{oid}, size\+\_\+t oid\+Len, const \hyperlink{mib__common_8h_a515b369f80863becb3a17870e6bb7a80}{Mib\+Variant} $\ast$\hyperlink{chap_8h_adfa040d04d16520129a735fff8fb1628}{value}, size\+\_\+t value\+Len, \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} commit)
+\begin{DoxyCompactList}\small\item\em Set usm\+User\+Spin\+Lock object value. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{snmp__usm__mib__impl_8c_afb39204c61b7f10d56456f3517290d3d}{snmp\+Usm\+Mib\+Get\+User\+Spin\+Lock} (const \hyperlink{mib__common_8h_a2bc33cee6dd90a0ee8eeb92976a1c479}{Mib\+Object} $\ast$object, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{mib__common_8h_a5d78f42b3545deb9bbd305138506c7a7}{oid}, size\+\_\+t oid\+Len, \hyperlink{mib__common_8h_a515b369f80863becb3a17870e6bb7a80}{Mib\+Variant} $\ast$\hyperlink{chap_8h_adfa040d04d16520129a735fff8fb1628}{value}, size\+\_\+t $\ast$value\+Len)
+\begin{DoxyCompactList}\small\item\em Get usm\+User\+Spin\+Lock object value. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{snmp__usm__mib__impl_8c_a2c4d88338f606f49ccdaae26b7b12a15}{snmp\+Usm\+Mib\+Set\+User\+Entry} (const \hyperlink{mib__common_8h_a2bc33cee6dd90a0ee8eeb92976a1c479}{Mib\+Object} $\ast$object, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{mib__common_8h_a5d78f42b3545deb9bbd305138506c7a7}{oid}, size\+\_\+t oid\+Len, const \hyperlink{mib__common_8h_a515b369f80863becb3a17870e6bb7a80}{Mib\+Variant} $\ast$\hyperlink{chap_8h_adfa040d04d16520129a735fff8fb1628}{value}, size\+\_\+t value\+Len, \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} commit)
+\begin{DoxyCompactList}\small\item\em Set usm\+User\+Entry object value. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{snmp__usm__mib__impl_8c_a62929e77e3517d90b658a1fb052ec09d}{snmp\+Usm\+Mib\+Get\+User\+Entry} (const \hyperlink{mib__common_8h_a2bc33cee6dd90a0ee8eeb92976a1c479}{Mib\+Object} $\ast$object, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{mib__common_8h_a5d78f42b3545deb9bbd305138506c7a7}{oid}, size\+\_\+t oid\+Len, \hyperlink{mib__common_8h_a515b369f80863becb3a17870e6bb7a80}{Mib\+Variant} $\ast$\hyperlink{chap_8h_adfa040d04d16520129a735fff8fb1628}{value}, size\+\_\+t $\ast$value\+Len)
+\begin{DoxyCompactList}\small\item\em Get usm\+User\+Entry object value. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{snmp__usm__mib__impl_8c_ad93c061deccd28611ba8e0f3ba617c86}{snmp\+Usm\+Mib\+Get\+Next\+User\+Entry} (const \hyperlink{mib__common_8h_a2bc33cee6dd90a0ee8eeb92976a1c479}{Mib\+Object} $\ast$object, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{mib__common_8h_a5d78f42b3545deb9bbd305138506c7a7}{oid}, size\+\_\+t oid\+Len, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$next\+Oid, size\+\_\+t $\ast$next\+Oid\+Len)
+\begin{DoxyCompactList}\small\item\em Get next usm\+User\+Entry object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} \hyperlink{snmp__usm__mib__impl_8c_ae8c8a57380663da703d635f42c4b06c8}{usm\+No\+Auth\+Protocol\+Oid} \mbox{[}9\mbox{]} = \{43, 6, 1, 6, 3, 10, 1, 1, 1\}
+\item 
+const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} \hyperlink{snmp__usm__mib__impl_8c_ac8445afff7b425a46a00a3ad2da25e46}{usm\+H\+M\+A\+C\+M\+D5\+Auth\+Protocol\+Oid} \mbox{[}9\mbox{]} = \{43, 6, 1, 6, 3, 10, 1, 1, 2\}
+\item 
+const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} \hyperlink{snmp__usm__mib__impl_8c_ac45f676571c417394d45b288e080e7ac}{usm\+H\+M\+A\+C\+S\+H\+A\+Auth\+Protocol\+Oid} \mbox{[}9\mbox{]} = \{43, 6, 1, 6, 3, 10, 1, 1, 3\}
+\item 
+const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} \hyperlink{snmp__usm__mib__impl_8c_ad3033a1f473631c39dc1b66026eb0a6a}{usm\+H\+M\+A\+C128\+S\+H\+A224\+Auth\+Protocol\+Oid} \mbox{[}9\mbox{]} = \{43, 6, 1, 6, 3, 10, 1, 1, 4\}
+\item 
+const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} \hyperlink{snmp__usm__mib__impl_8c_a78ad63ebb672ecf84dd37c042b42cc43}{usm\+H\+M\+A\+C192\+S\+H\+A256\+Auth\+Protocol\+Oid} \mbox{[}9\mbox{]} = \{43, 6, 1, 6, 3, 10, 1, 1, 5\}
+\item 
+const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} \hyperlink{snmp__usm__mib__impl_8c_a0bee38880ebba0b1eb23306a46a95c65}{usm\+H\+M\+A\+C256\+S\+H\+A384\+Auth\+Protocol\+Oid} \mbox{[}9\mbox{]} = \{43, 6, 1, 6, 3, 10, 1, 1, 6\}
+\item 
+const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} \hyperlink{snmp__usm__mib__impl_8c_a7dee9181ece4bb5061ab1eff12a8e02d}{usm\+H\+M\+A\+C384\+S\+H\+A512\+Auth\+Protocol\+Oid} \mbox{[}9\mbox{]} = \{43, 6, 1, 6, 3, 10, 1, 1, 7\}
+\item 
+const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} \hyperlink{snmp__usm__mib__impl_8c_a07161aa336ff79fcf62ad1a9985eb115}{usm\+No\+Priv\+Protocol\+Oid} \mbox{[}9\mbox{]} = \{43, 6, 1, 6, 3, 10, 1, 2, 1\}
+\item 
+const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} \hyperlink{snmp__usm__mib__impl_8c_a008e107e60db13679e6156f679da3dfd}{usm\+D\+E\+S\+Priv\+Protocol\+Oid} \mbox{[}9\mbox{]} = \{43, 6, 1, 6, 3, 10, 1, 2, 2\}
+\item 
+const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} \hyperlink{snmp__usm__mib__impl_8c_ab5d82af6dc40db7550c05b13b586b4fa}{usm\+Aes\+Cfb128\+Protocol\+Oid} \mbox{[}9\mbox{]} = \{43, 6, 1, 6, 3, 10, 1, 2, 4\}
+\item 
+const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} \hyperlink{snmp__usm__mib__impl_8c_a714fc79835177094b022fb0c94464c74}{usm\+User\+Entry\+Oid} \mbox{[}10\mbox{]} = \{43, 6, 1, 6, 3, 15, 1, 2, 2, 1\}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+S\+N\+MP U\+SM M\+IB module implementation. 
+
+\hypertarget{pic32mz__ef__curiosity_8h_License}{}\subsection{License}\label{pic32mz__ef__curiosity_8h_License}
+S\+P\+D\+X-\/\+License-\/\+Identifier\+: G\+P\+L-\/2.\+0-\/or-\/later
+
+Copyright (C) 2010-\/2019 Oryx Embedded S\+A\+RL. All rights reserved.
+
+This file is part of Cyclone\+T\+CP Open.
+
+This program is free software; you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+
+You should have received a copy of the G\+NU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-\/1301, U\+SA.
+
+\begin{DoxyAuthor}{Author}
+Oryx Embedded S\+A\+RL (www.\+oryx-\/embedded.\+com) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+9.\+6 
+\end{DoxyVersion}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{snmp__usm__mib__impl_8c_afcdf5e66fd927a7f4cc64295acd20407}\label{snmp__usm__mib__impl_8c_afcdf5e66fd927a7f4cc64295acd20407}} 
+\index{snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c@{snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c}!T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+\index{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}!snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c@{snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c}}
+\subsubsection{\texorpdfstring{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}{TRACE\_LEVEL}}
+{\footnotesize\ttfamily \#define T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL~\hyperlink{net__config_8h_af5cf34762d7114743a58dd8a05289bd9}{S\+N\+M\+P\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+
+
+
+Definition at line 32 of file snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c.
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{snmp__usm__mib__impl_8c_ad93c061deccd28611ba8e0f3ba617c86}\label{snmp__usm__mib__impl_8c_ad93c061deccd28611ba8e0f3ba617c86}} 
+\index{snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c@{snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c}!snmp\+Usm\+Mib\+Get\+Next\+User\+Entry@{snmp\+Usm\+Mib\+Get\+Next\+User\+Entry}}
+\index{snmp\+Usm\+Mib\+Get\+Next\+User\+Entry@{snmp\+Usm\+Mib\+Get\+Next\+User\+Entry}!snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c@{snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c}}
+\subsubsection{\texorpdfstring{snmp\+Usm\+Mib\+Get\+Next\+User\+Entry()}{snmpUsmMibGetNextUserEntry()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} snmp\+Usm\+Mib\+Get\+Next\+User\+Entry (\begin{DoxyParamCaption}\item[{const \hyperlink{mib__common_8h_a2bc33cee6dd90a0ee8eeb92976a1c479}{Mib\+Object} $\ast$}]{object,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{oid,  }\item[{size\+\_\+t}]{oid\+Len,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{next\+Oid,  }\item[{size\+\_\+t $\ast$}]{next\+Oid\+Len }\end{DoxyParamCaption})}
+
+
+
+Get next usm\+User\+Entry object. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em object} & Pointer to the M\+IB object descriptor \\
+\hline
+\mbox{\tt in}  & {\em oid} & Object identifier \\
+\hline
+\mbox{\tt in}  & {\em oid\+Len} & Length of the O\+ID, in bytes \\
+\hline
+\mbox{\tt out}  & {\em next\+Oid} & O\+ID of the next object in the M\+IB \\
+\hline
+\mbox{\tt out}  & {\em next\+Oid\+Len} & Length of the next object identifier, in bytes \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 1052 of file snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c.
+
+
+\begin{DoxyCode}
+1054 \{
+1055    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+1056    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+1057    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1058    \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\_t} acceptable;
+1059    \hyperlink{snmp__agent_8h_a4c68afef83114acf80065b64191bfdac}{SnmpAgentContext} *context;
+1060    \hyperlink{structSnmpUserEntry}{SnmpUserEntry} *entry;
+1061    \hyperlink{structSnmpUserEntry}{SnmpUserEntry} *nextEntry;
+1062 
+1063    \textcolor{comment}{//Initialize variables}
+1064    nextEntry = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+1065 
+1066    \textcolor{comment}{//Point to the SNMP agent context}
+1067    context = (\hyperlink{snmp__agent_8h_a4c68afef83114acf80065b64191bfdac}{SnmpAgentContext} *) \hyperlink{snmp__usm__mib__module_8c_af70b3b61ca665679cb091bd6ad2b235a}{snmpUsmMibBase}.
+      \hyperlink{structSnmpUsmMibBase_a7348cb0e2110c37b29fb3ba2501744d9}{context};
+1068    \textcolor{comment}{//Sanity check}
+1069    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1070       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca7c3779a9c0fe7d65f66367f176dee6d7}{ERROR\_OBJECT\_NOT\_FOUND};
+1071 
+1072    \textcolor{comment}{//Make sure the buffer is large enough to hold the OID prefix}
+1073    \textcolor{keywordflow}{if}(*nextOidLen < object->oidLen)
+1074       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf3f6e48b0cfaea7cac34f4223cd8a57}{ERROR\_BUFFER\_OVERFLOW};
+1075 
+1076    \textcolor{comment}{//Copy OID prefix}
+1077    memcpy(nextOid, object->oid, object->oidLen);
+1078 
+1079    \textcolor{comment}{//Loop through the list of users}
+1080    \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{snmp__agent_8h_a87620bd88babef997647226c78f35ecb}{SNMP\_AGENT\_MAX\_USERS}; i++)
+1081    \{
+1082       \textcolor{comment}{//Point to the current entry}
+1083       entry = &context->userTable[i];
+1084 
+1085       \textcolor{comment}{//Check the status of the row}
+1086       \textcolor{keywordflow}{if}(entry->\hyperlink{structSnmpUserEntry_add2c8c54d828652fa85a0697654e0573}{status} != \hyperlink{mib__common_8h_a40ce1ea958f5c3b04f841d76f5557097a23a541b8e284769017711c3c13b9bc87}{MIB\_ROW\_STATUS\_UNUSED})
+1087       \{
+1088          \textcolor{comment}{//Append the instance identifier to the OID prefix}
+1089          n = \textcolor{keywordtype}{object}->oidLen;
+1090 
+1091          \textcolor{comment}{//usmUserEngineID is used as 1st instance identifier}
+1092          error = \hyperlink{mib__common_8c_a8dc034d2d8a997653d6ecd27ccc9c7d0}{mibEncodeOctetString}(nextOid, *nextOidLen, &n,
+1093             context->contextEngine, context->contextEngineLen, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE});
+1094          \textcolor{comment}{//Any error to report?}
+1095          \textcolor{keywordflow}{if}(error)
+1096             \textcolor{keywordflow}{return} error;
+1097 
+1098          \textcolor{comment}{//usmUserName is used as 2nd instance identifier}
+1099          error = \hyperlink{mib__common_8c_af9ee67937a6b8128aff72ee3c89dc87f}{mibEncodeString}(nextOid, *nextOidLen, &n, entry->
+      \hyperlink{structSnmpUserEntry_a60ae402e93fecec705e4f7ff0755360f}{name}, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE});
+1100          \textcolor{comment}{//Any error to report?}
+1101          \textcolor{keywordflow}{if}(error)
+1102             \textcolor{keywordflow}{return} error;
+1103 
+1104          \textcolor{comment}{//Check whether the resulting object identifier lexicographically}
+1105          \textcolor{comment}{//follows the specified OID}
+1106          \textcolor{keywordflow}{if}(\hyperlink{oid_8c_a3f24a7995a2a7aa587379ec6e1922e36}{oidComp}(nextOid, n, \hyperlink{mib__common_8h_a5d78f42b3545deb9bbd305138506c7a7}{oid}, oidLen) > 0)
+1107          \{
+1108             \textcolor{comment}{//Perform lexicographic comparison}
+1109             \textcolor{keywordflow}{if}(nextEntry == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1110                acceptable = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+1111             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(strlen(entry->\hyperlink{structSnmpUserEntry_a60ae402e93fecec705e4f7ff0755360f}{name}) < strlen(nextEntry->\hyperlink{structSnmpUserEntry_a60ae402e93fecec705e4f7ff0755360f}{name}))
+1112                acceptable = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+1113             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(strlen(entry->\hyperlink{structSnmpUserEntry_a60ae402e93fecec705e4f7ff0755360f}{name}) > strlen(nextEntry->\hyperlink{structSnmpUserEntry_a60ae402e93fecec705e4f7ff0755360f}{name}))
+1114                acceptable = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+1115             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(strcmp(entry->\hyperlink{structSnmpUserEntry_a60ae402e93fecec705e4f7ff0755360f}{name}, nextEntry->\hyperlink{structSnmpUserEntry_a60ae402e93fecec705e4f7ff0755360f}{name}) < 0)
+1116                acceptable = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+1117             \textcolor{keywordflow}{else}
+1118                acceptable = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+1119 
+1120             \textcolor{comment}{//Save the closest object identifier that follows the specified}
+1121             \textcolor{comment}{//OID in lexicographic order}
+1122             \textcolor{keywordflow}{if}(acceptable)
+1123                nextEntry = entry;
+1124          \}
+1125       \}
+1126    \}
+1127 
+1128    \textcolor{comment}{//The specified OID does not lexicographically precede the name}
+1129    \textcolor{comment}{//of some object?}
+1130    \textcolor{keywordflow}{if}(nextEntry == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1131       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca7c3779a9c0fe7d65f66367f176dee6d7}{ERROR\_OBJECT\_NOT\_FOUND};
+1132 
+1133    \textcolor{comment}{//Append the instance identifier to the OID prefix}
+1134    n = \textcolor{keywordtype}{object}->oidLen;
+1135 
+1136    \textcolor{comment}{//usmUserEngineID is used as 1st instance identifier}
+1137    error = \hyperlink{mib__common_8c_a8dc034d2d8a997653d6ecd27ccc9c7d0}{mibEncodeOctetString}(nextOid, *nextOidLen, &n,
+1138       context->contextEngine, context->contextEngineLen, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE});
+1139    \textcolor{comment}{//Any error to report?}
+1140    \textcolor{keywordflow}{if}(error)
+1141       \textcolor{keywordflow}{return} error;
+1142 
+1143    \textcolor{comment}{//usmUserName is used as 2nd instance identifier}
+1144    error = \hyperlink{mib__common_8c_af9ee67937a6b8128aff72ee3c89dc87f}{mibEncodeString}(nextOid, *nextOidLen, &n, nextEntry->
+      \hyperlink{structSnmpUserEntry_a60ae402e93fecec705e4f7ff0755360f}{name}, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE});
+1145    \textcolor{comment}{//Any error to report?}
+1146    \textcolor{keywordflow}{if}(error)
+1147       \textcolor{keywordflow}{return} error;
+1148 
+1149    \textcolor{comment}{//Save the length of the resulting object identifier}
+1150    *nextOidLen = \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1151    \textcolor{comment}{//Next object found}
+1152    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+1153 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{snmp__usm__mib__impl_8c_a62929e77e3517d90b658a1fb052ec09d}\label{snmp__usm__mib__impl_8c_a62929e77e3517d90b658a1fb052ec09d}} 
+\index{snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c@{snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c}!snmp\+Usm\+Mib\+Get\+User\+Entry@{snmp\+Usm\+Mib\+Get\+User\+Entry}}
+\index{snmp\+Usm\+Mib\+Get\+User\+Entry@{snmp\+Usm\+Mib\+Get\+User\+Entry}!snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c@{snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c}}
+\subsubsection{\texorpdfstring{snmp\+Usm\+Mib\+Get\+User\+Entry()}{snmpUsmMibGetUserEntry()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} snmp\+Usm\+Mib\+Get\+User\+Entry (\begin{DoxyParamCaption}\item[{const \hyperlink{mib__common_8h_a2bc33cee6dd90a0ee8eeb92976a1c479}{Mib\+Object} $\ast$}]{object,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{oid,  }\item[{size\+\_\+t}]{oid\+Len,  }\item[{\hyperlink{mib__common_8h_a515b369f80863becb3a17870e6bb7a80}{Mib\+Variant} $\ast$}]{value,  }\item[{size\+\_\+t $\ast$}]{value\+Len }\end{DoxyParamCaption})}
+
+
+
+Get usm\+User\+Entry object value. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em object} & Pointer to the M\+IB object descriptor \\
+\hline
+\mbox{\tt in}  & {\em oid} & Object identifier (object name and instance identifier) \\
+\hline
+\mbox{\tt in}  & {\em oid\+Len} & Length of the O\+ID, in bytes \\
+\hline
+\mbox{\tt out}  & {\em value} & Object value \\
+\hline
+\mbox{\tt in,out}  & {\em value\+Len} & Length of the object value, in bytes \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 783 of file snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c.
+
+
+\begin{DoxyCode}
+785 \{
+786    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+787    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+788    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} userEngineId[\hyperlink{snmp__common_8h_a182f7381f1e0c29ee196042008e380be}{SNMP\_MAX\_CONTEXT\_ENGINE\_SIZE}];
+789    \textcolor{keywordtype}{size\_t} userEngineIdLen;
+790    \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\_t} userName[\hyperlink{snmp__common_8h_ae889f56d8038ef202bca4b1d974bd53f}{SNMP\_MAX\_USER\_NAME\_LEN} + 1];
+791    \hyperlink{snmp__agent_8h_a4c68afef83114acf80065b64191bfdac}{SnmpAgentContext} *context;
+792    \hyperlink{structSnmpUserEntry}{SnmpUserEntry} *user;
+793 
+794    \textcolor{comment}{//Point to the instance identifier}
+795    n = \textcolor{keywordtype}{object}->oidLen;
+796 
+797    \textcolor{comment}{//usmUserEngineID is used as 1st instance identifier}
+798    error = \hyperlink{mib__common_8c_a2f923007633943049e9ed343eca0cc03}{mibDecodeOctetString}(\hyperlink{mib__common_8h_a5d78f42b3545deb9bbd305138506c7a7}{oid}, oidLen, &n, userEngineId,
+799       \hyperlink{snmp__common_8h_a182f7381f1e0c29ee196042008e380be}{SNMP\_MAX\_CONTEXT\_ENGINE\_SIZE}, &userEngineIdLen, 
+      \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE});
+800    \textcolor{comment}{//Invalid instance identifier?}
+801    \textcolor{keywordflow}{if}(error)
+802       \textcolor{keywordflow}{return} error;
+803 
+804    \textcolor{comment}{//usmUserName is used as 2nd instance identifier}
+805    error = \hyperlink{mib__common_8c_a1d2f3bd24afe689ea31baf797bbf8f0c}{mibDecodeString}(\hyperlink{mib__common_8h_a5d78f42b3545deb9bbd305138506c7a7}{oid}, oidLen, &n, userName,
+806       \hyperlink{snmp__common_8h_ae889f56d8038ef202bca4b1d974bd53f}{SNMP\_MAX\_USER\_NAME\_LEN}, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE});
+807    \textcolor{comment}{//Invalid instance identifier?}
+808    \textcolor{keywordflow}{if}(error)
+809       \textcolor{keywordflow}{return} error;
+810 
+811    \textcolor{comment}{//Sanity check}
+812    \textcolor{keywordflow}{if}(n != oidLen)
+813       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca805a80fe68633921ca43149789f4c3eb}{ERROR\_INSTANCE\_NOT\_FOUND};
+814 
+815    \textcolor{comment}{//Point to the SNMP agent context}
+816    context = (\hyperlink{snmp__agent_8h_a4c68afef83114acf80065b64191bfdac}{SnmpAgentContext} *) \hyperlink{snmp__usm__mib__module_8c_af70b3b61ca665679cb091bd6ad2b235a}{snmpUsmMibBase}.
+      \hyperlink{structSnmpUsmMibBase_a7348cb0e2110c37b29fb3ba2501744d9}{context};
+817    \textcolor{comment}{//Sanity check}
+818    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+819       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca805a80fe68633921ca43149789f4c3eb}{ERROR\_INSTANCE\_NOT\_FOUND};
+820 
+821    \textcolor{comment}{//Check the length of the SNMP engine ID}
+822    \textcolor{keywordflow}{if}(userEngineIdLen != context->contextEngineLen)
+823       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca805a80fe68633921ca43149789f4c3eb}{ERROR\_INSTANCE\_NOT\_FOUND};
+824 
+825    \textcolor{comment}{//Check SNMP engine ID}
+826    \textcolor{keywordflow}{if}(memcmp(userEngineId, context->contextEngine, userEngineIdLen))
+827       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca805a80fe68633921ca43149789f4c3eb}{ERROR\_INSTANCE\_NOT\_FOUND};
+828 
+829    \textcolor{comment}{//Retrieve the security profile of the specified user}
+830    user = \hyperlink{snmp__agent__usm_8c_adb4ad71f3b5167a13a2551f075c25110}{snmpFindUserEntry}(context, userName, strlen(userName));
+831    \textcolor{comment}{//Unknown user name?}
+832    \textcolor{keywordflow}{if}(user == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+833       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca805a80fe68633921ca43149789f4c3eb}{ERROR\_INSTANCE\_NOT\_FOUND};
+834 
+835    \textcolor{comment}{//usmUserSecurityName object?}
+836    \textcolor{keywordflow}{if}(!strcmp(object->name, \textcolor{stringliteral}{"usmUserSecurityName"}))
+837    \{
+838       \textcolor{comment}{//The security name is the same as the user name}
+839       n = strlen(user->\hyperlink{structSnmpUserEntry_a60ae402e93fecec705e4f7ff0755360f}{name});
+840 
+841       \textcolor{comment}{//Make sure the buffer is large enough to hold the entire object}
+842       \textcolor{keywordflow}{if}(*valueLen >= n)
+843       \{
+844          \textcolor{comment}{//Copy object value}
+845          memcpy(\hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->octetString, user->\hyperlink{structSnmpUserEntry_a60ae402e93fecec705e4f7ff0755360f}{name}, n);
+846          \textcolor{comment}{//Return object length}
+847          *valueLen = \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+848       \}
+849       \textcolor{keywordflow}{else}
+850       \{
+851          \textcolor{comment}{//Report an error}
+852          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf3f6e48b0cfaea7cac34f4223cd8a57}{ERROR\_BUFFER\_OVERFLOW};
+853       \}
+854    \}
+855    \textcolor{comment}{//usmUserCloneFrom object?}
+856    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!strcmp(object->name, \textcolor{stringliteral}{"usmUserCloneFrom"}))
+857    \{
+858       \textcolor{comment}{//When this object is read, the ZeroDotZero OID is returned}
+859       \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} zeroDotZeroOid[] = \{0\};
+860 
+861       \textcolor{comment}{//Make sure the buffer is large enough to hold the entire object}
+862       \textcolor{keywordflow}{if}(*valueLen >= \textcolor{keyword}{sizeof}(zeroDotZeroOid))
+863       \{
+864          \textcolor{comment}{//Copy object value}
+865          memcpy(\hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->octetString, zeroDotZeroOid, \textcolor{keyword}{sizeof}(zeroDotZeroOid));
+866          \textcolor{comment}{//Return object length}
+867          *valueLen = \textcolor{keyword}{sizeof}(zeroDotZeroOid);
+868       \}
+869       \textcolor{keywordflow}{else}
+870       \{
+871          \textcolor{comment}{//Report an error}
+872          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf3f6e48b0cfaea7cac34f4223cd8a57}{ERROR\_BUFFER\_OVERFLOW};
+873       \}
+874    \}
+875    \textcolor{comment}{//usmUserAuthProtocol object?}
+876    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!strcmp(object->name, \textcolor{stringliteral}{"usmUserAuthProtocol"}))
+877    \{
+878       \textcolor{keywordtype}{size\_t} authProtocolLen;
+879       \textcolor{keyword}{const} \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *authProtocol;
+880 
+881       \textcolor{comment}{//Check the type of authentication protocol which is used}
+882       \textcolor{keywordflow}{switch}(user->\hyperlink{structSnmpUserEntry_a5131eefca59001108b44e59b284397db}{authProtocol})
+883       \{
+884       \textcolor{comment}{//HMAC-MD5-96 authentication protocol?}
+885       \textcolor{keywordflow}{case} \hyperlink{snmp__agent__usm_8h_a13c46b84c881bd15bad7093a7f3639e3a64f336076b554983b5ff0ac9bc93b7cd}{SNMP\_AUTH\_PROTOCOL\_MD5}:
+886          authProtocol = \hyperlink{snmp__usm__mib__impl_8c_ac8445afff7b425a46a00a3ad2da25e46}{usmHMACMD5AuthProtocolOid};
+887          authProtocolLen = \textcolor{keyword}{sizeof}(\hyperlink{snmp__usm__mib__impl_8c_ac8445afff7b425a46a00a3ad2da25e46}{usmHMACMD5AuthProtocolOid});
+888          \textcolor{keywordflow}{break};
+889       \textcolor{comment}{//HMAC-SHA-1-96 authentication protocol?}
+890       \textcolor{keywordflow}{case} \hyperlink{snmp__agent__usm_8h_a13c46b84c881bd15bad7093a7f3639e3a7c85bbbb7ea3bdf550096ed626557f4f}{SNMP\_AUTH\_PROTOCOL\_SHA1}:
+891          authProtocol = \hyperlink{snmp__usm__mib__impl_8c_ac45f676571c417394d45b288e080e7ac}{usmHMACSHAAuthProtocolOid};
+892          authProtocolLen = \textcolor{keyword}{sizeof}(\hyperlink{snmp__usm__mib__impl_8c_ac45f676571c417394d45b288e080e7ac}{usmHMACSHAAuthProtocolOid});
+893          \textcolor{keywordflow}{break};
+894       \textcolor{comment}{//HMAC-SHA-224-128 authentication protocol?}
+895       \textcolor{keywordflow}{case} \hyperlink{snmp__agent__usm_8h_a13c46b84c881bd15bad7093a7f3639e3a378de262fb541cdfe1c014b8245e4f21}{SNMP\_AUTH\_PROTOCOL\_SHA224}:
+896          authProtocol = \hyperlink{snmp__usm__mib__impl_8c_ad3033a1f473631c39dc1b66026eb0a6a}{usmHMAC128SHA224AuthProtocolOid};
+897          authProtocolLen = \textcolor{keyword}{sizeof}(\hyperlink{snmp__usm__mib__impl_8c_ad3033a1f473631c39dc1b66026eb0a6a}{usmHMAC128SHA224AuthProtocolOid});
+898          \textcolor{keywordflow}{break};
+899       \textcolor{comment}{//HMAC-SHA-256-192 authentication protocol?}
+900       \textcolor{keywordflow}{case} \hyperlink{snmp__agent__usm_8h_a13c46b84c881bd15bad7093a7f3639e3a7d555935f861e6d8533decd5b84f72b0}{SNMP\_AUTH\_PROTOCOL\_SHA256}:
+901          authProtocol = \hyperlink{snmp__usm__mib__impl_8c_a78ad63ebb672ecf84dd37c042b42cc43}{usmHMAC192SHA256AuthProtocolOid};
+902          authProtocolLen = \textcolor{keyword}{sizeof}(\hyperlink{snmp__usm__mib__impl_8c_a78ad63ebb672ecf84dd37c042b42cc43}{usmHMAC192SHA256AuthProtocolOid});
+903          \textcolor{keywordflow}{break};
+904       \textcolor{comment}{//HMAC-SHA-384-256 authentication protocol?}
+905       \textcolor{keywordflow}{case} \hyperlink{snmp__agent__usm_8h_a13c46b84c881bd15bad7093a7f3639e3a79c2b9959e9da55e6a4191bd61c9223c}{SNMP\_AUTH\_PROTOCOL\_SHA384}:
+906          authProtocol = \hyperlink{snmp__usm__mib__impl_8c_a0bee38880ebba0b1eb23306a46a95c65}{usmHMAC256SHA384AuthProtocolOid};
+907          authProtocolLen = \textcolor{keyword}{sizeof}(\hyperlink{snmp__usm__mib__impl_8c_a0bee38880ebba0b1eb23306a46a95c65}{usmHMAC256SHA384AuthProtocolOid});
+908          \textcolor{keywordflow}{break};
+909       \textcolor{comment}{//HMAC-SHA-512-384 authentication protocol?}
+910       \textcolor{keywordflow}{case} \hyperlink{snmp__agent__usm_8h_a13c46b84c881bd15bad7093a7f3639e3a0ba8a62eeb03f3f1a0f522833255eadc}{SNMP\_AUTH\_PROTOCOL\_SHA512}:
+911          authProtocol = \hyperlink{snmp__usm__mib__impl_8c_a7dee9181ece4bb5061ab1eff12a8e02d}{usmHMAC384SHA512AuthProtocolOid};
+912          authProtocolLen = \textcolor{keyword}{sizeof}(\hyperlink{snmp__usm__mib__impl_8c_a7dee9181ece4bb5061ab1eff12a8e02d}{usmHMAC384SHA512AuthProtocolOid});
+913          \textcolor{keywordflow}{break};
+914       \textcolor{comment}{//No authentication?}
+915       \textcolor{keywordflow}{default}:
+916          authProtocol = \hyperlink{snmp__usm__mib__impl_8c_ae8c8a57380663da703d635f42c4b06c8}{usmNoAuthProtocolOid};
+917          authProtocolLen = \textcolor{keyword}{sizeof}(\hyperlink{snmp__usm__mib__impl_8c_ae8c8a57380663da703d635f42c4b06c8}{usmNoAuthProtocolOid});
+918          \textcolor{keywordflow}{break};
+919       \}
+920 
+921       \textcolor{comment}{//Make sure the buffer is large enough to hold the entire object}
+922       \textcolor{keywordflow}{if}(*valueLen >= authProtocolLen)
+923       \{
+924          \textcolor{comment}{//Copy object value}
+925          memcpy(\hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->octetString, authProtocol, authProtocolLen);
+926          \textcolor{comment}{//Return object length}
+927          *valueLen = authProtocolLen;
+928       \}
+929       \textcolor{keywordflow}{else}
+930       \{
+931          \textcolor{comment}{//Report an error}
+932          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf3f6e48b0cfaea7cac34f4223cd8a57}{ERROR\_BUFFER\_OVERFLOW};
+933       \}
+934    \}
+935    \textcolor{comment}{//usmUserAuthKeyChange object?}
+936    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!strcmp(object->name, \textcolor{stringliteral}{"usmUserAuthKeyChange"}))
+937    \{
+938       \textcolor{comment}{//When this object is read, the zero-length (empty) string is returned}
+939       *valueLen = 0;
+940    \}
+941    \textcolor{comment}{//usmUserOwnAuthKeyChange object?}
+942    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!strcmp(object->name, \textcolor{stringliteral}{"usmUserOwnAuthKeyChange"}))
+943    \{
+944       \textcolor{comment}{//When this object is read, the zero-length (empty) string is returned}
+945       *valueLen = 0;
+946    \}
+947    \textcolor{comment}{//usmUserPrivProtocol object?}
+948    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!strcmp(object->name, \textcolor{stringliteral}{"usmUserPrivProtocol"}))
+949    \{
+950       \textcolor{keywordtype}{size\_t} privProtocolLen;
+951       \textcolor{keyword}{const} \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *privProtocol;
+952 
+953       \textcolor{comment}{//Check the type of privacy protocol which is used}
+954       \textcolor{keywordflow}{switch}(user->\hyperlink{structSnmpUserEntry_a59bfb353ffa70a6791f0a6d5608ec0eb}{privProtocol})
+955       \{
+956       \textcolor{comment}{//DES-CBC privacy protocol?}
+957       \textcolor{keywordflow}{case} \hyperlink{snmp__agent__usm_8h_acfd97e4fdb0cd081855bcb3d922dd851a286d2219f3f41326458583ac8f7ca4af}{SNMP\_PRIV\_PROTOCOL\_DES}:
+958          privProtocol = \hyperlink{snmp__usm__mib__impl_8c_a008e107e60db13679e6156f679da3dfd}{usmDESPrivProtocolOid};
+959          privProtocolLen = \textcolor{keyword}{sizeof}(\hyperlink{snmp__usm__mib__impl_8c_a008e107e60db13679e6156f679da3dfd}{usmDESPrivProtocolOid});
+960          \textcolor{keywordflow}{break};
+961       \textcolor{comment}{//AES-128-CFB privacy protocol?}
+962       \textcolor{keywordflow}{case} \hyperlink{snmp__agent__usm_8h_acfd97e4fdb0cd081855bcb3d922dd851a9afc3ebc5fd421e94a7a5eca75f2520b}{SNMP\_PRIV\_PROTOCOL\_AES}:
+963          privProtocol = \hyperlink{snmp__usm__mib__impl_8c_ab5d82af6dc40db7550c05b13b586b4fa}{usmAesCfb128ProtocolOid};
+964          privProtocolLen = \textcolor{keyword}{sizeof}(\hyperlink{snmp__usm__mib__impl_8c_ab5d82af6dc40db7550c05b13b586b4fa}{usmAesCfb128ProtocolOid});
+965          \textcolor{keywordflow}{break};
+966       \textcolor{comment}{//No privacy?}
+967       \textcolor{keywordflow}{default}:
+968          privProtocol = \hyperlink{snmp__usm__mib__impl_8c_a07161aa336ff79fcf62ad1a9985eb115}{usmNoPrivProtocolOid};
+969          privProtocolLen = \textcolor{keyword}{sizeof}(\hyperlink{snmp__usm__mib__impl_8c_a07161aa336ff79fcf62ad1a9985eb115}{usmNoPrivProtocolOid});
+970          \textcolor{keywordflow}{break};
+971       \}
+972 
+973       \textcolor{comment}{//Make sure the buffer is large enough to hold the entire object}
+974       \textcolor{keywordflow}{if}(*valueLen >= privProtocolLen)
+975       \{
+976          \textcolor{comment}{//Copy object value}
+977          memcpy(\hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->octetString, privProtocol, privProtocolLen);
+978          \textcolor{comment}{//Return object length}
+979          *valueLen = privProtocolLen;
+980       \}
+981       \textcolor{keywordflow}{else}
+982       \{
+983          \textcolor{comment}{//Report an error}
+984          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf3f6e48b0cfaea7cac34f4223cd8a57}{ERROR\_BUFFER\_OVERFLOW};
+985       \}
+986    \}
+987    \textcolor{comment}{//usmUserPrivKeyChange object?}
+988    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!strcmp(object->name, \textcolor{stringliteral}{"usmUserPrivKeyChange"}))
+989    \{
+990       \textcolor{comment}{//When this object is read, the zero-length (empty) string is returned}
+991       *valueLen = 0;
+992    \}
+993    \textcolor{comment}{//usmUserOwnPrivKeyChange object?}
+994    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!strcmp(object->name, \textcolor{stringliteral}{"usmUserOwnPrivKeyChange"}))
+995    \{
+996       \textcolor{comment}{//When this object is read, the zero-length (empty) string is returned}
+997       *valueLen = 0;
+998    \}
+999    \textcolor{comment}{//usmUserPublic object?}
+1000    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!strcmp(object->name, \textcolor{stringliteral}{"usmUserPublic"}))
+1001    \{
+1002       \textcolor{comment}{//Make sure the buffer is large enough to hold the public value}
+1003       \textcolor{keywordflow}{if}(*valueLen >= user->\hyperlink{structSnmpUserEntry_a5b818085df903f1065013380308c3777}{publicValueLen})
+1004       \{
+1005          \textcolor{comment}{//The public value can be read to determine whether the change of}
+1006          \textcolor{comment}{//the secret was effected}
+1007          memcpy(\hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->octetString, user->\hyperlink{structSnmpUserEntry_a40f5fdae184968aea77b0c816f341c8e}{publicValue}, user->
+      \hyperlink{structSnmpUserEntry_a5b818085df903f1065013380308c3777}{publicValueLen});
+1008 
+1009          \textcolor{comment}{//Return object length}
+1010          *valueLen = user->\hyperlink{structSnmpUserEntry_a5b818085df903f1065013380308c3777}{publicValueLen};
+1011       \}
+1012       \textcolor{keywordflow}{else}
+1013       \{
+1014          \textcolor{comment}{//Report an error}
+1015          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf3f6e48b0cfaea7cac34f4223cd8a57}{ERROR\_BUFFER\_OVERFLOW};
+1016       \}
+1017    \}
+1018    \textcolor{comment}{//usmUserStorageType object?}
+1019    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!strcmp(object->name, \textcolor{stringliteral}{"usmUserStorageType"}))
+1020    \{
+1021       \textcolor{comment}{//Get the storage type for this conceptual row}
+1022       \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->integer = \hyperlink{mib__common_8h_a6045d2fe4e80ff6ad14510d1e2cd616fab1109cfa48bf598ea9cb07d8f41f7536}{MIB\_STORAGE\_TYPE\_VOLATILE};
+1023    \}
+1024    \textcolor{comment}{//usmUserStatus object?}
+1025    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!strcmp(object->name, \textcolor{stringliteral}{"usmUserStatus"}))
+1026    \{
+1027       \textcolor{comment}{//Get the status of this conceptual row}
+1028       \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->integer = user->\hyperlink{structSnmpUserEntry_add2c8c54d828652fa85a0697654e0573}{status};
+1029    \}
+1030    \textcolor{comment}{//Unknown object?}
+1031    \textcolor{keywordflow}{else}
+1032    \{
+1033       \textcolor{comment}{//The specified object does not exist}
+1034       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca7c3779a9c0fe7d65f66367f176dee6d7}{ERROR\_OBJECT\_NOT\_FOUND};
+1035    \}
+1036 
+1037    \textcolor{comment}{//Return status code}
+1038    \textcolor{keywordflow}{return} error;
+1039 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{snmp__usm__mib__impl_8c_afb39204c61b7f10d56456f3517290d3d}\label{snmp__usm__mib__impl_8c_afb39204c61b7f10d56456f3517290d3d}} 
+\index{snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c@{snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c}!snmp\+Usm\+Mib\+Get\+User\+Spin\+Lock@{snmp\+Usm\+Mib\+Get\+User\+Spin\+Lock}}
+\index{snmp\+Usm\+Mib\+Get\+User\+Spin\+Lock@{snmp\+Usm\+Mib\+Get\+User\+Spin\+Lock}!snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c@{snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c}}
+\subsubsection{\texorpdfstring{snmp\+Usm\+Mib\+Get\+User\+Spin\+Lock()}{snmpUsmMibGetUserSpinLock()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} snmp\+Usm\+Mib\+Get\+User\+Spin\+Lock (\begin{DoxyParamCaption}\item[{const \hyperlink{mib__common_8h_a2bc33cee6dd90a0ee8eeb92976a1c479}{Mib\+Object} $\ast$}]{object,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{oid,  }\item[{size\+\_\+t}]{oid\+Len,  }\item[{\hyperlink{mib__common_8h_a515b369f80863becb3a17870e6bb7a80}{Mib\+Variant} $\ast$}]{value,  }\item[{size\+\_\+t $\ast$}]{value\+Len }\end{DoxyParamCaption})}
+
+
+
+Get usm\+User\+Spin\+Lock object value. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em object} & Pointer to the M\+IB object descriptor \\
+\hline
+\mbox{\tt in}  & {\em oid} & Object identifier (object name and instance identifier) \\
+\hline
+\mbox{\tt in}  & {\em oid\+Len} & Length of the O\+ID, in bytes \\
+\hline
+\mbox{\tt out}  & {\em value} & Object value \\
+\hline
+\mbox{\tt in,out}  & {\em value\+Len} & Length of the object value, in bytes \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 176 of file snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c.
+
+
+\begin{DoxyCode}
+178 \{
+179    \textcolor{comment}{//Get the current value of the spin lock}
+180    \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->integer = \hyperlink{snmp__usm__mib__module_8c_af70b3b61ca665679cb091bd6ad2b235a}{snmpUsmMibBase}.\hyperlink{structSnmpUsmMibBase_a48469936e03465ca06110ee6ef0fde8f}{usmUserSpinLock};
+181 
+182    \textcolor{comment}{//Return status code}
+183    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+184 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{snmp__usm__mib__impl_8c_a6aba7a167556d6b944fd51cae240dcb3}\label{snmp__usm__mib__impl_8c_a6aba7a167556d6b944fd51cae240dcb3}} 
+\index{snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c@{snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c}!snmp\+Usm\+Mib\+Init@{snmp\+Usm\+Mib\+Init}}
+\index{snmp\+Usm\+Mib\+Init@{snmp\+Usm\+Mib\+Init}!snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c@{snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c}}
+\subsubsection{\texorpdfstring{snmp\+Usm\+Mib\+Init()}{snmpUsmMibInit()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} snmp\+Usm\+Mib\+Init (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+S\+N\+MP U\+SM M\+IB module initialization. 
+
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 79 of file snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c.
+
+
+\begin{DoxyCode}
+80 \{
+81    \textcolor{comment}{//Debug message}
+82    \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"Initializing SNMP-USM-MIB base...\(\backslash\)r\(\backslash\)n"});
+83 
+84    \textcolor{comment}{//Clear SNMP USM MIB base}
+85    memset(&\hyperlink{snmp__usm__mib__module_8c_af70b3b61ca665679cb091bd6ad2b235a}{snmpUsmMibBase}, 0, \textcolor{keyword}{sizeof}(\hyperlink{snmp__usm__mib__module_8c_af70b3b61ca665679cb091bd6ad2b235a}{snmpUsmMibBase}));
+86 
+87    \textcolor{comment}{//usmUserSpinLock object}
+88    \hyperlink{snmp__usm__mib__module_8c_af70b3b61ca665679cb091bd6ad2b235a}{snmpUsmMibBase}.\hyperlink{structSnmpUsmMibBase_a48469936e03465ca06110ee6ef0fde8f}{usmUserSpinLock} = \hyperlink{net_8c_af45ea0afc9806749114ec85e507014e1}{netGetRandRange}(1, 
+      \hyperlink{stdint_8h_a181807730d4a375f848ba139813ce04f}{INT32\_MAX});
+89 
+90    \textcolor{comment}{//Successful processing}
+91    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+92 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{snmp__usm__mib__impl_8c_a19afb1b80822788d5a9729c3bcb5b82a}\label{snmp__usm__mib__impl_8c_a19afb1b80822788d5a9729c3bcb5b82a}} 
+\index{snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c@{snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c}!snmp\+Usm\+Mib\+Load@{snmp\+Usm\+Mib\+Load}}
+\index{snmp\+Usm\+Mib\+Load@{snmp\+Usm\+Mib\+Load}!snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c@{snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c}}
+\subsubsection{\texorpdfstring{snmp\+Usm\+Mib\+Load()}{snmpUsmMibLoad()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} snmp\+Usm\+Mib\+Load (\begin{DoxyParamCaption}\item[{void $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Load S\+N\+MP U\+SM M\+IB module. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the S\+N\+MP agent context \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 101 of file snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c.
+
+
+\begin{DoxyCode}
+102 \{
+103    \textcolor{comment}{//Register SNMP agent context}
+104    \hyperlink{snmp__usm__mib__module_8c_af70b3b61ca665679cb091bd6ad2b235a}{snmpUsmMibBase}.\hyperlink{structSnmpUsmMibBase_a7348cb0e2110c37b29fb3ba2501744d9}{context} = context;
+105 
+106    \textcolor{comment}{//Successful processing}
+107    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+108 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{snmp__usm__mib__impl_8c_a1c5d94b7fb85fb23453e3c24425577a9}\label{snmp__usm__mib__impl_8c_a1c5d94b7fb85fb23453e3c24425577a9}} 
+\index{snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c@{snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c}!snmp\+Usm\+Mib\+Lock@{snmp\+Usm\+Mib\+Lock}}
+\index{snmp\+Usm\+Mib\+Lock@{snmp\+Usm\+Mib\+Lock}!snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c@{snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c}}
+\subsubsection{\texorpdfstring{snmp\+Usm\+Mib\+Lock()}{snmpUsmMibLock()}}
+{\footnotesize\ttfamily void snmp\+Usm\+Mib\+Lock (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Lock S\+N\+MP U\+SM M\+IB base. 
+
+
+
+Definition at line 127 of file snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c.
+
+
+\begin{DoxyCode}
+128 \{
+129    \textcolor{comment}{//Clear temporary user}
+130    memset(&\hyperlink{snmp__usm__mib__module_8c_af70b3b61ca665679cb091bd6ad2b235a}{snmpUsmMibBase}.\hyperlink{structSnmpUsmMibBase_a2b38282734d310adb88b0bafaf4143ca}{tempUser}, 0, \textcolor{keyword}{sizeof}(
+      \hyperlink{structSnmpUserEntry}{SnmpUserEntry}));
+131 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{snmp__usm__mib__impl_8c_a2c4d88338f606f49ccdaae26b7b12a15}\label{snmp__usm__mib__impl_8c_a2c4d88338f606f49ccdaae26b7b12a15}} 
+\index{snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c@{snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c}!snmp\+Usm\+Mib\+Set\+User\+Entry@{snmp\+Usm\+Mib\+Set\+User\+Entry}}
+\index{snmp\+Usm\+Mib\+Set\+User\+Entry@{snmp\+Usm\+Mib\+Set\+User\+Entry}!snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c@{snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c}}
+\subsubsection{\texorpdfstring{snmp\+Usm\+Mib\+Set\+User\+Entry()}{snmpUsmMibSetUserEntry()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} snmp\+Usm\+Mib\+Set\+User\+Entry (\begin{DoxyParamCaption}\item[{const \hyperlink{mib__common_8h_a2bc33cee6dd90a0ee8eeb92976a1c479}{Mib\+Object} $\ast$}]{object,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{oid,  }\item[{size\+\_\+t}]{oid\+Len,  }\item[{const \hyperlink{mib__common_8h_a515b369f80863becb3a17870e6bb7a80}{Mib\+Variant} $\ast$}]{value,  }\item[{size\+\_\+t}]{value\+Len,  }\item[{\hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t}}]{commit }\end{DoxyParamCaption})}
+
+
+
+Set usm\+User\+Entry object value. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em object} & Pointer to the M\+IB object descriptor \\
+\hline
+\mbox{\tt in}  & {\em oid} & Object identifier (object name and instance identifier) \\
+\hline
+\mbox{\tt in}  & {\em oid\+Len} & Length of the O\+ID, in bytes \\
+\hline
+\mbox{\tt in}  & {\em value} & Object value \\
+\hline
+\mbox{\tt in}  & {\em value\+Len} & Length of the object value, in bytes \\
+\hline
+\mbox{\tt in}  & {\em commit} & This flag tells whether the changes shall be committed to the M\+IB base \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 199 of file snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c.
+
+
+\begin{DoxyCode}
+201 \{
+202    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+203    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+204    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} userEngineId[\hyperlink{snmp__common_8h_a182f7381f1e0c29ee196042008e380be}{SNMP\_MAX\_CONTEXT\_ENGINE\_SIZE}];
+205    \textcolor{keywordtype}{size\_t} userEngineIdLen;
+206    \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\_t} userName[\hyperlink{snmp__common_8h_ae889f56d8038ef202bca4b1d974bd53f}{SNMP\_MAX\_USER\_NAME\_LEN} + 1];
+207    \hyperlink{snmp__agent_8h_a4c68afef83114acf80065b64191bfdac}{SnmpAgentContext} *context;
+208    \hyperlink{structSnmpUserEntry}{SnmpUserEntry} *user;
+209 
+210    \textcolor{comment}{//Point to the instance identifier}
+211    n = \textcolor{keywordtype}{object}->oidLen;
+212 
+213    \textcolor{comment}{//usmUserEngineID is used as 1st instance identifier}
+214    error = \hyperlink{mib__common_8c_a2f923007633943049e9ed343eca0cc03}{mibDecodeOctetString}(\hyperlink{mib__common_8h_a5d78f42b3545deb9bbd305138506c7a7}{oid}, oidLen, &n, userEngineId,
+215       \hyperlink{snmp__common_8h_a182f7381f1e0c29ee196042008e380be}{SNMP\_MAX\_CONTEXT\_ENGINE\_SIZE}, &userEngineIdLen, 
+      \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE});
+216    \textcolor{comment}{//Invalid instance identifier?}
+217    \textcolor{keywordflow}{if}(error)
+218       \textcolor{keywordflow}{return} error;
+219 
+220    \textcolor{comment}{//Accept malformed SNMP engine IDs}
+221    \textcolor{keywordflow}{if}(n < oidLen && \hyperlink{mib__common_8h_a5d78f42b3545deb9bbd305138506c7a7}{oid}[n] == 0)
+222       n++;
+223 
+224    \textcolor{comment}{//usmUserName is used as 2nd instance identifier}
+225    error = \hyperlink{mib__common_8c_a1d2f3bd24afe689ea31baf797bbf8f0c}{mibDecodeString}(\hyperlink{mib__common_8h_a5d78f42b3545deb9bbd305138506c7a7}{oid}, oidLen, &n, userName,
+226       \hyperlink{snmp__common_8h_ae889f56d8038ef202bca4b1d974bd53f}{SNMP\_MAX\_USER\_NAME\_LEN}, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE});
+227    \textcolor{comment}{//Invalid instance identifier?}
+228    \textcolor{keywordflow}{if}(error)
+229       \textcolor{keywordflow}{return} error;
+230 
+231    \textcolor{comment}{//Sanity check}
+232    \textcolor{keywordflow}{if}(n != oidLen)
+233       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca805a80fe68633921ca43149789f4c3eb}{ERROR\_INSTANCE\_NOT\_FOUND};
+234 
+235    \textcolor{comment}{//Make sure the user name is acceptable}
+236    \textcolor{keywordflow}{if}(userName[0] == \textcolor{charliteral}{'\(\backslash\)0'})
+237       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca805a80fe68633921ca43149789f4c3eb}{ERROR\_INSTANCE\_NOT\_FOUND};
+238 
+239    \textcolor{comment}{//Point to the SNMP agent context}
+240    context = (\hyperlink{snmp__agent_8h_a4c68afef83114acf80065b64191bfdac}{SnmpAgentContext} *) \hyperlink{snmp__usm__mib__module_8c_af70b3b61ca665679cb091bd6ad2b235a}{snmpUsmMibBase}.
+      \hyperlink{structSnmpUsmMibBase_a7348cb0e2110c37b29fb3ba2501744d9}{context};
+241    \textcolor{comment}{//Sanity check}
+242    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+243       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca805a80fe68633921ca43149789f4c3eb}{ERROR\_INSTANCE\_NOT\_FOUND};
+244 
+245    \textcolor{comment}{//Retrieve the security profile of the specified user}
+246    user = \hyperlink{snmp__agent__usm_8c_adb4ad71f3b5167a13a2551f075c25110}{snmpFindUserEntry}(context, userName, strlen(userName));
+247 
+248    \textcolor{comment}{//usmUserCloneFrom object?}
+249    \textcolor{keywordflow}{if}(!strcmp(object->name, \textcolor{stringliteral}{"usmUserCloneFrom"}))
+250    \{
+251       \hyperlink{structSnmpUserEntry}{SnmpUserEntry} *cloneFromUser;
+252 
+253       \textcolor{comment}{//Check the length of the OID}
+254       \textcolor{keywordflow}{if}(valueLen <= \textcolor{keyword}{sizeof}(\hyperlink{snmp__usm__mib__impl_8c_a714fc79835177094b022fb0c94464c74}{usmUserEntryOid}))
+255          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cafaae3a6b1efb8378ac642c5670d71885}{ERROR\_INCONSISTENT\_VALUE};
+256 
+257       \textcolor{comment}{//The OID must point to another conceptual row in the usmUserTable}
+258       \textcolor{keywordflow}{if}(memcmp(\hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->oid, \hyperlink{snmp__usm__mib__impl_8c_a714fc79835177094b022fb0c94464c74}{usmUserEntryOid}, \textcolor{keyword}{sizeof}(
+      \hyperlink{snmp__usm__mib__impl_8c_a714fc79835177094b022fb0c94464c74}{usmUserEntryOid})))
+259          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cafaae3a6b1efb8378ac642c5670d71885}{ERROR\_INCONSISTENT\_VALUE};
+260 
+261       \textcolor{comment}{//Point to the instance identifier}
+262       n = \textcolor{keyword}{sizeof}(\hyperlink{snmp__usm__mib__impl_8c_a714fc79835177094b022fb0c94464c74}{usmUserEntryOid}) + 1;
+263 
+264       \textcolor{comment}{//usmUserEngineID is used as 1st instance identifier}
+265       error = \hyperlink{mib__common_8c_a2f923007633943049e9ed343eca0cc03}{mibDecodeOctetString}(\hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->oid, valueLen, &n, userEngineId,
+266          \hyperlink{snmp__common_8h_a182f7381f1e0c29ee196042008e380be}{SNMP\_MAX\_CONTEXT\_ENGINE\_SIZE}, &userEngineIdLen, 
+      \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE});
+267       \textcolor{comment}{//Invalid instance identifier?}
+268       \textcolor{keywordflow}{if}(error)
+269          \textcolor{keywordflow}{return} error;
+270 
+271       \textcolor{comment}{//usmUserName is used as 2nd instance identifier}
+272       error = \hyperlink{mib__common_8c_a1d2f3bd24afe689ea31baf797bbf8f0c}{mibDecodeString}(\hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->oid, valueLen, &n, userName,
+273          \hyperlink{snmp__common_8h_ae889f56d8038ef202bca4b1d974bd53f}{SNMP\_MAX\_USER\_NAME\_LEN}, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE});
+274       \textcolor{comment}{//Invalid instance identifier?}
+275       \textcolor{keywordflow}{if}(error)
+276          \textcolor{keywordflow}{return} error;
+277 
+278       \textcolor{comment}{//Retrieve the security profile of the clone-from user}
+279       cloneFromUser = \hyperlink{snmp__agent__usm_8c_adb4ad71f3b5167a13a2551f075c25110}{snmpFindUserEntry}(context, userName, strlen(userName));
+280 
+281       \textcolor{comment}{//The cloning process fails with an inconsistentName error if the}
+282       \textcolor{comment}{//conceptual row representing the clone-from user does not exist or}
+283       \textcolor{comment}{//is not in an active state when the cloning process is invoked}
+284       \textcolor{keywordflow}{if}(cloneFromUser == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || cloneFromUser->\hyperlink{structSnmpUserEntry_add2c8c54d828652fa85a0697654e0573}{status} != 
+      \hyperlink{mib__common_8h_a40ce1ea958f5c3b04f841d76f5557097a438de565ef13d128f16f420284316088}{MIB\_ROW\_STATUS\_ACTIVE})
+285          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cafaae3a6b1efb8378ac642c5670d71885}{ERROR\_INCONSISTENT\_VALUE};
+286 
+287       \textcolor{comment}{//Check whether the row has already been instantiated}
+288       \textcolor{keywordflow}{if}(user != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+289       \{
+290          \textcolor{comment}{//Commit phase?}
+291          \textcolor{keywordflow}{if}(commit)
+292          \{
+293             \textcolor{comment}{//The first time an instance of this object is set by a management}
+294             \textcolor{comment}{//operation, the cloning process is invoked}
+295             \textcolor{keywordflow}{if}(user->\hyperlink{structSnmpUserEntry_af0824f5ebfa463d31b6d9983def956eb}{mode} == \hyperlink{snmp__agent__usm_8h_a45fe7ae59b303bb7c3a6067ffe2ed5caacf90f7f9213ec90e188a5f43aba70484}{SNMP\_ACCESS\_NONE})
+296             \{
+297                \textcolor{comment}{//Clone the security parameters of the specified user}
+298                \hyperlink{snmp__agent__usm_8c_a7a2163b21b2086dba7259a5aaea7c3fd}{snmpCloneSecurityParameters}(user, cloneFromUser);
+299             \}
+300          \}
+301       \}
+302       \textcolor{keywordflow}{else}
+303       \{
+304          \textcolor{comment}{//Prepare phase?}
+305          \textcolor{keywordflow}{if}(!commit)
+306          \{
+307             \textcolor{comment}{//The first time an instance of this object is set by a management}
+308             \textcolor{comment}{//operation, the cloning process is invoked}
+309             \hyperlink{snmp__agent__usm_8c_a7a2163b21b2086dba7259a5aaea7c3fd}{snmpCloneSecurityParameters}(&
+      \hyperlink{snmp__usm__mib__module_8c_af70b3b61ca665679cb091bd6ad2b235a}{snmpUsmMibBase}.\hyperlink{structSnmpUsmMibBase_a2b38282734d310adb88b0bafaf4143ca}{tempUser}, cloneFromUser);
+310          \}
+311       \}
+312    \}
+313    \textcolor{comment}{//usmUserAuthProtocol object?}
+314    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!strcmp(object->name, \textcolor{stringliteral}{"usmUserAuthProtocol"}))
+315    \{
+316       \textcolor{comment}{//Check whether the user name exists}
+317       \textcolor{keywordflow}{if}(user != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+318       \{
+319          \textcolor{comment}{//If a set operation tries to change the value of an existing instance}
+320          \textcolor{comment}{//of this object to any value other than usmNoAuthProtocol, then an}
+321          \textcolor{comment}{//inconsistentValue error must be returned}
+322          \textcolor{keywordflow}{if}(\hyperlink{oid_8c_a3f24a7995a2a7aa587379ec6e1922e36}{oidComp}(\hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->oid, valueLen, \hyperlink{snmp__usm__mib__impl_8c_ae8c8a57380663da703d635f42c4b06c8}{usmNoAuthProtocolOid},
+323             \textcolor{keyword}{sizeof}(\hyperlink{snmp__usm__mib__impl_8c_ae8c8a57380663da703d635f42c4b06c8}{usmNoAuthProtocolOid})))
+324          \{
+325             \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cafaae3a6b1efb8378ac642c5670d71885}{ERROR\_INCONSISTENT\_VALUE};
+326          \}
+327 
+328          \textcolor{comment}{//If a set operation tries to set the value to the usmNoAuthProtocol}
+329          \textcolor{comment}{//while the usmUserPrivProtocol value in the same row is not equal to}
+330          \textcolor{comment}{//usmNoPrivProtocol, then an inconsistentValue error must be returned}
+331          \textcolor{keywordflow}{if}(user->\hyperlink{structSnmpUserEntry_a59bfb353ffa70a6791f0a6d5608ec0eb}{privProtocol} != \hyperlink{snmp__agent__usm_8h_acfd97e4fdb0cd081855bcb3d922dd851a29bcb0f6410e21559159915d4c08dac8}{SNMP\_PRIV\_PROTOCOL\_NONE})
+332             \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cafaae3a6b1efb8378ac642c5670d71885}{ERROR\_INCONSISTENT\_VALUE};
+333 
+334          \textcolor{comment}{//Commit phase?}
+335          \textcolor{keywordflow}{if}(commit)
+336          \{
+337             \textcolor{comment}{//Once instantiated, the value of such an instance of this object}
+338             \textcolor{comment}{//can only be changed via a set operation to the value of the}
+339             \textcolor{comment}{//usmNoAuthProtocol}
+340             user->\hyperlink{structSnmpUserEntry_a5131eefca59001108b44e59b284397db}{authProtocol} = \hyperlink{snmp__agent__usm_8h_a13c46b84c881bd15bad7093a7f3639e3a2c9ec503096d5f8c9f31352c4ad6488b}{SNMP\_AUTH\_PROTOCOL\_NONE};
+341          \}
+342       \}
+343       \textcolor{keywordflow}{else}
+344       \{
+345          \textcolor{comment}{//Prepare phase?}
+346          \textcolor{keywordflow}{if}(!commit)
+347          \{
+348             \textcolor{comment}{//The usmUserAuthProtocol object specifies the type of authentication}
+349             \textcolor{comment}{//protocol which is used}
+350             \textcolor{keywordflow}{if}(!\hyperlink{oid_8c_a3f24a7995a2a7aa587379ec6e1922e36}{oidComp}(\hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->oid, valueLen, \hyperlink{snmp__usm__mib__impl_8c_ae8c8a57380663da703d635f42c4b06c8}{usmNoAuthProtocolOid},
+351                \textcolor{keyword}{sizeof}(\hyperlink{snmp__usm__mib__impl_8c_ae8c8a57380663da703d635f42c4b06c8}{usmNoAuthProtocolOid})))
+352             \{
+353                \textcolor{comment}{//No authentication}
+354             \}
+355             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!\hyperlink{oid_8c_a3f24a7995a2a7aa587379ec6e1922e36}{oidComp}(\hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->oid, valueLen, 
+      \hyperlink{snmp__usm__mib__impl_8c_ac8445afff7b425a46a00a3ad2da25e46}{usmHMACMD5AuthProtocolOid},
+356                \textcolor{keyword}{sizeof}(\hyperlink{snmp__usm__mib__impl_8c_ac8445afff7b425a46a00a3ad2da25e46}{usmHMACMD5AuthProtocolOid})))
+357             \{
+358                \textcolor{comment}{//HMAC-MD5-96 authentication protocol}
+359             \}
+360             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!\hyperlink{oid_8c_a3f24a7995a2a7aa587379ec6e1922e36}{oidComp}(\hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->oid, valueLen, 
+      \hyperlink{snmp__usm__mib__impl_8c_ac45f676571c417394d45b288e080e7ac}{usmHMACSHAAuthProtocolOid},
+361                \textcolor{keyword}{sizeof}(\hyperlink{snmp__usm__mib__impl_8c_ac45f676571c417394d45b288e080e7ac}{usmHMACSHAAuthProtocolOid})))
+362             \{
+363                \textcolor{comment}{//HMAC-SHA-1-96 authentication protocol}
+364             \}
+365             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!\hyperlink{oid_8c_a3f24a7995a2a7aa587379ec6e1922e36}{oidComp}(\hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->oid, valueLen, 
+      \hyperlink{snmp__usm__mib__impl_8c_ad3033a1f473631c39dc1b66026eb0a6a}{usmHMAC128SHA224AuthProtocolOid},
+366                \textcolor{keyword}{sizeof}(\hyperlink{snmp__usm__mib__impl_8c_ad3033a1f473631c39dc1b66026eb0a6a}{usmHMAC128SHA224AuthProtocolOid})))
+367             \{
+368                \textcolor{comment}{//HMAC-SHA-224-128 authentication protocol}
+369             \}
+370             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!\hyperlink{oid_8c_a3f24a7995a2a7aa587379ec6e1922e36}{oidComp}(\hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->oid, valueLen, 
+      \hyperlink{snmp__usm__mib__impl_8c_a78ad63ebb672ecf84dd37c042b42cc43}{usmHMAC192SHA256AuthProtocolOid},
+371                \textcolor{keyword}{sizeof}(\hyperlink{snmp__usm__mib__impl_8c_a78ad63ebb672ecf84dd37c042b42cc43}{usmHMAC192SHA256AuthProtocolOid})))
+372             \{
+373                \textcolor{comment}{//HMAC-SHA-256-192 authentication protocol}
+374             \}
+375             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!\hyperlink{oid_8c_a3f24a7995a2a7aa587379ec6e1922e36}{oidComp}(\hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->oid, valueLen, 
+      \hyperlink{snmp__usm__mib__impl_8c_a0bee38880ebba0b1eb23306a46a95c65}{usmHMAC256SHA384AuthProtocolOid},
+376                \textcolor{keyword}{sizeof}(\hyperlink{snmp__usm__mib__impl_8c_a0bee38880ebba0b1eb23306a46a95c65}{usmHMAC256SHA384AuthProtocolOid})))
+377             \{
+378                \textcolor{comment}{//HMAC-SHA-384-256 authentication protocol}
+379             \}
+380             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!\hyperlink{oid_8c_a3f24a7995a2a7aa587379ec6e1922e36}{oidComp}(\hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->oid, valueLen, 
+      \hyperlink{snmp__usm__mib__impl_8c_a7dee9181ece4bb5061ab1eff12a8e02d}{usmHMAC384SHA512AuthProtocolOid},
+381                \textcolor{keyword}{sizeof}(\hyperlink{snmp__usm__mib__impl_8c_a7dee9181ece4bb5061ab1eff12a8e02d}{usmHMAC384SHA512AuthProtocolOid})))
+382             \{
+383                \textcolor{comment}{//HMAC-SHA-512-384 authentication protocol}
+384             \}
+385             \textcolor{keywordflow}{else}
+386             \{
+387                \textcolor{comment}{//If an initial set operation (at row creation time) tries to}
+388                \textcolor{comment}{//set a value for an unknown or unsupported protocol, then a}
+389                \textcolor{comment}{//wrongValue error must be returned}
+390                \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caa89e595b6b9492cadd1e39bcf6b51255}{ERROR\_WRONG\_VALUE};
+391             \}
+392          \}
+393       \}
+394    \}
+395    \textcolor{comment}{//usmUserAuthKeyChange or usmUserOwnAuthKeyChange object?}
+396    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!strcmp(object->name, \textcolor{stringliteral}{"usmUserAuthKeyChange"}) ||
+397       !strcmp(object->name, \textcolor{stringliteral}{"usmUserOwnAuthKeyChange"}))
+398    \{
+399       \textcolor{keyword}{const} \hyperlink{structHashAlgo}{HashAlgo} *hashAlgo;
+400 
+401       \textcolor{comment}{//Unknown user name?}
+402       \textcolor{keywordflow}{if}(user == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+403          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca805a80fe68633921ca43149789f4c3eb}{ERROR\_INSTANCE\_NOT\_FOUND};
+404 
+405       \textcolor{comment}{//usmUserOwnAuthKeyChange object?}
+406       \textcolor{keywordflow}{if}(!strcmp(object->name, \textcolor{stringliteral}{"usmUserOwnAuthKeyChange"}))
+407       \{
+408          \textcolor{comment}{//When the user name of the requester is not the same as the umsUserName}
+409          \textcolor{comment}{//that indexes the row, then a noAccess error must be returned}
+410          \textcolor{keywordflow}{if}(strcmp(user->\hyperlink{structSnmpUserEntry_a60ae402e93fecec705e4f7ff0755360f}{name}, context->user.name))
+411             \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cab2ad5fd7f964111e682dab2f8411902a}{ERROR\_ACCESS\_DENIED};
+412 
+413          \textcolor{comment}{//When a set is received and the security model in use is not USM, then}
+414          \textcolor{comment}{//a noAccess error must be returned}
+415          \textcolor{keywordflow}{if}(context->request.msgSecurityModel != \hyperlink{snmp__agent__usm_8h_a59354ab45890b9da1b27d44f88193695a21c6309103699e29211c87fd78c79521}{SNMP\_SECURITY\_MODEL\_USM})
+416             \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cab2ad5fd7f964111e682dab2f8411902a}{ERROR\_ACCESS\_DENIED};
+417       \}
+418 
+419       \textcolor{comment}{//Get the hash algorithm to be used to update the key}
+420       hashAlgo = \hyperlink{snmp__agent__usm_8c_ac2516fd2164cc67ce314e5f736c43d29}{snmpGetHashAlgo}(user->\hyperlink{structSnmpUserEntry_a5131eefca59001108b44e59b284397db}{authProtocol});
+421 
+422       \textcolor{comment}{//Invalid authentication protocol?}
+423       \textcolor{keywordflow}{if}(hashAlgo == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+424          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca7446f962c635e715f75bc4aff05feb77}{ERROR\_WRITE\_FAILED};
+425 
+426       \textcolor{comment}{//The value of an instance of this object is the concatenation of}
+427       \textcolor{comment}{//two components of fixed length: first a random component and then}
+428       \textcolor{comment}{//a delta component}
+429       \textcolor{keywordflow}{if}(valueLen != (hashAlgo->\hyperlink{structHashAlgo_a0c8ccdb22ea395ccdd8decd06401d22e}{digestSize} * 2))
+430          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca5040f7f12c5856b6fa69242813935bad}{ERROR\_WRONG\_LENGTH};
+431 
+432       \textcolor{comment}{//Commit phase?}
+433       \textcolor{keywordflow}{if}(commit)
+434       \{
+435          \textcolor{comment}{//Update the localized authentication key (Kul)}
+436          \hyperlink{snmp__agent__usm_8c_a1555f6ee258f6dfef2f9d11f95560a39}{snmpChangeKey}(hashAlgo, \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->octetString,
+437             \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->octetString + hashAlgo->\hyperlink{structHashAlgo_a0c8ccdb22ea395ccdd8decd06401d22e}{digestSize}, &user->
+      \hyperlink{structSnmpUserEntry_abe989af09e827849ce740a3813edcbc7}{localizedAuthKey});
+438 
+439          \textcolor{comment}{//The raw authentication key (Ku) is no longer valid}
+440          memset(&user->\hyperlink{structSnmpUserEntry_a32003a1f649e6244a8453157d6502f92}{rawAuthKey}, 0, \textcolor{keyword}{sizeof}(\hyperlink{structSnmpKey}{SnmpKey}));
+441       \}
+442    \}
+443    \textcolor{comment}{//usmUserPrivProtocol object?}
+444    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!strcmp(object->name, \textcolor{stringliteral}{"usmUserPrivProtocol"}))
+445    \{
+446       \textcolor{comment}{//Check whether the user name exists}
+447       \textcolor{keywordflow}{if}(user != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+448       \{
+449          \textcolor{comment}{//If a set operation tries to change the value of an existing instance}
+450          \textcolor{comment}{//of this object to any value other than usmNoPrivProtocol, then an}
+451          \textcolor{comment}{//inconsistentValue error must be returned}
+452          \textcolor{keywordflow}{if}(\hyperlink{oid_8c_a3f24a7995a2a7aa587379ec6e1922e36}{oidComp}(\hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->oid, valueLen, \hyperlink{snmp__usm__mib__impl_8c_a07161aa336ff79fcf62ad1a9985eb115}{usmNoPrivProtocolOid},
+453             \textcolor{keyword}{sizeof}(\hyperlink{snmp__usm__mib__impl_8c_a07161aa336ff79fcf62ad1a9985eb115}{usmNoPrivProtocolOid})))
+454          \{
+455             \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cafaae3a6b1efb8378ac642c5670d71885}{ERROR\_INCONSISTENT\_VALUE};
+456          \}
+457 
+458          \textcolor{comment}{//Commit phase?}
+459          \textcolor{keywordflow}{if}(commit)
+460          \{
+461             \textcolor{comment}{//Once instantiated, the value of such an instance of this object}
+462             \textcolor{comment}{//can only be changed via a set operation to the value of the}
+463             \textcolor{comment}{//usmNoPrivProtocol}
+464             user->\hyperlink{structSnmpUserEntry_a59bfb353ffa70a6791f0a6d5608ec0eb}{privProtocol} = \hyperlink{snmp__agent__usm_8h_acfd97e4fdb0cd081855bcb3d922dd851a29bcb0f6410e21559159915d4c08dac8}{SNMP\_PRIV\_PROTOCOL\_NONE};
+465          \}
+466       \}
+467       \textcolor{keywordflow}{else}
+468       \{
+469          \textcolor{comment}{//Prepare phase?}
+470          \textcolor{keywordflow}{if}(!commit)
+471          \{
+472             \textcolor{comment}{//The usmUserPrivProtocol object specifies the type of privacy}
+473             \textcolor{comment}{//protocol which is used}
+474             \textcolor{keywordflow}{if}(!\hyperlink{oid_8c_a3f24a7995a2a7aa587379ec6e1922e36}{oidComp}(\hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->oid, valueLen, \hyperlink{snmp__usm__mib__impl_8c_a07161aa336ff79fcf62ad1a9985eb115}{usmNoPrivProtocolOid},
+475                \textcolor{keyword}{sizeof}(\hyperlink{snmp__usm__mib__impl_8c_a07161aa336ff79fcf62ad1a9985eb115}{usmNoPrivProtocolOid})))
+476             \{
+477                \textcolor{comment}{//No privacy}
+478             \}
+479             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!\hyperlink{oid_8c_a3f24a7995a2a7aa587379ec6e1922e36}{oidComp}(\hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->oid, valueLen, 
+      \hyperlink{snmp__usm__mib__impl_8c_a008e107e60db13679e6156f679da3dfd}{usmDESPrivProtocolOid},
+480                \textcolor{keyword}{sizeof}(\hyperlink{snmp__usm__mib__impl_8c_a008e107e60db13679e6156f679da3dfd}{usmDESPrivProtocolOid})))
+481             \{
+482                \textcolor{comment}{//DES-CBC privacy protocol}
+483             \}
+484             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!\hyperlink{oid_8c_a3f24a7995a2a7aa587379ec6e1922e36}{oidComp}(\hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->oid, valueLen, 
+      \hyperlink{snmp__usm__mib__impl_8c_ab5d82af6dc40db7550c05b13b586b4fa}{usmAesCfb128ProtocolOid},
+485                \textcolor{keyword}{sizeof}(\hyperlink{snmp__usm__mib__impl_8c_ab5d82af6dc40db7550c05b13b586b4fa}{usmAesCfb128ProtocolOid})))
+486             \{
+487                \textcolor{comment}{//AES-128-CFB privacy protocol}
+488             \}
+489             \textcolor{keywordflow}{else}
+490             \{
+491                \textcolor{comment}{//If an initial set operation (at row creation time) tries to}
+492                \textcolor{comment}{//set a value for an unknown or unsupported protocol, then a}
+493                \textcolor{comment}{//wrongValue error must be returned}
+494                \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caa89e595b6b9492cadd1e39bcf6b51255}{ERROR\_WRONG\_VALUE};
+495             \}
+496          \}
+497       \}
+498    \}
+499    \textcolor{comment}{//usmUserPrivKeyChange or usmUserOwnPrivKeyChangeobject?}
+500    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!strcmp(object->name, \textcolor{stringliteral}{"usmUserPrivKeyChange"}) ||
+501       !strcmp(object->name, \textcolor{stringliteral}{"usmUserOwnPrivKeyChange"}))
+502    \{
+503       \textcolor{keyword}{const} \hyperlink{structHashAlgo}{HashAlgo} *hashAlgo;
+504 
+505       \textcolor{comment}{//Unknown user name?}
+506       \textcolor{keywordflow}{if}(user == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+507          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca805a80fe68633921ca43149789f4c3eb}{ERROR\_INSTANCE\_NOT\_FOUND};
+508 
+509       \textcolor{comment}{//usmUserOwnPrivKeyChange object?}
+510       \textcolor{keywordflow}{if}(!strcmp(object->name, \textcolor{stringliteral}{"usmUserOwnPrivKeyChange"}))
+511       \{
+512          \textcolor{comment}{//When the user name of the requester is not the same as the umsUserName}
+513          \textcolor{comment}{//that indexes the row, then a noAccess error must be returned}
+514          \textcolor{keywordflow}{if}(strcmp(user->\hyperlink{structSnmpUserEntry_a60ae402e93fecec705e4f7ff0755360f}{name}, context->user.name))
+515             \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cab2ad5fd7f964111e682dab2f8411902a}{ERROR\_ACCESS\_DENIED};
+516 
+517          \textcolor{comment}{//When a set is received and the security model in use is not USM, then}
+518          \textcolor{comment}{//a noAccess error must be returned}
+519          \textcolor{keywordflow}{if}(context->request.msgSecurityModel != \hyperlink{snmp__agent__usm_8h_a59354ab45890b9da1b27d44f88193695a21c6309103699e29211c87fd78c79521}{SNMP\_SECURITY\_MODEL\_USM})
+520             \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cab2ad5fd7f964111e682dab2f8411902a}{ERROR\_ACCESS\_DENIED};
+521       \}
+522 
+523       \textcolor{comment}{//Get the hash algorithm to be used to update the key}
+524       hashAlgo = \hyperlink{snmp__agent__usm_8c_ac2516fd2164cc67ce314e5f736c43d29}{snmpGetHashAlgo}(user->\hyperlink{structSnmpUserEntry_a5131eefca59001108b44e59b284397db}{authProtocol});
+525 
+526       \textcolor{comment}{//Invalid authentication protocol?}
+527       \textcolor{keywordflow}{if}(hashAlgo == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+528          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca7446f962c635e715f75bc4aff05feb77}{ERROR\_WRITE\_FAILED};
+529 
+530       \textcolor{comment}{//The value of an instance of this object is the concatenation of}
+531       \textcolor{comment}{//two components of fixed length: first a random component and then}
+532       \textcolor{comment}{//a delta component}
+533       \textcolor{keywordflow}{if}(valueLen != (hashAlgo->\hyperlink{structHashAlgo_a0c8ccdb22ea395ccdd8decd06401d22e}{digestSize} * 2))
+534          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca5040f7f12c5856b6fa69242813935bad}{ERROR\_WRONG\_LENGTH};
+535 
+536       \textcolor{comment}{//Commit phase?}
+537       \textcolor{keywordflow}{if}(commit)
+538       \{
+539          \textcolor{comment}{//Update the localized privacy key (Kul)}
+540          \hyperlink{snmp__agent__usm_8c_a1555f6ee258f6dfef2f9d11f95560a39}{snmpChangeKey}(hashAlgo, \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->octetString,
+541             \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->octetString + hashAlgo->\hyperlink{structHashAlgo_a0c8ccdb22ea395ccdd8decd06401d22e}{digestSize}, &user->
+      \hyperlink{structSnmpUserEntry_aee3ff1ac4b61b242440a14543c06bef2}{localizedPrivKey});
+542 
+543          \textcolor{comment}{//The raw privacy key (Ku) is no longer valid}
+544          memset(&user->\hyperlink{structSnmpUserEntry_ac4445ac274e1da56ffb5c037c9f9cb46}{rawPrivKey}, 0, \textcolor{keyword}{sizeof}(\hyperlink{structSnmpKey}{SnmpKey}));
+545       \}
+546    \}
+547    \textcolor{comment}{//usmUserPublic object?}
+548    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!strcmp(object->name, \textcolor{stringliteral}{"usmUserPublic"}))
+549    \{
+550       \textcolor{comment}{//Check the length of the public value}
+551       \textcolor{keywordflow}{if}(valueLen > \hyperlink{snmp__common_8h_aa26659028607a40bdde3f48bb7e603e3}{SNMP\_MAX\_PUBLIC\_VALUE\_SIZE})
+552          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca5040f7f12c5856b6fa69242813935bad}{ERROR\_WRONG\_LENGTH};
+553 
+554       \textcolor{comment}{//Check whether the user name exists}
+555       \textcolor{keywordflow}{if}(user != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+556       \{
+557          \textcolor{comment}{//Commit phase?}
+558          \textcolor{keywordflow}{if}(commit)
+559          \{
+560             \textcolor{comment}{//The usmUserPublic can be written as part of the procedure for}
+561             \textcolor{comment}{//changing a user's secret authentication and/or privacy key,}
+562             \textcolor{comment}{//and later read to determine whether the change of the secret}
+563             \textcolor{comment}{//was effected}
+564             memcpy(user->\hyperlink{structSnmpUserEntry_a40f5fdae184968aea77b0c816f341c8e}{publicValue}, \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->octetString, valueLen);
+565 
+566             \textcolor{comment}{//Update the length of the public value}
+567             user->\hyperlink{structSnmpUserEntry_a5b818085df903f1065013380308c3777}{publicValueLen} = valueLen;
+568          \}
+569       \}
+570       \textcolor{keywordflow}{else}
+571       \{
+572          \textcolor{comment}{//Prepare phase?}
+573          \textcolor{keywordflow}{if}(!commit)
+574          \{
+575             \textcolor{comment}{//Save the value of the public value for later use}
+576             memcpy(\hyperlink{snmp__usm__mib__module_8c_af70b3b61ca665679cb091bd6ad2b235a}{snmpUsmMibBase}.\hyperlink{structSnmpUsmMibBase_a2b38282734d310adb88b0bafaf4143ca}{tempUser}.\hyperlink{structSnmpUserEntry_a40f5fdae184968aea77b0c816f341c8e}{publicValue}, 
+      \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->octetString,
+577                valueLen);
+578 
+579             \textcolor{comment}{//Save the length of the public value}
+580             \hyperlink{snmp__usm__mib__module_8c_af70b3b61ca665679cb091bd6ad2b235a}{snmpUsmMibBase}.\hyperlink{structSnmpUsmMibBase_a2b38282734d310adb88b0bafaf4143ca}{tempUser}.\hyperlink{structSnmpUserEntry_a5b818085df903f1065013380308c3777}{publicValueLen} = valueLen;
+581          \}
+582       \}
+583    \}
+584    \textcolor{comment}{//usmUserStorageType object?}
+585    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!strcmp(object->name, \textcolor{stringliteral}{"usmUserStorageType"}))
+586    \{
+587       \textcolor{comment}{//The usmUserStorageType object specifies the storage type for this}
+588       \textcolor{comment}{//conceptual row}
+589       \textcolor{keywordflow}{if}(\hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->integer != \hyperlink{mib__common_8h_a6045d2fe4e80ff6ad14510d1e2cd616fa23d8d1e34813d8e160ef1e8f90df167d}{MIB\_STORAGE\_TYPE\_OTHER} &&
+590          \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->integer != \hyperlink{mib__common_8h_a6045d2fe4e80ff6ad14510d1e2cd616fab1109cfa48bf598ea9cb07d8f41f7536}{MIB\_STORAGE\_TYPE\_VOLATILE} &&
+591          \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->integer != \hyperlink{mib__common_8h_a6045d2fe4e80ff6ad14510d1e2cd616fa08c50a9fa5de427b5fe638fe82a2b40e}{MIB\_STORAGE\_TYPE\_NON\_VOLATILE} &&
+592          \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->integer != \hyperlink{mib__common_8h_a6045d2fe4e80ff6ad14510d1e2cd616fa42210747745ce2b0af7d81ca9ac81739}{MIB\_STORAGE\_TYPE\_PERMANENT} &&
+593          \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->integer != \hyperlink{mib__common_8h_a6045d2fe4e80ff6ad14510d1e2cd616fa319c608df40b9b341f4d6f13417a9850}{MIB\_STORAGE\_TYPE\_READ\_ONLY})
+594       \{
+595          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caa89e595b6b9492cadd1e39bcf6b51255}{ERROR\_WRONG\_VALUE};
+596       \}
+597    \}
+598    \textcolor{comment}{//usmUserStatus object?}
+599    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!strcmp(object->name, \textcolor{stringliteral}{"usmUserStatus"}))
+600    \{
+601       \hyperlink{mib__common_8h_a40ce1ea958f5c3b04f841d76f5557097}{MibRowStatus} status;
+602 
+603       \textcolor{comment}{//Get row status}
+604       status = (\hyperlink{mib__common_8h_a40ce1ea958f5c3b04f841d76f5557097}{MibRowStatus}) \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->integer;
+605 
+606       \textcolor{comment}{//Check the value specified by the set operation}
+607       \textcolor{keywordflow}{if}(status == \hyperlink{mib__common_8h_a40ce1ea958f5c3b04f841d76f5557097a438de565ef13d128f16f420284316088}{MIB\_ROW\_STATUS\_ACTIVE} ||
+608          status == \hyperlink{mib__common_8h_a40ce1ea958f5c3b04f841d76f5557097a4b22a7de003761700ca3bde5898fd2e9}{MIB\_ROW\_STATUS\_NOT\_IN\_SERVICE})
+609       \{
+610          \textcolor{comment}{//Unknown user name?}
+611          \textcolor{keywordflow}{if}(user == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+612             \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cafaae3a6b1efb8378ac642c5670d71885}{ERROR\_INCONSISTENT\_VALUE};
+613 
+614          \textcolor{comment}{//Commit phase?}
+615          \textcolor{keywordflow}{if}(commit)
+616          \{
+617             \textcolor{comment}{//The first time an instance of this object is set by a management}
+618             \textcolor{comment}{//operation, the cloning process is invoked}
+619             \textcolor{keywordflow}{if}(user->\hyperlink{structSnmpUserEntry_af0824f5ebfa463d31b6d9983def956eb}{mode} == \hyperlink{snmp__agent__usm_8h_a45fe7ae59b303bb7c3a6067ffe2ed5caacf90f7f9213ec90e188a5f43aba70484}{SNMP\_ACCESS\_NONE})
+620             \{
+621                \textcolor{comment}{//Valid clone-from user?}
+622                \textcolor{keywordflow}{if}(\hyperlink{snmp__usm__mib__module_8c_af70b3b61ca665679cb091bd6ad2b235a}{snmpUsmMibBase}.\hyperlink{structSnmpUsmMibBase_a2b38282734d310adb88b0bafaf4143ca}{tempUser}.\hyperlink{structSnmpUserEntry_af0824f5ebfa463d31b6d9983def956eb}{mode} != 
+      \hyperlink{snmp__agent__usm_8h_a45fe7ae59b303bb7c3a6067ffe2ed5caacf90f7f9213ec90e188a5f43aba70484}{SNMP\_ACCESS\_NONE})
+623                \{
+624                   \textcolor{comment}{//Copy the security profile of the clone-from user}
+625                   \hyperlink{snmp__agent__usm_8c_a7a2163b21b2086dba7259a5aaea7c3fd}{snmpCloneSecurityParameters}(user, &
+      \hyperlink{snmp__usm__mib__module_8c_af70b3b61ca665679cb091bd6ad2b235a}{snmpUsmMibBase}.\hyperlink{structSnmpUsmMibBase_a2b38282734d310adb88b0bafaf4143ca}{tempUser});
+626                \}
+627             \}
+628 
+629             \textcolor{comment}{//When the agent processes the set operation, it verifies that it}
+630             \textcolor{comment}{//has sufficient information to make the conceptual row available}
+631             \textcolor{comment}{//for use by the managed device}
+632             \textcolor{keywordflow}{if}(user->\hyperlink{structSnmpUserEntry_af0824f5ebfa463d31b6d9983def956eb}{mode} == \hyperlink{snmp__agent__usm_8h_a45fe7ae59b303bb7c3a6067ffe2ed5caacf90f7f9213ec90e188a5f43aba70484}{SNMP\_ACCESS\_NONE})
+633                \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cafaae3a6b1efb8378ac642c5670d71885}{ERROR\_INCONSISTENT\_VALUE};
+634 
+635             \textcolor{comment}{//Update the status of the conceptual row}
+636             user->\hyperlink{structSnmpUserEntry_add2c8c54d828652fa85a0697654e0573}{status} = status;
+637          \}
+638       \}
+639       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(status == \hyperlink{mib__common_8h_a40ce1ea958f5c3b04f841d76f5557097a7e302e94aab90e40035ff0ad48c1aaac}{MIB\_ROW\_STATUS\_CREATE\_AND\_GO})
+640       \{
+641          \textcolor{comment}{//User name already in use?}
+642          \textcolor{keywordflow}{if}(user != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+643             \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cafaae3a6b1efb8378ac642c5670d71885}{ERROR\_INCONSISTENT\_VALUE};
+644 
+645          \textcolor{comment}{//Create a security profile for the new user}
+646          user = \hyperlink{snmp__agent__usm_8c_aa834b11d54972a9deb6af7253f99a541}{snmpCreateUserEntry}(context);
+647          \textcolor{comment}{//Unable to create a new user?}
+648          \textcolor{keywordflow}{if}(user == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+649             \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca7446f962c635e715f75bc4aff05feb77}{ERROR\_WRITE\_FAILED};
+650 
+651          \textcolor{comment}{//Commit phase?}
+652          \textcolor{keywordflow}{if}(commit)
+653          \{
+654             \textcolor{comment}{//Valid clone-from user?}
+655             \textcolor{keywordflow}{if}(\hyperlink{snmp__usm__mib__module_8c_af70b3b61ca665679cb091bd6ad2b235a}{snmpUsmMibBase}.\hyperlink{structSnmpUsmMibBase_a2b38282734d310adb88b0bafaf4143ca}{tempUser}.\hyperlink{structSnmpUserEntry_af0824f5ebfa463d31b6d9983def956eb}{mode} != 
+      \hyperlink{snmp__agent__usm_8h_a45fe7ae59b303bb7c3a6067ffe2ed5caacf90f7f9213ec90e188a5f43aba70484}{SNMP\_ACCESS\_NONE})
+656             \{
+657                \textcolor{comment}{//Clear the security profile of the user}
+658                memset(user, 0, \textcolor{keyword}{sizeof}(\hyperlink{structSnmpUserEntry}{SnmpUserEntry}));
+659                \textcolor{comment}{//Save user name}
+660                strcpy(user->\hyperlink{structSnmpUserEntry_a60ae402e93fecec705e4f7ff0755360f}{name}, userName);
+661 
+662                \textcolor{comment}{//Valid public value specified?}
+663                \textcolor{keywordflow}{if}(\hyperlink{snmp__usm__mib__module_8c_af70b3b61ca665679cb091bd6ad2b235a}{snmpUsmMibBase}.\hyperlink{structSnmpUsmMibBase_a2b38282734d310adb88b0bafaf4143ca}{tempUser}.\hyperlink{structSnmpUserEntry_a5b818085df903f1065013380308c3777}{publicValueLen} > 0)
+664                \{
+665                   \textcolor{comment}{//Copy the public value}
+666                   memcpy(user->\hyperlink{structSnmpUserEntry_a40f5fdae184968aea77b0c816f341c8e}{publicValue}, \hyperlink{snmp__usm__mib__module_8c_af70b3b61ca665679cb091bd6ad2b235a}{snmpUsmMibBase}.
+      \hyperlink{structSnmpUsmMibBase_a2b38282734d310adb88b0bafaf4143ca}{tempUser}.\hyperlink{structSnmpUserEntry_a40f5fdae184968aea77b0c816f341c8e}{publicValue},
+667                      \hyperlink{snmp__usm__mib__module_8c_af70b3b61ca665679cb091bd6ad2b235a}{snmpUsmMibBase}.\hyperlink{structSnmpUsmMibBase_a2b38282734d310adb88b0bafaf4143ca}{tempUser}.
+      \hyperlink{structSnmpUserEntry_a5b818085df903f1065013380308c3777}{publicValueLen});
+668 
+669                   \textcolor{comment}{//Set the length of the public value}
+670                   user->\hyperlink{structSnmpUserEntry_a5b818085df903f1065013380308c3777}{publicValueLen} = \hyperlink{snmp__usm__mib__module_8c_af70b3b61ca665679cb091bd6ad2b235a}{snmpUsmMibBase}.
+      \hyperlink{structSnmpUsmMibBase_a2b38282734d310adb88b0bafaf4143ca}{tempUser}.\hyperlink{structSnmpUserEntry_a5b818085df903f1065013380308c3777}{publicValueLen};
+671                \}
+672 
+673                \textcolor{comment}{//Copy the security profile of the clone-from user}
+674                \hyperlink{snmp__agent__usm_8c_a7a2163b21b2086dba7259a5aaea7c3fd}{snmpCloneSecurityParameters}(user, &
+      \hyperlink{snmp__usm__mib__module_8c_af70b3b61ca665679cb091bd6ad2b235a}{snmpUsmMibBase}.\hyperlink{structSnmpUsmMibBase_a2b38282734d310adb88b0bafaf4143ca}{tempUser});
+675 
+676                \textcolor{comment}{//The conceptual row is now available for use by the managed device}
+677                user->\hyperlink{structSnmpUserEntry_add2c8c54d828652fa85a0697654e0573}{status} = \hyperlink{mib__common_8h_a40ce1ea958f5c3b04f841d76f5557097a438de565ef13d128f16f420284316088}{MIB\_ROW\_STATUS\_ACTIVE};
+678             \}
+679             \textcolor{keywordflow}{else}
+680             \{
+681                \textcolor{comment}{//The newly created row cannot be made active}
+682                \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cafaae3a6b1efb8378ac642c5670d71885}{ERROR\_INCONSISTENT\_VALUE};
+683             \}
+684          \}
+685       \}
+686       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(status == \hyperlink{mib__common_8h_a40ce1ea958f5c3b04f841d76f5557097a236ac2459eae20f25f78db63416b7ac2}{MIB\_ROW\_STATUS\_CREATE\_AND\_WAIT})
+687       \{
+688          \textcolor{comment}{//User name already in use?}
+689          \textcolor{keywordflow}{if}(user != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+690             \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cafaae3a6b1efb8378ac642c5670d71885}{ERROR\_INCONSISTENT\_VALUE};
+691 
+692          \textcolor{comment}{//Create a security profile for the new user}
+693          user = \hyperlink{snmp__agent__usm_8c_aa834b11d54972a9deb6af7253f99a541}{snmpCreateUserEntry}(context);
+694          \textcolor{comment}{//Unable to create a new user?}
+695          \textcolor{keywordflow}{if}(user == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+696             \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca7446f962c635e715f75bc4aff05feb77}{ERROR\_WRITE\_FAILED};
+697 
+698          \textcolor{comment}{//Commit phase?}
+699          \textcolor{keywordflow}{if}(commit)
+700          \{
+701             \textcolor{comment}{//Clear the security profile of the user}
+702             memset(user, 0, \textcolor{keyword}{sizeof}(\hyperlink{structSnmpUserEntry}{SnmpUserEntry}));
+703             \textcolor{comment}{//Save user name}
+704             strcpy(user->\hyperlink{structSnmpUserEntry_a60ae402e93fecec705e4f7ff0755360f}{name}, userName);
+705 
+706             \textcolor{comment}{//Valid public value specified?}
+707             \textcolor{keywordflow}{if}(\hyperlink{snmp__usm__mib__module_8c_af70b3b61ca665679cb091bd6ad2b235a}{snmpUsmMibBase}.\hyperlink{structSnmpUsmMibBase_a2b38282734d310adb88b0bafaf4143ca}{tempUser}.\hyperlink{structSnmpUserEntry_a5b818085df903f1065013380308c3777}{publicValueLen} > 0)
+708             \{
+709                \textcolor{comment}{//Copy the public value}
+710                memcpy(user->\hyperlink{structSnmpUserEntry_a40f5fdae184968aea77b0c816f341c8e}{publicValue}, \hyperlink{snmp__usm__mib__module_8c_af70b3b61ca665679cb091bd6ad2b235a}{snmpUsmMibBase}.
+      \hyperlink{structSnmpUsmMibBase_a2b38282734d310adb88b0bafaf4143ca}{tempUser}.\hyperlink{structSnmpUserEntry_a40f5fdae184968aea77b0c816f341c8e}{publicValue},
+711                   \hyperlink{snmp__usm__mib__module_8c_af70b3b61ca665679cb091bd6ad2b235a}{snmpUsmMibBase}.\hyperlink{structSnmpUsmMibBase_a2b38282734d310adb88b0bafaf4143ca}{tempUser}.\hyperlink{structSnmpUserEntry_a5b818085df903f1065013380308c3777}{publicValueLen});
+712 
+713                \textcolor{comment}{//Set the length of the public value}
+714                user->\hyperlink{structSnmpUserEntry_a5b818085df903f1065013380308c3777}{publicValueLen} = \hyperlink{snmp__usm__mib__module_8c_af70b3b61ca665679cb091bd6ad2b235a}{snmpUsmMibBase}.
+      \hyperlink{structSnmpUsmMibBase_a2b38282734d310adb88b0bafaf4143ca}{tempUser}.\hyperlink{structSnmpUserEntry_a5b818085df903f1065013380308c3777}{publicValueLen};
+715             \}
+716 
+717             \textcolor{comment}{//Check whether the cloning process has been invoked}
+718             \textcolor{keywordflow}{if}(user->\hyperlink{structSnmpUserEntry_af0824f5ebfa463d31b6d9983def956eb}{mode} != \hyperlink{snmp__agent__usm_8h_a45fe7ae59b303bb7c3a6067ffe2ed5caacf90f7f9213ec90e188a5f43aba70484}{SNMP\_ACCESS\_NONE})
+719             \{
+720                \textcolor{comment}{//Copy the security profile of the clone-from user}
+721                \hyperlink{snmp__agent__usm_8c_a7a2163b21b2086dba7259a5aaea7c3fd}{snmpCloneSecurityParameters}(user, &
+      \hyperlink{snmp__usm__mib__module_8c_af70b3b61ca665679cb091bd6ad2b235a}{snmpUsmMibBase}.\hyperlink{structSnmpUsmMibBase_a2b38282734d310adb88b0bafaf4143ca}{tempUser});
+722 
+723                \textcolor{comment}{//Instances of all corresponding columns are now configured}
+724                user->\hyperlink{structSnmpUserEntry_add2c8c54d828652fa85a0697654e0573}{status} = \hyperlink{mib__common_8h_a40ce1ea958f5c3b04f841d76f5557097a4b22a7de003761700ca3bde5898fd2e9}{MIB\_ROW\_STATUS\_NOT\_IN\_SERVICE};
+725             \}
+726             \textcolor{keywordflow}{else}
+727             \{
+728                \textcolor{comment}{//Initialize columns with default values}
+729                user->\hyperlink{structSnmpUserEntry_a5131eefca59001108b44e59b284397db}{authProtocol} = \hyperlink{snmp__agent__usm_8h_a13c46b84c881bd15bad7093a7f3639e3a2c9ec503096d5f8c9f31352c4ad6488b}{SNMP\_AUTH\_PROTOCOL\_NONE};
+730                user->\hyperlink{structSnmpUserEntry_a59bfb353ffa70a6791f0a6d5608ec0eb}{privProtocol} = \hyperlink{snmp__agent__usm_8h_acfd97e4fdb0cd081855bcb3d922dd851a29bcb0f6410e21559159915d4c08dac8}{SNMP\_PRIV\_PROTOCOL\_NONE};
+731 
+732                \textcolor{comment}{//Until instances of all corresponding columns are appropriately}
+733                \textcolor{comment}{//configured, the value of the corresponding instance of the}
+734                \textcolor{comment}{//usmUserStatus column is notReady}
+735                user->\hyperlink{structSnmpUserEntry_add2c8c54d828652fa85a0697654e0573}{status} = \hyperlink{mib__common_8h_a40ce1ea958f5c3b04f841d76f5557097ab6c550e32b731ff9573ce8db2f299a2b}{MIB\_ROW\_STATUS\_NOT\_READY};
+736             \}
+737          \}
+738       \}
+739       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(status == \hyperlink{mib__common_8h_a40ce1ea958f5c3b04f841d76f5557097a705e943dcc8e73d35667b8bdc20d639d}{MIB\_ROW\_STATUS\_DESTROY})
+740       \{
+741          \textcolor{comment}{//Check whether the user name exists}
+742          \textcolor{keywordflow}{if}(user != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+743          \{
+744             \textcolor{comment}{//Commit phase?}
+745             \textcolor{keywordflow}{if}(commit)
+746             \{
+747                \textcolor{comment}{//Clear the security profile of the user}
+748                memset(user, 0, \textcolor{keyword}{sizeof}(\hyperlink{structSnmpUserEntry}{SnmpUserEntry}));
+749 
+750                \textcolor{comment}{//Delete the conceptual row from the table}
+751                user->\hyperlink{structSnmpUserEntry_add2c8c54d828652fa85a0697654e0573}{status} = \hyperlink{mib__common_8h_a40ce1ea958f5c3b04f841d76f5557097a23a541b8e284769017711c3c13b9bc87}{MIB\_ROW\_STATUS\_UNUSED};
+752             \}
+753          \}
+754       \}
+755       \textcolor{keywordflow}{else}
+756       \{
+757          \textcolor{comment}{//Unsupported action}
+758          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cafaae3a6b1efb8378ac642c5670d71885}{ERROR\_INCONSISTENT\_VALUE};
+759       \}
+760    \}
+761    \textcolor{comment}{//Unknown object?}
+762    \textcolor{keywordflow}{else}
+763    \{
+764       \textcolor{comment}{//The specified object does not exist}
+765       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca7c3779a9c0fe7d65f66367f176dee6d7}{ERROR\_OBJECT\_NOT\_FOUND};
+766    \}
+767 
+768    \textcolor{comment}{//Successful set operation}
+769    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+770 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{snmp__usm__mib__impl_8c_ad726fc07b4f30743a477b03a400f20b8}\label{snmp__usm__mib__impl_8c_ad726fc07b4f30743a477b03a400f20b8}} 
+\index{snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c@{snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c}!snmp\+Usm\+Mib\+Set\+User\+Spin\+Lock@{snmp\+Usm\+Mib\+Set\+User\+Spin\+Lock}}
+\index{snmp\+Usm\+Mib\+Set\+User\+Spin\+Lock@{snmp\+Usm\+Mib\+Set\+User\+Spin\+Lock}!snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c@{snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c}}
+\subsubsection{\texorpdfstring{snmp\+Usm\+Mib\+Set\+User\+Spin\+Lock()}{snmpUsmMibSetUserSpinLock()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} snmp\+Usm\+Mib\+Set\+User\+Spin\+Lock (\begin{DoxyParamCaption}\item[{const \hyperlink{mib__common_8h_a2bc33cee6dd90a0ee8eeb92976a1c479}{Mib\+Object} $\ast$}]{object,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{oid,  }\item[{size\+\_\+t}]{oid\+Len,  }\item[{const \hyperlink{mib__common_8h_a515b369f80863becb3a17870e6bb7a80}{Mib\+Variant} $\ast$}]{value,  }\item[{size\+\_\+t}]{value\+Len,  }\item[{\hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t}}]{commit }\end{DoxyParamCaption})}
+
+
+
+Set usm\+User\+Spin\+Lock object value. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em object} & Pointer to the M\+IB object descriptor \\
+\hline
+\mbox{\tt in}  & {\em oid} & Object identifier (object name and instance identifier) \\
+\hline
+\mbox{\tt in}  & {\em oid\+Len} & Length of the O\+ID, in bytes \\
+\hline
+\mbox{\tt in}  & {\em value} & Object value \\
+\hline
+\mbox{\tt in}  & {\em value\+Len} & Length of the object value, in bytes \\
+\hline
+\mbox{\tt in}  & {\em commit} & This flag tells whether the changes shall be committed to the M\+IB base \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 157 of file snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c.
+
+
+\begin{DoxyCode}
+159 \{
+160    \textcolor{comment}{//Test and increment spin lock}
+161    \textcolor{keywordflow}{return} \hyperlink{mib__common_8c_a8898a2653904cfbf5e06cd1e14b4a37b}{mibTestAndIncSpinLock}(&\hyperlink{snmp__usm__mib__module_8c_af70b3b61ca665679cb091bd6ad2b235a}{snmpUsmMibBase}.
+      \hyperlink{structSnmpUsmMibBase_a48469936e03465ca06110ee6ef0fde8f}{usmUserSpinLock},
+162       \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->integer, commit);
+163 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{snmp__usm__mib__impl_8c_a0d2bf8eac6abd8252dd7aebba4085774}\label{snmp__usm__mib__impl_8c_a0d2bf8eac6abd8252dd7aebba4085774}} 
+\index{snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c@{snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c}!snmp\+Usm\+Mib\+Unload@{snmp\+Usm\+Mib\+Unload}}
+\index{snmp\+Usm\+Mib\+Unload@{snmp\+Usm\+Mib\+Unload}!snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c@{snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c}}
+\subsubsection{\texorpdfstring{snmp\+Usm\+Mib\+Unload()}{snmpUsmMibUnload()}}
+{\footnotesize\ttfamily void snmp\+Usm\+Mib\+Unload (\begin{DoxyParamCaption}\item[{void $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Unload S\+N\+MP U\+SM M\+IB module. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the S\+N\+MP agent context \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 116 of file snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c.
+
+
+\begin{DoxyCode}
+117 \{
+118    \textcolor{comment}{//Unregister SNMP agent context}
+119    \hyperlink{snmp__usm__mib__module_8c_af70b3b61ca665679cb091bd6ad2b235a}{snmpUsmMibBase}.\hyperlink{structSnmpUsmMibBase_a7348cb0e2110c37b29fb3ba2501744d9}{context} = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+120 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{snmp__usm__mib__impl_8c_a532db8b3cbfe174d858873981bcf77fa}\label{snmp__usm__mib__impl_8c_a532db8b3cbfe174d858873981bcf77fa}} 
+\index{snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c@{snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c}!snmp\+Usm\+Mib\+Unlock@{snmp\+Usm\+Mib\+Unlock}}
+\index{snmp\+Usm\+Mib\+Unlock@{snmp\+Usm\+Mib\+Unlock}!snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c@{snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c}}
+\subsubsection{\texorpdfstring{snmp\+Usm\+Mib\+Unlock()}{snmpUsmMibUnlock()}}
+{\footnotesize\ttfamily void snmp\+Usm\+Mib\+Unlock (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Unlock S\+N\+MP U\+SM M\+IB base. 
+
+
+
+Definition at line 138 of file snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c.
+
+
+\begin{DoxyCode}
+139 \{
+140    \textcolor{comment}{//Clear temporary user}
+141    memset(&\hyperlink{snmp__usm__mib__module_8c_af70b3b61ca665679cb091bd6ad2b235a}{snmpUsmMibBase}.\hyperlink{structSnmpUsmMibBase_a2b38282734d310adb88b0bafaf4143ca}{tempUser}, 0, \textcolor{keyword}{sizeof}(
+      \hyperlink{structSnmpUserEntry}{SnmpUserEntry}));
+142 \}
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{snmp__usm__mib__impl_8c_ab5d82af6dc40db7550c05b13b586b4fa}\label{snmp__usm__mib__impl_8c_ab5d82af6dc40db7550c05b13b586b4fa}} 
+\index{snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c@{snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c}!usm\+Aes\+Cfb128\+Protocol\+Oid@{usm\+Aes\+Cfb128\+Protocol\+Oid}}
+\index{usm\+Aes\+Cfb128\+Protocol\+Oid@{usm\+Aes\+Cfb128\+Protocol\+Oid}!snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c@{snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c}}
+\subsubsection{\texorpdfstring{usm\+Aes\+Cfb128\+Protocol\+Oid}{usmAesCfb128ProtocolOid}}
+{\footnotesize\ttfamily const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} usm\+Aes\+Cfb128\+Protocol\+Oid\mbox{[}9\mbox{]} = \{43, 6, 1, 6, 3, 10, 1, 2, 4\}}
+
+
+
+Definition at line 68 of file snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c.
+
+\mbox{\Hypertarget{snmp__usm__mib__impl_8c_a008e107e60db13679e6156f679da3dfd}\label{snmp__usm__mib__impl_8c_a008e107e60db13679e6156f679da3dfd}} 
+\index{snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c@{snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c}!usm\+D\+E\+S\+Priv\+Protocol\+Oid@{usm\+D\+E\+S\+Priv\+Protocol\+Oid}}
+\index{usm\+D\+E\+S\+Priv\+Protocol\+Oid@{usm\+D\+E\+S\+Priv\+Protocol\+Oid}!snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c@{snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c}}
+\subsubsection{\texorpdfstring{usm\+D\+E\+S\+Priv\+Protocol\+Oid}{usmDESPrivProtocolOid}}
+{\footnotesize\ttfamily const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} usm\+D\+E\+S\+Priv\+Protocol\+Oid\mbox{[}9\mbox{]} = \{43, 6, 1, 6, 3, 10, 1, 2, 2\}}
+
+
+
+Definition at line 66 of file snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c.
+
+\mbox{\Hypertarget{snmp__usm__mib__impl_8c_ad3033a1f473631c39dc1b66026eb0a6a}\label{snmp__usm__mib__impl_8c_ad3033a1f473631c39dc1b66026eb0a6a}} 
+\index{snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c@{snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c}!usm\+H\+M\+A\+C128\+S\+H\+A224\+Auth\+Protocol\+Oid@{usm\+H\+M\+A\+C128\+S\+H\+A224\+Auth\+Protocol\+Oid}}
+\index{usm\+H\+M\+A\+C128\+S\+H\+A224\+Auth\+Protocol\+Oid@{usm\+H\+M\+A\+C128\+S\+H\+A224\+Auth\+Protocol\+Oid}!snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c@{snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c}}
+\subsubsection{\texorpdfstring{usm\+H\+M\+A\+C128\+S\+H\+A224\+Auth\+Protocol\+Oid}{usmHMAC128SHA224AuthProtocolOid}}
+{\footnotesize\ttfamily const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} usm\+H\+M\+A\+C128\+S\+H\+A224\+Auth\+Protocol\+Oid\mbox{[}9\mbox{]} = \{43, 6, 1, 6, 3, 10, 1, 1, 4\}}
+
+
+
+Definition at line 55 of file snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c.
+
+\mbox{\Hypertarget{snmp__usm__mib__impl_8c_a78ad63ebb672ecf84dd37c042b42cc43}\label{snmp__usm__mib__impl_8c_a78ad63ebb672ecf84dd37c042b42cc43}} 
+\index{snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c@{snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c}!usm\+H\+M\+A\+C192\+S\+H\+A256\+Auth\+Protocol\+Oid@{usm\+H\+M\+A\+C192\+S\+H\+A256\+Auth\+Protocol\+Oid}}
+\index{usm\+H\+M\+A\+C192\+S\+H\+A256\+Auth\+Protocol\+Oid@{usm\+H\+M\+A\+C192\+S\+H\+A256\+Auth\+Protocol\+Oid}!snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c@{snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c}}
+\subsubsection{\texorpdfstring{usm\+H\+M\+A\+C192\+S\+H\+A256\+Auth\+Protocol\+Oid}{usmHMAC192SHA256AuthProtocolOid}}
+{\footnotesize\ttfamily const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} usm\+H\+M\+A\+C192\+S\+H\+A256\+Auth\+Protocol\+Oid\mbox{[}9\mbox{]} = \{43, 6, 1, 6, 3, 10, 1, 1, 5\}}
+
+
+
+Definition at line 57 of file snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c.
+
+\mbox{\Hypertarget{snmp__usm__mib__impl_8c_a0bee38880ebba0b1eb23306a46a95c65}\label{snmp__usm__mib__impl_8c_a0bee38880ebba0b1eb23306a46a95c65}} 
+\index{snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c@{snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c}!usm\+H\+M\+A\+C256\+S\+H\+A384\+Auth\+Protocol\+Oid@{usm\+H\+M\+A\+C256\+S\+H\+A384\+Auth\+Protocol\+Oid}}
+\index{usm\+H\+M\+A\+C256\+S\+H\+A384\+Auth\+Protocol\+Oid@{usm\+H\+M\+A\+C256\+S\+H\+A384\+Auth\+Protocol\+Oid}!snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c@{snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c}}
+\subsubsection{\texorpdfstring{usm\+H\+M\+A\+C256\+S\+H\+A384\+Auth\+Protocol\+Oid}{usmHMAC256SHA384AuthProtocolOid}}
+{\footnotesize\ttfamily const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} usm\+H\+M\+A\+C256\+S\+H\+A384\+Auth\+Protocol\+Oid\mbox{[}9\mbox{]} = \{43, 6, 1, 6, 3, 10, 1, 1, 6\}}
+
+
+
+Definition at line 59 of file snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c.
+
+\mbox{\Hypertarget{snmp__usm__mib__impl_8c_a7dee9181ece4bb5061ab1eff12a8e02d}\label{snmp__usm__mib__impl_8c_a7dee9181ece4bb5061ab1eff12a8e02d}} 
+\index{snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c@{snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c}!usm\+H\+M\+A\+C384\+S\+H\+A512\+Auth\+Protocol\+Oid@{usm\+H\+M\+A\+C384\+S\+H\+A512\+Auth\+Protocol\+Oid}}
+\index{usm\+H\+M\+A\+C384\+S\+H\+A512\+Auth\+Protocol\+Oid@{usm\+H\+M\+A\+C384\+S\+H\+A512\+Auth\+Protocol\+Oid}!snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c@{snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c}}
+\subsubsection{\texorpdfstring{usm\+H\+M\+A\+C384\+S\+H\+A512\+Auth\+Protocol\+Oid}{usmHMAC384SHA512AuthProtocolOid}}
+{\footnotesize\ttfamily const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} usm\+H\+M\+A\+C384\+S\+H\+A512\+Auth\+Protocol\+Oid\mbox{[}9\mbox{]} = \{43, 6, 1, 6, 3, 10, 1, 1, 7\}}
+
+
+
+Definition at line 61 of file snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c.
+
+\mbox{\Hypertarget{snmp__usm__mib__impl_8c_ac8445afff7b425a46a00a3ad2da25e46}\label{snmp__usm__mib__impl_8c_ac8445afff7b425a46a00a3ad2da25e46}} 
+\index{snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c@{snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c}!usm\+H\+M\+A\+C\+M\+D5\+Auth\+Protocol\+Oid@{usm\+H\+M\+A\+C\+M\+D5\+Auth\+Protocol\+Oid}}
+\index{usm\+H\+M\+A\+C\+M\+D5\+Auth\+Protocol\+Oid@{usm\+H\+M\+A\+C\+M\+D5\+Auth\+Protocol\+Oid}!snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c@{snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c}}
+\subsubsection{\texorpdfstring{usm\+H\+M\+A\+C\+M\+D5\+Auth\+Protocol\+Oid}{usmHMACMD5AuthProtocolOid}}
+{\footnotesize\ttfamily const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} usm\+H\+M\+A\+C\+M\+D5\+Auth\+Protocol\+Oid\mbox{[}9\mbox{]} = \{43, 6, 1, 6, 3, 10, 1, 1, 2\}}
+
+
+
+Definition at line 51 of file snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c.
+
+\mbox{\Hypertarget{snmp__usm__mib__impl_8c_ac45f676571c417394d45b288e080e7ac}\label{snmp__usm__mib__impl_8c_ac45f676571c417394d45b288e080e7ac}} 
+\index{snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c@{snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c}!usm\+H\+M\+A\+C\+S\+H\+A\+Auth\+Protocol\+Oid@{usm\+H\+M\+A\+C\+S\+H\+A\+Auth\+Protocol\+Oid}}
+\index{usm\+H\+M\+A\+C\+S\+H\+A\+Auth\+Protocol\+Oid@{usm\+H\+M\+A\+C\+S\+H\+A\+Auth\+Protocol\+Oid}!snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c@{snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c}}
+\subsubsection{\texorpdfstring{usm\+H\+M\+A\+C\+S\+H\+A\+Auth\+Protocol\+Oid}{usmHMACSHAAuthProtocolOid}}
+{\footnotesize\ttfamily const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} usm\+H\+M\+A\+C\+S\+H\+A\+Auth\+Protocol\+Oid\mbox{[}9\mbox{]} = \{43, 6, 1, 6, 3, 10, 1, 1, 3\}}
+
+
+
+Definition at line 53 of file snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c.
+
+\mbox{\Hypertarget{snmp__usm__mib__impl_8c_ae8c8a57380663da703d635f42c4b06c8}\label{snmp__usm__mib__impl_8c_ae8c8a57380663da703d635f42c4b06c8}} 
+\index{snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c@{snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c}!usm\+No\+Auth\+Protocol\+Oid@{usm\+No\+Auth\+Protocol\+Oid}}
+\index{usm\+No\+Auth\+Protocol\+Oid@{usm\+No\+Auth\+Protocol\+Oid}!snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c@{snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c}}
+\subsubsection{\texorpdfstring{usm\+No\+Auth\+Protocol\+Oid}{usmNoAuthProtocolOid}}
+{\footnotesize\ttfamily const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} usm\+No\+Auth\+Protocol\+Oid\mbox{[}9\mbox{]} = \{43, 6, 1, 6, 3, 10, 1, 1, 1\}}
+
+
+
+Definition at line 49 of file snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c.
+
+\mbox{\Hypertarget{snmp__usm__mib__impl_8c_a07161aa336ff79fcf62ad1a9985eb115}\label{snmp__usm__mib__impl_8c_a07161aa336ff79fcf62ad1a9985eb115}} 
+\index{snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c@{snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c}!usm\+No\+Priv\+Protocol\+Oid@{usm\+No\+Priv\+Protocol\+Oid}}
+\index{usm\+No\+Priv\+Protocol\+Oid@{usm\+No\+Priv\+Protocol\+Oid}!snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c@{snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c}}
+\subsubsection{\texorpdfstring{usm\+No\+Priv\+Protocol\+Oid}{usmNoPrivProtocolOid}}
+{\footnotesize\ttfamily const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} usm\+No\+Priv\+Protocol\+Oid\mbox{[}9\mbox{]} = \{43, 6, 1, 6, 3, 10, 1, 2, 1\}}
+
+
+
+Definition at line 64 of file snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c.
+
+\mbox{\Hypertarget{snmp__usm__mib__impl_8c_a714fc79835177094b022fb0c94464c74}\label{snmp__usm__mib__impl_8c_a714fc79835177094b022fb0c94464c74}} 
+\index{snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c@{snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c}!usm\+User\+Entry\+Oid@{usm\+User\+Entry\+Oid}}
+\index{usm\+User\+Entry\+Oid@{usm\+User\+Entry\+Oid}!snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c@{snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c}}
+\subsubsection{\texorpdfstring{usm\+User\+Entry\+Oid}{usmUserEntryOid}}
+{\footnotesize\ttfamily const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} usm\+User\+Entry\+Oid\mbox{[}10\mbox{]} = \{43, 6, 1, 6, 3, 15, 1, 2, 2, 1\}}
+
+
+
+Definition at line 71 of file snmp\+\_\+usm\+\_\+mib\+\_\+impl.\+c.
+

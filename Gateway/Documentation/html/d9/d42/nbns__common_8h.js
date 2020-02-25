@@ -1,0 +1,38 @@
+var nbns__common_8h =
+[
+    [ "NBNS_DEFAULT_RESOURCE_RECORD_TTL", "d9/d42/nbns__common_8h.html#aa04e699099d69eb61f316d7550cfa32a", null ],
+    [ "NBNS_ENCODE_H", "d9/d42/nbns__common_8h.html#ad1308214a45279d3f48cc59e8441aa69", null ],
+    [ "NBNS_ENCODE_L", "d9/d42/nbns__common_8h.html#a606386a02d4ad5322acb2201fe5dc99b", null ],
+    [ "NBNS_PORT", "d9/d42/nbns__common_8h.html#ab90f2670e8b34ee01fe3052166b7a279", null ],
+    [ "NbnsAddrEntry", "d9/d42/nbns__common_8h.html#abdcf413c012c8910ced7035094a5c957", null ],
+    [ "NbnsHeader", "d9/d42/nbns__common_8h.html#a31dec1106c9cf3a1e242d985ac447238", null ],
+    [ "DnsFlags", "d9/d42/nbns__common_8h.html#a74c2dcc7bacb7bcd8cc1be291ab3c4c3", [
+      [ "NBNS_ONT_BNODE", "d9/d42/nbns__common_8h.html#a74c2dcc7bacb7bcd8cc1be291ab3c4c3aabb4b26121a1e6492b5ed67620a31b91", null ],
+      [ "NBNS_ONT_PNODE", "d9/d42/nbns__common_8h.html#a74c2dcc7bacb7bcd8cc1be291ab3c4c3aff03f58fed8f095823e2e6afc9f265a8", null ],
+      [ "NBNS_ONT_MNODE", "d9/d42/nbns__common_8h.html#a74c2dcc7bacb7bcd8cc1be291ab3c4c3ad6ddc4d3950fc642527b993650b01e17", null ],
+      [ "NBNS_G_UNIQUE", "d9/d42/nbns__common_8h.html#a74c2dcc7bacb7bcd8cc1be291ab3c4c3af908bf51925379c899f86b3fad4e8275", null ],
+      [ "NBNS_G_GROUP", "d9/d42/nbns__common_8h.html#a74c2dcc7bacb7bcd8cc1be291ab3c4c3a9cf4c1eb8c88152b7d2a45c3f201e798", null ]
+    ] ],
+    [ "nbnsCompareName", "d9/d42/nbns__common_8h.html#af63e6277864b3b60286e2d72e977bf7a", null ],
+    [ "nbnsEncodeName", "d9/d42/nbns__common_8h.html#a2ffccdee63ab330c3b5720619c241fa8", null ],
+    [ "nbnsInit", "d9/d42/nbns__common_8h.html#ad9e000b477fa3dc3c5022422fbd870a2", null ],
+    [ "nbnsParseName", "d9/d42/nbns__common_8h.html#a883186d42b150c72047c02e9ee490770", null ],
+    [ "nbnsProcessMessage", "d9/d42/nbns__common_8h.html#a2e6bb155e1564f9b4af864f8ea870b01", null ],
+    [ "aa", "d9/d42/nbns__common_8h.html#a43db0a12061a1ee8cfe8e6f7be5db78f", null ],
+    [ "addr", "d9/d42/nbns__common_8h.html#ac597eaa9711dfbc34f49d506132e85cd", null ],
+    [ "ancount", "d9/d42/nbns__common_8h.html#a2a5577b198ba758438292038bbab5437", null ],
+    [ "arcount", "d9/d42/nbns__common_8h.html#a6eedffaf6f8d915f67e6f6bb77094562", null ],
+    [ "b", "d9/d42/nbns__common_8h.html#a4313c9563516f94387762ab05763456b", null ],
+    [ "flags", "d9/d42/nbns__common_8h.html#a1e87af3c18a2fd36c61faf89949bdc3f", null ],
+    [ "id", "d9/d42/nbns__common_8h.html#a4fc3a0c58dfbd1e68224521185cb9384", null ],
+    [ "nscount", "d9/d42/nbns__common_8h.html#aa613b2dc181144b8d4c975a5260d59e3", null ],
+    [ "opcode", "d9/d42/nbns__common_8h.html#a5c1b56e6bccc2a95dbddf1a08e56e87d", null ],
+    [ "qdcount", "d9/d42/nbns__common_8h.html#a04016da27d1b8b5859d8527d2742f4f4", null ],
+    [ "qr", "d9/d42/nbns__common_8h.html#a546c9e75516a23a77c420f5cf3db2491", null ],
+    [ "questions", "d9/d42/nbns__common_8h.html#a11fbe6f279c9fa8420c58a61fa32920b", null ],
+    [ "ra", "d9/d42/nbns__common_8h.html#a8c6ef05d58dabc71644516f26ad1c254", null ],
+    [ "rcode", "d9/d42/nbns__common_8h.html#adf670ab4abaa59641d37f17a5f1d453c", null ],
+    [ "rd", "d9/d42/nbns__common_8h.html#a05d61bb4202746183e0bb408c70f689d", null ],
+    [ "tc", "d9/d42/nbns__common_8h.html#a67deec524d278467a2815a2783b95591", null ],
+    [ "z", "d9/d42/nbns__common_8h.html#ab3539ae3820541b70d17c66cfc5a0e3f", null ]
+];

@@ -1,0 +1,820 @@
+\hypertarget{dhcpv6__relay_8c}{}\section{cyclone\+\_\+tcp/dhcpv6/dhcpv6\+\_\+relay.c File Reference}
+\label{dhcpv6__relay_8c}\index{cyclone\+\_\+tcp/dhcpv6/dhcpv6\+\_\+relay.\+c@{cyclone\+\_\+tcp/dhcpv6/dhcpv6\+\_\+relay.\+c}}
+
+
+D\+H\+C\+Pv6 relay agent (Dynamic Host Configuration Protocol for I\+Pv6)  
+
+
+{\ttfamily \#include \char`\"{}core/net.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}dhcpv6\+\_\+relay.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}dhcpv6/dhcpv6\+\_\+common.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}dhcpv6/dhcpv6\+\_\+debug.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}debug.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{dhcpv6__relay_8c_afcdf5e66fd927a7f4cc64295acd20407}{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}~\hyperlink{net__config_8h_a90777ced99a67be301c4f3de730a8e7d}{D\+H\+C\+P\+V6\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{dhcpv6__relay_8c_a827792dea732bb247aeaac2c1493604f}{dhcpv6\+Relay\+Start} (\hyperlink{structDhcpv6RelayContext}{Dhcpv6\+Relay\+Context} $\ast$context, const \hyperlink{structDhcpv6RelaySettings}{Dhcpv6\+Relay\+Settings} $\ast$settings)
+\begin{DoxyCompactList}\small\item\em Start D\+H\+C\+Pv6 relay agent. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{dhcpv6__relay_8c_a1d963abc6408a428e1b5bd8639c611c8}{dhcpv6\+Relay\+Stop} (\hyperlink{structDhcpv6RelayContext}{Dhcpv6\+Relay\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Stop D\+H\+C\+Pv6 relay agent. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{dhcpv6__relay_8c_a49a97ef0f397dfdb834e76ab9890404e}{dhcpv6\+Relay\+Join\+Multicast\+Group} (\hyperlink{structDhcpv6RelayContext}{Dhcpv6\+Relay\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Join All\+\_\+\+D\+H\+C\+P\+\_\+\+Relay\+\_\+\+Agents\+\_\+and\+\_\+\+Servers multicast group. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{dhcpv6__relay_8c_a07e881461f6f3942df1f00c37db3dbcc}{dhcpv6\+Relay\+Leave\+Multicast\+Group} (\hyperlink{structDhcpv6RelayContext}{Dhcpv6\+Relay\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Leave All\+\_\+\+D\+H\+C\+P\+\_\+\+Relay\+\_\+\+Agents\+\_\+and\+\_\+\+Servers multicast group. \end{DoxyCompactList}\item 
+void \hyperlink{dhcpv6__relay_8c_ac65ffd658c0eaab3dc018343ad96885e}{dhcpv6\+Relay\+Task} (void $\ast$param)
+\begin{DoxyCompactList}\small\item\em D\+H\+C\+Pv6 relay agent task. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{dhcpv6__relay_8c_a9bf2840da492ac67f5202f7de0678576}{dhcpv6\+Forward\+Client\+Message} (\hyperlink{structDhcpv6RelayContext}{Dhcpv6\+Relay\+Context} $\ast$context, \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} index)
+\begin{DoxyCompactList}\small\item\em Forward client message. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{dhcpv6__relay_8c_a06b3124f4a5879a06def16b34ecadfeb}{dhcpv6\+Forward\+Relay\+Reply\+Message} (\hyperlink{structDhcpv6RelayContext}{Dhcpv6\+Relay\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Forward Relay-\/\+Reply message. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+D\+H\+C\+Pv6 relay agent (Dynamic Host Configuration Protocol for I\+Pv6) 
+
+\hypertarget{pic32mz__ef__curiosity_8h_License}{}\subsection{License}\label{pic32mz__ef__curiosity_8h_License}
+S\+P\+D\+X-\/\+License-\/\+Identifier\+: G\+P\+L-\/2.\+0-\/or-\/later
+
+Copyright (C) 2010-\/2019 Oryx Embedded S\+A\+RL. All rights reserved.
+
+This file is part of Cyclone\+T\+CP Open.
+
+This program is free software; you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+
+You should have received a copy of the G\+NU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-\/1301, U\+SA.\hypertarget{tftp__server_8c_Description}{}\subsection{Description}\label{tftp__server_8c_Description}
+D\+H\+C\+Pv6 Relay-\/\+Agents are deployed to forward D\+H\+C\+Pv6 messages between clients and servers when they are not on the same I\+Pv6 link and are often implemented alongside a routing function in a common node. Refer to R\+FC 3315
+
+\begin{DoxyAuthor}{Author}
+Oryx Embedded S\+A\+RL (www.\+oryx-\/embedded.\+com) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+9.\+6 
+\end{DoxyVersion}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{dhcpv6__relay_8c_afcdf5e66fd927a7f4cc64295acd20407}\label{dhcpv6__relay_8c_afcdf5e66fd927a7f4cc64295acd20407}} 
+\index{dhcpv6\+\_\+relay.\+c@{dhcpv6\+\_\+relay.\+c}!T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+\index{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}!dhcpv6\+\_\+relay.\+c@{dhcpv6\+\_\+relay.\+c}}
+\subsubsection{\texorpdfstring{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}{TRACE\_LEVEL}}
+{\footnotesize\ttfamily \#define T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL~\hyperlink{net__config_8h_a90777ced99a67be301c4f3de730a8e7d}{D\+H\+C\+P\+V6\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+
+
+
+Definition at line 38 of file dhcpv6\+\_\+relay.\+c.
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{dhcpv6__relay_8c_a9bf2840da492ac67f5202f7de0678576}\label{dhcpv6__relay_8c_a9bf2840da492ac67f5202f7de0678576}} 
+\index{dhcpv6\+\_\+relay.\+c@{dhcpv6\+\_\+relay.\+c}!dhcpv6\+Forward\+Client\+Message@{dhcpv6\+Forward\+Client\+Message}}
+\index{dhcpv6\+Forward\+Client\+Message@{dhcpv6\+Forward\+Client\+Message}!dhcpv6\+\_\+relay.\+c@{dhcpv6\+\_\+relay.\+c}}
+\subsubsection{\texorpdfstring{dhcpv6\+Forward\+Client\+Message()}{dhcpv6ForwardClientMessage()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} dhcpv6\+Forward\+Client\+Message (\begin{DoxyParamCaption}\item[{\hyperlink{structDhcpv6RelayContext}{Dhcpv6\+Relay\+Context} $\ast$}]{context,  }\item[{\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t}}]{index }\end{DoxyParamCaption})}
+
+
+
+Forward client message. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the D\+H\+C\+Pv6 relay agent context \\
+\hline
+\mbox{\tt in}  & {\em index} & Index identifying the interface on which the message was received \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 434 of file dhcpv6\+\_\+relay.\+c.
+
+
+\begin{DoxyCode}
+435 \{
+436    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+437    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} \hyperlink{ipv6cp_8h_a897753848b1e78a33fa45fad7b58ddbb}{interfaceId};
+438    \textcolor{keywordtype}{size\_t} inputMessageLen;
+439    \textcolor{keywordtype}{size\_t} outputMessageLen;
+440    \hyperlink{dhcpv6__common_8h_abad17b8a4f961e3d05bfbdea0b8c3e51}{Dhcpv6RelayMessage} *inputMessage;
+441    \hyperlink{dhcpv6__common_8h_abad17b8a4f961e3d05bfbdea0b8c3e51}{Dhcpv6RelayMessage} *outputMessage;
+442    \hyperlink{dhcpv6__common_8h_a89f7acb5d12dede28c2b98290018051e}{Dhcpv6Option} *option;
+443    \hyperlink{structIpAddr}{IpAddr} \hyperlink{mib__common_8h_a3860e959b1b7dd73686a6e11424805e2}{ipAddr};
+444 
+445    \textcolor{comment}{//Point to the buffer where to store the incoming DHCPv6 message}
+446    inputMessage = (\hyperlink{dhcpv6__common_8h_abad17b8a4f961e3d05bfbdea0b8c3e51}{Dhcpv6RelayMessage} *) (context->\hyperlink{structDhcpv6RelayContext_a3ca219cd9bd76e4b98038814a5c3c653}{buffer} + 
+      \hyperlink{dhcpv6__relay_8h_a09fd417198dd4c753c56eeec934e4ac7}{DHCPV6\_RELAY\_FORW\_OVERHEAD});
+447    \textcolor{comment}{//Message that will be forwarded by the DHCPv6 relay agent}
+448    outputMessage = (\hyperlink{dhcpv6__common_8h_abad17b8a4f961e3d05bfbdea0b8c3e51}{Dhcpv6RelayMessage} *) context->\hyperlink{structDhcpv6RelayContext_a3ca219cd9bd76e4b98038814a5c3c653}{buffer};
+449 
+450    \textcolor{comment}{//Read incoming message}
+451    error = \hyperlink{socket_8c_a26af4b642b71708e1408fc94483f90bb}{socketReceiveFrom}(context->\hyperlink{structDhcpv6RelayContext_a356e927a8bf2bd0e9f434759945ea9c7}{clientSocket}[index], &ipAddr, 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, inputMessage,
+452       \hyperlink{dhcpv6__common_8h_a4b2fa99ee47d1cc91da2b57fa69b324f}{DHCPV6\_MAX\_MSG\_SIZE} - \hyperlink{dhcpv6__relay_8h_a09fd417198dd4c753c56eeec934e4ac7}{DHCPV6\_RELAY\_FORW\_OVERHEAD}, &
+      inputMessageLen, 0);
+453    \textcolor{comment}{//Any error to report?}
+454    \textcolor{keywordflow}{if}(error)
+455       \textcolor{keywordflow}{return} error;
+456 
+457    \textcolor{comment}{//Debug message}
+458    \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"\(\backslash\)r\(\backslash\)nDHCPv6 message received on client-facing interface %s (%"} 
+      \hyperlink{compiler__port_8h_a2b7b0557dc6cd786df02dafbb51f5292}{PRIuSIZE} \textcolor{stringliteral}{" bytes)...\(\backslash\)r\(\backslash\)n"},
+459       context->\hyperlink{structDhcpv6RelayContext_a3781192d09173701e63dcbbb721fe630}{clientInterface}[index]->name, inputMessageLen);
+460 
+461    \textcolor{comment}{//Dump the contents of the message for debugging purpose}
+462    \hyperlink{dhcpv6__debug_8c_a36ce435509b18e157c961e1e82ae0e88}{dhcpv6DumpMessage}(inputMessage, inputMessageLen);
+463 
+464    \textcolor{comment}{//The source address must be a valid IPv6 address}
+465    \textcolor{keywordflow}{if}(ipAddr.\hyperlink{structIpAddr_ae61478bd1e79361fca7dd04a21aeb2f8}{length} != \textcolor{keyword}{sizeof}(\hyperlink{ipv6_8h_aed0cbc40c61ed5b4fb681ebc55237e89}{Ipv6Addr}))
+466       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca21cbabf2c791471c05a9bc2710638aec}{ERROR\_INVALID\_ADDRESS};
+467    \textcolor{comment}{//Check the length of the DHCPv6 message}
+468    \textcolor{keywordflow}{if}(inputMessageLen < \textcolor{keyword}{sizeof}(\hyperlink{dhcpv6__common_8h_a32f2f44ec9a8d2ee5e2977a7fcddaf85}{Dhcpv6Message}))
+469       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca6b1c5652c82e48ada5b4348c0ebb95e6}{ERROR\_INVALID\_MESSAGE};
+470 
+471    \textcolor{comment}{//When the relay agent receives a valid message to be relayed,}
+472    \textcolor{comment}{//it constructs a new Relay-Forward message}
+473    outputMessage->msgType = \hyperlink{dhcpv6__common_8h_aeca9d54a4001e239844ff0245aaedf6ca6626814db2c95900979e79c72f511d36}{DHCPV6\_MSG\_TYPE\_RELAY\_FORW};
+474 
+475    \textcolor{comment}{//Inspect the message type}
+476    \textcolor{keywordflow}{switch}(inputMessage->msgType)
+477    \{
+478    \textcolor{comment}{//Message received from a client?}
+479    \textcolor{keywordflow}{case} \hyperlink{dhcpv6__common_8h_aeca9d54a4001e239844ff0245aaedf6cafdc89c929b9b3330a914465fa2032331}{DHCPV6\_MSG\_TYPE\_SOLICIT}:
+480    \textcolor{keywordflow}{case} \hyperlink{dhcpv6__common_8h_aeca9d54a4001e239844ff0245aaedf6cac1ee9533dff4ae432ec3f5213eac19a8}{DHCPV6\_MSG\_TYPE\_REQUEST}:
+481    \textcolor{keywordflow}{case} \hyperlink{dhcpv6__common_8h_aeca9d54a4001e239844ff0245aaedf6ca91b403f91b6637d1f732b4b5f451fa70}{DHCPV6\_MSG\_TYPE\_CONFIRM}:
+482    \textcolor{keywordflow}{case} \hyperlink{dhcpv6__common_8h_aeca9d54a4001e239844ff0245aaedf6caf3daa29a1a24a5350cefcfe02eeb6c75}{DHCPV6\_MSG\_TYPE\_RENEW}:
+483    \textcolor{keywordflow}{case} \hyperlink{dhcpv6__common_8h_aeca9d54a4001e239844ff0245aaedf6ca97164d83c790095e8d84307ef58c2cf3}{DHCPV6\_MSG\_TYPE\_REBIND}:
+484    \textcolor{keywordflow}{case} \hyperlink{dhcpv6__common_8h_aeca9d54a4001e239844ff0245aaedf6cae849f87ed116032b918ad1bbe1f0f069}{DHCPV6\_MSG\_TYPE\_RELEASE}:
+485    \textcolor{keywordflow}{case} \hyperlink{dhcpv6__common_8h_aeca9d54a4001e239844ff0245aaedf6ca831bfe9d5e4626e44a7c3e3a432f2ffc}{DHCPV6\_MSG\_TYPE\_DECLINE}:
+486    \textcolor{keywordflow}{case} \hyperlink{dhcpv6__common_8h_aeca9d54a4001e239844ff0245aaedf6ca24416b5f842f2eda8b2889ef8cacef5c}{DHCPV6\_MSG\_TYPE\_INFO\_REQUEST}:
+487       \textcolor{comment}{//If the relay agent received the message to be relayed from a client}
+488       \textcolor{comment}{//the hop-count in the Relay-Forward message is set to 0}
+489       outputMessage->hopCount = 0;
+490       \textcolor{comment}{//Continue processing}
+491       \textcolor{keywordflow}{break};
+492 
+493    \textcolor{comment}{//Message received from another relay agent?}
+494    \textcolor{keywordflow}{case} \hyperlink{dhcpv6__common_8h_aeca9d54a4001e239844ff0245aaedf6ca6626814db2c95900979e79c72f511d36}{DHCPV6\_MSG\_TYPE\_RELAY\_FORW}:
+495       \textcolor{comment}{//If the message received by the relay agent is a Relay-Forward message}
+496       \textcolor{comment}{//and the hop-count in the message is greater than or equal to 32, the}
+497       \textcolor{comment}{//relay agent discards the received message}
+498       \textcolor{keywordflow}{if}(inputMessage->hopCount >= \hyperlink{dhcpv6__common_8h_a8c49fb097fe2fd14b06a462c6b648ad8}{DHCPV6\_HOP\_COUNT\_LIMIT})
+499          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca6b1c5652c82e48ada5b4348c0ebb95e6}{ERROR\_INVALID\_MESSAGE};
+500       \textcolor{comment}{//Set the hop-count field to the value of the hop-count field in}
+501       \textcolor{comment}{//the received message incremented by 1}
+502       outputMessage->hopCount = inputMessage->hopCount + 1;
+503       \textcolor{comment}{//Continue processing}
+504       \textcolor{keywordflow}{break};
+505 
+506    \textcolor{comment}{//Message received from a server?}
+507    \textcolor{keywordflow}{default}:
+508       \textcolor{comment}{//Discard ADVERTISE, REPLY, RECONFIGURE and RELAY-REPL messages}
+509       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca6b1c5652c82e48ada5b4348c0ebb95e6}{ERROR\_INVALID\_MESSAGE};
+510    \}
+511 
+512    \textcolor{comment}{//Set the link-address field to the unspecified address}
+513    outputMessage->linkAddress = \hyperlink{ipv6_8c_aa4baeec4f7b8b166d2457787fb9eddf9}{IPV6\_UNSPECIFIED\_ADDR};
+514    \textcolor{comment}{//Copy the source address from the header of the IP datagram in}
+515    \textcolor{comment}{//which the message was received to the peer-address field}
+516    outputMessage->peerAddress = ipAddr.\hyperlink{structIpAddr_a9bc2340a9c0bc5a0b8aa9695b74e2ee6}{ipv6Addr};
+517    \textcolor{comment}{//Size of the Relay-Forward message}
+518    outputMessageLen = \textcolor{keyword}{sizeof}(\hyperlink{dhcpv6__common_8h_abad17b8a4f961e3d05bfbdea0b8c3e51}{Dhcpv6RelayMessage});
+519 
+520    \textcolor{comment}{//Get the interface identifier}
+521    interfaceId = context->\hyperlink{structDhcpv6RelayContext_a3781192d09173701e63dcbbb721fe630}{clientInterface}[index]->id;
+522    \textcolor{comment}{//Convert the 32-bit integer to network byte order}
+523    interfaceId = \hyperlink{cpu__endian_8h_a63baf217625b15caa7246af75b027380}{htonl}(interfaceId);
+524 
+525    \textcolor{comment}{//If the relay agent cannot use the address in the link-address field}
+526    \textcolor{comment}{//to identify the interface through which the response to the client}
+527    \textcolor{comment}{//will be relayed, the relay agent must include an Interface ID option}
+528    \hyperlink{dhcpv6__common_8c_ac0a7db4b0542d3f4b7270bfb239ce6f0}{dhcpv6AddOption}(outputMessage, &outputMessageLen,
+529       \hyperlink{dhcpv6__common_8h_ace3d7da87df06edf56819a49ebf00574a498ef81844e25586bff25605cc8faf11}{DHCPV6\_OPTION\_INTERFACE\_ID}, &interfaceId, \textcolor{keyword}{sizeof}(interfaceId));
+530 
+531    \textcolor{comment}{//Copy the received DHCPv6 message into a Relay Message option}
+532    option = \hyperlink{dhcpv6__common_8c_ac0a7db4b0542d3f4b7270bfb239ce6f0}{dhcpv6AddOption}(outputMessage, &outputMessageLen,
+533       \hyperlink{dhcpv6__common_8h_ace3d7da87df06edf56819a49ebf00574a8bfea5a174dd513b782b3b2dd7eabd96}{DHCPV6\_OPTION\_RELAY\_MSG}, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, 0);
+534 
+535    \textcolor{comment}{//Set the appropriate length of the option}
+536    option->length = \hyperlink{cpu__endian_8h_a800cdbf435a85a9b3ad4f0edc518472a}{htons}(inputMessageLen);
+537    \textcolor{comment}{//Adjust the length of the Relay-Forward message}
+538    outputMessageLen += inputMessageLen;
+539 
+540    \textcolor{comment}{//Debug message}
+541    \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"Forwarding DHCPv6 message on network-facing interface %s (%"} 
+      \hyperlink{compiler__port_8h_a2b7b0557dc6cd786df02dafbb51f5292}{PRIuSIZE} \textcolor{stringliteral}{" bytes)...\(\backslash\)r\(\backslash\)n"},
+542       context->\hyperlink{structDhcpv6RelayContext_ac4e2670737b844e0484e24a13d01d914}{serverInterface}->name, outputMessageLen);
+543 
+544    \textcolor{comment}{//Dump the contents of the message for debugging purpose}
+545    \hyperlink{dhcpv6__debug_8c_a36ce435509b18e157c961e1e82ae0e88}{dhcpv6DumpMessage}(outputMessage, outputMessageLen);
+546 
+547    \textcolor{comment}{//Destination address to be used when relaying the client message}
+548    ipAddr.\hyperlink{structIpAddr_ae61478bd1e79361fca7dd04a21aeb2f8}{length} = \textcolor{keyword}{sizeof}(\hyperlink{ipv6_8h_aed0cbc40c61ed5b4fb681ebc55237e89}{Ipv6Addr});
+549    ipAddr.\hyperlink{structIpAddr_a9bc2340a9c0bc5a0b8aa9695b74e2ee6}{ipv6Addr} = context->\hyperlink{structDhcpv6RelayContext_af99b4fbe7d100b5356cd7aa2c587eda4}{serverAddress};
+550 
+551    \textcolor{comment}{//Relay the client message to the server}
+552    \textcolor{keywordflow}{return} \hyperlink{socket_8c_a5985321fef9f287f84c4004aaa78920e}{socketSendTo}(context->\hyperlink{structDhcpv6RelayContext_af1c015d0b8abef9419722312631a132d}{serverSocket}, &ipAddr,
+553       \hyperlink{dhcpv6__common_8h_ab2fd1889bb669d854b61d4a5fee3e3ec}{DHCPV6\_SERVER\_PORT}, outputMessage, outputMessageLen, 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, 0);
+554 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{dhcpv6__relay_8c_a06b3124f4a5879a06def16b34ecadfeb}\label{dhcpv6__relay_8c_a06b3124f4a5879a06def16b34ecadfeb}} 
+\index{dhcpv6\+\_\+relay.\+c@{dhcpv6\+\_\+relay.\+c}!dhcpv6\+Forward\+Relay\+Reply\+Message@{dhcpv6\+Forward\+Relay\+Reply\+Message}}
+\index{dhcpv6\+Forward\+Relay\+Reply\+Message@{dhcpv6\+Forward\+Relay\+Reply\+Message}!dhcpv6\+\_\+relay.\+c@{dhcpv6\+\_\+relay.\+c}}
+\subsubsection{\texorpdfstring{dhcpv6\+Forward\+Relay\+Reply\+Message()}{dhcpv6ForwardRelayReplyMessage()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} dhcpv6\+Forward\+Relay\+Reply\+Message (\begin{DoxyParamCaption}\item[{\hyperlink{structDhcpv6RelayContext}{Dhcpv6\+Relay\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Forward Relay-\/\+Reply message. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the D\+H\+C\+Pv6 relay agent context \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 563 of file dhcpv6\+\_\+relay.\+c.
+
+
+\begin{DoxyCode}
+564 \{
+565    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+566    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+567    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} \hyperlink{ipv6cp_8h_a897753848b1e78a33fa45fad7b58ddbb}{interfaceId};
+568    \textcolor{keywordtype}{size\_t} inputMessageLen;
+569    \textcolor{keywordtype}{size\_t} outputMessageLen;
+570    \hyperlink{dhcpv6__common_8h_abad17b8a4f961e3d05bfbdea0b8c3e51}{Dhcpv6RelayMessage} *inputMessage;
+571    \hyperlink{dhcpv6__common_8h_a32f2f44ec9a8d2ee5e2977a7fcddaf85}{Dhcpv6Message} *outputMessage;
+572    \hyperlink{dhcpv6__common_8h_a89f7acb5d12dede28c2b98290018051e}{Dhcpv6Option} *option;
+573    \hyperlink{structIpAddr}{IpAddr} \hyperlink{mib__common_8h_a3860e959b1b7dd73686a6e11424805e2}{ipAddr};
+574    \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t} \hyperlink{dns__common_8h_a8e0798404bf2cf5dabb84c5ba9a4f236}{port};
+575 
+576    \textcolor{comment}{//Point to the buffer where to store the incoming DHCPv6 message}
+577    inputMessage = (\hyperlink{dhcpv6__common_8h_abad17b8a4f961e3d05bfbdea0b8c3e51}{Dhcpv6RelayMessage} *) context->\hyperlink{structDhcpv6RelayContext_a3ca219cd9bd76e4b98038814a5c3c653}{buffer};
+578 
+579    \textcolor{comment}{//Read incoming message}
+580    error = \hyperlink{socket_8c_a26af4b642b71708e1408fc94483f90bb}{socketReceiveFrom}(context->\hyperlink{structDhcpv6RelayContext_af1c015d0b8abef9419722312631a132d}{serverSocket}, &ipAddr, &port,
+581       inputMessage, \hyperlink{dhcpv6__common_8h_a4b2fa99ee47d1cc91da2b57fa69b324f}{DHCPV6\_MAX\_MSG\_SIZE}, &inputMessageLen, 0);
+582    \textcolor{comment}{//Any error to report?}
+583    \textcolor{keywordflow}{if}(error)
+584       \textcolor{keywordflow}{return} error;
+585 
+586    \textcolor{comment}{//Debug message}
+587    \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"\(\backslash\)r\(\backslash\)nDHCPv6 message received on network-facing interface %s (%"} 
+      \hyperlink{compiler__port_8h_a2b7b0557dc6cd786df02dafbb51f5292}{PRIuSIZE} \textcolor{stringliteral}{" bytes)...\(\backslash\)r\(\backslash\)n"},
+588       context->\hyperlink{structDhcpv6RelayContext_ac4e2670737b844e0484e24a13d01d914}{serverInterface}->name, inputMessageLen);
+589 
+590    \textcolor{comment}{//Dump the contents of the message for debugging purpose}
+591    \hyperlink{dhcpv6__debug_8c_a36ce435509b18e157c961e1e82ae0e88}{dhcpv6DumpMessage}(inputMessage, inputMessageLen);
+592 
+593    \textcolor{comment}{//Check the length of the DHCPv6 message}
+594    \textcolor{keywordflow}{if}(inputMessageLen < \textcolor{keyword}{sizeof}(\hyperlink{dhcpv6__common_8h_abad17b8a4f961e3d05bfbdea0b8c3e51}{Dhcpv6RelayMessage}))
+595       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca6b1c5652c82e48ada5b4348c0ebb95e6}{ERROR\_INVALID\_MESSAGE};
+596 
+597    \textcolor{comment}{//Inspect the message type and only forward Relay-Reply messages.}
+598    \textcolor{comment}{//Other DHCPv6 message types must be silently discarded}
+599    \textcolor{keywordflow}{if}(inputMessage->msgType != \hyperlink{dhcpv6__common_8h_aeca9d54a4001e239844ff0245aaedf6ca0601ef72bcb468a79871a3b7e0185d28}{DHCPV6\_MSG\_TYPE\_RELAY\_REPL})
+600       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca6b1c5652c82e48ada5b4348c0ebb95e6}{ERROR\_INVALID\_MESSAGE};
+601 
+602    \textcolor{comment}{//Get the length of the Options field}
+603    inputMessageLen -= \textcolor{keyword}{sizeof}(\hyperlink{dhcpv6__common_8h_a32f2f44ec9a8d2ee5e2977a7fcddaf85}{Dhcpv6Message});
+604 
+605    \textcolor{comment}{//Check whether an Interface ID option is included in the Relay-Reply}
+606    option = \hyperlink{dhcpv6__common_8c_a6678e0579ff5fe27d71f2ca45f35b54b}{dhcpv6GetOption}(inputMessage->options, inputMessageLen, 
+      \hyperlink{dhcpv6__common_8h_ace3d7da87df06edf56819a49ebf00574a498ef81844e25586bff25605cc8faf11}{DHCPV6\_OPTION\_INTERFACE\_ID});
+607    \textcolor{comment}{//Failed to retrieve specified option?}
+608    \textcolor{keywordflow}{if}(option == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || \hyperlink{cpu__endian_8h_a9312c6eb72e64f748ae0d0e0dc3ec9b9}{ntohs}(option->length) != \textcolor{keyword}{sizeof}(interfaceId))
+609       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca6b1c5652c82e48ada5b4348c0ebb95e6}{ERROR\_INVALID\_MESSAGE};
+610 
+611    \textcolor{comment}{//Read the Interface ID option contents}
+612    memcpy(&interfaceId, option->value, \textcolor{keyword}{sizeof}(interfaceId));
+613    \textcolor{comment}{//Convert the 32-bit integer from network byte order}
+614    interfaceId = \hyperlink{cpu__endian_8h_a22f92ea3318059b7d88dfbd98d0cbc3e}{ntohl}(interfaceId);
+615 
+616    \textcolor{comment}{//The Relay-Reply message must include a Relay Message option}
+617    option = \hyperlink{dhcpv6__common_8c_a6678e0579ff5fe27d71f2ca45f35b54b}{dhcpv6GetOption}(inputMessage->options, inputMessageLen, 
+      \hyperlink{dhcpv6__common_8h_ace3d7da87df06edf56819a49ebf00574a8bfea5a174dd513b782b3b2dd7eabd96}{DHCPV6\_OPTION\_RELAY\_MSG});
+618    \textcolor{comment}{//Failed to retrieve specified option?}
+619    \textcolor{keywordflow}{if}(option == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || \hyperlink{cpu__endian_8h_a9312c6eb72e64f748ae0d0e0dc3ec9b9}{ntohs}(option->length) < \textcolor{keyword}{sizeof}(\hyperlink{dhcpv6__common_8h_a32f2f44ec9a8d2ee5e2977a7fcddaf85}{Dhcpv6Message}))
+620       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca6b1c5652c82e48ada5b4348c0ebb95e6}{ERROR\_INVALID\_MESSAGE};
+621 
+622    \textcolor{comment}{//Extract the message from the Relay Message option}
+623    outputMessage = (\hyperlink{dhcpv6__common_8h_a32f2f44ec9a8d2ee5e2977a7fcddaf85}{Dhcpv6Message} *) option->value;
+624    \textcolor{comment}{//Save the length of the message}
+625    outputMessageLen = \hyperlink{cpu__endian_8h_a9312c6eb72e64f748ae0d0e0dc3ec9b9}{ntohs}(option->length);
+626 
+627    \textcolor{comment}{//Loop through client-facing interfaces}
+628    \textcolor{keywordflow}{for}(i = 0; i < context->\hyperlink{structDhcpv6RelayContext_a2f2b799fb5c66e195d8cea084afc1116}{clientInterfaceCount}; i++)
+629    \{
+630       \textcolor{comment}{//Check whether the current interface matches the Interface ID option}
+631       \textcolor{keywordflow}{if}(context->\hyperlink{structDhcpv6RelayContext_a3781192d09173701e63dcbbb721fe630}{clientInterface}[i]->id == interfaceId)
+632       \{
+633          \textcolor{comment}{//Debug message}
+634          \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"Forwarding DHCPv6 message on client-facing interface %s (%"} 
+      \hyperlink{compiler__port_8h_a2b7b0557dc6cd786df02dafbb51f5292}{PRIuSIZE} \textcolor{stringliteral}{" bytes)...\(\backslash\)r\(\backslash\)n"},
+635             context->\hyperlink{structDhcpv6RelayContext_a3781192d09173701e63dcbbb721fe630}{clientInterface}[i]->name, outputMessageLen);
+636 
+637          \textcolor{comment}{//Dump the contents of the message for debugging purpose}
+638          \hyperlink{dhcpv6__debug_8c_a36ce435509b18e157c961e1e82ae0e88}{dhcpv6DumpMessage}(outputMessage, outputMessageLen);
+639 
+640          \textcolor{comment}{//Copy the peer-address into the destination IP address}
+641          ipAddr.\hyperlink{structIpAddr_ae61478bd1e79361fca7dd04a21aeb2f8}{length} = \textcolor{keyword}{sizeof}(\hyperlink{ipv6_8h_aed0cbc40c61ed5b4fb681ebc55237e89}{Ipv6Addr});
+642          ipAddr.\hyperlink{structIpAddr_a9bc2340a9c0bc5a0b8aa9695b74e2ee6}{ipv6Addr} = inputMessage->peerAddress;
+643 
+644          \textcolor{comment}{//Select the relevant port number to use}
+645          \textcolor{keywordflow}{if}(outputMessage->msgType == \hyperlink{dhcpv6__common_8h_aeca9d54a4001e239844ff0245aaedf6ca0601ef72bcb468a79871a3b7e0185d28}{DHCPV6\_MSG\_TYPE\_RELAY\_REPL})
+646             port = \hyperlink{dhcpv6__common_8h_ab2fd1889bb669d854b61d4a5fee3e3ec}{DHCPV6\_SERVER\_PORT};
+647          \textcolor{keywordflow}{else}
+648             port = \hyperlink{dhcpv6__common_8h_a6802d48c8c3b96baafb23641a82f43a0}{DHCPV6\_CLIENT\_PORT};
+649 
+650          \textcolor{comment}{//Relay the DHCPv6 message to the client on the link}
+651          \textcolor{comment}{//identified by the Interface ID option}
+652          \textcolor{keywordflow}{return} \hyperlink{socket_8c_a5985321fef9f287f84c4004aaa78920e}{socketSendTo}(context->\hyperlink{structDhcpv6RelayContext_a356e927a8bf2bd0e9f434759945ea9c7}{clientSocket}[i], &ipAddr,
+653             port, outputMessage, outputMessageLen, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, 0);
+654       \}
+655    \}
+656 
+657    \textcolor{comment}{//Unknown interface identifier...}
+658    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca29b2389396deec9c8dbd640bfffe457c}{ERROR\_INVALID\_OPTION};
+659 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{dhcpv6__relay_8c_a49a97ef0f397dfdb834e76ab9890404e}\label{dhcpv6__relay_8c_a49a97ef0f397dfdb834e76ab9890404e}} 
+\index{dhcpv6\+\_\+relay.\+c@{dhcpv6\+\_\+relay.\+c}!dhcpv6\+Relay\+Join\+Multicast\+Group@{dhcpv6\+Relay\+Join\+Multicast\+Group}}
+\index{dhcpv6\+Relay\+Join\+Multicast\+Group@{dhcpv6\+Relay\+Join\+Multicast\+Group}!dhcpv6\+\_\+relay.\+c@{dhcpv6\+\_\+relay.\+c}}
+\subsubsection{\texorpdfstring{dhcpv6\+Relay\+Join\+Multicast\+Group()}{dhcpv6RelayJoinMulticastGroup()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} dhcpv6\+Relay\+Join\+Multicast\+Group (\begin{DoxyParamCaption}\item[{\hyperlink{structDhcpv6RelayContext}{Dhcpv6\+Relay\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Join All\+\_\+\+D\+H\+C\+P\+\_\+\+Relay\+\_\+\+Agents\+\_\+and\+\_\+\+Servers multicast group. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the D\+H\+C\+Pv6 relay agent context \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 296 of file dhcpv6\+\_\+relay.\+c.
+
+
+\begin{DoxyCode}
+297 \{
+298    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+299    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} j;
+300 
+301    \textcolor{comment}{//Initialize status code}
+302    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+303 
+304    \textcolor{comment}{//Loop through the client-facing interfaces}
+305    \textcolor{keywordflow}{for}(i = 0; i < context->\hyperlink{structDhcpv6RelayContext_a2f2b799fb5c66e195d8cea084afc1116}{clientInterfaceCount}; i++)
+306    \{
+307       \textcolor{comment}{//Join the All\_DHCP\_Relay\_Agents\_and\_Servers multicast}
+308       \textcolor{comment}{//group for each interface}
+309       error = \hyperlink{ipv6_8c_abbf3683ee76a53fdf931e58fabe6db6f}{ipv6JoinMulticastGroup}(context->
+      \hyperlink{structDhcpv6RelayContext_a3781192d09173701e63dcbbb721fe630}{clientInterface}[i],
+310          &\hyperlink{dhcpv6__common_8c_afd1207a3dea473503c7fc4aee69c6213}{DHCPV6\_ALL\_RELAY\_AGENTS\_AND\_SERVERS\_ADDR});
+311       \textcolor{comment}{//Unable to join the specified multicast group?}
+312       \textcolor{keywordflow}{if}(error)
+313          \textcolor{keywordflow}{break};
+314    \}
+315 
+316    \textcolor{comment}{//Did we encounter an error?}
+317    \textcolor{keywordflow}{if}(error)
+318    \{
+319       \textcolor{comment}{//Clean up side effects before returning...}
+320       \textcolor{keywordflow}{for}(j = 0; j < i; j++)
+321       \{
+322          \textcolor{comment}{//Leave the multicast group for each interface}
+323          \hyperlink{ipv6_8c_a803fc8d3c2db73c8fa1f6bb4ee7abde4}{ipv6LeaveMulticastGroup}(context->\hyperlink{structDhcpv6RelayContext_a3781192d09173701e63dcbbb721fe630}{clientInterface}[j],
+324             &\hyperlink{dhcpv6__common_8c_afd1207a3dea473503c7fc4aee69c6213}{DHCPV6\_ALL\_RELAY\_AGENTS\_AND\_SERVERS\_ADDR});
+325       \}
+326    \}
+327 
+328    \textcolor{comment}{//Return status code}
+329    \textcolor{keywordflow}{return} error;
+330 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{dhcpv6__relay_8c_a07e881461f6f3942df1f00c37db3dbcc}\label{dhcpv6__relay_8c_a07e881461f6f3942df1f00c37db3dbcc}} 
+\index{dhcpv6\+\_\+relay.\+c@{dhcpv6\+\_\+relay.\+c}!dhcpv6\+Relay\+Leave\+Multicast\+Group@{dhcpv6\+Relay\+Leave\+Multicast\+Group}}
+\index{dhcpv6\+Relay\+Leave\+Multicast\+Group@{dhcpv6\+Relay\+Leave\+Multicast\+Group}!dhcpv6\+\_\+relay.\+c@{dhcpv6\+\_\+relay.\+c}}
+\subsubsection{\texorpdfstring{dhcpv6\+Relay\+Leave\+Multicast\+Group()}{dhcpv6RelayLeaveMulticastGroup()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} dhcpv6\+Relay\+Leave\+Multicast\+Group (\begin{DoxyParamCaption}\item[{\hyperlink{structDhcpv6RelayContext}{Dhcpv6\+Relay\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Leave All\+\_\+\+D\+H\+C\+P\+\_\+\+Relay\+\_\+\+Agents\+\_\+and\+\_\+\+Servers multicast group. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the D\+H\+C\+Pv6 relay agent context \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 338 of file dhcpv6\+\_\+relay.\+c.
+
+
+\begin{DoxyCode}
+339 \{
+340    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+341 
+342    \textcolor{comment}{//Loop through the client-facing interfaces}
+343    \textcolor{keywordflow}{for}(i = 0; i < context->\hyperlink{structDhcpv6RelayContext_a2f2b799fb5c66e195d8cea084afc1116}{clientInterfaceCount}; i++)
+344    \{
+345       \textcolor{comment}{//Leave the All\_DHCP\_Relay\_Agents\_and\_Servers multicast}
+346       \textcolor{comment}{//group for each interface}
+347       \hyperlink{ipv6_8c_a803fc8d3c2db73c8fa1f6bb4ee7abde4}{ipv6LeaveMulticastGroup}(context->\hyperlink{structDhcpv6RelayContext_a3781192d09173701e63dcbbb721fe630}{clientInterface}[i],
+348          &\hyperlink{dhcpv6__common_8c_afd1207a3dea473503c7fc4aee69c6213}{DHCPV6\_ALL\_RELAY\_AGENTS\_AND\_SERVERS\_ADDR});
+349    \}
+350 
+351    \textcolor{comment}{//Successsful processing}
+352    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+353 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{dhcpv6__relay_8c_a827792dea732bb247aeaac2c1493604f}\label{dhcpv6__relay_8c_a827792dea732bb247aeaac2c1493604f}} 
+\index{dhcpv6\+\_\+relay.\+c@{dhcpv6\+\_\+relay.\+c}!dhcpv6\+Relay\+Start@{dhcpv6\+Relay\+Start}}
+\index{dhcpv6\+Relay\+Start@{dhcpv6\+Relay\+Start}!dhcpv6\+\_\+relay.\+c@{dhcpv6\+\_\+relay.\+c}}
+\subsubsection{\texorpdfstring{dhcpv6\+Relay\+Start()}{dhcpv6RelayStart()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} dhcpv6\+Relay\+Start (\begin{DoxyParamCaption}\item[{\hyperlink{structDhcpv6RelayContext}{Dhcpv6\+Relay\+Context} $\ast$}]{context,  }\item[{const \hyperlink{structDhcpv6RelaySettings}{Dhcpv6\+Relay\+Settings} $\ast$}]{settings }\end{DoxyParamCaption})}
+
+
+
+Start D\+H\+C\+Pv6 relay agent. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the D\+H\+C\+Pv6 relay agent context \\
+\hline
+\mbox{\tt in}  & {\em settings} & D\+H\+C\+Pv6 relay agent specific settings \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 58 of file dhcpv6\+\_\+relay.\+c.
+
+
+\begin{DoxyCode}
+59 \{
+60    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+61    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+62    \hyperlink{structOsTask}{OsTask} *task;
+63 
+64    \textcolor{comment}{//Debug message}
+65    \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"Starting DHCPv6 relay agent...\(\backslash\)r\(\backslash\)n"});
+66 
+67    \textcolor{comment}{//Ensure the parameters are valid}
+68    \textcolor{keywordflow}{if}(!context || !settings)
+69       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+70    \textcolor{comment}{//The pointer to the network-facing interface shall be valid}
+71    \textcolor{keywordflow}{if}(!settings->\hyperlink{structDhcpv6RelaySettings_afa82c181218d1b3adefa0df21eba2f4e}{serverInterface})
+72       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca18648c6804c77e30234b0e60e646718b}{ERROR\_INVALID\_INTERFACE};
+73    \textcolor{comment}{//Check the number of client-facing interfaces}
+74    \textcolor{keywordflow}{if}(!settings->\hyperlink{structDhcpv6RelaySettings_a71332729d2fd110fdb43069bbe8675b5}{clientInterfaceCount})
+75       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+76    \textcolor{keywordflow}{if}(settings->\hyperlink{structDhcpv6RelaySettings_a71332729d2fd110fdb43069bbe8675b5}{clientInterfaceCount} >= 
+      \hyperlink{dhcpv6__relay_8h_a588f9db9b4638a3b196e1421ab1bf6dc}{DHCPV6\_RELAY\_MAX\_CLIENT\_IF})
+77       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+78 
+79    \textcolor{comment}{//Loop through the client-facing interfaces}
+80    \textcolor{keywordflow}{for}(i = 0; i < settings->\hyperlink{structDhcpv6RelaySettings_a71332729d2fd110fdb43069bbe8675b5}{clientInterfaceCount}; i++)
+81    \{
+82       \textcolor{comment}{//A valid pointer is required for each interface}
+83       \textcolor{keywordflow}{if}(!settings->\hyperlink{structDhcpv6RelaySettings_a4241ac47ff555d8eec259b14eb51e3b9}{clientInterface}[i])
+84          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca18648c6804c77e30234b0e60e646718b}{ERROR\_INVALID\_INTERFACE};
+85    \}
+86 
+87    \textcolor{comment}{//Check the address to be used when forwarding messages to the server}
+88    \textcolor{keywordflow}{if}(\hyperlink{ipv6_8h_ab1e93bd2152bc3f3b5642fd0216384d7}{ipv6CompAddr}(&settings->\hyperlink{structDhcpv6RelaySettings_a67c3bcbd5fc280fe4bbff6e074ae4d8b}{serverAddress}, &
+      \hyperlink{ipv6_8c_aa4baeec4f7b8b166d2457787fb9eddf9}{IPV6\_UNSPECIFIED\_ADDR}))
+89       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca21cbabf2c791471c05a9bc2710638aec}{ERROR\_INVALID\_ADDRESS};
+90 
+91    \textcolor{comment}{//Clear the DHCPv6 relay agent context}
+92    memset(context, 0, \textcolor{keyword}{sizeof}(\hyperlink{structDhcpv6RelayContext}{Dhcpv6RelayContext}));
+93 
+94    \textcolor{comment}{//Save the network-facing interface}
+95    context->\hyperlink{structDhcpv6RelayContext_ac4e2670737b844e0484e24a13d01d914}{serverInterface} = settings->\hyperlink{structDhcpv6RelaySettings_afa82c181218d1b3adefa0df21eba2f4e}{serverInterface};
+96    \textcolor{comment}{//Save the number of client-facing interfaces}
+97    context->\hyperlink{structDhcpv6RelayContext_a2f2b799fb5c66e195d8cea084afc1116}{clientInterfaceCount} = settings->
+      \hyperlink{structDhcpv6RelaySettings_a71332729d2fd110fdb43069bbe8675b5}{clientInterfaceCount};
+98 
+99    \textcolor{comment}{//Save all the client-facing interfaces}
+100    \textcolor{keywordflow}{for}(i = 0; i < context->\hyperlink{structDhcpv6RelayContext_a2f2b799fb5c66e195d8cea084afc1116}{clientInterfaceCount}; i++)
+101       context->\hyperlink{structDhcpv6RelayContext_a3781192d09173701e63dcbbb721fe630}{clientInterface}[i] = settings->\hyperlink{structDhcpv6RelaySettings_a4241ac47ff555d8eec259b14eb51e3b9}{clientInterface}[i];
+102 
+103    \textcolor{comment}{//Save the address to be used when relaying client messages to the server}
+104    context->\hyperlink{structDhcpv6RelayContext_af99b4fbe7d100b5356cd7aa2c587eda4}{serverAddress} = settings->\hyperlink{structDhcpv6RelaySettings_a67c3bcbd5fc280fe4bbff6e074ae4d8b}{serverAddress};
+105 
+106    \textcolor{comment}{//Join the All\_DHCP\_Relay\_Agents\_and\_Servers multicast group}
+107    \textcolor{comment}{//for each client-facing interface}
+108    error = \hyperlink{dhcpv6__relay_8c_a49a97ef0f397dfdb834e76ab9890404e}{dhcpv6RelayJoinMulticastGroup}(context);
+109    \textcolor{comment}{//Any error to report?}
+110    \textcolor{keywordflow}{if}(error)
+111       \textcolor{keywordflow}{return} error;
+112 
+113    \textcolor{comment}{//Start of exception handling block}
+114    \textcolor{keywordflow}{do}
+115    \{
+116       \textcolor{comment}{//Open a UDP socket to handle the network-facing interface}
+117       context->\hyperlink{structDhcpv6RelayContext_af1c015d0b8abef9419722312631a132d}{serverSocket} = \hyperlink{socket_8c_aa139bbf42b326b52eb08cf52771ac337}{socketOpen}(\hyperlink{socket_8h_aa78c7398fa81f7f62aa233159d4d8d97a26963b01dac3a99a930779035d3796a7}{SOCKET\_TYPE\_DGRAM}, 
+      \hyperlink{socket_8h_a56eb0e60bda5d1d8a2e702228405d969a53c45ffdb9dee4a8f885b816386a99b8}{SOCKET\_IP\_PROTO\_UDP});
+118       \textcolor{comment}{//Failed to open socket?}
+119       \textcolor{keywordflow}{if}(!context->\hyperlink{structDhcpv6RelayContext_af1c015d0b8abef9419722312631a132d}{serverSocket})
+120       \{
+121          \textcolor{comment}{//Report an error}
+122          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cab721230e985e398cc0977dd729a12c61}{ERROR\_OPEN\_FAILED};
+123          \textcolor{comment}{//Stop processing}
+124          \textcolor{keywordflow}{break};
+125       \}
+126 
+127       \textcolor{comment}{//Explicitly associate the socket with the relevant interface}
+128       error = \hyperlink{net__legacy_8h_a80bc49fa99e5654d8c345cd5c70d36d3}{socketBindToInterface}(context->\hyperlink{structDhcpv6RelayContext_af1c015d0b8abef9419722312631a132d}{serverSocket}, context->
+      \hyperlink{structDhcpv6RelayContext_ac4e2670737b844e0484e24a13d01d914}{serverInterface});
+129       \textcolor{comment}{//Unable to bind the socket to the desired interface?}
+130       \textcolor{keywordflow}{if}(error)
+131          \textcolor{keywordflow}{break};
+132 
+133       \textcolor{comment}{//Relay agents listen for DHCPv6 messages on UDP port 547}
+134       error = \hyperlink{socket_8c_a56de93ca9f66782811dbe151d6da0b9c}{socketBind}(context->\hyperlink{structDhcpv6RelayContext_af1c015d0b8abef9419722312631a132d}{serverSocket}, &
+      \hyperlink{ip_8c_a132481a9d89ddf554ea8bbbe342e5d5a}{IP\_ADDR\_ANY}, \hyperlink{dhcpv6__common_8h_ab2fd1889bb669d854b61d4a5fee3e3ec}{DHCPV6\_SERVER\_PORT});
+135       \textcolor{comment}{//Unable to bind the socket to the desired port?}
+136       \textcolor{keywordflow}{if}(error)
+137          \textcolor{keywordflow}{break};
+138 
+139       \textcolor{comment}{//Only accept datagrams with source port number 547}
+140       error = \hyperlink{socket_8c_aff3e3c0abc332f42189fce8f362fbd63}{socketConnect}(context->\hyperlink{structDhcpv6RelayContext_af1c015d0b8abef9419722312631a132d}{serverSocket}, &
+      \hyperlink{ip_8c_a132481a9d89ddf554ea8bbbe342e5d5a}{IP\_ADDR\_ANY}, \hyperlink{dhcpv6__common_8h_ab2fd1889bb669d854b61d4a5fee3e3ec}{DHCPV6\_SERVER\_PORT});
+141       \textcolor{comment}{//Any error to report?}
+142       \textcolor{keywordflow}{if}(error)
+143          \textcolor{keywordflow}{break};
+144 
+145       \textcolor{comment}{//If the relay agent relays messages to the All\_DHCP\_Servers address}
+146       \textcolor{comment}{//or other multicast addresses, it sets the Hop Limit field to 32}
+147 
+148       \textcolor{comment}{//Loop through the client-facing interfaces}
+149       \textcolor{keywordflow}{for}(i = 0; i < context->\hyperlink{structDhcpv6RelayContext_a2f2b799fb5c66e195d8cea084afc1116}{clientInterfaceCount}; i++)
+150       \{
+151          \textcolor{comment}{//Open a UDP socket to handle the current interface}
+152          context->\hyperlink{structDhcpv6RelayContext_a356e927a8bf2bd0e9f434759945ea9c7}{clientSocket}[i] = \hyperlink{socket_8c_aa139bbf42b326b52eb08cf52771ac337}{socketOpen}(
+      \hyperlink{socket_8h_aa78c7398fa81f7f62aa233159d4d8d97a26963b01dac3a99a930779035d3796a7}{SOCKET\_TYPE\_DGRAM}, \hyperlink{socket_8h_a56eb0e60bda5d1d8a2e702228405d969a53c45ffdb9dee4a8f885b816386a99b8}{SOCKET\_IP\_PROTO\_UDP});
+153          \textcolor{comment}{//Failed to open socket?}
+154          \textcolor{keywordflow}{if}(!context->\hyperlink{structDhcpv6RelayContext_a356e927a8bf2bd0e9f434759945ea9c7}{clientSocket}[i])
+155          \{
+156             \textcolor{comment}{//Report an error}
+157             error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cab721230e985e398cc0977dd729a12c61}{ERROR\_OPEN\_FAILED};
+158             \textcolor{comment}{//Stop processing}
+159             \textcolor{keywordflow}{break};
+160          \}
+161 
+162          \textcolor{comment}{//Explicitly associate the socket with the relevant interface}
+163          error = \hyperlink{net__legacy_8h_a80bc49fa99e5654d8c345cd5c70d36d3}{socketBindToInterface}(context->
+      \hyperlink{structDhcpv6RelayContext_a356e927a8bf2bd0e9f434759945ea9c7}{clientSocket}[i], context->\hyperlink{structDhcpv6RelayContext_a3781192d09173701e63dcbbb721fe630}{clientInterface}[i]);
+164          \textcolor{comment}{//Unable to bind the socket to the desired interface?}
+165          \textcolor{keywordflow}{if}(error)
+166             \textcolor{keywordflow}{break};
+167 
+168          \textcolor{comment}{//Relay agents listen for DHCPv6 messages on UDP port 547}
+169          error = \hyperlink{socket_8c_a56de93ca9f66782811dbe151d6da0b9c}{socketBind}(context->\hyperlink{structDhcpv6RelayContext_a356e927a8bf2bd0e9f434759945ea9c7}{clientSocket}[i], &
+      \hyperlink{ip_8c_a132481a9d89ddf554ea8bbbe342e5d5a}{IP\_ADDR\_ANY}, \hyperlink{dhcpv6__common_8h_ab2fd1889bb669d854b61d4a5fee3e3ec}{DHCPV6\_SERVER\_PORT});
+170          \textcolor{comment}{//Unable to bind the socket to the desired port?}
+171          \textcolor{keywordflow}{if}(error)
+172             \textcolor{keywordflow}{break};
+173 
+174          \textcolor{comment}{//Only accept datagrams with source port number 546}
+175          error = \hyperlink{socket_8c_aff3e3c0abc332f42189fce8f362fbd63}{socketConnect}(context->\hyperlink{structDhcpv6RelayContext_a356e927a8bf2bd0e9f434759945ea9c7}{clientSocket}[i], &
+      \hyperlink{ip_8c_a132481a9d89ddf554ea8bbbe342e5d5a}{IP\_ADDR\_ANY}, \hyperlink{dhcpv6__common_8h_a6802d48c8c3b96baafb23641a82f43a0}{DHCPV6\_CLIENT\_PORT});
+176          \textcolor{comment}{//Any error to report?}
+177          \textcolor{keywordflow}{if}(error)
+178             \textcolor{keywordflow}{break};
+179       \}
+180 
+181       \textcolor{comment}{//Propagate exception if necessary}
+182       \textcolor{keywordflow}{if}(error)
+183          \textcolor{keywordflow}{break};
+184 
+185       \textcolor{comment}{//Initialize event object}
+186       \textcolor{keywordflow}{if}(!\hyperlink{os__port__chibios_8c_ac1658f3fed1eb64efcd47e4503a9ef2e}{osCreateEvent}(&context->\hyperlink{structDhcpv6RelayContext_a0db53b8fcf50ef4cb5067a6af954c659}{event}))
+187       \{
+188          \textcolor{comment}{//Failed to create event}
+189          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca528efe91b7a7e4bcc9a6de7d4b778c67}{ERROR\_OUT\_OF\_RESOURCES};
+190          \textcolor{comment}{//Stop processing}
+191          \textcolor{keywordflow}{break};
+192       \}
+193 
+194       \textcolor{comment}{//Initialize ACK event object}
+195       \textcolor{keywordflow}{if}(!\hyperlink{os__port__chibios_8c_ac1658f3fed1eb64efcd47e4503a9ef2e}{osCreateEvent}(&context->\hyperlink{structDhcpv6RelayContext_af3a40357f3522b48095aee5287ce085e}{ackEvent}))
+196       \{
+197          \textcolor{comment}{//Failed to create event}
+198          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca528efe91b7a7e4bcc9a6de7d4b778c67}{ERROR\_OUT\_OF\_RESOURCES};
+199          \textcolor{comment}{//Stop processing}
+200          \textcolor{keywordflow}{break};
+201       \}
+202 
+203       \textcolor{comment}{//The DHCPv6 relay agent is now running}
+204       context->\hyperlink{structDhcpv6RelayContext_a4d6dd0abf3071d9e44c401004deef46b}{running} = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+205 
+206       \textcolor{comment}{//Start the DHCPv6 relay agent service}
+207       task = \hyperlink{os__port__chibios_8c_aef8c6fe13a0df9e5cfaeb0501ecbac3e}{osCreateTask}(\textcolor{stringliteral}{"DHCPv6 Relay"}, \hyperlink{dhcpv6__relay_8c_ac65ffd658c0eaab3dc018343ad96885e}{dhcpv6RelayTask},
+208          context, \hyperlink{dhcpv6__relay_8h_a58114e658679e915dd5f47034d8761c8}{DHCPV6\_RELAY\_STACK\_SIZE}, 
+      \hyperlink{dhcpv6__relay_8h_ae58f7b2a07df9693f50edd39b48c3584}{DHCPV6\_RELAY\_PRIORITY});
+209 
+210       \textcolor{comment}{//Unable to create the task?}
+211       \textcolor{keywordflow}{if}(task == \hyperlink{os__port_8h_aa673e52d8b286c3b613ad127aa85d536}{OS\_INVALID\_HANDLE})
+212          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca528efe91b7a7e4bcc9a6de7d4b778c67}{ERROR\_OUT\_OF\_RESOURCES};
+213 
+214       \textcolor{comment}{//End of exception handling block}
+215    \} \textcolor{keywordflow}{while}(0);
+216 
+217    \textcolor{comment}{//Did we encounter an error?}
+218    \textcolor{keywordflow}{if}(error)
+219    \{
+220       \textcolor{comment}{//Close the socket associated with the network-facing interface}
+221       \hyperlink{socket_8c_ac5012e9f71c97e2ea0410f2c5baccb0e}{socketClose}(context->\hyperlink{structDhcpv6RelayContext_af1c015d0b8abef9419722312631a132d}{serverSocket});
+222 
+223       \textcolor{comment}{//Close the socket associated with each client-facing interface}
+224       \textcolor{keywordflow}{for}(i = 0; i < context->\hyperlink{structDhcpv6RelayContext_a2f2b799fb5c66e195d8cea084afc1116}{clientInterfaceCount}; i++)
+225          \hyperlink{socket_8c_ac5012e9f71c97e2ea0410f2c5baccb0e}{socketClose}(context->\hyperlink{structDhcpv6RelayContext_a356e927a8bf2bd0e9f434759945ea9c7}{clientSocket}[i]);
+226 
+227       \textcolor{comment}{//Leave the All\_DHCP\_Relay\_Agents\_and\_Servers multicast group}
+228       \textcolor{comment}{//for each client-facing interface}
+229       \hyperlink{dhcpv6__relay_8c_a07e881461f6f3942df1f00c37db3dbcc}{dhcpv6RelayLeaveMulticastGroup}(context);
+230 
+231       \textcolor{comment}{//Delete event objects}
+232       \hyperlink{os__port__chibios_8c_a25827a49278bad6150b04b47165fda3d}{osDeleteEvent}(&context->\hyperlink{structDhcpv6RelayContext_a0db53b8fcf50ef4cb5067a6af954c659}{event});
+233       \hyperlink{os__port__chibios_8c_a25827a49278bad6150b04b47165fda3d}{osDeleteEvent}(&context->\hyperlink{structDhcpv6RelayContext_af3a40357f3522b48095aee5287ce085e}{ackEvent});
+234    \}
+235 
+236    \textcolor{comment}{//Return status code}
+237    \textcolor{keywordflow}{return} error;
+238 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{dhcpv6__relay_8c_a1d963abc6408a428e1b5bd8639c611c8}\label{dhcpv6__relay_8c_a1d963abc6408a428e1b5bd8639c611c8}} 
+\index{dhcpv6\+\_\+relay.\+c@{dhcpv6\+\_\+relay.\+c}!dhcpv6\+Relay\+Stop@{dhcpv6\+Relay\+Stop}}
+\index{dhcpv6\+Relay\+Stop@{dhcpv6\+Relay\+Stop}!dhcpv6\+\_\+relay.\+c@{dhcpv6\+\_\+relay.\+c}}
+\subsubsection{\texorpdfstring{dhcpv6\+Relay\+Stop()}{dhcpv6RelayStop()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} dhcpv6\+Relay\+Stop (\begin{DoxyParamCaption}\item[{\hyperlink{structDhcpv6RelayContext}{Dhcpv6\+Relay\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Stop D\+H\+C\+Pv6 relay agent. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the D\+H\+C\+Pv6 relay agent context \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 247 of file dhcpv6\+\_\+relay.\+c.
+
+
+\begin{DoxyCode}
+248 \{
+249    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+250 
+251    \textcolor{comment}{//Debug message}
+252    \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"Stopping DHCPv6 relay agent...\(\backslash\)r\(\backslash\)n"});
+253 
+254    \textcolor{comment}{//Ensure the specified pointer is valid}
+255    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+256       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+257    \textcolor{comment}{//Check DHCPv6 relay agent state}
+258    \textcolor{keywordflow}{if}(!context->\hyperlink{structDhcpv6RelayContext_a4d6dd0abf3071d9e44c401004deef46b}{running})
+259       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac3190fa1f36c6acf147c7ce453a655e2}{ERROR\_WRONG\_STATE};
+260 
+261    \textcolor{comment}{//Reset ACK event before sending the kill signal}
+262    \hyperlink{os__port__chibios_8c_a9122a1cf258caef553a6b224ef8ef6bf}{osResetEvent}(&context->\hyperlink{structDhcpv6RelayContext_af3a40357f3522b48095aee5287ce085e}{ackEvent});
+263    \textcolor{comment}{//Stop the DHCPv6 relay agent task}
+264    context->\hyperlink{structDhcpv6RelayContext_a6aacb68538ea15d3bd6be970a37ca5b6}{stopRequest} = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+265    \textcolor{comment}{//Send a signal to the task in order to abort any blocking operation}
+266    \hyperlink{os__port__chibios_8c_afc1d64fc90afbf03baecfa636bb99ff7}{osSetEvent}(&context->\hyperlink{structDhcpv6RelayContext_a0db53b8fcf50ef4cb5067a6af954c659}{event});
+267 
+268    \textcolor{comment}{//Wait for the process to terminate...}
+269    \hyperlink{os__port__chibios_8c_a1dc707247e44dfefae5bec4a322fc78a}{osWaitForEvent}(&context->\hyperlink{structDhcpv6RelayContext_af3a40357f3522b48095aee5287ce085e}{ackEvent}, \hyperlink{os__port_8h_ab893de6f8a0ec8b0e6dd8097ff398019}{INFINITE\_DELAY});
+270 
+271    \textcolor{comment}{//Leave the All\_DHCP\_Relay\_Agents\_and\_Servers multicast group}
+272    \textcolor{comment}{//for each client-facing interface}
+273    \hyperlink{dhcpv6__relay_8c_a07e881461f6f3942df1f00c37db3dbcc}{dhcpv6RelayLeaveMulticastGroup}(context);
+274 
+275    \textcolor{comment}{//Close the socket that carries traffic towards the DHCPv6 server}
+276    \hyperlink{socket_8c_ac5012e9f71c97e2ea0410f2c5baccb0e}{socketClose}(context->\hyperlink{structDhcpv6RelayContext_af1c015d0b8abef9419722312631a132d}{serverSocket});
+277 
+278    \textcolor{comment}{//Properly dispose the sockets that carry traffic towards the DHCPv6 clients}
+279    \textcolor{keywordflow}{for}(i = 0; i < context->\hyperlink{structDhcpv6RelayContext_a2f2b799fb5c66e195d8cea084afc1116}{clientInterfaceCount}; i++)
+280       \hyperlink{socket_8c_ac5012e9f71c97e2ea0410f2c5baccb0e}{socketClose}(context->\hyperlink{structDhcpv6RelayContext_a356e927a8bf2bd0e9f434759945ea9c7}{clientSocket}[i]);
+281 
+282    \textcolor{comment}{//Delete event objects}
+283    \hyperlink{os__port__chibios_8c_a25827a49278bad6150b04b47165fda3d}{osDeleteEvent}(&context->\hyperlink{structDhcpv6RelayContext_a0db53b8fcf50ef4cb5067a6af954c659}{event});
+284    \hyperlink{os__port__chibios_8c_a25827a49278bad6150b04b47165fda3d}{osDeleteEvent}(&context->\hyperlink{structDhcpv6RelayContext_af3a40357f3522b48095aee5287ce085e}{ackEvent});
+285 
+286    \textcolor{comment}{//Successful processing}
+287    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+288 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{dhcpv6__relay_8c_ac65ffd658c0eaab3dc018343ad96885e}\label{dhcpv6__relay_8c_ac65ffd658c0eaab3dc018343ad96885e}} 
+\index{dhcpv6\+\_\+relay.\+c@{dhcpv6\+\_\+relay.\+c}!dhcpv6\+Relay\+Task@{dhcpv6\+Relay\+Task}}
+\index{dhcpv6\+Relay\+Task@{dhcpv6\+Relay\+Task}!dhcpv6\+\_\+relay.\+c@{dhcpv6\+\_\+relay.\+c}}
+\subsubsection{\texorpdfstring{dhcpv6\+Relay\+Task()}{dhcpv6RelayTask()}}
+{\footnotesize\ttfamily void dhcpv6\+Relay\+Task (\begin{DoxyParamCaption}\item[{void $\ast$}]{param }\end{DoxyParamCaption})}
+
+
+
+D\+H\+C\+Pv6 relay agent task. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em param} & Pointer to the D\+H\+C\+Pv6 relay agent context \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 361 of file dhcpv6\+\_\+relay.\+c.
+
+
+\begin{DoxyCode}
+362 \{
+363    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+364    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+365    \hyperlink{structDhcpv6RelayContext}{Dhcpv6RelayContext} *context;
+366 
+367    \textcolor{comment}{//Task prologue}
+368    \hyperlink{os__port__chibios_8h_abd3485ee30ab6a2de1208b0498a449cf}{osEnterTask}();
+369 
+370    \textcolor{comment}{//Point to the DHCPv6 relay agent context}
+371    context = (\hyperlink{structDhcpv6RelayContext}{Dhcpv6RelayContext} *) param;
+372 
+373    \textcolor{comment}{//Specify the events the application is interested in for}
+374    \textcolor{comment}{//each client-facing sockets}
+375    \textcolor{keywordflow}{for}(i = 0; i < context->\hyperlink{structDhcpv6RelayContext_a2f2b799fb5c66e195d8cea084afc1116}{clientInterfaceCount}; i++)
+376    \{
+377       context->\hyperlink{structDhcpv6RelayContext_a932752b59e55fb44d4151e350fbd09be}{eventDesc}[i].\hyperlink{structSocketEventDesc_a31fbff5c4d515c81ff43934e8aeba08c}{socket} = context->\hyperlink{structDhcpv6RelayContext_a356e927a8bf2bd0e9f434759945ea9c7}{clientSocket}[i];
+378       context->\hyperlink{structDhcpv6RelayContext_a932752b59e55fb44d4151e350fbd09be}{eventDesc}[i].\hyperlink{structSocketEventDesc_ac979f02c9bb6b9517ed9c2d1b17e6201}{eventMask} = \hyperlink{socket_8h_add8a4c36456f478ab23bd4372aebde6ea72985d7e82625f037ca8a6734f49996c}{SOCKET\_EVENT\_RX\_READY};
+379    \}
+380 
+381    \textcolor{comment}{//Specify the events the application is interested in for}
+382    \textcolor{comment}{//the network-facing socket}
+383    context->\hyperlink{structDhcpv6RelayContext_a932752b59e55fb44d4151e350fbd09be}{eventDesc}[i].\hyperlink{structSocketEventDesc_a31fbff5c4d515c81ff43934e8aeba08c}{socket} = context->\hyperlink{structDhcpv6RelayContext_af1c015d0b8abef9419722312631a132d}{serverSocket};
+384    context->\hyperlink{structDhcpv6RelayContext_a932752b59e55fb44d4151e350fbd09be}{eventDesc}[i].\hyperlink{structSocketEventDesc_ac979f02c9bb6b9517ed9c2d1b17e6201}{eventMask} = \hyperlink{socket_8h_add8a4c36456f478ab23bd4372aebde6ea72985d7e82625f037ca8a6734f49996c}{SOCKET\_EVENT\_RX\_READY};
+385 
+386    \textcolor{comment}{//Main loop}
+387    \textcolor{keywordflow}{while}(1)
+388    \{
+389       \textcolor{comment}{//Wait for incoming packets on network-facing or client-facing interfaces}
+390       error = \hyperlink{socket_8c_a57ec969d9a3deee2dae93fe0a891e583}{socketPoll}(context->\hyperlink{structDhcpv6RelayContext_a932752b59e55fb44d4151e350fbd09be}{eventDesc}, context->
+      \hyperlink{structDhcpv6RelayContext_a2f2b799fb5c66e195d8cea084afc1116}{clientInterfaceCount} + 1,
+391          &context->\hyperlink{structDhcpv6RelayContext_a0db53b8fcf50ef4cb5067a6af954c659}{event}, \hyperlink{os__port_8h_ab893de6f8a0ec8b0e6dd8097ff398019}{INFINITE\_DELAY});
+392 
+393       \textcolor{comment}{//Stop DHCPv6 relay agent?}
+394       \textcolor{keywordflow}{if}(context->\hyperlink{structDhcpv6RelayContext_a6aacb68538ea15d3bd6be970a37ca5b6}{stopRequest})
+395       \{
+396          \textcolor{comment}{//The DHCPv6 relay agent is about to stop}
+397          context->\hyperlink{structDhcpv6RelayContext_a6aacb68538ea15d3bd6be970a37ca5b6}{stopRequest} = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+398          context->\hyperlink{structDhcpv6RelayContext_a4d6dd0abf3071d9e44c401004deef46b}{running} = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+399          \textcolor{comment}{//Acknowledge the reception of the user request}
+400          \hyperlink{os__port__chibios_8c_afc1d64fc90afbf03baecfa636bb99ff7}{osSetEvent}(&context->\hyperlink{structDhcpv6RelayContext_af3a40357f3522b48095aee5287ce085e}{ackEvent});
+401          \textcolor{comment}{//Kill ourselves}
+402          \hyperlink{os__port__chibios_8c_ae19a41c2cb0f1e7242f48c2dbbc36e8e}{osDeleteTask}(\hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+403       \}
+404 
+405       \textcolor{comment}{//Verify status code}
+406       \textcolor{keywordflow}{if}(!error)
+407       \{
+408          \textcolor{comment}{//Check the state of each client-facing socket}
+409          \textcolor{keywordflow}{for}(i = 0; i < context->\hyperlink{structDhcpv6RelayContext_a2f2b799fb5c66e195d8cea084afc1116}{clientInterfaceCount}; i++)
+410          \{
+411             \textcolor{comment}{//Relay client messages if applicable}
+412             \textcolor{keywordflow}{if}(context->\hyperlink{structDhcpv6RelayContext_a932752b59e55fb44d4151e350fbd09be}{eventDesc}[i].\hyperlink{structSocketEventDesc_aca8e460cfc75c58870239584437a3c1d}{eventFlags} & 
+      \hyperlink{socket_8h_add8a4c36456f478ab23bd4372aebde6ea72985d7e82625f037ca8a6734f49996c}{SOCKET\_EVENT\_RX\_READY})
+413                \hyperlink{dhcpv6__relay_8c_a9bf2840da492ac67f5202f7de0678576}{dhcpv6ForwardClientMessage}(context, i);
+414          \}
+415 
+416          \textcolor{comment}{//Check the state of the network-facing socket}
+417          \textcolor{keywordflow}{if}(context->\hyperlink{structDhcpv6RelayContext_a932752b59e55fb44d4151e350fbd09be}{eventDesc}[i].\hyperlink{structSocketEventDesc_aca8e460cfc75c58870239584437a3c1d}{eventFlags} & 
+      \hyperlink{socket_8h_add8a4c36456f478ab23bd4372aebde6ea72985d7e82625f037ca8a6734f49996c}{SOCKET\_EVENT\_RX\_READY})
+418          \{
+419             \textcolor{comment}{//Forward Relay-Reply messages from the network}
+420             \hyperlink{dhcpv6__relay_8c_a06b3124f4a5879a06def16b34ecadfeb}{dhcpv6ForwardRelayReplyMessage}(context);
+421          \}
+422       \}
+423    \}
+424 \}
+\end{DoxyCode}

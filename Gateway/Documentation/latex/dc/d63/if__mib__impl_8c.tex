@@ -1,0 +1,1382 @@
+\hypertarget{if__mib__impl_8c}{}\section{cyclone\+\_\+tcp/mibs/if\+\_\+mib\+\_\+impl.c File Reference}
+\label{if__mib__impl_8c}\index{cyclone\+\_\+tcp/mibs/if\+\_\+mib\+\_\+impl.\+c@{cyclone\+\_\+tcp/mibs/if\+\_\+mib\+\_\+impl.\+c}}
+
+
+Interfaces Group M\+IB module implementation.  
+
+
+{\ttfamily \#include \char`\"{}core/net.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}mibs/mib\+\_\+common.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}mibs/if\+\_\+mib\+\_\+module.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}mibs/if\+\_\+mib\+\_\+impl.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}core/crypto.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}encoding/asn1.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}encoding/oid.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}debug.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{if__mib__impl_8c_afcdf5e66fd927a7f4cc64295acd20407}{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}~\hyperlink{net__config_8h_af5cf34762d7114743a58dd8a05289bd9}{S\+N\+M\+P\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{if__mib__impl_8c_a996d74de04de86d6a59069f525fb0ee5}{if\+Mib\+Init} (void)
+\begin{DoxyCompactList}\small\item\em Interfaces Group M\+IB module initialization. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{if__mib__impl_8c_afc4c69c3f714526ee9a1a0cd17195e18}{if\+Mib\+Set\+If\+Entry} (const \hyperlink{mib__common_8h_a2bc33cee6dd90a0ee8eeb92976a1c479}{Mib\+Object} $\ast$object, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{mib__common_8h_a5d78f42b3545deb9bbd305138506c7a7}{oid}, size\+\_\+t oid\+Len, const \hyperlink{mib__common_8h_a515b369f80863becb3a17870e6bb7a80}{Mib\+Variant} $\ast$\hyperlink{chap_8h_adfa040d04d16520129a735fff8fb1628}{value}, size\+\_\+t value\+Len, \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} commit)
+\begin{DoxyCompactList}\small\item\em Set if\+Entry object value. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{if__mib__impl_8c_a3fc6d830cd4336b48e9477d1caac8817}{if\+Mib\+Get\+If\+Entry} (const \hyperlink{mib__common_8h_a2bc33cee6dd90a0ee8eeb92976a1c479}{Mib\+Object} $\ast$object, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{mib__common_8h_a5d78f42b3545deb9bbd305138506c7a7}{oid}, size\+\_\+t oid\+Len, \hyperlink{mib__common_8h_a515b369f80863becb3a17870e6bb7a80}{Mib\+Variant} $\ast$\hyperlink{chap_8h_adfa040d04d16520129a735fff8fb1628}{value}, size\+\_\+t $\ast$value\+Len)
+\begin{DoxyCompactList}\small\item\em Get if\+Entry object value. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{if__mib__impl_8c_a9b90d71f5788efd6e4fb3be895ae34dc}{if\+Mib\+Get\+Next\+If\+Entry} (const \hyperlink{mib__common_8h_a2bc33cee6dd90a0ee8eeb92976a1c479}{Mib\+Object} $\ast$object, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{mib__common_8h_a5d78f42b3545deb9bbd305138506c7a7}{oid}, size\+\_\+t oid\+Len, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$next\+Oid, size\+\_\+t $\ast$next\+Oid\+Len)
+\begin{DoxyCompactList}\small\item\em Get next if\+Entry object. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{if__mib__impl_8c_a234e29d23dffa8033e2e06b4114e51ec}{if\+Mib\+Set\+If\+X\+Entry} (const \hyperlink{mib__common_8h_a2bc33cee6dd90a0ee8eeb92976a1c479}{Mib\+Object} $\ast$object, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{mib__common_8h_a5d78f42b3545deb9bbd305138506c7a7}{oid}, size\+\_\+t oid\+Len, const \hyperlink{mib__common_8h_a515b369f80863becb3a17870e6bb7a80}{Mib\+Variant} $\ast$\hyperlink{chap_8h_adfa040d04d16520129a735fff8fb1628}{value}, size\+\_\+t value\+Len, \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} commit)
+\begin{DoxyCompactList}\small\item\em Set if\+X\+Entry object value. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{if__mib__impl_8c_acc4ee9f2fd914b61dd3830570f1715bb}{if\+Mib\+Get\+If\+X\+Entry} (const \hyperlink{mib__common_8h_a2bc33cee6dd90a0ee8eeb92976a1c479}{Mib\+Object} $\ast$object, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{mib__common_8h_a5d78f42b3545deb9bbd305138506c7a7}{oid}, size\+\_\+t oid\+Len, \hyperlink{mib__common_8h_a515b369f80863becb3a17870e6bb7a80}{Mib\+Variant} $\ast$\hyperlink{chap_8h_adfa040d04d16520129a735fff8fb1628}{value}, size\+\_\+t $\ast$value\+Len)
+\begin{DoxyCompactList}\small\item\em Get if\+X\+Entry object value. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{if__mib__impl_8c_ab1708e9d574d145f987dc71f14cd4a16}{if\+Mib\+Get\+Next\+If\+X\+Entry} (const \hyperlink{mib__common_8h_a2bc33cee6dd90a0ee8eeb92976a1c479}{Mib\+Object} $\ast$object, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{mib__common_8h_a5d78f42b3545deb9bbd305138506c7a7}{oid}, size\+\_\+t oid\+Len, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$next\+Oid, size\+\_\+t $\ast$next\+Oid\+Len)
+\begin{DoxyCompactList}\small\item\em Get next if\+X\+Entry object. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{if__mib__impl_8c_a2e8b5a663b426e96c200dfa0d64a6f20}{if\+Mib\+Set\+If\+Stack\+Entry} (const \hyperlink{mib__common_8h_a2bc33cee6dd90a0ee8eeb92976a1c479}{Mib\+Object} $\ast$object, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{mib__common_8h_a5d78f42b3545deb9bbd305138506c7a7}{oid}, size\+\_\+t oid\+Len, const \hyperlink{mib__common_8h_a515b369f80863becb3a17870e6bb7a80}{Mib\+Variant} $\ast$\hyperlink{chap_8h_adfa040d04d16520129a735fff8fb1628}{value}, size\+\_\+t value\+Len, \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} commit)
+\begin{DoxyCompactList}\small\item\em Set if\+Stack\+Entry object value. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{if__mib__impl_8c_a8d6113fc62f73781b285d23132449862}{if\+Mib\+Get\+If\+Stack\+Entry} (const \hyperlink{mib__common_8h_a2bc33cee6dd90a0ee8eeb92976a1c479}{Mib\+Object} $\ast$object, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{mib__common_8h_a5d78f42b3545deb9bbd305138506c7a7}{oid}, size\+\_\+t oid\+Len, \hyperlink{mib__common_8h_a515b369f80863becb3a17870e6bb7a80}{Mib\+Variant} $\ast$\hyperlink{chap_8h_adfa040d04d16520129a735fff8fb1628}{value}, size\+\_\+t $\ast$value\+Len)
+\begin{DoxyCompactList}\small\item\em Get if\+Stack\+Entry object value. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{if__mib__impl_8c_a72ff1c320f07790380dd9bc719b658db}{if\+Mib\+Get\+Next\+If\+Stack\+Entry} (const \hyperlink{mib__common_8h_a2bc33cee6dd90a0ee8eeb92976a1c479}{Mib\+Object} $\ast$object, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{mib__common_8h_a5d78f42b3545deb9bbd305138506c7a7}{oid}, size\+\_\+t oid\+Len, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$next\+Oid, size\+\_\+t $\ast$next\+Oid\+Len)
+\begin{DoxyCompactList}\small\item\em Get next if\+Stack\+Entry object. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{if__mib__impl_8c_a2bfb2c15d79b4c03636762b62c34c213}{if\+Mib\+Set\+If\+Rcv\+Address\+Entry} (const \hyperlink{mib__common_8h_a2bc33cee6dd90a0ee8eeb92976a1c479}{Mib\+Object} $\ast$object, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{mib__common_8h_a5d78f42b3545deb9bbd305138506c7a7}{oid}, size\+\_\+t oid\+Len, const \hyperlink{mib__common_8h_a515b369f80863becb3a17870e6bb7a80}{Mib\+Variant} $\ast$\hyperlink{chap_8h_adfa040d04d16520129a735fff8fb1628}{value}, size\+\_\+t value\+Len, \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} commit)
+\begin{DoxyCompactList}\small\item\em Set if\+Rcv\+Address\+Entry object value. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{if__mib__impl_8c_afa8166aa019734dee39b512b5fbf7e92}{if\+Mib\+Get\+If\+Rcv\+Address\+Entry} (const \hyperlink{mib__common_8h_a2bc33cee6dd90a0ee8eeb92976a1c479}{Mib\+Object} $\ast$object, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{mib__common_8h_a5d78f42b3545deb9bbd305138506c7a7}{oid}, size\+\_\+t oid\+Len, \hyperlink{mib__common_8h_a515b369f80863becb3a17870e6bb7a80}{Mib\+Variant} $\ast$\hyperlink{chap_8h_adfa040d04d16520129a735fff8fb1628}{value}, size\+\_\+t $\ast$value\+Len)
+\begin{DoxyCompactList}\small\item\em Get if\+Rcv\+Address\+Entry object value. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{if__mib__impl_8c_a374924c8c4a6887079907dc137886001}{if\+Mib\+Get\+Next\+If\+Rcv\+Address\+Entry} (const \hyperlink{mib__common_8h_a2bc33cee6dd90a0ee8eeb92976a1c479}{Mib\+Object} $\ast$object, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{mib__common_8h_a5d78f42b3545deb9bbd305138506c7a7}{oid}, size\+\_\+t oid\+Len, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$next\+Oid, size\+\_\+t $\ast$next\+Oid\+Len)
+\begin{DoxyCompactList}\small\item\em Get next if\+Rcv\+Address\+Entry object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Interfaces Group M\+IB module implementation. 
+
+\hypertarget{pic32mz__ef__curiosity_8h_License}{}\subsection{License}\label{pic32mz__ef__curiosity_8h_License}
+S\+P\+D\+X-\/\+License-\/\+Identifier\+: G\+P\+L-\/2.\+0-\/or-\/later
+
+Copyright (C) 2010-\/2019 Oryx Embedded S\+A\+RL. All rights reserved.
+
+This file is part of Cyclone\+T\+CP Open.
+
+This program is free software; you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+
+You should have received a copy of the G\+NU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-\/1301, U\+SA.
+
+\begin{DoxyAuthor}{Author}
+Oryx Embedded S\+A\+RL (www.\+oryx-\/embedded.\+com) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+9.\+6 
+\end{DoxyVersion}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{if__mib__impl_8c_afcdf5e66fd927a7f4cc64295acd20407}\label{if__mib__impl_8c_afcdf5e66fd927a7f4cc64295acd20407}} 
+\index{if\+\_\+mib\+\_\+impl.\+c@{if\+\_\+mib\+\_\+impl.\+c}!T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+\index{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}!if\+\_\+mib\+\_\+impl.\+c@{if\+\_\+mib\+\_\+impl.\+c}}
+\subsubsection{\texorpdfstring{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}{TRACE\_LEVEL}}
+{\footnotesize\ttfamily \#define T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL~\hyperlink{net__config_8h_af5cf34762d7114743a58dd8a05289bd9}{S\+N\+M\+P\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+
+
+
+Definition at line 32 of file if\+\_\+mib\+\_\+impl.\+c.
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{if__mib__impl_8c_a3fc6d830cd4336b48e9477d1caac8817}\label{if__mib__impl_8c_a3fc6d830cd4336b48e9477d1caac8817}} 
+\index{if\+\_\+mib\+\_\+impl.\+c@{if\+\_\+mib\+\_\+impl.\+c}!if\+Mib\+Get\+If\+Entry@{if\+Mib\+Get\+If\+Entry}}
+\index{if\+Mib\+Get\+If\+Entry@{if\+Mib\+Get\+If\+Entry}!if\+\_\+mib\+\_\+impl.\+c@{if\+\_\+mib\+\_\+impl.\+c}}
+\subsubsection{\texorpdfstring{if\+Mib\+Get\+If\+Entry()}{ifMibGetIfEntry()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} if\+Mib\+Get\+If\+Entry (\begin{DoxyParamCaption}\item[{const \hyperlink{mib__common_8h_a2bc33cee6dd90a0ee8eeb92976a1c479}{Mib\+Object} $\ast$}]{object,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{oid,  }\item[{size\+\_\+t}]{oid\+Len,  }\item[{\hyperlink{mib__common_8h_a515b369f80863becb3a17870e6bb7a80}{Mib\+Variant} $\ast$}]{value,  }\item[{size\+\_\+t $\ast$}]{value\+Len }\end{DoxyParamCaption})}
+
+
+
+Get if\+Entry object value. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em object} & Pointer to the M\+IB object descriptor \\
+\hline
+\mbox{\tt in}  & {\em oid} & Object identifier (object name and instance identifier) \\
+\hline
+\mbox{\tt in}  & {\em oid\+Len} & Length of the O\+ID, in bytes \\
+\hline
+\mbox{\tt out}  & {\em value} & Object value \\
+\hline
+\mbox{\tt in,out}  & {\em value\+Len} & Length of the object value, in bytes \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 112 of file if\+\_\+mib\+\_\+impl.\+c.
+
+
+\begin{DoxyCode}
+114 \{
+115    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+116    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+117    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} index;
+118    \hyperlink{structIfMibIfEntry}{IfMibIfEntry} *entry;
+119    \hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{NetInterface} *interface;
+120    \hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{NetInterface} *logicalInterface;
+121    \hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{NetInterface} *physicalInterface;
+122 
+123    \textcolor{comment}{//Point to the instance identifier}
+124    n = \textcolor{keywordtype}{object}->oidLen;
+125 
+126    \textcolor{comment}{//ifIndex is used as instance identifier}
+127    error = \hyperlink{mib__common_8c_a87f69547e6c08947fd243a6a82ca6672}{mibDecodeIndex}(\hyperlink{mib__common_8h_a5d78f42b3545deb9bbd305138506c7a7}{oid}, oidLen, &n, &index);
+128    \textcolor{comment}{//Invalid instance identifier?}
+129    \textcolor{keywordflow}{if}(error)
+130       \textcolor{keywordflow}{return} error;
+131 
+132    \textcolor{comment}{//Sanity check}
+133    \textcolor{keywordflow}{if}(n != oidLen)
+134       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca805a80fe68633921ca43149789f4c3eb}{ERROR\_INSTANCE\_NOT\_FOUND};
+135 
+136    \textcolor{comment}{//Check index range}
+137    \textcolor{keywordflow}{if}(index < 1 || index > \hyperlink{net_8h_a116f850ebcb023ffa3e6b8de10c5cb35}{NET\_INTERFACE\_COUNT})
+138       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca805a80fe68633921ca43149789f4c3eb}{ERROR\_INSTANCE\_NOT\_FOUND};
+139 
+140    \textcolor{comment}{//Point to the underlying interface}
+141    \textcolor{keyword}{interface }= &\hyperlink{net_8c_a7ecafab0039ec54d1d7a1e9e7402379b}{netInterface}[index - 1];
+142    \textcolor{comment}{//Point to the interface table entry}
+143    entry = &\hyperlink{if__mib__module_8c_a033f024ad081eac6325745f7d8317af1}{ifMibBase}.\hyperlink{structIfMibBase_a68d4daf12c07778493a7018d4f495252}{ifTable}[index - 1];
+144 
+145    \textcolor{comment}{//Point to the logical interface}
+146    logicalInterface = \hyperlink{nic_8c_a650d776d6513c3bb88671c3aedd782f0}{nicGetLogicalInterface}(interface);
+147    \textcolor{comment}{//Point to the physical interface}
+148    physicalInterface = \hyperlink{nic_8c_aa8f48265895dab1633056c2dcd796355}{nicGetPhysicalInterface}(interface);
+149 
+150    \textcolor{comment}{//ifIndex object?}
+151    \textcolor{keywordflow}{if}(!strcmp(object->name, \textcolor{stringliteral}{"ifIndex"}))
+152    \{
+153       \textcolor{comment}{//Get object value}
+154       \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->integer = index;
+155    \}
+156    \textcolor{comment}{//ifDescr object?}
+157    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!strcmp(object->name, \textcolor{stringliteral}{"ifDescr"}))
+158    \{
+159       \textcolor{comment}{//Retrieve the length of the interface name}
+160       n = strlen(interface->name);
+161 
+162       \textcolor{comment}{//Make sure the buffer is large enough to hold the entire object}
+163       \textcolor{keywordflow}{if}(*valueLen >= n)
+164       \{
+165          \textcolor{comment}{//Copy object value}
+166          memcpy(\hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->octetString, interface->name, n);
+167          \textcolor{comment}{//Return object length}
+168          *valueLen = \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+169       \}
+170       \textcolor{keywordflow}{else}
+171       \{
+172          \textcolor{comment}{//Report an error}
+173          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf3f6e48b0cfaea7cac34f4223cd8a57}{ERROR\_BUFFER\_OVERFLOW};
+174       \}
+175    \}
+176    \textcolor{comment}{//ifType object?}
+177    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!strcmp(object->name, \textcolor{stringliteral}{"ifType"}))
+178    \{
+179 \textcolor{preprocessor}{#if (ETH\_VLAN\_SUPPORT == ENABLED)}
+180       \textcolor{comment}{//VLAN interface?}
+181       \textcolor{keywordflow}{if}(interface->vlanId != 0)
+182       \{
+183          \textcolor{comment}{//Layer 2 virtual LAN using 802.1Q}
+184          \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->integer = \hyperlink{if__mib__module_8h_a8e53f24d29ec4223259e4c2e2a5a510da23eca7ba65f9b9fdb1491e4b8190105a}{IF\_MIB\_IF\_TYPE\_L2\_VLAN};
+185       \}
+186       \textcolor{keywordflow}{else}
+187 \textcolor{preprocessor}{#endif}
+188       \{
+189          \textcolor{comment}{//Sanity check}
+190          \textcolor{keywordflow}{if}(physicalInterface->nicDriver != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+191          \{
+192             \textcolor{comment}{//Get interface type}
+193             \textcolor{keywordflow}{switch}(physicalInterface->nicDriver->type)
+194             \{
+195             \textcolor{comment}{//Ethernet interface}
+196             \textcolor{keywordflow}{case} \hyperlink{nic_8h_ac1ce8659a9797513ecd9cc1afedce40ba84802cab6ee937691c3d76122ffaffcd}{NIC\_TYPE\_ETHERNET}:
+197                \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->integer = \hyperlink{if__mib__module_8h_a8e53f24d29ec4223259e4c2e2a5a510da26fa80d181f91a3cec234eb92af207c0}{IF\_MIB\_IF\_TYPE\_ETHERNET\_CSMACD};
+198                \textcolor{keywordflow}{break};
+199             \textcolor{comment}{//PPP interface}
+200             \textcolor{keywordflow}{case} \hyperlink{nic_8h_ac1ce8659a9797513ecd9cc1afedce40bafe21fcd3851e27a8b4ac8f6ea0a692df}{NIC\_TYPE\_PPP}:
+201                \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->integer = \hyperlink{if__mib__module_8h_a8e53f24d29ec4223259e4c2e2a5a510da8ec0877c5bbd859a132cc637b1686453}{IF\_MIB\_IF\_TYPE\_PPP};
+202                \textcolor{keywordflow}{break};
+203             \textcolor{comment}{//IEEE 802.15.4 WPAN interface}
+204             \textcolor{keywordflow}{case} \hyperlink{nic_8h_ac1ce8659a9797513ecd9cc1afedce40ba5b85ff07103ab20b9b081b4b263619ea}{NIC\_TYPE\_6LOWPAN}:
+205                \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->integer = \hyperlink{if__mib__module_8h_a8e53f24d29ec4223259e4c2e2a5a510dae959967fe4ae7caa34e0a1ae9f821547}{IF\_MIB\_IF\_TYPE\_IEEE\_802\_15\_4};
+206                \textcolor{keywordflow}{break};
+207             \textcolor{comment}{//Unknown interface type}
+208             \textcolor{keywordflow}{default}:
+209                \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->integer = \hyperlink{if__mib__module_8h_a8e53f24d29ec4223259e4c2e2a5a510daf687478fbc41e30bc5077678fe90d7d9}{IF\_MIB\_IF\_TYPE\_OTHER};
+210                \textcolor{keywordflow}{break};
+211             \}
+212          \}
+213          \textcolor{keywordflow}{else}
+214          \{
+215             \textcolor{comment}{//Unknown interface type}
+216             \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->integer = \hyperlink{if__mib__module_8h_a8e53f24d29ec4223259e4c2e2a5a510daf687478fbc41e30bc5077678fe90d7d9}{IF\_MIB\_IF\_TYPE\_OTHER};
+217          \}
+218       \}
+219    \}
+220    \textcolor{comment}{//ifMtu object?}
+221    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!strcmp(object->name, \textcolor{stringliteral}{"ifMtu"}))
+222    \{
+223       \textcolor{comment}{//Get interface MTU}
+224       \textcolor{keywordflow}{if}(physicalInterface->nicDriver != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+225          \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->integer = physicalInterface->nicDriver->mtu;
+226       \textcolor{keywordflow}{else}
+227          \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->integer = 0;
+228    \}
+229    \textcolor{comment}{//ifSpeed object?}
+230    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!strcmp(object->name, \textcolor{stringliteral}{"ifSpeed"}))
+231    \{
+232       \textcolor{comment}{//Get interface's current bandwidth}
+233       \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->gauge32 = interface->linkSpeed;
+234    \}
+235    \textcolor{comment}{//ifPhysAddress object?}
+236    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!strcmp(object->name, \textcolor{stringliteral}{"ifPhysAddress"}))
+237    \{
+238       \textcolor{comment}{//Make sure the buffer is large enough to hold the entire object}
+239       \textcolor{keywordflow}{if}(*valueLen >= \textcolor{keyword}{sizeof}(\hyperlink{ethernet_8h_a1e00ed3977e8a770e8b4ae4cb306d1c0}{MacAddr}))
+240       \{
+241          \textcolor{comment}{//Copy object value}
+242          \hyperlink{ethernet_8h_aa0ca7dc72f1ca81fabcc0aeeafb0d465}{macCopyAddr}(\hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->octetString, &logicalInterface->macAddr);
+243          \textcolor{comment}{//Return object length}
+244          *valueLen = \textcolor{keyword}{sizeof}(\hyperlink{ethernet_8h_a1e00ed3977e8a770e8b4ae4cb306d1c0}{MacAddr});
+245       \}
+246       \textcolor{keywordflow}{else}
+247       \{
+248          \textcolor{comment}{//Report an error}
+249          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf3f6e48b0cfaea7cac34f4223cd8a57}{ERROR\_BUFFER\_OVERFLOW};
+250       \}
+251    \}
+252    \textcolor{comment}{//ifAdminStatus object?}
+253    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!strcmp(object->name, \textcolor{stringliteral}{"ifAdminStatus"}))
+254    \{
+255       \textcolor{comment}{//Check whether the interface is enabled for operation}
+256       \textcolor{keywordflow}{if}(physicalInterface->nicDriver != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+257          \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->integer = \hyperlink{if__mib__module_8h_a1c123932da02b17be5ab24e22252dadbac4fdde84a2decf7f6bc47f89ccc39b1f}{IF\_MIB\_IF\_ADMIN\_STATUS\_UP};
+258       \textcolor{keywordflow}{else}
+259          \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->integer = \hyperlink{if__mib__module_8h_a1c123932da02b17be5ab24e22252dadba5b2fbb34a3dd2a7230d745466f972dfa}{IF\_MIB\_IF\_ADMIN\_STATUS\_DOWN};
+260    \}
+261    \textcolor{comment}{//ifOperStatus object?}
+262    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!strcmp(object->name, \textcolor{stringliteral}{"ifOperStatus"}))
+263    \{
+264       \textcolor{comment}{//Get the current operational state of the interface}
+265       \textcolor{keywordflow}{if}(interface->linkState)
+266          \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->integer = \hyperlink{if__mib__module_8h_a894ac88a8edfbf6040457bbb098e303cacc20da6240cd377d728ebbf919db76f7}{IF\_MIB\_IF\_OPER\_STATUS\_UP};
+267       \textcolor{keywordflow}{else}
+268          \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->integer = \hyperlink{if__mib__module_8h_a894ac88a8edfbf6040457bbb098e303cac9079adf04e7d83aa0ab7143618f89a1}{IF\_MIB\_IF\_OPER\_STATUS\_DOWN};
+269    \}
+270    \textcolor{comment}{//ifLastChange object?}
+271    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!strcmp(object->name, \textcolor{stringliteral}{"ifLastChange"}))
+272    \{
+273       \textcolor{comment}{//Get object value}
+274       \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->timeTicks = entry->\hyperlink{structIfMibIfEntry_a3f8edc50f37f29cbbfb4664010df7ba9}{ifLastChange};
+275    \}
+276    \textcolor{comment}{//ifInOctets object?}
+277    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!strcmp(object->name, \textcolor{stringliteral}{"ifInOctets"}))
+278    \{
+279       \textcolor{comment}{//Get object value}
+280       \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->counter32 = entry->\hyperlink{structIfMibIfEntry_a5648d4f845dd71b19056524184c68ee5}{ifInOctets};
+281    \}
+282    \textcolor{comment}{//ifInUcastPkts object?}
+283    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!strcmp(object->name, \textcolor{stringliteral}{"ifInUcastPkts"}))
+284    \{
+285       \textcolor{comment}{//Get object value}
+286       \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->counter32 = entry->\hyperlink{structIfMibIfEntry_a7e9081beb20cde7e344ad3002afcc769}{ifInUcastPkts};
+287    \}
+288    \textcolor{comment}{//ifInDiscards object?}
+289    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!strcmp(object->name, \textcolor{stringliteral}{"ifInDiscards"}))
+290    \{
+291       \textcolor{comment}{//Get object value}
+292       \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->counter32 = entry->\hyperlink{structIfMibIfEntry_af87be9e678bf819eae6d9b71748811db}{ifInDiscards};
+293    \}
+294    \textcolor{comment}{//ifInErrors object?}
+295    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!strcmp(object->name, \textcolor{stringliteral}{"ifInErrors"}))
+296    \{
+297       \textcolor{comment}{//Get object value}
+298       \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->counter32 = entry->\hyperlink{structIfMibIfEntry_ab1f9925512bfa34b85b5258c56d1307e}{ifInErrors};
+299    \}
+300    \textcolor{comment}{//ifInUnknownProtos object?}
+301    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!strcmp(object->name, \textcolor{stringliteral}{"ifInUnknownProtos"}))
+302    \{
+303       \textcolor{comment}{//Get object value}
+304       \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->counter32 = entry->\hyperlink{structIfMibIfEntry_a07ee897158eb93cfb25512c6eff13369}{ifInUnknownProtos};
+305    \}
+306    \textcolor{comment}{//ifOutOctets object?}
+307    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!strcmp(object->name, \textcolor{stringliteral}{"ifOutOctets"}))
+308    \{
+309       \textcolor{comment}{//Get object value}
+310       \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->counter32 = entry->\hyperlink{structIfMibIfEntry_a84ccab237960cd7e7bc3f5b39bd88071}{ifOutOctets};
+311    \}
+312    \textcolor{comment}{//ifOutUcastPkts object?}
+313    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!strcmp(object->name, \textcolor{stringliteral}{"ifOutUcastPkts"}))
+314    \{
+315       \textcolor{comment}{//Get object value}
+316       \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->counter32 = entry->\hyperlink{structIfMibIfEntry_aacaaf6c959c48cd89cb423930b2fe300}{ifOutUcastPkts};
+317    \}
+318    \textcolor{comment}{//ifOutDiscards object?}
+319    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!strcmp(object->name, \textcolor{stringliteral}{"ifOutDiscards"}))
+320    \{
+321       \textcolor{comment}{//Get object value}
+322       \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->counter32 = entry->\hyperlink{structIfMibIfEntry_a513b1816145273f0a8c76ed0aa632e8e}{ifOutDiscards};
+323    \}
+324    \textcolor{comment}{//ifOutErrors object?}
+325    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!strcmp(object->name, \textcolor{stringliteral}{"ifOutErrors"}))
+326    \{
+327       \textcolor{comment}{//Get object value}
+328       \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->counter32 = entry->\hyperlink{structIfMibIfEntry_a6e2a5f25673dd66c56c63972f57bf2dd}{ifOutErrors};
+329    \}
+330    \textcolor{comment}{//Unknown object?}
+331    \textcolor{keywordflow}{else}
+332    \{
+333       \textcolor{comment}{//The specified object does not exist}
+334       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca7c3779a9c0fe7d65f66367f176dee6d7}{ERROR\_OBJECT\_NOT\_FOUND};
+335    \}
+336 
+337    \textcolor{comment}{//Return status code}
+338    \textcolor{keywordflow}{return} error;
+339 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{if__mib__impl_8c_afa8166aa019734dee39b512b5fbf7e92}\label{if__mib__impl_8c_afa8166aa019734dee39b512b5fbf7e92}} 
+\index{if\+\_\+mib\+\_\+impl.\+c@{if\+\_\+mib\+\_\+impl.\+c}!if\+Mib\+Get\+If\+Rcv\+Address\+Entry@{if\+Mib\+Get\+If\+Rcv\+Address\+Entry}}
+\index{if\+Mib\+Get\+If\+Rcv\+Address\+Entry@{if\+Mib\+Get\+If\+Rcv\+Address\+Entry}!if\+\_\+mib\+\_\+impl.\+c@{if\+\_\+mib\+\_\+impl.\+c}}
+\subsubsection{\texorpdfstring{if\+Mib\+Get\+If\+Rcv\+Address\+Entry()}{ifMibGetIfRcvAddressEntry()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} if\+Mib\+Get\+If\+Rcv\+Address\+Entry (\begin{DoxyParamCaption}\item[{const \hyperlink{mib__common_8h_a2bc33cee6dd90a0ee8eeb92976a1c479}{Mib\+Object} $\ast$}]{object,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{oid,  }\item[{size\+\_\+t}]{oid\+Len,  }\item[{\hyperlink{mib__common_8h_a515b369f80863becb3a17870e6bb7a80}{Mib\+Variant} $\ast$}]{value,  }\item[{size\+\_\+t $\ast$}]{value\+Len }\end{DoxyParamCaption})}
+
+
+
+Get if\+Rcv\+Address\+Entry object value. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em object} & Pointer to the M\+IB object descriptor \\
+\hline
+\mbox{\tt in}  & {\em oid} & Object identifier (object name and instance identifier) \\
+\hline
+\mbox{\tt in}  & {\em oid\+Len} & Length of the O\+ID, in bytes \\
+\hline
+\mbox{\tt out}  & {\em value} & Object value \\
+\hline
+\mbox{\tt in,out}  & {\em value\+Len} & Length of the object value, in bytes \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 849 of file if\+\_\+mib\+\_\+impl.\+c.
+
+
+\begin{DoxyCode}
+851 \{
+852    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+853    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+854    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+855    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} index;
+856    \hyperlink{ethernet_8h_a1e00ed3977e8a770e8b4ae4cb306d1c0}{MacAddr} macAddr;
+857    \hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{NetInterface} *interface;
+858    \hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{NetInterface} *logicalInterface;
+859 
+860    \textcolor{comment}{//Point to the instance identifier}
+861    n = \textcolor{keywordtype}{object}->oidLen;
+862 
+863    \textcolor{comment}{//ifIndex is used as 1st instance identifier}
+864    error = \hyperlink{mib__common_8c_a87f69547e6c08947fd243a6a82ca6672}{mibDecodeIndex}(\hyperlink{mib__common_8h_a5d78f42b3545deb9bbd305138506c7a7}{oid}, oidLen, &n, &index);
+865    \textcolor{comment}{//Invalid instance identifier?}
+866    \textcolor{keywordflow}{if}(error)
+867       \textcolor{keywordflow}{return} error;
+868 
+869    \textcolor{comment}{//ifRcvAddressAddress is used as 2nd instance identifier}
+870    error = \hyperlink{mib__common_8c_a238155867951aef7bc7330ee4e6b00b4}{mibDecodeMacAddr}(\hyperlink{mib__common_8h_a5d78f42b3545deb9bbd305138506c7a7}{oid}, oidLen, &n, &macAddr);
+871    \textcolor{comment}{//Invalid instance identifier?}
+872    \textcolor{keywordflow}{if}(error)
+873       \textcolor{keywordflow}{return} error;
+874 
+875    \textcolor{comment}{//Sanity check}
+876    \textcolor{keywordflow}{if}(n != oidLen)
+877       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca805a80fe68633921ca43149789f4c3eb}{ERROR\_INSTANCE\_NOT\_FOUND};
+878 
+879    \textcolor{comment}{//Check index range}
+880    \textcolor{keywordflow}{if}(index < 1 || index > \hyperlink{net_8h_a116f850ebcb023ffa3e6b8de10c5cb35}{NET\_INTERFACE\_COUNT})
+881       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca805a80fe68633921ca43149789f4c3eb}{ERROR\_INSTANCE\_NOT\_FOUND};
+882 
+883    \textcolor{comment}{//Point to the underlying interface}
+884    \textcolor{keyword}{interface }= &\hyperlink{net_8c_a7ecafab0039ec54d1d7a1e9e7402379b}{netInterface}[index - 1];
+885    \textcolor{comment}{//Point to the logical interface}
+886    logicalInterface = \hyperlink{nic_8c_a650d776d6513c3bb88671c3aedd782f0}{nicGetLogicalInterface}(interface);
+887 
+888    \textcolor{comment}{//Initialize status code}
+889    error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca805a80fe68633921ca43149789f4c3eb}{ERROR\_INSTANCE\_NOT\_FOUND};
+890 
+891    \textcolor{comment}{//Interface MAC address?}
+892    \textcolor{keywordflow}{if}(\hyperlink{ethernet_8h_a800d9f928930baf027e925976c44b9b2}{macCompAddr}(&macAddr, &logicalInterface->macAddr))
+893    \{
+894       \textcolor{comment}{//The MAC address is acceptable}
+895       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+896    \}
+897    \textcolor{comment}{//Broadcast address?}
+898    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(\hyperlink{ethernet_8h_a800d9f928930baf027e925976c44b9b2}{macCompAddr}(&macAddr, &\hyperlink{ethernet_8c_ae1313f9f72de49c713dea514e09ae0e3}{MAC\_BROADCAST\_ADDR}))
+899    \{
+900       \textcolor{comment}{//The MAC address is acceptable}
+901       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+902    \}
+903    \textcolor{comment}{//Multicast address?}
+904    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(\hyperlink{ethernet_8h_a039998d9b03dc52280cda15b57d88cb3}{macIsMulticastAddr}(&macAddr))
+905    \{
+906       \textcolor{comment}{//Go through the MAC filter table}
+907       \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{ethernet_8h_ab64acae68b5723774fa272c62efd7c2b}{MAC\_ADDR\_FILTER\_SIZE}; i++)
+908       \{
+909          \textcolor{comment}{//Valid entry?}
+910          \textcolor{keywordflow}{if}(interface->macAddrFilter[i].refCount > 0)
+911          \{
+912             \textcolor{comment}{//Check whether the MAC address matches a relevant multicast address}
+913             \textcolor{keywordflow}{if}(\hyperlink{ethernet_8h_a800d9f928930baf027e925976c44b9b2}{macCompAddr}(&macAddr, &interface->macAddrFilter[i].addr))
+914             \{
+915                \textcolor{comment}{//The MAC address is acceptable}
+916                error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+917             \}
+918          \}
+919       \}
+920    \}
+921 
+922    \textcolor{comment}{//Check whether the MAC address is acceptable}
+923    \textcolor{keywordflow}{if}(!error)
+924    \{
+925       \textcolor{comment}{//ifRcvAddressStatus object?}
+926       \textcolor{keywordflow}{if}(!strcmp(object->name, \textcolor{stringliteral}{"ifRcvAddressStatus"}))
+927       \{
+928          \textcolor{comment}{//Get object value}
+929          \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->integer = \hyperlink{mib__common_8h_a40ce1ea958f5c3b04f841d76f5557097a438de565ef13d128f16f420284316088}{MIB\_ROW\_STATUS\_ACTIVE};
+930       \}
+931       \textcolor{comment}{//ifRcvAddressType object?}
+932       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!strcmp(object->name, \textcolor{stringliteral}{"ifRcvAddressType"}))
+933       \{
+934          \textcolor{comment}{//Get object value}
+935          \textcolor{keywordflow}{if}(\hyperlink{ethernet_8h_a800d9f928930baf027e925976c44b9b2}{macCompAddr}(&macAddr, &logicalInterface->macAddr) ||
+936             \hyperlink{ethernet_8h_a800d9f928930baf027e925976c44b9b2}{macCompAddr}(&macAddr, &\hyperlink{ethernet_8c_ae1313f9f72de49c713dea514e09ae0e3}{MAC\_BROADCAST\_ADDR}))
+937          \{
+938             \textcolor{comment}{//The entry is not volatile}
+939             \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->integer = \hyperlink{if__mib__module_8h_a766e334a98dbf51d3109cdcfac24b05ea09903e7a36b790f9e8f476115e8b80cb}{IF\_MIB\_RCV\_ADDRESS\_TYPE\_NON\_VOLATILE};
+940          \}
+941          \textcolor{keywordflow}{else}
+942          \{
+943             \textcolor{comment}{//The entry is volatile}
+944             \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->integer = \hyperlink{if__mib__module_8h_a766e334a98dbf51d3109cdcfac24b05ea33539b8dfd804a9e1ad3aa9ec897a7b1}{IF\_MIB\_RCV\_ADDRESS\_TYPE\_VOLATILE};
+945          \}
+946       \}
+947       \textcolor{comment}{//Unknown object?}
+948       \textcolor{keywordflow}{else}
+949       \{
+950          \textcolor{comment}{//The specified object does not exist}
+951          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca7c3779a9c0fe7d65f66367f176dee6d7}{ERROR\_OBJECT\_NOT\_FOUND};
+952       \}
+953    \}
+954 
+955    \textcolor{comment}{//Return status code}
+956    \textcolor{keywordflow}{return} error;
+957 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{if__mib__impl_8c_a8d6113fc62f73781b285d23132449862}\label{if__mib__impl_8c_a8d6113fc62f73781b285d23132449862}} 
+\index{if\+\_\+mib\+\_\+impl.\+c@{if\+\_\+mib\+\_\+impl.\+c}!if\+Mib\+Get\+If\+Stack\+Entry@{if\+Mib\+Get\+If\+Stack\+Entry}}
+\index{if\+Mib\+Get\+If\+Stack\+Entry@{if\+Mib\+Get\+If\+Stack\+Entry}!if\+\_\+mib\+\_\+impl.\+c@{if\+\_\+mib\+\_\+impl.\+c}}
+\subsubsection{\texorpdfstring{if\+Mib\+Get\+If\+Stack\+Entry()}{ifMibGetIfStackEntry()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} if\+Mib\+Get\+If\+Stack\+Entry (\begin{DoxyParamCaption}\item[{const \hyperlink{mib__common_8h_a2bc33cee6dd90a0ee8eeb92976a1c479}{Mib\+Object} $\ast$}]{object,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{oid,  }\item[{size\+\_\+t}]{oid\+Len,  }\item[{\hyperlink{mib__common_8h_a515b369f80863becb3a17870e6bb7a80}{Mib\+Variant} $\ast$}]{value,  }\item[{size\+\_\+t $\ast$}]{value\+Len }\end{DoxyParamCaption})}
+
+
+
+Get if\+Stack\+Entry object value. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em object} & Pointer to the M\+IB object descriptor \\
+\hline
+\mbox{\tt in}  & {\em oid} & Object identifier (object name and instance identifier) \\
+\hline
+\mbox{\tt in}  & {\em oid\+Len} & Length of the O\+ID, in bytes \\
+\hline
+\mbox{\tt out}  & {\em value} & Object value \\
+\hline
+\mbox{\tt in,out}  & {\em value\+Len} & Length of the object value, in bytes \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 680 of file if\+\_\+mib\+\_\+impl.\+c.
+
+
+\begin{DoxyCode}
+682 \{
+683    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+684    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+685    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} index;
+686    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} higherLayer;
+687    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} lowerLayer;
+688 
+689    \textcolor{comment}{//Point to the instance identifier}
+690    n = \textcolor{keywordtype}{object}->oidLen;
+691 
+692    \textcolor{comment}{//ifStackHigherLayer is used as 1st instance identifier}
+693    error = \hyperlink{mib__common_8c_a87f69547e6c08947fd243a6a82ca6672}{mibDecodeIndex}(\hyperlink{mib__common_8h_a5d78f42b3545deb9bbd305138506c7a7}{oid}, oidLen, &n, &higherLayer);
+694    \textcolor{comment}{//Invalid instance identifier?}
+695    \textcolor{keywordflow}{if}(error)
+696       \textcolor{keywordflow}{return} error;
+697 
+698    \textcolor{comment}{//ifStackLowerLayer is used as 2nd instance identifier}
+699    error = \hyperlink{mib__common_8c_a87f69547e6c08947fd243a6a82ca6672}{mibDecodeIndex}(\hyperlink{mib__common_8h_a5d78f42b3545deb9bbd305138506c7a7}{oid}, oidLen, &n, &lowerLayer);
+700    \textcolor{comment}{//Invalid instance identifier?}
+701    \textcolor{keywordflow}{if}(error)
+702       \textcolor{keywordflow}{return} error;
+703 
+704    \textcolor{comment}{//Sanity check}
+705    \textcolor{keywordflow}{if}(n != oidLen)
+706       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca805a80fe68633921ca43149789f4c3eb}{ERROR\_INSTANCE\_NOT\_FOUND};
+707 
+708    \textcolor{comment}{//Loop through network interfaces}
+709    \textcolor{keywordflow}{for}(index = 1; index <= \hyperlink{net_8h_a116f850ebcb023ffa3e6b8de10c5cb35}{NET\_INTERFACE\_COUNT}; index++)
+710    \{
+711       \textcolor{comment}{//Check higher and lower sub-layers}
+712       \textcolor{keywordflow}{if}(higherLayer == 0 && lowerLayer == index)
+713          \textcolor{keywordflow}{break};
+714       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(higherLayer == index && lowerLayer == 0)
+715          \textcolor{keywordflow}{break};
+716    \}
+717 
+718    \textcolor{comment}{//No matching interface?}
+719    \textcolor{keywordflow}{if}(index > \hyperlink{net_8h_a116f850ebcb023ffa3e6b8de10c5cb35}{NET\_INTERFACE\_COUNT})
+720       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca805a80fe68633921ca43149789f4c3eb}{ERROR\_INSTANCE\_NOT\_FOUND};
+721 
+722    \textcolor{comment}{//ifStackStatus object?}
+723    \textcolor{keywordflow}{if}(!strcmp(object->name, \textcolor{stringliteral}{"ifStackStatus"}))
+724    \{
+725       \textcolor{comment}{//status of the relationship between the two sub-layers}
+726       \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->integer = \hyperlink{mib__common_8h_a40ce1ea958f5c3b04f841d76f5557097a438de565ef13d128f16f420284316088}{MIB\_ROW\_STATUS\_ACTIVE};
+727    \}
+728    \textcolor{comment}{//Unknown object?}
+729    \textcolor{keywordflow}{else}
+730    \{
+731       \textcolor{comment}{//The specified object does not exist}
+732       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca7c3779a9c0fe7d65f66367f176dee6d7}{ERROR\_OBJECT\_NOT\_FOUND};
+733    \}
+734 
+735    \textcolor{comment}{//Return status code}
+736    \textcolor{keywordflow}{return} error;
+737 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{if__mib__impl_8c_acc4ee9f2fd914b61dd3830570f1715bb}\label{if__mib__impl_8c_acc4ee9f2fd914b61dd3830570f1715bb}} 
+\index{if\+\_\+mib\+\_\+impl.\+c@{if\+\_\+mib\+\_\+impl.\+c}!if\+Mib\+Get\+If\+X\+Entry@{if\+Mib\+Get\+If\+X\+Entry}}
+\index{if\+Mib\+Get\+If\+X\+Entry@{if\+Mib\+Get\+If\+X\+Entry}!if\+\_\+mib\+\_\+impl.\+c@{if\+\_\+mib\+\_\+impl.\+c}}
+\subsubsection{\texorpdfstring{if\+Mib\+Get\+If\+X\+Entry()}{ifMibGetIfXEntry()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} if\+Mib\+Get\+If\+X\+Entry (\begin{DoxyParamCaption}\item[{const \hyperlink{mib__common_8h_a2bc33cee6dd90a0ee8eeb92976a1c479}{Mib\+Object} $\ast$}]{object,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{oid,  }\item[{size\+\_\+t}]{oid\+Len,  }\item[{\hyperlink{mib__common_8h_a515b369f80863becb3a17870e6bb7a80}{Mib\+Variant} $\ast$}]{value,  }\item[{size\+\_\+t $\ast$}]{value\+Len }\end{DoxyParamCaption})}
+
+
+
+Get if\+X\+Entry object value. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em object} & Pointer to the M\+IB object descriptor \\
+\hline
+\mbox{\tt in}  & {\em oid} & Object identifier (object name and instance identifier) \\
+\hline
+\mbox{\tt in}  & {\em oid\+Len} & Length of the O\+ID, in bytes \\
+\hline
+\mbox{\tt out}  & {\em value} & Object value \\
+\hline
+\mbox{\tt in,out}  & {\em value\+Len} & Length of the object value, in bytes \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 425 of file if\+\_\+mib\+\_\+impl.\+c.
+
+
+\begin{DoxyCode}
+427 \{
+428    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+429    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+430    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} index;
+431    \hyperlink{structIfMibIfXEntry}{IfMibIfXEntry} *entry;
+432    \hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{NetInterface} *interface;
+433 
+434    \textcolor{comment}{//Point to the instance identifier}
+435    n = \textcolor{keywordtype}{object}->oidLen;
+436 
+437    \textcolor{comment}{//ifIndex is used as instance identifier}
+438    error = \hyperlink{mib__common_8c_a87f69547e6c08947fd243a6a82ca6672}{mibDecodeIndex}(\hyperlink{mib__common_8h_a5d78f42b3545deb9bbd305138506c7a7}{oid}, oidLen, &n, &index);
+439    \textcolor{comment}{//Invalid instance identifier?}
+440    \textcolor{keywordflow}{if}(error)
+441       \textcolor{keywordflow}{return} error;
+442 
+443    \textcolor{comment}{//Sanity check}
+444    \textcolor{keywordflow}{if}(n != oidLen)
+445       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca805a80fe68633921ca43149789f4c3eb}{ERROR\_INSTANCE\_NOT\_FOUND};
+446 
+447    \textcolor{comment}{//Check index range}
+448    \textcolor{keywordflow}{if}(index < 1 || index > \hyperlink{net_8h_a116f850ebcb023ffa3e6b8de10c5cb35}{NET\_INTERFACE\_COUNT})
+449       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca805a80fe68633921ca43149789f4c3eb}{ERROR\_INSTANCE\_NOT\_FOUND};
+450 
+451    \textcolor{comment}{//Point to the underlying interface}
+452    \textcolor{keyword}{interface }= &\hyperlink{net_8c_a7ecafab0039ec54d1d7a1e9e7402379b}{netInterface}[index - 1];
+453    \textcolor{comment}{//Point to the interface table entry}
+454    entry = &\hyperlink{if__mib__module_8c_a033f024ad081eac6325745f7d8317af1}{ifMibBase}.\hyperlink{structIfMibBase_aa6225a41e399254043fd5a537cb30c81}{ifXTable}[index - 1];
+455 
+456    \textcolor{comment}{//ifName object?}
+457    \textcolor{keywordflow}{if}(!strcmp(object->name, \textcolor{stringliteral}{"ifName"}))
+458    \{
+459       \textcolor{comment}{//Retrieve the length of the interface name}
+460       n = strlen(interface->name);
+461 
+462       \textcolor{comment}{//Make sure the buffer is large enough to hold the entire object}
+463       \textcolor{keywordflow}{if}(*valueLen >= n)
+464       \{
+465          \textcolor{comment}{//Copy object value}
+466          memcpy(\hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->octetString, interface->name, n);
+467          \textcolor{comment}{//Return object length}
+468          *valueLen = \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+469       \}
+470       \textcolor{keywordflow}{else}
+471       \{
+472          \textcolor{comment}{//Report an error}
+473          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf3f6e48b0cfaea7cac34f4223cd8a57}{ERROR\_BUFFER\_OVERFLOW};
+474       \}
+475    \}
+476    \textcolor{comment}{//ifInMulticastPkts object?}
+477    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!strcmp(object->name, \textcolor{stringliteral}{"ifInMulticastPkts"}))
+478    \{
+479       \textcolor{comment}{//Get object value}
+480       \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->counter32 = entry->\hyperlink{structIfMibIfXEntry_ad90d04ca67b7492232fd63c969ae4215}{ifInMulticastPkts};
+481    \}
+482    \textcolor{comment}{//ifInBroadcastPkts object?}
+483    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!strcmp(object->name, \textcolor{stringliteral}{"ifInBroadcastPkts"}))
+484    \{
+485       \textcolor{comment}{//Get object value}
+486       \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->counter32 = entry->\hyperlink{structIfMibIfXEntry_aa5d2c35b733dc150d95a7685e7cca09b}{ifInBroadcastPkts};
+487    \}
+488    \textcolor{comment}{//ifOutMulticastPkts object?}
+489    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!strcmp(object->name, \textcolor{stringliteral}{"ifOutMulticastPkts"}))
+490    \{
+491       \textcolor{comment}{//Get object value}
+492       \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->counter32 = entry->\hyperlink{structIfMibIfXEntry_a59ddb219c11f99577537d7622e8e190c}{ifOutMulticastPkts};
+493    \}
+494    \textcolor{comment}{//ifOutBroadcastPkts object?}
+495    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!strcmp(object->name, \textcolor{stringliteral}{"ifOutBroadcastPkts"}))
+496    \{
+497       \textcolor{comment}{//Get object value}
+498       \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->counter32 = entry->\hyperlink{structIfMibIfXEntry_a87cd03861faad96d27e52fe60ddbc6f3}{ifOutBroadcastPkts};
+499    \}
+500    \textcolor{comment}{//ifHCInOctets object?}
+501    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!strcmp(object->name, \textcolor{stringliteral}{"ifHCInOctets"}))
+502    \{
+503       \textcolor{comment}{//Get object value}
+504       \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->counter64 = entry->\hyperlink{structIfMibIfXEntry_afd25a1b57b8b48f44976dceef150ddae}{ifHCInOctets};
+505    \}
+506    \textcolor{comment}{//ifHCInUcastPkts object?}
+507    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!strcmp(object->name, \textcolor{stringliteral}{"ifHCInUcastPkts"}))
+508    \{
+509       \textcolor{comment}{//Get object value}
+510       \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->counter64 = entry->\hyperlink{structIfMibIfXEntry_a5ec73ef683257906bcdaaa7a7768de22}{ifHCInUcastPkts};
+511    \}
+512    \textcolor{comment}{//ifHCInMulticastPkts object?}
+513    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!strcmp(object->name, \textcolor{stringliteral}{"ifHCInMulticastPkts"}))
+514    \{
+515       \textcolor{comment}{//Get object value}
+516       \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->counter64 = entry->\hyperlink{structIfMibIfXEntry_a4adc41437b9725f2150b07fb29dc76ec}{ifHCInMulticastPkts};
+517    \}
+518    \textcolor{comment}{//ifHCInBroadcastPkts object?}
+519    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!strcmp(object->name, \textcolor{stringliteral}{"ifHCInBroadcastPkts"}))
+520    \{
+521       \textcolor{comment}{//Get object value}
+522       \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->counter64 = entry->\hyperlink{structIfMibIfXEntry_a5194481da5fb7098cf5e78e5c6e7fb1e}{ifHCInBroadcastPkts};
+523    \}
+524    \textcolor{comment}{//ifHCOutOctets object?}
+525    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!strcmp(object->name, \textcolor{stringliteral}{"ifHCOutOctets"}))
+526    \{
+527       \textcolor{comment}{//Get object value}
+528       \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->counter64 = entry->\hyperlink{structIfMibIfXEntry_a289f09bab1c357e2ce00c9dbe1c94e20}{ifHCOutOctets};
+529    \}
+530    \textcolor{comment}{//ifHCOutUcastPkts object?}
+531    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!strcmp(object->name, \textcolor{stringliteral}{"ifHCOutUcastPkts"}))
+532    \{
+533       \textcolor{comment}{//Get object value}
+534       \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->counter64 = entry->\hyperlink{structIfMibIfXEntry_ac9f79792ea4eb605a0a68a2ecd8fd206}{ifHCOutUcastPkts};
+535    \}
+536    \textcolor{comment}{//ifHCOutMulticastPkts object?}
+537    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!strcmp(object->name, \textcolor{stringliteral}{"ifHCOutMulticastPkts"}))
+538    \{
+539       \textcolor{comment}{//Get object value}
+540       \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->counter64 = entry->\hyperlink{structIfMibIfXEntry_a8d3636e9c5083e1e40f63eb948e8a52b}{ifHCOutMulticastPkts};
+541    \}
+542    \textcolor{comment}{//ifHCOutBroadcastPkts object?}
+543    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!strcmp(object->name, \textcolor{stringliteral}{"ifHCOutBroadcastPkts"}))
+544    \{
+545       \textcolor{comment}{//Get object value}
+546       \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->counter64 = entry->\hyperlink{structIfMibIfXEntry_a6941cc526adb35d49f3110da4671cc43}{ifHCOutBroadcastPkts};
+547    \}
+548    \textcolor{comment}{//ifLinkUpDownTrapEnable object?}
+549    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!strcmp(object->name, \textcolor{stringliteral}{"ifLinkUpDownTrapEnable"}))
+550    \{
+551       \textcolor{comment}{//Get object value}
+552       \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->integer = entry->\hyperlink{structIfMibIfXEntry_a8083fbfc4f3dbc7846bc4bf14de32763}{ifLinkUpDownTrapEnable};
+553    \}
+554    \textcolor{comment}{//ifHighSpeed object?}
+555    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!strcmp(object->name, \textcolor{stringliteral}{"ifHighSpeed"}))
+556    \{
+557       \textcolor{comment}{//Get interface's current bandwidth}
+558       \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->gauge32 = interface->linkSpeed / 1000000;
+559    \}
+560    \textcolor{comment}{//ifPromiscuousMode object?}
+561    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!strcmp(object->name, \textcolor{stringliteral}{"ifPromiscuousMode"}))
+562    \{
+563       \textcolor{comment}{//Get object value}
+564       \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->integer = entry->\hyperlink{structIfMibIfXEntry_a2d8b6d9eb34768f204a4ab8921798aa4}{ifPromiscuousMode};
+565    \}
+566    \textcolor{comment}{//ifConnectorPresent object?}
+567    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!strcmp(object->name, \textcolor{stringliteral}{"ifConnectorPresent"}))
+568    \{
+569       \textcolor{comment}{//Get object value}
+570       \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->integer = entry->\hyperlink{structIfMibIfXEntry_aaa054ec79edc2fd779de985eac9d2549}{ifConnectorPresent};
+571    \}
+572    \textcolor{comment}{//ifAlias object?}
+573    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!strcmp(object->name, \textcolor{stringliteral}{"ifAlias"}))
+574    \{
+575       \textcolor{comment}{//On the first instantiation of an interface, the value of ifAlias}
+576       \textcolor{comment}{//associated with that interface is the zero-length string}
+577       *valueLen = 0;
+578    \}
+579    \textcolor{comment}{//ifCounterDiscontinuityTime object?}
+580    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!strcmp(object->name, \textcolor{stringliteral}{"ifCounterDiscontinuityTime"}))
+581    \{
+582       \textcolor{comment}{//Get object value}
+583       \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value}->timeTicks = 0;
+584    \}
+585    \textcolor{comment}{//Unknown object?}
+586    \textcolor{keywordflow}{else}
+587    \{
+588       \textcolor{comment}{//The specified object does not exist}
+589       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca7c3779a9c0fe7d65f66367f176dee6d7}{ERROR\_OBJECT\_NOT\_FOUND};
+590    \}
+591 
+592    \textcolor{comment}{//Return status code}
+593    \textcolor{keywordflow}{return} error;
+594 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{if__mib__impl_8c_a9b90d71f5788efd6e4fb3be895ae34dc}\label{if__mib__impl_8c_a9b90d71f5788efd6e4fb3be895ae34dc}} 
+\index{if\+\_\+mib\+\_\+impl.\+c@{if\+\_\+mib\+\_\+impl.\+c}!if\+Mib\+Get\+Next\+If\+Entry@{if\+Mib\+Get\+Next\+If\+Entry}}
+\index{if\+Mib\+Get\+Next\+If\+Entry@{if\+Mib\+Get\+Next\+If\+Entry}!if\+\_\+mib\+\_\+impl.\+c@{if\+\_\+mib\+\_\+impl.\+c}}
+\subsubsection{\texorpdfstring{if\+Mib\+Get\+Next\+If\+Entry()}{ifMibGetNextIfEntry()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} if\+Mib\+Get\+Next\+If\+Entry (\begin{DoxyParamCaption}\item[{const \hyperlink{mib__common_8h_a2bc33cee6dd90a0ee8eeb92976a1c479}{Mib\+Object} $\ast$}]{object,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{oid,  }\item[{size\+\_\+t}]{oid\+Len,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{next\+Oid,  }\item[{size\+\_\+t $\ast$}]{next\+Oid\+Len }\end{DoxyParamCaption})}
+
+
+
+Get next if\+Entry object. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em object} & Pointer to the M\+IB object descriptor \\
+\hline
+\mbox{\tt in}  & {\em oid} & Object identifier \\
+\hline
+\mbox{\tt in}  & {\em oid\+Len} & Length of the O\+ID, in bytes \\
+\hline
+\mbox{\tt out}  & {\em next\+Oid} & O\+ID of the next object in the M\+IB \\
+\hline
+\mbox{\tt out}  & {\em next\+Oid\+Len} & Length of the next object identifier, in bytes \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 352 of file if\+\_\+mib\+\_\+impl.\+c.
+
+
+\begin{DoxyCode}
+354 \{
+355    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+356    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+357    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} index;
+358 
+359    \textcolor{comment}{//Make sure the buffer is large enough to hold the OID prefix}
+360    \textcolor{keywordflow}{if}(*nextOidLen < object->oidLen)
+361       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf3f6e48b0cfaea7cac34f4223cd8a57}{ERROR\_BUFFER\_OVERFLOW};
+362 
+363    \textcolor{comment}{//Copy OID prefix}
+364    memcpy(nextOid, object->oid, object->oidLen);
+365 
+366    \textcolor{comment}{//Loop through network interfaces}
+367    \textcolor{keywordflow}{for}(index = 1; index <= \hyperlink{net_8h_a116f850ebcb023ffa3e6b8de10c5cb35}{NET\_INTERFACE\_COUNT}; index++)
+368    \{
+369       \textcolor{comment}{//Append the instance identifier to the OID prefix}
+370       n = \textcolor{keywordtype}{object}->oidLen;
+371 
+372       \textcolor{comment}{//ifIndex is used as instance identifier}
+373       error = \hyperlink{mib__common_8c_aedf45951f2f23c0f1250f087a620dea5}{mibEncodeIndex}(nextOid, *nextOidLen, &n, index);
+374       \textcolor{comment}{//Any error to report?}
+375       \textcolor{keywordflow}{if}(error)
+376          \textcolor{keywordflow}{return} error;
+377 
+378       \textcolor{comment}{//Check whether the resulting object identifier lexicographically}
+379       \textcolor{comment}{//follows the specified OID}
+380       \textcolor{keywordflow}{if}(\hyperlink{oid_8c_a3f24a7995a2a7aa587379ec6e1922e36}{oidComp}(nextOid, n, \hyperlink{mib__common_8h_a5d78f42b3545deb9bbd305138506c7a7}{oid}, oidLen) > 0)
+381       \{
+382          \textcolor{comment}{//Save the length of the resulting object identifier}
+383          *nextOidLen = \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+384          \textcolor{comment}{//Next object found}
+385          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+386       \}
+387    \}
+388 
+389    \textcolor{comment}{//The specified OID does not lexicographically precede the name}
+390    \textcolor{comment}{//of some object}
+391    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca7c3779a9c0fe7d65f66367f176dee6d7}{ERROR\_OBJECT\_NOT\_FOUND};
+392 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{if__mib__impl_8c_a374924c8c4a6887079907dc137886001}\label{if__mib__impl_8c_a374924c8c4a6887079907dc137886001}} 
+\index{if\+\_\+mib\+\_\+impl.\+c@{if\+\_\+mib\+\_\+impl.\+c}!if\+Mib\+Get\+Next\+If\+Rcv\+Address\+Entry@{if\+Mib\+Get\+Next\+If\+Rcv\+Address\+Entry}}
+\index{if\+Mib\+Get\+Next\+If\+Rcv\+Address\+Entry@{if\+Mib\+Get\+Next\+If\+Rcv\+Address\+Entry}!if\+\_\+mib\+\_\+impl.\+c@{if\+\_\+mib\+\_\+impl.\+c}}
+\subsubsection{\texorpdfstring{if\+Mib\+Get\+Next\+If\+Rcv\+Address\+Entry()}{ifMibGetNextIfRcvAddressEntry()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} if\+Mib\+Get\+Next\+If\+Rcv\+Address\+Entry (\begin{DoxyParamCaption}\item[{const \hyperlink{mib__common_8h_a2bc33cee6dd90a0ee8eeb92976a1c479}{Mib\+Object} $\ast$}]{object,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{oid,  }\item[{size\+\_\+t}]{oid\+Len,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{next\+Oid,  }\item[{size\+\_\+t $\ast$}]{next\+Oid\+Len }\end{DoxyParamCaption})}
+
+
+
+Get next if\+Rcv\+Address\+Entry object. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em object} & Pointer to the M\+IB object descriptor \\
+\hline
+\mbox{\tt in}  & {\em oid} & Object identifier \\
+\hline
+\mbox{\tt in}  & {\em oid\+Len} & Length of the O\+ID, in bytes \\
+\hline
+\mbox{\tt out}  & {\em next\+Oid} & O\+ID of the next object in the M\+IB \\
+\hline
+\mbox{\tt out}  & {\em next\+Oid\+Len} & Length of the next object identifier, in bytes \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 970 of file if\+\_\+mib\+\_\+impl.\+c.
+
+
+\begin{DoxyCode}
+972 \{
+973    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+974    \hyperlink{compiler__port_8h_a022c65af7f6c8d3947e8a37d64db6ad6}{int\_t} i;
+975    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+976    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} index;
+977    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} curIndex;
+978    \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\_t} acceptable;
+979    \hyperlink{ethernet_8h_a1e00ed3977e8a770e8b4ae4cb306d1c0}{MacAddr} macAddr;
+980    \hyperlink{ethernet_8h_a1e00ed3977e8a770e8b4ae4cb306d1c0}{MacAddr} curMacAddr;
+981    \hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{NetInterface} *interface;
+982    \hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{NetInterface} *logicalInterface;
+983 
+984    \textcolor{comment}{//Initialize variables}
+985    index = 0;
+986    macAddr = \hyperlink{ethernet_8c_a24b2ce78dd643fe028d2e18c3b503f1f}{MAC\_UNSPECIFIED\_ADDR};
+987 
+988    \textcolor{comment}{//Make sure the buffer is large enough to hold the OID prefix}
+989    \textcolor{keywordflow}{if}(*nextOidLen < object->oidLen)
+990       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf3f6e48b0cfaea7cac34f4223cd8a57}{ERROR\_BUFFER\_OVERFLOW};
+991 
+992    \textcolor{comment}{//Copy OID prefix}
+993    memcpy(nextOid, object->oid, object->oidLen);
+994 
+995    \textcolor{comment}{//Loop through network interfaces}
+996    \textcolor{keywordflow}{for}(curIndex = 1; curIndex <= \hyperlink{net_8h_a116f850ebcb023ffa3e6b8de10c5cb35}{NET\_INTERFACE\_COUNT}; curIndex++)
+997    \{
+998       \textcolor{comment}{//Point to the underlying interface}
+999       \textcolor{keyword}{interface }= &\hyperlink{net_8c_a7ecafab0039ec54d1d7a1e9e7402379b}{netInterface}[curIndex - 1];
+1000       \textcolor{comment}{//Point to the logical interface}
+1001       logicalInterface = \hyperlink{nic_8c_a650d776d6513c3bb88671c3aedd782f0}{nicGetLogicalInterface}(interface);
+1002 
+1003       \textcolor{comment}{//Go through the MAC filter table}
+1004       \textcolor{keywordflow}{for}(i = -2; i < \hyperlink{ethernet_8h_ab64acae68b5723774fa272c62efd7c2b}{MAC\_ADDR\_FILTER\_SIZE}; i++)
+1005       \{
+1006          \textcolor{keywordflow}{if}(i == -2)
+1007          \{
+1008             \textcolor{comment}{//Get interface MAC address}
+1009             curMacAddr = logicalInterface->macAddr;
+1010          \}
+1011          \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(i == -1)
+1012          \{
+1013             \textcolor{comment}{//Get broadcast address}
+1014             curMacAddr = \hyperlink{ethernet_8c_ae1313f9f72de49c713dea514e09ae0e3}{MAC\_BROADCAST\_ADDR};
+1015          \}
+1016          \textcolor{keywordflow}{else}
+1017          \{
+1018             \textcolor{comment}{//Get multicast address}
+1019             \textcolor{keywordflow}{if}(interface->macAddrFilter[i].refCount > 0)
+1020                curMacAddr = interface->macAddrFilter[i].addr;
+1021             \textcolor{keywordflow}{else}
+1022                curMacAddr = \hyperlink{ethernet_8c_a24b2ce78dd643fe028d2e18c3b503f1f}{MAC\_UNSPECIFIED\_ADDR};
+1023          \}
+1024 
+1025          \textcolor{comment}{//Valid MAC address?}
+1026          \textcolor{keywordflow}{if}(!\hyperlink{ethernet_8h_a800d9f928930baf027e925976c44b9b2}{macCompAddr}(&curMacAddr, &\hyperlink{ethernet_8c_a24b2ce78dd643fe028d2e18c3b503f1f}{MAC\_UNSPECIFIED\_ADDR}))
+1027          \{
+1028             \textcolor{comment}{//Append the instance identifier to the OID prefix}
+1029             n = \textcolor{keywordtype}{object}->oidLen;
+1030 
+1031             \textcolor{comment}{//ifIndex is used as 1st instance identifier}
+1032             error = \hyperlink{mib__common_8c_aedf45951f2f23c0f1250f087a620dea5}{mibEncodeIndex}(nextOid, *nextOidLen, &n, curIndex);
+1033             \textcolor{comment}{//Invalid instance identifier?}
+1034             \textcolor{keywordflow}{if}(error)
+1035                \textcolor{keywordflow}{return} error;
+1036 
+1037             \textcolor{comment}{//ifRcvAddressAddress is used as 2nd instance identifier}
+1038             error = \hyperlink{mib__common_8c_af16e299d0a2015d459ba47dfcef75140}{mibEncodeMacAddr}(nextOid, *nextOidLen, &n, &curMacAddr);
+1039             \textcolor{comment}{//Invalid instance identifier?}
+1040             \textcolor{keywordflow}{if}(error)
+1041                \textcolor{keywordflow}{return} error;
+1042 
+1043             \textcolor{comment}{//Check whether the resulting object identifier lexicographically}
+1044             \textcolor{comment}{//follows the specified OID}
+1045             \textcolor{keywordflow}{if}(\hyperlink{oid_8c_a3f24a7995a2a7aa587379ec6e1922e36}{oidComp}(nextOid, n, \hyperlink{mib__common_8h_a5d78f42b3545deb9bbd305138506c7a7}{oid}, oidLen) > 0)
+1046             \{
+1047                \textcolor{comment}{//Perform lexicographic comparison}
+1048                \textcolor{keywordflow}{if}(index == 0)
+1049                   acceptable = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+1050                \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(curIndex < index)
+1051                   acceptable = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+1052                \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(curIndex > index)
+1053                   acceptable = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+1054                \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(memcmp(&curMacAddr, &macAddr, \textcolor{keyword}{sizeof}(\hyperlink{ethernet_8h_a1e00ed3977e8a770e8b4ae4cb306d1c0}{MacAddr})) < 0)
+1055                   acceptable = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+1056                \textcolor{keywordflow}{else}
+1057                   acceptable = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+1058 
+1059                \textcolor{comment}{//Save the closest object identifier that follows the specified}
+1060                \textcolor{comment}{//OID in lexicographic order}
+1061                \textcolor{keywordflow}{if}(acceptable)
+1062                \{
+1063                   macAddr = curMacAddr;
+1064                   index = curIndex;
+1065                \}
+1066             \}
+1067          \}
+1068       \}
+1069    \}
+1070 
+1071    \textcolor{comment}{//The specified OID does not lexicographically precede the name}
+1072    \textcolor{comment}{//of some object?}
+1073    \textcolor{keywordflow}{if}(index == 0)
+1074       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca7c3779a9c0fe7d65f66367f176dee6d7}{ERROR\_OBJECT\_NOT\_FOUND};
+1075 
+1076    \textcolor{comment}{//Append the instance identifier to the OID prefix}
+1077    n = \textcolor{keywordtype}{object}->oidLen;
+1078 
+1079    \textcolor{comment}{//ifIndex is used as 1st instance identifier}
+1080    error = \hyperlink{mib__common_8c_aedf45951f2f23c0f1250f087a620dea5}{mibEncodeIndex}(nextOid, *nextOidLen, &n, index);
+1081    \textcolor{comment}{//Invalid instance identifier?}
+1082    \textcolor{keywordflow}{if}(error)
+1083       \textcolor{keywordflow}{return} error;
+1084 
+1085    \textcolor{comment}{//ifRcvAddressAddress is used as 2nd instance identifier}
+1086    error = \hyperlink{mib__common_8c_af16e299d0a2015d459ba47dfcef75140}{mibEncodeMacAddr}(nextOid, *nextOidLen, &n, &macAddr);
+1087    \textcolor{comment}{//Invalid instance identifier?}
+1088    \textcolor{keywordflow}{if}(error)
+1089       \textcolor{keywordflow}{return} error;
+1090 
+1091    \textcolor{comment}{//Save the length of the resulting object identifier}
+1092    *nextOidLen = \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1093    \textcolor{comment}{//Next object found}
+1094    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+1095 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{if__mib__impl_8c_a72ff1c320f07790380dd9bc719b658db}\label{if__mib__impl_8c_a72ff1c320f07790380dd9bc719b658db}} 
+\index{if\+\_\+mib\+\_\+impl.\+c@{if\+\_\+mib\+\_\+impl.\+c}!if\+Mib\+Get\+Next\+If\+Stack\+Entry@{if\+Mib\+Get\+Next\+If\+Stack\+Entry}}
+\index{if\+Mib\+Get\+Next\+If\+Stack\+Entry@{if\+Mib\+Get\+Next\+If\+Stack\+Entry}!if\+\_\+mib\+\_\+impl.\+c@{if\+\_\+mib\+\_\+impl.\+c}}
+\subsubsection{\texorpdfstring{if\+Mib\+Get\+Next\+If\+Stack\+Entry()}{ifMibGetNextIfStackEntry()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} if\+Mib\+Get\+Next\+If\+Stack\+Entry (\begin{DoxyParamCaption}\item[{const \hyperlink{mib__common_8h_a2bc33cee6dd90a0ee8eeb92976a1c479}{Mib\+Object} $\ast$}]{object,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{oid,  }\item[{size\+\_\+t}]{oid\+Len,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{next\+Oid,  }\item[{size\+\_\+t $\ast$}]{next\+Oid\+Len }\end{DoxyParamCaption})}
+
+
+
+Get next if\+Stack\+Entry object. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em object} & Pointer to the M\+IB object descriptor \\
+\hline
+\mbox{\tt in}  & {\em oid} & Object identifier \\
+\hline
+\mbox{\tt in}  & {\em oid\+Len} & Length of the O\+ID, in bytes \\
+\hline
+\mbox{\tt out}  & {\em next\+Oid} & O\+ID of the next object in the M\+IB \\
+\hline
+\mbox{\tt out}  & {\em next\+Oid\+Len} & Length of the next object identifier, in bytes \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 750 of file if\+\_\+mib\+\_\+impl.\+c.
+
+
+\begin{DoxyCode}
+752 \{
+753    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+754    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} \hyperlink{md5_8c_af11ea3cdbca7345eb6a4a8ac5ce0434d}{k};
+755    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+756    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} index;
+757    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} higherLayer;
+758    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} lowerLayer;
+759 
+760    \textcolor{comment}{//Make sure the buffer is large enough to hold the OID prefix}
+761    \textcolor{keywordflow}{if}(*nextOidLen < object->oidLen)
+762       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf3f6e48b0cfaea7cac34f4223cd8a57}{ERROR\_BUFFER\_OVERFLOW};
+763 
+764    \textcolor{comment}{//Copy OID prefix}
+765    memcpy(nextOid, object->oid, object->oidLen);
+766 
+767    \textcolor{comment}{//two rows exist even for an interface which has no others stacked}
+768    \textcolor{comment}{//on top or below it}
+769    \textcolor{keywordflow}{for}(k = 0; k < 2; k++)
+770    \{
+771       \textcolor{comment}{//Loop through network interfaces}
+772       \textcolor{keywordflow}{for}(index = 1; index <= \hyperlink{net_8h_a116f850ebcb023ffa3e6b8de10c5cb35}{NET\_INTERFACE\_COUNT}; index++)
+773       \{
+774          \textcolor{comment}{//Append the instance identifier to the OID prefix}
+775          n = \textcolor{keywordtype}{object}->oidLen;
+776 
+777          \textcolor{comment}{//Higher and lower sub-layers}
+778          \textcolor{keywordflow}{if}(k == 0)
+779          \{
+780             higherLayer = 0;
+781             lowerLayer = index;
+782          \}
+783          \textcolor{keywordflow}{else}
+784          \{
+785             higherLayer = index;
+786             lowerLayer = 0;
+787          \}
+788 
+789          \textcolor{comment}{//ifStackHigherLayer is used as 1st instance identifier}
+790          error = \hyperlink{mib__common_8c_aedf45951f2f23c0f1250f087a620dea5}{mibEncodeIndex}(nextOid, *nextOidLen, &n, higherLayer);
+791          \textcolor{comment}{//Any error to report?}
+792          \textcolor{keywordflow}{if}(error)
+793             \textcolor{keywordflow}{return} error;
+794 
+795          \textcolor{comment}{//ifStackLowerLayer is used as 2nd instance identifier}
+796          error = \hyperlink{mib__common_8c_aedf45951f2f23c0f1250f087a620dea5}{mibEncodeIndex}(nextOid, *nextOidLen, &n, lowerLayer);
+797          \textcolor{comment}{//Any error to report?}
+798          \textcolor{keywordflow}{if}(error)
+799             \textcolor{keywordflow}{return} error;
+800 
+801          \textcolor{comment}{//Check whether the resulting object identifier lexicographically}
+802          \textcolor{comment}{//follows the specified OID}
+803          \textcolor{keywordflow}{if}(\hyperlink{oid_8c_a3f24a7995a2a7aa587379ec6e1922e36}{oidComp}(nextOid, n, \hyperlink{mib__common_8h_a5d78f42b3545deb9bbd305138506c7a7}{oid}, oidLen) > 0)
+804          \{
+805             \textcolor{comment}{//Save the length of the resulting object identifier}
+806             *nextOidLen = \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+807             \textcolor{comment}{//Next object found}
+808             \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+809          \}
+810       \}
+811    \}
+812 
+813    \textcolor{comment}{//The specified OID does not lexicographically precede the name}
+814    \textcolor{comment}{//of some object}
+815    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca7c3779a9c0fe7d65f66367f176dee6d7}{ERROR\_OBJECT\_NOT\_FOUND};
+816 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{if__mib__impl_8c_ab1708e9d574d145f987dc71f14cd4a16}\label{if__mib__impl_8c_ab1708e9d574d145f987dc71f14cd4a16}} 
+\index{if\+\_\+mib\+\_\+impl.\+c@{if\+\_\+mib\+\_\+impl.\+c}!if\+Mib\+Get\+Next\+If\+X\+Entry@{if\+Mib\+Get\+Next\+If\+X\+Entry}}
+\index{if\+Mib\+Get\+Next\+If\+X\+Entry@{if\+Mib\+Get\+Next\+If\+X\+Entry}!if\+\_\+mib\+\_\+impl.\+c@{if\+\_\+mib\+\_\+impl.\+c}}
+\subsubsection{\texorpdfstring{if\+Mib\+Get\+Next\+If\+X\+Entry()}{ifMibGetNextIfXEntry()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} if\+Mib\+Get\+Next\+If\+X\+Entry (\begin{DoxyParamCaption}\item[{const \hyperlink{mib__common_8h_a2bc33cee6dd90a0ee8eeb92976a1c479}{Mib\+Object} $\ast$}]{object,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{oid,  }\item[{size\+\_\+t}]{oid\+Len,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{next\+Oid,  }\item[{size\+\_\+t $\ast$}]{next\+Oid\+Len }\end{DoxyParamCaption})}
+
+
+
+Get next if\+X\+Entry object. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em object} & Pointer to the M\+IB object descriptor \\
+\hline
+\mbox{\tt in}  & {\em oid} & Object identifier \\
+\hline
+\mbox{\tt in}  & {\em oid\+Len} & Length of the O\+ID, in bytes \\
+\hline
+\mbox{\tt out}  & {\em next\+Oid} & O\+ID of the next object in the M\+IB \\
+\hline
+\mbox{\tt out}  & {\em next\+Oid\+Len} & Length of the next object identifier, in bytes \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 607 of file if\+\_\+mib\+\_\+impl.\+c.
+
+
+\begin{DoxyCode}
+609 \{
+610    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+611    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+612    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} index;
+613 
+614    \textcolor{comment}{//Make sure the buffer is large enough to hold the OID prefix}
+615    \textcolor{keywordflow}{if}(*nextOidLen < object->oidLen)
+616       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf3f6e48b0cfaea7cac34f4223cd8a57}{ERROR\_BUFFER\_OVERFLOW};
+617 
+618    \textcolor{comment}{//Copy OID prefix}
+619    memcpy(nextOid, object->oid, object->oidLen);
+620 
+621    \textcolor{comment}{//Loop through network interfaces}
+622    \textcolor{keywordflow}{for}(index = 1; index <= \hyperlink{net_8h_a116f850ebcb023ffa3e6b8de10c5cb35}{NET\_INTERFACE\_COUNT}; index++)
+623    \{
+624       \textcolor{comment}{//Append the instance identifier to the OID prefix}
+625       n = \textcolor{keywordtype}{object}->oidLen;
+626 
+627       \textcolor{comment}{//ifIndex is used as instance identifier}
+628       error = \hyperlink{mib__common_8c_aedf45951f2f23c0f1250f087a620dea5}{mibEncodeIndex}(nextOid, *nextOidLen, &n, index);
+629       \textcolor{comment}{//Any error to report?}
+630       \textcolor{keywordflow}{if}(error)
+631          \textcolor{keywordflow}{return} error;
+632 
+633       \textcolor{comment}{//Check whether the resulting object identifier lexicographically}
+634       \textcolor{comment}{//follows the specified OID}
+635       \textcolor{keywordflow}{if}(\hyperlink{oid_8c_a3f24a7995a2a7aa587379ec6e1922e36}{oidComp}(nextOid, n, \hyperlink{mib__common_8h_a5d78f42b3545deb9bbd305138506c7a7}{oid}, oidLen) > 0)
+636       \{
+637          \textcolor{comment}{//Save the length of the resulting object identifier}
+638          *nextOidLen = \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+639          \textcolor{comment}{//Next object found}
+640          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+641       \}
+642    \}
+643 
+644    \textcolor{comment}{//The specified OID does not lexicographically precede the name}
+645    \textcolor{comment}{//of some object}
+646    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca7c3779a9c0fe7d65f66367f176dee6d7}{ERROR\_OBJECT\_NOT\_FOUND};
+647 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{if__mib__impl_8c_a996d74de04de86d6a59069f525fb0ee5}\label{if__mib__impl_8c_a996d74de04de86d6a59069f525fb0ee5}} 
+\index{if\+\_\+mib\+\_\+impl.\+c@{if\+\_\+mib\+\_\+impl.\+c}!if\+Mib\+Init@{if\+Mib\+Init}}
+\index{if\+Mib\+Init@{if\+Mib\+Init}!if\+\_\+mib\+\_\+impl.\+c@{if\+\_\+mib\+\_\+impl.\+c}}
+\subsubsection{\texorpdfstring{if\+Mib\+Init()}{ifMibInit()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} if\+Mib\+Init (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Interfaces Group M\+IB module initialization. 
+
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 53 of file if\+\_\+mib\+\_\+impl.\+c.
+
+
+\begin{DoxyCode}
+54 \{
+55    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+56 
+57    \textcolor{comment}{//Debug message}
+58    \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"Initializing IF-MIB base...\(\backslash\)r\(\backslash\)n"});
+59 
+60    \textcolor{comment}{//Clear Interfaces Group MIB base}
+61    memset(&\hyperlink{if__mib__module_8c_a033f024ad081eac6325745f7d8317af1}{ifMibBase}, 0, \textcolor{keyword}{sizeof}(\hyperlink{if__mib__module_8c_a033f024ad081eac6325745f7d8317af1}{ifMibBase}));
+62 
+63    \textcolor{comment}{//ifNumber object}
+64    \hyperlink{if__mib__module_8c_a033f024ad081eac6325745f7d8317af1}{ifMibBase}.\hyperlink{structIfMibBase_ad14f7109a9c9c3d47b35ba1ac0603ba5}{ifNumber} = \hyperlink{net_8h_a116f850ebcb023ffa3e6b8de10c5cb35}{NET\_INTERFACE\_COUNT};
+65 
+66    \textcolor{comment}{//Extension to the interface table}
+67    \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{net_8h_a116f850ebcb023ffa3e6b8de10c5cb35}{NET\_INTERFACE\_COUNT}; i++)
+68    \{
+69       \textcolor{comment}{//ifLinkUpDownTrapEnable object}
+70       \hyperlink{if__mib__module_8c_a033f024ad081eac6325745f7d8317af1}{ifMibBase}.\hyperlink{structIfMibBase_aa6225a41e399254043fd5a537cb30c81}{ifXTable}[i].\hyperlink{structIfMibIfXEntry_a8083fbfc4f3dbc7846bc4bf14de32763}{ifLinkUpDownTrapEnable} = 
+      \hyperlink{if__mib__module_8h_a2a5ce9676b2dfe2179efd58c4cd464d7aa46cbdbec38eb846e9e4e365b4d7364a}{IF\_MIB\_IF\_LINK\_UP\_DOWN\_TRAP\_DISABLED};
+71       \textcolor{comment}{//ifPromiscuousMode object}
+72       \hyperlink{if__mib__module_8c_a033f024ad081eac6325745f7d8317af1}{ifMibBase}.\hyperlink{structIfMibBase_aa6225a41e399254043fd5a537cb30c81}{ifXTable}[i].\hyperlink{structIfMibIfXEntry_a2d8b6d9eb34768f204a4ab8921798aa4}{ifPromiscuousMode} = 
+      \hyperlink{mib__common_8h_a2f022f804edc2bf185adbdd71447fe74abf3da4bf18acff76f6ebcce5574393dd}{MIB\_TRUTH\_VALUE\_FALSE};
+73       \textcolor{comment}{//ifConnectorPresent object}
+74       \hyperlink{if__mib__module_8c_a033f024ad081eac6325745f7d8317af1}{ifMibBase}.\hyperlink{structIfMibBase_aa6225a41e399254043fd5a537cb30c81}{ifXTable}[i].\hyperlink{structIfMibIfXEntry_aaa054ec79edc2fd779de985eac9d2549}{ifConnectorPresent} = 
+      \hyperlink{mib__common_8h_a2f022f804edc2bf185adbdd71447fe74a0598afb35a102f87ad0a9aae82227cba}{MIB\_TRUTH\_VALUE\_TRUE};
+75    \}
+76 
+77    \textcolor{comment}{//Successful processing}
+78    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+79 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{if__mib__impl_8c_afc4c69c3f714526ee9a1a0cd17195e18}\label{if__mib__impl_8c_afc4c69c3f714526ee9a1a0cd17195e18}} 
+\index{if\+\_\+mib\+\_\+impl.\+c@{if\+\_\+mib\+\_\+impl.\+c}!if\+Mib\+Set\+If\+Entry@{if\+Mib\+Set\+If\+Entry}}
+\index{if\+Mib\+Set\+If\+Entry@{if\+Mib\+Set\+If\+Entry}!if\+\_\+mib\+\_\+impl.\+c@{if\+\_\+mib\+\_\+impl.\+c}}
+\subsubsection{\texorpdfstring{if\+Mib\+Set\+If\+Entry()}{ifMibSetIfEntry()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} if\+Mib\+Set\+If\+Entry (\begin{DoxyParamCaption}\item[{const \hyperlink{mib__common_8h_a2bc33cee6dd90a0ee8eeb92976a1c479}{Mib\+Object} $\ast$}]{object,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{oid,  }\item[{size\+\_\+t}]{oid\+Len,  }\item[{const \hyperlink{mib__common_8h_a515b369f80863becb3a17870e6bb7a80}{Mib\+Variant} $\ast$}]{value,  }\item[{size\+\_\+t}]{value\+Len,  }\item[{\hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t}}]{commit }\end{DoxyParamCaption})}
+
+
+
+Set if\+Entry object value. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em object} & Pointer to the M\+IB object descriptor \\
+\hline
+\mbox{\tt in}  & {\em oid} & Object identifier (object name and instance identifier) \\
+\hline
+\mbox{\tt in}  & {\em oid\+Len} & Length of the O\+ID, in bytes \\
+\hline
+\mbox{\tt in}  & {\em value} & Object value \\
+\hline
+\mbox{\tt in}  & {\em value\+Len} & Length of the object value, in bytes \\
+\hline
+\mbox{\tt in}  & {\em commit} & This flag tells whether the changes shall be committed to the M\+IB base \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 94 of file if\+\_\+mib\+\_\+impl.\+c.
+
+
+\begin{DoxyCode}
+96 \{
+97    \textcolor{comment}{//Not implemented}
+98    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca7446f962c635e715f75bc4aff05feb77}{ERROR\_WRITE\_FAILED};
+99 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{if__mib__impl_8c_a2bfb2c15d79b4c03636762b62c34c213}\label{if__mib__impl_8c_a2bfb2c15d79b4c03636762b62c34c213}} 
+\index{if\+\_\+mib\+\_\+impl.\+c@{if\+\_\+mib\+\_\+impl.\+c}!if\+Mib\+Set\+If\+Rcv\+Address\+Entry@{if\+Mib\+Set\+If\+Rcv\+Address\+Entry}}
+\index{if\+Mib\+Set\+If\+Rcv\+Address\+Entry@{if\+Mib\+Set\+If\+Rcv\+Address\+Entry}!if\+\_\+mib\+\_\+impl.\+c@{if\+\_\+mib\+\_\+impl.\+c}}
+\subsubsection{\texorpdfstring{if\+Mib\+Set\+If\+Rcv\+Address\+Entry()}{ifMibSetIfRcvAddressEntry()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} if\+Mib\+Set\+If\+Rcv\+Address\+Entry (\begin{DoxyParamCaption}\item[{const \hyperlink{mib__common_8h_a2bc33cee6dd90a0ee8eeb92976a1c479}{Mib\+Object} $\ast$}]{object,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{oid,  }\item[{size\+\_\+t}]{oid\+Len,  }\item[{const \hyperlink{mib__common_8h_a515b369f80863becb3a17870e6bb7a80}{Mib\+Variant} $\ast$}]{value,  }\item[{size\+\_\+t}]{value\+Len,  }\item[{\hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t}}]{commit }\end{DoxyParamCaption})}
+
+
+
+Set if\+Rcv\+Address\+Entry object value. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em object} & Pointer to the M\+IB object descriptor \\
+\hline
+\mbox{\tt in}  & {\em oid} & Object identifier (object name and instance identifier) \\
+\hline
+\mbox{\tt in}  & {\em oid\+Len} & Length of the O\+ID, in bytes \\
+\hline
+\mbox{\tt in}  & {\em value} & Object value \\
+\hline
+\mbox{\tt in}  & {\em value\+Len} & Length of the object value, in bytes \\
+\hline
+\mbox{\tt in}  & {\em commit} & This flag tells whether the changes shall be committed to the M\+IB base \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 831 of file if\+\_\+mib\+\_\+impl.\+c.
+
+
+\begin{DoxyCode}
+833 \{
+834    \textcolor{comment}{//Not implemented}
+835    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca7446f962c635e715f75bc4aff05feb77}{ERROR\_WRITE\_FAILED};
+836 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{if__mib__impl_8c_a2e8b5a663b426e96c200dfa0d64a6f20}\label{if__mib__impl_8c_a2e8b5a663b426e96c200dfa0d64a6f20}} 
+\index{if\+\_\+mib\+\_\+impl.\+c@{if\+\_\+mib\+\_\+impl.\+c}!if\+Mib\+Set\+If\+Stack\+Entry@{if\+Mib\+Set\+If\+Stack\+Entry}}
+\index{if\+Mib\+Set\+If\+Stack\+Entry@{if\+Mib\+Set\+If\+Stack\+Entry}!if\+\_\+mib\+\_\+impl.\+c@{if\+\_\+mib\+\_\+impl.\+c}}
+\subsubsection{\texorpdfstring{if\+Mib\+Set\+If\+Stack\+Entry()}{ifMibSetIfStackEntry()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} if\+Mib\+Set\+If\+Stack\+Entry (\begin{DoxyParamCaption}\item[{const \hyperlink{mib__common_8h_a2bc33cee6dd90a0ee8eeb92976a1c479}{Mib\+Object} $\ast$}]{object,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{oid,  }\item[{size\+\_\+t}]{oid\+Len,  }\item[{const \hyperlink{mib__common_8h_a515b369f80863becb3a17870e6bb7a80}{Mib\+Variant} $\ast$}]{value,  }\item[{size\+\_\+t}]{value\+Len,  }\item[{\hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t}}]{commit }\end{DoxyParamCaption})}
+
+
+
+Set if\+Stack\+Entry object value. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em object} & Pointer to the M\+IB object descriptor \\
+\hline
+\mbox{\tt in}  & {\em oid} & Object identifier (object name and instance identifier) \\
+\hline
+\mbox{\tt in}  & {\em oid\+Len} & Length of the O\+ID, in bytes \\
+\hline
+\mbox{\tt in}  & {\em value} & Object value \\
+\hline
+\mbox{\tt in}  & {\em value\+Len} & Length of the object value, in bytes \\
+\hline
+\mbox{\tt in}  & {\em commit} & This flag tells whether the changes shall be committed to the M\+IB base \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 662 of file if\+\_\+mib\+\_\+impl.\+c.
+
+
+\begin{DoxyCode}
+664 \{
+665    \textcolor{comment}{//Not implemented}
+666    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca7446f962c635e715f75bc4aff05feb77}{ERROR\_WRITE\_FAILED};
+667 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{if__mib__impl_8c_a234e29d23dffa8033e2e06b4114e51ec}\label{if__mib__impl_8c_a234e29d23dffa8033e2e06b4114e51ec}} 
+\index{if\+\_\+mib\+\_\+impl.\+c@{if\+\_\+mib\+\_\+impl.\+c}!if\+Mib\+Set\+If\+X\+Entry@{if\+Mib\+Set\+If\+X\+Entry}}
+\index{if\+Mib\+Set\+If\+X\+Entry@{if\+Mib\+Set\+If\+X\+Entry}!if\+\_\+mib\+\_\+impl.\+c@{if\+\_\+mib\+\_\+impl.\+c}}
+\subsubsection{\texorpdfstring{if\+Mib\+Set\+If\+X\+Entry()}{ifMibSetIfXEntry()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} if\+Mib\+Set\+If\+X\+Entry (\begin{DoxyParamCaption}\item[{const \hyperlink{mib__common_8h_a2bc33cee6dd90a0ee8eeb92976a1c479}{Mib\+Object} $\ast$}]{object,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{oid,  }\item[{size\+\_\+t}]{oid\+Len,  }\item[{const \hyperlink{mib__common_8h_a515b369f80863becb3a17870e6bb7a80}{Mib\+Variant} $\ast$}]{value,  }\item[{size\+\_\+t}]{value\+Len,  }\item[{\hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t}}]{commit }\end{DoxyParamCaption})}
+
+
+
+Set if\+X\+Entry object value. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em object} & Pointer to the M\+IB object descriptor \\
+\hline
+\mbox{\tt in}  & {\em oid} & Object identifier (object name and instance identifier) \\
+\hline
+\mbox{\tt in}  & {\em oid\+Len} & Length of the O\+ID, in bytes \\
+\hline
+\mbox{\tt in}  & {\em value} & Object value \\
+\hline
+\mbox{\tt in}  & {\em value\+Len} & Length of the object value, in bytes \\
+\hline
+\mbox{\tt in}  & {\em commit} & This flag tells whether the changes shall be committed to the M\+IB base \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 407 of file if\+\_\+mib\+\_\+impl.\+c.
+
+
+\begin{DoxyCode}
+409 \{
+410    \textcolor{comment}{//Not implemented}
+411    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca7446f962c635e715f75bc4aff05feb77}{ERROR\_WRITE\_FAILED};
+412 \}
+\end{DoxyCode}

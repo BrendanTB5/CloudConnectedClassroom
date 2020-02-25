@@ -1,0 +1,92 @@
+\hypertarget{heap__3_8c}{}\section{third\+\_\+party/freertos/portable/memmang/heap\+\_\+3.c File Reference}
+\label{heap__3_8c}\index{third\+\_\+party/freertos/portable/memmang/heap\+\_\+3.\+c@{third\+\_\+party/freertos/portable/memmang/heap\+\_\+3.\+c}}
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}Free\+R\+T\+O\+S.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}task.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{heap__3_8c_ab622d8c674f2a417a666a7ed89109e79}{M\+P\+U\+\_\+\+W\+R\+A\+P\+P\+E\+R\+S\+\_\+\+I\+N\+C\+L\+U\+D\+E\+D\+\_\+\+F\+R\+O\+M\+\_\+\+A\+P\+I\+\_\+\+F\+I\+LE}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void $\ast$ \hyperlink{heap__3_8c_a0379669d07d76cc81e3028123113b271}{pv\+Port\+Malloc} (size\+\_\+t x\+Wanted\+Size)
+\item 
+void \hyperlink{heap__3_8c_a1e7cea2fd1bc894ea3b5f5e8179d259b}{v\+Port\+Free} (void $\ast$pv)
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{heap__3_8c_ab622d8c674f2a417a666a7ed89109e79}\label{heap__3_8c_ab622d8c674f2a417a666a7ed89109e79}} 
+\index{heap\+\_\+3.\+c@{heap\+\_\+3.\+c}!M\+P\+U\+\_\+\+W\+R\+A\+P\+P\+E\+R\+S\+\_\+\+I\+N\+C\+L\+U\+D\+E\+D\+\_\+\+F\+R\+O\+M\+\_\+\+A\+P\+I\+\_\+\+F\+I\+LE@{M\+P\+U\+\_\+\+W\+R\+A\+P\+P\+E\+R\+S\+\_\+\+I\+N\+C\+L\+U\+D\+E\+D\+\_\+\+F\+R\+O\+M\+\_\+\+A\+P\+I\+\_\+\+F\+I\+LE}}
+\index{M\+P\+U\+\_\+\+W\+R\+A\+P\+P\+E\+R\+S\+\_\+\+I\+N\+C\+L\+U\+D\+E\+D\+\_\+\+F\+R\+O\+M\+\_\+\+A\+P\+I\+\_\+\+F\+I\+LE@{M\+P\+U\+\_\+\+W\+R\+A\+P\+P\+E\+R\+S\+\_\+\+I\+N\+C\+L\+U\+D\+E\+D\+\_\+\+F\+R\+O\+M\+\_\+\+A\+P\+I\+\_\+\+F\+I\+LE}!heap\+\_\+3.\+c@{heap\+\_\+3.\+c}}
+\subsubsection{\texorpdfstring{M\+P\+U\+\_\+\+W\+R\+A\+P\+P\+E\+R\+S\+\_\+\+I\+N\+C\+L\+U\+D\+E\+D\+\_\+\+F\+R\+O\+M\+\_\+\+A\+P\+I\+\_\+\+F\+I\+LE}{MPU\_WRAPPERS\_INCLUDED\_FROM\_API\_FILE}}
+{\footnotesize\ttfamily \#define M\+P\+U\+\_\+\+W\+R\+A\+P\+P\+E\+R\+S\+\_\+\+I\+N\+C\+L\+U\+D\+E\+D\+\_\+\+F\+R\+O\+M\+\_\+\+A\+P\+I\+\_\+\+F\+I\+LE}
+
+
+
+Definition at line 45 of file heap\+\_\+3.\+c.
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{heap__3_8c_a0379669d07d76cc81e3028123113b271}\label{heap__3_8c_a0379669d07d76cc81e3028123113b271}} 
+\index{heap\+\_\+3.\+c@{heap\+\_\+3.\+c}!pv\+Port\+Malloc@{pv\+Port\+Malloc}}
+\index{pv\+Port\+Malloc@{pv\+Port\+Malloc}!heap\+\_\+3.\+c@{heap\+\_\+3.\+c}}
+\subsubsection{\texorpdfstring{pv\+Port\+Malloc()}{pvPortMalloc()}}
+{\footnotesize\ttfamily void$\ast$ pv\+Port\+Malloc (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{x\+Wanted\+Size }\end{DoxyParamCaption})}
+
+
+
+Definition at line 58 of file heap\+\_\+3.\+c.
+
+
+\begin{DoxyCode}
+59 \{
+60 \textcolor{keywordtype}{void} *pvReturn;
+61 
+62     \hyperlink{task_8h_a366b302eba79d10b5ee2a3756f0fcc43}{vTaskSuspendAll}();
+63     \{
+64         pvReturn = malloc( xWantedSize );
+65         \hyperlink{FreeRTOS_8h_af326afe922ffa6da245c98dc227a3293}{traceMALLOC}( pvReturn, xWantedSize );
+66     \}
+67     ( void ) \hyperlink{task_8h_a003f8ae6d649225abd030cc76e1c7d0e}{xTaskResumeAll}();
+68 
+69 \textcolor{preprocessor}{    #if( configUSE\_MALLOC\_FAILED\_HOOK == 1 )}
+70     \{
+71         \textcolor{keywordflow}{if}( pvReturn == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} )
+72         \{
+73             \textcolor{keyword}{extern} \textcolor{keywordtype}{void} vApplicationMallocFailedHook( \textcolor{keywordtype}{void} );
+74             vApplicationMallocFailedHook();
+75         \}
+76     \}
+77 \textcolor{preprocessor}{    #endif}
+78 
+79     \textcolor{keywordflow}{return} pvReturn;
+80 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{heap__3_8c_a1e7cea2fd1bc894ea3b5f5e8179d259b}\label{heap__3_8c_a1e7cea2fd1bc894ea3b5f5e8179d259b}} 
+\index{heap\+\_\+3.\+c@{heap\+\_\+3.\+c}!v\+Port\+Free@{v\+Port\+Free}}
+\index{v\+Port\+Free@{v\+Port\+Free}!heap\+\_\+3.\+c@{heap\+\_\+3.\+c}}
+\subsubsection{\texorpdfstring{v\+Port\+Free()}{vPortFree()}}
+{\footnotesize\ttfamily void v\+Port\+Free (\begin{DoxyParamCaption}\item[{void $\ast$}]{pv }\end{DoxyParamCaption})}
+
+
+
+Definition at line 83 of file heap\+\_\+3.\+c.
+
+
+\begin{DoxyCode}
+84 \{
+85     \textcolor{keywordflow}{if}( pv )
+86     \{
+87         \hyperlink{task_8h_a366b302eba79d10b5ee2a3756f0fcc43}{vTaskSuspendAll}();
+88         \{
+89             free( pv );
+90             \hyperlink{FreeRTOS_8h_a941bb09090b5788f0c27d9690118eed2}{traceFREE}( pv, 0 );
+91         \}
+92         ( void ) \hyperlink{task_8h_a003f8ae6d649225abd030cc76e1c7d0e}{xTaskResumeAll}();
+93     \}
+94 \}
+\end{DoxyCode}

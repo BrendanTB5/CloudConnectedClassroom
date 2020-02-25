@@ -1,0 +1,1008 @@
+\hypertarget{pkix_2x509__cert__validate_8c}{}\section{cyclone\+\_\+crypto/pkix/x509\+\_\+cert\+\_\+validate.c File Reference}
+\label{pkix_2x509__cert__validate_8c}\index{cyclone\+\_\+crypto/pkix/x509\+\_\+cert\+\_\+validate.\+c@{cyclone\+\_\+crypto/pkix/x509\+\_\+cert\+\_\+validate.\+c}}
+{\ttfamily \#include \char`\"{}core/crypto.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}pkix/x509\+\_\+cert\+\_\+parse.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}pkix/x509\+\_\+cert\+\_\+validate.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}pkix/x509\+\_\+key\+\_\+parse.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}encoding/asn1.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}encoding/oid.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}pkc/rsa.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}pkc/dsa.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ecc/ecdsa.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ecc/ed25519.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ecc/ed448.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}debug.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{pkix_2x509__cert__validate_8c_afcdf5e66fd927a7f4cc64295acd20407}{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}~\hyperlink{crypto__config_8h_a6afae3a9b63f9b55d979e667ee0e881d}{C\+R\+Y\+P\+T\+O\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{pkix_2x509__cert__validate_8c_a1d829c42c03a21d7d0325d214db51f0d}{x509\+Validate\+Certificate} (const \hyperlink{structX509CertificateInfo}{X509\+Certificate\+Info} $\ast$cert\+Info, const \hyperlink{structX509CertificateInfo}{X509\+Certificate\+Info} $\ast$issuer\+Cert\+Info, \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} path\+Len)
+\begin{DoxyCompactList}\small\item\em X.\+509 certificate validation. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{pkix_2x509__cert__validate_8c_ac72ef1917acb42ac1e984731723c7e57}{x509\+Check\+Subject\+Name} (const \hyperlink{structX509CertificateInfo}{X509\+Certificate\+Info} $\ast$cert\+Info, const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$fqdn)
+\begin{DoxyCompactList}\small\item\em Check whether the certificate matches the specified F\+Q\+DN. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{pkix_2x509__cert__validate_8c_aba02729cea03e1500a1839c15d1f1149}{x509\+Check\+Name\+Constraints} (const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$subject\+Name, const \hyperlink{structX509CertificateInfo}{X509\+Certificate\+Info} $\ast$cert\+Info)
+\begin{DoxyCompactList}\small\item\em Check name constraints. \end{DoxyCompactList}\item 
+\hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} \hyperlink{pkix_2x509__cert__validate_8c_ac0134610dc71d5ff612ac1bc609b7981}{x509\+Compare\+Name} (const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$name1, size\+\_\+t name\+Len1, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$name2, size\+\_\+t name\+Len2)
+\begin{DoxyCompactList}\small\item\em Compare distinguished names. \end{DoxyCompactList}\item 
+\hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} \hyperlink{pkix_2x509__cert__validate_8c_a6f02ee13e1ab2c2e2bce2e1ce4ba732d}{x509\+Compare\+Subject\+Name} (const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$subject\+Name, size\+\_\+t subject\+Name\+Len, const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$fqdn)
+\begin{DoxyCompactList}\small\item\em Check whether the subject name matches the specified F\+Q\+DN. \end{DoxyCompactList}\item 
+\hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} \hyperlink{pkix_2x509__cert__validate_8c_a36490c38bb9d95c4959e422ccf8398f8}{x509\+Compare\+Subtree} (const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$subject\+Name, const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$subtree, size\+\_\+t subtree\+Len)
+\begin{DoxyCompactList}\small\item\em Compare a subject name against the specified subtree. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{pkix_2x509__cert__validate_8c_a1d8215100a2199ceac838bb36ad392bf}{x509\+Verify\+Signature} (const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$tbs\+Cert, size\+\_\+t tbs\+Cert\+Len, const \hyperlink{structX509SignatureAlgoId}{X509\+Signature\+Algo\+Id} $\ast$signature\+Algo\+Id, const \hyperlink{structX509SubjectPublicKeyInfo}{X509\+Subject\+Public\+Key\+Info} $\ast$public\+Key\+Info, const \hyperlink{structX509SignatureValue}{X509\+Signature\+Value} $\ast$signature\+Value)
+\begin{DoxyCompactList}\small\item\em Certificate signature verification. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{pkix_2x509__cert__validate_8c_afcdf5e66fd927a7f4cc64295acd20407}\label{pkix_2x509__cert__validate_8c_afcdf5e66fd927a7f4cc64295acd20407}} 
+\index{pkix/x509\+\_\+cert\+\_\+validate.\+c@{pkix/x509\+\_\+cert\+\_\+validate.\+c}!T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+\index{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}!pkix/x509\+\_\+cert\+\_\+validate.\+c@{pkix/x509\+\_\+cert\+\_\+validate.\+c}}
+\subsubsection{\texorpdfstring{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}{TRACE\_LEVEL}}
+{\footnotesize\ttfamily \#define T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL~\hyperlink{crypto__config_8h_a6afae3a9b63f9b55d979e667ee0e881d}{C\+R\+Y\+P\+T\+O\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+
+
+
+Definition at line 32 of file x509\+\_\+cert\+\_\+validate.\+c.
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{pkix_2x509__cert__validate_8c_aba02729cea03e1500a1839c15d1f1149}\label{pkix_2x509__cert__validate_8c_aba02729cea03e1500a1839c15d1f1149}} 
+\index{pkix/x509\+\_\+cert\+\_\+validate.\+c@{pkix/x509\+\_\+cert\+\_\+validate.\+c}!x509\+Check\+Name\+Constraints@{x509\+Check\+Name\+Constraints}}
+\index{x509\+Check\+Name\+Constraints@{x509\+Check\+Name\+Constraints}!pkix/x509\+\_\+cert\+\_\+validate.\+c@{pkix/x509\+\_\+cert\+\_\+validate.\+c}}
+\subsubsection{\texorpdfstring{x509\+Check\+Name\+Constraints()}{x509CheckNameConstraints()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} x509\+Check\+Name\+Constraints (\begin{DoxyParamCaption}\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{subject\+Name,  }\item[{const \hyperlink{structX509CertificateInfo}{X509\+Certificate\+Info} $\ast$}]{cert\+Info }\end{DoxyParamCaption})}
+
+
+
+Check name constraints. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em subject\+Name} & Subject name to be verified \\
+\hline
+\mbox{\tt in}  & {\em cert\+Info} & Pointer to the CA certificate \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 252 of file x509\+\_\+cert\+\_\+validate.\+c.
+
+
+\begin{DoxyCode}
+254 \{
+255    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+256    \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\_t} match;
+257    \textcolor{keywordtype}{size\_t} \hyperlink{ndp_8h_a6b3284d8492267a77ca46948daf5545e}{m};
+258    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+259    \textcolor{keywordtype}{size\_t} \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length};
+260    \textcolor{keyword}{const} \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *\hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data};
+261    \textcolor{keyword}{const} \hyperlink{structX509Extensions}{X509Extensions} *\hyperlink{tls13__misc_8h_a7b8cc84c920376c616d85d575080d28e}{extensions};
+262    \hyperlink{structX509GeneralName}{X509GeneralName} subtree;
+263 
+264    \textcolor{comment}{//Initialize error code}
+265    error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+266 
+267    \textcolor{comment}{//Point to the X.509 extensions of the CA certificate}
+268    extensions = &certInfo->\hyperlink{structX509CertificateInfo_acfa4445df39031f204f8936a2eec189e}{tbsCert}.\hyperlink{structX509TbsCertificate_aa60d8b8a952d01fd8de02c2da091563e}{extensions};
+269 
+270    \textcolor{comment}{//Valid subject name provided?}
+271    \textcolor{keywordflow}{if}(subjectName != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+272    \{
+273       \textcolor{comment}{//Point to the list of excluded name subtrees}
+274       data = extensions->\hyperlink{structX509Extensions_a25c09f610754fe740c393867ee9950a9}{nameConstraints}.\hyperlink{structX509NameConstraints_a187e11b65d21e9eb4c9124c133c0fbbc}{excludedSubtrees};
+275       length = extensions->\hyperlink{structX509Extensions_a25c09f610754fe740c393867ee9950a9}{nameConstraints}.\hyperlink{structX509NameConstraints_a5f03d1d2e8b8eddf4f1e99bbb61254af}{excludedSubtreesLen};
+276 
+277       \textcolor{comment}{//Loop through the names constraints}
+278       \textcolor{keywordflow}{while}(length > 0)
+279       \{
+280          \textcolor{comment}{//Parse GeneralSubtree field}
+281          error = \hyperlink{certificate_2x509__cert__parse_8c_a9195227eeefd0a4135989aae9be08082}{x509ParseGeneralSubtree}(data, length, &n, &subtree);
+282          \textcolor{comment}{//Failed to decode ASN.1 tag?}
+283          \textcolor{keywordflow}{if}(error)
+284             \textcolor{keywordflow}{break};
+285 
+286          \textcolor{comment}{//Initialize flag}
+287          match = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+288 
+289          \textcolor{comment}{//Check name type}
+290          \textcolor{keywordflow}{if}(subtree.\hyperlink{structX509GeneralName_a014e3358c1ab42d4da4cd2535d59f05f}{type} == \hyperlink{certificate_2x509__common_8h_a6a82f43a61ee7a3e18d71f986d7f9a59a003e302836639dc17ee9796f98700a24}{X509\_GENERAL\_NAME\_TYPE\_DNS})
+291          \{
+292             \textcolor{comment}{//Check whether the subject name matches the subtree}
+293             match = \hyperlink{certificate_2x509__cert__validate_8c_a36490c38bb9d95c4959e422ccf8398f8}{x509CompareSubtree}(subjectName, subtree.
+      \hyperlink{structX509GeneralName_a00814b3509e1b708f019a645511e3d3a}{value},
+294                subtree.\hyperlink{structX509GeneralName_a2804f41c9ae3cf1fb375b1d222d4f3af}{length});
+295          \}
+296          \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(subtree.\hyperlink{structX509GeneralName_a014e3358c1ab42d4da4cd2535d59f05f}{type} == \hyperlink{certificate_2x509__common_8h_a6a82f43a61ee7a3e18d71f986d7f9a59a82182e4afdc99725bded20464ec3a591}{X509\_GENERAL\_NAME\_TYPE\_DIRECTORY})
+297          \{
+298             \hyperlink{structX509Name}{X509Name} \hyperlink{resource__manager_8h_a26532d7194d592ae8da35222073f36d6}{name};
+299 
+300             \textcolor{comment}{//Parse distinguished name}
+301             error = \hyperlink{certificate_2x509__cert__parse_8c_a91dc365cee54dd84e0e926317b7a1cea}{x509ParseName}((\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *) subtree.\hyperlink{structX509GeneralName_a00814b3509e1b708f019a645511e3d3a}{value}, subtree.
+      \hyperlink{structX509GeneralName_a2804f41c9ae3cf1fb375b1d222d4f3af}{length},
+302                &m, &name);
+303             \textcolor{comment}{//Failed to decode ASN.1 structure?}
+304             \textcolor{keywordflow}{if}(error)
+305                \textcolor{keywordflow}{break};
+306 
+307             \textcolor{comment}{//Valid common name?}
+308             \textcolor{keywordflow}{if}(name.\hyperlink{structX509Name_a29948ef6424aa86551582e5bf7afa47a}{commonName} != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+309             \{
+310                \textcolor{comment}{//Check whether the subject name matches the subtree}
+311                match = \hyperlink{certificate_2x509__cert__validate_8c_a36490c38bb9d95c4959e422ccf8398f8}{x509CompareSubtree}(subjectName, name.
+      \hyperlink{structX509Name_a29948ef6424aa86551582e5bf7afa47a}{commonName},
+312                   name.\hyperlink{structX509Name_a5c5af434bfa902d83cae8cec8af15581}{commonNameLen});
+313             \}
+314          \}
+315          \textcolor{keywordflow}{else}
+316          \{
+317             \textcolor{comment}{//Just for sanity}
+318          \}
+319 
+320          \textcolor{comment}{//Any match?}
+321          \textcolor{keywordflow}{if}(match)
+322          \{
+323             \textcolor{comment}{//The subject name is not acceptable}
+324             error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cae70a08cf0e3bf6240f67e1c63bcbda2c}{ERROR\_INVALID\_NAME};
+325             \textcolor{keywordflow}{break};
+326          \}
+327 
+328          \textcolor{comment}{//Next item}
+329          data += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+330          length -= \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+331       \}
+332 
+333       \textcolor{comment}{//Any name matching a restriction in the excludedSubtrees field is}
+334       \textcolor{comment}{//invalid regardless of information appearing in the permittedSubtrees}
+335       \textcolor{comment}{//(Refer to RFC 5280, section 4.2.1.10)}
+336       \textcolor{keywordflow}{if}(!error)
+337       \{
+338          \textcolor{comment}{//Point to the list of permitted name subtrees}
+339          data = extensions->\hyperlink{structX509Extensions_a25c09f610754fe740c393867ee9950a9}{nameConstraints}.\hyperlink{structX509NameConstraints_a156421797fb4821bee39cfc265a0c2da}{permittedSubtrees};
+340          length = extensions->\hyperlink{structX509Extensions_a25c09f610754fe740c393867ee9950a9}{nameConstraints}.
+      \hyperlink{structX509NameConstraints_aaada0ccb4f22f65db2b71493b14327c0}{permittedSubtreesLen};
+341 
+342          \textcolor{comment}{//Loop through the names constraints}
+343          \textcolor{keywordflow}{while}(length > 0)
+344          \{
+345             \textcolor{comment}{//Parse GeneralSubtree field}
+346             error = \hyperlink{certificate_2x509__cert__parse_8c_a9195227eeefd0a4135989aae9be08082}{x509ParseGeneralSubtree}(data, length, &n, &subtree);
+347             \textcolor{comment}{//Failed to decode ASN.1 tag?}
+348             \textcolor{keywordflow}{if}(error)
+349                \textcolor{keywordflow}{break};
+350 
+351             \textcolor{comment}{//Initialize flag}
+352             match = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+353 
+354             \textcolor{comment}{//Check name type}
+355             \textcolor{keywordflow}{if}(subtree.\hyperlink{structX509GeneralName_a014e3358c1ab42d4da4cd2535d59f05f}{type} == \hyperlink{certificate_2x509__common_8h_a6a82f43a61ee7a3e18d71f986d7f9a59a003e302836639dc17ee9796f98700a24}{X509\_GENERAL\_NAME\_TYPE\_DNS})
+356             \{
+357                \textcolor{comment}{//Check whether the subject name matches the subtree}
+358                match = \hyperlink{certificate_2x509__cert__validate_8c_a36490c38bb9d95c4959e422ccf8398f8}{x509CompareSubtree}(subjectName, subtree.
+      \hyperlink{structX509GeneralName_a00814b3509e1b708f019a645511e3d3a}{value},
+359                   subtree.\hyperlink{structX509GeneralName_a2804f41c9ae3cf1fb375b1d222d4f3af}{length});
+360             \}
+361             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(subtree.\hyperlink{structX509GeneralName_a014e3358c1ab42d4da4cd2535d59f05f}{type} == \hyperlink{certificate_2x509__common_8h_a6a82f43a61ee7a3e18d71f986d7f9a59a82182e4afdc99725bded20464ec3a591}{X509\_GENERAL\_NAME\_TYPE\_DIRECTORY})
+362             \{
+363                \hyperlink{structX509Name}{X509Name} \hyperlink{resource__manager_8h_a26532d7194d592ae8da35222073f36d6}{name};
+364 
+365                \textcolor{comment}{//Parse distinguished name}
+366                error = \hyperlink{certificate_2x509__cert__parse_8c_a91dc365cee54dd84e0e926317b7a1cea}{x509ParseName}((\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *) subtree.
+      \hyperlink{structX509GeneralName_a00814b3509e1b708f019a645511e3d3a}{value}, subtree.\hyperlink{structX509GeneralName_a2804f41c9ae3cf1fb375b1d222d4f3af}{length},
+367                   &m, &name);
+368                \textcolor{comment}{//Failed to decode ASN.1 structure?}
+369                \textcolor{keywordflow}{if}(error)
+370                   \textcolor{keywordflow}{break};
+371 
+372                \textcolor{comment}{//Valid common name?}
+373                \textcolor{keywordflow}{if}(name.\hyperlink{structX509Name_a29948ef6424aa86551582e5bf7afa47a}{commonName} != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+374                \{
+375                   \textcolor{comment}{//Check whether the subject name matches the subtree}
+376                   match = \hyperlink{certificate_2x509__cert__validate_8c_a36490c38bb9d95c4959e422ccf8398f8}{x509CompareSubtree}(subjectName, name.
+      \hyperlink{structX509Name_a29948ef6424aa86551582e5bf7afa47a}{commonName},
+377                      name.\hyperlink{structX509Name_a5c5af434bfa902d83cae8cec8af15581}{commonNameLen});
+378                \}
+379             \}
+380             \textcolor{keywordflow}{else}
+381             \{
+382                \textcolor{comment}{//Just for sanity}
+383             \}
+384 
+385             \textcolor{comment}{//Any match?}
+386             \textcolor{keywordflow}{if}(match)
+387             \{
+388                \textcolor{comment}{//The subject name is acceptable}
+389                error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+390                \textcolor{keywordflow}{break};
+391             \}
+392             \textcolor{keywordflow}{else}
+393             \{
+394                \textcolor{comment}{//The subject name does not match the current field}
+395                error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cae70a08cf0e3bf6240f67e1c63bcbda2c}{ERROR\_INVALID\_NAME};
+396             \}
+397 
+398             \textcolor{comment}{//Next item}
+399             data += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+400             length -= \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+401          \}
+402       \}
+403    \}
+404    \textcolor{keywordflow}{else}
+405    \{
+406       \textcolor{comment}{//If no valid subject name is provided, then the name constraints}
+407       \textcolor{comment}{//are not verified}
+408    \}
+409 
+410    \textcolor{comment}{//Return status code}
+411    \textcolor{keywordflow}{return} error;
+412 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{pkix_2x509__cert__validate_8c_ac72ef1917acb42ac1e984731723c7e57}\label{pkix_2x509__cert__validate_8c_ac72ef1917acb42ac1e984731723c7e57}} 
+\index{pkix/x509\+\_\+cert\+\_\+validate.\+c@{pkix/x509\+\_\+cert\+\_\+validate.\+c}!x509\+Check\+Subject\+Name@{x509\+Check\+Subject\+Name}}
+\index{x509\+Check\+Subject\+Name@{x509\+Check\+Subject\+Name}!pkix/x509\+\_\+cert\+\_\+validate.\+c@{pkix/x509\+\_\+cert\+\_\+validate.\+c}}
+\subsubsection{\texorpdfstring{x509\+Check\+Subject\+Name()}{x509CheckSubjectName()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} x509\+Check\+Subject\+Name (\begin{DoxyParamCaption}\item[{const \hyperlink{structX509CertificateInfo}{X509\+Certificate\+Info} $\ast$}]{cert\+Info,  }\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{fqdn }\end{DoxyParamCaption})}
+
+
+
+Check whether the certificate matches the specified F\+Q\+DN. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em cert\+Info} & Pointer to the X.\+509 certificate \\
+\hline
+\mbox{\tt in}  & {\em fqdn} & N\+U\+L\+L-\/terminated string that contains the fully-\/qualified domain name \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 156 of file x509\+\_\+cert\+\_\+validate.\+c.
+
+
+\begin{DoxyCode}
+158 \{
+159    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+160    \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\_t} \hyperlink{resource__manager_8c_a369fab9cf831846ad1a1d6bd33a86fa1}{res};
+161    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+162    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+163    \textcolor{keywordtype}{size\_t} \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length};
+164    \textcolor{keyword}{const} \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *\hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data};
+165    \textcolor{keyword}{const} \hyperlink{structX509Extensions}{X509Extensions} *\hyperlink{tls13__misc_8h_a7b8cc84c920376c616d85d575080d28e}{extensions};
+166    \hyperlink{structX509GeneralName}{X509GeneralName} generalName;
+167 
+168    \textcolor{comment}{//Point to the X.509 extensions of the CA certificate}
+169    extensions = &certInfo->\hyperlink{structX509CertificateInfo_acfa4445df39031f204f8936a2eec189e}{tbsCert}.\hyperlink{structX509TbsCertificate_aa60d8b8a952d01fd8de02c2da091563e}{extensions};
+170 
+171    \textcolor{comment}{//Valid FQDN name provided?}
+172    \textcolor{keywordflow}{if}(fqdn != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+173    \{
+174       \textcolor{comment}{//Initialize flag}
+175       res = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+176 
+177       \textcolor{comment}{//Total number of valid DNS names found in the SubjectAltName extension}
+178       i = 0;
+179 
+180       \textcolor{comment}{//Valid SubjectAltName extension?}
+181       \textcolor{keywordflow}{if}(extensions->\hyperlink{structX509Extensions_a6a01ce6bc43517af604b8cf580ebd01d}{subjectAltName}.\hyperlink{structX509SubjectAltName_a87435ad32eda0d4b0a9229028521812b}{rawDataLen} > 0)
+182       \{
+183          \textcolor{comment}{//The subject alternative name extension allows identities to be bound}
+184          \textcolor{comment}{//to the subject of the certificate. These identities may be included}
+185          \textcolor{comment}{//in addition to or in place of the identity in the subject field of}
+186          \textcolor{comment}{//the certificate}
+187          data = extensions->\hyperlink{structX509Extensions_a6a01ce6bc43517af604b8cf580ebd01d}{subjectAltName}.\hyperlink{structX509SubjectAltName_a7d756442bef6565af58ede9410b2dc77}{rawData};
+188          length = extensions->\hyperlink{structX509Extensions_a6a01ce6bc43517af604b8cf580ebd01d}{subjectAltName}.\hyperlink{structX509SubjectAltName_a87435ad32eda0d4b0a9229028521812b}{rawDataLen};
+189 
+190          \textcolor{comment}{//Loop through the list of subject alternative names}
+191          \textcolor{keywordflow}{while}(!res && length > 0)
+192          \{
+193             \textcolor{comment}{//Parse GeneralName field}
+194             error = \hyperlink{certificate_2x509__cert__parse_8c_aa329c231ea14f7d8b61a64db46be87e1}{x509ParseGeneralName}(data, length, &n, &generalName);
+195             \textcolor{comment}{//Failed to decode ASN.1 tag?}
+196             \textcolor{keywordflow}{if}(error)
+197                \textcolor{keywordflow}{return} error;
+198 
+199             \textcolor{comment}{//DNS name found?}
+200             \textcolor{keywordflow}{if}(generalName.\hyperlink{structX509GeneralName_a014e3358c1ab42d4da4cd2535d59f05f}{type} == \hyperlink{certificate_2x509__common_8h_a6a82f43a61ee7a3e18d71f986d7f9a59a003e302836639dc17ee9796f98700a24}{X509\_GENERAL\_NAME\_TYPE\_DNS})
+201             \{
+202                \textcolor{comment}{//Check whether the alternative name matches the specified FQDN}
+203                res = \hyperlink{certificate_2x509__cert__validate_8c_a6f02ee13e1ab2c2e2bce2e1ce4ba732d}{x509CompareSubjectName}(generalName.
+      \hyperlink{structX509GeneralName_a00814b3509e1b708f019a645511e3d3a}{value},
+204                   generalName.\hyperlink{structX509GeneralName_a2804f41c9ae3cf1fb375b1d222d4f3af}{length}, fqdn);
+205 
+206                \textcolor{comment}{//Increment counter}
+207                i++;
+208             \}
+209 
+210             \textcolor{comment}{//Next item}
+211             data += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+212             length -= \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+213          \}
+214       \}
+215 
+216       \textcolor{comment}{//No match?}
+217       \textcolor{keywordflow}{if}(!res)
+218       \{
+219          \textcolor{comment}{//The implementation must not seek a match for a reference identifier}
+220          \textcolor{comment}{//of CN-ID if the presented identifiers include a DNS-ID, SRV-ID or}
+221          \textcolor{comment}{//URI-ID (refer to RFC 6125, section 6.4.4)}
+222          \textcolor{keywordflow}{if}(i == 0 && certInfo->\hyperlink{structX509CertificateInfo_acfa4445df39031f204f8936a2eec189e}{tbsCert}.\hyperlink{structX509TbsCertificate_a68e21bffb3f287f4e57378b275e1d178}{subject}.\hyperlink{structX509Name_a5c5af434bfa902d83cae8cec8af15581}{commonNameLen} > 0)
+223          \{
+224             \textcolor{comment}{//The implementation may as a last resort check the CN-ID for a match}
+225             res = \hyperlink{certificate_2x509__cert__validate_8c_a6f02ee13e1ab2c2e2bce2e1ce4ba732d}{x509CompareSubjectName}(certInfo->\hyperlink{structX509CertificateInfo_acfa4445df39031f204f8936a2eec189e}{tbsCert}.
+      \hyperlink{structX509TbsCertificate_a68e21bffb3f287f4e57378b275e1d178}{subject}.\hyperlink{structX509Name_a29948ef6424aa86551582e5bf7afa47a}{commonName},
+226                certInfo->\hyperlink{structX509CertificateInfo_acfa4445df39031f204f8936a2eec189e}{tbsCert}.\hyperlink{structX509TbsCertificate_a68e21bffb3f287f4e57378b275e1d178}{subject}.\hyperlink{structX509Name_a5c5af434bfa902d83cae8cec8af15581}{commonNameLen}, fqdn);
+227          \}
+228       \}
+229 
+230       \textcolor{comment}{//Check whether the subject name matches the specified FQDN}
+231       error = res ? \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR} : \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cae70a08cf0e3bf6240f67e1c63bcbda2c}{ERROR\_INVALID\_NAME};
+232    \}
+233    \textcolor{keywordflow}{else}
+234    \{
+235       \textcolor{comment}{//If no valid FQDN name is provided, then the subject name of the}
+236       \textcolor{comment}{//certificate is not verified}
+237       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+238    \}
+239 
+240    \textcolor{comment}{//Return status code}
+241    \textcolor{keywordflow}{return} error;
+242 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{pkix_2x509__cert__validate_8c_ac0134610dc71d5ff612ac1bc609b7981}\label{pkix_2x509__cert__validate_8c_ac0134610dc71d5ff612ac1bc609b7981}} 
+\index{pkix/x509\+\_\+cert\+\_\+validate.\+c@{pkix/x509\+\_\+cert\+\_\+validate.\+c}!x509\+Compare\+Name@{x509\+Compare\+Name}}
+\index{x509\+Compare\+Name@{x509\+Compare\+Name}!pkix/x509\+\_\+cert\+\_\+validate.\+c@{pkix/x509\+\_\+cert\+\_\+validate.\+c}}
+\subsubsection{\texorpdfstring{x509\+Compare\+Name()}{x509CompareName()}}
+{\footnotesize\ttfamily \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} x509\+Compare\+Name (\begin{DoxyParamCaption}\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{name1,  }\item[{size\+\_\+t}]{name\+Len1,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{name2,  }\item[{size\+\_\+t}]{name\+Len2 }\end{DoxyParamCaption})}
+
+
+
+Compare distinguished names. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em name1} & Pointer to the first distinguished name \\
+\hline
+\mbox{\tt in}  & {\em name\+Len1} & Length of the first distinguished name \\
+\hline
+\mbox{\tt in}  & {\em name2} & Pointer to the second distinguished name \\
+\hline
+\mbox{\tt in}  & {\em name\+Len2} & Length of the second distinguished name \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Comparison result 
+\end{DoxyReturn}
+
+
+Definition at line 424 of file x509\+\_\+cert\+\_\+validate.\+c.
+
+
+\begin{DoxyCode}
+426 \{
+427    \textcolor{comment}{//Compare the length of the distinguished names}
+428    \textcolor{keywordflow}{if}(nameLen1 != nameLen2)
+429       \textcolor{keywordflow}{return} \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+430 
+431    \textcolor{comment}{//Compare the contents of the distinguished names}
+432    \textcolor{keywordflow}{if}(\hyperlink{cyclone__crypto_2core_2crypto_8h_aad1b4995b60f205abd5d3f409e569a0c}{cryptoMemcmp}(name1, name2, nameLen1))
+433       \textcolor{keywordflow}{return} \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+434 
+435    \textcolor{comment}{//The distinguished names match}
+436    \textcolor{keywordflow}{return} \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+437 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{pkix_2x509__cert__validate_8c_a6f02ee13e1ab2c2e2bce2e1ce4ba732d}\label{pkix_2x509__cert__validate_8c_a6f02ee13e1ab2c2e2bce2e1ce4ba732d}} 
+\index{pkix/x509\+\_\+cert\+\_\+validate.\+c@{pkix/x509\+\_\+cert\+\_\+validate.\+c}!x509\+Compare\+Subject\+Name@{x509\+Compare\+Subject\+Name}}
+\index{x509\+Compare\+Subject\+Name@{x509\+Compare\+Subject\+Name}!pkix/x509\+\_\+cert\+\_\+validate.\+c@{pkix/x509\+\_\+cert\+\_\+validate.\+c}}
+\subsubsection{\texorpdfstring{x509\+Compare\+Subject\+Name()}{x509CompareSubjectName()}}
+{\footnotesize\ttfamily \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} x509\+Compare\+Subject\+Name (\begin{DoxyParamCaption}\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{subject\+Name,  }\item[{size\+\_\+t}]{subject\+Name\+Len,  }\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{fqdn }\end{DoxyParamCaption})}
+
+
+
+Check whether the subject name matches the specified F\+Q\+DN. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em subject\+Name} & Subject name \\
+\hline
+\mbox{\tt in}  & {\em subject\+Name\+Len} & Length of the subject name \\
+\hline
+\mbox{\tt in}  & {\em fqdn} & N\+U\+L\+L-\/terminated string that contains the fully-\/qualified domain name \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+T\+R\+UE if the subject name matches the specified F\+Q\+DN, else F\+A\+L\+SE 
+\end{DoxyReturn}
+
+
+Definition at line 448 of file x509\+\_\+cert\+\_\+validate.\+c.
+
+
+\begin{DoxyCode}
+450 \{
+451    \textcolor{keywordtype}{size\_t} i;
+452    \textcolor{keywordtype}{size\_t} j;
+453    \textcolor{keywordtype}{size\_t} fqdnLen;
+454 
+455    \textcolor{comment}{//Retrieve the length of the FQDN}
+456    fqdnLen = \hyperlink{cyclone__crypto_2core_2crypto_8h_a60355e8a0b63bff69cedd877fc82c624}{cryptoStrlen}(fqdn);
+457 
+458    \textcolor{comment}{//Initialize variables}
+459    i = 0;
+460    j = 0;
+461 
+462    \textcolor{comment}{//Parse the subject name}
+463    \textcolor{keywordflow}{while}(i < subjectNameLen && j < fqdnLen)
+464    \{
+465       \textcolor{comment}{//Wildcard name found?}
+466       \textcolor{keywordflow}{if}(subjectName[i] == \textcolor{charliteral}{'*'})
+467       \{
+468          \textcolor{comment}{//The implementation should not attempt to match a presented}
+469          \textcolor{comment}{//identifier in which the wildcard character comprises a label other}
+470          \textcolor{comment}{//than the left-most label (refer to RFC 6125, section 6.4.3)}
+471          \textcolor{keywordflow}{if}(i != 0)
+472          \{
+473             \textcolor{keywordflow}{break};
+474          \}
+475 
+476          \textcolor{comment}{//The implementation should not compare against anything but the}
+477          \textcolor{comment}{//left-most label of the reference identifier}
+478          \textcolor{keywordflow}{if}(fqdn[j] == \textcolor{charliteral}{'.'})
+479          \{
+480             i++;
+481          \}
+482          \textcolor{keywordflow}{else}
+483          \{
+484             j++;
+485          \}
+486       \}
+487       \textcolor{keywordflow}{else}
+488       \{
+489          \textcolor{comment}{//Perform case insensitive character comparison}
+490          \textcolor{keywordflow}{if}(\hyperlink{cyclone__crypto_2core_2crypto_8h_a0b121504c7a981295bc221b2b9a4c03a}{cryptoTolower}(subjectName[i]) != fqdn[j])
+491          \{
+492             \textcolor{keywordflow}{break};
+493          \}
+494 
+495          \textcolor{comment}{//Compare next characters}
+496          i++;
+497          j++;
+498       \}
+499    \}
+500 
+501    \textcolor{comment}{//Check whether the subject name matches the specified FQDN}
+502    \textcolor{keywordflow}{if}(i == subjectNameLen && j == fqdnLen)
+503       \textcolor{keywordflow}{return} \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+504    \textcolor{keywordflow}{else}
+505       \textcolor{keywordflow}{return} \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+506 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{pkix_2x509__cert__validate_8c_a36490c38bb9d95c4959e422ccf8398f8}\label{pkix_2x509__cert__validate_8c_a36490c38bb9d95c4959e422ccf8398f8}} 
+\index{pkix/x509\+\_\+cert\+\_\+validate.\+c@{pkix/x509\+\_\+cert\+\_\+validate.\+c}!x509\+Compare\+Subtree@{x509\+Compare\+Subtree}}
+\index{x509\+Compare\+Subtree@{x509\+Compare\+Subtree}!pkix/x509\+\_\+cert\+\_\+validate.\+c@{pkix/x509\+\_\+cert\+\_\+validate.\+c}}
+\subsubsection{\texorpdfstring{x509\+Compare\+Subtree()}{x509CompareSubtree()}}
+{\footnotesize\ttfamily \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} x509\+Compare\+Subtree (\begin{DoxyParamCaption}\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{subject\+Name,  }\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{subtree,  }\item[{size\+\_\+t}]{subtree\+Len }\end{DoxyParamCaption})}
+
+
+
+Compare a subject name against the specified subtree. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em subject\+Name} & N\+U\+L\+L-\/terminated string that contains the subject name \\
+\hline
+\mbox{\tt in}  & {\em subtree} & Pointer to the subtree \\
+\hline
+\mbox{\tt in}  & {\em subtree\+Len} & Length of the subtree \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Comparison result 
+\end{DoxyReturn}
+
+
+Definition at line 517 of file x509\+\_\+cert\+\_\+validate.\+c.
+
+
+\begin{DoxyCode}
+519 \{
+520    \hyperlink{compiler__port_8h_a022c65af7f6c8d3947e8a37d64db6ad6}{int\_t} i;
+521    \hyperlink{compiler__port_8h_a022c65af7f6c8d3947e8a37d64db6ad6}{int\_t} j;
+522 
+523    \textcolor{comment}{//Point to the last character of the subtree}
+524    i = subtreeLen - 1;
+525    \textcolor{comment}{//Point to the last character of the subject name}
+526    j = \hyperlink{cyclone__crypto_2core_2crypto_8h_a60355e8a0b63bff69cedd877fc82c624}{cryptoStrlen}(subjectName) - 1;
+527 
+528    \textcolor{comment}{//Parse the subtree}
+529    \textcolor{keywordflow}{while}(i >= 0 && j >= 0)
+530    \{
+531       \textcolor{comment}{//Perform case insensitive character comparison}
+532       \textcolor{keywordflow}{if}(\hyperlink{cyclone__crypto_2core_2crypto_8h_a0b121504c7a981295bc221b2b9a4c03a}{cryptoTolower}(subtree[i]) != subjectName[j])
+533       \{
+534          \textcolor{keywordflow}{break};
+535       \}
+536 
+537       \textcolor{comment}{//The constraint may specify a host or a domain}
+538       \textcolor{keywordflow}{if}(subtree[i] == \textcolor{charliteral}{'.'} && i == 0)
+539       \{
+540          \textcolor{comment}{//When the constraint begins with a period, it may be expanded with}
+541          \textcolor{comment}{//one or more labels (refer to RFC 5280, section 4.2.1.10)}
+542          i = -1;
+543          j = -1;
+544       \}
+545       \textcolor{keywordflow}{else}
+546       \{
+547          \textcolor{comment}{//Compare previous characters}
+548          i--;
+549          j--;
+550       \}
+551    \}
+552 
+553    \textcolor{comment}{//Check whether the subject name matches the specified subtree}
+554    \textcolor{keywordflow}{if}(i < 0 && j < 0)
+555       \textcolor{keywordflow}{return} \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+556    \textcolor{keywordflow}{else}
+557       \textcolor{keywordflow}{return} \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+558 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{pkix_2x509__cert__validate_8c_a1d829c42c03a21d7d0325d214db51f0d}\label{pkix_2x509__cert__validate_8c_a1d829c42c03a21d7d0325d214db51f0d}} 
+\index{pkix/x509\+\_\+cert\+\_\+validate.\+c@{pkix/x509\+\_\+cert\+\_\+validate.\+c}!x509\+Validate\+Certificate@{x509\+Validate\+Certificate}}
+\index{x509\+Validate\+Certificate@{x509\+Validate\+Certificate}!pkix/x509\+\_\+cert\+\_\+validate.\+c@{pkix/x509\+\_\+cert\+\_\+validate.\+c}}
+\subsubsection{\texorpdfstring{x509\+Validate\+Certificate()}{x509ValidateCertificate()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} x509\+Validate\+Certificate (\begin{DoxyParamCaption}\item[{const \hyperlink{structX509CertificateInfo}{X509\+Certificate\+Info} $\ast$}]{cert\+Info,  }\item[{const \hyperlink{structX509CertificateInfo}{X509\+Certificate\+Info} $\ast$}]{issuer\+Cert\+Info,  }\item[{\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t}}]{path\+Len }\end{DoxyParamCaption})}
+
+
+
+X.\+509 certificate validation. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em cert\+Info} & X.\+509 certificate to be verified \\
+\hline
+\mbox{\tt in}  & {\em issuer\+Cert\+Info} & Issuer certificate \\
+\hline
+\mbox{\tt in}  & {\em path\+Len} & Certificate path length \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 60 of file x509\+\_\+cert\+\_\+validate.\+c.
+
+
+\begin{DoxyCode}
+62 \{
+63    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+64    time\_t currentTime;
+65    \textcolor{keyword}{const} \hyperlink{structX509Extensions}{X509Extensions} *\hyperlink{tls13__misc_8h_a7b8cc84c920376c616d85d575080d28e}{extensions};
+66 
+67    \textcolor{comment}{//Check parameters}
+68    \textcolor{keywordflow}{if}(certInfo == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || issuerCertInfo == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+69       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+70 
+71    \textcolor{comment}{//Retrieve current time}
+72    currentTime = \hyperlink{date__time_8c_a5ea5d60e1fafcd89917ee76d57981aae}{getCurrentUnixTime}();
+73 
+74    \textcolor{comment}{//Any real-time clock implemented?}
+75    \textcolor{keywordflow}{if}(currentTime != 0)
+76    \{
+77       \hyperlink{structDateTime}{DateTime} currentDate;
+78       \textcolor{keyword}{const} \hyperlink{structX509Validity}{X509Validity} *validity;
+79 
+80       \textcolor{comment}{//Convert Unix timestamp to date}
+81       \hyperlink{date__time_8c_adf6672c66ed1b93ea8bba616ae630a4b}{convertUnixTimeToDate}(currentTime, &currentDate);
+82 
+83       \textcolor{comment}{//The certificate validity period is the time interval during which the}
+84       \textcolor{comment}{//CA warrants that it will maintain information about the status of the}
+85       \textcolor{comment}{//certificate}
+86       validity = &certInfo->\hyperlink{structX509CertificateInfo_acfa4445df39031f204f8936a2eec189e}{tbsCert}.\hyperlink{structX509TbsCertificate_ad2149392b07cf44a8b6421572a93a70e}{validity};
+87 
+88       \textcolor{comment}{//Check the validity period}
+89       \textcolor{keywordflow}{if}(\hyperlink{date__time_8c_a2ed68acb2c0d1aa6d43a1f2ad835ee87}{compareDateTime}(&currentDate, &validity->\hyperlink{structX509Validity_a54d94f88fced1072aaacb4824757aee0}{notBefore}) < 0 ||
+90          \hyperlink{date__time_8c_a2ed68acb2c0d1aa6d43a1f2ad835ee87}{compareDateTime}(&currentDate, &validity->\hyperlink{structX509Validity_a23debc3797b2921431fce9658ecc1b73}{notAfter}) > 0)
+91       \{
+92          \textcolor{comment}{//The certificate has expired or is not yet valid}
+93          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caa2946c553fc62b37757e42e1995d17e3}{ERROR\_CERTIFICATE\_EXPIRED};
+94       \}
+95    \}
+96 
+97    \textcolor{comment}{//Make sure that the subject and issuer names chain correctly}
+98    \textcolor{keywordflow}{if}(!\hyperlink{certificate_2x509__cert__validate_8c_ac0134610dc71d5ff612ac1bc609b7981}{x509CompareName}(certInfo->\hyperlink{structX509CertificateInfo_acfa4445df39031f204f8936a2eec189e}{tbsCert}.\hyperlink{structX509TbsCertificate_a8f9e1f73fbccfe993464a10bf6420a69}{issuer}.
+      \hyperlink{structX509Name_a16f889e11f79b38a1ade245692857253}{rawData},
+99       certInfo->\hyperlink{structX509CertificateInfo_acfa4445df39031f204f8936a2eec189e}{tbsCert}.\hyperlink{structX509TbsCertificate_a8f9e1f73fbccfe993464a10bf6420a69}{issuer}.\hyperlink{structX509Name_a0f57dd73feee5e3a4aa769fa1ecf3766}{rawDataLen},
+100       issuerCertInfo->\hyperlink{structX509CertificateInfo_acfa4445df39031f204f8936a2eec189e}{tbsCert}.\hyperlink{structX509TbsCertificate_a68e21bffb3f287f4e57378b275e1d178}{subject}.\hyperlink{structX509Name_a16f889e11f79b38a1ade245692857253}{rawData},
+101       issuerCertInfo->\hyperlink{structX509CertificateInfo_acfa4445df39031f204f8936a2eec189e}{tbsCert}.\hyperlink{structX509TbsCertificate_a68e21bffb3f287f4e57378b275e1d178}{subject}.\hyperlink{structX509Name_a0f57dd73feee5e3a4aa769fa1ecf3766}{rawDataLen}))
+102    \{
+103       \textcolor{comment}{//Report an error}
+104       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac22a1806531a09ab25cc2ef268b2eeb0}{ERROR\_BAD\_CERTIFICATE};
+105    \}
+106 
+107    \textcolor{comment}{//Point to the X.509 extensions of the issuer certificate}
+108    extensions = &issuerCertInfo->\hyperlink{structX509CertificateInfo_acfa4445df39031f204f8936a2eec189e}{tbsCert}.\hyperlink{structX509TbsCertificate_aa60d8b8a952d01fd8de02c2da091563e}{extensions};
+109 
+110    \textcolor{comment}{//X.509 version 3 certificate?}
+111    \textcolor{keywordflow}{if}(issuerCertInfo->\hyperlink{structX509CertificateInfo_acfa4445df39031f204f8936a2eec189e}{tbsCert}.\hyperlink{structX509TbsCertificate_a651e18b39b7492e6e739823ea19129d9}{version} >= \hyperlink{certificate_2x509__common_8h_a42c631650a1a4fbe9d70d54d99dcac26addaa01d4830baa29e7e19044f0a656eb}{X509\_VERSION\_3})
+112    \{
+113       \textcolor{comment}{//Ensure that the issuer certificate is a CA certificate}
+114       \textcolor{keywordflow}{if}(!extensions->\hyperlink{structX509Extensions_ab06800e3424608f8d652ff23c5a027a9}{basicConstraints}.\hyperlink{structX509BasicConstraints_afcfd439b65fdffa3e6fd07e6a46e9d7d}{cA})
+115          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac22a1806531a09ab25cc2ef268b2eeb0}{ERROR\_BAD\_CERTIFICATE};
+116    \}
+117 
+118    \textcolor{comment}{//Where pathLenConstraint does not appear, no limit is imposed}
+119    \textcolor{keywordflow}{if}(extensions->\hyperlink{structX509Extensions_ab06800e3424608f8d652ff23c5a027a9}{basicConstraints}.\hyperlink{structX509BasicConstraints_a13c129a1b79a0a489604e28d69dd0950}{pathLenConstraint} >= 0)
+120    \{
+121       \textcolor{comment}{//The pathLenConstraint field gives the maximum number of non-self-issued}
+122       \textcolor{comment}{//intermediate certificates that may follow this certificate in a valid}
+123       \textcolor{comment}{//certification path}
+124       \textcolor{keywordflow}{if}(pathLen > (\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t}) extensions->\hyperlink{structX509Extensions_ab06800e3424608f8d652ff23c5a027a9}{basicConstraints}.
+      \hyperlink{structX509BasicConstraints_a13c129a1b79a0a489604e28d69dd0950}{pathLenConstraint})
+125          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac22a1806531a09ab25cc2ef268b2eeb0}{ERROR\_BAD\_CERTIFICATE};
+126    \}
+127 
+128    \textcolor{comment}{//Check if the keyUsage extension is present}
+129    \textcolor{keywordflow}{if}(extensions->\hyperlink{structX509Extensions_adc23b201b2f81c036bb2f6fb364af346}{keyUsage}.bitmap != 0)
+130    \{
+131       \textcolor{comment}{//If the keyUsage extension is present, then the subject public key must}
+132       \textcolor{comment}{//not be used to verify signatures on certificates unless the keyCertSign}
+133       \textcolor{comment}{//bit is set (refer to RFC 5280, section 4.2.1.3)}
+134       \textcolor{keywordflow}{if}(!(extensions->\hyperlink{structX509Extensions_adc23b201b2f81c036bb2f6fb364af346}{keyUsage}.bitmap & \hyperlink{certificate_2x509__common_8h_a071feff2befadce3a4fe5b708cdb149ba2dc6d1748a2dd8a65a7ba5e521a1c054}{X509\_KEY\_USAGE\_KEY\_CERT\_SIGN}))
+135          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac22a1806531a09ab25cc2ef268b2eeb0}{ERROR\_BAD\_CERTIFICATE};
+136    \}
+137 
+138    \textcolor{comment}{//The ASN.1 DER-encoded tbsCertificate is used as the input to the signature}
+139    \textcolor{comment}{//function}
+140    error = \hyperlink{pkix_2x509__cert__validate_8c_a1d8215100a2199ceac838bb36ad392bf}{x509VerifySignature}(certInfo->\hyperlink{structX509CertificateInfo_acfa4445df39031f204f8936a2eec189e}{tbsCert}.
+      \hyperlink{structX509TbsCertificate_ace5ec9ea3582843c4e81cdbbe4c3d0aa}{rawData},
+141       certInfo->\hyperlink{structX509CertificateInfo_acfa4445df39031f204f8936a2eec189e}{tbsCert}.\hyperlink{structX509TbsCertificate_af8694e963e30d044b217305d089e7ecd}{rawDataLen}, &certInfo->\hyperlink{structX509CertificateInfo_a557f43736fe7dab190eac1cd31559281}{signatureAlgo},
+142       &issuerCertInfo->\hyperlink{structX509CertificateInfo_acfa4445df39031f204f8936a2eec189e}{tbsCert}.\hyperlink{structX509TbsCertificate_ae6d392cbe0fcd240ab1dabaac465ca95}{subjectPublicKeyInfo}, &certInfo->
+      \hyperlink{structX509CertificateInfo_a14aae7b8131fdc0d1cae4ccc6be1f02d}{signatureValue});
+143 
+144    \textcolor{comment}{//Return status code}
+145    \textcolor{keywordflow}{return} error;
+146 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{pkix_2x509__cert__validate_8c_a1d8215100a2199ceac838bb36ad392bf}\label{pkix_2x509__cert__validate_8c_a1d8215100a2199ceac838bb36ad392bf}} 
+\index{pkix/x509\+\_\+cert\+\_\+validate.\+c@{pkix/x509\+\_\+cert\+\_\+validate.\+c}!x509\+Verify\+Signature@{x509\+Verify\+Signature}}
+\index{x509\+Verify\+Signature@{x509\+Verify\+Signature}!pkix/x509\+\_\+cert\+\_\+validate.\+c@{pkix/x509\+\_\+cert\+\_\+validate.\+c}}
+\subsubsection{\texorpdfstring{x509\+Verify\+Signature()}{x509VerifySignature()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} x509\+Verify\+Signature (\begin{DoxyParamCaption}\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{tbs\+Cert,  }\item[{size\+\_\+t}]{tbs\+Cert\+Len,  }\item[{const \hyperlink{structX509SignatureAlgoId}{X509\+Signature\+Algo\+Id} $\ast$}]{signature\+Algo\+Id,  }\item[{const \hyperlink{structX509SubjectPublicKeyInfo}{X509\+Subject\+Public\+Key\+Info} $\ast$}]{public\+Key\+Info,  }\item[{const \hyperlink{structX509SignatureValue}{X509\+Signature\+Value} $\ast$}]{signature\+Value }\end{DoxyParamCaption})}
+
+
+
+Certificate signature verification. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em tbs\+Cert} & T\+B\+S\+Certificate whose signature is to be verified \\
+\hline
+\mbox{\tt in}  & {\em tbs\+Cert\+Len} & Length of the T\+B\+S\+Certificate, in bytes \\
+\hline
+\mbox{\tt in}  & {\em signature\+Algo\+Id} & Signature algorithm identifier \\
+\hline
+\mbox{\tt in}  & {\em public\+Key\+Info} & Issuer\textquotesingle{}s public key \\
+\hline
+\mbox{\tt in}  & {\em signature\+Value} & Signature to be verified \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 571 of file x509\+\_\+cert\+\_\+validate.\+c.
+
+
+\begin{DoxyCode}
+575 \{
+576    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+577    \hyperlink{certificate_2x509__common_8h_ac7f323ef3436e8cc3a89862a5e818078}{X509SignatureAlgo} signAlgo;
+578    \textcolor{keyword}{const} \hyperlink{structHashAlgo}{HashAlgo} *hashAlgo;
+579    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} digest[\hyperlink{pkix_2x509__common_8h_aaa7e393a09f334c6e3d573cff46ad6b0}{X509\_MAX\_HASH\_DIGEST\_SIZE}];
+580 
+581    \textcolor{comment}{//Retrieve the signature algorithm that was used to sign the certificate}
+582    error = \hyperlink{certificate_2x509__common_8c_ac397a84e21ec7d1d10607d48aa9fdf54}{x509GetSignHashAlgo}(signatureAlgoId, &signAlgo, &hashAlgo);
+583    \textcolor{comment}{//Unsupported signature algorithm?}
+584    \textcolor{keywordflow}{if}(error)
+585       \textcolor{keywordflow}{return} error;
+586 
+587    \textcolor{comment}{//Ed25519 and Ed448 are used in PureEdDSA mode, without pre-hashing}
+588    \textcolor{keywordflow}{if}(hashAlgo != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+589    \{
+590       \textcolor{comment}{//Digest the TBSCertificate structure using the specified hash algorithm}
+591       error = hashAlgo->\hyperlink{structHashAlgo_af06e5499992d76f215cc8329a2d6cbb3}{compute}(tbsCert, tbsCertLen, digest);
+592       \textcolor{comment}{//Any error to report?}
+593       \textcolor{keywordflow}{if}(error)
+594          \textcolor{keywordflow}{return} error;
+595 
+596 \textcolor{preprocessor}{#if (X509\_RSA\_SUPPORT == ENABLED && RSA\_SUPPORT == ENABLED)}
+597       \textcolor{comment}{//RSA signature algorithm?}
+598       \textcolor{keywordflow}{if}(signAlgo == \hyperlink{certificate_2x509__common_8h_ac7f323ef3436e8cc3a89862a5e818078aaa23c66e6e738231765cb534729eb144}{X509\_SIGN\_ALGO\_RSA})
+599       \{
+600          \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} \hyperlink{md5_8c_af11ea3cdbca7345eb6a4a8ac5ce0434d}{k};
+601          \hyperlink{structRsaPublicKey}{RsaPublicKey} publicKey;
+602 
+603          \textcolor{comment}{//Initialize RSA public key}
+604          \hyperlink{rsa_8c_af3d3a1f0ce23e006da06325cc37c4063}{rsaInitPublicKey}(&publicKey);
+605 
+606          \textcolor{comment}{//Import the RSA public key}
+607          error = \hyperlink{x509__key__parse_8c_a46b55059a7e4840fa58c40d2c2b44cd4}{x509ImportRsaPublicKey}(publicKeyInfo, &publicKey);
+608 
+609          \textcolor{comment}{//Check status code}
+610          \textcolor{keywordflow}{if}(!error)
+611          \{
+612             \textcolor{comment}{//Get the length of the modulus, in bits}
+613             k = \hyperlink{mpi_8c_a2e540eb4b5d15ea9755fb3e138990c1c}{mpiGetBitLength}(&publicKey.\hyperlink{structRsaPublicKey_a51b3d236796d7d46c15d3e6bc7e5acb2}{n});
+614 
+615             \textcolor{comment}{//Make sure the modulus is acceptable}
+616             \textcolor{keywordflow}{if}(k < X509\_MIN\_RSA\_MODULUS\_SIZE || k > \hyperlink{certificate_2x509__common_8h_a511b1a0e91b5d02cd509c45134828001}{X509\_MAX\_RSA\_MODULUS\_SIZE})
+617             \{
+618                \textcolor{comment}{//Report an error}
+619                error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca31846fcd73423f08cca08d9acf9b3f8e}{ERROR\_INVALID\_KEY};
+620             \}
+621          \}
+622 
+623          \textcolor{comment}{//Check status code}
+624          \textcolor{keywordflow}{if}(!error)
+625          \{
+626             \textcolor{comment}{//Verify RSA signature (RSASSA-PKCS1-v1\_5 signature scheme)}
+627             error = \hyperlink{rsa_8c_ac8bc3701e41ec2201abf77a280dfbc01}{rsassaPkcs1v15Verify}(&publicKey, hashAlgo, digest,
+628                signatureValue->\hyperlink{structX509SignatureValue_a3e53e8589cdfc0c22d30e85bebfa0625}{data}, signatureValue->\hyperlink{structX509SignatureValue_af1bce8baf0e1a46212467145e00079d7}{length});
+629          \}
+630 
+631          \textcolor{comment}{//Release previously allocated resources}
+632          \hyperlink{rsa_8c_a6dc1711d56454b2a6e565199509d884e}{rsaFreePublicKey}(&publicKey);
+633       \}
+634       \textcolor{keywordflow}{else}
+635 \textcolor{preprocessor}{#endif}
+636 \textcolor{preprocessor}{#if (X509\_RSA\_PSS\_SUPPORT == ENABLED && RSA\_SUPPORT == ENABLED)}
+637       \textcolor{comment}{//RSA-PSS signature algorithm?}
+638       \textcolor{keywordflow}{if}(signAlgo == \hyperlink{certificate_2x509__common_8h_ac7f323ef3436e8cc3a89862a5e818078ae780ed4bee657c707e10479fc8f55c0a}{X509\_SIGN\_ALGO\_RSA\_PSS})
+639       \{
+640          \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} \hyperlink{md5_8c_af11ea3cdbca7345eb6a4a8ac5ce0434d}{k};
+641          \hyperlink{structRsaPublicKey}{RsaPublicKey} publicKey;
+642 
+643          \textcolor{comment}{//Initialize RSA public key}
+644          \hyperlink{rsa_8c_af3d3a1f0ce23e006da06325cc37c4063}{rsaInitPublicKey}(&publicKey);
+645 
+646          \textcolor{comment}{//Import the RSA public key}
+647          error = \hyperlink{x509__key__parse_8c_a46b55059a7e4840fa58c40d2c2b44cd4}{x509ImportRsaPublicKey}(publicKeyInfo, &publicKey);
+648 
+649          \textcolor{comment}{//Check status code}
+650          \textcolor{keywordflow}{if}(!error)
+651          \{
+652             \textcolor{comment}{//Get the length of the modulus, in bits}
+653             k = \hyperlink{mpi_8c_a2e540eb4b5d15ea9755fb3e138990c1c}{mpiGetBitLength}(&publicKey.\hyperlink{structRsaPublicKey_a51b3d236796d7d46c15d3e6bc7e5acb2}{n});
+654 
+655             \textcolor{comment}{//Make sure the modulus is acceptable}
+656             \textcolor{keywordflow}{if}(k < X509\_MIN\_RSA\_MODULUS\_SIZE || k > \hyperlink{certificate_2x509__common_8h_a511b1a0e91b5d02cd509c45134828001}{X509\_MAX\_RSA\_MODULUS\_SIZE})
+657             \{
+658                \textcolor{comment}{//Report an error}
+659                error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca31846fcd73423f08cca08d9acf9b3f8e}{ERROR\_INVALID\_KEY};
+660             \}
+661          \}
+662 
+663          \textcolor{comment}{//Check status code}
+664          \textcolor{keywordflow}{if}(!error)
+665          \{
+666             \textcolor{comment}{//Retrieve the length of the salt}
+667             k = signatureAlgoId->\hyperlink{structX509SignatureAlgoId_aabb448030d8783d06739cdd2c660dde4}{rsaPssParams}.\hyperlink{structX509RsaPssParameters_a0472b015828361df56b2550e4c1ac220}{saltLen};
+668 
+669             \textcolor{comment}{//Verify RSA signature (RSASSA-PSS signature scheme)}
+670             error = \hyperlink{rsa_8c_a353c0daced94ff0a95ec1067f6f9048c}{rsassaPssVerify}(&publicKey, hashAlgo, k, digest,
+671                signatureValue->\hyperlink{structX509SignatureValue_a3e53e8589cdfc0c22d30e85bebfa0625}{data}, signatureValue->\hyperlink{structX509SignatureValue_af1bce8baf0e1a46212467145e00079d7}{length});
+672          \}
+673 
+674          \textcolor{comment}{//Release previously allocated resources}
+675          \hyperlink{rsa_8c_a6dc1711d56454b2a6e565199509d884e}{rsaFreePublicKey}(&publicKey);
+676       \}
+677       \textcolor{keywordflow}{else}
+678 \textcolor{preprocessor}{#endif}
+679 \textcolor{preprocessor}{#if (X509\_DSA\_SUPPORT == ENABLED && DSA\_SUPPORT == ENABLED)}
+680       \textcolor{comment}{//DSA signature algorithm?}
+681       \textcolor{keywordflow}{if}(signAlgo == \hyperlink{certificate_2x509__common_8h_ac7f323ef3436e8cc3a89862a5e818078aab93ed50739173cd96d39538379411da}{X509\_SIGN\_ALGO\_DSA})
+682       \{
+683          \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} \hyperlink{md5_8c_af11ea3cdbca7345eb6a4a8ac5ce0434d}{k};
+684          \hyperlink{structDsaPublicKey}{DsaPublicKey} publicKey;
+685          \hyperlink{structDsaSignature}{DsaSignature} \hyperlink{tls_8h_af27e6d4ea3add14cd8cc9aa275d716ad}{signature};
+686 
+687          \textcolor{comment}{//Initialize DSA public key}
+688          \hyperlink{dsa_8c_ab058852057768fc18904ba5796f5af4d}{dsaInitPublicKey}(&publicKey);
+689          \textcolor{comment}{//Initialize DSA signature}
+690          \hyperlink{dsa_8c_a6ebbad1e693d6967da33e2a1338912c7}{dsaInitSignature}(&signature);
+691 
+692          \textcolor{comment}{//Import the DSA public key}
+693          error = \hyperlink{x509__key__parse_8c_aa028d369d57dd4e935aed069e8274de9}{x509ImportDsaPublicKey}(publicKeyInfo, &publicKey);
+694 
+695          \textcolor{comment}{//Check status code}
+696          \textcolor{keywordflow}{if}(!error)
+697          \{
+698             \textcolor{comment}{//Get the length of the prime modulus, in bits}
+699             k = \hyperlink{mpi_8c_a2e540eb4b5d15ea9755fb3e138990c1c}{mpiGetBitLength}(&publicKey.\hyperlink{structDsaPublicKey_a273f5bed06a946fd672c94283f49fc3e}{p});
+700 
+701             \textcolor{comment}{//Make sure the prime modulus is acceptable}
+702             \textcolor{keywordflow}{if}(k < X509\_MIN\_DSA\_MODULUS\_SIZE || k > \hyperlink{certificate_2x509__common_8h_a00cfe4510ccfcf3398b135cef8632ed4}{X509\_MAX\_DSA\_MODULUS\_SIZE})
+703             \{
+704                \textcolor{comment}{//Report an error}
+705                error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca31846fcd73423f08cca08d9acf9b3f8e}{ERROR\_INVALID\_KEY};
+706             \}
+707          \}
+708 
+709          \textcolor{comment}{//Check status code}
+710          \textcolor{keywordflow}{if}(!error)
+711          \{
+712             \textcolor{comment}{//Read the ASN.1 encoded signature}
+713             error = \hyperlink{dsa_8c_a05526f7cfcf22483963264e0500bc724}{dsaReadSignature}(signatureValue->\hyperlink{structX509SignatureValue_a3e53e8589cdfc0c22d30e85bebfa0625}{data},
+714                signatureValue->\hyperlink{structX509SignatureValue_af1bce8baf0e1a46212467145e00079d7}{length}, &signature);
+715          \}
+716 
+717          \textcolor{comment}{//Check status code}
+718          \textcolor{keywordflow}{if}(!error)
+719          \{
+720             \textcolor{comment}{//Verify DSA signature}
+721             error = \hyperlink{dsa_8c_a551e9301249e713b9925e2a7f6d7ed79}{dsaVerifySignature}(&publicKey, digest, hashAlgo->
+      \hyperlink{structHashAlgo_a0c8ccdb22ea395ccdd8decd06401d22e}{digestSize},
+722                &signature);
+723          \}
+724 
+725          \textcolor{comment}{//Release previously allocated resources}
+726          \hyperlink{dsa_8c_aecb06a7f6d0f7df028b6a30284fa0016}{dsaFreePublicKey}(&publicKey);
+727          \hyperlink{dsa_8c_a78f8ff9636dd1677e22b637476c88e9d}{dsaFreeSignature}(&signature);
+728       \}
+729       \textcolor{keywordflow}{else}
+730 \textcolor{preprocessor}{#endif}
+731 \textcolor{preprocessor}{#if (X509\_ECDSA\_SUPPORT == ENABLED && ECDSA\_SUPPORT == ENABLED)}
+732       \textcolor{comment}{//ECDSA signature algorithm?}
+733       \textcolor{keywordflow}{if}(signAlgo == \hyperlink{certificate_2x509__common_8h_ac7f323ef3436e8cc3a89862a5e818078abef3275bb5075ac798ff19adb39cfb95}{X509\_SIGN\_ALGO\_ECDSA})
+734       \{
+735          \textcolor{keyword}{const} \hyperlink{structEcCurveInfo}{EcCurveInfo} *curveInfo;
+736          \hyperlink{structEcDomainParameters}{EcDomainParameters} params;
+737          \hyperlink{structEcPoint}{EcPoint} publicKey;
+738          \hyperlink{structEcdsaSignature}{EcdsaSignature} \hyperlink{tls_8h_af27e6d4ea3add14cd8cc9aa275d716ad}{signature};
+739 
+740          \textcolor{comment}{//Initialize EC domain parameters}
+741          \hyperlink{ec_8c_a5b5132fb8adf668ffa74ec10e7e63441}{ecInitDomainParameters}(&params);
+742          \textcolor{comment}{//Initialize ECDSA public key}
+743          \hyperlink{ec_8c_ac038e67dcc04d6d94bb930f9475f3ff8}{ecInit}(&publicKey);
+744          \textcolor{comment}{//Initialize ECDSA signature}
+745          \hyperlink{ecdsa_8c_aef8cd9a530146f44fc0597eb67480133}{ecdsaInitSignature}(&signature);
+746 
+747          \textcolor{comment}{//Retrieve EC domain parameters}
+748          curveInfo = \hyperlink{certificate_2x509__common_8c_a6f6416a69dd75fe6f18aab77a0f7205c}{x509GetCurveInfo}(publicKeyInfo->\hyperlink{structX509SubjectPublicKeyInfo_af45ca47e19db60631c9fdb4d4b62ed10}{ecParams}.
+      \hyperlink{structX509EcParameters_a122c5387fb2f12374a905ecfd2ca4c86}{namedCurve},
+749             publicKeyInfo->\hyperlink{structX509SubjectPublicKeyInfo_af45ca47e19db60631c9fdb4d4b62ed10}{ecParams}.\hyperlink{structX509EcParameters_ac58081bd63ed68d0cb101ff7e65667ec}{namedCurveLen});
+750 
+751          \textcolor{comment}{//Make sure the specified elliptic curve is supported}
+752          \textcolor{keywordflow}{if}(curveInfo != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+753          \{
+754             \textcolor{comment}{//Load EC domain parameters}
+755             error = \hyperlink{ec_8c_ab3d7ebcb8fd2e79990ef25e39a68f4a5}{ecLoadDomainParameters}(&params, curveInfo);
+756          \}
+757          \textcolor{keywordflow}{else}
+758          \{
+759             \textcolor{comment}{//Invalid EC domain parameters}
+760             error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac22a1806531a09ab25cc2ef268b2eeb0}{ERROR\_BAD\_CERTIFICATE};
+761          \}
+762 
+763          \textcolor{comment}{//Check status code}
+764          \textcolor{keywordflow}{if}(!error)
+765          \{
+766             \textcolor{comment}{//Retrieve the EC public key}
+767             error = \hyperlink{ec_8c_ae707a9a99979ce0b291ac6c0f8d380fd}{ecImport}(&params, &publicKey, publicKeyInfo->
+      \hyperlink{structX509SubjectPublicKeyInfo_af9b3b1e9d01c44192f01edbf14001622}{ecPublicKey}.\hyperlink{structX509EcPublicKey_a40d2e839059193580054d744529d0131}{q},
+768                publicKeyInfo->\hyperlink{structX509SubjectPublicKeyInfo_af9b3b1e9d01c44192f01edbf14001622}{ecPublicKey}.\hyperlink{structX509EcPublicKey_a62e05abdaa08ec4418a624e44b84a5b8}{qLen});
+769          \}
+770 
+771          \textcolor{comment}{//Check status code}
+772          \textcolor{keywordflow}{if}(!error)
+773          \{
+774             \textcolor{comment}{//Read the ASN.1 encoded signature}
+775             error = \hyperlink{ecdsa_8c_a51f5efbd49199a8d8db36b694f0683ff}{ecdsaReadSignature}(signatureValue->\hyperlink{structX509SignatureValue_a3e53e8589cdfc0c22d30e85bebfa0625}{data},
+776                signatureValue->\hyperlink{structX509SignatureValue_af1bce8baf0e1a46212467145e00079d7}{length}, &signature);
+777          \}
+778 
+779          \textcolor{comment}{//Check status code}
+780          \textcolor{keywordflow}{if}(!error)
+781          \{
+782             \textcolor{comment}{//Verify ECDSA signature}
+783             error = \hyperlink{ecdsa_8c_a34b9fa4b6962c63ed4edf6f4ec1b6f6d}{ecdsaVerifySignature}(&params, &publicKey, digest,
+784                hashAlgo->\hyperlink{structHashAlgo_a0c8ccdb22ea395ccdd8decd06401d22e}{digestSize}, &signature);
+785          \}
+786 
+787          \textcolor{comment}{//Release previously allocated resources}
+788          \hyperlink{ec_8c_a256993c154cf87c3d9d18138a1365eca}{ecFreeDomainParameters}(&params);
+789          \hyperlink{ec_8c_ae4a9276eac491f8acbb6d0916287411b}{ecFree}(&publicKey);
+790          \hyperlink{ecdsa_8c_a6f4daa07ea8815b8c67b47c4b089d157}{ecdsaFreeSignature}(&signature);
+791       \}
+792       \textcolor{keywordflow}{else}
+793 \textcolor{preprocessor}{#endif}
+794       \textcolor{comment}{//Invalid signature algorithm?}
+795       \{
+796          \textcolor{comment}{//Report an error}
+797          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4c54d9b14297edac328805943cf95795}{ERROR\_UNSUPPORTED\_SIGNATURE\_ALGO};
+798       \}
+799    \}
+800    \textcolor{keywordflow}{else}
+801    \{
+802 \textcolor{preprocessor}{#if (X509\_ED25519\_SUPPORT == ENABLED && ED25519\_SUPPORT == ENABLED)}
+803       \textcolor{comment}{//Ed25519 signature algorithm?}
+804       \textcolor{keywordflow}{if}(signAlgo == \hyperlink{certificate_2x509__common_8h_ac7f323ef3436e8cc3a89862a5e818078a34b6299ba091cde76553b23a7632da7f}{X509\_SIGN\_ALGO\_ED25519})
+805       \{
+806          \textcolor{comment}{//Check the length of the public key}
+807          \textcolor{keywordflow}{if}(publicKeyInfo->\hyperlink{structX509SubjectPublicKeyInfo_af9b3b1e9d01c44192f01edbf14001622}{ecPublicKey}.\hyperlink{structX509EcPublicKey_a62e05abdaa08ec4418a624e44b84a5b8}{qLen} == 
+      \hyperlink{ed25519_8h_a5fdd1f73dec2be868a8ed5d2e129bb5e}{ED25519\_PUBLIC\_KEY\_LEN})
+808          \{
+809             \textcolor{comment}{//Check the length of the EdDSA signature}
+810             \textcolor{keywordflow}{if}(signatureValue->\hyperlink{structX509SignatureValue_af1bce8baf0e1a46212467145e00079d7}{length} == \hyperlink{ed25519_8h_a6b45906484d3c938aef3a114e3d1a8ea}{ED25519\_SIGNATURE\_LEN})
+811             \{
+812                \textcolor{comment}{//Verify signature (PureEdDSA mode)}
+813                error = \hyperlink{ed25519_8c_a5f517039b2a85e2dbdcf26791e7d1b2c}{ed25519VerifySignature}(publicKeyInfo->
+      \hyperlink{structX509SubjectPublicKeyInfo_af9b3b1e9d01c44192f01edbf14001622}{ecPublicKey}.\hyperlink{structX509EcPublicKey_a40d2e839059193580054d744529d0131}{q},
+814                   tbsCert, tbsCertLen, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, 0, 0, signatureValue->\hyperlink{structX509SignatureValue_a3e53e8589cdfc0c22d30e85bebfa0625}{data});
+815             \}
+816             \textcolor{keywordflow}{else}
+817             \{
+818                \textcolor{comment}{//The length of the EdDSA signature is not valid}
+819                error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca6e8db1d17e3aad53ecc5a4ff62df6f48}{ERROR\_INVALID\_SIGNATURE};
+820             \}
+821          \}
+822          \textcolor{keywordflow}{else}
+823          \{
+824             \textcolor{comment}{//The length of the Ed25519 public key is not valid}
+825             error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca152b24f57c941cb736772696416eb7c2}{ERROR\_ILLEGAL\_PARAMETER};
+826          \}
+827       \}
+828       \textcolor{keywordflow}{else}
+829 \textcolor{preprocessor}{#endif}
+830 \textcolor{preprocessor}{#if (X509\_ED448\_SUPPORT == ENABLED && ED448\_SUPPORT == ENABLED)}
+831       \textcolor{comment}{//Ed448 signature algorithm?}
+832       \textcolor{keywordflow}{if}(signAlgo == \hyperlink{certificate_2x509__common_8h_ac7f323ef3436e8cc3a89862a5e818078a258c2bcce0e685a5315ff975dc2f7c57}{X509\_SIGN\_ALGO\_ED448})
+833       \{
+834          \textcolor{comment}{//Check the length of the public key}
+835          \textcolor{keywordflow}{if}(publicKeyInfo->\hyperlink{structX509SubjectPublicKeyInfo_af9b3b1e9d01c44192f01edbf14001622}{ecPublicKey}.\hyperlink{structX509EcPublicKey_a62e05abdaa08ec4418a624e44b84a5b8}{qLen} == 
+      \hyperlink{ed448_8h_a452cd73807c6a5607ede7ba57cbc3e6a}{ED448\_PUBLIC\_KEY\_LEN})
+836          \{
+837             \textcolor{comment}{//Check the length of the EdDSA signature}
+838             \textcolor{keywordflow}{if}(signatureValue->\hyperlink{structX509SignatureValue_af1bce8baf0e1a46212467145e00079d7}{length} == \hyperlink{ed448_8h_a6faeb89fbb8744bcc8ec3333ec22b099}{ED448\_SIGNATURE\_LEN})
+839             \{
+840                \textcolor{comment}{//Verify signature (PureEdDSA mode)}
+841                error = \hyperlink{ed448_8c_ab6f6de548796083dfc337efbc7542084}{ed448VerifySignature}(publicKeyInfo->
+      \hyperlink{structX509SubjectPublicKeyInfo_af9b3b1e9d01c44192f01edbf14001622}{ecPublicKey}.\hyperlink{structX509EcPublicKey_a40d2e839059193580054d744529d0131}{q},
+842                   tbsCert, tbsCertLen, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, 0, 0, signatureValue->\hyperlink{structX509SignatureValue_a3e53e8589cdfc0c22d30e85bebfa0625}{data});
+843             \}
+844             \textcolor{keywordflow}{else}
+845             \{
+846                \textcolor{comment}{//The length of the EdDSA signature is not valid}
+847                error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca6e8db1d17e3aad53ecc5a4ff62df6f48}{ERROR\_INVALID\_SIGNATURE};
+848             \}
+849          \}
+850          \textcolor{keywordflow}{else}
+851          \{
+852             \textcolor{comment}{//The length of the Ed448 public key is not valid}
+853             error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca152b24f57c941cb736772696416eb7c2}{ERROR\_ILLEGAL\_PARAMETER};
+854          \}
+855       \}
+856       \textcolor{keywordflow}{else}
+857 \textcolor{preprocessor}{#endif}
+858       \textcolor{comment}{//Invalid signature algorithm?}
+859       \{
+860          \textcolor{comment}{//Report an error}
+861          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4c54d9b14297edac328805943cf95795}{ERROR\_UNSUPPORTED\_SIGNATURE\_ALGO};
+862       \}
+863    \}
+864 
+865    \textcolor{comment}{//Return status code}
+866    \textcolor{keywordflow}{return} error;
+867 \}
+\end{DoxyCode}

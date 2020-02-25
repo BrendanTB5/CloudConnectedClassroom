@@ -1,0 +1,1462 @@
+\hypertarget{modbus__client_8c}{}\section{cyclone\+\_\+tcp/modbus/modbus\+\_\+client.c File Reference}
+\label{modbus__client_8c}\index{cyclone\+\_\+tcp/modbus/modbus\+\_\+client.\+c@{cyclone\+\_\+tcp/modbus/modbus\+\_\+client.\+c}}
+
+
+Modbus/\+T\+CP client.  
+
+
+{\ttfamily \#include \char`\"{}modbus/modbus\+\_\+client.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}modbus/modbus\+\_\+client\+\_\+pdu.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}modbus/modbus\+\_\+client\+\_\+transport.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}modbus/modbus\+\_\+client\+\_\+misc.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}debug.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{modbus__client_8c_afcdf5e66fd927a7f4cc64295acd20407}{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}~\hyperlink{net__config_8h_aa132de375069fd85fe54b72fe90f445f}{M\+O\+D\+B\+U\+S\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{modbus__client_8c_a01dbab668effbedd143813cc77cbbdf8}{modbus\+Client\+Init} (\hyperlink{modbus__client_8h_afb534cba0b839b960b7afd907b978713}{Modbus\+Client\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Initialize Modbus/\+T\+CP client context. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{modbus__client_8c_a489715d64066f9882e44d4133a8fc9f2}{modbus\+Client\+Register\+Tls\+Init\+Callback} (\hyperlink{modbus__client_8h_afb534cba0b839b960b7afd907b978713}{Modbus\+Client\+Context} $\ast$context, \hyperlink{modbus__client_8h_a3c569366af881058e415a11fb1071050}{Modbus\+Client\+Tls\+Init\+Callback} callback)
+\begin{DoxyCompactList}\small\item\em Register T\+LS initialization callback function. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{modbus__client_8c_ad406d6a7cd24d54e1fad43023f8b0e10}{modbus\+Client\+Set\+Timeout} (\hyperlink{modbus__client_8h_afb534cba0b839b960b7afd907b978713}{Modbus\+Client\+Context} $\ast$context, \hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\+\_\+t} timeout)
+\begin{DoxyCompactList}\small\item\em Set timeout value for blocking operations. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{modbus__client_8c_a2a1318b3a54116e33df697930621bc63}{modbus\+Client\+Set\+Unit\+Id} (\hyperlink{modbus__client_8h_afb534cba0b839b960b7afd907b978713}{Modbus\+Client\+Context} $\ast$context, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} \hyperlink{modbus__common_8h_a62544890ec097bc0814255ebeacd7e13}{unit\+Id})
+\begin{DoxyCompactList}\small\item\em Set unit identifier. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{modbus__client_8c_a57ec04066f1f250b168699266feae4ce}{modbus\+Client\+Bind\+To\+Interface} (\hyperlink{modbus__client_8h_afb534cba0b839b960b7afd907b978713}{Modbus\+Client\+Context} $\ast$context, \hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface)
+\begin{DoxyCompactList}\small\item\em Bind the Modbus/\+T\+CP client to a particular network interface. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{modbus__client_8c_a48dcfd422732c134e7c6a3e0fb3c0f15}{modbus\+Client\+Connect} (\hyperlink{modbus__client_8h_afb534cba0b839b960b7afd907b978713}{Modbus\+Client\+Context} $\ast$context, const \hyperlink{structIpAddr}{Ip\+Addr} $\ast$server\+Ip\+Addr, \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} server\+Port)
+\begin{DoxyCompactList}\small\item\em Establish connection with the Modbus/\+T\+CP server. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{modbus__client_8c_a4e6a95928c0084fd723a8867b9c05d32}{modbus\+Client\+Read\+Coils} (\hyperlink{modbus__client_8h_afb534cba0b839b960b7afd907b978713}{Modbus\+Client\+Context} $\ast$context, \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} \hyperlink{ndp_8h_a1b452a6c3ab338d73213b321b6750f2b}{address}, \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} quantity, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{chap_8h_adfa040d04d16520129a735fff8fb1628}{value})
+\begin{DoxyCompactList}\small\item\em Read coils. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{modbus__client_8c_ac9df611639019b1a09b7064ed0016190}{modbus\+Client\+Read\+Discrete\+Inputs} (\hyperlink{modbus__client_8h_afb534cba0b839b960b7afd907b978713}{Modbus\+Client\+Context} $\ast$context, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} \hyperlink{ndp_8h_a1b452a6c3ab338d73213b321b6750f2b}{address}, \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} quantity, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{chap_8h_adfa040d04d16520129a735fff8fb1628}{value})
+\begin{DoxyCompactList}\small\item\em Read discrete inputs. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{modbus__client_8c_a124a244c1817a28f52bfb50564968fec}{modbus\+Client\+Read\+Holding\+Regs} (\hyperlink{modbus__client_8h_afb534cba0b839b960b7afd907b978713}{Modbus\+Client\+Context} $\ast$context, \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} \hyperlink{ndp_8h_a1b452a6c3ab338d73213b321b6750f2b}{address}, \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} quantity, \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} $\ast$\hyperlink{chap_8h_adfa040d04d16520129a735fff8fb1628}{value})
+\begin{DoxyCompactList}\small\item\em Read holding registers. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{modbus__client_8c_a7b7c4e8f59da5f637642cc9b5fa66f25}{modbus\+Client\+Read\+Input\+Regs} (\hyperlink{modbus__client_8h_afb534cba0b839b960b7afd907b978713}{Modbus\+Client\+Context} $\ast$context, \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} \hyperlink{ndp_8h_a1b452a6c3ab338d73213b321b6750f2b}{address}, \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} quantity, \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} $\ast$\hyperlink{chap_8h_adfa040d04d16520129a735fff8fb1628}{value})
+\begin{DoxyCompactList}\small\item\em Read input registers. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{modbus__client_8c_a76e73c5155f433e3eab622de35eb5e5a}{modbus\+Client\+Write\+Single\+Coil} (\hyperlink{modbus__client_8h_afb534cba0b839b960b7afd907b978713}{Modbus\+Client\+Context} $\ast$context, \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} \hyperlink{ndp_8h_a1b452a6c3ab338d73213b321b6750f2b}{address}, \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} \hyperlink{chap_8h_adfa040d04d16520129a735fff8fb1628}{value})
+\begin{DoxyCompactList}\small\item\em Write single coil. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{modbus__client_8c_a57f328ea573bed00255877f7712714f0}{modbus\+Client\+Write\+Single\+Reg} (\hyperlink{modbus__client_8h_afb534cba0b839b960b7afd907b978713}{Modbus\+Client\+Context} $\ast$context, \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} \hyperlink{ndp_8h_a1b452a6c3ab338d73213b321b6750f2b}{address}, \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} \hyperlink{chap_8h_adfa040d04d16520129a735fff8fb1628}{value})
+\begin{DoxyCompactList}\small\item\em Write single register. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{modbus__client_8c_afac5176ac4ff8a95edc1bc5d8ef885b6}{modbus\+Client\+Write\+Multiple\+Coils} (\hyperlink{modbus__client_8h_afb534cba0b839b960b7afd907b978713}{Modbus\+Client\+Context} $\ast$context, \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} \hyperlink{ndp_8h_a1b452a6c3ab338d73213b321b6750f2b}{address}, \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} quantity, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{chap_8h_adfa040d04d16520129a735fff8fb1628}{value})
+\begin{DoxyCompactList}\small\item\em Write multiple coils. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{modbus__client_8c_a301ebc7bb8afd4909d019a9005ff7b64}{modbus\+Client\+Write\+Multiple\+Regs} (\hyperlink{modbus__client_8h_afb534cba0b839b960b7afd907b978713}{Modbus\+Client\+Context} $\ast$context, \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} \hyperlink{ndp_8h_a1b452a6c3ab338d73213b321b6750f2b}{address}, \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} quantity, const \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} $\ast$\hyperlink{chap_8h_adfa040d04d16520129a735fff8fb1628}{value})
+\begin{DoxyCompactList}\small\item\em Write multiple registers. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{modbus__client_8c_a559b64f411d3626cc2f8e2fcd65729af}{modbus\+Client\+Mask\+Write\+Reg} (\hyperlink{modbus__client_8h_afb534cba0b839b960b7afd907b978713}{Modbus\+Client\+Context} $\ast$context, \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} \hyperlink{ndp_8h_a1b452a6c3ab338d73213b321b6750f2b}{address}, \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} \hyperlink{modbus__common_8h_acb3a59cf566f9458f57ee33d025a6edb}{and\+Mask}, \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} \hyperlink{modbus__common_8h_ab78e691ac48889ca164516c323c53791}{or\+Mask})
+\begin{DoxyCompactList}\small\item\em Apply A\+N\+D/\+OR bitmask to a register. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{modbus__client_8c_a70c648081f23a81699f69f6884ba668e}{modbus\+Client\+Read\+Write\+Multiple\+Regs} (\hyperlink{modbus__client_8h_afb534cba0b839b960b7afd907b978713}{Modbus\+Client\+Context} $\ast$context, \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} read\+Address, \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} read\+Quantity, \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} $\ast$read\+Value, \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} write\+Address, \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} write\+Quantity, const \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} $\ast$write\+Value)
+\begin{DoxyCompactList}\small\item\em Read/write multiple registers. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{modbus__client_8c_aa99b84c0da6fa7b0f8ab82a40c4d2546}{modbus\+Client\+Get\+Exception\+Code} (\hyperlink{modbus__client_8h_afb534cba0b839b960b7afd907b978713}{Modbus\+Client\+Context} $\ast$context, \hyperlink{modbus__common_8h_a0b7f726dfaa2b4cf98aaaed1eb42fa72}{Modbus\+Exception\+Code} $\ast$\hyperlink{modbus__common_8h_a87000e9fd18fc68c309200e9abe4bb68}{exception\+Code})
+\begin{DoxyCompactList}\small\item\em Retrieve exception code. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{modbus__client_8c_a1b911884af43ff10cb9bf51d4f601a03}{modbus\+Client\+Disconnect} (\hyperlink{modbus__client_8h_afb534cba0b839b960b7afd907b978713}{Modbus\+Client\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Gracefully disconnect from the Modbus/\+T\+CP server. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{modbus__client_8c_a2e33435a0f9a5185b9efebb9e4d3d58b}{modbus\+Client\+Close} (\hyperlink{modbus__client_8h_afb534cba0b839b960b7afd907b978713}{Modbus\+Client\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Close the connection with the Modbus/\+T\+CP server. \end{DoxyCompactList}\item 
+void \hyperlink{modbus__client_8c_a97e272c2e20bd8ea6ee2747f6c8f1e0e}{modbus\+Client\+Deinit} (\hyperlink{modbus__client_8h_afb534cba0b839b960b7afd907b978713}{Modbus\+Client\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Release Modbus/\+T\+CP client context. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Modbus/\+T\+CP client. 
+
+\hypertarget{pic32mz__ef__curiosity_8h_License}{}\subsection{License}\label{pic32mz__ef__curiosity_8h_License}
+S\+P\+D\+X-\/\+License-\/\+Identifier\+: G\+P\+L-\/2.\+0-\/or-\/later
+
+Copyright (C) 2010-\/2019 Oryx Embedded S\+A\+RL. All rights reserved.
+
+This file is part of Cyclone\+T\+CP Open.
+
+This program is free software; you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+
+You should have received a copy of the G\+NU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-\/1301, U\+SA.
+
+\begin{DoxyAuthor}{Author}
+Oryx Embedded S\+A\+RL (www.\+oryx-\/embedded.\+com) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+9.\+6 
+\end{DoxyVersion}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{modbus__client_8c_afcdf5e66fd927a7f4cc64295acd20407}\label{modbus__client_8c_afcdf5e66fd927a7f4cc64295acd20407}} 
+\index{modbus\+\_\+client.\+c@{modbus\+\_\+client.\+c}!T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+\index{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}!modbus\+\_\+client.\+c@{modbus\+\_\+client.\+c}}
+\subsubsection{\texorpdfstring{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}{TRACE\_LEVEL}}
+{\footnotesize\ttfamily \#define T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL~\hyperlink{net__config_8h_aa132de375069fd85fe54b72fe90f445f}{M\+O\+D\+B\+U\+S\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+
+
+
+Definition at line 32 of file modbus\+\_\+client.\+c.
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{modbus__client_8c_a57ec04066f1f250b168699266feae4ce}\label{modbus__client_8c_a57ec04066f1f250b168699266feae4ce}} 
+\index{modbus\+\_\+client.\+c@{modbus\+\_\+client.\+c}!modbus\+Client\+Bind\+To\+Interface@{modbus\+Client\+Bind\+To\+Interface}}
+\index{modbus\+Client\+Bind\+To\+Interface@{modbus\+Client\+Bind\+To\+Interface}!modbus\+\_\+client.\+c@{modbus\+\_\+client.\+c}}
+\subsubsection{\texorpdfstring{modbus\+Client\+Bind\+To\+Interface()}{modbusClientBindToInterface()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} modbus\+Client\+Bind\+To\+Interface (\begin{DoxyParamCaption}\item[{\hyperlink{modbus__client_8h_afb534cba0b839b960b7afd907b978713}{Modbus\+Client\+Context} $\ast$}]{context,  }\item[{\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$}]{interface }\end{DoxyParamCaption})}
+
+
+
+Bind the Modbus/\+T\+CP client to a particular network interface. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the Modbus/\+T\+CP client context \\
+\hline
+\mbox{\tt in}  & {\em interface} & Network interface to be used \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 164 of file modbus\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+166 \{
+167    \textcolor{comment}{//Make sure the Modbus/TCP client context is valid}
+168    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+169       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+170 
+171    \textcolor{comment}{//Explicitly associate the Modbus/TCP client with the specified interface}
+172    context->interface = interface;
+173 
+174    \textcolor{comment}{//Successful processing}
+175    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+176 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{modbus__client_8c_a2e33435a0f9a5185b9efebb9e4d3d58b}\label{modbus__client_8c_a2e33435a0f9a5185b9efebb9e4d3d58b}} 
+\index{modbus\+\_\+client.\+c@{modbus\+\_\+client.\+c}!modbus\+Client\+Close@{modbus\+Client\+Close}}
+\index{modbus\+Client\+Close@{modbus\+Client\+Close}!modbus\+\_\+client.\+c@{modbus\+\_\+client.\+c}}
+\subsubsection{\texorpdfstring{modbus\+Client\+Close()}{modbusClientClose()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} modbus\+Client\+Close (\begin{DoxyParamCaption}\item[{\hyperlink{modbus__client_8h_afb534cba0b839b960b7afd907b978713}{Modbus\+Client\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Close the connection with the Modbus/\+T\+CP server. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the Modbus/\+T\+CP client context \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 1041 of file modbus\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+1042 \{
+1043    \textcolor{comment}{//Make sure the Modbus/TCP client context is valid}
+1044    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1045       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+1046 
+1047    \textcolor{comment}{//Close connection}
+1048    \hyperlink{modbus__client__transport_8c_a90bc319fe060c033a8d71df5c1650014}{modbusClientCloseConnection}(context);
+1049    \textcolor{comment}{//Update Modbus/TCP client state}
+1050    context->state = \hyperlink{modbus__client_8h_af9e4aa6eb4ddde054d9f23f72b3fb3fdaf4779dae00e4161bdea4fbcc3c7d68ee}{MODBUS\_CLIENT\_STATE\_DISCONNECTED};
+1051 
+1052    \textcolor{comment}{//Successful processing}
+1053    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+1054 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{modbus__client_8c_a48dcfd422732c134e7c6a3e0fb3c0f15}\label{modbus__client_8c_a48dcfd422732c134e7c6a3e0fb3c0f15}} 
+\index{modbus\+\_\+client.\+c@{modbus\+\_\+client.\+c}!modbus\+Client\+Connect@{modbus\+Client\+Connect}}
+\index{modbus\+Client\+Connect@{modbus\+Client\+Connect}!modbus\+\_\+client.\+c@{modbus\+\_\+client.\+c}}
+\subsubsection{\texorpdfstring{modbus\+Client\+Connect()}{modbusClientConnect()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} modbus\+Client\+Connect (\begin{DoxyParamCaption}\item[{\hyperlink{modbus__client_8h_afb534cba0b839b960b7afd907b978713}{Modbus\+Client\+Context} $\ast$}]{context,  }\item[{const \hyperlink{structIpAddr}{Ip\+Addr} $\ast$}]{server\+Ip\+Addr,  }\item[{\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t}}]{server\+Port }\end{DoxyParamCaption})}
+
+
+
+Establish connection with the Modbus/\+T\+CP server. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the Modbus/\+T\+CP client context \\
+\hline
+\mbox{\tt in}  & {\em server\+Ip\+Addr} & IP address of the server to connect to \\
+\hline
+\mbox{\tt in}  & {\em server\+Port} & T\+CP port number that will be used \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 187 of file modbus\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+189 \{
+190    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+191 
+192    \textcolor{comment}{//Check parameters}
+193    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || serverIpAddr == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+194       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+195 
+196    \textcolor{comment}{//Initialize status code}
+197    error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+198 
+199    \textcolor{comment}{//Establish connection with the Modbus/TCP server}
+200    \textcolor{keywordflow}{while}(!error)
+201    \{
+202       \textcolor{comment}{//Check current state}
+203       \textcolor{keywordflow}{if}(context->state == \hyperlink{modbus__client_8h_af9e4aa6eb4ddde054d9f23f72b3fb3fdaf4779dae00e4161bdea4fbcc3c7d68ee}{MODBUS\_CLIENT\_STATE\_DISCONNECTED})
+204       \{
+205          \textcolor{comment}{//Open network connection}
+206          error = \hyperlink{modbus__client__transport_8c_ad230f1f59c93b92e9c3a844e7266f794}{modbusClientOpenConnection}(context);
+207 
+208          \textcolor{comment}{//Check status code}
+209          \textcolor{keywordflow}{if}(!error)
+210          \{
+211             \textcolor{comment}{//Save current time}
+212             context->timestamp = \hyperlink{os__port__chibios_8c_ab66a11272d40a916fa69dd8e4dc443d4}{osGetSystemTime}();
+213             \textcolor{comment}{//Update Modbus/TCP client state}
+214             context->state = \hyperlink{modbus__client_8h_af9e4aa6eb4ddde054d9f23f72b3fb3fda45c3848f60dc9669ccec78af8be09b67}{MODBUS\_CLIENT\_STATE\_CONNECTING};
+215          \}
+216       \}
+217       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->state == \hyperlink{modbus__client_8h_af9e4aa6eb4ddde054d9f23f72b3fb3fda45c3848f60dc9669ccec78af8be09b67}{MODBUS\_CLIENT\_STATE\_CONNECTING})
+218       \{
+219          \textcolor{comment}{//Establish network connection}
+220          error = \hyperlink{modbus__client__transport_8c_a04650caca14a2a8c9511e20a115621a6}{modbusClientEstablishConnection}(context, serverIpAddr,
+221             serverPort);
+222 
+223          \textcolor{comment}{//Check status code}
+224          \textcolor{keywordflow}{if}(error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR})
+225          \{
+226             \textcolor{comment}{//Update Modbus/TCP client state}
+227             context->state = \hyperlink{modbus__client_8h_af9e4aa6eb4ddde054d9f23f72b3fb3fda1387eb84ed026967f245481eb6b17ee4}{MODBUS\_CLIENT\_STATE\_CONNECTED};
+228          \}
+229          \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca16f356a669fbb42deb27f59e9054f6d6}{ERROR\_WOULD\_BLOCK} || error == 
+      \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4d0f7be53b837f004379ac6bbd56f1e2}{ERROR\_TIMEOUT})
+230          \{
+231             \textcolor{comment}{//Check whether the timeout has elapsed}
+232             error = \hyperlink{modbus__client__misc_8c_af527bcdeb9340f03e495ccaba8b65187}{modbusClientCheckTimeout}(context);
+233          \}
+234          \textcolor{keywordflow}{else}
+235          \{
+236             \textcolor{comment}{//A communication error has occured}
+237          \}
+238       \}
+239       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->state == \hyperlink{modbus__client_8h_af9e4aa6eb4ddde054d9f23f72b3fb3fda1387eb84ed026967f245481eb6b17ee4}{MODBUS\_CLIENT\_STATE\_CONNECTED})
+240       \{
+241          \textcolor{comment}{//The Modbus/TCP client is connected}
+242          \textcolor{keywordflow}{break};
+243       \}
+244       \textcolor{keywordflow}{else}
+245       \{
+246          \textcolor{comment}{//Invalid state}
+247          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac3190fa1f36c6acf147c7ce453a655e2}{ERROR\_WRONG\_STATE};
+248       \}
+249    \}
+250 
+251    \textcolor{comment}{//Failed to establish connection with the Modbus/TCP server?}
+252    \textcolor{keywordflow}{if}(error != \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR} && error != \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca16f356a669fbb42deb27f59e9054f6d6}{ERROR\_WOULD\_BLOCK})
+253    \{
+254       \textcolor{comment}{//Clean up side effects}
+255       \hyperlink{modbus__client__transport_8c_a90bc319fe060c033a8d71df5c1650014}{modbusClientCloseConnection}(context);
+256       \textcolor{comment}{//Update Modbus/TCP client state}
+257       context->state = \hyperlink{modbus__client_8h_af9e4aa6eb4ddde054d9f23f72b3fb3fdaf4779dae00e4161bdea4fbcc3c7d68ee}{MODBUS\_CLIENT\_STATE\_DISCONNECTED};
+258    \}
+259 
+260    \textcolor{comment}{//Return status code}
+261    \textcolor{keywordflow}{return} error;
+262 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{modbus__client_8c_a97e272c2e20bd8ea6ee2747f6c8f1e0e}\label{modbus__client_8c_a97e272c2e20bd8ea6ee2747f6c8f1e0e}} 
+\index{modbus\+\_\+client.\+c@{modbus\+\_\+client.\+c}!modbus\+Client\+Deinit@{modbus\+Client\+Deinit}}
+\index{modbus\+Client\+Deinit@{modbus\+Client\+Deinit}!modbus\+\_\+client.\+c@{modbus\+\_\+client.\+c}}
+\subsubsection{\texorpdfstring{modbus\+Client\+Deinit()}{modbusClientDeinit()}}
+{\footnotesize\ttfamily void modbus\+Client\+Deinit (\begin{DoxyParamCaption}\item[{\hyperlink{modbus__client_8h_afb534cba0b839b960b7afd907b978713}{Modbus\+Client\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Release Modbus/\+T\+CP client context. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the Modbus/\+T\+CP client context \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 1062 of file modbus\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+1063 \{
+1064    \textcolor{comment}{//Make sure the Modbus/TCP client context is valid}
+1065    \textcolor{keywordflow}{if}(context != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1066    \{
+1067       \textcolor{comment}{//Close connection}
+1068       \hyperlink{modbus__client__transport_8c_a90bc319fe060c033a8d71df5c1650014}{modbusClientCloseConnection}(context);
+1069 
+1070 \textcolor{preprocessor}{#if (MODBUS\_CLIENT\_TLS\_SUPPORT == ENABLED)}
+1071       \textcolor{comment}{//Release TLS session state}
+1072       \hyperlink{tls_8c_a6e78d966a9bcd9eb6210c996389f6551}{tlsFreeSessionState}(&context->tlsSession);
+1073 \textcolor{preprocessor}{#endif}
+1074 
+1075       \textcolor{comment}{//Clear Modbus/TCP client context}
+1076       memset(context, 0, \textcolor{keyword}{sizeof}(\hyperlink{modbus__client_8h_afb534cba0b839b960b7afd907b978713}{ModbusClientContext}));
+1077    \}
+1078 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{modbus__client_8c_a1b911884af43ff10cb9bf51d4f601a03}\label{modbus__client_8c_a1b911884af43ff10cb9bf51d4f601a03}} 
+\index{modbus\+\_\+client.\+c@{modbus\+\_\+client.\+c}!modbus\+Client\+Disconnect@{modbus\+Client\+Disconnect}}
+\index{modbus\+Client\+Disconnect@{modbus\+Client\+Disconnect}!modbus\+\_\+client.\+c@{modbus\+\_\+client.\+c}}
+\subsubsection{\texorpdfstring{modbus\+Client\+Disconnect()}{modbusClientDisconnect()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} modbus\+Client\+Disconnect (\begin{DoxyParamCaption}\item[{\hyperlink{modbus__client_8h_afb534cba0b839b960b7afd907b978713}{Modbus\+Client\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Gracefully disconnect from the Modbus/\+T\+CP server. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the Modbus/\+T\+CP client context \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 964 of file modbus\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+965 \{
+966    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+967 
+968    \textcolor{comment}{//Make sure the Modbus/TCP client context is valid}
+969    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+970       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+971 
+972    \textcolor{comment}{//Initialize status code}
+973    error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+974 
+975    \textcolor{comment}{//Gracefully disconnect from the Modbus/TCP server}
+976    \textcolor{keywordflow}{while}(!error)
+977    \{
+978       \textcolor{comment}{//Check current state}
+979       \textcolor{keywordflow}{if}(context->state == \hyperlink{modbus__client_8h_af9e4aa6eb4ddde054d9f23f72b3fb3fda1387eb84ed026967f245481eb6b17ee4}{MODBUS\_CLIENT\_STATE\_CONNECTED})
+980       \{
+981          \textcolor{comment}{//Save current time}
+982          context->timestamp = \hyperlink{os__port__chibios_8c_ab66a11272d40a916fa69dd8e4dc443d4}{osGetSystemTime}();
+983          \textcolor{comment}{//Update Modbus/TCP client state}
+984          context->state = \hyperlink{modbus__client_8h_af9e4aa6eb4ddde054d9f23f72b3fb3fda6e8456a6d47f9a636244d3c9522d7add}{MODBUS\_CLIENT\_STATE\_DISCONNECTING};
+985       \}
+986       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->state == \hyperlink{modbus__client_8h_af9e4aa6eb4ddde054d9f23f72b3fb3fda6e8456a6d47f9a636244d3c9522d7add}{MODBUS\_CLIENT\_STATE\_DISCONNECTING})
+987       \{
+988          \textcolor{comment}{//Shutdown connection}
+989          error = \hyperlink{modbus__client__transport_8c_aebfc01985165399ae1c91ae6004da9f8}{modbusClientShutdownConnection}(context);
+990 
+991          \textcolor{comment}{//Check status code}
+992          \textcolor{keywordflow}{if}(error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR})
+993          \{
+994             \textcolor{comment}{//Close connection}
+995             \hyperlink{modbus__client__transport_8c_a90bc319fe060c033a8d71df5c1650014}{modbusClientCloseConnection}(context);
+996             \textcolor{comment}{//Update Modbus/TCP client state}
+997             context->state = \hyperlink{modbus__client_8h_af9e4aa6eb4ddde054d9f23f72b3fb3fdaf4779dae00e4161bdea4fbcc3c7d68ee}{MODBUS\_CLIENT\_STATE\_DISCONNECTED};
+998          \}
+999          \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca16f356a669fbb42deb27f59e9054f6d6}{ERROR\_WOULD\_BLOCK} || error == 
+      \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4d0f7be53b837f004379ac6bbd56f1e2}{ERROR\_TIMEOUT})
+1000          \{
+1001             \textcolor{comment}{//Check whether the timeout has elapsed}
+1002             error = \hyperlink{modbus__client__misc_8c_af527bcdeb9340f03e495ccaba8b65187}{modbusClientCheckTimeout}(context);
+1003          \}
+1004          \textcolor{keywordflow}{else}
+1005          \{
+1006             \textcolor{comment}{//A communication error has occured}
+1007          \}
+1008       \}
+1009       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->state == \hyperlink{modbus__client_8h_af9e4aa6eb4ddde054d9f23f72b3fb3fdaf4779dae00e4161bdea4fbcc3c7d68ee}{MODBUS\_CLIENT\_STATE\_DISCONNECTED})
+1010       \{
+1011          \textcolor{comment}{//The Modbus/TCP client is disconnected}
+1012          \textcolor{keywordflow}{break};
+1013       \}
+1014       \textcolor{keywordflow}{else}
+1015       \{
+1016          \textcolor{comment}{//Invalid state}
+1017          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac3190fa1f36c6acf147c7ce453a655e2}{ERROR\_WRONG\_STATE};
+1018       \}
+1019    \}
+1020 
+1021    \textcolor{comment}{//Failed to gracefully disconnect from the Modbus/TCP server?}
+1022    \textcolor{keywordflow}{if}(error != \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR} && error != \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca16f356a669fbb42deb27f59e9054f6d6}{ERROR\_WOULD\_BLOCK})
+1023    \{
+1024       \textcolor{comment}{//Close connection}
+1025       \hyperlink{modbus__client__transport_8c_a90bc319fe060c033a8d71df5c1650014}{modbusClientCloseConnection}(context);
+1026       \textcolor{comment}{//Update Modbus/TCP client state}
+1027       context->state = \hyperlink{modbus__client_8h_af9e4aa6eb4ddde054d9f23f72b3fb3fdaf4779dae00e4161bdea4fbcc3c7d68ee}{MODBUS\_CLIENT\_STATE\_DISCONNECTED};
+1028    \}
+1029 
+1030    \textcolor{comment}{//Return status code}
+1031    \textcolor{keywordflow}{return} error;
+1032 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{modbus__client_8c_aa99b84c0da6fa7b0f8ab82a40c4d2546}\label{modbus__client_8c_aa99b84c0da6fa7b0f8ab82a40c4d2546}} 
+\index{modbus\+\_\+client.\+c@{modbus\+\_\+client.\+c}!modbus\+Client\+Get\+Exception\+Code@{modbus\+Client\+Get\+Exception\+Code}}
+\index{modbus\+Client\+Get\+Exception\+Code@{modbus\+Client\+Get\+Exception\+Code}!modbus\+\_\+client.\+c@{modbus\+\_\+client.\+c}}
+\subsubsection{\texorpdfstring{modbus\+Client\+Get\+Exception\+Code()}{modbusClientGetExceptionCode()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} modbus\+Client\+Get\+Exception\+Code (\begin{DoxyParamCaption}\item[{\hyperlink{modbus__client_8h_afb534cba0b839b960b7afd907b978713}{Modbus\+Client\+Context} $\ast$}]{context,  }\item[{\hyperlink{modbus__common_8h_a0b7f726dfaa2b4cf98aaaed1eb42fa72}{Modbus\+Exception\+Code} $\ast$}]{exception\+Code }\end{DoxyParamCaption})}
+
+
+
+Retrieve exception code. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the Modbus/\+T\+CP client context \\
+\hline
+\mbox{\tt out}  & {\em exception\+Code} & Exception code \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 943 of file modbus\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+945 \{
+946    \textcolor{comment}{//Check parameters}
+947    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || \hyperlink{modbus__common_8h_a87000e9fd18fc68c309200e9abe4bb68}{exceptionCode} == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+948       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+949 
+950    \textcolor{comment}{//Retrieve exception code}
+951    *\hyperlink{modbus__common_8h_a87000e9fd18fc68c309200e9abe4bb68}{exceptionCode} = context->exceptionCode;
+952 
+953    \textcolor{comment}{//Successful processing}
+954    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+955 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{modbus__client_8c_a01dbab668effbedd143813cc77cbbdf8}\label{modbus__client_8c_a01dbab668effbedd143813cc77cbbdf8}} 
+\index{modbus\+\_\+client.\+c@{modbus\+\_\+client.\+c}!modbus\+Client\+Init@{modbus\+Client\+Init}}
+\index{modbus\+Client\+Init@{modbus\+Client\+Init}!modbus\+\_\+client.\+c@{modbus\+\_\+client.\+c}}
+\subsubsection{\texorpdfstring{modbus\+Client\+Init()}{modbusClientInit()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} modbus\+Client\+Init (\begin{DoxyParamCaption}\item[{\hyperlink{modbus__client_8h_afb534cba0b839b960b7afd907b978713}{Modbus\+Client\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Initialize Modbus/\+T\+CP client context. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the Modbus/\+T\+CP client context \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 51 of file modbus\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+52 \{
+53 \textcolor{preprocessor}{#if (MODBUS\_CLIENT\_TLS\_SUPPORT == ENABLED)}
+54    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+55 \textcolor{preprocessor}{#endif}
+56 
+57    \textcolor{comment}{//Make sure the Modbus/TCP client context is valid}
+58    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+59       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+60 
+61    \textcolor{comment}{//Clear Modbus/TCP client context}
+62    memset(context, 0, \textcolor{keyword}{sizeof}(\hyperlink{modbus__client_8h_afb534cba0b839b960b7afd907b978713}{ModbusClientContext}));
+63 
+64 \textcolor{preprocessor}{#if (MODBUS\_CLIENT\_TLS\_SUPPORT == ENABLED)}
+65    \textcolor{comment}{//Initialize TLS session state}
+66    error = \hyperlink{tls_8c_aea7b98b4b876fe45322df04583f7c1b4}{tlsInitSessionState}(&context->tlsSession);
+67    \textcolor{comment}{//Any error to report?}
+68    \textcolor{keywordflow}{if}(error)
+69       \textcolor{keywordflow}{return} error;
+70 \textcolor{preprocessor}{#endif}
+71 
+72    \textcolor{comment}{//Initialize Modbus/TCP client state}
+73    context->state = \hyperlink{modbus__client_8h_af9e4aa6eb4ddde054d9f23f72b3fb3fdaf4779dae00e4161bdea4fbcc3c7d68ee}{MODBUS\_CLIENT\_STATE\_DISCONNECTED};
+74 
+75    \textcolor{comment}{//Default timeout}
+76    context->timeout = \hyperlink{modbus__client_8h_a1ca407d37d24f8545ef9093b4180fd1e}{MODBUS\_CLIENT\_DEFAULT\_TIMEOUT};
+77    \textcolor{comment}{//Default unit identifier}
+78    context->unitId = \hyperlink{modbus__common_8h_abd7ccef87881102e441acb30ab051d01}{MODBUS\_DEFAULT\_UNIT\_ID};
+79 
+80    \textcolor{comment}{//The transaction identifier is used to uniquely identify the matching}
+81    \textcolor{comment}{//requests and responses}
+82    context->transactionId = (\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t}) \hyperlink{net_8c_a7bb00b31d641749ac8ce742261eb1f6d}{netGetRand}();
+83 
+84    \textcolor{comment}{//Successful initialization}
+85    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+86 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{modbus__client_8c_a559b64f411d3626cc2f8e2fcd65729af}\label{modbus__client_8c_a559b64f411d3626cc2f8e2fcd65729af}} 
+\index{modbus\+\_\+client.\+c@{modbus\+\_\+client.\+c}!modbus\+Client\+Mask\+Write\+Reg@{modbus\+Client\+Mask\+Write\+Reg}}
+\index{modbus\+Client\+Mask\+Write\+Reg@{modbus\+Client\+Mask\+Write\+Reg}!modbus\+\_\+client.\+c@{modbus\+\_\+client.\+c}}
+\subsubsection{\texorpdfstring{modbus\+Client\+Mask\+Write\+Reg()}{modbusClientMaskWriteReg()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} modbus\+Client\+Mask\+Write\+Reg (\begin{DoxyParamCaption}\item[{\hyperlink{modbus__client_8h_afb534cba0b839b960b7afd907b978713}{Modbus\+Client\+Context} $\ast$}]{context,  }\item[{\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t}}]{address,  }\item[{\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t}}]{and\+Mask,  }\item[{\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t}}]{or\+Mask }\end{DoxyParamCaption})}
+
+
+
+Apply A\+N\+D/\+OR bitmask to a register. 
+
+This function code is used to modify the contents of a specified holding register using a combination of an A\+ND mask, an OR mask, and the register\textquotesingle{}s current contents. The function can be used to set or clear individual bits in the register
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the Modbus/\+T\+CP client context \\
+\hline
+\mbox{\tt in}  & {\em address} & Address of the holding register \\
+\hline
+\mbox{\tt in}  & {\em and\+Mask} & A\+ND bitmask \\
+\hline
+\mbox{\tt in}  & {\em or\+Mask} & OR bitmask \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 810 of file modbus\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+812 \{
+813    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+814 
+815    \textcolor{comment}{//Make sure the Modbus/TCP client context is valid}
+816    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+817       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+818 
+819    \textcolor{comment}{//Initialize status code}
+820    error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+821 
+822    \textcolor{comment}{//Perform Modbus request/response transaction}
+823    \textcolor{keywordflow}{while}(!error)
+824    \{
+825       \textcolor{comment}{//Check current state}
+826       \textcolor{keywordflow}{if}(context->state == \hyperlink{modbus__client_8h_af9e4aa6eb4ddde054d9f23f72b3fb3fda1387eb84ed026967f245481eb6b17ee4}{MODBUS\_CLIENT\_STATE\_CONNECTED})
+827       \{
+828          \textcolor{comment}{//Format request}
+829          error = \hyperlink{modbus__client__pdu_8c_a854cb8b1f31643653dcd3a73f1757360}{modbusClientFormatMaskWriteRegReq}(context, 
+      \hyperlink{dhcpv6__common_8h_aaee906fadd211e863c2e29a3690b25c4}{address},
+830             \hyperlink{modbus__common_8h_acb3a59cf566f9458f57ee33d025a6edb}{andMask}, \hyperlink{modbus__common_8h_ab78e691ac48889ca164516c323c53791}{orMask});
+831       \}
+832       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->state == \hyperlink{modbus__client_8h_af9e4aa6eb4ddde054d9f23f72b3fb3fda0277ca3aa14d4a942d45da1478f79267}{MODBUS\_CLIENT\_STATE\_SENDING} ||
+833          context->state == \hyperlink{modbus__client_8h_af9e4aa6eb4ddde054d9f23f72b3fb3fda9748b537005fc36f8dd4cb4b396703bf}{MODBUS\_CLIENT\_STATE\_RECEIVING})
+834       \{
+835          \textcolor{comment}{//Send Modbus request and wait for a matching response}
+836          error = \hyperlink{modbus__client__misc_8c_ac25fde56e74cd8409c114708958f7439}{modbusClientTransaction}(context);
+837       \}
+838       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->state == \hyperlink{modbus__client_8h_af9e4aa6eb4ddde054d9f23f72b3fb3fda5623f903086a8d5c77f628c81007db64}{MODBUS\_CLIENT\_STATE\_COMPLETE})
+839       \{
+840          \textcolor{comment}{//Parse response}
+841          error = \hyperlink{modbus__client__pdu_8c_abcac03cf3106f461c66a023e37eee9f4}{modbusClientParseMaskWriteRegResp}(context, 
+      \hyperlink{dhcpv6__common_8h_aaee906fadd211e863c2e29a3690b25c4}{address},
+842             \hyperlink{modbus__common_8h_acb3a59cf566f9458f57ee33d025a6edb}{andMask}, \hyperlink{modbus__common_8h_ab78e691ac48889ca164516c323c53791}{orMask});
+843 
+844          \textcolor{comment}{//The Modbus transaction is complete}
+845          context->state = \hyperlink{modbus__client_8h_af9e4aa6eb4ddde054d9f23f72b3fb3fda1387eb84ed026967f245481eb6b17ee4}{MODBUS\_CLIENT\_STATE\_CONNECTED};
+846          \textcolor{keywordflow}{break};
+847       \}
+848       \textcolor{keywordflow}{else}
+849       \{
+850          \textcolor{comment}{//Invalid state}
+851          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca8cf62de6117b9a4c1537d1ce96c219a8}{ERROR\_NOT\_CONNECTED};
+852       \}
+853    \}
+854 
+855    \textcolor{comment}{//Return status code}
+856    \textcolor{keywordflow}{return} error;
+857 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{modbus__client_8c_a4e6a95928c0084fd723a8867b9c05d32}\label{modbus__client_8c_a4e6a95928c0084fd723a8867b9c05d32}} 
+\index{modbus\+\_\+client.\+c@{modbus\+\_\+client.\+c}!modbus\+Client\+Read\+Coils@{modbus\+Client\+Read\+Coils}}
+\index{modbus\+Client\+Read\+Coils@{modbus\+Client\+Read\+Coils}!modbus\+\_\+client.\+c@{modbus\+\_\+client.\+c}}
+\subsubsection{\texorpdfstring{modbus\+Client\+Read\+Coils()}{modbusClientReadCoils()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} modbus\+Client\+Read\+Coils (\begin{DoxyParamCaption}\item[{\hyperlink{modbus__client_8h_afb534cba0b839b960b7afd907b978713}{Modbus\+Client\+Context} $\ast$}]{context,  }\item[{\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t}}]{address,  }\item[{\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t}}]{quantity,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{value }\end{DoxyParamCaption})}
+
+
+
+Read coils. 
+
+This function code is used to read from 1 to 2000 contiguous status of coils in a remote device. The request specifies the starting address and the number of coils
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the Modbus/\+T\+CP client context \\
+\hline
+\mbox{\tt in}  & {\em address} & Address of the first coil \\
+\hline
+\mbox{\tt in}  & {\em quantity} & Number of coils \\
+\hline
+\mbox{\tt out}  & {\em value} & Value of the discrete outputs \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 279 of file modbus\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+281 \{
+282    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+283 
+284    \textcolor{comment}{//Check parameters}
+285    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value} == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+286       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+287 
+288    \textcolor{comment}{//The number of coils must be in range 1 to 2000}
+289    \textcolor{keywordflow}{if}(quantity < 1 || quantity > 2000)
+290       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+291 
+292    \textcolor{comment}{//Initialize status code}
+293    error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+294 
+295    \textcolor{comment}{//Perform Modbus request/response transaction}
+296    \textcolor{keywordflow}{while}(!error)
+297    \{
+298       \textcolor{comment}{//Check current state}
+299       \textcolor{keywordflow}{if}(context->state == \hyperlink{modbus__client_8h_af9e4aa6eb4ddde054d9f23f72b3fb3fda1387eb84ed026967f245481eb6b17ee4}{MODBUS\_CLIENT\_STATE\_CONNECTED})
+300       \{
+301          \textcolor{comment}{//Format request}
+302          error = \hyperlink{modbus__client__pdu_8c_a6d65f5a9314320d56db6fe2316d0c915}{modbusClientFormatReadCoilsReq}(context, 
+      \hyperlink{dhcpv6__common_8h_aaee906fadd211e863c2e29a3690b25c4}{address},
+303             quantity);
+304       \}
+305       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->state == \hyperlink{modbus__client_8h_af9e4aa6eb4ddde054d9f23f72b3fb3fda0277ca3aa14d4a942d45da1478f79267}{MODBUS\_CLIENT\_STATE\_SENDING} ||
+306          context->state == \hyperlink{modbus__client_8h_af9e4aa6eb4ddde054d9f23f72b3fb3fda9748b537005fc36f8dd4cb4b396703bf}{MODBUS\_CLIENT\_STATE\_RECEIVING})
+307       \{
+308          \textcolor{comment}{//Send Modbus request and wait for a matching response}
+309          error = \hyperlink{modbus__client__misc_8c_ac25fde56e74cd8409c114708958f7439}{modbusClientTransaction}(context);
+310       \}
+311       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->state == \hyperlink{modbus__client_8h_af9e4aa6eb4ddde054d9f23f72b3fb3fda5623f903086a8d5c77f628c81007db64}{MODBUS\_CLIENT\_STATE\_COMPLETE})
+312       \{
+313          \textcolor{comment}{//Parse response}
+314          error = \hyperlink{modbus__client__pdu_8c_a4205e1f9a7963cf1ed454dfecb5f3006}{modbusClientParseReadCoilsResp}(context, quantity,
+315             \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value});
+316 
+317          \textcolor{comment}{//The Modbus transaction is complete}
+318          context->state = \hyperlink{modbus__client_8h_af9e4aa6eb4ddde054d9f23f72b3fb3fda1387eb84ed026967f245481eb6b17ee4}{MODBUS\_CLIENT\_STATE\_CONNECTED};
+319          \textcolor{keywordflow}{break};
+320       \}
+321       \textcolor{keywordflow}{else}
+322       \{
+323          \textcolor{comment}{//Invalid state}
+324          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca8cf62de6117b9a4c1537d1ce96c219a8}{ERROR\_NOT\_CONNECTED};
+325       \}
+326    \}
+327 
+328    \textcolor{comment}{//Return status code}
+329    \textcolor{keywordflow}{return} error;
+330 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{modbus__client_8c_ac9df611639019b1a09b7064ed0016190}\label{modbus__client_8c_ac9df611639019b1a09b7064ed0016190}} 
+\index{modbus\+\_\+client.\+c@{modbus\+\_\+client.\+c}!modbus\+Client\+Read\+Discrete\+Inputs@{modbus\+Client\+Read\+Discrete\+Inputs}}
+\index{modbus\+Client\+Read\+Discrete\+Inputs@{modbus\+Client\+Read\+Discrete\+Inputs}!modbus\+\_\+client.\+c@{modbus\+\_\+client.\+c}}
+\subsubsection{\texorpdfstring{modbus\+Client\+Read\+Discrete\+Inputs()}{modbusClientReadDiscreteInputs()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} modbus\+Client\+Read\+Discrete\+Inputs (\begin{DoxyParamCaption}\item[{\hyperlink{modbus__client_8h_afb534cba0b839b960b7afd907b978713}{Modbus\+Client\+Context} $\ast$}]{context,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}}]{address,  }\item[{\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t}}]{quantity,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{value }\end{DoxyParamCaption})}
+
+
+
+Read discrete inputs. 
+
+This function code is used to read from 1 to 2000 contiguous status of discrete inputs in a remote device. The request specifies the starting address and the number of inputs
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the Modbus/\+T\+CP client context \\
+\hline
+\mbox{\tt in}  & {\em address} & Address of the first input \\
+\hline
+\mbox{\tt in}  & {\em quantity} & Number of inputs \\
+\hline
+\mbox{\tt out}  & {\em value} & Value of the discrete inputs \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 347 of file modbus\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+349 \{
+350    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+351 
+352    \textcolor{comment}{//Check parameters}
+353    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value} == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+354       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+355 
+356    \textcolor{comment}{//The number of discrete inputs must be in range 1 to 2000}
+357    \textcolor{keywordflow}{if}(quantity < 1 || quantity > 2000)
+358       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+359 
+360    \textcolor{comment}{//Initialize status code}
+361    error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+362 
+363    \textcolor{comment}{//Perform Modbus request/response transaction}
+364    \textcolor{keywordflow}{while}(!error)
+365    \{
+366       \textcolor{comment}{//Check current state}
+367       \textcolor{keywordflow}{if}(context->state == \hyperlink{modbus__client_8h_af9e4aa6eb4ddde054d9f23f72b3fb3fda1387eb84ed026967f245481eb6b17ee4}{MODBUS\_CLIENT\_STATE\_CONNECTED})
+368       \{
+369          \textcolor{comment}{//Format request}
+370          error = \hyperlink{modbus__client__pdu_8c_a0ffcf5d78d2fb09105e8986ef111e78e}{modbusClientFormatReadDiscreteInputsReq}(context, 
+      \hyperlink{dhcpv6__common_8h_aaee906fadd211e863c2e29a3690b25c4}{address},
+371             quantity);
+372       \}
+373       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->state == \hyperlink{modbus__client_8h_af9e4aa6eb4ddde054d9f23f72b3fb3fda0277ca3aa14d4a942d45da1478f79267}{MODBUS\_CLIENT\_STATE\_SENDING} ||
+374          context->state == \hyperlink{modbus__client_8h_af9e4aa6eb4ddde054d9f23f72b3fb3fda9748b537005fc36f8dd4cb4b396703bf}{MODBUS\_CLIENT\_STATE\_RECEIVING})
+375       \{
+376          \textcolor{comment}{//Send Modbus request and wait for a matching response}
+377          error = \hyperlink{modbus__client__misc_8c_ac25fde56e74cd8409c114708958f7439}{modbusClientTransaction}(context);
+378       \}
+379       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->state == \hyperlink{modbus__client_8h_af9e4aa6eb4ddde054d9f23f72b3fb3fda5623f903086a8d5c77f628c81007db64}{MODBUS\_CLIENT\_STATE\_COMPLETE})
+380       \{
+381          \textcolor{comment}{//Parse response}
+382          error = \hyperlink{modbus__client__pdu_8c_a1d9d277568750c2acfb511e85d6d564b}{modbusClientParseReadDiscreteInputsResp}(context, 
+      quantity,
+383             \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value});
+384 
+385          \textcolor{comment}{//The Modbus transaction is complete}
+386          context->state = \hyperlink{modbus__client_8h_af9e4aa6eb4ddde054d9f23f72b3fb3fda1387eb84ed026967f245481eb6b17ee4}{MODBUS\_CLIENT\_STATE\_CONNECTED};
+387          \textcolor{keywordflow}{break};
+388       \}
+389       \textcolor{keywordflow}{else}
+390       \{
+391          \textcolor{comment}{//Invalid state}
+392          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca8cf62de6117b9a4c1537d1ce96c219a8}{ERROR\_NOT\_CONNECTED};
+393       \}
+394    \}
+395 
+396    \textcolor{comment}{//Return status code}
+397    \textcolor{keywordflow}{return} error;
+398 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{modbus__client_8c_a124a244c1817a28f52bfb50564968fec}\label{modbus__client_8c_a124a244c1817a28f52bfb50564968fec}} 
+\index{modbus\+\_\+client.\+c@{modbus\+\_\+client.\+c}!modbus\+Client\+Read\+Holding\+Regs@{modbus\+Client\+Read\+Holding\+Regs}}
+\index{modbus\+Client\+Read\+Holding\+Regs@{modbus\+Client\+Read\+Holding\+Regs}!modbus\+\_\+client.\+c@{modbus\+\_\+client.\+c}}
+\subsubsection{\texorpdfstring{modbus\+Client\+Read\+Holding\+Regs()}{modbusClientReadHoldingRegs()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} modbus\+Client\+Read\+Holding\+Regs (\begin{DoxyParamCaption}\item[{\hyperlink{modbus__client_8h_afb534cba0b839b960b7afd907b978713}{Modbus\+Client\+Context} $\ast$}]{context,  }\item[{\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t}}]{address,  }\item[{\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t}}]{quantity,  }\item[{\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} $\ast$}]{value }\end{DoxyParamCaption})}
+
+
+
+Read holding registers. 
+
+This function code is used to read the contents of a contiguous block of holding registers in a remote device. The request specifies the starting register address and the number of registers
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the Modbus/\+T\+CP client context \\
+\hline
+\mbox{\tt in}  & {\em address} & Starting register address \\
+\hline
+\mbox{\tt in}  & {\em quantity} & Number of registers \\
+\hline
+\mbox{\tt out}  & {\em value} & Value of the holding registers \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 415 of file modbus\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+417 \{
+418    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+419 
+420    \textcolor{comment}{//Check parameters}
+421    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value} == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+422       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+423 
+424    \textcolor{comment}{//The number of registers must be in range 1 to 125}
+425    \textcolor{keywordflow}{if}(quantity < 1 || quantity > 125)
+426       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+427 
+428    \textcolor{comment}{//Initialize status code}
+429    error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+430 
+431    \textcolor{comment}{//Perform Modbus request/response transaction}
+432    \textcolor{keywordflow}{while}(!error)
+433    \{
+434       \textcolor{comment}{//Check current state}
+435       \textcolor{keywordflow}{if}(context->state == \hyperlink{modbus__client_8h_af9e4aa6eb4ddde054d9f23f72b3fb3fda1387eb84ed026967f245481eb6b17ee4}{MODBUS\_CLIENT\_STATE\_CONNECTED})
+436       \{
+437          \textcolor{comment}{//Format request}
+438          error = \hyperlink{modbus__client__pdu_8c_af4fb92206762a3a063f16bc6145b2b1b}{modbusClientFormatReadHoldingRegsReq}(context, 
+      \hyperlink{dhcpv6__common_8h_aaee906fadd211e863c2e29a3690b25c4}{address},
+439             quantity);
+440       \}
+441       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->state == \hyperlink{modbus__client_8h_af9e4aa6eb4ddde054d9f23f72b3fb3fda0277ca3aa14d4a942d45da1478f79267}{MODBUS\_CLIENT\_STATE\_SENDING} ||
+442          context->state == \hyperlink{modbus__client_8h_af9e4aa6eb4ddde054d9f23f72b3fb3fda9748b537005fc36f8dd4cb4b396703bf}{MODBUS\_CLIENT\_STATE\_RECEIVING})
+443       \{
+444          \textcolor{comment}{//Send Modbus request and wait for a matching response}
+445          error = \hyperlink{modbus__client__misc_8c_ac25fde56e74cd8409c114708958f7439}{modbusClientTransaction}(context);
+446       \}
+447       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->state == \hyperlink{modbus__client_8h_af9e4aa6eb4ddde054d9f23f72b3fb3fda5623f903086a8d5c77f628c81007db64}{MODBUS\_CLIENT\_STATE\_COMPLETE})
+448       \{
+449          \textcolor{comment}{//Parse response}
+450          error = \hyperlink{modbus__client__pdu_8c_ad8297274243d28b7ddcdc67fc4332270}{modbusClientParseReadHoldingRegsResp}(context, quantity
+      ,
+451             \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value});
+452 
+453          \textcolor{comment}{//The Modbus transaction is complete}
+454          context->state = \hyperlink{modbus__client_8h_af9e4aa6eb4ddde054d9f23f72b3fb3fda1387eb84ed026967f245481eb6b17ee4}{MODBUS\_CLIENT\_STATE\_CONNECTED};
+455          \textcolor{keywordflow}{break};
+456       \}
+457       \textcolor{keywordflow}{else}
+458       \{
+459          \textcolor{comment}{//Invalid state}
+460          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca8cf62de6117b9a4c1537d1ce96c219a8}{ERROR\_NOT\_CONNECTED};
+461       \}
+462    \}
+463 
+464    \textcolor{comment}{//Return status code}
+465    \textcolor{keywordflow}{return} error;
+466 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{modbus__client_8c_a7b7c4e8f59da5f637642cc9b5fa66f25}\label{modbus__client_8c_a7b7c4e8f59da5f637642cc9b5fa66f25}} 
+\index{modbus\+\_\+client.\+c@{modbus\+\_\+client.\+c}!modbus\+Client\+Read\+Input\+Regs@{modbus\+Client\+Read\+Input\+Regs}}
+\index{modbus\+Client\+Read\+Input\+Regs@{modbus\+Client\+Read\+Input\+Regs}!modbus\+\_\+client.\+c@{modbus\+\_\+client.\+c}}
+\subsubsection{\texorpdfstring{modbus\+Client\+Read\+Input\+Regs()}{modbusClientReadInputRegs()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} modbus\+Client\+Read\+Input\+Regs (\begin{DoxyParamCaption}\item[{\hyperlink{modbus__client_8h_afb534cba0b839b960b7afd907b978713}{Modbus\+Client\+Context} $\ast$}]{context,  }\item[{\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t}}]{address,  }\item[{\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t}}]{quantity,  }\item[{\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} $\ast$}]{value }\end{DoxyParamCaption})}
+
+
+
+Read input registers. 
+
+This function code is used to read from 1 to 125 contiguous input registers in a remote device. The request specifies the starting register address and the number of registers
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the Modbus/\+T\+CP client context \\
+\hline
+\mbox{\tt in}  & {\em address} & Starting register address \\
+\hline
+\mbox{\tt in}  & {\em quantity} & Number of registers \\
+\hline
+\mbox{\tt out}  & {\em value} & Value of the input registers \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 483 of file modbus\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+485 \{
+486    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+487 
+488    \textcolor{comment}{//Check parameters}
+489    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value} == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+490       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+491 
+492    \textcolor{comment}{//The number of registers must be in range 1 to 125}
+493    \textcolor{keywordflow}{if}(quantity < 1 || quantity > 125)
+494       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+495 
+496    \textcolor{comment}{//Initialize status code}
+497    error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+498 
+499    \textcolor{comment}{//Perform Modbus request/response transaction}
+500    \textcolor{keywordflow}{while}(!error)
+501    \{
+502       \textcolor{comment}{//Check current state}
+503       \textcolor{keywordflow}{if}(context->state == \hyperlink{modbus__client_8h_af9e4aa6eb4ddde054d9f23f72b3fb3fda1387eb84ed026967f245481eb6b17ee4}{MODBUS\_CLIENT\_STATE\_CONNECTED})
+504       \{
+505          \textcolor{comment}{//Format request}
+506          error = \hyperlink{modbus__client__pdu_8c_a3da499e457bf1180b69e83d8057988e6}{modbusClientFormatReadInputRegsReq}(context, 
+      \hyperlink{dhcpv6__common_8h_aaee906fadd211e863c2e29a3690b25c4}{address},
+507             quantity);
+508       \}
+509       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->state == \hyperlink{modbus__client_8h_af9e4aa6eb4ddde054d9f23f72b3fb3fda0277ca3aa14d4a942d45da1478f79267}{MODBUS\_CLIENT\_STATE\_SENDING} ||
+510          context->state == \hyperlink{modbus__client_8h_af9e4aa6eb4ddde054d9f23f72b3fb3fda9748b537005fc36f8dd4cb4b396703bf}{MODBUS\_CLIENT\_STATE\_RECEIVING})
+511       \{
+512          \textcolor{comment}{//Send Modbus request and wait for a matching response}
+513          error = \hyperlink{modbus__client__misc_8c_ac25fde56e74cd8409c114708958f7439}{modbusClientTransaction}(context);
+514       \}
+515       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->state == \hyperlink{modbus__client_8h_af9e4aa6eb4ddde054d9f23f72b3fb3fda5623f903086a8d5c77f628c81007db64}{MODBUS\_CLIENT\_STATE\_COMPLETE})
+516       \{
+517          \textcolor{comment}{//Parse response}
+518          error = \hyperlink{modbus__client__pdu_8c_ae31de7c95a40e22e5ebce273ba9ca578}{modbusClientParseReadInputRegsResp}(context, quantity,
+519             \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value});
+520 
+521          \textcolor{comment}{//The Modbus transaction is complete}
+522          context->state = \hyperlink{modbus__client_8h_af9e4aa6eb4ddde054d9f23f72b3fb3fda1387eb84ed026967f245481eb6b17ee4}{MODBUS\_CLIENT\_STATE\_CONNECTED};
+523          \textcolor{keywordflow}{break};
+524       \}
+525       \textcolor{keywordflow}{else}
+526       \{
+527          \textcolor{comment}{//Invalid state}
+528          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca8cf62de6117b9a4c1537d1ce96c219a8}{ERROR\_NOT\_CONNECTED};
+529       \}
+530    \}
+531 
+532    \textcolor{comment}{//Return status code}
+533    \textcolor{keywordflow}{return} error;
+534 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{modbus__client_8c_a70c648081f23a81699f69f6884ba668e}\label{modbus__client_8c_a70c648081f23a81699f69f6884ba668e}} 
+\index{modbus\+\_\+client.\+c@{modbus\+\_\+client.\+c}!modbus\+Client\+Read\+Write\+Multiple\+Regs@{modbus\+Client\+Read\+Write\+Multiple\+Regs}}
+\index{modbus\+Client\+Read\+Write\+Multiple\+Regs@{modbus\+Client\+Read\+Write\+Multiple\+Regs}!modbus\+\_\+client.\+c@{modbus\+\_\+client.\+c}}
+\subsubsection{\texorpdfstring{modbus\+Client\+Read\+Write\+Multiple\+Regs()}{modbusClientReadWriteMultipleRegs()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} modbus\+Client\+Read\+Write\+Multiple\+Regs (\begin{DoxyParamCaption}\item[{\hyperlink{modbus__client_8h_afb534cba0b839b960b7afd907b978713}{Modbus\+Client\+Context} $\ast$}]{context,  }\item[{\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t}}]{read\+Address,  }\item[{\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t}}]{read\+Quantity,  }\item[{\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} $\ast$}]{read\+Value,  }\item[{\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t}}]{write\+Address,  }\item[{\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t}}]{write\+Quantity,  }\item[{const \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} $\ast$}]{write\+Value }\end{DoxyParamCaption})}
+
+
+
+Read/write multiple registers. 
+
+This function code performs a combination of one read operation and one write operation in a single Modbus transaction. The write operation is performed before the read
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the Modbus/\+T\+CP client context \\
+\hline
+\mbox{\tt in}  & {\em read\+Address} & Address of the first holding registers to be read \\
+\hline
+\mbox{\tt in}  & {\em read\+Quantity} & Number of holding registers to be read \\
+\hline
+\mbox{\tt out}  & {\em read\+Value} & Value of the holding registers (read operation) \\
+\hline
+\mbox{\tt in}  & {\em write\+Address} & Address of the first holding registers to be written \\
+\hline
+\mbox{\tt in}  & {\em write\+Quantity} & Number of holding registers to be written \\
+\hline
+\mbox{\tt in}  & {\em write\+Value} & Value of the holding registers (write operation) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 877 of file modbus\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+880 \{
+881    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+882 
+883    \textcolor{comment}{//Check parameters}
+884    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || readValue == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || writeValue == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+885       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+886 
+887    \textcolor{comment}{//The number of registers to be read must be in range 1 to 125}
+888    \textcolor{keywordflow}{if}(readQuantity < 1 || readQuantity > 125)
+889       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+890 
+891    \textcolor{comment}{//The number of registers to be written must be in range 1 to 121}
+892    \textcolor{keywordflow}{if}(writeQuantity < 1 || writeQuantity > 121)
+893       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+894 
+895    \textcolor{comment}{//Initialize status code}
+896    error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+897 
+898    \textcolor{comment}{//Perform Modbus request/response transaction}
+899    \textcolor{keywordflow}{while}(!error)
+900    \{
+901       \textcolor{comment}{//Check current state}
+902       \textcolor{keywordflow}{if}(context->state == \hyperlink{modbus__client_8h_af9e4aa6eb4ddde054d9f23f72b3fb3fda1387eb84ed026967f245481eb6b17ee4}{MODBUS\_CLIENT\_STATE\_CONNECTED})
+903       \{
+904          \textcolor{comment}{//Format request}
+905          error = \hyperlink{modbus__client__pdu_8c_a12c5d6ed170584244bc3b28db7e32230}{modbusClientFormatReadWriteMultipleRegsReq}(
+      context,
+906             readAddress, readQuantity, writeAddress, writeQuantity, writeValue);
+907       \}
+908       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->state == \hyperlink{modbus__client_8h_af9e4aa6eb4ddde054d9f23f72b3fb3fda0277ca3aa14d4a942d45da1478f79267}{MODBUS\_CLIENT\_STATE\_SENDING} ||
+909          context->state == \hyperlink{modbus__client_8h_af9e4aa6eb4ddde054d9f23f72b3fb3fda9748b537005fc36f8dd4cb4b396703bf}{MODBUS\_CLIENT\_STATE\_RECEIVING})
+910       \{
+911          \textcolor{comment}{//Send Modbus request and wait for a matching response}
+912          error = \hyperlink{modbus__client__misc_8c_ac25fde56e74cd8409c114708958f7439}{modbusClientTransaction}(context);
+913       \}
+914       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->state == \hyperlink{modbus__client_8h_af9e4aa6eb4ddde054d9f23f72b3fb3fda5623f903086a8d5c77f628c81007db64}{MODBUS\_CLIENT\_STATE\_COMPLETE})
+915       \{
+916          \textcolor{comment}{//Parse response}
+917          error = \hyperlink{modbus__client__pdu_8c_a5de535b4743f992e6754acacb60431dd}{modbusClientParseReadWriteMultipleRegsResp}(
+      context,
+918             readQuantity, readValue);
+919 
+920          \textcolor{comment}{//The Modbus transaction is complete}
+921          context->state = \hyperlink{modbus__client_8h_af9e4aa6eb4ddde054d9f23f72b3fb3fda1387eb84ed026967f245481eb6b17ee4}{MODBUS\_CLIENT\_STATE\_CONNECTED};
+922          \textcolor{keywordflow}{break};
+923       \}
+924       \textcolor{keywordflow}{else}
+925       \{
+926          \textcolor{comment}{//Invalid state}
+927          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca8cf62de6117b9a4c1537d1ce96c219a8}{ERROR\_NOT\_CONNECTED};
+928       \}
+929    \}
+930 
+931    \textcolor{comment}{//Return status code}
+932    \textcolor{keywordflow}{return} error;
+933 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{modbus__client_8c_a489715d64066f9882e44d4133a8fc9f2}\label{modbus__client_8c_a489715d64066f9882e44d4133a8fc9f2}} 
+\index{modbus\+\_\+client.\+c@{modbus\+\_\+client.\+c}!modbus\+Client\+Register\+Tls\+Init\+Callback@{modbus\+Client\+Register\+Tls\+Init\+Callback}}
+\index{modbus\+Client\+Register\+Tls\+Init\+Callback@{modbus\+Client\+Register\+Tls\+Init\+Callback}!modbus\+\_\+client.\+c@{modbus\+\_\+client.\+c}}
+\subsubsection{\texorpdfstring{modbus\+Client\+Register\+Tls\+Init\+Callback()}{modbusClientRegisterTlsInitCallback()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} modbus\+Client\+Register\+Tls\+Init\+Callback (\begin{DoxyParamCaption}\item[{\hyperlink{modbus__client_8h_afb534cba0b839b960b7afd907b978713}{Modbus\+Client\+Context} $\ast$}]{context,  }\item[{\hyperlink{modbus__client_8h_a3c569366af881058e415a11fb1071050}{Modbus\+Client\+Tls\+Init\+Callback}}]{callback }\end{DoxyParamCaption})}
+
+
+
+Register T\+LS initialization callback function. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the Modbus/\+T\+CP client context \\
+\hline
+\mbox{\tt in}  & {\em callback} & T\+LS initialization callback function \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 98 of file modbus\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+100 \{
+101    \textcolor{comment}{//Make sure the Modbus/TCP client context is valid}
+102    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+103       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+104 
+105    \textcolor{comment}{//Save callback function}
+106    context->tlsInitCallback = callback;
+107 
+108    \textcolor{comment}{//Successful processing}
+109    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+110 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{modbus__client_8c_ad406d6a7cd24d54e1fad43023f8b0e10}\label{modbus__client_8c_ad406d6a7cd24d54e1fad43023f8b0e10}} 
+\index{modbus\+\_\+client.\+c@{modbus\+\_\+client.\+c}!modbus\+Client\+Set\+Timeout@{modbus\+Client\+Set\+Timeout}}
+\index{modbus\+Client\+Set\+Timeout@{modbus\+Client\+Set\+Timeout}!modbus\+\_\+client.\+c@{modbus\+\_\+client.\+c}}
+\subsubsection{\texorpdfstring{modbus\+Client\+Set\+Timeout()}{modbusClientSetTimeout()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} modbus\+Client\+Set\+Timeout (\begin{DoxyParamCaption}\item[{\hyperlink{modbus__client_8h_afb534cba0b839b960b7afd907b978713}{Modbus\+Client\+Context} $\ast$}]{context,  }\item[{\hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\+\_\+t}}]{timeout }\end{DoxyParamCaption})}
+
+
+
+Set timeout value for blocking operations. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the Modbus/\+T\+CP client context \\
+\hline
+\mbox{\tt in}  & {\em timeout} & Timeout value, in milliseconds \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 122 of file modbus\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+123 \{
+124    \textcolor{comment}{//Make sure the Modbus/TCP client context is valid}
+125    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+126       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+127 
+128    \textcolor{comment}{//Save timeout value}
+129    context->timeout = timeout;
+130 
+131    \textcolor{comment}{//Successful processing}
+132    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+133 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{modbus__client_8c_a2a1318b3a54116e33df697930621bc63}\label{modbus__client_8c_a2a1318b3a54116e33df697930621bc63}} 
+\index{modbus\+\_\+client.\+c@{modbus\+\_\+client.\+c}!modbus\+Client\+Set\+Unit\+Id@{modbus\+Client\+Set\+Unit\+Id}}
+\index{modbus\+Client\+Set\+Unit\+Id@{modbus\+Client\+Set\+Unit\+Id}!modbus\+\_\+client.\+c@{modbus\+\_\+client.\+c}}
+\subsubsection{\texorpdfstring{modbus\+Client\+Set\+Unit\+Id()}{modbusClientSetUnitId()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} modbus\+Client\+Set\+Unit\+Id (\begin{DoxyParamCaption}\item[{\hyperlink{modbus__client_8h_afb534cba0b839b960b7afd907b978713}{Modbus\+Client\+Context} $\ast$}]{context,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}}]{unit\+Id }\end{DoxyParamCaption})}
+
+
+
+Set unit identifier. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the Modbus/\+T\+CP client context \\
+\hline
+\mbox{\tt in}  & {\em unit\+Id} & Identifier of the remote slave \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 143 of file modbus\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+144 \{
+145    \textcolor{comment}{//Make sure the Modbus/TCP client context is valid}
+146    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+147       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+148 
+149    \textcolor{comment}{//Save unit identifier}
+150    context->unitId = \hyperlink{modbus__common_8h_a62544890ec097bc0814255ebeacd7e13}{unitId};
+151 
+152    \textcolor{comment}{//Successful processing}
+153    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+154 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{modbus__client_8c_afac5176ac4ff8a95edc1bc5d8ef885b6}\label{modbus__client_8c_afac5176ac4ff8a95edc1bc5d8ef885b6}} 
+\index{modbus\+\_\+client.\+c@{modbus\+\_\+client.\+c}!modbus\+Client\+Write\+Multiple\+Coils@{modbus\+Client\+Write\+Multiple\+Coils}}
+\index{modbus\+Client\+Write\+Multiple\+Coils@{modbus\+Client\+Write\+Multiple\+Coils}!modbus\+\_\+client.\+c@{modbus\+\_\+client.\+c}}
+\subsubsection{\texorpdfstring{modbus\+Client\+Write\+Multiple\+Coils()}{modbusClientWriteMultipleCoils()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} modbus\+Client\+Write\+Multiple\+Coils (\begin{DoxyParamCaption}\item[{\hyperlink{modbus__client_8h_afb534cba0b839b960b7afd907b978713}{Modbus\+Client\+Context} $\ast$}]{context,  }\item[{\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t}}]{address,  }\item[{\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t}}]{quantity,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{value }\end{DoxyParamCaption})}
+
+
+
+Write multiple coils. 
+
+This function code is used to force each coil in a sequence of coils to either ON or O\+FF in a remote device. The request specifies the starting address, the number of outputs and the requested O\+N/\+O\+FF states
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the Modbus/\+T\+CP client context \\
+\hline
+\mbox{\tt in}  & {\em address} & Address of the first coil to be forced \\
+\hline
+\mbox{\tt in}  & {\em quantity} & Number of coils \\
+\hline
+\mbox{\tt in}  & {\em value} & Value of the discrete outputs \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 673 of file modbus\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+675 \{
+676    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+677 
+678    \textcolor{comment}{//Check parameters}
+679    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value} == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+680       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+681 
+682    \textcolor{comment}{//The number of coils must be in range 1 to 1968}
+683    \textcolor{keywordflow}{if}(quantity < 1 || quantity > 1968)
+684       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+685 
+686    \textcolor{comment}{//Initialize status code}
+687    error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+688 
+689    \textcolor{comment}{//Perform Modbus request/response transaction}
+690    \textcolor{keywordflow}{while}(!error)
+691    \{
+692       \textcolor{comment}{//Check current state}
+693       \textcolor{keywordflow}{if}(context->state == \hyperlink{modbus__client_8h_af9e4aa6eb4ddde054d9f23f72b3fb3fda1387eb84ed026967f245481eb6b17ee4}{MODBUS\_CLIENT\_STATE\_CONNECTED})
+694       \{
+695          \textcolor{comment}{//Format request}
+696          error = \hyperlink{modbus__client__pdu_8c_ad4953be07e3af367f21843c616ba031e}{modbusClientFormatWriteMultipleCoilsReq}(context, 
+      \hyperlink{dhcpv6__common_8h_aaee906fadd211e863c2e29a3690b25c4}{address},
+697             quantity, \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value});
+698       \}
+699       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->state == \hyperlink{modbus__client_8h_af9e4aa6eb4ddde054d9f23f72b3fb3fda0277ca3aa14d4a942d45da1478f79267}{MODBUS\_CLIENT\_STATE\_SENDING} ||
+700          context->state == \hyperlink{modbus__client_8h_af9e4aa6eb4ddde054d9f23f72b3fb3fda9748b537005fc36f8dd4cb4b396703bf}{MODBUS\_CLIENT\_STATE\_RECEIVING})
+701       \{
+702          \textcolor{comment}{//Send Modbus request and wait for a matching response}
+703          error = \hyperlink{modbus__client__misc_8c_ac25fde56e74cd8409c114708958f7439}{modbusClientTransaction}(context);
+704       \}
+705       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->state == \hyperlink{modbus__client_8h_af9e4aa6eb4ddde054d9f23f72b3fb3fda5623f903086a8d5c77f628c81007db64}{MODBUS\_CLIENT\_STATE\_COMPLETE})
+706       \{
+707          \textcolor{comment}{//Parse response}
+708          error = \hyperlink{modbus__client__pdu_8c_ad30fd09b9c968aea88b414fdf2b6047a}{modbusClientParseWriteMultipleCoilsResp}(context, 
+      \hyperlink{dhcpv6__common_8h_aaee906fadd211e863c2e29a3690b25c4}{address},
+709             quantity);
+710 
+711          \textcolor{comment}{//The Modbus transaction is complete}
+712          context->state = \hyperlink{modbus__client_8h_af9e4aa6eb4ddde054d9f23f72b3fb3fda1387eb84ed026967f245481eb6b17ee4}{MODBUS\_CLIENT\_STATE\_CONNECTED};
+713          \textcolor{keywordflow}{break};
+714       \}
+715       \textcolor{keywordflow}{else}
+716       \{
+717          \textcolor{comment}{//Invalid state}
+718          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca8cf62de6117b9a4c1537d1ce96c219a8}{ERROR\_NOT\_CONNECTED};
+719       \}
+720    \}
+721 
+722    \textcolor{comment}{//Return status code}
+723    \textcolor{keywordflow}{return} error;
+724 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{modbus__client_8c_a301ebc7bb8afd4909d019a9005ff7b64}\label{modbus__client_8c_a301ebc7bb8afd4909d019a9005ff7b64}} 
+\index{modbus\+\_\+client.\+c@{modbus\+\_\+client.\+c}!modbus\+Client\+Write\+Multiple\+Regs@{modbus\+Client\+Write\+Multiple\+Regs}}
+\index{modbus\+Client\+Write\+Multiple\+Regs@{modbus\+Client\+Write\+Multiple\+Regs}!modbus\+\_\+client.\+c@{modbus\+\_\+client.\+c}}
+\subsubsection{\texorpdfstring{modbus\+Client\+Write\+Multiple\+Regs()}{modbusClientWriteMultipleRegs()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} modbus\+Client\+Write\+Multiple\+Regs (\begin{DoxyParamCaption}\item[{\hyperlink{modbus__client_8h_afb534cba0b839b960b7afd907b978713}{Modbus\+Client\+Context} $\ast$}]{context,  }\item[{\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t}}]{address,  }\item[{\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t}}]{quantity,  }\item[{const \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} $\ast$}]{value }\end{DoxyParamCaption})}
+
+
+
+Write multiple registers. 
+
+This function code is used to write a block of contiguous registers (1 to 123 registers) in a remote device. The request specifies the starting address, the number of registers and the requested written values
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the Modbus/\+T\+CP client context \\
+\hline
+\mbox{\tt in}  & {\em address} & Starting register address \\
+\hline
+\mbox{\tt in}  & {\em quantity} & Number of registers \\
+\hline
+\mbox{\tt in}  & {\em value} & Value of the holding registers \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 741 of file modbus\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+743 \{
+744    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+745 
+746    \textcolor{comment}{//Check parameters}
+747    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value} == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+748       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+749 
+750    \textcolor{comment}{//The number of registers must be in range 1 to 123}
+751    \textcolor{keywordflow}{if}(quantity < 1 || quantity > 123)
+752       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+753 
+754    \textcolor{comment}{//Initialize status code}
+755    error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+756 
+757    \textcolor{comment}{//Perform Modbus request/response transaction}
+758    \textcolor{keywordflow}{while}(!error)
+759    \{
+760       \textcolor{comment}{//Check current state}
+761       \textcolor{keywordflow}{if}(context->state == \hyperlink{modbus__client_8h_af9e4aa6eb4ddde054d9f23f72b3fb3fda1387eb84ed026967f245481eb6b17ee4}{MODBUS\_CLIENT\_STATE\_CONNECTED})
+762       \{
+763          \textcolor{comment}{//Format request}
+764          error = \hyperlink{modbus__client__pdu_8c_a1152d96efdbf05e382200af8fba25493}{modbusClientFormatWriteMultipleRegsReq}(context, 
+      \hyperlink{dhcpv6__common_8h_aaee906fadd211e863c2e29a3690b25c4}{address},
+765             quantity, \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value});
+766       \}
+767       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->state == \hyperlink{modbus__client_8h_af9e4aa6eb4ddde054d9f23f72b3fb3fda0277ca3aa14d4a942d45da1478f79267}{MODBUS\_CLIENT\_STATE\_SENDING} ||
+768          context->state == \hyperlink{modbus__client_8h_af9e4aa6eb4ddde054d9f23f72b3fb3fda9748b537005fc36f8dd4cb4b396703bf}{MODBUS\_CLIENT\_STATE\_RECEIVING})
+769       \{
+770          \textcolor{comment}{//Send Modbus request and wait for a matching response}
+771          error = \hyperlink{modbus__client__misc_8c_ac25fde56e74cd8409c114708958f7439}{modbusClientTransaction}(context);
+772       \}
+773       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->state == \hyperlink{modbus__client_8h_af9e4aa6eb4ddde054d9f23f72b3fb3fda5623f903086a8d5c77f628c81007db64}{MODBUS\_CLIENT\_STATE\_COMPLETE})
+774       \{
+775          \textcolor{comment}{//Parse response}
+776          error = \hyperlink{modbus__client__pdu_8c_a3e6e413549fc0f6e20feea143be68649}{modbusClientParseWriteMultipleRegsResp}(context, 
+      \hyperlink{dhcpv6__common_8h_aaee906fadd211e863c2e29a3690b25c4}{address},
+777             quantity);
+778 
+779          \textcolor{comment}{//The Modbus transaction is complete}
+780          context->state = \hyperlink{modbus__client_8h_af9e4aa6eb4ddde054d9f23f72b3fb3fda1387eb84ed026967f245481eb6b17ee4}{MODBUS\_CLIENT\_STATE\_CONNECTED};
+781          \textcolor{keywordflow}{break};
+782       \}
+783       \textcolor{keywordflow}{else}
+784       \{
+785          \textcolor{comment}{//Invalid state}
+786          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca8cf62de6117b9a4c1537d1ce96c219a8}{ERROR\_NOT\_CONNECTED};
+787       \}
+788    \}
+789 
+790    \textcolor{comment}{//Return status code}
+791    \textcolor{keywordflow}{return} error;
+792 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{modbus__client_8c_a76e73c5155f433e3eab622de35eb5e5a}\label{modbus__client_8c_a76e73c5155f433e3eab622de35eb5e5a}} 
+\index{modbus\+\_\+client.\+c@{modbus\+\_\+client.\+c}!modbus\+Client\+Write\+Single\+Coil@{modbus\+Client\+Write\+Single\+Coil}}
+\index{modbus\+Client\+Write\+Single\+Coil@{modbus\+Client\+Write\+Single\+Coil}!modbus\+\_\+client.\+c@{modbus\+\_\+client.\+c}}
+\subsubsection{\texorpdfstring{modbus\+Client\+Write\+Single\+Coil()}{modbusClientWriteSingleCoil()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} modbus\+Client\+Write\+Single\+Coil (\begin{DoxyParamCaption}\item[{\hyperlink{modbus__client_8h_afb534cba0b839b960b7afd907b978713}{Modbus\+Client\+Context} $\ast$}]{context,  }\item[{\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t}}]{address,  }\item[{\hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t}}]{value }\end{DoxyParamCaption})}
+
+
+
+Write single coil. 
+
+This function code is used to write a single output to either ON or O\+FF in a remote device. The request specifies the address of the coil to be forced and the requested O\+N/\+O\+FF state
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the Modbus/\+T\+CP client context \\
+\hline
+\mbox{\tt in}  & {\em address} & Address of the coil to be forced \\
+\hline
+\mbox{\tt in}  & {\em value} & Value of the discrete output \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 550 of file modbus\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+552 \{
+553    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+554 
+555    \textcolor{comment}{//Make sure the Modbus/TCP client context is valid}
+556    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+557       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+558 
+559    \textcolor{comment}{//Initialize status code}
+560    error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+561 
+562    \textcolor{comment}{//Perform Modbus request/response transaction}
+563    \textcolor{keywordflow}{while}(!error)
+564    \{
+565       \textcolor{comment}{//Check current state}
+566       \textcolor{keywordflow}{if}(context->state == \hyperlink{modbus__client_8h_af9e4aa6eb4ddde054d9f23f72b3fb3fda1387eb84ed026967f245481eb6b17ee4}{MODBUS\_CLIENT\_STATE\_CONNECTED})
+567       \{
+568          \textcolor{comment}{//Format request}
+569          error = \hyperlink{modbus__client__pdu_8c_a07aa9e2f6d2254aef859a4621fe51323}{modbusClientFormatWriteSingleCoilReq}(context, 
+      \hyperlink{dhcpv6__common_8h_aaee906fadd211e863c2e29a3690b25c4}{address}, \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value});
+570       \}
+571       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->state == \hyperlink{modbus__client_8h_af9e4aa6eb4ddde054d9f23f72b3fb3fda0277ca3aa14d4a942d45da1478f79267}{MODBUS\_CLIENT\_STATE\_SENDING} ||
+572          context->state == \hyperlink{modbus__client_8h_af9e4aa6eb4ddde054d9f23f72b3fb3fda9748b537005fc36f8dd4cb4b396703bf}{MODBUS\_CLIENT\_STATE\_RECEIVING})
+573       \{
+574          \textcolor{comment}{//Send Modbus request and wait for a matching response}
+575          error = \hyperlink{modbus__client__misc_8c_ac25fde56e74cd8409c114708958f7439}{modbusClientTransaction}(context);
+576       \}
+577       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->state == \hyperlink{modbus__client_8h_af9e4aa6eb4ddde054d9f23f72b3fb3fda5623f903086a8d5c77f628c81007db64}{MODBUS\_CLIENT\_STATE\_COMPLETE})
+578       \{
+579          \textcolor{comment}{//Parse response}
+580          error = \hyperlink{modbus__client__pdu_8c_a03b80491b0fa1ec26e810849c0fb0063}{modbusClientParseWriteSingleCoilResp}(context, 
+      \hyperlink{dhcpv6__common_8h_aaee906fadd211e863c2e29a3690b25c4}{address}, \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value});
+581 
+582          \textcolor{comment}{//The Modbus transaction is complete}
+583          context->state = \hyperlink{modbus__client_8h_af9e4aa6eb4ddde054d9f23f72b3fb3fda1387eb84ed026967f245481eb6b17ee4}{MODBUS\_CLIENT\_STATE\_CONNECTED};
+584          \textcolor{keywordflow}{break};
+585       \}
+586       \textcolor{keywordflow}{else}
+587       \{
+588          \textcolor{comment}{//Invalid state}
+589          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca8cf62de6117b9a4c1537d1ce96c219a8}{ERROR\_NOT\_CONNECTED};
+590       \}
+591    \}
+592 
+593    \textcolor{comment}{//Return status code}
+594    \textcolor{keywordflow}{return} error;
+595 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{modbus__client_8c_a57f328ea573bed00255877f7712714f0}\label{modbus__client_8c_a57f328ea573bed00255877f7712714f0}} 
+\index{modbus\+\_\+client.\+c@{modbus\+\_\+client.\+c}!modbus\+Client\+Write\+Single\+Reg@{modbus\+Client\+Write\+Single\+Reg}}
+\index{modbus\+Client\+Write\+Single\+Reg@{modbus\+Client\+Write\+Single\+Reg}!modbus\+\_\+client.\+c@{modbus\+\_\+client.\+c}}
+\subsubsection{\texorpdfstring{modbus\+Client\+Write\+Single\+Reg()}{modbusClientWriteSingleReg()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} modbus\+Client\+Write\+Single\+Reg (\begin{DoxyParamCaption}\item[{\hyperlink{modbus__client_8h_afb534cba0b839b960b7afd907b978713}{Modbus\+Client\+Context} $\ast$}]{context,  }\item[{\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t}}]{address,  }\item[{\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t}}]{value }\end{DoxyParamCaption})}
+
+
+
+Write single register. 
+
+This function code is used to write a single holding register in a remote device. The request specifies the address of the register to be written and the register value
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the Modbus/\+T\+CP client context \\
+\hline
+\mbox{\tt in}  & {\em address} & Address of the register to be written \\
+\hline
+\mbox{\tt in}  & {\em value} & Register value \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 611 of file modbus\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+613 \{
+614    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+615 
+616    \textcolor{comment}{//Make sure the Modbus/TCP client context is valid}
+617    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+618       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+619 
+620    \textcolor{comment}{//Initialize status code}
+621    error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+622 
+623    \textcolor{comment}{//Perform Modbus request/response transaction}
+624    \textcolor{keywordflow}{while}(!error)
+625    \{
+626       \textcolor{comment}{//Check current state}
+627       \textcolor{keywordflow}{if}(context->state == \hyperlink{modbus__client_8h_af9e4aa6eb4ddde054d9f23f72b3fb3fda1387eb84ed026967f245481eb6b17ee4}{MODBUS\_CLIENT\_STATE\_CONNECTED})
+628       \{
+629          \textcolor{comment}{//Format request}
+630          error = \hyperlink{modbus__client__pdu_8c_aa3240da227782d3039460b3e591a983e}{modbusClientFormatWriteSingleRegReq}(context, 
+      \hyperlink{dhcpv6__common_8h_aaee906fadd211e863c2e29a3690b25c4}{address}, \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value});
+631       \}
+632       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->state == \hyperlink{modbus__client_8h_af9e4aa6eb4ddde054d9f23f72b3fb3fda0277ca3aa14d4a942d45da1478f79267}{MODBUS\_CLIENT\_STATE\_SENDING} ||
+633          context->state == \hyperlink{modbus__client_8h_af9e4aa6eb4ddde054d9f23f72b3fb3fda9748b537005fc36f8dd4cb4b396703bf}{MODBUS\_CLIENT\_STATE\_RECEIVING})
+634       \{
+635          \textcolor{comment}{//Send Modbus request and wait for a matching response}
+636          error = \hyperlink{modbus__client__misc_8c_ac25fde56e74cd8409c114708958f7439}{modbusClientTransaction}(context);
+637       \}
+638       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->state == \hyperlink{modbus__client_8h_af9e4aa6eb4ddde054d9f23f72b3fb3fda5623f903086a8d5c77f628c81007db64}{MODBUS\_CLIENT\_STATE\_COMPLETE})
+639       \{
+640          \textcolor{comment}{//Parse response}
+641          error = \hyperlink{modbus__client__pdu_8c_a8d89e61555a73e81f2cae0cc8b220e90}{modbusClientParseWriteSingleRegResp}(context, 
+      \hyperlink{dhcpv6__common_8h_aaee906fadd211e863c2e29a3690b25c4}{address}, \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value});
+642 
+643          \textcolor{comment}{//The Modbus transaction is complete}
+644          context->state = \hyperlink{modbus__client_8h_af9e4aa6eb4ddde054d9f23f72b3fb3fda1387eb84ed026967f245481eb6b17ee4}{MODBUS\_CLIENT\_STATE\_CONNECTED};
+645          \textcolor{keywordflow}{break};
+646       \}
+647       \textcolor{keywordflow}{else}
+648       \{
+649          \textcolor{comment}{//Invalid state}
+650          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca8cf62de6117b9a4c1537d1ce96c219a8}{ERROR\_NOT\_CONNECTED};
+651       \}
+652    \}
+653 
+654    \textcolor{comment}{//Return status code}
+655    \textcolor{keywordflow}{return} error;
+656 \}
+\end{DoxyCode}

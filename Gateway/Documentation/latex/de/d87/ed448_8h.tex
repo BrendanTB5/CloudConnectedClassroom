@@ -1,0 +1,1128 @@
+\hypertarget{ed448_8h}{}\section{cyclone\+\_\+crypto/ecc/ed448.h File Reference}
+\label{ed448_8h}\index{cyclone\+\_\+crypto/ecc/ed448.\+h@{cyclone\+\_\+crypto/ecc/ed448.\+h}}
+
+
+Ed448 elliptic curve (constant-\/time implementation)  
+
+
+{\ttfamily \#include \char`\"{}core/crypto.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}xof/shake256.\+h\char`\"{}}\newline
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structEd448Point}{Ed448\+Point}
+\begin{DoxyCompactList}\small\item\em Projective point representation. \end{DoxyCompactList}\item 
+struct \hyperlink{structEd448State}{Ed448\+State}
+\begin{DoxyCompactList}\small\item\em Ed448 working state. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{ed448_8h_a26f2969270eebc560926f8bada35cb65}{E\+D448\+\_\+\+P\+R\+I\+V\+A\+T\+E\+\_\+\+K\+E\+Y\+\_\+\+L\+EN}~57
+\item 
+\#define \hyperlink{ed448_8h_a452cd73807c6a5607ede7ba57cbc3e6a}{E\+D448\+\_\+\+P\+U\+B\+L\+I\+C\+\_\+\+K\+E\+Y\+\_\+\+L\+EN}~57
+\item 
+\#define \hyperlink{ed448_8h_a6faeb89fbb8744bcc8ec3333ec22b099}{E\+D448\+\_\+\+S\+I\+G\+N\+A\+T\+U\+R\+E\+\_\+\+L\+EN}~114
+\item 
+\#define \hyperlink{ed448_8h_a6b2d73f7e38f8bea483202306fc6b34f}{E\+D448\+\_\+\+P\+H\+\_\+\+F\+L\+AG}~1
+\item 
+\#define \hyperlink{ed448_8h_a156dec107d2f43d4674a6d73f0b16537}{E\+D448\+\_\+\+P\+H\+\_\+\+S\+I\+ZE}~64
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ed448_8h_a033819fe843111ba0725540aae9e8429}{ed448\+Generate\+Key\+Pair} (const \hyperlink{structPrngAlgo}{Prng\+Algo} $\ast$prng\+Algo, void $\ast$prng\+Context, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$private\+Key, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$public\+Key)
+\begin{DoxyCompactList}\small\item\em Ed\+D\+SA key pair generation. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ed448_8h_a6c02071081eff48fb9e6c6b8c5342377}{ed448\+Generate\+Signature} (const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$private\+Key, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$public\+Key, const void $\ast$\hyperlink{pap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}, size\+\_\+t message\+Len, const void $\ast$context, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} context\+Len, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} flag, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{tls_8h_af27e6d4ea3add14cd8cc9aa275d716ad}{signature})
+\begin{DoxyCompactList}\small\item\em Ed\+D\+SA signature generation. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ed448_8h_ab6f6de548796083dfc337efbc7542084}{ed448\+Verify\+Signature} (const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$public\+Key, const void $\ast$\hyperlink{pap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}, size\+\_\+t message\+Len, const void $\ast$context, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} context\+Len, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} flag, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{tls_8h_af27e6d4ea3add14cd8cc9aa275d716ad}{signature})
+\begin{DoxyCompactList}\small\item\em Ed\+D\+SA signature verification. \end{DoxyCompactList}\item 
+void \hyperlink{ed448_8h_a4ce51aa77df6f762bf7b129703a186de}{ed448\+Mul} (\hyperlink{structEd448State}{Ed448\+State} $\ast$state, \hyperlink{structEd448Point}{Ed448\+Point} $\ast$\hyperlink{ndp_8h_a4c5c6ceb8ed33456261fa907136e0c3a}{r}, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{sha512_8c_a3934111e8801bd86b261f4bac043efa6}{k}, const \hyperlink{structEd448Point}{Ed448\+Point} $\ast$\hyperlink{ndp_8h_a6519522ad9a6f45e7a8d25d31392a977}{p})
+\begin{DoxyCompactList}\small\item\em Scalar multiplication on Ed448 curve. \end{DoxyCompactList}\item 
+void \hyperlink{ed448_8h_a4484428171c3e921308248c4db48ae3f}{ed448\+Add} (\hyperlink{structEd448State}{Ed448\+State} $\ast$state, \hyperlink{structEd448Point}{Ed448\+Point} $\ast$\hyperlink{ndp_8h_a4c5c6ceb8ed33456261fa907136e0c3a}{r}, const \hyperlink{structEd448Point}{Ed448\+Point} $\ast$\hyperlink{ndp_8h_a6519522ad9a6f45e7a8d25d31392a977}{p}, const \hyperlink{structEd448Point}{Ed448\+Point} $\ast$q)
+\begin{DoxyCompactList}\small\item\em Point addition. \end{DoxyCompactList}\item 
+void \hyperlink{ed448_8h_a001d142880cc0e9738a21c1d6efe4fd8}{ed448\+Double} (\hyperlink{structEd448State}{Ed448\+State} $\ast$state, \hyperlink{structEd448Point}{Ed448\+Point} $\ast$\hyperlink{ndp_8h_a4c5c6ceb8ed33456261fa907136e0c3a}{r}, const \hyperlink{structEd448Point}{Ed448\+Point} $\ast$\hyperlink{ndp_8h_a6519522ad9a6f45e7a8d25d31392a977}{p})
+\begin{DoxyCompactList}\small\item\em Point doubling. \end{DoxyCompactList}\item 
+void \hyperlink{ed448_8h_a8abe404dcd862b0dc7405c753a6b979e}{ed448\+Encode} (\hyperlink{structEd448Point}{Ed448\+Point} $\ast$\hyperlink{ndp_8h_a6519522ad9a6f45e7a8d25d31392a977}{p}, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{tftp__common_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data})
+\begin{DoxyCompactList}\small\item\em Point encoding. \end{DoxyCompactList}\item 
+\hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t} \hyperlink{ed448_8h_ad6d3aaed50430e23647e8aa63f8f7971}{ed448\+Decode} (\hyperlink{structEd448Point}{Ed448\+Point} $\ast$\hyperlink{ndp_8h_a6519522ad9a6f45e7a8d25d31392a977}{p}, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{tftp__common_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data})
+\begin{DoxyCompactList}\small\item\em Point decoding. \end{DoxyCompactList}\item 
+void \hyperlink{ed448_8h_a20520b5bc9181f7d6374bd17446b8651}{ed448\+Red\+Int} (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{ndp_8h_a4c5c6ceb8ed33456261fa907136e0c3a}{r}, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a})
+\begin{DoxyCompactList}\small\item\em Reduce an integer modulo L. \end{DoxyCompactList}\item 
+void \hyperlink{ed448_8h_a43df21b6ec072e79389933e925ee90c3}{ed448\+Add\+Int} (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{ndp_8h_a4c5c6ceb8ed33456261fa907136e0c3a}{r}, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b}, \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n})
+\begin{DoxyCompactList}\small\item\em Addition of two integers. \end{DoxyCompactList}\item 
+\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} \hyperlink{ed448_8h_a6e135bb55f1e1f9d5a479cb4764c8a57}{ed448\+Sub\+Int} (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{ndp_8h_a4c5c6ceb8ed33456261fa907136e0c3a}{r}, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b}, \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n})
+\begin{DoxyCompactList}\small\item\em Subtraction of two integers. \end{DoxyCompactList}\item 
+void \hyperlink{ed448_8h_a5b80976d1044c6271b82cd6cc314fb75}{ed448\+Mul\+Int} (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$rl, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$rh, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b}, \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n})
+\begin{DoxyCompactList}\small\item\em Multiplication of two integers. \end{DoxyCompactList}\item 
+void \hyperlink{ed448_8h_a4d30c2cad7d1db24ffe4302e99a23649}{ed448\+Copy\+Int} (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b}, \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n})
+\begin{DoxyCompactList}\small\item\em Copy an integer. \end{DoxyCompactList}\item 
+void \hyperlink{ed448_8h_a23c5d36308dea7fbe3473d5a96acb3b1}{ed448\+Select\+Int} (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{ndp_8h_a4c5c6ceb8ed33456261fa907136e0c3a}{r}, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b}, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} \hyperlink{llmnr__common_8h_a2e5a04327b5658199f0f7bda2acceee1}{c}, \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n})
+\begin{DoxyCompactList}\small\item\em Select an integer. \end{DoxyCompactList}\item 
+\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} \hyperlink{ed448_8h_aa399eef7d82ab4983692f4b902e20cd1}{ed448\+Comp\+Int} (const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b}, \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n})
+\begin{DoxyCompactList}\small\item\em Compare integers. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Ed448 elliptic curve (constant-\/time implementation) 
+
+\hypertarget{pic32mz__ef__curiosity_8h_License}{}\subsection{License}\label{pic32mz__ef__curiosity_8h_License}
+S\+P\+D\+X-\/\+License-\/\+Identifier\+: G\+P\+L-\/2.\+0-\/or-\/later
+
+Copyright (C) 2010-\/2019 Oryx Embedded S\+A\+RL. All rights reserved.
+
+This file is part of Cyclone\+Crypto Open.
+
+This program is free software; you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+
+You should have received a copy of the G\+NU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-\/1301, U\+SA.
+
+\begin{DoxyAuthor}{Author}
+Oryx Embedded S\+A\+RL (www.\+oryx-\/embedded.\+com) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+9.\+6 
+\end{DoxyVersion}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{ed448_8h_a6b2d73f7e38f8bea483202306fc6b34f}\label{ed448_8h_a6b2d73f7e38f8bea483202306fc6b34f}} 
+\index{ed448.\+h@{ed448.\+h}!E\+D448\+\_\+\+P\+H\+\_\+\+F\+L\+AG@{E\+D448\+\_\+\+P\+H\+\_\+\+F\+L\+AG}}
+\index{E\+D448\+\_\+\+P\+H\+\_\+\+F\+L\+AG@{E\+D448\+\_\+\+P\+H\+\_\+\+F\+L\+AG}!ed448.\+h@{ed448.\+h}}
+\subsubsection{\texorpdfstring{E\+D448\+\_\+\+P\+H\+\_\+\+F\+L\+AG}{ED448\_PH\_FLAG}}
+{\footnotesize\ttfamily \#define E\+D448\+\_\+\+P\+H\+\_\+\+F\+L\+AG~1}
+
+
+
+Definition at line 46 of file ed448.\+h.
+
+\mbox{\Hypertarget{ed448_8h_a156dec107d2f43d4674a6d73f0b16537}\label{ed448_8h_a156dec107d2f43d4674a6d73f0b16537}} 
+\index{ed448.\+h@{ed448.\+h}!E\+D448\+\_\+\+P\+H\+\_\+\+S\+I\+ZE@{E\+D448\+\_\+\+P\+H\+\_\+\+S\+I\+ZE}}
+\index{E\+D448\+\_\+\+P\+H\+\_\+\+S\+I\+ZE@{E\+D448\+\_\+\+P\+H\+\_\+\+S\+I\+ZE}!ed448.\+h@{ed448.\+h}}
+\subsubsection{\texorpdfstring{E\+D448\+\_\+\+P\+H\+\_\+\+S\+I\+ZE}{ED448\_PH\_SIZE}}
+{\footnotesize\ttfamily \#define E\+D448\+\_\+\+P\+H\+\_\+\+S\+I\+ZE~64}
+
+
+
+Definition at line 48 of file ed448.\+h.
+
+\mbox{\Hypertarget{ed448_8h_a26f2969270eebc560926f8bada35cb65}\label{ed448_8h_a26f2969270eebc560926f8bada35cb65}} 
+\index{ed448.\+h@{ed448.\+h}!E\+D448\+\_\+\+P\+R\+I\+V\+A\+T\+E\+\_\+\+K\+E\+Y\+\_\+\+L\+EN@{E\+D448\+\_\+\+P\+R\+I\+V\+A\+T\+E\+\_\+\+K\+E\+Y\+\_\+\+L\+EN}}
+\index{E\+D448\+\_\+\+P\+R\+I\+V\+A\+T\+E\+\_\+\+K\+E\+Y\+\_\+\+L\+EN@{E\+D448\+\_\+\+P\+R\+I\+V\+A\+T\+E\+\_\+\+K\+E\+Y\+\_\+\+L\+EN}!ed448.\+h@{ed448.\+h}}
+\subsubsection{\texorpdfstring{E\+D448\+\_\+\+P\+R\+I\+V\+A\+T\+E\+\_\+\+K\+E\+Y\+\_\+\+L\+EN}{ED448\_PRIVATE\_KEY\_LEN}}
+{\footnotesize\ttfamily \#define E\+D448\+\_\+\+P\+R\+I\+V\+A\+T\+E\+\_\+\+K\+E\+Y\+\_\+\+L\+EN~57}
+
+
+
+Definition at line 39 of file ed448.\+h.
+
+\mbox{\Hypertarget{ed448_8h_a452cd73807c6a5607ede7ba57cbc3e6a}\label{ed448_8h_a452cd73807c6a5607ede7ba57cbc3e6a}} 
+\index{ed448.\+h@{ed448.\+h}!E\+D448\+\_\+\+P\+U\+B\+L\+I\+C\+\_\+\+K\+E\+Y\+\_\+\+L\+EN@{E\+D448\+\_\+\+P\+U\+B\+L\+I\+C\+\_\+\+K\+E\+Y\+\_\+\+L\+EN}}
+\index{E\+D448\+\_\+\+P\+U\+B\+L\+I\+C\+\_\+\+K\+E\+Y\+\_\+\+L\+EN@{E\+D448\+\_\+\+P\+U\+B\+L\+I\+C\+\_\+\+K\+E\+Y\+\_\+\+L\+EN}!ed448.\+h@{ed448.\+h}}
+\subsubsection{\texorpdfstring{E\+D448\+\_\+\+P\+U\+B\+L\+I\+C\+\_\+\+K\+E\+Y\+\_\+\+L\+EN}{ED448\_PUBLIC\_KEY\_LEN}}
+{\footnotesize\ttfamily \#define E\+D448\+\_\+\+P\+U\+B\+L\+I\+C\+\_\+\+K\+E\+Y\+\_\+\+L\+EN~57}
+
+
+
+Definition at line 41 of file ed448.\+h.
+
+\mbox{\Hypertarget{ed448_8h_a6faeb89fbb8744bcc8ec3333ec22b099}\label{ed448_8h_a6faeb89fbb8744bcc8ec3333ec22b099}} 
+\index{ed448.\+h@{ed448.\+h}!E\+D448\+\_\+\+S\+I\+G\+N\+A\+T\+U\+R\+E\+\_\+\+L\+EN@{E\+D448\+\_\+\+S\+I\+G\+N\+A\+T\+U\+R\+E\+\_\+\+L\+EN}}
+\index{E\+D448\+\_\+\+S\+I\+G\+N\+A\+T\+U\+R\+E\+\_\+\+L\+EN@{E\+D448\+\_\+\+S\+I\+G\+N\+A\+T\+U\+R\+E\+\_\+\+L\+EN}!ed448.\+h@{ed448.\+h}}
+\subsubsection{\texorpdfstring{E\+D448\+\_\+\+S\+I\+G\+N\+A\+T\+U\+R\+E\+\_\+\+L\+EN}{ED448\_SIGNATURE\_LEN}}
+{\footnotesize\ttfamily \#define E\+D448\+\_\+\+S\+I\+G\+N\+A\+T\+U\+R\+E\+\_\+\+L\+EN~114}
+
+
+
+Definition at line 43 of file ed448.\+h.
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{ed448_8h_a4484428171c3e921308248c4db48ae3f}\label{ed448_8h_a4484428171c3e921308248c4db48ae3f}} 
+\index{ed448.\+h@{ed448.\+h}!ed448\+Add@{ed448\+Add}}
+\index{ed448\+Add@{ed448\+Add}!ed448.\+h@{ed448.\+h}}
+\subsubsection{\texorpdfstring{ed448\+Add()}{ed448Add()}}
+{\footnotesize\ttfamily void ed448\+Add (\begin{DoxyParamCaption}\item[{\hyperlink{structEd448State}{Ed448\+State} $\ast$}]{state,  }\item[{\hyperlink{structEd448Point}{Ed448\+Point} $\ast$}]{r,  }\item[{const \hyperlink{structEd448Point}{Ed448\+Point} $\ast$}]{p,  }\item[{const \hyperlink{structEd448Point}{Ed448\+Point} $\ast$}]{q }\end{DoxyParamCaption})}
+
+
+
+Point addition. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em state} & Pointer to the working state \\
+\hline
+\mbox{\tt out}  & {\em r} & Resulting point R = P + Q \\
+\hline
+\mbox{\tt in}  & {\em p} & First operand \\
+\hline
+\mbox{\tt in}  & {\em q} & Second operand \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 412 of file ed448.\+c.
+
+
+\begin{DoxyCode}
+414 \{
+415    \textcolor{comment}{//Compute A = X1 * X2}
+416    \hyperlink{curve448_8c_a9e465ebba8466bf0c71c08fb4e8c5e7d}{curve448Mul}(state->\hyperlink{structEd448State_ad4cb72edff81f1f9a5b6bc63a1094c22}{a}, p->\hyperlink{structEd448Point_a6396f5c659c12687df267e45d6c12069}{x}, q->\hyperlink{structEd448Point_a6396f5c659c12687df267e45d6c12069}{x});
+417    \textcolor{comment}{//Compute B = Y1 * Y2}
+418    \hyperlink{curve448_8c_a9e465ebba8466bf0c71c08fb4e8c5e7d}{curve448Mul}(state->\hyperlink{structEd448State_a5b53562eef4d3b0b81a24f016aa99bc4}{b}, p->\hyperlink{structEd448Point_a21298d9fefc8531fa8b77062e9e97591}{y}, q->\hyperlink{structEd448Point_a21298d9fefc8531fa8b77062e9e97591}{y});
+419    \textcolor{comment}{//Compute C = Z1 * Z2}
+420    \hyperlink{curve448_8c_a9e465ebba8466bf0c71c08fb4e8c5e7d}{curve448Mul}(state->\hyperlink{structEd448State_a78d0f1209633c367017d8d461c4b6e84}{c}, p->\hyperlink{structEd448Point_a17b31287fc682b3d42e6dc5685aaf237}{z}, q->\hyperlink{structEd448Point_a17b31287fc682b3d42e6dc5685aaf237}{z});
+421    \textcolor{comment}{//Compute D = C^2}
+422    \hyperlink{curve448_8c_aef5f312be16d281f6106adb9446c4eeb}{curve448Sqr}(state->\hyperlink{structEd448State_a3f052b03dccc728fdff2d62927a9a59f}{d}, state->\hyperlink{structEd448State_a78d0f1209633c367017d8d461c4b6e84}{c});
+423    \textcolor{comment}{//Compute E = d * A * B}
+424    \hyperlink{curve448_8c_a9e465ebba8466bf0c71c08fb4e8c5e7d}{curve448Mul}(state->\hyperlink{structEd448State_a62cda869b3e678db6b13553921f82f29}{e}, state->\hyperlink{structEd448State_ad4cb72edff81f1f9a5b6bc63a1094c22}{a}, state->\hyperlink{structEd448State_a5b53562eef4d3b0b81a24f016aa99bc4}{b});
+425    \hyperlink{curve448_8c_a9e465ebba8466bf0c71c08fb4e8c5e7d}{curve448Mul}(state->\hyperlink{structEd448State_a62cda869b3e678db6b13553921f82f29}{e}, state->\hyperlink{structEd448State_a62cda869b3e678db6b13553921f82f29}{e}, \hyperlink{ed448_8c_a9aecb8482dae2ea4165e52180c421f76}{ED448\_D});
+426    \textcolor{comment}{//Compute F = D + E}
+427    \hyperlink{curve448_8c_a95607469c0c0c75d84234a41ad3b2987}{curve448Add}(state->\hyperlink{structEd448State_a6bc488bc58706d2eac01880e5df4c54b}{f}, state->\hyperlink{structEd448State_a3f052b03dccc728fdff2d62927a9a59f}{d}, state->\hyperlink{structEd448State_a62cda869b3e678db6b13553921f82f29}{e});
+428    \textcolor{comment}{//Compute G = D - E}
+429    \hyperlink{curve448_8c_a60277698c2d05decaa3755fcf2e6dee8}{curve448Sub}(state->\hyperlink{structEd448State_adea8c65b2e29b9bbf50d317dfd064433}{g}, state->\hyperlink{structEd448State_a3f052b03dccc728fdff2d62927a9a59f}{d}, state->\hyperlink{structEd448State_a62cda869b3e678db6b13553921f82f29}{e});
+430    \textcolor{comment}{//Compute D = (X1 + Y1) * (X2 + Y2)}
+431    \hyperlink{curve448_8c_a95607469c0c0c75d84234a41ad3b2987}{curve448Add}(state->\hyperlink{structEd448State_a3f052b03dccc728fdff2d62927a9a59f}{d}, p->\hyperlink{structEd448Point_a6396f5c659c12687df267e45d6c12069}{x}, p->\hyperlink{structEd448Point_a21298d9fefc8531fa8b77062e9e97591}{y});
+432    \hyperlink{curve448_8c_a95607469c0c0c75d84234a41ad3b2987}{curve448Add}(state->\hyperlink{structEd448State_a62cda869b3e678db6b13553921f82f29}{e}, q->\hyperlink{structEd448Point_a6396f5c659c12687df267e45d6c12069}{x}, q->\hyperlink{structEd448Point_a21298d9fefc8531fa8b77062e9e97591}{y});
+433    \hyperlink{curve448_8c_a9e465ebba8466bf0c71c08fb4e8c5e7d}{curve448Mul}(state->\hyperlink{structEd448State_a3f052b03dccc728fdff2d62927a9a59f}{d}, state->\hyperlink{structEd448State_a3f052b03dccc728fdff2d62927a9a59f}{d}, state->\hyperlink{structEd448State_a62cda869b3e678db6b13553921f82f29}{e});
+434    \textcolor{comment}{//Compute X3 = C * G * (D - A - B)}
+435    \hyperlink{curve448_8c_a60277698c2d05decaa3755fcf2e6dee8}{curve448Sub}(state->\hyperlink{structEd448State_a3f052b03dccc728fdff2d62927a9a59f}{d}, state->\hyperlink{structEd448State_a3f052b03dccc728fdff2d62927a9a59f}{d}, state->\hyperlink{structEd448State_ad4cb72edff81f1f9a5b6bc63a1094c22}{a});
+436    \hyperlink{curve448_8c_a60277698c2d05decaa3755fcf2e6dee8}{curve448Sub}(state->\hyperlink{structEd448State_a3f052b03dccc728fdff2d62927a9a59f}{d}, state->\hyperlink{structEd448State_a3f052b03dccc728fdff2d62927a9a59f}{d}, state->\hyperlink{structEd448State_a5b53562eef4d3b0b81a24f016aa99bc4}{b});
+437    \hyperlink{curve448_8c_a9e465ebba8466bf0c71c08fb4e8c5e7d}{curve448Mul}(state->\hyperlink{structEd448State_a3f052b03dccc728fdff2d62927a9a59f}{d}, state->\hyperlink{structEd448State_a3f052b03dccc728fdff2d62927a9a59f}{d}, state->\hyperlink{structEd448State_a78d0f1209633c367017d8d461c4b6e84}{c});
+438    \hyperlink{curve448_8c_a9e465ebba8466bf0c71c08fb4e8c5e7d}{curve448Mul}(r->\hyperlink{structEd448Point_a6396f5c659c12687df267e45d6c12069}{x}, state->\hyperlink{structEd448State_a3f052b03dccc728fdff2d62927a9a59f}{d}, state->\hyperlink{structEd448State_adea8c65b2e29b9bbf50d317dfd064433}{g});
+439    \textcolor{comment}{//Compute Y3 = C * F * (B - A)}
+440    \hyperlink{curve448_8c_a60277698c2d05decaa3755fcf2e6dee8}{curve448Sub}(state->\hyperlink{structEd448State_a5b53562eef4d3b0b81a24f016aa99bc4}{b}, state->\hyperlink{structEd448State_a5b53562eef4d3b0b81a24f016aa99bc4}{b}, state->\hyperlink{structEd448State_ad4cb72edff81f1f9a5b6bc63a1094c22}{a});
+441    \hyperlink{curve448_8c_a9e465ebba8466bf0c71c08fb4e8c5e7d}{curve448Mul}(state->\hyperlink{structEd448State_a5b53562eef4d3b0b81a24f016aa99bc4}{b}, state->\hyperlink{structEd448State_a5b53562eef4d3b0b81a24f016aa99bc4}{b}, state->\hyperlink{structEd448State_a78d0f1209633c367017d8d461c4b6e84}{c});
+442    \hyperlink{curve448_8c_a9e465ebba8466bf0c71c08fb4e8c5e7d}{curve448Mul}(r->\hyperlink{structEd448Point_a21298d9fefc8531fa8b77062e9e97591}{y}, state->\hyperlink{structEd448State_a5b53562eef4d3b0b81a24f016aa99bc4}{b}, state->\hyperlink{structEd448State_a6bc488bc58706d2eac01880e5df4c54b}{f});
+443    \textcolor{comment}{//Compute Z3 = F * G}
+444    \hyperlink{curve448_8c_a9e465ebba8466bf0c71c08fb4e8c5e7d}{curve448Mul}(r->\hyperlink{structEd448Point_a17b31287fc682b3d42e6dc5685aaf237}{z}, state->\hyperlink{structEd448State_a6bc488bc58706d2eac01880e5df4c54b}{f}, state->\hyperlink{structEd448State_adea8c65b2e29b9bbf50d317dfd064433}{g});
+445 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ed448_8h_a43df21b6ec072e79389933e925ee90c3}\label{ed448_8h_a43df21b6ec072e79389933e925ee90c3}} 
+\index{ed448.\+h@{ed448.\+h}!ed448\+Add\+Int@{ed448\+Add\+Int}}
+\index{ed448\+Add\+Int@{ed448\+Add\+Int}!ed448.\+h@{ed448.\+h}}
+\subsubsection{\texorpdfstring{ed448\+Add\+Int()}{ed448AddInt()}}
+{\footnotesize\ttfamily void ed448\+Add\+Int (\begin{DoxyParamCaption}\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{r,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{a,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{b,  }\item[{\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t}}]{n }\end{DoxyParamCaption})}
+
+
+
+Addition of two integers. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em r} & Resulting integer R = A + B \\
+\hline
+\mbox{\tt in}  & {\em a} & An integer such as 0 $<$= A $<$ (2$^\wedge$8)$^\wedge$n \\
+\hline
+\mbox{\tt in}  & {\em b} & An integer such as 0 $<$= B $<$ (2$^\wedge$8)$^\wedge$n \\
+\hline
+\mbox{\tt in}  & {\em n} & Size of the operands, in bytes \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 623 of file ed448.\+c.
+
+
+\begin{DoxyCode}
+624 \{
+625    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+626    \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t} temp;
+627 
+628    \textcolor{comment}{//Compute R = A + B}
+629    \textcolor{keywordflow}{for}(temp = 0, i = 0; i < \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n}; i++)
+630    \{
+631       temp += \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[i];
+632       temp += \hyperlink{dtls__misc_8h_ab590318ac859d0e57e15c3dd6c62a605}{b}[i];
+633       \hyperlink{ndp_8h_a4c5c6ceb8ed33456261fa907136e0c3a}{r}[i] = temp & 0xFF;
+634       temp >>= 8;
+635    \}
+636 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ed448_8h_aa399eef7d82ab4983692f4b902e20cd1}\label{ed448_8h_aa399eef7d82ab4983692f4b902e20cd1}} 
+\index{ed448.\+h@{ed448.\+h}!ed448\+Comp\+Int@{ed448\+Comp\+Int}}
+\index{ed448\+Comp\+Int@{ed448\+Comp\+Int}!ed448.\+h@{ed448.\+h}}
+\subsubsection{\texorpdfstring{ed448\+Comp\+Int()}{ed448CompInt()}}
+{\footnotesize\ttfamily \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} ed448\+Comp\+Int (\begin{DoxyParamCaption}\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{a,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{b,  }\item[{\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t}}]{n }\end{DoxyParamCaption})}
+
+
+
+Compare integers. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em a} & Pointer to the first integer \\
+\hline
+\mbox{\tt in}  & {\em b} & Pointer to the second integer \\
+\hline
+\mbox{\tt in}  & {\em n} & Size of the integers, in bytes \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The function returns 0 if the A = B, else 1 
+\end{DoxyReturn}
+
+
+Definition at line 787 of file ed448.\+c.
+
+
+\begin{DoxyCode}
+788 \{
+789    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+790    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} \hyperlink{web__socket_8h_a8a74907784be6c7786c2d060c8d7e10b}{mask};
+791 
+792    \textcolor{comment}{//Initialize mask}
+793    mask = 0;
+794 
+795    \textcolor{comment}{//Compare A and B}
+796    \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n}; i++)
+797    \{
+798       \textcolor{comment}{//Constant time implementation}
+799       mask |= \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[i] ^ \hyperlink{dtls__misc_8h_ab590318ac859d0e57e15c3dd6c62a605}{b}[i];
+800    \}
+801 
+802    \textcolor{comment}{//Return 0 if A = B, else 1}
+803    \textcolor{keywordflow}{return} ((\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t}) (mask | (~mask + 1))) >> 7;
+804 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ed448_8h_a4d30c2cad7d1db24ffe4302e99a23649}\label{ed448_8h_a4d30c2cad7d1db24ffe4302e99a23649}} 
+\index{ed448.\+h@{ed448.\+h}!ed448\+Copy\+Int@{ed448\+Copy\+Int}}
+\index{ed448\+Copy\+Int@{ed448\+Copy\+Int}!ed448.\+h@{ed448.\+h}}
+\subsubsection{\texorpdfstring{ed448\+Copy\+Int()}{ed448CopyInt()}}
+{\footnotesize\ttfamily void ed448\+Copy\+Int (\begin{DoxyParamCaption}\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{a,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{b,  }\item[{\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t}}]{n }\end{DoxyParamCaption})}
+
+
+
+Copy an integer. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em a} & Pointer to the destination integer \\
+\hline
+\mbox{\tt in}  & {\em b} & Pointer to the source integer \\
+\hline
+\mbox{\tt in}  & {\em n} & Size of the integers, in bytes \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 740 of file ed448.\+c.
+
+
+\begin{DoxyCode}
+741 \{
+742    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+743 
+744    \textcolor{comment}{//Copy the value of the integer}
+745    \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n}; i++)
+746    \{
+747       \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[i] = \hyperlink{dtls__misc_8h_ab590318ac859d0e57e15c3dd6c62a605}{b}[i];
+748    \}
+749 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ed448_8h_ad6d3aaed50430e23647e8aa63f8f7971}\label{ed448_8h_ad6d3aaed50430e23647e8aa63f8f7971}} 
+\index{ed448.\+h@{ed448.\+h}!ed448\+Decode@{ed448\+Decode}}
+\index{ed448\+Decode@{ed448\+Decode}!ed448.\+h@{ed448.\+h}}
+\subsubsection{\texorpdfstring{ed448\+Decode()}{ed448Decode()}}
+{\footnotesize\ttfamily \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t} ed448\+Decode (\begin{DoxyParamCaption}\item[{\hyperlink{structEd448Point}{Ed448\+Point} $\ast$}]{p,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{data }\end{DoxyParamCaption})}
+
+
+
+Point decoding. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em p} & Point representation \\
+\hline
+\mbox{\tt out}  & {\em data} & Octet string to be converted \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 513 of file ed448.\+c.
+
+
+\begin{DoxyCode}
+514 \{
+515    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+516    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} x0;
+517    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} ret;
+518    \hyperlink{stdint_8h_aec6fcb673ff035718c238c8c9d544c47}{uint64\_t} temp;
+519    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} u[14];
+520    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} v[14];
+521 
+522    \textcolor{comment}{//First, interpret the string as an integer in little-endian representation.}
+523    \textcolor{comment}{//Bit 455 of this number is the least significant bit of the x-coordinate}
+524    \textcolor{comment}{//and denote this value x\_0}
+525    x0 = \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}[56] >> 7;
+526 
+527    \textcolor{comment}{//The y-coordinate is recovered simply by clearing this bit}
+528    \hyperlink{curve448_8c_adefb9b763312f68025f5607420aed329}{curve448Import}(p->\hyperlink{structEd448Point_a21298d9fefc8531fa8b77062e9e97591}{y}, \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data});
+529 
+530    \textcolor{comment}{//Compute u = y + 2^224 + 1}
+531    \textcolor{keywordflow}{for}(temp = 1, i = 0; i < 7; i++)
+532    \{
+533       temp += p->\hyperlink{structEd448Point_a21298d9fefc8531fa8b77062e9e97591}{y}[i];
+534       u[i] = temp & 0xFFFFFFFF;
+535       temp >>= 32;
+536    \}
+537 
+538    \textcolor{keywordflow}{for}(temp += 1, i = 7; i < 14; i++)
+539    \{
+540       temp += p->\hyperlink{structEd448Point_a21298d9fefc8531fa8b77062e9e97591}{y}[i];
+541       u[i] = temp & 0xFFFFFFFF;
+542       temp >>= 32;
+543    \}
+544 
+545    temp += \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}[56] & 0x7F;
+546    ret = temp & 0xFFFFFFFF;
+547 
+548    \textcolor{comment}{//If the y-coordinate is >= p, decoding fails}
+549    ret = (ret | (~ret + 1)) >> 31;
+550 
+551    \textcolor{comment}{//The curve equation implies x^2 = (y^2 - 1) / (d * y^2 - 1) mod p}
+552    \textcolor{comment}{//Let u = y^2 - 1 and v = d * y^2 - 1}
+553    \hyperlink{curve448_8c_aef5f312be16d281f6106adb9446c4eeb}{curve448Sqr}(v, p->\hyperlink{structEd448Point_a21298d9fefc8531fa8b77062e9e97591}{y});
+554    \hyperlink{curve448_8c_ab77c81e1dc5fe4586667acdd3080a9c6}{curve448SubInt}(u, v, 1);
+555    \hyperlink{curve448_8c_a9e465ebba8466bf0c71c08fb4e8c5e7d}{curve448Mul}(v, v, \hyperlink{ed448_8c_a9aecb8482dae2ea4165e52180c421f76}{ED448\_D});
+556    \hyperlink{curve448_8c_ab77c81e1dc5fe4586667acdd3080a9c6}{curve448SubInt}(v, v, 1);
+557 
+558    \textcolor{comment}{//Compute u = sqrt(u / v)}
+559    ret |= \hyperlink{curve448_8c_a548498ab60c89922a9bc1e16e9d1a1c6}{curve448Sqrt}(u, u, v);
+560 
+561    \textcolor{comment}{//If x = 0, and x\_0 = 1, decoding fails}
+562    ret |= (\hyperlink{curve448_8c_a7defba8eb3dee93dd77c6f7bdba6c4d7}{curve448Comp}(u, \hyperlink{ed448_8c_af09cbabfe9188550a0247c1d57c79630}{ED448\_ZERO}) ^ 1) & x0;
+563 
+564    \textcolor{comment}{//Compute v = p - u}
+565    \hyperlink{curve448_8c_a60277698c2d05decaa3755fcf2e6dee8}{curve448Sub}(v, \hyperlink{ed448_8c_af09cbabfe9188550a0247c1d57c79630}{ED448\_ZERO}, u);
+566 
+567    \textcolor{comment}{//Finally, use the x\_0 bit to select the right square root}
+568    \hyperlink{curve448_8c_a1722eb19844e80369c8b7dd04e8ea8aa}{curve448Select}(p->\hyperlink{structEd448Point_a6396f5c659c12687df267e45d6c12069}{x}, u, v, (x0 ^ u[0]) & 1);
+569 
+570    \textcolor{comment}{//Initialize z-coordinate (projective representation)}
+571    \hyperlink{curve448_8c_a3ac13c880f381f5349d061bd171bef60}{curve448SetInt}(p->\hyperlink{structEd448Point_a17b31287fc682b3d42e6dc5685aaf237}{z}, 1);
+572 
+573    \textcolor{comment}{//Return 0 if the point has been successfully decoded, else 1}
+574    \textcolor{keywordflow}{return} ret;
+575 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ed448_8h_a001d142880cc0e9738a21c1d6efe4fd8}\label{ed448_8h_a001d142880cc0e9738a21c1d6efe4fd8}} 
+\index{ed448.\+h@{ed448.\+h}!ed448\+Double@{ed448\+Double}}
+\index{ed448\+Double@{ed448\+Double}!ed448.\+h@{ed448.\+h}}
+\subsubsection{\texorpdfstring{ed448\+Double()}{ed448Double()}}
+{\footnotesize\ttfamily void ed448\+Double (\begin{DoxyParamCaption}\item[{\hyperlink{structEd448State}{Ed448\+State} $\ast$}]{state,  }\item[{\hyperlink{structEd448Point}{Ed448\+Point} $\ast$}]{r,  }\item[{const \hyperlink{structEd448Point}{Ed448\+Point} $\ast$}]{p }\end{DoxyParamCaption})}
+
+
+
+Point doubling. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em state} & Pointer to the working state \\
+\hline
+\mbox{\tt out}  & {\em r} & Resulting point R = 2 $\ast$ P \\
+\hline
+\mbox{\tt in}  & {\em p} & Input point P \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 455 of file ed448.\+c.
+
+
+\begin{DoxyCode}
+456 \{
+457    \textcolor{comment}{//Compute A = X1 * X2}
+458    \hyperlink{curve448_8c_a9e465ebba8466bf0c71c08fb4e8c5e7d}{curve448Mul}(state->\hyperlink{structEd448State_ad4cb72edff81f1f9a5b6bc63a1094c22}{a}, p->\hyperlink{structEd448Point_a6396f5c659c12687df267e45d6c12069}{x}, p->\hyperlink{structEd448Point_a6396f5c659c12687df267e45d6c12069}{x});
+459    \textcolor{comment}{//Compute B = Y1 * Y2}
+460    \hyperlink{curve448_8c_a9e465ebba8466bf0c71c08fb4e8c5e7d}{curve448Mul}(state->\hyperlink{structEd448State_a5b53562eef4d3b0b81a24f016aa99bc4}{b}, p->\hyperlink{structEd448Point_a21298d9fefc8531fa8b77062e9e97591}{y}, p->\hyperlink{structEd448Point_a21298d9fefc8531fa8b77062e9e97591}{y});
+461    \textcolor{comment}{//Compute C = Z1 * Z2}
+462    \hyperlink{curve448_8c_a9e465ebba8466bf0c71c08fb4e8c5e7d}{curve448Mul}(state->\hyperlink{structEd448State_a78d0f1209633c367017d8d461c4b6e84}{c}, p->\hyperlink{structEd448Point_a17b31287fc682b3d42e6dc5685aaf237}{z}, p->\hyperlink{structEd448Point_a17b31287fc682b3d42e6dc5685aaf237}{z});
+463    \textcolor{comment}{//Compute F = A + B}
+464    \hyperlink{curve448_8c_a95607469c0c0c75d84234a41ad3b2987}{curve448Add}(state->\hyperlink{structEd448State_a6bc488bc58706d2eac01880e5df4c54b}{f}, state->\hyperlink{structEd448State_ad4cb72edff81f1f9a5b6bc63a1094c22}{a}, state->\hyperlink{structEd448State_a5b53562eef4d3b0b81a24f016aa99bc4}{b});
+465    \textcolor{comment}{//Compute G = F - 2 * C}
+466    \hyperlink{curve448_8c_a95607469c0c0c75d84234a41ad3b2987}{curve448Add}(state->\hyperlink{structEd448State_a78d0f1209633c367017d8d461c4b6e84}{c}, state->\hyperlink{structEd448State_a78d0f1209633c367017d8d461c4b6e84}{c}, state->\hyperlink{structEd448State_a78d0f1209633c367017d8d461c4b6e84}{c});
+467    \hyperlink{curve448_8c_a60277698c2d05decaa3755fcf2e6dee8}{curve448Sub}(state->\hyperlink{structEd448State_adea8c65b2e29b9bbf50d317dfd064433}{g}, state->\hyperlink{structEd448State_a6bc488bc58706d2eac01880e5df4c54b}{f}, state->\hyperlink{structEd448State_a78d0f1209633c367017d8d461c4b6e84}{c});
+468    \textcolor{comment}{//Compute D = (X1 + Y1)^2}
+469    \hyperlink{curve448_8c_a95607469c0c0c75d84234a41ad3b2987}{curve448Add}(state->\hyperlink{structEd448State_a3f052b03dccc728fdff2d62927a9a59f}{d}, p->\hyperlink{structEd448Point_a6396f5c659c12687df267e45d6c12069}{x}, p->\hyperlink{structEd448Point_a21298d9fefc8531fa8b77062e9e97591}{y});
+470    \hyperlink{curve448_8c_aef5f312be16d281f6106adb9446c4eeb}{curve448Sqr}(state->\hyperlink{structEd448State_a3f052b03dccc728fdff2d62927a9a59f}{d}, state->\hyperlink{structEd448State_a3f052b03dccc728fdff2d62927a9a59f}{d});
+471    \textcolor{comment}{//Compute X3 = G * (D - F)}
+472    \hyperlink{curve448_8c_a60277698c2d05decaa3755fcf2e6dee8}{curve448Sub}(state->\hyperlink{structEd448State_a3f052b03dccc728fdff2d62927a9a59f}{d}, state->\hyperlink{structEd448State_a3f052b03dccc728fdff2d62927a9a59f}{d}, state->\hyperlink{structEd448State_a6bc488bc58706d2eac01880e5df4c54b}{f});
+473    \hyperlink{curve448_8c_a9e465ebba8466bf0c71c08fb4e8c5e7d}{curve448Mul}(r->\hyperlink{structEd448Point_a6396f5c659c12687df267e45d6c12069}{x}, state->\hyperlink{structEd448State_a3f052b03dccc728fdff2d62927a9a59f}{d}, state->\hyperlink{structEd448State_adea8c65b2e29b9bbf50d317dfd064433}{g});
+474    \textcolor{comment}{//Compute Y3 = F * (A - B)}
+475    \hyperlink{curve448_8c_a60277698c2d05decaa3755fcf2e6dee8}{curve448Sub}(state->\hyperlink{structEd448State_ad4cb72edff81f1f9a5b6bc63a1094c22}{a}, state->\hyperlink{structEd448State_ad4cb72edff81f1f9a5b6bc63a1094c22}{a}, state->\hyperlink{structEd448State_a5b53562eef4d3b0b81a24f016aa99bc4}{b});
+476    \hyperlink{curve448_8c_a9e465ebba8466bf0c71c08fb4e8c5e7d}{curve448Mul}(r->\hyperlink{structEd448Point_a21298d9fefc8531fa8b77062e9e97591}{y}, state->\hyperlink{structEd448State_ad4cb72edff81f1f9a5b6bc63a1094c22}{a}, state->\hyperlink{structEd448State_a6bc488bc58706d2eac01880e5df4c54b}{f});
+477    \textcolor{comment}{//Compute Z3 = F * G}
+478    \hyperlink{curve448_8c_a9e465ebba8466bf0c71c08fb4e8c5e7d}{curve448Mul}(r->\hyperlink{structEd448Point_a17b31287fc682b3d42e6dc5685aaf237}{z}, state->\hyperlink{structEd448State_a6bc488bc58706d2eac01880e5df4c54b}{f}, state->\hyperlink{structEd448State_adea8c65b2e29b9bbf50d317dfd064433}{g});
+479 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ed448_8h_a8abe404dcd862b0dc7405c753a6b979e}\label{ed448_8h_a8abe404dcd862b0dc7405c753a6b979e}} 
+\index{ed448.\+h@{ed448.\+h}!ed448\+Encode@{ed448\+Encode}}
+\index{ed448\+Encode@{ed448\+Encode}!ed448.\+h@{ed448.\+h}}
+\subsubsection{\texorpdfstring{ed448\+Encode()}{ed448Encode()}}
+{\footnotesize\ttfamily void ed448\+Encode (\begin{DoxyParamCaption}\item[{\hyperlink{structEd448Point}{Ed448\+Point} $\ast$}]{p,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{data }\end{DoxyParamCaption})}
+
+
+
+Point encoding. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em p} & Point representation \\
+\hline
+\mbox{\tt out}  & {\em data} & Octet string resulting from the conversion \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 488 of file ed448.\+c.
+
+
+\begin{DoxyCode}
+489 \{
+490    \textcolor{comment}{//Retrieve affine representation}
+491    \hyperlink{curve448_8c_ac7719f974f4b271e3571760807e24cde}{curve448Inv}(p->\hyperlink{structEd448Point_a17b31287fc682b3d42e6dc5685aaf237}{z}, p->\hyperlink{structEd448Point_a17b31287fc682b3d42e6dc5685aaf237}{z});
+492    \hyperlink{curve448_8c_a9e465ebba8466bf0c71c08fb4e8c5e7d}{curve448Mul}(p->\hyperlink{structEd448Point_a6396f5c659c12687df267e45d6c12069}{x}, p->\hyperlink{structEd448Point_a6396f5c659c12687df267e45d6c12069}{x}, p->\hyperlink{structEd448Point_a17b31287fc682b3d42e6dc5685aaf237}{z});
+493    \hyperlink{curve448_8c_a9e465ebba8466bf0c71c08fb4e8c5e7d}{curve448Mul}(p->\hyperlink{structEd448Point_a21298d9fefc8531fa8b77062e9e97591}{y}, p->\hyperlink{structEd448Point_a21298d9fefc8531fa8b77062e9e97591}{y}, p->\hyperlink{structEd448Point_a17b31287fc682b3d42e6dc5685aaf237}{z});
+494    \hyperlink{curve448_8c_a3ac13c880f381f5349d061bd171bef60}{curve448SetInt}(p->\hyperlink{structEd448Point_a17b31287fc682b3d42e6dc5685aaf237}{z}, 1);
+495 
+496    \textcolor{comment}{//Encode the y-coordinate as a little-endian string of 57 octets. The final}
+497    \textcolor{comment}{//octet is always zero}
+498    \hyperlink{curve448_8c_a9039eeaa95f929f0cc5cf5c4120dfac0}{curve448Export}(p->\hyperlink{structEd448Point_a21298d9fefc8531fa8b77062e9e97591}{y}, \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data});
+499    \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}[56] = 0;
+500 
+501    \textcolor{comment}{//Copy the least significant bit of the x-coordinate to the most significant}
+502    \textcolor{comment}{//bit of the final octet}
+503    \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}[56] |= (p->\hyperlink{structEd448Point_a6396f5c659c12687df267e45d6c12069}{x}[0] & 1) << 7;
+504 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ed448_8h_a033819fe843111ba0725540aae9e8429}\label{ed448_8h_a033819fe843111ba0725540aae9e8429}} 
+\index{ed448.\+h@{ed448.\+h}!ed448\+Generate\+Key\+Pair@{ed448\+Generate\+Key\+Pair}}
+\index{ed448\+Generate\+Key\+Pair@{ed448\+Generate\+Key\+Pair}!ed448.\+h@{ed448.\+h}}
+\subsubsection{\texorpdfstring{ed448\+Generate\+Key\+Pair()}{ed448GenerateKeyPair()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ed448\+Generate\+Key\+Pair (\begin{DoxyParamCaption}\item[{const \hyperlink{structPrngAlgo}{Prng\+Algo} $\ast$}]{prng\+Algo,  }\item[{void $\ast$}]{prng\+Context,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{private\+Key,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{public\+Key }\end{DoxyParamCaption})}
+
+
+
+Ed\+D\+SA key pair generation. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em prng\+Algo} & P\+R\+NG algorithm \\
+\hline
+\mbox{\tt in}  & {\em prng\+Context} & Pointer to the P\+R\+NG context \\
+\hline
+\mbox{\tt out}  & {\em private\+Key} & Ed\+D\+SA private key (57 bytes) \\
+\hline
+\mbox{\tt out}  & {\em public\+Key} & Ed\+D\+SA public key (57 bytes) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 103 of file ed448.\+c.
+
+
+\begin{DoxyCode}
+105 \{
+106    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+107    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} \hyperlink{md2_8c_adf356ff381033f761b7de5f76e763a45}{s}[57];
+108    \hyperlink{structEd448State}{Ed448State} *state;
+109 
+110    \textcolor{comment}{//Check parameters}
+111    \textcolor{keywordflow}{if}(prngAlgo == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || prngContext == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+112       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+113    \textcolor{keywordflow}{if}(privateKey == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || publicKey == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+114       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+115 
+116    \textcolor{comment}{//The private key is 57 octets of cryptographically secure random data}
+117    error = prngAlgo->\hyperlink{structPrngAlgo_a079621740ef14faacfcd05b84c9036eb}{read}(prngContext, privateKey, \hyperlink{ed448_8h_a26f2969270eebc560926f8bada35cb65}{ED448\_PRIVATE\_KEY\_LEN});
+118    \textcolor{comment}{//Any error to report?}
+119    \textcolor{keywordflow}{if}(error)
+120       \textcolor{keywordflow}{return} error;
+121 
+122    \textcolor{comment}{//Allocate working state}
+123    state = \hyperlink{cyclone__crypto_2core_2crypto_8h_a48b53d16f66d31e5dcf82db3c1b882ba}{cryptoAllocMem}(\textcolor{keyword}{sizeof}(\hyperlink{structEd448State}{Ed448State}));
+124    \textcolor{comment}{//Failed to allocate memory?}
+125    \textcolor{keywordflow}{if}(state == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+126       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac0a554045048d2fb61387cf735676f69}{ERROR\_OUT\_OF\_MEMORY};
+127 
+128    \textcolor{comment}{//Hash the 57-byte private key using SHA-512}
+129    \hyperlink{shake256_8c_a9db6fcc2d16d3b8d199c7504070c20b6}{shake256Init}(&state->\hyperlink{structEd448State_a80b6a03936367779610c7ec1f2cc27ad}{shake256Context});
+130    \hyperlink{shake256_8c_a82026ff651b4151ef245a91cf8037837}{shake256Absorb}(&state->\hyperlink{structEd448State_a80b6a03936367779610c7ec1f2cc27ad}{shake256Context}, privateKey, 
+      \hyperlink{ed448_8h_a26f2969270eebc560926f8bada35cb65}{ED448\_PRIVATE\_KEY\_LEN});
+131    \hyperlink{shake256_8c_aea0f1fca652c9d61498ebbf0baa138d2}{shake256Final}(&state->\hyperlink{structEd448State_a80b6a03936367779610c7ec1f2cc27ad}{shake256Context});
+132 
+133    \textcolor{comment}{//Only the lower 57 bytes are used for generating the public key. Interpret}
+134    \textcolor{comment}{//the buffer as the little-endian integer, forming a secret scalar s}
+135    \hyperlink{shake256_8c_a5726222a16067416da493455779fe02e}{shake256Squeeze}(&state->\hyperlink{structEd448State_a80b6a03936367779610c7ec1f2cc27ad}{shake256Context}, s, 57);
+136 
+137    \textcolor{comment}{//The two least significant bits of the first octet are cleared, all eight}
+138    \textcolor{comment}{//bits the last octet are cleared, and the highest bit of the second to}
+139    \textcolor{comment}{//last octet is set}
+140    s[0] &= 0xFC;
+141    s[56] = 0x00;
+142    s[55] |= 0x80;
+143 
+144    \textcolor{comment}{//Perform a fixed-base scalar multiplication s * B}
+145    \hyperlink{ed448_8c_a4ce51aa77df6f762bf7b129703a186de}{ed448Mul}(state, &state->\hyperlink{structEd448State_a261c5effb4cc26327eb1d480be635ebb}{sb}, s, &\hyperlink{ed448_8c_afe186a51f34d98a89c538878cbbf527b}{ED448\_B});
+146    \textcolor{comment}{//The public key A is the encoding of the point s * B}
+147    \hyperlink{ed448_8c_a8abe404dcd862b0dc7405c753a6b979e}{ed448Encode}(&state->\hyperlink{structEd448State_a261c5effb4cc26327eb1d480be635ebb}{sb}, publicKey);
+148 
+149    \textcolor{comment}{//Erase working state}
+150    \hyperlink{cyclone__crypto_2core_2crypto_8h_ad4465436e4ff353300fba4896012e18b}{cryptoMemset}(state, 0, \textcolor{keyword}{sizeof}(\hyperlink{structEd448State}{Ed448State}));
+151    \textcolor{comment}{//Release working state}
+152    \hyperlink{cyclone__crypto_2core_2crypto_8h_ac8a223b176683db4e9eed4162774f870}{cryptoFreeMem}(state);
+153 
+154    \textcolor{comment}{//Successful processing}
+155    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+156 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ed448_8h_a6c02071081eff48fb9e6c6b8c5342377}\label{ed448_8h_a6c02071081eff48fb9e6c6b8c5342377}} 
+\index{ed448.\+h@{ed448.\+h}!ed448\+Generate\+Signature@{ed448\+Generate\+Signature}}
+\index{ed448\+Generate\+Signature@{ed448\+Generate\+Signature}!ed448.\+h@{ed448.\+h}}
+\subsubsection{\texorpdfstring{ed448\+Generate\+Signature()}{ed448GenerateSignature()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ed448\+Generate\+Signature (\begin{DoxyParamCaption}\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{private\+Key,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{public\+Key,  }\item[{const void $\ast$}]{message,  }\item[{size\+\_\+t}]{message\+Len,  }\item[{const void $\ast$}]{context,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}}]{context\+Len,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}}]{flag,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{signature }\end{DoxyParamCaption})}
+
+
+
+Ed\+D\+SA signature generation. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em private\+Key} & Signer\textquotesingle{}s Ed\+D\+SA private key (57 bytes) \\
+\hline
+\mbox{\tt in}  & {\em public\+Key} & Signer\textquotesingle{}s Ed\+D\+SA public key (57 bytes) \\
+\hline
+\mbox{\tt in}  & {\em message} & Pointer to the message to be signed \\
+\hline
+\mbox{\tt in}  & {\em message\+Len} & Length of the message, in bytes \\
+\hline
+\mbox{\tt in}  & {\em context} & Constant string specified by the protocol using it \\
+\hline
+\mbox{\tt in}  & {\em context\+Len} & Length of the context, in bytes \\
+\hline
+\mbox{\tt in}  & {\em flag} & Prehash flag for Ed448ph scheme \\
+\hline
+\mbox{\tt out}  & {\em signature} & Ed\+D\+SA signature (114 bytes) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 172 of file ed448.\+c.
+
+
+\begin{DoxyCode}
+175 \{
+176    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} \hyperlink{aria_8c_a5dadc28804036d1b82e1dc027e95c9a6}{c};
+177    \hyperlink{structEd448State}{Ed448State} *state;
+178 
+179    \textcolor{comment}{//Check parameters}
+180    \textcolor{keywordflow}{if}(privateKey == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || \hyperlink{tls_8h_af27e6d4ea3add14cd8cc9aa275d716ad}{signature} == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+181       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+182    \textcolor{keywordflow}{if}(\hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message} == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} && messageLen != 0)
+183       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+184    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} && contextLen != 0)
+185       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+186 
+187    \textcolor{comment}{//Allocate working state}
+188    state = \hyperlink{cyclone__crypto_2core_2crypto_8h_a48b53d16f66d31e5dcf82db3c1b882ba}{cryptoAllocMem}(\textcolor{keyword}{sizeof}(\hyperlink{structEd448State}{Ed448State}));
+189    \textcolor{comment}{//Failed to allocate memory?}
+190    \textcolor{keywordflow}{if}(state == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+191       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac0a554045048d2fb61387cf735676f69}{ERROR\_OUT\_OF\_MEMORY};
+192 
+193    \textcolor{comment}{//Hash the private key, 57 octets, using SHAKE256(x, 114). Let h denote}
+194    \textcolor{comment}{//the resulting digest}
+195    \hyperlink{shake256_8c_a9db6fcc2d16d3b8d199c7504070c20b6}{shake256Init}(&state->\hyperlink{structEd448State_a80b6a03936367779610c7ec1f2cc27ad}{shake256Context});
+196    \hyperlink{shake256_8c_a82026ff651b4151ef245a91cf8037837}{shake256Absorb}(&state->\hyperlink{structEd448State_a80b6a03936367779610c7ec1f2cc27ad}{shake256Context}, privateKey, 
+      \hyperlink{ed448_8h_a26f2969270eebc560926f8bada35cb65}{ED448\_PRIVATE\_KEY\_LEN});
+197    \hyperlink{shake256_8c_aea0f1fca652c9d61498ebbf0baa138d2}{shake256Final}(&state->\hyperlink{structEd448State_a80b6a03936367779610c7ec1f2cc27ad}{shake256Context});
+198 
+199    \textcolor{comment}{//Construct the secret scalar s from the first half of the digest}
+200    \hyperlink{shake256_8c_a5726222a16067416da493455779fe02e}{shake256Squeeze}(&state->\hyperlink{structEd448State_a80b6a03936367779610c7ec1f2cc27ad}{shake256Context}, state->
+      \hyperlink{structEd448State_a1072024363ba04b1a3162b1a0f0caa38}{s}, 57);
+201 
+202    \textcolor{comment}{//The two least significant bits of the first octet are cleared, all eight}
+203    \textcolor{comment}{//bits the last octet are cleared, and the highest bit of the second to}
+204    \textcolor{comment}{//last octet is set}
+205    state->\hyperlink{structEd448State_a1072024363ba04b1a3162b1a0f0caa38}{s}[0] &= 0xFC;
+206    state->\hyperlink{structEd448State_a1072024363ba04b1a3162b1a0f0caa38}{s}[56] = 0x00;
+207    state->\hyperlink{structEd448State_a1072024363ba04b1a3162b1a0f0caa38}{s}[55] |= 0x80;
+208 
+209    \textcolor{comment}{//The public key is optional}
+210    \textcolor{keywordflow}{if}(publicKey == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+211    \{
+212       \textcolor{comment}{//Perform a fixed-base scalar multiplication s * B}
+213       \hyperlink{ed448_8c_a4ce51aa77df6f762bf7b129703a186de}{ed448Mul}(state, &state->\hyperlink{structEd448State_a261c5effb4cc26327eb1d480be635ebb}{sb}, state->\hyperlink{structEd448State_a1072024363ba04b1a3162b1a0f0caa38}{s}, &\hyperlink{ed448_8c_afe186a51f34d98a89c538878cbbf527b}{ED448\_B});
+214       \textcolor{comment}{//The public key A is the encoding of the point s * B}
+215       \hyperlink{ed448_8c_a8abe404dcd862b0dc7405c753a6b979e}{ed448Encode}(&state->\hyperlink{structEd448State_a261c5effb4cc26327eb1d480be635ebb}{sb}, state->\hyperlink{structEd448State_a013f38fceb014e0929a015410ea960f0}{t});
+216       \textcolor{comment}{//Point to the resulting public key}
+217       publicKey = state->\hyperlink{structEd448State_a013f38fceb014e0929a015410ea960f0}{t};
+218    \}
+219 
+220    \textcolor{comment}{//Let prefix denote the second half of the hash digest}
+221    \hyperlink{shake256_8c_a5726222a16067416da493455779fe02e}{shake256Squeeze}(&state->\hyperlink{structEd448State_a80b6a03936367779610c7ec1f2cc27ad}{shake256Context}, state->
+      \hyperlink{structEd448State_a0f0eb37b77a1011d319079256fe00115}{p}, 57);
+222 
+223    \textcolor{comment}{//Compute SHAKE256(dom4(F, C) || prefix || PH(M), 114)}
+224    \hyperlink{shake256_8c_a9db6fcc2d16d3b8d199c7504070c20b6}{shake256Init}(&state->\hyperlink{structEd448State_a80b6a03936367779610c7ec1f2cc27ad}{shake256Context});
+225    \hyperlink{shake256_8c_a82026ff651b4151ef245a91cf8037837}{shake256Absorb}(&state->\hyperlink{structEd448State_a80b6a03936367779610c7ec1f2cc27ad}{shake256Context}, \textcolor{stringliteral}{"SigEd448"}, 8);
+226    \hyperlink{shake256_8c_a82026ff651b4151ef245a91cf8037837}{shake256Absorb}(&state->\hyperlink{structEd448State_a80b6a03936367779610c7ec1f2cc27ad}{shake256Context}, &flag, \textcolor{keyword}{sizeof}(
+      \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t}));
+227    \hyperlink{shake256_8c_a82026ff651b4151ef245a91cf8037837}{shake256Absorb}(&state->\hyperlink{structEd448State_a80b6a03936367779610c7ec1f2cc27ad}{shake256Context}, &contextLen, \textcolor{keyword}{sizeof}(
+      \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t}));
+228    \hyperlink{shake256_8c_a82026ff651b4151ef245a91cf8037837}{shake256Absorb}(&state->\hyperlink{structEd448State_a80b6a03936367779610c7ec1f2cc27ad}{shake256Context}, context, contextLen);
+229    \hyperlink{shake256_8c_a82026ff651b4151ef245a91cf8037837}{shake256Absorb}(&state->\hyperlink{structEd448State_a80b6a03936367779610c7ec1f2cc27ad}{shake256Context}, state->\hyperlink{structEd448State_a0f0eb37b77a1011d319079256fe00115}{p}, 57);
+230    \hyperlink{shake256_8c_a82026ff651b4151ef245a91cf8037837}{shake256Absorb}(&state->\hyperlink{structEd448State_a80b6a03936367779610c7ec1f2cc27ad}{shake256Context}, \hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}, messageLen);
+231    \hyperlink{shake256_8c_aea0f1fca652c9d61498ebbf0baa138d2}{shake256Final}(&state->\hyperlink{structEd448State_a80b6a03936367779610c7ec1f2cc27ad}{shake256Context});
+232    \hyperlink{shake256_8c_a5726222a16067416da493455779fe02e}{shake256Squeeze}(&state->\hyperlink{structEd448State_a80b6a03936367779610c7ec1f2cc27ad}{shake256Context}, state->
+      \hyperlink{structEd448State_adecc7312993a236e3df0d92af8bb2207}{k}, 114);
+233 
+234    \textcolor{comment}{//Reduce the 114-octet digest as a little-endian integer r}
+235    \hyperlink{ed448_8c_a20520b5bc9181f7d6374bd17446b8651}{ed448RedInt}(state->\hyperlink{structEd448State_ad5b8473d4a83e8fdd2c400f52c0bb64c}{r}, state->\hyperlink{structEd448State_adecc7312993a236e3df0d92af8bb2207}{k});
+236    \textcolor{comment}{//Compute the point r * B}
+237    \hyperlink{ed448_8c_a4ce51aa77df6f762bf7b129703a186de}{ed448Mul}(state, &state->\hyperlink{structEd448State_ab000b2957cda8c96b2ea63f23de28381}{rb}, state->\hyperlink{structEd448State_ad5b8473d4a83e8fdd2c400f52c0bb64c}{r}, &\hyperlink{ed448_8c_afe186a51f34d98a89c538878cbbf527b}{ED448\_B});
+238    \textcolor{comment}{//Let the string R be the encoding of this point}
+239    \hyperlink{ed448_8c_a8abe404dcd862b0dc7405c753a6b979e}{ed448Encode}(&state->\hyperlink{structEd448State_ab000b2957cda8c96b2ea63f23de28381}{rb}, \hyperlink{tls_8h_af27e6d4ea3add14cd8cc9aa275d716ad}{signature});
+240 
+241    \textcolor{comment}{//Compute SHAKE256(dom4(F, C) || R || A || PH(M), 114) and interpret the}
+242    \textcolor{comment}{//114-octet digest as a little-endian integer k}
+243    \hyperlink{shake256_8c_a9db6fcc2d16d3b8d199c7504070c20b6}{shake256Init}(&state->\hyperlink{structEd448State_a80b6a03936367779610c7ec1f2cc27ad}{shake256Context});
+244    \hyperlink{shake256_8c_a82026ff651b4151ef245a91cf8037837}{shake256Absorb}(&state->\hyperlink{structEd448State_a80b6a03936367779610c7ec1f2cc27ad}{shake256Context}, \textcolor{stringliteral}{"SigEd448"}, 8);
+245    \hyperlink{shake256_8c_a82026ff651b4151ef245a91cf8037837}{shake256Absorb}(&state->\hyperlink{structEd448State_a80b6a03936367779610c7ec1f2cc27ad}{shake256Context}, &flag, \textcolor{keyword}{sizeof}(
+      \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t}));
+246    \hyperlink{shake256_8c_a82026ff651b4151ef245a91cf8037837}{shake256Absorb}(&state->\hyperlink{structEd448State_a80b6a03936367779610c7ec1f2cc27ad}{shake256Context}, &contextLen, \textcolor{keyword}{sizeof}(
+      \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t}));
+247    \hyperlink{shake256_8c_a82026ff651b4151ef245a91cf8037837}{shake256Absorb}(&state->\hyperlink{structEd448State_a80b6a03936367779610c7ec1f2cc27ad}{shake256Context}, context, contextLen);
+248    \hyperlink{shake256_8c_a82026ff651b4151ef245a91cf8037837}{shake256Absorb}(&state->\hyperlink{structEd448State_a80b6a03936367779610c7ec1f2cc27ad}{shake256Context}, 
+      \hyperlink{tls_8h_af27e6d4ea3add14cd8cc9aa275d716ad}{signature}, \hyperlink{ed448_8h_a6faeb89fbb8744bcc8ec3333ec22b099}{ED448\_SIGNATURE\_LEN} / 2);
+249    \hyperlink{shake256_8c_a82026ff651b4151ef245a91cf8037837}{shake256Absorb}(&state->\hyperlink{structEd448State_a80b6a03936367779610c7ec1f2cc27ad}{shake256Context}, publicKey, 
+      \hyperlink{ed448_8h_a452cd73807c6a5607ede7ba57cbc3e6a}{ED448\_PUBLIC\_KEY\_LEN});
+250    \hyperlink{shake256_8c_a82026ff651b4151ef245a91cf8037837}{shake256Absorb}(&state->\hyperlink{structEd448State_a80b6a03936367779610c7ec1f2cc27ad}{shake256Context}, \hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}, messageLen);
+251    \hyperlink{shake256_8c_aea0f1fca652c9d61498ebbf0baa138d2}{shake256Final}(&state->\hyperlink{structEd448State_a80b6a03936367779610c7ec1f2cc27ad}{shake256Context});
+252    \hyperlink{shake256_8c_a5726222a16067416da493455779fe02e}{shake256Squeeze}(&state->\hyperlink{structEd448State_a80b6a03936367779610c7ec1f2cc27ad}{shake256Context}, state->
+      \hyperlink{structEd448State_adecc7312993a236e3df0d92af8bb2207}{k}, 114);
+253 
+254    \textcolor{comment}{//Compute S = (r + k * s) mod L. For efficiency, reduce k modulo L first}
+255    \hyperlink{ed448_8c_a20520b5bc9181f7d6374bd17446b8651}{ed448RedInt}(state->\hyperlink{structEd448State_a0f0eb37b77a1011d319079256fe00115}{p}, state->\hyperlink{structEd448State_adecc7312993a236e3df0d92af8bb2207}{k});
+256    \hyperlink{ed448_8c_a5b80976d1044c6271b82cd6cc314fb75}{ed448MulInt}(state->\hyperlink{structEd448State_adecc7312993a236e3df0d92af8bb2207}{k}, state->\hyperlink{structEd448State_adecc7312993a236e3df0d92af8bb2207}{k} + 57, state->\hyperlink{structEd448State_a0f0eb37b77a1011d319079256fe00115}{p}, state->\hyperlink{structEd448State_a1072024363ba04b1a3162b1a0f0caa38}{s}, 57);
+257    \hyperlink{ed448_8c_a20520b5bc9181f7d6374bd17446b8651}{ed448RedInt}(state->\hyperlink{structEd448State_a0f0eb37b77a1011d319079256fe00115}{p}, state->\hyperlink{structEd448State_adecc7312993a236e3df0d92af8bb2207}{k});
+258    \hyperlink{ed448_8c_a43df21b6ec072e79389933e925ee90c3}{ed448AddInt}(state->\hyperlink{structEd448State_a1072024363ba04b1a3162b1a0f0caa38}{s}, state->\hyperlink{structEd448State_a0f0eb37b77a1011d319079256fe00115}{p}, state->\hyperlink{structEd448State_ad5b8473d4a83e8fdd2c400f52c0bb64c}{r}, 57);
+259 
+260    \textcolor{comment}{//Perform modular reduction}
+261    c = \hyperlink{ed448_8c_a6e135bb55f1e1f9d5a479cb4764c8a57}{ed448SubInt}(state->\hyperlink{structEd448State_a0f0eb37b77a1011d319079256fe00115}{p}, state->\hyperlink{structEd448State_a1072024363ba04b1a3162b1a0f0caa38}{s}, \hyperlink{ed448_8c_a8630a412ff655db8bc9edb9bd4babb5a}{ED448\_L}, 57);
+262    \hyperlink{ed448_8c_a23c5d36308dea7fbe3473d5a96acb3b1}{ed448SelectInt}(\hyperlink{tls_8h_af27e6d4ea3add14cd8cc9aa275d716ad}{signature} + 57, state->\hyperlink{structEd448State_a0f0eb37b77a1011d319079256fe00115}{p}, state->\hyperlink{structEd448State_a1072024363ba04b1a3162b1a0f0caa38}{s}, c, 57);
+263 
+264    \textcolor{comment}{//Erase working state}
+265    \hyperlink{cyclone__crypto_2core_2crypto_8h_ad4465436e4ff353300fba4896012e18b}{cryptoMemset}(state, 0, \textcolor{keyword}{sizeof}(\hyperlink{structEd448State}{Ed448State}));
+266    \textcolor{comment}{//Release working state}
+267    \hyperlink{cyclone__crypto_2core_2crypto_8h_ac8a223b176683db4e9eed4162774f870}{cryptoFreeMem}(state);
+268 
+269    \textcolor{comment}{//Successful processing}
+270    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+271 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ed448_8h_a4ce51aa77df6f762bf7b129703a186de}\label{ed448_8h_a4ce51aa77df6f762bf7b129703a186de}} 
+\index{ed448.\+h@{ed448.\+h}!ed448\+Mul@{ed448\+Mul}}
+\index{ed448\+Mul@{ed448\+Mul}!ed448.\+h@{ed448.\+h}}
+\subsubsection{\texorpdfstring{ed448\+Mul()}{ed448Mul()}}
+{\footnotesize\ttfamily void ed448\+Mul (\begin{DoxyParamCaption}\item[{\hyperlink{structEd448State}{Ed448\+State} $\ast$}]{state,  }\item[{\hyperlink{structEd448Point}{Ed448\+Point} $\ast$}]{r,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{k,  }\item[{const \hyperlink{structEd448Point}{Ed448\+Point} $\ast$}]{p }\end{DoxyParamCaption})}
+
+
+
+Scalar multiplication on Ed448 curve. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em state} & Pointer to the working state \\
+\hline
+\mbox{\tt out}  & {\em r} & Resulting point R = d $\ast$ S \\
+\hline
+\mbox{\tt in}  & {\em k} & Input scalar \\
+\hline
+\mbox{\tt in}  & {\em p} & Input point \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 369 of file ed448.\+c.
+
+
+\begin{DoxyCode}
+371 \{
+372    \hyperlink{compiler__port_8h_a022c65af7f6c8d3947e8a37d64db6ad6}{int\_t} i;
+373    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} \hyperlink{dtls__misc_8h_ab590318ac859d0e57e15c3dd6c62a605}{b};
+374 
+375    \textcolor{comment}{//The neutral element is represented by (0, 1, 1)}
+376    \hyperlink{curve448_8c_a3ac13c880f381f5349d061bd171bef60}{curve448SetInt}(state->\hyperlink{structEd448State_a8b01461b3a9860a1e729c976b783ea77}{u}.\hyperlink{structEd448Point_a6396f5c659c12687df267e45d6c12069}{x}, 0);
+377    \hyperlink{curve448_8c_a3ac13c880f381f5349d061bd171bef60}{curve448SetInt}(state->\hyperlink{structEd448State_a8b01461b3a9860a1e729c976b783ea77}{u}.\hyperlink{structEd448Point_a21298d9fefc8531fa8b77062e9e97591}{y}, 1);
+378    \hyperlink{curve448_8c_a3ac13c880f381f5349d061bd171bef60}{curve448SetInt}(state->\hyperlink{structEd448State_a8b01461b3a9860a1e729c976b783ea77}{u}.\hyperlink{structEd448Point_a17b31287fc682b3d42e6dc5685aaf237}{z}, 1);
+379 
+380    \textcolor{comment}{//Perform scalar multiplication}
+381    \textcolor{keywordflow}{for}(i = \hyperlink{curve448_8h_ab6a4b53cd7663324ac1ef0e21f1cd7fc}{CURVE448\_BIT\_LEN} - 1; i >= 0; i--)
+382    \{
+383       \textcolor{comment}{//The scalar is processed in a left-to-right fashion}
+384       b = (\hyperlink{md5_8c_af11ea3cdbca7345eb6a4a8ac5ce0434d}{k}[i / 8] >> (i % 8)) & 1;
+385 
+386       \textcolor{comment}{//Compute U = 2 * U}
+387       \hyperlink{ed448_8c_a001d142880cc0e9738a21c1d6efe4fd8}{ed448Double}(state, &state->\hyperlink{structEd448State_a8b01461b3a9860a1e729c976b783ea77}{u}, &state->\hyperlink{structEd448State_a8b01461b3a9860a1e729c976b783ea77}{u});
+388       \textcolor{comment}{//Compute V = U + P}
+389       \hyperlink{ed448_8c_a4484428171c3e921308248c4db48ae3f}{ed448Add}(state, &state->\hyperlink{structEd448State_ae1caad09bcd6c049bdd8e32f11e181b0}{v}, &state->\hyperlink{structEd448State_a8b01461b3a9860a1e729c976b783ea77}{u}, p);
+390 
+391       \textcolor{comment}{//If b is set, then U = V}
+392       \hyperlink{curve448_8c_a1722eb19844e80369c8b7dd04e8ea8aa}{curve448Select}(state->\hyperlink{structEd448State_a8b01461b3a9860a1e729c976b783ea77}{u}.\hyperlink{structEd448Point_a6396f5c659c12687df267e45d6c12069}{x}, state->\hyperlink{structEd448State_a8b01461b3a9860a1e729c976b783ea77}{u}.\hyperlink{structEd448Point_a6396f5c659c12687df267e45d6c12069}{x}, state->\hyperlink{structEd448State_ae1caad09bcd6c049bdd8e32f11e181b0}{v}.\hyperlink{structEd448Point_a6396f5c659c12687df267e45d6c12069}{x}, b);
+393       \hyperlink{curve448_8c_a1722eb19844e80369c8b7dd04e8ea8aa}{curve448Select}(state->\hyperlink{structEd448State_a8b01461b3a9860a1e729c976b783ea77}{u}.\hyperlink{structEd448Point_a21298d9fefc8531fa8b77062e9e97591}{y}, state->\hyperlink{structEd448State_a8b01461b3a9860a1e729c976b783ea77}{u}.\hyperlink{structEd448Point_a21298d9fefc8531fa8b77062e9e97591}{y}, state->\hyperlink{structEd448State_ae1caad09bcd6c049bdd8e32f11e181b0}{v}.\hyperlink{structEd448Point_a21298d9fefc8531fa8b77062e9e97591}{y}, b);
+394       \hyperlink{curve448_8c_a1722eb19844e80369c8b7dd04e8ea8aa}{curve448Select}(state->\hyperlink{structEd448State_a8b01461b3a9860a1e729c976b783ea77}{u}.\hyperlink{structEd448Point_a17b31287fc682b3d42e6dc5685aaf237}{z}, state->\hyperlink{structEd448State_a8b01461b3a9860a1e729c976b783ea77}{u}.\hyperlink{structEd448Point_a17b31287fc682b3d42e6dc5685aaf237}{z}, state->\hyperlink{structEd448State_ae1caad09bcd6c049bdd8e32f11e181b0}{v}.\hyperlink{structEd448Point_a17b31287fc682b3d42e6dc5685aaf237}{z}, b);
+395    \}
+396 
+397    \textcolor{comment}{//Copy result}
+398    \hyperlink{curve448_8c_a94b95a2737f6ff5016cde1280d48ee77}{curve448Copy}(r->\hyperlink{structEd448Point_a6396f5c659c12687df267e45d6c12069}{x}, state->\hyperlink{structEd448State_a8b01461b3a9860a1e729c976b783ea77}{u}.\hyperlink{structEd448Point_a6396f5c659c12687df267e45d6c12069}{x});
+399    \hyperlink{curve448_8c_a94b95a2737f6ff5016cde1280d48ee77}{curve448Copy}(r->\hyperlink{structEd448Point_a21298d9fefc8531fa8b77062e9e97591}{y}, state->\hyperlink{structEd448State_a8b01461b3a9860a1e729c976b783ea77}{u}.\hyperlink{structEd448Point_a21298d9fefc8531fa8b77062e9e97591}{y});
+400    \hyperlink{curve448_8c_a94b95a2737f6ff5016cde1280d48ee77}{curve448Copy}(r->\hyperlink{structEd448Point_a17b31287fc682b3d42e6dc5685aaf237}{z}, state->\hyperlink{structEd448State_a8b01461b3a9860a1e729c976b783ea77}{u}.\hyperlink{structEd448Point_a17b31287fc682b3d42e6dc5685aaf237}{z});
+401 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ed448_8h_a5b80976d1044c6271b82cd6cc314fb75}\label{ed448_8h_a5b80976d1044c6271b82cd6cc314fb75}} 
+\index{ed448.\+h@{ed448.\+h}!ed448\+Mul\+Int@{ed448\+Mul\+Int}}
+\index{ed448\+Mul\+Int@{ed448\+Mul\+Int}!ed448.\+h@{ed448.\+h}}
+\subsubsection{\texorpdfstring{ed448\+Mul\+Int()}{ed448MulInt()}}
+{\footnotesize\ttfamily void ed448\+Mul\+Int (\begin{DoxyParamCaption}\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{rl,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{rh,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{a,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{b,  }\item[{\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t}}]{n }\end{DoxyParamCaption})}
+
+
+
+Multiplication of two integers. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em rl} & Low part of the result R = (A + B) mod (2$^\wedge$8)$^\wedge$n \\
+\hline
+\mbox{\tt out}  & {\em rh} & High part of the result R = (A + B) / (2$^\wedge$8)$^\wedge$n \\
+\hline
+\mbox{\tt in}  & {\em a} & An integer such as 0 $<$= A $<$ (2$^\wedge$8)$^\wedge$n \\
+\hline
+\mbox{\tt in}  & {\em b} & An integer such as 0 $<$= B $<$ (2$^\wedge$8)$^\wedge$n \\
+\hline
+\mbox{\tt in}  & {\em n} & Size of the operands, in bytes \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 676 of file ed448.\+c.
+
+
+\begin{DoxyCode}
+678 \{
+679    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+680    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} j;
+681    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} \hyperlink{aria_8c_a5dadc28804036d1b82e1dc027e95c9a6}{c};
+682    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} d;
+683    \hyperlink{stdint_8h_aec6fcb673ff035718c238c8c9d544c47}{uint64\_t} temp;
+684 
+685    \textcolor{comment}{//Perform multiplication in base b = 2^24}
+686    \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n} /= 3;
+687 
+688    \textcolor{comment}{//Compute the low part of the multiplication}
+689    \textcolor{keywordflow}{for}(temp = 0, i = 0; i < \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n}; i++)
+690    \{
+691       \textcolor{comment}{//The Comba's algorithm computes the products, column by column}
+692       \textcolor{keywordflow}{for}(j = 0; j <= i; j++)
+693       \{
+694          c = \hyperlink{cpu__endian_8h_a68c9c66c5f48382a071c5336d389fccd}{LOAD24LE}(\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a} + 3 * j);
+695          d = \hyperlink{cpu__endian_8h_a68c9c66c5f48382a071c5336d389fccd}{LOAD24LE}(\hyperlink{dtls__misc_8h_ab590318ac859d0e57e15c3dd6c62a605}{b} + 3 * (i - j));
+696          temp += (\hyperlink{stdint_8h_aec6fcb673ff035718c238c8c9d544c47}{uint64\_t}) c * d;
+697       \}
+698 
+699       \textcolor{comment}{//At the bottom of each column, the final result is written to memory}
+700       \textcolor{keywordflow}{if}(rl != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+701       \{
+702          \hyperlink{cpu__endian_8h_ad181379965a0d9b7e4f9514290748bf6}{STORE24LE}(temp & 0xFFFFFF, rl + 3 * i);
+703       \}
+704 
+705       \textcolor{comment}{//Propagate the carry upwards}
+706       temp >>= 24;
+707    \}
+708 
+709    \textcolor{comment}{//Check whether the high part of the multiplication should be calculated}
+710    \textcolor{keywordflow}{if}(rh != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+711    \{
+712       \textcolor{comment}{//Compute the high part of the multiplication}
+713       \textcolor{keywordflow}{for}(i = n; i < (2 * \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n}); i++)
+714       \{
+715          \textcolor{comment}{//The Comba's algorithm computes the products, column by column}
+716          \textcolor{keywordflow}{for}(j = i + 1 - n; j < \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n}; j++)
+717          \{
+718             c = \hyperlink{cpu__endian_8h_a68c9c66c5f48382a071c5336d389fccd}{LOAD24LE}(\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a} + 3 * j);
+719             d = \hyperlink{cpu__endian_8h_a68c9c66c5f48382a071c5336d389fccd}{LOAD24LE}(\hyperlink{dtls__misc_8h_ab590318ac859d0e57e15c3dd6c62a605}{b} + 3 * (i - j));
+720             temp += (\hyperlink{stdint_8h_aec6fcb673ff035718c238c8c9d544c47}{uint64\_t}) c * d;
+721          \}
+722 
+723          \textcolor{comment}{//At the bottom of each column, the final result is written to memory}
+724          \hyperlink{cpu__endian_8h_ad181379965a0d9b7e4f9514290748bf6}{STORE24LE}(temp & 0xFFFFFF, rh + 3 * (i - n));
+725 
+726          \textcolor{comment}{//Propagate the carry upwards}
+727          temp >>= 24;
+728       \}
+729    \}
+730 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ed448_8h_a20520b5bc9181f7d6374bd17446b8651}\label{ed448_8h_a20520b5bc9181f7d6374bd17446b8651}} 
+\index{ed448.\+h@{ed448.\+h}!ed448\+Red\+Int@{ed448\+Red\+Int}}
+\index{ed448\+Red\+Int@{ed448\+Red\+Int}!ed448.\+h@{ed448.\+h}}
+\subsubsection{\texorpdfstring{ed448\+Red\+Int()}{ed448RedInt()}}
+{\footnotesize\ttfamily void ed448\+Red\+Int (\begin{DoxyParamCaption}\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{r,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{a }\end{DoxyParamCaption})}
+
+
+
+Reduce an integer modulo L. 
+
+This function implements Barrett reduction with b = 2$^\wedge$24 and k = 19. The algorithm requires the precomputation of the quantity mu = b$^\wedge$(2 $\ast$ k) / L
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em r} & Resulting integer R = A mod L \\
+\hline
+\mbox{\tt in}  & {\em a} & An integer such as 0 $<$= A $<$ b$^\wedge$(2 $\ast$ k) \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 588 of file ed448.\+c.
+
+
+\begin{DoxyCode}
+589 \{
+590    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} \hyperlink{aria_8c_a5dadc28804036d1b82e1dc027e95c9a6}{c};
+591    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} u[60];
+592    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} v[60];
+593 
+594    \textcolor{comment}{//Compute the estimate of the quotient u = ((a / b^(k - 1)) * mu) / b^(k + 1)}
+595    \hyperlink{ed448_8c_a5b80976d1044c6271b82cd6cc314fb75}{ed448MulInt}(\hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, u, \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a} + 54, \hyperlink{ed448_8c_aaa2eb959656f864fdbf42ba3f12e19c6}{ED448\_MU}, 60);
+596    \textcolor{comment}{//Compute v = u * L mod b^(k + 1)}
+597    \hyperlink{ed448_8c_a5b80976d1044c6271b82cd6cc314fb75}{ed448MulInt}(v, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, u, \hyperlink{ed448_8c_a8630a412ff655db8bc9edb9bd4babb5a}{ED448\_L}, 60);
+598 
+599    \textcolor{comment}{//Compute the estimate of the remainder u = a mod b^(k + 1) - v}
+600    \textcolor{comment}{//If u < 0, then u = u + b^(k + 1)}
+601    \hyperlink{ed448_8c_a6e135bb55f1e1f9d5a479cb4764c8a57}{ed448SubInt}(u, \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}, v, 60);
+602 
+603    \textcolor{comment}{//This estimation implies that at most two subtractions of L are required to}
+604    \textcolor{comment}{//obtain the correct remainder r}
+605    c = \hyperlink{ed448_8c_a6e135bb55f1e1f9d5a479cb4764c8a57}{ed448SubInt}(v, u, \hyperlink{ed448_8c_a8630a412ff655db8bc9edb9bd4babb5a}{ED448\_L}, 60);
+606    \hyperlink{ed448_8c_a23c5d36308dea7fbe3473d5a96acb3b1}{ed448SelectInt}(u, v, u, c, 60);
+607    c = \hyperlink{ed448_8c_a6e135bb55f1e1f9d5a479cb4764c8a57}{ed448SubInt}(v, u, \hyperlink{ed448_8c_a8630a412ff655db8bc9edb9bd4babb5a}{ED448\_L}, 60);
+608    \hyperlink{ed448_8c_a23c5d36308dea7fbe3473d5a96acb3b1}{ed448SelectInt}(u, v, u, c, 60);
+609 
+610    \textcolor{comment}{//Copy the resulting remainder}
+611    \hyperlink{ed448_8c_a4d30c2cad7d1db24ffe4302e99a23649}{ed448CopyInt}(\hyperlink{ndp_8h_a4c5c6ceb8ed33456261fa907136e0c3a}{r}, u, 57);
+612 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ed448_8h_a23c5d36308dea7fbe3473d5a96acb3b1}\label{ed448_8h_a23c5d36308dea7fbe3473d5a96acb3b1}} 
+\index{ed448.\+h@{ed448.\+h}!ed448\+Select\+Int@{ed448\+Select\+Int}}
+\index{ed448\+Select\+Int@{ed448\+Select\+Int}!ed448.\+h@{ed448.\+h}}
+\subsubsection{\texorpdfstring{ed448\+Select\+Int()}{ed448SelectInt()}}
+{\footnotesize\ttfamily void ed448\+Select\+Int (\begin{DoxyParamCaption}\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{r,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{a,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{b,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}}]{c,  }\item[{\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t}}]{n }\end{DoxyParamCaption})}
+
+
+
+Select an integer. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em r} & Pointer to the destination integer \\
+\hline
+\mbox{\tt in}  & {\em a} & Pointer to the first source integer \\
+\hline
+\mbox{\tt in}  & {\em b} & Pointer to the second source integer \\
+\hline
+\mbox{\tt in}  & {\em c} & Condition variable \\
+\hline
+\mbox{\tt in}  & {\em n} & Size of the integers, in bytes \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 761 of file ed448.\+c.
+
+
+\begin{DoxyCode}
+763 \{
+764    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+765    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} \hyperlink{web__socket_8h_a8a74907784be6c7786c2d060c8d7e10b}{mask};
+766 
+767    \textcolor{comment}{//The mask is the all-1 or all-0 word}
+768    mask = \hyperlink{aria_8c_a5dadc28804036d1b82e1dc027e95c9a6}{c} - 1;
+769 
+770    \textcolor{comment}{//Select between A and B}
+771    \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n}; i++)
+772    \{
+773       \textcolor{comment}{//Constant time implementation}
+774       \hyperlink{ndp_8h_a4c5c6ceb8ed33456261fa907136e0c3a}{r}[i] = (\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[i] & \hyperlink{web__socket_8h_a8a74907784be6c7786c2d060c8d7e10b}{mask}) | (\hyperlink{dtls__misc_8h_ab590318ac859d0e57e15c3dd6c62a605}{b}[i] & ~mask);
+775    \}
+776 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ed448_8h_a6e135bb55f1e1f9d5a479cb4764c8a57}\label{ed448_8h_a6e135bb55f1e1f9d5a479cb4764c8a57}} 
+\index{ed448.\+h@{ed448.\+h}!ed448\+Sub\+Int@{ed448\+Sub\+Int}}
+\index{ed448\+Sub\+Int@{ed448\+Sub\+Int}!ed448.\+h@{ed448.\+h}}
+\subsubsection{\texorpdfstring{ed448\+Sub\+Int()}{ed448SubInt()}}
+{\footnotesize\ttfamily \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} ed448\+Sub\+Int (\begin{DoxyParamCaption}\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{r,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{a,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{b,  }\item[{\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t}}]{n }\end{DoxyParamCaption})}
+
+
+
+Subtraction of two integers. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em r} & Resulting integer R = A -\/ B \\
+\hline
+\mbox{\tt in}  & {\em a} & An integer such as 0 $<$= A $<$ (2$^\wedge$8)$^\wedge$n \\
+\hline
+\mbox{\tt in}  & {\em b} & An integer such as 0 $<$= B $<$ (2$^\wedge$8)$^\wedge$n \\
+\hline
+\mbox{\tt in}  & {\em n} & Size of the operands, in bytes \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if the result is negative, else 0 
+\end{DoxyReturn}
+
+
+Definition at line 648 of file ed448.\+c.
+
+
+\begin{DoxyCode}
+649 \{
+650    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+651    \hyperlink{stdint_8h_a269259c924dce846340ddbb810db2e3c}{int16\_t} temp;
+652 
+653    \textcolor{comment}{//Compute R = A - B}
+654    \textcolor{keywordflow}{for}(temp = 0, i = 0; i < \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n}; i++)
+655    \{
+656       temp += \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[i];
+657       temp -= \hyperlink{dtls__misc_8h_ab590318ac859d0e57e15c3dd6c62a605}{b}[i];
+658       \hyperlink{ndp_8h_a4c5c6ceb8ed33456261fa907136e0c3a}{r}[i] = temp & 0xFF;
+659       temp >>= 8;
+660    \}
+661 
+662    \textcolor{comment}{//Return 1 if the result of the subtraction is negative}
+663    \textcolor{keywordflow}{return} temp & 1;
+664 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ed448_8h_ab6f6de548796083dfc337efbc7542084}\label{ed448_8h_ab6f6de548796083dfc337efbc7542084}} 
+\index{ed448.\+h@{ed448.\+h}!ed448\+Verify\+Signature@{ed448\+Verify\+Signature}}
+\index{ed448\+Verify\+Signature@{ed448\+Verify\+Signature}!ed448.\+h@{ed448.\+h}}
+\subsubsection{\texorpdfstring{ed448\+Verify\+Signature()}{ed448VerifySignature()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ed448\+Verify\+Signature (\begin{DoxyParamCaption}\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{public\+Key,  }\item[{const void $\ast$}]{message,  }\item[{size\+\_\+t}]{message\+Len,  }\item[{const void $\ast$}]{context,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}}]{context\+Len,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}}]{flag,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{signature }\end{DoxyParamCaption})}
+
+
+
+Ed\+D\+SA signature verification. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em public\+Key} & Signer\textquotesingle{}s Ed\+D\+SA public key (57 bytes) \\
+\hline
+\mbox{\tt in}  & {\em message} & Message whose signature is to be verified \\
+\hline
+\mbox{\tt in}  & {\em message\+Len} & Length of the message, in bytes \\
+\hline
+\mbox{\tt in}  & {\em context} & Constant string specified by the protocol using it \\
+\hline
+\mbox{\tt in}  & {\em context\+Len} & Length of the context, in bytes \\
+\hline
+\mbox{\tt in}  & {\em flag} & Prehash flag for Ed448ph scheme \\
+\hline
+\mbox{\tt in}  & {\em signature} & Ed\+D\+SA signature (114 bytes) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 286 of file ed448.\+c.
+
+
+\begin{DoxyCode}
+289 \{
+290    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} ret;
+291    \hyperlink{structEd448State}{Ed448State} *state;
+292 
+293    \textcolor{comment}{//Check parameters}
+294    \textcolor{keywordflow}{if}(publicKey == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || \hyperlink{tls_8h_af27e6d4ea3add14cd8cc9aa275d716ad}{signature} == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+295       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+296    \textcolor{keywordflow}{if}(\hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message} == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} && messageLen != 0)
+297       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+298    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} && contextLen != 0)
+299       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+300 
+301    \textcolor{comment}{//Allocate working state}
+302    state = \hyperlink{cyclone__crypto_2core_2crypto_8h_a48b53d16f66d31e5dcf82db3c1b882ba}{cryptoAllocMem}(\textcolor{keyword}{sizeof}(\hyperlink{structEd448State}{Ed448State}));
+303    \textcolor{comment}{//Failed to allocate memory?}
+304    \textcolor{keywordflow}{if}(state == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+305       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac0a554045048d2fb61387cf735676f69}{ERROR\_OUT\_OF\_MEMORY};
+306 
+307    \textcolor{comment}{//First split the signature into two 32-octet halves. Decode the first}
+308    \textcolor{comment}{//half as a point R}
+309    \hyperlink{cyclone__crypto_2core_2crypto_8h_a6724616c4014bb7e21f2660bd7b88be8}{cryptoMemcpy}(state->\hyperlink{structEd448State_ad5b8473d4a83e8fdd2c400f52c0bb64c}{r}, \hyperlink{tls_8h_af27e6d4ea3add14cd8cc9aa275d716ad}{signature}, \hyperlink{ed448_8h_a6faeb89fbb8744bcc8ec3333ec22b099}{ED448\_SIGNATURE\_LEN} / 2);
+310 
+311    \textcolor{comment}{//Decode the second half as an integer S, in the range 0 <= s < L}
+312    \hyperlink{cyclone__crypto_2core_2crypto_8h_a6724616c4014bb7e21f2660bd7b88be8}{cryptoMemcpy}(state->\hyperlink{structEd448State_a1072024363ba04b1a3162b1a0f0caa38}{s}, \hyperlink{tls_8h_af27e6d4ea3add14cd8cc9aa275d716ad}{signature} + \hyperlink{ed448_8h_a6faeb89fbb8744bcc8ec3333ec22b099}{ED448\_SIGNATURE\_LEN} / 2,
+313       \hyperlink{ed448_8h_a6faeb89fbb8744bcc8ec3333ec22b099}{ED448\_SIGNATURE\_LEN} / 2);
+314 
+315    \textcolor{comment}{//Ed448 signatures are not malleable due to the verification check that}
+316    \textcolor{comment}{//decoded S is smaller than L (refer to RFC 8032, section 8.4)}
+317    ret = 1 ^ \hyperlink{ed448_8c_a6e135bb55f1e1f9d5a479cb4764c8a57}{ed448SubInt}(state->\hyperlink{structEd448State_a0f0eb37b77a1011d319079256fe00115}{p}, state->\hyperlink{structEd448State_a1072024363ba04b1a3162b1a0f0caa38}{s}, \hyperlink{ed448_8c_a8630a412ff655db8bc9edb9bd4babb5a}{ED448\_L}, 
+      \hyperlink{ed448_8h_a6faeb89fbb8744bcc8ec3333ec22b099}{ED448\_SIGNATURE\_LEN} / 2);
+318 
+319    \textcolor{comment}{//Decode the public key A as point A'}
+320    ret |= \hyperlink{ed448_8c_ad6d3aaed50430e23647e8aa63f8f7971}{ed448Decode}(&state->\hyperlink{structEd448State_a3f57a359818f62157012833c5126f8cf}{ka}, publicKey);
+321 
+322    \textcolor{comment}{//Compute SHAKE256(dom4(F, C) || R || A || PH(M), 114) and interpret the}
+323    \textcolor{comment}{//114-octet digest as a little-endian integer k}
+324    \hyperlink{shake256_8c_a9db6fcc2d16d3b8d199c7504070c20b6}{shake256Init}(&state->\hyperlink{structEd448State_a80b6a03936367779610c7ec1f2cc27ad}{shake256Context});
+325    \hyperlink{shake256_8c_a82026ff651b4151ef245a91cf8037837}{shake256Absorb}(&state->\hyperlink{structEd448State_a80b6a03936367779610c7ec1f2cc27ad}{shake256Context}, \textcolor{stringliteral}{"SigEd448"}, 8);
+326    \hyperlink{shake256_8c_a82026ff651b4151ef245a91cf8037837}{shake256Absorb}(&state->\hyperlink{structEd448State_a80b6a03936367779610c7ec1f2cc27ad}{shake256Context}, &flag, \textcolor{keyword}{sizeof}(
+      \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t}));
+327    \hyperlink{shake256_8c_a82026ff651b4151ef245a91cf8037837}{shake256Absorb}(&state->\hyperlink{structEd448State_a80b6a03936367779610c7ec1f2cc27ad}{shake256Context}, &contextLen, \textcolor{keyword}{sizeof}(
+      \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t}));
+328    \hyperlink{shake256_8c_a82026ff651b4151ef245a91cf8037837}{shake256Absorb}(&state->\hyperlink{structEd448State_a80b6a03936367779610c7ec1f2cc27ad}{shake256Context}, context, contextLen);
+329    \hyperlink{shake256_8c_a82026ff651b4151ef245a91cf8037837}{shake256Absorb}(&state->\hyperlink{structEd448State_a80b6a03936367779610c7ec1f2cc27ad}{shake256Context}, state->\hyperlink{structEd448State_ad5b8473d4a83e8fdd2c400f52c0bb64c}{r}, 
+      \hyperlink{ed448_8h_a6faeb89fbb8744bcc8ec3333ec22b099}{ED448\_SIGNATURE\_LEN} / 2);
+330    \hyperlink{shake256_8c_a82026ff651b4151ef245a91cf8037837}{shake256Absorb}(&state->\hyperlink{structEd448State_a80b6a03936367779610c7ec1f2cc27ad}{shake256Context}, publicKey, 
+      \hyperlink{ed448_8h_a452cd73807c6a5607ede7ba57cbc3e6a}{ED448\_PUBLIC\_KEY\_LEN});
+331    \hyperlink{shake256_8c_a82026ff651b4151ef245a91cf8037837}{shake256Absorb}(&state->\hyperlink{structEd448State_a80b6a03936367779610c7ec1f2cc27ad}{shake256Context}, \hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}, messageLen);
+332    \hyperlink{shake256_8c_aea0f1fca652c9d61498ebbf0baa138d2}{shake256Final}(&state->\hyperlink{structEd448State_a80b6a03936367779610c7ec1f2cc27ad}{shake256Context});
+333    \hyperlink{shake256_8c_a5726222a16067416da493455779fe02e}{shake256Squeeze}(&state->\hyperlink{structEd448State_a80b6a03936367779610c7ec1f2cc27ad}{shake256Context}, state->
+      \hyperlink{structEd448State_adecc7312993a236e3df0d92af8bb2207}{k}, 114);
+334 
+335    \textcolor{comment}{//For efficiency, reduce k modulo L first}
+336    \hyperlink{ed448_8c_a20520b5bc9181f7d6374bd17446b8651}{ed448RedInt}(state->\hyperlink{structEd448State_adecc7312993a236e3df0d92af8bb2207}{k}, state->\hyperlink{structEd448State_adecc7312993a236e3df0d92af8bb2207}{k});
+337 
+338    \textcolor{comment}{//Compute the point P = s * B - k * A'}
+339    \hyperlink{curve448_8c_a60277698c2d05decaa3755fcf2e6dee8}{curve448Sub}(state->\hyperlink{structEd448State_a3f57a359818f62157012833c5126f8cf}{ka}.\hyperlink{structEd448Point_a6396f5c659c12687df267e45d6c12069}{x}, \hyperlink{ed448_8c_af09cbabfe9188550a0247c1d57c79630}{ED448\_ZERO}, state->\hyperlink{structEd448State_a3f57a359818f62157012833c5126f8cf}{ka}.\hyperlink{structEd448Point_a6396f5c659c12687df267e45d6c12069}{x});
+340    \hyperlink{ed448_8c_a4ce51aa77df6f762bf7b129703a186de}{ed448Mul}(state, &state->\hyperlink{structEd448State_a261c5effb4cc26327eb1d480be635ebb}{sb}, state->\hyperlink{structEd448State_a1072024363ba04b1a3162b1a0f0caa38}{s}, &\hyperlink{ed448_8c_afe186a51f34d98a89c538878cbbf527b}{ED448\_B});
+341    \hyperlink{ed448_8c_a4ce51aa77df6f762bf7b129703a186de}{ed448Mul}(state, &state->\hyperlink{structEd448State_a3f57a359818f62157012833c5126f8cf}{ka}, state->\hyperlink{structEd448State_adecc7312993a236e3df0d92af8bb2207}{k}, &state->\hyperlink{structEd448State_a3f57a359818f62157012833c5126f8cf}{ka});
+342    \hyperlink{ed448_8c_a4484428171c3e921308248c4db48ae3f}{ed448Add}(state, &state->\hyperlink{structEd448State_a3f57a359818f62157012833c5126f8cf}{ka}, &state->\hyperlink{structEd448State_a261c5effb4cc26327eb1d480be635ebb}{sb}, &state->\hyperlink{structEd448State_a3f57a359818f62157012833c5126f8cf}{ka});
+343 
+344    \textcolor{comment}{//Encode of the resulting point P}
+345    \hyperlink{ed448_8c_a8abe404dcd862b0dc7405c753a6b979e}{ed448Encode}(&state->\hyperlink{structEd448State_a3f57a359818f62157012833c5126f8cf}{ka}, state->\hyperlink{structEd448State_a0f0eb37b77a1011d319079256fe00115}{p});
+346 
+347    \textcolor{comment}{//If P = R, then the signature is verified. If P does not equal R,}
+348    \textcolor{comment}{//then the message or the signature may have been modified}
+349    ret |= \hyperlink{ed448_8c_aa399eef7d82ab4983692f4b902e20cd1}{ed448CompInt}(state->\hyperlink{structEd448State_a0f0eb37b77a1011d319079256fe00115}{p}, \hyperlink{tls_8h_af27e6d4ea3add14cd8cc9aa275d716ad}{signature}, 
+      \hyperlink{ed448_8h_a6faeb89fbb8744bcc8ec3333ec22b099}{ED448\_SIGNATURE\_LEN} / 2);
+350 
+351    \textcolor{comment}{//Erase working state}
+352    \hyperlink{cyclone__crypto_2core_2crypto_8h_ad4465436e4ff353300fba4896012e18b}{cryptoMemset}(state, 0, \textcolor{keyword}{sizeof}(\hyperlink{structEd448State}{Ed448State}));
+353    \textcolor{comment}{//Release working state}
+354    \hyperlink{cyclone__crypto_2core_2crypto_8h_ac8a223b176683db4e9eed4162774f870}{cryptoFreeMem}(state);
+355 
+356    \textcolor{comment}{//Return status code}
+357    \textcolor{keywordflow}{return} (ret == 0) ? \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR} : \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca6e8db1d17e3aad53ecc5a4ff62df6f48}{ERROR\_INVALID\_SIGNATURE};
+358 \}
+\end{DoxyCode}

@@ -1,0 +1,61 @@
+\hypertarget{common_2debug_8c}{}\section{common/debug.c File Reference}
+\label{common_2debug_8c}\index{common/debug.\+c@{common/debug.\+c}}
+{\ttfamily \#include \char`\"{}debug.\+h\char`\"{}}\newline
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{common_2debug_8c_a677d36098816518430188cb0a0b2bc71}{debug\+Display\+Array} (F\+I\+LE $\ast$stream, const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$prepend, const void $\ast$\hyperlink{tftp__common_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length})
+\begin{DoxyCompactList}\small\item\em Display the contents of an array. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{common_2debug_8c_a677d36098816518430188cb0a0b2bc71}\label{common_2debug_8c_a677d36098816518430188cb0a0b2bc71}} 
+\index{common/debug.\+c@{common/debug.\+c}!debug\+Display\+Array@{debug\+Display\+Array}}
+\index{debug\+Display\+Array@{debug\+Display\+Array}!common/debug.\+c@{common/debug.\+c}}
+\subsubsection{\texorpdfstring{debug\+Display\+Array()}{debugDisplayArray()}}
+{\footnotesize\ttfamily void debug\+Display\+Array (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{stream,  }\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{prepend,  }\item[{const void $\ast$}]{data,  }\item[{size\+\_\+t}]{length }\end{DoxyParamCaption})}
+
+
+
+Display the contents of an array. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em stream} & Pointer to a F\+I\+LE object that identifies an output stream \\
+\hline
+\mbox{\tt in}  & {\em prepend} & String to prepend to the left of each line \\
+\hline
+\mbox{\tt in}  & {\em data} & Pointer to the data array \\
+\hline
+\mbox{\tt in}  & {\em length} & Number of bytes to display \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 41 of file debug.\+c.
+
+
+\begin{DoxyCode}
+43 \{
+44    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+45 
+46    \textcolor{comment}{//Dump the contents of the array}
+47    \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}; i++)
+48    \{
+49       \textcolor{comment}{//Beginning of a new line?}
+50       \textcolor{keywordflow}{if}((i % 16) == 0)
+51       \{
+52          \hyperlink{debug_8h_aca5efb882702a5017dc225d85cd8f82d}{TRACE\_PRINTF}(\textcolor{stringliteral}{"%s"}, prepend);
+53       \}
+54 
+55       \textcolor{comment}{//Display current data byte}
+56       \hyperlink{debug_8h_aca5efb882702a5017dc225d85cd8f82d}{TRACE\_PRINTF}(\textcolor{stringliteral}{"%02"} PRIX8 \textcolor{stringliteral}{" "}, *((\textcolor{keyword}{const} \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *) \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data} + i));
+57 
+58       \textcolor{comment}{//End of current line?}
+59       \textcolor{keywordflow}{if}((i % 16) == 15 || i == (length - 1))
+60       \{
+61          \hyperlink{debug_8h_aca5efb882702a5017dc225d85cd8f82d}{TRACE\_PRINTF}(\textcolor{stringliteral}{"\(\backslash\)r\(\backslash\)n"});
+62       \}
+63    \}
+64 \}
+\end{DoxyCode}

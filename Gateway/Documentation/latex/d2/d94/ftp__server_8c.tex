@@ -1,0 +1,592 @@
+\hypertarget{ftp__server_8c}{}\section{cyclone\+\_\+tcp/ftp/ftp\+\_\+server.c File Reference}
+\label{ftp__server_8c}\index{cyclone\+\_\+tcp/ftp/ftp\+\_\+server.\+c@{cyclone\+\_\+tcp/ftp/ftp\+\_\+server.\+c}}
+
+
+F\+TP server (File Transfer Protocol)  
+
+
+{\ttfamily \#include \char`\"{}ftp/ftp\+\_\+server.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ftp/ftp\+\_\+server\+\_\+control.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ftp/ftp\+\_\+server\+\_\+data.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ftp/ftp\+\_\+server\+\_\+misc.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}path.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}debug.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{ftp__server_8c_afcdf5e66fd927a7f4cc64295acd20407}{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}~\hyperlink{net__config_8h_ae398facab6ce5126fa3b23996aafefa5}{F\+T\+P\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{ftp__server_8c_a92d8183dcff6fec01eec09d83ddbb4b3}{ftp\+Server\+Get\+Default\+Settings} (\hyperlink{structFtpServerSettings}{Ftp\+Server\+Settings} $\ast$settings)
+\begin{DoxyCompactList}\small\item\em Initialize settings with default values. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ftp__server_8c_a3294731ed262e893ec37339283e6bcf1}{ftp\+Server\+Init} (\hyperlink{ftp__server_8h_af7294ff4e42ca4befb7414ce9fd6f287}{Ftp\+Server\+Context} $\ast$context, const \hyperlink{structFtpServerSettings}{Ftp\+Server\+Settings} $\ast$settings)
+\begin{DoxyCompactList}\small\item\em F\+TP server initialization. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ftp__server_8c_a0ea54d1c4e2997e47248434879204d2a}{ftp\+Server\+Start} (\hyperlink{ftp__server_8h_af7294ff4e42ca4befb7414ce9fd6f287}{Ftp\+Server\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Start F\+TP server. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ftp__server_8c_aa3089292a50345bfa0167c080463a2e4}{ftp\+Server\+Set\+Home\+Dir} (\hyperlink{ftp__server_8h_ab682699c15473841571a42c3df57e9d2}{Ftp\+Client\+Connection} $\ast$connection, const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$home\+Dir)
+\begin{DoxyCompactList}\small\item\em Set home directory. \end{DoxyCompactList}\item 
+void \hyperlink{ftp__server_8c_a05149a63c4dc428e9805fd09ebac8fe5}{ftp\+Server\+Task} (\hyperlink{ftp__server_8h_af7294ff4e42ca4befb7414ce9fd6f287}{Ftp\+Server\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em F\+TP server task. \end{DoxyCompactList}\item 
+void \hyperlink{ftp__server_8c_ab9763c64ffa081448e37c0e67574e524}{ftp\+Server\+Deinit} (\hyperlink{ftp__server_8h_af7294ff4e42ca4befb7414ce9fd6f287}{Ftp\+Server\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Release F\+TP server context. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+F\+TP server (File Transfer Protocol) 
+
+\hypertarget{pic32mz__ef__curiosity_8h_License}{}\subsection{License}\label{pic32mz__ef__curiosity_8h_License}
+S\+P\+D\+X-\/\+License-\/\+Identifier\+: G\+P\+L-\/2.\+0-\/or-\/later
+
+Copyright (C) 2010-\/2019 Oryx Embedded S\+A\+RL. All rights reserved.
+
+This file is part of Cyclone\+T\+CP Open.
+
+This program is free software; you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+
+You should have received a copy of the G\+NU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-\/1301, U\+SA.\hypertarget{tftp__server_8c_Description}{}\subsection{Description}\label{tftp__server_8c_Description}
+File Transfer Protocol (F\+TP) is a standard network protocol used to transfer files from one host to another host over a T\+C\+P-\/based network. Refer to the following R\+F\+Cs for complete details\+:
+\begin{DoxyItemize}
+\item R\+FC 959\+: File Transfer Protocol (F\+TP)
+\item R\+FC 3659\+: Extensions to F\+TP
+\item R\+FC 2428\+: F\+TP Extensions for I\+Pv6 and N\+A\+Ts
+\end{DoxyItemize}
+
+\begin{DoxyAuthor}{Author}
+Oryx Embedded S\+A\+RL (www.\+oryx-\/embedded.\+com) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+9.\+6 
+\end{DoxyVersion}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{ftp__server_8c_afcdf5e66fd927a7f4cc64295acd20407}\label{ftp__server_8c_afcdf5e66fd927a7f4cc64295acd20407}} 
+\index{ftp\+\_\+server.\+c@{ftp\+\_\+server.\+c}!T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+\index{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}!ftp\+\_\+server.\+c@{ftp\+\_\+server.\+c}}
+\subsubsection{\texorpdfstring{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}{TRACE\_LEVEL}}
+{\footnotesize\ttfamily \#define T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL~\hyperlink{net__config_8h_ae398facab6ce5126fa3b23996aafefa5}{F\+T\+P\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+
+
+
+Definition at line 41 of file ftp\+\_\+server.\+c.
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{ftp__server_8c_ab9763c64ffa081448e37c0e67574e524}\label{ftp__server_8c_ab9763c64ffa081448e37c0e67574e524}} 
+\index{ftp\+\_\+server.\+c@{ftp\+\_\+server.\+c}!ftp\+Server\+Deinit@{ftp\+Server\+Deinit}}
+\index{ftp\+Server\+Deinit@{ftp\+Server\+Deinit}!ftp\+\_\+server.\+c@{ftp\+\_\+server.\+c}}
+\subsubsection{\texorpdfstring{ftp\+Server\+Deinit()}{ftpServerDeinit()}}
+{\footnotesize\ttfamily void ftp\+Server\+Deinit (\begin{DoxyParamCaption}\item[{\hyperlink{ftp__server_8h_af7294ff4e42ca4befb7414ce9fd6f287}{Ftp\+Server\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Release F\+TP server context. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the F\+TP server context \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 442 of file ftp\+\_\+server.\+c.
+
+
+\begin{DoxyCode}
+443 \{
+444    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+445 
+446    \textcolor{comment}{//Make sure the FTP server context is valid}
+447    \textcolor{keywordflow}{if}(context != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+448    \{
+449       \textcolor{comment}{//Loop through the connection table}
+450       \textcolor{keywordflow}{for}(i = 0; i < context->settings.maxConnections; i++)
+451       \{
+452          \textcolor{comment}{//Close client connection}
+453          \hyperlink{ftp__server__misc_8c_a131bc4ee0544ae32eee4cf829f006a11}{ftpServerCloseConnection}(&context->connections[i]);
+454       \}
+455 
+456       \textcolor{comment}{//Close listening socket}
+457       \hyperlink{socket_8c_ac5012e9f71c97e2ea0410f2c5baccb0e}{socketClose}(context->socket);
+458 
+459 \textcolor{preprocessor}{#if (FTP\_SERVER\_TLS\_SUPPORT == ENABLED && TLS\_TICKET\_SUPPORT == ENABLED)}
+460       \textcolor{comment}{//Release ticket encryption context}
+461       \hyperlink{tls__ticket_8c_ad3813e8c1e07d368b1aa50d0e7028fe3}{tlsFreeTicketContext}(&context->tlsTicketContext);
+462 \textcolor{preprocessor}{#endif}
+463 
+464       \textcolor{comment}{//Free previously allocated resources}
+465       \hyperlink{os__port__chibios_8c_a25827a49278bad6150b04b47165fda3d}{osDeleteEvent}(&context->event);
+466 
+467       \textcolor{comment}{//Clear FTP server context}
+468       memset(context, 0, \textcolor{keyword}{sizeof}(\hyperlink{ftp__server_8h_af7294ff4e42ca4befb7414ce9fd6f287}{FtpServerContext}));
+469    \}
+470 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ftp__server_8c_a92d8183dcff6fec01eec09d83ddbb4b3}\label{ftp__server_8c_a92d8183dcff6fec01eec09d83ddbb4b3}} 
+\index{ftp\+\_\+server.\+c@{ftp\+\_\+server.\+c}!ftp\+Server\+Get\+Default\+Settings@{ftp\+Server\+Get\+Default\+Settings}}
+\index{ftp\+Server\+Get\+Default\+Settings@{ftp\+Server\+Get\+Default\+Settings}!ftp\+\_\+server.\+c@{ftp\+\_\+server.\+c}}
+\subsubsection{\texorpdfstring{ftp\+Server\+Get\+Default\+Settings()}{ftpServerGetDefaultSettings()}}
+{\footnotesize\ttfamily void ftp\+Server\+Get\+Default\+Settings (\begin{DoxyParamCaption}\item[{\hyperlink{structFtpServerSettings}{Ftp\+Server\+Settings} $\ast$}]{settings }\end{DoxyParamCaption})}
+
+
+
+Initialize settings with default values. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em settings} & Structure that contains F\+TP server settings \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 60 of file ftp\+\_\+server.\+c.
+
+
+\begin{DoxyCode}
+61 \{
+62    \textcolor{comment}{//The FTP server is not bound to any interface}
+63    settings->\hyperlink{structFtpServerSettings_ad11e10bdc70d2e513c530f93a107e445}{interface} = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+64 
+65    \textcolor{comment}{//FTP command port number}
+66    settings->\hyperlink{structFtpServerSettings_a147e45ee6c047a4fdd0cd5b8f86b9dee}{port} = \hyperlink{ftp__server_8h_a216fb5ecf93cbe055eab51282597b3ab}{FTP\_PORT};
+67    \textcolor{comment}{//FTP data port number}
+68    settings->\hyperlink{structFtpServerSettings_ab762670572bc8baa139a71e62cf3fa0f}{dataPort} = \hyperlink{ftp__server_8h_a972c1b4b37ca75e1e499e91617a3e40b}{FTP\_DATA\_PORT};
+69 
+70    \textcolor{comment}{//Passive port range}
+71    settings->\hyperlink{structFtpServerSettings_a73f929e99c294e6d04bf3a3306676aa1}{passivePortMin} = \hyperlink{ftp__server_8h_a619ecf48984a2a7120800e5dc67dbdeb}{FTP\_SERVER\_PASSIVE\_PORT\_MIN};
+72    settings->\hyperlink{structFtpServerSettings_a482982b26fa039c6df31e22e61cbdc72}{passivePortMax} = \hyperlink{ftp__server_8h_a0955b58a2b4a3c6701aed8b4f6596d25}{FTP\_SERVER\_PASSIVE\_PORT\_MAX};
+73 
+74    \textcolor{comment}{//Public IPv4 address to be used in PASV replies}
+75    settings->\hyperlink{structFtpServerSettings_aa954f00cecd495bc7a3304a9f5e15391}{publicIpv4Addr} = \hyperlink{ipv4_8h_aa9d277a6ff68d361eaf48d6af73e78e8}{IPV4\_UNSPECIFIED\_ADDR};
+76 
+77    \textcolor{comment}{//Default security mode (no security)}
+78    settings->\hyperlink{structFtpServerSettings_a1f29e06ca5ab84bca3197e4a1c3f409b}{mode} = \hyperlink{ftp__server_8h_a8ae7b1433220e89fb8719e2a0117150aa498a88d4d99d76660ef0980ddf6e475c}{FTP\_SERVER\_MODE\_PLAINTEXT};
+79 
+80    \textcolor{comment}{//Client connections}
+81    settings->\hyperlink{structFtpServerSettings_abd014b45519176c7d629ec4c79b3035a}{maxConnections} = 0;
+82    settings->\hyperlink{structFtpServerSettings_aa978284727ae89147f970d349b7d36b1}{connections} = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+83 
+84    \textcolor{comment}{//Set root directory}
+85    strcpy(settings->\hyperlink{structFtpServerSettings_ad2fbe642f13e772c1019f1fc24acf613}{rootDir}, \textcolor{stringliteral}{"/"});
+86 
+87    \textcolor{comment}{//Connection callback function}
+88    settings->\hyperlink{structFtpServerSettings_a3ce9af486eb03a9a3fe571778d259e58}{connectCallback} = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+89    \textcolor{comment}{//Disconnection callback function}
+90    settings->\hyperlink{structFtpServerSettings_a4783ee2799969f290291aa5e7891bb8a}{disconnectCallback} = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+91 
+92 \textcolor{preprocessor}{#if (FTP\_SERVER\_TLS\_SUPPORT == ENABLED)}
+93    \textcolor{comment}{//TLS initialization callback function}
+94    settings->\hyperlink{structFtpServerSettings_a94ca7c826a4b8531615e59933bdfcc2a}{tlsInitCallback} = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+95 \textcolor{preprocessor}{#endif}
+96 
+97    \textcolor{comment}{//User verification callback function}
+98    settings->\hyperlink{structFtpServerSettings_a9fe22a48651c9d7320341da09aa9c08a}{checkUserCallback} = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+99    \textcolor{comment}{//Password verification callback function}
+100    settings->\hyperlink{structFtpServerSettings_a4a1c5c51668a5618b57fb94247128e57}{checkPasswordCallback} = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+101    \textcolor{comment}{//Callback used to retrieve file permissions}
+102    settings->\hyperlink{structFtpServerSettings_a25ff73d02f8e90eb0536b9560762c3b1}{getFilePermCallback} = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+103    \textcolor{comment}{//Unknown command callback function}
+104    settings->\hyperlink{structFtpServerSettings_a7a0ec4276b7d33f2c9e05432c7fc714b}{unknownCommandCallback} = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+105 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ftp__server_8c_a3294731ed262e893ec37339283e6bcf1}\label{ftp__server_8c_a3294731ed262e893ec37339283e6bcf1}} 
+\index{ftp\+\_\+server.\+c@{ftp\+\_\+server.\+c}!ftp\+Server\+Init@{ftp\+Server\+Init}}
+\index{ftp\+Server\+Init@{ftp\+Server\+Init}!ftp\+\_\+server.\+c@{ftp\+\_\+server.\+c}}
+\subsubsection{\texorpdfstring{ftp\+Server\+Init()}{ftpServerInit()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ftp\+Server\+Init (\begin{DoxyParamCaption}\item[{\hyperlink{ftp__server_8h_af7294ff4e42ca4befb7414ce9fd6f287}{Ftp\+Server\+Context} $\ast$}]{context,  }\item[{const \hyperlink{structFtpServerSettings}{Ftp\+Server\+Settings} $\ast$}]{settings }\end{DoxyParamCaption})}
+
+
+
+F\+TP server initialization. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the F\+TP server context \\
+\hline
+\mbox{\tt in}  & {\em settings} & F\+TP server specific settings \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 115 of file ftp\+\_\+server.\+c.
+
+
+\begin{DoxyCode}
+117 \{
+118    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+119    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+120 
+121    \textcolor{comment}{//Debug message}
+122    \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"Initializing FTP server...\(\backslash\)r\(\backslash\)n"});
+123 
+124    \textcolor{comment}{//Ensure the parameters are valid}
+125    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || settings == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+126       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+127 
+128    \textcolor{comment}{//Sanity check}
+129    \textcolor{keywordflow}{if}(settings->\hyperlink{structFtpServerSettings_a482982b26fa039c6df31e22e61cbdc72}{passivePortMax} <= settings->\hyperlink{structFtpServerSettings_a73f929e99c294e6d04bf3a3306676aa1}{passivePortMin})
+130    \{
+131       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+132    \}
+133 
+134    \textcolor{comment}{//Invalid number of client connections?}
+135    \textcolor{keywordflow}{if}(settings->\hyperlink{structFtpServerSettings_abd014b45519176c7d629ec4c79b3035a}{maxConnections} < 1 ||
+136       settings->\hyperlink{structFtpServerSettings_abd014b45519176c7d629ec4c79b3035a}{maxConnections} > \hyperlink{ftp__server_8h_af3d93e6b48588bd5702175cb67d65cf4}{FTP\_SERVER\_MAX\_CONNECTIONS})
+137    \{
+138       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+139    \}
+140 
+141    \textcolor{comment}{//Invalid pointer?}
+142    \textcolor{keywordflow}{if}(settings->\hyperlink{structFtpServerSettings_aa978284727ae89147f970d349b7d36b1}{connections} == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+143       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+144 
+145    \textcolor{comment}{//Clear the FTP server context}
+146    memset(context, 0, \textcolor{keyword}{sizeof}(\hyperlink{ftp__server_8h_af7294ff4e42ca4befb7414ce9fd6f287}{FtpServerContext}));
+147 
+148    \textcolor{comment}{//Save user settings}
+149    context->settings = *settings;
+150    \textcolor{comment}{//Client connections}
+151    context->\hyperlink{structFtpServerSettings_aa978284727ae89147f970d349b7d36b1}{connections} = settings->\hyperlink{structFtpServerSettings_aa978284727ae89147f970d349b7d36b1}{connections};
+152 
+153    \textcolor{comment}{//Clean the root directory path}
+154    \hyperlink{path_8c_a64519f81386b6ece797fb51f06e3052d}{pathCanonicalize}(context->settings.rootDir);
+155    \hyperlink{path_8c_af03ec9a7da6f93032b4ea949a4d0d768}{pathRemoveSlash}(context->settings.rootDir);
+156 
+157    \textcolor{comment}{//Loop through client connections}
+158    \textcolor{keywordflow}{for}(i = 0; i < context->settings.maxConnections; i++)
+159    \{
+160       \textcolor{comment}{//Initialize the structure representing the client connection}
+161       memset(&context->connections[i], 0, \textcolor{keyword}{sizeof}(\hyperlink{ftp__server_8h_ab682699c15473841571a42c3df57e9d2}{FtpClientConnection}));
+162    \}
+163 
+164    \textcolor{comment}{//Create an event object to poll the state of sockets}
+165    \textcolor{keywordflow}{if}(!\hyperlink{os__port__chibios_8c_ac1658f3fed1eb64efcd47e4503a9ef2e}{osCreateEvent}(&context->event))
+166    \{
+167       \textcolor{comment}{//Failed to create event}
+168       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca528efe91b7a7e4bcc9a6de7d4b778c67}{ERROR\_OUT\_OF\_RESOURCES};
+169    \}
+170 
+171    \textcolor{comment}{//Start of exception handling block}
+172    \textcolor{keywordflow}{do}
+173    \{
+174       \textcolor{comment}{//Open a TCP socket}
+175       context->socket = \hyperlink{socket_8c_aa139bbf42b326b52eb08cf52771ac337}{socketOpen}(\hyperlink{socket_8h_aa78c7398fa81f7f62aa233159d4d8d97a9dab003c4dc9f7279e806241534d4859}{SOCKET\_TYPE\_STREAM}, 
+      \hyperlink{socket_8h_a56eb0e60bda5d1d8a2e702228405d969ae0f38a6f025bce7700b3cf0ddd04bb2a}{SOCKET\_IP\_PROTO\_TCP});
+176       \textcolor{comment}{//Failed to open socket?}
+177       \textcolor{keywordflow}{if}(context->socket == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+178       \{
+179          \textcolor{comment}{//Report an error}
+180          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cab721230e985e398cc0977dd729a12c61}{ERROR\_OPEN\_FAILED};
+181          \textcolor{comment}{//Exit immediately}
+182          \textcolor{keywordflow}{break};
+183       \}
+184 
+185       \textcolor{comment}{//Force the socket to operate in non-blocking mode}
+186       error = \hyperlink{socket_8c_abdd29ac0ba4a644c726f5b1280680099}{socketSetTimeout}(context->socket, 0);
+187       \textcolor{comment}{//Any error to report?}
+188       \textcolor{keywordflow}{if}(error)
+189          \textcolor{keywordflow}{break};
+190 
+191       \textcolor{comment}{//Adjust the size of the TX buffer}
+192       error = \hyperlink{socket_8c_aedf25ddaf93caf6fb4a9e47dae20c831}{socketSetTxBufferSize}(context->socket,
+193          \hyperlink{ftp__server_8h_a33693338bba1ae7c5c6c6900a2390de3}{FTP\_SERVER\_MIN\_TCP\_BUFFER\_SIZE});
+194       \textcolor{comment}{//Any error to report?}
+195       \textcolor{keywordflow}{if}(error)
+196          \textcolor{keywordflow}{break};
+197 
+198       \textcolor{comment}{//Adjust the size of the RX buffer}
+199       error = \hyperlink{socket_8c_ade5d61125056ad265723b44f236bdb20}{socketSetRxBufferSize}(context->socket,
+200          \hyperlink{ftp__server_8h_a33693338bba1ae7c5c6c6900a2390de3}{FTP\_SERVER\_MIN\_TCP\_BUFFER\_SIZE});
+201       \textcolor{comment}{//Any error to report?}
+202       \textcolor{keywordflow}{if}(error)
+203          \textcolor{keywordflow}{break};
+204 
+205       \textcolor{comment}{//Associate the socket with the relevant interface}
+206       error = \hyperlink{net__legacy_8h_a80bc49fa99e5654d8c345cd5c70d36d3}{socketBindToInterface}(context->socket, settings->
+      \hyperlink{structFtpServerSettings_ad11e10bdc70d2e513c530f93a107e445}{interface});
+207       \textcolor{comment}{//Unable to bind the socket to the desired interface?}
+208       \textcolor{keywordflow}{if}(error)
+209          \textcolor{keywordflow}{break};
+210 
+211       \textcolor{comment}{//The FTP server listens for connection requests on port 21}
+212       error = \hyperlink{socket_8c_a56de93ca9f66782811dbe151d6da0b9c}{socketBind}(context->socket, &\hyperlink{ip_8c_a132481a9d89ddf554ea8bbbe342e5d5a}{IP\_ADDR\_ANY}, settings->
+      \hyperlink{structFtpServerSettings_a147e45ee6c047a4fdd0cd5b8f86b9dee}{port});
+213       \textcolor{comment}{//Failed to bind socket to port 21?}
+214       \textcolor{keywordflow}{if}(error)
+215          \textcolor{keywordflow}{break};
+216 
+217       \textcolor{comment}{//Place socket in listening state}
+218       error = \hyperlink{socket_8c_a96b275d0dd033cf5fc36ba1a9c4543e3}{socketListen}(context->socket, \hyperlink{ftp__server_8h_a685df10874b9e59f552395be1573c27b}{FTP\_SERVER\_BACKLOG});
+219       \textcolor{comment}{//Any failure to report?}
+220       \textcolor{keywordflow}{if}(error)
+221          \textcolor{keywordflow}{break};
+222 
+223 \textcolor{preprocessor}{#if (FTP\_SERVER\_TLS\_SUPPORT == ENABLED && TLS\_TICKET\_SUPPORT == ENABLED)}
+224       \textcolor{comment}{//Initialize ticket encryption context}
+225       error = \hyperlink{tls__ticket_8c_a900454bf2fd13397d121c59265d93365}{tlsInitTicketContext}(&context->tlsTicketContext);
+226       \textcolor{comment}{//Any error to report?}
+227       \textcolor{keywordflow}{if}(error)
+228          \textcolor{keywordflow}{return} error;
+229 \textcolor{preprocessor}{#endif}
+230 
+231       \textcolor{comment}{//End of exception handling block}
+232    \} \textcolor{keywordflow}{while}(0);
+233 
+234    \textcolor{comment}{//Check status code}
+235    \textcolor{keywordflow}{if}(error)
+236    \{
+237       \textcolor{comment}{//Clean up side effects}
+238       \hyperlink{ftp__server_8c_ab9763c64ffa081448e37c0e67574e524}{ftpServerDeinit}(context);
+239    \}
+240 
+241    \textcolor{comment}{//Return status code}
+242    \textcolor{keywordflow}{return} error;
+243 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ftp__server_8c_aa3089292a50345bfa0167c080463a2e4}\label{ftp__server_8c_aa3089292a50345bfa0167c080463a2e4}} 
+\index{ftp\+\_\+server.\+c@{ftp\+\_\+server.\+c}!ftp\+Server\+Set\+Home\+Dir@{ftp\+Server\+Set\+Home\+Dir}}
+\index{ftp\+Server\+Set\+Home\+Dir@{ftp\+Server\+Set\+Home\+Dir}!ftp\+\_\+server.\+c@{ftp\+\_\+server.\+c}}
+\subsubsection{\texorpdfstring{ftp\+Server\+Set\+Home\+Dir()}{ftpServerSetHomeDir()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ftp\+Server\+Set\+Home\+Dir (\begin{DoxyParamCaption}\item[{\hyperlink{ftp__server_8h_ab682699c15473841571a42c3df57e9d2}{Ftp\+Client\+Connection} $\ast$}]{connection,  }\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{home\+Dir }\end{DoxyParamCaption})}
+
+
+
+Set home directory. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em connection} & Pointer to the client connection \\
+\hline
+\mbox{\tt in}  & {\em home\+Dir} & N\+U\+L\+L-\/terminated string specifying the home directory \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 283 of file ftp\+\_\+server.\+c.
+
+
+\begin{DoxyCode}
+285 \{
+286    \textcolor{comment}{//Check parameters}
+287    \textcolor{keywordflow}{if}(connection == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || homeDir == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+288       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+289 
+290    \textcolor{comment}{//Set home directory}
+291    \hyperlink{path_8c_a38625df4e9abd106fb932b8ff308adc3}{pathCombine}(connection->homeDir, homeDir, 
+      \hyperlink{ftp__server_8h_a35155939971b184ab508d61e3373d997}{FTP\_SERVER\_MAX\_HOME\_DIR\_LEN});
+292 
+293    \textcolor{comment}{//Clean the resulting path}
+294    \hyperlink{path_8c_a64519f81386b6ece797fb51f06e3052d}{pathCanonicalize}(connection->homeDir);
+295    \hyperlink{path_8c_af03ec9a7da6f93032b4ea949a4d0d768}{pathRemoveSlash}(connection->homeDir);
+296 
+297    \textcolor{comment}{//Set current directory}
+298    strcpy(connection->currentDir, connection->homeDir);
+299 
+300    \textcolor{comment}{//Successful processing}
+301    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+302 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ftp__server_8c_a0ea54d1c4e2997e47248434879204d2a}\label{ftp__server_8c_a0ea54d1c4e2997e47248434879204d2a}} 
+\index{ftp\+\_\+server.\+c@{ftp\+\_\+server.\+c}!ftp\+Server\+Start@{ftp\+Server\+Start}}
+\index{ftp\+Server\+Start@{ftp\+Server\+Start}!ftp\+\_\+server.\+c@{ftp\+\_\+server.\+c}}
+\subsubsection{\texorpdfstring{ftp\+Server\+Start()}{ftpServerStart()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ftp\+Server\+Start (\begin{DoxyParamCaption}\item[{\hyperlink{ftp__server_8h_af7294ff4e42ca4befb7414ce9fd6f287}{Ftp\+Server\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Start F\+TP server. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the F\+TP server context \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 252 of file ftp\+\_\+server.\+c.
+
+
+\begin{DoxyCode}
+253 \{
+254    \hyperlink{structOsTask}{OsTask} *task;
+255 
+256    \textcolor{comment}{//Debug message}
+257    \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"Starting FTP server...\(\backslash\)r\(\backslash\)n"});
+258 
+259    \textcolor{comment}{//Make sure the FTP server context is valid}
+260    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+261       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+262 
+263    \textcolor{comment}{//Create the FTP server task}
+264    task = \hyperlink{os__port__chibios_8c_aef8c6fe13a0df9e5cfaeb0501ecbac3e}{osCreateTask}(\textcolor{stringliteral}{"FTP Server"}, (\hyperlink{os__port__chibios_8h_a52a4e1975bb554c2ce70aaac35b752d2}{OsTaskCode}) 
+      \hyperlink{ftp__server_8c_a05149a63c4dc428e9805fd09ebac8fe5}{ftpServerTask},
+265       context, \hyperlink{ftp__server_8h_ace22ca8dc847ddb9b65faf8ecd0d4f38}{FTP\_SERVER\_STACK\_SIZE}, \hyperlink{ftp__server_8h_a40565e5d6676d1027787d8144ce99508}{FTP\_SERVER\_PRIORITY});
+266 
+267    \textcolor{comment}{//Unable to create the task?}
+268    \textcolor{keywordflow}{if}(task == \hyperlink{os__port_8h_aa673e52d8b286c3b613ad127aa85d536}{OS\_INVALID\_HANDLE})
+269       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca528efe91b7a7e4bcc9a6de7d4b778c67}{ERROR\_OUT\_OF\_RESOURCES};
+270 
+271    \textcolor{comment}{//Successful processing}
+272    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+273 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ftp__server_8c_a05149a63c4dc428e9805fd09ebac8fe5}\label{ftp__server_8c_a05149a63c4dc428e9805fd09ebac8fe5}} 
+\index{ftp\+\_\+server.\+c@{ftp\+\_\+server.\+c}!ftp\+Server\+Task@{ftp\+Server\+Task}}
+\index{ftp\+Server\+Task@{ftp\+Server\+Task}!ftp\+\_\+server.\+c@{ftp\+\_\+server.\+c}}
+\subsubsection{\texorpdfstring{ftp\+Server\+Task()}{ftpServerTask()}}
+{\footnotesize\ttfamily void ftp\+Server\+Task (\begin{DoxyParamCaption}\item[{\hyperlink{ftp__server_8h_af7294ff4e42ca4befb7414ce9fd6f287}{Ftp\+Server\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+F\+TP server task. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the F\+TP server context \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 310 of file ftp\+\_\+server.\+c.
+
+
+\begin{DoxyCode}
+311 \{
+312    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+313    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+314    \hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\_t} \hyperlink{dhcpv6__common_8h_ae73654f333e4363463ad8c594eca1905}{time};
+315    \hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\_t} timeout;
+316    \hyperlink{ftp__server_8h_ab682699c15473841571a42c3df57e9d2}{FtpClientConnection} *connection;
+317 
+318 \textcolor{preprocessor}{#if (NET\_RTOS\_SUPPORT == ENABLED)}
+319    \textcolor{comment}{//Task prologue}
+320    \hyperlink{os__port__chibios_8h_abd3485ee30ab6a2de1208b0498a449cf}{osEnterTask}();
+321 
+322    \textcolor{comment}{//Process events}
+323    \textcolor{keywordflow}{while}(1)
+324    \{
+325 \textcolor{preprocessor}{#endif}
+326       \textcolor{comment}{//Set polling timeout}
+327       timeout = \hyperlink{ftp__server_8h_a1e3fb6081ac1a501357d329a75a5f997}{FTP\_SERVER\_TICK\_INTERVAL};
+328 
+329       \textcolor{comment}{//Clear event descriptor set}
+330       memset(context->eventDesc, 0, \textcolor{keyword}{sizeof}(context->eventDesc));
+331 
+332       \textcolor{comment}{//Specify the events the application is interested in}
+333       \textcolor{keywordflow}{for}(i = 0; i < context->settings.maxConnections; i++)
+334       \{
+335          \textcolor{comment}{//Point to the structure describing the current connection}
+336          connection = &context->connections[i];
+337 
+338          \textcolor{comment}{//Check whether the control connection is active}
+339          \textcolor{keywordflow}{if}(connection->controlChannel.socket != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+340          \{
+341             \textcolor{comment}{//Register the events related to the control connection}
+342             \hyperlink{ftp__server__control_8c_a0efabb0e0da0fbe9db7130a36319c36a}{ftpServerRegisterControlChannelEvents}(connection,
+343                &context->eventDesc[2 * i]);
+344 
+345             \textcolor{comment}{//Check whether the socket is ready for I/O operation}
+346             \textcolor{keywordflow}{if}(context->eventDesc[2 * i].eventFlags != 0)
+347             \{
+348                \textcolor{comment}{//No need to poll the underlying socket for incoming traffic}
+349                timeout = 0;
+350             \}
+351          \}
+352 
+353          \textcolor{comment}{//Check whether the data connection is active}
+354          \textcolor{keywordflow}{if}(connection->dataChannel.socket != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+355          \{
+356             \textcolor{comment}{//Register the events related to the data connection}
+357             \hyperlink{ftp__server__data_8c_a2796f2b1e77f205af4187cae0b916024}{ftpServerRegisterDataChannelEvents}(connection,
+358                &context->eventDesc[2 * i + 1]);
+359 
+360             \textcolor{comment}{//Check whether the socket is ready for I/O operation}
+361             \textcolor{keywordflow}{if}(context->eventDesc[2 * i + 1].eventFlags != 0)
+362             \{
+363                \textcolor{comment}{//No need to poll the underlying socket for incoming traffic}
+364                timeout = 0;
+365             \}
+366          \}
+367       \}
+368 
+369       \textcolor{comment}{//Accept connection request events}
+370       context->eventDesc[2 * i].socket = context->socket;
+371       context->eventDesc[2 * i].eventMask = \hyperlink{socket_8h_add8a4c36456f478ab23bd4372aebde6ea72985d7e82625f037ca8a6734f49996c}{SOCKET\_EVENT\_RX\_READY};
+372 
+373       \textcolor{comment}{//Wait for one of the set of sockets to become ready to perform I/O}
+374       error = \hyperlink{socket_8c_a57ec969d9a3deee2dae93fe0a891e583}{socketPoll}(context->eventDesc,
+375          2 * context->settings.maxConnections + 1, &context->event, timeout);
+376 
+377       \textcolor{comment}{//Get current time}
+378       time = \hyperlink{os__port__chibios_8c_ab66a11272d40a916fa69dd8e4dc443d4}{osGetSystemTime}();
+379 
+380       \textcolor{comment}{//Check status code}
+381       \textcolor{keywordflow}{if}(error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR} || error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4d0f7be53b837f004379ac6bbd56f1e2}{ERROR\_TIMEOUT})
+382       \{
+383          \textcolor{comment}{//Event-driven processing}
+384          \textcolor{keywordflow}{for}(i = 0; i < context->settings.maxConnections; i++)
+385          \{
+386             \textcolor{comment}{//Point to the structure describing the current connection}
+387             connection = &context->connections[i];
+388 
+389             \textcolor{comment}{//Check whether the control connection is active}
+390             \textcolor{keywordflow}{if}(connection->controlChannel.socket != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+391             \{
+392                \textcolor{comment}{//Check whether the control socket is to ready to perform I/O}
+393                \textcolor{keywordflow}{if}(context->eventDesc[2 * i].eventFlags)
+394                \{
+395                   \textcolor{comment}{//Update time stamp}
+396                   connection->timestamp = \hyperlink{dhcpv6__common_8h_ae73654f333e4363463ad8c594eca1905}{time};
+397 
+398                   \textcolor{comment}{//Control connection event handler}
+399                   \hyperlink{ftp__server__control_8c_a4f1b63e4bea6acf0904237bf35449bb0}{ftpServerProcessControlChannelEvents}(connection,
+400                      context->eventDesc[2 * i].eventFlags);
+401                \}
+402             \}
+403 
+404             \textcolor{comment}{//Check whether the data connection is active}
+405             \textcolor{keywordflow}{if}(connection->dataChannel.socket != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+406             \{
+407                \textcolor{comment}{//Check whether the data socket is ready to perform I/O}
+408                \textcolor{keywordflow}{if}(context->eventDesc[2 * i + 1].eventFlags)
+409                \{
+410                   \textcolor{comment}{//Update time stamp}
+411                   connection->timestamp = \hyperlink{dhcpv6__common_8h_ae73654f333e4363463ad8c594eca1905}{time};
+412 
+413                   \textcolor{comment}{//Data connection event handler}
+414                   \hyperlink{ftp__server__data_8c_aed7f8eac88f002524e9d4b7ec14c140b}{ftpServerProcessDataChannelEvents}(connection,
+415                      context->eventDesc[2 * i + 1].eventFlags);
+416                \}
+417             \}
+418          \}
+419 
+420          \textcolor{comment}{//Check the state of the listening socket}
+421          \textcolor{keywordflow}{if}(context->eventDesc[2 * i].eventFlags & \hyperlink{socket_8h_add8a4c36456f478ab23bd4372aebde6ea72985d7e82625f037ca8a6734f49996c}{SOCKET\_EVENT\_RX\_READY})
+422          \{
+423             \textcolor{comment}{//Accept connection request}
+424             \hyperlink{ftp__server__control_8c_ad16acd986947873a6317237e6c3f18aa}{ftpServerAcceptControlChannel}(context);
+425          \}
+426       \}
+427 
+428       \textcolor{comment}{//Handle periodic operations}
+429       \hyperlink{ftp__server__misc_8c_a50a3cc62ee63d47c923b30ad23b20aef}{ftpServerTick}(context);
+430 
+431 \textcolor{preprocessor}{#if (NET\_RTOS\_SUPPORT == ENABLED)}
+432    \}
+433 \textcolor{preprocessor}{#endif}
+434 \}
+\end{DoxyCode}

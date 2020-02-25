@@ -1,0 +1,66 @@
+\hypertarget{group__WifiSetScanOptionFn}{}\section{m2m\+\_\+wifi\+\_\+set\+\_\+scan\+\_\+options}
+\label{group__WifiSetScanOptionFn}\index{m2m\+\_\+wifi\+\_\+set\+\_\+scan\+\_\+options@{m2m\+\_\+wifi\+\_\+set\+\_\+scan\+\_\+options}}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group__BSPDefine_gaecc0323d771e41ef81a76b5f12783e22}{N\+M\+I\+\_\+\+A\+PI} \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} \hyperlink{group__WifiSetScanOptionFn_ga588ab7517c383d5f814a7a55125dd83b}{m2m\+\_\+wifi\+\_\+set\+\_\+scan\+\_\+options} (\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} u8\+Num\+Of\+Slot, \hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} u8\+Slot\+Time)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Synchronous wi-\/fi scan settings function. This function sets the time configuration parameters for the scan operation. 
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group__WifiSetScanOptionFn_ga588ab7517c383d5f814a7a55125dd83b}\label{group__WifiSetScanOptionFn_ga588ab7517c383d5f814a7a55125dd83b}} 
+\index{m2m\+\_\+wifi\+\_\+set\+\_\+scan\+\_\+options@{m2m\+\_\+wifi\+\_\+set\+\_\+scan\+\_\+options}!m2m\+\_\+wifi\+\_\+set\+\_\+scan\+\_\+options@{m2m\+\_\+wifi\+\_\+set\+\_\+scan\+\_\+options}}
+\index{m2m\+\_\+wifi\+\_\+set\+\_\+scan\+\_\+options@{m2m\+\_\+wifi\+\_\+set\+\_\+scan\+\_\+options}!m2m\+\_\+wifi\+\_\+set\+\_\+scan\+\_\+options@{m2m\+\_\+wifi\+\_\+set\+\_\+scan\+\_\+options}}
+\subsubsection{\texorpdfstring{m2m\+\_\+wifi\+\_\+set\+\_\+scan\+\_\+options()}{m2m\_wifi\_set\_scan\_options()}}
+{\footnotesize\ttfamily \hyperlink{group__BSPDefine_gaecc0323d771e41ef81a76b5f12783e22}{N\+M\+I\+\_\+\+A\+PI} \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} m2m\+\_\+wifi\+\_\+set\+\_\+scan\+\_\+options (\begin{DoxyParamCaption}\item[{\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8}}]{u8\+Num\+Of\+Slot,  }\item[{\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8}}]{u8\+Slot\+Time }\end{DoxyParamCaption})}
+
+
+
+{\ttfamily \#include $<$\hyperlink{m2m__wifi_8h}{third\+\_\+party/atmel/devices/wilc1000/driver/include/m2m\+\_\+wifi.\+h}$>$}
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em u8\+Num\+Of\+Slot;} & The minimum number of slots is 2 for every channel, For every slot the soc will send Probe Req on air, and wait/listen for P\+R\+O\+BE R\+E\+S\+P/\+B\+E\+A\+C\+O\+NS for the u8slot\+Time in ms\\
+\hline
+\mbox{\tt in}  & {\em u8\+Slot\+Time;} & The time in ms that the Soc will wait on every channel listening for the frames on air when that time increases the number of A\+Ps will increase in the scan results Minimum time is 10 ms and the maximum is 250 ms \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{group__WlanEnums_ga2a91dd671e2672dba1a7ed45230f3a99}{tenu\+M2m\+Scan\+Ch} \hyperlink{group__WifiRequestScanFn_ga499dfa24a19c2e84776aeabedf897135}{m2m\+\_\+wifi\+\_\+request\+\_\+scan}
+\end{DoxySeeAlso}
+\begin{DoxyReturn}{Returns}
+The function returns \hyperlink{nm__common_8h_a9ef27ba27aafdd1aa3a79d3ba2c36b8f}{M2\+M\+\_\+\+S\+U\+C\+C\+E\+SS} for successful operations and a negative value otherwise. 
+\end{DoxyReturn}
+
+
+Definition at line 399 of file m2m\+\_\+wifi.\+c.
+
+
+\begin{DoxyCode}
+400 \{
+401     \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8}  s8Ret = \hyperlink{nm__common_8h_a39ed05df730834f2255971ca9879996e}{M2M\_ERR\_FAIL};
+402     \hyperlink{structtstrM2MScanOption}{tstrM2MScanOption}* pstrM2MScan = &guCtrlStruct.strM2MScanOption;
+403     pstrM2MScan->\hyperlink{structtstrM2MScanOption_afea8abd511d36669abe3f62db32448fd}{u8NumOfSlot} = u8NumOfSlot;
+404     pstrM2MScan->\hyperlink{structtstrM2MScanOption_a059c3a0366f0f96c3ad371edf7ebee43}{u8SlotTime} = u8SlotTime;
+405 
+406     \textcolor{keywordflow}{if}(pstrM2MScan->\hyperlink{structtstrM2MScanOption_afea8abd511d36669abe3f62db32448fd}{u8NumOfSlot} < \hyperlink{group__WlanDefines_gac12991014d0b3fa80110e85b07235e4d}{M2M\_SCAN\_MIN\_NUM\_SLOTS})
+407     \{
+408         pstrM2MScan->\hyperlink{structtstrM2MScanOption_afea8abd511d36669abe3f62db32448fd}{u8NumOfSlot} = \hyperlink{group__WlanDefines_gac12991014d0b3fa80110e85b07235e4d}{M2M\_SCAN\_MIN\_NUM\_SLOTS};
+409     \}
+410     \textcolor{keywordflow}{if}(pstrM2MScan->\hyperlink{structtstrM2MScanOption_a059c3a0366f0f96c3ad371edf7ebee43}{u8SlotTime} < \hyperlink{group__WlanDefines_gad6bb7f6e8dd156db1a61f8d481f24de3}{M2M\_SCAN\_MIN\_SLOT\_TIME})
+411     \{
+412         pstrM2MScan->\hyperlink{structtstrM2MScanOption_a059c3a0366f0f96c3ad371edf7ebee43}{u8SlotTime} = \hyperlink{group__WlanDefines_gad6bb7f6e8dd156db1a61f8d481f24de3}{M2M\_SCAN\_MIN\_SLOT\_TIME};
+413     \}
+414     s8Ret = \hyperlink{m2m__hif_8c_a13ba8ad11b2ac39516ca787386d16ce0}{hif\_send}(\hyperlink{nm__common_8h_a9ab02eb1aea02a75c3f5aade4eef1276aeb9a7d57324ba4b8a6c2a5f46dd499c2}{M2M\_REQ\_GRP\_WIFI}, 
+      \hyperlink{group__WlanEnums_gga064de09dec1d5e88ed8d075fa40f57dea95e9a50ab14cddc8421dc02928027892}{M2M\_WIFI\_REQ\_SET\_SCAN\_OPTION}, (\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8}*)pstrM2MScan, \textcolor{keyword}{sizeof}(
+      \hyperlink{structtstrM2MScan}{tstrM2MScan}),\hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, 0,0);
+415     \textcolor{keywordflow}{if}(s8Ret != \hyperlink{nm__common_8h_a9ef27ba27aafdd1aa3a79d3ba2c36b8f}{M2M\_SUCCESS})
+416     \{
+417         \hyperlink{nm__common_8h_a34d005df494e50b05cd38b80f318d7ac}{M2M\_ERR}(\textcolor{stringliteral}{"SCAN Failed Ret = %d\(\backslash\)r\(\backslash\)n"},s8Ret);
+418     \}
+419     \textcolor{keywordflow}{return} s8Ret;
+420 \}
+\end{DoxyCode}

@@ -1,0 +1,1459 @@
+\hypertarget{nic_8h}{}\section{cyclone\+\_\+tcp/core/nic.h File Reference}
+\label{nic_8h}\index{cyclone\+\_\+tcp/core/nic.\+h@{cyclone\+\_\+tcp/core/nic.\+h}}
+
+
+Network interface controller abstraction layer.  
+
+
+{\ttfamily \#include \char`\"{}core/net.\+h\char`\"{}}\newline
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structNicDriver}{Nic\+Driver}
+\begin{DoxyCompactList}\small\item\em N\+IC driver. \end{DoxyCompactList}\item 
+struct \hyperlink{structPhyDriver}{Phy\+Driver}
+\begin{DoxyCompactList}\small\item\em P\+HY driver. \end{DoxyCompactList}\item 
+struct \hyperlink{structSpiDriver}{Spi\+Driver}
+\begin{DoxyCompactList}\small\item\em S\+PI driver. \end{DoxyCompactList}\item 
+struct \hyperlink{structUartDriver}{Uart\+Driver}
+\begin{DoxyCompactList}\small\item\em U\+A\+RT driver. \end{DoxyCompactList}\item 
+struct \hyperlink{structExtIntDriver}{Ext\+Int\+Driver}
+\begin{DoxyCompactList}\small\item\em External interrupt line driver. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{nic_8h_a7d7bc2ec255de745e3116552ea3218bb}{N\+I\+C\+\_\+\+T\+I\+C\+K\+\_\+\+I\+N\+T\+E\+R\+V\+AL}~1000
+\item 
+\#define \hyperlink{nic_8h_a519984a512a8f611d1a1d86750b25a1e}{N\+I\+C\+\_\+\+M\+A\+X\+\_\+\+B\+L\+O\+C\+K\+I\+N\+G\+\_\+\+T\+I\+ME}~\hyperlink{os__port_8h_ab893de6f8a0ec8b0e6dd8097ff398019}{I\+N\+F\+I\+N\+I\+T\+E\+\_\+\+D\+E\+L\+AY}
+\item 
+\#define \hyperlink{nic_8h_aae102aeec82fff42fcadd719a6cf41c2}{N\+I\+C\+\_\+\+C\+O\+N\+T\+E\+X\+T\+\_\+\+S\+I\+ZE}~16
+\item 
+\#define \hyperlink{nic_8h_a2c89595097fbf0ecb10e0973326be9c3}{S\+M\+I\+\_\+\+S\+Y\+NC}~0x\+F\+F\+F\+F\+F\+F\+FF
+\item 
+\#define \hyperlink{nic_8h_a91a712150352d5d4e97569f7f03242f5}{S\+M\+I\+\_\+\+S\+T\+A\+RT}~1
+\item 
+\#define \hyperlink{nic_8h_ab5f0d4034254a57a2135c996ec15b46a}{S\+M\+I\+\_\+\+O\+P\+C\+O\+D\+E\+\_\+0}~0
+\item 
+\#define \hyperlink{nic_8h_a1fa0e7586e487646372c0f169c9ea786}{S\+M\+I\+\_\+\+O\+P\+C\+O\+D\+E\+\_\+\+W\+R\+I\+TE}~1
+\item 
+\#define \hyperlink{nic_8h_acceb418bf1cbc9cf0483446cd1cb1e78}{S\+M\+I\+\_\+\+O\+P\+C\+O\+D\+E\+\_\+\+R\+E\+AD}~2
+\item 
+\#define \hyperlink{nic_8h_ad094acb14ba987515a242beb12531088}{S\+M\+I\+\_\+\+TA}~2
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t}($\ast$ \hyperlink{nic_8h_a8c65f971bb6fede1efeae1873a16841f}{Nic\+Init}) (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface)
+\item 
+typedef void($\ast$ \hyperlink{nic_8h_a3f6714321f4ab9564fdac42ba69de526}{Nic\+Tick}) (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface)
+\item 
+typedef void($\ast$ \hyperlink{nic_8h_a5287b4eea3f3d81a54e873acdf405c0f}{Nic\+Enable\+Irq}) (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface)
+\item 
+typedef void($\ast$ \hyperlink{nic_8h_a2838a247e625bd72c8214dac1d95c394}{Nic\+Disable\+Irq}) (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface)
+\item 
+typedef void($\ast$ \hyperlink{nic_8h_a64cc7ec2ef61ae3a5c36c2d52f52ae0e}{Nic\+Event\+Handler}) (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface)
+\item 
+typedef \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t}($\ast$ \hyperlink{nic_8h_a63d88efa567d89b00e11faebabafa2e0}{Nic\+Send\+Packet}) (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface, const \hyperlink{structNetBuffer}{Net\+Buffer} $\ast$buffer, size\+\_\+t \hyperlink{pic32mz_2isr__support_8h_ac0542d92dfcd62c19170fd963f9e5052}{offset})
+\item 
+typedef \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t}($\ast$ \hyperlink{nic_8h_a1e0d018c9a510a084370e7e8a354e54d}{Nic\+Update\+Mac\+Addr\+Filter}) (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface)
+\item 
+typedef \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t}($\ast$ \hyperlink{nic_8h_a24c14c5747a3d68e12393a0bf9ede8fb}{Nic\+Update\+Mac\+Config}) (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface)
+\item 
+typedef void($\ast$ \hyperlink{nic_8h_a5b15217319f2376ad4dd5c883ee6924a}{Nic\+Write\+Phy\+Reg}) (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} \hyperlink{web__socket_8h_a5c1b56e6bccc2a95dbddf1a08e56e87d}{opcode}, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} phy\+Addr, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} \hyperlink{modbus__common_8h_a184543cc09c0f45a36f7cd93a99aeae3}{reg\+Addr}, \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} \hyperlink{tftp__common_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data})
+\item 
+typedef \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t}($\ast$ \hyperlink{nic_8h_a0d400b31f6491d5bdb45075c389fac19}{Nic\+Read\+Phy\+Reg}) (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} \hyperlink{web__socket_8h_a5c1b56e6bccc2a95dbddf1a08e56e87d}{opcode}, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} phy\+Addr, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} \hyperlink{modbus__common_8h_a184543cc09c0f45a36f7cd93a99aeae3}{reg\+Addr})
+\item 
+typedef \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t}($\ast$ \hyperlink{nic_8h_afc0573cbc6dfafe78e7fbea63f882e81}{Phy\+Init}) (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface)
+\item 
+typedef void($\ast$ \hyperlink{nic_8h_ab684b8c15e030cb47dc256480325a732}{Phy\+Tick}) (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface)
+\item 
+typedef void($\ast$ \hyperlink{nic_8h_a439e57db4994b903e75b9ebfedaec34f}{Phy\+Enable\+Irq}) (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface)
+\item 
+typedef void($\ast$ \hyperlink{nic_8h_a190fda514154e83e25ffcc6c69f59714}{Phy\+Disable\+Irq}) (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface)
+\item 
+typedef void($\ast$ \hyperlink{nic_8h_a3822e27f4410b42d46b452bbbafb062e}{Phy\+Event\+Handler}) (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface)
+\item 
+typedef \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t}($\ast$ \hyperlink{nic_8h_a85c4a163fe96d6cdaab0e5545369e233}{Phy\+Tag\+Frame}) (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface, \hyperlink{structNetBuffer}{Net\+Buffer} $\ast$buffer, size\+\_\+t $\ast$\hyperlink{pic32mz_2isr__support_8h_ac0542d92dfcd62c19170fd963f9e5052}{offset}, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} \hyperlink{dns__common_8h_a8e0798404bf2cf5dabb84c5ba9a4f236}{port}, \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} $\ast$\hyperlink{ppp_8h_a1d127017fb298b889f4ba24752d08b8e}{type})
+\item 
+typedef \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t}($\ast$ \hyperlink{nic_8h_a4f423898a5e094db0fbcc5b7732a3cb9}{Phy\+Untag\+Frame}) (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$$\ast$frame, size\+\_\+t $\ast$\hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length}, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{dns__common_8h_a8e0798404bf2cf5dabb84c5ba9a4f236}{port})
+\item 
+typedef \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t}($\ast$ \hyperlink{nic_8h_a5641b785b2d731fb89fe8e582e5727a6}{Spi\+Init}) (void)
+\item 
+typedef \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t}($\ast$ \hyperlink{nic_8h_adf96940921e97bad16877a29ee08b7ba}{Spi\+Set\+Mode}) (\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} \hyperlink{ntp__common_8h_a37e90f5e3bd99fac2021fb3a326607d4}{mode})
+\item 
+typedef \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t}($\ast$ \hyperlink{nic_8h_aaf7cee9ed915be68ba8c3bbe2a2366ab}{Spi\+Set\+Bitrate}) (\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} bitrate)
+\item 
+typedef void($\ast$ \hyperlink{nic_8h_a5367e86c609a9e08a7fdaeb4ea35035b}{Spi\+Assert\+Cs}) (void)
+\item 
+typedef void($\ast$ \hyperlink{nic_8h_a314bf7aa989ddd1b04e72751382d2a3c}{Spi\+Deassert\+Cs}) (void)
+\item 
+typedef \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}($\ast$ \hyperlink{nic_8h_a9563443a6b4fdbea93e0ba3c607ef4c2}{Spi\+Transfer}) (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} \hyperlink{tftp__common_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data})
+\item 
+typedef \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t}($\ast$ \hyperlink{nic_8h_ad480784aefd824e7a159728df3c51643}{Uart\+Init}) (void)
+\item 
+typedef void($\ast$ \hyperlink{nic_8h_ad360b535e20add52396382193c5c9cd9}{Uart\+Enable\+Irq}) (void)
+\item 
+typedef void($\ast$ \hyperlink{nic_8h_abf355b7478afb1e1df154e42f41dbb58}{Uart\+Disable\+Irq}) (void)
+\item 
+typedef void($\ast$ \hyperlink{nic_8h_a06153573bb814bc87bf01b68a91a4de5}{Uart\+Start\+Tx}) (void)
+\item 
+typedef \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t}($\ast$ \hyperlink{nic_8h_a0fb3a794e644738e423bbcf3fc09047b}{Ext\+Int\+Init}) (void)
+\item 
+typedef void($\ast$ \hyperlink{nic_8h_a7718a8a56f19fcb851736f1810e2efce}{Ext\+Int\+Enable\+Irq}) (void)
+\item 
+typedef void($\ast$ \hyperlink{nic_8h_a03d360f5fa3eb3c27e63a9247d8f7e1d}{Ext\+Int\+Disable\+Irq}) (void)
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{nic_8h_ac1ce8659a9797513ecd9cc1afedce40b}{Nic\+Type} \{ \newline
+\hyperlink{nic_8h_ac1ce8659a9797513ecd9cc1afedce40ba56195723443671dea1cddf63b71313fe}{N\+I\+C\+\_\+\+T\+Y\+P\+E\+\_\+\+U\+N\+K\+N\+O\+WN} = 0, 
+\hyperlink{nic_8h_ac1ce8659a9797513ecd9cc1afedce40ba84802cab6ee937691c3d76122ffaffcd}{N\+I\+C\+\_\+\+T\+Y\+P\+E\+\_\+\+E\+T\+H\+E\+R\+N\+ET} = 1, 
+\hyperlink{nic_8h_ac1ce8659a9797513ecd9cc1afedce40bafe21fcd3851e27a8b4ac8f6ea0a692df}{N\+I\+C\+\_\+\+T\+Y\+P\+E\+\_\+\+P\+PP} = 2, 
+\hyperlink{nic_8h_ac1ce8659a9797513ecd9cc1afedce40ba5b85ff07103ab20b9b081b4b263619ea}{N\+I\+C\+\_\+\+T\+Y\+P\+E\+\_\+6\+L\+O\+W\+P\+AN} = 3, 
+\newline
+\hyperlink{nic_8h_ac1ce8659a9797513ecd9cc1afedce40ba562c14f927fc4795741eb23aee4e4598}{N\+I\+C\+\_\+\+T\+Y\+P\+E\+\_\+\+L\+O\+O\+P\+B\+A\+CK} = 4
+ \}\begin{DoxyCompactList}\small\item\em N\+IC types. \end{DoxyCompactList}
+\item 
+enum \hyperlink{nic_8h_a0febd18365446a71d375767b1e98af38}{Nic\+Link\+State} \{ \hyperlink{nic_8h_a0febd18365446a71d375767b1e98af38adfaf7a6194e0810c99a6046b35350340}{N\+I\+C\+\_\+\+L\+I\+N\+K\+\_\+\+S\+T\+A\+T\+E\+\_\+\+D\+O\+WN} = 0, 
+\hyperlink{nic_8h_a0febd18365446a71d375767b1e98af38ab427f70f4912ae0fd8aada63d8469674}{N\+I\+C\+\_\+\+L\+I\+N\+K\+\_\+\+S\+T\+A\+T\+E\+\_\+\+UP} = 1, 
+\hyperlink{nic_8h_a0febd18365446a71d375767b1e98af38adf443eadea125099efe3b095ef6608cc}{N\+I\+C\+\_\+\+L\+I\+N\+K\+\_\+\+S\+T\+A\+T\+E\+\_\+\+A\+U\+TO} = 2
+ \}\begin{DoxyCompactList}\small\item\em Link state. \end{DoxyCompactList}
+\item 
+enum \hyperlink{nic_8h_afef666155a43e0a2a3a1f0df9e50bab4}{Nic\+Link\+Speed} \{ \hyperlink{nic_8h_afef666155a43e0a2a3a1f0df9e50bab4a77e6c81652333fac98361950c2b6a4f8}{N\+I\+C\+\_\+\+L\+I\+N\+K\+\_\+\+S\+P\+E\+E\+D\+\_\+\+U\+N\+K\+N\+O\+WN} = 0, 
+\hyperlink{nic_8h_afef666155a43e0a2a3a1f0df9e50bab4a43656b0244470a43d497c77353f3da84}{N\+I\+C\+\_\+\+L\+I\+N\+K\+\_\+\+S\+P\+E\+E\+D\+\_\+10\+M\+B\+PS} = 10000000, 
+\hyperlink{nic_8h_afef666155a43e0a2a3a1f0df9e50bab4a3001394d2b59b22c97f6957e07ca28fd}{N\+I\+C\+\_\+\+L\+I\+N\+K\+\_\+\+S\+P\+E\+E\+D\+\_\+100\+M\+B\+PS} = 100000000, 
+\hyperlink{nic_8h_afef666155a43e0a2a3a1f0df9e50bab4a80d2206215bf4b2f0c40c2fb44291380}{N\+I\+C\+\_\+\+L\+I\+N\+K\+\_\+\+S\+P\+E\+E\+D\+\_\+1\+G\+B\+PS} = 1000000000
+ \}\begin{DoxyCompactList}\small\item\em Link speed. \end{DoxyCompactList}
+\item 
+enum \hyperlink{nic_8h_ae96e77ca948a3796e2d1900a73f133da}{Nic\+Duplex\+Mode} \{ \hyperlink{nic_8h_ae96e77ca948a3796e2d1900a73f133daab9af1b5a4752d6d26979734c91b3c920}{N\+I\+C\+\_\+\+U\+N\+K\+N\+O\+W\+N\+\_\+\+D\+U\+P\+L\+E\+X\+\_\+\+M\+O\+DE} = 0, 
+\hyperlink{nic_8h_ae96e77ca948a3796e2d1900a73f133daa60856f1c6ecbcb1227b653fb48205f41}{N\+I\+C\+\_\+\+H\+A\+L\+F\+\_\+\+D\+U\+P\+L\+E\+X\+\_\+\+M\+O\+DE} = 1, 
+\hyperlink{nic_8h_ae96e77ca948a3796e2d1900a73f133daa2c75584234136d8fd79f372116d26340}{N\+I\+C\+\_\+\+F\+U\+L\+L\+\_\+\+D\+U\+P\+L\+E\+X\+\_\+\+M\+O\+DE} = 2
+ \}\begin{DoxyCompactList}\small\item\em Duplex mode. \end{DoxyCompactList}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$ \hyperlink{nic_8h_a650d776d6513c3bb88671c3aedd782f0}{nic\+Get\+Logical\+Interface} (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface)
+\begin{DoxyCompactList}\small\item\em Retrieve logical interface. \end{DoxyCompactList}\item 
+\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$ \hyperlink{nic_8h_aa8f48265895dab1633056c2dcd796355}{nic\+Get\+Physical\+Interface} (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface)
+\begin{DoxyCompactList}\small\item\em Retrieve physical interface. \end{DoxyCompactList}\item 
+\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} \hyperlink{nic_8h_a57cef1a0e3b5314d4d0c17fdc13ce56b}{nic\+Get\+Switch\+Port} (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface)
+\begin{DoxyCompactList}\small\item\em Retrieve switch port identifier. \end{DoxyCompactList}\item 
+\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} \hyperlink{nic_8h_a6c931d644f65e0d18c4d4311eaefc68e}{nic\+Get\+Vlan\+Id} (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface)
+\begin{DoxyCompactList}\small\item\em Retrieve V\+L\+AN identifier. \end{DoxyCompactList}\item 
+\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} \hyperlink{nic_8h_a283192e9d12b5c863a2f5710da9fe1c8}{nic\+Get\+Vman\+Id} (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface)
+\begin{DoxyCompactList}\small\item\em Retrieve V\+M\+AN identifier. \end{DoxyCompactList}\item 
+\hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} \hyperlink{nic_8h_afa0628577c7cf893442123f89d0ad183}{nic\+Is\+Parent\+Interface} (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface, \hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$parent)
+\begin{DoxyCompactList}\small\item\em Test parent/child relationship between 2 interfaces. \end{DoxyCompactList}\item 
+void \hyperlink{nic_8h_aa357a772d6985d2516db87e35c39d148}{nic\+Tick} (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface)
+\begin{DoxyCompactList}\small\item\em Network controller timer handler. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{nic_8h_af480b2743ecb07bc0312f2bbcecdb287}{nic\+Send\+Packet} (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface, const \hyperlink{structNetBuffer}{Net\+Buffer} $\ast$buffer, size\+\_\+t \hyperlink{pic32mz_2isr__support_8h_ac0542d92dfcd62c19170fd963f9e5052}{offset})
+\begin{DoxyCompactList}\small\item\em Send a packet to the network controller. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{nic_8h_a9aa22ecc6ff76481bd33224fda34cb90}{nic\+Update\+Mac\+Addr\+Filter} (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface)
+\begin{DoxyCompactList}\small\item\em Configure M\+AC address filtering. \end{DoxyCompactList}\item 
+void \hyperlink{nic_8h_a5e5ef3b84649c36ebfe1e70edb1a0f75}{nic\+Process\+Packet} (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$packet, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length})
+\begin{DoxyCompactList}\small\item\em Handle a packet received by the network controller. \end{DoxyCompactList}\item 
+void \hyperlink{nic_8h_ae9054795c5d49a4db97396bf1d16b413}{nic\+Notify\+Link\+Change} (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface)
+\begin{DoxyCompactList}\small\item\em Process link state change notification. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\+\_\+t} \hyperlink{nic_8h_a1dd89f7555db6c62a9228c8a0f0c9806}{nic\+Tick\+Counter}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Network interface controller abstraction layer. 
+
+\hypertarget{pic32mz__ef__curiosity_8h_License}{}\subsection{License}\label{pic32mz__ef__curiosity_8h_License}
+S\+P\+D\+X-\/\+License-\/\+Identifier\+: G\+P\+L-\/2.\+0-\/or-\/later
+
+Copyright (C) 2010-\/2019 Oryx Embedded S\+A\+RL. All rights reserved.
+
+This file is part of Cyclone\+T\+CP Open.
+
+This program is free software; you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+
+You should have received a copy of the G\+NU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-\/1301, U\+SA.
+
+\begin{DoxyAuthor}{Author}
+Oryx Embedded S\+A\+RL (www.\+oryx-\/embedded.\+com) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+9.\+6 
+\end{DoxyVersion}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{nic_8h_aae102aeec82fff42fcadd719a6cf41c2}\label{nic_8h_aae102aeec82fff42fcadd719a6cf41c2}} 
+\index{nic.\+h@{nic.\+h}!N\+I\+C\+\_\+\+C\+O\+N\+T\+E\+X\+T\+\_\+\+S\+I\+ZE@{N\+I\+C\+\_\+\+C\+O\+N\+T\+E\+X\+T\+\_\+\+S\+I\+ZE}}
+\index{N\+I\+C\+\_\+\+C\+O\+N\+T\+E\+X\+T\+\_\+\+S\+I\+ZE@{N\+I\+C\+\_\+\+C\+O\+N\+T\+E\+X\+T\+\_\+\+S\+I\+ZE}!nic.\+h@{nic.\+h}}
+\subsubsection{\texorpdfstring{N\+I\+C\+\_\+\+C\+O\+N\+T\+E\+X\+T\+\_\+\+S\+I\+ZE}{NIC\_CONTEXT\_SIZE}}
+{\footnotesize\ttfamily \#define N\+I\+C\+\_\+\+C\+O\+N\+T\+E\+X\+T\+\_\+\+S\+I\+ZE~16}
+
+
+
+Definition at line 53 of file nic.\+h.
+
+\mbox{\Hypertarget{nic_8h_a519984a512a8f611d1a1d86750b25a1e}\label{nic_8h_a519984a512a8f611d1a1d86750b25a1e}} 
+\index{nic.\+h@{nic.\+h}!N\+I\+C\+\_\+\+M\+A\+X\+\_\+\+B\+L\+O\+C\+K\+I\+N\+G\+\_\+\+T\+I\+ME@{N\+I\+C\+\_\+\+M\+A\+X\+\_\+\+B\+L\+O\+C\+K\+I\+N\+G\+\_\+\+T\+I\+ME}}
+\index{N\+I\+C\+\_\+\+M\+A\+X\+\_\+\+B\+L\+O\+C\+K\+I\+N\+G\+\_\+\+T\+I\+ME@{N\+I\+C\+\_\+\+M\+A\+X\+\_\+\+B\+L\+O\+C\+K\+I\+N\+G\+\_\+\+T\+I\+ME}!nic.\+h@{nic.\+h}}
+\subsubsection{\texorpdfstring{N\+I\+C\+\_\+\+M\+A\+X\+\_\+\+B\+L\+O\+C\+K\+I\+N\+G\+\_\+\+T\+I\+ME}{NIC\_MAX\_BLOCKING\_TIME}}
+{\footnotesize\ttfamily \#define N\+I\+C\+\_\+\+M\+A\+X\+\_\+\+B\+L\+O\+C\+K\+I\+N\+G\+\_\+\+T\+I\+ME~\hyperlink{os__port_8h_ab893de6f8a0ec8b0e6dd8097ff398019}{I\+N\+F\+I\+N\+I\+T\+E\+\_\+\+D\+E\+L\+AY}}
+
+
+
+Definition at line 46 of file nic.\+h.
+
+\mbox{\Hypertarget{nic_8h_a7d7bc2ec255de745e3116552ea3218bb}\label{nic_8h_a7d7bc2ec255de745e3116552ea3218bb}} 
+\index{nic.\+h@{nic.\+h}!N\+I\+C\+\_\+\+T\+I\+C\+K\+\_\+\+I\+N\+T\+E\+R\+V\+AL@{N\+I\+C\+\_\+\+T\+I\+C\+K\+\_\+\+I\+N\+T\+E\+R\+V\+AL}}
+\index{N\+I\+C\+\_\+\+T\+I\+C\+K\+\_\+\+I\+N\+T\+E\+R\+V\+AL@{N\+I\+C\+\_\+\+T\+I\+C\+K\+\_\+\+I\+N\+T\+E\+R\+V\+AL}!nic.\+h@{nic.\+h}}
+\subsubsection{\texorpdfstring{N\+I\+C\+\_\+\+T\+I\+C\+K\+\_\+\+I\+N\+T\+E\+R\+V\+AL}{NIC\_TICK\_INTERVAL}}
+{\footnotesize\ttfamily \#define N\+I\+C\+\_\+\+T\+I\+C\+K\+\_\+\+I\+N\+T\+E\+R\+V\+AL~1000}
+
+
+
+Definition at line 39 of file nic.\+h.
+
+\mbox{\Hypertarget{nic_8h_ab5f0d4034254a57a2135c996ec15b46a}\label{nic_8h_ab5f0d4034254a57a2135c996ec15b46a}} 
+\index{nic.\+h@{nic.\+h}!S\+M\+I\+\_\+\+O\+P\+C\+O\+D\+E\+\_\+0@{S\+M\+I\+\_\+\+O\+P\+C\+O\+D\+E\+\_\+0}}
+\index{S\+M\+I\+\_\+\+O\+P\+C\+O\+D\+E\+\_\+0@{S\+M\+I\+\_\+\+O\+P\+C\+O\+D\+E\+\_\+0}!nic.\+h@{nic.\+h}}
+\subsubsection{\texorpdfstring{S\+M\+I\+\_\+\+O\+P\+C\+O\+D\+E\+\_\+0}{SMI\_OPCODE\_0}}
+{\footnotesize\ttfamily \#define S\+M\+I\+\_\+\+O\+P\+C\+O\+D\+E\+\_\+0~0}
+
+
+
+Definition at line 61 of file nic.\+h.
+
+\mbox{\Hypertarget{nic_8h_acceb418bf1cbc9cf0483446cd1cb1e78}\label{nic_8h_acceb418bf1cbc9cf0483446cd1cb1e78}} 
+\index{nic.\+h@{nic.\+h}!S\+M\+I\+\_\+\+O\+P\+C\+O\+D\+E\+\_\+\+R\+E\+AD@{S\+M\+I\+\_\+\+O\+P\+C\+O\+D\+E\+\_\+\+R\+E\+AD}}
+\index{S\+M\+I\+\_\+\+O\+P\+C\+O\+D\+E\+\_\+\+R\+E\+AD@{S\+M\+I\+\_\+\+O\+P\+C\+O\+D\+E\+\_\+\+R\+E\+AD}!nic.\+h@{nic.\+h}}
+\subsubsection{\texorpdfstring{S\+M\+I\+\_\+\+O\+P\+C\+O\+D\+E\+\_\+\+R\+E\+AD}{SMI\_OPCODE\_READ}}
+{\footnotesize\ttfamily \#define S\+M\+I\+\_\+\+O\+P\+C\+O\+D\+E\+\_\+\+R\+E\+AD~2}
+
+
+
+Definition at line 63 of file nic.\+h.
+
+\mbox{\Hypertarget{nic_8h_a1fa0e7586e487646372c0f169c9ea786}\label{nic_8h_a1fa0e7586e487646372c0f169c9ea786}} 
+\index{nic.\+h@{nic.\+h}!S\+M\+I\+\_\+\+O\+P\+C\+O\+D\+E\+\_\+\+W\+R\+I\+TE@{S\+M\+I\+\_\+\+O\+P\+C\+O\+D\+E\+\_\+\+W\+R\+I\+TE}}
+\index{S\+M\+I\+\_\+\+O\+P\+C\+O\+D\+E\+\_\+\+W\+R\+I\+TE@{S\+M\+I\+\_\+\+O\+P\+C\+O\+D\+E\+\_\+\+W\+R\+I\+TE}!nic.\+h@{nic.\+h}}
+\subsubsection{\texorpdfstring{S\+M\+I\+\_\+\+O\+P\+C\+O\+D\+E\+\_\+\+W\+R\+I\+TE}{SMI\_OPCODE\_WRITE}}
+{\footnotesize\ttfamily \#define S\+M\+I\+\_\+\+O\+P\+C\+O\+D\+E\+\_\+\+W\+R\+I\+TE~1}
+
+
+
+Definition at line 62 of file nic.\+h.
+
+\mbox{\Hypertarget{nic_8h_a91a712150352d5d4e97569f7f03242f5}\label{nic_8h_a91a712150352d5d4e97569f7f03242f5}} 
+\index{nic.\+h@{nic.\+h}!S\+M\+I\+\_\+\+S\+T\+A\+RT@{S\+M\+I\+\_\+\+S\+T\+A\+RT}}
+\index{S\+M\+I\+\_\+\+S\+T\+A\+RT@{S\+M\+I\+\_\+\+S\+T\+A\+RT}!nic.\+h@{nic.\+h}}
+\subsubsection{\texorpdfstring{S\+M\+I\+\_\+\+S\+T\+A\+RT}{SMI\_START}}
+{\footnotesize\ttfamily \#define S\+M\+I\+\_\+\+S\+T\+A\+RT~1}
+
+
+
+Definition at line 60 of file nic.\+h.
+
+\mbox{\Hypertarget{nic_8h_a2c89595097fbf0ecb10e0973326be9c3}\label{nic_8h_a2c89595097fbf0ecb10e0973326be9c3}} 
+\index{nic.\+h@{nic.\+h}!S\+M\+I\+\_\+\+S\+Y\+NC@{S\+M\+I\+\_\+\+S\+Y\+NC}}
+\index{S\+M\+I\+\_\+\+S\+Y\+NC@{S\+M\+I\+\_\+\+S\+Y\+NC}!nic.\+h@{nic.\+h}}
+\subsubsection{\texorpdfstring{S\+M\+I\+\_\+\+S\+Y\+NC}{SMI\_SYNC}}
+{\footnotesize\ttfamily \#define S\+M\+I\+\_\+\+S\+Y\+NC~0x\+F\+F\+F\+F\+F\+F\+FF}
+
+
+
+Definition at line 59 of file nic.\+h.
+
+\mbox{\Hypertarget{nic_8h_ad094acb14ba987515a242beb12531088}\label{nic_8h_ad094acb14ba987515a242beb12531088}} 
+\index{nic.\+h@{nic.\+h}!S\+M\+I\+\_\+\+TA@{S\+M\+I\+\_\+\+TA}}
+\index{S\+M\+I\+\_\+\+TA@{S\+M\+I\+\_\+\+TA}!nic.\+h@{nic.\+h}}
+\subsubsection{\texorpdfstring{S\+M\+I\+\_\+\+TA}{SMI\_TA}}
+{\footnotesize\ttfamily \#define S\+M\+I\+\_\+\+TA~2}
+
+
+
+Definition at line 64 of file nic.\+h.
+
+
+
+\subsection{Typedef Documentation}
+\mbox{\Hypertarget{nic_8h_a03d360f5fa3eb3c27e63a9247d8f7e1d}\label{nic_8h_a03d360f5fa3eb3c27e63a9247d8f7e1d}} 
+\index{nic.\+h@{nic.\+h}!Ext\+Int\+Disable\+Irq@{Ext\+Int\+Disable\+Irq}}
+\index{Ext\+Int\+Disable\+Irq@{Ext\+Int\+Disable\+Irq}!nic.\+h@{nic.\+h}}
+\subsubsection{\texorpdfstring{Ext\+Int\+Disable\+Irq}{ExtIntDisableIrq}}
+{\footnotesize\ttfamily typedef void($\ast$ Ext\+Int\+Disable\+Irq) (void)}
+
+
+
+Definition at line 172 of file nic.\+h.
+
+\mbox{\Hypertarget{nic_8h_a7718a8a56f19fcb851736f1810e2efce}\label{nic_8h_a7718a8a56f19fcb851736f1810e2efce}} 
+\index{nic.\+h@{nic.\+h}!Ext\+Int\+Enable\+Irq@{Ext\+Int\+Enable\+Irq}}
+\index{Ext\+Int\+Enable\+Irq@{Ext\+Int\+Enable\+Irq}!nic.\+h@{nic.\+h}}
+\subsubsection{\texorpdfstring{Ext\+Int\+Enable\+Irq}{ExtIntEnableIrq}}
+{\footnotesize\ttfamily typedef void($\ast$ Ext\+Int\+Enable\+Irq) (void)}
+
+
+
+Definition at line 171 of file nic.\+h.
+
+\mbox{\Hypertarget{nic_8h_a0fb3a794e644738e423bbcf3fc09047b}\label{nic_8h_a0fb3a794e644738e423bbcf3fc09047b}} 
+\index{nic.\+h@{nic.\+h}!Ext\+Int\+Init@{Ext\+Int\+Init}}
+\index{Ext\+Int\+Init@{Ext\+Int\+Init}!nic.\+h@{nic.\+h}}
+\subsubsection{\texorpdfstring{Ext\+Int\+Init}{ExtIntInit}}
+{\footnotesize\ttfamily typedef \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t}($\ast$ Ext\+Int\+Init) (void)}
+
+
+
+Definition at line 170 of file nic.\+h.
+
+\mbox{\Hypertarget{nic_8h_a2838a247e625bd72c8214dac1d95c394}\label{nic_8h_a2838a247e625bd72c8214dac1d95c394}} 
+\index{nic.\+h@{nic.\+h}!Nic\+Disable\+Irq@{Nic\+Disable\+Irq}}
+\index{Nic\+Disable\+Irq@{Nic\+Disable\+Irq}!nic.\+h@{nic.\+h}}
+\subsubsection{\texorpdfstring{Nic\+Disable\+Irq}{NicDisableIrq}}
+{\footnotesize\ttfamily typedef void($\ast$ Nic\+Disable\+Irq) (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface)}
+
+
+
+Definition at line 127 of file nic.\+h.
+
+\mbox{\Hypertarget{nic_8h_a5287b4eea3f3d81a54e873acdf405c0f}\label{nic_8h_a5287b4eea3f3d81a54e873acdf405c0f}} 
+\index{nic.\+h@{nic.\+h}!Nic\+Enable\+Irq@{Nic\+Enable\+Irq}}
+\index{Nic\+Enable\+Irq@{Nic\+Enable\+Irq}!nic.\+h@{nic.\+h}}
+\subsubsection{\texorpdfstring{Nic\+Enable\+Irq}{NicEnableIrq}}
+{\footnotesize\ttfamily typedef void($\ast$ Nic\+Enable\+Irq) (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface)}
+
+
+
+Definition at line 126 of file nic.\+h.
+
+\mbox{\Hypertarget{nic_8h_a64cc7ec2ef61ae3a5c36c2d52f52ae0e}\label{nic_8h_a64cc7ec2ef61ae3a5c36c2d52f52ae0e}} 
+\index{nic.\+h@{nic.\+h}!Nic\+Event\+Handler@{Nic\+Event\+Handler}}
+\index{Nic\+Event\+Handler@{Nic\+Event\+Handler}!nic.\+h@{nic.\+h}}
+\subsubsection{\texorpdfstring{Nic\+Event\+Handler}{NicEventHandler}}
+{\footnotesize\ttfamily typedef void($\ast$ Nic\+Event\+Handler) (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface)}
+
+
+
+Definition at line 128 of file nic.\+h.
+
+\mbox{\Hypertarget{nic_8h_a8c65f971bb6fede1efeae1873a16841f}\label{nic_8h_a8c65f971bb6fede1efeae1873a16841f}} 
+\index{nic.\+h@{nic.\+h}!Nic\+Init@{Nic\+Init}}
+\index{Nic\+Init@{Nic\+Init}!nic.\+h@{nic.\+h}}
+\subsubsection{\texorpdfstring{Nic\+Init}{NicInit}}
+{\footnotesize\ttfamily typedef \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t}($\ast$ Nic\+Init) (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface)}
+
+
+
+Definition at line 124 of file nic.\+h.
+
+\mbox{\Hypertarget{nic_8h_a0d400b31f6491d5bdb45075c389fac19}\label{nic_8h_a0d400b31f6491d5bdb45075c389fac19}} 
+\index{nic.\+h@{nic.\+h}!Nic\+Read\+Phy\+Reg@{Nic\+Read\+Phy\+Reg}}
+\index{Nic\+Read\+Phy\+Reg@{Nic\+Read\+Phy\+Reg}!nic.\+h@{nic.\+h}}
+\subsubsection{\texorpdfstring{Nic\+Read\+Phy\+Reg}{NicReadPhyReg}}
+{\footnotesize\ttfamily typedef \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t}($\ast$ Nic\+Read\+Phy\+Reg) (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} \hyperlink{web__socket_8h_a5c1b56e6bccc2a95dbddf1a08e56e87d}{opcode}, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} phy\+Addr, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} \hyperlink{modbus__common_8h_a184543cc09c0f45a36f7cd93a99aeae3}{reg\+Addr})}
+
+
+
+Definition at line 139 of file nic.\+h.
+
+\mbox{\Hypertarget{nic_8h_a63d88efa567d89b00e11faebabafa2e0}\label{nic_8h_a63d88efa567d89b00e11faebabafa2e0}} 
+\index{nic.\+h@{nic.\+h}!Nic\+Send\+Packet@{Nic\+Send\+Packet}}
+\index{Nic\+Send\+Packet@{Nic\+Send\+Packet}!nic.\+h@{nic.\+h}}
+\subsubsection{\texorpdfstring{Nic\+Send\+Packet}{NicSendPacket}}
+{\footnotesize\ttfamily typedef \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t}($\ast$ Nic\+Send\+Packet) (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface, const \hyperlink{structNetBuffer}{Net\+Buffer} $\ast$buffer, size\+\_\+t \hyperlink{pic32mz_2isr__support_8h_ac0542d92dfcd62c19170fd963f9e5052}{offset})}
+
+
+
+Definition at line 130 of file nic.\+h.
+
+\mbox{\Hypertarget{nic_8h_a3f6714321f4ab9564fdac42ba69de526}\label{nic_8h_a3f6714321f4ab9564fdac42ba69de526}} 
+\index{nic.\+h@{nic.\+h}!Nic\+Tick@{Nic\+Tick}}
+\index{Nic\+Tick@{Nic\+Tick}!nic.\+h@{nic.\+h}}
+\subsubsection{\texorpdfstring{Nic\+Tick}{NicTick}}
+{\footnotesize\ttfamily typedef void($\ast$ Nic\+Tick) (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface)}
+
+
+
+Definition at line 125 of file nic.\+h.
+
+\mbox{\Hypertarget{nic_8h_a1e0d018c9a510a084370e7e8a354e54d}\label{nic_8h_a1e0d018c9a510a084370e7e8a354e54d}} 
+\index{nic.\+h@{nic.\+h}!Nic\+Update\+Mac\+Addr\+Filter@{Nic\+Update\+Mac\+Addr\+Filter}}
+\index{Nic\+Update\+Mac\+Addr\+Filter@{Nic\+Update\+Mac\+Addr\+Filter}!nic.\+h@{nic.\+h}}
+\subsubsection{\texorpdfstring{Nic\+Update\+Mac\+Addr\+Filter}{NicUpdateMacAddrFilter}}
+{\footnotesize\ttfamily typedef \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t}($\ast$ Nic\+Update\+Mac\+Addr\+Filter) (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface)}
+
+
+
+Definition at line 133 of file nic.\+h.
+
+\mbox{\Hypertarget{nic_8h_a24c14c5747a3d68e12393a0bf9ede8fb}\label{nic_8h_a24c14c5747a3d68e12393a0bf9ede8fb}} 
+\index{nic.\+h@{nic.\+h}!Nic\+Update\+Mac\+Config@{Nic\+Update\+Mac\+Config}}
+\index{Nic\+Update\+Mac\+Config@{Nic\+Update\+Mac\+Config}!nic.\+h@{nic.\+h}}
+\subsubsection{\texorpdfstring{Nic\+Update\+Mac\+Config}{NicUpdateMacConfig}}
+{\footnotesize\ttfamily typedef \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t}($\ast$ Nic\+Update\+Mac\+Config) (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface)}
+
+
+
+Definition at line 134 of file nic.\+h.
+
+\mbox{\Hypertarget{nic_8h_a5b15217319f2376ad4dd5c883ee6924a}\label{nic_8h_a5b15217319f2376ad4dd5c883ee6924a}} 
+\index{nic.\+h@{nic.\+h}!Nic\+Write\+Phy\+Reg@{Nic\+Write\+Phy\+Reg}}
+\index{Nic\+Write\+Phy\+Reg@{Nic\+Write\+Phy\+Reg}!nic.\+h@{nic.\+h}}
+\subsubsection{\texorpdfstring{Nic\+Write\+Phy\+Reg}{NicWritePhyReg}}
+{\footnotesize\ttfamily typedef void($\ast$ Nic\+Write\+Phy\+Reg) (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} \hyperlink{web__socket_8h_a5c1b56e6bccc2a95dbddf1a08e56e87d}{opcode}, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} phy\+Addr, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} \hyperlink{modbus__common_8h_a184543cc09c0f45a36f7cd93a99aeae3}{reg\+Addr}, \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} \hyperlink{tftp__common_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data})}
+
+
+
+Definition at line 136 of file nic.\+h.
+
+\mbox{\Hypertarget{nic_8h_a190fda514154e83e25ffcc6c69f59714}\label{nic_8h_a190fda514154e83e25ffcc6c69f59714}} 
+\index{nic.\+h@{nic.\+h}!Phy\+Disable\+Irq@{Phy\+Disable\+Irq}}
+\index{Phy\+Disable\+Irq@{Phy\+Disable\+Irq}!nic.\+h@{nic.\+h}}
+\subsubsection{\texorpdfstring{Phy\+Disable\+Irq}{PhyDisableIrq}}
+{\footnotesize\ttfamily typedef void($\ast$ Phy\+Disable\+Irq) (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface)}
+
+
+
+Definition at line 146 of file nic.\+h.
+
+\mbox{\Hypertarget{nic_8h_a439e57db4994b903e75b9ebfedaec34f}\label{nic_8h_a439e57db4994b903e75b9ebfedaec34f}} 
+\index{nic.\+h@{nic.\+h}!Phy\+Enable\+Irq@{Phy\+Enable\+Irq}}
+\index{Phy\+Enable\+Irq@{Phy\+Enable\+Irq}!nic.\+h@{nic.\+h}}
+\subsubsection{\texorpdfstring{Phy\+Enable\+Irq}{PhyEnableIrq}}
+{\footnotesize\ttfamily typedef void($\ast$ Phy\+Enable\+Irq) (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface)}
+
+
+
+Definition at line 145 of file nic.\+h.
+
+\mbox{\Hypertarget{nic_8h_a3822e27f4410b42d46b452bbbafb062e}\label{nic_8h_a3822e27f4410b42d46b452bbbafb062e}} 
+\index{nic.\+h@{nic.\+h}!Phy\+Event\+Handler@{Phy\+Event\+Handler}}
+\index{Phy\+Event\+Handler@{Phy\+Event\+Handler}!nic.\+h@{nic.\+h}}
+\subsubsection{\texorpdfstring{Phy\+Event\+Handler}{PhyEventHandler}}
+{\footnotesize\ttfamily typedef void($\ast$ Phy\+Event\+Handler) (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface)}
+
+
+
+Definition at line 147 of file nic.\+h.
+
+\mbox{\Hypertarget{nic_8h_afc0573cbc6dfafe78e7fbea63f882e81}\label{nic_8h_afc0573cbc6dfafe78e7fbea63f882e81}} 
+\index{nic.\+h@{nic.\+h}!Phy\+Init@{Phy\+Init}}
+\index{Phy\+Init@{Phy\+Init}!nic.\+h@{nic.\+h}}
+\subsubsection{\texorpdfstring{Phy\+Init}{PhyInit}}
+{\footnotesize\ttfamily typedef \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t}($\ast$ Phy\+Init) (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface)}
+
+
+
+Definition at line 143 of file nic.\+h.
+
+\mbox{\Hypertarget{nic_8h_a85c4a163fe96d6cdaab0e5545369e233}\label{nic_8h_a85c4a163fe96d6cdaab0e5545369e233}} 
+\index{nic.\+h@{nic.\+h}!Phy\+Tag\+Frame@{Phy\+Tag\+Frame}}
+\index{Phy\+Tag\+Frame@{Phy\+Tag\+Frame}!nic.\+h@{nic.\+h}}
+\subsubsection{\texorpdfstring{Phy\+Tag\+Frame}{PhyTagFrame}}
+{\footnotesize\ttfamily typedef \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t}($\ast$ Phy\+Tag\+Frame) (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface, \hyperlink{structNetBuffer}{Net\+Buffer} $\ast$buffer, size\+\_\+t $\ast$\hyperlink{pic32mz_2isr__support_8h_ac0542d92dfcd62c19170fd963f9e5052}{offset}, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} \hyperlink{dns__common_8h_a8e0798404bf2cf5dabb84c5ba9a4f236}{port}, \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} $\ast$\hyperlink{ppp_8h_a1d127017fb298b889f4ba24752d08b8e}{type})}
+
+
+
+Definition at line 149 of file nic.\+h.
+
+\mbox{\Hypertarget{nic_8h_ab684b8c15e030cb47dc256480325a732}\label{nic_8h_ab684b8c15e030cb47dc256480325a732}} 
+\index{nic.\+h@{nic.\+h}!Phy\+Tick@{Phy\+Tick}}
+\index{Phy\+Tick@{Phy\+Tick}!nic.\+h@{nic.\+h}}
+\subsubsection{\texorpdfstring{Phy\+Tick}{PhyTick}}
+{\footnotesize\ttfamily typedef void($\ast$ Phy\+Tick) (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface)}
+
+
+
+Definition at line 144 of file nic.\+h.
+
+\mbox{\Hypertarget{nic_8h_a4f423898a5e094db0fbcc5b7732a3cb9}\label{nic_8h_a4f423898a5e094db0fbcc5b7732a3cb9}} 
+\index{nic.\+h@{nic.\+h}!Phy\+Untag\+Frame@{Phy\+Untag\+Frame}}
+\index{Phy\+Untag\+Frame@{Phy\+Untag\+Frame}!nic.\+h@{nic.\+h}}
+\subsubsection{\texorpdfstring{Phy\+Untag\+Frame}{PhyUntagFrame}}
+{\footnotesize\ttfamily typedef \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t}($\ast$ Phy\+Untag\+Frame) (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$$\ast$frame, size\+\_\+t $\ast$\hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length}, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{dns__common_8h_a8e0798404bf2cf5dabb84c5ba9a4f236}{port})}
+
+
+
+Definition at line 152 of file nic.\+h.
+
+\mbox{\Hypertarget{nic_8h_a5367e86c609a9e08a7fdaeb4ea35035b}\label{nic_8h_a5367e86c609a9e08a7fdaeb4ea35035b}} 
+\index{nic.\+h@{nic.\+h}!Spi\+Assert\+Cs@{Spi\+Assert\+Cs}}
+\index{Spi\+Assert\+Cs@{Spi\+Assert\+Cs}!nic.\+h@{nic.\+h}}
+\subsubsection{\texorpdfstring{Spi\+Assert\+Cs}{SpiAssertCs}}
+{\footnotesize\ttfamily typedef void($\ast$ Spi\+Assert\+Cs) (void)}
+
+
+
+Definition at line 159 of file nic.\+h.
+
+\mbox{\Hypertarget{nic_8h_a314bf7aa989ddd1b04e72751382d2a3c}\label{nic_8h_a314bf7aa989ddd1b04e72751382d2a3c}} 
+\index{nic.\+h@{nic.\+h}!Spi\+Deassert\+Cs@{Spi\+Deassert\+Cs}}
+\index{Spi\+Deassert\+Cs@{Spi\+Deassert\+Cs}!nic.\+h@{nic.\+h}}
+\subsubsection{\texorpdfstring{Spi\+Deassert\+Cs}{SpiDeassertCs}}
+{\footnotesize\ttfamily typedef void($\ast$ Spi\+Deassert\+Cs) (void)}
+
+
+
+Definition at line 160 of file nic.\+h.
+
+\mbox{\Hypertarget{nic_8h_a5641b785b2d731fb89fe8e582e5727a6}\label{nic_8h_a5641b785b2d731fb89fe8e582e5727a6}} 
+\index{nic.\+h@{nic.\+h}!Spi\+Init@{Spi\+Init}}
+\index{Spi\+Init@{Spi\+Init}!nic.\+h@{nic.\+h}}
+\subsubsection{\texorpdfstring{Spi\+Init}{SpiInit}}
+{\footnotesize\ttfamily typedef \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t}($\ast$ Spi\+Init) (void)}
+
+
+
+Definition at line 156 of file nic.\+h.
+
+\mbox{\Hypertarget{nic_8h_aaf7cee9ed915be68ba8c3bbe2a2366ab}\label{nic_8h_aaf7cee9ed915be68ba8c3bbe2a2366ab}} 
+\index{nic.\+h@{nic.\+h}!Spi\+Set\+Bitrate@{Spi\+Set\+Bitrate}}
+\index{Spi\+Set\+Bitrate@{Spi\+Set\+Bitrate}!nic.\+h@{nic.\+h}}
+\subsubsection{\texorpdfstring{Spi\+Set\+Bitrate}{SpiSetBitrate}}
+{\footnotesize\ttfamily typedef \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t}($\ast$ Spi\+Set\+Bitrate) (\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} bitrate)}
+
+
+
+Definition at line 158 of file nic.\+h.
+
+\mbox{\Hypertarget{nic_8h_adf96940921e97bad16877a29ee08b7ba}\label{nic_8h_adf96940921e97bad16877a29ee08b7ba}} 
+\index{nic.\+h@{nic.\+h}!Spi\+Set\+Mode@{Spi\+Set\+Mode}}
+\index{Spi\+Set\+Mode@{Spi\+Set\+Mode}!nic.\+h@{nic.\+h}}
+\subsubsection{\texorpdfstring{Spi\+Set\+Mode}{SpiSetMode}}
+{\footnotesize\ttfamily typedef \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t}($\ast$ Spi\+Set\+Mode) (\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} \hyperlink{ntp__common_8h_a37e90f5e3bd99fac2021fb3a326607d4}{mode})}
+
+
+
+Definition at line 157 of file nic.\+h.
+
+\mbox{\Hypertarget{nic_8h_a9563443a6b4fdbea93e0ba3c607ef4c2}\label{nic_8h_a9563443a6b4fdbea93e0ba3c607ef4c2}} 
+\index{nic.\+h@{nic.\+h}!Spi\+Transfer@{Spi\+Transfer}}
+\index{Spi\+Transfer@{Spi\+Transfer}!nic.\+h@{nic.\+h}}
+\subsubsection{\texorpdfstring{Spi\+Transfer}{SpiTransfer}}
+{\footnotesize\ttfamily typedef \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}($\ast$ Spi\+Transfer) (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} \hyperlink{tftp__common_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data})}
+
+
+
+Definition at line 161 of file nic.\+h.
+
+\mbox{\Hypertarget{nic_8h_abf355b7478afb1e1df154e42f41dbb58}\label{nic_8h_abf355b7478afb1e1df154e42f41dbb58}} 
+\index{nic.\+h@{nic.\+h}!Uart\+Disable\+Irq@{Uart\+Disable\+Irq}}
+\index{Uart\+Disable\+Irq@{Uart\+Disable\+Irq}!nic.\+h@{nic.\+h}}
+\subsubsection{\texorpdfstring{Uart\+Disable\+Irq}{UartDisableIrq}}
+{\footnotesize\ttfamily typedef void($\ast$ Uart\+Disable\+Irq) (void)}
+
+
+
+Definition at line 166 of file nic.\+h.
+
+\mbox{\Hypertarget{nic_8h_ad360b535e20add52396382193c5c9cd9}\label{nic_8h_ad360b535e20add52396382193c5c9cd9}} 
+\index{nic.\+h@{nic.\+h}!Uart\+Enable\+Irq@{Uart\+Enable\+Irq}}
+\index{Uart\+Enable\+Irq@{Uart\+Enable\+Irq}!nic.\+h@{nic.\+h}}
+\subsubsection{\texorpdfstring{Uart\+Enable\+Irq}{UartEnableIrq}}
+{\footnotesize\ttfamily typedef void($\ast$ Uart\+Enable\+Irq) (void)}
+
+
+
+Definition at line 165 of file nic.\+h.
+
+\mbox{\Hypertarget{nic_8h_ad480784aefd824e7a159728df3c51643}\label{nic_8h_ad480784aefd824e7a159728df3c51643}} 
+\index{nic.\+h@{nic.\+h}!Uart\+Init@{Uart\+Init}}
+\index{Uart\+Init@{Uart\+Init}!nic.\+h@{nic.\+h}}
+\subsubsection{\texorpdfstring{Uart\+Init}{UartInit}}
+{\footnotesize\ttfamily typedef \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t}($\ast$ Uart\+Init) (void)}
+
+
+
+Definition at line 164 of file nic.\+h.
+
+\mbox{\Hypertarget{nic_8h_a06153573bb814bc87bf01b68a91a4de5}\label{nic_8h_a06153573bb814bc87bf01b68a91a4de5}} 
+\index{nic.\+h@{nic.\+h}!Uart\+Start\+Tx@{Uart\+Start\+Tx}}
+\index{Uart\+Start\+Tx@{Uart\+Start\+Tx}!nic.\+h@{nic.\+h}}
+\subsubsection{\texorpdfstring{Uart\+Start\+Tx}{UartStartTx}}
+{\footnotesize\ttfamily typedef void($\ast$ Uart\+Start\+Tx) (void)}
+
+
+
+Definition at line 167 of file nic.\+h.
+
+
+
+\subsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{nic_8h_ae96e77ca948a3796e2d1900a73f133da}\label{nic_8h_ae96e77ca948a3796e2d1900a73f133da}} 
+\index{nic.\+h@{nic.\+h}!Nic\+Duplex\+Mode@{Nic\+Duplex\+Mode}}
+\index{Nic\+Duplex\+Mode@{Nic\+Duplex\+Mode}!nic.\+h@{nic.\+h}}
+\subsubsection{\texorpdfstring{Nic\+Duplex\+Mode}{NicDuplexMode}}
+{\footnotesize\ttfamily enum \hyperlink{nic_8h_ae96e77ca948a3796e2d1900a73f133da}{Nic\+Duplex\+Mode}}
+
+
+
+Duplex mode. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{N\+I\+C\+\_\+\+U\+N\+K\+N\+O\+W\+N\+\_\+\+D\+U\+P\+L\+E\+X\+\_\+\+M\+O\+DE@{N\+I\+C\+\_\+\+U\+N\+K\+N\+O\+W\+N\+\_\+\+D\+U\+P\+L\+E\+X\+\_\+\+M\+O\+DE}!nic.\+h@{nic.\+h}}\index{nic.\+h@{nic.\+h}!N\+I\+C\+\_\+\+U\+N\+K\+N\+O\+W\+N\+\_\+\+D\+U\+P\+L\+E\+X\+\_\+\+M\+O\+DE@{N\+I\+C\+\_\+\+U\+N\+K\+N\+O\+W\+N\+\_\+\+D\+U\+P\+L\+E\+X\+\_\+\+M\+O\+DE}}}\mbox{\Hypertarget{nic_8h_ae96e77ca948a3796e2d1900a73f133daab9af1b5a4752d6d26979734c91b3c920}\label{nic_8h_ae96e77ca948a3796e2d1900a73f133daab9af1b5a4752d6d26979734c91b3c920}} 
+N\+I\+C\+\_\+\+U\+N\+K\+N\+O\+W\+N\+\_\+\+D\+U\+P\+L\+E\+X\+\_\+\+M\+O\+DE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{N\+I\+C\+\_\+\+H\+A\+L\+F\+\_\+\+D\+U\+P\+L\+E\+X\+\_\+\+M\+O\+DE@{N\+I\+C\+\_\+\+H\+A\+L\+F\+\_\+\+D\+U\+P\+L\+E\+X\+\_\+\+M\+O\+DE}!nic.\+h@{nic.\+h}}\index{nic.\+h@{nic.\+h}!N\+I\+C\+\_\+\+H\+A\+L\+F\+\_\+\+D\+U\+P\+L\+E\+X\+\_\+\+M\+O\+DE@{N\+I\+C\+\_\+\+H\+A\+L\+F\+\_\+\+D\+U\+P\+L\+E\+X\+\_\+\+M\+O\+DE}}}\mbox{\Hypertarget{nic_8h_ae96e77ca948a3796e2d1900a73f133daa60856f1c6ecbcb1227b653fb48205f41}\label{nic_8h_ae96e77ca948a3796e2d1900a73f133daa60856f1c6ecbcb1227b653fb48205f41}} 
+N\+I\+C\+\_\+\+H\+A\+L\+F\+\_\+\+D\+U\+P\+L\+E\+X\+\_\+\+M\+O\+DE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{N\+I\+C\+\_\+\+F\+U\+L\+L\+\_\+\+D\+U\+P\+L\+E\+X\+\_\+\+M\+O\+DE@{N\+I\+C\+\_\+\+F\+U\+L\+L\+\_\+\+D\+U\+P\+L\+E\+X\+\_\+\+M\+O\+DE}!nic.\+h@{nic.\+h}}\index{nic.\+h@{nic.\+h}!N\+I\+C\+\_\+\+F\+U\+L\+L\+\_\+\+D\+U\+P\+L\+E\+X\+\_\+\+M\+O\+DE@{N\+I\+C\+\_\+\+F\+U\+L\+L\+\_\+\+D\+U\+P\+L\+E\+X\+\_\+\+M\+O\+DE}}}\mbox{\Hypertarget{nic_8h_ae96e77ca948a3796e2d1900a73f133daa2c75584234136d8fd79f372116d26340}\label{nic_8h_ae96e77ca948a3796e2d1900a73f133daa2c75584234136d8fd79f372116d26340}} 
+N\+I\+C\+\_\+\+F\+U\+L\+L\+\_\+\+D\+U\+P\+L\+E\+X\+\_\+\+M\+O\+DE&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line 115 of file nic.\+h.
+
+
+\begin{DoxyCode}
+116 \{
+117    \hyperlink{nic_8h_ae96e77ca948a3796e2d1900a73f133daab9af1b5a4752d6d26979734c91b3c920}{NIC\_UNKNOWN\_DUPLEX\_MODE} = 0,
+118    \hyperlink{nic_8h_ae96e77ca948a3796e2d1900a73f133daa60856f1c6ecbcb1227b653fb48205f41}{NIC\_HALF\_DUPLEX\_MODE}    = 1,
+119    \hyperlink{nic_8h_ae96e77ca948a3796e2d1900a73f133daa2c75584234136d8fd79f372116d26340}{NIC\_FULL\_DUPLEX\_MODE}    = 2
+120 \} \hyperlink{nic_8h_ae96e77ca948a3796e2d1900a73f133da}{NicDuplexMode};
+\end{DoxyCode}
+\mbox{\Hypertarget{nic_8h_afef666155a43e0a2a3a1f0df9e50bab4}\label{nic_8h_afef666155a43e0a2a3a1f0df9e50bab4}} 
+\index{nic.\+h@{nic.\+h}!Nic\+Link\+Speed@{Nic\+Link\+Speed}}
+\index{Nic\+Link\+Speed@{Nic\+Link\+Speed}!nic.\+h@{nic.\+h}}
+\subsubsection{\texorpdfstring{Nic\+Link\+Speed}{NicLinkSpeed}}
+{\footnotesize\ttfamily enum \hyperlink{nic_8h_afef666155a43e0a2a3a1f0df9e50bab4}{Nic\+Link\+Speed}}
+
+
+
+Link speed. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{N\+I\+C\+\_\+\+L\+I\+N\+K\+\_\+\+S\+P\+E\+E\+D\+\_\+\+U\+N\+K\+N\+O\+WN@{N\+I\+C\+\_\+\+L\+I\+N\+K\+\_\+\+S\+P\+E\+E\+D\+\_\+\+U\+N\+K\+N\+O\+WN}!nic.\+h@{nic.\+h}}\index{nic.\+h@{nic.\+h}!N\+I\+C\+\_\+\+L\+I\+N\+K\+\_\+\+S\+P\+E\+E\+D\+\_\+\+U\+N\+K\+N\+O\+WN@{N\+I\+C\+\_\+\+L\+I\+N\+K\+\_\+\+S\+P\+E\+E\+D\+\_\+\+U\+N\+K\+N\+O\+WN}}}\mbox{\Hypertarget{nic_8h_afef666155a43e0a2a3a1f0df9e50bab4a77e6c81652333fac98361950c2b6a4f8}\label{nic_8h_afef666155a43e0a2a3a1f0df9e50bab4a77e6c81652333fac98361950c2b6a4f8}} 
+N\+I\+C\+\_\+\+L\+I\+N\+K\+\_\+\+S\+P\+E\+E\+D\+\_\+\+U\+N\+K\+N\+O\+WN&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{N\+I\+C\+\_\+\+L\+I\+N\+K\+\_\+\+S\+P\+E\+E\+D\+\_\+10\+M\+B\+PS@{N\+I\+C\+\_\+\+L\+I\+N\+K\+\_\+\+S\+P\+E\+E\+D\+\_\+10\+M\+B\+PS}!nic.\+h@{nic.\+h}}\index{nic.\+h@{nic.\+h}!N\+I\+C\+\_\+\+L\+I\+N\+K\+\_\+\+S\+P\+E\+E\+D\+\_\+10\+M\+B\+PS@{N\+I\+C\+\_\+\+L\+I\+N\+K\+\_\+\+S\+P\+E\+E\+D\+\_\+10\+M\+B\+PS}}}\mbox{\Hypertarget{nic_8h_afef666155a43e0a2a3a1f0df9e50bab4a43656b0244470a43d497c77353f3da84}\label{nic_8h_afef666155a43e0a2a3a1f0df9e50bab4a43656b0244470a43d497c77353f3da84}} 
+N\+I\+C\+\_\+\+L\+I\+N\+K\+\_\+\+S\+P\+E\+E\+D\+\_\+10\+M\+B\+PS&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{N\+I\+C\+\_\+\+L\+I\+N\+K\+\_\+\+S\+P\+E\+E\+D\+\_\+100\+M\+B\+PS@{N\+I\+C\+\_\+\+L\+I\+N\+K\+\_\+\+S\+P\+E\+E\+D\+\_\+100\+M\+B\+PS}!nic.\+h@{nic.\+h}}\index{nic.\+h@{nic.\+h}!N\+I\+C\+\_\+\+L\+I\+N\+K\+\_\+\+S\+P\+E\+E\+D\+\_\+100\+M\+B\+PS@{N\+I\+C\+\_\+\+L\+I\+N\+K\+\_\+\+S\+P\+E\+E\+D\+\_\+100\+M\+B\+PS}}}\mbox{\Hypertarget{nic_8h_afef666155a43e0a2a3a1f0df9e50bab4a3001394d2b59b22c97f6957e07ca28fd}\label{nic_8h_afef666155a43e0a2a3a1f0df9e50bab4a3001394d2b59b22c97f6957e07ca28fd}} 
+N\+I\+C\+\_\+\+L\+I\+N\+K\+\_\+\+S\+P\+E\+E\+D\+\_\+100\+M\+B\+PS&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{N\+I\+C\+\_\+\+L\+I\+N\+K\+\_\+\+S\+P\+E\+E\+D\+\_\+1\+G\+B\+PS@{N\+I\+C\+\_\+\+L\+I\+N\+K\+\_\+\+S\+P\+E\+E\+D\+\_\+1\+G\+B\+PS}!nic.\+h@{nic.\+h}}\index{nic.\+h@{nic.\+h}!N\+I\+C\+\_\+\+L\+I\+N\+K\+\_\+\+S\+P\+E\+E\+D\+\_\+1\+G\+B\+PS@{N\+I\+C\+\_\+\+L\+I\+N\+K\+\_\+\+S\+P\+E\+E\+D\+\_\+1\+G\+B\+PS}}}\mbox{\Hypertarget{nic_8h_afef666155a43e0a2a3a1f0df9e50bab4a80d2206215bf4b2f0c40c2fb44291380}\label{nic_8h_afef666155a43e0a2a3a1f0df9e50bab4a80d2206215bf4b2f0c40c2fb44291380}} 
+N\+I\+C\+\_\+\+L\+I\+N\+K\+\_\+\+S\+P\+E\+E\+D\+\_\+1\+G\+B\+PS&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line 102 of file nic.\+h.
+
+
+\begin{DoxyCode}
+103 \{
+104    \hyperlink{nic_8h_afef666155a43e0a2a3a1f0df9e50bab4a77e6c81652333fac98361950c2b6a4f8}{NIC\_LINK\_SPEED\_UNKNOWN} = 0,
+105    \hyperlink{nic_8h_afef666155a43e0a2a3a1f0df9e50bab4a43656b0244470a43d497c77353f3da84}{NIC\_LINK\_SPEED\_10MBPS}  = 10000000,
+106    \hyperlink{nic_8h_afef666155a43e0a2a3a1f0df9e50bab4a3001394d2b59b22c97f6957e07ca28fd}{NIC\_LINK\_SPEED\_100MBPS} = 100000000,
+107    \hyperlink{nic_8h_afef666155a43e0a2a3a1f0df9e50bab4a80d2206215bf4b2f0c40c2fb44291380}{NIC\_LINK\_SPEED\_1GBPS}   = 1000000000
+108 \} \hyperlink{nic_8h_afef666155a43e0a2a3a1f0df9e50bab4}{NicLinkSpeed};
+\end{DoxyCode}
+\mbox{\Hypertarget{nic_8h_a0febd18365446a71d375767b1e98af38}\label{nic_8h_a0febd18365446a71d375767b1e98af38}} 
+\index{nic.\+h@{nic.\+h}!Nic\+Link\+State@{Nic\+Link\+State}}
+\index{Nic\+Link\+State@{Nic\+Link\+State}!nic.\+h@{nic.\+h}}
+\subsubsection{\texorpdfstring{Nic\+Link\+State}{NicLinkState}}
+{\footnotesize\ttfamily enum \hyperlink{nic_8h_a0febd18365446a71d375767b1e98af38}{Nic\+Link\+State}}
+
+
+
+Link state. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{N\+I\+C\+\_\+\+L\+I\+N\+K\+\_\+\+S\+T\+A\+T\+E\+\_\+\+D\+O\+WN@{N\+I\+C\+\_\+\+L\+I\+N\+K\+\_\+\+S\+T\+A\+T\+E\+\_\+\+D\+O\+WN}!nic.\+h@{nic.\+h}}\index{nic.\+h@{nic.\+h}!N\+I\+C\+\_\+\+L\+I\+N\+K\+\_\+\+S\+T\+A\+T\+E\+\_\+\+D\+O\+WN@{N\+I\+C\+\_\+\+L\+I\+N\+K\+\_\+\+S\+T\+A\+T\+E\+\_\+\+D\+O\+WN}}}\mbox{\Hypertarget{nic_8h_a0febd18365446a71d375767b1e98af38adfaf7a6194e0810c99a6046b35350340}\label{nic_8h_a0febd18365446a71d375767b1e98af38adfaf7a6194e0810c99a6046b35350340}} 
+N\+I\+C\+\_\+\+L\+I\+N\+K\+\_\+\+S\+T\+A\+T\+E\+\_\+\+D\+O\+WN&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{N\+I\+C\+\_\+\+L\+I\+N\+K\+\_\+\+S\+T\+A\+T\+E\+\_\+\+UP@{N\+I\+C\+\_\+\+L\+I\+N\+K\+\_\+\+S\+T\+A\+T\+E\+\_\+\+UP}!nic.\+h@{nic.\+h}}\index{nic.\+h@{nic.\+h}!N\+I\+C\+\_\+\+L\+I\+N\+K\+\_\+\+S\+T\+A\+T\+E\+\_\+\+UP@{N\+I\+C\+\_\+\+L\+I\+N\+K\+\_\+\+S\+T\+A\+T\+E\+\_\+\+UP}}}\mbox{\Hypertarget{nic_8h_a0febd18365446a71d375767b1e98af38ab427f70f4912ae0fd8aada63d8469674}\label{nic_8h_a0febd18365446a71d375767b1e98af38ab427f70f4912ae0fd8aada63d8469674}} 
+N\+I\+C\+\_\+\+L\+I\+N\+K\+\_\+\+S\+T\+A\+T\+E\+\_\+\+UP&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{N\+I\+C\+\_\+\+L\+I\+N\+K\+\_\+\+S\+T\+A\+T\+E\+\_\+\+A\+U\+TO@{N\+I\+C\+\_\+\+L\+I\+N\+K\+\_\+\+S\+T\+A\+T\+E\+\_\+\+A\+U\+TO}!nic.\+h@{nic.\+h}}\index{nic.\+h@{nic.\+h}!N\+I\+C\+\_\+\+L\+I\+N\+K\+\_\+\+S\+T\+A\+T\+E\+\_\+\+A\+U\+TO@{N\+I\+C\+\_\+\+L\+I\+N\+K\+\_\+\+S\+T\+A\+T\+E\+\_\+\+A\+U\+TO}}}\mbox{\Hypertarget{nic_8h_a0febd18365446a71d375767b1e98af38adf443eadea125099efe3b095ef6608cc}\label{nic_8h_a0febd18365446a71d375767b1e98af38adf443eadea125099efe3b095ef6608cc}} 
+N\+I\+C\+\_\+\+L\+I\+N\+K\+\_\+\+S\+T\+A\+T\+E\+\_\+\+A\+U\+TO&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line 90 of file nic.\+h.
+
+
+\begin{DoxyCode}
+91 \{
+92    \hyperlink{nic_8h_a0febd18365446a71d375767b1e98af38adfaf7a6194e0810c99a6046b35350340}{NIC\_LINK\_STATE\_DOWN} = 0,
+93    \hyperlink{nic_8h_a0febd18365446a71d375767b1e98af38ab427f70f4912ae0fd8aada63d8469674}{NIC\_LINK\_STATE\_UP}   = 1,
+94    \hyperlink{nic_8h_a0febd18365446a71d375767b1e98af38adf443eadea125099efe3b095ef6608cc}{NIC\_LINK\_STATE\_AUTO} = 2
+95 \} \hyperlink{nic_8h_a0febd18365446a71d375767b1e98af38}{NicLinkState};
+\end{DoxyCode}
+\mbox{\Hypertarget{nic_8h_ac1ce8659a9797513ecd9cc1afedce40b}\label{nic_8h_ac1ce8659a9797513ecd9cc1afedce40b}} 
+\index{nic.\+h@{nic.\+h}!Nic\+Type@{Nic\+Type}}
+\index{Nic\+Type@{Nic\+Type}!nic.\+h@{nic.\+h}}
+\subsubsection{\texorpdfstring{Nic\+Type}{NicType}}
+{\footnotesize\ttfamily enum \hyperlink{nic_8h_ac1ce8659a9797513ecd9cc1afedce40b}{Nic\+Type}}
+
+
+
+N\+IC types. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{N\+I\+C\+\_\+\+T\+Y\+P\+E\+\_\+\+U\+N\+K\+N\+O\+WN@{N\+I\+C\+\_\+\+T\+Y\+P\+E\+\_\+\+U\+N\+K\+N\+O\+WN}!nic.\+h@{nic.\+h}}\index{nic.\+h@{nic.\+h}!N\+I\+C\+\_\+\+T\+Y\+P\+E\+\_\+\+U\+N\+K\+N\+O\+WN@{N\+I\+C\+\_\+\+T\+Y\+P\+E\+\_\+\+U\+N\+K\+N\+O\+WN}}}\mbox{\Hypertarget{nic_8h_ac1ce8659a9797513ecd9cc1afedce40ba56195723443671dea1cddf63b71313fe}\label{nic_8h_ac1ce8659a9797513ecd9cc1afedce40ba56195723443671dea1cddf63b71313fe}} 
+N\+I\+C\+\_\+\+T\+Y\+P\+E\+\_\+\+U\+N\+K\+N\+O\+WN&Unknown interface type. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{N\+I\+C\+\_\+\+T\+Y\+P\+E\+\_\+\+E\+T\+H\+E\+R\+N\+ET@{N\+I\+C\+\_\+\+T\+Y\+P\+E\+\_\+\+E\+T\+H\+E\+R\+N\+ET}!nic.\+h@{nic.\+h}}\index{nic.\+h@{nic.\+h}!N\+I\+C\+\_\+\+T\+Y\+P\+E\+\_\+\+E\+T\+H\+E\+R\+N\+ET@{N\+I\+C\+\_\+\+T\+Y\+P\+E\+\_\+\+E\+T\+H\+E\+R\+N\+ET}}}\mbox{\Hypertarget{nic_8h_ac1ce8659a9797513ecd9cc1afedce40ba84802cab6ee937691c3d76122ffaffcd}\label{nic_8h_ac1ce8659a9797513ecd9cc1afedce40ba84802cab6ee937691c3d76122ffaffcd}} 
+N\+I\+C\+\_\+\+T\+Y\+P\+E\+\_\+\+E\+T\+H\+E\+R\+N\+ET&Ethernet interface. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{N\+I\+C\+\_\+\+T\+Y\+P\+E\+\_\+\+P\+PP@{N\+I\+C\+\_\+\+T\+Y\+P\+E\+\_\+\+P\+PP}!nic.\+h@{nic.\+h}}\index{nic.\+h@{nic.\+h}!N\+I\+C\+\_\+\+T\+Y\+P\+E\+\_\+\+P\+PP@{N\+I\+C\+\_\+\+T\+Y\+P\+E\+\_\+\+P\+PP}}}\mbox{\Hypertarget{nic_8h_ac1ce8659a9797513ecd9cc1afedce40bafe21fcd3851e27a8b4ac8f6ea0a692df}\label{nic_8h_ac1ce8659a9797513ecd9cc1afedce40bafe21fcd3851e27a8b4ac8f6ea0a692df}} 
+N\+I\+C\+\_\+\+T\+Y\+P\+E\+\_\+\+P\+PP&P\+PP interface. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{N\+I\+C\+\_\+\+T\+Y\+P\+E\+\_\+6\+L\+O\+W\+P\+AN@{N\+I\+C\+\_\+\+T\+Y\+P\+E\+\_\+6\+L\+O\+W\+P\+AN}!nic.\+h@{nic.\+h}}\index{nic.\+h@{nic.\+h}!N\+I\+C\+\_\+\+T\+Y\+P\+E\+\_\+6\+L\+O\+W\+P\+AN@{N\+I\+C\+\_\+\+T\+Y\+P\+E\+\_\+6\+L\+O\+W\+P\+AN}}}\mbox{\Hypertarget{nic_8h_ac1ce8659a9797513ecd9cc1afedce40ba5b85ff07103ab20b9b081b4b263619ea}\label{nic_8h_ac1ce8659a9797513ecd9cc1afedce40ba5b85ff07103ab20b9b081b4b263619ea}} 
+N\+I\+C\+\_\+\+T\+Y\+P\+E\+\_\+6\+L\+O\+W\+P\+AN&6\+Lo\+W\+P\+AN interface \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{N\+I\+C\+\_\+\+T\+Y\+P\+E\+\_\+\+L\+O\+O\+P\+B\+A\+CK@{N\+I\+C\+\_\+\+T\+Y\+P\+E\+\_\+\+L\+O\+O\+P\+B\+A\+CK}!nic.\+h@{nic.\+h}}\index{nic.\+h@{nic.\+h}!N\+I\+C\+\_\+\+T\+Y\+P\+E\+\_\+\+L\+O\+O\+P\+B\+A\+CK@{N\+I\+C\+\_\+\+T\+Y\+P\+E\+\_\+\+L\+O\+O\+P\+B\+A\+CK}}}\mbox{\Hypertarget{nic_8h_ac1ce8659a9797513ecd9cc1afedce40ba562c14f927fc4795741eb23aee4e4598}\label{nic_8h_ac1ce8659a9797513ecd9cc1afedce40ba562c14f927fc4795741eb23aee4e4598}} 
+N\+I\+C\+\_\+\+T\+Y\+P\+E\+\_\+\+L\+O\+O\+P\+B\+A\+CK&Loopback interface. \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line 76 of file nic.\+h.
+
+
+\begin{DoxyCode}
+77 \{
+78    \hyperlink{nic_8h_ac1ce8659a9797513ecd9cc1afedce40ba56195723443671dea1cddf63b71313fe}{NIC\_TYPE\_UNKNOWN}  = 0, 
+79    \hyperlink{nic_8h_ac1ce8659a9797513ecd9cc1afedce40ba84802cab6ee937691c3d76122ffaffcd}{NIC\_TYPE\_ETHERNET} = 1, 
+80    \hyperlink{nic_8h_ac1ce8659a9797513ecd9cc1afedce40bafe21fcd3851e27a8b4ac8f6ea0a692df}{NIC\_TYPE\_PPP}      = 2, 
+81    \hyperlink{nic_8h_ac1ce8659a9797513ecd9cc1afedce40ba5b85ff07103ab20b9b081b4b263619ea}{NIC\_TYPE\_6LOWPAN}  = 3, 
+82    \hyperlink{nic_8h_ac1ce8659a9797513ecd9cc1afedce40ba562c14f927fc4795741eb23aee4e4598}{NIC\_TYPE\_LOOPBACK} = 4  
+83 \} \hyperlink{nic_8h_ac1ce8659a9797513ecd9cc1afedce40b}{NicType};
+\end{DoxyCode}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{nic_8h_a650d776d6513c3bb88671c3aedd782f0}\label{nic_8h_a650d776d6513c3bb88671c3aedd782f0}} 
+\index{nic.\+h@{nic.\+h}!nic\+Get\+Logical\+Interface@{nic\+Get\+Logical\+Interface}}
+\index{nic\+Get\+Logical\+Interface@{nic\+Get\+Logical\+Interface}!nic.\+h@{nic.\+h}}
+\subsubsection{\texorpdfstring{nic\+Get\+Logical\+Interface()}{nicGetLogicalInterface()}}
+{\footnotesize\ttfamily \hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface}$\ast$ nic\+Get\+Logical\+Interface (\begin{DoxyParamCaption}\item[{\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$}]{interface }\end{DoxyParamCaption})}
+
+
+
+Retrieve logical interface. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em interface} & Pointer to the network interface \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Pointer to the physical interface 
+\end{DoxyReturn}
+
+
+Definition at line 52 of file nic.\+c.
+
+
+\begin{DoxyCode}
+53 \{
+54 \textcolor{preprocessor}{#if (ETH\_VLAN\_SUPPORT == ENABLED)}
+55    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+56 
+57    \textcolor{comment}{//A virtual interface can inherit from multiple parent interfaces}
+58    \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{net_8h_a116f850ebcb023ffa3e6b8de10c5cb35}{NET\_INTERFACE\_COUNT}; i++)
+59    \{
+60       \textcolor{comment}{//Check whether a valid MAC address has been assigned to the interface}
+61       \textcolor{keywordflow}{if}(!\hyperlink{ethernet_8h_a800d9f928930baf027e925976c44b9b2}{macCompAddr}(&interface->macAddr, &\hyperlink{ethernet_8c_a24b2ce78dd643fe028d2e18c3b503f1f}{MAC\_UNSPECIFIED\_ADDR}))
+62          \textcolor{keywordflow}{break};
+63 
+64       \textcolor{comment}{//Last interface in the list?}
+65       \textcolor{keywordflow}{if}(interface->parent == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+66          \textcolor{keywordflow}{break};
+67 
+68       \textcolor{comment}{//Point to the interface on top of which the virtual interface runs}
+69       \textcolor{keyword}{interface }= interface->parent;
+70    \}
+71 \textcolor{preprocessor}{#endif}
+72 
+73    \textcolor{comment}{//Return a pointer to the logical interface}
+74    \textcolor{keywordflow}{return} interface;
+75 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{nic_8h_aa8f48265895dab1633056c2dcd796355}\label{nic_8h_aa8f48265895dab1633056c2dcd796355}} 
+\index{nic.\+h@{nic.\+h}!nic\+Get\+Physical\+Interface@{nic\+Get\+Physical\+Interface}}
+\index{nic\+Get\+Physical\+Interface@{nic\+Get\+Physical\+Interface}!nic.\+h@{nic.\+h}}
+\subsubsection{\texorpdfstring{nic\+Get\+Physical\+Interface()}{nicGetPhysicalInterface()}}
+{\footnotesize\ttfamily \hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface}$\ast$ nic\+Get\+Physical\+Interface (\begin{DoxyParamCaption}\item[{\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$}]{interface }\end{DoxyParamCaption})}
+
+
+
+Retrieve physical interface. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em interface} & Pointer to the network interface \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Pointer to the physical interface 
+\end{DoxyReturn}
+
+
+Definition at line 84 of file nic.\+c.
+
+
+\begin{DoxyCode}
+85 \{
+86 \textcolor{preprocessor}{#if (ETH\_VIRTUAL\_IF\_SUPPORT == ENABLED || ETH\_VLAN\_SUPPORT == ENABLED || \(\backslash\)}
+87 \textcolor{preprocessor}{   ETH\_PORT\_TAGGING\_SUPPORT == ENABLED)}
+88    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+89 
+90    \textcolor{comment}{//A virtual interface can inherit from multiple parent interfaces}
+91    \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{net_8h_a116f850ebcb023ffa3e6b8de10c5cb35}{NET\_INTERFACE\_COUNT}; i++)
+92    \{
+93       \textcolor{comment}{//Physical interface?}
+94       \textcolor{keywordflow}{if}(interface->nicDriver != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || interface->parent == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+95          \textcolor{keywordflow}{break};
+96 
+97       \textcolor{comment}{//Point to the interface on top of which the virtual interface runs}
+98       \textcolor{keyword}{interface }= interface->parent;
+99    \}
+100 \textcolor{preprocessor}{#endif}
+101 
+102    \textcolor{comment}{//Return a pointer to the physical interface}
+103    \textcolor{keywordflow}{return} interface;
+104 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{nic_8h_a57cef1a0e3b5314d4d0c17fdc13ce56b}\label{nic_8h_a57cef1a0e3b5314d4d0c17fdc13ce56b}} 
+\index{nic.\+h@{nic.\+h}!nic\+Get\+Switch\+Port@{nic\+Get\+Switch\+Port}}
+\index{nic\+Get\+Switch\+Port@{nic\+Get\+Switch\+Port}!nic.\+h@{nic.\+h}}
+\subsubsection{\texorpdfstring{nic\+Get\+Switch\+Port()}{nicGetSwitchPort()}}
+{\footnotesize\ttfamily \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} nic\+Get\+Switch\+Port (\begin{DoxyParamCaption}\item[{\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$}]{interface }\end{DoxyParamCaption})}
+
+
+
+Retrieve switch port identifier. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em interface} & Pointer to the network interface \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Switch port identifier 
+\end{DoxyReturn}
+
+
+Definition at line 113 of file nic.\+c.
+
+
+\begin{DoxyCode}
+114 \{
+115 \textcolor{preprocessor}{#if (ETH\_PORT\_TAGGING\_SUPPORT == ENABLED)}
+116    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+117 
+118    \textcolor{comment}{//A virtual interface can inherit from multiple parent interfaces}
+119    \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{net_8h_a116f850ebcb023ffa3e6b8de10c5cb35}{NET\_INTERFACE\_COUNT}; i++)
+120    \{
+121       \textcolor{comment}{//Valid switch port identifier?}
+122       \textcolor{keywordflow}{if}(interface->port != 0 || interface->parent == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+123          \textcolor{keywordflow}{break};
+124 
+125       \textcolor{comment}{//Point to the interface on top of which the virtual interface runs}
+126       \textcolor{keyword}{interface }= interface->parent;
+127    \}
+128 
+129    \textcolor{comment}{//Return switch port identifier}
+130    \textcolor{keywordflow}{return} interface->port;
+131 \textcolor{preprocessor}{#else}
+132    \textcolor{comment}{//Ethernet port multiplication (VLAN or tail tagging) is not supported}
+133    \textcolor{keywordflow}{return} 0;
+134 \textcolor{preprocessor}{#endif}
+135 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{nic_8h_a6c931d644f65e0d18c4d4311eaefc68e}\label{nic_8h_a6c931d644f65e0d18c4d4311eaefc68e}} 
+\index{nic.\+h@{nic.\+h}!nic\+Get\+Vlan\+Id@{nic\+Get\+Vlan\+Id}}
+\index{nic\+Get\+Vlan\+Id@{nic\+Get\+Vlan\+Id}!nic.\+h@{nic.\+h}}
+\subsubsection{\texorpdfstring{nic\+Get\+Vlan\+Id()}{nicGetVlanId()}}
+{\footnotesize\ttfamily \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} nic\+Get\+Vlan\+Id (\begin{DoxyParamCaption}\item[{\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$}]{interface }\end{DoxyParamCaption})}
+
+
+
+Retrieve V\+L\+AN identifier. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em interface} & Pointer to the network interface \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+V\+L\+AN identifier 
+\end{DoxyReturn}
+
+
+Definition at line 144 of file nic.\+c.
+
+
+\begin{DoxyCode}
+145 \{
+146 \textcolor{preprocessor}{#if (ETH\_VLAN\_SUPPORT == ENABLED)}
+147    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+148 
+149    \textcolor{comment}{//A virtual interface can inherit from multiple parent interfaces}
+150    \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{net_8h_a116f850ebcb023ffa3e6b8de10c5cb35}{NET\_INTERFACE\_COUNT}; i++)
+151    \{
+152       \textcolor{comment}{//Valid VLAN identifier?}
+153       \textcolor{keywordflow}{if}(interface->vlanId != 0 || interface->parent == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+154          \textcolor{keywordflow}{break};
+155 
+156       \textcolor{comment}{//Point to the interface on top of which the virtual interface runs}
+157       \textcolor{keyword}{interface }= interface->parent;
+158    \}
+159 
+160    \textcolor{comment}{//Return VLAN identifier}
+161    \textcolor{keywordflow}{return} interface->vlanId;
+162 \textcolor{preprocessor}{#else}
+163    \textcolor{comment}{//VLAN is not supported}
+164    \textcolor{keywordflow}{return} 0;
+165 \textcolor{preprocessor}{#endif}
+166 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{nic_8h_a283192e9d12b5c863a2f5710da9fe1c8}\label{nic_8h_a283192e9d12b5c863a2f5710da9fe1c8}} 
+\index{nic.\+h@{nic.\+h}!nic\+Get\+Vman\+Id@{nic\+Get\+Vman\+Id}}
+\index{nic\+Get\+Vman\+Id@{nic\+Get\+Vman\+Id}!nic.\+h@{nic.\+h}}
+\subsubsection{\texorpdfstring{nic\+Get\+Vman\+Id()}{nicGetVmanId()}}
+{\footnotesize\ttfamily \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} nic\+Get\+Vman\+Id (\begin{DoxyParamCaption}\item[{\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$}]{interface }\end{DoxyParamCaption})}
+
+
+
+Retrieve V\+M\+AN identifier. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em interface} & Pointer to the network interface \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+V\+M\+AN identifier 
+\end{DoxyReturn}
+
+
+Definition at line 175 of file nic.\+c.
+
+
+\begin{DoxyCode}
+176 \{
+177 \textcolor{preprocessor}{#if (ETH\_VMAN\_SUPPORT == ENABLED)}
+178    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+179 
+180    \textcolor{comment}{//A virtual interface can inherit from multiple parent interfaces}
+181    \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{net_8h_a116f850ebcb023ffa3e6b8de10c5cb35}{NET\_INTERFACE\_COUNT}; i++)
+182    \{
+183       \textcolor{comment}{//Valid VMAN identifier?}
+184       \textcolor{keywordflow}{if}(interface->vmanId != 0 || interface->parent == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+185          \textcolor{keywordflow}{break};
+186 
+187       \textcolor{comment}{//Point to the interface on top of which the virtual interface runs}
+188       \textcolor{keyword}{interface }= interface->parent;
+189    \}
+190 
+191    \textcolor{comment}{//Return VMAN identifier}
+192    \textcolor{keywordflow}{return} interface->vmanId;
+193 \textcolor{preprocessor}{#else}
+194    \textcolor{comment}{//VMAN is not supported}
+195    \textcolor{keywordflow}{return} 0;
+196 \textcolor{preprocessor}{#endif}
+197 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{nic_8h_afa0628577c7cf893442123f89d0ad183}\label{nic_8h_afa0628577c7cf893442123f89d0ad183}} 
+\index{nic.\+h@{nic.\+h}!nic\+Is\+Parent\+Interface@{nic\+Is\+Parent\+Interface}}
+\index{nic\+Is\+Parent\+Interface@{nic\+Is\+Parent\+Interface}!nic.\+h@{nic.\+h}}
+\subsubsection{\texorpdfstring{nic\+Is\+Parent\+Interface()}{nicIsParentInterface()}}
+{\footnotesize\ttfamily \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} nic\+Is\+Parent\+Interface (\begin{DoxyParamCaption}\item[{\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$}]{interface,  }\item[{\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$}]{parent }\end{DoxyParamCaption})}
+
+
+
+Test parent/child relationship between 2 interfaces. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em interface} & Pointer to the child interface \\
+\hline
+\mbox{\tt in}  & {\em parent} & Pointer to the parent interface \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+T\+R\+UE is an existing parent/child relationship is found, else F\+A\+L\+SE 
+\end{DoxyReturn}
+
+
+Definition at line 207 of file nic.\+c.
+
+
+\begin{DoxyCode}
+208 \{
+209 \textcolor{preprocessor}{#if (ETH\_VIRTUAL\_IF\_SUPPORT == ENABLED || ETH\_VLAN\_SUPPORT == ENABLED || \(\backslash\)}
+210 \textcolor{preprocessor}{   ETH\_PORT\_TAGGING\_SUPPORT == ENABLED)}
+211    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+212    \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\_t} flag;
+213 
+214    \textcolor{comment}{//Iterate through the parent interfaces}
+215    \textcolor{keywordflow}{for}(flag = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, i = 0; i < \hyperlink{net_8h_a116f850ebcb023ffa3e6b8de10c5cb35}{NET\_INTERFACE\_COUNT}; i++)
+216    \{
+217       \textcolor{comment}{//Any parent/child relationship?}
+218       \textcolor{keywordflow}{if}(interface == parent)
+219       \{
+220          flag = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+221          \textcolor{keywordflow}{break};
+222       \}
+223 
+224       \textcolor{comment}{//Last interface in the list?}
+225       \textcolor{keywordflow}{if}(interface->parent == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+226          \textcolor{keywordflow}{break};
+227 
+228       \textcolor{comment}{//Point to the interface on top of which the virtual interface runs}
+229       \textcolor{keyword}{interface }= interface->parent;
+230    \}
+231 
+232    \textcolor{comment}{//Return TRUE is an existing parent/child relationship is found}
+233    \textcolor{keywordflow}{return} flag;
+234 \textcolor{preprocessor}{#else}
+235    \textcolor{comment}{//Virtual interfaces are not supported}
+236    \textcolor{keywordflow}{return} (interface == parent) ? \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE} : \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+237 \textcolor{preprocessor}{#endif}
+238 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{nic_8h_ae9054795c5d49a4db97396bf1d16b413}\label{nic_8h_ae9054795c5d49a4db97396bf1d16b413}} 
+\index{nic.\+h@{nic.\+h}!nic\+Notify\+Link\+Change@{nic\+Notify\+Link\+Change}}
+\index{nic\+Notify\+Link\+Change@{nic\+Notify\+Link\+Change}!nic.\+h@{nic.\+h}}
+\subsubsection{\texorpdfstring{nic\+Notify\+Link\+Change()}{nicNotifyLinkChange()}}
+{\footnotesize\ttfamily void nic\+Notify\+Link\+Change (\begin{DoxyParamCaption}\item[{\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$}]{interface }\end{DoxyParamCaption})}
+
+
+
+Process link state change notification. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em interface} & Underlying network interface \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 525 of file nic.\+c.
+
+
+\begin{DoxyCode}
+526 \{
+527    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+528    \hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{NetInterface} *physicalInterface;
+529    \hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{NetInterface} *virtualInterface;
+530 
+531    \textcolor{comment}{//Point to the physical interface}
+532    physicalInterface = \hyperlink{nic_8c_aa8f48265895dab1633056c2dcd796355}{nicGetPhysicalInterface}(interface);
+533 
+534    \textcolor{comment}{//Re-enable interrupts if necessary}
+535    \textcolor{keywordflow}{if}(physicalInterface->configured)
+536    \{
+537       physicalInterface->nicDriver->enableIrq(physicalInterface);
+538    \}
+539 
+540    \textcolor{comment}{//Loop through network interfaces}
+541    \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{net_8h_a116f850ebcb023ffa3e6b8de10c5cb35}{NET\_INTERFACE\_COUNT}; i++)
+542    \{
+543       \textcolor{comment}{//Point to the current interface}
+544       virtualInterface = &\hyperlink{net_8c_a7ecafab0039ec54d1d7a1e9e7402379b}{netInterface}[i];
+545 
+546       \textcolor{comment}{//Check whether the current virtual interface is attached to the physical}
+547       \textcolor{comment}{//interface}
+548       \textcolor{keywordflow}{if}(\hyperlink{nic_8c_afa0628577c7cf893442123f89d0ad183}{nicIsParentInterface}(virtualInterface, interface) &&
+549          \hyperlink{nic_8c_a57cef1a0e3b5314d4d0c17fdc13ce56b}{nicGetSwitchPort}(virtualInterface) == \hyperlink{nic_8c_a57cef1a0e3b5314d4d0c17fdc13ce56b}{nicGetSwitchPort}(interface))
+550       \{
+551          \textcolor{comment}{//Set operation mode}
+552          virtualInterface->linkSpeed = interface->linkSpeed;
+553          virtualInterface->duplexMode = interface->duplexMode;
+554 
+555          \textcolor{comment}{//Update link state}
+556          virtualInterface->linkState = interface->linkState;
+557 
+558          \textcolor{comment}{//Process link state change event}
+559          \hyperlink{net_8c_a640aeb84055d730ae11aaa7aaab61d8e}{netProcessLinkChange}(virtualInterface);
+560       \}
+561    \}
+562 
+563    \textcolor{comment}{//Disable interrupts}
+564    physicalInterface->nicDriver->disableIrq(physicalInterface);
+565 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{nic_8h_a5e5ef3b84649c36ebfe1e70edb1a0f75}\label{nic_8h_a5e5ef3b84649c36ebfe1e70edb1a0f75}} 
+\index{nic.\+h@{nic.\+h}!nic\+Process\+Packet@{nic\+Process\+Packet}}
+\index{nic\+Process\+Packet@{nic\+Process\+Packet}!nic.\+h@{nic.\+h}}
+\subsubsection{\texorpdfstring{nic\+Process\+Packet()}{nicProcessPacket()}}
+{\footnotesize\ttfamily void nic\+Process\+Packet (\begin{DoxyParamCaption}\item[{\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$}]{interface,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{packet,  }\item[{size\+\_\+t}]{length }\end{DoxyParamCaption})}
+
+
+
+Handle a packet received by the network controller. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em interface} & Underlying network interface \\
+\hline
+\mbox{\tt in}  & {\em packet} & Incoming packet to process \\
+\hline
+\mbox{\tt in}  & {\em length} & Total packet length \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 383 of file nic.\+c.
+
+
+\begin{DoxyCode}
+384 \{
+385    \hyperlink{nic_8h_ac1ce8659a9797513ecd9cc1afedce40b}{NicType} \hyperlink{resource__manager_8h_a12e46a33bfe90638e58ef067c6fd4a6e}{type};
+386 
+387    \textcolor{comment}{//Check whether the interface is enabled for operation}
+388    \textcolor{keywordflow}{if}(interface->configured)
+389    \{
+390       \textcolor{comment}{//Re-enable interrupts}
+391       interface->nicDriver->enableIrq(interface);
+392 
+393       \textcolor{comment}{//Debug message}
+394       \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"Packet received (%"} \hyperlink{compiler__port_8h_a2b7b0557dc6cd786df02dafbb51f5292}{PRIuSIZE} \textcolor{stringliteral}{" bytes)...\(\backslash\)r\(\backslash\)n"}, 
+      \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length});
+395       \hyperlink{debug_8h_a1f71019169d85407d8827300ed43bdf0}{TRACE\_DEBUG\_ARRAY}(\textcolor{stringliteral}{"  "}, packet, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length});
+396 
+397       \textcolor{comment}{//Retrieve network interface type}
+398       type = interface->nicDriver->type;
+399 
+400 \textcolor{preprocessor}{#if (ETH\_SUPPORT == ENABLED)}
+401       \textcolor{comment}{//Ethernet interface?}
+402       \textcolor{keywordflow}{if}(type == \hyperlink{nic_8h_ac1ce8659a9797513ecd9cc1afedce40ba84802cab6ee937691c3d76122ffaffcd}{NIC\_TYPE\_ETHERNET})
+403       \{
+404          \textcolor{comment}{//Process incoming Ethernet frame}
+405          \hyperlink{ethernet_8c_a8a0785e8ca268a2c93145d32eac66757}{ethProcessFrame}(interface, packet, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length});
+406       \}
+407       \textcolor{keywordflow}{else}
+408 \textcolor{preprocessor}{#endif}
+409 \textcolor{preprocessor}{#if (PPP\_SUPPORT == ENABLED)}
+410       \textcolor{comment}{//PPP interface?}
+411       \textcolor{keywordflow}{if}(type == \hyperlink{nic_8h_ac1ce8659a9797513ecd9cc1afedce40bafe21fcd3851e27a8b4ac8f6ea0a692df}{NIC\_TYPE\_PPP})
+412       \{
+413          \textcolor{comment}{//Process incoming PPP frame}
+414          \hyperlink{ppp_8c_acf85af1268ca737c3e4b07d39befa40c}{pppProcessFrame}(interface, packet, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length});
+415       \}
+416       \textcolor{keywordflow}{else}
+417 \textcolor{preprocessor}{#endif}
+418 \textcolor{preprocessor}{#if (IPV6\_SUPPORT == ENABLED)}
+419       \textcolor{comment}{//6LoWPAN interface?}
+420       \textcolor{keywordflow}{if}(type == \hyperlink{nic_8h_ac1ce8659a9797513ecd9cc1afedce40ba5b85ff07103ab20b9b081b4b263619ea}{NIC\_TYPE\_6LOWPAN})
+421       \{
+422          \hyperlink{structNetBuffer1}{NetBuffer1} buffer;
+423 
+424          \textcolor{comment}{//The incoming packet fits in a single chunk}
+425          buffer.\hyperlink{structNetBuffer1_a05cff68539009da3dd878a7b7d38e1e6}{chunkCount} = 1;
+426          buffer.\hyperlink{structNetBuffer1_a17baf9f6d2d0ea0520a6ee1b00e954de}{maxChunkCount} = 1;
+427          buffer.\hyperlink{structNetBuffer1_a2450ee8ad02374a831693b3529283739}{chunk}[0].\hyperlink{structChunkDesc_a014aac6efdc5722e058a9b67ca5f8358}{address} = packet;
+428          buffer.\hyperlink{structNetBuffer1_a2450ee8ad02374a831693b3529283739}{chunk}[0].\hyperlink{structChunkDesc_a4bdd57a9363511126fe5cd6d30c51c81}{length} = (\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t}) \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length};
+429          buffer.\hyperlink{structNetBuffer1_a2450ee8ad02374a831693b3529283739}{chunk}[0].\hyperlink{structChunkDesc_ab06232d65ee252651962c202651910c4}{size} = 0;
+430 
+431          \textcolor{comment}{//Process incoming IPv6 packet}
+432          \hyperlink{ipv6_8c_ae5a231be5cc78f474ac7fb73df8947bd}{ipv6ProcessPacket}(interface, (\hyperlink{structNetBuffer}{NetBuffer} *) &buffer, 0);
+433       \}
+434       \textcolor{keywordflow}{else}
+435 \textcolor{preprocessor}{#endif}
+436 \textcolor{preprocessor}{#if (NET\_LOOPBACK\_IF\_SUPPORT == ENABLED)}
+437       \textcolor{comment}{//Loopback interface?}
+438       \textcolor{keywordflow}{if}(type == \hyperlink{nic_8h_ac1ce8659a9797513ecd9cc1afedce40ba562c14f927fc4795741eb23aee4e4598}{NIC\_TYPE\_LOOPBACK})
+439       \{
+440 \textcolor{preprocessor}{#if (IPV4\_SUPPORT == ENABLED)}
+441          \textcolor{comment}{//IPv4 packet received?}
+442          \textcolor{keywordflow}{if}(\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} >= \textcolor{keyword}{sizeof}(\hyperlink{ipv4_8h_a294daf3717d3c22ffb24cbd3485ddbfc}{Ipv4Header}) && (packet[0] >> 4) == 4)
+443          \{
+444             \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+445             \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+446             \hyperlink{ipv4_8h_a294daf3717d3c22ffb24cbd3485ddbfc}{Ipv4Header} *header;
+447 
+448             \textcolor{comment}{//Point to the IPv4 header}
+449             header = (\hyperlink{ipv4_8h_a294daf3717d3c22ffb24cbd3485ddbfc}{Ipv4Header} *) packet;
+450 
+451             \textcolor{comment}{//Loop through network interfaces}
+452             \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{net_8h_a116f850ebcb023ffa3e6b8de10c5cb35}{NET\_INTERFACE\_COUNT}; i++)
+453             \{
+454                \textcolor{comment}{//Check destination address}
+455                error = \hyperlink{ipv4__misc_8c_aeed51fbc5f6dedba3c539939c1997a8d}{ipv4CheckDestAddr}(&\hyperlink{net_8c_a7ecafab0039ec54d1d7a1e9e7402379b}{netInterface}[i], header->destAddr);
+456 
+457                \textcolor{comment}{//Valid destination address?}
+458                \textcolor{keywordflow}{if}(!error)
+459                \{
+460                   \textcolor{comment}{//Process incoming IPv4 packet}
+461                   \hyperlink{ipv4_8c_a56bd5279686b3415f88d758b6a548978}{ipv4ProcessPacket}(&\hyperlink{net_8c_a7ecafab0039ec54d1d7a1e9e7402379b}{netInterface}[i], (
+      \hyperlink{ipv4_8h_a294daf3717d3c22ffb24cbd3485ddbfc}{Ipv4Header} *) packet,
+462                      \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length});
+463                \}
+464             \}
+465          \}
+466          \textcolor{keywordflow}{else}
+467 \textcolor{preprocessor}{#endif}
+468 \textcolor{preprocessor}{#if (IPV6\_SUPPORT == ENABLED)}
+469          \textcolor{comment}{//IPv6 packet received?}
+470          \textcolor{keywordflow}{if}(\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} >= \textcolor{keyword}{sizeof}(\hyperlink{ipv6_8h_ad553284c12e3a0d96dc8a4da1c5f6ea0}{Ipv6Header}) && (packet[0] >> 4) == 6)
+471          \{
+472             \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+473             \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+474             \hyperlink{structNetBuffer1}{NetBuffer1} buffer;
+475             \hyperlink{ipv6_8h_ad553284c12e3a0d96dc8a4da1c5f6ea0}{Ipv6Header} *header;
+476 
+477             \textcolor{comment}{//Point to the IPv6 header}
+478             header = (\hyperlink{ipv6_8h_ad553284c12e3a0d96dc8a4da1c5f6ea0}{Ipv6Header} *) packet;
+479 
+480             \textcolor{comment}{//Loop through network interfaces}
+481             \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{net_8h_a116f850ebcb023ffa3e6b8de10c5cb35}{NET\_INTERFACE\_COUNT}; i++)
+482             \{
+483                \textcolor{comment}{//Check destination address}
+484                error = \hyperlink{ipv6__misc_8c_acf063c0c23ac317d11b9973f3e05e1ac}{ipv6CheckDestAddr}(&\hyperlink{net_8c_a7ecafab0039ec54d1d7a1e9e7402379b}{netInterface}[i], &header->destAddr);
+485 
+486                \textcolor{comment}{//Valid destination address?}
+487                \textcolor{keywordflow}{if}(!error)
+488                \{
+489                   \textcolor{comment}{//The incoming packet fits in a single chunk}
+490                   buffer.\hyperlink{structNetBuffer1_a05cff68539009da3dd878a7b7d38e1e6}{chunkCount} = 1;
+491                   buffer.\hyperlink{structNetBuffer1_a17baf9f6d2d0ea0520a6ee1b00e954de}{maxChunkCount} = 1;
+492                   buffer.\hyperlink{structNetBuffer1_a2450ee8ad02374a831693b3529283739}{chunk}[0].\hyperlink{structChunkDesc_a014aac6efdc5722e058a9b67ca5f8358}{address} = packet;
+493                   buffer.\hyperlink{structNetBuffer1_a2450ee8ad02374a831693b3529283739}{chunk}[0].\hyperlink{structChunkDesc_a4bdd57a9363511126fe5cd6d30c51c81}{length} = (\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t}) \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length};
+494                   buffer.\hyperlink{structNetBuffer1_a2450ee8ad02374a831693b3529283739}{chunk}[0].\hyperlink{structChunkDesc_ab06232d65ee252651962c202651910c4}{size} = 0;
+495 
+496                   \textcolor{comment}{//Process incoming IPv6 packet}
+497                   \hyperlink{ipv6_8c_ae5a231be5cc78f474ac7fb73df8947bd}{ipv6ProcessPacket}(&\hyperlink{net_8c_a7ecafab0039ec54d1d7a1e9e7402379b}{netInterface}[i], (
+      \hyperlink{structNetBuffer}{NetBuffer} *) &buffer, 0);
+498                \}
+499             \}
+500          \}
+501          \textcolor{keywordflow}{else}
+502 \textcolor{preprocessor}{#endif}
+503          \{
+504             \textcolor{comment}{//Invalid version number}
+505          \}
+506       \}
+507       \textcolor{keywordflow}{else}
+508 \textcolor{preprocessor}{#endif}
+509       \textcolor{comment}{//Unknown interface type?}
+510       \{
+511          \textcolor{comment}{//Silently discard the received packet}
+512       \}
+513 
+514       \textcolor{comment}{//Disable interrupts}
+515       interface->nicDriver->disableIrq(interface);
+516    \}
+517 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{nic_8h_af480b2743ecb07bc0312f2bbcecdb287}\label{nic_8h_af480b2743ecb07bc0312f2bbcecdb287}} 
+\index{nic.\+h@{nic.\+h}!nic\+Send\+Packet@{nic\+Send\+Packet}}
+\index{nic\+Send\+Packet@{nic\+Send\+Packet}!nic.\+h@{nic.\+h}}
+\subsubsection{\texorpdfstring{nic\+Send\+Packet()}{nicSendPacket()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} nic\+Send\+Packet (\begin{DoxyParamCaption}\item[{\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$}]{interface,  }\item[{const \hyperlink{structNetBuffer}{Net\+Buffer} $\ast$}]{buffer,  }\item[{size\+\_\+t}]{offset }\end{DoxyParamCaption})}
+
+
+
+Send a packet to the network controller. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em interface} & Underlying network interface \\
+\hline
+\mbox{\tt in}  & {\em buffer} & Multi-\/part buffer containing the data to send \\
+\hline
+\mbox{\tt in}  & {\em offset} & Offset to the first data byte \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 278 of file nic.\+c.
+
+
+\begin{DoxyCode}
+280 \{
+281    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+282    \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\_t} status;
+283 
+284 \textcolor{preprocessor}{#if (TRACE\_LEVEL >= TRACE\_LEVEL\_DEBUG)}
+285    \textcolor{comment}{//Retrieve the length of the packet}
+286    \textcolor{keywordtype}{size\_t} \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} = \hyperlink{net__mem_8c_ac9dbcd9e28e61d8f4f6d2e9af2607b68}{netBufferGetLength}(buffer) - \hyperlink{pic32mz_2isr__support_8h_a12a5aed8a193ebbf9a641104a310610d}{offset};
+287 
+288    \textcolor{comment}{//Debug message}
+289    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"Sending packet (%"} \hyperlink{compiler__port_8h_a2b7b0557dc6cd786df02dafbb51f5292}{PRIuSIZE} \textcolor{stringliteral}{" bytes)...\(\backslash\)r\(\backslash\)n"}, length);
+290    \hyperlink{debug_8h_a5fb2ec20bc5626d859c3c51db0d2ea88}{TRACE\_DEBUG\_NET\_BUFFER}(\textcolor{stringliteral}{"  "}, buffer, \hyperlink{pic32mz_2isr__support_8h_a12a5aed8a193ebbf9a641104a310610d}{offset}, length);
+291 \textcolor{preprocessor}{#endif}
+292 
+293    \textcolor{comment}{//Check whether the interface is enabled for operation}
+294    \textcolor{keywordflow}{if}(interface->configured && interface->nicDriver != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+295    \{
+296       \textcolor{comment}{//Loopback interface?}
+297       \textcolor{keywordflow}{if}(interface->nicDriver->type == \hyperlink{nic_8h_ac1ce8659a9797513ecd9cc1afedce40ba562c14f927fc4795741eb23aee4e4598}{NIC\_TYPE\_LOOPBACK})
+298       \{
+299          \textcolor{comment}{//The loopback interface is always available}
+300          status = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+301       \}
+302       \textcolor{keywordflow}{else}
+303       \{
+304          \textcolor{comment}{//Wait for the transmitter to be ready to send}
+305          status = \hyperlink{os__port__chibios_8c_a1dc707247e44dfefae5bec4a322fc78a}{osWaitForEvent}(&interface->nicTxEvent, 
+      \hyperlink{nic_8h_a519984a512a8f611d1a1d86750b25a1e}{NIC\_MAX\_BLOCKING\_TIME});
+306       \}
+307 
+308       \textcolor{comment}{//Check whether the specified event is in signaled state}
+309       \textcolor{keywordflow}{if}(status)
+310       \{
+311          \textcolor{comment}{//Disable interrupts}
+312          interface->nicDriver->disableIrq(interface);
+313 
+314          \textcolor{comment}{//Send Ethernet frame}
+315          error = interface->nicDriver->sendPacket(interface, buffer, \hyperlink{pic32mz_2isr__support_8h_a12a5aed8a193ebbf9a641104a310610d}{offset});
+316 
+317          \textcolor{comment}{//Re-enable interrupts if necessary}
+318          \textcolor{keywordflow}{if}(interface->configured)
+319          \{
+320             interface->nicDriver->enableIrq(interface);
+321          \}
+322       \}
+323       \textcolor{keywordflow}{else}
+324       \{
+325          \textcolor{comment}{//The transmitter is busy}
+326          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caa336c55211847e9cc11a4e95e7479a1c}{ERROR\_TRANSMITTER\_BUSY};
+327       \}
+328    \}
+329    \textcolor{keywordflow}{else}
+330    \{
+331       \textcolor{comment}{//Report an error}
+332       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca18648c6804c77e30234b0e60e646718b}{ERROR\_INVALID\_INTERFACE};
+333    \}
+334 
+335    \textcolor{comment}{//Return status code}
+336    \textcolor{keywordflow}{return} error;
+337 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{nic_8h_aa357a772d6985d2516db87e35c39d148}\label{nic_8h_aa357a772d6985d2516db87e35c39d148}} 
+\index{nic.\+h@{nic.\+h}!nic\+Tick@{nic\+Tick}}
+\index{nic\+Tick@{nic\+Tick}!nic.\+h@{nic.\+h}}
+\subsubsection{\texorpdfstring{nic\+Tick()}{nicTick()}}
+{\footnotesize\ttfamily void nic\+Tick (\begin{DoxyParamCaption}\item[{\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$}]{interface }\end{DoxyParamCaption})}
+
+
+
+Network controller timer handler. 
+
+This routine is periodically called by the T\+C\+P/\+IP stack to handle periodic operations such as polling the link state
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em interface} & Underlying network interface \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 250 of file nic.\+c.
+
+
+\begin{DoxyCode}
+251 \{
+252    \textcolor{comment}{//Valid NIC driver?}
+253    \textcolor{keywordflow}{if}(interface->nicDriver != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+254    \{
+255       \textcolor{comment}{//Disable interrupts}
+256       interface->nicDriver->disableIrq(interface);
+257 
+258       \textcolor{comment}{//Handle periodic operations}
+259       interface->nicDriver->tick(interface);
+260 
+261       \textcolor{comment}{//Re-enable interrupts if necessary}
+262       \textcolor{keywordflow}{if}(interface->configured)
+263       \{
+264          interface->nicDriver->enableIrq(interface);
+265       \}
+266    \}
+267 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{nic_8h_a9aa22ecc6ff76481bd33224fda34cb90}\label{nic_8h_a9aa22ecc6ff76481bd33224fda34cb90}} 
+\index{nic.\+h@{nic.\+h}!nic\+Update\+Mac\+Addr\+Filter@{nic\+Update\+Mac\+Addr\+Filter}}
+\index{nic\+Update\+Mac\+Addr\+Filter@{nic\+Update\+Mac\+Addr\+Filter}!nic.\+h@{nic.\+h}}
+\subsubsection{\texorpdfstring{nic\+Update\+Mac\+Addr\+Filter()}{nicUpdateMacAddrFilter()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} nic\+Update\+Mac\+Addr\+Filter (\begin{DoxyParamCaption}\item[{\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$}]{interface }\end{DoxyParamCaption})}
+
+
+
+Configure M\+AC address filtering. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em interface} & Underlying network interface \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 346 of file nic.\+c.
+
+
+\begin{DoxyCode}
+347 \{
+348    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+349 
+350    \textcolor{comment}{//Valid NIC driver?}
+351    \textcolor{keywordflow}{if}(interface->nicDriver != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+352    \{
+353       \textcolor{comment}{//Disable interrupts}
+354       interface->nicDriver->disableIrq(interface);
+355 
+356       \textcolor{comment}{//Update MAC filter table}
+357       error = interface->nicDriver->updateMacAddrFilter(interface);
+358 
+359       \textcolor{comment}{//Re-enable interrupts if necessary}
+360       \textcolor{keywordflow}{if}(interface->configured)
+361       \{
+362          interface->nicDriver->enableIrq(interface);
+363       \}
+364    \}
+365    \textcolor{keywordflow}{else}
+366    \{
+367       \textcolor{comment}{//Report an error}
+368       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca18648c6804c77e30234b0e60e646718b}{ERROR\_INVALID\_INTERFACE};
+369    \}
+370 
+371    \textcolor{comment}{//Return status code}
+372    \textcolor{keywordflow}{return} error;
+373 \}
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{nic_8h_a1dd89f7555db6c62a9228c8a0f0c9806}\label{nic_8h_a1dd89f7555db6c62a9228c8a0f0c9806}} 
+\index{nic.\+h@{nic.\+h}!nic\+Tick\+Counter@{nic\+Tick\+Counter}}
+\index{nic\+Tick\+Counter@{nic\+Tick\+Counter}!nic.\+h@{nic.\+h}}
+\subsubsection{\texorpdfstring{nic\+Tick\+Counter}{nicTickCounter}}
+{\footnotesize\ttfamily \hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\+\_\+t} nic\+Tick\+Counter}
+
+
+
+Definition at line 43 of file nic.\+c.
+

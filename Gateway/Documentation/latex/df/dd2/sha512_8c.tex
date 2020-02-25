@@ -1,0 +1,544 @@
+\hypertarget{sha512_8c}{}\section{cyclone\+\_\+crypto/hash/sha512.c File Reference}
+\label{sha512_8c}\index{cyclone\+\_\+crypto/hash/sha512.\+c@{cyclone\+\_\+crypto/hash/sha512.\+c}}
+
+
+S\+H\+A-\/512 (Secure Hash Algorithm 512)  
+
+
+{\ttfamily \#include \char`\"{}core/crypto.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}hash/sha512.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{sha512_8c_afcdf5e66fd927a7f4cc64295acd20407}{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}~\hyperlink{crypto__config_8h_a6afae3a9b63f9b55d979e667ee0e881d}{C\+R\+Y\+P\+T\+O\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}
+\item 
+\#define \hyperlink{sha512_8c_a1255a03794787336683d162cf62f7523}{W}(\hyperlink{llmnr__common_8h_a2d03918f4f9edabaf3c9f43abcc2d85b}{t})~\hyperlink{ipv6_8h_a1af4b0ff8d706155536888c9d1f27f87}{w}\mbox{[}(\hyperlink{llmnr__common_8h_a2d03918f4f9edabaf3c9f43abcc2d85b}{t}) \& 0x0\+F\mbox{]}
+\item 
+\#define \hyperlink{sha512_8c_a0ed6c9c714485592a8c317a8ad91c83b}{CH}(x,  y,  \hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z})~(((x) \& (y)) $\vert$ ($\sim$(x) \& (\hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z})))
+\item 
+\#define \hyperlink{sha512_8c_ae2f6c7a0b4fdb15387259356b16854c9}{M\+AJ}(x,  y,  \hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z})~(((x) \& (y)) $\vert$ ((x) \& (\hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z})) $\vert$ ((y) \& (\hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z})))
+\item 
+\#define \hyperlink{sha512_8c_ad73ff0c2b937d2657b21f58eca4d1d7c}{S\+I\+G\+M\+A1}(x)~(\hyperlink{cyclone__crypto_2core_2crypto_8h_a057cc20666fe872898590d5d29bec330}{R\+O\+R64}(x, 28) $^\wedge$ \hyperlink{cyclone__crypto_2core_2crypto_8h_a057cc20666fe872898590d5d29bec330}{R\+O\+R64}(x, 34) $^\wedge$ \hyperlink{cyclone__crypto_2core_2crypto_8h_a057cc20666fe872898590d5d29bec330}{R\+O\+R64}(x, 39))
+\item 
+\#define \hyperlink{sha512_8c_a745eb84b4bc1f2c8bf77f3d082161f90}{S\+I\+G\+M\+A2}(x)~(\hyperlink{cyclone__crypto_2core_2crypto_8h_a057cc20666fe872898590d5d29bec330}{R\+O\+R64}(x, 14) $^\wedge$ \hyperlink{cyclone__crypto_2core_2crypto_8h_a057cc20666fe872898590d5d29bec330}{R\+O\+R64}(x, 18) $^\wedge$ \hyperlink{cyclone__crypto_2core_2crypto_8h_a057cc20666fe872898590d5d29bec330}{R\+O\+R64}(x, 41))
+\item 
+\#define \hyperlink{sha512_8c_a1b365adbd1a69e2b77496cb9f3496d76}{S\+I\+G\+M\+A3}(x)~(\hyperlink{cyclone__crypto_2core_2crypto_8h_a057cc20666fe872898590d5d29bec330}{R\+O\+R64}(x, 1) $^\wedge$ \hyperlink{cyclone__crypto_2core_2crypto_8h_a057cc20666fe872898590d5d29bec330}{R\+O\+R64}(x, 8) $^\wedge$ \hyperlink{cyclone__crypto_2core_2crypto_8h_a527571d4166057a4ad7b9d0ef31194e9}{S\+H\+R64}(x, 7))
+\item 
+\#define \hyperlink{sha512_8c_afdaf94b45938801e2481d2dba230f234}{S\+I\+G\+M\+A4}(x)~(\hyperlink{cyclone__crypto_2core_2crypto_8h_a057cc20666fe872898590d5d29bec330}{R\+O\+R64}(x, 19) $^\wedge$ \hyperlink{cyclone__crypto_2core_2crypto_8h_a057cc20666fe872898590d5d29bec330}{R\+O\+R64}(x, 61) $^\wedge$ \hyperlink{cyclone__crypto_2core_2crypto_8h_a527571d4166057a4ad7b9d0ef31194e9}{S\+H\+R64}(x, 6))
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{sha512_8c_a2dba443d6ac20d8ca44f13934e232f80}{sha512\+Compute} (const void $\ast$\hyperlink{tftp__common_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length}, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$digest)
+\begin{DoxyCompactList}\small\item\em Digest a message using S\+H\+A-\/512. \end{DoxyCompactList}\item 
+void \hyperlink{sha512_8c_a4901f384e1d07dc3b58ae22f4ea947cb}{sha512\+Init} (\hyperlink{structSha512Context}{Sha512\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Initialize S\+H\+A-\/512 message digest context. \end{DoxyCompactList}\item 
+void \hyperlink{sha512_8c_aa557f01dccd10a72beb2aa7149f50b58}{sha512\+Update} (\hyperlink{structSha512Context}{Sha512\+Context} $\ast$context, const void $\ast$\hyperlink{tftp__common_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length})
+\begin{DoxyCompactList}\small\item\em Update the S\+H\+A-\/512 context with a portion of the message being hashed. \end{DoxyCompactList}\item 
+void \hyperlink{sha512_8c_a7d421f7a03f3a92f3c6c8628ab035dc5}{sha512\+Final} (\hyperlink{structSha512Context}{Sha512\+Context} $\ast$context, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$digest)
+\begin{DoxyCompactList}\small\item\em Finish the S\+H\+A-\/512 message digest. \end{DoxyCompactList}\item 
+void \hyperlink{sha512_8c_a01e92b3bd2e45ae411429770e167447f}{sha512\+Process\+Block} (\hyperlink{structSha512Context}{Sha512\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Process message in 16-\/word blocks. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} \hyperlink{sha512_8c_aa9acdc1b5446bc018349ce0a859e17bd}{padding} \mbox{[}128\mbox{]}
+\item 
+static const \hyperlink{stdint_8h_aec6fcb673ff035718c238c8c9d544c47}{uint64\+\_\+t} \hyperlink{sha512_8c_a3934111e8801bd86b261f4bac043efa6}{k} \mbox{[}80\mbox{]}
+\item 
+const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} \hyperlink{sha512_8c_a2917e0d8426a070a4d640c0b6cf9f496}{sha512\+Oid} \mbox{[}9\mbox{]} = \{0x60, 0x86, 0x48, 0x01, 0x65, 0x03, 0x04, 0x02, 0x03\}
+\item 
+const \hyperlink{structHashAlgo}{Hash\+Algo} \hyperlink{sha512_8c_a89abe1bbc6003a0c334ae61e121fd938}{sha512\+Hash\+Algo}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+S\+H\+A-\/512 (Secure Hash Algorithm 512) 
+
+\hypertarget{pic32mz__ef__curiosity_8h_License}{}\subsection{License}\label{pic32mz__ef__curiosity_8h_License}
+S\+P\+D\+X-\/\+License-\/\+Identifier\+: G\+P\+L-\/2.\+0-\/or-\/later
+
+Copyright (C) 2010-\/2019 Oryx Embedded S\+A\+RL. All rights reserved.
+
+This file is part of Cyclone\+Crypto Open.
+
+This program is free software; you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+
+You should have received a copy of the G\+NU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-\/1301, U\+SA.\hypertarget{tftp__server_8c_Description}{}\subsection{Description}\label{tftp__server_8c_Description}
+S\+H\+A-\/512 is a secure hash algorithm for computing a condensed representation of an electronic message. Refer to F\+I\+PS 180-\/4 for more details
+
+\begin{DoxyAuthor}{Author}
+Oryx Embedded S\+A\+RL (www.\+oryx-\/embedded.\+com) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+9.\+6 
+\end{DoxyVersion}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{sha512_8c_a0ed6c9c714485592a8c317a8ad91c83b}\label{sha512_8c_a0ed6c9c714485592a8c317a8ad91c83b}} 
+\index{sha512.\+c@{sha512.\+c}!CH@{CH}}
+\index{CH@{CH}!sha512.\+c@{sha512.\+c}}
+\subsubsection{\texorpdfstring{CH}{CH}}
+{\footnotesize\ttfamily \#define CH(\begin{DoxyParamCaption}\item[{}]{x,  }\item[{}]{y,  }\item[{}]{\hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z} }\end{DoxyParamCaption})~(((x) \& (y)) $\vert$ ($\sim$(x) \& (\hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z})))}
+
+
+
+Definition at line 51 of file sha512.\+c.
+
+\mbox{\Hypertarget{sha512_8c_ae2f6c7a0b4fdb15387259356b16854c9}\label{sha512_8c_ae2f6c7a0b4fdb15387259356b16854c9}} 
+\index{sha512.\+c@{sha512.\+c}!M\+AJ@{M\+AJ}}
+\index{M\+AJ@{M\+AJ}!sha512.\+c@{sha512.\+c}}
+\subsubsection{\texorpdfstring{M\+AJ}{MAJ}}
+{\footnotesize\ttfamily \#define M\+AJ(\begin{DoxyParamCaption}\item[{}]{x,  }\item[{}]{y,  }\item[{}]{\hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z} }\end{DoxyParamCaption})~(((x) \& (y)) $\vert$ ((x) \& (\hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z})) $\vert$ ((y) \& (\hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z})))}
+
+
+
+Definition at line 52 of file sha512.\+c.
+
+\mbox{\Hypertarget{sha512_8c_ad73ff0c2b937d2657b21f58eca4d1d7c}\label{sha512_8c_ad73ff0c2b937d2657b21f58eca4d1d7c}} 
+\index{sha512.\+c@{sha512.\+c}!S\+I\+G\+M\+A1@{S\+I\+G\+M\+A1}}
+\index{S\+I\+G\+M\+A1@{S\+I\+G\+M\+A1}!sha512.\+c@{sha512.\+c}}
+\subsubsection{\texorpdfstring{S\+I\+G\+M\+A1}{SIGMA1}}
+{\footnotesize\ttfamily \#define S\+I\+G\+M\+A1(\begin{DoxyParamCaption}\item[{}]{x }\end{DoxyParamCaption})~(\hyperlink{cyclone__crypto_2core_2crypto_8h_a057cc20666fe872898590d5d29bec330}{R\+O\+R64}(x, 28) $^\wedge$ \hyperlink{cyclone__crypto_2core_2crypto_8h_a057cc20666fe872898590d5d29bec330}{R\+O\+R64}(x, 34) $^\wedge$ \hyperlink{cyclone__crypto_2core_2crypto_8h_a057cc20666fe872898590d5d29bec330}{R\+O\+R64}(x, 39))}
+
+
+
+Definition at line 53 of file sha512.\+c.
+
+\mbox{\Hypertarget{sha512_8c_a745eb84b4bc1f2c8bf77f3d082161f90}\label{sha512_8c_a745eb84b4bc1f2c8bf77f3d082161f90}} 
+\index{sha512.\+c@{sha512.\+c}!S\+I\+G\+M\+A2@{S\+I\+G\+M\+A2}}
+\index{S\+I\+G\+M\+A2@{S\+I\+G\+M\+A2}!sha512.\+c@{sha512.\+c}}
+\subsubsection{\texorpdfstring{S\+I\+G\+M\+A2}{SIGMA2}}
+{\footnotesize\ttfamily \#define S\+I\+G\+M\+A2(\begin{DoxyParamCaption}\item[{}]{x }\end{DoxyParamCaption})~(\hyperlink{cyclone__crypto_2core_2crypto_8h_a057cc20666fe872898590d5d29bec330}{R\+O\+R64}(x, 14) $^\wedge$ \hyperlink{cyclone__crypto_2core_2crypto_8h_a057cc20666fe872898590d5d29bec330}{R\+O\+R64}(x, 18) $^\wedge$ \hyperlink{cyclone__crypto_2core_2crypto_8h_a057cc20666fe872898590d5d29bec330}{R\+O\+R64}(x, 41))}
+
+
+
+Definition at line 54 of file sha512.\+c.
+
+\mbox{\Hypertarget{sha512_8c_a1b365adbd1a69e2b77496cb9f3496d76}\label{sha512_8c_a1b365adbd1a69e2b77496cb9f3496d76}} 
+\index{sha512.\+c@{sha512.\+c}!S\+I\+G\+M\+A3@{S\+I\+G\+M\+A3}}
+\index{S\+I\+G\+M\+A3@{S\+I\+G\+M\+A3}!sha512.\+c@{sha512.\+c}}
+\subsubsection{\texorpdfstring{S\+I\+G\+M\+A3}{SIGMA3}}
+{\footnotesize\ttfamily \#define S\+I\+G\+M\+A3(\begin{DoxyParamCaption}\item[{}]{x }\end{DoxyParamCaption})~(\hyperlink{cyclone__crypto_2core_2crypto_8h_a057cc20666fe872898590d5d29bec330}{R\+O\+R64}(x, 1) $^\wedge$ \hyperlink{cyclone__crypto_2core_2crypto_8h_a057cc20666fe872898590d5d29bec330}{R\+O\+R64}(x, 8) $^\wedge$ \hyperlink{cyclone__crypto_2core_2crypto_8h_a527571d4166057a4ad7b9d0ef31194e9}{S\+H\+R64}(x, 7))}
+
+
+
+Definition at line 55 of file sha512.\+c.
+
+\mbox{\Hypertarget{sha512_8c_afdaf94b45938801e2481d2dba230f234}\label{sha512_8c_afdaf94b45938801e2481d2dba230f234}} 
+\index{sha512.\+c@{sha512.\+c}!S\+I\+G\+M\+A4@{S\+I\+G\+M\+A4}}
+\index{S\+I\+G\+M\+A4@{S\+I\+G\+M\+A4}!sha512.\+c@{sha512.\+c}}
+\subsubsection{\texorpdfstring{S\+I\+G\+M\+A4}{SIGMA4}}
+{\footnotesize\ttfamily \#define S\+I\+G\+M\+A4(\begin{DoxyParamCaption}\item[{}]{x }\end{DoxyParamCaption})~(\hyperlink{cyclone__crypto_2core_2crypto_8h_a057cc20666fe872898590d5d29bec330}{R\+O\+R64}(x, 19) $^\wedge$ \hyperlink{cyclone__crypto_2core_2crypto_8h_a057cc20666fe872898590d5d29bec330}{R\+O\+R64}(x, 61) $^\wedge$ \hyperlink{cyclone__crypto_2core_2crypto_8h_a527571d4166057a4ad7b9d0ef31194e9}{S\+H\+R64}(x, 6))}
+
+
+
+Definition at line 56 of file sha512.\+c.
+
+\mbox{\Hypertarget{sha512_8c_afcdf5e66fd927a7f4cc64295acd20407}\label{sha512_8c_afcdf5e66fd927a7f4cc64295acd20407}} 
+\index{sha512.\+c@{sha512.\+c}!T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+\index{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}!sha512.\+c@{sha512.\+c}}
+\subsubsection{\texorpdfstring{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}{TRACE\_LEVEL}}
+{\footnotesize\ttfamily \#define T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL~\hyperlink{crypto__config_8h_a6afae3a9b63f9b55d979e667ee0e881d}{C\+R\+Y\+P\+T\+O\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+
+
+
+Definition at line 37 of file sha512.\+c.
+
+\mbox{\Hypertarget{sha512_8c_a1255a03794787336683d162cf62f7523}\label{sha512_8c_a1255a03794787336683d162cf62f7523}} 
+\index{sha512.\+c@{sha512.\+c}!W@{W}}
+\index{W@{W}!sha512.\+c@{sha512.\+c}}
+\subsubsection{\texorpdfstring{W}{W}}
+{\footnotesize\ttfamily \#define W(\begin{DoxyParamCaption}\item[{}]{\hyperlink{llmnr__common_8h_a2d03918f4f9edabaf3c9f43abcc2d85b}{t} }\end{DoxyParamCaption})~\hyperlink{ipv6_8h_a1af4b0ff8d706155536888c9d1f27f87}{w}\mbox{[}(\hyperlink{llmnr__common_8h_a2d03918f4f9edabaf3c9f43abcc2d85b}{t}) \& 0x0\+F\mbox{]}}
+
+
+
+Definition at line 48 of file sha512.\+c.
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{sha512_8c_a2dba443d6ac20d8ca44f13934e232f80}\label{sha512_8c_a2dba443d6ac20d8ca44f13934e232f80}} 
+\index{sha512.\+c@{sha512.\+c}!sha512\+Compute@{sha512\+Compute}}
+\index{sha512\+Compute@{sha512\+Compute}!sha512.\+c@{sha512.\+c}}
+\subsubsection{\texorpdfstring{sha512\+Compute()}{sha512Compute()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} sha512\+Compute (\begin{DoxyParamCaption}\item[{const void $\ast$}]{data,  }\item[{size\+\_\+t}]{length,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{digest }\end{DoxyParamCaption})}
+
+
+
+Digest a message using S\+H\+A-\/512. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em data} & Pointer to the message being hashed \\
+\hline
+\mbox{\tt in}  & {\em length} & Length of the message \\
+\hline
+\mbox{\tt out}  & {\em digest} & Pointer to the calculated digest \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 126 of file sha512.\+c.
+
+
+\begin{DoxyCode}
+127 \{
+128    \textcolor{comment}{//Allocate a memory buffer to hold the SHA-512 context}
+129    \hyperlink{structSha512Context}{Sha512Context} *context = \hyperlink{cyclone__crypto_2core_2crypto_8h_a48b53d16f66d31e5dcf82db3c1b882ba}{cryptoAllocMem}(\textcolor{keyword}{sizeof}(
+      \hyperlink{structSha512Context}{Sha512Context}));
+130    \textcolor{comment}{//Failed to allocate memory?}
+131    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+132       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac0a554045048d2fb61387cf735676f69}{ERROR\_OUT\_OF\_MEMORY};
+133 
+134    \textcolor{comment}{//Initialize the SHA-512 context}
+135    \hyperlink{sha512_8c_a4901f384e1d07dc3b58ae22f4ea947cb}{sha512Init}(context);
+136    \textcolor{comment}{//Digest the message}
+137    \hyperlink{sha512_8c_aa557f01dccd10a72beb2aa7149f50b58}{sha512Update}(context, \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length});
+138    \textcolor{comment}{//Finalize the SHA-512 message digest}
+139    \hyperlink{sha512_8c_a7d421f7a03f3a92f3c6c8628ab035dc5}{sha512Final}(context, digest);
+140 
+141    \textcolor{comment}{//Free previously allocated memory}
+142    \hyperlink{cyclone__crypto_2core_2crypto_8h_ac8a223b176683db4e9eed4162774f870}{cryptoFreeMem}(context);
+143    \textcolor{comment}{//Successful processing}
+144    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+145 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{sha512_8c_a7d421f7a03f3a92f3c6c8628ab035dc5}\label{sha512_8c_a7d421f7a03f3a92f3c6c8628ab035dc5}} 
+\index{sha512.\+c@{sha512.\+c}!sha512\+Final@{sha512\+Final}}
+\index{sha512\+Final@{sha512\+Final}!sha512.\+c@{sha512.\+c}}
+\subsubsection{\texorpdfstring{sha512\+Final()}{sha512Final()}}
+{\footnotesize\ttfamily void sha512\+Final (\begin{DoxyParamCaption}\item[{\hyperlink{structSha512Context}{Sha512\+Context} $\ast$}]{context,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{digest }\end{DoxyParamCaption})}
+
+
+
+Finish the S\+H\+A-\/512 message digest. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the S\+H\+A-\/512 context \\
+\hline
+\mbox{\tt out}  & {\em digest} & Calculated digest (optional parameter) \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 218 of file sha512.\+c.
+
+
+\begin{DoxyCode}
+219 \{
+220    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+221    \textcolor{keywordtype}{size\_t} paddingSize;
+222    \hyperlink{stdint_8h_aec6fcb673ff035718c238c8c9d544c47}{uint64\_t} \hyperlink{resource__manager_8h_afd8a6a01e3b212857df6efb82e06f682}{totalSize};
+223 
+224    \textcolor{comment}{//Length of the original message (before padding)}
+225    totalSize = context->\hyperlink{structSha512Context_a5fc83aae6c94e47daba93aa778cb952d}{totalSize} * 8;
+226 
+227    \textcolor{comment}{//Pad the message so that its length is congruent to 112 modulo 128}
+228    \textcolor{keywordflow}{if}(context->\hyperlink{structSha512Context_ac9959286ecbbbe3fc89c954f65e3add2}{size} < 112)
+229       paddingSize = 112 - context->\hyperlink{structSha512Context_ac9959286ecbbbe3fc89c954f65e3add2}{size};
+230    \textcolor{keywordflow}{else}
+231       paddingSize = 128 + 112 - context->\hyperlink{structSha512Context_ac9959286ecbbbe3fc89c954f65e3add2}{size};
+232 
+233    \textcolor{comment}{//Append padding}
+234    \hyperlink{sha512_8c_aa557f01dccd10a72beb2aa7149f50b58}{sha512Update}(context, \hyperlink{sha512_8c_aa9acdc1b5446bc018349ce0a859e17bd}{padding}, paddingSize);
+235 
+236    \textcolor{comment}{//Append the length of the original message}
+237    context->\hyperlink{structSha512Context_ae359d0bf9be744a30222e2086ca42860}{w}[14] = 0;
+238    context->\hyperlink{structSha512Context_ae359d0bf9be744a30222e2086ca42860}{w}[15] = \hyperlink{cpu__endian_8h_a02eed9f02bd58916880c33c57510bea5}{htobe64}(totalSize);
+239 
+240    \textcolor{comment}{//Calculate the message digest}
+241    \hyperlink{sha512_8c_a01e92b3bd2e45ae411429770e167447f}{sha512ProcessBlock}(context);
+242 
+243    \textcolor{comment}{//Convert from host byte order to big-endian byte order}
+244    \textcolor{keywordflow}{for}(i = 0; i < 8; i++)
+245    \{
+246       context->\hyperlink{structSha512Context_ad45c82baa9d7bc67dccdab829d8c2586}{h}[i] = \hyperlink{cpu__endian_8h_a02eed9f02bd58916880c33c57510bea5}{htobe64}(context->\hyperlink{structSha512Context_ad45c82baa9d7bc67dccdab829d8c2586}{h}[i]);
+247    \}
+248 
+249    \textcolor{comment}{//Copy the resulting digest}
+250    \textcolor{keywordflow}{if}(digest != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+251       \hyperlink{cyclone__crypto_2core_2crypto_8h_a6724616c4014bb7e21f2660bd7b88be8}{cryptoMemcpy}(digest, context->\hyperlink{structSha512Context_a132f046ba86d88873dd6a5b960e3bf8c}{digest}, \hyperlink{sha512_8h_a67f489f3eee39c447a6db3ba34ef75f2}{SHA512\_DIGEST\_SIZE});
+252 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{sha512_8c_a4901f384e1d07dc3b58ae22f4ea947cb}\label{sha512_8c_a4901f384e1d07dc3b58ae22f4ea947cb}} 
+\index{sha512.\+c@{sha512.\+c}!sha512\+Init@{sha512\+Init}}
+\index{sha512\+Init@{sha512\+Init}!sha512.\+c@{sha512.\+c}}
+\subsubsection{\texorpdfstring{sha512\+Init()}{sha512Init()}}
+{\footnotesize\ttfamily void sha512\+Init (\begin{DoxyParamCaption}\item[{\hyperlink{structSha512Context}{Sha512\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Initialize S\+H\+A-\/512 message digest context. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the S\+H\+A-\/512 context to initialize \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 153 of file sha512.\+c.
+
+
+\begin{DoxyCode}
+154 \{
+155    \textcolor{comment}{//Set initial hash value}
+156    context->\hyperlink{structSha512Context_ad45c82baa9d7bc67dccdab829d8c2586}{h}[0] = 0x6A09E667F3BCC908;
+157    context->\hyperlink{structSha512Context_ad45c82baa9d7bc67dccdab829d8c2586}{h}[1] = 0xBB67AE8584CAA73B;
+158    context->\hyperlink{structSha512Context_ad45c82baa9d7bc67dccdab829d8c2586}{h}[2] = 0x3C6EF372FE94F82B;
+159    context->\hyperlink{structSha512Context_ad45c82baa9d7bc67dccdab829d8c2586}{h}[3] = 0xA54FF53A5F1D36F1;
+160    context->\hyperlink{structSha512Context_ad45c82baa9d7bc67dccdab829d8c2586}{h}[4] = 0x510E527FADE682D1;
+161    context->\hyperlink{structSha512Context_ad45c82baa9d7bc67dccdab829d8c2586}{h}[5] = 0x9B05688C2B3E6C1F;
+162    context->\hyperlink{structSha512Context_ad45c82baa9d7bc67dccdab829d8c2586}{h}[6] = 0x1F83D9ABFB41BD6B;
+163    context->\hyperlink{structSha512Context_ad45c82baa9d7bc67dccdab829d8c2586}{h}[7] = 0x5BE0CD19137E2179;
+164 
+165    \textcolor{comment}{//Number of bytes in the buffer}
+166    context->\hyperlink{structSha512Context_ac9959286ecbbbe3fc89c954f65e3add2}{size} = 0;
+167    \textcolor{comment}{//Total length of the message}
+168    context->\hyperlink{structSha512Context_a5fc83aae6c94e47daba93aa778cb952d}{totalSize} = 0;
+169 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{sha512_8c_a01e92b3bd2e45ae411429770e167447f}\label{sha512_8c_a01e92b3bd2e45ae411429770e167447f}} 
+\index{sha512.\+c@{sha512.\+c}!sha512\+Process\+Block@{sha512\+Process\+Block}}
+\index{sha512\+Process\+Block@{sha512\+Process\+Block}!sha512.\+c@{sha512.\+c}}
+\subsubsection{\texorpdfstring{sha512\+Process\+Block()}{sha512ProcessBlock()}}
+{\footnotesize\ttfamily void sha512\+Process\+Block (\begin{DoxyParamCaption}\item[{\hyperlink{structSha512Context}{Sha512\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Process message in 16-\/word blocks. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the S\+H\+A-\/512 context \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 260 of file sha512.\+c.
+
+
+\begin{DoxyCode}
+261 \{
+262    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} \hyperlink{llmnr__common_8h_a2d03918f4f9edabaf3c9f43abcc2d85b}{t};
+263    \hyperlink{stdint_8h_aec6fcb673ff035718c238c8c9d544c47}{uint64\_t} temp1;
+264    \hyperlink{stdint_8h_aec6fcb673ff035718c238c8c9d544c47}{uint64\_t} temp2;
+265 
+266    \textcolor{comment}{//Initialize the 8 working registers}
+267    \hyperlink{stdint_8h_aec6fcb673ff035718c238c8c9d544c47}{uint64\_t} \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a} = context->\hyperlink{structSha512Context_ad45c82baa9d7bc67dccdab829d8c2586}{h}[0];
+268    \hyperlink{stdint_8h_aec6fcb673ff035718c238c8c9d544c47}{uint64\_t} \hyperlink{dtls__misc_8h_ab590318ac859d0e57e15c3dd6c62a605}{b} = context->\hyperlink{structSha512Context_ad45c82baa9d7bc67dccdab829d8c2586}{h}[1];
+269    \hyperlink{stdint_8h_aec6fcb673ff035718c238c8c9d544c47}{uint64\_t} \hyperlink{aria_8c_a5dadc28804036d1b82e1dc027e95c9a6}{c} = context->\hyperlink{structSha512Context_ad45c82baa9d7bc67dccdab829d8c2586}{h}[2];
+270    \hyperlink{stdint_8h_aec6fcb673ff035718c238c8c9d544c47}{uint64\_t} d = context->\hyperlink{structSha512Context_ad45c82baa9d7bc67dccdab829d8c2586}{h}[3];
+271    \hyperlink{stdint_8h_aec6fcb673ff035718c238c8c9d544c47}{uint64\_t} e = context->\hyperlink{structSha512Context_ad45c82baa9d7bc67dccdab829d8c2586}{h}[4];
+272    \hyperlink{stdint_8h_aec6fcb673ff035718c238c8c9d544c47}{uint64\_t} f = context->\hyperlink{structSha512Context_ad45c82baa9d7bc67dccdab829d8c2586}{h}[5];
+273    \hyperlink{stdint_8h_aec6fcb673ff035718c238c8c9d544c47}{uint64\_t} g = context->\hyperlink{structSha512Context_ad45c82baa9d7bc67dccdab829d8c2586}{h}[6];
+274    \hyperlink{stdint_8h_aec6fcb673ff035718c238c8c9d544c47}{uint64\_t} \hyperlink{ndp_8h_a1f1dfeb2f802fe99f37fe91867b84456}{h} = context->\hyperlink{structSha512Context_ad45c82baa9d7bc67dccdab829d8c2586}{h}[7];
+275 
+276    \textcolor{comment}{//Process message in 16-word blocks}
+277    \hyperlink{stdint_8h_aec6fcb673ff035718c238c8c9d544c47}{uint64\_t} *\hyperlink{ethernet_8h_aaa9bda35d7b2e3d98ecec180d3f628c0}{w} = context->\hyperlink{structSha512Context_ae359d0bf9be744a30222e2086ca42860}{w};
+278 
+279    \textcolor{comment}{//Convert from big-endian byte order to host byte order}
+280    \textcolor{keywordflow}{for}(t = 0; t < 16; t++)
+281    \{
+282       w[\hyperlink{llmnr__common_8h_a2d03918f4f9edabaf3c9f43abcc2d85b}{t}] = \hyperlink{cpu__endian_8h_af18eac7ad2dec12ba37255aeb701b08e}{betoh64}(w[t]);
+283    \}
+284 
+285    \textcolor{comment}{//SHA-512 hash computation (alternate method)}
+286    \textcolor{keywordflow}{for}(t = 0; t < 80; t++)
+287    \{
+288       \textcolor{comment}{//Prepare the message schedule}
+289       \textcolor{keywordflow}{if}(t >= 16)
+290          \hyperlink{sha512_8c_a1255a03794787336683d162cf62f7523}{W}(t) += \hyperlink{sha512_8c_afdaf94b45938801e2481d2dba230f234}{SIGMA4}(\hyperlink{sha512_8c_a1255a03794787336683d162cf62f7523}{W}(t + 14)) + \hyperlink{sha512_8c_a1255a03794787336683d162cf62f7523}{W}(t + 9) + \hyperlink{sha512_8c_a1b365adbd1a69e2b77496cb9f3496d76}{SIGMA3}(\hyperlink{sha512_8c_a1255a03794787336683d162cf62f7523}{W}(t + 1));
+291 
+292       \textcolor{comment}{//Calculate T1 and T2}
+293       temp1 = h + \hyperlink{sha512_8c_a745eb84b4bc1f2c8bf77f3d082161f90}{SIGMA2}(e) + \hyperlink{sha512_8c_a0ed6c9c714485592a8c317a8ad91c83b}{CH}(e, f, g) + \hyperlink{sha512_8c_a3934111e8801bd86b261f4bac043efa6}{k}[\hyperlink{llmnr__common_8h_a2d03918f4f9edabaf3c9f43abcc2d85b}{t}] + \hyperlink{sha512_8c_a1255a03794787336683d162cf62f7523}{W}(t);
+294       temp2 = \hyperlink{sha512_8c_ad73ff0c2b937d2657b21f58eca4d1d7c}{SIGMA1}(a) + \hyperlink{sha512_8c_ae2f6c7a0b4fdb15387259356b16854c9}{MAJ}(a, b, c);
+295 
+296       \textcolor{comment}{//Update the working registers}
+297       h = g;
+298       g = f;
+299       f = e;
+300       e = d + temp1;
+301       d = \hyperlink{aria_8c_a5dadc28804036d1b82e1dc027e95c9a6}{c};
+302       c = \hyperlink{dtls__misc_8h_ab590318ac859d0e57e15c3dd6c62a605}{b};
+303       b = \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a};
+304       a = temp1 + temp2;
+305    \}
+306 
+307    \textcolor{comment}{//Update the hash value}
+308    context->\hyperlink{structSha512Context_ad45c82baa9d7bc67dccdab829d8c2586}{h}[0] += \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a};
+309    context->\hyperlink{structSha512Context_ad45c82baa9d7bc67dccdab829d8c2586}{h}[1] += \hyperlink{dtls__misc_8h_ab590318ac859d0e57e15c3dd6c62a605}{b};
+310    context->\hyperlink{structSha512Context_ad45c82baa9d7bc67dccdab829d8c2586}{h}[2] += \hyperlink{aria_8c_a5dadc28804036d1b82e1dc027e95c9a6}{c};
+311    context->\hyperlink{structSha512Context_ad45c82baa9d7bc67dccdab829d8c2586}{h}[3] += d;
+312    context->\hyperlink{structSha512Context_ad45c82baa9d7bc67dccdab829d8c2586}{h}[4] += e;
+313    context->\hyperlink{structSha512Context_ad45c82baa9d7bc67dccdab829d8c2586}{h}[5] += f;
+314    context->\hyperlink{structSha512Context_ad45c82baa9d7bc67dccdab829d8c2586}{h}[6] += g;
+315    context->\hyperlink{structSha512Context_ad45c82baa9d7bc67dccdab829d8c2586}{h}[7] += \hyperlink{ndp_8h_a1f1dfeb2f802fe99f37fe91867b84456}{h};
+316 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{sha512_8c_aa557f01dccd10a72beb2aa7149f50b58}\label{sha512_8c_aa557f01dccd10a72beb2aa7149f50b58}} 
+\index{sha512.\+c@{sha512.\+c}!sha512\+Update@{sha512\+Update}}
+\index{sha512\+Update@{sha512\+Update}!sha512.\+c@{sha512.\+c}}
+\subsubsection{\texorpdfstring{sha512\+Update()}{sha512Update()}}
+{\footnotesize\ttfamily void sha512\+Update (\begin{DoxyParamCaption}\item[{\hyperlink{structSha512Context}{Sha512\+Context} $\ast$}]{context,  }\item[{const void $\ast$}]{data,  }\item[{size\+\_\+t}]{length }\end{DoxyParamCaption})}
+
+
+
+Update the S\+H\+A-\/512 context with a portion of the message being hashed. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the S\+H\+A-\/512 context \\
+\hline
+\mbox{\tt in}  & {\em data} & Pointer to the buffer being hashed \\
+\hline
+\mbox{\tt in}  & {\em length} & Length of the buffer \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 179 of file sha512.\+c.
+
+
+\begin{DoxyCode}
+180 \{
+181    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+182 
+183    \textcolor{comment}{//Process the incoming data}
+184    \textcolor{keywordflow}{while}(\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} > 0)
+185    \{
+186       \textcolor{comment}{//The buffer can hold at most 128 bytes}
+187       n = \hyperlink{os__port_8h_a3acffbd305ee72dcd4593c0d8af64a4f}{MIN}(\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, 128 - context->\hyperlink{structSha512Context_ac9959286ecbbbe3fc89c954f65e3add2}{size});
+188 
+189       \textcolor{comment}{//Copy the data to the buffer}
+190       \hyperlink{cyclone__crypto_2core_2crypto_8h_a6724616c4014bb7e21f2660bd7b88be8}{cryptoMemcpy}(context->\hyperlink{structSha512Context_a5634ba203a8da22b12ddd1dd74089f37}{buffer} + context->\hyperlink{structSha512Context_ac9959286ecbbbe3fc89c954f65e3add2}{size}, \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, n);
+191 
+192       \textcolor{comment}{//Update the SHA-512 context}
+193       context->\hyperlink{structSha512Context_ac9959286ecbbbe3fc89c954f65e3add2}{size} += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+194       context->\hyperlink{structSha512Context_a5fc83aae6c94e47daba93aa778cb952d}{totalSize} += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+195       \textcolor{comment}{//Advance the data pointer}
+196       \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data} = (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *) \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data} + n;
+197       \textcolor{comment}{//Remaining bytes to process}
+198       \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} -= \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+199 
+200       \textcolor{comment}{//Process message in 16-word blocks}
+201       \textcolor{keywordflow}{if}(context->\hyperlink{structSha512Context_ac9959286ecbbbe3fc89c954f65e3add2}{size} == 128)
+202       \{
+203          \textcolor{comment}{//Transform the 16-word block}
+204          \hyperlink{sha512_8c_a01e92b3bd2e45ae411429770e167447f}{sha512ProcessBlock}(context);
+205          \textcolor{comment}{//Empty the buffer}
+206          context->\hyperlink{structSha512Context_ac9959286ecbbbe3fc89c954f65e3add2}{size} = 0;
+207       \}
+208    \}
+209 \}
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{sha512_8c_a3934111e8801bd86b261f4bac043efa6}\label{sha512_8c_a3934111e8801bd86b261f4bac043efa6}} 
+\index{sha512.\+c@{sha512.\+c}!k@{k}}
+\index{k@{k}!sha512.\+c@{sha512.\+c}}
+\subsubsection{\texorpdfstring{k}{k}}
+{\footnotesize\ttfamily const \hyperlink{stdint_8h_aec6fcb673ff035718c238c8c9d544c47}{uint64\+\_\+t} k\mbox{[}80\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=
+\{
+   0x428A2F98D728AE22, 0x7137449123EF65CD, 0xB5C0FBCFEC4D3B2F, 0xE9B5DBA58189DBBC,
+   0x3956C25BF348B538, 0x59F111F1B605D019, 0x923F82A4AF194F9B, 0xAB1C5ED5DA6D8118,
+   0xD807AA98A3030242, 0x12835B0145706FBE, 0x243185BE4EE4B28C, 0x550C7DC3D5FFB4E2,
+   0x72BE5D74F27B896F, 0x80DEB1FE3B1696B1, 0x9BDC06A725C71235, 0xC19BF174CF692694,
+   0xE49B69C19EF14AD2, 0xEFBE4786384F25E3, 0x0FC19DC68B8CD5B5, 0x240CA1CC77AC9C65,
+   0x2DE92C6F592B0275, 0x4A7484AA6EA6E483, 0x5CB0A9DCBD41FBD4, 0x76F988DA831153B5,
+   0x983E5152EE66DFAB, 0xA831C66D2DB43210, 0xB00327C898FB213F, 0xBF597FC7BEEF0EE4,
+   0xC6E00BF33DA88FC2, 0xD5A79147930AA725, 0x06CA6351E003826F, 0x142929670A0E6E70,
+   0x27B70A8546D22FFC, 0x2E1B21385C26C926, 0x4D2C6DFC5AC42AED, 0x53380D139D95B3DF,
+   0x650A73548BAF63DE, 0x766A0ABB3C77B2A8, 0x81C2C92E47EDAEE6, 0x92722C851482353B,
+   0xA2BFE8A14CF10364, 0xA81A664BBC423001, 0xC24B8B70D0F89791, 0xC76C51A30654BE30,
+   0xD192E819D6EF5218, 0xD69906245565A910, 0xF40E35855771202A, 0x106AA07032BBD1B8,
+   0x19A4C116B8D2D0C8, 0x1E376C085141AB53, 0x2748774CDF8EEB99, 0x34B0BCB5E19B48A8,
+   0x391C0CB3C5C95A63, 0x4ED8AA4AE3418ACB, 0x5B9CCA4F7763E373, 0x682E6FF3D6B2B8A3,
+   0x748F82EE5DEFB2FC, 0x78A5636F43172F60, 0x84C87814A1F0AB72, 0x8CC702081A6439EC,
+   0x90BEFFFA23631E28, 0xA4506CEBDE82BDE9, 0xBEF9A3F7B2C67915, 0xC67178F2E372532B,
+   0xCA273ECEEA26619C, 0xD186B8C721C0C207, 0xEADA7DD6CDE0EB1E, 0xF57D4F7FEE6ED178,
+   0x06F067AA72176FBA, 0x0A637DC5A2C898A6, 0x113F9804BEF90DAE, 0x1B710B35131C471B,
+   0x28DB77F523047D84, 0x32CAAB7B40C72493, 0x3C9EBE0A15C9BEBC, 0x431D67C49C100D4C,
+   0x4CC5D4BECB3E42B6, 0x597F299CFC657E2A, 0x5FCB6FAB3AD6FAEC, 0x6C44198C4A475817
+\}
+\end{DoxyCode}
+
+
+Definition at line 72 of file sha512.\+c.
+
+\mbox{\Hypertarget{sha512_8c_aa9acdc1b5446bc018349ce0a859e17bd}\label{sha512_8c_aa9acdc1b5446bc018349ce0a859e17bd}} 
+\index{sha512.\+c@{sha512.\+c}!padding@{padding}}
+\index{padding@{padding}!sha512.\+c@{sha512.\+c}}
+\subsubsection{\texorpdfstring{padding}{padding}}
+{\footnotesize\ttfamily const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} padding\mbox{[}128\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=
+\{
+   0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+\}
+\end{DoxyCode}
+
+
+Definition at line 59 of file sha512.\+c.
+
+\mbox{\Hypertarget{sha512_8c_a89abe1bbc6003a0c334ae61e121fd938}\label{sha512_8c_a89abe1bbc6003a0c334ae61e121fd938}} 
+\index{sha512.\+c@{sha512.\+c}!sha512\+Hash\+Algo@{sha512\+Hash\+Algo}}
+\index{sha512\+Hash\+Algo@{sha512\+Hash\+Algo}!sha512.\+c@{sha512.\+c}}
+\subsubsection{\texorpdfstring{sha512\+Hash\+Algo}{sha512HashAlgo}}
+{\footnotesize\ttfamily const \hyperlink{structHashAlgo}{Hash\+Algo} sha512\+Hash\+Algo}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=
+\{
+   \textcolor{stringliteral}{"SHA-512"},
+   \hyperlink{sha512_8c_a2917e0d8426a070a4d640c0b6cf9f496}{sha512Oid},
+   \textcolor{keyword}{sizeof}(\hyperlink{sha512_8c_a2917e0d8426a070a4d640c0b6cf9f496}{sha512Oid}),
+   \textcolor{keyword}{sizeof}(\hyperlink{structSha512Context}{Sha512Context}),
+   \hyperlink{sha512_8h_ac7071364cb94c9fcce009ba16a4bdca1}{SHA512\_BLOCK\_SIZE},
+   \hyperlink{sha512_8h_a67f489f3eee39c447a6db3ba34ef75f2}{SHA512\_DIGEST\_SIZE},
+   \hyperlink{sha512_8h_a952d72cf49c6d1904020c48617de410a}{SHA512\_MIN\_PAD\_SIZE},
+   \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE},
+   (\hyperlink{cyclone__crypto_2core_2crypto_8h_a02fe893af436f6d8a574897a59748592}{HashAlgoCompute}) \hyperlink{sha512_8c_a2dba443d6ac20d8ca44f13934e232f80}{sha512Compute},
+   (\hyperlink{cyclone__crypto_2core_2crypto_8h_afc5ce55917bd80825aa610848f402caf}{HashAlgoInit}) \hyperlink{sha512_8c_a4901f384e1d07dc3b58ae22f4ea947cb}{sha512Init},
+   (\hyperlink{cyclone__crypto_2core_2crypto_8h_a3d1fb45d6ca7822d20873ddbc8e39b89}{HashAlgoUpdate}) \hyperlink{sha512_8c_aa557f01dccd10a72beb2aa7149f50b58}{sha512Update},
+   (\hyperlink{cyclone__crypto_2core_2crypto_8h_a0a272470b5f95692d2e2e882f75844b3}{HashAlgoFinal}) \hyperlink{sha512_8c_a7d421f7a03f3a92f3c6c8628ab035dc5}{sha512Final},
+   \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}
+\}
+\end{DoxyCode}
+
+
+Definition at line 100 of file sha512.\+c.
+
+\mbox{\Hypertarget{sha512_8c_a2917e0d8426a070a4d640c0b6cf9f496}\label{sha512_8c_a2917e0d8426a070a4d640c0b6cf9f496}} 
+\index{sha512.\+c@{sha512.\+c}!sha512\+Oid@{sha512\+Oid}}
+\index{sha512\+Oid@{sha512\+Oid}!sha512.\+c@{sha512.\+c}}
+\subsubsection{\texorpdfstring{sha512\+Oid}{sha512Oid}}
+{\footnotesize\ttfamily const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} sha512\+Oid\mbox{[}9\mbox{]} = \{0x60, 0x86, 0x48, 0x01, 0x65, 0x03, 0x04, 0x02, 0x03\}}
+
+
+
+Definition at line 97 of file sha512.\+c.
+

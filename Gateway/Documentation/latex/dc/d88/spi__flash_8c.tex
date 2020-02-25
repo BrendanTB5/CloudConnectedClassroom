@@ -1,0 +1,310 @@
+\hypertarget{spi__flash_8c}{}\section{third\+\_\+party/atmel/devices/wilc1000/driver/source/spi\+\_\+flash.c File Reference}
+\label{spi__flash_8c}\index{third\+\_\+party/atmel/devices/wilc1000/driver/source/spi\+\_\+flash.\+c@{third\+\_\+party/atmel/devices/wilc1000/driver/source/spi\+\_\+flash.\+c}}
+
+
+W\+I\+LC stack S\+PI Flash internal A\+P\+Is implementation.  
+
+
+{\ttfamily \#include \char`\"{}common/include/nm\+\_\+common.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}driver/source/nmbus.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}bsp/include/nm\+\_\+bsp.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}driver/source/nmdrv.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{spi__flash_8c_a45ba202b05caf39795aeca91b0ae547e}{T\+I\+M\+E\+O\+UT}~10000 /$\ast$MS$\ast$/
+\item 
+\#define \hyperlink{spi__flash_8c_afa34b8813d828dddc6c8853041810691}{S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+B\+A\+SE}~(0x10200)
+\item 
+\#define \hyperlink{spi__flash_8c_a25b574a296f6b3ce3671990801bc6ee8}{S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+M\+O\+DE}~(\hyperlink{spi__flash_8c_afa34b8813d828dddc6c8853041810691}{S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+B\+A\+SE} + 0x00)
+\item 
+\#define \hyperlink{spi__flash_8c_a2b6b1ae66fe39d7d191e17148bfadd27}{S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+C\+M\+D\+\_\+\+C\+NT}~(\hyperlink{spi__flash_8c_afa34b8813d828dddc6c8853041810691}{S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+B\+A\+SE} + 0x04)
+\item 
+\#define \hyperlink{spi__flash_8c_ada57e0fafb17fd8bac3cd236b75400db}{S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+D\+A\+T\+A\+\_\+\+C\+NT}~(\hyperlink{spi__flash_8c_afa34b8813d828dddc6c8853041810691}{S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+B\+A\+SE} + 0x08)
+\item 
+\#define \hyperlink{spi__flash_8c_a05fbdafcafd204b546e76cfe7b1ab2e2}{S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+B\+U\+F1}~(\hyperlink{spi__flash_8c_afa34b8813d828dddc6c8853041810691}{S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+B\+A\+SE} + 0x0c)
+\item 
+\#define \hyperlink{spi__flash_8c_a5130ca7c4d089c6e3d6bfaba588485f6}{S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+B\+U\+F2}~(\hyperlink{spi__flash_8c_afa34b8813d828dddc6c8853041810691}{S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+B\+A\+SE} + 0x10)
+\item 
+\#define \hyperlink{spi__flash_8c_a3f25744fc26fd7b8c7fb5711bba0ebd9}{S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+B\+U\+F\+\_\+\+D\+IR}~(\hyperlink{spi__flash_8c_afa34b8813d828dddc6c8853041810691}{S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+B\+A\+SE} + 0x14)
+\item 
+\#define \hyperlink{spi__flash_8c_a9ce6155adb0ea813ad9b25af8b320289}{S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+T\+R\+\_\+\+D\+O\+NE}~(\hyperlink{spi__flash_8c_afa34b8813d828dddc6c8853041810691}{S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+B\+A\+SE} + 0x18)
+\item 
+\#define \hyperlink{spi__flash_8c_a70b0c65b5e77a8aa07cc95607e6dc992}{S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+D\+M\+A\+\_\+\+A\+D\+DR}~(\hyperlink{spi__flash_8c_afa34b8813d828dddc6c8853041810691}{S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+B\+A\+SE} + 0x1c)
+\item 
+\#define \hyperlink{spi__flash_8c_ac3d48f9f6ea0f0af9ae6ed4af584ca18}{S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+M\+S\+B\+\_\+\+C\+TL}~(\hyperlink{spi__flash_8c_afa34b8813d828dddc6c8853041810691}{S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+B\+A\+SE} + 0x20)
+\item 
+\#define \hyperlink{spi__flash_8c_a578310a99672d3e27a38fc07b0b7a815}{S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+T\+X\+\_\+\+C\+TL}~(\hyperlink{spi__flash_8c_afa34b8813d828dddc6c8853041810691}{S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+B\+A\+SE} + 0x24)
+\item 
+\#define \hyperlink{spi__flash_8c_a71be2eb3e4ec829627e4fbd389fda4eb}{D\+U\+M\+M\+Y\+\_\+\+R\+E\+G\+I\+S\+T\+ER}~(0x1084)
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group__DataT_ga100e7c691a47d6978527c479a0158245}{uint32} \hyperlink{spi__flash_8c_a8a155fac74a5d09d3fdbac95964b487c}{spi\+\_\+flash\+\_\+get\+\_\+size} (void)
+\item 
+static \hyperlink{group__DataT_ga100e7c691a47d6978527c479a0158245}{uint32} \hyperlink{spi__flash_8c_a8e3a0305a153d2fdf20650e15e1a95fe}{spi\+\_\+flash\+\_\+rdid} (void)
+\item 
+static \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} \hyperlink{spi__flash_8c_a58c45d7653c91d13d7f5d1611c2933ed}{spi\+\_\+flash\+\_\+probe} (\hyperlink{group__DataT_ga100e7c691a47d6978527c479a0158245}{uint32} $\ast$u32\+Flash\+Id)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{group__DataT_ga100e7c691a47d6978527c479a0158245}{uint32} \hyperlink{spi__flash_8c_a2475b6a199430c436217c5b24d80b028}{gu32\+Inernal\+Flash\+Size} = 0
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+W\+I\+LC stack S\+PI Flash internal A\+P\+Is implementation. 
+
+Copyright (c) 2016-\/2018 Microchip Technology Inc. and its subsidiaries.
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{spi__flash_8c_a71be2eb3e4ec829627e4fbd389fda4eb}\label{spi__flash_8c_a71be2eb3e4ec829627e4fbd389fda4eb}} 
+\index{spi\+\_\+flash.\+c@{spi\+\_\+flash.\+c}!D\+U\+M\+M\+Y\+\_\+\+R\+E\+G\+I\+S\+T\+ER@{D\+U\+M\+M\+Y\+\_\+\+R\+E\+G\+I\+S\+T\+ER}}
+\index{D\+U\+M\+M\+Y\+\_\+\+R\+E\+G\+I\+S\+T\+ER@{D\+U\+M\+M\+Y\+\_\+\+R\+E\+G\+I\+S\+T\+ER}!spi\+\_\+flash.\+c@{spi\+\_\+flash.\+c}}
+\subsubsection{\texorpdfstring{D\+U\+M\+M\+Y\+\_\+\+R\+E\+G\+I\+S\+T\+ER}{DUMMY\_REGISTER}}
+{\footnotesize\ttfamily \#define D\+U\+M\+M\+Y\+\_\+\+R\+E\+G\+I\+S\+T\+ER~(0x1084)}
+
+
+
+Definition at line 56 of file spi\+\_\+flash.\+c.
+
+\mbox{\Hypertarget{spi__flash_8c_afa34b8813d828dddc6c8853041810691}\label{spi__flash_8c_afa34b8813d828dddc6c8853041810691}} 
+\index{spi\+\_\+flash.\+c@{spi\+\_\+flash.\+c}!S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+B\+A\+SE@{S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+B\+A\+SE}}
+\index{S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+B\+A\+SE@{S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+B\+A\+SE}!spi\+\_\+flash.\+c@{spi\+\_\+flash.\+c}}
+\subsubsection{\texorpdfstring{S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+B\+A\+SE}{SPI\_FLASH\_BASE}}
+{\footnotesize\ttfamily \#define S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+B\+A\+SE~(0x10200)}
+
+
+
+Definition at line 44 of file spi\+\_\+flash.\+c.
+
+\mbox{\Hypertarget{spi__flash_8c_a05fbdafcafd204b546e76cfe7b1ab2e2}\label{spi__flash_8c_a05fbdafcafd204b546e76cfe7b1ab2e2}} 
+\index{spi\+\_\+flash.\+c@{spi\+\_\+flash.\+c}!S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+B\+U\+F1@{S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+B\+U\+F1}}
+\index{S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+B\+U\+F1@{S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+B\+U\+F1}!spi\+\_\+flash.\+c@{spi\+\_\+flash.\+c}}
+\subsubsection{\texorpdfstring{S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+B\+U\+F1}{SPI\_FLASH\_BUF1}}
+{\footnotesize\ttfamily \#define S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+B\+U\+F1~(\hyperlink{spi__flash_8c_afa34b8813d828dddc6c8853041810691}{S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+B\+A\+SE} + 0x0c)}
+
+
+
+Definition at line 48 of file spi\+\_\+flash.\+c.
+
+\mbox{\Hypertarget{spi__flash_8c_a5130ca7c4d089c6e3d6bfaba588485f6}\label{spi__flash_8c_a5130ca7c4d089c6e3d6bfaba588485f6}} 
+\index{spi\+\_\+flash.\+c@{spi\+\_\+flash.\+c}!S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+B\+U\+F2@{S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+B\+U\+F2}}
+\index{S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+B\+U\+F2@{S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+B\+U\+F2}!spi\+\_\+flash.\+c@{spi\+\_\+flash.\+c}}
+\subsubsection{\texorpdfstring{S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+B\+U\+F2}{SPI\_FLASH\_BUF2}}
+{\footnotesize\ttfamily \#define S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+B\+U\+F2~(\hyperlink{spi__flash_8c_afa34b8813d828dddc6c8853041810691}{S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+B\+A\+SE} + 0x10)}
+
+
+
+Definition at line 49 of file spi\+\_\+flash.\+c.
+
+\mbox{\Hypertarget{spi__flash_8c_a3f25744fc26fd7b8c7fb5711bba0ebd9}\label{spi__flash_8c_a3f25744fc26fd7b8c7fb5711bba0ebd9}} 
+\index{spi\+\_\+flash.\+c@{spi\+\_\+flash.\+c}!S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+B\+U\+F\+\_\+\+D\+IR@{S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+B\+U\+F\+\_\+\+D\+IR}}
+\index{S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+B\+U\+F\+\_\+\+D\+IR@{S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+B\+U\+F\+\_\+\+D\+IR}!spi\+\_\+flash.\+c@{spi\+\_\+flash.\+c}}
+\subsubsection{\texorpdfstring{S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+B\+U\+F\+\_\+\+D\+IR}{SPI\_FLASH\_BUF\_DIR}}
+{\footnotesize\ttfamily \#define S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+B\+U\+F\+\_\+\+D\+IR~(\hyperlink{spi__flash_8c_afa34b8813d828dddc6c8853041810691}{S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+B\+A\+SE} + 0x14)}
+
+
+
+Definition at line 50 of file spi\+\_\+flash.\+c.
+
+\mbox{\Hypertarget{spi__flash_8c_a2b6b1ae66fe39d7d191e17148bfadd27}\label{spi__flash_8c_a2b6b1ae66fe39d7d191e17148bfadd27}} 
+\index{spi\+\_\+flash.\+c@{spi\+\_\+flash.\+c}!S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+C\+M\+D\+\_\+\+C\+NT@{S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+C\+M\+D\+\_\+\+C\+NT}}
+\index{S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+C\+M\+D\+\_\+\+C\+NT@{S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+C\+M\+D\+\_\+\+C\+NT}!spi\+\_\+flash.\+c@{spi\+\_\+flash.\+c}}
+\subsubsection{\texorpdfstring{S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+C\+M\+D\+\_\+\+C\+NT}{SPI\_FLASH\_CMD\_CNT}}
+{\footnotesize\ttfamily \#define S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+C\+M\+D\+\_\+\+C\+NT~(\hyperlink{spi__flash_8c_afa34b8813d828dddc6c8853041810691}{S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+B\+A\+SE} + 0x04)}
+
+
+
+Definition at line 46 of file spi\+\_\+flash.\+c.
+
+\mbox{\Hypertarget{spi__flash_8c_ada57e0fafb17fd8bac3cd236b75400db}\label{spi__flash_8c_ada57e0fafb17fd8bac3cd236b75400db}} 
+\index{spi\+\_\+flash.\+c@{spi\+\_\+flash.\+c}!S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+D\+A\+T\+A\+\_\+\+C\+NT@{S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+D\+A\+T\+A\+\_\+\+C\+NT}}
+\index{S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+D\+A\+T\+A\+\_\+\+C\+NT@{S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+D\+A\+T\+A\+\_\+\+C\+NT}!spi\+\_\+flash.\+c@{spi\+\_\+flash.\+c}}
+\subsubsection{\texorpdfstring{S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+D\+A\+T\+A\+\_\+\+C\+NT}{SPI\_FLASH\_DATA\_CNT}}
+{\footnotesize\ttfamily \#define S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+D\+A\+T\+A\+\_\+\+C\+NT~(\hyperlink{spi__flash_8c_afa34b8813d828dddc6c8853041810691}{S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+B\+A\+SE} + 0x08)}
+
+
+
+Definition at line 47 of file spi\+\_\+flash.\+c.
+
+\mbox{\Hypertarget{spi__flash_8c_a70b0c65b5e77a8aa07cc95607e6dc992}\label{spi__flash_8c_a70b0c65b5e77a8aa07cc95607e6dc992}} 
+\index{spi\+\_\+flash.\+c@{spi\+\_\+flash.\+c}!S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+D\+M\+A\+\_\+\+A\+D\+DR@{S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+D\+M\+A\+\_\+\+A\+D\+DR}}
+\index{S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+D\+M\+A\+\_\+\+A\+D\+DR@{S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+D\+M\+A\+\_\+\+A\+D\+DR}!spi\+\_\+flash.\+c@{spi\+\_\+flash.\+c}}
+\subsubsection{\texorpdfstring{S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+D\+M\+A\+\_\+\+A\+D\+DR}{SPI\_FLASH\_DMA\_ADDR}}
+{\footnotesize\ttfamily \#define S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+D\+M\+A\+\_\+\+A\+D\+DR~(\hyperlink{spi__flash_8c_afa34b8813d828dddc6c8853041810691}{S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+B\+A\+SE} + 0x1c)}
+
+
+
+Definition at line 52 of file spi\+\_\+flash.\+c.
+
+\mbox{\Hypertarget{spi__flash_8c_a25b574a296f6b3ce3671990801bc6ee8}\label{spi__flash_8c_a25b574a296f6b3ce3671990801bc6ee8}} 
+\index{spi\+\_\+flash.\+c@{spi\+\_\+flash.\+c}!S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+M\+O\+DE@{S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+M\+O\+DE}}
+\index{S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+M\+O\+DE@{S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+M\+O\+DE}!spi\+\_\+flash.\+c@{spi\+\_\+flash.\+c}}
+\subsubsection{\texorpdfstring{S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+M\+O\+DE}{SPI\_FLASH\_MODE}}
+{\footnotesize\ttfamily \#define S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+M\+O\+DE~(\hyperlink{spi__flash_8c_afa34b8813d828dddc6c8853041810691}{S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+B\+A\+SE} + 0x00)}
+
+
+
+Definition at line 45 of file spi\+\_\+flash.\+c.
+
+\mbox{\Hypertarget{spi__flash_8c_ac3d48f9f6ea0f0af9ae6ed4af584ca18}\label{spi__flash_8c_ac3d48f9f6ea0f0af9ae6ed4af584ca18}} 
+\index{spi\+\_\+flash.\+c@{spi\+\_\+flash.\+c}!S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+M\+S\+B\+\_\+\+C\+TL@{S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+M\+S\+B\+\_\+\+C\+TL}}
+\index{S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+M\+S\+B\+\_\+\+C\+TL@{S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+M\+S\+B\+\_\+\+C\+TL}!spi\+\_\+flash.\+c@{spi\+\_\+flash.\+c}}
+\subsubsection{\texorpdfstring{S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+M\+S\+B\+\_\+\+C\+TL}{SPI\_FLASH\_MSB\_CTL}}
+{\footnotesize\ttfamily \#define S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+M\+S\+B\+\_\+\+C\+TL~(\hyperlink{spi__flash_8c_afa34b8813d828dddc6c8853041810691}{S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+B\+A\+SE} + 0x20)}
+
+
+
+Definition at line 53 of file spi\+\_\+flash.\+c.
+
+\mbox{\Hypertarget{spi__flash_8c_a9ce6155adb0ea813ad9b25af8b320289}\label{spi__flash_8c_a9ce6155adb0ea813ad9b25af8b320289}} 
+\index{spi\+\_\+flash.\+c@{spi\+\_\+flash.\+c}!S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+T\+R\+\_\+\+D\+O\+NE@{S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+T\+R\+\_\+\+D\+O\+NE}}
+\index{S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+T\+R\+\_\+\+D\+O\+NE@{S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+T\+R\+\_\+\+D\+O\+NE}!spi\+\_\+flash.\+c@{spi\+\_\+flash.\+c}}
+\subsubsection{\texorpdfstring{S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+T\+R\+\_\+\+D\+O\+NE}{SPI\_FLASH\_TR\_DONE}}
+{\footnotesize\ttfamily \#define S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+T\+R\+\_\+\+D\+O\+NE~(\hyperlink{spi__flash_8c_afa34b8813d828dddc6c8853041810691}{S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+B\+A\+SE} + 0x18)}
+
+
+
+Definition at line 51 of file spi\+\_\+flash.\+c.
+
+\mbox{\Hypertarget{spi__flash_8c_a578310a99672d3e27a38fc07b0b7a815}\label{spi__flash_8c_a578310a99672d3e27a38fc07b0b7a815}} 
+\index{spi\+\_\+flash.\+c@{spi\+\_\+flash.\+c}!S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+T\+X\+\_\+\+C\+TL@{S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+T\+X\+\_\+\+C\+TL}}
+\index{S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+T\+X\+\_\+\+C\+TL@{S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+T\+X\+\_\+\+C\+TL}!spi\+\_\+flash.\+c@{spi\+\_\+flash.\+c}}
+\subsubsection{\texorpdfstring{S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+T\+X\+\_\+\+C\+TL}{SPI\_FLASH\_TX\_CTL}}
+{\footnotesize\ttfamily \#define S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+T\+X\+\_\+\+C\+TL~(\hyperlink{spi__flash_8c_afa34b8813d828dddc6c8853041810691}{S\+P\+I\+\_\+\+F\+L\+A\+S\+H\+\_\+\+B\+A\+SE} + 0x24)}
+
+
+
+Definition at line 54 of file spi\+\_\+flash.\+c.
+
+\mbox{\Hypertarget{spi__flash_8c_a45ba202b05caf39795aeca91b0ae547e}\label{spi__flash_8c_a45ba202b05caf39795aeca91b0ae547e}} 
+\index{spi\+\_\+flash.\+c@{spi\+\_\+flash.\+c}!T\+I\+M\+E\+O\+UT@{T\+I\+M\+E\+O\+UT}}
+\index{T\+I\+M\+E\+O\+UT@{T\+I\+M\+E\+O\+UT}!spi\+\_\+flash.\+c@{spi\+\_\+flash.\+c}}
+\subsubsection{\texorpdfstring{T\+I\+M\+E\+O\+UT}{TIMEOUT}}
+{\footnotesize\ttfamily \#define T\+I\+M\+E\+O\+UT~10000 /$\ast$MS$\ast$/}
+
+
+
+Definition at line 43 of file spi\+\_\+flash.\+c.
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{spi__flash_8c_a8a155fac74a5d09d3fdbac95964b487c}\label{spi__flash_8c_a8a155fac74a5d09d3fdbac95964b487c}} 
+\index{spi\+\_\+flash.\+c@{spi\+\_\+flash.\+c}!spi\+\_\+flash\+\_\+get\+\_\+size@{spi\+\_\+flash\+\_\+get\+\_\+size}}
+\index{spi\+\_\+flash\+\_\+get\+\_\+size@{spi\+\_\+flash\+\_\+get\+\_\+size}!spi\+\_\+flash.\+c@{spi\+\_\+flash.\+c}}
+\subsubsection{\texorpdfstring{spi\+\_\+flash\+\_\+get\+\_\+size()}{spi\_flash\_get\_size()}}
+{\footnotesize\ttfamily \hyperlink{group__DataT_ga100e7c691a47d6978527c479a0158245}{uint32} spi\+\_\+flash\+\_\+get\+\_\+size (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 106 of file spi\+\_\+flash.\+c.
+
+
+\begin{DoxyCode}
+107 \{
+108     \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} ret  = \hyperlink{nm__common_8h_a9ef27ba27aafdd1aa3a79d3ba2c36b8f}{M2M\_SUCCESS};
+109     \hyperlink{group__DataT_ga100e7c691a47d6978527c479a0158245}{uint32} u32FlashId = 0, u32FlashPwr = 0;
+110     \textcolor{keywordflow}{if}(!\hyperlink{spi__flash_8c_a2475b6a199430c436217c5b24d80b028}{gu32InernalFlashSize})
+111     \{
+112         ret = \hyperlink{spi__flash_8c_a58c45d7653c91d13d7f5d1611c2933ed}{spi\_flash\_probe}(&u32FlashId);
+113         \textcolor{keywordflow}{if}((u32FlashId != 0xffffffff)&&(ret == \hyperlink{nm__common_8h_a9ef27ba27aafdd1aa3a79d3ba2c36b8f}{M2M\_SUCCESS}))
+114         \{
+115             \textcolor{comment}{/*flash size is the third byte from the FLASH RDID*/}
+116             u32FlashPwr = ((u32FlashId>>16)&0xff) - 0x11; \textcolor{comment}{/*2MBIT is the min*/}
+117             \textcolor{comment}{/*That number power 2 to get the flash size*/}
+118             \hyperlink{spi__flash_8c_a2475b6a199430c436217c5b24d80b028}{gu32InernalFlashSize} = 1<<u32FlashPwr;
+119             \hyperlink{nm__common_8h_a84108eca2655e811179386a39c62acf2}{M2M\_INFO}(\textcolor{stringliteral}{"Flash Size %lu MBit\(\backslash\)r\(\backslash\)n"},\hyperlink{spi__flash_8c_a2475b6a199430c436217c5b24d80b028}{gu32InernalFlashSize});
+120         \}
+121         \textcolor{keywordflow}{else}
+122         \{
+123             \hyperlink{nm__common_8h_a34d005df494e50b05cd38b80f318d7ac}{M2M\_ERR}(\textcolor{stringliteral}{"Cann't Detect Flash size\(\backslash\)r\(\backslash\)n"});
+124         \}
+125     \}
+126 
+127     \textcolor{keywordflow}{return} \hyperlink{spi__flash_8c_a2475b6a199430c436217c5b24d80b028}{gu32InernalFlashSize};
+128 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{spi__flash_8c_a58c45d7653c91d13d7f5d1611c2933ed}\label{spi__flash_8c_a58c45d7653c91d13d7f5d1611c2933ed}} 
+\index{spi\+\_\+flash.\+c@{spi\+\_\+flash.\+c}!spi\+\_\+flash\+\_\+probe@{spi\+\_\+flash\+\_\+probe}}
+\index{spi\+\_\+flash\+\_\+probe@{spi\+\_\+flash\+\_\+probe}!spi\+\_\+flash.\+c@{spi\+\_\+flash.\+c}}
+\subsubsection{\texorpdfstring{spi\+\_\+flash\+\_\+probe()}{spi\_flash\_probe()}}
+{\footnotesize\ttfamily static \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} spi\+\_\+flash\+\_\+probe (\begin{DoxyParamCaption}\item[{\hyperlink{group__DataT_ga100e7c691a47d6978527c479a0158245}{uint32} $\ast$}]{u32\+Flash\+Id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 80 of file spi\+\_\+flash.\+c.
+
+
+\begin{DoxyCode}
+81 \{
+82     \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} ret = \hyperlink{nm__common_8h_a9ef27ba27aafdd1aa3a79d3ba2c36b8f}{M2M\_SUCCESS};
+83     \hyperlink{group__DataT_ga100e7c691a47d6978527c479a0158245}{uint32} pin\_mux\_0;
+84     \hyperlink{group__DataT_ga100e7c691a47d6978527c479a0158245}{uint32} orig\_pin\_mux\_0;
+85     \hyperlink{group__DataT_ga100e7c691a47d6978527c479a0158245}{uint32} flashid;
+86 
+87     pin\_mux\_0 = \hyperlink{nmbus_8c_a40095d9f8d9cd502b40d93015c93af24}{nm\_read\_reg}(0x1408);
+88     orig\_pin\_mux\_0 = pin\_mux\_0;
+89 
+90     \textcolor{keywordflow}{if}( (orig\_pin\_mux\_0 & 0xffff000) != 0x1111000) \{
+91         \textcolor{comment}{/* Select PINMUX to use SPI MASTER */}
+92         pin\_mux\_0 &= ~0xffff000;
+93         pin\_mux\_0 |= 0x1111000;
+94         \hyperlink{nmbus_8c_a6a7d6b943cea86630575707ef80e09f9}{nm\_write\_reg}(0x1408, pin\_mux\_0);
+95     \}
+96 
+97     flashid = \hyperlink{spi__flash_8c_a8e3a0305a153d2fdf20650e15e1a95fe}{spi\_flash\_rdid}();
+98 
+99     \textcolor{keywordflow}{if}( (orig\_pin\_mux\_0 & 0xffff000) != 0x1111000) \{
+100         \hyperlink{nmbus_8c_a6a7d6b943cea86630575707ef80e09f9}{nm\_write\_reg}(0x1408, orig\_pin\_mux\_0);
+101     \}
+102     *u32FlashId = flashid;
+103     \textcolor{keywordflow}{return} ret;
+104 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{spi__flash_8c_a8e3a0305a153d2fdf20650e15e1a95fe}\label{spi__flash_8c_a8e3a0305a153d2fdf20650e15e1a95fe}} 
+\index{spi\+\_\+flash.\+c@{spi\+\_\+flash.\+c}!spi\+\_\+flash\+\_\+rdid@{spi\+\_\+flash\+\_\+rdid}}
+\index{spi\+\_\+flash\+\_\+rdid@{spi\+\_\+flash\+\_\+rdid}!spi\+\_\+flash.\+c@{spi\+\_\+flash.\+c}}
+\subsubsection{\texorpdfstring{spi\+\_\+flash\+\_\+rdid()}{spi\_flash\_rdid()}}
+{\footnotesize\ttfamily static \hyperlink{group__DataT_ga100e7c691a47d6978527c479a0158245}{uint32} spi\+\_\+flash\+\_\+rdid (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 62 of file spi\+\_\+flash.\+c.
+
+
+\begin{DoxyCode}
+63 \{
+64     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} cmd[1];
+65     \hyperlink{group__DataT_ga100e7c691a47d6978527c479a0158245}{uint32} reg;
+66 
+67     cmd[0] = 0x9f;
+68 
+69     \hyperlink{nmbus_8c_a6a7d6b943cea86630575707ef80e09f9}{nm\_write\_reg}(\hyperlink{spi__flash_8c_ada57e0fafb17fd8bac3cd236b75400db}{SPI\_FLASH\_DATA\_CNT}, 4);
+70     \hyperlink{nmbus_8c_a6a7d6b943cea86630575707ef80e09f9}{nm\_write\_reg}(\hyperlink{spi__flash_8c_a05fbdafcafd204b546e76cfe7b1ab2e2}{SPI\_FLASH\_BUF1}, cmd[0]);
+71     \hyperlink{nmbus_8c_a6a7d6b943cea86630575707ef80e09f9}{nm\_write\_reg}(\hyperlink{spi__flash_8c_a3f25744fc26fd7b8c7fb5711bba0ebd9}{SPI\_FLASH\_BUF\_DIR}, 0x1);
+72     \hyperlink{nmbus_8c_a6a7d6b943cea86630575707ef80e09f9}{nm\_write\_reg}(\hyperlink{spi__flash_8c_a70b0c65b5e77a8aa07cc95607e6dc992}{SPI\_FLASH\_DMA\_ADDR}, 
+      \hyperlink{spi__flash_8c_a71be2eb3e4ec829627e4fbd389fda4eb}{DUMMY\_REGISTER});
+73     \hyperlink{nmbus_8c_a6a7d6b943cea86630575707ef80e09f9}{nm\_write\_reg}(\hyperlink{spi__flash_8c_a2b6b1ae66fe39d7d191e17148bfadd27}{SPI\_FLASH\_CMD\_CNT}, 1 | (1<<7));
+74     \textcolor{keywordflow}{while}(\hyperlink{nmbus_8c_a40095d9f8d9cd502b40d93015c93af24}{nm\_read\_reg}(\hyperlink{spi__flash_8c_a9ce6155adb0ea813ad9b25af8b320289}{SPI\_FLASH\_TR\_DONE}) != 1);
+75     reg = \hyperlink{nmbus_8c_a40095d9f8d9cd502b40d93015c93af24}{nm\_read\_reg}(\hyperlink{spi__flash_8c_a71be2eb3e4ec829627e4fbd389fda4eb}{DUMMY\_REGISTER});
+76     \hyperlink{nm__common_8h_a151ceaaab8f30c48e1e6aec3f3eff194}{M2M\_PRINT}(\textcolor{stringliteral}{"Flash id %lx \(\backslash\)r\(\backslash\)n"},reg);
+77     \textcolor{keywordflow}{return} reg;
+78 \}
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{spi__flash_8c_a2475b6a199430c436217c5b24d80b028}\label{spi__flash_8c_a2475b6a199430c436217c5b24d80b028}} 
+\index{spi\+\_\+flash.\+c@{spi\+\_\+flash.\+c}!gu32\+Inernal\+Flash\+Size@{gu32\+Inernal\+Flash\+Size}}
+\index{gu32\+Inernal\+Flash\+Size@{gu32\+Inernal\+Flash\+Size}!spi\+\_\+flash.\+c@{spi\+\_\+flash.\+c}}
+\subsubsection{\texorpdfstring{gu32\+Inernal\+Flash\+Size}{gu32InernalFlashSize}}
+{\footnotesize\ttfamily \hyperlink{group__DataT_ga100e7c691a47d6978527c479a0158245}{uint32} gu32\+Inernal\+Flash\+Size = 0\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 58 of file spi\+\_\+flash.\+c.
+

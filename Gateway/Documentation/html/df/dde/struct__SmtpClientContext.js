@@ -1,0 +1,25 @@
+var struct__SmtpClientContext =
+[
+    [ "authCramMd5Supported", "df/dde/struct__SmtpClientContext.html#a266325289e109a6c5e22a69be1441d1e", null ],
+    [ "authLoginSupported", "df/dde/struct__SmtpClientContext.html#aee293f97c92ff4d3b13d738ccd54597a", null ],
+    [ "authPlainSupported", "df/dde/struct__SmtpClientContext.html#aaa2a532277fb8bc8616baf84cd13775b", null ],
+    [ "base64Encoding", "df/dde/struct__SmtpClientContext.html#a7805b71cff07e84b4592a21cfc830ac7", null ],
+    [ "boundary", "df/dde/struct__SmtpClientContext.html#ac5d4f45c1fbfc6f882f0d1bd99f5faa0", null ],
+    [ "buffer", "df/dde/struct__SmtpClientContext.html#a4b2eee830af1e3129cf7e5b924172895", null ],
+    [ "bufferLen", "df/dde/struct__SmtpClientContext.html#a749fb7b9249105b493ae7e63623e6e04", null ],
+    [ "bufferPos", "df/dde/struct__SmtpClientContext.html#ae276846168abb52ec32644fe33dc8ec0", null ],
+    [ "commandLen", "df/dde/struct__SmtpClientContext.html#a6040a7456bd6c44460d6690ba23ff833", null ],
+    [ "contentType", "df/dde/struct__SmtpClientContext.html#adcd96e07f999a41b6f39520bb7a1a4a8", null ],
+    [ "interface", "df/dde/struct__SmtpClientContext.html#acbc7a76809846d0c0c6bb6c15747f3f0", null ],
+    [ "recipientIndex", "df/dde/struct__SmtpClientContext.html#a733bd5d651b06a123f941d864caacf89", null ],
+    [ "replyCode", "df/dde/struct__SmtpClientContext.html#aab1f5c5a03c3f5ba832af9284b1a87ca", null ],
+    [ "replyLen", "df/dde/struct__SmtpClientContext.html#a513e65e0472f8ed23cac5286bb0654d9", null ],
+    [ "socket", "df/dde/struct__SmtpClientContext.html#ae3a67578091bec03a60899d26eee5d29", null ],
+    [ "startTlsSupported", "df/dde/struct__SmtpClientContext.html#a746552b8071ec5a7b84d00f194c19fb9", null ],
+    [ "state", "df/dde/struct__SmtpClientContext.html#a7c137fa400a3ee3144d9c376dbb762ab", null ],
+    [ "timeout", "df/dde/struct__SmtpClientContext.html#a99a21bfd307945df4944cb48bbc48539", null ],
+    [ "timestamp", "df/dde/struct__SmtpClientContext.html#ae828b596e3e5e7bdacbfd8ebea198b5f", null ],
+    [ "tlsContext", "df/dde/struct__SmtpClientContext.html#aae64372affcfaf16b344c50487ff568f", null ],
+    [ "tlsInitCallback", "df/dde/struct__SmtpClientContext.html#abccb1317b52843832881cafbc3321e3c", null ],
+    [ "tlsSession", "df/dde/struct__SmtpClientContext.html#abfbeefc026c246debf9ed6520f120c48", null ]
+];

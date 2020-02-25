@@ -1,0 +1,508 @@
+\hypertarget{md4_8c}{}\section{cyclone\+\_\+crypto/hash/md4.c File Reference}
+\label{md4_8c}\index{cyclone\+\_\+crypto/hash/md4.\+c@{cyclone\+\_\+crypto/hash/md4.\+c}}
+
+
+M\+D4 (Message-\/\+Digest Algorithm)  
+
+
+{\ttfamily \#include \char`\"{}core/crypto.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}hash/md4.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{md4_8c_afcdf5e66fd927a7f4cc64295acd20407}{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}~\hyperlink{crypto__config_8h_a6afae3a9b63f9b55d979e667ee0e881d}{C\+R\+Y\+P\+T\+O\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}
+\item 
+\#define \hyperlink{md4_8c_a96d73bbd7af15cb1fc38c3f4a3bd82e9}{F}(x,  y,  \hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z})~(((x) \& (y)) $\vert$ ($\sim$(x) \& (\hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z})))
+\item 
+\#define \hyperlink{md4_8c_ad96b7cf3182ce2ba85e5a7a93b12c441}{G}(x,  y,  \hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z})~(((x) \& (y)) $\vert$ ((x) \& (\hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z})) $\vert$ ((y) \& (\hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z})))
+\item 
+\#define \hyperlink{md4_8c_ae42219072d798876e6b08e6b78614ff6}{H}(x,  y,  \hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z})~((x) $^\wedge$ (y) $^\wedge$ (\hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z}))
+\item 
+\#define \hyperlink{md4_8c_ac8846e6b450b9fd8ff8699b9d7656feb}{FF}(\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a},  \hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b},  \hyperlink{llmnr__common_8h_a2e5a04327b5658199f0f7bda2acceee1}{c},  d,  x,  \hyperlink{ndp_8h_a2dee666f0c1fe072c549ff86b1d0a8ab}{s})~\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a} += \hyperlink{ripemd160_8c_a96d73bbd7af15cb1fc38c3f4a3bd82e9}{F}(\hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b}, \hyperlink{llmnr__common_8h_a2e5a04327b5658199f0f7bda2acceee1}{c}, d) + (x), \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a} = \hyperlink{cyclone__crypto_2core_2crypto_8h_ad5e52b5ea688101f11d0bf34dc3a8b4b}{R\+O\+L32}(\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}, \hyperlink{ndp_8h_a2dee666f0c1fe072c549ff86b1d0a8ab}{s})
+\item 
+\#define \hyperlink{md4_8c_a6153ad9d538a19797c766281645a35b4}{GG}(\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a},  \hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b},  \hyperlink{llmnr__common_8h_a2e5a04327b5658199f0f7bda2acceee1}{c},  d,  x,  \hyperlink{ndp_8h_a2dee666f0c1fe072c549ff86b1d0a8ab}{s})~\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a} += \hyperlink{ripemd160_8c_ad96b7cf3182ce2ba85e5a7a93b12c441}{G}(\hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b}, \hyperlink{llmnr__common_8h_a2e5a04327b5658199f0f7bda2acceee1}{c}, d) + (x) + 0x5\+A827999, a = R\+O\+L32(a, s)
+\item 
+\#define \hyperlink{md4_8c_a34a9d762b33890e7285161614e71a20c}{HH}(\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a},  \hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b},  \hyperlink{llmnr__common_8h_a2e5a04327b5658199f0f7bda2acceee1}{c},  d,  x,  \hyperlink{ndp_8h_a2dee666f0c1fe072c549ff86b1d0a8ab}{s})~\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a} += \hyperlink{ripemd160_8c_ae42219072d798876e6b08e6b78614ff6}{H}(\hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b}, \hyperlink{llmnr__common_8h_a2e5a04327b5658199f0f7bda2acceee1}{c}, d) + (x) + 0x6\+E\+D9\+E\+B\+A1, a = R\+O\+L32(a, s)
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{md4_8c_a8f17acc957814d4c4a4b4a84217f5b15}{md4\+Compute} (const void $\ast$\hyperlink{tftp__common_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length}, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$digest)
+\begin{DoxyCompactList}\small\item\em Digest a message using M\+D4. \end{DoxyCompactList}\item 
+void \hyperlink{md4_8c_ac95e715170c2a25d00e69161c76e193f}{md4\+Init} (\hyperlink{structMd4Context}{Md4\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Initialize M\+D4 message digest context. \end{DoxyCompactList}\item 
+void \hyperlink{md4_8c_a89760d0c9ee056a1926b0fd03b11ad09}{md4\+Update} (\hyperlink{structMd4Context}{Md4\+Context} $\ast$context, const void $\ast$\hyperlink{tftp__common_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length})
+\begin{DoxyCompactList}\small\item\em Update the M\+D4 context with a portion of the message being hashed. \end{DoxyCompactList}\item 
+void \hyperlink{md4_8c_af9dfcf7d1fc268208496e7da82030dcb}{md4\+Final} (\hyperlink{structMd4Context}{Md4\+Context} $\ast$context, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$digest)
+\begin{DoxyCompactList}\small\item\em Finish the M\+D4 message digest. \end{DoxyCompactList}\item 
+void \hyperlink{md4_8c_acf5f7272e41fad070771ff294637cb00}{md4\+Process\+Block} (\hyperlink{structMd4Context}{Md4\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Process message in 16-\/word blocks. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} \hyperlink{md4_8c_ae1cca62951c2df9f5bf77fda3dcdd423}{padding} \mbox{[}64\mbox{]}
+\item 
+const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} \hyperlink{md4_8c_a6afc6706e295d263ea3440cf18825826}{md4\+Oid} \mbox{[}8\mbox{]} = \{0x2\+A, 0x86, 0x48, 0x86, 0x\+F7, 0x0\+D, 0x02, 0x04\}
+\item 
+const \hyperlink{structHashAlgo}{Hash\+Algo} \hyperlink{md4_8c_a059d93cb3ec55712a52e6a717ec65acb}{md4\+Hash\+Algo}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+M\+D4 (Message-\/\+Digest Algorithm) 
+
+\hypertarget{pic32mz__ef__curiosity_8h_License}{}\subsection{License}\label{pic32mz__ef__curiosity_8h_License}
+S\+P\+D\+X-\/\+License-\/\+Identifier\+: G\+P\+L-\/2.\+0-\/or-\/later
+
+Copyright (C) 2010-\/2019 Oryx Embedded S\+A\+RL. All rights reserved.
+
+This file is part of Cyclone\+Crypto Open.
+
+This program is free software; you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+
+You should have received a copy of the G\+NU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-\/1301, U\+SA.\hypertarget{tftp__server_8c_Description}{}\subsection{Description}\label{tftp__server_8c_Description}
+The M\+D4 algorithm takes as input a message of arbitrary length and produces as output a 128-\/bit message digest of the input. Refer to R\+FC 1320
+
+\begin{DoxyAuthor}{Author}
+Oryx Embedded S\+A\+RL (www.\+oryx-\/embedded.\+com) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+9.\+6 
+\end{DoxyVersion}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{md4_8c_a96d73bbd7af15cb1fc38c3f4a3bd82e9}\label{md4_8c_a96d73bbd7af15cb1fc38c3f4a3bd82e9}} 
+\index{md4.\+c@{md4.\+c}!F@{F}}
+\index{F@{F}!md4.\+c@{md4.\+c}}
+\subsubsection{\texorpdfstring{F}{F}}
+{\footnotesize\ttfamily \#define F(\begin{DoxyParamCaption}\item[{}]{x,  }\item[{}]{y,  }\item[{}]{\hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z} }\end{DoxyParamCaption})~(((x) \& (y)) $\vert$ ($\sim$(x) \& (\hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z})))}
+
+
+
+Definition at line 47 of file md4.\+c.
+
+\mbox{\Hypertarget{md4_8c_ac8846e6b450b9fd8ff8699b9d7656feb}\label{md4_8c_ac8846e6b450b9fd8ff8699b9d7656feb}} 
+\index{md4.\+c@{md4.\+c}!FF@{FF}}
+\index{FF@{FF}!md4.\+c@{md4.\+c}}
+\subsubsection{\texorpdfstring{FF}{FF}}
+{\footnotesize\ttfamily \#define FF(\begin{DoxyParamCaption}\item[{}]{\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a},  }\item[{}]{\hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b},  }\item[{}]{\hyperlink{llmnr__common_8h_a2e5a04327b5658199f0f7bda2acceee1}{c},  }\item[{}]{d,  }\item[{}]{x,  }\item[{}]{\hyperlink{ndp_8h_a2dee666f0c1fe072c549ff86b1d0a8ab}{s} }\end{DoxyParamCaption})~\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a} += \hyperlink{ripemd160_8c_a96d73bbd7af15cb1fc38c3f4a3bd82e9}{F}(\hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b}, \hyperlink{llmnr__common_8h_a2e5a04327b5658199f0f7bda2acceee1}{c}, d) + (x), \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a} = \hyperlink{cyclone__crypto_2core_2crypto_8h_ad5e52b5ea688101f11d0bf34dc3a8b4b}{R\+O\+L32}(\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}, \hyperlink{ndp_8h_a2dee666f0c1fe072c549ff86b1d0a8ab}{s})}
+
+
+
+Definition at line 51 of file md4.\+c.
+
+\mbox{\Hypertarget{md4_8c_ad96b7cf3182ce2ba85e5a7a93b12c441}\label{md4_8c_ad96b7cf3182ce2ba85e5a7a93b12c441}} 
+\index{md4.\+c@{md4.\+c}!G@{G}}
+\index{G@{G}!md4.\+c@{md4.\+c}}
+\subsubsection{\texorpdfstring{G}{G}}
+{\footnotesize\ttfamily \#define G(\begin{DoxyParamCaption}\item[{}]{x,  }\item[{}]{y,  }\item[{}]{\hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z} }\end{DoxyParamCaption})~(((x) \& (y)) $\vert$ ((x) \& (\hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z})) $\vert$ ((y) \& (\hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z})))}
+
+
+
+Definition at line 48 of file md4.\+c.
+
+\mbox{\Hypertarget{md4_8c_a6153ad9d538a19797c766281645a35b4}\label{md4_8c_a6153ad9d538a19797c766281645a35b4}} 
+\index{md4.\+c@{md4.\+c}!GG@{GG}}
+\index{GG@{GG}!md4.\+c@{md4.\+c}}
+\subsubsection{\texorpdfstring{GG}{GG}}
+{\footnotesize\ttfamily \#define GG(\begin{DoxyParamCaption}\item[{}]{\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a},  }\item[{}]{\hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b},  }\item[{}]{\hyperlink{llmnr__common_8h_a2e5a04327b5658199f0f7bda2acceee1}{c},  }\item[{}]{d,  }\item[{}]{x,  }\item[{}]{\hyperlink{ndp_8h_a2dee666f0c1fe072c549ff86b1d0a8ab}{s} }\end{DoxyParamCaption})~\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a} += \hyperlink{ripemd160_8c_ad96b7cf3182ce2ba85e5a7a93b12c441}{G}(\hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b}, \hyperlink{llmnr__common_8h_a2e5a04327b5658199f0f7bda2acceee1}{c}, d) + (x) + 0x5\+A827999, a = R\+O\+L32(a, s)}
+
+
+
+Definition at line 52 of file md4.\+c.
+
+\mbox{\Hypertarget{md4_8c_ae42219072d798876e6b08e6b78614ff6}\label{md4_8c_ae42219072d798876e6b08e6b78614ff6}} 
+\index{md4.\+c@{md4.\+c}!H@{H}}
+\index{H@{H}!md4.\+c@{md4.\+c}}
+\subsubsection{\texorpdfstring{H}{H}}
+{\footnotesize\ttfamily \#define H(\begin{DoxyParamCaption}\item[{}]{x,  }\item[{}]{y,  }\item[{}]{\hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z} }\end{DoxyParamCaption})~((x) $^\wedge$ (y) $^\wedge$ (\hyperlink{nbns__common_8h_ab3539ae3820541b70d17c66cfc5a0e3f}{z}))}
+
+
+
+Definition at line 49 of file md4.\+c.
+
+\mbox{\Hypertarget{md4_8c_a34a9d762b33890e7285161614e71a20c}\label{md4_8c_a34a9d762b33890e7285161614e71a20c}} 
+\index{md4.\+c@{md4.\+c}!HH@{HH}}
+\index{HH@{HH}!md4.\+c@{md4.\+c}}
+\subsubsection{\texorpdfstring{HH}{HH}}
+{\footnotesize\ttfamily \#define HH(\begin{DoxyParamCaption}\item[{}]{\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a},  }\item[{}]{\hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b},  }\item[{}]{\hyperlink{llmnr__common_8h_a2e5a04327b5658199f0f7bda2acceee1}{c},  }\item[{}]{d,  }\item[{}]{x,  }\item[{}]{\hyperlink{ndp_8h_a2dee666f0c1fe072c549ff86b1d0a8ab}{s} }\end{DoxyParamCaption})~\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a} += \hyperlink{ripemd160_8c_ae42219072d798876e6b08e6b78614ff6}{H}(\hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b}, \hyperlink{llmnr__common_8h_a2e5a04327b5658199f0f7bda2acceee1}{c}, d) + (x) + 0x6\+E\+D9\+E\+B\+A1, a = R\+O\+L32(a, s)}
+
+
+
+Definition at line 53 of file md4.\+c.
+
+\mbox{\Hypertarget{md4_8c_afcdf5e66fd927a7f4cc64295acd20407}\label{md4_8c_afcdf5e66fd927a7f4cc64295acd20407}} 
+\index{md4.\+c@{md4.\+c}!T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+\index{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}!md4.\+c@{md4.\+c}}
+\subsubsection{\texorpdfstring{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}{TRACE\_LEVEL}}
+{\footnotesize\ttfamily \#define T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL~\hyperlink{crypto__config_8h_a6afae3a9b63f9b55d979e667ee0e881d}{C\+R\+Y\+P\+T\+O\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+
+
+
+Definition at line 37 of file md4.\+c.
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{md4_8c_a8f17acc957814d4c4a4b4a84217f5b15}\label{md4_8c_a8f17acc957814d4c4a4b4a84217f5b15}} 
+\index{md4.\+c@{md4.\+c}!md4\+Compute@{md4\+Compute}}
+\index{md4\+Compute@{md4\+Compute}!md4.\+c@{md4.\+c}}
+\subsubsection{\texorpdfstring{md4\+Compute()}{md4Compute()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} md4\+Compute (\begin{DoxyParamCaption}\item[{const void $\ast$}]{data,  }\item[{size\+\_\+t}]{length,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{digest }\end{DoxyParamCaption})}
+
+
+
+Digest a message using M\+D4. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em data} & Pointer to the message being hashed \\
+\hline
+\mbox{\tt in}  & {\em length} & Length of the message \\
+\hline
+\mbox{\tt out}  & {\em digest} & Pointer to the calculated digest \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 94 of file md4.\+c.
+
+
+\begin{DoxyCode}
+95 \{
+96    \textcolor{comment}{//Allocate a memory buffer to hold the MD4 context}
+97    \hyperlink{structMd4Context}{Md4Context} *context = \hyperlink{cyclone__crypto_2core_2crypto_8h_a48b53d16f66d31e5dcf82db3c1b882ba}{cryptoAllocMem}(\textcolor{keyword}{sizeof}(
+      \hyperlink{structMd4Context}{Md4Context}));
+98    \textcolor{comment}{//Failed to allocate memory?}
+99    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+100       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac0a554045048d2fb61387cf735676f69}{ERROR\_OUT\_OF\_MEMORY};
+101 
+102    \textcolor{comment}{//Initialize the MD4 context}
+103    \hyperlink{md4_8c_ac95e715170c2a25d00e69161c76e193f}{md4Init}(context);
+104    \textcolor{comment}{//Digest the message}
+105    \hyperlink{md4_8c_a89760d0c9ee056a1926b0fd03b11ad09}{md4Update}(context, \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length});
+106    \textcolor{comment}{//Finalize the MD4 message digest}
+107    \hyperlink{md4_8c_af9dfcf7d1fc268208496e7da82030dcb}{md4Final}(context, digest);
+108 
+109    \textcolor{comment}{//Free previously allocated memory}
+110    \hyperlink{cyclone__crypto_2core_2crypto_8h_ac8a223b176683db4e9eed4162774f870}{cryptoFreeMem}(context);
+111    \textcolor{comment}{//Successful processing}
+112    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+113 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{md4_8c_af9dfcf7d1fc268208496e7da82030dcb}\label{md4_8c_af9dfcf7d1fc268208496e7da82030dcb}} 
+\index{md4.\+c@{md4.\+c}!md4\+Final@{md4\+Final}}
+\index{md4\+Final@{md4\+Final}!md4.\+c@{md4.\+c}}
+\subsubsection{\texorpdfstring{md4\+Final()}{md4Final()}}
+{\footnotesize\ttfamily void md4\+Final (\begin{DoxyParamCaption}\item[{\hyperlink{structMd4Context}{Md4\+Context} $\ast$}]{context,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{digest }\end{DoxyParamCaption})}
+
+
+
+Finish the M\+D4 message digest. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the M\+D4 context \\
+\hline
+\mbox{\tt out}  & {\em digest} & Calculated digest (optional parameter) \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 182 of file md4.\+c.
+
+
+\begin{DoxyCode}
+183 \{
+184    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+185    \textcolor{keywordtype}{size\_t} paddingSize;
+186    \hyperlink{stdint_8h_aec6fcb673ff035718c238c8c9d544c47}{uint64\_t} \hyperlink{resource__manager_8h_afd8a6a01e3b212857df6efb82e06f682}{totalSize};
+187 
+188    \textcolor{comment}{//Length of the original message (before padding)}
+189    totalSize = context->\hyperlink{structMd4Context_a16bb74c444bc226e324b473afd9a7c60}{totalSize} * 8;
+190 
+191    \textcolor{comment}{//Pad the message so that its length is congruent to 56 modulo 64}
+192    \textcolor{keywordflow}{if}(context->\hyperlink{structMd4Context_acdaf9c8b63010710962be1805b42e703}{size} < 56)
+193       paddingSize = 56 - context->\hyperlink{structMd4Context_acdaf9c8b63010710962be1805b42e703}{size};
+194    \textcolor{keywordflow}{else}
+195       paddingSize = 64 + 56 - context->\hyperlink{structMd4Context_acdaf9c8b63010710962be1805b42e703}{size};
+196 
+197    \textcolor{comment}{//Append padding}
+198    \hyperlink{md4_8c_a89760d0c9ee056a1926b0fd03b11ad09}{md4Update}(context, \hyperlink{md4_8c_ae1cca62951c2df9f5bf77fda3dcdd423}{padding}, paddingSize);
+199 
+200    \textcolor{comment}{//Append the length of the original message}
+201    context->\hyperlink{structMd4Context_a92e939d79039860f83c5245e8e6363e8}{x}[14] = \hyperlink{cpu__endian_8h_a336f132f175f47bfab3fa57f6a00276d}{htole32}((\hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t}) totalSize);
+202    context->\hyperlink{structMd4Context_a92e939d79039860f83c5245e8e6363e8}{x}[15] = \hyperlink{cpu__endian_8h_a336f132f175f47bfab3fa57f6a00276d}{htole32}((\hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t}) (totalSize >> 32));
+203 
+204    \textcolor{comment}{//Calculate the message digest}
+205    \hyperlink{md4_8c_acf5f7272e41fad070771ff294637cb00}{md4ProcessBlock}(context);
+206 
+207    \textcolor{comment}{//Convert from host byte order to little-endian byte order}
+208    \textcolor{keywordflow}{for}(i = 0; i < 4; i++)
+209    \{
+210       context->\hyperlink{structMd4Context_ab6a8fb9f73f48392e40c069e43af33c1}{h}[i] = \hyperlink{cpu__endian_8h_a336f132f175f47bfab3fa57f6a00276d}{htole32}(context->\hyperlink{structMd4Context_ab6a8fb9f73f48392e40c069e43af33c1}{h}[i]);
+211    \}
+212 
+213    \textcolor{comment}{//Copy the resulting digest}
+214    \textcolor{keywordflow}{if}(digest != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+215       \hyperlink{cyclone__crypto_2core_2crypto_8h_a6724616c4014bb7e21f2660bd7b88be8}{cryptoMemcpy}(digest, context->\hyperlink{structMd4Context_a20d72c6b9df675ac808b1e94fbeac522}{digest}, \hyperlink{md4_8h_a2c528f60064796f6bef1c4dfaf9873b0}{MD4\_DIGEST\_SIZE});
+216 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{md4_8c_ac95e715170c2a25d00e69161c76e193f}\label{md4_8c_ac95e715170c2a25d00e69161c76e193f}} 
+\index{md4.\+c@{md4.\+c}!md4\+Init@{md4\+Init}}
+\index{md4\+Init@{md4\+Init}!md4.\+c@{md4.\+c}}
+\subsubsection{\texorpdfstring{md4\+Init()}{md4Init()}}
+{\footnotesize\ttfamily void md4\+Init (\begin{DoxyParamCaption}\item[{\hyperlink{structMd4Context}{Md4\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Initialize M\+D4 message digest context. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the M\+D4 context to initialize \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 121 of file md4.\+c.
+
+
+\begin{DoxyCode}
+122 \{
+123    \textcolor{comment}{//Set initial hash value}
+124    context->\hyperlink{structMd4Context_ab6a8fb9f73f48392e40c069e43af33c1}{h}[0] = 0x67452301;
+125    context->\hyperlink{structMd4Context_ab6a8fb9f73f48392e40c069e43af33c1}{h}[1] = 0xEFCDAB89;
+126    context->\hyperlink{structMd4Context_ab6a8fb9f73f48392e40c069e43af33c1}{h}[2] = 0x98BADCFE;
+127    context->\hyperlink{structMd4Context_ab6a8fb9f73f48392e40c069e43af33c1}{h}[3] = 0x10325476;
+128 
+129    \textcolor{comment}{//Number of bytes in the buffer}
+130    context->\hyperlink{structMd4Context_acdaf9c8b63010710962be1805b42e703}{size} = 0;
+131    \textcolor{comment}{//Total length of the message}
+132    context->\hyperlink{structMd4Context_a16bb74c444bc226e324b473afd9a7c60}{totalSize} = 0;
+133 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{md4_8c_acf5f7272e41fad070771ff294637cb00}\label{md4_8c_acf5f7272e41fad070771ff294637cb00}} 
+\index{md4.\+c@{md4.\+c}!md4\+Process\+Block@{md4\+Process\+Block}}
+\index{md4\+Process\+Block@{md4\+Process\+Block}!md4.\+c@{md4.\+c}}
+\subsubsection{\texorpdfstring{md4\+Process\+Block()}{md4ProcessBlock()}}
+{\footnotesize\ttfamily void md4\+Process\+Block (\begin{DoxyParamCaption}\item[{\hyperlink{structMd4Context}{Md4\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Process message in 16-\/word blocks. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the M\+D4 context \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 224 of file md4.\+c.
+
+
+\begin{DoxyCode}
+225 \{
+226    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+227 
+228    \textcolor{comment}{//Initialize the 4 working registers}
+229    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a} = context->\hyperlink{structMd4Context_ab6a8fb9f73f48392e40c069e43af33c1}{h}[0];
+230    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} \hyperlink{dtls__misc_8h_ab590318ac859d0e57e15c3dd6c62a605}{b} = context->\hyperlink{structMd4Context_ab6a8fb9f73f48392e40c069e43af33c1}{h}[1];
+231    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} \hyperlink{aria_8c_a5dadc28804036d1b82e1dc027e95c9a6}{c} = context->\hyperlink{structMd4Context_ab6a8fb9f73f48392e40c069e43af33c1}{h}[2];
+232    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} d = context->\hyperlink{structMd4Context_ab6a8fb9f73f48392e40c069e43af33c1}{h}[3];
+233 
+234    \textcolor{comment}{//Process message in 16-word blocks}
+235    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} *x = context->\hyperlink{structMd4Context_a92e939d79039860f83c5245e8e6363e8}{x};
+236 
+237    \textcolor{comment}{//Convert from little-endian byte order to host byte order}
+238    \textcolor{keywordflow}{for}(i = 0; i < 16; i++)
+239    \{
+240       x[i] = \hyperlink{cpu__endian_8h_a637984da0e96437b4bff8b68108256c6}{letoh32}(x[i]);
+241    \}
+242 
+243    \textcolor{comment}{//Round 1}
+244    \hyperlink{md4_8c_ac8846e6b450b9fd8ff8699b9d7656feb}{FF}(a, b, c, d, x[0],  3);
+245    \hyperlink{md4_8c_ac8846e6b450b9fd8ff8699b9d7656feb}{FF}(d, a, b, c, x[1],  7);
+246    \hyperlink{md4_8c_ac8846e6b450b9fd8ff8699b9d7656feb}{FF}(c, d, a, b, x[2],  11);
+247    \hyperlink{md4_8c_ac8846e6b450b9fd8ff8699b9d7656feb}{FF}(b, c, d, a, x[3],  19);
+248    \hyperlink{md4_8c_ac8846e6b450b9fd8ff8699b9d7656feb}{FF}(a, b, c, d, x[4],  3);
+249    \hyperlink{md4_8c_ac8846e6b450b9fd8ff8699b9d7656feb}{FF}(d, a, b, c, x[5],  7);
+250    \hyperlink{md4_8c_ac8846e6b450b9fd8ff8699b9d7656feb}{FF}(c, d, a, b, x[6],  11);
+251    \hyperlink{md4_8c_ac8846e6b450b9fd8ff8699b9d7656feb}{FF}(b, c, d, a, x[7],  19);
+252    \hyperlink{md4_8c_ac8846e6b450b9fd8ff8699b9d7656feb}{FF}(a, b, c, d, x[8],  3);
+253    \hyperlink{md4_8c_ac8846e6b450b9fd8ff8699b9d7656feb}{FF}(d, a, b, c, x[9],  7);
+254    \hyperlink{md4_8c_ac8846e6b450b9fd8ff8699b9d7656feb}{FF}(c, d, a, b, x[10], 11);
+255    \hyperlink{md4_8c_ac8846e6b450b9fd8ff8699b9d7656feb}{FF}(b, c, d, a, x[11], 19);
+256    \hyperlink{md4_8c_ac8846e6b450b9fd8ff8699b9d7656feb}{FF}(a, b, c, d, x[12], 3);
+257    \hyperlink{md4_8c_ac8846e6b450b9fd8ff8699b9d7656feb}{FF}(d, a, b, c, x[13], 7);
+258    \hyperlink{md4_8c_ac8846e6b450b9fd8ff8699b9d7656feb}{FF}(c, d, a, b, x[14], 11);
+259    \hyperlink{md4_8c_ac8846e6b450b9fd8ff8699b9d7656feb}{FF}(b, c, d, a, x[15], 19);
+260 
+261    \textcolor{comment}{//Round 2}
+262    \hyperlink{md4_8c_a6153ad9d538a19797c766281645a35b4}{GG}(a, b, c, d, x[0],  3);
+263    \hyperlink{md4_8c_a6153ad9d538a19797c766281645a35b4}{GG}(d, a, b, c, x[4],  5);
+264    \hyperlink{md4_8c_a6153ad9d538a19797c766281645a35b4}{GG}(c, d, a, b, x[8],  9);
+265    \hyperlink{md4_8c_a6153ad9d538a19797c766281645a35b4}{GG}(b, c, d, a, x[12], 13);
+266    \hyperlink{md4_8c_a6153ad9d538a19797c766281645a35b4}{GG}(a, b, c, d, x[1],  3);
+267    \hyperlink{md4_8c_a6153ad9d538a19797c766281645a35b4}{GG}(d, a, b, c, x[5],  5);
+268    \hyperlink{md4_8c_a6153ad9d538a19797c766281645a35b4}{GG}(c, d, a, b, x[9],  9);
+269    \hyperlink{md4_8c_a6153ad9d538a19797c766281645a35b4}{GG}(b, c, d, a, x[13], 13);
+270    \hyperlink{md4_8c_a6153ad9d538a19797c766281645a35b4}{GG}(a, b, c, d, x[2],  3);
+271    \hyperlink{md4_8c_a6153ad9d538a19797c766281645a35b4}{GG}(d, a, b, c, x[6],  5);
+272    \hyperlink{md4_8c_a6153ad9d538a19797c766281645a35b4}{GG}(c, d, a, b, x[10], 9);
+273    \hyperlink{md4_8c_a6153ad9d538a19797c766281645a35b4}{GG}(b, c, d, a, x[14], 13);
+274    \hyperlink{md4_8c_a6153ad9d538a19797c766281645a35b4}{GG}(a, b, c, d, x[3],  3);
+275    \hyperlink{md4_8c_a6153ad9d538a19797c766281645a35b4}{GG}(d, a, b, c, x[7],  5);
+276    \hyperlink{md4_8c_a6153ad9d538a19797c766281645a35b4}{GG}(c, d, a, b, x[11], 9);
+277    \hyperlink{md4_8c_a6153ad9d538a19797c766281645a35b4}{GG}(b, c, d, a, x[15], 13);
+278 
+279    \textcolor{comment}{//Round 3}
+280    \hyperlink{md4_8c_a34a9d762b33890e7285161614e71a20c}{HH}(a, b, c, d, x[0],  3);
+281    \hyperlink{md4_8c_a34a9d762b33890e7285161614e71a20c}{HH}(d, a, b, c, x[8],  9);
+282    \hyperlink{md4_8c_a34a9d762b33890e7285161614e71a20c}{HH}(c, d, a, b, x[4],  11);
+283    \hyperlink{md4_8c_a34a9d762b33890e7285161614e71a20c}{HH}(b, c, d, a, x[12], 15);
+284    \hyperlink{md4_8c_a34a9d762b33890e7285161614e71a20c}{HH}(a, b, c, d, x[2],  3);
+285    \hyperlink{md4_8c_a34a9d762b33890e7285161614e71a20c}{HH}(d, a, b, c, x[10], 9);
+286    \hyperlink{md4_8c_a34a9d762b33890e7285161614e71a20c}{HH}(c, d, a, b, x[6],  11);
+287    \hyperlink{md4_8c_a34a9d762b33890e7285161614e71a20c}{HH}(b, c, d, a, x[14], 15);
+288    \hyperlink{md4_8c_a34a9d762b33890e7285161614e71a20c}{HH}(a, b, c, d, x[1],  3);
+289    \hyperlink{md4_8c_a34a9d762b33890e7285161614e71a20c}{HH}(d, a, b, c, x[9],  9);
+290    \hyperlink{md4_8c_a34a9d762b33890e7285161614e71a20c}{HH}(c, d, a, b, x[5],  11);
+291    \hyperlink{md4_8c_a34a9d762b33890e7285161614e71a20c}{HH}(b, c, d, a, x[13], 15);
+292    \hyperlink{md4_8c_a34a9d762b33890e7285161614e71a20c}{HH}(a, b, c, d, x[3],  3);
+293    \hyperlink{md4_8c_a34a9d762b33890e7285161614e71a20c}{HH}(d, a, b, c, x[11], 9);
+294    \hyperlink{md4_8c_a34a9d762b33890e7285161614e71a20c}{HH}(c, d, a, b, x[7],  11);
+295    \hyperlink{md4_8c_a34a9d762b33890e7285161614e71a20c}{HH}(b, c, d, a, x[15], 15);
+296 
+297    \textcolor{comment}{//Update the hash value}
+298    context->\hyperlink{structMd4Context_ab6a8fb9f73f48392e40c069e43af33c1}{h}[0] += \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a};
+299    context->\hyperlink{structMd4Context_ab6a8fb9f73f48392e40c069e43af33c1}{h}[1] += \hyperlink{dtls__misc_8h_ab590318ac859d0e57e15c3dd6c62a605}{b};
+300    context->\hyperlink{structMd4Context_ab6a8fb9f73f48392e40c069e43af33c1}{h}[2] += \hyperlink{aria_8c_a5dadc28804036d1b82e1dc027e95c9a6}{c};
+301    context->\hyperlink{structMd4Context_ab6a8fb9f73f48392e40c069e43af33c1}{h}[3] += d;
+302 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{md4_8c_a89760d0c9ee056a1926b0fd03b11ad09}\label{md4_8c_a89760d0c9ee056a1926b0fd03b11ad09}} 
+\index{md4.\+c@{md4.\+c}!md4\+Update@{md4\+Update}}
+\index{md4\+Update@{md4\+Update}!md4.\+c@{md4.\+c}}
+\subsubsection{\texorpdfstring{md4\+Update()}{md4Update()}}
+{\footnotesize\ttfamily void md4\+Update (\begin{DoxyParamCaption}\item[{\hyperlink{structMd4Context}{Md4\+Context} $\ast$}]{context,  }\item[{const void $\ast$}]{data,  }\item[{size\+\_\+t}]{length }\end{DoxyParamCaption})}
+
+
+
+Update the M\+D4 context with a portion of the message being hashed. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the M\+D4 context \\
+\hline
+\mbox{\tt in}  & {\em data} & Pointer to the buffer being hashed \\
+\hline
+\mbox{\tt in}  & {\em length} & Length of the buffer \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 143 of file md4.\+c.
+
+
+\begin{DoxyCode}
+144 \{
+145    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+146 
+147    \textcolor{comment}{//Process the incoming data}
+148    \textcolor{keywordflow}{while}(\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} > 0)
+149    \{
+150       \textcolor{comment}{//The buffer can hold at most 64 bytes}
+151       n = \hyperlink{os__port_8h_a3acffbd305ee72dcd4593c0d8af64a4f}{MIN}(\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, 64 - context->\hyperlink{structMd4Context_acdaf9c8b63010710962be1805b42e703}{size});
+152 
+153       \textcolor{comment}{//Copy the data to the buffer}
+154       \hyperlink{cyclone__crypto_2core_2crypto_8h_a6724616c4014bb7e21f2660bd7b88be8}{cryptoMemcpy}(context->\hyperlink{structMd4Context_a147578f591978c41d6852388aa6f9550}{buffer} + context->\hyperlink{structMd4Context_acdaf9c8b63010710962be1805b42e703}{size}, \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, n);
+155 
+156       \textcolor{comment}{//Update the MD4 context}
+157       context->\hyperlink{structMd4Context_acdaf9c8b63010710962be1805b42e703}{size} += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+158       context->\hyperlink{structMd4Context_a16bb74c444bc226e324b473afd9a7c60}{totalSize} += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+159       \textcolor{comment}{//Advance the data pointer}
+160       \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data} = (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *) \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data} + n;
+161       \textcolor{comment}{//Remaining bytes to process}
+162       \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} -= \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+163 
+164       \textcolor{comment}{//Process message in 16-word blocks}
+165       \textcolor{keywordflow}{if}(context->\hyperlink{structMd4Context_acdaf9c8b63010710962be1805b42e703}{size} == 64)
+166       \{
+167          \textcolor{comment}{//Transform the 16-word block}
+168          \hyperlink{md4_8c_acf5f7272e41fad070771ff294637cb00}{md4ProcessBlock}(context);
+169          \textcolor{comment}{//Empty the buffer}
+170          context->\hyperlink{structMd4Context_acdaf9c8b63010710962be1805b42e703}{size} = 0;
+171       \}
+172    \}
+173 \}
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{md4_8c_a059d93cb3ec55712a52e6a717ec65acb}\label{md4_8c_a059d93cb3ec55712a52e6a717ec65acb}} 
+\index{md4.\+c@{md4.\+c}!md4\+Hash\+Algo@{md4\+Hash\+Algo}}
+\index{md4\+Hash\+Algo@{md4\+Hash\+Algo}!md4.\+c@{md4.\+c}}
+\subsubsection{\texorpdfstring{md4\+Hash\+Algo}{md4HashAlgo}}
+{\footnotesize\ttfamily const \hyperlink{structHashAlgo}{Hash\+Algo} md4\+Hash\+Algo}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=
+\{
+   \textcolor{stringliteral}{"MD4"},
+   \hyperlink{md4_8c_a6afc6706e295d263ea3440cf18825826}{md4Oid},
+   \textcolor{keyword}{sizeof}(\hyperlink{md4_8c_a6afc6706e295d263ea3440cf18825826}{md4Oid}),
+   \textcolor{keyword}{sizeof}(\hyperlink{structMd4Context}{Md4Context}),
+   \hyperlink{md4_8h_afbf9e53f515d3005fe3b0f75285442da}{MD4\_BLOCK\_SIZE},
+   \hyperlink{md4_8h_a2c528f60064796f6bef1c4dfaf9873b0}{MD4\_DIGEST\_SIZE},
+   \hyperlink{md4_8h_af0a768996afe1a4bcc9a4bc1fe3ef1a4}{MD4\_MIN\_PAD\_SIZE},
+   \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE},
+   (\hyperlink{cyclone__crypto_2core_2crypto_8h_a02fe893af436f6d8a574897a59748592}{HashAlgoCompute}) \hyperlink{md4_8c_a8f17acc957814d4c4a4b4a84217f5b15}{md4Compute},
+   (\hyperlink{cyclone__crypto_2core_2crypto_8h_afc5ce55917bd80825aa610848f402caf}{HashAlgoInit}) \hyperlink{md4_8c_ac95e715170c2a25d00e69161c76e193f}{md4Init},
+   (\hyperlink{cyclone__crypto_2core_2crypto_8h_a3d1fb45d6ca7822d20873ddbc8e39b89}{HashAlgoUpdate}) \hyperlink{md4_8c_a89760d0c9ee056a1926b0fd03b11ad09}{md4Update},
+   (\hyperlink{cyclone__crypto_2core_2crypto_8h_a0a272470b5f95692d2e2e882f75844b3}{HashAlgoFinal}) \hyperlink{md4_8c_af9dfcf7d1fc268208496e7da82030dcb}{md4Final},
+   \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}
+\}
+\end{DoxyCode}
+
+
+Definition at line 68 of file md4.\+c.
+
+\mbox{\Hypertarget{md4_8c_a6afc6706e295d263ea3440cf18825826}\label{md4_8c_a6afc6706e295d263ea3440cf18825826}} 
+\index{md4.\+c@{md4.\+c}!md4\+Oid@{md4\+Oid}}
+\index{md4\+Oid@{md4\+Oid}!md4.\+c@{md4.\+c}}
+\subsubsection{\texorpdfstring{md4\+Oid}{md4Oid}}
+{\footnotesize\ttfamily const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} md4\+Oid\mbox{[}8\mbox{]} = \{0x2\+A, 0x86, 0x48, 0x86, 0x\+F7, 0x0\+D, 0x02, 0x04\}}
+
+
+
+Definition at line 65 of file md4.\+c.
+
+\mbox{\Hypertarget{md4_8c_ae1cca62951c2df9f5bf77fda3dcdd423}\label{md4_8c_ae1cca62951c2df9f5bf77fda3dcdd423}} 
+\index{md4.\+c@{md4.\+c}!padding@{padding}}
+\index{padding@{padding}!md4.\+c@{md4.\+c}}
+\subsubsection{\texorpdfstring{padding}{padding}}
+{\footnotesize\ttfamily const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} padding\mbox{[}64\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=
+\{
+   0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+\}
+\end{DoxyCode}
+
+
+Definition at line 56 of file md4.\+c.
+

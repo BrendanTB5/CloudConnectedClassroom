@@ -1,0 +1,88 @@
+\hypertarget{group__WifiDisableApFn}{}\section{m2m\+\_\+wifi\+\_\+disable\+\_\+ap}
+\label{group__WifiDisableApFn}\index{m2m\+\_\+wifi\+\_\+disable\+\_\+ap@{m2m\+\_\+wifi\+\_\+disable\+\_\+ap}}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group__BSPDefine_gaecc0323d771e41ef81a76b5f12783e22}{N\+M\+I\+\_\+\+A\+PI} \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} \hyperlink{group__WifiDisableApFn_ga69d3d1d687a493fa31c05109cfe3d05a}{m2m\+\_\+wifi\+\_\+disable\+\_\+ap} (void)
+\item 
+\hyperlink{group__BSPDefine_gaecc0323d771e41ef81a76b5f12783e22}{N\+M\+I\+\_\+\+A\+PI} \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} \hyperlink{group__WifiDisableApFn_gafc6b3c4d3e41b821c37a6884b06481e0}{m2m\+\_\+wifi\+\_\+ap\+\_\+add\+\_\+black\+\_\+list} (\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} b\+Add\+New\+Entry, \hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} $\ast$mac\+\_\+addr)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Synchronous wi-\/fi hotspot disabling function. Must be called only when the AP is enabled through the \hyperlink{group__WifiEnableApFn_gab34cff419964df3c4e1ed86076aef7ce}{m2m\+\_\+wifi\+\_\+enable\+\_\+ap} function. Otherwise the call to this function will not be useful.
+
+Synchronous wi-\/fi hotspot add/remove station from the black List. 
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group__WifiDisableApFn_gafc6b3c4d3e41b821c37a6884b06481e0}\label{group__WifiDisableApFn_gafc6b3c4d3e41b821c37a6884b06481e0}} 
+\index{m2m\+\_\+wifi\+\_\+disable\+\_\+ap@{m2m\+\_\+wifi\+\_\+disable\+\_\+ap}!m2m\+\_\+wifi\+\_\+ap\+\_\+add\+\_\+black\+\_\+list@{m2m\+\_\+wifi\+\_\+ap\+\_\+add\+\_\+black\+\_\+list}}
+\index{m2m\+\_\+wifi\+\_\+ap\+\_\+add\+\_\+black\+\_\+list@{m2m\+\_\+wifi\+\_\+ap\+\_\+add\+\_\+black\+\_\+list}!m2m\+\_\+wifi\+\_\+disable\+\_\+ap@{m2m\+\_\+wifi\+\_\+disable\+\_\+ap}}
+\subsubsection{\texorpdfstring{m2m\+\_\+wifi\+\_\+ap\+\_\+add\+\_\+black\+\_\+list()}{m2m\_wifi\_ap\_add\_black\_list()}}
+{\footnotesize\ttfamily \hyperlink{group__BSPDefine_gaecc0323d771e41ef81a76b5f12783e22}{N\+M\+I\+\_\+\+A\+PI} \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} m2m\+\_\+wifi\+\_\+ap\+\_\+add\+\_\+black\+\_\+list (\begin{DoxyParamCaption}\item[{\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8}}]{b\+Add\+New\+Entry,  }\item[{\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} $\ast$}]{mac\+\_\+addr }\end{DoxyParamCaption})}
+
+
+
+{\ttfamily \#include $<$\hyperlink{m2m__wifi_8h}{third\+\_\+party/atmel/devices/wilc1000/driver/include/m2m\+\_\+wifi.\+h}$>$}
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em b\+Add\+New\+Entry} & Boolean value if 1 then the given mac address would be added to the black list if zero the given mac address would be removed from the black list mac\+\_\+addr M\+AC address of the station to be added/removed from the black list Note to remove all stations from the black list use all FF\textquotesingle{}s in the mac address and set b\+Add\+New\+Entry to zero \\
+\hline
+\end{DoxyParams}
+\begin{DoxyWarning}{Warning}
+The firmware will be maintaining a list of 16 M\+AC addresses , Requests over this number will be discarded without a notice.
+\end{DoxyWarning}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{group__WifiEnableApFn_gab34cff419964df3c4e1ed86076aef7ce}{m2m\+\_\+wifi\+\_\+enable\+\_\+ap} 
+\end{DoxySeeAlso}
+\begin{DoxyReturn}{Returns}
+The function returns \hyperlink{nm__common_8h_a9ef27ba27aafdd1aa3a79d3ba2c36b8f}{M2\+M\+\_\+\+S\+U\+C\+C\+E\+SS} for successful operations and a negative value otherwise. 
+\end{DoxyReturn}
+
+
+Definition at line 585 of file m2m\+\_\+wifi.\+c.
+
+
+\begin{DoxyCode}
+586 \{
+587     \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} ret = \hyperlink{nm__common_8h_a9ef27ba27aafdd1aa3a79d3ba2c36b8f}{M2M\_SUCCESS};
+588     \hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8}* pu8BlackListRequest = guCtrlStruct.au8BlackListRequest;
+589 
+590     pu8BlackListRequest[0] = bAddNewEntry;
+591     \hyperlink{nm__common_8h_a62b30b611dfcc58e190254d1f663470a}{m2m\_memcpy}(&pu8BlackListRequest[1],mac\_addr,6);
+592     ret = \hyperlink{m2m__hif_8c_a13ba8ad11b2ac39516ca787386d16ce0}{hif\_send}(\hyperlink{nm__common_8h_a9ab02eb1aea02a75c3f5aade4eef1276aeb9a7d57324ba4b8a6c2a5f46dd499c2}{M2M\_REQ\_GRP\_WIFI}, 
+      \hyperlink{group__WlanEnums_ggaa62989ea5e2977b374a04db81c89d524adb0a42de9451d51642d7269fea6fce9a}{M2M\_WIFI\_REQ\_AP\_BLACK\_LIST},pu8BlackListRequest, 7, 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, 0, 0);
+593     \textcolor{keywordflow}{return} ret;
+594 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{group__WifiDisableApFn_ga69d3d1d687a493fa31c05109cfe3d05a}\label{group__WifiDisableApFn_ga69d3d1d687a493fa31c05109cfe3d05a}} 
+\index{m2m\+\_\+wifi\+\_\+disable\+\_\+ap@{m2m\+\_\+wifi\+\_\+disable\+\_\+ap}!m2m\+\_\+wifi\+\_\+disable\+\_\+ap@{m2m\+\_\+wifi\+\_\+disable\+\_\+ap}}
+\index{m2m\+\_\+wifi\+\_\+disable\+\_\+ap@{m2m\+\_\+wifi\+\_\+disable\+\_\+ap}!m2m\+\_\+wifi\+\_\+disable\+\_\+ap@{m2m\+\_\+wifi\+\_\+disable\+\_\+ap}}
+\subsubsection{\texorpdfstring{m2m\+\_\+wifi\+\_\+disable\+\_\+ap()}{m2m\_wifi\_disable\_ap()}}
+{\footnotesize\ttfamily \hyperlink{group__BSPDefine_gaecc0323d771e41ef81a76b5f12783e22}{N\+M\+I\+\_\+\+A\+PI} \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} m2m\+\_\+wifi\+\_\+disable\+\_\+ap (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+{\ttfamily \#include $<$\hyperlink{m2m__wifi_8h}{third\+\_\+party/atmel/devices/wilc1000/driver/include/m2m\+\_\+wifi.\+h}$>$}
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{group__WifiEnableApFn_gab34cff419964df3c4e1ed86076aef7ce}{m2m\+\_\+wifi\+\_\+enable\+\_\+ap} 
+\end{DoxySeeAlso}
+\begin{DoxyReturn}{Returns}
+The function returns \hyperlink{nm__common_8h_a9ef27ba27aafdd1aa3a79d3ba2c36b8f}{M2\+M\+\_\+\+S\+U\+C\+C\+E\+SS} for successful operations and a negative value otherwise. 
+\end{DoxyReturn}
+
+
+Definition at line 573 of file m2m\+\_\+wifi.\+c.
+
+
+\begin{DoxyCode}
+574 \{
+575     \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} ret = \hyperlink{nm__common_8h_a9ef27ba27aafdd1aa3a79d3ba2c36b8f}{M2M\_SUCCESS};
+576     ret = \hyperlink{m2m__hif_8c_a13ba8ad11b2ac39516ca787386d16ce0}{hif\_send}(\hyperlink{nm__common_8h_a9ab02eb1aea02a75c3f5aade4eef1276aeb9a7d57324ba4b8a6c2a5f46dd499c2}{M2M\_REQ\_GRP\_WIFI}, 
+      \hyperlink{group__WlanEnums_ggaa62989ea5e2977b374a04db81c89d524a472b080df0dcfd0cc31d9299c252ef38}{M2M\_WIFI\_REQ\_DISABLE\_AP}, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, 0, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, 0, 0);
+577     \textcolor{keywordflow}{return} ret;
+578 \}
+\end{DoxyCode}

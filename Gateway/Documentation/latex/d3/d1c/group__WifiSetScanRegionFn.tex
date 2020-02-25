@@ -1,0 +1,96 @@
+\hypertarget{group__WifiSetScanRegionFn}{}\section{m2m\+\_\+wifi\+\_\+set\+\_\+scan\+\_\+region}
+\label{group__WifiSetScanRegionFn}\index{m2m\+\_\+wifi\+\_\+set\+\_\+scan\+\_\+region@{m2m\+\_\+wifi\+\_\+set\+\_\+scan\+\_\+region}}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group__BSPDefine_gaecc0323d771e41ef81a76b5f12783e22}{N\+M\+I\+\_\+\+A\+PI} \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} \hyperlink{group__WifiSetScanRegionFn_ga68c36d05bbbec08c800137eabddb6d92}{m2m\+\_\+wifi\+\_\+set\+\_\+scan\+\_\+region} (\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} Scan\+Region)
+\item 
+\hyperlink{group__BSPDefine_gaecc0323d771e41ef81a76b5f12783e22}{N\+M\+I\+\_\+\+A\+PI} \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} \hyperlink{group__WifiSetScanRegionFn_gace941c5ceb0d191e1605b85f0a8dcb73}{m2m\+\_\+wifi\+\_\+set\+\_\+scan\+\_\+list} (\hyperlink{structtstrM2MScanList}{tstr\+M2\+M\+Scan\+List} $\ast$pstr\+Scan\+List)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Synchronous wi-\/fi scan region setting function. This function sets the scan region, which will affect the range of possible scan channels. For 2.\+5\+G\+Hz supported in the current release, the requested scanregion can\textquotesingle{}t exceed the maximum number of channels (14).
+
+Synchronous wi-\/fi scan region setting function. This function sets the scan list, which will affect the range of possible scan channels. For 2.\+5\+G\+Hz supported in the current release, the requested scanregion can\textquotesingle{}t exceed the maximum number of channels (14). 
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group__WifiSetScanRegionFn_gace941c5ceb0d191e1605b85f0a8dcb73}\label{group__WifiSetScanRegionFn_gace941c5ceb0d191e1605b85f0a8dcb73}} 
+\index{m2m\+\_\+wifi\+\_\+set\+\_\+scan\+\_\+region@{m2m\+\_\+wifi\+\_\+set\+\_\+scan\+\_\+region}!m2m\+\_\+wifi\+\_\+set\+\_\+scan\+\_\+list@{m2m\+\_\+wifi\+\_\+set\+\_\+scan\+\_\+list}}
+\index{m2m\+\_\+wifi\+\_\+set\+\_\+scan\+\_\+list@{m2m\+\_\+wifi\+\_\+set\+\_\+scan\+\_\+list}!m2m\+\_\+wifi\+\_\+set\+\_\+scan\+\_\+region@{m2m\+\_\+wifi\+\_\+set\+\_\+scan\+\_\+region}}
+\subsubsection{\texorpdfstring{m2m\+\_\+wifi\+\_\+set\+\_\+scan\+\_\+list()}{m2m\_wifi\_set\_scan\_list()}}
+{\footnotesize\ttfamily \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} m2m\+\_\+wifi\+\_\+set\+\_\+scan\+\_\+list (\begin{DoxyParamCaption}\item[{\hyperlink{structtstrM2MScanList}{tstr\+M2\+M\+Scan\+List} $\ast$}]{pstr\+Scan\+List }\end{DoxyParamCaption})}
+
+
+
+{\ttfamily \#include $<$\hyperlink{m2m__wifi_8h}{third\+\_\+party/atmel/devices/wilc1000/driver/include/m2m\+\_\+wifi.\+h}$>$}
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em Scan\+Region;} & pstr\+Scan\+List\\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{structtstrM2MScanList}{tstr\+M2\+M\+Scan\+List} \hyperlink{group__WifiRequestScanFn_ga499dfa24a19c2e84776aeabedf897135}{m2m\+\_\+wifi\+\_\+request\+\_\+scan}
+\end{DoxySeeAlso}
+\begin{DoxyReturn}{Returns}
+The function returns \hyperlink{nm__common_8h_a9ef27ba27aafdd1aa3a79d3ba2c36b8f}{M2\+M\+\_\+\+S\+U\+C\+C\+E\+SS} for successful operations and a negative value otherwise. 
+\end{DoxyReturn}
+
+
+Definition at line 430 of file m2m\+\_\+wifi.\+c.
+
+
+\begin{DoxyCode}
+431 \{
+432     \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8}  s8Ret = \hyperlink{nm__common_8h_a39ed05df730834f2255971ca9879996e}{M2M\_ERR\_FAIL};
+433     \hyperlink{structtstrM2MScanList}{tstrM2MScanList}* pstrTmpScanList = &guCtrlStruct.strM2MScanList;
+434     \hyperlink{nm__common_8h_a62b30b611dfcc58e190254d1f663470a}{m2m\_memcpy}((\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8}*)pstrTmpScanList, (\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8}*)pstrScanList, \textcolor{keyword}{sizeof}(
+      \hyperlink{structtstrM2MScanList}{tstrM2MScanList}));
+435     s8Ret = \hyperlink{m2m__hif_8c_a13ba8ad11b2ac39516ca787386d16ce0}{hif\_send}(\hyperlink{nm__common_8h_a9ab02eb1aea02a75c3f5aade4eef1276aeb9a7d57324ba4b8a6c2a5f46dd499c2}{M2M\_REQ\_GRP\_WIFI}, 
+      \hyperlink{group__WlanEnums_gga064de09dec1d5e88ed8d075fa40f57dea1ac22ce0ce7d422cc7afbc08c7a8e61a}{M2M\_WIFI\_REQ\_SET\_SCAN\_LIST}, (\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8}*)pstrTmpScanList, \textcolor{keyword}{sizeof}(
+      \hyperlink{structtstrM2MScanList}{tstrM2MScanList}),\hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, 0,0);
+436     \textcolor{keywordflow}{if}(s8Ret != \hyperlink{nm__common_8h_a9ef27ba27aafdd1aa3a79d3ba2c36b8f}{M2M\_SUCCESS})
+437     \{
+438         \hyperlink{nm__common_8h_a34d005df494e50b05cd38b80f318d7ac}{M2M\_ERR}(\textcolor{stringliteral}{"SCAN List Ret = %d\(\backslash\)r\(\backslash\)n"},s8Ret);
+439     \}
+440     \textcolor{keywordflow}{return} s8Ret;
+441 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{group__WifiSetScanRegionFn_ga68c36d05bbbec08c800137eabddb6d92}\label{group__WifiSetScanRegionFn_ga68c36d05bbbec08c800137eabddb6d92}} 
+\index{m2m\+\_\+wifi\+\_\+set\+\_\+scan\+\_\+region@{m2m\+\_\+wifi\+\_\+set\+\_\+scan\+\_\+region}!m2m\+\_\+wifi\+\_\+set\+\_\+scan\+\_\+region@{m2m\+\_\+wifi\+\_\+set\+\_\+scan\+\_\+region}}
+\index{m2m\+\_\+wifi\+\_\+set\+\_\+scan\+\_\+region@{m2m\+\_\+wifi\+\_\+set\+\_\+scan\+\_\+region}!m2m\+\_\+wifi\+\_\+set\+\_\+scan\+\_\+region@{m2m\+\_\+wifi\+\_\+set\+\_\+scan\+\_\+region}}
+\subsubsection{\texorpdfstring{m2m\+\_\+wifi\+\_\+set\+\_\+scan\+\_\+region()}{m2m\_wifi\_set\_scan\_region()}}
+{\footnotesize\ttfamily \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} m2m\+\_\+wifi\+\_\+set\+\_\+scan\+\_\+region (\begin{DoxyParamCaption}\item[{\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8}}]{Scan\+Region }\end{DoxyParamCaption})}
+
+
+
+{\ttfamily \#include $<$\hyperlink{m2m__wifi_8h}{third\+\_\+party/atmel/devices/wilc1000/driver/include/m2m\+\_\+wifi.\+h}$>$}
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em Scan\+Region;} & A\+S\+IA = 14 N\+O\+R\+T\+H\+\_\+\+A\+M\+E\+R\+I\+CA = 11 \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{group__WlanEnums_ga2a91dd671e2672dba1a7ed45230f3a99}{tenu\+M2m\+Scan\+Ch} \hyperlink{group__WifiRequestScanFn_ga499dfa24a19c2e84776aeabedf897135}{m2m\+\_\+wifi\+\_\+request\+\_\+scan}
+\end{DoxySeeAlso}
+\begin{DoxyReturn}{Returns}
+The function returns \hyperlink{nm__common_8h_a9ef27ba27aafdd1aa3a79d3ba2c36b8f}{M2\+M\+\_\+\+S\+U\+C\+C\+E\+SS} for successful operations and a negative value otherwise. 
+\end{DoxyReturn}
+
+
+Definition at line 421 of file m2m\+\_\+wifi.\+c.
+
+
+\begin{DoxyCode}
+422 \{
+423     \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8}  s8Ret = \hyperlink{nm__common_8h_a39ed05df730834f2255971ca9879996e}{M2M\_ERR\_FAIL};
+424     \hyperlink{structtstrM2MScanRegion}{tstrM2MScanRegion}* pstrScanRegion = &guCtrlStruct.strM2MScanRegion;
+425     pstrScanRegion->\hyperlink{structtstrM2MScanRegion_a0fa84955213be6c6bf2602b743ec315f}{u8ScanRegion} = ScanRegion;
+426     s8Ret = \hyperlink{m2m__hif_8c_a13ba8ad11b2ac39516ca787386d16ce0}{hif\_send}(\hyperlink{nm__common_8h_a9ab02eb1aea02a75c3f5aade4eef1276aeb9a7d57324ba4b8a6c2a5f46dd499c2}{M2M\_REQ\_GRP\_WIFI}, 
+      \hyperlink{group__WlanEnums_gga064de09dec1d5e88ed8d075fa40f57deab10eb46bba8f7314383ad0e642faa4ce}{M2M\_WIFI\_REQ\_SET\_SCAN\_REGION}, (\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8}*)pstrScanRegion, \textcolor{keyword}{sizeof}(
+      \hyperlink{structtstrM2MScanRegion}{tstrM2MScanRegion}),\hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, 0,0);
+427     \textcolor{keywordflow}{return} s8Ret;
+428 \}
+\end{DoxyCode}

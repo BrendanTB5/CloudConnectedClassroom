@@ -1,0 +1,2151 @@
+\hypertarget{smtp__client_8h}{}\section{cyclone\+\_\+tcp/smtp/smtp\+\_\+client.h File Reference}
+\label{smtp__client_8h}\index{cyclone\+\_\+tcp/smtp/smtp\+\_\+client.\+h@{cyclone\+\_\+tcp/smtp/smtp\+\_\+client.\+h}}
+
+
+S\+M\+TP client (Simple Mail Transfer Protocol)  
+
+
+{\ttfamily \#include \char`\"{}core/net.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}core/crypto.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}tls.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}encoding/base64.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}mac/hmac.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}hash/md5.\+h\char`\"{}}\newline
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structSmtpMailAddr}{Smtp\+Mail\+Addr}
+\begin{DoxyCompactList}\small\item\em Email address. \end{DoxyCompactList}\item 
+struct \hyperlink{struct__SmtpClientContext}{\+\_\+\+Smtp\+Client\+Context}
+\begin{DoxyCompactList}\small\item\em S\+M\+TP client context. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{smtp__client_8h_aae07922aee815e562940e5302926f0f1}{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+U\+P\+P\+O\+RT}~\hyperlink{os__port_8h_a73c228f87e038e8295ee8ea8eceaa5ac}{E\+N\+A\+B\+L\+ED}
+\item 
+\#define \hyperlink{smtp__client_8h_a420e89c6b2da25f3bdf13b2732d551b5}{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+M\+I\+M\+E\+\_\+\+S\+U\+P\+P\+O\+RT}~\hyperlink{os__port_8h_a73c228f87e038e8295ee8ea8eceaa5ac}{E\+N\+A\+B\+L\+ED}
+\item 
+\#define \hyperlink{smtp__client_8h_ab9d2c96113e0af6d87de62545c8004c1}{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+T\+L\+S\+\_\+\+S\+U\+P\+P\+O\+RT}~\hyperlink{os__port_8h_abd5c8ab57c190a6522ccdbf0ed7577da}{D\+I\+S\+A\+B\+L\+ED}
+\item 
+\#define \hyperlink{smtp__client_8h_a9eded38d92186ecd4d2a88337200c788}{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+L\+O\+G\+I\+N\+\_\+\+A\+U\+T\+H\+\_\+\+S\+U\+P\+P\+O\+RT}~\hyperlink{os__port_8h_a73c228f87e038e8295ee8ea8eceaa5ac}{E\+N\+A\+B\+L\+ED}
+\item 
+\#define \hyperlink{smtp__client_8h_a778af4abf60b01f556d43b1f61bdf4c0}{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+P\+L\+A\+I\+N\+\_\+\+A\+U\+T\+H\+\_\+\+S\+U\+P\+P\+O\+RT}~\hyperlink{os__port_8h_a73c228f87e038e8295ee8ea8eceaa5ac}{E\+N\+A\+B\+L\+ED}
+\item 
+\#define \hyperlink{smtp__client_8h_ac9fb4cfc29feb283f38417291dd13f3a}{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+C\+R\+A\+M\+\_\+\+M\+D5\+\_\+\+A\+U\+T\+H\+\_\+\+S\+U\+P\+P\+O\+RT}~\hyperlink{os__port_8h_abd5c8ab57c190a6522ccdbf0ed7577da}{D\+I\+S\+A\+B\+L\+ED}
+\item 
+\#define \hyperlink{smtp__client_8h_a0b031b3eb0661fcf3fd9591aab485e12}{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+D\+E\+F\+A\+U\+L\+T\+\_\+\+T\+I\+M\+E\+O\+UT}~20000
+\item 
+\#define \hyperlink{smtp__client_8h_a55cbd4c03a87f28df130203250a61810}{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE}~512
+\item 
+\#define \hyperlink{smtp__client_8h_aecc8aae6a9cde14d17b1209ccbd779aa}{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+T\+L\+S\+\_\+\+T\+X\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE}~2048
+\item 
+\#define \hyperlink{smtp__client_8h_a82e2a01eb32c60ce8cda46221a5f9e49}{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+T\+L\+S\+\_\+\+R\+X\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE}~4096
+\item 
+\#define \hyperlink{smtp__client_8h_a85f89a4d69250996b210dd7773d50479}{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+C\+O\+N\+T\+E\+N\+T\+\_\+\+T\+Y\+P\+E\+\_\+\+M\+A\+X\+\_\+\+L\+EN}~32
+\item 
+\#define \hyperlink{smtp__client_8h_adea07fb5e3cabd59c58567657e9de718}{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+B\+O\+U\+N\+D\+A\+R\+Y\+\_\+\+M\+A\+X\+\_\+\+L\+EN}~70
+\item 
+\#define \hyperlink{smtp__client_8h_a9b3a2f4393b2cf27e91596469815cda2}{S\+M\+T\+P\+\_\+\+R\+E\+L\+A\+Y\+\_\+\+P\+O\+RT}~25
+\item 
+\#define \hyperlink{smtp__client_8h_a94716c37a983ae774a9acfead160e21a}{S\+M\+T\+P\+\_\+\+S\+U\+B\+M\+I\+S\+S\+I\+O\+N\+\_\+\+P\+O\+RT}~587
+\item 
+\#define \hyperlink{smtp__client_8h_ad8a148c02890ee78210083a57ada6178}{S\+M\+T\+P\+S\+\_\+\+S\+U\+B\+M\+I\+S\+S\+I\+O\+N\+\_\+\+P\+O\+RT}~465
+\item 
+\#define \hyperlink{smtp__client_8h_a9cb6804b6ece6c7b253e111101d57545}{S\+M\+T\+P\+\_\+\+R\+E\+P\+L\+Y\+\_\+\+C\+O\+D\+E\+\_\+2\+YZ}(\hyperlink{ppp_8h_a966576744a473fafb7687f8e5649941f}{code})~((\hyperlink{ppp_8h_a966576744a473fafb7687f8e5649941f}{code}) $>$= 200 \&\& (\hyperlink{ppp_8h_a966576744a473fafb7687f8e5649941f}{code}) $<$ 300)
+\item 
+\#define \hyperlink{smtp__client_8h_a17ea972951d6b2d8cf44ada358fd8d59}{S\+M\+T\+P\+\_\+\+R\+E\+P\+L\+Y\+\_\+\+C\+O\+D\+E\+\_\+3\+YZ}(\hyperlink{ppp_8h_a966576744a473fafb7687f8e5649941f}{code})~((\hyperlink{ppp_8h_a966576744a473fafb7687f8e5649941f}{code}) $>$= 300 \&\& (\hyperlink{ppp_8h_a966576744a473fafb7687f8e5649941f}{code}) $<$ 400)
+\item 
+\#define \hyperlink{smtp__client_8h_a9ca1d8e7d8a18b23477064726adf853b}{S\+M\+T\+P\+\_\+\+R\+E\+P\+L\+Y\+\_\+\+C\+O\+D\+E\+\_\+4\+YZ}(\hyperlink{ppp_8h_a966576744a473fafb7687f8e5649941f}{code})~((\hyperlink{ppp_8h_a966576744a473fafb7687f8e5649941f}{code}) $>$= 400 \&\& (\hyperlink{ppp_8h_a966576744a473fafb7687f8e5649941f}{code}) $<$ 500)
+\item 
+\#define \hyperlink{smtp__client_8h_a71852123411b3592263848ba71652549}{S\+M\+T\+P\+\_\+\+R\+E\+P\+L\+Y\+\_\+\+C\+O\+D\+E\+\_\+5\+YZ}(\hyperlink{ppp_8h_a966576744a473fafb7687f8e5649941f}{code})~((\hyperlink{ppp_8h_a966576744a473fafb7687f8e5649941f}{code}) $>$= 500 \&\& (\hyperlink{ppp_8h_a966576744a473fafb7687f8e5649941f}{code}) $<$ 600)
+\item 
+\#define \hyperlink{smtp__client_8h_a1d51e1986667e1138d72dec48c441c89}{Smtp\+Client\+Context}~struct \hyperlink{struct__SmtpClientContext}{\+\_\+\+Smtp\+Client\+Context}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t}($\ast$ \hyperlink{smtp__client_8h_a41608593fa8a8f1b06157bd7bb00667d}{Smtp\+Client\+Reply\+Callback}) (\hyperlink{smtp__client_8h_a1d51e1986667e1138d72dec48c441c89}{Smtp\+Client\+Context} $\ast$context, \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$reply\+Line)
+\begin{DoxyCompactList}\small\item\em Multiline reply parsing callback function. \end{DoxyCompactList}\item 
+typedef \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t}($\ast$ \hyperlink{smtp__client_8h_ad04a65acf644c29932a9a90545eb2291}{Smtp\+Client\+Tls\+Init\+Callback}) (\hyperlink{smtp__client_8h_a1d51e1986667e1138d72dec48c441c89}{Smtp\+Client\+Context} $\ast$context, \hyperlink{tls_8h_ac09f7a286c0cdf9b07ee1edd107946f5}{Tls\+Context} $\ast$tls\+Context)
+\begin{DoxyCompactList}\small\item\em T\+LS initialization callback function. \end{DoxyCompactList}\item 
+typedef \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t}($\ast$ \hyperlink{smtp__client_8h_af060061b4252206c466e41b66e60239d}{Smtp\+Reply\+Callback}) (\hyperlink{smtp__client_8h_a1d51e1986667e1138d72dec48c441c89}{Smtp\+Client\+Context} $\ast$context, \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$reply\+Line, \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} reply\+Code)
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{smtp__client_8h_a911ca4bf6d0935fa11d6c8267acf058d}{Smtp\+Connection\+Mode} \{ \hyperlink{smtp__client_8h_a911ca4bf6d0935fa11d6c8267acf058da14ca69b09492de2b1dd587bb75081742}{S\+M\+T\+P\+\_\+\+M\+O\+D\+E\+\_\+\+P\+L\+A\+I\+N\+T\+E\+XT} = 1, 
+\hyperlink{smtp__client_8h_a911ca4bf6d0935fa11d6c8267acf058da01abc009c2c147e39c82f1b221c1f51c}{S\+M\+T\+P\+\_\+\+M\+O\+D\+E\+\_\+\+I\+M\+P\+L\+I\+C\+I\+T\+\_\+\+T\+LS} = 2, 
+\hyperlink{smtp__client_8h_a911ca4bf6d0935fa11d6c8267acf058dafdc9c15d5790d1aff8325b5e433c8aff}{S\+M\+T\+P\+\_\+\+M\+O\+D\+E\+\_\+\+E\+X\+P\+L\+I\+C\+I\+T\+\_\+\+T\+LS} = 3
+ \}\begin{DoxyCompactList}\small\item\em S\+M\+TP connection modes. \end{DoxyCompactList}
+\item 
+enum \hyperlink{smtp__client_8h_aeee50722ccc5015c4fdc33b13819126e}{Smtp\+Mail\+Addr\+Type} \{ \hyperlink{smtp__client_8h_aeee50722ccc5015c4fdc33b13819126eac16220aa65cda6d029d27f1c77e2cd59}{S\+M\+T\+P\+\_\+\+A\+D\+D\+R\+\_\+\+T\+Y\+P\+E\+\_\+\+F\+R\+OM} = 0, 
+\hyperlink{smtp__client_8h_aeee50722ccc5015c4fdc33b13819126ea47715b8a7f2291a2ba2678871446c1b5}{S\+M\+T\+P\+\_\+\+A\+D\+D\+R\+\_\+\+T\+Y\+P\+E\+\_\+\+TO} = 1, 
+\hyperlink{smtp__client_8h_aeee50722ccc5015c4fdc33b13819126ea378c4ba43e544fb077f60dc92d55832c}{S\+M\+T\+P\+\_\+\+A\+D\+D\+R\+\_\+\+T\+Y\+P\+E\+\_\+\+CC} = 2, 
+\hyperlink{smtp__client_8h_aeee50722ccc5015c4fdc33b13819126ea95b0ff9b31988fa48a06267ed293ae42}{S\+M\+T\+P\+\_\+\+A\+D\+D\+R\+\_\+\+T\+Y\+P\+E\+\_\+\+B\+CC} = 3
+ \}\begin{DoxyCompactList}\small\item\em Email address types. \end{DoxyCompactList}
+\item 
+enum \hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212}{Smtp\+Client\+State} \{ \newline
+\hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212ae46bff82522430941d20384780347cea}{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+D\+I\+S\+C\+O\+N\+N\+E\+C\+T\+ED} = 0, 
+\hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212a6c425b9f7c5a819b6e98a87605612d2f}{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+N\+G\+\_\+\+T\+CP} = 1, 
+\hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212a163d96a2d3abd7f2c2289d14cd809087}{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+N\+G\+\_\+\+T\+LS} = 2, 
+\hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212a6d4f5c25e53afe04c724c28bf689b53b}{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+C\+O\+N\+N\+E\+C\+T\+ED} = 3, 
+\newline
+\hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212a604aa223130b82feebda4402f92aace6}{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+U\+B\+\_\+\+C\+O\+M\+M\+A\+N\+D\+\_\+1} = 4, 
+\hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212af10d15d3806fc94483d0a85b77777252}{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+U\+B\+\_\+\+C\+O\+M\+M\+A\+N\+D\+\_\+2} = 5, 
+\hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212ae8779b04af528f5a554e46018811efb2}{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+U\+B\+\_\+\+C\+O\+M\+M\+A\+N\+D\+\_\+3} = 6, 
+\hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212a00adf5f58da3e271eac222fca788bb5b}{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+M\+A\+I\+L\+\_\+\+H\+E\+A\+D\+ER} = 7, 
+\newline
+\hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212a9dbb3fb5b3b2d1bf1b571318f2573c27}{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+M\+A\+I\+L\+\_\+\+B\+O\+DY} = 8, 
+\hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212af04a73d17db8cb132b3c223bc3e13eea}{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+M\+U\+L\+T\+I\+P\+A\+R\+T\+\_\+\+H\+E\+A\+D\+ER} = 9, 
+\hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212a52f5a7d628155fe521298f75b9c7ab05}{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+M\+U\+L\+T\+I\+P\+A\+R\+T\+\_\+\+B\+O\+DY} = 10, 
+\hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212ae5602be37222145c168ac38e3ebe0735}{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+D\+I\+S\+C\+O\+N\+N\+E\+C\+T\+I\+NG} = 11
+ \}\begin{DoxyCompactList}\small\item\em S\+M\+TP client states. \end{DoxyCompactList}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{smtp__client_8h_a995f203e0c960ac051d8374147683fe0}{smtp\+Client\+Init} (\hyperlink{smtp__client_8h_a1d51e1986667e1138d72dec48c441c89}{Smtp\+Client\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Initialize S\+M\+TP client context. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{smtp__client_8h_a437ee922c4e925b1c84d026eb204182c}{smtp\+Client\+Register\+Tls\+Init\+Callback} (\hyperlink{smtp__client_8h_a1d51e1986667e1138d72dec48c441c89}{Smtp\+Client\+Context} $\ast$context, \hyperlink{smtp__client_8h_ad04a65acf644c29932a9a90545eb2291}{Smtp\+Client\+Tls\+Init\+Callback} callback)
+\begin{DoxyCompactList}\small\item\em Register T\+LS initialization callback function. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{smtp__client_8h_a979183272524634f1ded897843314657}{smtp\+Client\+Set\+Timeout} (\hyperlink{smtp__client_8h_a1d51e1986667e1138d72dec48c441c89}{Smtp\+Client\+Context} $\ast$context, \hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\+\_\+t} timeout)
+\begin{DoxyCompactList}\small\item\em Set communication timeout. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{smtp__client_8h_aef0b3e23d665d5e6ab0c58040c1ac255}{smtp\+Client\+Bind\+To\+Interface} (\hyperlink{smtp__client_8h_a1d51e1986667e1138d72dec48c441c89}{Smtp\+Client\+Context} $\ast$context, \hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface)
+\begin{DoxyCompactList}\small\item\em Bind the S\+M\+TP client to a particular network interface. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{smtp__client_8h_a872b439623742705b0ef1058bbf26d00}{smtp\+Client\+Connect} (\hyperlink{smtp__client_8h_a1d51e1986667e1138d72dec48c441c89}{Smtp\+Client\+Context} $\ast$context, const \hyperlink{structIpAddr}{Ip\+Addr} $\ast$server\+Ip\+Addr, \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} server\+Port, \hyperlink{smtp__client_8h_a911ca4bf6d0935fa11d6c8267acf058d}{Smtp\+Connection\+Mode} \hyperlink{ntp__common_8h_a37e90f5e3bd99fac2021fb3a326607d4}{mode})
+\begin{DoxyCompactList}\small\item\em Establish a connection with the specified S\+M\+TP server. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{smtp__client_8h_a1dce89c0f8514a31e3da2dcd040a4197}{smtp\+Client\+Login} (\hyperlink{smtp__client_8h_a1d51e1986667e1138d72dec48c441c89}{Smtp\+Client\+Context} $\ast$context, const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$username, const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$password)
+\begin{DoxyCompactList}\small\item\em Login to the S\+M\+TP server using the provided user name and password. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{smtp__client_8h_a335f386b2a59c63c4946742d1a7d4d04}{smtp\+Client\+Set\+Content\+Type} (\hyperlink{smtp__client_8h_a1d51e1986667e1138d72dec48c441c89}{Smtp\+Client\+Context} $\ast$context, const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$content\+Type)
+\begin{DoxyCompactList}\small\item\em Set the content type to be used. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{smtp__client_8h_a7c4c60ca25c360eb7d7e1e4ef45e9a6c}{smtp\+Client\+Set\+Multipart\+Boundary} (\hyperlink{smtp__client_8h_a1d51e1986667e1138d72dec48c441c89}{Smtp\+Client\+Context} $\ast$context, const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$boundary)
+\begin{DoxyCompactList}\small\item\em Define the boundary string to be used (multipart encoding) \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{smtp__client_8h_af3bd52c9831ddfe24f276144492b0255}{smtp\+Client\+Write\+Mail\+Header} (\hyperlink{smtp__client_8h_a1d51e1986667e1138d72dec48c441c89}{Smtp\+Client\+Context} $\ast$context, const \hyperlink{structSmtpMailAddr}{Smtp\+Mail\+Addr} $\ast$from, const \hyperlink{structSmtpMailAddr}{Smtp\+Mail\+Addr} $\ast$recipients, \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} num\+Recipients, const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$subject)
+\begin{DoxyCompactList}\small\item\em Write email header. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{smtp__client_8h_a87d9dc34c5a3f59f1e8822c3c091bbd5}{smtp\+Client\+Write\+Mail\+Body} (\hyperlink{smtp__client_8h_a1d51e1986667e1138d72dec48c441c89}{Smtp\+Client\+Context} $\ast$context, const void $\ast$\hyperlink{tftp__common_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length}, size\+\_\+t $\ast$written, \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} \hyperlink{nbns__common_8h_a1e87af3c18a2fd36c61faf89949bdc3f}{flags})
+\begin{DoxyCompactList}\small\item\em Write email body. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{smtp__client_8h_ad1537cdb0e73bfd1dbaeec0f26e26aaf}{smtp\+Client\+Write\+Multipart\+Header} (\hyperlink{smtp__client_8h_a1d51e1986667e1138d72dec48c441c89}{Smtp\+Client\+Context} $\ast$context, const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$\hyperlink{tftp__common_8h_a054704ecfbf9f8eea80cd1d120b8cf62}{filename}, const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$content\+Type, const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$content\+Transfer\+Encoding, \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} \hyperlink{ipv6__frag_8h_a7179af054cf318941e1a12e964965935}{last})
+\begin{DoxyCompactList}\small\item\em Write multipart header. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{smtp__client_8h_af281ccc5376dc7e09523262172a5e83a}{smtp\+Client\+Write\+Multipart\+Body} (\hyperlink{smtp__client_8h_a1d51e1986667e1138d72dec48c441c89}{Smtp\+Client\+Context} $\ast$context, const void $\ast$\hyperlink{tftp__common_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length}, size\+\_\+t $\ast$written, \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} \hyperlink{nbns__common_8h_a1e87af3c18a2fd36c61faf89949bdc3f}{flags})
+\begin{DoxyCompactList}\small\item\em Write data to the the multipart body. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{smtp__client_8h_a025b74cb30a6490b8daaac0a60b7b6ba}{smtp\+Client\+Close\+Mail\+Body} (\hyperlink{smtp__client_8h_a1d51e1986667e1138d72dec48c441c89}{Smtp\+Client\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Complete email sending process and wait for server\textquotesingle{}s status. \end{DoxyCompactList}\item 
+\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} \hyperlink{smtp__client_8h_a05d1aeeeaceaf22fc889ef9743d5aeaa}{smtp\+Client\+Get\+Reply\+Code} (\hyperlink{smtp__client_8h_a1d51e1986667e1138d72dec48c441c89}{Smtp\+Client\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Retrieve server\textquotesingle{}s reply code. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{smtp__client_8h_a56188b2b15a9735fb524423c6aaf3faa}{smtp\+Client\+Disconnect} (\hyperlink{smtp__client_8h_a1d51e1986667e1138d72dec48c441c89}{Smtp\+Client\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Gracefully disconnect from the S\+M\+TP server. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{smtp__client_8h_a282a4bd4097cd42d11367874c8e83b79}{smtp\+Client\+Close} (\hyperlink{smtp__client_8h_a1d51e1986667e1138d72dec48c441c89}{Smtp\+Client\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Close the connection with the S\+M\+TP server. \end{DoxyCompactList}\item 
+void \hyperlink{smtp__client_8h_aed9249007a1ad35dd2852557fa8ac087}{smtp\+Client\+Deinit} (\hyperlink{smtp__client_8h_a1d51e1986667e1138d72dec48c441c89}{Smtp\+Client\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Release S\+M\+TP client context. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+S\+M\+TP client (Simple Mail Transfer Protocol) 
+
+\hypertarget{pic32mz__ef__curiosity_8h_License}{}\subsection{License}\label{pic32mz__ef__curiosity_8h_License}
+S\+P\+D\+X-\/\+License-\/\+Identifier\+: G\+P\+L-\/2.\+0-\/or-\/later
+
+Copyright (C) 2010-\/2019 Oryx Embedded S\+A\+RL. All rights reserved.
+
+This file is part of Cyclone\+T\+CP Open.
+
+This program is free software; you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+
+You should have received a copy of the G\+NU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-\/1301, U\+SA.
+
+\begin{DoxyAuthor}{Author}
+Oryx Embedded S\+A\+RL (www.\+oryx-\/embedded.\+com) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+9.\+6 
+\end{DoxyVersion}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{smtp__client_8h_adea07fb5e3cabd59c58567657e9de718}\label{smtp__client_8h_adea07fb5e3cabd59c58567657e9de718}} 
+\index{smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}!S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+B\+O\+U\+N\+D\+A\+R\+Y\+\_\+\+M\+A\+X\+\_\+\+L\+EN@{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+B\+O\+U\+N\+D\+A\+R\+Y\+\_\+\+M\+A\+X\+\_\+\+L\+EN}}
+\index{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+B\+O\+U\+N\+D\+A\+R\+Y\+\_\+\+M\+A\+X\+\_\+\+L\+EN@{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+B\+O\+U\+N\+D\+A\+R\+Y\+\_\+\+M\+A\+X\+\_\+\+L\+EN}!smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}}
+\subsubsection{\texorpdfstring{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+B\+O\+U\+N\+D\+A\+R\+Y\+\_\+\+M\+A\+X\+\_\+\+L\+EN}{SMTP\_CLIENT\_BOUNDARY\_MAX\_LEN}}
+{\footnotesize\ttfamily \#define S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+B\+O\+U\+N\+D\+A\+R\+Y\+\_\+\+M\+A\+X\+\_\+\+L\+EN~70}
+
+
+
+Definition at line 116 of file smtp\+\_\+client.\+h.
+
+\mbox{\Hypertarget{smtp__client_8h_a55cbd4c03a87f28df130203250a61810}\label{smtp__client_8h_a55cbd4c03a87f28df130203250a61810}} 
+\index{smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}!S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE@{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE}}
+\index{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE@{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE}!smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}}
+\subsubsection{\texorpdfstring{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE}{SMTP\_CLIENT\_BUFFER\_SIZE}}
+{\footnotesize\ttfamily \#define S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE~512}
+
+
+
+Definition at line 88 of file smtp\+\_\+client.\+h.
+
+\mbox{\Hypertarget{smtp__client_8h_a85f89a4d69250996b210dd7773d50479}\label{smtp__client_8h_a85f89a4d69250996b210dd7773d50479}} 
+\index{smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}!S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+C\+O\+N\+T\+E\+N\+T\+\_\+\+T\+Y\+P\+E\+\_\+\+M\+A\+X\+\_\+\+L\+EN@{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+C\+O\+N\+T\+E\+N\+T\+\_\+\+T\+Y\+P\+E\+\_\+\+M\+A\+X\+\_\+\+L\+EN}}
+\index{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+C\+O\+N\+T\+E\+N\+T\+\_\+\+T\+Y\+P\+E\+\_\+\+M\+A\+X\+\_\+\+L\+EN@{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+C\+O\+N\+T\+E\+N\+T\+\_\+\+T\+Y\+P\+E\+\_\+\+M\+A\+X\+\_\+\+L\+EN}!smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}}
+\subsubsection{\texorpdfstring{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+C\+O\+N\+T\+E\+N\+T\+\_\+\+T\+Y\+P\+E\+\_\+\+M\+A\+X\+\_\+\+L\+EN}{SMTP\_CLIENT\_CONTENT\_TYPE\_MAX\_LEN}}
+{\footnotesize\ttfamily \#define S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+C\+O\+N\+T\+E\+N\+T\+\_\+\+T\+Y\+P\+E\+\_\+\+M\+A\+X\+\_\+\+L\+EN~32}
+
+
+
+Definition at line 109 of file smtp\+\_\+client.\+h.
+
+\mbox{\Hypertarget{smtp__client_8h_ac9fb4cfc29feb283f38417291dd13f3a}\label{smtp__client_8h_ac9fb4cfc29feb283f38417291dd13f3a}} 
+\index{smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}!S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+C\+R\+A\+M\+\_\+\+M\+D5\+\_\+\+A\+U\+T\+H\+\_\+\+S\+U\+P\+P\+O\+RT@{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+C\+R\+A\+M\+\_\+\+M\+D5\+\_\+\+A\+U\+T\+H\+\_\+\+S\+U\+P\+P\+O\+RT}}
+\index{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+C\+R\+A\+M\+\_\+\+M\+D5\+\_\+\+A\+U\+T\+H\+\_\+\+S\+U\+P\+P\+O\+RT@{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+C\+R\+A\+M\+\_\+\+M\+D5\+\_\+\+A\+U\+T\+H\+\_\+\+S\+U\+P\+P\+O\+RT}!smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}}
+\subsubsection{\texorpdfstring{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+C\+R\+A\+M\+\_\+\+M\+D5\+\_\+\+A\+U\+T\+H\+\_\+\+S\+U\+P\+P\+O\+RT}{SMTP\_CLIENT\_CRAM\_MD5\_AUTH\_SUPPORT}}
+{\footnotesize\ttfamily \#define S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+C\+R\+A\+M\+\_\+\+M\+D5\+\_\+\+A\+U\+T\+H\+\_\+\+S\+U\+P\+P\+O\+RT~\hyperlink{os__port_8h_abd5c8ab57c190a6522ccdbf0ed7577da}{D\+I\+S\+A\+B\+L\+ED}}
+
+
+
+Definition at line 74 of file smtp\+\_\+client.\+h.
+
+\mbox{\Hypertarget{smtp__client_8h_a0b031b3eb0661fcf3fd9591aab485e12}\label{smtp__client_8h_a0b031b3eb0661fcf3fd9591aab485e12}} 
+\index{smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}!S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+D\+E\+F\+A\+U\+L\+T\+\_\+\+T\+I\+M\+E\+O\+UT@{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+D\+E\+F\+A\+U\+L\+T\+\_\+\+T\+I\+M\+E\+O\+UT}}
+\index{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+D\+E\+F\+A\+U\+L\+T\+\_\+\+T\+I\+M\+E\+O\+UT@{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+D\+E\+F\+A\+U\+L\+T\+\_\+\+T\+I\+M\+E\+O\+UT}!smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}}
+\subsubsection{\texorpdfstring{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+D\+E\+F\+A\+U\+L\+T\+\_\+\+T\+I\+M\+E\+O\+UT}{SMTP\_CLIENT\_DEFAULT\_TIMEOUT}}
+{\footnotesize\ttfamily \#define S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+D\+E\+F\+A\+U\+L\+T\+\_\+\+T\+I\+M\+E\+O\+UT~20000}
+
+
+
+Definition at line 81 of file smtp\+\_\+client.\+h.
+
+\mbox{\Hypertarget{smtp__client_8h_a9eded38d92186ecd4d2a88337200c788}\label{smtp__client_8h_a9eded38d92186ecd4d2a88337200c788}} 
+\index{smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}!S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+L\+O\+G\+I\+N\+\_\+\+A\+U\+T\+H\+\_\+\+S\+U\+P\+P\+O\+RT@{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+L\+O\+G\+I\+N\+\_\+\+A\+U\+T\+H\+\_\+\+S\+U\+P\+P\+O\+RT}}
+\index{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+L\+O\+G\+I\+N\+\_\+\+A\+U\+T\+H\+\_\+\+S\+U\+P\+P\+O\+RT@{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+L\+O\+G\+I\+N\+\_\+\+A\+U\+T\+H\+\_\+\+S\+U\+P\+P\+O\+RT}!smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}}
+\subsubsection{\texorpdfstring{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+L\+O\+G\+I\+N\+\_\+\+A\+U\+T\+H\+\_\+\+S\+U\+P\+P\+O\+RT}{SMTP\_CLIENT\_LOGIN\_AUTH\_SUPPORT}}
+{\footnotesize\ttfamily \#define S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+L\+O\+G\+I\+N\+\_\+\+A\+U\+T\+H\+\_\+\+S\+U\+P\+P\+O\+RT~\hyperlink{os__port_8h_a73c228f87e038e8295ee8ea8eceaa5ac}{E\+N\+A\+B\+L\+ED}}
+
+
+
+Definition at line 60 of file smtp\+\_\+client.\+h.
+
+\mbox{\Hypertarget{smtp__client_8h_a420e89c6b2da25f3bdf13b2732d551b5}\label{smtp__client_8h_a420e89c6b2da25f3bdf13b2732d551b5}} 
+\index{smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}!S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+M\+I\+M\+E\+\_\+\+S\+U\+P\+P\+O\+RT@{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+M\+I\+M\+E\+\_\+\+S\+U\+P\+P\+O\+RT}}
+\index{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+M\+I\+M\+E\+\_\+\+S\+U\+P\+P\+O\+RT@{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+M\+I\+M\+E\+\_\+\+S\+U\+P\+P\+O\+RT}!smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}}
+\subsubsection{\texorpdfstring{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+M\+I\+M\+E\+\_\+\+S\+U\+P\+P\+O\+RT}{SMTP\_CLIENT\_MIME\_SUPPORT}}
+{\footnotesize\ttfamily \#define S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+M\+I\+M\+E\+\_\+\+S\+U\+P\+P\+O\+RT~\hyperlink{os__port_8h_a73c228f87e038e8295ee8ea8eceaa5ac}{E\+N\+A\+B\+L\+ED}}
+
+
+
+Definition at line 46 of file smtp\+\_\+client.\+h.
+
+\mbox{\Hypertarget{smtp__client_8h_a778af4abf60b01f556d43b1f61bdf4c0}\label{smtp__client_8h_a778af4abf60b01f556d43b1f61bdf4c0}} 
+\index{smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}!S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+P\+L\+A\+I\+N\+\_\+\+A\+U\+T\+H\+\_\+\+S\+U\+P\+P\+O\+RT@{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+P\+L\+A\+I\+N\+\_\+\+A\+U\+T\+H\+\_\+\+S\+U\+P\+P\+O\+RT}}
+\index{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+P\+L\+A\+I\+N\+\_\+\+A\+U\+T\+H\+\_\+\+S\+U\+P\+P\+O\+RT@{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+P\+L\+A\+I\+N\+\_\+\+A\+U\+T\+H\+\_\+\+S\+U\+P\+P\+O\+RT}!smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}}
+\subsubsection{\texorpdfstring{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+P\+L\+A\+I\+N\+\_\+\+A\+U\+T\+H\+\_\+\+S\+U\+P\+P\+O\+RT}{SMTP\_CLIENT\_PLAIN\_AUTH\_SUPPORT}}
+{\footnotesize\ttfamily \#define S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+P\+L\+A\+I\+N\+\_\+\+A\+U\+T\+H\+\_\+\+S\+U\+P\+P\+O\+RT~\hyperlink{os__port_8h_a73c228f87e038e8295ee8ea8eceaa5ac}{E\+N\+A\+B\+L\+ED}}
+
+
+
+Definition at line 67 of file smtp\+\_\+client.\+h.
+
+\mbox{\Hypertarget{smtp__client_8h_aae07922aee815e562940e5302926f0f1}\label{smtp__client_8h_aae07922aee815e562940e5302926f0f1}} 
+\index{smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}!S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+U\+P\+P\+O\+RT@{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+U\+P\+P\+O\+RT}}
+\index{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+U\+P\+P\+O\+RT@{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+U\+P\+P\+O\+RT}!smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}}
+\subsubsection{\texorpdfstring{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+U\+P\+P\+O\+RT}{SMTP\_CLIENT\_SUPPORT}}
+{\footnotesize\ttfamily \#define S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+U\+P\+P\+O\+RT~\hyperlink{os__port_8h_a73c228f87e038e8295ee8ea8eceaa5ac}{E\+N\+A\+B\+L\+ED}}
+
+
+
+Definition at line 39 of file smtp\+\_\+client.\+h.
+
+\mbox{\Hypertarget{smtp__client_8h_a82e2a01eb32c60ce8cda46221a5f9e49}\label{smtp__client_8h_a82e2a01eb32c60ce8cda46221a5f9e49}} 
+\index{smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}!S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+T\+L\+S\+\_\+\+R\+X\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE@{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+T\+L\+S\+\_\+\+R\+X\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE}}
+\index{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+T\+L\+S\+\_\+\+R\+X\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE@{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+T\+L\+S\+\_\+\+R\+X\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE}!smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}}
+\subsubsection{\texorpdfstring{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+T\+L\+S\+\_\+\+R\+X\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE}{SMTP\_CLIENT\_TLS\_RX\_BUFFER\_SIZE}}
+{\footnotesize\ttfamily \#define S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+T\+L\+S\+\_\+\+R\+X\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE~4096}
+
+
+
+Definition at line 102 of file smtp\+\_\+client.\+h.
+
+\mbox{\Hypertarget{smtp__client_8h_ab9d2c96113e0af6d87de62545c8004c1}\label{smtp__client_8h_ab9d2c96113e0af6d87de62545c8004c1}} 
+\index{smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}!S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+T\+L\+S\+\_\+\+S\+U\+P\+P\+O\+RT@{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+T\+L\+S\+\_\+\+S\+U\+P\+P\+O\+RT}}
+\index{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+T\+L\+S\+\_\+\+S\+U\+P\+P\+O\+RT@{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+T\+L\+S\+\_\+\+S\+U\+P\+P\+O\+RT}!smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}}
+\subsubsection{\texorpdfstring{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+T\+L\+S\+\_\+\+S\+U\+P\+P\+O\+RT}{SMTP\_CLIENT\_TLS\_SUPPORT}}
+{\footnotesize\ttfamily \#define S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+T\+L\+S\+\_\+\+S\+U\+P\+P\+O\+RT~\hyperlink{os__port_8h_abd5c8ab57c190a6522ccdbf0ed7577da}{D\+I\+S\+A\+B\+L\+ED}}
+
+
+
+Definition at line 53 of file smtp\+\_\+client.\+h.
+
+\mbox{\Hypertarget{smtp__client_8h_aecc8aae6a9cde14d17b1209ccbd779aa}\label{smtp__client_8h_aecc8aae6a9cde14d17b1209ccbd779aa}} 
+\index{smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}!S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+T\+L\+S\+\_\+\+T\+X\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE@{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+T\+L\+S\+\_\+\+T\+X\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE}}
+\index{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+T\+L\+S\+\_\+\+T\+X\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE@{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+T\+L\+S\+\_\+\+T\+X\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE}!smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}}
+\subsubsection{\texorpdfstring{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+T\+L\+S\+\_\+\+T\+X\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE}{SMTP\_CLIENT\_TLS\_TX\_BUFFER\_SIZE}}
+{\footnotesize\ttfamily \#define S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+T\+L\+S\+\_\+\+T\+X\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE~2048}
+
+
+
+Definition at line 95 of file smtp\+\_\+client.\+h.
+
+\mbox{\Hypertarget{smtp__client_8h_a9b3a2f4393b2cf27e91596469815cda2}\label{smtp__client_8h_a9b3a2f4393b2cf27e91596469815cda2}} 
+\index{smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}!S\+M\+T\+P\+\_\+\+R\+E\+L\+A\+Y\+\_\+\+P\+O\+RT@{S\+M\+T\+P\+\_\+\+R\+E\+L\+A\+Y\+\_\+\+P\+O\+RT}}
+\index{S\+M\+T\+P\+\_\+\+R\+E\+L\+A\+Y\+\_\+\+P\+O\+RT@{S\+M\+T\+P\+\_\+\+R\+E\+L\+A\+Y\+\_\+\+P\+O\+RT}!smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}}
+\subsubsection{\texorpdfstring{S\+M\+T\+P\+\_\+\+R\+E\+L\+A\+Y\+\_\+\+P\+O\+RT}{SMTP\_RELAY\_PORT}}
+{\footnotesize\ttfamily \#define S\+M\+T\+P\+\_\+\+R\+E\+L\+A\+Y\+\_\+\+P\+O\+RT~25}
+
+
+
+Definition at line 142 of file smtp\+\_\+client.\+h.
+
+\mbox{\Hypertarget{smtp__client_8h_a9cb6804b6ece6c7b253e111101d57545}\label{smtp__client_8h_a9cb6804b6ece6c7b253e111101d57545}} 
+\index{smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}!S\+M\+T\+P\+\_\+\+R\+E\+P\+L\+Y\+\_\+\+C\+O\+D\+E\+\_\+2\+YZ@{S\+M\+T\+P\+\_\+\+R\+E\+P\+L\+Y\+\_\+\+C\+O\+D\+E\+\_\+2\+YZ}}
+\index{S\+M\+T\+P\+\_\+\+R\+E\+P\+L\+Y\+\_\+\+C\+O\+D\+E\+\_\+2\+YZ@{S\+M\+T\+P\+\_\+\+R\+E\+P\+L\+Y\+\_\+\+C\+O\+D\+E\+\_\+2\+YZ}!smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}}
+\subsubsection{\texorpdfstring{S\+M\+T\+P\+\_\+\+R\+E\+P\+L\+Y\+\_\+\+C\+O\+D\+E\+\_\+2\+YZ}{SMTP\_REPLY\_CODE\_2YZ}}
+{\footnotesize\ttfamily \#define S\+M\+T\+P\+\_\+\+R\+E\+P\+L\+Y\+\_\+\+C\+O\+D\+E\+\_\+2\+YZ(\begin{DoxyParamCaption}\item[{}]{\hyperlink{ppp_8h_a966576744a473fafb7687f8e5649941f}{code} }\end{DoxyParamCaption})~((\hyperlink{ppp_8h_a966576744a473fafb7687f8e5649941f}{code}) $>$= 200 \&\& (\hyperlink{ppp_8h_a966576744a473fafb7687f8e5649941f}{code}) $<$ 300)}
+
+
+
+Definition at line 149 of file smtp\+\_\+client.\+h.
+
+\mbox{\Hypertarget{smtp__client_8h_a17ea972951d6b2d8cf44ada358fd8d59}\label{smtp__client_8h_a17ea972951d6b2d8cf44ada358fd8d59}} 
+\index{smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}!S\+M\+T\+P\+\_\+\+R\+E\+P\+L\+Y\+\_\+\+C\+O\+D\+E\+\_\+3\+YZ@{S\+M\+T\+P\+\_\+\+R\+E\+P\+L\+Y\+\_\+\+C\+O\+D\+E\+\_\+3\+YZ}}
+\index{S\+M\+T\+P\+\_\+\+R\+E\+P\+L\+Y\+\_\+\+C\+O\+D\+E\+\_\+3\+YZ@{S\+M\+T\+P\+\_\+\+R\+E\+P\+L\+Y\+\_\+\+C\+O\+D\+E\+\_\+3\+YZ}!smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}}
+\subsubsection{\texorpdfstring{S\+M\+T\+P\+\_\+\+R\+E\+P\+L\+Y\+\_\+\+C\+O\+D\+E\+\_\+3\+YZ}{SMTP\_REPLY\_CODE\_3YZ}}
+{\footnotesize\ttfamily \#define S\+M\+T\+P\+\_\+\+R\+E\+P\+L\+Y\+\_\+\+C\+O\+D\+E\+\_\+3\+YZ(\begin{DoxyParamCaption}\item[{}]{\hyperlink{ppp_8h_a966576744a473fafb7687f8e5649941f}{code} }\end{DoxyParamCaption})~((\hyperlink{ppp_8h_a966576744a473fafb7687f8e5649941f}{code}) $>$= 300 \&\& (\hyperlink{ppp_8h_a966576744a473fafb7687f8e5649941f}{code}) $<$ 400)}
+
+
+
+Definition at line 150 of file smtp\+\_\+client.\+h.
+
+\mbox{\Hypertarget{smtp__client_8h_a9ca1d8e7d8a18b23477064726adf853b}\label{smtp__client_8h_a9ca1d8e7d8a18b23477064726adf853b}} 
+\index{smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}!S\+M\+T\+P\+\_\+\+R\+E\+P\+L\+Y\+\_\+\+C\+O\+D\+E\+\_\+4\+YZ@{S\+M\+T\+P\+\_\+\+R\+E\+P\+L\+Y\+\_\+\+C\+O\+D\+E\+\_\+4\+YZ}}
+\index{S\+M\+T\+P\+\_\+\+R\+E\+P\+L\+Y\+\_\+\+C\+O\+D\+E\+\_\+4\+YZ@{S\+M\+T\+P\+\_\+\+R\+E\+P\+L\+Y\+\_\+\+C\+O\+D\+E\+\_\+4\+YZ}!smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}}
+\subsubsection{\texorpdfstring{S\+M\+T\+P\+\_\+\+R\+E\+P\+L\+Y\+\_\+\+C\+O\+D\+E\+\_\+4\+YZ}{SMTP\_REPLY\_CODE\_4YZ}}
+{\footnotesize\ttfamily \#define S\+M\+T\+P\+\_\+\+R\+E\+P\+L\+Y\+\_\+\+C\+O\+D\+E\+\_\+4\+YZ(\begin{DoxyParamCaption}\item[{}]{\hyperlink{ppp_8h_a966576744a473fafb7687f8e5649941f}{code} }\end{DoxyParamCaption})~((\hyperlink{ppp_8h_a966576744a473fafb7687f8e5649941f}{code}) $>$= 400 \&\& (\hyperlink{ppp_8h_a966576744a473fafb7687f8e5649941f}{code}) $<$ 500)}
+
+
+
+Definition at line 151 of file smtp\+\_\+client.\+h.
+
+\mbox{\Hypertarget{smtp__client_8h_a71852123411b3592263848ba71652549}\label{smtp__client_8h_a71852123411b3592263848ba71652549}} 
+\index{smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}!S\+M\+T\+P\+\_\+\+R\+E\+P\+L\+Y\+\_\+\+C\+O\+D\+E\+\_\+5\+YZ@{S\+M\+T\+P\+\_\+\+R\+E\+P\+L\+Y\+\_\+\+C\+O\+D\+E\+\_\+5\+YZ}}
+\index{S\+M\+T\+P\+\_\+\+R\+E\+P\+L\+Y\+\_\+\+C\+O\+D\+E\+\_\+5\+YZ@{S\+M\+T\+P\+\_\+\+R\+E\+P\+L\+Y\+\_\+\+C\+O\+D\+E\+\_\+5\+YZ}!smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}}
+\subsubsection{\texorpdfstring{S\+M\+T\+P\+\_\+\+R\+E\+P\+L\+Y\+\_\+\+C\+O\+D\+E\+\_\+5\+YZ}{SMTP\_REPLY\_CODE\_5YZ}}
+{\footnotesize\ttfamily \#define S\+M\+T\+P\+\_\+\+R\+E\+P\+L\+Y\+\_\+\+C\+O\+D\+E\+\_\+5\+YZ(\begin{DoxyParamCaption}\item[{}]{\hyperlink{ppp_8h_a966576744a473fafb7687f8e5649941f}{code} }\end{DoxyParamCaption})~((\hyperlink{ppp_8h_a966576744a473fafb7687f8e5649941f}{code}) $>$= 500 \&\& (\hyperlink{ppp_8h_a966576744a473fafb7687f8e5649941f}{code}) $<$ 600)}
+
+
+
+Definition at line 152 of file smtp\+\_\+client.\+h.
+
+\mbox{\Hypertarget{smtp__client_8h_a94716c37a983ae774a9acfead160e21a}\label{smtp__client_8h_a94716c37a983ae774a9acfead160e21a}} 
+\index{smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}!S\+M\+T\+P\+\_\+\+S\+U\+B\+M\+I\+S\+S\+I\+O\+N\+\_\+\+P\+O\+RT@{S\+M\+T\+P\+\_\+\+S\+U\+B\+M\+I\+S\+S\+I\+O\+N\+\_\+\+P\+O\+RT}}
+\index{S\+M\+T\+P\+\_\+\+S\+U\+B\+M\+I\+S\+S\+I\+O\+N\+\_\+\+P\+O\+RT@{S\+M\+T\+P\+\_\+\+S\+U\+B\+M\+I\+S\+S\+I\+O\+N\+\_\+\+P\+O\+RT}!smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}}
+\subsubsection{\texorpdfstring{S\+M\+T\+P\+\_\+\+S\+U\+B\+M\+I\+S\+S\+I\+O\+N\+\_\+\+P\+O\+RT}{SMTP\_SUBMISSION\_PORT}}
+{\footnotesize\ttfamily \#define S\+M\+T\+P\+\_\+\+S\+U\+B\+M\+I\+S\+S\+I\+O\+N\+\_\+\+P\+O\+RT~587}
+
+
+
+Definition at line 144 of file smtp\+\_\+client.\+h.
+
+\mbox{\Hypertarget{smtp__client_8h_a1d51e1986667e1138d72dec48c441c89}\label{smtp__client_8h_a1d51e1986667e1138d72dec48c441c89}} 
+\index{smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}!Smtp\+Client\+Context@{Smtp\+Client\+Context}}
+\index{Smtp\+Client\+Context@{Smtp\+Client\+Context}!smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}}
+\subsubsection{\texorpdfstring{Smtp\+Client\+Context}{SmtpClientContext}}
+{\footnotesize\ttfamily \#define Smtp\+Client\+Context~struct \hyperlink{struct__SmtpClientContext}{\+\_\+\+Smtp\+Client\+Context}}
+
+
+
+Definition at line 156 of file smtp\+\_\+client.\+h.
+
+\mbox{\Hypertarget{smtp__client_8h_ad8a148c02890ee78210083a57ada6178}\label{smtp__client_8h_ad8a148c02890ee78210083a57ada6178}} 
+\index{smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}!S\+M\+T\+P\+S\+\_\+\+S\+U\+B\+M\+I\+S\+S\+I\+O\+N\+\_\+\+P\+O\+RT@{S\+M\+T\+P\+S\+\_\+\+S\+U\+B\+M\+I\+S\+S\+I\+O\+N\+\_\+\+P\+O\+RT}}
+\index{S\+M\+T\+P\+S\+\_\+\+S\+U\+B\+M\+I\+S\+S\+I\+O\+N\+\_\+\+P\+O\+RT@{S\+M\+T\+P\+S\+\_\+\+S\+U\+B\+M\+I\+S\+S\+I\+O\+N\+\_\+\+P\+O\+RT}!smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}}
+\subsubsection{\texorpdfstring{S\+M\+T\+P\+S\+\_\+\+S\+U\+B\+M\+I\+S\+S\+I\+O\+N\+\_\+\+P\+O\+RT}{SMTPS\_SUBMISSION\_PORT}}
+{\footnotesize\ttfamily \#define S\+M\+T\+P\+S\+\_\+\+S\+U\+B\+M\+I\+S\+S\+I\+O\+N\+\_\+\+P\+O\+RT~465}
+
+
+
+Definition at line 146 of file smtp\+\_\+client.\+h.
+
+
+
+\subsection{Typedef Documentation}
+\mbox{\Hypertarget{smtp__client_8h_a41608593fa8a8f1b06157bd7bb00667d}\label{smtp__client_8h_a41608593fa8a8f1b06157bd7bb00667d}} 
+\index{smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}!Smtp\+Client\+Reply\+Callback@{Smtp\+Client\+Reply\+Callback}}
+\index{Smtp\+Client\+Reply\+Callback@{Smtp\+Client\+Reply\+Callback}!smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}}
+\subsubsection{\texorpdfstring{Smtp\+Client\+Reply\+Callback}{SmtpClientReplyCallback}}
+{\footnotesize\ttfamily typedef \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t}($\ast$ Smtp\+Client\+Reply\+Callback) (\hyperlink{smtp__client_8h_a1d51e1986667e1138d72dec48c441c89}{Smtp\+Client\+Context} $\ast$context, \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$reply\+Line)}
+
+
+
+Multiline reply parsing callback function. 
+
+
+
+Definition at line 214 of file smtp\+\_\+client.\+h.
+
+\mbox{\Hypertarget{smtp__client_8h_ad04a65acf644c29932a9a90545eb2291}\label{smtp__client_8h_ad04a65acf644c29932a9a90545eb2291}} 
+\index{smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}!Smtp\+Client\+Tls\+Init\+Callback@{Smtp\+Client\+Tls\+Init\+Callback}}
+\index{Smtp\+Client\+Tls\+Init\+Callback@{Smtp\+Client\+Tls\+Init\+Callback}!smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}}
+\subsubsection{\texorpdfstring{Smtp\+Client\+Tls\+Init\+Callback}{SmtpClientTlsInitCallback}}
+{\footnotesize\ttfamily typedef \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t}($\ast$ Smtp\+Client\+Tls\+Init\+Callback) (\hyperlink{smtp__client_8h_a1d51e1986667e1138d72dec48c441c89}{Smtp\+Client\+Context} $\ast$context, \hyperlink{tls_8h_ac09f7a286c0cdf9b07ee1edd107946f5}{Tls\+Context} $\ast$tls\+Context)}
+
+
+
+T\+LS initialization callback function. 
+
+
+
+Definition at line 225 of file smtp\+\_\+client.\+h.
+
+\mbox{\Hypertarget{smtp__client_8h_af060061b4252206c466e41b66e60239d}\label{smtp__client_8h_af060061b4252206c466e41b66e60239d}} 
+\index{smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}!Smtp\+Reply\+Callback@{Smtp\+Reply\+Callback}}
+\index{Smtp\+Reply\+Callback@{Smtp\+Reply\+Callback}!smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}}
+\subsubsection{\texorpdfstring{Smtp\+Reply\+Callback}{SmtpReplyCallback}}
+{\footnotesize\ttfamily typedef \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t}($\ast$ Smtp\+Reply\+Callback) (\hyperlink{smtp__client_8h_a1d51e1986667e1138d72dec48c441c89}{Smtp\+Client\+Context} $\ast$context, \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$reply\+Line, \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} reply\+Code)}
+
+
+
+Definition at line 279 of file smtp\+\_\+client.\+h.
+
+
+
+\subsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{smtp__client_8h_a02fc964f050527db806d949976661212}\label{smtp__client_8h_a02fc964f050527db806d949976661212}} 
+\index{smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}!Smtp\+Client\+State@{Smtp\+Client\+State}}
+\index{Smtp\+Client\+State@{Smtp\+Client\+State}!smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}}
+\subsubsection{\texorpdfstring{Smtp\+Client\+State}{SmtpClientState}}
+{\footnotesize\ttfamily enum \hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212}{Smtp\+Client\+State}}
+
+
+
+S\+M\+TP client states. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+D\+I\+S\+C\+O\+N\+N\+E\+C\+T\+ED@{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+D\+I\+S\+C\+O\+N\+N\+E\+C\+T\+ED}!smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}}\index{smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}!S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+D\+I\+S\+C\+O\+N\+N\+E\+C\+T\+ED@{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+D\+I\+S\+C\+O\+N\+N\+E\+C\+T\+ED}}}\mbox{\Hypertarget{smtp__client_8h_a02fc964f050527db806d949976661212ae46bff82522430941d20384780347cea}\label{smtp__client_8h_a02fc964f050527db806d949976661212ae46bff82522430941d20384780347cea}} 
+S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+D\+I\+S\+C\+O\+N\+N\+E\+C\+T\+ED&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+N\+G\+\_\+\+T\+CP@{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+N\+G\+\_\+\+T\+CP}!smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}}\index{smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}!S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+N\+G\+\_\+\+T\+CP@{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+N\+G\+\_\+\+T\+CP}}}\mbox{\Hypertarget{smtp__client_8h_a02fc964f050527db806d949976661212a6c425b9f7c5a819b6e98a87605612d2f}\label{smtp__client_8h_a02fc964f050527db806d949976661212a6c425b9f7c5a819b6e98a87605612d2f}} 
+S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+N\+G\+\_\+\+T\+CP&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+N\+G\+\_\+\+T\+LS@{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+N\+G\+\_\+\+T\+LS}!smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}}\index{smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}!S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+N\+G\+\_\+\+T\+LS@{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+N\+G\+\_\+\+T\+LS}}}\mbox{\Hypertarget{smtp__client_8h_a02fc964f050527db806d949976661212a163d96a2d3abd7f2c2289d14cd809087}\label{smtp__client_8h_a02fc964f050527db806d949976661212a163d96a2d3abd7f2c2289d14cd809087}} 
+S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+N\+G\+\_\+\+T\+LS&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+C\+O\+N\+N\+E\+C\+T\+ED@{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+C\+O\+N\+N\+E\+C\+T\+ED}!smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}}\index{smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}!S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+C\+O\+N\+N\+E\+C\+T\+ED@{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+C\+O\+N\+N\+E\+C\+T\+ED}}}\mbox{\Hypertarget{smtp__client_8h_a02fc964f050527db806d949976661212a6d4f5c25e53afe04c724c28bf689b53b}\label{smtp__client_8h_a02fc964f050527db806d949976661212a6d4f5c25e53afe04c724c28bf689b53b}} 
+S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+C\+O\+N\+N\+E\+C\+T\+ED&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+U\+B\+\_\+\+C\+O\+M\+M\+A\+N\+D\+\_\+1@{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+U\+B\+\_\+\+C\+O\+M\+M\+A\+N\+D\+\_\+1}!smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}}\index{smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}!S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+U\+B\+\_\+\+C\+O\+M\+M\+A\+N\+D\+\_\+1@{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+U\+B\+\_\+\+C\+O\+M\+M\+A\+N\+D\+\_\+1}}}\mbox{\Hypertarget{smtp__client_8h_a02fc964f050527db806d949976661212a604aa223130b82feebda4402f92aace6}\label{smtp__client_8h_a02fc964f050527db806d949976661212a604aa223130b82feebda4402f92aace6}} 
+S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+U\+B\+\_\+\+C\+O\+M\+M\+A\+N\+D\+\_\+1&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+U\+B\+\_\+\+C\+O\+M\+M\+A\+N\+D\+\_\+2@{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+U\+B\+\_\+\+C\+O\+M\+M\+A\+N\+D\+\_\+2}!smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}}\index{smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}!S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+U\+B\+\_\+\+C\+O\+M\+M\+A\+N\+D\+\_\+2@{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+U\+B\+\_\+\+C\+O\+M\+M\+A\+N\+D\+\_\+2}}}\mbox{\Hypertarget{smtp__client_8h_a02fc964f050527db806d949976661212af10d15d3806fc94483d0a85b77777252}\label{smtp__client_8h_a02fc964f050527db806d949976661212af10d15d3806fc94483d0a85b77777252}} 
+S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+U\+B\+\_\+\+C\+O\+M\+M\+A\+N\+D\+\_\+2&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+U\+B\+\_\+\+C\+O\+M\+M\+A\+N\+D\+\_\+3@{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+U\+B\+\_\+\+C\+O\+M\+M\+A\+N\+D\+\_\+3}!smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}}\index{smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}!S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+U\+B\+\_\+\+C\+O\+M\+M\+A\+N\+D\+\_\+3@{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+U\+B\+\_\+\+C\+O\+M\+M\+A\+N\+D\+\_\+3}}}\mbox{\Hypertarget{smtp__client_8h_a02fc964f050527db806d949976661212ae8779b04af528f5a554e46018811efb2}\label{smtp__client_8h_a02fc964f050527db806d949976661212ae8779b04af528f5a554e46018811efb2}} 
+S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+U\+B\+\_\+\+C\+O\+M\+M\+A\+N\+D\+\_\+3&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+M\+A\+I\+L\+\_\+\+H\+E\+A\+D\+ER@{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+M\+A\+I\+L\+\_\+\+H\+E\+A\+D\+ER}!smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}}\index{smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}!S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+M\+A\+I\+L\+\_\+\+H\+E\+A\+D\+ER@{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+M\+A\+I\+L\+\_\+\+H\+E\+A\+D\+ER}}}\mbox{\Hypertarget{smtp__client_8h_a02fc964f050527db806d949976661212a00adf5f58da3e271eac222fca788bb5b}\label{smtp__client_8h_a02fc964f050527db806d949976661212a00adf5f58da3e271eac222fca788bb5b}} 
+S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+M\+A\+I\+L\+\_\+\+H\+E\+A\+D\+ER&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+M\+A\+I\+L\+\_\+\+B\+O\+DY@{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+M\+A\+I\+L\+\_\+\+B\+O\+DY}!smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}}\index{smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}!S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+M\+A\+I\+L\+\_\+\+B\+O\+DY@{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+M\+A\+I\+L\+\_\+\+B\+O\+DY}}}\mbox{\Hypertarget{smtp__client_8h_a02fc964f050527db806d949976661212a9dbb3fb5b3b2d1bf1b571318f2573c27}\label{smtp__client_8h_a02fc964f050527db806d949976661212a9dbb3fb5b3b2d1bf1b571318f2573c27}} 
+S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+M\+A\+I\+L\+\_\+\+B\+O\+DY&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+M\+U\+L\+T\+I\+P\+A\+R\+T\+\_\+\+H\+E\+A\+D\+ER@{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+M\+U\+L\+T\+I\+P\+A\+R\+T\+\_\+\+H\+E\+A\+D\+ER}!smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}}\index{smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}!S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+M\+U\+L\+T\+I\+P\+A\+R\+T\+\_\+\+H\+E\+A\+D\+ER@{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+M\+U\+L\+T\+I\+P\+A\+R\+T\+\_\+\+H\+E\+A\+D\+ER}}}\mbox{\Hypertarget{smtp__client_8h_a02fc964f050527db806d949976661212af04a73d17db8cb132b3c223bc3e13eea}\label{smtp__client_8h_a02fc964f050527db806d949976661212af04a73d17db8cb132b3c223bc3e13eea}} 
+S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+M\+U\+L\+T\+I\+P\+A\+R\+T\+\_\+\+H\+E\+A\+D\+ER&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+M\+U\+L\+T\+I\+P\+A\+R\+T\+\_\+\+B\+O\+DY@{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+M\+U\+L\+T\+I\+P\+A\+R\+T\+\_\+\+B\+O\+DY}!smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}}\index{smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}!S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+M\+U\+L\+T\+I\+P\+A\+R\+T\+\_\+\+B\+O\+DY@{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+M\+U\+L\+T\+I\+P\+A\+R\+T\+\_\+\+B\+O\+DY}}}\mbox{\Hypertarget{smtp__client_8h_a02fc964f050527db806d949976661212a52f5a7d628155fe521298f75b9c7ab05}\label{smtp__client_8h_a02fc964f050527db806d949976661212a52f5a7d628155fe521298f75b9c7ab05}} 
+S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+M\+U\+L\+T\+I\+P\+A\+R\+T\+\_\+\+B\+O\+DY&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+D\+I\+S\+C\+O\+N\+N\+E\+C\+T\+I\+NG@{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+D\+I\+S\+C\+O\+N\+N\+E\+C\+T\+I\+NG}!smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}}\index{smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}!S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+D\+I\+S\+C\+O\+N\+N\+E\+C\+T\+I\+NG@{S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+D\+I\+S\+C\+O\+N\+N\+E\+C\+T\+I\+NG}}}\mbox{\Hypertarget{smtp__client_8h_a02fc964f050527db806d949976661212ae5602be37222145c168ac38e3ebe0735}\label{smtp__client_8h_a02fc964f050527db806d949976661212ae5602be37222145c168ac38e3ebe0735}} 
+S\+M\+T\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+D\+I\+S\+C\+O\+N\+N\+E\+C\+T\+I\+NG&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line 193 of file smtp\+\_\+client.\+h.
+
+
+\begin{DoxyCode}
+194 \{
+195    \hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212ae46bff82522430941d20384780347cea}{SMTP\_CLIENT\_STATE\_DISCONNECTED}     = 0,
+196    \hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212a6c425b9f7c5a819b6e98a87605612d2f}{SMTP\_CLIENT\_STATE\_CONNECTING\_TCP}   = 1,
+197    \hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212a163d96a2d3abd7f2c2289d14cd809087}{SMTP\_CLIENT\_STATE\_CONNECTING\_TLS}   = 2,
+198    \hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212a6d4f5c25e53afe04c724c28bf689b53b}{SMTP\_CLIENT\_STATE\_CONNECTED}        = 3,
+199    \hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212a604aa223130b82feebda4402f92aace6}{SMTP\_CLIENT\_STATE\_SUB\_COMMAND\_1}    = 4,
+200    \hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212af10d15d3806fc94483d0a85b77777252}{SMTP\_CLIENT\_STATE\_SUB\_COMMAND\_2}    = 5,
+201    \hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212ae8779b04af528f5a554e46018811efb2}{SMTP\_CLIENT\_STATE\_SUB\_COMMAND\_3}    = 6,
+202    \hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212a00adf5f58da3e271eac222fca788bb5b}{SMTP\_CLIENT\_STATE\_MAIL\_HEADER}      = 7,
+203    \hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212a9dbb3fb5b3b2d1bf1b571318f2573c27}{SMTP\_CLIENT\_STATE\_MAIL\_BODY}        = 8,
+204    \hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212af04a73d17db8cb132b3c223bc3e13eea}{SMTP\_CLIENT\_STATE\_MULTIPART\_HEADER} = 9,
+205    \hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212a52f5a7d628155fe521298f75b9c7ab05}{SMTP\_CLIENT\_STATE\_MULTIPART\_BODY}   = 10,
+206    \hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212ae5602be37222145c168ac38e3ebe0735}{SMTP\_CLIENT\_STATE\_DISCONNECTING}    = 11
+207 \} \hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212}{SmtpClientState};
+\end{DoxyCode}
+\mbox{\Hypertarget{smtp__client_8h_a911ca4bf6d0935fa11d6c8267acf058d}\label{smtp__client_8h_a911ca4bf6d0935fa11d6c8267acf058d}} 
+\index{smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}!Smtp\+Connection\+Mode@{Smtp\+Connection\+Mode}}
+\index{Smtp\+Connection\+Mode@{Smtp\+Connection\+Mode}!smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}}
+\subsubsection{\texorpdfstring{Smtp\+Connection\+Mode}{SmtpConnectionMode}}
+{\footnotesize\ttfamily enum \hyperlink{smtp__client_8h_a911ca4bf6d0935fa11d6c8267acf058d}{Smtp\+Connection\+Mode}}
+
+
+
+S\+M\+TP connection modes. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\+M\+T\+P\+\_\+\+M\+O\+D\+E\+\_\+\+P\+L\+A\+I\+N\+T\+E\+XT@{S\+M\+T\+P\+\_\+\+M\+O\+D\+E\+\_\+\+P\+L\+A\+I\+N\+T\+E\+XT}!smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}}\index{smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}!S\+M\+T\+P\+\_\+\+M\+O\+D\+E\+\_\+\+P\+L\+A\+I\+N\+T\+E\+XT@{S\+M\+T\+P\+\_\+\+M\+O\+D\+E\+\_\+\+P\+L\+A\+I\+N\+T\+E\+XT}}}\mbox{\Hypertarget{smtp__client_8h_a911ca4bf6d0935fa11d6c8267acf058da14ca69b09492de2b1dd587bb75081742}\label{smtp__client_8h_a911ca4bf6d0935fa11d6c8267acf058da14ca69b09492de2b1dd587bb75081742}} 
+S\+M\+T\+P\+\_\+\+M\+O\+D\+E\+\_\+\+P\+L\+A\+I\+N\+T\+E\+XT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\+M\+T\+P\+\_\+\+M\+O\+D\+E\+\_\+\+I\+M\+P\+L\+I\+C\+I\+T\+\_\+\+T\+LS@{S\+M\+T\+P\+\_\+\+M\+O\+D\+E\+\_\+\+I\+M\+P\+L\+I\+C\+I\+T\+\_\+\+T\+LS}!smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}}\index{smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}!S\+M\+T\+P\+\_\+\+M\+O\+D\+E\+\_\+\+I\+M\+P\+L\+I\+C\+I\+T\+\_\+\+T\+LS@{S\+M\+T\+P\+\_\+\+M\+O\+D\+E\+\_\+\+I\+M\+P\+L\+I\+C\+I\+T\+\_\+\+T\+LS}}}\mbox{\Hypertarget{smtp__client_8h_a911ca4bf6d0935fa11d6c8267acf058da01abc009c2c147e39c82f1b221c1f51c}\label{smtp__client_8h_a911ca4bf6d0935fa11d6c8267acf058da01abc009c2c147e39c82f1b221c1f51c}} 
+S\+M\+T\+P\+\_\+\+M\+O\+D\+E\+\_\+\+I\+M\+P\+L\+I\+C\+I\+T\+\_\+\+T\+LS&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\+M\+T\+P\+\_\+\+M\+O\+D\+E\+\_\+\+E\+X\+P\+L\+I\+C\+I\+T\+\_\+\+T\+LS@{S\+M\+T\+P\+\_\+\+M\+O\+D\+E\+\_\+\+E\+X\+P\+L\+I\+C\+I\+T\+\_\+\+T\+LS}!smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}}\index{smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}!S\+M\+T\+P\+\_\+\+M\+O\+D\+E\+\_\+\+E\+X\+P\+L\+I\+C\+I\+T\+\_\+\+T\+LS@{S\+M\+T\+P\+\_\+\+M\+O\+D\+E\+\_\+\+E\+X\+P\+L\+I\+C\+I\+T\+\_\+\+T\+LS}}}\mbox{\Hypertarget{smtp__client_8h_a911ca4bf6d0935fa11d6c8267acf058dafdc9c15d5790d1aff8325b5e433c8aff}\label{smtp__client_8h_a911ca4bf6d0935fa11d6c8267acf058dafdc9c15d5790d1aff8325b5e433c8aff}} 
+S\+M\+T\+P\+\_\+\+M\+O\+D\+E\+\_\+\+E\+X\+P\+L\+I\+C\+I\+T\+\_\+\+T\+LS&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line 168 of file smtp\+\_\+client.\+h.
+
+
+\begin{DoxyCode}
+169 \{
+170    \hyperlink{smtp__client_8h_a911ca4bf6d0935fa11d6c8267acf058da14ca69b09492de2b1dd587bb75081742}{SMTP\_MODE\_PLAINTEXT}    = 1,
+171    \hyperlink{smtp__client_8h_a911ca4bf6d0935fa11d6c8267acf058da01abc009c2c147e39c82f1b221c1f51c}{SMTP\_MODE\_IMPLICIT\_TLS} = 2,
+172    \hyperlink{smtp__client_8h_a911ca4bf6d0935fa11d6c8267acf058dafdc9c15d5790d1aff8325b5e433c8aff}{SMTP\_MODE\_EXPLICIT\_TLS} = 3
+173 \} \hyperlink{smtp__client_8h_a911ca4bf6d0935fa11d6c8267acf058d}{SmtpConnectionMode};
+\end{DoxyCode}
+\mbox{\Hypertarget{smtp__client_8h_aeee50722ccc5015c4fdc33b13819126e}\label{smtp__client_8h_aeee50722ccc5015c4fdc33b13819126e}} 
+\index{smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}!Smtp\+Mail\+Addr\+Type@{Smtp\+Mail\+Addr\+Type}}
+\index{Smtp\+Mail\+Addr\+Type@{Smtp\+Mail\+Addr\+Type}!smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}}
+\subsubsection{\texorpdfstring{Smtp\+Mail\+Addr\+Type}{SmtpMailAddrType}}
+{\footnotesize\ttfamily enum \hyperlink{smtp__client_8h_aeee50722ccc5015c4fdc33b13819126e}{Smtp\+Mail\+Addr\+Type}}
+
+
+
+Email address types. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\+M\+T\+P\+\_\+\+A\+D\+D\+R\+\_\+\+T\+Y\+P\+E\+\_\+\+F\+R\+OM@{S\+M\+T\+P\+\_\+\+A\+D\+D\+R\+\_\+\+T\+Y\+P\+E\+\_\+\+F\+R\+OM}!smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}}\index{smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}!S\+M\+T\+P\+\_\+\+A\+D\+D\+R\+\_\+\+T\+Y\+P\+E\+\_\+\+F\+R\+OM@{S\+M\+T\+P\+\_\+\+A\+D\+D\+R\+\_\+\+T\+Y\+P\+E\+\_\+\+F\+R\+OM}}}\mbox{\Hypertarget{smtp__client_8h_aeee50722ccc5015c4fdc33b13819126eac16220aa65cda6d029d27f1c77e2cd59}\label{smtp__client_8h_aeee50722ccc5015c4fdc33b13819126eac16220aa65cda6d029d27f1c77e2cd59}} 
+S\+M\+T\+P\+\_\+\+A\+D\+D\+R\+\_\+\+T\+Y\+P\+E\+\_\+\+F\+R\+OM&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\+M\+T\+P\+\_\+\+A\+D\+D\+R\+\_\+\+T\+Y\+P\+E\+\_\+\+TO@{S\+M\+T\+P\+\_\+\+A\+D\+D\+R\+\_\+\+T\+Y\+P\+E\+\_\+\+TO}!smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}}\index{smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}!S\+M\+T\+P\+\_\+\+A\+D\+D\+R\+\_\+\+T\+Y\+P\+E\+\_\+\+TO@{S\+M\+T\+P\+\_\+\+A\+D\+D\+R\+\_\+\+T\+Y\+P\+E\+\_\+\+TO}}}\mbox{\Hypertarget{smtp__client_8h_aeee50722ccc5015c4fdc33b13819126ea47715b8a7f2291a2ba2678871446c1b5}\label{smtp__client_8h_aeee50722ccc5015c4fdc33b13819126ea47715b8a7f2291a2ba2678871446c1b5}} 
+S\+M\+T\+P\+\_\+\+A\+D\+D\+R\+\_\+\+T\+Y\+P\+E\+\_\+\+TO&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\+M\+T\+P\+\_\+\+A\+D\+D\+R\+\_\+\+T\+Y\+P\+E\+\_\+\+CC@{S\+M\+T\+P\+\_\+\+A\+D\+D\+R\+\_\+\+T\+Y\+P\+E\+\_\+\+CC}!smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}}\index{smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}!S\+M\+T\+P\+\_\+\+A\+D\+D\+R\+\_\+\+T\+Y\+P\+E\+\_\+\+CC@{S\+M\+T\+P\+\_\+\+A\+D\+D\+R\+\_\+\+T\+Y\+P\+E\+\_\+\+CC}}}\mbox{\Hypertarget{smtp__client_8h_aeee50722ccc5015c4fdc33b13819126ea378c4ba43e544fb077f60dc92d55832c}\label{smtp__client_8h_aeee50722ccc5015c4fdc33b13819126ea378c4ba43e544fb077f60dc92d55832c}} 
+S\+M\+T\+P\+\_\+\+A\+D\+D\+R\+\_\+\+T\+Y\+P\+E\+\_\+\+CC&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\+M\+T\+P\+\_\+\+A\+D\+D\+R\+\_\+\+T\+Y\+P\+E\+\_\+\+B\+CC@{S\+M\+T\+P\+\_\+\+A\+D\+D\+R\+\_\+\+T\+Y\+P\+E\+\_\+\+B\+CC}!smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}}\index{smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}!S\+M\+T\+P\+\_\+\+A\+D\+D\+R\+\_\+\+T\+Y\+P\+E\+\_\+\+B\+CC@{S\+M\+T\+P\+\_\+\+A\+D\+D\+R\+\_\+\+T\+Y\+P\+E\+\_\+\+B\+CC}}}\mbox{\Hypertarget{smtp__client_8h_aeee50722ccc5015c4fdc33b13819126ea95b0ff9b31988fa48a06267ed293ae42}\label{smtp__client_8h_aeee50722ccc5015c4fdc33b13819126ea95b0ff9b31988fa48a06267ed293ae42}} 
+S\+M\+T\+P\+\_\+\+A\+D\+D\+R\+\_\+\+T\+Y\+P\+E\+\_\+\+B\+CC&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line 180 of file smtp\+\_\+client.\+h.
+
+
+\begin{DoxyCode}
+181 \{
+182    \hyperlink{smtp__client_8h_aeee50722ccc5015c4fdc33b13819126eac16220aa65cda6d029d27f1c77e2cd59}{SMTP\_ADDR\_TYPE\_FROM} = 0,
+183    \hyperlink{smtp__client_8h_aeee50722ccc5015c4fdc33b13819126ea47715b8a7f2291a2ba2678871446c1b5}{SMTP\_ADDR\_TYPE\_TO}   = 1,
+184    \hyperlink{smtp__client_8h_aeee50722ccc5015c4fdc33b13819126ea378c4ba43e544fb077f60dc92d55832c}{SMTP\_ADDR\_TYPE\_CC}   = 2,
+185    \hyperlink{smtp__client_8h_aeee50722ccc5015c4fdc33b13819126ea95b0ff9b31988fa48a06267ed293ae42}{SMTP\_ADDR\_TYPE\_BCC}  = 3
+186 \} \hyperlink{smtp__client_8h_aeee50722ccc5015c4fdc33b13819126e}{SmtpMailAddrType};
+\end{DoxyCode}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{smtp__client_8h_aef0b3e23d665d5e6ab0c58040c1ac255}\label{smtp__client_8h_aef0b3e23d665d5e6ab0c58040c1ac255}} 
+\index{smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}!smtp\+Client\+Bind\+To\+Interface@{smtp\+Client\+Bind\+To\+Interface}}
+\index{smtp\+Client\+Bind\+To\+Interface@{smtp\+Client\+Bind\+To\+Interface}!smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}}
+\subsubsection{\texorpdfstring{smtp\+Client\+Bind\+To\+Interface()}{smtpClientBindToInterface()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} smtp\+Client\+Bind\+To\+Interface (\begin{DoxyParamCaption}\item[{\hyperlink{smtp__client_8h_a1d51e1986667e1138d72dec48c441c89}{Smtp\+Client\+Context} $\ast$}]{context,  }\item[{\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$}]{interface }\end{DoxyParamCaption})}
+
+
+
+Bind the S\+M\+TP client to a particular network interface. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the S\+M\+TP client context \\
+\hline
+\mbox{\tt in}  & {\em interface} & Network interface to be used \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 147 of file smtp\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+149 \{
+150    \textcolor{comment}{//Make sure the SMTP client context is valid}
+151    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+152       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+153 
+154    \textcolor{comment}{//Explicitly associate the SMTP client with the specified interface}
+155    context->interface = interface;
+156 
+157    \textcolor{comment}{//Successful processing}
+158    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+159 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{smtp__client_8h_a282a4bd4097cd42d11367874c8e83b79}\label{smtp__client_8h_a282a4bd4097cd42d11367874c8e83b79}} 
+\index{smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}!smtp\+Client\+Close@{smtp\+Client\+Close}}
+\index{smtp\+Client\+Close@{smtp\+Client\+Close}!smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}}
+\subsubsection{\texorpdfstring{smtp\+Client\+Close()}{smtpClientClose()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} smtp\+Client\+Close (\begin{DoxyParamCaption}\item[{\hyperlink{smtp__client_8h_a1d51e1986667e1138d72dec48c441c89}{Smtp\+Client\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Close the connection with the S\+M\+TP server. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the S\+M\+TP client context \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 1278 of file smtp\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+1279 \{
+1280    \textcolor{comment}{//Make sure the SMTP client context is valid}
+1281    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1282       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+1283 
+1284    \textcolor{comment}{//Close connection}
+1285    \hyperlink{smtp__client__transport_8c_a2cdce599b57f2627c3f422830acaf475}{smtpClientCloseConnection}(context);
+1286    \textcolor{comment}{//Update SMTP client state}
+1287    \hyperlink{smtp__client__misc_8c_a0b784079ddc4b895d3c299e9d7264c3b}{smtpClientChangeState}(context, 
+      \hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212ae46bff82522430941d20384780347cea}{SMTP\_CLIENT\_STATE\_DISCONNECTED});
+1288 
+1289    \textcolor{comment}{//Successful processing}
+1290    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+1291 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{smtp__client_8h_a025b74cb30a6490b8daaac0a60b7b6ba}\label{smtp__client_8h_a025b74cb30a6490b8daaac0a60b7b6ba}} 
+\index{smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}!smtp\+Client\+Close\+Mail\+Body@{smtp\+Client\+Close\+Mail\+Body}}
+\index{smtp\+Client\+Close\+Mail\+Body@{smtp\+Client\+Close\+Mail\+Body}!smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}}
+\subsubsection{\texorpdfstring{smtp\+Client\+Close\+Mail\+Body()}{smtpClientCloseMailBody()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} smtp\+Client\+Close\+Mail\+Body (\begin{DoxyParamCaption}\item[{\hyperlink{smtp__client_8h_a1d51e1986667e1138d72dec48c441c89}{Smtp\+Client\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Complete email sending process and wait for server\textquotesingle{}s status. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the S\+M\+TP client context \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 1081 of file smtp\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+1082 \{
+1083    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+1084 
+1085    \textcolor{comment}{//Make sure the SMTP client context is valid}
+1086    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1087       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+1088 
+1089    \textcolor{comment}{//Initialize status code}
+1090    error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+1091 
+1092    \textcolor{comment}{//Execute SMTP command sequence}
+1093    \textcolor{keywordflow}{while}(!error)
+1094    \{
+1095       \textcolor{comment}{//Check current state}
+1096       \textcolor{keywordflow}{if}(context->state == \hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212a9dbb3fb5b3b2d1bf1b571318f2573c27}{SMTP\_CLIENT\_STATE\_MAIL\_BODY})
+1097       \{
+1098          \textcolor{comment}{//SMTP indicates the end of the mail data by sending a line containing}
+1099          \textcolor{comment}{//only a "." (refer to RFC 5321, section 3.3)}
+1100          error = \hyperlink{smtp__client__misc_8c_ac924542c9a648900a3f6c08f89fca3ab}{smtpClientFormatCommand}(context, \textcolor{stringliteral}{"."}, 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+1101 
+1102          \textcolor{comment}{//Check status code}
+1103          \textcolor{keywordflow}{if}(!error)
+1104          \{
+1105             \textcolor{comment}{//Wait for the server's response}
+1106             \hyperlink{smtp__client__misc_8c_a0b784079ddc4b895d3c299e9d7264c3b}{smtpClientChangeState}(context, 
+      \hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212a604aa223130b82feebda4402f92aace6}{SMTP\_CLIENT\_STATE\_SUB\_COMMAND\_1});
+1107          \}
+1108       \}
+1109       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->state == \hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212a604aa223130b82feebda4402f92aace6}{SMTP\_CLIENT\_STATE\_SUB\_COMMAND\_1})
+1110       \{
+1111          \textcolor{comment}{//Wait for the server's response}
+1112          error = \hyperlink{smtp__client__misc_8c_a9a573cb6d178025fe0beb8f8dab70f11}{smtpClientSendCommand}(context, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+1113 
+1114          \textcolor{comment}{//Check status code}
+1115          \textcolor{keywordflow}{if}(!error)
+1116          \{
+1117             \textcolor{comment}{//Check SMTP response code}
+1118             \textcolor{keywordflow}{if}(\hyperlink{smtp__client_8h_a9cb6804b6ece6c7b253e111101d57545}{SMTP\_REPLY\_CODE\_2YZ}(context->replyCode))
+1119             \{
+1120                \textcolor{comment}{//Update SMTP client state}
+1121                \hyperlink{smtp__client__misc_8c_a0b784079ddc4b895d3c299e9d7264c3b}{smtpClientChangeState}(context, 
+      \hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212a6d4f5c25e53afe04c724c28bf689b53b}{SMTP\_CLIENT\_STATE\_CONNECTED});
+1122                \textcolor{comment}{//The email has been accepted by the server}
+1123                \textcolor{keywordflow}{break};
+1124             \}
+1125             \textcolor{keywordflow}{else}
+1126             \{
+1127                \textcolor{comment}{//Update SMTP client state}
+1128                \hyperlink{smtp__client__misc_8c_a0b784079ddc4b895d3c299e9d7264c3b}{smtpClientChangeState}(context, 
+      \hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212a6d4f5c25e53afe04c724c28bf689b53b}{SMTP\_CLIENT\_STATE\_CONNECTED});
+1129                \textcolor{comment}{//Report an error}
+1130                error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caa71f5ec9e991d033d622bd5fb6f6633f}{ERROR\_UNEXPECTED\_RESPONSE};
+1131             \}
+1132          \}
+1133       \}
+1134       \textcolor{keywordflow}{else}
+1135       \{
+1136          \textcolor{comment}{//Invalid state}
+1137          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac3190fa1f36c6acf147c7ce453a655e2}{ERROR\_WRONG\_STATE};
+1138       \}
+1139    \}
+1140 
+1141    \textcolor{comment}{//Check status code}
+1142    \textcolor{keywordflow}{if}(error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca16f356a669fbb42deb27f59e9054f6d6}{ERROR\_WOULD\_BLOCK} || error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4d0f7be53b837f004379ac6bbd56f1e2}{ERROR\_TIMEOUT})
+1143    \{
+1144       \textcolor{comment}{//Check whether the timeout has elapsed}
+1145       error = \hyperlink{smtp__client__misc_8c_ad78e5cfcbf408a9b9c01c176c016100d}{smtpClientCheckTimeout}(context);
+1146    \}
+1147 
+1148    \textcolor{comment}{//Return status code}
+1149    \textcolor{keywordflow}{return} error;
+1150 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{smtp__client_8h_a872b439623742705b0ef1058bbf26d00}\label{smtp__client_8h_a872b439623742705b0ef1058bbf26d00}} 
+\index{smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}!smtp\+Client\+Connect@{smtp\+Client\+Connect}}
+\index{smtp\+Client\+Connect@{smtp\+Client\+Connect}!smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}}
+\subsubsection{\texorpdfstring{smtp\+Client\+Connect()}{smtpClientConnect()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} smtp\+Client\+Connect (\begin{DoxyParamCaption}\item[{\hyperlink{smtp__client_8h_a1d51e1986667e1138d72dec48c441c89}{Smtp\+Client\+Context} $\ast$}]{context,  }\item[{const \hyperlink{structIpAddr}{Ip\+Addr} $\ast$}]{server\+Ip\+Addr,  }\item[{\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t}}]{server\+Port,  }\item[{\hyperlink{smtp__client_8h_a911ca4bf6d0935fa11d6c8267acf058d}{Smtp\+Connection\+Mode}}]{mode }\end{DoxyParamCaption})}
+
+
+
+Establish a connection with the specified S\+M\+TP server. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the S\+M\+TP client context \\
+\hline
+\mbox{\tt in}  & {\em server\+Ip\+Addr} & IP address of the S\+M\+TP server \\
+\hline
+\mbox{\tt in}  & {\em server\+Port} & Port number \\
+\hline
+\mbox{\tt in}  & {\em mode} & S\+M\+TP connection mode \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 171 of file smtp\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+173 \{
+174    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+175 
+176    \textcolor{comment}{//Check parameters}
+177    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || serverIpAddr == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+178       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+179 
+180 \textcolor{preprocessor}{#if (SMTP\_CLIENT\_TLS\_SUPPORT == ENABLED)}
+181    \textcolor{comment}{//Check connection mode}
+182    \textcolor{keywordflow}{if}(\hyperlink{ntp__common_8h_a37e90f5e3bd99fac2021fb3a326607d4}{mode} != \hyperlink{smtp__client_8h_a911ca4bf6d0935fa11d6c8267acf058da14ca69b09492de2b1dd587bb75081742}{SMTP\_MODE\_PLAINTEXT} &&
+183       \hyperlink{ntp__common_8h_a37e90f5e3bd99fac2021fb3a326607d4}{mode} != \hyperlink{smtp__client_8h_a911ca4bf6d0935fa11d6c8267acf058da01abc009c2c147e39c82f1b221c1f51c}{SMTP\_MODE\_IMPLICIT\_TLS} &&
+184       \hyperlink{ntp__common_8h_a37e90f5e3bd99fac2021fb3a326607d4}{mode} != \hyperlink{smtp__client_8h_a911ca4bf6d0935fa11d6c8267acf058dafdc9c15d5790d1aff8325b5e433c8aff}{SMTP\_MODE\_EXPLICIT\_TLS})
+185    \{
+186       \textcolor{comment}{//The connection mode is not valid}
+187       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+188    \}
+189 \textcolor{preprocessor}{#else}
+190    \textcolor{comment}{//Check connection mode}
+191    \textcolor{keywordflow}{if}(\hyperlink{ntp__common_8h_a37e90f5e3bd99fac2021fb3a326607d4}{mode} != \hyperlink{smtp__client_8h_a911ca4bf6d0935fa11d6c8267acf058da14ca69b09492de2b1dd587bb75081742}{SMTP\_MODE\_PLAINTEXT})
+192    \{
+193       \textcolor{comment}{//The connection mode is not valid}
+194       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+195    \}
+196 \textcolor{preprocessor}{#endif}
+197 
+198    \textcolor{comment}{//Initialize status code}
+199    error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+200 
+201    \textcolor{comment}{//Establish connection with the SMTP server}
+202    \textcolor{keywordflow}{while}(!error)
+203    \{
+204       \textcolor{comment}{//Check current state}
+205       \textcolor{keywordflow}{if}(context->state == \hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212ae46bff82522430941d20384780347cea}{SMTP\_CLIENT\_STATE\_DISCONNECTED})
+206       \{
+207          \textcolor{comment}{//Reset parameters}
+208          context->startTlsSupported = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+209          context->authLoginSupported = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+210          context->authPlainSupported = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+211          context->authCramMd5Supported = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+212 
+213 \textcolor{preprocessor}{#if (SMTP\_CLIENT\_MIME\_SUPPORT == ENABLED)}
+214          \textcolor{comment}{//Reset MIME-specific parameters}
+215          strcpy(context->contentType, \textcolor{stringliteral}{""});
+216          strcpy(context->boundary, \textcolor{stringliteral}{"this-is-a-boundary"});
+217 \textcolor{preprocessor}{#endif}
+218          \textcolor{comment}{//Open TCP socket}
+219          error = \hyperlink{smtp__client__transport_8c_a17f5548caec52ff70c9ca76d23542677}{smtpClientOpenConnection}(context);
+220 
+221          \textcolor{comment}{//Check status code}
+222          \textcolor{keywordflow}{if}(!error)
+223          \{
+224             \textcolor{comment}{//Establish TCP connection}
+225             \hyperlink{smtp__client__misc_8c_a0b784079ddc4b895d3c299e9d7264c3b}{smtpClientChangeState}(context, 
+      \hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212a6c425b9f7c5a819b6e98a87605612d2f}{SMTP\_CLIENT\_STATE\_CONNECTING\_TCP});
+226          \}
+227       \}
+228       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->state == \hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212a6c425b9f7c5a819b6e98a87605612d2f}{SMTP\_CLIENT\_STATE\_CONNECTING\_TCP})
+229       \{
+230          \textcolor{comment}{//Establish TCP connection}
+231          error = \hyperlink{smtp__client__transport_8c_aa8bed5f500111dbc51b5f3a4c4913d52}{smtpClientEstablishConnection}(context, serverIpAddr,
+232             serverPort);
+233 
+234          \textcolor{comment}{//Check status code}
+235          \textcolor{keywordflow}{if}(!error)
+236          \{
+237             \textcolor{comment}{//Implicit TLS?}
+238             \textcolor{keywordflow}{if}(\hyperlink{ntp__common_8h_a37e90f5e3bd99fac2021fb3a326607d4}{mode} == \hyperlink{smtp__client_8h_a911ca4bf6d0935fa11d6c8267acf058da01abc009c2c147e39c82f1b221c1f51c}{SMTP\_MODE\_IMPLICIT\_TLS})
+239             \{
+240                \textcolor{comment}{//TLS initialization}
+241                error = \hyperlink{smtp__client__transport_8c_a518275c381b7fa028674afa5d1e78d3c}{smtpClientOpenSecureConnection}(context);
+242 
+243                \textcolor{comment}{//Check status code}
+244                \textcolor{keywordflow}{if}(!error)
+245                \{
+246                   \textcolor{comment}{//Perform TLS handshake}
+247                   \hyperlink{smtp__client__misc_8c_a0b784079ddc4b895d3c299e9d7264c3b}{smtpClientChangeState}(context, 
+      \hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212a163d96a2d3abd7f2c2289d14cd809087}{SMTP\_CLIENT\_STATE\_CONNECTING\_TLS});
+248                \}
+249             \}
+250             \textcolor{keywordflow}{else}
+251             \{
+252                \textcolor{comment}{//Flush buffer}
+253                context->bufferPos = 0;
+254                context->commandLen = 0;
+255                context->replyLen = 0;
+256 
+257                \textcolor{comment}{//Wait for the connection greeting reply}
+258                \hyperlink{smtp__client__misc_8c_a0b784079ddc4b895d3c299e9d7264c3b}{smtpClientChangeState}(context, 
+      \hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212a604aa223130b82feebda4402f92aace6}{SMTP\_CLIENT\_STATE\_SUB\_COMMAND\_1});
+259             \}
+260          \}
+261       \}
+262       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->state == \hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212a163d96a2d3abd7f2c2289d14cd809087}{SMTP\_CLIENT\_STATE\_CONNECTING\_TLS})
+263       \{
+264          \textcolor{comment}{//Perform TLS handshake}
+265          error = \hyperlink{smtp__client__transport_8c_aa17b363154efc6e0ea1ac960030a20fb}{smtpClientEstablishSecureConnection}(context);
+266 
+267          \textcolor{comment}{//Check status code}
+268          \textcolor{keywordflow}{if}(!error)
+269          \{
+270             \textcolor{comment}{//Implicit TLS?}
+271             \textcolor{keywordflow}{if}(\hyperlink{ntp__common_8h_a37e90f5e3bd99fac2021fb3a326607d4}{mode} == \hyperlink{smtp__client_8h_a911ca4bf6d0935fa11d6c8267acf058da01abc009c2c147e39c82f1b221c1f51c}{SMTP\_MODE\_IMPLICIT\_TLS})
+272             \{
+273                \textcolor{comment}{//Flush buffer}
+274                context->bufferPos = 0;
+275                context->commandLen = 0;
+276                context->replyLen = 0;
+277 
+278                \textcolor{comment}{//Wait for the connection greeting reply}
+279                \hyperlink{smtp__client__misc_8c_a0b784079ddc4b895d3c299e9d7264c3b}{smtpClientChangeState}(context, 
+      \hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212a604aa223130b82feebda4402f92aace6}{SMTP\_CLIENT\_STATE\_SUB\_COMMAND\_1});
+280             \}
+281             \textcolor{keywordflow}{else}
+282             \{
+283                \textcolor{comment}{//Format EHLO command}
+284                error = \hyperlink{smtp__client__misc_8c_ac924542c9a648900a3f6c08f89fca3ab}{smtpClientFormatCommand}(context, \textcolor{stringliteral}{"EHLO [127.0.0.1]"}, 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+285 
+286                \textcolor{comment}{//Check status code}
+287                \textcolor{keywordflow}{if}(!error)
+288                \{
+289                   \textcolor{comment}{//Send EHLO command and wait for the server's response}
+290                   \hyperlink{smtp__client__misc_8c_a0b784079ddc4b895d3c299e9d7264c3b}{smtpClientChangeState}(context, 
+      \hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212af10d15d3806fc94483d0a85b77777252}{SMTP\_CLIENT\_STATE\_SUB\_COMMAND\_2});
+291                \}
+292             \}
+293          \}
+294       \}
+295       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->state == \hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212a604aa223130b82feebda4402f92aace6}{SMTP\_CLIENT\_STATE\_SUB\_COMMAND\_1})
+296       \{
+297          \textcolor{comment}{//Wait for the connection greeting reply}
+298          error = \hyperlink{smtp__client__misc_8c_a9a573cb6d178025fe0beb8f8dab70f11}{smtpClientSendCommand}(context, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+299 
+300          \textcolor{comment}{//Check status code}
+301          \textcolor{keywordflow}{if}(!error)
+302          \{
+303             \textcolor{comment}{//Check SMTP response code}
+304             \textcolor{keywordflow}{if}(\hyperlink{smtp__client_8h_a9cb6804b6ece6c7b253e111101d57545}{SMTP\_REPLY\_CODE\_2YZ}(context->replyCode))
+305             \{
+306                \textcolor{comment}{//Format EHLO command}
+307                error = \hyperlink{smtp__client__misc_8c_ac924542c9a648900a3f6c08f89fca3ab}{smtpClientFormatCommand}(context, \textcolor{stringliteral}{"EHLO [127.0.0.1]"}, 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+308 
+309                \textcolor{comment}{//Check status code}
+310                \textcolor{keywordflow}{if}(!error)
+311                \{
+312                   \textcolor{comment}{//Send EHLO command and wait for the server's response}
+313                   \hyperlink{smtp__client__misc_8c_a0b784079ddc4b895d3c299e9d7264c3b}{smtpClientChangeState}(context, 
+      \hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212af10d15d3806fc94483d0a85b77777252}{SMTP\_CLIENT\_STATE\_SUB\_COMMAND\_2});
+314                \}
+315             \}
+316             \textcolor{keywordflow}{else}
+317             \{
+318                \textcolor{comment}{//Report an error}
+319                error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caa71f5ec9e991d033d622bd5fb6f6633f}{ERROR\_UNEXPECTED\_RESPONSE};
+320             \}
+321          \}
+322       \}
+323       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->state == \hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212af10d15d3806fc94483d0a85b77777252}{SMTP\_CLIENT\_STATE\_SUB\_COMMAND\_2})
+324       \{
+325          \textcolor{comment}{//Send EHLO command and wait for the server's response}
+326          error = \hyperlink{smtp__client__misc_8c_a9a573cb6d178025fe0beb8f8dab70f11}{smtpClientSendCommand}(context, 
+      \hyperlink{smtp__client__misc_8c_a90bdd85d7386c059a956d5e186d48d5c}{smtpClientParseEhloReply});
+327 
+328          \textcolor{comment}{//Check status code}
+329          \textcolor{keywordflow}{if}(!error)
+330          \{
+331             \textcolor{comment}{//Check SMTP response code}
+332             \textcolor{keywordflow}{if}(\hyperlink{smtp__client_8h_a9cb6804b6ece6c7b253e111101d57545}{SMTP\_REPLY\_CODE\_2YZ}(context->replyCode))
+333             \{
+334 \textcolor{preprocessor}{#if (SMTP\_CLIENT\_TLS\_SUPPORT == ENABLED)}
+335                \textcolor{comment}{//Explicit TLS?}
+336                \textcolor{keywordflow}{if}(\hyperlink{ntp__common_8h_a37e90f5e3bd99fac2021fb3a326607d4}{mode} == \hyperlink{smtp__client_8h_a911ca4bf6d0935fa11d6c8267acf058dafdc9c15d5790d1aff8325b5e433c8aff}{SMTP\_MODE\_EXPLICIT\_TLS} && context->tlsContext == 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+337                \{
+338                   \textcolor{comment}{//Format STARTTLS command}
+339                   error = \hyperlink{smtp__client__misc_8c_ac924542c9a648900a3f6c08f89fca3ab}{smtpClientFormatCommand}(context, \textcolor{stringliteral}{"STARTTLS"}, 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+340 
+341                   \textcolor{comment}{//Check status code}
+342                   \textcolor{keywordflow}{if}(!error)
+343                   \{
+344                      \textcolor{comment}{//Send STARTTLS command and wait for the server's response}
+345                      \hyperlink{smtp__client__misc_8c_a0b784079ddc4b895d3c299e9d7264c3b}{smtpClientChangeState}(context, 
+      \hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212ae8779b04af528f5a554e46018811efb2}{SMTP\_CLIENT\_STATE\_SUB\_COMMAND\_3});
+346                   \}
+347                \}
+348                \textcolor{keywordflow}{else}
+349 \textcolor{preprocessor}{#endif}
+350                \{
+351                   \textcolor{comment}{//The SMTP client is connected}
+352                   \hyperlink{smtp__client__misc_8c_a0b784079ddc4b895d3c299e9d7264c3b}{smtpClientChangeState}(context, 
+      \hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212a6d4f5c25e53afe04c724c28bf689b53b}{SMTP\_CLIENT\_STATE\_CONNECTED});
+353                \}
+354             \}
+355             \textcolor{keywordflow}{else}
+356             \{
+357                \textcolor{comment}{//Report an error}
+358                error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caa71f5ec9e991d033d622bd5fb6f6633f}{ERROR\_UNEXPECTED\_RESPONSE};
+359             \}
+360          \}
+361       \}
+362       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->state == \hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212ae8779b04af528f5a554e46018811efb2}{SMTP\_CLIENT\_STATE\_SUB\_COMMAND\_3})
+363       \{
+364          \textcolor{comment}{//Send STARTTLS command and wait for the server's response}
+365          error = \hyperlink{smtp__client__misc_8c_a9a573cb6d178025fe0beb8f8dab70f11}{smtpClientSendCommand}(context, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+366 
+367          \textcolor{comment}{//Check status code}
+368          \textcolor{keywordflow}{if}(!error)
+369          \{
+370             \textcolor{comment}{//Check SMTP response code}
+371             \textcolor{keywordflow}{if}(\hyperlink{smtp__client_8h_a9cb6804b6ece6c7b253e111101d57545}{SMTP\_REPLY\_CODE\_2YZ}(context->replyCode))
+372             \{
+373                \textcolor{comment}{//TLS initialization}
+374                error = \hyperlink{smtp__client__transport_8c_a518275c381b7fa028674afa5d1e78d3c}{smtpClientOpenSecureConnection}(context);
+375 
+376                \textcolor{comment}{//Check status code}
+377                \textcolor{keywordflow}{if}(!error)
+378                \{
+379                   \textcolor{comment}{//Perform TLS handshake}
+380                   \hyperlink{smtp__client__misc_8c_a0b784079ddc4b895d3c299e9d7264c3b}{smtpClientChangeState}(context, 
+      \hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212a163d96a2d3abd7f2c2289d14cd809087}{SMTP\_CLIENT\_STATE\_CONNECTING\_TLS});
+381                \}
+382             \}
+383             \textcolor{keywordflow}{else}
+384             \{
+385                \textcolor{comment}{//Report an error}
+386                error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caa71f5ec9e991d033d622bd5fb6f6633f}{ERROR\_UNEXPECTED\_RESPONSE};
+387             \}
+388          \}
+389       \}
+390       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->state == \hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212a6d4f5c25e53afe04c724c28bf689b53b}{SMTP\_CLIENT\_STATE\_CONNECTED})
+391       \{
+392          \textcolor{comment}{//The SMTP client is connected}
+393          \textcolor{keywordflow}{break};
+394       \}
+395       \textcolor{keywordflow}{else}
+396       \{
+397          \textcolor{comment}{//Invalid state}
+398          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac3190fa1f36c6acf147c7ce453a655e2}{ERROR\_WRONG\_STATE};
+399       \}
+400    \}
+401 
+402    \textcolor{comment}{//Check status code}
+403    \textcolor{keywordflow}{if}(error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca16f356a669fbb42deb27f59e9054f6d6}{ERROR\_WOULD\_BLOCK} || error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4d0f7be53b837f004379ac6bbd56f1e2}{ERROR\_TIMEOUT})
+404    \{
+405       \textcolor{comment}{//Check whether the timeout has elapsed}
+406       error = \hyperlink{smtp__client__misc_8c_ad78e5cfcbf408a9b9c01c176c016100d}{smtpClientCheckTimeout}(context);
+407    \}
+408 
+409    \textcolor{comment}{//Failed to establish connection with the SMTP server?}
+410    \textcolor{keywordflow}{if}(error != \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR} && error != \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca16f356a669fbb42deb27f59e9054f6d6}{ERROR\_WOULD\_BLOCK})
+411    \{
+412       \textcolor{comment}{//Clean up side effects}
+413       \hyperlink{smtp__client__transport_8c_a2cdce599b57f2627c3f422830acaf475}{smtpClientCloseConnection}(context);
+414       \textcolor{comment}{//Update SMTP client state}
+415       \hyperlink{smtp__client__misc_8c_a0b784079ddc4b895d3c299e9d7264c3b}{smtpClientChangeState}(context, 
+      \hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212ae46bff82522430941d20384780347cea}{SMTP\_CLIENT\_STATE\_DISCONNECTED});
+416    \}
+417 
+418    \textcolor{comment}{//Return status code}
+419    \textcolor{keywordflow}{return} error;
+420 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{smtp__client_8h_aed9249007a1ad35dd2852557fa8ac087}\label{smtp__client_8h_aed9249007a1ad35dd2852557fa8ac087}} 
+\index{smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}!smtp\+Client\+Deinit@{smtp\+Client\+Deinit}}
+\index{smtp\+Client\+Deinit@{smtp\+Client\+Deinit}!smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}}
+\subsubsection{\texorpdfstring{smtp\+Client\+Deinit()}{smtpClientDeinit()}}
+{\footnotesize\ttfamily void smtp\+Client\+Deinit (\begin{DoxyParamCaption}\item[{\hyperlink{smtp__client_8h_a1d51e1986667e1138d72dec48c441c89}{Smtp\+Client\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Release S\+M\+TP client context. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the S\+M\+TP client context \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 1299 of file smtp\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+1300 \{
+1301    \textcolor{comment}{//Make sure the SMTP client context is valid}
+1302    \textcolor{keywordflow}{if}(context != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1303    \{
+1304       \textcolor{comment}{//Close connection}
+1305       \hyperlink{smtp__client__transport_8c_a2cdce599b57f2627c3f422830acaf475}{smtpClientCloseConnection}(context);
+1306 
+1307 \textcolor{preprocessor}{#if (SMTP\_CLIENT\_TLS\_SUPPORT == ENABLED)}
+1308       \textcolor{comment}{//Release TLS session state}
+1309       \hyperlink{tls_8c_a6e78d966a9bcd9eb6210c996389f6551}{tlsFreeSessionState}(&context->tlsSession);
+1310 \textcolor{preprocessor}{#endif}
+1311 
+1312       \textcolor{comment}{//Clear SMTP client context}
+1313       memset(context, 0, \textcolor{keyword}{sizeof}(\hyperlink{smtp__client_8h_a1d51e1986667e1138d72dec48c441c89}{SmtpClientContext}));
+1314    \}
+1315 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{smtp__client_8h_a56188b2b15a9735fb524423c6aaf3faa}\label{smtp__client_8h_a56188b2b15a9735fb524423c6aaf3faa}} 
+\index{smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}!smtp\+Client\+Disconnect@{smtp\+Client\+Disconnect}}
+\index{smtp\+Client\+Disconnect@{smtp\+Client\+Disconnect}!smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}}
+\subsubsection{\texorpdfstring{smtp\+Client\+Disconnect()}{smtpClientDisconnect()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} smtp\+Client\+Disconnect (\begin{DoxyParamCaption}\item[{\hyperlink{smtp__client_8h_a1d51e1986667e1138d72dec48c441c89}{Smtp\+Client\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Gracefully disconnect from the S\+M\+TP server. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the S\+M\+TP client context \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 1186 of file smtp\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+1187 \{
+1188    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+1189 
+1190    \textcolor{comment}{//Make sure the SMTP client context is valid}
+1191    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1192       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+1193 
+1194    \textcolor{comment}{//Initialize status code}
+1195    error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+1196 
+1197    \textcolor{comment}{//Execute SMTP command sequence}
+1198    \textcolor{keywordflow}{while}(!error)
+1199    \{
+1200       \textcolor{comment}{//Check current state}
+1201       \textcolor{keywordflow}{if}(context->state == \hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212a6d4f5c25e53afe04c724c28bf689b53b}{SMTP\_CLIENT\_STATE\_CONNECTED})
+1202       \{
+1203          \textcolor{comment}{//Format QUIT command}
+1204          error = \hyperlink{smtp__client__misc_8c_ac924542c9a648900a3f6c08f89fca3ab}{smtpClientFormatCommand}(context, \textcolor{stringliteral}{"QUIT"}, 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+1205 
+1206          \textcolor{comment}{//Check status code}
+1207          \textcolor{keywordflow}{if}(!error)
+1208          \{
+1209             \textcolor{comment}{//Send QUIT command and wait for the server's response}
+1210             \hyperlink{smtp__client__misc_8c_a0b784079ddc4b895d3c299e9d7264c3b}{smtpClientChangeState}(context, 
+      \hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212a604aa223130b82feebda4402f92aace6}{SMTP\_CLIENT\_STATE\_SUB\_COMMAND\_1});
+1211          \}
+1212       \}
+1213       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->state == \hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212a604aa223130b82feebda4402f92aace6}{SMTP\_CLIENT\_STATE\_SUB\_COMMAND\_1})
+1214       \{
+1215          \textcolor{comment}{//Send QUIT command and wait for the server's response}
+1216          error = \hyperlink{smtp__client__misc_8c_a9a573cb6d178025fe0beb8f8dab70f11}{smtpClientSendCommand}(context, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+1217 
+1218          \textcolor{comment}{//Check status code}
+1219          \textcolor{keywordflow}{if}(!error)
+1220          \{
+1221             \textcolor{comment}{//Update SMTP client state}
+1222             \hyperlink{smtp__client__misc_8c_a0b784079ddc4b895d3c299e9d7264c3b}{smtpClientChangeState}(context, 
+      \hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212ae5602be37222145c168ac38e3ebe0735}{SMTP\_CLIENT\_STATE\_DISCONNECTING});
+1223          \}
+1224       \}
+1225       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->state == \hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212ae5602be37222145c168ac38e3ebe0735}{SMTP\_CLIENT\_STATE\_DISCONNECTING})
+1226       \{
+1227          \textcolor{comment}{//Shutdown connection}
+1228          error = \hyperlink{smtp__client__transport_8c_aee0810f79bbc85eae3174ce8aed74035}{smtpClientShutdownConnection}(context);
+1229 
+1230          \textcolor{comment}{//Check status code}
+1231          \textcolor{keywordflow}{if}(!error)
+1232          \{
+1233             \textcolor{comment}{//Close connection}
+1234             \hyperlink{smtp__client__transport_8c_a2cdce599b57f2627c3f422830acaf475}{smtpClientCloseConnection}(context);
+1235             \textcolor{comment}{//Update SMTP client state}
+1236             \hyperlink{smtp__client__misc_8c_a0b784079ddc4b895d3c299e9d7264c3b}{smtpClientChangeState}(context, 
+      \hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212ae46bff82522430941d20384780347cea}{SMTP\_CLIENT\_STATE\_DISCONNECTED});
+1237          \}
+1238       \}
+1239       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->state == \hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212ae46bff82522430941d20384780347cea}{SMTP\_CLIENT\_STATE\_DISCONNECTED})
+1240       \{
+1241          \textcolor{comment}{//We are done}
+1242          \textcolor{keywordflow}{break};
+1243       \}
+1244       \textcolor{keywordflow}{else}
+1245       \{
+1246          \textcolor{comment}{//Invalid state}
+1247          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac3190fa1f36c6acf147c7ce453a655e2}{ERROR\_WRONG\_STATE};
+1248       \}
+1249    \}
+1250 
+1251    \textcolor{comment}{//Check status code}
+1252    \textcolor{keywordflow}{if}(error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca16f356a669fbb42deb27f59e9054f6d6}{ERROR\_WOULD\_BLOCK} || error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4d0f7be53b837f004379ac6bbd56f1e2}{ERROR\_TIMEOUT})
+1253    \{
+1254       \textcolor{comment}{//Check whether the timeout has elapsed}
+1255       error = \hyperlink{smtp__client__misc_8c_ad78e5cfcbf408a9b9c01c176c016100d}{smtpClientCheckTimeout}(context);
+1256    \}
+1257 
+1258    \textcolor{comment}{//Failed to gracefully disconnect from the SMTP server?}
+1259    \textcolor{keywordflow}{if}(error != \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR} && error != \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca16f356a669fbb42deb27f59e9054f6d6}{ERROR\_WOULD\_BLOCK})
+1260    \{
+1261       \textcolor{comment}{//Close connection}
+1262       \hyperlink{smtp__client__transport_8c_a2cdce599b57f2627c3f422830acaf475}{smtpClientCloseConnection}(context);
+1263       \textcolor{comment}{//Update SMTP client state}
+1264       \hyperlink{smtp__client__misc_8c_a0b784079ddc4b895d3c299e9d7264c3b}{smtpClientChangeState}(context, 
+      \hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212ae46bff82522430941d20384780347cea}{SMTP\_CLIENT\_STATE\_DISCONNECTED});
+1265    \}
+1266 
+1267    \textcolor{comment}{//Return status code}
+1268    \textcolor{keywordflow}{return} error;
+1269 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{smtp__client_8h_a05d1aeeeaceaf22fc889ef9743d5aeaa}\label{smtp__client_8h_a05d1aeeeaceaf22fc889ef9743d5aeaa}} 
+\index{smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}!smtp\+Client\+Get\+Reply\+Code@{smtp\+Client\+Get\+Reply\+Code}}
+\index{smtp\+Client\+Get\+Reply\+Code@{smtp\+Client\+Get\+Reply\+Code}!smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}}
+\subsubsection{\texorpdfstring{smtp\+Client\+Get\+Reply\+Code()}{smtpClientGetReplyCode()}}
+{\footnotesize\ttfamily \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} smtp\+Client\+Get\+Reply\+Code (\begin{DoxyParamCaption}\item[{\hyperlink{smtp__client_8h_a1d51e1986667e1138d72dec48c441c89}{Smtp\+Client\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Retrieve server\textquotesingle{}s reply code. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the S\+M\+TP client context \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+S\+M\+TP reply code 
+\end{DoxyReturn}
+
+
+Definition at line 1159 of file smtp\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+1160 \{
+1161    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} replyCode;
+1162 
+1163    \textcolor{comment}{//Make sure the SMTP client context is valid}
+1164    \textcolor{keywordflow}{if}(context != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1165    \{
+1166       \textcolor{comment}{//Get server's reply code}
+1167       replyCode = context->replyCode;
+1168    \}
+1169    \textcolor{keywordflow}{else}
+1170    \{
+1171       \textcolor{comment}{//The SMTP client context is not valid}
+1172       replyCode = 0;
+1173    \}
+1174 
+1175    \textcolor{comment}{//Return SMTP reply code}
+1176    \textcolor{keywordflow}{return} replyCode;
+1177 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{smtp__client_8h_a995f203e0c960ac051d8374147683fe0}\label{smtp__client_8h_a995f203e0c960ac051d8374147683fe0}} 
+\index{smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}!smtp\+Client\+Init@{smtp\+Client\+Init}}
+\index{smtp\+Client\+Init@{smtp\+Client\+Init}!smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}}
+\subsubsection{\texorpdfstring{smtp\+Client\+Init()}{smtpClientInit()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} smtp\+Client\+Init (\begin{DoxyParamCaption}\item[{\hyperlink{smtp__client_8h_a1d51e1986667e1138d72dec48c441c89}{Smtp\+Client\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Initialize S\+M\+TP client context. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the S\+M\+TP client context \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 61 of file smtp\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+62 \{
+63 \textcolor{preprocessor}{#if (SMTP\_CLIENT\_TLS\_SUPPORT == ENABLED)}
+64    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+65 \textcolor{preprocessor}{#endif}
+66 
+67    \textcolor{comment}{//Make sure the SMTP client context is valid}
+68    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+69       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+70 
+71    \textcolor{comment}{//Clear SMTP client context}
+72    memset(context, 0, \textcolor{keyword}{sizeof}(\hyperlink{smtp__client_8h_a1d51e1986667e1138d72dec48c441c89}{SmtpClientContext}));
+73 
+74 \textcolor{preprocessor}{#if (SMTP\_CLIENT\_TLS\_SUPPORT == ENABLED)}
+75    \textcolor{comment}{//Initialize TLS session state}
+76    error = \hyperlink{tls_8c_aea7b98b4b876fe45322df04583f7c1b4}{tlsInitSessionState}(&context->tlsSession);
+77    \textcolor{comment}{//Any error to report?}
+78    \textcolor{keywordflow}{if}(error)
+79       \textcolor{keywordflow}{return} error;
+80 \textcolor{preprocessor}{#endif}
+81 
+82    \textcolor{comment}{//Initialize SMTP client state}
+83    context->state = \hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212ae46bff82522430941d20384780347cea}{SMTP\_CLIENT\_STATE\_DISCONNECTED};
+84 
+85    \textcolor{comment}{//Default timeout}
+86    context->timeout = \hyperlink{smtp__client_8h_a0b031b3eb0661fcf3fd9591aab485e12}{SMTP\_CLIENT\_DEFAULT\_TIMEOUT};
+87 
+88    \textcolor{comment}{//Successful initialization}
+89    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+90 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{smtp__client_8h_a1dce89c0f8514a31e3da2dcd040a4197}\label{smtp__client_8h_a1dce89c0f8514a31e3da2dcd040a4197}} 
+\index{smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}!smtp\+Client\+Login@{smtp\+Client\+Login}}
+\index{smtp\+Client\+Login@{smtp\+Client\+Login}!smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}}
+\subsubsection{\texorpdfstring{smtp\+Client\+Login()}{smtpClientLogin()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} smtp\+Client\+Login (\begin{DoxyParamCaption}\item[{\hyperlink{smtp__client_8h_a1d51e1986667e1138d72dec48c441c89}{Smtp\+Client\+Context} $\ast$}]{context,  }\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{username,  }\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{password }\end{DoxyParamCaption})}
+
+
+
+Login to the S\+M\+TP server using the provided user name and password. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the S\+M\+TP client context \\
+\hline
+\mbox{\tt in}  & {\em username} & N\+U\+L\+L-\/terminated string containing the user name \\
+\hline
+\mbox{\tt in}  & {\em password} & N\+U\+L\+L-\/terminated string containing the user\textquotesingle{}s password \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 431 of file smtp\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+433 \{
+434    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+435 
+436    \textcolor{comment}{//Check parameters}
+437    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || username == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || password == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+438       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+439 
+440 \textcolor{preprocessor}{#if (SMTP\_CLIENT\_CRAM\_MD5\_AUTH\_SUPPORT == ENABLED)}
+441    \textcolor{comment}{//CRAM-MD5 authentication mechanism supported?}
+442    \textcolor{keywordflow}{if}(context->authCramMd5Supported)
+443    \{
+444       \textcolor{comment}{//Perform CRAM-MD5 authentication}
+445       error = \hyperlink{smtp__client__auth_8c_a9e5434ce531926d1b59e4eb6212be477}{smtpClientCramMd5Auth}(context, username, password);
+446    \}
+447    \textcolor{keywordflow}{else}
+448 \textcolor{preprocessor}{#endif}
+449 \textcolor{preprocessor}{#if (SMTP\_CLIENT\_LOGIN\_AUTH\_SUPPORT == ENABLED)}
+450    \textcolor{comment}{//LOGIN authentication mechanism supported?}
+451    \textcolor{keywordflow}{if}(context->authLoginSupported)
+452    \{
+453       \textcolor{comment}{//Perform LOGIN authentication}
+454       error = \hyperlink{smtp__client__auth_8c_ab92b818e1d50243ded5ee7ddae5b0aa7}{smtpClientLoginAuth}(context, username, password);
+455    \}
+456    \textcolor{keywordflow}{else}
+457 \textcolor{preprocessor}{#endif}
+458 \textcolor{preprocessor}{#if (SMTP\_CLIENT\_PLAIN\_AUTH\_SUPPORT == ENABLED)}
+459    \textcolor{comment}{//PLAIN authentication mechanism supported?}
+460    \textcolor{keywordflow}{if}(context->authPlainSupported)
+461    \{
+462       \textcolor{comment}{//Perform PLAIN authentication}
+463       error = \hyperlink{smtp__client__auth_8c_adfc4feff558f08272cf14fbc7ce340af}{smtpClientPlainAuth}(context, username, password);
+464    \}
+465    \textcolor{keywordflow}{else}
+466 \textcolor{preprocessor}{#endif}
+467    \{
+468       \textcolor{comment}{//Report an error}
+469       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca87e6ef81b46229cb03ed0a27e7f45c6e}{ERROR\_AUTHENTICATION\_FAILED};
+470    \}
+471 
+472    \textcolor{comment}{//Return status code}
+473    \textcolor{keywordflow}{return} error;
+474 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{smtp__client_8h_a437ee922c4e925b1c84d026eb204182c}\label{smtp__client_8h_a437ee922c4e925b1c84d026eb204182c}} 
+\index{smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}!smtp\+Client\+Register\+Tls\+Init\+Callback@{smtp\+Client\+Register\+Tls\+Init\+Callback}}
+\index{smtp\+Client\+Register\+Tls\+Init\+Callback@{smtp\+Client\+Register\+Tls\+Init\+Callback}!smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}}
+\subsubsection{\texorpdfstring{smtp\+Client\+Register\+Tls\+Init\+Callback()}{smtpClientRegisterTlsInitCallback()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} smtp\+Client\+Register\+Tls\+Init\+Callback (\begin{DoxyParamCaption}\item[{\hyperlink{smtp__client_8h_a1d51e1986667e1138d72dec48c441c89}{Smtp\+Client\+Context} $\ast$}]{context,  }\item[{\hyperlink{smtp__client_8h_ad04a65acf644c29932a9a90545eb2291}{Smtp\+Client\+Tls\+Init\+Callback}}]{callback }\end{DoxyParamCaption})}
+
+
+
+Register T\+LS initialization callback function. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the S\+M\+TP client context \\
+\hline
+\mbox{\tt in}  & {\em callback} & T\+LS initialization callback function \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 102 of file smtp\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+104 \{
+105    \textcolor{comment}{//Check parameters}
+106    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || callback == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+107       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+108 
+109    \textcolor{comment}{//Save callback function}
+110    context->tlsInitCallback = callback;
+111 
+112    \textcolor{comment}{//Successful processing}
+113    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+114 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{smtp__client_8h_a335f386b2a59c63c4946742d1a7d4d04}\label{smtp__client_8h_a335f386b2a59c63c4946742d1a7d4d04}} 
+\index{smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}!smtp\+Client\+Set\+Content\+Type@{smtp\+Client\+Set\+Content\+Type}}
+\index{smtp\+Client\+Set\+Content\+Type@{smtp\+Client\+Set\+Content\+Type}!smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}}
+\subsubsection{\texorpdfstring{smtp\+Client\+Set\+Content\+Type()}{smtpClientSetContentType()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} smtp\+Client\+Set\+Content\+Type (\begin{DoxyParamCaption}\item[{\hyperlink{smtp__client_8h_a1d51e1986667e1138d72dec48c441c89}{Smtp\+Client\+Context} $\ast$}]{context,  }\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{content\+Type }\end{DoxyParamCaption})}
+
+
+
+Set the content type to be used. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the S\+M\+TP client context \\
+\hline
+\mbox{\tt in}  & {\em content\+Type} & N\+U\+L\+L-\/terminated string that holds the content type \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 484 of file smtp\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+486 \{
+487 \textcolor{preprocessor}{#if (SMTP\_CLIENT\_MIME\_SUPPORT == ENABLED)}
+488    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+489 
+490    \textcolor{comment}{//Check parameters}
+491    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || contentType == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+492       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+493 
+494    \textcolor{comment}{//Retrieve the length of the boundary string}
+495    n = strlen(contentType);
+496 
+497    \textcolor{comment}{//Check the length of the string}
+498    \textcolor{keywordflow}{if}(n < 1 || n > \hyperlink{smtp__client_8h_a85f89a4d69250996b210dd7773d50479}{SMTP\_CLIENT\_CONTENT\_TYPE\_MAX\_LEN})
+499       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cae5c014519c3ac2540447887ddca1bd28}{ERROR\_INVALID\_LENGTH};
+500 
+501    \textcolor{comment}{//Save content type}
+502    strcpy(context->contentType, contentType);
+503 
+504    \textcolor{comment}{//Successful processing}
+505    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+506 \textcolor{preprocessor}{#else}
+507    \textcolor{comment}{//MIME extension is not implemented}
+508    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cab61c5ef368fbf03fdc1fb566c63f2f9a}{ERROR\_NOT\_IMPLEMENTED};
+509 \textcolor{preprocessor}{#endif}
+510 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{smtp__client_8h_a7c4c60ca25c360eb7d7e1e4ef45e9a6c}\label{smtp__client_8h_a7c4c60ca25c360eb7d7e1e4ef45e9a6c}} 
+\index{smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}!smtp\+Client\+Set\+Multipart\+Boundary@{smtp\+Client\+Set\+Multipart\+Boundary}}
+\index{smtp\+Client\+Set\+Multipart\+Boundary@{smtp\+Client\+Set\+Multipart\+Boundary}!smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}}
+\subsubsection{\texorpdfstring{smtp\+Client\+Set\+Multipart\+Boundary()}{smtpClientSetMultipartBoundary()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} smtp\+Client\+Set\+Multipart\+Boundary (\begin{DoxyParamCaption}\item[{\hyperlink{smtp__client_8h_a1d51e1986667e1138d72dec48c441c89}{Smtp\+Client\+Context} $\ast$}]{context,  }\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{boundary }\end{DoxyParamCaption})}
+
+
+
+Define the boundary string to be used (multipart encoding) 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the S\+M\+TP client context \\
+\hline
+\mbox{\tt in}  & {\em boundary} & N\+U\+L\+L-\/terminated string that holds the boundary string \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 520 of file smtp\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+522 \{
+523 \textcolor{preprocessor}{#if (SMTP\_CLIENT\_MIME\_SUPPORT == ENABLED)}
+524    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+525 
+526    \textcolor{comment}{//Check parameters}
+527    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || boundary == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+528       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+529 
+530    \textcolor{comment}{//Retrieve the length of the boundary string}
+531    n = strlen(boundary);
+532 
+533    \textcolor{comment}{//The boundary parameter consists of 1 to 70 characters}
+534    \textcolor{keywordflow}{if}(n < 1 || n > \hyperlink{smtp__client_8h_adea07fb5e3cabd59c58567657e9de718}{SMTP\_CLIENT\_BOUNDARY\_MAX\_LEN})
+535       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cae5c014519c3ac2540447887ddca1bd28}{ERROR\_INVALID\_LENGTH};
+536 
+537    \textcolor{comment}{//Save boundary string}
+538    strcpy(context->boundary, boundary);
+539 
+540    \textcolor{comment}{//Successful processing}
+541    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+542 \textcolor{preprocessor}{#else}
+543    \textcolor{comment}{//MIME extension is not implemented}
+544    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cab61c5ef368fbf03fdc1fb566c63f2f9a}{ERROR\_NOT\_IMPLEMENTED};
+545 \textcolor{preprocessor}{#endif}
+546 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{smtp__client_8h_a979183272524634f1ded897843314657}\label{smtp__client_8h_a979183272524634f1ded897843314657}} 
+\index{smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}!smtp\+Client\+Set\+Timeout@{smtp\+Client\+Set\+Timeout}}
+\index{smtp\+Client\+Set\+Timeout@{smtp\+Client\+Set\+Timeout}!smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}}
+\subsubsection{\texorpdfstring{smtp\+Client\+Set\+Timeout()}{smtpClientSetTimeout()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} smtp\+Client\+Set\+Timeout (\begin{DoxyParamCaption}\item[{\hyperlink{smtp__client_8h_a1d51e1986667e1138d72dec48c441c89}{Smtp\+Client\+Context} $\ast$}]{context,  }\item[{\hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\+\_\+t}}]{timeout }\end{DoxyParamCaption})}
+
+
+
+Set communication timeout. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the S\+M\+TP client context \\
+\hline
+\mbox{\tt in}  & {\em timeout} & Timeout value, in milliseconds \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 126 of file smtp\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+127 \{
+128    \textcolor{comment}{//Make sure the SMTP client context is valid}
+129    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+130       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+131 
+132    \textcolor{comment}{//Save timeout value}
+133    context->timeout = timeout;
+134 
+135    \textcolor{comment}{//Successful processing}
+136    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+137 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{smtp__client_8h_a87d9dc34c5a3f59f1e8822c3c091bbd5}\label{smtp__client_8h_a87d9dc34c5a3f59f1e8822c3c091bbd5}} 
+\index{smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}!smtp\+Client\+Write\+Mail\+Body@{smtp\+Client\+Write\+Mail\+Body}}
+\index{smtp\+Client\+Write\+Mail\+Body@{smtp\+Client\+Write\+Mail\+Body}!smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}}
+\subsubsection{\texorpdfstring{smtp\+Client\+Write\+Mail\+Body()}{smtpClientWriteMailBody()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} smtp\+Client\+Write\+Mail\+Body (\begin{DoxyParamCaption}\item[{\hyperlink{smtp__client_8h_a1d51e1986667e1138d72dec48c441c89}{Smtp\+Client\+Context} $\ast$}]{context,  }\item[{const void $\ast$}]{data,  }\item[{size\+\_\+t}]{length,  }\item[{size\+\_\+t $\ast$}]{written,  }\item[{\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t}}]{flags }\end{DoxyParamCaption})}
+
+
+
+Write email body. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the S\+M\+TP client context \\
+\hline
+\mbox{\tt in}  & {\em data} & Pointer to a buffer containing the data to be written \\
+\hline
+\mbox{\tt in}  & {\em length} & Number of data bytes to write \\
+\hline
+\mbox{\tt in}  & {\em written} & Number of bytes that have been written (optional parameter) \\
+\hline
+\mbox{\tt in}  & {\em flags} & Set of flags that influences the behavior of this function \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 727 of file smtp\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+729 \{
+730    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+731    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+732 
+733    \textcolor{comment}{//Make sure the SMTP client context is valid}
+734    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+735       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+736 
+737    \textcolor{comment}{//Check parameters}
+738    \textcolor{keywordflow}{if}(\hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data} == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} && \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} != 0)
+739       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+740 
+741    \textcolor{comment}{//Actual number of bytes written}
+742    n = 0;
+743 
+744    \textcolor{comment}{//Check current state}
+745    \textcolor{keywordflow}{if}(context->state == \hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212a9dbb3fb5b3b2d1bf1b571318f2573c27}{SMTP\_CLIENT\_STATE\_MAIL\_BODY})
+746    \{
+747       \textcolor{comment}{//Transmit the contents of the body}
+748       error = \hyperlink{smtp__client__transport_8c_a85898809e400ef6197582909b7534d65}{smtpClientSendData}(context, \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, &n, 
+      \hyperlink{tcp_8h_aa2585d779da0ab21273a8d92de9a0ebe}{flags});
+749 
+750       \textcolor{comment}{//Check status code}
+751       \textcolor{keywordflow}{if}(error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR} || error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4d0f7be53b837f004379ac6bbd56f1e2}{ERROR\_TIMEOUT})
+752       \{
+753          \textcolor{comment}{//Any data transmitted?}
+754          \textcolor{keywordflow}{if}(n > 0)
+755          \{
+756             \textcolor{comment}{//Save current time}
+757             context->timestamp = \hyperlink{os__port__chibios_8c_ab66a11272d40a916fa69dd8e4dc443d4}{osGetSystemTime}();
+758          \}
+759       \}
+760    \}
+761    \textcolor{keywordflow}{else}
+762    \{
+763       \textcolor{comment}{//Invalid state}
+764       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac3190fa1f36c6acf147c7ce453a655e2}{ERROR\_WRONG\_STATE};
+765    \}
+766 
+767   \textcolor{comment}{//Check status code}
+768    \textcolor{keywordflow}{if}(error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca16f356a669fbb42deb27f59e9054f6d6}{ERROR\_WOULD\_BLOCK} || error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4d0f7be53b837f004379ac6bbd56f1e2}{ERROR\_TIMEOUT})
+769    \{
+770       \textcolor{comment}{//Check whether the timeout has elapsed}
+771       error = \hyperlink{smtp__client__misc_8c_ad78e5cfcbf408a9b9c01c176c016100d}{smtpClientCheckTimeout}(context);
+772    \}
+773 
+774    \textcolor{comment}{//Total number of data that have been written}
+775    \textcolor{keywordflow}{if}(written != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+776       *written = \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+777 
+778    \textcolor{comment}{//Return status code}
+779    \textcolor{keywordflow}{return} error;
+780 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{smtp__client_8h_af3bd52c9831ddfe24f276144492b0255}\label{smtp__client_8h_af3bd52c9831ddfe24f276144492b0255}} 
+\index{smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}!smtp\+Client\+Write\+Mail\+Header@{smtp\+Client\+Write\+Mail\+Header}}
+\index{smtp\+Client\+Write\+Mail\+Header@{smtp\+Client\+Write\+Mail\+Header}!smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}}
+\subsubsection{\texorpdfstring{smtp\+Client\+Write\+Mail\+Header()}{smtpClientWriteMailHeader()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} smtp\+Client\+Write\+Mail\+Header (\begin{DoxyParamCaption}\item[{\hyperlink{smtp__client_8h_a1d51e1986667e1138d72dec48c441c89}{Smtp\+Client\+Context} $\ast$}]{context,  }\item[{const \hyperlink{structSmtpMailAddr}{Smtp\+Mail\+Addr} $\ast$}]{from,  }\item[{const \hyperlink{structSmtpMailAddr}{Smtp\+Mail\+Addr} $\ast$}]{recipients,  }\item[{\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t}}]{num\+Recipients,  }\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{subject }\end{DoxyParamCaption})}
+
+
+
+Write email header. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the S\+M\+TP client context \\
+\hline
+\mbox{\tt in}  & {\em from} & Email address of the sender \\
+\hline
+\mbox{\tt in}  & {\em recipients} & Email addresses of the recipients \\
+\hline
+\mbox{\tt in}  & {\em num\+Recipients} & Number of email addresses in the list \\
+\hline
+\mbox{\tt in}  & {\em subject} & N\+U\+L\+L-\/terminsated string containing the email subject \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 559 of file smtp\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+562 \{
+563    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+564    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+565 
+566    \textcolor{comment}{//Check parameters}
+567    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || from == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || recipients == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || subject == 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+568       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+569 
+570    \textcolor{comment}{//Initialize status code}
+571    error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+572 
+573    \textcolor{comment}{//Execute SMTP command sequence}
+574    \textcolor{keywordflow}{while}(!error)
+575    \{
+576       \textcolor{comment}{//Check current state}
+577       \textcolor{keywordflow}{if}(context->state == \hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212a6d4f5c25e53afe04c724c28bf689b53b}{SMTP\_CLIENT\_STATE\_CONNECTED})
+578       \{
+579          \textcolor{comment}{//Format MAIL FROM command}
+580          error = \hyperlink{smtp__client__misc_8c_ac924542c9a648900a3f6c08f89fca3ab}{smtpClientFormatCommand}(context, \textcolor{stringliteral}{"MAIL FROM"}, from->
+      \hyperlink{structSmtpMailAddr_aee3796762170dbb8b894acb870ec2f66}{addr});
+581 
+582          \textcolor{comment}{//Check status code}
+583          \textcolor{keywordflow}{if}(!error)
+584          \{
+585             \textcolor{comment}{//Point to the first recipient of the list}
+586             context->recipientIndex = 0;
+587             \textcolor{comment}{//Send MAIL FROM command and wait for the server's response}
+588             \hyperlink{smtp__client__misc_8c_a0b784079ddc4b895d3c299e9d7264c3b}{smtpClientChangeState}(context, 
+      \hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212a604aa223130b82feebda4402f92aace6}{SMTP\_CLIENT\_STATE\_SUB\_COMMAND\_1});
+589          \}
+590       \}
+591       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->state == \hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212a604aa223130b82feebda4402f92aace6}{SMTP\_CLIENT\_STATE\_SUB\_COMMAND\_1})
+592       \{
+593          \textcolor{comment}{//Wait for the server's response}
+594          error = \hyperlink{smtp__client__misc_8c_a9a573cb6d178025fe0beb8f8dab70f11}{smtpClientSendCommand}(context, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+595 
+596          \textcolor{comment}{//Check status code}
+597          \textcolor{keywordflow}{if}(!error)
+598          \{
+599             \textcolor{comment}{//Check SMTP response code}
+600             \textcolor{keywordflow}{if}(\hyperlink{smtp__client_8h_a9cb6804b6ece6c7b253e111101d57545}{SMTP\_REPLY\_CODE\_2YZ}(context->replyCode))
+601             \{
+602                \textcolor{comment}{//Process each recipients of the list}
+603                \textcolor{keywordflow}{if}(context->recipientIndex < numRecipients)
+604                \{
+605                   \textcolor{comment}{//Format RCPT TO command}
+606                   error = \hyperlink{smtp__client__misc_8c_ac924542c9a648900a3f6c08f89fca3ab}{smtpClientFormatCommand}(context, \textcolor{stringliteral}{"RCPT TO"},
+607                      recipients[context->recipientIndex].\hyperlink{structSmtpMailAddr_aee3796762170dbb8b894acb870ec2f66}{addr});
+608 
+609                   \textcolor{comment}{//Check status code}
+610                   \textcolor{keywordflow}{if}(!error)
+611                   \{
+612                      \textcolor{comment}{//Point to the next recipient}
+613                      context->recipientIndex++;
+614                      \textcolor{comment}{//Send RCPT TO command and wait for the server's response}
+615                      \hyperlink{smtp__client__misc_8c_a0b784079ddc4b895d3c299e9d7264c3b}{smtpClientChangeState}(context, 
+      \hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212a604aa223130b82feebda4402f92aace6}{SMTP\_CLIENT\_STATE\_SUB\_COMMAND\_1});
+616                   \}
+617                \}
+618                \textcolor{keywordflow}{else}
+619                \{
+620                   \textcolor{comment}{//Format DATA command}
+621                   error = \hyperlink{smtp__client__misc_8c_ac924542c9a648900a3f6c08f89fca3ab}{smtpClientFormatCommand}(context, \textcolor{stringliteral}{"DATA"}, 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+622 
+623                   \textcolor{comment}{//Check status code}
+624                   \textcolor{keywordflow}{if}(!error)
+625                   \{
+626                      \textcolor{comment}{//Send DATA command and wait for the server's response}
+627                      \hyperlink{smtp__client__misc_8c_a0b784079ddc4b895d3c299e9d7264c3b}{smtpClientChangeState}(context, 
+      \hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212af10d15d3806fc94483d0a85b77777252}{SMTP\_CLIENT\_STATE\_SUB\_COMMAND\_2});
+628                   \}
+629                \}
+630             \}
+631             \textcolor{keywordflow}{else}
+632             \{
+633                \textcolor{comment}{//Update SMTP client state}
+634                \hyperlink{smtp__client__misc_8c_a0b784079ddc4b895d3c299e9d7264c3b}{smtpClientChangeState}(context, 
+      \hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212a6d4f5c25e53afe04c724c28bf689b53b}{SMTP\_CLIENT\_STATE\_CONNECTED});
+635                \textcolor{comment}{//Report an error}
+636                error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caa71f5ec9e991d033d622bd5fb6f6633f}{ERROR\_UNEXPECTED\_RESPONSE};
+637             \}
+638          \}
+639       \}
+640       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->state == \hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212af10d15d3806fc94483d0a85b77777252}{SMTP\_CLIENT\_STATE\_SUB\_COMMAND\_2})
+641       \{
+642          \textcolor{comment}{//Send DATA command and wait for the server's response}
+643          error = \hyperlink{smtp__client__misc_8c_a9a573cb6d178025fe0beb8f8dab70f11}{smtpClientSendCommand}(context, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+644 
+645          \textcolor{comment}{//Check status code}
+646          \textcolor{keywordflow}{if}(!error)
+647          \{
+648             \textcolor{comment}{//Check SMTP response code}
+649             \textcolor{keywordflow}{if}(\hyperlink{smtp__client_8h_a17ea972951d6b2d8cf44ada358fd8d59}{SMTP\_REPLY\_CODE\_3YZ}(context->replyCode))
+650             \{
+651                \textcolor{comment}{//Format email header}
+652                error = \hyperlink{smtp__client__misc_8c_a1520b2863d298c5b5389a26835899b4e}{smtpClientFormatMailHeader}(context, from, recipients,
+653                   numRecipients, subject);
+654 
+655                \textcolor{comment}{//Check status code}
+656                \textcolor{keywordflow}{if}(!error)
+657                \{
+658                   \textcolor{comment}{//Send email header}
+659                   \hyperlink{smtp__client__misc_8c_a0b784079ddc4b895d3c299e9d7264c3b}{smtpClientChangeState}(context, 
+      \hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212a00adf5f58da3e271eac222fca788bb5b}{SMTP\_CLIENT\_STATE\_MAIL\_HEADER});
+660                \}
+661             \}
+662             \textcolor{keywordflow}{else}
+663             \{
+664                \textcolor{comment}{//Report an error}
+665                error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caa71f5ec9e991d033d622bd5fb6f6633f}{ERROR\_UNEXPECTED\_RESPONSE};
+666             \}
+667          \}
+668       \}
+669       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->state == \hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212a00adf5f58da3e271eac222fca788bb5b}{SMTP\_CLIENT\_STATE\_MAIL\_HEADER})
+670       \{
+671          \textcolor{comment}{//Send email header}
+672          \textcolor{keywordflow}{if}(context->bufferPos < context->bufferLen)
+673          \{
+674             \textcolor{comment}{//Send more data}
+675             error = \hyperlink{smtp__client__transport_8c_a85898809e400ef6197582909b7534d65}{smtpClientSendData}(context,
+676                context->buffer + context->bufferPos,
+677                context->bufferLen - context->bufferPos, &n, 0);
+678 
+679             \textcolor{comment}{//Check status code}
+680             \textcolor{keywordflow}{if}(error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR} || error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4d0f7be53b837f004379ac6bbd56f1e2}{ERROR\_TIMEOUT})
+681             \{
+682                \textcolor{comment}{//Advance data pointer}
+683                context->bufferPos += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+684             \}
+685          \}
+686          \textcolor{keywordflow}{else}
+687          \{
+688             \textcolor{comment}{//Flush transmit buffer}
+689             context->bufferPos = 0;
+690             context->bufferLen = 0;
+691 
+692             \textcolor{comment}{//Update SMTP client state}
+693             \hyperlink{smtp__client__misc_8c_a0b784079ddc4b895d3c299e9d7264c3b}{smtpClientChangeState}(context, 
+      \hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212a9dbb3fb5b3b2d1bf1b571318f2573c27}{SMTP\_CLIENT\_STATE\_MAIL\_BODY});
+694             \textcolor{comment}{//The email header has been successfully written}
+695             \textcolor{keywordflow}{break};
+696          \}
+697       \}
+698       \textcolor{keywordflow}{else}
+699       \{
+700          \textcolor{comment}{//Invalid state}
+701          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac3190fa1f36c6acf147c7ce453a655e2}{ERROR\_WRONG\_STATE};
+702       \}
+703    \}
+704 
+705    \textcolor{comment}{//Check status code}
+706    \textcolor{keywordflow}{if}(error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca16f356a669fbb42deb27f59e9054f6d6}{ERROR\_WOULD\_BLOCK} || error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4d0f7be53b837f004379ac6bbd56f1e2}{ERROR\_TIMEOUT})
+707    \{
+708       \textcolor{comment}{//Check whether the timeout has elapsed}
+709       error = \hyperlink{smtp__client__misc_8c_ad78e5cfcbf408a9b9c01c176c016100d}{smtpClientCheckTimeout}(context);
+710    \}
+711 
+712    \textcolor{comment}{//Return status code}
+713    \textcolor{keywordflow}{return} error;
+714 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{smtp__client_8h_af281ccc5376dc7e09523262172a5e83a}\label{smtp__client_8h_af281ccc5376dc7e09523262172a5e83a}} 
+\index{smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}!smtp\+Client\+Write\+Multipart\+Body@{smtp\+Client\+Write\+Multipart\+Body}}
+\index{smtp\+Client\+Write\+Multipart\+Body@{smtp\+Client\+Write\+Multipart\+Body}!smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}}
+\subsubsection{\texorpdfstring{smtp\+Client\+Write\+Multipart\+Body()}{smtpClientWriteMultipartBody()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} smtp\+Client\+Write\+Multipart\+Body (\begin{DoxyParamCaption}\item[{\hyperlink{smtp__client_8h_a1d51e1986667e1138d72dec48c441c89}{Smtp\+Client\+Context} $\ast$}]{context,  }\item[{const void $\ast$}]{data,  }\item[{size\+\_\+t}]{length,  }\item[{size\+\_\+t $\ast$}]{written,  }\item[{\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t}}]{flags }\end{DoxyParamCaption})}
+
+
+
+Write data to the the multipart body. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the S\+M\+TP client context \\
+\hline
+\mbox{\tt in}  & {\em data} & Pointer to the buffer containing the data to be transmitted \\
+\hline
+\mbox{\tt in}  & {\em length} & Number of data bytes to send \\
+\hline
+\mbox{\tt out}  & {\em written} & Actual number of bytes written (optional parameter) \\
+\hline
+\mbox{\tt in}  & {\em flags} & Set of flags that influences the behavior of this function \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 934 of file smtp\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+936 \{
+937 \textcolor{preprocessor}{#if (SMTP\_CLIENT\_MIME\_SUPPORT == ENABLED)}
+938    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+939    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+940    \textcolor{keywordtype}{size\_t} totalLength;
+941 
+942    \textcolor{comment}{//Make sure the SMTP client context is valid}
+943    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+944       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+945 
+946    \textcolor{comment}{//Check parameters}
+947    \textcolor{keywordflow}{if}(\hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data} == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} && \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} != 0)
+948       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+949 
+950    \textcolor{comment}{//Initialize status code}
+951    error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+952 
+953    \textcolor{comment}{//Actual number of bytes written}
+954    totalLength = 0;
+955 
+956    \textcolor{comment}{//Check current state}
+957    \textcolor{keywordflow}{if}(context->state == \hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212a52f5a7d628155fe521298f75b9c7ab05}{SMTP\_CLIENT\_STATE\_MULTIPART\_BODY})
+958    \{
+959       \textcolor{comment}{//Base64 encoding?}
+960       \textcolor{keywordflow}{if}(context->base64Encoding)
+961       \{
+962          \textcolor{comment}{//Send as much data as possible}
+963          \textcolor{keywordflow}{while}(totalLength < \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} && !error)
+964          \{
+965             \textcolor{comment}{//Any data pending in the transmit buffer?}
+966             \textcolor{keywordflow}{if}(context->bufferLen < 4)
+967             \{
+968                \textcolor{comment}{//Base64 maps a 3-byte block to 4 printable characters}
+969                n = (\hyperlink{smtp__client_8h_a55cbd4c03a87f28df130203250a61810}{SMTP\_CLIENT\_BUFFER\_SIZE} * 3) / 4;
+970 
+971                \textcolor{comment}{//Calculate the number of bytes to copy at a time}
+972                n = \hyperlink{os__port_8h_a3acffbd305ee72dcd4593c0d8af64a4f}{MIN}(n - context->bufferLen, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} - totalLength);
+973 
+974                \textcolor{comment}{//The raw data must be an integral multiple of 24 bits}
+975                \textcolor{keywordflow}{if}((context->bufferLen + n) > 3)
+976                \{
+977                   n -= (context->bufferLen + \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n}) % 3;
+978                \}
+979 
+980                \textcolor{comment}{//Copy the raw data to the transmit buffer}
+981                memcpy(context->buffer + context->bufferLen, \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, n);
+982 
+983                \textcolor{comment}{//Advance data pointer}
+984                \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data} = (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *) \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data} + n;
+985                \textcolor{comment}{//Update the length of the buffer}
+986                context->bufferLen += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+987                \textcolor{comment}{//Actual number of bytes written}
+988                totalLength += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+989 
+990                \textcolor{comment}{//The raw data is processed block by block}
+991                \textcolor{keywordflow}{if}(context->bufferLen >= 3)
+992                \{
+993                   \textcolor{comment}{//Encode the data with Base64 algorithm}
+994                   \hyperlink{base64_8c_a6eb49435a26b3297e611264f6d1cbf5f}{base64Encode}(context->buffer, context->bufferLen,
+995                      context->buffer, &n);
+996 
+997                   \textcolor{comment}{//Save the length of the Base64-encoded string}
+998                   context->bufferLen = \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+999                   context->bufferPos = 0;
+1000                \}
+1001             \}
+1002             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->bufferPos < context->bufferLen)
+1003             \{
+1004                \textcolor{comment}{//Send more data}
+1005                error = \hyperlink{smtp__client__transport_8c_a85898809e400ef6197582909b7534d65}{smtpClientSendData}(context,
+1006                   context->buffer + context->bufferPos,
+1007                   context->bufferLen - context->bufferPos, &n, 0);
+1008 
+1009                \textcolor{comment}{//Check status code}
+1010                \textcolor{keywordflow}{if}(error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR} || error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4d0f7be53b837f004379ac6bbd56f1e2}{ERROR\_TIMEOUT})
+1011                \{
+1012                   \textcolor{comment}{//Any data transmitted?}
+1013                   \textcolor{keywordflow}{if}(n > 0)
+1014                   \{
+1015                      \textcolor{comment}{//Advance data pointer}
+1016                      context->bufferPos += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1017                      \textcolor{comment}{//Save current time}
+1018                      context->timestamp = \hyperlink{os__port__chibios_8c_ab66a11272d40a916fa69dd8e4dc443d4}{osGetSystemTime}();
+1019                   \}
+1020                \}
+1021             \}
+1022             \textcolor{keywordflow}{else}
+1023             \{
+1024                \textcolor{comment}{//Rewind to the beginning of the buffer}
+1025                context->bufferPos = 0;
+1026                context->bufferLen = 0;
+1027             \}
+1028          \}
+1029       \}
+1030       \textcolor{keywordflow}{else}
+1031       \{
+1032          \textcolor{comment}{//Send raw data}
+1033          error = \hyperlink{smtp__client__transport_8c_a85898809e400ef6197582909b7534d65}{smtpClientSendData}(context, \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, &n, 
+      \hyperlink{tcp_8h_aa2585d779da0ab21273a8d92de9a0ebe}{flags});
+1034 
+1035          \textcolor{comment}{//Check status code}
+1036          \textcolor{keywordflow}{if}(error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR} || error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4d0f7be53b837f004379ac6bbd56f1e2}{ERROR\_TIMEOUT})
+1037          \{
+1038             \textcolor{comment}{//Any data transmitted?}
+1039             \textcolor{keywordflow}{if}(n > 0)
+1040             \{
+1041                \textcolor{comment}{//Actual number of bytes written}
+1042                totalLength += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1043                \textcolor{comment}{//Save current time}
+1044                context->timestamp = \hyperlink{os__port__chibios_8c_ab66a11272d40a916fa69dd8e4dc443d4}{osGetSystemTime}();
+1045             \}
+1046          \}
+1047       \}
+1048    \}
+1049    \textcolor{keywordflow}{else}
+1050    \{
+1051       \textcolor{comment}{//Invalid state}
+1052       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac3190fa1f36c6acf147c7ce453a655e2}{ERROR\_WRONG\_STATE};
+1053    \}
+1054 
+1055    \textcolor{comment}{//Check status code}
+1056    \textcolor{keywordflow}{if}(error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca16f356a669fbb42deb27f59e9054f6d6}{ERROR\_WOULD\_BLOCK} || error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4d0f7be53b837f004379ac6bbd56f1e2}{ERROR\_TIMEOUT})
+1057    \{
+1058       \textcolor{comment}{//Check whether the timeout has elapsed}
+1059       error = \hyperlink{smtp__client__misc_8c_ad78e5cfcbf408a9b9c01c176c016100d}{smtpClientCheckTimeout}(context);
+1060    \}
+1061 
+1062    \textcolor{comment}{//Total number of data that have been written}
+1063    \textcolor{keywordflow}{if}(written != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1064       *written = totalLength;
+1065 
+1066    \textcolor{comment}{//Return status code}
+1067    \textcolor{keywordflow}{return} error;
+1068 \textcolor{preprocessor}{#else}
+1069    \textcolor{comment}{//MIME extension is not implemented}
+1070    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cab61c5ef368fbf03fdc1fb566c63f2f9a}{ERROR\_NOT\_IMPLEMENTED};
+1071 \textcolor{preprocessor}{#endif}
+1072 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{smtp__client_8h_ad1537cdb0e73bfd1dbaeec0f26e26aaf}\label{smtp__client_8h_ad1537cdb0e73bfd1dbaeec0f26e26aaf}} 
+\index{smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}!smtp\+Client\+Write\+Multipart\+Header@{smtp\+Client\+Write\+Multipart\+Header}}
+\index{smtp\+Client\+Write\+Multipart\+Header@{smtp\+Client\+Write\+Multipart\+Header}!smtp\+\_\+client.\+h@{smtp\+\_\+client.\+h}}
+\subsubsection{\texorpdfstring{smtp\+Client\+Write\+Multipart\+Header()}{smtpClientWriteMultipartHeader()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} smtp\+Client\+Write\+Multipart\+Header (\begin{DoxyParamCaption}\item[{\hyperlink{smtp__client_8h_a1d51e1986667e1138d72dec48c441c89}{Smtp\+Client\+Context} $\ast$}]{context,  }\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{filename,  }\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{content\+Type,  }\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{content\+Transfer\+Encoding,  }\item[{\hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t}}]{last }\end{DoxyParamCaption})}
+
+
+
+Write multipart header. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the S\+M\+TP client context \\
+\hline
+\mbox{\tt in}  & {\em filename} & N\+U\+L\+L-\/terminated string that holds the file name (optional parameter) \\
+\hline
+\mbox{\tt in}  & {\em content\+Type} & N\+U\+L\+L-\/terminated string that holds the content type (optional parameter) \\
+\hline
+\mbox{\tt in}  & {\em content\+Transfer\+Encoding} & N\+U\+L\+L-\/terminated string that holds the content transfer encoding (optional parameter) \\
+\hline
+\mbox{\tt in}  & {\em last} & This flag indicates whether the multipart header is the final one \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 797 of file smtp\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+800 \{
+801 \textcolor{preprocessor}{#if (SMTP\_CLIENT\_MIME\_SUPPORT == ENABLED)}
+802    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+803    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+804 
+805    \textcolor{comment}{//Make sure the SMTP client context is valid}
+806    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+807       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+808 
+809    \textcolor{comment}{//Initialize status code}
+810    error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+811 
+812    \textcolor{comment}{//Format and send multipart header}
+813    \textcolor{keywordflow}{while}(!error)
+814    \{
+815       \textcolor{comment}{//Check current state}
+816       \textcolor{keywordflow}{if}(context->state == \hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212a9dbb3fb5b3b2d1bf1b571318f2573c27}{SMTP\_CLIENT\_STATE\_MAIL\_BODY} ||
+817          context->state == \hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212a52f5a7d628155fe521298f75b9c7ab05}{SMTP\_CLIENT\_STATE\_MULTIPART\_BODY})
+818       \{
+819          \textcolor{comment}{//Any data residue?}
+820          \textcolor{keywordflow}{if}(context->bufferLen > 0 && context->bufferLen < 4)
+821          \{
+822             \textcolor{comment}{//Encode the final quantum}
+823             \hyperlink{base64_8c_a6eb49435a26b3297e611264f6d1cbf5f}{base64Encode}(context->buffer, context->bufferLen,
+824                context->buffer, &n);
+825 
+826             \textcolor{comment}{//Save the length of the Base64-encoded string}
+827             context->bufferLen = \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+828             context->bufferPos = 0;
+829          \}
+830          \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->bufferPos < context->bufferLen)
+831          \{
+832             \textcolor{comment}{//Send more data}
+833             error = \hyperlink{smtp__client__transport_8c_a85898809e400ef6197582909b7534d65}{smtpClientSendData}(context,
+834                context->buffer + context->bufferPos,
+835                context->bufferLen - context->bufferPos, &n, 0);
+836 
+837             \textcolor{comment}{//Check status code}
+838             \textcolor{keywordflow}{if}(error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR} || error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4d0f7be53b837f004379ac6bbd56f1e2}{ERROR\_TIMEOUT})
+839             \{
+840                \textcolor{comment}{//Advance data pointer}
+841                context->bufferPos += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+842             \}
+843          \}
+844          \textcolor{keywordflow}{else}
+845          \{
+846             \textcolor{comment}{//Rewind to the beginning of the buffer}
+847             context->bufferPos = 0;
+848             context->bufferLen = 0;
+849 
+850             \textcolor{comment}{//Format multipart header}
+851             error = \hyperlink{smtp__client__misc_8c_ad34bfc04a8d65914bfa5916a4620dddd}{smtpClientFormatMultipartHeader}(context, 
+      \hyperlink{tftp__common_8h_a054704ecfbf9f8eea80cd1d120b8cf62}{filename},
+852                contentType, contentTransferEncoding, \hyperlink{ipv4__frag_8h_a7179af054cf318941e1a12e964965935}{last});
+853 
+854             \textcolor{comment}{//Check status code}
+855             \textcolor{keywordflow}{if}(!error)
+856             \{
+857                \textcolor{comment}{//Send multipart header}
+858                \hyperlink{smtp__client__misc_8c_a0b784079ddc4b895d3c299e9d7264c3b}{smtpClientChangeState}(context, 
+      \hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212af04a73d17db8cb132b3c223bc3e13eea}{SMTP\_CLIENT\_STATE\_MULTIPART\_HEADER});
+859             \}
+860          \}
+861       \}
+862       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->state == \hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212af04a73d17db8cb132b3c223bc3e13eea}{SMTP\_CLIENT\_STATE\_MULTIPART\_HEADER})
+863       \{
+864          \textcolor{comment}{//Send multipart header}
+865          \textcolor{keywordflow}{if}(context->bufferPos < context->bufferLen)
+866          \{
+867             \textcolor{comment}{//Send more data}
+868             error = \hyperlink{smtp__client__transport_8c_a85898809e400ef6197582909b7534d65}{smtpClientSendData}(context,
+869                context->buffer + context->bufferPos,
+870                context->bufferLen - context->bufferPos, &n, 0);
+871 
+872             \textcolor{comment}{//Check status code}
+873             \textcolor{keywordflow}{if}(error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR} || error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4d0f7be53b837f004379ac6bbd56f1e2}{ERROR\_TIMEOUT})
+874             \{
+875                \textcolor{comment}{//Advance data pointer}
+876                context->bufferPos += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+877             \}
+878          \}
+879          \textcolor{keywordflow}{else}
+880          \{
+881             \textcolor{comment}{//Rewind to the beginning of the buffer}
+882             context->bufferPos = 0;
+883             context->bufferLen = 0;
+884 
+885             \textcolor{comment}{//Last multipart header?}
+886             \textcolor{keywordflow}{if}(\hyperlink{ipv4__frag_8h_a7179af054cf318941e1a12e964965935}{last})
+887             \{
+888                \textcolor{comment}{//The last multipart header has been successfully transmitted}
+889                \hyperlink{smtp__client__misc_8c_a0b784079ddc4b895d3c299e9d7264c3b}{smtpClientChangeState}(context, 
+      \hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212a9dbb3fb5b3b2d1bf1b571318f2573c27}{SMTP\_CLIENT\_STATE\_MAIL\_BODY});
+890             \}
+891             \textcolor{keywordflow}{else}
+892             \{
+893                \textcolor{comment}{//Send multipart body}
+894                \hyperlink{smtp__client__misc_8c_a0b784079ddc4b895d3c299e9d7264c3b}{smtpClientChangeState}(context, 
+      \hyperlink{smtp__client_8h_a02fc964f050527db806d949976661212a52f5a7d628155fe521298f75b9c7ab05}{SMTP\_CLIENT\_STATE\_MULTIPART\_BODY});
+895             \}
+896 
+897             \textcolor{comment}{//The email header has been successfully written}
+898             \textcolor{keywordflow}{break};
+899          \}
+900       \}
+901       \textcolor{keywordflow}{else}
+902       \{
+903          \textcolor{comment}{//Invalid state}
+904          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac3190fa1f36c6acf147c7ce453a655e2}{ERROR\_WRONG\_STATE};
+905       \}
+906    \}
+907 
+908    \textcolor{comment}{//Check status code}
+909    \textcolor{keywordflow}{if}(error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca16f356a669fbb42deb27f59e9054f6d6}{ERROR\_WOULD\_BLOCK} || error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4d0f7be53b837f004379ac6bbd56f1e2}{ERROR\_TIMEOUT})
+910    \{
+911       \textcolor{comment}{//Check whether the timeout has elapsed}
+912       error = \hyperlink{smtp__client__misc_8c_ad78e5cfcbf408a9b9c01c176c016100d}{smtpClientCheckTimeout}(context);
+913    \}
+914 
+915    \textcolor{comment}{//Return status code}
+916    \textcolor{keywordflow}{return} error;
+917 \textcolor{preprocessor}{#else}
+918    \textcolor{comment}{//MIME extension is not implemented}
+919    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cab61c5ef368fbf03fdc1fb566c63f2f9a}{ERROR\_NOT\_IMPLEMENTED};
+920 \textcolor{preprocessor}{#endif}
+921 \}
+\end{DoxyCode}

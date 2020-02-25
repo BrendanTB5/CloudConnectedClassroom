@@ -1,0 +1,558 @@
+\hypertarget{web__socket__frame_8c}{}\section{cyclone\+\_\+tcp/web\+\_\+socket/web\+\_\+socket\+\_\+frame.c File Reference}
+\label{web__socket__frame_8c}\index{cyclone\+\_\+tcp/web\+\_\+socket/web\+\_\+socket\+\_\+frame.\+c@{cyclone\+\_\+tcp/web\+\_\+socket/web\+\_\+socket\+\_\+frame.\+c}}
+
+
+Web\+Socket frame parsing and formatting.  
+
+
+{\ttfamily \#include \char`\"{}core/net.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}web\+\_\+socket/web\+\_\+socket.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}web\+\_\+socket/web\+\_\+socket\+\_\+frame.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}web\+\_\+socket/web\+\_\+socket\+\_\+transport.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}web\+\_\+socket/web\+\_\+socket\+\_\+misc.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}debug.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{web__socket__frame_8c_afcdf5e66fd927a7f4cc64295acd20407}{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}~\hyperlink{net__config_8h_a726918867be6caec18d98f3fc26813f9}{W\+E\+B\+\_\+\+S\+O\+C\+K\+E\+T\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{web__socket__frame_8c_a8ca0a7202ffdd839b35230742c85e902}{web\+Socket\+Format\+Frame\+Header} (\hyperlink{web__socket_8h_aad796fb4e3af91c4358c5b273d4a2028}{Web\+Socket} $\ast$web\+Socket, \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} \hyperlink{web__socket_8h_a48dcf0f2005f7f1028d2cbbc2c6cde85}{fin}, \hyperlink{web__socket_8h_a5cb4405f3460a36460b6ba588b60ea28}{Web\+Socket\+Frame\+Type} \hyperlink{ppp_8h_a1d127017fb298b889f4ba24752d08b8e}{type}, size\+\_\+t \hyperlink{web__socket_8h_ae4d38aba40b6dddf544612da0726cd7e}{payload\+Len})
+\begin{DoxyCompactList}\small\item\em Format Web\+Socket frame header. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{web__socket__frame_8c_a85a0b487af35df826e4b7d963cbab4f8}{web\+Socket\+Parse\+Frame\+Header} (\hyperlink{web__socket_8h_aad796fb4e3af91c4358c5b273d4a2028}{Web\+Socket} $\ast$web\+Socket, const \hyperlink{web__socket_8h_a949a0d07e7ae57a9e5762b54617f88d0}{Web\+Socket\+Frame} $\ast$frame, \hyperlink{web__socket_8h_a5cb4405f3460a36460b6ba588b60ea28}{Web\+Socket\+Frame\+Type} $\ast$\hyperlink{ppp_8h_a1d127017fb298b889f4ba24752d08b8e}{type})
+\begin{DoxyCompactList}\small\item\em Parse Web\+Socket frame header. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{web__socket__frame_8c_a172d65e16ec86639ed38de661bbd6dc5}{web\+Socket\+Format\+Close\+Frame} (\hyperlink{web__socket_8h_aad796fb4e3af91c4358c5b273d4a2028}{Web\+Socket} $\ast$web\+Socket)
+\begin{DoxyCompactList}\small\item\em Format a Close frame. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Web\+Socket frame parsing and formatting. 
+
+\hypertarget{pic32mz__ef__curiosity_8h_License}{}\subsection{License}\label{pic32mz__ef__curiosity_8h_License}
+S\+P\+D\+X-\/\+License-\/\+Identifier\+: G\+P\+L-\/2.\+0-\/or-\/later
+
+Copyright (C) 2010-\/2019 Oryx Embedded S\+A\+RL. All rights reserved.
+
+This file is part of Cyclone\+T\+CP Open.
+
+This program is free software; you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+
+You should have received a copy of the G\+NU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-\/1301, U\+SA.
+
+\begin{DoxyAuthor}{Author}
+Oryx Embedded S\+A\+RL (www.\+oryx-\/embedded.\+com) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+9.\+6 
+\end{DoxyVersion}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{web__socket__frame_8c_afcdf5e66fd927a7f4cc64295acd20407}\label{web__socket__frame_8c_afcdf5e66fd927a7f4cc64295acd20407}} 
+\index{web\+\_\+socket\+\_\+frame.\+c@{web\+\_\+socket\+\_\+frame.\+c}!T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+\index{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}!web\+\_\+socket\+\_\+frame.\+c@{web\+\_\+socket\+\_\+frame.\+c}}
+\subsubsection{\texorpdfstring{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}{TRACE\_LEVEL}}
+{\footnotesize\ttfamily \#define T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL~\hyperlink{net__config_8h_a726918867be6caec18d98f3fc26813f9}{W\+E\+B\+\_\+\+S\+O\+C\+K\+E\+T\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+
+
+
+Definition at line 32 of file web\+\_\+socket\+\_\+frame.\+c.
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{web__socket__frame_8c_a172d65e16ec86639ed38de661bbd6dc5}\label{web__socket__frame_8c_a172d65e16ec86639ed38de661bbd6dc5}} 
+\index{web\+\_\+socket\+\_\+frame.\+c@{web\+\_\+socket\+\_\+frame.\+c}!web\+Socket\+Format\+Close\+Frame@{web\+Socket\+Format\+Close\+Frame}}
+\index{web\+Socket\+Format\+Close\+Frame@{web\+Socket\+Format\+Close\+Frame}!web\+\_\+socket\+\_\+frame.\+c@{web\+\_\+socket\+\_\+frame.\+c}}
+\subsubsection{\texorpdfstring{web\+Socket\+Format\+Close\+Frame()}{webSocketFormatCloseFrame()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} web\+Socket\+Format\+Close\+Frame (\begin{DoxyParamCaption}\item[{\hyperlink{web__socket_8h_aad796fb4e3af91c4358c5b273d4a2028}{Web\+Socket} $\ast$}]{web\+Socket }\end{DoxyParamCaption})}
+
+
+
+Format a Close frame. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em web\+Socket} & Handle to a Web\+Socket \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 436 of file web\+\_\+socket\+\_\+frame.\+c.
+
+
+\begin{DoxyCode}
+437 \{
+438    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+439    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *\hyperlink{ndp_8h_a6519522ad9a6f45e7a8d25d31392a977}{p};
+440 
+441    \textcolor{comment}{//Format Close frame}
+442    error = \hyperlink{web__socket__frame_8c_a8ca0a7202ffdd839b35230742c85e902}{webSocketFormatFrameHeader}(webSocket,
+443       \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE}, \hyperlink{web__socket_8h_a5cb4405f3460a36460b6ba588b60ea28afdcd6c0f02a3c4f929f25acf318ee31d}{WS\_FRAME\_TYPE\_CLOSE}, \textcolor{keyword}{sizeof}(\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t}));
+444 
+445    \textcolor{comment}{//Check status code}
+446    \textcolor{keywordflow}{if}(!error)
+447    \{
+448       \textcolor{comment}{//1005 is a reserved value and must not be set as a status code in}
+449       \textcolor{comment}{//a Close control frame by an endpoint}
+450       \textcolor{keywordflow}{if}(webSocket->statusCode == \hyperlink{web__socket_8h_acd8f55557f218580a4048bba2d0c5192a7911bd0755c0ff03ee1add8df6ab25ba}{WS\_STATUS\_CODE\_NO\_STATUS\_RCVD})
+451          webSocket->statusCode = \hyperlink{web__socket_8h_acd8f55557f218580a4048bba2d0c5192afa052f8cdfa3f02fd4a0700321f66021}{WS\_STATUS\_CODE\_NORMAL\_CLOSURE};
+452 
+453       \textcolor{comment}{//Debug message}
+454       \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  Status Code = %u\(\backslash\)r\(\backslash\)n"}, webSocket->statusCode);
+455 
+456       \textcolor{comment}{//Point to end of the WebSocket frame header}
+457       p = webSocket->txContext.buffer + webSocket->txContext.bufferLen;
+458 
+459       \textcolor{comment}{//Write status code}
+460       p[0] = \hyperlink{os__port_8h_aeb61a4e8fff2f4624a632a3189cbd3a0}{MSB}(webSocket->statusCode);
+461       p[1] = \hyperlink{os__port_8h_a34a3aa6cbadec6a80ab1eae8efd0083d}{LSB}(webSocket->statusCode);
+462 
+463       \textcolor{comment}{//All frames sent from the client to the server are masked}
+464       \textcolor{keywordflow}{if}(webSocket->endpoint == \hyperlink{web__socket_8h_ae7d51561abe243c4f263d6c7d50699a9aa78fcf3108fe2e0b57f32684e9c76076}{WS\_ENDPOINT\_CLIENT})
+465       \{
+466          \textcolor{comment}{//Apply masking}
+467          p[0] ^= webSocket->txContext.maskingKey[0];
+468          p[1] ^= webSocket->txContext.maskingKey[1];
+469       \}
+470 
+471       \textcolor{comment}{//Adjust the length of the frame}
+472       webSocket->txContext.bufferLen += \textcolor{keyword}{sizeof}(\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t});
+473    \}
+474 
+475    \textcolor{comment}{//Return status code}
+476    \textcolor{keywordflow}{return} error;
+477 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{web__socket__frame_8c_a8ca0a7202ffdd839b35230742c85e902}\label{web__socket__frame_8c_a8ca0a7202ffdd839b35230742c85e902}} 
+\index{web\+\_\+socket\+\_\+frame.\+c@{web\+\_\+socket\+\_\+frame.\+c}!web\+Socket\+Format\+Frame\+Header@{web\+Socket\+Format\+Frame\+Header}}
+\index{web\+Socket\+Format\+Frame\+Header@{web\+Socket\+Format\+Frame\+Header}!web\+\_\+socket\+\_\+frame.\+c@{web\+\_\+socket\+\_\+frame.\+c}}
+\subsubsection{\texorpdfstring{web\+Socket\+Format\+Frame\+Header()}{webSocketFormatFrameHeader()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} web\+Socket\+Format\+Frame\+Header (\begin{DoxyParamCaption}\item[{\hyperlink{web__socket_8h_aad796fb4e3af91c4358c5b273d4a2028}{Web\+Socket} $\ast$}]{web\+Socket,  }\item[{\hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t}}]{fin,  }\item[{\hyperlink{web__socket_8h_a5cb4405f3460a36460b6ba588b60ea28}{Web\+Socket\+Frame\+Type}}]{type,  }\item[{size\+\_\+t}]{payload\+Len }\end{DoxyParamCaption})}
+
+
+
+Format Web\+Socket frame header. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em web\+Socket} & Handle to a Web\+Socket \\
+\hline
+\mbox{\tt in}  & {\em fin} & F\+IN flag \\
+\hline
+\mbox{\tt in}  & {\em type} & Frame type \\
+\hline
+\mbox{\tt in}  & {\em payload\+Len} & Length of the payload data \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 55 of file web\+\_\+socket\+\_\+frame.\+c.
+
+
+\begin{DoxyCode}
+57 \{
+58    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+59    \hyperlink{structWebSocketFrameContext}{WebSocketFrameContext} *txContext;
+60    \hyperlink{web__socket_8h_a949a0d07e7ae57a9e5762b54617f88d0}{WebSocketFrame} *frame;
+61 
+62    \textcolor{comment}{//Point to the TX context}
+63    txContext = &webSocket->txContext;
+64 
+65    \textcolor{comment}{//Flush the transmit buffer}
+66    txContext->\hyperlink{structWebSocketFrameContext_acad756853cbb653f12d4fd64bbf4cf0a}{bufferPos} = 0;
+67    txContext->\hyperlink{structWebSocketFrameContext_ac89d1a88498690e3ae1f39c96182ea19}{bufferLen} = 0;
+68 
+69    \textcolor{comment}{//The endpoint must encapsulate the data in a WebSocket frame}
+70    frame = (\hyperlink{web__socket_8h_a949a0d07e7ae57a9e5762b54617f88d0}{WebSocketFrame} *) txContext->\hyperlink{structWebSocketFrameContext_a3cec5a6cbb2cf4c3d519ddecae1f4726}{buffer};
+71 
+72    \textcolor{comment}{//The frame needs to be formatted according to the WebSocket framing}
+73    \textcolor{comment}{//format}
+74    frame->fin = \hyperlink{web__socket_8h_a48dcf0f2005f7f1028d2cbbc2c6cde85}{fin};
+75    frame->reserved = 0;
+76    frame->opcode = \hyperlink{resource__manager_8h_a12e46a33bfe90638e58ef067c6fd4a6e}{type};
+77 
+78    \textcolor{comment}{//All frames sent from the client to the server are masked by a 32-bit}
+79    \textcolor{comment}{//value that is contained within the frame}
+80    \textcolor{keywordflow}{if}(webSocket->endpoint == \hyperlink{web__socket_8h_ae7d51561abe243c4f263d6c7d50699a9aa78fcf3108fe2e0b57f32684e9c76076}{WS\_ENDPOINT\_CLIENT})
+81    \{
+82       \textcolor{comment}{//All frames sent from client to server have the Mask bit set to 1}
+83       frame->mask = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+84 
+85       \textcolor{comment}{//Make sure that the RNG callback function has been registered}
+86       \textcolor{keywordflow}{if}(\hyperlink{web__socket_8c_a40c7da11532d9e76959cdfc8ed692b3c}{webSockRandCallback} != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+87       \{
+88          \textcolor{comment}{//Generate a random masking key}
+89          error = \hyperlink{web__socket_8c_a40c7da11532d9e76959cdfc8ed692b3c}{webSockRandCallback}(txContext->\hyperlink{structWebSocketFrameContext_aed0e3efec712dcb1c747dad97187d0ad}{maskingKey}, \textcolor{keyword}{sizeof}(
+      \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t}));
+90          \textcolor{comment}{//Any error to report?}
+91          \textcolor{keywordflow}{if}(error)
+92             \textcolor{keywordflow}{return} error;
+93       \}
+94       \textcolor{keywordflow}{else}
+95       \{
+96          \textcolor{comment}{//A cryptographically strong random number generator}
+97          \textcolor{comment}{//must be used to generate the masking key}
+98          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca2846b744950d419d058ba0f917caf491}{ERROR\_PRNG\_NOT\_READY};
+99       \}
+100    \}
+101    \textcolor{keywordflow}{else}
+102    \{
+103       \textcolor{comment}{//Clear the Mask bit}
+104       frame->mask = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+105    \}
+106 
+107    \textcolor{comment}{//Size of the frame header}
+108    txContext->\hyperlink{structWebSocketFrameContext_ac89d1a88498690e3ae1f39c96182ea19}{bufferLen} = \textcolor{keyword}{sizeof}(\hyperlink{web__socket_8h_a949a0d07e7ae57a9e5762b54617f88d0}{WebSocketFrame});
+109 
+110    \textcolor{comment}{//Compute the number of application data to be transmitted}
+111    txContext->\hyperlink{structWebSocketFrameContext_a55076f17b7463a67c6e07cbd2de8d241}{payloadLen} = \hyperlink{ipv6_8h_ae4d38aba40b6dddf544612da0726cd7e}{payloadLen};
+112 
+113    \textcolor{comment}{//Check the length of the payload}
+114    \textcolor{keywordflow}{if}(\hyperlink{ipv6_8h_ae4d38aba40b6dddf544612da0726cd7e}{payloadLen} <= 125)
+115    \{
+116       \textcolor{comment}{//Payload length}
+117       frame->payloadLen = \hyperlink{ipv6_8h_ae4d38aba40b6dddf544612da0726cd7e}{payloadLen};
+118    \}
+119    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(\hyperlink{ipv6_8h_ae4d38aba40b6dddf544612da0726cd7e}{payloadLen} <= 65535)
+120    \{
+121       \textcolor{comment}{//If the Payload Length field is set to 126, then the following}
+122       \textcolor{comment}{//2 bytes are interpreted as a 16-bit unsigned integer}
+123       frame->payloadLen = 126;
+124 
+125       \textcolor{comment}{//Save the length of the payload data}
+126       \hyperlink{cpu__endian_8h_a8e657bcdf3842380d2d0006859029240}{STORE16BE}(\hyperlink{ipv6_8h_ae4d38aba40b6dddf544612da0726cd7e}{payloadLen}, frame->extPayloadLen);
+127 
+128       \textcolor{comment}{//Adjust the length of the frame header}
+129       txContext->\hyperlink{structWebSocketFrameContext_ac89d1a88498690e3ae1f39c96182ea19}{bufferLen} += \textcolor{keyword}{sizeof}(\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t});
+130    \}
+131    \textcolor{keywordflow}{else}
+132    \{
+133       \textcolor{comment}{//If the Payload Length field is set to 127, then the following}
+134       \textcolor{comment}{//8 bytes are interpreted as a 64-bit unsigned integer}
+135       frame->payloadLen = 127;
+136 
+137       \textcolor{comment}{//Save the length of the payload data}
+138       \hyperlink{cpu__endian_8h_abd64119985555609ad9c94eed4c96e0f}{STORE64BE}(\hyperlink{ipv6_8h_ae4d38aba40b6dddf544612da0726cd7e}{payloadLen}, frame->extPayloadLen);
+139 
+140       \textcolor{comment}{//Adjust the length of the frame header}
+141       txContext->\hyperlink{structWebSocketFrameContext_ac89d1a88498690e3ae1f39c96182ea19}{bufferLen} += \textcolor{keyword}{sizeof}(\hyperlink{stdint_8h_aec6fcb673ff035718c238c8c9d544c47}{uint64\_t});
+142    \}
+143 
+144    \textcolor{comment}{//Debug message}
+145    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"WebSocket: Sending frame\(\backslash\)r\(\backslash\)n"});
+146    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  FIN = %u\(\backslash\)r\(\backslash\)n"}, frame->fin);
+147    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  Reserved = %u\(\backslash\)r\(\backslash\)n"}, frame->reserved);
+148    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  Opcode = %u\(\backslash\)r\(\backslash\)n"}, frame->opcode);
+149    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  Mask = %u\(\backslash\)r\(\backslash\)n"}, frame->mask);
+150    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  Payload Length = %u\(\backslash\)r\(\backslash\)n"}, txContext->\hyperlink{structWebSocketFrameContext_a55076f17b7463a67c6e07cbd2de8d241}{payloadLen});
+151 
+152    \textcolor{comment}{//The Masking Key field is present the mask bit is set to 1}
+153    \textcolor{keywordflow}{if}(frame->mask)
+154    \{
+155       \textcolor{comment}{//Debug message}
+156       \hyperlink{debug_8h_a1f71019169d85407d8827300ed43bdf0}{TRACE\_DEBUG\_ARRAY}(\textcolor{stringliteral}{"  Masking Key = "}, txContext->
+      \hyperlink{structWebSocketFrameContext_aed0e3efec712dcb1c747dad97187d0ad}{maskingKey}, \textcolor{keyword}{sizeof}(\hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t}));
+157 
+158       \textcolor{comment}{//Copy the masking key}
+159       memcpy(txContext->\hyperlink{structWebSocketFrameContext_a3cec5a6cbb2cf4c3d519ddecae1f4726}{buffer} + txContext->\hyperlink{structWebSocketFrameContext_ac89d1a88498690e3ae1f39c96182ea19}{bufferLen},
+160          txContext->\hyperlink{structWebSocketFrameContext_aed0e3efec712dcb1c747dad97187d0ad}{maskingKey}, \textcolor{keyword}{sizeof}(\hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t}));
+161 
+162       \textcolor{comment}{//Adjust the length of the frame header}
+163       txContext->\hyperlink{structWebSocketFrameContext_ac89d1a88498690e3ae1f39c96182ea19}{bufferLen} += \textcolor{keyword}{sizeof}(\hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t});
+164    \}
+165 
+166    \textcolor{comment}{//Successful processing}
+167    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+168 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{web__socket__frame_8c_a85a0b487af35df826e4b7d963cbab4f8}\label{web__socket__frame_8c_a85a0b487af35df826e4b7d963cbab4f8}} 
+\index{web\+\_\+socket\+\_\+frame.\+c@{web\+\_\+socket\+\_\+frame.\+c}!web\+Socket\+Parse\+Frame\+Header@{web\+Socket\+Parse\+Frame\+Header}}
+\index{web\+Socket\+Parse\+Frame\+Header@{web\+Socket\+Parse\+Frame\+Header}!web\+\_\+socket\+\_\+frame.\+c@{web\+\_\+socket\+\_\+frame.\+c}}
+\subsubsection{\texorpdfstring{web\+Socket\+Parse\+Frame\+Header()}{webSocketParseFrameHeader()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} web\+Socket\+Parse\+Frame\+Header (\begin{DoxyParamCaption}\item[{\hyperlink{web__socket_8h_aad796fb4e3af91c4358c5b273d4a2028}{Web\+Socket} $\ast$}]{web\+Socket,  }\item[{const \hyperlink{web__socket_8h_a949a0d07e7ae57a9e5762b54617f88d0}{Web\+Socket\+Frame} $\ast$}]{frame,  }\item[{\hyperlink{web__socket_8h_a5cb4405f3460a36460b6ba588b60ea28}{Web\+Socket\+Frame\+Type} $\ast$}]{type }\end{DoxyParamCaption})}
+
+
+
+Parse Web\+Socket frame header. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em web\+Socket} & Handle to a Web\+Socket \\
+\hline
+\mbox{\tt in}  & {\em frame} & Pointer to the Web\+Socket frame header \\
+\hline
+\mbox{\tt out}  & {\em type} & Frame type \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 179 of file web\+\_\+socket\+\_\+frame.\+c.
+
+
+\begin{DoxyCode}
+181 \{
+182    \textcolor{keywordtype}{size\_t} j;
+183    \textcolor{keywordtype}{size\_t} \hyperlink{md5_8c_af11ea3cdbca7345eb6a4a8ac5ce0434d}{k};
+184    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+185    \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t} \hyperlink{dhcpv6__common_8h_ade31e7fd99344e8c35f2c373af659551}{statusCode};
+186    \hyperlink{structWebSocketFrameContext}{WebSocketFrameContext} *rxContext;
+187 
+188    \textcolor{comment}{//Point to the RX context}
+189    rxContext = &webSocket->rxContext;
+190 
+191    \textcolor{comment}{//Point to the Extended Payload Length}
+192    n = \textcolor{keyword}{sizeof}(\hyperlink{web__socket_8h_a949a0d07e7ae57a9e5762b54617f88d0}{WebSocketFrame});
+193 
+194    \textcolor{comment}{//Check frame type}
+195    \textcolor{keywordflow}{if}(\hyperlink{resource__manager_8h_a12e46a33bfe90638e58ef067c6fd4a6e}{type} != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+196    \{
+197       \textcolor{keywordflow}{if}(*\hyperlink{resource__manager_8h_a12e46a33bfe90638e58ef067c6fd4a6e}{type} != \hyperlink{web__socket_8h_a5cb4405f3460a36460b6ba588b60ea28a95a6c87691c4c8b1c52f17806dc612eb}{WS\_FRAME\_TYPE\_CONTINUATION})
+198       \{
+199          \textcolor{keywordflow}{if}(frame->opcode != \hyperlink{web__socket_8h_a5cb4405f3460a36460b6ba588b60ea28a95a6c87691c4c8b1c52f17806dc612eb}{WS\_FRAME\_TYPE\_CONTINUATION} &&
+200             frame->opcode != *\hyperlink{resource__manager_8h_a12e46a33bfe90638e58ef067c6fd4a6e}{type})
+201          \{
+202             \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cafb4f7e4640c9d495bf35ee668d620b17}{ERROR\_UNEXPECTED\_MESSAGE};
+203          \}
+204       \}
+205    \}
+206 
+207    \textcolor{comment}{//Check the Payload Length field}
+208    \textcolor{keywordflow}{if}(frame->payloadLen == 126)
+209    \{
+210       \textcolor{comment}{//If the Payload Length field is set to 126, then the following}
+211       \textcolor{comment}{//2 bytes are interpreted as a 16-bit unsigned integer}
+212       rxContext->\hyperlink{structWebSocketFrameContext_a55076f17b7463a67c6e07cbd2de8d241}{payloadLen} = \hyperlink{cpu__endian_8h_ae21854587c05993c850b537156470088}{LOAD16BE}(frame->extPayloadLen);
+213 
+214       \textcolor{comment}{//Point to the next field}
+215       n += \textcolor{keyword}{sizeof}(\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t});
+216    \}
+217    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(frame->payloadLen == 127)
+218    \{
+219       \textcolor{comment}{//If the Payload Length field is set to 127, then the following}
+220       \textcolor{comment}{//8 bytes are interpreted as a 64-bit unsigned integer}
+221       rxContext->\hyperlink{structWebSocketFrameContext_a55076f17b7463a67c6e07cbd2de8d241}{payloadLen} = \hyperlink{cpu__endian_8h_a7a0cbf37cd7f47dbcad3244a5983b033}{LOAD64BE}(frame->extPayloadLen);
+222 
+223       \textcolor{comment}{//Point to the next field}
+224       n += \textcolor{keyword}{sizeof}(\hyperlink{stdint_8h_aec6fcb673ff035718c238c8c9d544c47}{uint64\_t});
+225    \}
+226    \textcolor{keywordflow}{else}
+227    \{
+228       \textcolor{comment}{//Retrieve the length of the payload data}
+229       rxContext->\hyperlink{structWebSocketFrameContext_a55076f17b7463a67c6e07cbd2de8d241}{payloadLen} = frame->payloadLen;
+230    \}
+231 
+232    \textcolor{comment}{//Debug message}
+233    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"WebSocket: frame received...\(\backslash\)r\(\backslash\)n"});
+234    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  FIN = %u\(\backslash\)r\(\backslash\)n"}, frame->fin);
+235    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  Reserved = %u\(\backslash\)r\(\backslash\)n"}, frame->reserved);
+236    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  Opcode = %u\(\backslash\)r\(\backslash\)n"}, frame->opcode);
+237    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  Mask = %u\(\backslash\)r\(\backslash\)n"}, frame->mask);
+238    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  Payload Length = %u\(\backslash\)r\(\backslash\)n"}, rxContext->\hyperlink{structWebSocketFrameContext_a55076f17b7463a67c6e07cbd2de8d241}{payloadLen});
+239 
+240    \textcolor{comment}{//Check whether the payload data is masked}
+241    \textcolor{keywordflow}{if}(frame->mask)
+242    \{
+243       \textcolor{comment}{//Save the masking key}
+244       memcpy(rxContext->\hyperlink{structWebSocketFrameContext_aed0e3efec712dcb1c747dad97187d0ad}{maskingKey}, (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *) frame + n, \textcolor{keyword}{sizeof}(
+      \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t}));
+245       \textcolor{comment}{//Debug message}
+246       \hyperlink{debug_8h_a1f71019169d85407d8827300ed43bdf0}{TRACE\_DEBUG\_ARRAY}(\textcolor{stringliteral}{"  Masking Key = "}, rxContext->
+      \hyperlink{structWebSocketFrameContext_aed0e3efec712dcb1c747dad97187d0ad}{maskingKey}, \textcolor{keyword}{sizeof}(\hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t}));
+247 
+248       \textcolor{comment}{//Point to the payload data}
+249       n += \textcolor{keyword}{sizeof}(\hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t});
+250    \}
+251 
+252    \textcolor{comment}{//Text or Close frame received?}
+253    \textcolor{keywordflow}{if}(frame->opcode == \hyperlink{web__socket_8h_a5cb4405f3460a36460b6ba588b60ea28a7aa3f47f4e9de2389b7a7f0773ad3785}{WS\_FRAME\_TYPE\_TEXT} ||
+254       frame->opcode == \hyperlink{web__socket_8h_a5cb4405f3460a36460b6ba588b60ea28afdcd6c0f02a3c4f929f25acf318ee31d}{WS\_FRAME\_TYPE\_CLOSE})
+255    \{
+256       \textcolor{comment}{//Reinitialize UTF-8 decoding context}
+257       webSocket->utf8Context.utf8CharSize = 0;
+258       webSocket->utf8Context.utf8CharIndex = 0;
+259       webSocket->utf8Context.utf8CodePoint = 0;
+260    \}
+261 
+262    \textcolor{comment}{//If the RSV field is a nonzero value and none of the negotiated extensions}
+263    \textcolor{comment}{//defines the meaning of such a nonzero value, the receiving endpoint must}
+264    \textcolor{comment}{//fail the WebSocket connection}
+265    \textcolor{keywordflow}{if}(frame->reserved != 0)
+266    \{
+267       \textcolor{comment}{//Report a protocol error}
+268       webSocket->statusCode = \hyperlink{web__socket_8h_acd8f55557f218580a4048bba2d0c5192a43a574a1eab5c8d022034a5e356ad27c}{WS\_STATUS\_CODE\_PROTOCOL\_ERROR};
+269       \textcolor{comment}{//Terminate the WebSocket connection}
+270       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caa0a36625ee2bb3f8a1f6562033634139}{ERROR\_INVALID\_FRAME};
+271    \}
+272 
+273    \textcolor{comment}{//The Opcode field defines the interpretation of the payload data}
+274    \textcolor{keywordflow}{if}(frame->opcode == \hyperlink{web__socket_8h_a5cb4405f3460a36460b6ba588b60ea28a95a6c87691c4c8b1c52f17806dc612eb}{WS\_FRAME\_TYPE\_CONTINUATION})
+275    \{
+276       \textcolor{comment}{//A Continuation frame cannot be the first frame of a fragmented message}
+277       \textcolor{keywordflow}{if}(rxContext->\hyperlink{structWebSocketFrameContext_a0ac654d7668a4269ca136460a5361b50}{fin})
+278          webSocket->statusCode = \hyperlink{web__socket_8h_acd8f55557f218580a4048bba2d0c5192a43a574a1eab5c8d022034a5e356ad27c}{WS\_STATUS\_CODE\_PROTOCOL\_ERROR};
+279 
+280       rxContext->\hyperlink{structWebSocketFrameContext_a7bb7a8727546244769ec56b41f991fee}{controlFrameType} = \hyperlink{web__socket_8h_a5cb4405f3460a36460b6ba588b60ea28a95a6c87691c4c8b1c52f17806dc612eb}{WS\_FRAME\_TYPE\_CONTINUATION};
+281    \}
+282    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(frame->opcode == \hyperlink{web__socket_8h_a5cb4405f3460a36460b6ba588b60ea28a7aa3f47f4e9de2389b7a7f0773ad3785}{WS\_FRAME\_TYPE\_TEXT})
+283    \{
+284       \textcolor{comment}{//The Opcode must be 0 in subsequent fragmented frames}
+285       \textcolor{keywordflow}{if}(!rxContext->\hyperlink{structWebSocketFrameContext_a0ac654d7668a4269ca136460a5361b50}{fin})
+286          webSocket->statusCode = \hyperlink{web__socket_8h_acd8f55557f218580a4048bba2d0c5192a43a574a1eab5c8d022034a5e356ad27c}{WS\_STATUS\_CODE\_PROTOCOL\_ERROR};
+287 
+288       \textcolor{comment}{//Save the Opcode field}
+289       rxContext->\hyperlink{structWebSocketFrameContext_a036fe6609ab0425c8e56724c22e8760b}{dataFrameType} = \hyperlink{web__socket_8h_a5cb4405f3460a36460b6ba588b60ea28a7aa3f47f4e9de2389b7a7f0773ad3785}{WS\_FRAME\_TYPE\_TEXT};
+290       rxContext->\hyperlink{structWebSocketFrameContext_a7bb7a8727546244769ec56b41f991fee}{controlFrameType} = \hyperlink{web__socket_8h_a5cb4405f3460a36460b6ba588b60ea28a95a6c87691c4c8b1c52f17806dc612eb}{WS\_FRAME\_TYPE\_CONTINUATION};
+291    \}
+292    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(frame->opcode == \hyperlink{web__socket_8h_a5cb4405f3460a36460b6ba588b60ea28a2fdca4eba8711bd0925febf891d06e58}{WS\_FRAME\_TYPE\_BINARY})
+293    \{
+294       \textcolor{comment}{//The Opcode must be 0 in subsequent fragmented frames}
+295       \textcolor{keywordflow}{if}(!rxContext->\hyperlink{structWebSocketFrameContext_a0ac654d7668a4269ca136460a5361b50}{fin})
+296          webSocket->statusCode = \hyperlink{web__socket_8h_acd8f55557f218580a4048bba2d0c5192a43a574a1eab5c8d022034a5e356ad27c}{WS\_STATUS\_CODE\_PROTOCOL\_ERROR};
+297 
+298       \textcolor{comment}{//Save the Opcode field}
+299       rxContext->\hyperlink{structWebSocketFrameContext_a036fe6609ab0425c8e56724c22e8760b}{dataFrameType} = \hyperlink{web__socket_8h_a5cb4405f3460a36460b6ba588b60ea28a2fdca4eba8711bd0925febf891d06e58}{WS\_FRAME\_TYPE\_BINARY};
+300       rxContext->\hyperlink{structWebSocketFrameContext_a7bb7a8727546244769ec56b41f991fee}{controlFrameType} = \hyperlink{web__socket_8h_a5cb4405f3460a36460b6ba588b60ea28a95a6c87691c4c8b1c52f17806dc612eb}{WS\_FRAME\_TYPE\_CONTINUATION};
+301    \}
+302    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(frame->opcode == \hyperlink{web__socket_8h_a5cb4405f3460a36460b6ba588b60ea28afdcd6c0f02a3c4f929f25acf318ee31d}{WS\_FRAME\_TYPE\_CLOSE})
+303    \{
+304       \textcolor{comment}{//Check the length of the payload data}
+305       \textcolor{keywordflow}{if}(rxContext->\hyperlink{structWebSocketFrameContext_a55076f17b7463a67c6e07cbd2de8d241}{payloadLen} == 0)
+306       \{
+307          \textcolor{comment}{//The Close frame does not contain any body}
+308          webSocket->statusCode = \hyperlink{web__socket_8h_acd8f55557f218580a4048bba2d0c5192afa052f8cdfa3f02fd4a0700321f66021}{WS\_STATUS\_CODE\_NORMAL\_CLOSURE};
+309       \}
+310       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(rxContext->\hyperlink{structWebSocketFrameContext_a55076f17b7463a67c6e07cbd2de8d241}{payloadLen} == 1)
+311       \{
+312          \textcolor{comment}{//Report a protocol error}
+313          webSocket->statusCode = \hyperlink{web__socket_8h_acd8f55557f218580a4048bba2d0c5192a43a574a1eab5c8d022034a5e356ad27c}{WS\_STATUS\_CODE\_PROTOCOL\_ERROR};
+314       \}
+315       \textcolor{keywordflow}{else}
+316       \{
+317          \textcolor{comment}{//All frames sent from the client to the server are masked}
+318          \textcolor{keywordflow}{if}(frame->mask)
+319          \{
+320             \textcolor{comment}{//Unmask the data}
+321             \textcolor{keywordflow}{for}(j = 0; j < rxContext->\hyperlink{structWebSocketFrameContext_a55076f17b7463a67c6e07cbd2de8d241}{payloadLen}; j++)
+322             \{
+323                \textcolor{comment}{//Index of the masking key to be applied}
+324                k = j % 4;
+325                \textcolor{comment}{//Convert masked data into unmasked data}
+326                *((\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *) frame + n + j) ^= rxContext->\hyperlink{structWebSocketFrameContext_aed0e3efec712dcb1c747dad97187d0ad}{maskingKey}[
+      \hyperlink{md5_8c_af11ea3cdbca7345eb6a4a8ac5ce0434d}{k}];
+327             \}
+328          \}
+329 
+330          \textcolor{comment}{//If there is a body, the first two bytes of the body must be}
+331          \textcolor{comment}{//a 2-byte unsigned integer representing a status code}
+332          statusCode = \hyperlink{cpu__endian_8h_ae21854587c05993c850b537156470088}{LOAD16BE}((\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *) frame + n);
+333 
+334          \textcolor{comment}{//Debug message}
+335          \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  Status Code = %u\(\backslash\)r\(\backslash\)n"}, statusCode);
+336 
+337          \textcolor{comment}{//When sending a Close frame in response, the endpoint typically}
+338          \textcolor{comment}{//echos the status code it received}
+339          \textcolor{keywordflow}{if}(\hyperlink{web__socket__misc_8c_a4a58dbe97bf34442601492e7e227a093}{webSocketCheckStatusCode}(statusCode))
+340             webSocket->statusCode = \hyperlink{dhcpv6__common_8h_ade31e7fd99344e8c35f2c373af659551}{statusCode};
+341          \textcolor{keywordflow}{else}
+342             webSocket->statusCode = \hyperlink{web__socket_8h_acd8f55557f218580a4048bba2d0c5192a43a574a1eab5c8d022034a5e356ad27c}{WS\_STATUS\_CODE\_PROTOCOL\_ERROR};
+343 
+344          \textcolor{comment}{//The body may contain UTF-8-encoded data}
+345          \textcolor{keywordflow}{if}(rxContext->\hyperlink{structWebSocketFrameContext_a55076f17b7463a67c6e07cbd2de8d241}{payloadLen} > 2)
+346          \{
+347             \textcolor{comment}{//Compute the length of the data}
+348             k = rxContext->\hyperlink{structWebSocketFrameContext_a55076f17b7463a67c6e07cbd2de8d241}{payloadLen} - 2;
+349 
+350             \textcolor{comment}{//Invalid UTF-8 sequence?}
+351             \textcolor{keywordflow}{if}(!\hyperlink{web__socket__misc_8c_af1a30f65aca1d139d377ae373eead15c}{webSocketCheckUtf8Stream}(&webSocket->utf8Context,
+352                (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *) frame + n + 2, k, k))
+353             \{
+354                \textcolor{comment}{//The received data is not consistent with the type of the message}
+355                webSocket->statusCode = \hyperlink{web__socket_8h_acd8f55557f218580a4048bba2d0c5192abd132bf158d0fa6b7dbf2f06f4caa99d}{WS\_STATUS\_CODE\_INVALID\_PAYLOAD\_DATA}
+      ;
+356             \}
+357          \}
+358       \}
+359 
+360       \textcolor{comment}{//A Close frame has been received}
+361       webSocket->handshakeContext.closingFrameReceived = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+362       \textcolor{comment}{//Exit immediately}
+363       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca8b7223773301a4f3dd811f1d35e13ce4}{ERROR\_END\_OF\_STREAM};
+364    \}
+365    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(frame->opcode == \hyperlink{web__socket_8h_a5cb4405f3460a36460b6ba588b60ea28a155fe54189961469cc9817b9f4d57207}{WS\_FRAME\_TYPE\_PING})
+366    \{
+367       \textcolor{comment}{//Save the Opcode field}
+368       rxContext->\hyperlink{structWebSocketFrameContext_a7bb7a8727546244769ec56b41f991fee}{controlFrameType} = \hyperlink{web__socket_8h_a5cb4405f3460a36460b6ba588b60ea28a155fe54189961469cc9817b9f4d57207}{WS\_FRAME\_TYPE\_PING};
+369 
+370       \textcolor{comment}{//Control frames must not be fragmented}
+371       \textcolor{keywordflow}{if}(!frame->fin)
+372          webSocket->statusCode = \hyperlink{web__socket_8h_acd8f55557f218580a4048bba2d0c5192a43a574a1eab5c8d022034a5e356ad27c}{WS\_STATUS\_CODE\_PROTOCOL\_ERROR};
+373 
+374       \textcolor{comment}{//All control frames must have a payload length of 125 bytes or less}
+375       \textcolor{keywordflow}{if}(frame->payloadLen > 125)
+376          webSocket->statusCode = \hyperlink{web__socket_8h_acd8f55557f218580a4048bba2d0c5192a43a574a1eab5c8d022034a5e356ad27c}{WS\_STATUS\_CODE\_PROTOCOL\_ERROR};
+377    \}
+378    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(frame->opcode == \hyperlink{web__socket_8h_a5cb4405f3460a36460b6ba588b60ea28a5d1eb7f86566d35b3f41bd8a5ec0ef15}{WS\_FRAME\_TYPE\_PONG})
+379    \{
+380       \textcolor{comment}{//Save the Opcode field}
+381       rxContext->\hyperlink{structWebSocketFrameContext_a7bb7a8727546244769ec56b41f991fee}{controlFrameType} = \hyperlink{web__socket_8h_a5cb4405f3460a36460b6ba588b60ea28a5d1eb7f86566d35b3f41bd8a5ec0ef15}{WS\_FRAME\_TYPE\_PONG};
+382 
+383       \textcolor{comment}{//Control frames must not be fragmented}
+384       \textcolor{keywordflow}{if}(!frame->fin)
+385          webSocket->statusCode = \hyperlink{web__socket_8h_acd8f55557f218580a4048bba2d0c5192a43a574a1eab5c8d022034a5e356ad27c}{WS\_STATUS\_CODE\_PROTOCOL\_ERROR};
+386 
+387       \textcolor{comment}{//All control frames must have a payload length of 125 bytes or less}
+388       \textcolor{keywordflow}{if}(frame->payloadLen > 125)
+389          webSocket->statusCode = \hyperlink{web__socket_8h_acd8f55557f218580a4048bba2d0c5192a43a574a1eab5c8d022034a5e356ad27c}{WS\_STATUS\_CODE\_PROTOCOL\_ERROR};
+390    \}
+391    \textcolor{keywordflow}{else}
+392    \{
+393       \textcolor{comment}{//If an unknown opcode is received, the receiving endpoint must fail}
+394       \textcolor{comment}{//the WebSocket connection}
+395       webSocket->statusCode = \hyperlink{web__socket_8h_acd8f55557f218580a4048bba2d0c5192a43a574a1eab5c8d022034a5e356ad27c}{WS\_STATUS\_CODE\_PROTOCOL\_ERROR};
+396    \}
+397 
+398    \textcolor{comment}{//Save the Mask flag}
+399    rxContext->\hyperlink{structWebSocketFrameContext_a98aeed86b6916fbcf5aa32f7439066e0}{mask} = frame->mask;
+400 
+401    \textcolor{comment}{//Control frame?}
+402    \textcolor{keywordflow}{if}(rxContext->\hyperlink{structWebSocketFrameContext_a7bb7a8727546244769ec56b41f991fee}{controlFrameType} != \hyperlink{web__socket_8h_a5cb4405f3460a36460b6ba588b60ea28a95a6c87691c4c8b1c52f17806dc612eb}{WS\_FRAME\_TYPE\_CONTINUATION})
+403    \{
+404       \textcolor{comment}{//Return frame type}
+405       \textcolor{keywordflow}{if}(\hyperlink{resource__manager_8h_a12e46a33bfe90638e58ef067c6fd4a6e}{type} != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+406          *\hyperlink{resource__manager_8h_a12e46a33bfe90638e58ef067c6fd4a6e}{type} = rxContext->\hyperlink{structWebSocketFrameContext_a7bb7a8727546244769ec56b41f991fee}{controlFrameType};
+407    \}
+408    \textcolor{keywordflow}{else}
+409    \{
+410       \textcolor{comment}{//Save the FIN flag}
+411       rxContext->\hyperlink{structWebSocketFrameContext_a0ac654d7668a4269ca136460a5361b50}{fin} = frame->fin;
+412 
+413       \textcolor{comment}{//Return frame type}
+414       \textcolor{keywordflow}{if}(\hyperlink{resource__manager_8h_a12e46a33bfe90638e58ef067c6fd4a6e}{type} != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+415          *\hyperlink{resource__manager_8h_a12e46a33bfe90638e58ef067c6fd4a6e}{type} = rxContext->\hyperlink{structWebSocketFrameContext_a036fe6609ab0425c8e56724c22e8760b}{dataFrameType};
+416    \}
+417 
+418    \textcolor{comment}{//Check status code}
+419    \textcolor{keywordflow}{if}(webSocket->statusCode == \hyperlink{web__socket_8h_acd8f55557f218580a4048bba2d0c5192a7911bd0755c0ff03ee1add8df6ab25ba}{WS\_STATUS\_CODE\_NO\_STATUS\_RCVD})
+420       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+421    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(webSocket->statusCode == \hyperlink{web__socket_8h_acd8f55557f218580a4048bba2d0c5192afa052f8cdfa3f02fd4a0700321f66021}{WS\_STATUS\_CODE\_NORMAL\_CLOSURE})
+422       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca8b7223773301a4f3dd811f1d35e13ce4}{ERROR\_END\_OF\_STREAM};
+423    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(webSocket->statusCode == \hyperlink{web__socket_8h_acd8f55557f218580a4048bba2d0c5192a43a574a1eab5c8d022034a5e356ad27c}{WS\_STATUS\_CODE\_PROTOCOL\_ERROR})
+424       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caa0a36625ee2bb3f8a1f6562033634139}{ERROR\_INVALID\_FRAME};
+425    \textcolor{keywordflow}{else}
+426       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cae9be6449970fca5714ab9957b16562a5}{ERROR\_FAILURE};
+427 \}
+\end{DoxyCode}

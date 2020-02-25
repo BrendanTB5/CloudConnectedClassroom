@@ -1,0 +1,1728 @@
+\hypertarget{ec_8c}{}\section{cyclone\+\_\+crypto/ecc/ec.c File Reference}
+\label{ec_8c}\index{cyclone\+\_\+crypto/ecc/ec.\+c@{cyclone\+\_\+crypto/ecc/ec.\+c}}
+
+
+E\+CC (Elliptic Curve Cryptography)  
+
+
+{\ttfamily \#include \char`\"{}core/crypto.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ecc/ec.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ecc/curve25519.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ecc/curve448.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ecc/ed25519.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ecc/ed448.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}debug.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{ec_8c_afcdf5e66fd927a7f4cc64295acd20407}{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}~\hyperlink{crypto__config_8h_a6afae3a9b63f9b55d979e667ee0e881d}{C\+R\+Y\+P\+T\+O\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{ec_8c_a5b5132fb8adf668ffa74ec10e7e63441}{ec\+Init\+Domain\+Parameters} (\hyperlink{structEcDomainParameters}{Ec\+Domain\+Parameters} $\ast$params)
+\begin{DoxyCompactList}\small\item\em Initialize EC domain parameters. \end{DoxyCompactList}\item 
+void \hyperlink{ec_8c_a256993c154cf87c3d9d18138a1365eca}{ec\+Free\+Domain\+Parameters} (\hyperlink{structEcDomainParameters}{Ec\+Domain\+Parameters} $\ast$params)
+\begin{DoxyCompactList}\small\item\em Release EC domain parameters. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ec_8c_ab3d7ebcb8fd2e79990ef25e39a68f4a5}{ec\+Load\+Domain\+Parameters} (\hyperlink{structEcDomainParameters}{Ec\+Domain\+Parameters} $\ast$params, const \hyperlink{structEcCurveInfo}{Ec\+Curve\+Info} $\ast$curve\+Info)
+\begin{DoxyCompactList}\small\item\em Load EC domain parameters. \end{DoxyCompactList}\item 
+void \hyperlink{ec_8c_ac038e67dcc04d6d94bb930f9475f3ff8}{ec\+Init} (\hyperlink{structEcPoint}{Ec\+Point} $\ast$\hyperlink{ndp_8h_a4c5c6ceb8ed33456261fa907136e0c3a}{r})
+\begin{DoxyCompactList}\small\item\em Initialize elliptic curve point. \end{DoxyCompactList}\item 
+void \hyperlink{ec_8c_ae4a9276eac491f8acbb6d0916287411b}{ec\+Free} (\hyperlink{structEcPoint}{Ec\+Point} $\ast$\hyperlink{ndp_8h_a4c5c6ceb8ed33456261fa907136e0c3a}{r})
+\begin{DoxyCompactList}\small\item\em Release an elliptic curve point. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ec_8c_a5dfb5a020cc8692d1eb137cd3c794913}{ec\+Copy} (\hyperlink{structEcPoint}{Ec\+Point} $\ast$\hyperlink{ndp_8h_a4c5c6ceb8ed33456261fa907136e0c3a}{r}, const \hyperlink{structEcPoint}{Ec\+Point} $\ast$\hyperlink{ndp_8h_a2dee666f0c1fe072c549ff86b1d0a8ab}{s})
+\begin{DoxyCompactList}\small\item\em Copy EC point. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ec_8c_ae707a9a99979ce0b291ac6c0f8d380fd}{ec\+Import} (const \hyperlink{structEcDomainParameters}{Ec\+Domain\+Parameters} $\ast$params, \hyperlink{structEcPoint}{Ec\+Point} $\ast$\hyperlink{ndp_8h_a4c5c6ceb8ed33456261fa907136e0c3a}{r}, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{tftp__common_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length})
+\begin{DoxyCompactList}\small\item\em Convert an octet string to an EC point. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ec_8c_a5b0e532e196ac4715c98d0946304772c}{ec\+Export} (const \hyperlink{structEcDomainParameters}{Ec\+Domain\+Parameters} $\ast$params, const \hyperlink{structEcPoint}{Ec\+Point} $\ast$\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{tftp__common_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, size\+\_\+t $\ast$\hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length})
+\begin{DoxyCompactList}\small\item\em Convert an EC point to an octet string. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ec_8c_a1dbdfb4f5689eb88092fa08bc50eda00}{ec\+Projectify} (const \hyperlink{structEcDomainParameters}{Ec\+Domain\+Parameters} $\ast$params, \hyperlink{structEcPoint}{Ec\+Point} $\ast$\hyperlink{ndp_8h_a4c5c6ceb8ed33456261fa907136e0c3a}{r}, const \hyperlink{structEcPoint}{Ec\+Point} $\ast$\hyperlink{ndp_8h_a2dee666f0c1fe072c549ff86b1d0a8ab}{s})
+\begin{DoxyCompactList}\small\item\em Compute projective representation. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+weak \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ec_8c_af156298aca268c06f7708d4c4d700757}{ec\+Affinify} (const \hyperlink{structEcDomainParameters}{Ec\+Domain\+Parameters} $\ast$params, \hyperlink{structEcPoint}{Ec\+Point} $\ast$\hyperlink{ndp_8h_a4c5c6ceb8ed33456261fa907136e0c3a}{r}, const \hyperlink{structEcPoint}{Ec\+Point} $\ast$\hyperlink{ndp_8h_a2dee666f0c1fe072c549ff86b1d0a8ab}{s})
+\begin{DoxyCompactList}\small\item\em Recover affine representation. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+weak \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} \hyperlink{ec_8c_a40e3e0d1c6641c70cc4320ce009ceeaf}{ec\+Is\+Point\+Affine} (const \hyperlink{structEcDomainParameters}{Ec\+Domain\+Parameters} $\ast$params, const \hyperlink{structEcPoint}{Ec\+Point} $\ast$\hyperlink{ndp_8h_a2dee666f0c1fe072c549ff86b1d0a8ab}{s})
+\begin{DoxyCompactList}\small\item\em Check whether the affine point S is on the curve. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ec_8c_a75d1501e9dfae2897ec851ae9bb48461}{ec\+Double} (const \hyperlink{structEcDomainParameters}{Ec\+Domain\+Parameters} $\ast$params, \hyperlink{structEcPoint}{Ec\+Point} $\ast$\hyperlink{ndp_8h_a4c5c6ceb8ed33456261fa907136e0c3a}{r}, const \hyperlink{structEcPoint}{Ec\+Point} $\ast$\hyperlink{ndp_8h_a2dee666f0c1fe072c549ff86b1d0a8ab}{s})
+\begin{DoxyCompactList}\small\item\em Point doubling. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ec_8c_ab80471faaba5e47c99978028b755326a}{ec\+Add} (const \hyperlink{structEcDomainParameters}{Ec\+Domain\+Parameters} $\ast$params, \hyperlink{structEcPoint}{Ec\+Point} $\ast$\hyperlink{ndp_8h_a4c5c6ceb8ed33456261fa907136e0c3a}{r}, const \hyperlink{structEcPoint}{Ec\+Point} $\ast$\hyperlink{ndp_8h_a2dee666f0c1fe072c549ff86b1d0a8ab}{s}, const \hyperlink{structEcPoint}{Ec\+Point} $\ast$\hyperlink{llmnr__common_8h_a2d03918f4f9edabaf3c9f43abcc2d85b}{t})
+\begin{DoxyCompactList}\small\item\em Point addition (helper routine) \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ec_8c_a4d55abdf87bb84b25b5a0964d36c8296}{ec\+Full\+Add} (const \hyperlink{structEcDomainParameters}{Ec\+Domain\+Parameters} $\ast$params, \hyperlink{structEcPoint}{Ec\+Point} $\ast$\hyperlink{ndp_8h_a4c5c6ceb8ed33456261fa907136e0c3a}{r}, const \hyperlink{structEcPoint}{Ec\+Point} $\ast$\hyperlink{ndp_8h_a2dee666f0c1fe072c549ff86b1d0a8ab}{s}, const \hyperlink{structEcPoint}{Ec\+Point} $\ast$\hyperlink{llmnr__common_8h_a2d03918f4f9edabaf3c9f43abcc2d85b}{t})
+\begin{DoxyCompactList}\small\item\em Point addition. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ec_8c_a6e327968b5485882ef72833ad404323a}{ec\+Full\+Sub} (const \hyperlink{structEcDomainParameters}{Ec\+Domain\+Parameters} $\ast$params, \hyperlink{structEcPoint}{Ec\+Point} $\ast$\hyperlink{ndp_8h_a4c5c6ceb8ed33456261fa907136e0c3a}{r}, const \hyperlink{structEcPoint}{Ec\+Point} $\ast$\hyperlink{ndp_8h_a2dee666f0c1fe072c549ff86b1d0a8ab}{s}, const \hyperlink{structEcPoint}{Ec\+Point} $\ast$\hyperlink{llmnr__common_8h_a2d03918f4f9edabaf3c9f43abcc2d85b}{t})
+\begin{DoxyCompactList}\small\item\em Point subtraction. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+weak \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ec_8c_adfdc61723278833b0c8cecbb10185233}{ec\+Mult} (const \hyperlink{structEcDomainParameters}{Ec\+Domain\+Parameters} $\ast$params, \hyperlink{structEcPoint}{Ec\+Point} $\ast$\hyperlink{ndp_8h_a4c5c6ceb8ed33456261fa907136e0c3a}{r}, const \hyperlink{structMpi}{Mpi} $\ast$d, const \hyperlink{structEcPoint}{Ec\+Point} $\ast$\hyperlink{ndp_8h_a2dee666f0c1fe072c549ff86b1d0a8ab}{s})
+\begin{DoxyCompactList}\small\item\em Scalar multiplication. \end{DoxyCompactList}\item 
+\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} \hyperlink{ec_8c_aad4be77ed195be03204937d42b483ab2}{ec\+Twin\+MultF} (\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} \hyperlink{llmnr__common_8h_a2d03918f4f9edabaf3c9f43abcc2d85b}{t})
+\begin{DoxyCompactList}\small\item\em An auxiliary function for the twin multiplication. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ec_8c_aa71cc4a2e12f627bca5a9279e10e17ec}{ec\+Twin\+Mult} (const \hyperlink{structEcDomainParameters}{Ec\+Domain\+Parameters} $\ast$params, \hyperlink{structEcPoint}{Ec\+Point} $\ast$\hyperlink{ndp_8h_a4c5c6ceb8ed33456261fa907136e0c3a}{r}, const \hyperlink{structMpi}{Mpi} $\ast$d0, const \hyperlink{structEcPoint}{Ec\+Point} $\ast$\hyperlink{ndp_8h_a2dee666f0c1fe072c549ff86b1d0a8ab}{s}, const \hyperlink{structMpi}{Mpi} $\ast$d1, const \hyperlink{structEcPoint}{Ec\+Point} $\ast$\hyperlink{llmnr__common_8h_a2d03918f4f9edabaf3c9f43abcc2d85b}{t})
+\begin{DoxyCompactList}\small\item\em Twin multiplication. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ec_8c_a55f344223a6872a35df2c1033ef62f97}{ec\+Add\+Mod} (const \hyperlink{structEcDomainParameters}{Ec\+Domain\+Parameters} $\ast$params, \hyperlink{structMpi}{Mpi} $\ast$\hyperlink{ndp_8h_a4c5c6ceb8ed33456261fa907136e0c3a}{r}, const \hyperlink{structMpi}{Mpi} $\ast$\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}, const \hyperlink{structMpi}{Mpi} $\ast$\hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b})
+\begin{DoxyCompactList}\small\item\em Fast modular addition. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ec_8c_a0925285feb2a8347e1f3a762e0b80c48}{ec\+Sub\+Mod} (const \hyperlink{structEcDomainParameters}{Ec\+Domain\+Parameters} $\ast$params, \hyperlink{structMpi}{Mpi} $\ast$\hyperlink{ndp_8h_a4c5c6ceb8ed33456261fa907136e0c3a}{r}, const \hyperlink{structMpi}{Mpi} $\ast$\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}, const \hyperlink{structMpi}{Mpi} $\ast$\hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b})
+\begin{DoxyCompactList}\small\item\em Fast modular subtraction. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ec_8c_a1c5ac36557b7e70473a2b4aadfea347c}{ec\+Mul\+Mod} (const \hyperlink{structEcDomainParameters}{Ec\+Domain\+Parameters} $\ast$params, \hyperlink{structMpi}{Mpi} $\ast$\hyperlink{ndp_8h_a4c5c6ceb8ed33456261fa907136e0c3a}{r}, const \hyperlink{structMpi}{Mpi} $\ast$\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}, const \hyperlink{structMpi}{Mpi} $\ast$\hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b})
+\begin{DoxyCompactList}\small\item\em Fast modular multiplication. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ec_8c_a59c2a59af5fe95bee820036bc29edc1d}{ec\+Sqr\+Mod} (const \hyperlink{structEcDomainParameters}{Ec\+Domain\+Parameters} $\ast$params, \hyperlink{structMpi}{Mpi} $\ast$\hyperlink{ndp_8h_a4c5c6ceb8ed33456261fa907136e0c3a}{r}, const \hyperlink{structMpi}{Mpi} $\ast$\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a})
+\begin{DoxyCompactList}\small\item\em Fast modular squaring. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} \hyperlink{ec_8c_a5ff93c201b1e50b6fda04774a2fa537c}{E\+C\+\_\+\+P\+U\+B\+L\+I\+C\+\_\+\+K\+E\+Y\+\_\+\+O\+ID} \mbox{[}7\mbox{]} = \{0x2\+A, 0x86, 0x48, 0x\+C\+E, 0x3\+D, 0x02, 0x01\}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+E\+CC (Elliptic Curve Cryptography) 
+
+\hypertarget{pic32mz__ef__curiosity_8h_License}{}\subsection{License}\label{pic32mz__ef__curiosity_8h_License}
+S\+P\+D\+X-\/\+License-\/\+Identifier\+: G\+P\+L-\/2.\+0-\/or-\/later
+
+Copyright (C) 2010-\/2019 Oryx Embedded S\+A\+RL. All rights reserved.
+
+This file is part of Cyclone\+Crypto Open.
+
+This program is free software; you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+
+You should have received a copy of the G\+NU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-\/1301, U\+SA.
+
+\begin{DoxyAuthor}{Author}
+Oryx Embedded S\+A\+RL (www.\+oryx-\/embedded.\+com) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+9.\+6 
+\end{DoxyVersion}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{ec_8c_afcdf5e66fd927a7f4cc64295acd20407}\label{ec_8c_afcdf5e66fd927a7f4cc64295acd20407}} 
+\index{ec.\+c@{ec.\+c}!T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+\index{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}!ec.\+c@{ec.\+c}}
+\subsubsection{\texorpdfstring{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}{TRACE\_LEVEL}}
+{\footnotesize\ttfamily \#define T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL~\hyperlink{crypto__config_8h_a6afae3a9b63f9b55d979e667ee0e881d}{C\+R\+Y\+P\+T\+O\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+
+
+
+Definition at line 32 of file ec.\+c.
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{ec_8c_ab80471faaba5e47c99978028b755326a}\label{ec_8c_ab80471faaba5e47c99978028b755326a}} 
+\index{ec.\+c@{ec.\+c}!ec\+Add@{ec\+Add}}
+\index{ec\+Add@{ec\+Add}!ec.\+c@{ec.\+c}}
+\subsubsection{\texorpdfstring{ec\+Add()}{ecAdd()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ec\+Add (\begin{DoxyParamCaption}\item[{const \hyperlink{structEcDomainParameters}{Ec\+Domain\+Parameters} $\ast$}]{params,  }\item[{\hyperlink{structEcPoint}{Ec\+Point} $\ast$}]{r,  }\item[{const \hyperlink{structEcPoint}{Ec\+Point} $\ast$}]{s,  }\item[{const \hyperlink{structEcPoint}{Ec\+Point} $\ast$}]{t }\end{DoxyParamCaption})}
+
+
+
+Point addition (helper routine) 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em params} & EC domain parameters \\
+\hline
+\mbox{\tt out}  & {\em r} & Resulting point R = S + T \\
+\hline
+\mbox{\tt in}  & {\em s} & First operand \\
+\hline
+\mbox{\tt in}  & {\em t} & Second operand \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 588 of file ec.\+c.
+
+
+\begin{DoxyCode}
+590 \{
+591    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+592    \hyperlink{structMpi}{Mpi} \hyperlink{tiger_8c_a5017152cac85e29a2dc5d8d74de9e07c}{t1};
+593    \hyperlink{structMpi}{Mpi} \hyperlink{tiger_8c_a42a80c4c472115c0fcb04a076526ecf5}{t2};
+594    \hyperlink{structMpi}{Mpi} \hyperlink{tiger_8c_a275db56faf9780608afff7d4fb462caf}{t3};
+595    \hyperlink{structMpi}{Mpi} \hyperlink{tiger_8c_ad08af49192ab7f0c36cebbb4dee62ce8}{t4};
+596    \hyperlink{structMpi}{Mpi} \hyperlink{pic32mx_2isr__support_8h_a2308463bd36e47b9e0bfb702392f8d13}{t5};
+597    \hyperlink{structMpi}{Mpi} \hyperlink{pic32mx_2isr__support_8h_a756f8aa2372df97e38cc4ab45cc36ced}{t6};
+598    \hyperlink{structMpi}{Mpi} \hyperlink{pic32mx_2isr__support_8h_abf79196f19154a1f7dd99dfef1e66059}{t7};
+599 
+600    \textcolor{comment}{//Initialize multiple precision integers}
+601    \hyperlink{mpi_8c_a6f30959dcaabfb16e96cc47ef90515a6}{mpiInit}(&t1);
+602    \hyperlink{mpi_8c_a6f30959dcaabfb16e96cc47ef90515a6}{mpiInit}(&t2);
+603    \hyperlink{mpi_8c_a6f30959dcaabfb16e96cc47ef90515a6}{mpiInit}(&t3);
+604    \hyperlink{mpi_8c_a6f30959dcaabfb16e96cc47ef90515a6}{mpiInit}(&t4);
+605    \hyperlink{mpi_8c_a6f30959dcaabfb16e96cc47ef90515a6}{mpiInit}(&t5);
+606    \hyperlink{mpi_8c_a6f30959dcaabfb16e96cc47ef90515a6}{mpiInit}(&t6);
+607    \hyperlink{mpi_8c_a6f30959dcaabfb16e96cc47ef90515a6}{mpiInit}(&t7);
+608 
+609    \textcolor{comment}{//Set t1 = Sx}
+610    \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_a30e6f6e9d6916d0bbe24d8b19559ac7f}{mpiCopy}(&t1, &s->\hyperlink{structEcPoint_a08f3fbb7a7d07607306bd8d6200629af}{x}));
+611    \textcolor{comment}{//Set t2 = Sy}
+612    \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_a30e6f6e9d6916d0bbe24d8b19559ac7f}{mpiCopy}(&t2, &s->\hyperlink{structEcPoint_a2102dff813849bd0eaed8a1a5e64ec1f}{y}));
+613    \textcolor{comment}{//Set t3 = Sz}
+614    \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_a30e6f6e9d6916d0bbe24d8b19559ac7f}{mpiCopy}(&t3, &s->\hyperlink{structEcPoint_ac53a6ff4888f818509027e37004635f5}{z}));
+615    \textcolor{comment}{//Set t4 = Tx}
+616    \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_a30e6f6e9d6916d0bbe24d8b19559ac7f}{mpiCopy}(&t4, &t->\hyperlink{structEcPoint_a08f3fbb7a7d07607306bd8d6200629af}{x}));
+617    \textcolor{comment}{//Set t5 = Ty}
+618    \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_a30e6f6e9d6916d0bbe24d8b19559ac7f}{mpiCopy}(&t5, &t->\hyperlink{structEcPoint_a2102dff813849bd0eaed8a1a5e64ec1f}{y}));
+619 
+620    \textcolor{comment}{//Check whether Tz != 1}
+621    \textcolor{keywordflow}{if}(\hyperlink{mpi_8c_a46c2ff9f6fd5aa944ad4d41833ebef50}{mpiCompInt}(&t->\hyperlink{structEcPoint_ac53a6ff4888f818509027e37004635f5}{z}, 1) != 0)
+622    \{
+623       \textcolor{comment}{//Compute t6 = Tz}
+624       \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_a30e6f6e9d6916d0bbe24d8b19559ac7f}{mpiCopy}(&t6, &t->\hyperlink{structEcPoint_ac53a6ff4888f818509027e37004635f5}{z}));
+625       \textcolor{comment}{//Compute t7 = t6^2}
+626       \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a59c2a59af5fe95bee820036bc29edc1d}{ecSqrMod}(params, &t7, &t6));
+627       \textcolor{comment}{//Compute t1 = t1 * t7}
+628       \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a1c5ac36557b7e70473a2b4aadfea347c}{ecMulMod}(params, &t1, &t1, &t7));
+629       \textcolor{comment}{//Compute t7 = t6 * t7}
+630       \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a1c5ac36557b7e70473a2b4aadfea347c}{ecMulMod}(params, &t7, &t6, &t7));
+631       \textcolor{comment}{//Compute t2 = t2 * t7}
+632       \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a1c5ac36557b7e70473a2b4aadfea347c}{ecMulMod}(params, &t2, &t2, &t7));
+633    \}
+634 
+635    \textcolor{comment}{//Compute t7 = t3^2}
+636    \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a59c2a59af5fe95bee820036bc29edc1d}{ecSqrMod}(params, &t7, &t3));
+637    \textcolor{comment}{//Compute t4 = t4 * t7}
+638    \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a1c5ac36557b7e70473a2b4aadfea347c}{ecMulMod}(params, &t4, &t4, &t7));
+639    \textcolor{comment}{//Compute t7 = t3 * t7}
+640    \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a1c5ac36557b7e70473a2b4aadfea347c}{ecMulMod}(params, &t7, &t3, &t7));
+641    \textcolor{comment}{//Compute t5 = t5 * t7}
+642    \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a1c5ac36557b7e70473a2b4aadfea347c}{ecMulMod}(params, &t5, &t5, &t7));
+643    \textcolor{comment}{//Compute t4 = t1 - t4}
+644    \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a0925285feb2a8347e1f3a762e0b80c48}{ecSubMod}(params, &t4, &t1, &t4));
+645    \textcolor{comment}{//Compute t5 = t2 - t5}
+646    \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a0925285feb2a8347e1f3a762e0b80c48}{ecSubMod}(params, &t5, &t2, &t5));
+647 
+648    \textcolor{comment}{//Check whether t4 == 0}
+649    \textcolor{keywordflow}{if}(\hyperlink{mpi_8c_a46c2ff9f6fd5aa944ad4d41833ebef50}{mpiCompInt}(&t4, 0) == 0)
+650    \{
+651       \textcolor{comment}{//Check whether t5 == 0}
+652       \textcolor{keywordflow}{if}(\hyperlink{mpi_8c_a46c2ff9f6fd5aa944ad4d41833ebef50}{mpiCompInt}(&t5, 0) == 0)
+653       \{
+654          \textcolor{comment}{//Set R = (0, 0, 0)}
+655          \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_a1d8c5bea2b4bb91935654c4e9d05579f}{mpiSetValue}(&r->\hyperlink{structEcPoint_a08f3fbb7a7d07607306bd8d6200629af}{x}, 0));
+656          \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_a1d8c5bea2b4bb91935654c4e9d05579f}{mpiSetValue}(&r->\hyperlink{structEcPoint_a2102dff813849bd0eaed8a1a5e64ec1f}{y}, 0));
+657          \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_a1d8c5bea2b4bb91935654c4e9d05579f}{mpiSetValue}(&r->\hyperlink{structEcPoint_ac53a6ff4888f818509027e37004635f5}{z}, 0));
+658       \}
+659       \textcolor{keywordflow}{else}
+660       \{
+661          \textcolor{comment}{//Set R = (1, 1, 0)}
+662          \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_a1d8c5bea2b4bb91935654c4e9d05579f}{mpiSetValue}(&r->\hyperlink{structEcPoint_a08f3fbb7a7d07607306bd8d6200629af}{x}, 1));
+663          \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_a1d8c5bea2b4bb91935654c4e9d05579f}{mpiSetValue}(&r->\hyperlink{structEcPoint_a2102dff813849bd0eaed8a1a5e64ec1f}{y}, 1));
+664          \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_a1d8c5bea2b4bb91935654c4e9d05579f}{mpiSetValue}(&r->\hyperlink{structEcPoint_ac53a6ff4888f818509027e37004635f5}{z}, 0));
+665       \}
+666    \}
+667    \textcolor{keywordflow}{else}
+668    \{
+669       \textcolor{comment}{//Compute t1 = 2 * t1 - t4}
+670       \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a55f344223a6872a35df2c1033ef62f97}{ecAddMod}(params, &t1, &t1, &t1));
+671       \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a0925285feb2a8347e1f3a762e0b80c48}{ecSubMod}(params, &t1, &t1, &t4));
+672       \textcolor{comment}{//Compute t2 = 2 * t2 - t5}
+673       \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a55f344223a6872a35df2c1033ef62f97}{ecAddMod}(params, &t2, &t2, &t2));
+674       \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a0925285feb2a8347e1f3a762e0b80c48}{ecSubMod}(params, &t2, &t2, &t5));
+675 
+676       \textcolor{comment}{//Check whether Tz != 1}
+677       \textcolor{keywordflow}{if}(\hyperlink{mpi_8c_a46c2ff9f6fd5aa944ad4d41833ebef50}{mpiCompInt}(&t->\hyperlink{structEcPoint_ac53a6ff4888f818509027e37004635f5}{z}, 1) != 0)
+678       \{
+679          \textcolor{comment}{//Compute t3 = t3 * t6}
+680          \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a1c5ac36557b7e70473a2b4aadfea347c}{ecMulMod}(params, &t3, &t3, &t6));
+681       \}
+682 
+683       \textcolor{comment}{//Compute t3 = t3 * t4}
+684       \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a1c5ac36557b7e70473a2b4aadfea347c}{ecMulMod}(params, &t3, &t3, &t4));
+685       \textcolor{comment}{//Compute t7 = t4^2}
+686       \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a59c2a59af5fe95bee820036bc29edc1d}{ecSqrMod}(params, &t7, &t4));
+687       \textcolor{comment}{//Compute t4 = t4 * t7}
+688       \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a1c5ac36557b7e70473a2b4aadfea347c}{ecMulMod}(params, &t4, &t4, &t7));
+689       \textcolor{comment}{//Compute t7 = t1 * t7}
+690       \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a1c5ac36557b7e70473a2b4aadfea347c}{ecMulMod}(params, &t7, &t1, &t7));
+691       \textcolor{comment}{//Compute t1 = t5^2}
+692       \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a59c2a59af5fe95bee820036bc29edc1d}{ecSqrMod}(params, &t1, &t5));
+693       \textcolor{comment}{//Compute t1 = t1 - t7}
+694       \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a0925285feb2a8347e1f3a762e0b80c48}{ecSubMod}(params, &t1, &t1, &t7));
+695       \textcolor{comment}{//Compute t7 = t7 - 2 * t1}
+696       \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a55f344223a6872a35df2c1033ef62f97}{ecAddMod}(params, &t6, &t1, &t1));
+697       \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a0925285feb2a8347e1f3a762e0b80c48}{ecSubMod}(params, &t7, &t7, &t6));
+698       \textcolor{comment}{//Compute t5 = t5 * t7}
+699       \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a1c5ac36557b7e70473a2b4aadfea347c}{ecMulMod}(params, &t5, &t5, &t7));
+700       \textcolor{comment}{//Compute t4 = t2 * t4}
+701       \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a1c5ac36557b7e70473a2b4aadfea347c}{ecMulMod}(params, &t4, &t2, &t4));
+702       \textcolor{comment}{//Compute t2 = t5 - t4}
+703       \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a0925285feb2a8347e1f3a762e0b80c48}{ecSubMod}(params, &t2, &t5, &t4));
+704 
+705       \textcolor{comment}{//Compute t2 = t2 / 2}
+706       \textcolor{keywordflow}{if}(\hyperlink{mpi_8h_a53b82ca5e6d72401169ab98f73b9f0e5}{mpiIsEven}(&t2))
+707       \{
+708          \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_a550a7330971d895957015b810b25c805}{mpiShiftRight}(&t2, 1));
+709       \}
+710       \textcolor{keywordflow}{else}
+711       \{
+712          \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_abd7700302eaf9c1a7929b0d4362f43a5}{mpiAdd}(&t2, &t2, &params->\hyperlink{structEcDomainParameters_a497e7494540878b966444dc4ad973cdc}{p}));
+713          \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_a550a7330971d895957015b810b25c805}{mpiShiftRight}(&t2, 1));
+714       \}
+715 
+716       \textcolor{comment}{//Set Rx = t1}
+717       \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_a30e6f6e9d6916d0bbe24d8b19559ac7f}{mpiCopy}(&r->\hyperlink{structEcPoint_a08f3fbb7a7d07607306bd8d6200629af}{x}, &t1));
+718       \textcolor{comment}{//Set Ry = t2}
+719       \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_a30e6f6e9d6916d0bbe24d8b19559ac7f}{mpiCopy}(&r->\hyperlink{structEcPoint_a2102dff813849bd0eaed8a1a5e64ec1f}{y}, &t2));
+720       \textcolor{comment}{//Set Rz = t3}
+721       \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_a30e6f6e9d6916d0bbe24d8b19559ac7f}{mpiCopy}(&r->\hyperlink{structEcPoint_ac53a6ff4888f818509027e37004635f5}{z}, &t3));
+722    \}
+723 
+724 end:
+725    \textcolor{comment}{//Release multiple precision integers}
+726    \hyperlink{mpi_8c_a9dc5be2f62d37d3854fa61beab3a61ad}{mpiFree}(&t1);
+727    \hyperlink{mpi_8c_a9dc5be2f62d37d3854fa61beab3a61ad}{mpiFree}(&t2);
+728    \hyperlink{mpi_8c_a9dc5be2f62d37d3854fa61beab3a61ad}{mpiFree}(&t3);
+729    \hyperlink{mpi_8c_a9dc5be2f62d37d3854fa61beab3a61ad}{mpiFree}(&t4);
+730    \hyperlink{mpi_8c_a9dc5be2f62d37d3854fa61beab3a61ad}{mpiFree}(&t5);
+731    \hyperlink{mpi_8c_a9dc5be2f62d37d3854fa61beab3a61ad}{mpiFree}(&t6);
+732    \hyperlink{mpi_8c_a9dc5be2f62d37d3854fa61beab3a61ad}{mpiFree}(&t7);
+733 
+734    \textcolor{comment}{//Return status code}
+735    \textcolor{keywordflow}{return} error;
+736 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ec_8c_a55f344223a6872a35df2c1033ef62f97}\label{ec_8c_a55f344223a6872a35df2c1033ef62f97}} 
+\index{ec.\+c@{ec.\+c}!ec\+Add\+Mod@{ec\+Add\+Mod}}
+\index{ec\+Add\+Mod@{ec\+Add\+Mod}!ec.\+c@{ec.\+c}}
+\subsubsection{\texorpdfstring{ec\+Add\+Mod()}{ecAddMod()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ec\+Add\+Mod (\begin{DoxyParamCaption}\item[{const \hyperlink{structEcDomainParameters}{Ec\+Domain\+Parameters} $\ast$}]{params,  }\item[{\hyperlink{structMpi}{Mpi} $\ast$}]{r,  }\item[{const \hyperlink{structMpi}{Mpi} $\ast$}]{a,  }\item[{const \hyperlink{structMpi}{Mpi} $\ast$}]{b }\end{DoxyParamCaption})}
+
+
+
+Fast modular addition. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em params} & EC domain parameters \\
+\hline
+\mbox{\tt out}  & {\em r} & Resulting integer R = (A + B) mod p \\
+\hline
+\mbox{\tt in}  & {\em a} & An integer such as 0 $<$= A $<$ p \\
+\hline
+\mbox{\tt in}  & {\em b} & An integer such as 0 $<$= B $<$ p \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 1154 of file ec.\+c.
+
+
+\begin{DoxyCode}
+1156 \{
+1157    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+1158 
+1159    \textcolor{comment}{//Compute R = A + B}
+1160    \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_abd7700302eaf9c1a7929b0d4362f43a5}{mpiAdd}(r, a, b));
+1161 
+1162    \textcolor{comment}{//Compute R = (A + B) mod p}
+1163    \textcolor{keywordflow}{if}(\hyperlink{mpi_8c_a54cf7aedd99e130971849eb21eb578c9}{mpiComp}(r, &params->\hyperlink{structEcDomainParameters_a497e7494540878b966444dc4ad973cdc}{p}) >= 0)
+1164    \{
+1165       \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_a3bacb7d1ff434e94cc4c9fabbfcea3fe}{mpiSub}(r, r, &params->\hyperlink{structEcDomainParameters_a497e7494540878b966444dc4ad973cdc}{p}));
+1166    \}
+1167 
+1168 end:
+1169    \textcolor{comment}{//Return status code}
+1170    \textcolor{keywordflow}{return} error;
+1171 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ec_8c_af156298aca268c06f7708d4c4d700757}\label{ec_8c_af156298aca268c06f7708d4c4d700757}} 
+\index{ec.\+c@{ec.\+c}!ec\+Affinify@{ec\+Affinify}}
+\index{ec\+Affinify@{ec\+Affinify}!ec.\+c@{ec.\+c}}
+\subsubsection{\texorpdfstring{ec\+Affinify()}{ecAffinify()}}
+{\footnotesize\ttfamily \+\_\+\+\_\+weak \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ec\+Affinify (\begin{DoxyParamCaption}\item[{const \hyperlink{structEcDomainParameters}{Ec\+Domain\+Parameters} $\ast$}]{params,  }\item[{\hyperlink{structEcPoint}{Ec\+Point} $\ast$}]{r,  }\item[{const \hyperlink{structEcPoint}{Ec\+Point} $\ast$}]{s }\end{DoxyParamCaption})}
+
+
+
+Recover affine representation. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em params} & EC domain parameters \\
+\hline
+\mbox{\tt out}  & {\em r} & Affine representation of the point \\
+\hline
+\mbox{\tt in}  & {\em s} & Projective representation of the point \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 368 of file ec.\+c.
+
+
+\begin{DoxyCode}
+370 \{
+371    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+372    \hyperlink{structMpi}{Mpi} \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a};
+373    \hyperlink{structMpi}{Mpi} \hyperlink{dtls__misc_8h_ab590318ac859d0e57e15c3dd6c62a605}{b};
+374 
+375    \textcolor{comment}{//Point at the infinity?}
+376    \textcolor{keywordflow}{if}(\hyperlink{mpi_8c_a46c2ff9f6fd5aa944ad4d41833ebef50}{mpiCompInt}(&s->\hyperlink{structEcPoint_ac53a6ff4888f818509027e37004635f5}{z}, 0) == 0)
+377       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+378 
+379    \textcolor{comment}{//Initialize multiple precision integers}
+380    \hyperlink{mpi_8c_a6f30959dcaabfb16e96cc47ef90515a6}{mpiInit}(&a);
+381    \hyperlink{mpi_8c_a6f30959dcaabfb16e96cc47ef90515a6}{mpiInit}(&b);
+382 
+383    \textcolor{comment}{//Compute a = 1/Sz mod p}
+384    \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{samd51__crypto__pukcc_8c_a2195ea62b59019943aa5bfa4d309028f}{mpiInvMod}(&a, &s->\hyperlink{structEcPoint_ac53a6ff4888f818509027e37004635f5}{z}, &params->\hyperlink{structEcDomainParameters_a497e7494540878b966444dc4ad973cdc}{p}));
+385 
+386    \textcolor{comment}{//Set Rx = a^2 * Sx mod p}
+387    \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a59c2a59af5fe95bee820036bc29edc1d}{ecSqrMod}(params, &b, &a));
+388    \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a1c5ac36557b7e70473a2b4aadfea347c}{ecMulMod}(params, &r->\hyperlink{structEcPoint_a08f3fbb7a7d07607306bd8d6200629af}{x}, &b, &s->\hyperlink{structEcPoint_a08f3fbb7a7d07607306bd8d6200629af}{x}));
+389 
+390    \textcolor{comment}{//Set Ry = a^3 * Sy mod p}
+391    \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a1c5ac36557b7e70473a2b4aadfea347c}{ecMulMod}(params, &b, &b, &a));
+392    \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a1c5ac36557b7e70473a2b4aadfea347c}{ecMulMod}(params, &r->\hyperlink{structEcPoint_a2102dff813849bd0eaed8a1a5e64ec1f}{y}, &b, &s->\hyperlink{structEcPoint_a2102dff813849bd0eaed8a1a5e64ec1f}{y}));
+393 
+394    \textcolor{comment}{//Set Rz = 1}
+395    \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_a1d8c5bea2b4bb91935654c4e9d05579f}{mpiSetValue}(&r->\hyperlink{structEcPoint_ac53a6ff4888f818509027e37004635f5}{z}, 1));
+396 
+397 end:
+398    \textcolor{comment}{//Release multiple precision integers}
+399    \hyperlink{mpi_8c_a9dc5be2f62d37d3854fa61beab3a61ad}{mpiFree}(&a);
+400    \hyperlink{mpi_8c_a9dc5be2f62d37d3854fa61beab3a61ad}{mpiFree}(&b);
+401 
+402    \textcolor{comment}{//Return status code}
+403    \textcolor{keywordflow}{return} error;
+404 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ec_8c_a5dfb5a020cc8692d1eb137cd3c794913}\label{ec_8c_a5dfb5a020cc8692d1eb137cd3c794913}} 
+\index{ec.\+c@{ec.\+c}!ec\+Copy@{ec\+Copy}}
+\index{ec\+Copy@{ec\+Copy}!ec.\+c@{ec.\+c}}
+\subsubsection{\texorpdfstring{ec\+Copy()}{ecCopy()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ec\+Copy (\begin{DoxyParamCaption}\item[{\hyperlink{structEcPoint}{Ec\+Point} $\ast$}]{r,  }\item[{const \hyperlink{structEcPoint}{Ec\+Point} $\ast$}]{s }\end{DoxyParamCaption})}
+
+
+
+Copy EC point. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em r} & Destination EC point \\
+\hline
+\mbox{\tt in}  & {\em s} & Source EC point \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 186 of file ec.\+c.
+
+
+\begin{DoxyCode}
+187 \{
+188    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+189 
+190    \textcolor{comment}{//R and S are the same instance?}
+191    \textcolor{keywordflow}{if}(r == s)
+192       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+193 
+194    \textcolor{comment}{//Copy coordinates}
+195    \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_a30e6f6e9d6916d0bbe24d8b19559ac7f}{mpiCopy}(&r->\hyperlink{structEcPoint_a08f3fbb7a7d07607306bd8d6200629af}{x}, &s->\hyperlink{structEcPoint_a08f3fbb7a7d07607306bd8d6200629af}{x}));
+196    \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_a30e6f6e9d6916d0bbe24d8b19559ac7f}{mpiCopy}(&r->\hyperlink{structEcPoint_a2102dff813849bd0eaed8a1a5e64ec1f}{y}, &s->\hyperlink{structEcPoint_a2102dff813849bd0eaed8a1a5e64ec1f}{y}));
+197    \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_a30e6f6e9d6916d0bbe24d8b19559ac7f}{mpiCopy}(&r->\hyperlink{structEcPoint_ac53a6ff4888f818509027e37004635f5}{z}, &s->\hyperlink{structEcPoint_ac53a6ff4888f818509027e37004635f5}{z}));
+198 
+199 end:
+200    \textcolor{comment}{//Return status code}
+201    \textcolor{keywordflow}{return} error;
+202 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ec_8c_a75d1501e9dfae2897ec851ae9bb48461}\label{ec_8c_a75d1501e9dfae2897ec851ae9bb48461}} 
+\index{ec.\+c@{ec.\+c}!ec\+Double@{ec\+Double}}
+\index{ec\+Double@{ec\+Double}!ec.\+c@{ec.\+c}}
+\subsubsection{\texorpdfstring{ec\+Double()}{ecDouble()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ec\+Double (\begin{DoxyParamCaption}\item[{const \hyperlink{structEcDomainParameters}{Ec\+Domain\+Parameters} $\ast$}]{params,  }\item[{\hyperlink{structEcPoint}{Ec\+Point} $\ast$}]{r,  }\item[{const \hyperlink{structEcPoint}{Ec\+Point} $\ast$}]{s }\end{DoxyParamCaption})}
+
+
+
+Point doubling. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em params} & EC domain parameters \\
+\hline
+\mbox{\tt out}  & {\em r} & Resulting point R = 2S \\
+\hline
+\mbox{\tt in}  & {\em s} & Point S \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 456 of file ec.\+c.
+
+
+\begin{DoxyCode}
+458 \{
+459    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+460    \hyperlink{structMpi}{Mpi} \hyperlink{tiger_8c_a5017152cac85e29a2dc5d8d74de9e07c}{t1};
+461    \hyperlink{structMpi}{Mpi} \hyperlink{tiger_8c_a42a80c4c472115c0fcb04a076526ecf5}{t2};
+462    \hyperlink{structMpi}{Mpi} \hyperlink{tiger_8c_a275db56faf9780608afff7d4fb462caf}{t3};
+463    \hyperlink{structMpi}{Mpi} \hyperlink{tiger_8c_ad08af49192ab7f0c36cebbb4dee62ce8}{t4};
+464    \hyperlink{structMpi}{Mpi} \hyperlink{pic32mx_2isr__support_8h_a2308463bd36e47b9e0bfb702392f8d13}{t5};
+465 
+466    \textcolor{comment}{//Initialize multiple precision integers}
+467    \hyperlink{mpi_8c_a6f30959dcaabfb16e96cc47ef90515a6}{mpiInit}(&t1);
+468    \hyperlink{mpi_8c_a6f30959dcaabfb16e96cc47ef90515a6}{mpiInit}(&t2);
+469    \hyperlink{mpi_8c_a6f30959dcaabfb16e96cc47ef90515a6}{mpiInit}(&t3);
+470    \hyperlink{mpi_8c_a6f30959dcaabfb16e96cc47ef90515a6}{mpiInit}(&t4);
+471    \hyperlink{mpi_8c_a6f30959dcaabfb16e96cc47ef90515a6}{mpiInit}(&t5);
+472 
+473    \textcolor{comment}{//Set t1 = Sx}
+474    \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_a30e6f6e9d6916d0bbe24d8b19559ac7f}{mpiCopy}(&t1, &s->\hyperlink{structEcPoint_a08f3fbb7a7d07607306bd8d6200629af}{x}));
+475    \textcolor{comment}{//Set t2 = Sy}
+476    \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_a30e6f6e9d6916d0bbe24d8b19559ac7f}{mpiCopy}(&t2, &s->\hyperlink{structEcPoint_a2102dff813849bd0eaed8a1a5e64ec1f}{y}));
+477    \textcolor{comment}{//Set t3 = Sz}
+478    \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_a30e6f6e9d6916d0bbe24d8b19559ac7f}{mpiCopy}(&t3, &s->\hyperlink{structEcPoint_ac53a6ff4888f818509027e37004635f5}{z}));
+479 
+480    \textcolor{comment}{//Point at the infinity?}
+481    \textcolor{keywordflow}{if}(\hyperlink{mpi_8c_a46c2ff9f6fd5aa944ad4d41833ebef50}{mpiCompInt}(&t3, 0) == 0)
+482    \{
+483       \textcolor{comment}{//Set R = (1, 1, 0)}
+484       \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_a1d8c5bea2b4bb91935654c4e9d05579f}{mpiSetValue}(&r->\hyperlink{structEcPoint_a08f3fbb7a7d07607306bd8d6200629af}{x}, 1));
+485       \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_a1d8c5bea2b4bb91935654c4e9d05579f}{mpiSetValue}(&r->\hyperlink{structEcPoint_a2102dff813849bd0eaed8a1a5e64ec1f}{y}, 1));
+486       \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_a1d8c5bea2b4bb91935654c4e9d05579f}{mpiSetValue}(&r->\hyperlink{structEcPoint_ac53a6ff4888f818509027e37004635f5}{z}, 0));
+487    \}
+488    \textcolor{keywordflow}{else}
+489    \{
+490       \textcolor{comment}{//SECP K1 elliptic curve?}
+491       \textcolor{keywordflow}{if}(params->\hyperlink{structEcDomainParameters_a7e42fa63fdb0ee92990c05b0771ac383}{type} == \hyperlink{ec__curves_8h_af38fa6633c02444318870a309134ca21acb3e0a98a9b02dbc1f2571cb81803be5}{EC\_CURVE\_TYPE\_SECP\_K1})
+492       \{
+493          \textcolor{comment}{//Compute t5 = t1^2}
+494          \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a59c2a59af5fe95bee820036bc29edc1d}{ecSqrMod}(params, &t5, &t1));
+495          \textcolor{comment}{//Compute t4 = 3 * t5}
+496          \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a55f344223a6872a35df2c1033ef62f97}{ecAddMod}(params, &t4, &t5, &t5));
+497          \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a55f344223a6872a35df2c1033ef62f97}{ecAddMod}(params, &t4, &t4, &t5));
+498       \}
+499       \textcolor{comment}{//SECP R1 elliptic curve?}
+500       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(params->\hyperlink{structEcDomainParameters_a7e42fa63fdb0ee92990c05b0771ac383}{type} == \hyperlink{ec__curves_8h_af38fa6633c02444318870a309134ca21a6b7d19ff105076c689968bd272b23ddf}{EC\_CURVE\_TYPE\_SECP\_R1})
+501       \{
+502          \textcolor{comment}{//Compute t4 = t3^2}
+503          \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a59c2a59af5fe95bee820036bc29edc1d}{ecSqrMod}(params, &t4, &t3));
+504          \textcolor{comment}{//Compute t5 = t1 - t4}
+505          \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a0925285feb2a8347e1f3a762e0b80c48}{ecSubMod}(params, &t5, &t1, &t4));
+506          \textcolor{comment}{//Compute t4 = t1 + t4}
+507          \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a55f344223a6872a35df2c1033ef62f97}{ecAddMod}(params, &t4, &t1, &t4));
+508          \textcolor{comment}{//Compute t5 = t4 * t5}
+509          \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a1c5ac36557b7e70473a2b4aadfea347c}{ecMulMod}(params, &t5, &t4, &t5));
+510          \textcolor{comment}{//Compute t4 = 3 * t5}
+511          \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a55f344223a6872a35df2c1033ef62f97}{ecAddMod}(params, &t4, &t5, &t5));
+512          \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a55f344223a6872a35df2c1033ef62f97}{ecAddMod}(params, &t4, &t4, &t5));
+513       \}
+514       \textcolor{keywordflow}{else}
+515       \{
+516          \textcolor{comment}{//Compute t4 = t3^4}
+517          \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a59c2a59af5fe95bee820036bc29edc1d}{ecSqrMod}(params, &t4, &t3));
+518          \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a59c2a59af5fe95bee820036bc29edc1d}{ecSqrMod}(params, &t4, &t4));
+519          \textcolor{comment}{//Compute t4 = a * t4}
+520          \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a1c5ac36557b7e70473a2b4aadfea347c}{ecMulMod}(params, &t4, &t4, &params->\hyperlink{structEcDomainParameters_a108755e9eeb457a4df867816ee795589}{a}));
+521          \textcolor{comment}{//Compute t5 = t1^2}
+522          \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a59c2a59af5fe95bee820036bc29edc1d}{ecSqrMod}(params, &t5, &t1));
+523          \textcolor{comment}{//Compute t4 = t4 + 3 * t5}
+524          \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a55f344223a6872a35df2c1033ef62f97}{ecAddMod}(params, &t4, &t4, &t5));
+525          \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a55f344223a6872a35df2c1033ef62f97}{ecAddMod}(params, &t4, &t4, &t5));
+526          \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a55f344223a6872a35df2c1033ef62f97}{ecAddMod}(params, &t4, &t4, &t5));
+527       \}
+528 
+529       \textcolor{comment}{//Compute t3 = t3 * t2}
+530       \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a1c5ac36557b7e70473a2b4aadfea347c}{ecMulMod}(params, &t3, &t3, &t2));
+531       \textcolor{comment}{//Compute t3 = 2 * t3}
+532       \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a55f344223a6872a35df2c1033ef62f97}{ecAddMod}(params, &t3, &t3, &t3));
+533       \textcolor{comment}{//Compute t2 = t2^2}
+534       \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a59c2a59af5fe95bee820036bc29edc1d}{ecSqrMod}(params, &t2, &t2));
+535       \textcolor{comment}{//Compute t5 = t1 * t2}
+536       \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a1c5ac36557b7e70473a2b4aadfea347c}{ecMulMod}(params, &t5, &t1, &t2));
+537       \textcolor{comment}{//Compute t5 = 4 * t5}
+538       \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a55f344223a6872a35df2c1033ef62f97}{ecAddMod}(params, &t5, &t5, &t5));
+539       \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a55f344223a6872a35df2c1033ef62f97}{ecAddMod}(params, &t5, &t5, &t5));
+540       \textcolor{comment}{//Compute t1 = t4^2}
+541       \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a59c2a59af5fe95bee820036bc29edc1d}{ecSqrMod}(params, &t1, &t4));
+542       \textcolor{comment}{//Compute t1 = t1 - 2 * t5}
+543       \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a0925285feb2a8347e1f3a762e0b80c48}{ecSubMod}(params, &t1, &t1, &t5));
+544       \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a0925285feb2a8347e1f3a762e0b80c48}{ecSubMod}(params, &t1, &t1, &t5));
+545       \textcolor{comment}{//Compute t2 = t2^2}
+546       \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a59c2a59af5fe95bee820036bc29edc1d}{ecSqrMod}(params, &t2, &t2));
+547       \textcolor{comment}{//Compute t2 = 8 * t2}
+548       \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a55f344223a6872a35df2c1033ef62f97}{ecAddMod}(params, &t2, &t2, &t2));
+549       \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a55f344223a6872a35df2c1033ef62f97}{ecAddMod}(params, &t2, &t2, &t2));
+550       \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a55f344223a6872a35df2c1033ef62f97}{ecAddMod}(params, &t2, &t2, &t2));
+551       \textcolor{comment}{//Compute t5 = t5 - t1}
+552       \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a0925285feb2a8347e1f3a762e0b80c48}{ecSubMod}(params, &t5, &t5, &t1));
+553       \textcolor{comment}{//Compute t5 = t4 * t5}
+554       \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a1c5ac36557b7e70473a2b4aadfea347c}{ecMulMod}(params, &t5, &t4, &t5));
+555       \textcolor{comment}{//Compute t2 = t5 - t2}
+556       \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a0925285feb2a8347e1f3a762e0b80c48}{ecSubMod}(params, &t2, &t5, &t2));
+557 
+558       \textcolor{comment}{//Set Rx = t1}
+559       \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_a30e6f6e9d6916d0bbe24d8b19559ac7f}{mpiCopy}(&r->\hyperlink{structEcPoint_a08f3fbb7a7d07607306bd8d6200629af}{x}, &t1));
+560       \textcolor{comment}{//Set Ry = t2}
+561       \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_a30e6f6e9d6916d0bbe24d8b19559ac7f}{mpiCopy}(&r->\hyperlink{structEcPoint_a2102dff813849bd0eaed8a1a5e64ec1f}{y}, &t2));
+562       \textcolor{comment}{//Set Rz = t3}
+563       \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_a30e6f6e9d6916d0bbe24d8b19559ac7f}{mpiCopy}(&r->\hyperlink{structEcPoint_ac53a6ff4888f818509027e37004635f5}{z}, &t3));
+564    \}
+565 
+566 end:
+567    \textcolor{comment}{//Release multiple precision integers}
+568    \hyperlink{mpi_8c_a9dc5be2f62d37d3854fa61beab3a61ad}{mpiFree}(&t1);
+569    \hyperlink{mpi_8c_a9dc5be2f62d37d3854fa61beab3a61ad}{mpiFree}(&t2);
+570    \hyperlink{mpi_8c_a9dc5be2f62d37d3854fa61beab3a61ad}{mpiFree}(&t3);
+571    \hyperlink{mpi_8c_a9dc5be2f62d37d3854fa61beab3a61ad}{mpiFree}(&t4);
+572    \hyperlink{mpi_8c_a9dc5be2f62d37d3854fa61beab3a61ad}{mpiFree}(&t5);
+573 
+574    \textcolor{comment}{//Return status code}
+575    \textcolor{keywordflow}{return} error;
+576 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ec_8c_a5b0e532e196ac4715c98d0946304772c}\label{ec_8c_a5b0e532e196ac4715c98d0946304772c}} 
+\index{ec.\+c@{ec.\+c}!ec\+Export@{ec\+Export}}
+\index{ec\+Export@{ec\+Export}!ec.\+c@{ec.\+c}}
+\subsubsection{\texorpdfstring{ec\+Export()}{ecExport()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ec\+Export (\begin{DoxyParamCaption}\item[{const \hyperlink{structEcDomainParameters}{Ec\+Domain\+Parameters} $\ast$}]{params,  }\item[{const \hyperlink{structEcPoint}{Ec\+Point} $\ast$}]{a,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{data,  }\item[{size\+\_\+t $\ast$}]{length }\end{DoxyParamCaption})}
+
+
+
+Convert an EC point to an octet string. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em params} & EC domain parameters \\
+\hline
+\mbox{\tt in}  & {\em a} & EC point to be converted \\
+\hline
+\mbox{\tt out}  & {\em data} & Pointer to the octet string \\
+\hline
+\mbox{\tt out}  & {\em length} & Length of the resulting octet string \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 287 of file ec.\+c.
+
+
+\begin{DoxyCode}
+289 \{
+290    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+291    \textcolor{keywordtype}{size\_t} \hyperlink{md5_8c_af11ea3cdbca7345eb6a4a8ac5ce0434d}{k};
+292 
+293    \textcolor{comment}{//Get the length in octets of the prime}
+294    k = \hyperlink{mpi_8c_a8599cb7537c854ae3b2442144c7f853b}{mpiGetByteLength}(&params->\hyperlink{structEcDomainParameters_a497e7494540878b966444dc4ad973cdc}{p});
+295 
+296    \textcolor{comment}{//Montgomery curve?}
+297    \textcolor{keywordflow}{if}(params->\hyperlink{structEcDomainParameters_a7e42fa63fdb0ee92990c05b0771ac383}{type} == \hyperlink{ec__curves_8h_af38fa6633c02444318870a309134ca21a305ec79ddded0b086f533321ece697b8}{EC\_CURVE\_TYPE\_X25519} ||
+298       params->\hyperlink{structEcDomainParameters_a7e42fa63fdb0ee92990c05b0771ac383}{type} == \hyperlink{ec__curves_8h_af38fa6633c02444318870a309134ca21a7610f3e0b5df86a629dd8d2f7f1ce4ef}{EC\_CURVE\_TYPE\_X448})
+299    \{
+300       \textcolor{comment}{//Convert the u-coordinate to an octet string}
+301       error = \hyperlink{mpi_8c_aad846b0b5a3560243e1bf8601ad1b6a5}{mpiExport}(&a->\hyperlink{structEcPoint_a08f3fbb7a7d07607306bd8d6200629af}{x}, \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, k, \hyperlink{mpi_8h_a5fe4159c7c390c604067e854b41d337fa637c0a6e803a47db52875c6818674c60}{MPI\_FORMAT\_LITTLE\_ENDIAN});
+302       \textcolor{comment}{//Conversion failed?}
+303       \textcolor{keywordflow}{if}(error)
+304          \textcolor{keywordflow}{return} error;
+305 
+306       \textcolor{comment}{//Return the total number of bytes that have been written}
+307       *\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} = \hyperlink{md5_8c_af11ea3cdbca7345eb6a4a8ac5ce0434d}{k};
+308    \}
+309    \textcolor{comment}{//Weierstrass curve?}
+310    \textcolor{keywordflow}{else}
+311    \{
+312       \textcolor{comment}{//Point compression is not used}
+313       \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}[0] = 0x04;
+314 
+315       \textcolor{comment}{//Convert the x-coordinate to an octet string}
+316       error = \hyperlink{mpi_8c_aad846b0b5a3560243e1bf8601ad1b6a5}{mpiExport}(&a->\hyperlink{structEcPoint_a08f3fbb7a7d07607306bd8d6200629af}{x}, \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data} + 1, k, \hyperlink{mpi_8h_a5fe4159c7c390c604067e854b41d337fa0912b5922ecee206ec51e40d5285f77e}{MPI\_FORMAT\_BIG\_ENDIAN});
+317       \textcolor{comment}{//Conversion failed?}
+318       \textcolor{keywordflow}{if}(error)
+319          \textcolor{keywordflow}{return} error;
+320 
+321       \textcolor{comment}{//Convert the y-coordinate to an octet string}
+322       error = \hyperlink{mpi_8c_aad846b0b5a3560243e1bf8601ad1b6a5}{mpiExport}(&a->\hyperlink{structEcPoint_a2102dff813849bd0eaed8a1a5e64ec1f}{y}, \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data} + k + 1, k, 
+      \hyperlink{mpi_8h_a5fe4159c7c390c604067e854b41d337fa0912b5922ecee206ec51e40d5285f77e}{MPI\_FORMAT\_BIG\_ENDIAN});
+323       \textcolor{comment}{//Conversion failed?}
+324       \textcolor{keywordflow}{if}(error)
+325          \textcolor{keywordflow}{return} error;
+326 
+327       \textcolor{comment}{//Return the total number of bytes that have been written}
+328       *\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} = k * 2 + 1;
+329    \}
+330 
+331    \textcolor{comment}{//Successful processing}
+332    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+333 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ec_8c_ae4a9276eac491f8acbb6d0916287411b}\label{ec_8c_ae4a9276eac491f8acbb6d0916287411b}} 
+\index{ec.\+c@{ec.\+c}!ec\+Free@{ec\+Free}}
+\index{ec\+Free@{ec\+Free}!ec.\+c@{ec.\+c}}
+\subsubsection{\texorpdfstring{ec\+Free()}{ecFree()}}
+{\footnotesize\ttfamily void ec\+Free (\begin{DoxyParamCaption}\item[{\hyperlink{structEcPoint}{Ec\+Point} $\ast$}]{r }\end{DoxyParamCaption})}
+
+
+
+Release an elliptic curve point. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in,out}  & {\em r} & Pointer to the EC point to initialize to free \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 170 of file ec.\+c.
+
+
+\begin{DoxyCode}
+171 \{
+172    \textcolor{comment}{//Release previously allocated resources}
+173    \hyperlink{mpi_8c_a9dc5be2f62d37d3854fa61beab3a61ad}{mpiFree}(&r->\hyperlink{structEcPoint_a08f3fbb7a7d07607306bd8d6200629af}{x});
+174    \hyperlink{mpi_8c_a9dc5be2f62d37d3854fa61beab3a61ad}{mpiFree}(&r->\hyperlink{structEcPoint_a2102dff813849bd0eaed8a1a5e64ec1f}{y});
+175    \hyperlink{mpi_8c_a9dc5be2f62d37d3854fa61beab3a61ad}{mpiFree}(&r->\hyperlink{structEcPoint_ac53a6ff4888f818509027e37004635f5}{z});
+176 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ec_8c_a256993c154cf87c3d9d18138a1365eca}\label{ec_8c_a256993c154cf87c3d9d18138a1365eca}} 
+\index{ec.\+c@{ec.\+c}!ec\+Free\+Domain\+Parameters@{ec\+Free\+Domain\+Parameters}}
+\index{ec\+Free\+Domain\+Parameters@{ec\+Free\+Domain\+Parameters}!ec.\+c@{ec.\+c}}
+\subsubsection{\texorpdfstring{ec\+Free\+Domain\+Parameters()}{ecFreeDomainParameters()}}
+{\footnotesize\ttfamily void ec\+Free\+Domain\+Parameters (\begin{DoxyParamCaption}\item[{\hyperlink{structEcDomainParameters}{Ec\+Domain\+Parameters} $\ast$}]{params }\end{DoxyParamCaption})}
+
+
+
+Release EC domain parameters. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em params} & Pointer to the EC domain parameters to free \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 75 of file ec.\+c.
+
+
+\begin{DoxyCode}
+76 \{
+77    \textcolor{comment}{//Release previously allocated resources}
+78    \hyperlink{mpi_8c_a9dc5be2f62d37d3854fa61beab3a61ad}{mpiFree}(&params->\hyperlink{structEcDomainParameters_a497e7494540878b966444dc4ad973cdc}{p});
+79    \hyperlink{mpi_8c_a9dc5be2f62d37d3854fa61beab3a61ad}{mpiFree}(&params->\hyperlink{structEcDomainParameters_a108755e9eeb457a4df867816ee795589}{a});
+80    \hyperlink{mpi_8c_a9dc5be2f62d37d3854fa61beab3a61ad}{mpiFree}(&params->\hyperlink{structEcDomainParameters_a13b11f7ebb928f2407abb4ce5b40fffd}{b});
+81    \hyperlink{ec_8c_ae4a9276eac491f8acbb6d0916287411b}{ecFree}(&params->\hyperlink{structEcDomainParameters_a48b4ef67c6d94e7be182ae6b73708511}{g});
+82    \hyperlink{mpi_8c_a9dc5be2f62d37d3854fa61beab3a61ad}{mpiFree}(&params->\hyperlink{structEcDomainParameters_afcdd8e7ec1aa29476df4e2ae13882a12}{q});
+83 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ec_8c_a4d55abdf87bb84b25b5a0964d36c8296}\label{ec_8c_a4d55abdf87bb84b25b5a0964d36c8296}} 
+\index{ec.\+c@{ec.\+c}!ec\+Full\+Add@{ec\+Full\+Add}}
+\index{ec\+Full\+Add@{ec\+Full\+Add}!ec.\+c@{ec.\+c}}
+\subsubsection{\texorpdfstring{ec\+Full\+Add()}{ecFullAdd()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ec\+Full\+Add (\begin{DoxyParamCaption}\item[{const \hyperlink{structEcDomainParameters}{Ec\+Domain\+Parameters} $\ast$}]{params,  }\item[{\hyperlink{structEcPoint}{Ec\+Point} $\ast$}]{r,  }\item[{const \hyperlink{structEcPoint}{Ec\+Point} $\ast$}]{s,  }\item[{const \hyperlink{structEcPoint}{Ec\+Point} $\ast$}]{t }\end{DoxyParamCaption})}
+
+
+
+Point addition. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em params} & EC domain parameters \\
+\hline
+\mbox{\tt out}  & {\em r} & Resulting point R = S + T \\
+\hline
+\mbox{\tt in}  & {\em s} & First operand \\
+\hline
+\mbox{\tt in}  & {\em t} & Second operand \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 748 of file ec.\+c.
+
+
+\begin{DoxyCode}
+750 \{
+751    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+752 
+753    \textcolor{comment}{//Check whether Sz == 0}
+754    \textcolor{keywordflow}{if}(\hyperlink{mpi_8c_a46c2ff9f6fd5aa944ad4d41833ebef50}{mpiCompInt}(&s->\hyperlink{structEcPoint_ac53a6ff4888f818509027e37004635f5}{z}, 0) == 0)
+755    \{
+756       \textcolor{comment}{//Set R = T}
+757       \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_a30e6f6e9d6916d0bbe24d8b19559ac7f}{mpiCopy}(&r->\hyperlink{structEcPoint_a08f3fbb7a7d07607306bd8d6200629af}{x}, &t->\hyperlink{structEcPoint_a08f3fbb7a7d07607306bd8d6200629af}{x}));
+758       \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_a30e6f6e9d6916d0bbe24d8b19559ac7f}{mpiCopy}(&r->\hyperlink{structEcPoint_a2102dff813849bd0eaed8a1a5e64ec1f}{y}, &t->\hyperlink{structEcPoint_a2102dff813849bd0eaed8a1a5e64ec1f}{y}));
+759       \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_a30e6f6e9d6916d0bbe24d8b19559ac7f}{mpiCopy}(&r->\hyperlink{structEcPoint_ac53a6ff4888f818509027e37004635f5}{z}, &t->\hyperlink{structEcPoint_ac53a6ff4888f818509027e37004635f5}{z}));
+760    \}
+761    \textcolor{comment}{//Check whether Tz == 0}
+762    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(\hyperlink{mpi_8c_a46c2ff9f6fd5aa944ad4d41833ebef50}{mpiCompInt}(&t->\hyperlink{structEcPoint_ac53a6ff4888f818509027e37004635f5}{z}, 0) == 0)
+763    \{
+764       \textcolor{comment}{//Set R = S}
+765       \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_a30e6f6e9d6916d0bbe24d8b19559ac7f}{mpiCopy}(&r->\hyperlink{structEcPoint_a08f3fbb7a7d07607306bd8d6200629af}{x}, &s->\hyperlink{structEcPoint_a08f3fbb7a7d07607306bd8d6200629af}{x}));
+766       \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_a30e6f6e9d6916d0bbe24d8b19559ac7f}{mpiCopy}(&r->\hyperlink{structEcPoint_a2102dff813849bd0eaed8a1a5e64ec1f}{y}, &s->\hyperlink{structEcPoint_a2102dff813849bd0eaed8a1a5e64ec1f}{y}));
+767       \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_a30e6f6e9d6916d0bbe24d8b19559ac7f}{mpiCopy}(&r->\hyperlink{structEcPoint_ac53a6ff4888f818509027e37004635f5}{z}, &s->\hyperlink{structEcPoint_ac53a6ff4888f818509027e37004635f5}{z}));
+768    \}
+769    \textcolor{keywordflow}{else}
+770    \{
+771       \textcolor{comment}{//Compute R = S + T}
+772       \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_ab80471faaba5e47c99978028b755326a}{ecAdd}(params, r, s, t));
+773 
+774       \textcolor{comment}{//Check whether R == (0, 0, 0)}
+775       \textcolor{keywordflow}{if}(\hyperlink{mpi_8c_a46c2ff9f6fd5aa944ad4d41833ebef50}{mpiCompInt}(&r->\hyperlink{structEcPoint_a08f3fbb7a7d07607306bd8d6200629af}{x}, 0) == 0 &&
+776          \hyperlink{mpi_8c_a46c2ff9f6fd5aa944ad4d41833ebef50}{mpiCompInt}(&r->\hyperlink{structEcPoint_a2102dff813849bd0eaed8a1a5e64ec1f}{y}, 0) == 0 &&
+777          \hyperlink{mpi_8c_a46c2ff9f6fd5aa944ad4d41833ebef50}{mpiCompInt}(&r->\hyperlink{structEcPoint_ac53a6ff4888f818509027e37004635f5}{z}, 0) == 0)
+778       \{
+779          \textcolor{comment}{//Compute R = 2 * S}
+780          \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a75d1501e9dfae2897ec851ae9bb48461}{ecDouble}(params, r, s));
+781       \}
+782    \}
+783 
+784 end:
+785    \textcolor{comment}{//Return status code}
+786    \textcolor{keywordflow}{return} error;
+787 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ec_8c_a6e327968b5485882ef72833ad404323a}\label{ec_8c_a6e327968b5485882ef72833ad404323a}} 
+\index{ec.\+c@{ec.\+c}!ec\+Full\+Sub@{ec\+Full\+Sub}}
+\index{ec\+Full\+Sub@{ec\+Full\+Sub}!ec.\+c@{ec.\+c}}
+\subsubsection{\texorpdfstring{ec\+Full\+Sub()}{ecFullSub()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ec\+Full\+Sub (\begin{DoxyParamCaption}\item[{const \hyperlink{structEcDomainParameters}{Ec\+Domain\+Parameters} $\ast$}]{params,  }\item[{\hyperlink{structEcPoint}{Ec\+Point} $\ast$}]{r,  }\item[{const \hyperlink{structEcPoint}{Ec\+Point} $\ast$}]{s,  }\item[{const \hyperlink{structEcPoint}{Ec\+Point} $\ast$}]{t }\end{DoxyParamCaption})}
+
+
+
+Point subtraction. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em params} & EC domain parameters \\
+\hline
+\mbox{\tt out}  & {\em r} & Resulting point R = S -\/ T \\
+\hline
+\mbox{\tt in}  & {\em s} & First operand \\
+\hline
+\mbox{\tt in}  & {\em t} & Second operand \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 799 of file ec.\+c.
+
+
+\begin{DoxyCode}
+801 \{
+802    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+803    \hyperlink{structEcPoint}{EcPoint} u;
+804 
+805    \textcolor{comment}{//Initialize EC point}
+806    \hyperlink{ec_8c_ac038e67dcc04d6d94bb930f9475f3ff8}{ecInit}(&u);
+807 
+808    \textcolor{comment}{//Set Ux = Tx and Uz = Tz}
+809    \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_a30e6f6e9d6916d0bbe24d8b19559ac7f}{mpiCopy}(&u.\hyperlink{structEcPoint_a08f3fbb7a7d07607306bd8d6200629af}{x}, &t->\hyperlink{structEcPoint_a08f3fbb7a7d07607306bd8d6200629af}{x}));
+810    \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_a30e6f6e9d6916d0bbe24d8b19559ac7f}{mpiCopy}(&u.\hyperlink{structEcPoint_ac53a6ff4888f818509027e37004635f5}{z}, &t->\hyperlink{structEcPoint_ac53a6ff4888f818509027e37004635f5}{z}));
+811    \textcolor{comment}{//Set Uy = p - Ty}
+812    \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_a3bacb7d1ff434e94cc4c9fabbfcea3fe}{mpiSub}(&u.\hyperlink{structEcPoint_a2102dff813849bd0eaed8a1a5e64ec1f}{y}, &params->\hyperlink{structEcDomainParameters_a497e7494540878b966444dc4ad973cdc}{p}, &t->\hyperlink{structEcPoint_a2102dff813849bd0eaed8a1a5e64ec1f}{y}));
+813 
+814    \textcolor{comment}{//Compute R = S + U}
+815    \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a4d55abdf87bb84b25b5a0964d36c8296}{ecFullAdd}(params, r, s, &u));
+816 
+817 end:
+818    \textcolor{comment}{//Release EC point}
+819    \hyperlink{ec_8c_ae4a9276eac491f8acbb6d0916287411b}{ecFree}(&u);
+820 
+821    \textcolor{comment}{//Return status code}
+822    \textcolor{keywordflow}{return} error;
+823 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ec_8c_ae707a9a99979ce0b291ac6c0f8d380fd}\label{ec_8c_ae707a9a99979ce0b291ac6c0f8d380fd}} 
+\index{ec.\+c@{ec.\+c}!ec\+Import@{ec\+Import}}
+\index{ec\+Import@{ec\+Import}!ec.\+c@{ec.\+c}}
+\subsubsection{\texorpdfstring{ec\+Import()}{ecImport()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ec\+Import (\begin{DoxyParamCaption}\item[{const \hyperlink{structEcDomainParameters}{Ec\+Domain\+Parameters} $\ast$}]{params,  }\item[{\hyperlink{structEcPoint}{Ec\+Point} $\ast$}]{r,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{data,  }\item[{size\+\_\+t}]{length }\end{DoxyParamCaption})}
+
+
+
+Convert an octet string to an EC point. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em params} & EC domain parameters \\
+\hline
+\mbox{\tt out}  & {\em r} & EC point resulting from the conversion \\
+\hline
+\mbox{\tt in}  & {\em data} & Pointer to the octet string \\
+\hline
+\mbox{\tt in}  & {\em length} & Length of the octet string \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 214 of file ec.\+c.
+
+
+\begin{DoxyCode}
+216 \{
+217    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+218 
+219    \textcolor{comment}{//Montgomery or Edwards curve?}
+220    \textcolor{keywordflow}{if}(params->\hyperlink{structEcDomainParameters_a7e42fa63fdb0ee92990c05b0771ac383}{type} == \hyperlink{ec__curves_8h_af38fa6633c02444318870a309134ca21a305ec79ddded0b086f533321ece697b8}{EC\_CURVE\_TYPE\_X25519} ||
+221       params->\hyperlink{structEcDomainParameters_a7e42fa63fdb0ee92990c05b0771ac383}{type} == \hyperlink{ec__curves_8h_af38fa6633c02444318870a309134ca21a7610f3e0b5df86a629dd8d2f7f1ce4ef}{EC\_CURVE\_TYPE\_X448} ||
+222       params->\hyperlink{structEcDomainParameters_a7e42fa63fdb0ee92990c05b0771ac383}{type} == \hyperlink{ec__curves_8h_af38fa6633c02444318870a309134ca21a6455980db55e8a3cf891beddd08c0319}{EC\_CURVE\_TYPE\_ED25519} ||
+223       params->\hyperlink{structEcDomainParameters_a7e42fa63fdb0ee92990c05b0771ac383}{type} == \hyperlink{ec__curves_8h_af38fa6633c02444318870a309134ca21ab3f6074846d01c1bd8d1980ca9fc4a62}{EC\_CURVE\_TYPE\_ED448})
+224    \{
+225       \textcolor{comment}{//Empty octet string?}
+226       \textcolor{keywordflow}{if}(\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} == 0)
+227          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca152b24f57c941cb736772696416eb7c2}{ERROR\_ILLEGAL\_PARAMETER};
+228 
+229       \textcolor{comment}{//Check the length of the octet string}
+230       \textcolor{keywordflow}{if}((params->\hyperlink{structEcDomainParameters_a7e42fa63fdb0ee92990c05b0771ac383}{type} == \hyperlink{ec__curves_8h_af38fa6633c02444318870a309134ca21a305ec79ddded0b086f533321ece697b8}{EC\_CURVE\_TYPE\_X25519} && \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} != 
+      \hyperlink{curve25519_8h_acfa5fc6d5ea73b0a2efd5821d4412bde}{CURVE25519\_BYTE\_LEN}) ||
+231          (params->\hyperlink{structEcDomainParameters_a7e42fa63fdb0ee92990c05b0771ac383}{type} == \hyperlink{ec__curves_8h_af38fa6633c02444318870a309134ca21a7610f3e0b5df86a629dd8d2f7f1ce4ef}{EC\_CURVE\_TYPE\_X448} && \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} != 
+      \hyperlink{curve448_8h_a9352f9ae5f467c69283aa8bce8bf4d57}{CURVE448\_BYTE\_LEN}) ||
+232          (params->\hyperlink{structEcDomainParameters_a7e42fa63fdb0ee92990c05b0771ac383}{type} == \hyperlink{ec__curves_8h_af38fa6633c02444318870a309134ca21a6455980db55e8a3cf891beddd08c0319}{EC\_CURVE\_TYPE\_ED25519} && 
+      \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} != \hyperlink{ed25519_8h_a5fdd1f73dec2be868a8ed5d2e129bb5e}{ED25519\_PUBLIC\_KEY\_LEN}) ||
+233          (params->\hyperlink{structEcDomainParameters_a7e42fa63fdb0ee92990c05b0771ac383}{type} == \hyperlink{ec__curves_8h_af38fa6633c02444318870a309134ca21ab3f6074846d01c1bd8d1980ca9fc4a62}{EC\_CURVE\_TYPE\_ED448} && \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} != 
+      \hyperlink{ed448_8h_a452cd73807c6a5607ede7ba57cbc3e6a}{ED448\_PUBLIC\_KEY\_LEN}))
+234       \{
+235          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca152b24f57c941cb736772696416eb7c2}{ERROR\_ILLEGAL\_PARAMETER};
+236       \}
+237 
+238       \textcolor{comment}{//Convert the octet string to a multiple precision integer}
+239       error = \hyperlink{mpi_8c_a844d59498f4acce9d69ae55570b521f3}{mpiImport}(&r->\hyperlink{structEcPoint_a08f3fbb7a7d07607306bd8d6200629af}{x}, \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, 
+      \hyperlink{mpi_8h_a5fe4159c7c390c604067e854b41d337fa637c0a6e803a47db52875c6818674c60}{MPI\_FORMAT\_LITTLE\_ENDIAN});
+240       \textcolor{comment}{//Any error to report?}
+241       \textcolor{keywordflow}{if}(error)
+242          \textcolor{keywordflow}{return} error;
+243    \}
+244    \textcolor{comment}{//Weierstrass curve?}
+245    \textcolor{keywordflow}{else}
+246    \{
+247       \textcolor{keywordtype}{size\_t} \hyperlink{md5_8c_af11ea3cdbca7345eb6a4a8ac5ce0434d}{k};
+248 
+249       \textcolor{comment}{//Get the length in octets of the prime}
+250       k = \hyperlink{mpi_8c_a8599cb7537c854ae3b2442144c7f853b}{mpiGetByteLength}(&params->\hyperlink{structEcDomainParameters_a497e7494540878b966444dc4ad973cdc}{p});
+251 
+252       \textcolor{comment}{//Check the length of the octet string}
+253       \textcolor{keywordflow}{if}(\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} != (k * 2 + 1))
+254          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca9468adacac8c37004024dd0095ba2768}{ERROR\_DECODING\_FAILED};
+255 
+256       \textcolor{comment}{//Compressed point representation is not supported}
+257       \textcolor{keywordflow}{if}(\hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}[0] != 0x04)
+258          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca152b24f57c941cb736772696416eb7c2}{ERROR\_ILLEGAL\_PARAMETER};
+259 
+260       \textcolor{comment}{//Convert the x-coordinate to a multiple precision integer}
+261       error = \hyperlink{mpi_8c_a844d59498f4acce9d69ae55570b521f3}{mpiImport}(&r->\hyperlink{structEcPoint_a08f3fbb7a7d07607306bd8d6200629af}{x}, \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data} + 1, k, \hyperlink{mpi_8h_a5fe4159c7c390c604067e854b41d337fa0912b5922ecee206ec51e40d5285f77e}{MPI\_FORMAT\_BIG\_ENDIAN});
+262       \textcolor{comment}{//Any error to report?}
+263       \textcolor{keywordflow}{if}(error)
+264          \textcolor{keywordflow}{return} error;
+265 
+266       \textcolor{comment}{//Convert the y-coordinate to a multiple precision integer}
+267       error = \hyperlink{mpi_8c_a844d59498f4acce9d69ae55570b521f3}{mpiImport}(&r->\hyperlink{structEcPoint_a2102dff813849bd0eaed8a1a5e64ec1f}{y}, \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data} + k + 1, k, 
+      \hyperlink{mpi_8h_a5fe4159c7c390c604067e854b41d337fa0912b5922ecee206ec51e40d5285f77e}{MPI\_FORMAT\_BIG\_ENDIAN});
+268       \textcolor{comment}{//Any error to report?}
+269       \textcolor{keywordflow}{if}(error)
+270          \textcolor{keywordflow}{return} error;
+271    \}
+272 
+273    \textcolor{comment}{//Successful processing}
+274    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+275 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ec_8c_ac038e67dcc04d6d94bb930f9475f3ff8}\label{ec_8c_ac038e67dcc04d6d94bb930f9475f3ff8}} 
+\index{ec.\+c@{ec.\+c}!ec\+Init@{ec\+Init}}
+\index{ec\+Init@{ec\+Init}!ec.\+c@{ec.\+c}}
+\subsubsection{\texorpdfstring{ec\+Init()}{ecInit()}}
+{\footnotesize\ttfamily void ec\+Init (\begin{DoxyParamCaption}\item[{\hyperlink{structEcPoint}{Ec\+Point} $\ast$}]{r }\end{DoxyParamCaption})}
+
+
+
+Initialize elliptic curve point. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in,out}  & {\em r} & Pointer to the EC point to be initialized \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 156 of file ec.\+c.
+
+
+\begin{DoxyCode}
+157 \{
+158    \textcolor{comment}{//Initialize structure}
+159    \hyperlink{mpi_8c_a6f30959dcaabfb16e96cc47ef90515a6}{mpiInit}(&r->\hyperlink{structEcPoint_a08f3fbb7a7d07607306bd8d6200629af}{x});
+160    \hyperlink{mpi_8c_a6f30959dcaabfb16e96cc47ef90515a6}{mpiInit}(&r->\hyperlink{structEcPoint_a2102dff813849bd0eaed8a1a5e64ec1f}{y});
+161    \hyperlink{mpi_8c_a6f30959dcaabfb16e96cc47ef90515a6}{mpiInit}(&r->\hyperlink{structEcPoint_ac53a6ff4888f818509027e37004635f5}{z});
+162 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ec_8c_a5b5132fb8adf668ffa74ec10e7e63441}\label{ec_8c_a5b5132fb8adf668ffa74ec10e7e63441}} 
+\index{ec.\+c@{ec.\+c}!ec\+Init\+Domain\+Parameters@{ec\+Init\+Domain\+Parameters}}
+\index{ec\+Init\+Domain\+Parameters@{ec\+Init\+Domain\+Parameters}!ec.\+c@{ec.\+c}}
+\subsubsection{\texorpdfstring{ec\+Init\+Domain\+Parameters()}{ecInitDomainParameters()}}
+{\footnotesize\ttfamily void ec\+Init\+Domain\+Parameters (\begin{DoxyParamCaption}\item[{\hyperlink{structEcDomainParameters}{Ec\+Domain\+Parameters} $\ast$}]{params }\end{DoxyParamCaption})}
+
+
+
+Initialize EC domain parameters. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em params} & Pointer to the EC domain parameters to be initialized \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 55 of file ec.\+c.
+
+
+\begin{DoxyCode}
+56 \{
+57    \textcolor{comment}{//Initialize structure}
+58    params->\hyperlink{structEcDomainParameters_a7e42fa63fdb0ee92990c05b0771ac383}{type} = \hyperlink{ec__curves_8h_af38fa6633c02444318870a309134ca21aabe1282340885d34824de0b89adc9c48}{EC\_CURVE\_TYPE\_NONE};
+59    params->\hyperlink{structEcDomainParameters_a88e9a1b0adf5894df971c30383402160}{mod} = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+60 
+61    \textcolor{comment}{//Initialize EC domain parameters}
+62    \hyperlink{mpi_8c_a6f30959dcaabfb16e96cc47ef90515a6}{mpiInit}(&params->\hyperlink{structEcDomainParameters_a497e7494540878b966444dc4ad973cdc}{p});
+63    \hyperlink{mpi_8c_a6f30959dcaabfb16e96cc47ef90515a6}{mpiInit}(&params->\hyperlink{structEcDomainParameters_a108755e9eeb457a4df867816ee795589}{a});
+64    \hyperlink{mpi_8c_a6f30959dcaabfb16e96cc47ef90515a6}{mpiInit}(&params->\hyperlink{structEcDomainParameters_a13b11f7ebb928f2407abb4ce5b40fffd}{b});
+65    \hyperlink{ec_8c_ac038e67dcc04d6d94bb930f9475f3ff8}{ecInit}(&params->\hyperlink{structEcDomainParameters_a48b4ef67c6d94e7be182ae6b73708511}{g});
+66    \hyperlink{mpi_8c_a6f30959dcaabfb16e96cc47ef90515a6}{mpiInit}(&params->\hyperlink{structEcDomainParameters_afcdd8e7ec1aa29476df4e2ae13882a12}{q});
+67 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ec_8c_a40e3e0d1c6641c70cc4320ce009ceeaf}\label{ec_8c_a40e3e0d1c6641c70cc4320ce009ceeaf}} 
+\index{ec.\+c@{ec.\+c}!ec\+Is\+Point\+Affine@{ec\+Is\+Point\+Affine}}
+\index{ec\+Is\+Point\+Affine@{ec\+Is\+Point\+Affine}!ec.\+c@{ec.\+c}}
+\subsubsection{\texorpdfstring{ec\+Is\+Point\+Affine()}{ecIsPointAffine()}}
+{\footnotesize\ttfamily \+\_\+\+\_\+weak \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} ec\+Is\+Point\+Affine (\begin{DoxyParamCaption}\item[{const \hyperlink{structEcDomainParameters}{Ec\+Domain\+Parameters} $\ast$}]{params,  }\item[{const \hyperlink{structEcPoint}{Ec\+Point} $\ast$}]{s }\end{DoxyParamCaption})}
+
+
+
+Check whether the affine point S is on the curve. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em params} & EC domain parameters \\
+\hline
+\mbox{\tt in}  & {\em s} & Affine representation of the point \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+T\+R\+UE if the affine point S is on the curve, else F\+A\+L\+SE 
+\end{DoxyReturn}
+
+
+Definition at line 414 of file ec.\+c.
+
+
+\begin{DoxyCode}
+415 \{
+416    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+417    \hyperlink{structMpi}{Mpi} \hyperlink{tiger_8c_a5017152cac85e29a2dc5d8d74de9e07c}{t1};
+418    \hyperlink{structMpi}{Mpi} \hyperlink{tiger_8c_a42a80c4c472115c0fcb04a076526ecf5}{t2};
+419 
+420    \textcolor{comment}{//Initialize multiple precision integers}
+421    \hyperlink{mpi_8c_a6f30959dcaabfb16e96cc47ef90515a6}{mpiInit}(&t1);
+422    \hyperlink{mpi_8c_a6f30959dcaabfb16e96cc47ef90515a6}{mpiInit}(&t2);
+423 
+424    \textcolor{comment}{//Compute t1 = (Sx^3 + a * Sx + b) mod p}
+425    \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a59c2a59af5fe95bee820036bc29edc1d}{ecSqrMod}(params, &t1, &s->\hyperlink{structEcPoint_a08f3fbb7a7d07607306bd8d6200629af}{x}));
+426    \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a1c5ac36557b7e70473a2b4aadfea347c}{ecMulMod}(params, &t1, &t1, &s->\hyperlink{structEcPoint_a08f3fbb7a7d07607306bd8d6200629af}{x}));
+427    \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a1c5ac36557b7e70473a2b4aadfea347c}{ecMulMod}(params, &t2, &params->\hyperlink{structEcDomainParameters_a108755e9eeb457a4df867816ee795589}{a}, &s->\hyperlink{structEcPoint_a08f3fbb7a7d07607306bd8d6200629af}{x}));
+428    \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a55f344223a6872a35df2c1033ef62f97}{ecAddMod}(params, &t1, &t1, &t2));
+429    \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a55f344223a6872a35df2c1033ef62f97}{ecAddMod}(params, &t1, &t1, &params->\hyperlink{structEcDomainParameters_a13b11f7ebb928f2407abb4ce5b40fffd}{b}));
+430 
+431    \textcolor{comment}{//Compute t2 = Sy^2}
+432    \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a59c2a59af5fe95bee820036bc29edc1d}{ecSqrMod}(params, &t2, &s->\hyperlink{structEcPoint_a2102dff813849bd0eaed8a1a5e64ec1f}{y}));
+433 
+434    \textcolor{comment}{//Check whether the point is on the elliptic curve}
+435    \textcolor{keywordflow}{if}(\hyperlink{mpi_8c_a54cf7aedd99e130971849eb21eb578c9}{mpiComp}(&t1, &t2) != 0)
+436       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cae9be6449970fca5714ab9957b16562a5}{ERROR\_FAILURE};
+437 
+438 end:
+439    \textcolor{comment}{//Release multiple precision integers}
+440    \hyperlink{mpi_8c_a9dc5be2f62d37d3854fa61beab3a61ad}{mpiFree}(&t1);
+441    \hyperlink{mpi_8c_a9dc5be2f62d37d3854fa61beab3a61ad}{mpiFree}(&t2);
+442 
+443    \textcolor{comment}{//Return TRUE if the affine point S is on the curve, else FALSE}
+444    \textcolor{keywordflow}{return} error ? \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE} : \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+445 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ec_8c_ab3d7ebcb8fd2e79990ef25e39a68f4a5}\label{ec_8c_ab3d7ebcb8fd2e79990ef25e39a68f4a5}} 
+\index{ec.\+c@{ec.\+c}!ec\+Load\+Domain\+Parameters@{ec\+Load\+Domain\+Parameters}}
+\index{ec\+Load\+Domain\+Parameters@{ec\+Load\+Domain\+Parameters}!ec.\+c@{ec.\+c}}
+\subsubsection{\texorpdfstring{ec\+Load\+Domain\+Parameters()}{ecLoadDomainParameters()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ec\+Load\+Domain\+Parameters (\begin{DoxyParamCaption}\item[{\hyperlink{structEcDomainParameters}{Ec\+Domain\+Parameters} $\ast$}]{params,  }\item[{const \hyperlink{structEcCurveInfo}{Ec\+Curve\+Info} $\ast$}]{curve\+Info }\end{DoxyParamCaption})}
+
+
+
+Load EC domain parameters. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em params} & Pointer to the structure to be initialized \\
+\hline
+\mbox{\tt in}  & {\em curve\+Info} & Elliptic curve parameters \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 93 of file ec.\+c.
+
+
+\begin{DoxyCode}
+95 \{
+96    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+97 
+98    \textcolor{comment}{//Check parameters}
+99    \textcolor{keywordflow}{if}(params == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || curveInfo == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+100       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+101 
+102    \textcolor{comment}{//Debug message}
+103    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"Loading %s EC domain parameters...\(\backslash\)r\(\backslash\)n"}, curveInfo->
+      \hyperlink{structEcCurveInfo_a8847f30d2d0c15ae97fe291f1be401f8}{name});
+104 
+105    \textcolor{comment}{//Curve name}
+106    params->\hyperlink{structEcDomainParameters_ae21c1086132f9773bf0be4d23592a297}{name} = curveInfo->\hyperlink{structEcCurveInfo_a8847f30d2d0c15ae97fe291f1be401f8}{name};
+107    \textcolor{comment}{//Curve type}
+108    params->\hyperlink{structEcDomainParameters_a7e42fa63fdb0ee92990c05b0771ac383}{type} = curveInfo->\hyperlink{structEcCurveInfo_a66a3a3b5efc82c97fd1f3aaa83d6aed6}{type};
+109 
+110    \textcolor{comment}{//Import prime modulus}
+111    \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{crypto__legacy_8h_abcebe7f916d9073a85492596ec3924fa}{mpiReadRaw}(&params->\hyperlink{structEcDomainParameters_a497e7494540878b966444dc4ad973cdc}{p}, curveInfo->\hyperlink{structEcCurveInfo_adf2630219e7e7fba803e3495da250f63}{p}, curveInfo->
+      \hyperlink{structEcCurveInfo_ab2badb15f033fc37e697df9247635126}{pLen}));
+112    \textcolor{comment}{//Import parameter a}
+113    \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{crypto__legacy_8h_abcebe7f916d9073a85492596ec3924fa}{mpiReadRaw}(&params->\hyperlink{structEcDomainParameters_a108755e9eeb457a4df867816ee795589}{a}, curveInfo->\hyperlink{structEcCurveInfo_a6e4de3331be25436f89db95c81ff67fd}{a}, curveInfo->
+      \hyperlink{structEcCurveInfo_a24c49b1312a87d743b431a9bcd034a82}{aLen}));
+114    \textcolor{comment}{//Import parameter b}
+115    \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{crypto__legacy_8h_abcebe7f916d9073a85492596ec3924fa}{mpiReadRaw}(&params->\hyperlink{structEcDomainParameters_a13b11f7ebb928f2407abb4ce5b40fffd}{b}, curveInfo->\hyperlink{structEcCurveInfo_a1ccd0b43cdda7f8796588bcd4c8667ce}{b}, curveInfo->
+      \hyperlink{structEcCurveInfo_a72ad006f6cca9613a1e50efe29191cf6}{bLen}));
+116    \textcolor{comment}{//Import the x-coordinate of the base point G}
+117    \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{crypto__legacy_8h_abcebe7f916d9073a85492596ec3924fa}{mpiReadRaw}(&params->\hyperlink{structEcDomainParameters_a48b4ef67c6d94e7be182ae6b73708511}{g}.\hyperlink{structEcPoint_a08f3fbb7a7d07607306bd8d6200629af}{x}, curveInfo->\hyperlink{structEcCurveInfo_af597b54fc23acc8720b3e3437a02fe97}{gx}, curveInfo->
+      \hyperlink{structEcCurveInfo_a07f921dede7646b015a3c5f6f439561c}{gxLen}));
+118    \textcolor{comment}{//Import the y-coordinate of the base point G}
+119    \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{crypto__legacy_8h_abcebe7f916d9073a85492596ec3924fa}{mpiReadRaw}(&params->\hyperlink{structEcDomainParameters_a48b4ef67c6d94e7be182ae6b73708511}{g}.\hyperlink{structEcPoint_a2102dff813849bd0eaed8a1a5e64ec1f}{y}, curveInfo->\hyperlink{structEcCurveInfo_ae82180f4fb48879aed2d8939c004fc3d}{gy}, curveInfo->
+      \hyperlink{structEcCurveInfo_a1ea7f1fc164a055dcd9a03f2112486b2}{gyLen}));
+120    \textcolor{comment}{//Import base point order q}
+121    \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{crypto__legacy_8h_abcebe7f916d9073a85492596ec3924fa}{mpiReadRaw}(&params->\hyperlink{structEcDomainParameters_afcdd8e7ec1aa29476df4e2ae13882a12}{q}, curveInfo->\hyperlink{structEcCurveInfo_a96cbcc6f7b443a7861db66ab2fdddd9b}{q}, curveInfo->
+      \hyperlink{structEcCurveInfo_a262db34150bfda44566a0e8c87ca80c5}{qLen}));
+122 
+123    \textcolor{comment}{//Normalize base point G}
+124    \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_a1d8c5bea2b4bb91935654c4e9d05579f}{mpiSetValue}(&params->\hyperlink{structEcDomainParameters_a48b4ef67c6d94e7be182ae6b73708511}{g}.\hyperlink{structEcPoint_ac53a6ff4888f818509027e37004635f5}{z}, 1));
+125 
+126    \textcolor{comment}{//Cofactor h}
+127    params->\hyperlink{structEcDomainParameters_a1dce92caa10cbc17456426098ff7faea}{h} = curveInfo->\hyperlink{structEcCurveInfo_acea935f64165e9ebb37c0c602d5767f5}{h};
+128    \textcolor{comment}{//Fast modular reduction}
+129    params->\hyperlink{structEcDomainParameters_a88e9a1b0adf5894df971c30383402160}{mod} = curveInfo->\hyperlink{structEcCurveInfo_af6ef70c1bdd9cdd65c9a4f1424a328ef}{mod};
+130 
+131    \textcolor{comment}{//Debug message}
+132    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  p:\(\backslash\)r\(\backslash\)n"});
+133    \hyperlink{debug_8h_a9c9f3b28f2daf14d77b401512c189d93}{TRACE\_DEBUG\_MPI}(\textcolor{stringliteral}{"    "}, &params->\hyperlink{structEcDomainParameters_a497e7494540878b966444dc4ad973cdc}{p});
+134    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  a:\(\backslash\)r\(\backslash\)n"});
+135    \hyperlink{debug_8h_a9c9f3b28f2daf14d77b401512c189d93}{TRACE\_DEBUG\_MPI}(\textcolor{stringliteral}{"    "}, &params->\hyperlink{structEcDomainParameters_a108755e9eeb457a4df867816ee795589}{a});
+136    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  b:\(\backslash\)r\(\backslash\)n"});
+137    \hyperlink{debug_8h_a9c9f3b28f2daf14d77b401512c189d93}{TRACE\_DEBUG\_MPI}(\textcolor{stringliteral}{"    "}, &params->\hyperlink{structEcDomainParameters_a13b11f7ebb928f2407abb4ce5b40fffd}{b});
+138    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  Gx:\(\backslash\)r\(\backslash\)n"});
+139    \hyperlink{debug_8h_a9c9f3b28f2daf14d77b401512c189d93}{TRACE\_DEBUG\_MPI}(\textcolor{stringliteral}{"    "}, &params->\hyperlink{structEcDomainParameters_a48b4ef67c6d94e7be182ae6b73708511}{g}.\hyperlink{structEcPoint_a08f3fbb7a7d07607306bd8d6200629af}{x});
+140    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  Gy:\(\backslash\)r\(\backslash\)n"});
+141    \hyperlink{debug_8h_a9c9f3b28f2daf14d77b401512c189d93}{TRACE\_DEBUG\_MPI}(\textcolor{stringliteral}{"    "}, &params->\hyperlink{structEcDomainParameters_a48b4ef67c6d94e7be182ae6b73708511}{g}.\hyperlink{structEcPoint_a2102dff813849bd0eaed8a1a5e64ec1f}{y});
+142    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  q:\(\backslash\)r\(\backslash\)n"});
+143    \hyperlink{debug_8h_a9c9f3b28f2daf14d77b401512c189d93}{TRACE\_DEBUG\_MPI}(\textcolor{stringliteral}{"    "}, &params->\hyperlink{structEcDomainParameters_afcdd8e7ec1aa29476df4e2ae13882a12}{q});
+144 
+145 end:
+146    \textcolor{comment}{//Return status code}
+147    \textcolor{keywordflow}{return} error;
+148 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ec_8c_a1c5ac36557b7e70473a2b4aadfea347c}\label{ec_8c_a1c5ac36557b7e70473a2b4aadfea347c}} 
+\index{ec.\+c@{ec.\+c}!ec\+Mul\+Mod@{ec\+Mul\+Mod}}
+\index{ec\+Mul\+Mod@{ec\+Mul\+Mod}!ec.\+c@{ec.\+c}}
+\subsubsection{\texorpdfstring{ec\+Mul\+Mod()}{ecMulMod()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ec\+Mul\+Mod (\begin{DoxyParamCaption}\item[{const \hyperlink{structEcDomainParameters}{Ec\+Domain\+Parameters} $\ast$}]{params,  }\item[{\hyperlink{structMpi}{Mpi} $\ast$}]{r,  }\item[{const \hyperlink{structMpi}{Mpi} $\ast$}]{a,  }\item[{const \hyperlink{structMpi}{Mpi} $\ast$}]{b }\end{DoxyParamCaption})}
+
+
+
+Fast modular multiplication. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em params} & EC domain parameters \\
+\hline
+\mbox{\tt out}  & {\em r} & Resulting integer R = (A $\ast$ B) mod p \\
+\hline
+\mbox{\tt in}  & {\em a} & An integer such as 0 $<$= A $<$ p \\
+\hline
+\mbox{\tt in}  & {\em b} & An integer such as 0 $<$= B $<$ p \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 1212 of file ec.\+c.
+
+
+\begin{DoxyCode}
+1214 \{
+1215    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+1216 
+1217    \textcolor{comment}{//Compute R = A * B}
+1218    \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{samd51__crypto__pukcc_8c_a5ce82adaded4af385feef6b79aaad6d2}{mpiMul}(r, a, b));
+1219 
+1220    \textcolor{comment}{//Compute R = (A * B) mod p}
+1221    \textcolor{keywordflow}{if}(params->\hyperlink{structEcDomainParameters_a88e9a1b0adf5894df971c30383402160}{mod} != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1222    \{
+1223       \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(params->\hyperlink{structEcDomainParameters_a88e9a1b0adf5894df971c30383402160}{mod}(r, &params->\hyperlink{structEcDomainParameters_a497e7494540878b966444dc4ad973cdc}{p}));
+1224    \}
+1225    \textcolor{keywordflow}{else}
+1226    \{
+1227       \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_ac1ddf7a0ceb3cb9c2490edaef9878bf9}{mpiMod}(r, r, &params->\hyperlink{structEcDomainParameters_a497e7494540878b966444dc4ad973cdc}{p}));
+1228    \}
+1229 
+1230 end:
+1231    \textcolor{comment}{//Return status code}
+1232    \textcolor{keywordflow}{return} error;
+1233 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ec_8c_adfdc61723278833b0c8cecbb10185233}\label{ec_8c_adfdc61723278833b0c8cecbb10185233}} 
+\index{ec.\+c@{ec.\+c}!ec\+Mult@{ec\+Mult}}
+\index{ec\+Mult@{ec\+Mult}!ec.\+c@{ec.\+c}}
+\subsubsection{\texorpdfstring{ec\+Mult()}{ecMult()}}
+{\footnotesize\ttfamily \+\_\+\+\_\+weak \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ec\+Mult (\begin{DoxyParamCaption}\item[{const \hyperlink{structEcDomainParameters}{Ec\+Domain\+Parameters} $\ast$}]{params,  }\item[{\hyperlink{structEcPoint}{Ec\+Point} $\ast$}]{r,  }\item[{const \hyperlink{structMpi}{Mpi} $\ast$}]{d,  }\item[{const \hyperlink{structEcPoint}{Ec\+Point} $\ast$}]{s }\end{DoxyParamCaption})}
+
+
+
+Scalar multiplication. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em params} & EC domain parameters \\
+\hline
+\mbox{\tt out}  & {\em r} & Resulting point R = d.\+S \\
+\hline
+\mbox{\tt in}  & {\em d} & An integer d such as 0 $<$= d $<$ p \\
+\hline
+\mbox{\tt in}  & {\em s} & EC point \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 835 of file ec.\+c.
+
+
+\begin{DoxyCode}
+837 \{
+838    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+839    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+840    \hyperlink{structMpi}{Mpi} \hyperlink{ndp_8h_a1f1dfeb2f802fe99f37fe91867b84456}{h};
+841 
+842    \textcolor{comment}{//Initialize multiple precision integer}
+843    \hyperlink{mpi_8c_a6f30959dcaabfb16e96cc47ef90515a6}{mpiInit}(&h);
+844 
+845    \textcolor{comment}{//Check whether d == 0}
+846    \textcolor{keywordflow}{if}(\hyperlink{mpi_8c_a46c2ff9f6fd5aa944ad4d41833ebef50}{mpiCompInt}(d, 0) == 0)
+847    \{
+848       \textcolor{comment}{//Set R = (1, 1, 0)}
+849       \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_a1d8c5bea2b4bb91935654c4e9d05579f}{mpiSetValue}(&r->\hyperlink{structEcPoint_a08f3fbb7a7d07607306bd8d6200629af}{x}, 1));
+850       \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_a1d8c5bea2b4bb91935654c4e9d05579f}{mpiSetValue}(&r->\hyperlink{structEcPoint_a2102dff813849bd0eaed8a1a5e64ec1f}{y}, 1));
+851       \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_a1d8c5bea2b4bb91935654c4e9d05579f}{mpiSetValue}(&r->\hyperlink{structEcPoint_ac53a6ff4888f818509027e37004635f5}{z}, 0));
+852    \}
+853    \textcolor{comment}{//Check whether d == 1}
+854    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(\hyperlink{mpi_8c_a46c2ff9f6fd5aa944ad4d41833ebef50}{mpiCompInt}(d, 1) == 0)
+855    \{
+856       \textcolor{comment}{//Set R = S}
+857       \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_a30e6f6e9d6916d0bbe24d8b19559ac7f}{mpiCopy}(&r->\hyperlink{structEcPoint_a08f3fbb7a7d07607306bd8d6200629af}{x}, &s->\hyperlink{structEcPoint_a08f3fbb7a7d07607306bd8d6200629af}{x}));
+858       \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_a30e6f6e9d6916d0bbe24d8b19559ac7f}{mpiCopy}(&r->\hyperlink{structEcPoint_a2102dff813849bd0eaed8a1a5e64ec1f}{y}, &s->\hyperlink{structEcPoint_a2102dff813849bd0eaed8a1a5e64ec1f}{y}));
+859       \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_a30e6f6e9d6916d0bbe24d8b19559ac7f}{mpiCopy}(&r->\hyperlink{structEcPoint_ac53a6ff4888f818509027e37004635f5}{z}, &s->\hyperlink{structEcPoint_ac53a6ff4888f818509027e37004635f5}{z}));
+860    \}
+861    \textcolor{comment}{//Check whether Sz == 0}
+862    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(\hyperlink{mpi_8c_a46c2ff9f6fd5aa944ad4d41833ebef50}{mpiCompInt}(&s->\hyperlink{structEcPoint_ac53a6ff4888f818509027e37004635f5}{z}, 0) == 0)
+863    \{
+864       \textcolor{comment}{//Set R = (1, 1, 0)}
+865       \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_a1d8c5bea2b4bb91935654c4e9d05579f}{mpiSetValue}(&r->\hyperlink{structEcPoint_a08f3fbb7a7d07607306bd8d6200629af}{x}, 1));
+866       \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_a1d8c5bea2b4bb91935654c4e9d05579f}{mpiSetValue}(&r->\hyperlink{structEcPoint_a2102dff813849bd0eaed8a1a5e64ec1f}{y}, 1));
+867       \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_a1d8c5bea2b4bb91935654c4e9d05579f}{mpiSetValue}(&r->\hyperlink{structEcPoint_ac53a6ff4888f818509027e37004635f5}{z}, 0));
+868    \}
+869    \textcolor{keywordflow}{else}
+870    \{
+871       \textcolor{comment}{//Check whether Sz != 1}
+872       \textcolor{keywordflow}{if}(\hyperlink{mpi_8c_a46c2ff9f6fd5aa944ad4d41833ebef50}{mpiCompInt}(&s->\hyperlink{structEcPoint_ac53a6ff4888f818509027e37004635f5}{z}, 1) != 0)
+873       \{
+874          \textcolor{comment}{//Normalize S}
+875          \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_af156298aca268c06f7708d4c4d700757}{ecAffinify}(params, r, s));
+876          \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a1dbdfb4f5689eb88092fa08bc50eda00}{ecProjectify}(params, r, r));
+877       \}
+878       \textcolor{keywordflow}{else}
+879       \{
+880          \textcolor{comment}{//Set R = S}
+881          \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_a30e6f6e9d6916d0bbe24d8b19559ac7f}{mpiCopy}(&r->\hyperlink{structEcPoint_a08f3fbb7a7d07607306bd8d6200629af}{x}, &s->\hyperlink{structEcPoint_a08f3fbb7a7d07607306bd8d6200629af}{x}));
+882          \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_a30e6f6e9d6916d0bbe24d8b19559ac7f}{mpiCopy}(&r->\hyperlink{structEcPoint_a2102dff813849bd0eaed8a1a5e64ec1f}{y}, &s->\hyperlink{structEcPoint_a2102dff813849bd0eaed8a1a5e64ec1f}{y}));
+883          \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_a30e6f6e9d6916d0bbe24d8b19559ac7f}{mpiCopy}(&r->\hyperlink{structEcPoint_ac53a6ff4888f818509027e37004635f5}{z}, &s->\hyperlink{structEcPoint_ac53a6ff4888f818509027e37004635f5}{z}));
+884       \}
+885 
+886 \textcolor{comment}{//Left-to-right binary method}
+887 \textcolor{preprocessor}{#if 0}
+888       \textcolor{keywordflow}{for}(i = \hyperlink{mpi_8c_a2e540eb4b5d15ea9755fb3e138990c1c}{mpiGetBitLength}(d) - 1; i >= 1; i--)
+889       \{
+890          \textcolor{comment}{//Point doubling}
+891          \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a75d1501e9dfae2897ec851ae9bb48461}{ecDouble}(params, r, r));
+892 
+893          \textcolor{keywordflow}{if}(\hyperlink{mpi_8c_ad62c1f7143a1cc46b080bea217f20ede}{mpiGetBitValue}(d, i - 1))
+894          \{
+895             \textcolor{comment}{//Compute R = R + S}
+896             \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a4d55abdf87bb84b25b5a0964d36c8296}{ecFullAdd}(params, r, r, s));
+897          \}
+898       \}
+899 \textcolor{comment}{//Fast left-to-right binary method}
+900 \textcolor{preprocessor}{#else}
+901       \textcolor{comment}{//Precompute h = 3 * d}
+902       \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_abd7700302eaf9c1a7929b0d4362f43a5}{mpiAdd}(&h, d, d));
+903       \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_abd7700302eaf9c1a7929b0d4362f43a5}{mpiAdd}(&h, &h, d));
+904 
+905       \textcolor{comment}{//Scalar multiplication}
+906       \textcolor{keywordflow}{for}(i = \hyperlink{mpi_8c_a2e540eb4b5d15ea9755fb3e138990c1c}{mpiGetBitLength}(&h) - 2; i >= 1; i--)
+907       \{
+908          \textcolor{comment}{//Point doubling}
+909          \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a75d1501e9dfae2897ec851ae9bb48461}{ecDouble}(params, r, r));
+910 
+911          \textcolor{comment}{//Check whether h(i) == 1 and k(i) == 0}
+912          \textcolor{keywordflow}{if}(\hyperlink{mpi_8c_ad62c1f7143a1cc46b080bea217f20ede}{mpiGetBitValue}(&h, i) && !\hyperlink{mpi_8c_ad62c1f7143a1cc46b080bea217f20ede}{mpiGetBitValue}(d, i))
+913          \{
+914             \textcolor{comment}{//Compute R = R + S}
+915             \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a4d55abdf87bb84b25b5a0964d36c8296}{ecFullAdd}(params, r, r, s));
+916          \}
+917          \textcolor{comment}{//Check whether h(i) == 0 and k(i) == 1}
+918          \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!\hyperlink{mpi_8c_ad62c1f7143a1cc46b080bea217f20ede}{mpiGetBitValue}(&h, i) && \hyperlink{mpi_8c_ad62c1f7143a1cc46b080bea217f20ede}{mpiGetBitValue}(d, i))
+919          \{
+920             \textcolor{comment}{//Compute R = R - S}
+921             \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a6e327968b5485882ef72833ad404323a}{ecFullSub}(params, r, r, s));
+922          \}
+923       \}
+924 \textcolor{preprocessor}{#endif}
+925    \}
+926 
+927 end:
+928    \textcolor{comment}{//Release multiple precision integer}
+929    \hyperlink{mpi_8c_a9dc5be2f62d37d3854fa61beab3a61ad}{mpiFree}(&h);
+930 
+931    \textcolor{comment}{//Return status code}
+932    \textcolor{keywordflow}{return} error;
+933 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ec_8c_a1dbdfb4f5689eb88092fa08bc50eda00}\label{ec_8c_a1dbdfb4f5689eb88092fa08bc50eda00}} 
+\index{ec.\+c@{ec.\+c}!ec\+Projectify@{ec\+Projectify}}
+\index{ec\+Projectify@{ec\+Projectify}!ec.\+c@{ec.\+c}}
+\subsubsection{\texorpdfstring{ec\+Projectify()}{ecProjectify()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ec\+Projectify (\begin{DoxyParamCaption}\item[{const \hyperlink{structEcDomainParameters}{Ec\+Domain\+Parameters} $\ast$}]{params,  }\item[{\hyperlink{structEcPoint}{Ec\+Point} $\ast$}]{r,  }\item[{const \hyperlink{structEcPoint}{Ec\+Point} $\ast$}]{s }\end{DoxyParamCaption})}
+
+
+
+Compute projective representation. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em params} & EC domain parameters \\
+\hline
+\mbox{\tt out}  & {\em r} & Projective representation of the point \\
+\hline
+\mbox{\tt in}  & {\em s} & Affine representation of the point \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 344 of file ec.\+c.
+
+
+\begin{DoxyCode}
+346 \{
+347    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+348 
+349    \textcolor{comment}{//Copy point}
+350    \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a5dfb5a020cc8692d1eb137cd3c794913}{ecCopy}(r, s));
+351    \textcolor{comment}{//Map the point to projective space}
+352    \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_a1d8c5bea2b4bb91935654c4e9d05579f}{mpiSetValue}(&r->\hyperlink{structEcPoint_ac53a6ff4888f818509027e37004635f5}{z}, 1));
+353 
+354 end:
+355    \textcolor{comment}{//Return status code}
+356    \textcolor{keywordflow}{return} error;
+357 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ec_8c_a59c2a59af5fe95bee820036bc29edc1d}\label{ec_8c_a59c2a59af5fe95bee820036bc29edc1d}} 
+\index{ec.\+c@{ec.\+c}!ec\+Sqr\+Mod@{ec\+Sqr\+Mod}}
+\index{ec\+Sqr\+Mod@{ec\+Sqr\+Mod}!ec.\+c@{ec.\+c}}
+\subsubsection{\texorpdfstring{ec\+Sqr\+Mod()}{ecSqrMod()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ec\+Sqr\+Mod (\begin{DoxyParamCaption}\item[{const \hyperlink{structEcDomainParameters}{Ec\+Domain\+Parameters} $\ast$}]{params,  }\item[{\hyperlink{structMpi}{Mpi} $\ast$}]{r,  }\item[{const \hyperlink{structMpi}{Mpi} $\ast$}]{a }\end{DoxyParamCaption})}
+
+
+
+Fast modular squaring. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em params} & EC domain parameters \\
+\hline
+\mbox{\tt out}  & {\em r} & Resulting integer R = (A $^\wedge$ 2) mod p \\
+\hline
+\mbox{\tt in}  & {\em a} & An integer such as 0 $<$= A $<$ p \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 1244 of file ec.\+c.
+
+
+\begin{DoxyCode}
+1245 \{
+1246    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+1247 
+1248    \textcolor{comment}{//Compute R = A ^ 2}
+1249    \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{samd51__crypto__pukcc_8c_a5ce82adaded4af385feef6b79aaad6d2}{mpiMul}(r, a, a));
+1250 
+1251    \textcolor{comment}{//Compute R = (A ^ 2) mod p}
+1252    \textcolor{keywordflow}{if}(params->\hyperlink{structEcDomainParameters_a88e9a1b0adf5894df971c30383402160}{mod} != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1253    \{
+1254       \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(params->\hyperlink{structEcDomainParameters_a88e9a1b0adf5894df971c30383402160}{mod}(r, &params->\hyperlink{structEcDomainParameters_a497e7494540878b966444dc4ad973cdc}{p}));
+1255    \}
+1256    \textcolor{keywordflow}{else}
+1257    \{
+1258       \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_ac1ddf7a0ceb3cb9c2490edaef9878bf9}{mpiMod}(r, r, &params->\hyperlink{structEcDomainParameters_a497e7494540878b966444dc4ad973cdc}{p}));
+1259    \}
+1260 
+1261 end:
+1262    \textcolor{comment}{//Return status code}
+1263    \textcolor{keywordflow}{return} error;
+1264 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ec_8c_a0925285feb2a8347e1f3a762e0b80c48}\label{ec_8c_a0925285feb2a8347e1f3a762e0b80c48}} 
+\index{ec.\+c@{ec.\+c}!ec\+Sub\+Mod@{ec\+Sub\+Mod}}
+\index{ec\+Sub\+Mod@{ec\+Sub\+Mod}!ec.\+c@{ec.\+c}}
+\subsubsection{\texorpdfstring{ec\+Sub\+Mod()}{ecSubMod()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ec\+Sub\+Mod (\begin{DoxyParamCaption}\item[{const \hyperlink{structEcDomainParameters}{Ec\+Domain\+Parameters} $\ast$}]{params,  }\item[{\hyperlink{structMpi}{Mpi} $\ast$}]{r,  }\item[{const \hyperlink{structMpi}{Mpi} $\ast$}]{a,  }\item[{const \hyperlink{structMpi}{Mpi} $\ast$}]{b }\end{DoxyParamCaption})}
+
+
+
+Fast modular subtraction. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em params} & EC domain parameters \\
+\hline
+\mbox{\tt out}  & {\em r} & Resulting integer R = (A -\/ B) mod p \\
+\hline
+\mbox{\tt in}  & {\em a} & An integer such as 0 $<$= A $<$ p \\
+\hline
+\mbox{\tt in}  & {\em b} & An integer such as 0 $<$= B $<$ p \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 1183 of file ec.\+c.
+
+
+\begin{DoxyCode}
+1185 \{
+1186    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+1187 
+1188    \textcolor{comment}{//Compute R = A - B}
+1189    \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_a3bacb7d1ff434e94cc4c9fabbfcea3fe}{mpiSub}(r, a, b));
+1190 
+1191    \textcolor{comment}{//Compute R = (A - B) mod p}
+1192    \textcolor{keywordflow}{if}(\hyperlink{mpi_8c_a46c2ff9f6fd5aa944ad4d41833ebef50}{mpiCompInt}(r, 0) < 0)
+1193    \{
+1194       \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_abd7700302eaf9c1a7929b0d4362f43a5}{mpiAdd}(r, r, &params->\hyperlink{structEcDomainParameters_a497e7494540878b966444dc4ad973cdc}{p}));
+1195    \}
+1196 
+1197 end:
+1198    \textcolor{comment}{//Return status code}
+1199    \textcolor{keywordflow}{return} error;
+1200 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ec_8c_aa71cc4a2e12f627bca5a9279e10e17ec}\label{ec_8c_aa71cc4a2e12f627bca5a9279e10e17ec}} 
+\index{ec.\+c@{ec.\+c}!ec\+Twin\+Mult@{ec\+Twin\+Mult}}
+\index{ec\+Twin\+Mult@{ec\+Twin\+Mult}!ec.\+c@{ec.\+c}}
+\subsubsection{\texorpdfstring{ec\+Twin\+Mult()}{ecTwinMult()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ec\+Twin\+Mult (\begin{DoxyParamCaption}\item[{const \hyperlink{structEcDomainParameters}{Ec\+Domain\+Parameters} $\ast$}]{params,  }\item[{\hyperlink{structEcPoint}{Ec\+Point} $\ast$}]{r,  }\item[{const \hyperlink{structMpi}{Mpi} $\ast$}]{d0,  }\item[{const \hyperlink{structEcPoint}{Ec\+Point} $\ast$}]{s,  }\item[{const \hyperlink{structMpi}{Mpi} $\ast$}]{d1,  }\item[{const \hyperlink{structEcPoint}{Ec\+Point} $\ast$}]{t }\end{DoxyParamCaption})}
+
+
+
+Twin multiplication. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em params} & EC domain parameters \\
+\hline
+\mbox{\tt out}  & {\em r} & Resulting point R = d0.\+S + d1.\+T \\
+\hline
+\mbox{\tt in}  & {\em d0} & An integer d such as 0 $<$= d0 $<$ p \\
+\hline
+\mbox{\tt in}  & {\em s} & EC point \\
+\hline
+\mbox{\tt in}  & {\em d1} & An integer d such as 0 $<$= d1 $<$ p \\
+\hline
+\mbox{\tt in}  & {\em t} & EC point \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 984 of file ec.\+c.
+
+
+\begin{DoxyCode}
+986 \{
+987    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+988    \hyperlink{compiler__port_8h_a022c65af7f6c8d3947e8a37d64db6ad6}{int\_t} \hyperlink{md5_8c_af11ea3cdbca7345eb6a4a8ac5ce0434d}{k};
+989    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} \hyperlink{ndp_8h_a6b3284d8492267a77ca46948daf5545e}{m};
+990    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} m0;
+991    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} m1;
+992    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} c0;
+993    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} c1;
+994    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} h0;
+995    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} h1;
+996    \hyperlink{compiler__port_8h_a022c65af7f6c8d3947e8a37d64db6ad6}{int\_t} u0;
+997    \hyperlink{compiler__port_8h_a022c65af7f6c8d3947e8a37d64db6ad6}{int\_t} u1;
+998    \hyperlink{structEcPoint}{EcPoint} spt;
+999    \hyperlink{structEcPoint}{EcPoint} smt;
+1000 
+1001    \textcolor{comment}{//Initialize EC points}
+1002    \hyperlink{ec_8c_ac038e67dcc04d6d94bb930f9475f3ff8}{ecInit}(&spt);
+1003    \hyperlink{ec_8c_ac038e67dcc04d6d94bb930f9475f3ff8}{ecInit}(&smt);
+1004 
+1005    \textcolor{comment}{//Precompute SpT = S + T}
+1006    \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a4d55abdf87bb84b25b5a0964d36c8296}{ecFullAdd}(params, &spt, s, t));
+1007    \textcolor{comment}{//Precompute SmT = S - T}
+1008    \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a6e327968b5485882ef72833ad404323a}{ecFullSub}(params, &smt, s, t));
+1009 
+1010    \textcolor{comment}{//Let m0 be the bit length of d0}
+1011    m0 = \hyperlink{mpi_8c_a2e540eb4b5d15ea9755fb3e138990c1c}{mpiGetBitLength}(d0);
+1012    \textcolor{comment}{//Let m1 be the bit length of d1}
+1013    m1 = \hyperlink{mpi_8c_a2e540eb4b5d15ea9755fb3e138990c1c}{mpiGetBitLength}(d1);
+1014    \textcolor{comment}{//Let m = MAX(m0, m1)}
+1015    m = \hyperlink{os__port_8h_afa99ec4acc4ecb2dc3c2d05da15d0e3f}{MAX}(m0, m1);
+1016 
+1017    \textcolor{comment}{//Let c be a 2 x 6 binary matrix}
+1018    c0 = \hyperlink{mpi_8c_ad62c1f7143a1cc46b080bea217f20ede}{mpiGetBitValue}(d0, m - 4);
+1019    c0 |= \hyperlink{mpi_8c_ad62c1f7143a1cc46b080bea217f20ede}{mpiGetBitValue}(d0, m - 3) << 1;
+1020    c0 |= \hyperlink{mpi_8c_ad62c1f7143a1cc46b080bea217f20ede}{mpiGetBitValue}(d0, m - 2) << 2;
+1021    c0 |= \hyperlink{mpi_8c_ad62c1f7143a1cc46b080bea217f20ede}{mpiGetBitValue}(d0, m - 1) << 3;
+1022    c1 = \hyperlink{mpi_8c_ad62c1f7143a1cc46b080bea217f20ede}{mpiGetBitValue}(d1, m - 4);
+1023    c1 |= \hyperlink{mpi_8c_ad62c1f7143a1cc46b080bea217f20ede}{mpiGetBitValue}(d1, m - 3) << 1;
+1024    c1 |= \hyperlink{mpi_8c_ad62c1f7143a1cc46b080bea217f20ede}{mpiGetBitValue}(d1, m - 2) << 2;
+1025    c1 |= \hyperlink{mpi_8c_ad62c1f7143a1cc46b080bea217f20ede}{mpiGetBitValue}(d1, m - 1) << 3;
+1026 
+1027    \textcolor{comment}{//Set R = (1, 1, 0)}
+1028    \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_a1d8c5bea2b4bb91935654c4e9d05579f}{mpiSetValue}(&r->\hyperlink{structEcPoint_a08f3fbb7a7d07607306bd8d6200629af}{x}, 1));
+1029    \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_a1d8c5bea2b4bb91935654c4e9d05579f}{mpiSetValue}(&r->\hyperlink{structEcPoint_a2102dff813849bd0eaed8a1a5e64ec1f}{y}, 1));
+1030    \hyperlink{mpi_8h_a5e76fea2f61391de0c215692cbd3f418}{MPI\_CHECK}(\hyperlink{mpi_8c_a1d8c5bea2b4bb91935654c4e9d05579f}{mpiSetValue}(&r->\hyperlink{structEcPoint_ac53a6ff4888f818509027e37004635f5}{z}, 0));
+1031 
+1032    \textcolor{comment}{//Calculate both multiplications at the same time}
+1033    \textcolor{keywordflow}{for}(k = m; k >= 0; k--)
+1034    \{
+1035       \textcolor{comment}{//Compute h(0) = 16 * c(0,1) + 8 * c(0,2) + 4 * c(0,3) + 2 * c(0,4) + c(0,5)}
+1036       h0 = c0 & 0x1F;
+1037 
+1038       \textcolor{comment}{//Check whether c(0,0) == 1}
+1039       \textcolor{keywordflow}{if}(c0 & 0x20)
+1040       \{
+1041          h0 = 31 - h0;
+1042       \}
+1043 
+1044       \textcolor{comment}{//Compute h(1) = 16 * c(1,1) + 8 * c(1,2) + 4 * c(1,3) + 2 * c(1,4) + c(1,5)}
+1045       h1 = c1 & 0x1F;
+1046 
+1047       \textcolor{comment}{//Check whether c(1,0) == 1}
+1048       \textcolor{keywordflow}{if}(c1 & 0x20)
+1049       \{
+1050          h1 = 31 - h1;
+1051       \}
+1052 
+1053       \textcolor{comment}{//Compute u(0)}
+1054       \textcolor{keywordflow}{if}(h0 < \hyperlink{ec_8c_aad4be77ed195be03204937d42b483ab2}{ecTwinMultF}(h1))
+1055       \{
+1056          u0 = 0;
+1057       \}
+1058       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(c0 & 0x20)
+1059       \{
+1060          u0 = -1;
+1061       \}
+1062       \textcolor{keywordflow}{else}
+1063       \{
+1064          u0 = 1;
+1065       \}
+1066 
+1067       \textcolor{comment}{//Compute u(1)}
+1068       \textcolor{keywordflow}{if}(h1 < \hyperlink{ec_8c_aad4be77ed195be03204937d42b483ab2}{ecTwinMultF}(h0))
+1069       \{
+1070          u1 = 0;
+1071       \}
+1072       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(c1 & 0x20)
+1073       \{
+1074          u1 = -1;
+1075       \}
+1076       \textcolor{keywordflow}{else}
+1077       \{
+1078          u1 = 1;
+1079       \}
+1080 
+1081       \textcolor{comment}{//Update c matrix}
+1082       c0 <<= 1;
+1083       c0 |= \hyperlink{mpi_8c_ad62c1f7143a1cc46b080bea217f20ede}{mpiGetBitValue}(d0, k - 5);
+1084       c0 ^= u0 ? 0x20 : 0x00;
+1085       c1 <<= 1;
+1086       c1 |= \hyperlink{mpi_8c_ad62c1f7143a1cc46b080bea217f20ede}{mpiGetBitValue}(d1, k - 5);
+1087       c1 ^= u1 ? 0x20 : 0x00;
+1088 
+1089       \textcolor{comment}{//Point doubling}
+1090       \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a75d1501e9dfae2897ec851ae9bb48461}{ecDouble}(params, r, r));
+1091 
+1092       \textcolor{comment}{//Check u(0) and u(1)}
+1093       \textcolor{keywordflow}{if}(u0 == -1 && u1 == -1)
+1094       \{
+1095          \textcolor{comment}{//Compute R = R - SpT}
+1096          \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a6e327968b5485882ef72833ad404323a}{ecFullSub}(params, r, r, &spt));
+1097       \}
+1098       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(u0 == -1 && u1 == 0)
+1099       \{
+1100          \textcolor{comment}{//Compute R = R - S}
+1101          \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a6e327968b5485882ef72833ad404323a}{ecFullSub}(params, r, r, s));
+1102       \}
+1103       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(u0 == -1 && u1 == 1)
+1104       \{
+1105          \textcolor{comment}{//Compute R = R - SmT}
+1106          \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a6e327968b5485882ef72833ad404323a}{ecFullSub}(params, r, r, &smt));
+1107       \}
+1108       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(u0 == 0 && u1 == -1)
+1109       \{
+1110          \textcolor{comment}{//Compute R = R - T}
+1111          \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a6e327968b5485882ef72833ad404323a}{ecFullSub}(params, r, r, t));
+1112       \}
+1113       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(u0 == 0 && u1 == 1)
+1114       \{
+1115          \textcolor{comment}{//Compute R = R + T}
+1116          \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a4d55abdf87bb84b25b5a0964d36c8296}{ecFullAdd}(params, r, r, t));
+1117       \}
+1118       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(u0 == 1 && u1 == -1)
+1119       \{
+1120          \textcolor{comment}{//Compute R = R + SmT}
+1121          \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a4d55abdf87bb84b25b5a0964d36c8296}{ecFullAdd}(params, r, r, &smt));
+1122       \}
+1123       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(u0 == 1 && u1 == 0)
+1124       \{
+1125          \textcolor{comment}{//Compute R = R + S}
+1126          \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a4d55abdf87bb84b25b5a0964d36c8296}{ecFullAdd}(params, r, r, s));
+1127       \}
+1128       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(u0 == 1 && u1 == 1)
+1129       \{
+1130          \textcolor{comment}{//Compute R = R + SpT}
+1131          \hyperlink{ec_8h_ab3bdd4fc9d2068ed2f78d09c85102198}{EC\_CHECK}(\hyperlink{ec_8c_a4d55abdf87bb84b25b5a0964d36c8296}{ecFullAdd}(params, r, r, &spt));
+1132       \}
+1133    \}
+1134 
+1135 end:
+1136    \textcolor{comment}{//Release EC points}
+1137    \hyperlink{ec_8c_ae4a9276eac491f8acbb6d0916287411b}{ecFree}(&spt);
+1138    \hyperlink{ec_8c_ae4a9276eac491f8acbb6d0916287411b}{ecFree}(&smt);
+1139 
+1140    \textcolor{comment}{//Return status code}
+1141    \textcolor{keywordflow}{return} error;
+1142 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ec_8c_aad4be77ed195be03204937d42b483ab2}\label{ec_8c_aad4be77ed195be03204937d42b483ab2}} 
+\index{ec.\+c@{ec.\+c}!ec\+Twin\+MultF@{ec\+Twin\+MultF}}
+\index{ec\+Twin\+MultF@{ec\+Twin\+MultF}!ec.\+c@{ec.\+c}}
+\subsubsection{\texorpdfstring{ec\+Twin\+Mult\+F()}{ecTwinMultF()}}
+{\footnotesize\ttfamily \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} ec\+Twin\+MultF (\begin{DoxyParamCaption}\item[{\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t}}]{t }\end{DoxyParamCaption})}
+
+
+
+An auxiliary function for the twin multiplication. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em t} & An integer T such as 0 $<$= T $<$= 31 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Output value 
+\end{DoxyReturn}
+
+
+Definition at line 942 of file ec.\+c.
+
+
+\begin{DoxyCode}
+943 \{
+944    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} \hyperlink{ndp_8h_a1f1dfeb2f802fe99f37fe91867b84456}{h};
+945 
+946    \textcolor{comment}{//Check the value of T}
+947    \textcolor{keywordflow}{if}(18 <= \hyperlink{llmnr__common_8h_a2d03918f4f9edabaf3c9f43abcc2d85b}{t} && \hyperlink{llmnr__common_8h_a2d03918f4f9edabaf3c9f43abcc2d85b}{t} < 22)
+948    \{
+949       h = 9;
+950    \}
+951    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(14 <= \hyperlink{llmnr__common_8h_a2d03918f4f9edabaf3c9f43abcc2d85b}{t} && \hyperlink{llmnr__common_8h_a2d03918f4f9edabaf3c9f43abcc2d85b}{t} < 18)
+952    \{
+953       h = 10;
+954    \}
+955    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(22 <= \hyperlink{llmnr__common_8h_a2d03918f4f9edabaf3c9f43abcc2d85b}{t} && \hyperlink{llmnr__common_8h_a2d03918f4f9edabaf3c9f43abcc2d85b}{t} < 24)
+956    \{
+957       h = 11;
+958    \}
+959    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(4 <= \hyperlink{llmnr__common_8h_a2d03918f4f9edabaf3c9f43abcc2d85b}{t} && \hyperlink{llmnr__common_8h_a2d03918f4f9edabaf3c9f43abcc2d85b}{t} < 12)
+960    \{
+961       h = 14;
+962    \}
+963    \textcolor{keywordflow}{else}
+964    \{
+965       h = 12;
+966    \}
+967 
+968    \textcolor{comment}{//Return value}
+969    \textcolor{keywordflow}{return} \hyperlink{ndp_8h_a1f1dfeb2f802fe99f37fe91867b84456}{h};
+970 \}
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{ec_8c_a5ff93c201b1e50b6fda04774a2fa537c}\label{ec_8c_a5ff93c201b1e50b6fda04774a2fa537c}} 
+\index{ec.\+c@{ec.\+c}!E\+C\+\_\+\+P\+U\+B\+L\+I\+C\+\_\+\+K\+E\+Y\+\_\+\+O\+ID@{E\+C\+\_\+\+P\+U\+B\+L\+I\+C\+\_\+\+K\+E\+Y\+\_\+\+O\+ID}}
+\index{E\+C\+\_\+\+P\+U\+B\+L\+I\+C\+\_\+\+K\+E\+Y\+\_\+\+O\+ID@{E\+C\+\_\+\+P\+U\+B\+L\+I\+C\+\_\+\+K\+E\+Y\+\_\+\+O\+ID}!ec.\+c@{ec.\+c}}
+\subsubsection{\texorpdfstring{E\+C\+\_\+\+P\+U\+B\+L\+I\+C\+\_\+\+K\+E\+Y\+\_\+\+O\+ID}{EC\_PUBLIC\_KEY\_OID}}
+{\footnotesize\ttfamily const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} E\+C\+\_\+\+P\+U\+B\+L\+I\+C\+\_\+\+K\+E\+Y\+\_\+\+O\+ID\mbox{[}7\mbox{]} = \{0x2\+A, 0x86, 0x48, 0x\+C\+E, 0x3\+D, 0x02, 0x01\}}
+
+
+
+Definition at line 47 of file ec.\+c.
+

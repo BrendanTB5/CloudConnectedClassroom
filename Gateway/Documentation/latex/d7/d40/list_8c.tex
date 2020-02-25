@@ -1,0 +1,242 @@
+\hypertarget{list_8c}{}\section{third\+\_\+party/freertos/list.c File Reference}
+\label{list_8c}\index{third\+\_\+party/freertos/list.\+c@{third\+\_\+party/freertos/list.\+c}}
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}Free\+R\+T\+O\+S.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}list.\+h\char`\"{}}\newline
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{list_8c_aa0831d347bba16bfbe524f4faa790b9d}{v\+List\+Initialise} (\hyperlink{list_8h_afd590ef6400071b4d63d65ef90bea7f4}{List\+\_\+t} $\ast$const px\+List)
+\item 
+void \hyperlink{list_8c_a43e37223a86f5d0688ac4470d3106e87}{v\+List\+Initialise\+Item} (\hyperlink{list_8h_a1a62d469392f9bfe2443e7efab9c8398}{List\+Item\+\_\+t} $\ast$const px\+Item)
+\item 
+void \hyperlink{list_8c_a3240bc0f43fcf755be02bfc6de7dc6ef}{v\+List\+Insert\+End} (\hyperlink{list_8h_afd590ef6400071b4d63d65ef90bea7f4}{List\+\_\+t} $\ast$const px\+List, \hyperlink{list_8h_a1a62d469392f9bfe2443e7efab9c8398}{List\+Item\+\_\+t} $\ast$const px\+New\+List\+Item)
+\item 
+void \hyperlink{list_8c_a28faa70d3ec4b4f39e53b0fc52d62ecf}{v\+List\+Insert} (\hyperlink{list_8h_afd590ef6400071b4d63d65ef90bea7f4}{List\+\_\+t} $\ast$const px\+List, \hyperlink{list_8h_a1a62d469392f9bfe2443e7efab9c8398}{List\+Item\+\_\+t} $\ast$const px\+New\+List\+Item)
+\item 
+\hyperlink{pic32mx_2portmacro_8h_a646f89d4298e4f5afd522202b11cb2e6}{U\+Base\+Type\+\_\+t} \hyperlink{list_8c_a274fdced76bbdd9d8a4c4840ded2920c}{ux\+List\+Remove} (\hyperlink{list_8h_a1a62d469392f9bfe2443e7efab9c8398}{List\+Item\+\_\+t} $\ast$const px\+Item\+To\+Remove)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{list_8c_a274fdced76bbdd9d8a4c4840ded2920c}\label{list_8c_a274fdced76bbdd9d8a4c4840ded2920c}} 
+\index{list.\+c@{list.\+c}!ux\+List\+Remove@{ux\+List\+Remove}}
+\index{ux\+List\+Remove@{ux\+List\+Remove}!list.\+c@{list.\+c}}
+\subsubsection{\texorpdfstring{ux\+List\+Remove()}{uxListRemove()}}
+{\footnotesize\ttfamily \hyperlink{pic32mx_2portmacro_8h_a646f89d4298e4f5afd522202b11cb2e6}{U\+Base\+Type\+\_\+t} ux\+List\+Remove (\begin{DoxyParamCaption}\item[{\hyperlink{list_8h_a1a62d469392f9bfe2443e7efab9c8398}{List\+Item\+\_\+t} $\ast$const}]{px\+Item\+To\+Remove }\end{DoxyParamCaption})}
+
+
+
+Definition at line 170 of file list.\+c.
+
+
+\begin{DoxyCode}
+171 \{
+172 \textcolor{comment}{/* The list item knows which list it is in.  Obtain the list from the list}
+173 \textcolor{comment}{item. */}
+174 \hyperlink{structxLIST}{List\_t} * \textcolor{keyword}{const} pxList = pxItemToRemove->\hyperlink{structxLIST__ITEM_afb1e27a88f6b064cd0216de08009844a}{pxContainer};
+175 
+176     pxItemToRemove->\hyperlink{structxLIST__ITEM_a03713c4ee953ef5ca6adbec883720c60}{pxNext}->\hyperlink{structxLIST__ITEM_ae8e553eae41010a8e41c66d76c94110b}{pxPrevious} = pxItemToRemove->
+      \hyperlink{structxLIST__ITEM_ae8e553eae41010a8e41c66d76c94110b}{pxPrevious};
+177     pxItemToRemove->\hyperlink{structxLIST__ITEM_ae8e553eae41010a8e41c66d76c94110b}{pxPrevious}->\hyperlink{structxLIST__ITEM_a03713c4ee953ef5ca6adbec883720c60}{pxNext} = pxItemToRemove->\hyperlink{structxLIST__ITEM_a03713c4ee953ef5ca6adbec883720c60}{pxNext};
+178 
+179     \textcolor{comment}{/* Only used during decision coverage testing. */}
+180     \hyperlink{FreeRTOS_8h_a2ddaee9013b02cfbfe2773ec4257375c}{mtCOVERAGE\_TEST\_DELAY}();
+181 
+182     \textcolor{comment}{/* Make sure the index is left pointing to a valid item. */}
+183     \textcolor{keywordflow}{if}( pxList->\hyperlink{structxLIST_a7bf64d87701493b4c8c5c977682500d7}{pxIndex} == pxItemToRemove )
+184     \{
+185         pxList->\hyperlink{structxLIST_a7bf64d87701493b4c8c5c977682500d7}{pxIndex} = pxItemToRemove->\hyperlink{structxLIST__ITEM_ae8e553eae41010a8e41c66d76c94110b}{pxPrevious};
+186     \}
+187     \textcolor{keywordflow}{else}
+188     \{
+189         \hyperlink{FreeRTOS_8h_ac77e2af1a6b0d38fbab36cf2aa96f1a8}{mtCOVERAGE\_TEST\_MARKER}();
+190     \}
+191 
+192     pxItemToRemove->\hyperlink{structxLIST__ITEM_afb1e27a88f6b064cd0216de08009844a}{pxContainer} = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+193     ( pxList->\hyperlink{structxLIST_aa280e17bf4e71f81c449c2444cb70378}{uxNumberOfItems} )--;
+194 
+195     \textcolor{keywordflow}{return} pxList->\hyperlink{structxLIST_aa280e17bf4e71f81c449c2444cb70378}{uxNumberOfItems};
+196 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{list_8c_aa0831d347bba16bfbe524f4faa790b9d}\label{list_8c_aa0831d347bba16bfbe524f4faa790b9d}} 
+\index{list.\+c@{list.\+c}!v\+List\+Initialise@{v\+List\+Initialise}}
+\index{v\+List\+Initialise@{v\+List\+Initialise}!list.\+c@{list.\+c}}
+\subsubsection{\texorpdfstring{v\+List\+Initialise()}{vListInitialise()}}
+{\footnotesize\ttfamily void v\+List\+Initialise (\begin{DoxyParamCaption}\item[{\hyperlink{list_8h_afd590ef6400071b4d63d65ef90bea7f4}{List\+\_\+t} $\ast$const}]{px\+List }\end{DoxyParamCaption})}
+
+
+
+Definition at line 37 of file list.\+c.
+
+
+\begin{DoxyCode}
+38 \{
+39     \textcolor{comment}{/* The list structure contains a list item which is used to mark the}
+40 \textcolor{comment}{    end of the list.  To initialise the list the list end is inserted}
+41 \textcolor{comment}{    as the only list entry. */}
+42     pxList->\hyperlink{structxLIST_a7bf64d87701493b4c8c5c977682500d7}{pxIndex} = ( \hyperlink{structxLIST__ITEM}{ListItem\_t} * ) &( pxList->\hyperlink{structxLIST_a49ad62fa153126e27e273811167b336a}{xListEnd} );          \textcolor{comment}{/*lint
+       !e826 !e740 !e9087 The mini list structure is used as the list end to save RAM.  This is checked and valid. */}
+43 
+44     \textcolor{comment}{/* The list end value is the highest possible value in the list to}
+45 \textcolor{comment}{    ensure it remains at the end of the list. */}
+46     pxList->\hyperlink{structxLIST_a49ad62fa153126e27e273811167b336a}{xListEnd}.\hyperlink{structxMINI__LIST__ITEM_aae79c54ac1efa30959e68604cc23b29e}{xItemValue} = \hyperlink{pic32mx_2portmacro_8h_a72723ba1e4a85ca14f25c2b9e066613d}{portMAX\_DELAY};
+47 
+48     \textcolor{comment}{/* The list end next and previous pointers point to itself so we know}
+49 \textcolor{comment}{    when the list is empty. */}
+50     pxList->\hyperlink{structxLIST_a49ad62fa153126e27e273811167b336a}{xListEnd}.\hyperlink{structxMINI__LIST__ITEM_aa7ae770b0f10daeb9ac76c6f7dd5608e}{pxNext} = ( \hyperlink{structxLIST__ITEM}{ListItem\_t} * ) &( pxList->
+      \hyperlink{structxLIST_a49ad62fa153126e27e273811167b336a}{xListEnd} ); \textcolor{comment}{/*lint !e826 !e740 !e9087 The mini list structure is used as the list end to save RAM. 
+       This is checked and valid. */}
+51     pxList->\hyperlink{structxLIST_a49ad62fa153126e27e273811167b336a}{xListEnd}.\hyperlink{structxMINI__LIST__ITEM_a732c666bb97560eb1b094a2c411269ab}{pxPrevious} = ( \hyperlink{structxLIST__ITEM}{ListItem\_t} * ) &( pxList->
+      \hyperlink{structxLIST_a49ad62fa153126e27e273811167b336a}{xListEnd} );\textcolor{comment}{/*lint !e826 !e740 !e9087 The mini list structure is used as the list end to save RAM. 
+       This is checked and valid. */}
+52 
+53     pxList->\hyperlink{structxLIST_aa280e17bf4e71f81c449c2444cb70378}{uxNumberOfItems} = ( \hyperlink{pic32mx_2portmacro_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBaseType\_t} ) 0U;
+54 
+55     \textcolor{comment}{/* Write known values into the list if}
+56 \textcolor{comment}{    configUSE\_LIST\_DATA\_INTEGRITY\_CHECK\_BYTES is set to 1. */}
+57     \hyperlink{list_8h_a5d68b1187d09c64d6ee329786cb0289b}{listSET\_LIST\_INTEGRITY\_CHECK\_1\_VALUE}( pxList );
+58     \hyperlink{list_8h_a83b40c6e61534ef41229bd912dacab48}{listSET\_LIST\_INTEGRITY\_CHECK\_2\_VALUE}( pxList );
+59 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{list_8c_a43e37223a86f5d0688ac4470d3106e87}\label{list_8c_a43e37223a86f5d0688ac4470d3106e87}} 
+\index{list.\+c@{list.\+c}!v\+List\+Initialise\+Item@{v\+List\+Initialise\+Item}}
+\index{v\+List\+Initialise\+Item@{v\+List\+Initialise\+Item}!list.\+c@{list.\+c}}
+\subsubsection{\texorpdfstring{v\+List\+Initialise\+Item()}{vListInitialiseItem()}}
+{\footnotesize\ttfamily void v\+List\+Initialise\+Item (\begin{DoxyParamCaption}\item[{\hyperlink{list_8h_a1a62d469392f9bfe2443e7efab9c8398}{List\+Item\+\_\+t} $\ast$const}]{px\+Item }\end{DoxyParamCaption})}
+
+
+
+Definition at line 62 of file list.\+c.
+
+
+\begin{DoxyCode}
+63 \{
+64     \textcolor{comment}{/* Make sure the list item is not recorded as being on a list. */}
+65     pxItem->\hyperlink{structxLIST__ITEM_afb1e27a88f6b064cd0216de08009844a}{pxContainer} = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+66 
+67     \textcolor{comment}{/* Write known values into the list item if}
+68 \textcolor{comment}{    configUSE\_LIST\_DATA\_INTEGRITY\_CHECK\_BYTES is set to 1. */}
+69     \hyperlink{list_8h_a0e65118e1baa7ab805cdfb37e580501d}{listSET\_FIRST\_LIST\_ITEM\_INTEGRITY\_CHECK\_VALUE}( pxItem );
+70     \hyperlink{list_8h_ac8b9d912bdcfdb5544f373d2a94268b2}{listSET\_SECOND\_LIST\_ITEM\_INTEGRITY\_CHECK\_VALUE}( pxItem );
+71 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{list_8c_a28faa70d3ec4b4f39e53b0fc52d62ecf}\label{list_8c_a28faa70d3ec4b4f39e53b0fc52d62ecf}} 
+\index{list.\+c@{list.\+c}!v\+List\+Insert@{v\+List\+Insert}}
+\index{v\+List\+Insert@{v\+List\+Insert}!list.\+c@{list.\+c}}
+\subsubsection{\texorpdfstring{v\+List\+Insert()}{vListInsert()}}
+{\footnotesize\ttfamily void v\+List\+Insert (\begin{DoxyParamCaption}\item[{\hyperlink{list_8h_afd590ef6400071b4d63d65ef90bea7f4}{List\+\_\+t} $\ast$const}]{px\+List,  }\item[{\hyperlink{list_8h_a1a62d469392f9bfe2443e7efab9c8398}{List\+Item\+\_\+t} $\ast$const}]{px\+New\+List\+Item }\end{DoxyParamCaption})}
+
+
+
+Definition at line 103 of file list.\+c.
+
+
+\begin{DoxyCode}
+104 \{
+105 \hyperlink{structxLIST__ITEM}{ListItem\_t} *pxIterator;
+106 \textcolor{keyword}{const} \hyperlink{pic32mx_2portmacro_8h_aa69c48c6e902ce54f70886e6573c92a9}{TickType\_t} xValueOfInsertion = pxNewListItem->\hyperlink{structxLIST__ITEM_a9b1f26de79f9da1403ca3ebc7a2e653a}{xItemValue};
+107 
+108     \textcolor{comment}{/* Only effective when configASSERT() is also defined, these tests may catch}
+109 \textcolor{comment}{    the list data structures being overwritten in memory.  They will not catch}
+110 \textcolor{comment}{    data errors caused by incorrect configuration or use of FreeRTOS. */}
+111     \hyperlink{list_8h_a337d6137e0a4d37321efc5c2f31dba22}{listTEST\_LIST\_INTEGRITY}( pxList );
+112     \hyperlink{list_8h_a95b994725c299cdc81c74efc16210cc6}{listTEST\_LIST\_ITEM\_INTEGRITY}( pxNewListItem );
+113 
+114     \textcolor{comment}{/* Insert the new list item into the list, sorted in xItemValue order.}
+115 \textcolor{comment}{}
+116 \textcolor{comment}{    If the list already contains a list item with the same item value then the}
+117 \textcolor{comment}{    new list item should be placed after it.  This ensures that TCBs which are}
+118 \textcolor{comment}{    stored in ready lists (all of which have the same xItemValue value) get a}
+119 \textcolor{comment}{    share of the CPU.  However, if the xItemValue is the same as the back marker}
+120 \textcolor{comment}{    the iteration loop below will not end.  Therefore the value is checked}
+121 \textcolor{comment}{    first, and the algorithm slightly modified if necessary. */}
+122     \textcolor{keywordflow}{if}( xValueOfInsertion == \hyperlink{pic32mx_2portmacro_8h_a72723ba1e4a85ca14f25c2b9e066613d}{portMAX\_DELAY} )
+123     \{
+124         pxIterator = pxList->\hyperlink{structxLIST_a49ad62fa153126e27e273811167b336a}{xListEnd}.\hyperlink{structxMINI__LIST__ITEM_a732c666bb97560eb1b094a2c411269ab}{pxPrevious};
+125     \}
+126     \textcolor{keywordflow}{else}
+127     \{
+128         \textcolor{comment}{/* *** NOTE ***********************************************************}
+129 \textcolor{comment}{        If you find your application is crashing here then likely causes are}
+130 \textcolor{comment}{        listed below.  In addition see https://www.freertos.org/FAQHelp.html for}
+131 \textcolor{comment}{        more tips, and ensure configASSERT() is defined!}
+132 \textcolor{comment}{        https://www.freertos.org/a00110.html#configASSERT}
+133 \textcolor{comment}{}
+134 \textcolor{comment}{            1) Stack overflow -}
+135 \textcolor{comment}{               see https://www.freertos.org/Stacks-and-stack-overflow-checking.html}
+136 \textcolor{comment}{            2) Incorrect interrupt priority assignment, especially on Cortex-M}
+137 \textcolor{comment}{               parts where numerically high priority values denote low actual}
+138 \textcolor{comment}{               interrupt priorities, which can seem counter intuitive.  See}
+139 \textcolor{comment}{               https://www.freertos.org/RTOS-Cortex-M3-M4.html and the definition}
+140 \textcolor{comment}{               of configMAX\_SYSCALL\_INTERRUPT\_PRIORITY on}
+141 \textcolor{comment}{               https://www.freertos.org/a00110.html}
+142 \textcolor{comment}{            3) Calling an API function from within a critical section or when}
+143 \textcolor{comment}{               the scheduler is suspended, or calling an API function that does}
+144 \textcolor{comment}{               not end in "FromISR" from an interrupt.}
+145 \textcolor{comment}{            4) Using a queue or semaphore before it has been initialised or}
+146 \textcolor{comment}{               before the scheduler has been started (are interrupts firing}
+147 \textcolor{comment}{               before vTaskStartScheduler() has been called?).}
+148 \textcolor{comment}{        **********************************************************************/}
+149 
+150         \textcolor{keywordflow}{for}( pxIterator = ( \hyperlink{structxLIST__ITEM}{ListItem\_t} * ) &( pxList->\hyperlink{structxLIST_a49ad62fa153126e27e273811167b336a}{xListEnd} ); pxIterator->
+      \hyperlink{structxLIST__ITEM_a03713c4ee953ef5ca6adbec883720c60}{pxNext}->\hyperlink{structxLIST__ITEM_a9b1f26de79f9da1403ca3ebc7a2e653a}{xItemValue} <= xValueOfInsertion; pxIterator = pxIterator->
+      \hyperlink{structxLIST__ITEM_a03713c4ee953ef5ca6adbec883720c60}{pxNext} ) \textcolor{comment}{/*lint !e826 !e740 !e9087 The mini list structure is used as the list end to save RAM.  This
+       is checked and valid. */}\textcolor{comment}{/*lint !e440 The iterator moves to a different value, not xValueOfInsertion. */}
+151         \{
+152             \textcolor{comment}{/* There is nothing to do here, just iterating to the wanted}
+153 \textcolor{comment}{            insertion position. */}
+154         \}
+155     \}
+156 
+157     pxNewListItem->\hyperlink{structxLIST__ITEM_a03713c4ee953ef5ca6adbec883720c60}{pxNext} = pxIterator->\hyperlink{structxLIST__ITEM_a03713c4ee953ef5ca6adbec883720c60}{pxNext};
+158     pxNewListItem->\hyperlink{structxLIST__ITEM_a03713c4ee953ef5ca6adbec883720c60}{pxNext}->\hyperlink{structxLIST__ITEM_ae8e553eae41010a8e41c66d76c94110b}{pxPrevious} = pxNewListItem;
+159     pxNewListItem->\hyperlink{structxLIST__ITEM_ae8e553eae41010a8e41c66d76c94110b}{pxPrevious} = pxIterator;
+160     pxIterator->\hyperlink{structxLIST__ITEM_a03713c4ee953ef5ca6adbec883720c60}{pxNext} = pxNewListItem;
+161 
+162     \textcolor{comment}{/* Remember which list the item is in.  This allows fast removal of the}
+163 \textcolor{comment}{    item later. */}
+164     pxNewListItem->\hyperlink{structxLIST__ITEM_afb1e27a88f6b064cd0216de08009844a}{pxContainer} = pxList;
+165 
+166     ( pxList->\hyperlink{structxLIST_aa280e17bf4e71f81c449c2444cb70378}{uxNumberOfItems} )++;
+167 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{list_8c_a3240bc0f43fcf755be02bfc6de7dc6ef}\label{list_8c_a3240bc0f43fcf755be02bfc6de7dc6ef}} 
+\index{list.\+c@{list.\+c}!v\+List\+Insert\+End@{v\+List\+Insert\+End}}
+\index{v\+List\+Insert\+End@{v\+List\+Insert\+End}!list.\+c@{list.\+c}}
+\subsubsection{\texorpdfstring{v\+List\+Insert\+End()}{vListInsertEnd()}}
+{\footnotesize\ttfamily void v\+List\+Insert\+End (\begin{DoxyParamCaption}\item[{\hyperlink{list_8h_afd590ef6400071b4d63d65ef90bea7f4}{List\+\_\+t} $\ast$const}]{px\+List,  }\item[{\hyperlink{list_8h_a1a62d469392f9bfe2443e7efab9c8398}{List\+Item\+\_\+t} $\ast$const}]{px\+New\+List\+Item }\end{DoxyParamCaption})}
+
+
+
+Definition at line 74 of file list.\+c.
+
+
+\begin{DoxyCode}
+75 \{
+76 \hyperlink{structxLIST__ITEM}{ListItem\_t} * \textcolor{keyword}{const} pxIndex = pxList->\hyperlink{structxLIST_a7bf64d87701493b4c8c5c977682500d7}{pxIndex};
+77 
+78     \textcolor{comment}{/* Only effective when configASSERT() is also defined, these tests may catch}
+79 \textcolor{comment}{    the list data structures being overwritten in memory.  They will not catch}
+80 \textcolor{comment}{    data errors caused by incorrect configuration or use of FreeRTOS. */}
+81     \hyperlink{list_8h_a337d6137e0a4d37321efc5c2f31dba22}{listTEST\_LIST\_INTEGRITY}( pxList );
+82     \hyperlink{list_8h_a95b994725c299cdc81c74efc16210cc6}{listTEST\_LIST\_ITEM\_INTEGRITY}( pxNewListItem );
+83 
+84     \textcolor{comment}{/* Insert a new list item into pxList, but rather than sort the list,}
+85 \textcolor{comment}{    makes the new list item the last item to be removed by a call to}
+86 \textcolor{comment}{    listGET\_OWNER\_OF\_NEXT\_ENTRY(). */}
+87     pxNewListItem->\hyperlink{structxLIST__ITEM_a03713c4ee953ef5ca6adbec883720c60}{pxNext} = pxIndex;
+88     pxNewListItem->\hyperlink{structxLIST__ITEM_ae8e553eae41010a8e41c66d76c94110b}{pxPrevious} = pxIndex->\hyperlink{structxLIST__ITEM_ae8e553eae41010a8e41c66d76c94110b}{pxPrevious};
+89 
+90     \textcolor{comment}{/* Only used during decision coverage testing. */}
+91     \hyperlink{FreeRTOS_8h_a2ddaee9013b02cfbfe2773ec4257375c}{mtCOVERAGE\_TEST\_DELAY}();
+92 
+93     pxIndex->\hyperlink{structxLIST__ITEM_ae8e553eae41010a8e41c66d76c94110b}{pxPrevious}->\hyperlink{structxLIST__ITEM_a03713c4ee953ef5ca6adbec883720c60}{pxNext} = pxNewListItem;
+94     pxIndex->\hyperlink{structxLIST__ITEM_ae8e553eae41010a8e41c66d76c94110b}{pxPrevious} = pxNewListItem;
+95 
+96     \textcolor{comment}{/* Remember which list the item is in. */}
+97     pxNewListItem->\hyperlink{structxLIST__ITEM_afb1e27a88f6b064cd0216de08009844a}{pxContainer} = pxList;
+98 
+99     ( pxList->\hyperlink{structxLIST_aa280e17bf4e71f81c449c2444cb70378}{uxNumberOfItems} )++;
+100 \}
+\end{DoxyCode}

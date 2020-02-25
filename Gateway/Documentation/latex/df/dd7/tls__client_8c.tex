@@ -1,0 +1,1943 @@
+\hypertarget{tls__client_8c}{}\section{cyclone\+\_\+ssl/tls\+\_\+client.c File Reference}
+\label{tls__client_8c}\index{cyclone\+\_\+ssl/tls\+\_\+client.\+c@{cyclone\+\_\+ssl/tls\+\_\+client.\+c}}
+
+
+Handshake message processing (T\+LS client)  
+
+
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}tls.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}tls\+\_\+cipher\+\_\+suites.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}tls\+\_\+handshake.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}tls\+\_\+client.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}tls\+\_\+client\+\_\+extensions.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}tls\+\_\+client\+\_\+misc.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}tls\+\_\+common.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}tls\+\_\+extensions.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}tls\+\_\+certificate.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}tls\+\_\+signature.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}tls\+\_\+key\+\_\+material.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}tls\+\_\+transcript\+\_\+hash.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}tls\+\_\+record.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}tls\+\_\+misc.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}tls13\+\_\+client.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}tls13\+\_\+client\+\_\+extensions.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}tls13\+\_\+client\+\_\+misc.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}dtls\+\_\+record.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}dtls\+\_\+misc.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}pkix/pem\+\_\+import.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}date\+\_\+time.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}debug.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{tls__client_8c_afcdf5e66fd927a7f4cc64295acd20407}{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}~\hyperlink{tls__config_8h_afee42a623033dac888291d1993985206}{T\+L\+S\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{tls__client_8c_ae08e364f08b197642487228b0d090634}{tls\+Send\+Client\+Hello} (\hyperlink{tls_8h_ac09f7a286c0cdf9b07ee1edd107946f5}{Tls\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Send Client\+Hello message. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{tls__client_8c_a8093867cfcf2598d3c186d34a55a61c4}{tls\+Send\+Client\+Key\+Exchange} (\hyperlink{tls_8h_ac09f7a286c0cdf9b07ee1edd107946f5}{Tls\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Send Client\+Key\+Exchange message. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{tls__client_8c_a21420fc52dce13c48cf05dc5beba4905}{tls\+Format\+Client\+Hello} (\hyperlink{tls_8h_ac09f7a286c0cdf9b07ee1edd107946f5}{Tls\+Context} $\ast$context, \hyperlink{tls_8h_ac78d39e638430eb19c4017e5f9797d16}{Tls\+Client\+Hello} $\ast$\hyperlink{pap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}, size\+\_\+t $\ast$\hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length})
+\begin{DoxyCompactList}\small\item\em Format Client\+Hello message. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{tls__client_8c_a21a9a63fad15c959b75940665ea8973b}{tls\+Format\+Client\+Key\+Exchange} (\hyperlink{tls_8h_ac09f7a286c0cdf9b07ee1edd107946f5}{Tls\+Context} $\ast$context, \hyperlink{tls_8h_a88521372020709c027828954c0208b8f}{Tls\+Client\+Key\+Exchange} $\ast$\hyperlink{pap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}, size\+\_\+t $\ast$\hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length})
+\begin{DoxyCompactList}\small\item\em Format Client\+Key\+Exchange message. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{tls__client_8c_a81ca7c5ae469fee80d67742b49cd5329}{tls\+Parse\+Hello\+Request} (\hyperlink{tls_8h_ac09f7a286c0cdf9b07ee1edd107946f5}{Tls\+Context} $\ast$context, const \hyperlink{tls_8h_a5a660d7247105e377fe2e1ed95ff8ff7}{Tls\+Hello\+Request} $\ast$\hyperlink{pap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length})
+\begin{DoxyCompactList}\small\item\em Parse Hello\+Request message. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{tls__client_8c_a8a87bf037ce4a5d6f43a3a4973956a2b}{tls\+Parse\+Server\+Hello} (\hyperlink{tls_8h_ac09f7a286c0cdf9b07ee1edd107946f5}{Tls\+Context} $\ast$context, const \hyperlink{tls_8h_a3b37d03b4f71ce65b23f369d2040a245}{Tls\+Server\+Hello} $\ast$\hyperlink{pap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length})
+\begin{DoxyCompactList}\small\item\em Parse Server\+Hello message. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{tls__client_8c_a31b6586adec9fe0527edcf448dfa34b1}{tls\+Parse\+Server\+Key\+Exchange} (\hyperlink{tls_8h_ac09f7a286c0cdf9b07ee1edd107946f5}{Tls\+Context} $\ast$context, const \hyperlink{tls_8h_a69c0b3ab7349e73b2e8f9452dbdfef5a}{Tls\+Server\+Key\+Exchange} $\ast$\hyperlink{pap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length})
+\begin{DoxyCompactList}\small\item\em Parse Server\+Key\+Exchange message. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{tls__client_8c_ab5d289458cdd60951cd498313a7a39a2}{tls\+Parse\+Certificate\+Request} (\hyperlink{tls_8h_ac09f7a286c0cdf9b07ee1edd107946f5}{Tls\+Context} $\ast$context, const \hyperlink{tls_8h_a207a823320ed0904352de25ac220b5d8}{Tls\+Certificate\+Request} $\ast$\hyperlink{pap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length})
+\begin{DoxyCompactList}\small\item\em Parse Certificate\+Request message. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{tls__client_8c_afa16663d44f1be4f22bedea28caaa35c}{tls\+Parse\+Server\+Hello\+Done} (\hyperlink{tls_8h_ac09f7a286c0cdf9b07ee1edd107946f5}{Tls\+Context} $\ast$context, const \hyperlink{tls_8h_a71e29f87ab91f2adb5655ad8157e7aea}{Tls\+Server\+Hello\+Done} $\ast$\hyperlink{pap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length})
+\begin{DoxyCompactList}\small\item\em Parse Server\+Hello\+Done message. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Handshake message processing (T\+LS client) 
+
+\hypertarget{pic32mz__ef__curiosity_8h_License}{}\subsection{License}\label{pic32mz__ef__curiosity_8h_License}
+S\+P\+D\+X-\/\+License-\/\+Identifier\+: G\+P\+L-\/2.\+0-\/or-\/later
+
+Copyright (C) 2010-\/2019 Oryx Embedded S\+A\+RL. All rights reserved.
+
+This file is part of Cyclone\+S\+SL Open.
+
+This program is free software; you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+
+You should have received a copy of the G\+NU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-\/1301, U\+SA.\hypertarget{tftp__server_8c_Description}{}\subsection{Description}\label{tftp__server_8c_Description}
+The T\+LS protocol provides communications security over the Internet. The protocol allows client/server applications to communicate in a way that is designed to prevent eavesdropping, tampering, or message forgery
+
+\begin{DoxyAuthor}{Author}
+Oryx Embedded S\+A\+RL (www.\+oryx-\/embedded.\+com) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+9.\+6 
+\end{DoxyVersion}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{tls__client_8c_afcdf5e66fd927a7f4cc64295acd20407}\label{tls__client_8c_afcdf5e66fd927a7f4cc64295acd20407}} 
+\index{tls\+\_\+client.\+c@{tls\+\_\+client.\+c}!T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+\index{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}!tls\+\_\+client.\+c@{tls\+\_\+client.\+c}}
+\subsubsection{\texorpdfstring{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}{TRACE\_LEVEL}}
+{\footnotesize\ttfamily \#define T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL~\hyperlink{tls__config_8h_afee42a623033dac888291d1993985206}{T\+L\+S\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+
+
+
+Definition at line 38 of file tls\+\_\+client.\+c.
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{tls__client_8c_a21420fc52dce13c48cf05dc5beba4905}\label{tls__client_8c_a21420fc52dce13c48cf05dc5beba4905}} 
+\index{tls\+\_\+client.\+c@{tls\+\_\+client.\+c}!tls\+Format\+Client\+Hello@{tls\+Format\+Client\+Hello}}
+\index{tls\+Format\+Client\+Hello@{tls\+Format\+Client\+Hello}!tls\+\_\+client.\+c@{tls\+\_\+client.\+c}}
+\subsubsection{\texorpdfstring{tls\+Format\+Client\+Hello()}{tlsFormatClientHello()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} tls\+Format\+Client\+Hello (\begin{DoxyParamCaption}\item[{\hyperlink{tls_8h_ac09f7a286c0cdf9b07ee1edd107946f5}{Tls\+Context} $\ast$}]{context,  }\item[{\hyperlink{tls_8h_ac78d39e638430eb19c4017e5f9797d16}{Tls\+Client\+Hello} $\ast$}]{message,  }\item[{size\+\_\+t $\ast$}]{length }\end{DoxyParamCaption})}
+
+
+
+Format Client\+Hello message. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the T\+LS context \\
+\hline
+\mbox{\tt out}  & {\em message} & Buffer where to format the Client\+Hello message \\
+\hline
+\mbox{\tt out}  & {\em length} & Length of the resulting Client\+Hello message \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 284 of file tls\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+286 \{
+287    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+288    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+289    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *\hyperlink{ndp_8h_a6519522ad9a6f45e7a8d25d31392a977}{p};
+290    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} cipherSuiteTypes;
+291    \hyperlink{tls_8h_a7bbdd7bf690ae50dd1106ebc0bd92b0c}{TlsExtensionList} *extensionList;
+292 
+293    \textcolor{comment}{//In TLS 1.3, the client indicates its version preferences in the}
+294    \textcolor{comment}{//SupportedVersions extension and the legacy\_version field must be}
+295    \textcolor{comment}{//set to 0x0303, which is the version number for TLS 1.2}
+296    context->clientVersion = \hyperlink{os__port_8h_a3acffbd305ee72dcd4593c0d8af64a4f}{MIN}(context->versionMax, \hyperlink{tls_8h_af97e91c5fb95fb0957e5f37ec9e9eae8}{TLS\_VERSION\_1\_2});
+297 
+298 \textcolor{preprocessor}{#if (DTLS\_SUPPORT == ENABLED)}
+299    \textcolor{comment}{//DTLS protocol?}
+300    \textcolor{keywordflow}{if}(context->transportProtocol == \hyperlink{tls_8h_a25cb7e3df9004160eb21eac9377dc89fa3055717a6d464160f611ee26a81c7d92}{TLS\_TRANSPORT\_PROTOCOL\_DATAGRAM})
+301    \{
+302       \textcolor{comment}{//Translate TLS version into DTLS version}
+303       context->clientVersion = \hyperlink{dtls__misc_8c_a309abf8d9966cd0d5a28be1d94859970}{dtlsTranslateVersion}(context->clientVersion);
+304    \}
+305 \textcolor{preprocessor}{#endif}
+306 
+307    \textcolor{comment}{//In previous versions of TLS, the version field is used for version}
+308    \textcolor{comment}{//negotiation and represents the highest version number supported by}
+309    \textcolor{comment}{//the client}
+310    \hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}->clientVersion = \hyperlink{cpu__endian_8h_a800cdbf435a85a9b3ad4f0edc518472a}{htons}(context->clientVersion);
+311 
+312    \textcolor{comment}{//Client random value}
+313    memcpy(\hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}->random, context->clientRandom, 32);
+314 
+315    \textcolor{comment}{//Point to the session ID}
+316    p = \hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}->sessionId;
+317    \textcolor{comment}{//Length of the handshake message}
+318    *\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} = \textcolor{keyword}{sizeof}(\hyperlink{tls_8h_ac78d39e638430eb19c4017e5f9797d16}{TlsClientHello});
+319 
+320    \textcolor{comment}{//The session ID value identifies a session the client wishes to reuse for}
+321    \textcolor{comment}{//this connection}
+322    error = \hyperlink{tls__client__misc_8c_a598623f4746afea96a0f0055ab51a64e}{tlsFormatSessionId}(context, p, &n);
+323    \textcolor{comment}{//Any error to report?}
+324    \textcolor{keywordflow}{if}(error)
+325       \textcolor{keywordflow}{return} error;
+326 
+327    \textcolor{comment}{//Fix the length of the session ID}
+328    \hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}->sessionIdLen = (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t}) n;
+329 
+330    \textcolor{comment}{//Point to the next field}
+331    p += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+332    \textcolor{comment}{//Adjust the length of the message}
+333    *\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+334 
+335 \textcolor{preprocessor}{#if (DTLS\_SUPPORT == ENABLED)}
+336    \textcolor{comment}{//DTLS protocol?}
+337    \textcolor{keywordflow}{if}(context->transportProtocol == \hyperlink{tls_8h_a25cb7e3df9004160eb21eac9377dc89fa3055717a6d464160f611ee26a81c7d92}{TLS\_TRANSPORT\_PROTOCOL\_DATAGRAM})
+338    \{
+339       \textcolor{comment}{//Format Cookie field}
+340       error = \hyperlink{dtls__misc_8c_aff34f76abd062fe078fb4bc1efac8e5d}{dtlsFormatCookie}(context, p, &n);
+341       \textcolor{comment}{//Any error to report?}
+342       \textcolor{keywordflow}{if}(error)
+343          \textcolor{keywordflow}{return} error;
+344 
+345       \textcolor{comment}{//Point to the next field}
+346       p += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+347       \textcolor{comment}{//Adjust the length of the message}
+348       *\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+349    \}
+350 \textcolor{preprocessor}{#endif}
+351 
+352    \textcolor{comment}{//Format the list of cipher suites supported by the client}
+353    error = \hyperlink{tls__client__misc_8c_a1be7b9837110a78faff229f1b0fb0252}{tlsFormatCipherSuites}(context, &cipherSuiteTypes, p, &n);
+354    \textcolor{comment}{//Any error to report?}
+355    \textcolor{keywordflow}{if}(error)
+356       \textcolor{keywordflow}{return} error;
+357 
+358    \textcolor{comment}{//Point to the next field}
+359    p += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+360    \textcolor{comment}{//Adjust the length of the message}
+361    *\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+362 
+363    \textcolor{comment}{//Format the list of compression methods supported by the client}
+364    error = \hyperlink{tls__client__misc_8c_a5902647ae74b659dcb7adb487d2c62dc}{tlsFormatCompressMethods}(context, p, &n);
+365    \textcolor{comment}{//Any error to report?}
+366    \textcolor{keywordflow}{if}(error)
+367       \textcolor{keywordflow}{return} error;
+368 
+369    \textcolor{comment}{//Point to the next field}
+370    p += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+371    \textcolor{comment}{//Adjust the length of the message}
+372    *\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+373 
+374    \textcolor{comment}{//Clients may request extended functionality from servers by sending}
+375    \textcolor{comment}{//data in the extensions field}
+376    extensionList = (\hyperlink{tls_8h_a7bbdd7bf690ae50dd1106ebc0bd92b0c}{TlsExtensionList} *) p;
+377    \textcolor{comment}{//Total length of the extension list}
+378    extensionList->length = 0;
+379 
+380    \textcolor{comment}{//Point to the first extension of the list}
+381    p += \textcolor{keyword}{sizeof}(\hyperlink{tls_8h_a7bbdd7bf690ae50dd1106ebc0bd92b0c}{TlsExtensionList});
+382 
+383    \textcolor{comment}{//In TLS 1.2, the client can indicate its version preferences in the}
+384    \textcolor{comment}{//SupportedVersions extension}
+385    error = \hyperlink{tls__client__extensions_8c_ad9bb10c56b22f756ab454fd63dcba4d7}{tlsFormatClientSupportedVersionsExtension}(context, p, &
+      n);
+386    \textcolor{comment}{//Any error to report?}
+387    \textcolor{keywordflow}{if}(error)
+388       \textcolor{keywordflow}{return} error;
+389 
+390    \textcolor{comment}{//Fix the length of the extension list}
+391    extensionList->length += (\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t}) n;
+392    \textcolor{comment}{//Point to the next field}
+393    p += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+394 
+395 \textcolor{preprocessor}{#if (TLS\_SNI\_SUPPORT == ENABLED)}
+396    \textcolor{comment}{//In order to provide the server name, clients may include a ServerName}
+397    \textcolor{comment}{//extension}
+398    error = \hyperlink{tls__client__extensions_8c_a4d9277592681463451ceea0efdc26340}{tlsFormatClientSniExtension}(context, p, &n);
+399    \textcolor{comment}{//Any error to report?}
+400    \textcolor{keywordflow}{if}(error)
+401       \textcolor{keywordflow}{return} error;
+402 
+403    \textcolor{comment}{//Fix the length of the extension list}
+404    extensionList->length += (\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t}) n;
+405    \textcolor{comment}{//Point to the next field}
+406    p += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+407 \textcolor{preprocessor}{#endif}
+408 
+409 \textcolor{preprocessor}{#if (TLS\_MAX\_FRAG\_LEN\_SUPPORT == ENABLED)}
+410    \textcolor{comment}{//In order to negotiate smaller maximum fragment lengths, clients may}
+411    \textcolor{comment}{//include a MaxFragmentLength extension}
+412    error = \hyperlink{tls__client__extensions_8c_a05af8e4ee90e7cc25e14a80ea240f185}{tlsFormatClientMaxFragLenExtension}(context, p, &n);
+413    \textcolor{comment}{//Any error to report?}
+414    \textcolor{keywordflow}{if}(error)
+415       \textcolor{keywordflow}{return} error;
+416 
+417    \textcolor{comment}{//Fix the length of the extension list}
+418    extensionList->length += (\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t}) n;
+419    \textcolor{comment}{//Point to the next field}
+420    p += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+421 \textcolor{preprocessor}{#endif}
+422 
+423 \textcolor{preprocessor}{#if (TLS\_RECORD\_SIZE\_LIMIT\_SUPPORT == ENABLED)}
+424    \textcolor{comment}{//The value of RecordSizeLimit is the maximum size of record in octets}
+425    \textcolor{comment}{//that the endpoint is willing to receive}
+426    error = \hyperlink{tls__client__extensions_8c_a7e9320e20ccda8455635905cb92f6d5f}{tlsFormatClientRecordSizeLimitExtension}(context, p, &n);
+427    \textcolor{comment}{//Any error to report?}
+428    \textcolor{keywordflow}{if}(error)
+429       \textcolor{keywordflow}{return} error;
+430 
+431    \textcolor{comment}{//Fix the length of the extension list}
+432    extensionList->length += (\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t}) n;
+433    \textcolor{comment}{//Point to the next field}
+434    p += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+435 \textcolor{preprocessor}{#endif}
+436 
+437    \textcolor{comment}{//A client that proposes ECC/FFDHE cipher suites in its ClientHello message}
+438    \textcolor{comment}{//should send the SupportedGroups extension}
+439    error = \hyperlink{tls__client__extensions_8c_a61e515de2ffab301ccd6db65f8b23388}{tlsFormatSupportedGroupsExtension}(context, cipherSuiteTypes, p,
+       &n);
+440    \textcolor{comment}{//Any error to report?}
+441    \textcolor{keywordflow}{if}(error)
+442       \textcolor{keywordflow}{return} error;
+443 
+444    \textcolor{comment}{//Fix the length of the extension list}
+445    extensionList->length += (\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t}) n;
+446    \textcolor{comment}{//Point to the next field}
+447    p += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+448 
+449    \textcolor{comment}{//A client that proposes ECC cipher suites in its ClientHello message}
+450    \textcolor{comment}{//should send the EcPointFormats extension}
+451    error = \hyperlink{tls__client__extensions_8c_ac5346af8cde411297e32136ae676cf93}{tlsFormatClientEcPointFormatsExtension}(context, 
+      cipherSuiteTypes,
+452       p, &n);
+453    \textcolor{comment}{//Any error to report?}
+454    \textcolor{keywordflow}{if}(error)
+455       \textcolor{keywordflow}{return} error;
+456 
+457    \textcolor{comment}{//Fix the length of the extension list}
+458    extensionList->length += (\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t}) n;
+459    \textcolor{comment}{//Point to the next field}
+460    p += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+461 
+462    \textcolor{comment}{//Include the SignatureAlgorithms extension only if TLS 1.2 is supported}
+463    error = \hyperlink{tls__common_8c_a3e8da6ef31b6d88603dd0b9ff5c9899c}{tlsFormatSignatureAlgorithmsExtension}(context, 
+      cipherSuiteTypes,
+464       p, &n);
+465    \textcolor{comment}{//Any error to report?}
+466    \textcolor{keywordflow}{if}(error)
+467       \textcolor{keywordflow}{return} error;
+468 
+469    \textcolor{comment}{//Fix the length of the extension list}
+470    extensionList->length += (\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t}) n;
+471    \textcolor{comment}{//Point to the next field}
+472    p += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+473 
+474 \textcolor{preprocessor}{#if (TLS\_SIGN\_ALGOS\_CERT\_SUPPORT == ENABLED)}
+475    \textcolor{comment}{//The SignatureAlgorithmsCert extension allows a client to indicate which}
+476    \textcolor{comment}{//signature algorithms it can validate in X.509 certificates}
+477    error = \hyperlink{tls__common_8c_a2cb196a73d9b8d67091a344fe3551789}{tlsFormatSignatureAlgorithmsCertExtension}(context, p, &
+      n);
+478    \textcolor{comment}{//Any error to report?}
+479    \textcolor{keywordflow}{if}(error)
+480       \textcolor{keywordflow}{return} error;
+481 
+482    \textcolor{comment}{//Fix the length of the extension list}
+483    extensionList->length += (\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t}) n;
+484    \textcolor{comment}{//Point to the next field}
+485    p += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+486 \textcolor{preprocessor}{#endif}
+487 
+488 \textcolor{preprocessor}{#if (TLS\_ALPN\_SUPPORT == ENABLED)}
+489    \textcolor{comment}{//The ALPN extension contains the list of protocols advertised by the}
+490    \textcolor{comment}{//client, in descending order of preference}
+491    error = \hyperlink{tls__client__extensions_8c_a39698d5880238026defe6cb810f8bf73}{tlsFormatClientAlpnExtension}(context, p, &n);
+492    \textcolor{comment}{//Any error to report?}
+493    \textcolor{keywordflow}{if}(error)
+494       \textcolor{keywordflow}{return} error;
+495 
+496    \textcolor{comment}{//Fix the length of the extension list}
+497    extensionList->length += (\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t}) n;
+498    \textcolor{comment}{//Point to the next field}
+499    p += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+500 \textcolor{preprocessor}{#endif}
+501 
+502 \textcolor{preprocessor}{#if (TLS\_RAW\_PUBLIC\_KEY\_SUPPORT == ENABLED)}
+503    \textcolor{comment}{//In order to indicate the support of raw public keys, clients include the}
+504    \textcolor{comment}{//ClientCertType extension in an extended ClientHello message}
+505    error = \hyperlink{tls__client__extensions_8c_afd8592e5df48c67f0a3fdf1052a05403}{tlsFormatClientCertTypeListExtension}(context, p, &n);
+506    \textcolor{comment}{//Any error to report?}
+507    \textcolor{keywordflow}{if}(error)
+508       \textcolor{keywordflow}{return} error;
+509 
+510    \textcolor{comment}{//Fix the length of the extension list}
+511    extensionList->length += (\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t}) n;
+512    \textcolor{comment}{//Point to the next field}
+513    p += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+514 
+515    \textcolor{comment}{//In order to indicate the support of raw public keys, clients include the}
+516    \textcolor{comment}{//ServerCertType extension in an extended ClientHello message}
+517    error = \hyperlink{tls__client__extensions_8c_abe810d75943c4423f122d87d30119c5c}{tlsFormatServerCertTypeListExtension}(context, p, &n);
+518    \textcolor{comment}{//Any error to report?}
+519    \textcolor{keywordflow}{if}(error)
+520       \textcolor{keywordflow}{return} error;
+521 
+522    \textcolor{comment}{//Fix the length of the extension list}
+523    extensionList->length += (\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t}) n;
+524    \textcolor{comment}{//Point to the next field}
+525    p += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+526 \textcolor{preprocessor}{#endif}
+527 
+528 \textcolor{preprocessor}{#if (TLS\_EXT\_MASTER\_SECRET\_SUPPORT == ENABLED)}
+529    \textcolor{comment}{//In all handshakes, a client implementing RFC 7627 must send the}
+530    \textcolor{comment}{//ExtendedMasterSecret extension in its ClientHello}
+531    error = \hyperlink{tls__client__extensions_8c_a896d082ae1376761ea11808bc4c127b0}{tlsFormatClientEmsExtension}(context, p, &n);
+532    \textcolor{comment}{//Any error to report?}
+533    \textcolor{keywordflow}{if}(error)
+534       \textcolor{keywordflow}{return} error;
+535 
+536    \textcolor{comment}{//Fix the length of the extension list}
+537    extensionList->length += (\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t}) n;
+538    \textcolor{comment}{//Point to the next field}
+539    p += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+540 \textcolor{preprocessor}{#endif}
+541 
+542 \textcolor{preprocessor}{#if (TLS\_SECURE\_RENEGOTIATION\_SUPPORT == ENABLED)}
+543    \textcolor{comment}{//If the connection's secure\_renegotiation flag is set to TRUE, the client}
+544    \textcolor{comment}{//must include a RenegotiationInfo extension in its ClientHello message}
+545    error = \hyperlink{tls__client__extensions_8c_ac31c814e50949f47e7ca07502229fb21}{tlsFormatClientRenegoInfoExtension}(context, p, &n);
+546    \textcolor{comment}{//Any error to report?}
+547    \textcolor{keywordflow}{if}(error)
+548       \textcolor{keywordflow}{return} error;
+549 
+550    \textcolor{comment}{//Fix the length of the extension list}
+551    extensionList->length += (\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t}) n;
+552    \textcolor{comment}{//Point to the next field}
+553    p += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+554 \textcolor{preprocessor}{#endif}
+555 
+556 \textcolor{preprocessor}{#if (TLS\_MAX\_VERSION >= TLS\_VERSION\_1\_3 && TLS\_MIN\_VERSION <= TLS\_VERSION\_1\_3)}
+557    \textcolor{comment}{//TLS 1.3 supported by the client?}
+558    \textcolor{keywordflow}{if}(context->versionMax >= \hyperlink{tls_8h_ab44dc642afbfbd72926ab1f94634cd4d}{TLS\_VERSION\_1\_3} &&
+559       context->transportProtocol == \hyperlink{tls_8h_a25cb7e3df9004160eb21eac9377dc89fa2fbbbd6c318570d570225144f3c6c244}{TLS\_TRANSPORT\_PROTOCOL\_STREAM})
+560    \{
+561       \hyperlink{tls13__misc_8h_a7db8d1dd46888d594a416a309fe019b4}{Tls13PskIdentityList} *identityList;
+562       \hyperlink{tls13__misc_8h_adfca71a634ceaf319dacca4f6283a252}{Tls13PskBinderList} *binderList;
+563 
+564       \textcolor{comment}{//Clients must not use cookies in their initial ClientHello}
+565       \textcolor{keywordflow}{if}(context->state != \hyperlink{tls_8h_a02bb4c8aa7988b33fe4d4836d8ff4a4dade201db86ae38480c06696f3a48e0170}{TLS\_STATE\_CLIENT\_HELLO})
+566       \{
+567          \textcolor{comment}{//When sending the new ClientHello, the client must copy the contents}
+568          \textcolor{comment}{//of the Cookie extension received in the HelloRetryRequest into a}
+569          \textcolor{comment}{//Cookie extension in the new ClientHello}
+570          error = \hyperlink{tls13__client__extensions_8h_ace3a5dff70c7aedba9594851d5c73e9d}{tls13FormatCookieExtension}(context, p, &n);
+571          \textcolor{comment}{//Any error to report?}
+572          \textcolor{keywordflow}{if}(error)
+573             \textcolor{keywordflow}{return} error;
+574 
+575          \textcolor{comment}{//Fix the length of the extension list}
+576          extensionList->length += (\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t}) n;
+577          \textcolor{comment}{//Point to the next field}
+578          p += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+579       \}
+580 
+581       \textcolor{comment}{//The KeyShare extension contains the client's cryptographic parameters}
+582       error = \hyperlink{tls13__client__extensions_8h_aa211e60611fc5bed94d5b3b2f1bc2666}{tls13FormatClientKeyShareExtension}(context, p, &n);
+583       \textcolor{comment}{//Any error to report?}
+584       \textcolor{keywordflow}{if}(error)
+585          \textcolor{keywordflow}{return} error;
+586 
+587       \textcolor{comment}{//Fix the length of the extension list}
+588       extensionList->length += (\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t}) n;
+589       \textcolor{comment}{//Point to the next field}
+590       p += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+591 
+592 \textcolor{preprocessor}{#if (TLS13\_EARLY\_DATA\_SUPPORT == ENABLED)}
+593       \textcolor{comment}{//If the client opts to send application data in its first flight of}
+594       \textcolor{comment}{//messages, it must supply both the PreSharedKey and EarlyData extensions}
+595       error = \hyperlink{tls13__client__extensions_8h_ad83bb36f4cf30ee6196ab9ededc3d69c}{tls13FormatClientEarlyDataExtension}(context, p, &n);
+596       \textcolor{comment}{//Any error to report?}
+597       \textcolor{keywordflow}{if}(error)
+598          \textcolor{keywordflow}{return} error;
+599 
+600       \textcolor{comment}{//Fix the length of the extension list}
+601       extensionList->length += (\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t}) n;
+602       \textcolor{comment}{//Point to the next field}
+603       p += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+604 \textcolor{preprocessor}{#endif}
+605 
+606       \textcolor{comment}{//In order to use PSKs, clients must send a PskKeyExchangeModes extension}
+607       error = \hyperlink{tls13__client__extensions_8h_adc0b9be1454b2cf57ad928b71b62cfa1}{tls13FormatPskKeModesExtension}(context, p, &n);
+608       \textcolor{comment}{//Any error to report?}
+609       \textcolor{keywordflow}{if}(error)
+610          \textcolor{keywordflow}{return} error;
+611 
+612       \textcolor{comment}{//Fix the length of the extension list}
+613       extensionList->length += (\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t}) n;
+614       \textcolor{comment}{//Point to the next field}
+615       p += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+616 
+617 \textcolor{preprocessor}{#if (TLS\_CLIENT\_HELLO\_PADDING\_SUPPORT == ENABLED)}
+618       \textcolor{comment}{//The first pass calculates the length of the PreSharedKey extension}
+619       error = \hyperlink{tls13__client__extensions_8h_a68dd0971f654cff6f2af3e86f2a32f5b}{tls13FormatClientPreSharedKeyExtension}(context, p, &n,
+620          &identityList, &binderList);
+621       \textcolor{comment}{//Any error to report?}
+622       \textcolor{keywordflow}{if}(error)
+623          \textcolor{keywordflow}{return} error;
+624 
+625       \textcolor{comment}{//Determine the length of the resulting message}
+626       n += *\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} + \textcolor{keyword}{sizeof}(\hyperlink{tls_8h_a7bbdd7bf690ae50dd1106ebc0bd92b0c}{TlsExtensionList}) + extensionList->length;
+627 
+628       \textcolor{comment}{//Add a padding extension to ensure the ClientHello is never between}
+629       \textcolor{comment}{//256 and 511 bytes in length}
+630       error = \hyperlink{tls__client__extensions_8c_ad3ac65b6ad2b19ac1cf2849669926423}{tlsFormatClientHelloPaddingExtension}(context, n, p, &n);
+631       \textcolor{comment}{//Any error to report?}
+632       \textcolor{keywordflow}{if}(error)
+633          \textcolor{keywordflow}{return} error;
+634 
+635       \textcolor{comment}{//Fix the length of the extension list}
+636       extensionList->length += (\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t}) n;
+637       \textcolor{comment}{//Point to the next field}
+638       p += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+639 \textcolor{preprocessor}{#endif}
+640 
+641       \textcolor{comment}{//The extensions may appear in any order, with the exception of}
+642       \textcolor{comment}{//PreSharedKey which must be the last extension in the ClientHello}
+643       error = \hyperlink{tls13__client__extensions_8h_a68dd0971f654cff6f2af3e86f2a32f5b}{tls13FormatClientPreSharedKeyExtension}(context, p, &n,
+644          &identityList, &binderList);
+645       \textcolor{comment}{//Any error to report?}
+646       \textcolor{keywordflow}{if}(error)
+647          \textcolor{keywordflow}{return} error;
+648 
+649       \textcolor{comment}{//Fix the length of the extension list}
+650       extensionList->length += (\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t}) n;
+651       \textcolor{comment}{//Point to the next field}
+652       p += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+653 
+654       \textcolor{comment}{//Convert the length of the extension list to network byte order}
+655       extensionList->length = \hyperlink{cpu__endian_8h_a800cdbf435a85a9b3ad4f0edc518472a}{htons}(extensionList->length);
+656       \textcolor{comment}{//Total length of the message}
+657       *\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} += \textcolor{keyword}{sizeof}(\hyperlink{tls_8h_a7bbdd7bf690ae50dd1106ebc0bd92b0c}{TlsExtensionList}) + \hyperlink{cpu__endian_8h_a800cdbf435a85a9b3ad4f0edc518472a}{htons}(extensionList->length);
+658 
+659       \textcolor{comment}{//Fix PSK binder values in the PreSharedKey extension}
+660       error = \hyperlink{tls13__client__misc_8h_aa126b0f35a321ea9ae1b03ad0ceb86a8}{tls13ComputePskBinders}(context, \hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}, *
+      \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, identityList,
+661          binderList);
+662       \textcolor{comment}{//Any error to report?}
+663       \textcolor{keywordflow}{if}(error)
+664          \textcolor{keywordflow}{return} error;
+665    \}
+666    \textcolor{keywordflow}{else}
+667 \textcolor{preprocessor}{#endif}
+668    \{
+669 \textcolor{preprocessor}{#if (TLS\_CLIENT\_HELLO\_PADDING\_SUPPORT == ENABLED)}
+670       \textcolor{comment}{//Retrieve the actual length of the message}
+671       n = *\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length};
+672 
+673       \textcolor{comment}{//Any extensions included in the ClientHello message?}
+674       \textcolor{keywordflow}{if}(extensionList->length > 0)
+675          n += \textcolor{keyword}{sizeof}(\hyperlink{tls_8h_a7bbdd7bf690ae50dd1106ebc0bd92b0c}{TlsExtensionList}) + extensionList->length;
+676 
+677       \textcolor{comment}{//Add a padding extension to ensure the ClientHello is never between}
+678       \textcolor{comment}{//256 and 511 bytes in length}
+679       error = \hyperlink{tls__client__extensions_8c_ad3ac65b6ad2b19ac1cf2849669926423}{tlsFormatClientHelloPaddingExtension}(context, n, p, &n);
+680       \textcolor{comment}{//Any error to report?}
+681       \textcolor{keywordflow}{if}(error)
+682          \textcolor{keywordflow}{return} error;
+683 
+684       \textcolor{comment}{//Fix the length of the extension list}
+685       extensionList->length += (\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t}) n;
+686       \textcolor{comment}{//Point to the next field}
+687       p += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+688 \textcolor{preprocessor}{#endif}
+689 
+690       \textcolor{comment}{//Any extensions included in the ClientHello message?}
+691       \textcolor{keywordflow}{if}(extensionList->length > 0)
+692       \{
+693          \textcolor{comment}{//Convert the length of the extension list to network byte order}
+694          extensionList->length = \hyperlink{cpu__endian_8h_a800cdbf435a85a9b3ad4f0edc518472a}{htons}(extensionList->length);
+695          \textcolor{comment}{//Total length of the message}
+696          *\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} += \textcolor{keyword}{sizeof}(\hyperlink{tls_8h_a7bbdd7bf690ae50dd1106ebc0bd92b0c}{TlsExtensionList}) + \hyperlink{cpu__endian_8h_a800cdbf435a85a9b3ad4f0edc518472a}{htons}(extensionList->length);
+697       \}
+698    \}
+699 
+700    \textcolor{comment}{//Successful processing}
+701    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+702 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{tls__client_8c_a21a9a63fad15c959b75940665ea8973b}\label{tls__client_8c_a21a9a63fad15c959b75940665ea8973b}} 
+\index{tls\+\_\+client.\+c@{tls\+\_\+client.\+c}!tls\+Format\+Client\+Key\+Exchange@{tls\+Format\+Client\+Key\+Exchange}}
+\index{tls\+Format\+Client\+Key\+Exchange@{tls\+Format\+Client\+Key\+Exchange}!tls\+\_\+client.\+c@{tls\+\_\+client.\+c}}
+\subsubsection{\texorpdfstring{tls\+Format\+Client\+Key\+Exchange()}{tlsFormatClientKeyExchange()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} tls\+Format\+Client\+Key\+Exchange (\begin{DoxyParamCaption}\item[{\hyperlink{tls_8h_ac09f7a286c0cdf9b07ee1edd107946f5}{Tls\+Context} $\ast$}]{context,  }\item[{\hyperlink{tls_8h_a88521372020709c027828954c0208b8f}{Tls\+Client\+Key\+Exchange} $\ast$}]{message,  }\item[{size\+\_\+t $\ast$}]{length }\end{DoxyParamCaption})}
+
+
+
+Format Client\+Key\+Exchange message. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the T\+LS context \\
+\hline
+\mbox{\tt out}  & {\em message} & Buffer where to format the Client\+Key\+Exchange message \\
+\hline
+\mbox{\tt out}  & {\em length} & Length of the resulting Client\+Key\+Exchange message \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 713 of file tls\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+715 \{
+716    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+717    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+718    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *\hyperlink{ndp_8h_a6519522ad9a6f45e7a8d25d31392a977}{p};
+719 
+720    \textcolor{comment}{//Point to the beginning of the handshake message}
+721    p = \hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message};
+722    \textcolor{comment}{//Length of the handshake message}
+723    *\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} = 0;
+724 
+725 \textcolor{preprocessor}{#if (TLS\_PSK\_KE\_SUPPORT == ENABLED || TLS\_RSA\_PSK\_KE\_SUPPORT == ENABLED || \(\backslash\)}
+726 \textcolor{preprocessor}{   TLS\_DHE\_PSK\_KE\_SUPPORT == ENABLED || TLS\_ECDHE\_PSK\_KE\_SUPPORT == ENABLED)}
+727    \textcolor{comment}{//PSK key exchange method?}
+728    \textcolor{keywordflow}{if}(context->keyExchMethod == \hyperlink{tls_8h_a10c9078f6485419c2b8644b573ef0b75aed949c3b521aa45b6685846fa9a3b8f0}{TLS\_KEY\_EXCH\_PSK} ||
+729       context->keyExchMethod == \hyperlink{tls_8h_a10c9078f6485419c2b8644b573ef0b75a38a6d0551d2fbd9480b6c233c1242d4c}{TLS\_KEY\_EXCH\_RSA\_PSK} ||
+730       context->keyExchMethod == \hyperlink{tls_8h_a10c9078f6485419c2b8644b573ef0b75a32a252b7c7befeccaa088290d6a71dfe}{TLS\_KEY\_EXCH\_DHE\_PSK} ||
+731       context->keyExchMethod == \hyperlink{tls_8h_a10c9078f6485419c2b8644b573ef0b75aebba2060dba7ad92238668218f3a6520}{TLS\_KEY\_EXCH\_ECDHE\_PSK})
+732    \{
+733       \textcolor{comment}{//The client indicates which key to use by including a PSK identity}
+734       \textcolor{comment}{//in the ClientKeyExchange message}
+735       error = \hyperlink{tls__client__misc_8c_a7ef87744393b59616f0f54e7e56fc982}{tlsFormatPskIdentity}(context, p, &n);
+736       \textcolor{comment}{//Any error to report?}
+737       \textcolor{keywordflow}{if}(error)
+738          \textcolor{keywordflow}{return} error;
+739 
+740       \textcolor{comment}{//Advance data pointer}
+741       p += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+742       \textcolor{comment}{//Adjust the length of the message}
+743       *\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+744    \}
+745 \textcolor{preprocessor}{#endif}
+746 
+747    \textcolor{comment}{//RSA, Diffie-Hellman or ECDH key exchange method?}
+748    \textcolor{keywordflow}{if}(context->keyExchMethod != \hyperlink{tls_8h_a10c9078f6485419c2b8644b573ef0b75aed949c3b521aa45b6685846fa9a3b8f0}{TLS\_KEY\_EXCH\_PSK})
+749    \{
+750       \textcolor{comment}{//Format client's key exchange parameters}
+751       error = \hyperlink{tls__client__misc_8c_ab2a3a325ab81d183c2a3f86ef14ccbb2}{tlsFormatClientKeyParams}(context, p, &n);
+752       \textcolor{comment}{//Any error to report?}
+753       \textcolor{keywordflow}{if}(error)
+754          \textcolor{keywordflow}{return} error;
+755 
+756       \textcolor{comment}{//Advance data pointer}
+757       p += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+758       \textcolor{comment}{//Adjust the length of the message}
+759       *\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+760    \}
+761 
+762 \textcolor{preprocessor}{#if (TLS\_PSK\_KE\_SUPPORT == ENABLED || TLS\_RSA\_PSK\_KE\_SUPPORT == ENABLED || \(\backslash\)}
+763 \textcolor{preprocessor}{   TLS\_DHE\_PSK\_KE\_SUPPORT == ENABLED || TLS\_ECDHE\_PSK\_KE\_SUPPORT == ENABLED)}
+764    \textcolor{comment}{//PSK key exchange method?}
+765    \textcolor{keywordflow}{if}(context->keyExchMethod == \hyperlink{tls_8h_a10c9078f6485419c2b8644b573ef0b75aed949c3b521aa45b6685846fa9a3b8f0}{TLS\_KEY\_EXCH\_PSK} ||
+766       context->keyExchMethod == \hyperlink{tls_8h_a10c9078f6485419c2b8644b573ef0b75a38a6d0551d2fbd9480b6c233c1242d4c}{TLS\_KEY\_EXCH\_RSA\_PSK} ||
+767       context->keyExchMethod == \hyperlink{tls_8h_a10c9078f6485419c2b8644b573ef0b75a32a252b7c7befeccaa088290d6a71dfe}{TLS\_KEY\_EXCH\_DHE\_PSK} ||
+768       context->keyExchMethod == \hyperlink{tls_8h_a10c9078f6485419c2b8644b573ef0b75aebba2060dba7ad92238668218f3a6520}{TLS\_KEY\_EXCH\_ECDHE\_PSK})
+769    \{
+770       \textcolor{comment}{//Invalid pre-shared key?}
+771       \textcolor{keywordflow}{if}(context->pskLen == 0)
+772          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca3764b2929469f1eb1bf7af50b40df62f}{ERROR\_INVALID\_KEY\_LENGTH};
+773 
+774       \textcolor{comment}{//Generate premaster secret}
+775       error = \hyperlink{tls__key__material_8c_ac5650a18e65eed6e74b8d5ebec573a0d}{tlsGeneratePskPremasterSecret}(context);
+776       \textcolor{comment}{//Any error to report?}
+777       \textcolor{keywordflow}{if}(error)
+778          \textcolor{keywordflow}{return} error;
+779    \}
+780 \textcolor{preprocessor}{#endif}
+781 
+782    \textcolor{comment}{//Successful processing}
+783    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+784 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{tls__client_8c_ab5d289458cdd60951cd498313a7a39a2}\label{tls__client_8c_ab5d289458cdd60951cd498313a7a39a2}} 
+\index{tls\+\_\+client.\+c@{tls\+\_\+client.\+c}!tls\+Parse\+Certificate\+Request@{tls\+Parse\+Certificate\+Request}}
+\index{tls\+Parse\+Certificate\+Request@{tls\+Parse\+Certificate\+Request}!tls\+\_\+client.\+c@{tls\+\_\+client.\+c}}
+\subsubsection{\texorpdfstring{tls\+Parse\+Certificate\+Request()}{tlsParseCertificateRequest()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} tls\+Parse\+Certificate\+Request (\begin{DoxyParamCaption}\item[{\hyperlink{tls_8h_ac09f7a286c0cdf9b07ee1edd107946f5}{Tls\+Context} $\ast$}]{context,  }\item[{const \hyperlink{tls_8h_a207a823320ed0904352de25ac220b5d8}{Tls\+Certificate\+Request} $\ast$}]{message,  }\item[{size\+\_\+t}]{length }\end{DoxyParamCaption})}
+
+
+
+Parse Certificate\+Request message. 
+
+A server can optionally request a certificate from the client, if appropriate for the selected cipher suite. This message will immediately follow the Server\+Key\+Exchange message
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the T\+LS context \\
+\hline
+\mbox{\tt in}  & {\em message} & Incoming Certificate\+Request message to parse \\
+\hline
+\mbox{\tt in}  & {\em length} & Message length \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 1400 of file tls\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+1402 \{
+1403    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+1404    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+1405    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} j;
+1406    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1407    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} certTypesLen;
+1408    \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\_t} acceptable;
+1409    \textcolor{keyword}{const} \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *\hyperlink{ndp_8h_a6519522ad9a6f45e7a8d25d31392a977}{p};
+1410    \textcolor{keyword}{const} \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *certTypes;
+1411    \textcolor{keyword}{const} \hyperlink{tls_8h_a96ef533723d450ad6c4903a78c756f9e}{TlsCertAuthorities} *certAuthorities;
+1412    \textcolor{keyword}{const} \hyperlink{tls_8h_a52f8ea223987ee1e857b6687f38d3888}{TlsSignHashAlgos} *supportedSignAlgos;
+1413    \textcolor{keyword}{const} \hyperlink{tls_8h_a52f8ea223987ee1e857b6687f38d3888}{TlsSignHashAlgos} *supportedCertSignAlgos;
+1414 
+1415    \textcolor{comment}{//Debug message}
+1416    \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"CertificateRequest message received (%"} \hyperlink{compiler__port_8h_a2b7b0557dc6cd786df02dafbb51f5292}{PRIuSIZE} \textcolor{stringliteral}{" bytes)...\(\backslash\)r\(\backslash\)n"}, 
+      \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length});
+1417    \hyperlink{debug_8h_a1f71019169d85407d8827300ed43bdf0}{TRACE\_DEBUG\_ARRAY}(\textcolor{stringliteral}{"  "}, \hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length});
+1418 
+1419    \textcolor{comment}{//Check key exchange method}
+1420    \textcolor{keywordflow}{if}(context->keyExchMethod == \hyperlink{tls_8h_a10c9078f6485419c2b8644b573ef0b75aed949c3b521aa45b6685846fa9a3b8f0}{TLS\_KEY\_EXCH\_PSK} ||
+1421       context->keyExchMethod == \hyperlink{tls_8h_a10c9078f6485419c2b8644b573ef0b75a33535bd987c46f1ba621d6e28b0b3bfa}{TLS\_KEY\_EXCH\_DH\_ANON} ||
+1422       context->keyExchMethod == \hyperlink{tls_8h_a10c9078f6485419c2b8644b573ef0b75a32a252b7c7befeccaa088290d6a71dfe}{TLS\_KEY\_EXCH\_DHE\_PSK} ||
+1423       context->keyExchMethod == \hyperlink{tls_8h_a10c9078f6485419c2b8644b573ef0b75a895e0af86b29640264f699235be22953}{TLS\_KEY\_EXCH\_ECDH\_ANON} ||
+1424       context->keyExchMethod == \hyperlink{tls_8h_a10c9078f6485419c2b8644b573ef0b75aebba2060dba7ad92238668218f3a6520}{TLS\_KEY\_EXCH\_ECDHE\_PSK})
+1425    \{
+1426       \textcolor{comment}{//It is a fatal handshake failure alert for an anonymous server to}
+1427       \textcolor{comment}{//request client authentication}
+1428       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca70d82df53df56c9d4a943d5539ccc4bc}{ERROR\_HANDSHAKE\_FAILED};
+1429    \}
+1430    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->keyExchMethod == \hyperlink{tls_8h_a10c9078f6485419c2b8644b573ef0b75a38a6d0551d2fbd9480b6c233c1242d4c}{TLS\_KEY\_EXCH\_RSA\_PSK})
+1431    \{
+1432       \textcolor{comment}{//If no PSK identity hint is provided by the server, then the}
+1433       \textcolor{comment}{//ServerKeyExchange message is omitted}
+1434       \textcolor{keywordflow}{if}(context->state != \hyperlink{tls_8h_a02bb4c8aa7988b33fe4d4836d8ff4a4da8ed746876fcd686d131f90d04809fd32}{TLS\_STATE\_SERVER\_KEY\_EXCHANGE} &&
+1435          context->state != \hyperlink{tls_8h_a02bb4c8aa7988b33fe4d4836d8ff4a4dae316fcecd0b42b329c94f5c3102d8783}{TLS\_STATE\_CERTIFICATE\_REQUEST})
+1436       \{
+1437          \textcolor{comment}{//Handshake failure}
+1438          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cafb4f7e4640c9d495bf35ee668d620b17}{ERROR\_UNEXPECTED\_MESSAGE};
+1439       \}
+1440    \}
+1441    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->keyExchMethod == \hyperlink{tls_8h_a10c9078f6485419c2b8644b573ef0b75a45a7da7dfb7acad023f5c590b2f08552}{TLS13\_KEY\_EXCH\_PSK} ||
+1442       context->keyExchMethod == \hyperlink{tls_8h_a10c9078f6485419c2b8644b573ef0b75a300f3d4752b9af8484b4712f8b26f236}{TLS13\_KEY\_EXCH\_PSK\_DHE} ||
+1443       context->keyExchMethod == \hyperlink{tls_8h_a10c9078f6485419c2b8644b573ef0b75aabf2a8493da96f9c91cb9578ef076424}{TLS13\_KEY\_EXCH\_PSK\_ECDHE})
+1444    \{
+1445       \textcolor{comment}{//Servers which are authenticating with a PSK must not send the}
+1446       \textcolor{comment}{//CertificateRequest message in the main handshake}
+1447       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca70d82df53df56c9d4a943d5539ccc4bc}{ERROR\_HANDSHAKE\_FAILED};
+1448    \}
+1449    \textcolor{keywordflow}{else}
+1450    \{
+1451       \textcolor{comment}{//Check current state}
+1452       \textcolor{keywordflow}{if}(context->state != \hyperlink{tls_8h_a02bb4c8aa7988b33fe4d4836d8ff4a4dae316fcecd0b42b329c94f5c3102d8783}{TLS\_STATE\_CERTIFICATE\_REQUEST})
+1453          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cafb4f7e4640c9d495bf35ee668d620b17}{ERROR\_UNEXPECTED\_MESSAGE};
+1454    \}
+1455 
+1456    \textcolor{comment}{//The server requests a certificate from the client, so that connection}
+1457    \textcolor{comment}{//can be mutually authenticated}
+1458    context->clientCertRequested = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+1459 
+1460    \textcolor{comment}{//Point to the beginning of the handshake message}
+1461    p = (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *) \hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message};
+1462 
+1463 \textcolor{preprocessor}{#if (TLS\_MAX\_VERSION >= SSL\_VERSION\_3\_0 && TLS\_MIN\_VERSION <= TLS\_VERSION\_1\_2)}
+1464    \textcolor{comment}{//Version of TLS prior to TLS 1.3?}
+1465    \textcolor{keywordflow}{if}(context->version <= \hyperlink{tls_8h_af97e91c5fb95fb0957e5f37ec9e9eae8}{TLS\_VERSION\_1\_2})
+1466    \{
+1467       \textcolor{comment}{//Check the length of the ServerKeyExchange message}
+1468       \textcolor{keywordflow}{if}(\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} < \textcolor{keyword}{sizeof}(\hyperlink{tls_8h_a207a823320ed0904352de25ac220b5d8}{TlsCertificateRequest}))
+1469          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca9468adacac8c37004024dd0095ba2768}{ERROR\_DECODING\_FAILED};
+1470 
+1471       \textcolor{comment}{//Remaining bytes to process}
+1472       \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} -= \textcolor{keyword}{sizeof}(\hyperlink{tls_8h_a207a823320ed0904352de25ac220b5d8}{TlsCertificateRequest});
+1473 
+1474       \textcolor{comment}{//Retrieve the length of the list}
+1475       n = \hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}->certificateTypesLen;
+1476       \textcolor{comment}{//Malformed CertificateRequest message?}
+1477       \textcolor{keywordflow}{if}(n > \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length})
+1478          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca9468adacac8c37004024dd0095ba2768}{ERROR\_DECODING\_FAILED};
+1479 
+1480       \textcolor{comment}{//Point to the list of supported certificate types}
+1481       certTypes = \hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}->certificateTypes;
+1482       certTypesLen = \hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}->certificateTypesLen;
+1483 
+1484       \textcolor{comment}{//Point to the next field}
+1485       p += \textcolor{keyword}{sizeof}(\hyperlink{tls_8h_a207a823320ed0904352de25ac220b5d8}{TlsCertificateRequest}) + n;
+1486       \textcolor{comment}{//Remaining bytes to process}
+1487       \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} -= \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1488 
+1489       \textcolor{comment}{//TLS 1.2 currently selected?}
+1490       \textcolor{keywordflow}{if}(context->version == \hyperlink{tls_8h_af97e91c5fb95fb0957e5f37ec9e9eae8}{TLS\_VERSION\_1\_2})
+1491       \{
+1492          \textcolor{comment}{//Malformed CertificateRequest message?}
+1493          \textcolor{keywordflow}{if}(\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} < \textcolor{keyword}{sizeof}(\hyperlink{tls_8h_a52f8ea223987ee1e857b6687f38d3888}{TlsSignHashAlgos}))
+1494             \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca9468adacac8c37004024dd0095ba2768}{ERROR\_DECODING\_FAILED};
+1495 
+1496          \textcolor{comment}{//Point to the list of the hash/signature algorithm pairs}
+1497          supportedSignAlgos = (\hyperlink{tls_8h_a52f8ea223987ee1e857b6687f38d3888}{TlsSignHashAlgos} *) p;
+1498          \textcolor{comment}{//Remaining bytes to process}
+1499          \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} -= \textcolor{keyword}{sizeof}(\hyperlink{tls_8h_a52f8ea223987ee1e857b6687f38d3888}{TlsSignHashAlgos});
+1500 
+1501          \textcolor{comment}{//Retrieve the length of the list}
+1502          n = \hyperlink{cpu__endian_8h_a9312c6eb72e64f748ae0d0e0dc3ec9b9}{ntohs}(supportedSignAlgos->length);
+1503          \textcolor{comment}{//Malformed CertificateRequest message?}
+1504          \textcolor{keywordflow}{if}(n > \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length})
+1505             \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca9468adacac8c37004024dd0095ba2768}{ERROR\_DECODING\_FAILED};
+1506 
+1507          \textcolor{comment}{//The supported\_signature\_algorithms field cannot be emtpy (refer to}
+1508          \textcolor{comment}{//RFC 5246, section 7.4.4)}
+1509          \textcolor{keywordflow}{if}(n == 0)
+1510             \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca9468adacac8c37004024dd0095ba2768}{ERROR\_DECODING\_FAILED};
+1511          \textcolor{keywordflow}{if}((n % 2) != 0)
+1512             \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca9468adacac8c37004024dd0095ba2768}{ERROR\_DECODING\_FAILED};
+1513 
+1514          \textcolor{comment}{//Point to the next field}
+1515          p += \textcolor{keyword}{sizeof}(\hyperlink{tls_8h_a52f8ea223987ee1e857b6687f38d3888}{TlsSignHashAlgos}) + n;
+1516          \textcolor{comment}{//Remaining bytes to process}
+1517          \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} -= \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1518       \}
+1519       \textcolor{keywordflow}{else}
+1520       \{
+1521          \textcolor{comment}{//Implementations prior to TLS 1.2 do not include a list of supported}
+1522          \textcolor{comment}{//hash/signature algorithm pairs}
+1523          supportedSignAlgos = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+1524       \}
+1525 
+1526       \textcolor{comment}{//List of signature algorithms that may appear in X.509 certificates}
+1527       supportedCertSignAlgos = supportedSignAlgos;
+1528 
+1529       \textcolor{comment}{//Malformed CertificateRequest message?}
+1530       \textcolor{keywordflow}{if}(\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} < \textcolor{keyword}{sizeof}(\hyperlink{tls_8h_a96ef533723d450ad6c4903a78c756f9e}{TlsCertAuthorities}))
+1531          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca9468adacac8c37004024dd0095ba2768}{ERROR\_DECODING\_FAILED};
+1532 
+1533       \textcolor{comment}{//Point to the list of acceptable certificate authorities}
+1534       certAuthorities = (\hyperlink{tls_8h_a96ef533723d450ad6c4903a78c756f9e}{TlsCertAuthorities} *) p;
+1535       \textcolor{comment}{//Remaining bytes to process}
+1536       \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} -= \textcolor{keyword}{sizeof}(\hyperlink{tls_8h_a96ef533723d450ad6c4903a78c756f9e}{TlsCertAuthorities});
+1537 
+1538       \textcolor{comment}{//Retrieve the length of the list}
+1539       n = \hyperlink{cpu__endian_8h_a9312c6eb72e64f748ae0d0e0dc3ec9b9}{ntohs}(certAuthorities->length);
+1540       \textcolor{comment}{//Malformed CertificateRequest message?}
+1541       \textcolor{keywordflow}{if}(n != \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length})
+1542          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca9468adacac8c37004024dd0095ba2768}{ERROR\_DECODING\_FAILED};
+1543    \}
+1544    \textcolor{keywordflow}{else}
+1545 \textcolor{preprocessor}{#endif}
+1546 \textcolor{preprocessor}{#if (TLS\_MAX\_VERSION >= TLS\_VERSION\_1\_3 && TLS\_MIN\_VERSION <= TLS\_VERSION\_1\_3)}
+1547    \textcolor{comment}{//TLS 1.3 currently selected?}
+1548    \textcolor{keywordflow}{if}(context->version == \hyperlink{tls_8h_ab44dc642afbfbd72926ab1f94634cd4d}{TLS\_VERSION\_1\_3})
+1549    \{
+1550       \hyperlink{structTlsHelloExtensions}{TlsHelloExtensions} \hyperlink{tls13__misc_8h_a7b8cc84c920376c616d85d575080d28e}{extensions};
+1551       \textcolor{keyword}{const} \hyperlink{tls13__misc_8h_a7a73aa4b5d0ca0a547bc83636546f438}{Tls13CertRequestContext} *certRequestContext;
+1552 
+1553       \textcolor{comment}{//Unused parameters}
+1554       certTypes = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+1555       certTypesLen = 0;
+1556       certAuthorities = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+1557 
+1558       \textcolor{comment}{//Malformed CertificateRequest message?}
+1559       \textcolor{keywordflow}{if}(\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} < \textcolor{keyword}{sizeof}(\hyperlink{tls13__misc_8h_a7a73aa4b5d0ca0a547bc83636546f438}{Tls13CertRequestContext}))
+1560          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca9468adacac8c37004024dd0095ba2768}{ERROR\_DECODING\_FAILED};
+1561 
+1562       \textcolor{comment}{//Point to the certificate\_request\_context field}
+1563       certRequestContext = (\hyperlink{tls13__misc_8h_a7a73aa4b5d0ca0a547bc83636546f438}{Tls13CertRequestContext} *) p;
+1564       \textcolor{comment}{//Remaining bytes to process}
+1565       \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} -= \textcolor{keyword}{sizeof}(\hyperlink{tls13__misc_8h_a7a73aa4b5d0ca0a547bc83636546f438}{Tls13CertRequestContext});
+1566 
+1567       \textcolor{comment}{//Retrieve the length of the field}
+1568       n = certRequestContext->length;
+1569       \textcolor{comment}{//Malformed CertificateRequest message?}
+1570       \textcolor{keywordflow}{if}(n > \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length})
+1571          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca9468adacac8c37004024dd0095ba2768}{ERROR\_DECODING\_FAILED};
+1572 
+1573       \textcolor{comment}{//The certificate\_request\_context field shall be zero length unless}
+1574       \textcolor{comment}{//used for the post-handshake authentication exchange}
+1575       \textcolor{keywordflow}{if}(certRequestContext->length != 0)
+1576          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca152b24f57c941cb736772696416eb7c2}{ERROR\_ILLEGAL\_PARAMETER};
+1577 
+1578       \textcolor{comment}{//Point to the next field}
+1579       p += \textcolor{keyword}{sizeof}(\hyperlink{tls13__misc_8h_a7a73aa4b5d0ca0a547bc83636546f438}{Tls13CertRequestContext}) + n;
+1580       \textcolor{comment}{//Remaining bytes to process}
+1581       \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} -= \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1582 
+1583       \textcolor{comment}{//The extensions describe the parameters of the certificate being}
+1584       \textcolor{comment}{//requested}
+1585       error = \hyperlink{tls__extensions_8c_a44cc44e114cbc3c28245bdfa6546cb5c}{tlsParseHelloExtensions}(
+      \hyperlink{tls_8h_aea257240929f03e1e6ea3c7ab65ddb9badf4f63379ab93eec891cdbae8f8a2717}{TLS\_TYPE\_CERTIFICATE\_REQUEST}, p,
+1586          \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, &extensions);
+1587       \textcolor{comment}{//Any error to report?}
+1588       \textcolor{keywordflow}{if}(error)
+1589          \textcolor{keywordflow}{return} error;
+1590 
+1591       \textcolor{comment}{//Check the list of extensions offered by the server}
+1592       error = \hyperlink{tls__extensions_8c_a67e977c5311fc3d9b3503ca226f2ea7a}{tlsCheckHelloExtensions}(
+      \hyperlink{tls_8h_aea257240929f03e1e6ea3c7ab65ddb9badf4f63379ab93eec891cdbae8f8a2717}{TLS\_TYPE\_CERTIFICATE\_REQUEST},
+1593          context->version, &extensions);
+1594       \textcolor{comment}{//Any error to report?}
+1595       \textcolor{keywordflow}{if}(error)
+1596          \textcolor{keywordflow}{return} error;
+1597 
+1598       \textcolor{comment}{//The SignatureAlgorithms extension must be specified (refer to RFC 8446,}
+1599       \textcolor{comment}{//section 4.3.2)}
+1600       \textcolor{keywordflow}{if}(extensions.\hyperlink{structTlsHelloExtensions_a7903ad9cf319d5f27990432c4e719544}{signAlgoList} == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1601          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca2077bd85b4a42b704992210364bfb334}{ERROR\_MISSING\_EXTENSION};
+1602 
+1603       \textcolor{comment}{//Point to the list of the hash/signature algorithm pairs that}
+1604       \textcolor{comment}{//the server is able to verify}
+1605       supportedSignAlgos = extensions.\hyperlink{structTlsHelloExtensions_a7903ad9cf319d5f27990432c4e719544}{signAlgoList};
+1606 
+1607       \textcolor{comment}{//If no SignatureAlgorithmsCert extension is present, then the}
+1608       \textcolor{comment}{//SignatureAlgorithms extension also applies to signatures appearing}
+1609       \textcolor{comment}{//in certificates (RFC 8446, section 4.2.3)}
+1610       \textcolor{keywordflow}{if}(extensions.\hyperlink{structTlsHelloExtensions_a640637c05b8aec2ef15420d5005830cb}{certSignAlgoList} != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1611          supportedCertSignAlgos = extensions.\hyperlink{structTlsHelloExtensions_a640637c05b8aec2ef15420d5005830cb}{certSignAlgoList};
+1612       \textcolor{keywordflow}{else}
+1613          supportedCertSignAlgos = extensions.\hyperlink{structTlsHelloExtensions_a7903ad9cf319d5f27990432c4e719544}{signAlgoList};
+1614    \}
+1615    \textcolor{keywordflow}{else}
+1616 \textcolor{preprocessor}{#endif}
+1617    \textcolor{comment}{//Invalid TLS version?}
+1618    \{
+1619       \textcolor{comment}{//Report an error}
+1620       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cafc403a048723cbb5e5ade33caa70c48b}{ERROR\_INVALID\_VERSION};
+1621    \}
+1622 
+1623    \textcolor{comment}{//No suitable certificate has been found for the moment}
+1624    context->cert = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+1625    acceptable = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+1626 
+1627    \textcolor{comment}{//Select the most appropriate certificate (2-pass process)}
+1628    \textcolor{keywordflow}{for}(i = 0; i < 2 && !acceptable; i++)
+1629    \{
+1630       \textcolor{comment}{//Loop through the list of available certificates}
+1631       \textcolor{keywordflow}{for}(j = 0; j < context->numCerts && !acceptable; j++)
+1632       \{
+1633          \textcolor{comment}{//Check whether the current certificate is suitable}
+1634          acceptable = \hyperlink{tls__certificate_8c_a31f6bd0b16ae44ecc92ac37b5eb39d6f}{tlsIsCertificateAcceptable}(context, &context->certs[j],
+1635             certTypes, certTypesLen, supportedSignAlgos, supportedCertSignAlgos,
+1636             \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, certAuthorities);
+1637 
+1638          \textcolor{comment}{//TLS 1.2 and TLS 1.3 require additional examinations}
+1639          \textcolor{keywordflow}{if}(acceptable && context->version >= \hyperlink{tls_8h_af97e91c5fb95fb0957e5f37ec9e9eae8}{TLS\_VERSION\_1\_2})
+1640          \{
+1641             \textcolor{comment}{//The hash and signature algorithms used in the signature of the}
+1642             \textcolor{comment}{//CertificateVerify message must be one of those present in the}
+1643             \textcolor{comment}{//SupportedSignatureAlgorithms field}
+1644             error = \hyperlink{tls__signature_8c_ad721a7cba2bdeb68ea9f4a43c9b6c2cc}{tlsSelectSignatureScheme}(context, &context->certs[j],
+1645                supportedSignAlgos);
+1646 
+1647             \textcolor{comment}{//Check status code}
+1648             \textcolor{keywordflow}{if}(error)
+1649             \{
+1650                acceptable = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+1651             \}
+1652          \}
+1653 
+1654          \textcolor{comment}{//If all the requirements were met, the certificate can be used}
+1655          \textcolor{keywordflow}{if}(acceptable)
+1656          \{
+1657             context->cert = &context->certs[j];
+1658          \}
+1659       \}
+1660 
+1661       \textcolor{comment}{//The second pass relaxes the constraints}
+1662       supportedCertSignAlgos = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+1663       certAuthorities = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+1664    \}
+1665 
+1666    \textcolor{comment}{//Version of TLS prior to TLS 1.3?}
+1667    \textcolor{keywordflow}{if}(context->version <= \hyperlink{tls_8h_af97e91c5fb95fb0957e5f37ec9e9eae8}{TLS\_VERSION\_1\_2})
+1668    \{
+1669       \textcolor{comment}{//Wait for a ServerHelloDone message}
+1670       context->state = \hyperlink{tls_8h_a02bb4c8aa7988b33fe4d4836d8ff4a4dacfeeaa75eec1aecc4c975236b2af1f9c}{TLS\_STATE\_SERVER\_HELLO\_DONE};
+1671    \}
+1672    \textcolor{keywordflow}{else}
+1673    \{
+1674       \textcolor{comment}{//Wait for a Certificate message}
+1675       context->state = \hyperlink{tls_8h_a02bb4c8aa7988b33fe4d4836d8ff4a4da09790eaca7bac9c6bfd5b3e0775b6074}{TLS\_STATE\_SERVER\_CERTIFICATE};
+1676    \}
+1677 
+1678    \textcolor{comment}{//Successful processing}
+1679    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+1680 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{tls__client_8c_a81ca7c5ae469fee80d67742b49cd5329}\label{tls__client_8c_a81ca7c5ae469fee80d67742b49cd5329}} 
+\index{tls\+\_\+client.\+c@{tls\+\_\+client.\+c}!tls\+Parse\+Hello\+Request@{tls\+Parse\+Hello\+Request}}
+\index{tls\+Parse\+Hello\+Request@{tls\+Parse\+Hello\+Request}!tls\+\_\+client.\+c@{tls\+\_\+client.\+c}}
+\subsubsection{\texorpdfstring{tls\+Parse\+Hello\+Request()}{tlsParseHelloRequest()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} tls\+Parse\+Hello\+Request (\begin{DoxyParamCaption}\item[{\hyperlink{tls_8h_ac09f7a286c0cdf9b07ee1edd107946f5}{Tls\+Context} $\ast$}]{context,  }\item[{const \hyperlink{tls_8h_a5a660d7247105e377fe2e1ed95ff8ff7}{Tls\+Hello\+Request} $\ast$}]{message,  }\item[{size\+\_\+t}]{length }\end{DoxyParamCaption})}
+
+
+
+Parse Hello\+Request message. 
+
+Hello\+Request is a simple notification that the client should begin the negotiation process anew. In response, the client should send a Client\+Hello message when convenient
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the T\+LS context \\
+\hline
+\mbox{\tt in}  & {\em message} & Incoming Hello\+Request message to parse \\
+\hline
+\mbox{\tt in}  & {\em length} & Message length \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 800 of file tls\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+802 \{
+803    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+804 
+805    \textcolor{comment}{//Debug message}
+806    \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"HelloRequest message received (%"} \hyperlink{compiler__port_8h_a2b7b0557dc6cd786df02dafbb51f5292}{PRIuSIZE} \textcolor{stringliteral}{" bytes)...\(\backslash\)r\(\backslash\)n"}, 
+      \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length});
+807    \hyperlink{debug_8h_a1f71019169d85407d8827300ed43bdf0}{TRACE\_DEBUG\_ARRAY}(\textcolor{stringliteral}{"  "}, \hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length});
+808 
+809    \textcolor{comment}{//Check TLS version}
+810    \textcolor{keywordflow}{if}(context->version > \hyperlink{tls_8h_af97e91c5fb95fb0957e5f37ec9e9eae8}{TLS\_VERSION\_1\_2})
+811       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cafb4f7e4640c9d495bf35ee668d620b17}{ERROR\_UNEXPECTED\_MESSAGE};
+812 
+813    \textcolor{comment}{//The HelloRequest message does not contain any data}
+814    \textcolor{keywordflow}{if}(\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} != 0)
+815       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca9468adacac8c37004024dd0095ba2768}{ERROR\_DECODING\_FAILED};
+816 
+817    \textcolor{comment}{//Check current state}
+818    \textcolor{keywordflow}{if}(context->state == \hyperlink{tls_8h_a02bb4c8aa7988b33fe4d4836d8ff4a4da7ff3a76e0b1787b6d0026e533a89649b}{TLS\_STATE\_APPLICATION\_DATA})
+819    \{
+820 \textcolor{preprocessor}{#if (TLS\_SECURE\_RENEGOTIATION\_SUPPORT == ENABLED)}
+821       \textcolor{comment}{//Check whether the secure\_renegociation flag is set}
+822       \textcolor{keywordflow}{if}(context->secureRenegoEnabled && context->secureRenegoFlag)
+823       \{
+824          \textcolor{comment}{//HelloRequest is a simple notification that the client should begin}
+825          \textcolor{comment}{//the negotiation process anew}
+826          context->state = \hyperlink{tls_8h_a02bb4c8aa7988b33fe4d4836d8ff4a4dade201db86ae38480c06696f3a48e0170}{TLS\_STATE\_CLIENT\_HELLO};
+827 
+828          \textcolor{comment}{//Continue processing}
+829          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+830       \}
+831       \textcolor{keywordflow}{else}
+832 \textcolor{preprocessor}{#endif}
+833       \{
+834          \textcolor{comment}{//If the connection's secure\_renegotiation flag is set to FALSE, it}
+835          \textcolor{comment}{//is recommended that clients refuse this renegotiation request (refer}
+836          \textcolor{comment}{//to RFC 5746, section 4.2)}
+837          error = \hyperlink{tls__common_8c_a8ce30f40a9d800f679d6fa948993a7e5}{tlsSendAlert}(context, \hyperlink{tls_8h_ac8e8e96f1ba392878e3630791353d202adfdcd7c054d6ad81223ced6d22195bf5}{TLS\_ALERT\_LEVEL\_FATAL},
+838             \hyperlink{tls_8h_a1c40e8edb44cd99ad7f67b97690aa8dba19e891a2ed423d1799f73d08e7c604f4}{TLS\_ALERT\_NO\_RENEGOTIATION});
+839       \}
+840    \}
+841    \textcolor{keywordflow}{else}
+842    \{
+843       \textcolor{comment}{//The HelloRequest message can be sent at any time but it should be}
+844       \textcolor{comment}{//ignored by the client if it arrives in the middle of a handshake}
+845       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+846    \}
+847 
+848    \textcolor{comment}{//Return status code}
+849    \textcolor{keywordflow}{return} error;
+850 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{tls__client_8c_a8a87bf037ce4a5d6f43a3a4973956a2b}\label{tls__client_8c_a8a87bf037ce4a5d6f43a3a4973956a2b}} 
+\index{tls\+\_\+client.\+c@{tls\+\_\+client.\+c}!tls\+Parse\+Server\+Hello@{tls\+Parse\+Server\+Hello}}
+\index{tls\+Parse\+Server\+Hello@{tls\+Parse\+Server\+Hello}!tls\+\_\+client.\+c@{tls\+\_\+client.\+c}}
+\subsubsection{\texorpdfstring{tls\+Parse\+Server\+Hello()}{tlsParseServerHello()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} tls\+Parse\+Server\+Hello (\begin{DoxyParamCaption}\item[{\hyperlink{tls_8h_ac09f7a286c0cdf9b07ee1edd107946f5}{Tls\+Context} $\ast$}]{context,  }\item[{const \hyperlink{tls_8h_a3b37d03b4f71ce65b23f369d2040a245}{Tls\+Server\+Hello} $\ast$}]{message,  }\item[{size\+\_\+t}]{length }\end{DoxyParamCaption})}
+
+
+
+Parse Server\+Hello message. 
+
+The server will send this message in response to a Client\+Hello message when it was able to find an acceptable set of algorithms. If it cannot find such a match, it will respond with a handshake failure alert
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the T\+LS context \\
+\hline
+\mbox{\tt in}  & {\em message} & Incoming Server\+Hello message to parse \\
+\hline
+\mbox{\tt in}  & {\em length} & Message length \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 867 of file tls\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+869 \{
+870    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+871    \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t} \hyperlink{tls13__misc_8h_ac4845d111b268869455afbd35c5f477b}{cipherSuite};
+872    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} compressMethod;
+873    \textcolor{keyword}{const} \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *\hyperlink{ndp_8h_a6519522ad9a6f45e7a8d25d31392a977}{p};
+874    \hyperlink{structTlsHelloExtensions}{TlsHelloExtensions} \hyperlink{tls13__misc_8h_a7b8cc84c920376c616d85d575080d28e}{extensions};
+875 
+876    \textcolor{comment}{//Debug message}
+877    \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"ServerHello message received (%"} \hyperlink{compiler__port_8h_a2b7b0557dc6cd786df02dafbb51f5292}{PRIuSIZE} \textcolor{stringliteral}{" bytes)...\(\backslash\)r\(\backslash\)n"}, 
+      \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length});
+878    \hyperlink{debug_8h_a1f71019169d85407d8827300ed43bdf0}{TRACE\_DEBUG\_ARRAY}(\textcolor{stringliteral}{"  "}, \hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length});
+879 
+880    \textcolor{comment}{//Check current state}
+881    \textcolor{keywordflow}{if}(context->state != \hyperlink{tls_8h_a02bb4c8aa7988b33fe4d4836d8ff4a4da69787ce8e1f218e8e47defe7af1c601a}{TLS\_STATE\_SERVER\_HELLO} &&
+882       context->state != \hyperlink{tls_8h_a02bb4c8aa7988b33fe4d4836d8ff4a4da22971523377f52c52b251553e373b4c8}{TLS\_STATE\_SERVER\_HELLO\_2} &&
+883       context->state != \hyperlink{tls_8h_a02bb4c8aa7988b33fe4d4836d8ff4a4dac2a251e510ed5a202b13f7fe615767cc}{TLS\_STATE\_SERVER\_HELLO\_3})
+884    \{
+885       \textcolor{comment}{//Report an error}
+886       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cafb4f7e4640c9d495bf35ee668d620b17}{ERROR\_UNEXPECTED\_MESSAGE};
+887    \}
+888 
+889    \textcolor{comment}{//Check the length of the ServerHello message}
+890    \textcolor{keywordflow}{if}(\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} < \textcolor{keyword}{sizeof}(\hyperlink{tls_8h_a3b37d03b4f71ce65b23f369d2040a245}{TlsServerHello}))
+891       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca9468adacac8c37004024dd0095ba2768}{ERROR\_DECODING\_FAILED};
+892 
+893    \textcolor{comment}{//Point to the session ID}
+894    p = \hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}->sessionId;
+895    \textcolor{comment}{//Remaining bytes to process}
+896    \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} -= \textcolor{keyword}{sizeof}(\hyperlink{tls_8h_a3b37d03b4f71ce65b23f369d2040a245}{TlsServerHello});
+897 
+898    \textcolor{comment}{//Check the length of the session ID}
+899    \textcolor{keywordflow}{if}(\hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}->sessionIdLen > \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length})
+900       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca9468adacac8c37004024dd0095ba2768}{ERROR\_DECODING\_FAILED};
+901    \textcolor{keywordflow}{if}(\hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}->sessionIdLen > 32)
+902       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca9468adacac8c37004024dd0095ba2768}{ERROR\_DECODING\_FAILED};
+903 
+904    \textcolor{comment}{//Point to the next field}
+905    p += \hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}->sessionIdLen;
+906    \textcolor{comment}{//Remaining bytes to process}
+907    \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} -= \hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}->sessionIdLen;
+908 
+909    \textcolor{comment}{//Malformed ServerHello message?}
+910    \textcolor{keywordflow}{if}(\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} < \textcolor{keyword}{sizeof}(\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t}))
+911       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca9468adacac8c37004024dd0095ba2768}{ERROR\_DECODING\_FAILED};
+912 
+913    \textcolor{comment}{//Get the negotiated cipher suite}
+914    cipherSuite = \hyperlink{cpu__endian_8h_ae21854587c05993c850b537156470088}{LOAD16BE}(p);
+915    \textcolor{comment}{//Point to the next field}
+916    p += \textcolor{keyword}{sizeof}(\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t});
+917    \textcolor{comment}{//Remaining bytes to process}
+918    \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} -= \textcolor{keyword}{sizeof}(\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t});
+919 
+920    \textcolor{comment}{//Malformed ServerHello message?}
+921    \textcolor{keywordflow}{if}(\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} < \textcolor{keyword}{sizeof}(\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t}))
+922       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca9468adacac8c37004024dd0095ba2768}{ERROR\_DECODING\_FAILED};
+923 
+924    \textcolor{comment}{//Get the negotiated compression method}
+925    compressMethod = *\hyperlink{ndp_8h_a6519522ad9a6f45e7a8d25d31392a977}{p};
+926    \textcolor{comment}{//Point to the next field}
+927    p += \textcolor{keyword}{sizeof}(\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t});
+928    \textcolor{comment}{//Remaining bytes to process}
+929    \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} -= \textcolor{keyword}{sizeof}(\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t});
+930 
+931    \textcolor{comment}{//Server version}
+932    \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"  serverVersion = 0x%04"} PRIX16 \textcolor{stringliteral}{" (%s)\(\backslash\)r\(\backslash\)n"},
+933       \hyperlink{cpu__endian_8h_a9312c6eb72e64f748ae0d0e0dc3ec9b9}{ntohs}(\hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}->serverVersion),
+934       \hyperlink{tls__misc_8c_ae9e2241e80727e56d419facaeb83b91e}{tlsGetVersionName}(\hyperlink{cpu__endian_8h_a9312c6eb72e64f748ae0d0e0dc3ec9b9}{ntohs}(\hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}->serverVersion)));
+935 
+936    \textcolor{comment}{//Server random value}
+937    \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"  random\(\backslash\)r\(\backslash\)n"});
+938    \hyperlink{debug_8h_a291f0d17dd4473553319c186e48ed439}{TRACE\_INFO\_ARRAY}(\textcolor{stringliteral}{"    "}, \hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}->random, 32);
+939 
+940    \textcolor{comment}{//Session identifier}
+941    \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"  sessionId\(\backslash\)r\(\backslash\)n"});
+942    \hyperlink{debug_8h_a291f0d17dd4473553319c186e48ed439}{TRACE\_INFO\_ARRAY}(\textcolor{stringliteral}{"    "}, \hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}->sessionId, \hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}->sessionIdLen);
+943 
+944    \textcolor{comment}{//Cipher suite identifier}
+945    \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"  cipherSuite = 0x%04"} PRIX16 \textcolor{stringliteral}{" (%s)\(\backslash\)r\(\backslash\)n"},
+946       cipherSuite, \hyperlink{tls__cipher__suites_8c_a018dae46ac8e4443b69ed34bf3ea69c8}{tlsGetCipherSuiteName}(cipherSuite));
+947 
+948    \textcolor{comment}{//Compression method}
+949    \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"  compressMethod = 0x%02"} PRIX8 \textcolor{stringliteral}{"\(\backslash\)r\(\backslash\)n"}, compressMethod);
+950 
+951    \textcolor{comment}{//The CRIME exploit takes advantage of TLS compression, so conservative}
+952    \textcolor{comment}{//implementations do not accept compression at the TLS level}
+953    \textcolor{keywordflow}{if}(compressMethod != \hyperlink{tls_8h_a27ce2afc296aeccf0726bf834d2df74da9e6d39fe3397b578757793795b18d882}{TLS\_COMPRESSION\_METHOD\_NULL})
+954       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca152b24f57c941cb736772696416eb7c2}{ERROR\_ILLEGAL\_PARAMETER};
+955 
+956    \textcolor{comment}{//Parse the list of extensions offered by the server}
+957    error = \hyperlink{tls__extensions_8c_a44cc44e114cbc3c28245bdfa6546cb5c}{tlsParseHelloExtensions}(\hyperlink{tls_8h_aea257240929f03e1e6ea3c7ab65ddb9ba0ec92de95e5ea4899b69affe1bc7aeac}{TLS\_TYPE\_SERVER\_HELLO}, p, 
+      \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length},
+958       &extensions);
+959    \textcolor{comment}{//Any error to report?}
+960    \textcolor{keywordflow}{if}(error)
+961       \textcolor{keywordflow}{return} error;
+962 
+963    \textcolor{comment}{//TLS protocol?}
+964    \textcolor{keywordflow}{if}(context->transportProtocol == \hyperlink{tls_8h_a25cb7e3df9004160eb21eac9377dc89fa2fbbbd6c318570d570225144f3c6c244}{TLS\_TRANSPORT\_PROTOCOL\_STREAM})
+965    \{
+966       \textcolor{comment}{//Check whether the ServerHello message is received in response to}
+967       \textcolor{comment}{//the initial ClientHello}
+968       \textcolor{keywordflow}{if}(context->state != \hyperlink{tls_8h_a02bb4c8aa7988b33fe4d4836d8ff4a4da22971523377f52c52b251553e373b4c8}{TLS\_STATE\_SERVER\_HELLO\_2})
+969       \{
+970          \textcolor{comment}{//Release transcript hash context}
+971          \hyperlink{tls__transcript__hash_8c_a31d3870ea2bdcaee1ca450c11db2cc94}{tlsFreeTranscriptHash}(context);
+972 
+973          \textcolor{comment}{//Format initial ClientHello message}
+974          error = \hyperlink{tls__client__misc_8c_a1f7387a983a7c0ff30a699dd98d7d0a6}{tlsFormatInitialClientHello}(context);
+975          \textcolor{comment}{//Any error to report?}
+976          \textcolor{keywordflow}{if}(error)
+977             \textcolor{keywordflow}{return} error;
+978       \}
+979    \}
+980 
+981    \textcolor{comment}{//Select TLS version}
+982    error = \hyperlink{tls__client__misc_8c_af15e95c00232215557032412641a9c96}{tlsSelectClientVersion}(context, \hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}, &extensions);
+983    \textcolor{comment}{//TLS version not supported?}
+984    \textcolor{keywordflow}{if}(error)
+985       \textcolor{keywordflow}{return} error;
+986 
+987    \textcolor{comment}{//Check the list of extensions offered by the server}
+988    error = \hyperlink{tls__extensions_8c_a67e977c5311fc3d9b3503ca226f2ea7a}{tlsCheckHelloExtensions}(\hyperlink{tls_8h_aea257240929f03e1e6ea3c7ab65ddb9ba0ec92de95e5ea4899b69affe1bc7aeac}{TLS\_TYPE\_SERVER\_HELLO}, 
+      context->version,
+989       &extensions);
+990    \textcolor{comment}{//Any error to report?}
+991    \textcolor{keywordflow}{if}(error)
+992       \textcolor{keywordflow}{return} error;
+993 
+994    \textcolor{comment}{//Save server random value}
+995    memcpy(context->serverRandom, \hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}->random, 32);
+996 
+997 \textcolor{preprocessor}{#if (TLS\_MAX\_VERSION >= SSL\_VERSION\_3\_0 && TLS\_MIN\_VERSION <= TLS\_VERSION\_1\_2)}
+998    \textcolor{comment}{//SSL 3.0, TLS 1.0, TLS 1.1 or TLS 1.2 currently selected?}
+999    \textcolor{keywordflow}{if}(context->version <= \hyperlink{tls_8h_af97e91c5fb95fb0957e5f37ec9e9eae8}{TLS\_VERSION\_1\_2})
+1000    \{
+1001       \textcolor{comment}{//Reset the named group to its default value}
+1002       context->namedGroup = \hyperlink{tls_8h_ae51675bb94f1945c0eed549ef93e6b51aee79345f691598413b1506c1a2f22548}{TLS\_GROUP\_NONE};
+1003 
+1004       \textcolor{comment}{//Check whether the server has decided to resume a previous session}
+1005       error = \hyperlink{tls__client__misc_8c_a551517f0dbb1a1f13bcdb11513bd23ea}{tlsResumeClientSession}(context, \hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}->sessionId,
+1006          \hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}->sessionIdLen, cipherSuite);
+1007       \textcolor{comment}{//Any error to report?}
+1008       \textcolor{keywordflow}{if}(error)
+1009          \textcolor{keywordflow}{return} error;
+1010 
+1011       \textcolor{comment}{//Set cipher suite}
+1012       error = \hyperlink{tls__misc_8c_a2ba32c2ad10fd77d5947387e6753210d}{tlsSelectCipherSuite}(context, cipherSuite);
+1013       \textcolor{comment}{//Specified cipher suite not supported?}
+1014       \textcolor{keywordflow}{if}(error)
+1015          \textcolor{keywordflow}{return} error;
+1016 
+1017       \textcolor{comment}{//Initialize handshake message hashing}
+1018       error = \hyperlink{tls__transcript__hash_8c_a96f18526c55951964667477c4134f092}{tlsInitTranscriptHash}(context);
+1019       \textcolor{comment}{//Any error to report?}
+1020       \textcolor{keywordflow}{if}(error)
+1021          \textcolor{keywordflow}{return} error;
+1022 
+1023       \textcolor{comment}{//Save session identifier}
+1024       memcpy(context->sessionId, \hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}->sessionId, \hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}->sessionIdLen);
+1025       context->sessionIdLen = \hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}->sessionIdLen;
+1026 
+1027 \textcolor{preprocessor}{#if (TLS\_SECURE\_RENEGOTIATION\_SUPPORT == ENABLED)}
+1028       \textcolor{comment}{//Parse RenegotiationInfo extension}
+1029       error = \hyperlink{tls__client__extensions_8c_ab1f51cd1e13b9aa71e4e5e9bee4c6910}{tlsParseServerRenegoInfoExtension}(context, &extensions);
+1030       \textcolor{comment}{//Any error to report?}
+1031       \textcolor{keywordflow}{if}(error)
+1032          \textcolor{keywordflow}{return} error;
+1033 \textcolor{preprocessor}{#endif}
+1034 
+1035 \textcolor{preprocessor}{#if (TLS\_SNI\_SUPPORT == ENABLED)}
+1036       \textcolor{comment}{//When the server includes a ServerName extension, the data field of}
+1037       \textcolor{comment}{//this extension may be empty}
+1038       error = \hyperlink{tls__client__extensions_8c_abb7e3afa03320f12445a027bcec125ea}{tlsParseServerSniExtension}(context, extensions.
+      \hyperlink{structTlsHelloExtensions_a53acaa1dcce86449741ea9a780331d46}{serverNameList});
+1039       \textcolor{comment}{//Any error to report?}
+1040       \textcolor{keywordflow}{if}(error)
+1041          \textcolor{keywordflow}{return} error;
+1042 \textcolor{preprocessor}{#endif}
+1043 
+1044 \textcolor{preprocessor}{#if (TLS\_MAX\_FRAG\_LEN\_SUPPORT == ENABLED)}
+1045       \textcolor{comment}{//Servers that receive an ClientHello containing a MaxFragmentLength}
+1046       \textcolor{comment}{//extension may accept the requested maximum fragment length by including}
+1047       \textcolor{comment}{//an extension of type MaxFragmentLength in the ServerHello}
+1048       error = \hyperlink{tls__client__extensions_8c_a2e070756a890d030b3d44e52ca561cd1}{tlsParseServerMaxFragLenExtension}(context, extensions.
+      \hyperlink{structTlsHelloExtensions_a45f3337429c669574aaedfcc6a1a2d23}{maxFragLen});
+1049       \textcolor{comment}{//Any error to report?}
+1050       \textcolor{keywordflow}{if}(error)
+1051          \textcolor{keywordflow}{return} error;
+1052 \textcolor{preprocessor}{#endif}
+1053 
+1054 \textcolor{preprocessor}{#if (TLS\_RECORD\_SIZE\_LIMIT\_SUPPORT == ENABLED)}
+1055       \textcolor{comment}{//The value of RecordSizeLimit is the maximum size of record in octets}
+1056       \textcolor{comment}{//that the peer is willing to receive}
+1057       error = \hyperlink{tls__client__extensions_8c_a5585164093c76ef6fa5f2199dac4b98b}{tlsParseServerRecordSizeLimitExtension}(context,
+1058          extensions.\hyperlink{structTlsHelloExtensions_a35167138c60de81d1635fc1d87fc3b8f}{recordSizeLimit});
+1059       \textcolor{comment}{//Any error to report?}
+1060       \textcolor{keywordflow}{if}(error)
+1061          \textcolor{keywordflow}{return} error;
+1062 \textcolor{preprocessor}{#endif}
+1063 
+1064 \textcolor{preprocessor}{#if (TLS\_ECDH\_ANON\_KE\_SUPPORT == ENABLED || TLS\_ECDHE\_RSA\_KE\_SUPPORT == ENABLED || \(\backslash\)}
+1065 \textcolor{preprocessor}{   TLS\_ECDHE\_ECDSA\_KE\_SUPPORT == ENABLED || TLS\_ECDHE\_PSK\_KE\_SUPPORT == ENABLED)}
+1066       \textcolor{comment}{//A server that selects an ECC cipher suite in response to a ClientHello}
+1067       \textcolor{comment}{//message including an EcPointFormats extension appends this extension}
+1068       \textcolor{comment}{//to its ServerHello message}
+1069       error = \hyperlink{tls__client__extensions_8c_a111f4eb896f7a1e7b81c26949926d163}{tlsParseServerEcPointFormatsExtension}(context,
+1070          extensions.\hyperlink{structTlsHelloExtensions_aeea7fd9313f97525e78c56a722b0dcfd}{ecPointFormatList});
+1071       \textcolor{comment}{//Any error to report?}
+1072       \textcolor{keywordflow}{if}(error)
+1073          \textcolor{keywordflow}{return} error;
+1074 \textcolor{preprocessor}{#endif}
+1075 
+1076 \textcolor{preprocessor}{#if (TLS\_ALPN\_SUPPORT == ENABLED)}
+1077       \textcolor{comment}{//Parse ALPN extension}
+1078       error = \hyperlink{tls__client__extensions_8c_a48aa76764f8864824dbb375c3ea3b765}{tlsParseServerAlpnExtension}(context, extensions.
+      \hyperlink{structTlsHelloExtensions_a0752d52c09a933f5b001385db60159b1}{protocolNameList});
+1079       \textcolor{comment}{//Any error to report?}
+1080       \textcolor{keywordflow}{if}(error)
+1081          \textcolor{keywordflow}{return} error;
+1082 \textcolor{preprocessor}{#endif}
+1083 
+1084 \textcolor{preprocessor}{#if (TLS\_RAW\_PUBLIC\_KEY\_SUPPORT == ENABLED)}
+1085       \textcolor{comment}{//Parse ClientCertType extension}
+1086       error = \hyperlink{tls__client__extensions_8c_ad002dcf307670ef4d0692506650c9567}{tlsParseClientCertTypeExtension}(context, extensions.
+      \hyperlink{structTlsHelloExtensions_a763ae23601c4eb7b1ec11230ef1f88ed}{clientCertType});
+1087       \textcolor{comment}{//Any error to report?}
+1088       \textcolor{keywordflow}{if}(error)
+1089          \textcolor{keywordflow}{return} error;
+1090 
+1091       \textcolor{comment}{//Parse ServerCertType extension}
+1092       error = \hyperlink{tls__client__extensions_8c_a4fb6de89c85a0a0e3d7e42e55d6f0fe6}{tlsParseServerCertTypeExtension}(context, extensions.
+      \hyperlink{structTlsHelloExtensions_a2a473c126ac51cf3dd2e999ee6881186}{serverCertType});
+1093       \textcolor{comment}{//Any error to report?}
+1094       \textcolor{keywordflow}{if}(error)
+1095          \textcolor{keywordflow}{return} error;
+1096 \textcolor{preprocessor}{#endif}
+1097 
+1098 \textcolor{preprocessor}{#if (TLS\_EXT\_MASTER\_SECRET\_SUPPORT == ENABLED)}
+1099       \textcolor{comment}{//Parse ExtendedMasterSecret extension}
+1100       error = \hyperlink{tls__client__extensions_8c_a96534351b950c17505b01e28719d40b7}{tlsParseServerEmsExtension}(context, extensions.
+      \hyperlink{structTlsHelloExtensions_a04cc0ffcf992700820ec12d6f43212bf}{extendedMasterSecret});
+1101       \textcolor{comment}{//Any error to report?}
+1102       \textcolor{keywordflow}{if}(error)
+1103          \textcolor{keywordflow}{return} error;
+1104 \textcolor{preprocessor}{#endif}
+1105 
+1106 \textcolor{preprocessor}{#if (TLS\_SESSION\_RESUME\_SUPPORT == ENABLED)}
+1107       \textcolor{comment}{//Use abbreviated handshake?}
+1108       \textcolor{keywordflow}{if}(context->resume)
+1109       \{
+1110          \textcolor{comment}{//Derive session keys from the master secret}
+1111          error = \hyperlink{tls__key__material_8c_a48b57409ac1d3429ddc2e236ba8beeb3}{tlsGenerateSessionKeys}(context);
+1112          \textcolor{comment}{//Unable to generate key material?}
+1113          \textcolor{keywordflow}{if}(error)
+1114             \textcolor{keywordflow}{return} error;
+1115 
+1116          \textcolor{comment}{//At this point, both client and server must send ChangeCipherSpec}
+1117          \textcolor{comment}{//messages and proceed directly to Finished messages}
+1118          context->state = \hyperlink{tls_8h_a02bb4c8aa7988b33fe4d4836d8ff4a4da0023cfdc8ed0f0062637380bee3683a0}{TLS\_STATE\_SERVER\_CHANGE\_CIPHER\_SPEC};
+1119       \}
+1120       \textcolor{keywordflow}{else}
+1121 \textcolor{preprocessor}{#endif}
+1122       \{
+1123          \textcolor{comment}{//Perform a full handshake}
+1124          \textcolor{keywordflow}{if}(context->keyExchMethod == \hyperlink{tls_8h_a10c9078f6485419c2b8644b573ef0b75aed949c3b521aa45b6685846fa9a3b8f0}{TLS\_KEY\_EXCH\_PSK} ||
+1125             context->keyExchMethod == \hyperlink{tls_8h_a10c9078f6485419c2b8644b573ef0b75a33535bd987c46f1ba621d6e28b0b3bfa}{TLS\_KEY\_EXCH\_DH\_ANON} ||
+1126             context->keyExchMethod == \hyperlink{tls_8h_a10c9078f6485419c2b8644b573ef0b75a32a252b7c7befeccaa088290d6a71dfe}{TLS\_KEY\_EXCH\_DHE\_PSK} ||
+1127             context->keyExchMethod == \hyperlink{tls_8h_a10c9078f6485419c2b8644b573ef0b75a895e0af86b29640264f699235be22953}{TLS\_KEY\_EXCH\_ECDH\_ANON} ||
+1128             context->keyExchMethod == \hyperlink{tls_8h_a10c9078f6485419c2b8644b573ef0b75aebba2060dba7ad92238668218f3a6520}{TLS\_KEY\_EXCH\_ECDHE\_PSK})
+1129          \{
+1130             \textcolor{comment}{//The Certificate message is omitted from the server's response}
+1131             context->state = \hyperlink{tls_8h_a02bb4c8aa7988b33fe4d4836d8ff4a4da8ed746876fcd686d131f90d04809fd32}{TLS\_STATE\_SERVER\_KEY\_EXCHANGE};
+1132          \}
+1133          \textcolor{keywordflow}{else}
+1134          \{
+1135             \textcolor{comment}{//The server is required to send a Certificate message}
+1136             context->state = \hyperlink{tls_8h_a02bb4c8aa7988b33fe4d4836d8ff4a4da09790eaca7bac9c6bfd5b3e0775b6074}{TLS\_STATE\_SERVER\_CERTIFICATE};
+1137          \}
+1138       \}
+1139    \}
+1140    \textcolor{keywordflow}{else}
+1141 \textcolor{preprocessor}{#endif}
+1142 \textcolor{preprocessor}{#if (TLS\_MAX\_VERSION >= TLS\_VERSION\_1\_3 && TLS\_MIN\_VERSION <= TLS\_VERSION\_1\_3)}
+1143    \textcolor{comment}{//TLS 1.3 currently selected?}
+1144    \textcolor{keywordflow}{if}(context->version == \hyperlink{tls_8h_ab44dc642afbfbd72926ab1f94634cd4d}{TLS\_VERSION\_1\_3})
+1145    \{
+1146       \textcolor{comment}{//A client which receives a legacy\_session\_id\_echo field that does not}
+1147       \textcolor{comment}{//match what it sent in the ClientHello must abort the handshake with an}
+1148       \textcolor{comment}{//illegal\_parameter alert (RFC 8446, section 4.1.3)}
+1149       \textcolor{keywordflow}{if}(\hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}->sessionIdLen != context->sessionIdLen ||
+1150          memcmp(\hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}->sessionId, context->sessionId, \hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}->sessionIdLen))
+1151       \{
+1152          \textcolor{comment}{//The legacy\_session\_id\_echo field is not valid}
+1153          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca152b24f57c941cb736772696416eb7c2}{ERROR\_ILLEGAL\_PARAMETER};
+1154       \}
+1155 
+1156       \textcolor{comment}{//Check whether the ServerHello message is received in response to the}
+1157       \textcolor{comment}{//initial or the updated ClientHello}
+1158       \textcolor{keywordflow}{if}(context->state != \hyperlink{tls_8h_a02bb4c8aa7988b33fe4d4836d8ff4a4da22971523377f52c52b251553e373b4c8}{TLS\_STATE\_SERVER\_HELLO\_2})
+1159       \{
+1160          \textcolor{comment}{//Set cipher suite}
+1161          error = \hyperlink{tls__misc_8c_a2ba32c2ad10fd77d5947387e6753210d}{tlsSelectCipherSuite}(context, cipherSuite);
+1162          \textcolor{comment}{//Specified cipher suite not supported?}
+1163          \textcolor{keywordflow}{if}(error)
+1164             \textcolor{keywordflow}{return} error;
+1165 
+1166          \textcolor{comment}{//Initialize handshake message hashing}
+1167          error = \hyperlink{tls__transcript__hash_8c_a96f18526c55951964667477c4134f092}{tlsInitTranscriptHash}(context);
+1168          \textcolor{comment}{//Any error to report?}
+1169          \textcolor{keywordflow}{if}(error)
+1170             \textcolor{keywordflow}{return} error;
+1171       \}
+1172       \textcolor{keywordflow}{else}
+1173       \{
+1174          \textcolor{comment}{//Clients must check that the cipher suite supplied in the ServerHello}
+1175          \textcolor{comment}{//is the same as that in the HelloRetryRequest and otherwise abort the}
+1176          \textcolor{comment}{//handshake with an illegal\_parameter alert}
+1177          \textcolor{keywordflow}{if}(cipherSuite != context->cipherSuite.identifier)
+1178             \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca152b24f57c941cb736772696416eb7c2}{ERROR\_ILLEGAL\_PARAMETER};
+1179       \}
+1180 
+1181       \textcolor{comment}{//If using (EC)DHE key establishment, servers offer exactly one}
+1182       \textcolor{comment}{//KeyShareEntry in the ServerHello}
+1183       error = \hyperlink{tls13__client__extensions_8h_accb6d367b62a364c3ab9d59c64c12bf1}{tls13ParseServerKeyShareExtension}(context,
+1184          extensions.serverShare);
+1185       \textcolor{comment}{//Any error to report?}
+1186       \textcolor{keywordflow}{if}(error)
+1187          \textcolor{keywordflow}{return} error;
+1188 
+1189       \textcolor{comment}{//The PreSharedKey extension contains the selected PSK identity}
+1190       error = \hyperlink{tls13__client__extensions_8h_ac79d73d03a0d59ae7a66238ba3ffbf63}{tls13ParseServerPreSharedKeyExtension}(context,
+1191          extensions.selectedIdentity);
+1192       \textcolor{comment}{//Any error to report?}
+1193       \textcolor{keywordflow}{if}(error)
+1194          \textcolor{keywordflow}{return} error;
+1195 
+1196       \textcolor{comment}{//In TLS 1.3, the cipher suite concept has been changed. The key exchange}
+1197       \textcolor{comment}{//mechanism is negotiated separately from the cipher suite}
+1198       \textcolor{keywordflow}{if}(context->keyExchMethod == \hyperlink{tls_8h_a10c9078f6485419c2b8644b573ef0b75ac67099555f221b1aea54436f3aff0730}{TLS\_KEY\_EXCH\_NONE})
+1199          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca70d82df53df56c9d4a943d5539ccc4bc}{ERROR\_HANDSHAKE\_FAILED};
+1200 
+1201 \textcolor{preprocessor}{#if (TLS13\_MIDDLEBOX\_COMPAT\_SUPPORT == ENABLED)}
+1202       \textcolor{comment}{//The middlebox compatibility mode improves the chance of successfully}
+1203       \textcolor{comment}{//connecting through middleboxes}
+1204       \textcolor{keywordflow}{if}(context->state == \hyperlink{tls_8h_a02bb4c8aa7988b33fe4d4836d8ff4a4da69787ce8e1f218e8e47defe7af1c601a}{TLS\_STATE\_SERVER\_HELLO})
+1205       \{
+1206          \textcolor{comment}{//In middlebox compatibility mode, the client sends a dummy}
+1207          \textcolor{comment}{//ChangeCipherSpec record immediately before its second flight}
+1208          context->state = \hyperlink{tls_8h_a02bb4c8aa7988b33fe4d4836d8ff4a4da9e601264440c96a1e68763e9b0e5761a}{TLS\_STATE\_CLIENT\_CHANGE\_CIPHER\_SPEC\_2};
+1209       \}
+1210       \textcolor{keywordflow}{else}
+1211 \textcolor{preprocessor}{#endif}
+1212       \{
+1213          \textcolor{comment}{//All handshake messages after the ServerHello are now encrypted}
+1214          context->state = \hyperlink{tls_8h_a02bb4c8aa7988b33fe4d4836d8ff4a4daeb443224abb7649fc9e8adf3e51864a2}{TLS\_STATE\_HANDSHAKE\_TRAFFIC\_KEYS};
+1215       \}
+1216    \}
+1217    \textcolor{keywordflow}{else}
+1218 \textcolor{preprocessor}{#endif}
+1219    \textcolor{comment}{//Invalid TLS version?}
+1220    \{
+1221       \textcolor{comment}{//Just for sanity}
+1222       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cafc403a048723cbb5e5ade33caa70c48b}{ERROR\_INVALID\_VERSION};
+1223    \}
+1224 
+1225    \textcolor{comment}{//Successful processing}
+1226    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+1227 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{tls__client_8c_afa16663d44f1be4f22bedea28caaa35c}\label{tls__client_8c_afa16663d44f1be4f22bedea28caaa35c}} 
+\index{tls\+\_\+client.\+c@{tls\+\_\+client.\+c}!tls\+Parse\+Server\+Hello\+Done@{tls\+Parse\+Server\+Hello\+Done}}
+\index{tls\+Parse\+Server\+Hello\+Done@{tls\+Parse\+Server\+Hello\+Done}!tls\+\_\+client.\+c@{tls\+\_\+client.\+c}}
+\subsubsection{\texorpdfstring{tls\+Parse\+Server\+Hello\+Done()}{tlsParseServerHelloDone()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} tls\+Parse\+Server\+Hello\+Done (\begin{DoxyParamCaption}\item[{\hyperlink{tls_8h_ac09f7a286c0cdf9b07ee1edd107946f5}{Tls\+Context} $\ast$}]{context,  }\item[{const \hyperlink{tls_8h_a71e29f87ab91f2adb5655ad8157e7aea}{Tls\+Server\+Hello\+Done} $\ast$}]{message,  }\item[{size\+\_\+t}]{length }\end{DoxyParamCaption})}
+
+
+
+Parse Server\+Hello\+Done message. 
+
+The Server\+Hello\+Done message is sent by the server to indicate the end of the Server\+Hello and associated messages. After sending this message, the server will wait for a client response
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the T\+LS context \\
+\hline
+\mbox{\tt in}  & {\em message} & Incoming Server\+Hello\+Done message to parse \\
+\hline
+\mbox{\tt in}  & {\em length} & Message length \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 1696 of file tls\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+1698 \{
+1699    \textcolor{comment}{//Debug message}
+1700    \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"ServerHelloDone message received (%"} \hyperlink{compiler__port_8h_a2b7b0557dc6cd786df02dafbb51f5292}{PRIuSIZE} \textcolor{stringliteral}{" bytes)...\(\backslash\)r\(\backslash\)n"}, 
+      \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length});
+1701    \hyperlink{debug_8h_a1f71019169d85407d8827300ed43bdf0}{TRACE\_DEBUG\_ARRAY}(\textcolor{stringliteral}{"  "}, \hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length});
+1702 
+1703    \textcolor{comment}{//Check TLS version}
+1704    \textcolor{keywordflow}{if}(context->version > \hyperlink{tls_8h_af97e91c5fb95fb0957e5f37ec9e9eae8}{TLS\_VERSION\_1\_2})
+1705       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cafb4f7e4640c9d495bf35ee668d620b17}{ERROR\_UNEXPECTED\_MESSAGE};
+1706 
+1707    \textcolor{comment}{//Check key exchange method}
+1708    \textcolor{keywordflow}{if}(context->keyExchMethod == \hyperlink{tls_8h_a10c9078f6485419c2b8644b573ef0b75a01c48fe0c56e76f59032069e7c7da49e}{TLS\_KEY\_EXCH\_RSA} ||
+1709       context->keyExchMethod == \hyperlink{tls_8h_a10c9078f6485419c2b8644b573ef0b75a01660ec1808dd6a8b5250b16d81502e4}{TLS\_KEY\_EXCH\_DHE\_RSA} ||
+1710       context->keyExchMethod == \hyperlink{tls_8h_a10c9078f6485419c2b8644b573ef0b75ac256323d1e243a2e7a435abce34dbd39}{TLS\_KEY\_EXCH\_DHE\_DSS} ||
+1711       context->keyExchMethod == \hyperlink{tls_8h_a10c9078f6485419c2b8644b573ef0b75ad9ebbdd436027753829ea5b6cd4b810b}{TLS\_KEY\_EXCH\_ECDHE\_RSA} ||
+1712       context->keyExchMethod == \hyperlink{tls_8h_a10c9078f6485419c2b8644b573ef0b75a14c521a28278eecd181953c37b784cb7}{TLS\_KEY\_EXCH\_ECDHE\_ECDSA})
+1713    \{
+1714       \textcolor{comment}{//The server may omit the CertificateRequest message and go}
+1715       \textcolor{comment}{//directly to the ServerHelloDone message}
+1716       \textcolor{keywordflow}{if}(context->state != \hyperlink{tls_8h_a02bb4c8aa7988b33fe4d4836d8ff4a4dae316fcecd0b42b329c94f5c3102d8783}{TLS\_STATE\_CERTIFICATE\_REQUEST} &&
+1717          context->state != \hyperlink{tls_8h_a02bb4c8aa7988b33fe4d4836d8ff4a4dacfeeaa75eec1aecc4c975236b2af1f9c}{TLS\_STATE\_SERVER\_HELLO\_DONE})
+1718       \{
+1719          \textcolor{comment}{//Handshake failure}
+1720          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cafb4f7e4640c9d495bf35ee668d620b17}{ERROR\_UNEXPECTED\_MESSAGE};
+1721       \}
+1722    \}
+1723    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->keyExchMethod == \hyperlink{tls_8h_a10c9078f6485419c2b8644b573ef0b75aed949c3b521aa45b6685846fa9a3b8f0}{TLS\_KEY\_EXCH\_PSK})
+1724    \{
+1725       \textcolor{comment}{//If no PSK identity hint is provided by the server, the}
+1726       \textcolor{comment}{//ServerKeyExchange message is omitted}
+1727       \textcolor{keywordflow}{if}(context->state != \hyperlink{tls_8h_a02bb4c8aa7988b33fe4d4836d8ff4a4da8ed746876fcd686d131f90d04809fd32}{TLS\_STATE\_SERVER\_KEY\_EXCHANGE} &&
+1728          context->state != \hyperlink{tls_8h_a02bb4c8aa7988b33fe4d4836d8ff4a4dacfeeaa75eec1aecc4c975236b2af1f9c}{TLS\_STATE\_SERVER\_HELLO\_DONE})
+1729       \{
+1730          \textcolor{comment}{//Handshake failure}
+1731          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cafb4f7e4640c9d495bf35ee668d620b17}{ERROR\_UNEXPECTED\_MESSAGE};
+1732       \}
+1733    \}
+1734    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->keyExchMethod == \hyperlink{tls_8h_a10c9078f6485419c2b8644b573ef0b75a38a6d0551d2fbd9480b6c233c1242d4c}{TLS\_KEY\_EXCH\_RSA\_PSK})
+1735    \{
+1736       \textcolor{comment}{//The server may omit the ServerKeyExchange message and/or}
+1737       \textcolor{comment}{//the CertificateRequest message}
+1738       \textcolor{keywordflow}{if}(context->state != \hyperlink{tls_8h_a02bb4c8aa7988b33fe4d4836d8ff4a4da8ed746876fcd686d131f90d04809fd32}{TLS\_STATE\_SERVER\_KEY\_EXCHANGE} &&
+1739          context->state != \hyperlink{tls_8h_a02bb4c8aa7988b33fe4d4836d8ff4a4dae316fcecd0b42b329c94f5c3102d8783}{TLS\_STATE\_CERTIFICATE\_REQUEST} &&
+1740          context->state != \hyperlink{tls_8h_a02bb4c8aa7988b33fe4d4836d8ff4a4dacfeeaa75eec1aecc4c975236b2af1f9c}{TLS\_STATE\_SERVER\_HELLO\_DONE})
+1741       \{
+1742          \textcolor{comment}{//Handshake failure}
+1743          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cafb4f7e4640c9d495bf35ee668d620b17}{ERROR\_UNEXPECTED\_MESSAGE};
+1744       \}
+1745    \}
+1746    \textcolor{keywordflow}{else}
+1747    \{
+1748       \textcolor{comment}{//Check current state}
+1749       \textcolor{keywordflow}{if}(context->state != \hyperlink{tls_8h_a02bb4c8aa7988b33fe4d4836d8ff4a4dacfeeaa75eec1aecc4c975236b2af1f9c}{TLS\_STATE\_SERVER\_HELLO\_DONE})
+1750          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cafb4f7e4640c9d495bf35ee668d620b17}{ERROR\_UNEXPECTED\_MESSAGE};
+1751    \}
+1752 
+1753    \textcolor{comment}{//The ServerHelloDone message does not contain any data}
+1754    \textcolor{keywordflow}{if}(\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} != 0)
+1755       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca9468adacac8c37004024dd0095ba2768}{ERROR\_DECODING\_FAILED};
+1756 
+1757    \textcolor{comment}{//The client must send a Certificate message if the server requests it}
+1758    context->state = \hyperlink{tls_8h_a02bb4c8aa7988b33fe4d4836d8ff4a4daf228b75114f59a280fff6ec472c5a251}{TLS\_STATE\_CLIENT\_CERTIFICATE};
+1759 
+1760    \textcolor{comment}{//Successful processing}
+1761    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+1762 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{tls__client_8c_a31b6586adec9fe0527edcf448dfa34b1}\label{tls__client_8c_a31b6586adec9fe0527edcf448dfa34b1}} 
+\index{tls\+\_\+client.\+c@{tls\+\_\+client.\+c}!tls\+Parse\+Server\+Key\+Exchange@{tls\+Parse\+Server\+Key\+Exchange}}
+\index{tls\+Parse\+Server\+Key\+Exchange@{tls\+Parse\+Server\+Key\+Exchange}!tls\+\_\+client.\+c@{tls\+\_\+client.\+c}}
+\subsubsection{\texorpdfstring{tls\+Parse\+Server\+Key\+Exchange()}{tlsParseServerKeyExchange()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} tls\+Parse\+Server\+Key\+Exchange (\begin{DoxyParamCaption}\item[{\hyperlink{tls_8h_ac09f7a286c0cdf9b07ee1edd107946f5}{Tls\+Context} $\ast$}]{context,  }\item[{const \hyperlink{tls_8h_a69c0b3ab7349e73b2e8f9452dbdfef5a}{Tls\+Server\+Key\+Exchange} $\ast$}]{message,  }\item[{size\+\_\+t}]{length }\end{DoxyParamCaption})}
+
+
+
+Parse Server\+Key\+Exchange message. 
+
+The Server\+Key\+Exchange message is sent by the server only when the server Certificate message does not contain enough data to allow the client to exchange a premaster secret
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the T\+LS context \\
+\hline
+\mbox{\tt in}  & {\em message} & Incoming Server\+Key\+Exchange message to parse \\
+\hline
+\mbox{\tt in}  & {\em length} & Message length \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 1243 of file tls\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+1245 \{
+1246    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+1247    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1248    \textcolor{keywordtype}{size\_t} paramsLen;
+1249    \textcolor{keyword}{const} \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *\hyperlink{ndp_8h_a6519522ad9a6f45e7a8d25d31392a977}{p};
+1250    \textcolor{keyword}{const} \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *params;
+1251 
+1252    \textcolor{comment}{//Initialize variables}
+1253    params = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+1254    paramsLen = 0;
+1255 
+1256    \textcolor{comment}{//Debug message}
+1257    \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"ServerKeyExchange message received (%"} \hyperlink{compiler__port_8h_a2b7b0557dc6cd786df02dafbb51f5292}{PRIuSIZE} \textcolor{stringliteral}{" bytes)...\(\backslash\)r\(\backslash\)n"}, 
+      \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length});
+1258    \hyperlink{debug_8h_a1f71019169d85407d8827300ed43bdf0}{TRACE\_DEBUG\_ARRAY}(\textcolor{stringliteral}{"  "}, \hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length});
+1259 
+1260    \textcolor{comment}{//Check TLS version}
+1261    \textcolor{keywordflow}{if}(context->version > \hyperlink{tls_8h_af97e91c5fb95fb0957e5f37ec9e9eae8}{TLS\_VERSION\_1\_2})
+1262       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cafb4f7e4640c9d495bf35ee668d620b17}{ERROR\_UNEXPECTED\_MESSAGE};
+1263 
+1264    \textcolor{comment}{//Check current state}
+1265    \textcolor{keywordflow}{if}(context->state != \hyperlink{tls_8h_a02bb4c8aa7988b33fe4d4836d8ff4a4da8ed746876fcd686d131f90d04809fd32}{TLS\_STATE\_SERVER\_KEY\_EXCHANGE})
+1266       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cafb4f7e4640c9d495bf35ee668d620b17}{ERROR\_UNEXPECTED\_MESSAGE};
+1267 
+1268    \textcolor{comment}{//Point to the beginning of the handshake message}
+1269    p = \hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message};
+1270 
+1271 \textcolor{preprocessor}{#if (TLS\_PSK\_KE\_SUPPORT == ENABLED || TLS\_RSA\_PSK\_KE\_SUPPORT == ENABLED || \(\backslash\)}
+1272 \textcolor{preprocessor}{   TLS\_DHE\_PSK\_KE\_SUPPORT == ENABLED || TLS\_ECDHE\_PSK\_KE\_SUPPORT == ENABLED)}
+1273    \textcolor{comment}{//PSK key exchange method?}
+1274    \textcolor{keywordflow}{if}(context->keyExchMethod == \hyperlink{tls_8h_a10c9078f6485419c2b8644b573ef0b75aed949c3b521aa45b6685846fa9a3b8f0}{TLS\_KEY\_EXCH\_PSK} ||
+1275       context->keyExchMethod == \hyperlink{tls_8h_a10c9078f6485419c2b8644b573ef0b75a38a6d0551d2fbd9480b6c233c1242d4c}{TLS\_KEY\_EXCH\_RSA\_PSK} ||
+1276       context->keyExchMethod == \hyperlink{tls_8h_a10c9078f6485419c2b8644b573ef0b75a32a252b7c7befeccaa088290d6a71dfe}{TLS\_KEY\_EXCH\_DHE\_PSK} ||
+1277       context->keyExchMethod == \hyperlink{tls_8h_a10c9078f6485419c2b8644b573ef0b75aebba2060dba7ad92238668218f3a6520}{TLS\_KEY\_EXCH\_ECDHE\_PSK})
+1278    \{
+1279       \textcolor{comment}{//To help the client in selecting which identity to use, the server}
+1280       \textcolor{comment}{//can provide a PSK identity hint in the ServerKeyExchange message}
+1281       error = \hyperlink{tls__client__misc_8c_a81f447d46261af07d4664253edaa856b}{tlsParsePskIdentityHint}(context, p, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, &n);
+1282       \textcolor{comment}{//Any error to report?}
+1283       \textcolor{keywordflow}{if}(error)
+1284          \textcolor{keywordflow}{return} error;
+1285 
+1286       \textcolor{comment}{//Point to the next field}
+1287       p += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1288       \textcolor{comment}{//Remaining bytes to process}
+1289       \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} -= \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1290    \}
+1291 \textcolor{preprocessor}{#endif}
+1292 
+1293    \textcolor{comment}{//Diffie-Hellman or ECDH key exchange method?}
+1294    \textcolor{keywordflow}{if}(context->keyExchMethod == \hyperlink{tls_8h_a10c9078f6485419c2b8644b573ef0b75a33535bd987c46f1ba621d6e28b0b3bfa}{TLS\_KEY\_EXCH\_DH\_ANON} ||
+1295       context->keyExchMethod == \hyperlink{tls_8h_a10c9078f6485419c2b8644b573ef0b75a01660ec1808dd6a8b5250b16d81502e4}{TLS\_KEY\_EXCH\_DHE\_RSA} ||
+1296       context->keyExchMethod == \hyperlink{tls_8h_a10c9078f6485419c2b8644b573ef0b75ac256323d1e243a2e7a435abce34dbd39}{TLS\_KEY\_EXCH\_DHE\_DSS} ||
+1297       context->keyExchMethod == \hyperlink{tls_8h_a10c9078f6485419c2b8644b573ef0b75a32a252b7c7befeccaa088290d6a71dfe}{TLS\_KEY\_EXCH\_DHE\_PSK} ||
+1298       context->keyExchMethod == \hyperlink{tls_8h_a10c9078f6485419c2b8644b573ef0b75a895e0af86b29640264f699235be22953}{TLS\_KEY\_EXCH\_ECDH\_ANON} ||
+1299       context->keyExchMethod == \hyperlink{tls_8h_a10c9078f6485419c2b8644b573ef0b75ad9ebbdd436027753829ea5b6cd4b810b}{TLS\_KEY\_EXCH\_ECDHE\_RSA} ||
+1300       context->keyExchMethod == \hyperlink{tls_8h_a10c9078f6485419c2b8644b573ef0b75a14c521a28278eecd181953c37b784cb7}{TLS\_KEY\_EXCH\_ECDHE\_ECDSA} ||
+1301       context->keyExchMethod == \hyperlink{tls_8h_a10c9078f6485419c2b8644b573ef0b75aebba2060dba7ad92238668218f3a6520}{TLS\_KEY\_EXCH\_ECDHE\_PSK})
+1302    \{
+1303       \textcolor{comment}{//Point to the server's key exchange parameters}
+1304       params = \hyperlink{ndp_8h_a6519522ad9a6f45e7a8d25d31392a977}{p};
+1305 
+1306       \textcolor{comment}{//Parse server's key exchange parameters}
+1307       error = \hyperlink{tls__client__misc_8c_ae8501704f20b582398ff648ec3ed699e}{tlsParseServerKeyParams}(context, p, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, &paramsLen);
+1308       \textcolor{comment}{//Any error to report?}
+1309       \textcolor{keywordflow}{if}(error)
+1310          \textcolor{keywordflow}{return} error;
+1311 
+1312       \textcolor{comment}{//Point to the next field}
+1313       p += paramsLen;
+1314       \textcolor{comment}{//Remaining bytes to process}
+1315       \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} -= paramsLen;
+1316    \}
+1317 
+1318    \textcolor{comment}{//For non-anonymous Diffie-Hellman and ECDH key exchanges, the signature}
+1319    \textcolor{comment}{//over the server's key exchange parameters shall be verified}
+1320    \textcolor{keywordflow}{if}(context->keyExchMethod == \hyperlink{tls_8h_a10c9078f6485419c2b8644b573ef0b75a01660ec1808dd6a8b5250b16d81502e4}{TLS\_KEY\_EXCH\_DHE\_RSA} ||
+1321       context->keyExchMethod == \hyperlink{tls_8h_a10c9078f6485419c2b8644b573ef0b75ac256323d1e243a2e7a435abce34dbd39}{TLS\_KEY\_EXCH\_DHE\_DSS} ||
+1322       context->keyExchMethod == \hyperlink{tls_8h_a10c9078f6485419c2b8644b573ef0b75ad9ebbdd436027753829ea5b6cd4b810b}{TLS\_KEY\_EXCH\_ECDHE\_RSA} ||
+1323       context->keyExchMethod == \hyperlink{tls_8h_a10c9078f6485419c2b8644b573ef0b75a14c521a28278eecd181953c37b784cb7}{TLS\_KEY\_EXCH\_ECDHE\_ECDSA})
+1324    \{
+1325 \textcolor{preprocessor}{#if (TLS\_MAX\_VERSION >= SSL\_VERSION\_3\_0 && TLS\_MIN\_VERSION <= TLS\_VERSION\_1\_1)}
+1326       \textcolor{comment}{//SSL 3.0, TLS 1.0 or TLS 1.1 currently selected?}
+1327       \textcolor{keywordflow}{if}(context->version <= \hyperlink{tls_8h_a9e359f668824d16983a41f8deb338979}{TLS\_VERSION\_1\_1})
+1328       \{
+1329          \textcolor{comment}{//Signature verification}
+1330          error = \hyperlink{tls__client__misc_8c_a90e738caacda11c8946c18248b62ca7b}{tlsVerifyServerKeySignature}(context,
+1331             (\hyperlink{tls_8h_a8e07cba48fef31563460ba8f90ad5f1d}{TlsDigitalSignature} *) p, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, params, paramsLen, &n);
+1332       \}
+1333       \textcolor{keywordflow}{else}
+1334 \textcolor{preprocessor}{#endif}
+1335 \textcolor{preprocessor}{#if (TLS\_MAX\_VERSION >= TLS\_VERSION\_1\_2 && TLS\_MIN\_VERSION <= TLS\_VERSION\_1\_2)}
+1336       \textcolor{comment}{//TLS 1.2 currently selected?}
+1337       \textcolor{keywordflow}{if}(context->version == \hyperlink{tls_8h_af97e91c5fb95fb0957e5f37ec9e9eae8}{TLS\_VERSION\_1\_2})
+1338       \{
+1339          \textcolor{comment}{//Signature verification}
+1340          error = \hyperlink{tls__client__misc_8c_a2014bcc459d7ccebd22dc1157f288940}{tls12VerifyServerKeySignature}(context,
+1341             (\hyperlink{tls_8h_ad6758810e829828a20529e27e0f1fb6a}{Tls12DigitalSignature} *) p, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, params, paramsLen, &n);
+1342       \}
+1343       \textcolor{keywordflow}{else}
+1344 \textcolor{preprocessor}{#endif}
+1345       \{
+1346          \textcolor{comment}{//Report an error}
+1347          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cafc403a048723cbb5e5ade33caa70c48b}{ERROR\_INVALID\_VERSION};
+1348       \}
+1349 
+1350       \textcolor{comment}{//Any error to report?}
+1351       \textcolor{keywordflow}{if}(error)
+1352          \textcolor{keywordflow}{return} error;
+1353 
+1354       \textcolor{comment}{//Point to the next field}
+1355       p += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1356       \textcolor{comment}{//Remaining bytes to process}
+1357       \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} -= \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1358    \}
+1359 
+1360    \textcolor{comment}{//If the amount of data in the message does not precisely match the format}
+1361    \textcolor{comment}{//of the ServerKeyExchange message, then send a fatal alert}
+1362    \textcolor{keywordflow}{if}(\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} != 0)
+1363       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca9468adacac8c37004024dd0095ba2768}{ERROR\_DECODING\_FAILED};
+1364 
+1365    \textcolor{comment}{//Anomynous server?}
+1366    \textcolor{keywordflow}{if}(context->keyExchMethod == \hyperlink{tls_8h_a10c9078f6485419c2b8644b573ef0b75aed949c3b521aa45b6685846fa9a3b8f0}{TLS\_KEY\_EXCH\_PSK} ||
+1367       context->keyExchMethod == \hyperlink{tls_8h_a10c9078f6485419c2b8644b573ef0b75a33535bd987c46f1ba621d6e28b0b3bfa}{TLS\_KEY\_EXCH\_DH\_ANON} ||
+1368       context->keyExchMethod == \hyperlink{tls_8h_a10c9078f6485419c2b8644b573ef0b75a32a252b7c7befeccaa088290d6a71dfe}{TLS\_KEY\_EXCH\_DHE\_PSK} ||
+1369       context->keyExchMethod == \hyperlink{tls_8h_a10c9078f6485419c2b8644b573ef0b75a895e0af86b29640264f699235be22953}{TLS\_KEY\_EXCH\_ECDH\_ANON} ||
+1370       context->keyExchMethod == \hyperlink{tls_8h_a10c9078f6485419c2b8644b573ef0b75aebba2060dba7ad92238668218f3a6520}{TLS\_KEY\_EXCH\_ECDHE\_PSK})
+1371    \{
+1372       \textcolor{comment}{//An anonymous server cannot request client authentication}
+1373       context->state = \hyperlink{tls_8h_a02bb4c8aa7988b33fe4d4836d8ff4a4dacfeeaa75eec1aecc4c975236b2af1f9c}{TLS\_STATE\_SERVER\_HELLO\_DONE};
+1374    \}
+1375    \textcolor{keywordflow}{else}
+1376    \{
+1377       \textcolor{comment}{//A non-anonymous server can optionally request a certificate from}
+1378       \textcolor{comment}{//the client, if appropriate for the selected cipher suite}
+1379       context->state = \hyperlink{tls_8h_a02bb4c8aa7988b33fe4d4836d8ff4a4dae316fcecd0b42b329c94f5c3102d8783}{TLS\_STATE\_CERTIFICATE\_REQUEST};
+1380    \}
+1381 
+1382    \textcolor{comment}{//Successful processing}
+1383    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+1384 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{tls__client_8c_ae08e364f08b197642487228b0d090634}\label{tls__client_8c_ae08e364f08b197642487228b0d090634}} 
+\index{tls\+\_\+client.\+c@{tls\+\_\+client.\+c}!tls\+Send\+Client\+Hello@{tls\+Send\+Client\+Hello}}
+\index{tls\+Send\+Client\+Hello@{tls\+Send\+Client\+Hello}!tls\+\_\+client.\+c@{tls\+\_\+client.\+c}}
+\subsubsection{\texorpdfstring{tls\+Send\+Client\+Hello()}{tlsSendClientHello()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} tls\+Send\+Client\+Hello (\begin{DoxyParamCaption}\item[{\hyperlink{tls_8h_ac09f7a286c0cdf9b07ee1edd107946f5}{Tls\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Send Client\+Hello message. 
+
+When a client first connects to a server, it is required to send the Client\+Hello as its first message. The client can also send a Client\+Hello in response to a Hello\+Request or on its own initiative in order to renegotiate the security parameters in an existing connection
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the T\+LS context \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 82 of file tls\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+83 \{
+84    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+85    \textcolor{keywordtype}{size\_t} \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length};
+86    \hyperlink{tls_8h_ac78d39e638430eb19c4017e5f9797d16}{TlsClientHello} *\hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message};
+87 
+88    \textcolor{comment}{//Point to the buffer where to format the message}
+89    message = (\hyperlink{tls_8h_ac78d39e638430eb19c4017e5f9797d16}{TlsClientHello} *) (context->txBuffer + context->txBufferLen);
+90 
+91 \textcolor{preprocessor}{#if (DTLS\_SUPPORT == ENABLED)}
+92    \textcolor{comment}{//DTLS protocol?}
+93    \textcolor{keywordflow}{if}(context->transportProtocol == \hyperlink{tls_8h_a25cb7e3df9004160eb21eac9377dc89fa3055717a6d464160f611ee26a81c7d92}{TLS\_TRANSPORT\_PROTOCOL\_DATAGRAM})
+94    \{
+95       \textcolor{comment}{//When sending the first ClientHello, the client does not have a cookie yet}
+96       \textcolor{keywordflow}{if}(context->cookieLen == 0)
+97       \{
+98          \textcolor{comment}{//Generate the client random value using a cryptographically-safe}
+99          \textcolor{comment}{//pseudorandom number generator}
+100          error = \hyperlink{tls__misc_8c_a316db53174c47a590bc25a2aadae6af6}{tlsGenerateRandomValue}(context, context->clientRandom);
+101       \}
+102       \textcolor{keywordflow}{else}
+103       \{
+104          \textcolor{comment}{//When responding to a HelloVerifyRequest, the client must use the}
+105          \textcolor{comment}{//same random value as it did in the original ClientHello}
+106          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+107       \}
+108    \}
+109    \textcolor{keywordflow}{else}
+110 \textcolor{preprocessor}{#endif}
+111    \textcolor{comment}{//TLS protocol?}
+112    \{
+113       \textcolor{comment}{//Initial or updated ClientHello?}
+114       \textcolor{keywordflow}{if}(context->state == \hyperlink{tls_8h_a02bb4c8aa7988b33fe4d4836d8ff4a4dade201db86ae38480c06696f3a48e0170}{TLS\_STATE\_CLIENT\_HELLO})
+115       \{
+116          \textcolor{comment}{//Generate the client random value using a cryptographically-safe}
+117          \textcolor{comment}{//pseudorandom number generator}
+118          error = \hyperlink{tls__misc_8c_a316db53174c47a590bc25a2aadae6af6}{tlsGenerateRandomValue}(context, context->clientRandom);
+119       \}
+120       \textcolor{keywordflow}{else}
+121       \{
+122          \textcolor{comment}{//When responding to a HelloRetryRequest, the client must use the}
+123          \textcolor{comment}{//same random value as it did in the initial ClientHello}
+124          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+125       \}
+126    \}
+127 
+128 \textcolor{preprocessor}{#if (TLS\_MAX\_VERSION >= TLS\_VERSION\_1\_3 && TLS\_MIN\_VERSION <= TLS\_VERSION\_1\_3)}
+129    \textcolor{comment}{//Check status code}
+130    \textcolor{keywordflow}{if}(!error)
+131    \{
+132       \textcolor{comment}{//TLS 1.3 supported by the client?}
+133       \textcolor{keywordflow}{if}(context->versionMax >= \hyperlink{tls_8h_ab44dc642afbfbd72926ab1f94634cd4d}{TLS\_VERSION\_1\_3} &&
+134          context->transportProtocol == \hyperlink{tls_8h_a25cb7e3df9004160eb21eac9377dc89fa2fbbbd6c318570d570225144f3c6c244}{TLS\_TRANSPORT\_PROTOCOL\_STREAM})
+135       \{
+136          \textcolor{comment}{//Initial or updated ClientHello?}
+137          \textcolor{keywordflow}{if}(context->state == \hyperlink{tls_8h_a02bb4c8aa7988b33fe4d4836d8ff4a4dade201db86ae38480c06696f3a48e0170}{TLS\_STATE\_CLIENT\_HELLO})
+138          \{
+139 \textcolor{preprocessor}{#if (TLS13\_MIDDLEBOX\_COMPAT\_SUPPORT == ENABLED)}
+140             \textcolor{comment}{//In compatibility mode the session ID field must be non-empty}
+141             \textcolor{keywordflow}{if}(context->sessionIdLen == 0)
+142             \{
+143                \textcolor{comment}{//A client not offering a pre-TLS 1.3 session must generate a}
+144                \textcolor{comment}{//new 32-byte value (refer to RFC 8446, section 4.1.2)}
+145                context->sessionIdLen = 32;
+146 
+147                \textcolor{comment}{//This value need not be random but should be unpredictable to}
+148                \textcolor{comment}{//avoid implementations fixating on a specific value}
+149                error = \hyperlink{tls__misc_8c_a316db53174c47a590bc25a2aadae6af6}{tlsGenerateRandomValue}(context, context->sessionId);
+150             \}
+151 \textcolor{preprocessor}{#endif}
+152             \textcolor{comment}{//Check status code}
+153             \textcolor{keywordflow}{if}(!error)
+154             \{
+155                \textcolor{comment}{//Any preferred ECDHE or FFDHE group?}
+156                \textcolor{keywordflow}{if}(\hyperlink{tls13__misc_8h_aa4457d2345eac08691ecbd4514d79004}{tls13IsGroupSupported}(context, context->preferredGroup))
+157                \{
+158                   \textcolor{comment}{//Pregenerate key share using preferred named group}
+159                   error = \hyperlink{tls13__misc_8h_adf02129800e7da11f7025ee744a3f762}{tls13GenerateKeyShare}(context, context->preferredGroup);
+160                \}
+161                \textcolor{keywordflow}{else}
+162                \{
+163                   \textcolor{comment}{//Request group selection from the server, at the cost of an}
+164                   \textcolor{comment}{//additional round trip}
+165                   context->preferredGroup = \hyperlink{tls_8h_ae51675bb94f1945c0eed549ef93e6b51aee79345f691598413b1506c1a2f22548}{TLS\_GROUP\_NONE};
+166                \}
+167             \}
+168          \}
+169          \textcolor{keywordflow}{else}
+170          \{
+171             \textcolor{comment}{//The updated ClientHello message is not encrypted}
+172             \hyperlink{tls__misc_8c_a4b2ee57846957d64f8cae5cd6408f3fc}{tlsFreeEncryptionEngine}(&context->encryptionEngine);
+173          \}
+174       \}
+175 
+176       \textcolor{comment}{//Save current time}
+177       context->timestamp = \hyperlink{os__port__chibios_8c_ab66a11272d40a916fa69dd8e4dc443d4}{osGetSystemTime}();
+178    \}
+179 \textcolor{preprocessor}{#endif}
+180 
+181    \textcolor{comment}{//Check status code}
+182    \textcolor{keywordflow}{if}(!error)
+183    \{
+184       \textcolor{comment}{//Format ClientHello message}
+185       error = \hyperlink{tls__client_8c_a21420fc52dce13c48cf05dc5beba4905}{tlsFormatClientHello}(context, message, &length);
+186    \}
+187 
+188    \textcolor{comment}{//Check status code}
+189    \textcolor{keywordflow}{if}(!error)
+190    \{
+191       \textcolor{comment}{//Debug message}
+192       \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"Sending ClientHello message (%"} \hyperlink{compiler__port_8h_a2b7b0557dc6cd786df02dafbb51f5292}{PRIuSIZE} \textcolor{stringliteral}{" bytes)...\(\backslash\)r\(\backslash\)n"}, length);
+193       \hyperlink{debug_8h_a1f71019169d85407d8827300ed43bdf0}{TRACE\_DEBUG\_ARRAY}(\textcolor{stringliteral}{"  "}, message, length);
+194 
+195       \textcolor{comment}{//Send handshake message}
+196       error = \hyperlink{tls__handshake_8c_ad729f5d4a23f051eebf844a6fe4964cd}{tlsSendHandshakeMessage}(context, message, length,
+197          \hyperlink{tls_8h_aea257240929f03e1e6ea3c7ab65ddb9ba374f2754185de2cef4ffb42530ce16a8}{TLS\_TYPE\_CLIENT\_HELLO});
+198    \}
+199 
+200    \textcolor{comment}{//Check status code}
+201    \textcolor{keywordflow}{if}(error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR} || error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca16f356a669fbb42deb27f59e9054f6d6}{ERROR\_WOULD\_BLOCK} || error == 
+      \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4d0f7be53b837f004379ac6bbd56f1e2}{ERROR\_TIMEOUT})
+202    \{
+203       \textcolor{comment}{//Initial ClientHello?}
+204       \textcolor{keywordflow}{if}(context->state == \hyperlink{tls_8h_a02bb4c8aa7988b33fe4d4836d8ff4a4dade201db86ae38480c06696f3a48e0170}{TLS\_STATE\_CLIENT\_HELLO})
+205       \{
+206          \textcolor{comment}{//Wait for a ServerHello or HelloRetryRequest message}
+207          context->state = \hyperlink{tls_8h_a02bb4c8aa7988b33fe4d4836d8ff4a4da69787ce8e1f218e8e47defe7af1c601a}{TLS\_STATE\_SERVER\_HELLO};
+208       \}
+209       \textcolor{keywordflow}{else}
+210       \{
+211          \textcolor{comment}{//Wait for a ServerHello message}
+212          context->state = \hyperlink{tls_8h_a02bb4c8aa7988b33fe4d4836d8ff4a4da22971523377f52c52b251553e373b4c8}{TLS\_STATE\_SERVER\_HELLO\_2};
+213       \}
+214    \}
+215 
+216    \textcolor{comment}{//Return status code}
+217    \textcolor{keywordflow}{return} error;
+218 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{tls__client_8c_a8093867cfcf2598d3c186d34a55a61c4}\label{tls__client_8c_a8093867cfcf2598d3c186d34a55a61c4}} 
+\index{tls\+\_\+client.\+c@{tls\+\_\+client.\+c}!tls\+Send\+Client\+Key\+Exchange@{tls\+Send\+Client\+Key\+Exchange}}
+\index{tls\+Send\+Client\+Key\+Exchange@{tls\+Send\+Client\+Key\+Exchange}!tls\+\_\+client.\+c@{tls\+\_\+client.\+c}}
+\subsubsection{\texorpdfstring{tls\+Send\+Client\+Key\+Exchange()}{tlsSendClientKeyExchange()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} tls\+Send\+Client\+Key\+Exchange (\begin{DoxyParamCaption}\item[{\hyperlink{tls_8h_ac09f7a286c0cdf9b07ee1edd107946f5}{Tls\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Send Client\+Key\+Exchange message. 
+
+This message is always sent by the client. It must immediately follow the client Certificate message, if it is sent. Otherwise, it must be the first message sent by the client after it receives the Server\+Hello\+Done message
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the T\+LS context \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 233 of file tls\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+234 \{
+235    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+236    \textcolor{keywordtype}{size\_t} \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length};
+237    \hyperlink{tls_8h_a88521372020709c027828954c0208b8f}{TlsClientKeyExchange} *\hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message};
+238 
+239    \textcolor{comment}{//Point to the buffer where to format the message}
+240    message = (\hyperlink{tls_8h_a88521372020709c027828954c0208b8f}{TlsClientKeyExchange} *) (context->txBuffer + context->txBufferLen);
+241 
+242    \textcolor{comment}{//Format ClientKeyExchange message}
+243    error = \hyperlink{tls__client_8c_a21a9a63fad15c959b75940665ea8973b}{tlsFormatClientKeyExchange}(context, message, &length);
+244 
+245    \textcolor{comment}{//Check status code}
+246    \textcolor{keywordflow}{if}(!error)
+247    \{
+248       \textcolor{comment}{//Debug message}
+249       \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"Sending ClientKeyExchange message (%"} \hyperlink{compiler__port_8h_a2b7b0557dc6cd786df02dafbb51f5292}{PRIuSIZE} \textcolor{stringliteral}{" bytes)...\(\backslash\)r\(\backslash\)n"}, length
+      );
+250       \hyperlink{debug_8h_a1f71019169d85407d8827300ed43bdf0}{TRACE\_DEBUG\_ARRAY}(\textcolor{stringliteral}{"  "}, message, length);
+251 
+252       \textcolor{comment}{//Send handshake message}
+253       error = \hyperlink{tls__handshake_8c_ad729f5d4a23f051eebf844a6fe4964cd}{tlsSendHandshakeMessage}(context, message, length,
+254          \hyperlink{tls_8h_aea257240929f03e1e6ea3c7ab65ddb9bac60c488eb103ba58049875235476f1cc}{TLS\_TYPE\_CLIENT\_KEY\_EXCHANGE});
+255    \}
+256 
+257    \textcolor{comment}{//Check status code}
+258    \textcolor{keywordflow}{if}(error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR} || error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca16f356a669fbb42deb27f59e9054f6d6}{ERROR\_WOULD\_BLOCK} || error == 
+      \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4d0f7be53b837f004379ac6bbd56f1e2}{ERROR\_TIMEOUT})
+259    \{
+260       \textcolor{comment}{//Derive session keys from the premaster secret}
+261       error = \hyperlink{tls__key__material_8c_a48b57409ac1d3429ddc2e236ba8beeb3}{tlsGenerateSessionKeys}(context);
+262 
+263       \textcolor{comment}{//Key material successfully generated?}
+264       \textcolor{keywordflow}{if}(!error)
+265       \{
+266          \textcolor{comment}{//Send a CertificateVerify message to the server}
+267          context->state = \hyperlink{tls_8h_a02bb4c8aa7988b33fe4d4836d8ff4a4da0f0ff1805dfdec56bba42cbd8f42097b}{TLS\_STATE\_CLIENT\_CERTIFICATE\_VERIFY};
+268       \}
+269    \}
+270 
+271    \textcolor{comment}{//Return status code}
+272    \textcolor{keywordflow}{return} error;
+273 \}
+\end{DoxyCode}

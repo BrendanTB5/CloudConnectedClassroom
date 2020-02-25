@@ -1,0 +1,1239 @@
+\hypertarget{ed25519_8c}{}\section{cyclone\+\_\+crypto/ecc/ed25519.c File Reference}
+\label{ed25519_8c}\index{cyclone\+\_\+crypto/ecc/ed25519.\+c@{cyclone\+\_\+crypto/ecc/ed25519.\+c}}
+
+
+Ed25519 elliptic curve (constant-\/time implementation)  
+
+
+{\ttfamily \#include \char`\"{}core/crypto.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ecc/ec\+\_\+curves.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ecc/curve25519.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ecc/ed25519.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}debug.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{ed25519_8c_afcdf5e66fd927a7f4cc64295acd20407}{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}~\hyperlink{crypto__config_8h_a6afae3a9b63f9b55d979e667ee0e881d}{C\+R\+Y\+P\+T\+O\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ed25519_8c_aaff66ce50b16b8ff9429e75be717d931}{ed25519\+Generate\+Key\+Pair} (const \hyperlink{structPrngAlgo}{Prng\+Algo} $\ast$prng\+Algo, void $\ast$prng\+Context, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$private\+Key, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$public\+Key)
+\begin{DoxyCompactList}\small\item\em Ed\+D\+SA key pair generation. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ed25519_8c_ab4014bf39652bc11ca5ce38131705eef}{ed25519\+Generate\+Signature} (const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$private\+Key, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$public\+Key, const void $\ast$\hyperlink{pap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}, size\+\_\+t message\+Len, const void $\ast$context, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} context\+Len, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} flag, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{tls_8h_af27e6d4ea3add14cd8cc9aa275d716ad}{signature})
+\begin{DoxyCompactList}\small\item\em Ed\+D\+SA signature generation. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ed25519_8c_a5f517039b2a85e2dbdcf26791e7d1b2c}{ed25519\+Verify\+Signature} (const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$public\+Key, const void $\ast$\hyperlink{pap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}, size\+\_\+t message\+Len, const void $\ast$context, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} context\+Len, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} flag, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{tls_8h_af27e6d4ea3add14cd8cc9aa275d716ad}{signature})
+\begin{DoxyCompactList}\small\item\em Ed\+D\+SA signature verification. \end{DoxyCompactList}\item 
+void \hyperlink{ed25519_8c_ac13b6ac7e3e90843a76428497b788d1f}{ed25519\+Mul} (\hyperlink{structEd25519State}{Ed25519\+State} $\ast$state, \hyperlink{structEd25519Point}{Ed25519\+Point} $\ast$\hyperlink{ndp_8h_a4c5c6ceb8ed33456261fa907136e0c3a}{r}, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{sha512_8c_a3934111e8801bd86b261f4bac043efa6}{k}, const \hyperlink{structEd25519Point}{Ed25519\+Point} $\ast$\hyperlink{ndp_8h_a6519522ad9a6f45e7a8d25d31392a977}{p})
+\begin{DoxyCompactList}\small\item\em Scalar multiplication on Ed25519 curve. \end{DoxyCompactList}\item 
+void \hyperlink{ed25519_8c_a4c4f0fd4825177484ab2f5f4cfc9a115}{ed25519\+Add} (\hyperlink{structEd25519State}{Ed25519\+State} $\ast$state, \hyperlink{structEd25519Point}{Ed25519\+Point} $\ast$\hyperlink{ndp_8h_a4c5c6ceb8ed33456261fa907136e0c3a}{r}, const \hyperlink{structEd25519Point}{Ed25519\+Point} $\ast$\hyperlink{ndp_8h_a6519522ad9a6f45e7a8d25d31392a977}{p}, const \hyperlink{structEd25519Point}{Ed25519\+Point} $\ast$q)
+\begin{DoxyCompactList}\small\item\em Point addition. \end{DoxyCompactList}\item 
+void \hyperlink{ed25519_8c_ae98fcb32ac79241b27644b081585bae5}{ed25519\+Double} (\hyperlink{structEd25519State}{Ed25519\+State} $\ast$state, \hyperlink{structEd25519Point}{Ed25519\+Point} $\ast$\hyperlink{ndp_8h_a4c5c6ceb8ed33456261fa907136e0c3a}{r}, const \hyperlink{structEd25519Point}{Ed25519\+Point} $\ast$\hyperlink{ndp_8h_a6519522ad9a6f45e7a8d25d31392a977}{p})
+\begin{DoxyCompactList}\small\item\em Point doubling. \end{DoxyCompactList}\item 
+void \hyperlink{ed25519_8c_a93c72098b398b5190817bc51d86fd7a2}{ed25519\+Encode} (\hyperlink{structEd25519Point}{Ed25519\+Point} $\ast$\hyperlink{ndp_8h_a6519522ad9a6f45e7a8d25d31392a977}{p}, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{tftp__common_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data})
+\begin{DoxyCompactList}\small\item\em Point encoding. \end{DoxyCompactList}\item 
+\hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t} \hyperlink{ed25519_8c_a5df8442424e55c14c79b302426c1dba2}{ed25519\+Decode} (\hyperlink{structEd25519Point}{Ed25519\+Point} $\ast$\hyperlink{ndp_8h_a6519522ad9a6f45e7a8d25d31392a977}{p}, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{tftp__common_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data})
+\begin{DoxyCompactList}\small\item\em Point decoding. \end{DoxyCompactList}\item 
+void \hyperlink{ed25519_8c_aed1443fb9c2e04a551f26c48516df25c}{ed25519\+Red\+Int} (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{ndp_8h_a4c5c6ceb8ed33456261fa907136e0c3a}{r}, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a})
+\begin{DoxyCompactList}\small\item\em Reduce an integer modulo L. \end{DoxyCompactList}\item 
+void \hyperlink{ed25519_8c_a7197c9a4962aadf2faec70d5ecc5726c}{ed25519\+Add\+Int} (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{ndp_8h_a4c5c6ceb8ed33456261fa907136e0c3a}{r}, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b}, \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n})
+\begin{DoxyCompactList}\small\item\em Addition of two integers. \end{DoxyCompactList}\item 
+\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} \hyperlink{ed25519_8c_a3078c55ad9cbf3444a1e80f8845b9e1d}{ed25519\+Sub\+Int} (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{ndp_8h_a4c5c6ceb8ed33456261fa907136e0c3a}{r}, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b}, \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n})
+\begin{DoxyCompactList}\small\item\em Subtraction of two integers. \end{DoxyCompactList}\item 
+void \hyperlink{ed25519_8c_a345d8823c1850ef6b37285bac9450d73}{ed25519\+Mul\+Int} (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$rl, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$rh, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b}, \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n})
+\begin{DoxyCompactList}\small\item\em Multiplication of two integers. \end{DoxyCompactList}\item 
+void \hyperlink{ed25519_8c_a3b5a40c8f35bab66d16ac4654b0e4bdd}{ed25519\+Copy\+Int} (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b}, \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n})
+\begin{DoxyCompactList}\small\item\em Copy an integer. \end{DoxyCompactList}\item 
+void \hyperlink{ed25519_8c_a38f1bc0961d7624a22fc3607d801af9c}{ed25519\+Select\+Int} (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{ndp_8h_a4c5c6ceb8ed33456261fa907136e0c3a}{r}, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b}, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} \hyperlink{llmnr__common_8h_a2e5a04327b5658199f0f7bda2acceee1}{c}, \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n})
+\begin{DoxyCompactList}\small\item\em Select an integer. \end{DoxyCompactList}\item 
+\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} \hyperlink{ed25519_8c_a942870e7a11abca1c4304d2df21c0f4a}{ed25519\+Comp\+Int} (const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b}, \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n})
+\begin{DoxyCompactList}\small\item\em Compare integers. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static const \hyperlink{structEd25519Point}{Ed25519\+Point} \hyperlink{ed25519_8c_ad861e2266b3d362829683634a62f2444}{E\+D25519\+\_\+B}
+\item 
+static const \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t} \hyperlink{ed25519_8c_a8383113557d8ec492f8b65b7dde0f139}{E\+D25519\+\_\+\+Z\+E\+RO} \mbox{[}8\mbox{]}
+\item 
+static const \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t} \hyperlink{ed25519_8c_a727db9bc79e583f182fcf5c32832a860}{E\+D25519\+\_\+D} \mbox{[}8\mbox{]}
+\item 
+static const \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t} \hyperlink{ed25519_8c_aff8c89541a0620acdcc987ef7a15cddc}{E\+D25519\+\_\+2D} \mbox{[}8\mbox{]}
+\item 
+static const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} \hyperlink{ed25519_8c_ac2ce36b50c60db8dd24b33254b0e1bf7}{E\+D25519\+\_\+L} \mbox{[}33\mbox{]}
+\item 
+static const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} \hyperlink{ed25519_8c_acdfc95f47b3a8f6383a4ce3a41ff59da}{E\+D25519\+\_\+\+MU} \mbox{[}33\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Ed25519 elliptic curve (constant-\/time implementation) 
+
+\hypertarget{pic32mz__ef__curiosity_8h_License}{}\subsection{License}\label{pic32mz__ef__curiosity_8h_License}
+S\+P\+D\+X-\/\+License-\/\+Identifier\+: G\+P\+L-\/2.\+0-\/or-\/later
+
+Copyright (C) 2010-\/2019 Oryx Embedded S\+A\+RL. All rights reserved.
+
+This file is part of Cyclone\+Crypto Open.
+
+This program is free software; you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+
+You should have received a copy of the G\+NU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-\/1301, U\+SA.
+
+\begin{DoxyAuthor}{Author}
+Oryx Embedded S\+A\+RL (www.\+oryx-\/embedded.\+com) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+9.\+6 
+\end{DoxyVersion}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{ed25519_8c_afcdf5e66fd927a7f4cc64295acd20407}\label{ed25519_8c_afcdf5e66fd927a7f4cc64295acd20407}} 
+\index{ed25519.\+c@{ed25519.\+c}!T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+\index{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}!ed25519.\+c@{ed25519.\+c}}
+\subsubsection{\texorpdfstring{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}{TRACE\_LEVEL}}
+{\footnotesize\ttfamily \#define T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL~\hyperlink{crypto__config_8h_a6afae3a9b63f9b55d979e667ee0e881d}{C\+R\+Y\+P\+T\+O\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+
+
+
+Definition at line 32 of file ed25519.\+c.
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{ed25519_8c_a4c4f0fd4825177484ab2f5f4cfc9a115}\label{ed25519_8c_a4c4f0fd4825177484ab2f5f4cfc9a115}} 
+\index{ed25519.\+c@{ed25519.\+c}!ed25519\+Add@{ed25519\+Add}}
+\index{ed25519\+Add@{ed25519\+Add}!ed25519.\+c@{ed25519.\+c}}
+\subsubsection{\texorpdfstring{ed25519\+Add()}{ed25519Add()}}
+{\footnotesize\ttfamily void ed25519\+Add (\begin{DoxyParamCaption}\item[{\hyperlink{structEd25519State}{Ed25519\+State} $\ast$}]{state,  }\item[{\hyperlink{structEd25519Point}{Ed25519\+Point} $\ast$}]{r,  }\item[{const \hyperlink{structEd25519Point}{Ed25519\+Point} $\ast$}]{p,  }\item[{const \hyperlink{structEd25519Point}{Ed25519\+Point} $\ast$}]{q }\end{DoxyParamCaption})}
+
+
+
+Point addition. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em state} & Pointer to the working state \\
+\hline
+\mbox{\tt out}  & {\em r} & Resulting point R = P + Q \\
+\hline
+\mbox{\tt in}  & {\em p} & First operand \\
+\hline
+\mbox{\tt in}  & {\em q} & Second operand \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 456 of file ed25519.\+c.
+
+
+\begin{DoxyCode}
+458 \{
+459    \textcolor{comment}{//Compute A = (Y1 + X1) * (Y2 + X2)}
+460    \hyperlink{curve25519_8c_ac15009ba3514a9b25db173b34cecc698}{curve25519Add}(state->\hyperlink{structEd25519State_a89709eaf7e108ce3561694b0f5a2d107}{c}, p->\hyperlink{structEd25519Point_a54af56f591402668e6a50d1ae0d4fcd0}{y}, p->\hyperlink{structEd25519Point_ada4075918f73fe13ceaf4b3631549ce8}{x});
+461    \hyperlink{curve25519_8c_ac15009ba3514a9b25db173b34cecc698}{curve25519Add}(state->\hyperlink{structEd25519State_a1a5b5dcf20f8a5ca52db680cf167e7be}{d}, q->\hyperlink{structEd25519Point_a54af56f591402668e6a50d1ae0d4fcd0}{y}, q->\hyperlink{structEd25519Point_ada4075918f73fe13ceaf4b3631549ce8}{x});
+462    \hyperlink{curve25519_8c_ab54a7954076d8cd159d561ef39e94fdc}{curve25519Mul}(state->\hyperlink{structEd25519State_ad5256b987472364028bb7c680eb47fbf}{a}, state->\hyperlink{structEd25519State_a89709eaf7e108ce3561694b0f5a2d107}{c}, state->\hyperlink{structEd25519State_a1a5b5dcf20f8a5ca52db680cf167e7be}{d});
+463    \textcolor{comment}{//Compute B = (Y1 - X1) * (Y2 - X2)}
+464    \hyperlink{curve25519_8c_a4bfda30d50e23c13e552eb320c674717}{curve25519Sub}(state->\hyperlink{structEd25519State_a89709eaf7e108ce3561694b0f5a2d107}{c}, p->\hyperlink{structEd25519Point_a54af56f591402668e6a50d1ae0d4fcd0}{y}, p->\hyperlink{structEd25519Point_ada4075918f73fe13ceaf4b3631549ce8}{x});
+465    \hyperlink{curve25519_8c_a4bfda30d50e23c13e552eb320c674717}{curve25519Sub}(state->\hyperlink{structEd25519State_a1a5b5dcf20f8a5ca52db680cf167e7be}{d}, q->\hyperlink{structEd25519Point_a54af56f591402668e6a50d1ae0d4fcd0}{y}, q->\hyperlink{structEd25519Point_ada4075918f73fe13ceaf4b3631549ce8}{x});
+466    \hyperlink{curve25519_8c_ab54a7954076d8cd159d561ef39e94fdc}{curve25519Mul}(state->\hyperlink{structEd25519State_ab7959fd632debe6185b2c472467876d8}{b}, state->\hyperlink{structEd25519State_a89709eaf7e108ce3561694b0f5a2d107}{c}, state->\hyperlink{structEd25519State_a1a5b5dcf20f8a5ca52db680cf167e7be}{d});
+467    \textcolor{comment}{//Compute C = 2 * Z1 * Z2}
+468    \hyperlink{curve25519_8c_ab54a7954076d8cd159d561ef39e94fdc}{curve25519Mul}(state->\hyperlink{structEd25519State_a89709eaf7e108ce3561694b0f5a2d107}{c}, p->\hyperlink{structEd25519Point_ab7af3d9e39f190e82b2927bdc269ba98}{z}, q->\hyperlink{structEd25519Point_ab7af3d9e39f190e82b2927bdc269ba98}{z});
+469    \hyperlink{curve25519_8c_ac15009ba3514a9b25db173b34cecc698}{curve25519Add}(state->\hyperlink{structEd25519State_a89709eaf7e108ce3561694b0f5a2d107}{c}, state->\hyperlink{structEd25519State_a89709eaf7e108ce3561694b0f5a2d107}{c}, state->\hyperlink{structEd25519State_a89709eaf7e108ce3561694b0f5a2d107}{c});
+470    \textcolor{comment}{//Compute D = (2 * d) * T1 * T2}
+471    \hyperlink{curve25519_8c_ab54a7954076d8cd159d561ef39e94fdc}{curve25519Mul}(state->\hyperlink{structEd25519State_a1a5b5dcf20f8a5ca52db680cf167e7be}{d}, p->\hyperlink{structEd25519Point_a54ab7260c44bc9595d03a6829b4bfd18}{t}, q->\hyperlink{structEd25519Point_a54ab7260c44bc9595d03a6829b4bfd18}{t});
+472    \hyperlink{curve25519_8c_ab54a7954076d8cd159d561ef39e94fdc}{curve25519Mul}(state->\hyperlink{structEd25519State_a1a5b5dcf20f8a5ca52db680cf167e7be}{d}, state->\hyperlink{structEd25519State_a1a5b5dcf20f8a5ca52db680cf167e7be}{d}, \hyperlink{ed25519_8c_aff8c89541a0620acdcc987ef7a15cddc}{ED25519\_2D});
+473    \textcolor{comment}{//Compute E = A + B}
+474    \hyperlink{curve25519_8c_ac15009ba3514a9b25db173b34cecc698}{curve25519Add}(state->\hyperlink{structEd25519State_aea8e07abf5c03717fff2e06a3d403b05}{e}, state->\hyperlink{structEd25519State_ad5256b987472364028bb7c680eb47fbf}{a}, state->\hyperlink{structEd25519State_ab7959fd632debe6185b2c472467876d8}{b});
+475    \textcolor{comment}{//Compute F = A - B}
+476    \hyperlink{curve25519_8c_a4bfda30d50e23c13e552eb320c674717}{curve25519Sub}(state->\hyperlink{structEd25519State_a168d3aecb5fe85de18f5b1262f92c8a1}{f}, state->\hyperlink{structEd25519State_ad5256b987472364028bb7c680eb47fbf}{a}, state->\hyperlink{structEd25519State_ab7959fd632debe6185b2c472467876d8}{b});
+477    \textcolor{comment}{//Compute G = C + D}
+478    \hyperlink{curve25519_8c_ac15009ba3514a9b25db173b34cecc698}{curve25519Add}(state->\hyperlink{structEd25519State_a79c9d128ae5b3c351159268164ca23d4}{g}, state->\hyperlink{structEd25519State_a89709eaf7e108ce3561694b0f5a2d107}{c}, state->\hyperlink{structEd25519State_a1a5b5dcf20f8a5ca52db680cf167e7be}{d});
+479    \textcolor{comment}{//Compute H = C - D}
+480    \hyperlink{curve25519_8c_a4bfda30d50e23c13e552eb320c674717}{curve25519Sub}(state->\hyperlink{structEd25519State_a8d8b974786f20f7a3013f747808d2927}{h}, state->\hyperlink{structEd25519State_a89709eaf7e108ce3561694b0f5a2d107}{c}, state->\hyperlink{structEd25519State_a1a5b5dcf20f8a5ca52db680cf167e7be}{d});
+481    \textcolor{comment}{//Compute X3 = F * H}
+482    \hyperlink{curve25519_8c_ab54a7954076d8cd159d561ef39e94fdc}{curve25519Mul}(r->\hyperlink{structEd25519Point_ada4075918f73fe13ceaf4b3631549ce8}{x}, state->\hyperlink{structEd25519State_a168d3aecb5fe85de18f5b1262f92c8a1}{f}, state->\hyperlink{structEd25519State_a8d8b974786f20f7a3013f747808d2927}{h});
+483    \textcolor{comment}{//Compute Y3 = E * G}
+484    \hyperlink{curve25519_8c_ab54a7954076d8cd159d561ef39e94fdc}{curve25519Mul}(r->\hyperlink{structEd25519Point_a54af56f591402668e6a50d1ae0d4fcd0}{y}, state->\hyperlink{structEd25519State_aea8e07abf5c03717fff2e06a3d403b05}{e}, state->\hyperlink{structEd25519State_a79c9d128ae5b3c351159268164ca23d4}{g});
+485    \textcolor{comment}{//Compute Z3 = G * H}
+486    \hyperlink{curve25519_8c_ab54a7954076d8cd159d561ef39e94fdc}{curve25519Mul}(r->\hyperlink{structEd25519Point_ab7af3d9e39f190e82b2927bdc269ba98}{z}, state->\hyperlink{structEd25519State_a79c9d128ae5b3c351159268164ca23d4}{g}, state->\hyperlink{structEd25519State_a8d8b974786f20f7a3013f747808d2927}{h});
+487    \textcolor{comment}{//Compute T3 = E * F}
+488    \hyperlink{curve25519_8c_ab54a7954076d8cd159d561ef39e94fdc}{curve25519Mul}(r->\hyperlink{structEd25519Point_a54ab7260c44bc9595d03a6829b4bfd18}{t}, state->\hyperlink{structEd25519State_aea8e07abf5c03717fff2e06a3d403b05}{e}, state->\hyperlink{structEd25519State_a168d3aecb5fe85de18f5b1262f92c8a1}{f});
+489 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ed25519_8c_a7197c9a4962aadf2faec70d5ecc5726c}\label{ed25519_8c_a7197c9a4962aadf2faec70d5ecc5726c}} 
+\index{ed25519.\+c@{ed25519.\+c}!ed25519\+Add\+Int@{ed25519\+Add\+Int}}
+\index{ed25519\+Add\+Int@{ed25519\+Add\+Int}!ed25519.\+c@{ed25519.\+c}}
+\subsubsection{\texorpdfstring{ed25519\+Add\+Int()}{ed25519AddInt()}}
+{\footnotesize\ttfamily void ed25519\+Add\+Int (\begin{DoxyParamCaption}\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{r,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{a,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{b,  }\item[{\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t}}]{n }\end{DoxyParamCaption})}
+
+
+
+Addition of two integers. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em r} & Resulting integer R = A + B \\
+\hline
+\mbox{\tt in}  & {\em a} & An integer such as 0 $<$= A $<$ (2$^\wedge$8)$^\wedge$n \\
+\hline
+\mbox{\tt in}  & {\em b} & An integer such as 0 $<$= B $<$ (2$^\wedge$8)$^\wedge$n \\
+\hline
+\mbox{\tt in}  & {\em n} & Size of the operands, in bytes \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 662 of file ed25519.\+c.
+
+
+\begin{DoxyCode}
+663 \{
+664    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+665    \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t} temp;
+666 
+667    \textcolor{comment}{//Compute R = A + B}
+668    \textcolor{keywordflow}{for}(temp = 0, i = 0; i < \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n}; i++)
+669    \{
+670       temp += \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[i];
+671       temp += \hyperlink{dtls__misc_8h_ab590318ac859d0e57e15c3dd6c62a605}{b}[i];
+672       \hyperlink{ndp_8h_a4c5c6ceb8ed33456261fa907136e0c3a}{r}[i] = temp & 0xFF;
+673       temp >>= 8;
+674    \}
+675 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ed25519_8c_a942870e7a11abca1c4304d2df21c0f4a}\label{ed25519_8c_a942870e7a11abca1c4304d2df21c0f4a}} 
+\index{ed25519.\+c@{ed25519.\+c}!ed25519\+Comp\+Int@{ed25519\+Comp\+Int}}
+\index{ed25519\+Comp\+Int@{ed25519\+Comp\+Int}!ed25519.\+c@{ed25519.\+c}}
+\subsubsection{\texorpdfstring{ed25519\+Comp\+Int()}{ed25519CompInt()}}
+{\footnotesize\ttfamily \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} ed25519\+Comp\+Int (\begin{DoxyParamCaption}\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{a,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{b,  }\item[{\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t}}]{n }\end{DoxyParamCaption})}
+
+
+
+Compare integers. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em a} & Pointer to the first integer \\
+\hline
+\mbox{\tt in}  & {\em b} & Pointer to the second integer \\
+\hline
+\mbox{\tt in}  & {\em n} & Size of the integers, in bytes \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The function returns 0 if the A = B, else 1 
+\end{DoxyReturn}
+
+
+Definition at line 817 of file ed25519.\+c.
+
+
+\begin{DoxyCode}
+818 \{
+819    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+820    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} \hyperlink{web__socket_8h_a8a74907784be6c7786c2d060c8d7e10b}{mask};
+821 
+822    \textcolor{comment}{//Initialize mask}
+823    mask = 0;
+824 
+825    \textcolor{comment}{//Compare A and B}
+826    \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n}; i++)
+827    \{
+828       \textcolor{comment}{//Constant time implementation}
+829       mask |= \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[i] ^ \hyperlink{dtls__misc_8h_ab590318ac859d0e57e15c3dd6c62a605}{b}[i];
+830    \}
+831 
+832    \textcolor{comment}{//Return 0 if A = B, else 1}
+833    \textcolor{keywordflow}{return} ((\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t}) (mask | (~mask + 1))) >> 7;
+834 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ed25519_8c_a3b5a40c8f35bab66d16ac4654b0e4bdd}\label{ed25519_8c_a3b5a40c8f35bab66d16ac4654b0e4bdd}} 
+\index{ed25519.\+c@{ed25519.\+c}!ed25519\+Copy\+Int@{ed25519\+Copy\+Int}}
+\index{ed25519\+Copy\+Int@{ed25519\+Copy\+Int}!ed25519.\+c@{ed25519.\+c}}
+\subsubsection{\texorpdfstring{ed25519\+Copy\+Int()}{ed25519CopyInt()}}
+{\footnotesize\ttfamily void ed25519\+Copy\+Int (\begin{DoxyParamCaption}\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{a,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{b,  }\item[{\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t}}]{n }\end{DoxyParamCaption})}
+
+
+
+Copy an integer. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em a} & Pointer to the destination integer \\
+\hline
+\mbox{\tt in}  & {\em b} & Pointer to the source integer \\
+\hline
+\mbox{\tt in}  & {\em n} & Size of the integers, in bytes \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 770 of file ed25519.\+c.
+
+
+\begin{DoxyCode}
+771 \{
+772    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+773 
+774    \textcolor{comment}{//Copy the value of the integer}
+775    \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n}; i++)
+776    \{
+777       \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[i] = \hyperlink{dtls__misc_8h_ab590318ac859d0e57e15c3dd6c62a605}{b}[i];
+778    \}
+779 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ed25519_8c_a5df8442424e55c14c79b302426c1dba2}\label{ed25519_8c_a5df8442424e55c14c79b302426c1dba2}} 
+\index{ed25519.\+c@{ed25519.\+c}!ed25519\+Decode@{ed25519\+Decode}}
+\index{ed25519\+Decode@{ed25519\+Decode}!ed25519.\+c@{ed25519.\+c}}
+\subsubsection{\texorpdfstring{ed25519\+Decode()}{ed25519Decode()}}
+{\footnotesize\ttfamily \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t} ed25519\+Decode (\begin{DoxyParamCaption}\item[{\hyperlink{structEd25519Point}{Ed25519\+Point} $\ast$}]{p,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{data }\end{DoxyParamCaption})}
+
+
+
+Point decoding. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em p} & Point representation \\
+\hline
+\mbox{\tt out}  & {\em data} & Octet string to be converted \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 560 of file ed25519.\+c.
+
+
+\begin{DoxyCode}
+561 \{
+562    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+563    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} x0;
+564    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} ret;
+565    \hyperlink{stdint_8h_aec6fcb673ff035718c238c8c9d544c47}{uint64\_t} temp;
+566    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} u[8];
+567    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} v[8];
+568 
+569    \textcolor{comment}{//First, interpret the string as an integer in little-endian representation.}
+570    \textcolor{comment}{//Bit 255 of this number is the least significant bit of the x-coordinate}
+571    \textcolor{comment}{//and denote this value x\_0}
+572    x0 = \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}[31] >> 7;
+573 
+574    \textcolor{comment}{//The y-coordinate is recovered simply by clearing this bit}
+575    \hyperlink{curve25519_8c_a8e9b8576e591489652c867883c18e514}{curve25519Import}(p->\hyperlink{structEd25519Point_a54af56f591402668e6a50d1ae0d4fcd0}{y}, \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data});
+576    p->\hyperlink{structEd25519Point_a54af56f591402668e6a50d1ae0d4fcd0}{y}[7] &= 0x7FFFFFFF;
+577 
+578    \textcolor{comment}{//Compute u = y + 19}
+579    \textcolor{keywordflow}{for}(temp = 19, i = 0; i < 8; i++)
+580    \{
+581       temp += p->\hyperlink{structEd25519Point_a54af56f591402668e6a50d1ae0d4fcd0}{y}[i];
+582       u[i] = temp & 0xFFFFFFFF;
+583       temp >>= 32;
+584    \}
+585 
+586    \textcolor{comment}{//If the y-coordinate is >= p, decoding fails}
+587    ret = (u[7] >> 31) & 1;
+588 
+589    \textcolor{comment}{//The curve equation implies x^2 = (y^2 - 1) / (d * y^2 + 1) mod p}
+590    \textcolor{comment}{//Let u = y^2 - 1 and v = d * y^2 + 1}
+591    \hyperlink{curve25519_8c_a1db25b2546a42bf79a9c1d701c30d047}{curve25519Sqr}(v, p->\hyperlink{structEd25519Point_a54af56f591402668e6a50d1ae0d4fcd0}{y});
+592    \hyperlink{curve25519_8c_a59f533cbfa5e3b0a1e1c33c1b52bc169}{curve25519SubInt}(u, v, 1);
+593    \hyperlink{curve25519_8c_ab54a7954076d8cd159d561ef39e94fdc}{curve25519Mul}(v, v, \hyperlink{ed25519_8c_a727db9bc79e583f182fcf5c32832a860}{ED25519\_D});
+594    \hyperlink{curve25519_8c_adafac414eff32ef866995031f230064d}{curve25519AddInt}(v, v, 1);
+595 
+596    \textcolor{comment}{//Compute u = sqrt(u / v)}
+597    ret |= \hyperlink{curve25519_8c_a2e292cdeb29acc6fa52a36cc670ca2aa}{curve25519Sqrt}(u, u, v);
+598 
+599    \textcolor{comment}{//If x = 0, and x\_0 = 1, decoding fails}
+600    ret |= (\hyperlink{curve25519_8c_a18d5fa5f2a5940e7afc08dd127f3ed45}{curve25519Comp}(u, \hyperlink{ed25519_8c_a8383113557d8ec492f8b65b7dde0f139}{ED25519\_ZERO}) ^ 1) & x0;
+601 
+602    \textcolor{comment}{//Compute v = p - u}
+603    \hyperlink{curve25519_8c_a4bfda30d50e23c13e552eb320c674717}{curve25519Sub}(v, \hyperlink{ed25519_8c_a8383113557d8ec492f8b65b7dde0f139}{ED25519\_ZERO}, u);
+604 
+605    \textcolor{comment}{//Finally, use the x\_0 bit to select the right square root}
+606    \hyperlink{curve25519_8c_a4a0df0e0a6f77fcf5e44df5d38552b6d}{curve25519Select}(p->\hyperlink{structEd25519Point_ada4075918f73fe13ceaf4b3631549ce8}{x}, u, v, (x0 ^ u[0]) & 1);
+607 
+608    \textcolor{comment}{//Calculate extended point representation}
+609    \hyperlink{curve25519_8c_a1268b345c76c3639d20de5820b7ac8bc}{curve25519SetInt}(p->\hyperlink{structEd25519Point_ab7af3d9e39f190e82b2927bdc269ba98}{z}, 1);
+610    \hyperlink{curve25519_8c_ab54a7954076d8cd159d561ef39e94fdc}{curve25519Mul}(p->\hyperlink{structEd25519Point_a54ab7260c44bc9595d03a6829b4bfd18}{t}, p->\hyperlink{structEd25519Point_ada4075918f73fe13ceaf4b3631549ce8}{x}, p->\hyperlink{structEd25519Point_a54af56f591402668e6a50d1ae0d4fcd0}{y});
+611 
+612    \textcolor{comment}{//Return 0 if the point has been successfully decoded, else 1}
+613    \textcolor{keywordflow}{return} ret;
+614 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ed25519_8c_ae98fcb32ac79241b27644b081585bae5}\label{ed25519_8c_ae98fcb32ac79241b27644b081585bae5}} 
+\index{ed25519.\+c@{ed25519.\+c}!ed25519\+Double@{ed25519\+Double}}
+\index{ed25519\+Double@{ed25519\+Double}!ed25519.\+c@{ed25519.\+c}}
+\subsubsection{\texorpdfstring{ed25519\+Double()}{ed25519Double()}}
+{\footnotesize\ttfamily void ed25519\+Double (\begin{DoxyParamCaption}\item[{\hyperlink{structEd25519State}{Ed25519\+State} $\ast$}]{state,  }\item[{\hyperlink{structEd25519Point}{Ed25519\+Point} $\ast$}]{r,  }\item[{const \hyperlink{structEd25519Point}{Ed25519\+Point} $\ast$}]{p }\end{DoxyParamCaption})}
+
+
+
+Point doubling. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em state} & Pointer to the working state \\
+\hline
+\mbox{\tt out}  & {\em r} & Resulting point R = 2 $\ast$ P \\
+\hline
+\mbox{\tt in}  & {\em p} & Input point P \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 499 of file ed25519.\+c.
+
+
+\begin{DoxyCode}
+500 \{
+501    \textcolor{comment}{//Compute A = X1^2}
+502    \hyperlink{curve25519_8c_a1db25b2546a42bf79a9c1d701c30d047}{curve25519Sqr}(state->\hyperlink{structEd25519State_ad5256b987472364028bb7c680eb47fbf}{a}, p->\hyperlink{structEd25519Point_ada4075918f73fe13ceaf4b3631549ce8}{x});
+503    \textcolor{comment}{//Compute B = Y1^2}
+504    \hyperlink{curve25519_8c_a1db25b2546a42bf79a9c1d701c30d047}{curve25519Sqr}(state->\hyperlink{structEd25519State_ab7959fd632debe6185b2c472467876d8}{b}, p->\hyperlink{structEd25519Point_a54af56f591402668e6a50d1ae0d4fcd0}{y});
+505    \textcolor{comment}{//Compute C = 2 * Z1^2}
+506    \hyperlink{curve25519_8c_a1db25b2546a42bf79a9c1d701c30d047}{curve25519Sqr}(state->\hyperlink{structEd25519State_a89709eaf7e108ce3561694b0f5a2d107}{c}, p->\hyperlink{structEd25519Point_ab7af3d9e39f190e82b2927bdc269ba98}{z});
+507    \hyperlink{curve25519_8c_ac15009ba3514a9b25db173b34cecc698}{curve25519Add}(state->\hyperlink{structEd25519State_a89709eaf7e108ce3561694b0f5a2d107}{c}, state->\hyperlink{structEd25519State_a89709eaf7e108ce3561694b0f5a2d107}{c}, state->\hyperlink{structEd25519State_a89709eaf7e108ce3561694b0f5a2d107}{c});
+508    \textcolor{comment}{//Compute E = A + B}
+509    \hyperlink{curve25519_8c_ac15009ba3514a9b25db173b34cecc698}{curve25519Add}(state->\hyperlink{structEd25519State_aea8e07abf5c03717fff2e06a3d403b05}{e}, state->\hyperlink{structEd25519State_ad5256b987472364028bb7c680eb47fbf}{a}, state->\hyperlink{structEd25519State_ab7959fd632debe6185b2c472467876d8}{b});
+510    \textcolor{comment}{//Compute F = E - (X1 + Y1)^2}
+511    \hyperlink{curve25519_8c_ac15009ba3514a9b25db173b34cecc698}{curve25519Add}(state->\hyperlink{structEd25519State_a168d3aecb5fe85de18f5b1262f92c8a1}{f}, p->\hyperlink{structEd25519Point_ada4075918f73fe13ceaf4b3631549ce8}{x}, p->\hyperlink{structEd25519Point_a54af56f591402668e6a50d1ae0d4fcd0}{y});
+512    \hyperlink{curve25519_8c_a1db25b2546a42bf79a9c1d701c30d047}{curve25519Sqr}(state->\hyperlink{structEd25519State_a168d3aecb5fe85de18f5b1262f92c8a1}{f}, state->\hyperlink{structEd25519State_a168d3aecb5fe85de18f5b1262f92c8a1}{f});
+513    \hyperlink{curve25519_8c_a4bfda30d50e23c13e552eb320c674717}{curve25519Sub}(state->\hyperlink{structEd25519State_a168d3aecb5fe85de18f5b1262f92c8a1}{f}, state->\hyperlink{structEd25519State_aea8e07abf5c03717fff2e06a3d403b05}{e}, state->\hyperlink{structEd25519State_a168d3aecb5fe85de18f5b1262f92c8a1}{f});
+514    \textcolor{comment}{//Compute G = A - B}
+515    \hyperlink{curve25519_8c_a4bfda30d50e23c13e552eb320c674717}{curve25519Sub}(state->\hyperlink{structEd25519State_a79c9d128ae5b3c351159268164ca23d4}{g}, state->\hyperlink{structEd25519State_ad5256b987472364028bb7c680eb47fbf}{a}, state->\hyperlink{structEd25519State_ab7959fd632debe6185b2c472467876d8}{b});
+516    \textcolor{comment}{//Compute H = C + G}
+517    \hyperlink{curve25519_8c_ac15009ba3514a9b25db173b34cecc698}{curve25519Add}(state->\hyperlink{structEd25519State_a8d8b974786f20f7a3013f747808d2927}{h}, state->\hyperlink{structEd25519State_a89709eaf7e108ce3561694b0f5a2d107}{c}, state->\hyperlink{structEd25519State_a79c9d128ae5b3c351159268164ca23d4}{g});
+518    \textcolor{comment}{//Compute X3 = F * H}
+519    \hyperlink{curve25519_8c_ab54a7954076d8cd159d561ef39e94fdc}{curve25519Mul}(r->\hyperlink{structEd25519Point_ada4075918f73fe13ceaf4b3631549ce8}{x}, state->\hyperlink{structEd25519State_a168d3aecb5fe85de18f5b1262f92c8a1}{f}, state->\hyperlink{structEd25519State_a8d8b974786f20f7a3013f747808d2927}{h});
+520    \textcolor{comment}{//Compute Y3 = E * G}
+521    \hyperlink{curve25519_8c_ab54a7954076d8cd159d561ef39e94fdc}{curve25519Mul}(r->\hyperlink{structEd25519Point_a54af56f591402668e6a50d1ae0d4fcd0}{y}, state->\hyperlink{structEd25519State_aea8e07abf5c03717fff2e06a3d403b05}{e}, state->\hyperlink{structEd25519State_a79c9d128ae5b3c351159268164ca23d4}{g});
+522    \textcolor{comment}{//Compute Z3 = G * H}
+523    \hyperlink{curve25519_8c_ab54a7954076d8cd159d561ef39e94fdc}{curve25519Mul}(r->\hyperlink{structEd25519Point_ab7af3d9e39f190e82b2927bdc269ba98}{z}, state->\hyperlink{structEd25519State_a79c9d128ae5b3c351159268164ca23d4}{g}, state->\hyperlink{structEd25519State_a8d8b974786f20f7a3013f747808d2927}{h});
+524    \textcolor{comment}{//Compute T3 = E * F}
+525    \hyperlink{curve25519_8c_ab54a7954076d8cd159d561ef39e94fdc}{curve25519Mul}(r->\hyperlink{structEd25519Point_a54ab7260c44bc9595d03a6829b4bfd18}{t}, state->\hyperlink{structEd25519State_aea8e07abf5c03717fff2e06a3d403b05}{e}, state->\hyperlink{structEd25519State_a168d3aecb5fe85de18f5b1262f92c8a1}{f});
+526 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ed25519_8c_a93c72098b398b5190817bc51d86fd7a2}\label{ed25519_8c_a93c72098b398b5190817bc51d86fd7a2}} 
+\index{ed25519.\+c@{ed25519.\+c}!ed25519\+Encode@{ed25519\+Encode}}
+\index{ed25519\+Encode@{ed25519\+Encode}!ed25519.\+c@{ed25519.\+c}}
+\subsubsection{\texorpdfstring{ed25519\+Encode()}{ed25519Encode()}}
+{\footnotesize\ttfamily void ed25519\+Encode (\begin{DoxyParamCaption}\item[{\hyperlink{structEd25519Point}{Ed25519\+Point} $\ast$}]{p,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{data }\end{DoxyParamCaption})}
+
+
+
+Point encoding. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em p} & Point representation \\
+\hline
+\mbox{\tt out}  & {\em data} & Octet string resulting from the conversion \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 535 of file ed25519.\+c.
+
+
+\begin{DoxyCode}
+536 \{
+537    \textcolor{comment}{//Retrieve affine representation}
+538    \hyperlink{curve25519_8c_a5d96b1827091c69f5e83e5b48de05fac}{curve25519Inv}(p->\hyperlink{structEd25519Point_ab7af3d9e39f190e82b2927bdc269ba98}{z}, p->\hyperlink{structEd25519Point_ab7af3d9e39f190e82b2927bdc269ba98}{z});
+539    \hyperlink{curve25519_8c_ab54a7954076d8cd159d561ef39e94fdc}{curve25519Mul}(p->\hyperlink{structEd25519Point_ada4075918f73fe13ceaf4b3631549ce8}{x}, p->\hyperlink{structEd25519Point_ada4075918f73fe13ceaf4b3631549ce8}{x}, p->\hyperlink{structEd25519Point_ab7af3d9e39f190e82b2927bdc269ba98}{z});
+540    \hyperlink{curve25519_8c_ab54a7954076d8cd159d561ef39e94fdc}{curve25519Mul}(p->\hyperlink{structEd25519Point_a54af56f591402668e6a50d1ae0d4fcd0}{y}, p->\hyperlink{structEd25519Point_a54af56f591402668e6a50d1ae0d4fcd0}{y}, p->\hyperlink{structEd25519Point_ab7af3d9e39f190e82b2927bdc269ba98}{z});
+541    \hyperlink{curve25519_8c_a1268b345c76c3639d20de5820b7ac8bc}{curve25519SetInt}(p->\hyperlink{structEd25519Point_ab7af3d9e39f190e82b2927bdc269ba98}{z}, 1);
+542    \hyperlink{curve25519_8c_ab54a7954076d8cd159d561ef39e94fdc}{curve25519Mul}(p->\hyperlink{structEd25519Point_a54ab7260c44bc9595d03a6829b4bfd18}{t}, p->\hyperlink{structEd25519Point_ada4075918f73fe13ceaf4b3631549ce8}{x}, p->\hyperlink{structEd25519Point_a54af56f591402668e6a50d1ae0d4fcd0}{y});
+543 
+544    \textcolor{comment}{//Encode the y-coordinate as a little-endian string of 32 octets. The most}
+545    \textcolor{comment}{//significant bit of the final octet is always zero}
+546    \hyperlink{curve25519_8c_a4e9aeb2b5f23ec868997444e65a0f262}{curve25519Export}(p->\hyperlink{structEd25519Point_a54af56f591402668e6a50d1ae0d4fcd0}{y}, \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data});
+547 
+548    \textcolor{comment}{//Copy the least significant bit of the x-coordinate to the most significant}
+549    \textcolor{comment}{//bit of the final octet}
+550    \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}[31] |= (p->\hyperlink{structEd25519Point_ada4075918f73fe13ceaf4b3631549ce8}{x}[0] & 1) << 7;
+551 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ed25519_8c_aaff66ce50b16b8ff9429e75be717d931}\label{ed25519_8c_aaff66ce50b16b8ff9429e75be717d931}} 
+\index{ed25519.\+c@{ed25519.\+c}!ed25519\+Generate\+Key\+Pair@{ed25519\+Generate\+Key\+Pair}}
+\index{ed25519\+Generate\+Key\+Pair@{ed25519\+Generate\+Key\+Pair}!ed25519.\+c@{ed25519.\+c}}
+\subsubsection{\texorpdfstring{ed25519\+Generate\+Key\+Pair()}{ed25519GenerateKeyPair()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ed25519\+Generate\+Key\+Pair (\begin{DoxyParamCaption}\item[{const \hyperlink{structPrngAlgo}{Prng\+Algo} $\ast$}]{prng\+Algo,  }\item[{void $\ast$}]{prng\+Context,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{private\+Key,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{public\+Key }\end{DoxyParamCaption})}
+
+
+
+Ed\+D\+SA key pair generation. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em prng\+Algo} & P\+R\+NG algorithm \\
+\hline
+\mbox{\tt in}  & {\em prng\+Context} & Pointer to the P\+R\+NG context \\
+\hline
+\mbox{\tt out}  & {\em private\+Key} & Ed\+D\+SA private key (32 bytes) \\
+\hline
+\mbox{\tt out}  & {\em public\+Key} & Ed\+D\+SA public key (32 bytes) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 116 of file ed25519.\+c.
+
+
+\begin{DoxyCode}
+118 \{
+119    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+120    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *\hyperlink{md2_8c_adf356ff381033f761b7de5f76e763a45}{s};
+121    \hyperlink{structEd25519State}{Ed25519State} *state;
+122 
+123    \textcolor{comment}{//Check parameters}
+124    \textcolor{keywordflow}{if}(prngAlgo == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || prngContext == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+125       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+126    \textcolor{keywordflow}{if}(privateKey == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || publicKey == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+127       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+128 
+129    \textcolor{comment}{//The private key is 32 octets of cryptographically secure random data}
+130    error = prngAlgo->\hyperlink{structPrngAlgo_a079621740ef14faacfcd05b84c9036eb}{read}(prngContext, privateKey, \hyperlink{ed25519_8h_aed3a21b9d4421f2fc69bc1dd92af50ab}{ED25519\_PRIVATE\_KEY\_LEN});
+131    \textcolor{comment}{//Any error to report?}
+132    \textcolor{keywordflow}{if}(error)
+133       \textcolor{keywordflow}{return} error;
+134 
+135    \textcolor{comment}{//Allocate working state}
+136    state = \hyperlink{cyclone__crypto_2core_2crypto_8h_a48b53d16f66d31e5dcf82db3c1b882ba}{cryptoAllocMem}(\textcolor{keyword}{sizeof}(\hyperlink{structEd25519State}{Ed25519State}));
+137    \textcolor{comment}{//Failed to allocate memory?}
+138    \textcolor{keywordflow}{if}(state == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+139       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac0a554045048d2fb61387cf735676f69}{ERROR\_OUT\_OF\_MEMORY};
+140 
+141    \textcolor{comment}{//Hash the 32-byte private key using SHA-512}
+142    \hyperlink{sha512_8c_a4901f384e1d07dc3b58ae22f4ea947cb}{sha512Init}(&state->\hyperlink{structEd25519State_afdbdfe5a2f48317949f49d64892e30b1}{sha512Context});
+143    \hyperlink{sha512_8c_aa557f01dccd10a72beb2aa7149f50b58}{sha512Update}(&state->\hyperlink{structEd25519State_afdbdfe5a2f48317949f49d64892e30b1}{sha512Context}, privateKey, 
+      \hyperlink{ed25519_8h_aed3a21b9d4421f2fc69bc1dd92af50ab}{ED25519\_PRIVATE\_KEY\_LEN});
+144    \hyperlink{sha512_8c_a7d421f7a03f3a92f3c6c8628ab035dc5}{sha512Final}(&state->\hyperlink{structEd25519State_afdbdfe5a2f48317949f49d64892e30b1}{sha512Context}, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+145 
+146    \textcolor{comment}{//Only the lower 32 bytes are used for generating the public key. Interpret}
+147    \textcolor{comment}{//the buffer as the little-endian integer, forming a secret scalar s}
+148    s = state->\hyperlink{structEd25519State_afdbdfe5a2f48317949f49d64892e30b1}{sha512Context}.\hyperlink{structSha512Context_a132f046ba86d88873dd6a5b960e3bf8c}{digest};
+149 
+150    \textcolor{comment}{//The lowest three bits of the first octet are cleared, the highest bit}
+151    \textcolor{comment}{//of the last octet is cleared, and the second highest bit of the last}
+152    \textcolor{comment}{//octet is set}
+153    s[0] &= 0xF8;
+154    s[31] &= 0x7F;
+155    s[31] |= 0x40;
+156 
+157    \textcolor{comment}{//Perform a fixed-base scalar multiplication s * B}
+158    \hyperlink{ed25519_8c_ac13b6ac7e3e90843a76428497b788d1f}{ed25519Mul}(state, &state->\hyperlink{structEd25519State_a3a304cf7e6cd67160cabfb98195b6226}{sb}, s, &\hyperlink{ed25519_8c_ad861e2266b3d362829683634a62f2444}{ED25519\_B});
+159    \textcolor{comment}{//The public key A is the encoding of the point s * B}
+160    \hyperlink{ed25519_8c_a93c72098b398b5190817bc51d86fd7a2}{ed25519Encode}(&state->\hyperlink{structEd25519State_a3a304cf7e6cd67160cabfb98195b6226}{sb}, publicKey);
+161 
+162    \textcolor{comment}{//Erase working state}
+163    \hyperlink{cyclone__crypto_2core_2crypto_8h_ad4465436e4ff353300fba4896012e18b}{cryptoMemset}(state, 0, \textcolor{keyword}{sizeof}(\hyperlink{structEd25519State}{Ed25519State}));
+164    \textcolor{comment}{//Release working state}
+165    \hyperlink{cyclone__crypto_2core_2crypto_8h_ac8a223b176683db4e9eed4162774f870}{cryptoFreeMem}(state);
+166 
+167    \textcolor{comment}{//Successful processing}
+168    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+169 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ed25519_8c_ab4014bf39652bc11ca5ce38131705eef}\label{ed25519_8c_ab4014bf39652bc11ca5ce38131705eef}} 
+\index{ed25519.\+c@{ed25519.\+c}!ed25519\+Generate\+Signature@{ed25519\+Generate\+Signature}}
+\index{ed25519\+Generate\+Signature@{ed25519\+Generate\+Signature}!ed25519.\+c@{ed25519.\+c}}
+\subsubsection{\texorpdfstring{ed25519\+Generate\+Signature()}{ed25519GenerateSignature()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ed25519\+Generate\+Signature (\begin{DoxyParamCaption}\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{private\+Key,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{public\+Key,  }\item[{const void $\ast$}]{message,  }\item[{size\+\_\+t}]{message\+Len,  }\item[{const void $\ast$}]{context,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}}]{context\+Len,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}}]{flag,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{signature }\end{DoxyParamCaption})}
+
+
+
+Ed\+D\+SA signature generation. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em private\+Key} & Signer\textquotesingle{}s Ed\+D\+SA private key (32 bytes) \\
+\hline
+\mbox{\tt in}  & {\em public\+Key} & Signer\textquotesingle{}s Ed\+D\+SA public key (32 bytes) \\
+\hline
+\mbox{\tt in}  & {\em message} & Pointer to the message to be signed \\
+\hline
+\mbox{\tt in}  & {\em message\+Len} & Length of the message, in bytes \\
+\hline
+\mbox{\tt in}  & {\em context} & Constant string specified by the protocol using it \\
+\hline
+\mbox{\tt in}  & {\em context\+Len} & Length of the context, in bytes \\
+\hline
+\mbox{\tt in}  & {\em flag} & Prehash flag for Ed25519ph scheme \\
+\hline
+\mbox{\tt out}  & {\em signature} & Ed\+D\+SA signature (64 bytes) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 185 of file ed25519.\+c.
+
+
+\begin{DoxyCode}
+188 \{
+189    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} \hyperlink{aria_8c_a5dadc28804036d1b82e1dc027e95c9a6}{c};
+190    \hyperlink{structEd25519State}{Ed25519State} *state;
+191 
+192    \textcolor{comment}{//Check parameters}
+193    \textcolor{keywordflow}{if}(privateKey == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || \hyperlink{tls_8h_af27e6d4ea3add14cd8cc9aa275d716ad}{signature} == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+194       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+195    \textcolor{keywordflow}{if}(\hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message} == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} && messageLen != 0)
+196       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+197    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} && contextLen != 0)
+198       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+199 
+200    \textcolor{comment}{//Allocate working state}
+201    state = \hyperlink{cyclone__crypto_2core_2crypto_8h_a48b53d16f66d31e5dcf82db3c1b882ba}{cryptoAllocMem}(\textcolor{keyword}{sizeof}(\hyperlink{structEd25519State}{Ed25519State}));
+202    \textcolor{comment}{//Failed to allocate memory?}
+203    \textcolor{keywordflow}{if}(state == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+204       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac0a554045048d2fb61387cf735676f69}{ERROR\_OUT\_OF\_MEMORY};
+205 
+206    \textcolor{comment}{//Hash the private key, 32 octets, using SHA-512. Let h denote the}
+207    \textcolor{comment}{//resulting digest}
+208    \hyperlink{sha512_8c_a4901f384e1d07dc3b58ae22f4ea947cb}{sha512Init}(&state->\hyperlink{structEd25519State_afdbdfe5a2f48317949f49d64892e30b1}{sha512Context});
+209    \hyperlink{sha512_8c_aa557f01dccd10a72beb2aa7149f50b58}{sha512Update}(&state->\hyperlink{structEd25519State_afdbdfe5a2f48317949f49d64892e30b1}{sha512Context}, privateKey, 
+      \hyperlink{ed25519_8h_aed3a21b9d4421f2fc69bc1dd92af50ab}{ED25519\_PRIVATE\_KEY\_LEN});
+210    \hyperlink{sha512_8c_a7d421f7a03f3a92f3c6c8628ab035dc5}{sha512Final}(&state->\hyperlink{structEd25519State_afdbdfe5a2f48317949f49d64892e30b1}{sha512Context}, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+211 
+212    \textcolor{comment}{//Construct the secret scalar s from the first half of the digest}
+213    \hyperlink{cyclone__crypto_2core_2crypto_8h_a6724616c4014bb7e21f2660bd7b88be8}{cryptoMemcpy}(state->\hyperlink{structEd25519State_a6408b43f2f82c627e4bc602890d1859d}{s}, state->\hyperlink{structEd25519State_afdbdfe5a2f48317949f49d64892e30b1}{sha512Context}.\hyperlink{structSha512Context_a132f046ba86d88873dd6a5b960e3bf8c}{digest}, 32);
+214 
+215    \textcolor{comment}{//The lowest three bits of the first octet are cleared, the highest bit}
+216    \textcolor{comment}{//of the last octet is cleared, and the second highest bit of the last}
+217    \textcolor{comment}{//octet is set}
+218    state->\hyperlink{structEd25519State_a6408b43f2f82c627e4bc602890d1859d}{s}[0] &= 0xF8;
+219    state->\hyperlink{structEd25519State_a6408b43f2f82c627e4bc602890d1859d}{s}[31] &= 0x7F;
+220    state->\hyperlink{structEd25519State_a6408b43f2f82c627e4bc602890d1859d}{s}[31] |= 0x40;
+221 
+222    \textcolor{comment}{//The public key is optional}
+223    \textcolor{keywordflow}{if}(publicKey == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+224    \{
+225       \textcolor{comment}{//Perform a fixed-base scalar multiplication s * B}
+226       \hyperlink{ed25519_8c_ac13b6ac7e3e90843a76428497b788d1f}{ed25519Mul}(state, &state->\hyperlink{structEd25519State_a3a304cf7e6cd67160cabfb98195b6226}{sb}, state->\hyperlink{structEd25519State_a6408b43f2f82c627e4bc602890d1859d}{s}, &\hyperlink{ed25519_8c_ad861e2266b3d362829683634a62f2444}{ED25519\_B});
+227       \textcolor{comment}{//The public key A is the encoding of the point s * B}
+228       \hyperlink{ed25519_8c_a93c72098b398b5190817bc51d86fd7a2}{ed25519Encode}(&state->\hyperlink{structEd25519State_a3a304cf7e6cd67160cabfb98195b6226}{sb}, state->\hyperlink{structEd25519State_a2d1736dc398ddcbb49e1b2e3cb5b7182}{k});
+229       \textcolor{comment}{//Point to the resulting public key}
+230       publicKey = state->\hyperlink{structEd25519State_a2d1736dc398ddcbb49e1b2e3cb5b7182}{k};
+231    \}
+232 
+233    \textcolor{comment}{//Let prefix denote the second half of the hash digest}
+234    \hyperlink{cyclone__crypto_2core_2crypto_8h_a6724616c4014bb7e21f2660bd7b88be8}{cryptoMemcpy}(state->\hyperlink{structEd25519State_adb404431ce31a8acc6cdf1a9f60d708d}{p}, state->\hyperlink{structEd25519State_afdbdfe5a2f48317949f49d64892e30b1}{sha512Context}.\hyperlink{structSha512Context_a132f046ba86d88873dd6a5b960e3bf8c}{digest} + 32, 32);
+235 
+236    \textcolor{comment}{//Initialize SHA-512 context}
+237    \hyperlink{sha512_8c_a4901f384e1d07dc3b58ae22f4ea947cb}{sha512Init}(&state->\hyperlink{structEd25519State_afdbdfe5a2f48317949f49d64892e30b1}{sha512Context});
+238 
+239    \textcolor{comment}{//For Ed25519ctx and Ed25519ph schemes, dom2(x, y) is the octet string}
+240    \textcolor{comment}{//"SigEd25519 no Ed25519 collisions" || octet(x) || octet(OLEN(y)) || y,}
+241    \textcolor{comment}{//where x is in range 0-255 and y is an octet string of at most 255 octets}
+242    \textcolor{keywordflow}{if}(context != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || flag != 0)
+243    \{
+244       \hyperlink{sha512_8c_aa557f01dccd10a72beb2aa7149f50b58}{sha512Update}(&state->\hyperlink{structEd25519State_afdbdfe5a2f48317949f49d64892e30b1}{sha512Context}, \textcolor{stringliteral}{"SigEd25519 no Ed25519 collisions"}, 32);
+245       \hyperlink{sha512_8c_aa557f01dccd10a72beb2aa7149f50b58}{sha512Update}(&state->\hyperlink{structEd25519State_afdbdfe5a2f48317949f49d64892e30b1}{sha512Context}, &flag, \textcolor{keyword}{sizeof}(
+      \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t}));
+246       \hyperlink{sha512_8c_aa557f01dccd10a72beb2aa7149f50b58}{sha512Update}(&state->\hyperlink{structEd25519State_afdbdfe5a2f48317949f49d64892e30b1}{sha512Context}, &contextLen, \textcolor{keyword}{sizeof}(
+      \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t}));
+247       \hyperlink{sha512_8c_aa557f01dccd10a72beb2aa7149f50b58}{sha512Update}(&state->\hyperlink{structEd25519State_afdbdfe5a2f48317949f49d64892e30b1}{sha512Context}, context, contextLen);
+248    \}
+249 
+250    \textcolor{comment}{//Compute SHA-512(dom2(F, C) || prefix || PH(M))}
+251    \hyperlink{sha512_8c_aa557f01dccd10a72beb2aa7149f50b58}{sha512Update}(&state->\hyperlink{structEd25519State_afdbdfe5a2f48317949f49d64892e30b1}{sha512Context}, state->\hyperlink{structEd25519State_adb404431ce31a8acc6cdf1a9f60d708d}{p}, 32);
+252    \hyperlink{sha512_8c_aa557f01dccd10a72beb2aa7149f50b58}{sha512Update}(&state->\hyperlink{structEd25519State_afdbdfe5a2f48317949f49d64892e30b1}{sha512Context}, \hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}, messageLen);
+253    \hyperlink{sha512_8c_a7d421f7a03f3a92f3c6c8628ab035dc5}{sha512Final}(&state->\hyperlink{structEd25519State_afdbdfe5a2f48317949f49d64892e30b1}{sha512Context}, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+254 
+255    \textcolor{comment}{//Reduce the 64-octet digest as a little-endian integer r}
+256    \hyperlink{ed25519_8c_aed1443fb9c2e04a551f26c48516df25c}{ed25519RedInt}(state->\hyperlink{structEd25519State_a2dd4b3e1978f23bef13c5b3fbfbd5fb5}{r}, state->\hyperlink{structEd25519State_afdbdfe5a2f48317949f49d64892e30b1}{sha512Context}.
+      \hyperlink{structSha512Context_a132f046ba86d88873dd6a5b960e3bf8c}{digest});
+257    \textcolor{comment}{//Compute the point r * B}
+258    \hyperlink{ed25519_8c_ac13b6ac7e3e90843a76428497b788d1f}{ed25519Mul}(state, &state->\hyperlink{structEd25519State_a7afd80821acafe24712defd6093d9e0a}{rb}, state->\hyperlink{structEd25519State_a2dd4b3e1978f23bef13c5b3fbfbd5fb5}{r}, &\hyperlink{ed25519_8c_ad861e2266b3d362829683634a62f2444}{ED25519\_B});
+259    \textcolor{comment}{//Let the string R be the encoding of this point}
+260    \hyperlink{ed25519_8c_a93c72098b398b5190817bc51d86fd7a2}{ed25519Encode}(&state->\hyperlink{structEd25519State_a7afd80821acafe24712defd6093d9e0a}{rb}, \hyperlink{tls_8h_af27e6d4ea3add14cd8cc9aa275d716ad}{signature});
+261 
+262    \textcolor{comment}{//Initialize SHA-512 context}
+263    \hyperlink{sha512_8c_a4901f384e1d07dc3b58ae22f4ea947cb}{sha512Init}(&state->\hyperlink{structEd25519State_afdbdfe5a2f48317949f49d64892e30b1}{sha512Context});
+264 
+265    \textcolor{comment}{//For Ed25519ctx and Ed25519ph schemes, dom2(x, y) is the octet string}
+266    \textcolor{comment}{//"SigEd25519 no Ed25519 collisions" || octet(x) || octet(OLEN(y)) || y,}
+267    \textcolor{comment}{//where x is in range 0-255 and y is an octet string of at most 255 octets}
+268    \textcolor{keywordflow}{if}(context != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || flag != 0)
+269    \{
+270       \hyperlink{sha512_8c_aa557f01dccd10a72beb2aa7149f50b58}{sha512Update}(&state->\hyperlink{structEd25519State_afdbdfe5a2f48317949f49d64892e30b1}{sha512Context}, \textcolor{stringliteral}{"SigEd25519 no Ed25519 collisions"}, 32);
+271       \hyperlink{sha512_8c_aa557f01dccd10a72beb2aa7149f50b58}{sha512Update}(&state->\hyperlink{structEd25519State_afdbdfe5a2f48317949f49d64892e30b1}{sha512Context}, &flag, \textcolor{keyword}{sizeof}(
+      \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t}));
+272       \hyperlink{sha512_8c_aa557f01dccd10a72beb2aa7149f50b58}{sha512Update}(&state->\hyperlink{structEd25519State_afdbdfe5a2f48317949f49d64892e30b1}{sha512Context}, &contextLen, \textcolor{keyword}{sizeof}(
+      \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t}));
+273       \hyperlink{sha512_8c_aa557f01dccd10a72beb2aa7149f50b58}{sha512Update}(&state->\hyperlink{structEd25519State_afdbdfe5a2f48317949f49d64892e30b1}{sha512Context}, context, contextLen);
+274    \}
+275 
+276    \textcolor{comment}{//Compute SHA512(dom2(F, C) || R || A || PH(M)) and interpret the 64-octet}
+277    \textcolor{comment}{//digest as a little-endian integer k}
+278    \hyperlink{sha512_8c_aa557f01dccd10a72beb2aa7149f50b58}{sha512Update}(&state->\hyperlink{structEd25519State_afdbdfe5a2f48317949f49d64892e30b1}{sha512Context}, \hyperlink{tls_8h_af27e6d4ea3add14cd8cc9aa275d716ad}{signature}, 
+      \hyperlink{ed25519_8h_a6b45906484d3c938aef3a114e3d1a8ea}{ED25519\_SIGNATURE\_LEN} / 2);
+279    \hyperlink{sha512_8c_aa557f01dccd10a72beb2aa7149f50b58}{sha512Update}(&state->\hyperlink{structEd25519State_afdbdfe5a2f48317949f49d64892e30b1}{sha512Context}, publicKey, 
+      \hyperlink{ed25519_8h_a5fdd1f73dec2be868a8ed5d2e129bb5e}{ED25519\_PUBLIC\_KEY\_LEN});
+280    \hyperlink{sha512_8c_aa557f01dccd10a72beb2aa7149f50b58}{sha512Update}(&state->\hyperlink{structEd25519State_afdbdfe5a2f48317949f49d64892e30b1}{sha512Context}, \hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}, messageLen);
+281    \hyperlink{sha512_8c_a7d421f7a03f3a92f3c6c8628ab035dc5}{sha512Final}(&state->\hyperlink{structEd25519State_afdbdfe5a2f48317949f49d64892e30b1}{sha512Context}, state->\hyperlink{structEd25519State_a2d1736dc398ddcbb49e1b2e3cb5b7182}{k});
+282 
+283    \textcolor{comment}{//Compute S = (r + k * s) mod L. For efficiency, reduce k modulo L first}
+284    \hyperlink{ed25519_8c_aed1443fb9c2e04a551f26c48516df25c}{ed25519RedInt}(state->\hyperlink{structEd25519State_adb404431ce31a8acc6cdf1a9f60d708d}{p}, state->\hyperlink{structEd25519State_a2d1736dc398ddcbb49e1b2e3cb5b7182}{k});
+285    \hyperlink{ed25519_8c_a345d8823c1850ef6b37285bac9450d73}{ed25519MulInt}(state->\hyperlink{structEd25519State_a2d1736dc398ddcbb49e1b2e3cb5b7182}{k}, state->\hyperlink{structEd25519State_a2d1736dc398ddcbb49e1b2e3cb5b7182}{k} + 32, state->\hyperlink{structEd25519State_adb404431ce31a8acc6cdf1a9f60d708d}{p}, state->\hyperlink{structEd25519State_a6408b43f2f82c627e4bc602890d1859d}{s}, 32);
+286    \hyperlink{ed25519_8c_aed1443fb9c2e04a551f26c48516df25c}{ed25519RedInt}(state->\hyperlink{structEd25519State_adb404431ce31a8acc6cdf1a9f60d708d}{p}, state->\hyperlink{structEd25519State_a2d1736dc398ddcbb49e1b2e3cb5b7182}{k});
+287    \hyperlink{ed25519_8c_a7197c9a4962aadf2faec70d5ecc5726c}{ed25519AddInt}(state->\hyperlink{structEd25519State_a6408b43f2f82c627e4bc602890d1859d}{s}, state->\hyperlink{structEd25519State_adb404431ce31a8acc6cdf1a9f60d708d}{p}, state->\hyperlink{structEd25519State_a2dd4b3e1978f23bef13c5b3fbfbd5fb5}{r}, 32);
+288 
+289    \textcolor{comment}{//Perform modular reduction}
+290    c = \hyperlink{ed25519_8c_a3078c55ad9cbf3444a1e80f8845b9e1d}{ed25519SubInt}(state->\hyperlink{structEd25519State_adb404431ce31a8acc6cdf1a9f60d708d}{p}, state->\hyperlink{structEd25519State_a6408b43f2f82c627e4bc602890d1859d}{s}, \hyperlink{ed25519_8c_ac2ce36b50c60db8dd24b33254b0e1bf7}{ED25519\_L}, 32);
+291    \hyperlink{ed25519_8c_a38f1bc0961d7624a22fc3607d801af9c}{ed25519SelectInt}(\hyperlink{tls_8h_af27e6d4ea3add14cd8cc9aa275d716ad}{signature} + 32, state->\hyperlink{structEd25519State_adb404431ce31a8acc6cdf1a9f60d708d}{p}, state->\hyperlink{structEd25519State_a6408b43f2f82c627e4bc602890d1859d}{s}, c, 32);
+292 
+293    \textcolor{comment}{//Erase working state}
+294    \hyperlink{cyclone__crypto_2core_2crypto_8h_ad4465436e4ff353300fba4896012e18b}{cryptoMemset}(state, 0, \textcolor{keyword}{sizeof}(\hyperlink{structEd25519State}{Ed25519State}));
+295    \textcolor{comment}{//Release working state}
+296    \hyperlink{cyclone__crypto_2core_2crypto_8h_ac8a223b176683db4e9eed4162774f870}{cryptoFreeMem}(state);
+297 
+298    \textcolor{comment}{//Successful processing}
+299    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+300 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ed25519_8c_ac13b6ac7e3e90843a76428497b788d1f}\label{ed25519_8c_ac13b6ac7e3e90843a76428497b788d1f}} 
+\index{ed25519.\+c@{ed25519.\+c}!ed25519\+Mul@{ed25519\+Mul}}
+\index{ed25519\+Mul@{ed25519\+Mul}!ed25519.\+c@{ed25519.\+c}}
+\subsubsection{\texorpdfstring{ed25519\+Mul()}{ed25519Mul()}}
+{\footnotesize\ttfamily void ed25519\+Mul (\begin{DoxyParamCaption}\item[{\hyperlink{structEd25519State}{Ed25519\+State} $\ast$}]{state,  }\item[{\hyperlink{structEd25519Point}{Ed25519\+Point} $\ast$}]{r,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{k,  }\item[{const \hyperlink{structEd25519Point}{Ed25519\+Point} $\ast$}]{p }\end{DoxyParamCaption})}
+
+
+
+Scalar multiplication on Ed25519 curve. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em state} & Pointer to the working state \\
+\hline
+\mbox{\tt out}  & {\em r} & Resulting point R = d $\ast$ S \\
+\hline
+\mbox{\tt in}  & {\em k} & Input scalar \\
+\hline
+\mbox{\tt in}  & {\em p} & Input point \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 409 of file ed25519.\+c.
+
+
+\begin{DoxyCode}
+411 \{
+412    \hyperlink{compiler__port_8h_a022c65af7f6c8d3947e8a37d64db6ad6}{int\_t} i;
+413    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} \hyperlink{dtls__misc_8h_ab590318ac859d0e57e15c3dd6c62a605}{b};
+414 
+415    \textcolor{comment}{//The neutral element is represented by (0, 1, 1, 0)}
+416    \hyperlink{curve25519_8c_a1268b345c76c3639d20de5820b7ac8bc}{curve25519SetInt}(state->\hyperlink{structEd25519State_a15570ce8099b0032ccd73a7e62a60803}{u}.\hyperlink{structEd25519Point_ada4075918f73fe13ceaf4b3631549ce8}{x}, 0);
+417    \hyperlink{curve25519_8c_a1268b345c76c3639d20de5820b7ac8bc}{curve25519SetInt}(state->\hyperlink{structEd25519State_a15570ce8099b0032ccd73a7e62a60803}{u}.\hyperlink{structEd25519Point_a54af56f591402668e6a50d1ae0d4fcd0}{y}, 1);
+418    \hyperlink{curve25519_8c_a1268b345c76c3639d20de5820b7ac8bc}{curve25519SetInt}(state->\hyperlink{structEd25519State_a15570ce8099b0032ccd73a7e62a60803}{u}.\hyperlink{structEd25519Point_ab7af3d9e39f190e82b2927bdc269ba98}{z}, 1);
+419    \hyperlink{curve25519_8c_a1268b345c76c3639d20de5820b7ac8bc}{curve25519SetInt}(state->\hyperlink{structEd25519State_a15570ce8099b0032ccd73a7e62a60803}{u}.\hyperlink{structEd25519Point_a54ab7260c44bc9595d03a6829b4bfd18}{t}, 0);
+420 
+421    \textcolor{comment}{//Perform scalar multiplication}
+422    \textcolor{keywordflow}{for}(i = \hyperlink{curve25519_8h_ae9981804c0b574634d86b1a1f915dd3b}{CURVE25519\_BIT\_LEN} - 1; i >= 0; i--)
+423    \{
+424       \textcolor{comment}{//The scalar is processed in a left-to-right fashion}
+425       b = (\hyperlink{md5_8c_af11ea3cdbca7345eb6a4a8ac5ce0434d}{k}[i / 8] >> (i % 8)) & 1;
+426 
+427       \textcolor{comment}{//Compute U = 2 * U}
+428       \hyperlink{ed25519_8c_ae98fcb32ac79241b27644b081585bae5}{ed25519Double}(state, &state->\hyperlink{structEd25519State_a15570ce8099b0032ccd73a7e62a60803}{u}, &state->\hyperlink{structEd25519State_a15570ce8099b0032ccd73a7e62a60803}{u});
+429       \textcolor{comment}{//Compute V = U + P}
+430       \hyperlink{ed25519_8c_a4c4f0fd4825177484ab2f5f4cfc9a115}{ed25519Add}(state, &state->\hyperlink{structEd25519State_af078cf4ff8905b1a63935a6298c9ccbe}{v}, &state->\hyperlink{structEd25519State_a15570ce8099b0032ccd73a7e62a60803}{u}, p);
+431 
+432       \textcolor{comment}{//If b is set, then U = V}
+433       \hyperlink{curve25519_8c_a4a0df0e0a6f77fcf5e44df5d38552b6d}{curve25519Select}(state->\hyperlink{structEd25519State_a15570ce8099b0032ccd73a7e62a60803}{u}.\hyperlink{structEd25519Point_ada4075918f73fe13ceaf4b3631549ce8}{x}, state->\hyperlink{structEd25519State_a15570ce8099b0032ccd73a7e62a60803}{u}.\hyperlink{structEd25519Point_ada4075918f73fe13ceaf4b3631549ce8}{x}, state->\hyperlink{structEd25519State_af078cf4ff8905b1a63935a6298c9ccbe}{v}.\hyperlink{structEd25519Point_ada4075918f73fe13ceaf4b3631549ce8}{x}, b);
+434       \hyperlink{curve25519_8c_a4a0df0e0a6f77fcf5e44df5d38552b6d}{curve25519Select}(state->\hyperlink{structEd25519State_a15570ce8099b0032ccd73a7e62a60803}{u}.\hyperlink{structEd25519Point_a54af56f591402668e6a50d1ae0d4fcd0}{y}, state->\hyperlink{structEd25519State_a15570ce8099b0032ccd73a7e62a60803}{u}.\hyperlink{structEd25519Point_a54af56f591402668e6a50d1ae0d4fcd0}{y}, state->\hyperlink{structEd25519State_af078cf4ff8905b1a63935a6298c9ccbe}{v}.\hyperlink{structEd25519Point_a54af56f591402668e6a50d1ae0d4fcd0}{y}, b);
+435       \hyperlink{curve25519_8c_a4a0df0e0a6f77fcf5e44df5d38552b6d}{curve25519Select}(state->\hyperlink{structEd25519State_a15570ce8099b0032ccd73a7e62a60803}{u}.\hyperlink{structEd25519Point_ab7af3d9e39f190e82b2927bdc269ba98}{z}, state->\hyperlink{structEd25519State_a15570ce8099b0032ccd73a7e62a60803}{u}.\hyperlink{structEd25519Point_ab7af3d9e39f190e82b2927bdc269ba98}{z}, state->\hyperlink{structEd25519State_af078cf4ff8905b1a63935a6298c9ccbe}{v}.\hyperlink{structEd25519Point_ab7af3d9e39f190e82b2927bdc269ba98}{z}, b);
+436       \hyperlink{curve25519_8c_a4a0df0e0a6f77fcf5e44df5d38552b6d}{curve25519Select}(state->\hyperlink{structEd25519State_a15570ce8099b0032ccd73a7e62a60803}{u}.\hyperlink{structEd25519Point_a54ab7260c44bc9595d03a6829b4bfd18}{t}, state->\hyperlink{structEd25519State_a15570ce8099b0032ccd73a7e62a60803}{u}.\hyperlink{structEd25519Point_a54ab7260c44bc9595d03a6829b4bfd18}{t}, state->\hyperlink{structEd25519State_af078cf4ff8905b1a63935a6298c9ccbe}{v}.\hyperlink{structEd25519Point_a54ab7260c44bc9595d03a6829b4bfd18}{t}, b);
+437    \}
+438 
+439    \textcolor{comment}{//Copy result}
+440    \hyperlink{curve25519_8c_a5d900754494ae680c2b93fd27c1bed6e}{curve25519Copy}(r->\hyperlink{structEd25519Point_ada4075918f73fe13ceaf4b3631549ce8}{x}, state->\hyperlink{structEd25519State_a15570ce8099b0032ccd73a7e62a60803}{u}.\hyperlink{structEd25519Point_ada4075918f73fe13ceaf4b3631549ce8}{x});
+441    \hyperlink{curve25519_8c_a5d900754494ae680c2b93fd27c1bed6e}{curve25519Copy}(r->\hyperlink{structEd25519Point_a54af56f591402668e6a50d1ae0d4fcd0}{y}, state->\hyperlink{structEd25519State_a15570ce8099b0032ccd73a7e62a60803}{u}.\hyperlink{structEd25519Point_a54af56f591402668e6a50d1ae0d4fcd0}{y});
+442    \hyperlink{curve25519_8c_a5d900754494ae680c2b93fd27c1bed6e}{curve25519Copy}(r->\hyperlink{structEd25519Point_ab7af3d9e39f190e82b2927bdc269ba98}{z}, state->\hyperlink{structEd25519State_a15570ce8099b0032ccd73a7e62a60803}{u}.\hyperlink{structEd25519Point_ab7af3d9e39f190e82b2927bdc269ba98}{z});
+443    \hyperlink{curve25519_8c_a5d900754494ae680c2b93fd27c1bed6e}{curve25519Copy}(r->\hyperlink{structEd25519Point_a54ab7260c44bc9595d03a6829b4bfd18}{t}, state->\hyperlink{structEd25519State_a15570ce8099b0032ccd73a7e62a60803}{u}.\hyperlink{structEd25519Point_a54ab7260c44bc9595d03a6829b4bfd18}{t});
+444 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ed25519_8c_a345d8823c1850ef6b37285bac9450d73}\label{ed25519_8c_a345d8823c1850ef6b37285bac9450d73}} 
+\index{ed25519.\+c@{ed25519.\+c}!ed25519\+Mul\+Int@{ed25519\+Mul\+Int}}
+\index{ed25519\+Mul\+Int@{ed25519\+Mul\+Int}!ed25519.\+c@{ed25519.\+c}}
+\subsubsection{\texorpdfstring{ed25519\+Mul\+Int()}{ed25519MulInt()}}
+{\footnotesize\ttfamily void ed25519\+Mul\+Int (\begin{DoxyParamCaption}\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{rl,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{rh,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{a,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{b,  }\item[{\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t}}]{n }\end{DoxyParamCaption})}
+
+
+
+Multiplication of two integers. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em rl} & Low part of the result R = (A + B) mod (2$^\wedge$8)$^\wedge$n \\
+\hline
+\mbox{\tt out}  & {\em rh} & High part of the result R = (A + B) / (2$^\wedge$8)$^\wedge$n \\
+\hline
+\mbox{\tt in}  & {\em a} & An integer such as 0 $<$= A $<$ (2$^\wedge$8)$^\wedge$n \\
+\hline
+\mbox{\tt in}  & {\em b} & An integer such as 0 $<$= B $<$ (2$^\wedge$8)$^\wedge$n \\
+\hline
+\mbox{\tt in}  & {\em n} & Size of the operands, in bytes \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 715 of file ed25519.\+c.
+
+
+\begin{DoxyCode}
+717 \{
+718    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+719    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} j;
+720    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} temp;
+721 
+722    \textcolor{comment}{//Compute the low part of the multiplication}
+723    \textcolor{keywordflow}{for}(temp = 0, i = 0; i < \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n}; i++)
+724    \{
+725       \textcolor{comment}{//The Comba's algorithm computes the products, column by column}
+726       \textcolor{keywordflow}{for}(j = 0; j <= i; j++)
+727       \{
+728          temp += (\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t}) \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[j] * \hyperlink{dtls__misc_8h_ab590318ac859d0e57e15c3dd6c62a605}{b}[i - j];
+729       \}
+730 
+731       \textcolor{comment}{//At the bottom of each column, the final result is written to memory}
+732       \textcolor{keywordflow}{if}(rl != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+733       \{
+734          rl[i] = temp & 0xFF;
+735       \}
+736 
+737       \textcolor{comment}{//Propagate the carry upwards}
+738       temp >>= 8;
+739    \}
+740 
+741    \textcolor{comment}{//Check whether the high part of the multiplication should be calculated}
+742    \textcolor{keywordflow}{if}(rh != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+743    \{
+744       \textcolor{comment}{//Compute the high part of the multiplication}
+745       \textcolor{keywordflow}{for}(i = n; i < (2 * \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n}); i++)
+746       \{
+747          \textcolor{comment}{//The Comba's algorithm computes the products, column by column}
+748          \textcolor{keywordflow}{for}(j = i + 1 - n; j < \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n}; j++)
+749          \{
+750             temp += (\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t}) \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[j] * \hyperlink{dtls__misc_8h_ab590318ac859d0e57e15c3dd6c62a605}{b}[i - j];
+751          \}
+752 
+753          \textcolor{comment}{//At the bottom of each column, the final result is written to memory}
+754          rh[i - \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n}] = temp & 0xFF;
+755 
+756          \textcolor{comment}{//Propagate the carry upwards}
+757          temp >>= 8;
+758       \}
+759    \}
+760 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ed25519_8c_aed1443fb9c2e04a551f26c48516df25c}\label{ed25519_8c_aed1443fb9c2e04a551f26c48516df25c}} 
+\index{ed25519.\+c@{ed25519.\+c}!ed25519\+Red\+Int@{ed25519\+Red\+Int}}
+\index{ed25519\+Red\+Int@{ed25519\+Red\+Int}!ed25519.\+c@{ed25519.\+c}}
+\subsubsection{\texorpdfstring{ed25519\+Red\+Int()}{ed25519RedInt()}}
+{\footnotesize\ttfamily void ed25519\+Red\+Int (\begin{DoxyParamCaption}\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{r,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{a }\end{DoxyParamCaption})}
+
+
+
+Reduce an integer modulo L. 
+
+This function implements Barrett reduction with b = 2$^\wedge$8 and k = 32. The algorithm requires the precomputation of the quantity mu = b$^\wedge$(2 $\ast$ k) / L
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em r} & Resulting integer R = A mod L \\
+\hline
+\mbox{\tt in}  & {\em a} & An integer such as 0 $<$= A $<$ b$^\wedge$(2 $\ast$ k) \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 627 of file ed25519.\+c.
+
+
+\begin{DoxyCode}
+628 \{
+629    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} \hyperlink{aria_8c_a5dadc28804036d1b82e1dc027e95c9a6}{c};
+630    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} u[33];
+631    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} v[33];
+632 
+633    \textcolor{comment}{//Compute the estimate of the quotient u = ((a / b^(k - 1)) * mu) / b^(k + 1)}
+634    \hyperlink{ed25519_8c_a345d8823c1850ef6b37285bac9450d73}{ed25519MulInt}(\hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, u, \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a} + 31, \hyperlink{ed25519_8c_acdfc95f47b3a8f6383a4ce3a41ff59da}{ED25519\_MU}, 33);
+635    \textcolor{comment}{//Compute v = u * L mod b^(k + 1)}
+636    \hyperlink{ed25519_8c_a345d8823c1850ef6b37285bac9450d73}{ed25519MulInt}(v, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, u, \hyperlink{ed25519_8c_ac2ce36b50c60db8dd24b33254b0e1bf7}{ED25519\_L}, 33);
+637 
+638    \textcolor{comment}{//Compute the estimate of the remainder u = a mod b^(k + 1) - v}
+639    \textcolor{comment}{//If u < 0, then u = u + b^(k + 1)}
+640    \hyperlink{ed25519_8c_a3078c55ad9cbf3444a1e80f8845b9e1d}{ed25519SubInt}(u, \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}, v, 33);
+641 
+642    \textcolor{comment}{//This estimation implies that at most two subtractions of L are required to}
+643    \textcolor{comment}{//obtain the correct remainder r}
+644    c = \hyperlink{ed25519_8c_a3078c55ad9cbf3444a1e80f8845b9e1d}{ed25519SubInt}(v, u, \hyperlink{ed25519_8c_ac2ce36b50c60db8dd24b33254b0e1bf7}{ED25519\_L}, 33);
+645    \hyperlink{ed25519_8c_a38f1bc0961d7624a22fc3607d801af9c}{ed25519SelectInt}(u, v, u, c, 33);
+646    c = \hyperlink{ed25519_8c_a3078c55ad9cbf3444a1e80f8845b9e1d}{ed25519SubInt}(v, u, \hyperlink{ed25519_8c_ac2ce36b50c60db8dd24b33254b0e1bf7}{ED25519\_L}, 33);
+647    \hyperlink{ed25519_8c_a38f1bc0961d7624a22fc3607d801af9c}{ed25519SelectInt}(u, v, u, c, 33);
+648 
+649    \textcolor{comment}{//Copy the resulting remainder}
+650    \hyperlink{ed25519_8c_a3b5a40c8f35bab66d16ac4654b0e4bdd}{ed25519CopyInt}(\hyperlink{ndp_8h_a4c5c6ceb8ed33456261fa907136e0c3a}{r}, u, 32);
+651 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ed25519_8c_a38f1bc0961d7624a22fc3607d801af9c}\label{ed25519_8c_a38f1bc0961d7624a22fc3607d801af9c}} 
+\index{ed25519.\+c@{ed25519.\+c}!ed25519\+Select\+Int@{ed25519\+Select\+Int}}
+\index{ed25519\+Select\+Int@{ed25519\+Select\+Int}!ed25519.\+c@{ed25519.\+c}}
+\subsubsection{\texorpdfstring{ed25519\+Select\+Int()}{ed25519SelectInt()}}
+{\footnotesize\ttfamily void ed25519\+Select\+Int (\begin{DoxyParamCaption}\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{r,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{a,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{b,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}}]{c,  }\item[{\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t}}]{n }\end{DoxyParamCaption})}
+
+
+
+Select an integer. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em r} & Pointer to the destination integer \\
+\hline
+\mbox{\tt in}  & {\em a} & Pointer to the first source integer \\
+\hline
+\mbox{\tt in}  & {\em b} & Pointer to the second source integer \\
+\hline
+\mbox{\tt in}  & {\em c} & Condition variable \\
+\hline
+\mbox{\tt in}  & {\em n} & Size of the integers, in bytes \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 791 of file ed25519.\+c.
+
+
+\begin{DoxyCode}
+793 \{
+794    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+795    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} \hyperlink{web__socket_8h_a8a74907784be6c7786c2d060c8d7e10b}{mask};
+796 
+797    \textcolor{comment}{//The mask is the all-1 or all-0 word}
+798    mask = \hyperlink{aria_8c_a5dadc28804036d1b82e1dc027e95c9a6}{c} - 1;
+799 
+800    \textcolor{comment}{//Select between A and B}
+801    \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n}; i++)
+802    \{
+803       \textcolor{comment}{//Constant time implementation}
+804       \hyperlink{ndp_8h_a4c5c6ceb8ed33456261fa907136e0c3a}{r}[i] = (\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[i] & \hyperlink{web__socket_8h_a8a74907784be6c7786c2d060c8d7e10b}{mask}) | (\hyperlink{dtls__misc_8h_ab590318ac859d0e57e15c3dd6c62a605}{b}[i] & ~mask);
+805    \}
+806 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ed25519_8c_a3078c55ad9cbf3444a1e80f8845b9e1d}\label{ed25519_8c_a3078c55ad9cbf3444a1e80f8845b9e1d}} 
+\index{ed25519.\+c@{ed25519.\+c}!ed25519\+Sub\+Int@{ed25519\+Sub\+Int}}
+\index{ed25519\+Sub\+Int@{ed25519\+Sub\+Int}!ed25519.\+c@{ed25519.\+c}}
+\subsubsection{\texorpdfstring{ed25519\+Sub\+Int()}{ed25519SubInt()}}
+{\footnotesize\ttfamily \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} ed25519\+Sub\+Int (\begin{DoxyParamCaption}\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{r,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{a,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{b,  }\item[{\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t}}]{n }\end{DoxyParamCaption})}
+
+
+
+Subtraction of two integers. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em r} & Resulting integer R = A -\/ B \\
+\hline
+\mbox{\tt in}  & {\em a} & An integer such as 0 $<$= A $<$ (2$^\wedge$8)$^\wedge$n \\
+\hline
+\mbox{\tt in}  & {\em b} & An integer such as 0 $<$= B $<$ (2$^\wedge$8)$^\wedge$n \\
+\hline
+\mbox{\tt in}  & {\em n} & Size of the operands, in bytes \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if the result is negative, else 0 
+\end{DoxyReturn}
+
+
+Definition at line 687 of file ed25519.\+c.
+
+
+\begin{DoxyCode}
+688 \{
+689    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+690    \hyperlink{stdint_8h_a269259c924dce846340ddbb810db2e3c}{int16\_t} temp;
+691 
+692    \textcolor{comment}{//Compute R = A - B}
+693    \textcolor{keywordflow}{for}(temp = 0, i = 0; i < \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n}; i++)
+694    \{
+695       temp += \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[i];
+696       temp -= \hyperlink{dtls__misc_8h_ab590318ac859d0e57e15c3dd6c62a605}{b}[i];
+697       \hyperlink{ndp_8h_a4c5c6ceb8ed33456261fa907136e0c3a}{r}[i] = temp & 0xFF;
+698       temp >>= 8;
+699    \}
+700 
+701    \textcolor{comment}{//Return 1 if the result of the subtraction is negative}
+702    \textcolor{keywordflow}{return} temp & 1;
+703 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ed25519_8c_a5f517039b2a85e2dbdcf26791e7d1b2c}\label{ed25519_8c_a5f517039b2a85e2dbdcf26791e7d1b2c}} 
+\index{ed25519.\+c@{ed25519.\+c}!ed25519\+Verify\+Signature@{ed25519\+Verify\+Signature}}
+\index{ed25519\+Verify\+Signature@{ed25519\+Verify\+Signature}!ed25519.\+c@{ed25519.\+c}}
+\subsubsection{\texorpdfstring{ed25519\+Verify\+Signature()}{ed25519VerifySignature()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ed25519\+Verify\+Signature (\begin{DoxyParamCaption}\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{public\+Key,  }\item[{const void $\ast$}]{message,  }\item[{size\+\_\+t}]{message\+Len,  }\item[{const void $\ast$}]{context,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}}]{context\+Len,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}}]{flag,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{signature }\end{DoxyParamCaption})}
+
+
+
+Ed\+D\+SA signature verification. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em public\+Key} & Signer\textquotesingle{}s Ed\+D\+SA public key (32 bytes) \\
+\hline
+\mbox{\tt in}  & {\em message} & Message whose signature is to be verified \\
+\hline
+\mbox{\tt in}  & {\em message\+Len} & Length of the message, in bytes \\
+\hline
+\mbox{\tt in}  & {\em context} & Constant string specified by the protocol using it \\
+\hline
+\mbox{\tt in}  & {\em context\+Len} & Length of the context, in bytes \\
+\hline
+\mbox{\tt in}  & {\em flag} & Prehash flag for Ed25519ph scheme \\
+\hline
+\mbox{\tt in}  & {\em signature} & Ed\+D\+SA signature (64 bytes) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 315 of file ed25519.\+c.
+
+
+\begin{DoxyCode}
+318 \{
+319    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} ret;
+320    \hyperlink{structEd25519State}{Ed25519State} *state;
+321 
+322    \textcolor{comment}{//Check parameters}
+323    \textcolor{keywordflow}{if}(publicKey == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || \hyperlink{tls_8h_af27e6d4ea3add14cd8cc9aa275d716ad}{signature} == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+324       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+325    \textcolor{keywordflow}{if}(\hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message} == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} && messageLen != 0)
+326       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+327    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} && contextLen != 0)
+328       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+329 
+330    \textcolor{comment}{//Allocate working state}
+331    state = \hyperlink{cyclone__crypto_2core_2crypto_8h_a48b53d16f66d31e5dcf82db3c1b882ba}{cryptoAllocMem}(\textcolor{keyword}{sizeof}(\hyperlink{structEd25519State}{Ed25519State}));
+332    \textcolor{comment}{//Failed to allocate memory?}
+333    \textcolor{keywordflow}{if}(state == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+334       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac0a554045048d2fb61387cf735676f69}{ERROR\_OUT\_OF\_MEMORY};
+335 
+336    \textcolor{comment}{//First split the signature into two 32-octet halves. Decode the first}
+337    \textcolor{comment}{//half as a point R}
+338    \hyperlink{cyclone__crypto_2core_2crypto_8h_a6724616c4014bb7e21f2660bd7b88be8}{cryptoMemcpy}(state->\hyperlink{structEd25519State_a2dd4b3e1978f23bef13c5b3fbfbd5fb5}{r}, \hyperlink{tls_8h_af27e6d4ea3add14cd8cc9aa275d716ad}{signature}, \hyperlink{ed25519_8h_a6b45906484d3c938aef3a114e3d1a8ea}{ED25519\_SIGNATURE\_LEN} / 2);
+339 
+340    \textcolor{comment}{//Decode the second half as an integer S, in the range 0 <= s < L}
+341    \hyperlink{cyclone__crypto_2core_2crypto_8h_a6724616c4014bb7e21f2660bd7b88be8}{cryptoMemcpy}(state->\hyperlink{structEd25519State_a6408b43f2f82c627e4bc602890d1859d}{s}, \hyperlink{tls_8h_af27e6d4ea3add14cd8cc9aa275d716ad}{signature} + 
+      \hyperlink{ed25519_8h_a6b45906484d3c938aef3a114e3d1a8ea}{ED25519\_SIGNATURE\_LEN} / 2,
+342       \hyperlink{ed25519_8h_a6b45906484d3c938aef3a114e3d1a8ea}{ED25519\_SIGNATURE\_LEN} / 2);
+343 
+344    \textcolor{comment}{//Ed25519 signatures are not malleable due to the verification check that}
+345    \textcolor{comment}{//decoded S is smaller than L (refer to RFC 8032, section 8.4)}
+346    ret = 1 ^ \hyperlink{ed25519_8c_a3078c55ad9cbf3444a1e80f8845b9e1d}{ed25519SubInt}(state->\hyperlink{structEd25519State_adb404431ce31a8acc6cdf1a9f60d708d}{p}, state->\hyperlink{structEd25519State_a6408b43f2f82c627e4bc602890d1859d}{s}, \hyperlink{ed25519_8c_ac2ce36b50c60db8dd24b33254b0e1bf7}{ED25519\_L},
+347       \hyperlink{ed25519_8h_a6b45906484d3c938aef3a114e3d1a8ea}{ED25519\_SIGNATURE\_LEN} / 2);
+348 
+349    \textcolor{comment}{//Decode the public key A as point A'}
+350    ret |= \hyperlink{ed25519_8c_a5df8442424e55c14c79b302426c1dba2}{ed25519Decode}(&state->\hyperlink{structEd25519State_aec75f16ad3e620e0cbceb28e78285332}{ka}, publicKey);
+351 
+352    \textcolor{comment}{//Initialize SHA-512 context}
+353    \hyperlink{sha512_8c_a4901f384e1d07dc3b58ae22f4ea947cb}{sha512Init}(&state->\hyperlink{structEd25519State_afdbdfe5a2f48317949f49d64892e30b1}{sha512Context});
+354 
+355    \textcolor{comment}{//For Ed25519ctx and Ed25519ph schemes, dom2(x, y) is the octet string}
+356    \textcolor{comment}{//"SigEd25519 no Ed25519 collisions" || octet(x) || octet(OLEN(y)) || y,}
+357    \textcolor{comment}{//where x is in range 0-255 and y is an octet string of at most 255 octets}
+358    \textcolor{keywordflow}{if}(context != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || flag != 0)
+359    \{
+360       \hyperlink{sha512_8c_aa557f01dccd10a72beb2aa7149f50b58}{sha512Update}(&state->\hyperlink{structEd25519State_afdbdfe5a2f48317949f49d64892e30b1}{sha512Context}, \textcolor{stringliteral}{"SigEd25519 no Ed25519 collisions"}, 32);
+361       \hyperlink{sha512_8c_aa557f01dccd10a72beb2aa7149f50b58}{sha512Update}(&state->\hyperlink{structEd25519State_afdbdfe5a2f48317949f49d64892e30b1}{sha512Context}, &flag, \textcolor{keyword}{sizeof}(
+      \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t}));
+362       \hyperlink{sha512_8c_aa557f01dccd10a72beb2aa7149f50b58}{sha512Update}(&state->\hyperlink{structEd25519State_afdbdfe5a2f48317949f49d64892e30b1}{sha512Context}, &contextLen, \textcolor{keyword}{sizeof}(
+      \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t}));
+363       \hyperlink{sha512_8c_aa557f01dccd10a72beb2aa7149f50b58}{sha512Update}(&state->\hyperlink{structEd25519State_afdbdfe5a2f48317949f49d64892e30b1}{sha512Context}, context, contextLen);
+364    \}
+365 
+366    \textcolor{comment}{//Compute SHA512(dom2(F, C) || R || A || PH(M))}
+367    \hyperlink{sha512_8c_aa557f01dccd10a72beb2aa7149f50b58}{sha512Update}(&state->\hyperlink{structEd25519State_afdbdfe5a2f48317949f49d64892e30b1}{sha512Context}, state->\hyperlink{structEd25519State_a2dd4b3e1978f23bef13c5b3fbfbd5fb5}{r}, 
+      \hyperlink{ed25519_8h_a6b45906484d3c938aef3a114e3d1a8ea}{ED25519\_SIGNATURE\_LEN} / 2);
+368    \hyperlink{sha512_8c_aa557f01dccd10a72beb2aa7149f50b58}{sha512Update}(&state->\hyperlink{structEd25519State_afdbdfe5a2f48317949f49d64892e30b1}{sha512Context}, publicKey, 
+      \hyperlink{ed25519_8h_a5fdd1f73dec2be868a8ed5d2e129bb5e}{ED25519\_PUBLIC\_KEY\_LEN});
+369    \hyperlink{sha512_8c_aa557f01dccd10a72beb2aa7149f50b58}{sha512Update}(&state->\hyperlink{structEd25519State_afdbdfe5a2f48317949f49d64892e30b1}{sha512Context}, \hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}, messageLen);
+370 
+371    \textcolor{comment}{//Interpret the 64-octet digest as a little-endian integer k}
+372    \hyperlink{sha512_8c_a7d421f7a03f3a92f3c6c8628ab035dc5}{sha512Final}(&state->\hyperlink{structEd25519State_afdbdfe5a2f48317949f49d64892e30b1}{sha512Context}, state->\hyperlink{structEd25519State_a2d1736dc398ddcbb49e1b2e3cb5b7182}{k});
+373 
+374    \textcolor{comment}{//For efficiency, reduce k modulo L first}
+375    \hyperlink{ed25519_8c_aed1443fb9c2e04a551f26c48516df25c}{ed25519RedInt}(state->\hyperlink{structEd25519State_a2d1736dc398ddcbb49e1b2e3cb5b7182}{k}, state->\hyperlink{structEd25519State_a2d1736dc398ddcbb49e1b2e3cb5b7182}{k});
+376 
+377    \textcolor{comment}{//Compute the point P = s * B - k * A'}
+378    \hyperlink{curve25519_8c_a4bfda30d50e23c13e552eb320c674717}{curve25519Sub}(state->\hyperlink{structEd25519State_aec75f16ad3e620e0cbceb28e78285332}{ka}.\hyperlink{structEd25519Point_ada4075918f73fe13ceaf4b3631549ce8}{x}, \hyperlink{ed25519_8c_a8383113557d8ec492f8b65b7dde0f139}{ED25519\_ZERO}, state->
+      \hyperlink{structEd25519State_aec75f16ad3e620e0cbceb28e78285332}{ka}.\hyperlink{structEd25519Point_ada4075918f73fe13ceaf4b3631549ce8}{x});
+379    \hyperlink{curve25519_8c_a4bfda30d50e23c13e552eb320c674717}{curve25519Sub}(state->\hyperlink{structEd25519State_aec75f16ad3e620e0cbceb28e78285332}{ka}.\hyperlink{structEd25519Point_a54ab7260c44bc9595d03a6829b4bfd18}{t}, \hyperlink{ed25519_8c_a8383113557d8ec492f8b65b7dde0f139}{ED25519\_ZERO}, state->
+      \hyperlink{structEd25519State_aec75f16ad3e620e0cbceb28e78285332}{ka}.\hyperlink{structEd25519Point_a54ab7260c44bc9595d03a6829b4bfd18}{t});
+380    \hyperlink{ed25519_8c_ac13b6ac7e3e90843a76428497b788d1f}{ed25519Mul}(state, &state->\hyperlink{structEd25519State_a3a304cf7e6cd67160cabfb98195b6226}{sb}, state->\hyperlink{structEd25519State_a6408b43f2f82c627e4bc602890d1859d}{s}, &\hyperlink{ed25519_8c_ad861e2266b3d362829683634a62f2444}{ED25519\_B});
+381    \hyperlink{ed25519_8c_ac13b6ac7e3e90843a76428497b788d1f}{ed25519Mul}(state, &state->\hyperlink{structEd25519State_aec75f16ad3e620e0cbceb28e78285332}{ka}, state->\hyperlink{structEd25519State_a2d1736dc398ddcbb49e1b2e3cb5b7182}{k}, &state->\hyperlink{structEd25519State_aec75f16ad3e620e0cbceb28e78285332}{ka});
+382    \hyperlink{ed25519_8c_a4c4f0fd4825177484ab2f5f4cfc9a115}{ed25519Add}(state, &state->\hyperlink{structEd25519State_aec75f16ad3e620e0cbceb28e78285332}{ka}, &state->\hyperlink{structEd25519State_a3a304cf7e6cd67160cabfb98195b6226}{sb}, &state->\hyperlink{structEd25519State_aec75f16ad3e620e0cbceb28e78285332}{ka});
+383 
+384    \textcolor{comment}{//Encode of the resulting point P}
+385    \hyperlink{ed25519_8c_a93c72098b398b5190817bc51d86fd7a2}{ed25519Encode}(&state->\hyperlink{structEd25519State_aec75f16ad3e620e0cbceb28e78285332}{ka}, state->\hyperlink{structEd25519State_adb404431ce31a8acc6cdf1a9f60d708d}{p});
+386 
+387    \textcolor{comment}{//If P = R, then the signature is verified. If P does not equal R,}
+388    \textcolor{comment}{//then the message or the signature may have been modified}
+389    ret |= \hyperlink{ed25519_8c_a942870e7a11abca1c4304d2df21c0f4a}{ed25519CompInt}(state->\hyperlink{structEd25519State_adb404431ce31a8acc6cdf1a9f60d708d}{p}, \hyperlink{tls_8h_af27e6d4ea3add14cd8cc9aa275d716ad}{signature}, 
+      \hyperlink{ed25519_8h_a6b45906484d3c938aef3a114e3d1a8ea}{ED25519\_SIGNATURE\_LEN} / 2);
+390 
+391    \textcolor{comment}{//Erase working state}
+392    \hyperlink{cyclone__crypto_2core_2crypto_8h_ad4465436e4ff353300fba4896012e18b}{cryptoMemset}(state, 0, \textcolor{keyword}{sizeof}(\hyperlink{structEd25519State}{Ed25519State}));
+393    \textcolor{comment}{//Release working state}
+394    \hyperlink{cyclone__crypto_2core_2crypto_8h_ac8a223b176683db4e9eed4162774f870}{cryptoFreeMem}(state);
+395 
+396    \textcolor{comment}{//Return status code}
+397    \textcolor{keywordflow}{return} (ret == 0) ? \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR} : \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca6e8db1d17e3aad53ecc5a4ff62df6f48}{ERROR\_INVALID\_SIGNATURE};
+398 \}
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{ed25519_8c_aff8c89541a0620acdcc987ef7a15cddc}\label{ed25519_8c_aff8c89541a0620acdcc987ef7a15cddc}} 
+\index{ed25519.\+c@{ed25519.\+c}!E\+D25519\+\_\+2D@{E\+D25519\+\_\+2D}}
+\index{E\+D25519\+\_\+2D@{E\+D25519\+\_\+2D}!ed25519.\+c@{ed25519.\+c}}
+\subsubsection{\texorpdfstring{E\+D25519\+\_\+2D}{ED25519\_2D}}
+{\footnotesize\ttfamily const \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t} E\+D25519\+\_\+2D\mbox{[}8\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=
+\{
+   0x26B2F159, 0xEBD69B94, 0x8283B156, 0x00E0149A,
+   0xEEF3D130, 0x198E80F2, 0x56DFFCE7, 0x2406D9DC
+\}
+\end{DoxyCode}
+
+
+Definition at line 80 of file ed25519.\+c.
+
+\mbox{\Hypertarget{ed25519_8c_ad861e2266b3d362829683634a62f2444}\label{ed25519_8c_ad861e2266b3d362829683634a62f2444}} 
+\index{ed25519.\+c@{ed25519.\+c}!E\+D25519\+\_\+B@{E\+D25519\+\_\+B}}
+\index{E\+D25519\+\_\+B@{E\+D25519\+\_\+B}!ed25519.\+c@{ed25519.\+c}}
+\subsubsection{\texorpdfstring{E\+D25519\+\_\+B}{ED25519\_B}}
+{\footnotesize\ttfamily const \hyperlink{structEd25519Point}{Ed25519\+Point} E\+D25519\+\_\+B\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=
+\{
+   \{
+      0x8F25D51A, 0xC9562D60, 0x9525A7B2, 0x692CC760,
+      0xFDD6DC5C, 0xC0A4E231, 0xCD6E53FE, 0x216936D3
+   \},
+   \{
+      0x66666658, 0x66666666, 0x66666666, 0x66666666,
+      0x66666666, 0x66666666, 0x66666666, 0x66666666
+   \},
+   \{
+      0x00000001, 0x00000000, 0x00000000, 0x00000000,
+      0x00000000, 0x00000000, 0x00000000, 0x00000000
+   \},
+   \{
+      0xA5B7DDA3, 0x6DDE8AB3, 0x775152F5, 0x20F09F80,
+      0x64ABE37D, 0x66EA4E8E, 0xD78B7665, 0x67875F0F
+   \}
+\}
+\end{DoxyCode}
+
+
+Definition at line 45 of file ed25519.\+c.
+
+\mbox{\Hypertarget{ed25519_8c_a727db9bc79e583f182fcf5c32832a860}\label{ed25519_8c_a727db9bc79e583f182fcf5c32832a860}} 
+\index{ed25519.\+c@{ed25519.\+c}!E\+D25519\+\_\+D@{E\+D25519\+\_\+D}}
+\index{E\+D25519\+\_\+D@{E\+D25519\+\_\+D}!ed25519.\+c@{ed25519.\+c}}
+\subsubsection{\texorpdfstring{E\+D25519\+\_\+D}{ED25519\_D}}
+{\footnotesize\ttfamily const \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t} E\+D25519\+\_\+D\mbox{[}8\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=
+\{
+   0x135978A3, 0x75EB4DCA, 0x4141D8AB, 0x00700A4D,
+   0x7779E898, 0x8CC74079, 0x2B6FFE73, 0x52036CEE
+\}
+\end{DoxyCode}
+
+
+Definition at line 73 of file ed25519.\+c.
+
+\mbox{\Hypertarget{ed25519_8c_ac2ce36b50c60db8dd24b33254b0e1bf7}\label{ed25519_8c_ac2ce36b50c60db8dd24b33254b0e1bf7}} 
+\index{ed25519.\+c@{ed25519.\+c}!E\+D25519\+\_\+L@{E\+D25519\+\_\+L}}
+\index{E\+D25519\+\_\+L@{E\+D25519\+\_\+L}!ed25519.\+c@{ed25519.\+c}}
+\subsubsection{\texorpdfstring{E\+D25519\+\_\+L}{ED25519\_L}}
+{\footnotesize\ttfamily const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} E\+D25519\+\_\+L\mbox{[}33\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=
+\{
+   0xED, 0xD3, 0xF5, 0x5C, 0x1A, 0x63, 0x12, 0x58,
+   0xD6, 0x9C, 0xF7, 0xA2, 0xDE, 0xF9, 0xDE, 0x14,
+   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x10,
+   0x00,
+\}
+\end{DoxyCode}
+
+
+Definition at line 87 of file ed25519.\+c.
+
+\mbox{\Hypertarget{ed25519_8c_acdfc95f47b3a8f6383a4ce3a41ff59da}\label{ed25519_8c_acdfc95f47b3a8f6383a4ce3a41ff59da}} 
+\index{ed25519.\+c@{ed25519.\+c}!E\+D25519\+\_\+\+MU@{E\+D25519\+\_\+\+MU}}
+\index{E\+D25519\+\_\+\+MU@{E\+D25519\+\_\+\+MU}!ed25519.\+c@{ed25519.\+c}}
+\subsubsection{\texorpdfstring{E\+D25519\+\_\+\+MU}{ED25519\_MU}}
+{\footnotesize\ttfamily const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} E\+D25519\+\_\+\+MU\mbox{[}33\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=
+\{
+   0x1B, 0x13, 0x2C, 0x0A, 0xA3, 0xE5, 0x9C, 0xED,
+   0xA7, 0x29, 0x63, 0x08, 0x5D, 0x21, 0x06, 0x21,
+   0xEB, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
+   0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
+   0x0F
+\}
+\end{DoxyCode}
+
+
+Definition at line 97 of file ed25519.\+c.
+
+\mbox{\Hypertarget{ed25519_8c_a8383113557d8ec492f8b65b7dde0f139}\label{ed25519_8c_a8383113557d8ec492f8b65b7dde0f139}} 
+\index{ed25519.\+c@{ed25519.\+c}!E\+D25519\+\_\+\+Z\+E\+RO@{E\+D25519\+\_\+\+Z\+E\+RO}}
+\index{E\+D25519\+\_\+\+Z\+E\+RO@{E\+D25519\+\_\+\+Z\+E\+RO}!ed25519.\+c@{ed25519.\+c}}
+\subsubsection{\texorpdfstring{E\+D25519\+\_\+\+Z\+E\+RO}{ED25519\_ZERO}}
+{\footnotesize\ttfamily const \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t} E\+D25519\+\_\+\+Z\+E\+RO\mbox{[}8\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=
+\{
+   0x00000000, 0x00000000, 0x00000000, 0x00000000,
+   0x00000000, 0x00000000, 0x00000000, 0x00000000
+\}
+\end{DoxyCode}
+
+
+Definition at line 66 of file ed25519.\+c.
+

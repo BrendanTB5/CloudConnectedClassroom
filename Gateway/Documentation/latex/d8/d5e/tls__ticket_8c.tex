@@ -1,0 +1,595 @@
+\hypertarget{tls__ticket_8c}{}\section{cyclone\+\_\+ssl/tls\+\_\+ticket.c File Reference}
+\label{tls__ticket_8c}\index{cyclone\+\_\+ssl/tls\+\_\+ticket.\+c@{cyclone\+\_\+ssl/tls\+\_\+ticket.\+c}}
+
+
+T\+LS session tickets.  
+
+
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}tls.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}tls\+\_\+ticket.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}debug.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{tls__ticket_8c_afcdf5e66fd927a7f4cc64295acd20407}{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}~\hyperlink{tls__config_8h_afee42a623033dac888291d1993985206}{T\+L\+S\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{tls__ticket_8c_a900454bf2fd13397d121c59265d93365}{tls\+Init\+Ticket\+Context} (\hyperlink{structTlsTicketContext}{Tls\+Ticket\+Context} $\ast$ticket\+Context)
+\begin{DoxyCompactList}\small\item\em Initialize ticket encryption context. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{tls__ticket_8c_a97a23fd779221231d59bfc050bcd0f95}{tls\+Encrypt\+Ticket} (\hyperlink{tls_8h_ac09f7a286c0cdf9b07ee1edd107946f5}{Tls\+Context} $\ast$context, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$plaintext, size\+\_\+t plaintext\+Len, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$ciphertext, size\+\_\+t $\ast$ciphertext\+Len, void $\ast$param)
+\begin{DoxyCompactList}\small\item\em Session ticket encryption. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{tls__ticket_8c_ace306bc54547aba1c81d5a8f957fc1cd}{tls\+Decrypt\+Ticket} (\hyperlink{tls_8h_ac09f7a286c0cdf9b07ee1edd107946f5}{Tls\+Context} $\ast$context, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$ciphertext, size\+\_\+t ciphertext\+Len, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$plaintext, size\+\_\+t $\ast$plaintext\+Len, void $\ast$param)
+\begin{DoxyCompactList}\small\item\em Session ticket decryption. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{tls__ticket_8c_af2e90a0baa28d5593f10fa1254844a83}{tls\+Generate\+Ticket\+Keys} (\hyperlink{structTlsTicketContext}{Tls\+Ticket\+Context} $\ast$ticket\+Context, const \hyperlink{structPrngAlgo}{Prng\+Algo} $\ast$prng\+Algo, void $\ast$prng\+Context)
+\begin{DoxyCompactList}\small\item\em Generate a new set of keys. \end{DoxyCompactList}\item 
+void \hyperlink{tls__ticket_8c_ab684aebd83d61be7c57c69095ed834f8}{tls\+Check\+Ticket\+Key\+Lifetime} (\hyperlink{structTlsTicketEncryptionState}{Tls\+Ticket\+Encryption\+State} $\ast$state)
+\begin{DoxyCompactList}\small\item\em Check the validity of a given set of keys. \end{DoxyCompactList}\item 
+\hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} \hyperlink{tls__ticket_8c_ad66384d06a2ec12c8cc0414b9a625bdb}{tls\+Compare\+Ticket\+Key\+Name} (const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$ticket, size\+\_\+t ticket\+Len, const \hyperlink{structTlsTicketEncryptionState}{Tls\+Ticket\+Encryption\+State} $\ast$state)
+\begin{DoxyCompactList}\small\item\em Key name comparison. \end{DoxyCompactList}\item 
+void \hyperlink{tls__ticket_8c_ad3813e8c1e07d368b1aa50d0e7028fe3}{tls\+Free\+Ticket\+Context} (\hyperlink{structTlsTicketContext}{Tls\+Ticket\+Context} $\ast$ticket\+Context)
+\begin{DoxyCompactList}\small\item\em Properly dispose ticket encryption context. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+T\+LS session tickets. 
+
+\hypertarget{pic32mz__ef__curiosity_8h_License}{}\subsection{License}\label{pic32mz__ef__curiosity_8h_License}
+S\+P\+D\+X-\/\+License-\/\+Identifier\+: G\+P\+L-\/2.\+0-\/or-\/later
+
+Copyright (C) 2010-\/2019 Oryx Embedded S\+A\+RL. All rights reserved.
+
+This file is part of Cyclone\+S\+SL Open.
+
+This program is free software; you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+
+You should have received a copy of the G\+NU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-\/1301, U\+SA.
+
+\begin{DoxyAuthor}{Author}
+Oryx Embedded S\+A\+RL (www.\+oryx-\/embedded.\+com) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+9.\+6 
+\end{DoxyVersion}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{tls__ticket_8c_afcdf5e66fd927a7f4cc64295acd20407}\label{tls__ticket_8c_afcdf5e66fd927a7f4cc64295acd20407}} 
+\index{tls\+\_\+ticket.\+c@{tls\+\_\+ticket.\+c}!T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+\index{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}!tls\+\_\+ticket.\+c@{tls\+\_\+ticket.\+c}}
+\subsubsection{\texorpdfstring{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}{TRACE\_LEVEL}}
+{\footnotesize\ttfamily \#define T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL~\hyperlink{tls__config_8h_afee42a623033dac888291d1993985206}{T\+L\+S\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+
+
+
+Definition at line 32 of file tls\+\_\+ticket.\+c.
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{tls__ticket_8c_ab684aebd83d61be7c57c69095ed834f8}\label{tls__ticket_8c_ab684aebd83d61be7c57c69095ed834f8}} 
+\index{tls\+\_\+ticket.\+c@{tls\+\_\+ticket.\+c}!tls\+Check\+Ticket\+Key\+Lifetime@{tls\+Check\+Ticket\+Key\+Lifetime}}
+\index{tls\+Check\+Ticket\+Key\+Lifetime@{tls\+Check\+Ticket\+Key\+Lifetime}!tls\+\_\+ticket.\+c@{tls\+\_\+ticket.\+c}}
+\subsubsection{\texorpdfstring{tls\+Check\+Ticket\+Key\+Lifetime()}{tlsCheckTicketKeyLifetime()}}
+{\footnotesize\ttfamily void tls\+Check\+Ticket\+Key\+Lifetime (\begin{DoxyParamCaption}\item[{\hyperlink{structTlsTicketEncryptionState}{Tls\+Ticket\+Encryption\+State} $\ast$}]{state }\end{DoxyParamCaption})}
+
+
+
+Check the validity of a given set of keys. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em state} & Pointer to ticket encryption state \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 366 of file tls\+\_\+ticket.\+c.
+
+
+\begin{DoxyCode}
+367 \{
+368    \hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\_t} \hyperlink{dhcpv6__common_8h_ae73654f333e4363463ad8c594eca1905}{time};
+369 
+370    \textcolor{comment}{//Get current time}
+371    time = \hyperlink{os__port__chibios_8c_ab66a11272d40a916fa69dd8e4dc443d4}{osGetSystemTime}();
+372 
+373    \textcolor{comment}{//Valid set of keys?}
+374    \textcolor{keywordflow}{if}(state->\hyperlink{structTlsTicketEncryptionState_ac32d4eacdd76de6fc7e4ba33deb03928}{valid})
+375    \{
+376       \textcolor{comment}{//Check lifetime}
+377       \textcolor{keywordflow}{if}((time - state->\hyperlink{structTlsTicketEncryptionState_acd1f7694dc380aa6ff954dce48bfa9ce}{timestamp}) >= (2 * \hyperlink{tls_8h_ac2cb6bfc41ae757074ffbb39056e2709}{TLS\_TICKET\_LIFETIME}))
+378       \{
+379          \textcolor{comment}{//Clear ticket keys}
+380          memset(state, 0, \textcolor{keyword}{sizeof}(\hyperlink{structTlsTicketEncryptionState}{TlsTicketEncryptionState}));
+381       \}
+382    \}
+383 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{tls__ticket_8c_ad66384d06a2ec12c8cc0414b9a625bdb}\label{tls__ticket_8c_ad66384d06a2ec12c8cc0414b9a625bdb}} 
+\index{tls\+\_\+ticket.\+c@{tls\+\_\+ticket.\+c}!tls\+Compare\+Ticket\+Key\+Name@{tls\+Compare\+Ticket\+Key\+Name}}
+\index{tls\+Compare\+Ticket\+Key\+Name@{tls\+Compare\+Ticket\+Key\+Name}!tls\+\_\+ticket.\+c@{tls\+\_\+ticket.\+c}}
+\subsubsection{\texorpdfstring{tls\+Compare\+Ticket\+Key\+Name()}{tlsCompareTicketKeyName()}}
+{\footnotesize\ttfamily \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} tls\+Compare\+Ticket\+Key\+Name (\begin{DoxyParamCaption}\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{ticket,  }\item[{size\+\_\+t}]{ticket\+Len,  }\item[{const \hyperlink{structTlsTicketEncryptionState}{Tls\+Ticket\+Encryption\+State} $\ast$}]{state }\end{DoxyParamCaption})}
+
+
+
+Key name comparison. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em ticket} & Encrypted ticket \\
+\hline
+\mbox{\tt in}  & {\em ticket\+Len} & Length of the encrypted ticket, in bytes \\
+\hline
+\mbox{\tt in}  & {\em state} & Pointer to ticket encryption state \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 393 of file tls\+\_\+ticket.\+c.
+
+
+\begin{DoxyCode}
+395 \{
+396    \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\_t} \hyperlink{resource__manager_8c_a369fab9cf831846ad1a1d6bd33a86fa1}{res};
+397 
+398    \textcolor{comment}{//Initialize flag}
+399    res = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+400 
+401    \textcolor{comment}{//Valid set of keys?}
+402    \textcolor{keywordflow}{if}(state->\hyperlink{structTlsTicketEncryptionState_ac32d4eacdd76de6fc7e4ba33deb03928}{valid})
+403    \{
+404       \textcolor{comment}{//The key name serves to identify a particular set of keys used to}
+405       \textcolor{comment}{//protect the ticket (refer to RFC 5077, section 4)}
+406       \textcolor{keywordflow}{if}(ticketLen >= \hyperlink{tls__ticket_8h_a5452f40f64a879b44a635abb2ab07628}{TLS\_TICKET\_KEY\_NAME\_SIZE})
+407       \{
+408          \textcolor{comment}{//Compare key names}
+409          \textcolor{keywordflow}{if}(memcmp(ticket, state->\hyperlink{structTlsTicketEncryptionState_a0a87a9954a33281e7891644f24924770}{keyName}, \hyperlink{tls__ticket_8h_a5452f40f64a879b44a635abb2ab07628}{TLS\_TICKET\_KEY\_NAME\_SIZE}) == 0)
+410          \{
+411             \textcolor{comment}{//The key name is valid}
+412             res = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+413          \}
+414       \}
+415    \}
+416 
+417    \textcolor{comment}{//Return comparison result}
+418    \textcolor{keywordflow}{return} \hyperlink{resource__manager_8c_a369fab9cf831846ad1a1d6bd33a86fa1}{res};
+419 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{tls__ticket_8c_ace306bc54547aba1c81d5a8f957fc1cd}\label{tls__ticket_8c_ace306bc54547aba1c81d5a8f957fc1cd}} 
+\index{tls\+\_\+ticket.\+c@{tls\+\_\+ticket.\+c}!tls\+Decrypt\+Ticket@{tls\+Decrypt\+Ticket}}
+\index{tls\+Decrypt\+Ticket@{tls\+Decrypt\+Ticket}!tls\+\_\+ticket.\+c@{tls\+\_\+ticket.\+c}}
+\subsubsection{\texorpdfstring{tls\+Decrypt\+Ticket()}{tlsDecryptTicket()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} tls\+Decrypt\+Ticket (\begin{DoxyParamCaption}\item[{\hyperlink{tls_8h_ac09f7a286c0cdf9b07ee1edd107946f5}{Tls\+Context} $\ast$}]{context,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{ciphertext,  }\item[{size\+\_\+t}]{ciphertext\+Len,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{plaintext,  }\item[{size\+\_\+t $\ast$}]{plaintext\+Len,  }\item[{void $\ast$}]{param }\end{DoxyParamCaption})}
+
+
+
+Session ticket decryption. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the T\+LS context \\
+\hline
+\mbox{\tt in}  & {\em ciphertext} & Encrypted ticket \\
+\hline
+\mbox{\tt in}  & {\em ciphertext\+Len} & Length of the encrypted ticket, in bytes \\
+\hline
+\mbox{\tt out}  & {\em plaintext} & Plaintext session state \\
+\hline
+\mbox{\tt out}  & {\em plaintext\+Len} & Length of the plaintext session state, in bytes \\
+\hline
+\mbox{\tt in}  & {\em param} & Pointer to the ticket encryption context \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 211 of file tls\+\_\+ticket.\+c.
+
+
+\begin{DoxyCode}
+213 \{
+214    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+215    \textcolor{keyword}{const} \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *\hyperlink{blake2b_8c_a7776c99735c5a9d93817d8f7bd33d8e6}{iv};
+216    \textcolor{keyword}{const} \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *\hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data};
+217    \textcolor{keyword}{const} \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *tag;
+218    \hyperlink{structTlsTicketContext}{TlsTicketContext} *ticketContext;
+219    \hyperlink{structTlsTicketEncryptionState}{TlsTicketEncryptionState} *state;
+220 
+221    \textcolor{comment}{//Check parameters}
+222    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || param == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+223       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+224    \textcolor{keywordflow}{if}(ciphertext == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || plaintext == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || plaintextLen == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+225       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+226 
+227    \textcolor{comment}{//Check the length of the encrypted ticket}
+228    \textcolor{keywordflow}{if}(ciphertextLen < (\hyperlink{tls__ticket_8h_a5452f40f64a879b44a635abb2ab07628}{TLS\_TICKET\_KEY\_NAME\_SIZE} + 
+      \hyperlink{tls__ticket_8h_a994dff7e526c0dc53201d1695c2f2025}{TLS\_TICKET\_IV\_SIZE} +
+229       \hyperlink{tls__ticket_8h_a584724e2c68e04a13b788b23f58fd9fb}{TLS\_TICKET\_TAG\_SIZE}))
+230    \{
+231       \textcolor{comment}{//Report an error}
+232       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca42ac4eb97a02112d45b5f0405c0393c1}{ERROR\_DECRYPTION\_FAILED};
+233    \}
+234 
+235    \textcolor{comment}{//Initialize status code}
+236    error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+237 
+238    \textcolor{comment}{//Initialize variables}
+239    iv = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+240    data = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+241    tag = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+242    state = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+243 
+244    \textcolor{comment}{//Point to the ticket encryption context}
+245    ticketContext = (\hyperlink{structTlsTicketContext}{TlsTicketContext} *) param;
+246 
+247    \textcolor{comment}{//Acquire exclusive access to the ticket encryption context}
+248    \hyperlink{os__port__chibios_8c_a58485224df4bfa522246d55b35bbd83a}{osAcquireMutex}(&ticketContext->\hyperlink{structTlsTicketContext_a849eb29051bd12f969adf692adcf77a1}{mutex});
+249 
+250    \textcolor{comment}{//The keys should be changed regularly (refer to RFC 5077, section 5.5)}
+251    \hyperlink{tls__ticket_8c_ab684aebd83d61be7c57c69095ed834f8}{tlsCheckTicketKeyLifetime}(&ticketContext->
+      \hyperlink{structTlsTicketContext_a17718f312fa71bf90c3b046e44bf160e}{encryptionState});
+252    \hyperlink{tls__ticket_8c_ab684aebd83d61be7c57c69095ed834f8}{tlsCheckTicketKeyLifetime}(&ticketContext->
+      \hyperlink{structTlsTicketContext_a198a1a46a74ce01b4a1fd44671c053c1}{prevEncryptionState});
+253 
+254    \textcolor{comment}{//Compare key names}
+255    \textcolor{keywordflow}{if}(\hyperlink{tls__ticket_8c_ad66384d06a2ec12c8cc0414b9a625bdb}{tlsCompareTicketKeyName}(ciphertext, ciphertextLen,
+256       &ticketContext->\hyperlink{structTlsTicketContext_a17718f312fa71bf90c3b046e44bf160e}{encryptionState}))
+257    \{
+258       \textcolor{comment}{//Point to the current set of keys}
+259       state = &ticketContext->\hyperlink{structTlsTicketContext_a17718f312fa71bf90c3b046e44bf160e}{encryptionState};
+260    \}
+261    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(\hyperlink{tls__ticket_8c_ad66384d06a2ec12c8cc0414b9a625bdb}{tlsCompareTicketKeyName}(ciphertext, ciphertextLen,
+262       &ticketContext->\hyperlink{structTlsTicketContext_a198a1a46a74ce01b4a1fd44671c053c1}{prevEncryptionState}))
+263    \{
+264       \textcolor{comment}{//Point to the previous set of keys}
+265       state = &ticketContext->\hyperlink{structTlsTicketContext_a198a1a46a74ce01b4a1fd44671c053c1}{prevEncryptionState};
+266    \}
+267    \textcolor{keywordflow}{else}
+268    \{
+269       \textcolor{comment}{//Unknown key name}
+270       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca42ac4eb97a02112d45b5f0405c0393c1}{ERROR\_DECRYPTION\_FAILED};
+271    \}
+272 
+273    \textcolor{comment}{//Check status code}
+274    \textcolor{keywordflow}{if}(!error)
+275    \{
+276       \textcolor{comment}{//Point to the IV}
+277       iv = ciphertext + \hyperlink{tls__ticket_8h_a5452f40f64a879b44a635abb2ab07628}{TLS\_TICKET\_KEY\_NAME\_SIZE};
+278       \textcolor{comment}{//Point to the data}
+279       data = iv + \hyperlink{tls__ticket_8h_a994dff7e526c0dc53201d1695c2f2025}{TLS\_TICKET\_IV\_SIZE};
+280       \textcolor{comment}{//Point to the authentication tag}
+281       tag = ciphertext + ciphertextLen - \hyperlink{tls__ticket_8h_a584724e2c68e04a13b788b23f58fd9fb}{TLS\_TICKET\_TAG\_SIZE};
+282 
+283       \textcolor{comment}{//Retrieve the length of the data}
+284       *plaintextLen = ciphertextLen - TLS\_TICKET\_KEY\_NAME\_SIZE -
+285          TLS\_TICKET\_IV\_SIZE - \hyperlink{tls__ticket_8h_a584724e2c68e04a13b788b23f58fd9fb}{TLS\_TICKET\_TAG\_SIZE};
+286 
+287       \textcolor{comment}{//Initialize AES context}
+288       error = \hyperlink{aes_8c_a1786debf48f536d5dd454e4a8f7ecd0f}{aesInit}(&ticketContext->\hyperlink{structTlsTicketContext_a79e7955202ca564487149653daf99272}{aesContext}, state->\hyperlink{structTlsTicketEncryptionState_a9305708f5ec5626fde0314ba7627d036}{key},
+289          \hyperlink{tls__ticket_8h_a635960598196f4551883147633540063}{TLS\_TICKET\_KEY\_SIZE});
+290    \}
+291 
+292    \textcolor{comment}{//Check status code}
+293    \textcolor{keywordflow}{if}(!error)
+294    \{
+295       \textcolor{comment}{//Initialize GCM context}
+296       error = \hyperlink{gcm_8c_abc76ae24190694f6db77a7dc195072f9}{gcmInit}(&ticketContext->\hyperlink{structTlsTicketContext_a9dccce1f6388c835956bf82a3f4c0d3c}{gcmContext}, 
+      \hyperlink{aes_8h_ae075f5718fa6cdcfd6227f301c2ea202}{AES\_CIPHER\_ALGO},
+297          &ticketContext->\hyperlink{structTlsTicketContext_a79e7955202ca564487149653daf99272}{aesContext});
+298    \}
+299 
+300    \textcolor{comment}{//Check status code}
+301    \textcolor{keywordflow}{if}(!error)
+302    \{
+303       \textcolor{comment}{//The actual state information in encrypted using AES-GCM}
+304       error = \hyperlink{gcm_8c_aa540a4a01d648db3457f3ab0d5c15601}{gcmDecrypt}(&ticketContext->\hyperlink{structTlsTicketContext_a9dccce1f6388c835956bf82a3f4c0d3c}{gcmContext}, iv, 
+      \hyperlink{tls__ticket_8h_a994dff7e526c0dc53201d1695c2f2025}{TLS\_TICKET\_IV\_SIZE},
+305          state->\hyperlink{structTlsTicketEncryptionState_a0a87a9954a33281e7891644f24924770}{keyName}, \hyperlink{tls__ticket_8h_a5452f40f64a879b44a635abb2ab07628}{TLS\_TICKET\_KEY\_NAME\_SIZE}, data, plaintext,
+306          *plaintextLen, tag, \hyperlink{tls__ticket_8h_a584724e2c68e04a13b788b23f58fd9fb}{TLS\_TICKET\_TAG\_SIZE});
+307    \}
+308 
+309    \textcolor{comment}{//Release exclusive access to the ticket encryption context}
+310    \hyperlink{os__port__chibios_8c_a8e10e5b2c6d3877b5ba60e375ac45d79}{osReleaseMutex}(&ticketContext->\hyperlink{structTlsTicketContext_a849eb29051bd12f969adf692adcf77a1}{mutex});
+311 
+312    \textcolor{comment}{//Return status code}
+313    \textcolor{keywordflow}{return} error;
+314 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{tls__ticket_8c_a97a23fd779221231d59bfc050bcd0f95}\label{tls__ticket_8c_a97a23fd779221231d59bfc050bcd0f95}} 
+\index{tls\+\_\+ticket.\+c@{tls\+\_\+ticket.\+c}!tls\+Encrypt\+Ticket@{tls\+Encrypt\+Ticket}}
+\index{tls\+Encrypt\+Ticket@{tls\+Encrypt\+Ticket}!tls\+\_\+ticket.\+c@{tls\+\_\+ticket.\+c}}
+\subsubsection{\texorpdfstring{tls\+Encrypt\+Ticket()}{tlsEncryptTicket()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} tls\+Encrypt\+Ticket (\begin{DoxyParamCaption}\item[{\hyperlink{tls_8h_ac09f7a286c0cdf9b07ee1edd107946f5}{Tls\+Context} $\ast$}]{context,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{plaintext,  }\item[{size\+\_\+t}]{plaintext\+Len,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{ciphertext,  }\item[{size\+\_\+t $\ast$}]{ciphertext\+Len,  }\item[{void $\ast$}]{param }\end{DoxyParamCaption})}
+
+
+
+Session ticket encryption. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the T\+LS context \\
+\hline
+\mbox{\tt in}  & {\em plaintext} & Plaintext session state \\
+\hline
+\mbox{\tt in}  & {\em plaintext\+Len} & Length of the plaintext session state, in bytes \\
+\hline
+\mbox{\tt out}  & {\em ciphertext} & Encrypted ticket \\
+\hline
+\mbox{\tt out}  & {\em ciphertext\+Len} & Length of the encrypted ticket, in bytes \\
+\hline
+\mbox{\tt in}  & {\em param} & Pointer to the ticket encryption context \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 82 of file tls\+\_\+ticket.\+c.
+
+
+\begin{DoxyCode}
+84 \{
+85    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+86    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *\hyperlink{blake2b_8c_a7776c99735c5a9d93817d8f7bd33d8e6}{iv};
+87    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *\hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data};
+88    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *tag;
+89    \hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\_t} \hyperlink{dhcpv6__common_8h_ae73654f333e4363463ad8c594eca1905}{time};
+90    \hyperlink{structTlsTicketContext}{TlsTicketContext} *ticketContext;
+91    \hyperlink{structTlsTicketEncryptionState}{TlsTicketEncryptionState} *state;
+92 
+93    \textcolor{comment}{//Check parameters}
+94    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || param == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+95       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+96    \textcolor{keywordflow}{if}(plaintext == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || ciphertext == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || ciphertextLen == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+97       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+98 
+99    \textcolor{comment}{//Initialize status code}
+100    error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+101 
+102    \textcolor{comment}{//Initialize variables}
+103    iv = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+104    data = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+105    tag = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+106 
+107    \textcolor{comment}{//Point to the ticket encryption context}
+108    ticketContext = (\hyperlink{structTlsTicketContext}{TlsTicketContext} *) param;
+109 
+110    \textcolor{comment}{//Acquire exclusive access to the ticket encryption context}
+111    \hyperlink{os__port__chibios_8c_a58485224df4bfa522246d55b35bbd83a}{osAcquireMutex}(&ticketContext->\hyperlink{structTlsTicketContext_a849eb29051bd12f969adf692adcf77a1}{mutex});
+112 
+113    \textcolor{comment}{//The keys should be changed regularly (refer to RFC 5077, section 5.5)}
+114    \hyperlink{tls__ticket_8c_ab684aebd83d61be7c57c69095ed834f8}{tlsCheckTicketKeyLifetime}(&ticketContext->
+      \hyperlink{structTlsTicketContext_a17718f312fa71bf90c3b046e44bf160e}{encryptionState});
+115    \hyperlink{tls__ticket_8c_ab684aebd83d61be7c57c69095ed834f8}{tlsCheckTicketKeyLifetime}(&ticketContext->
+      \hyperlink{structTlsTicketContext_a198a1a46a74ce01b4a1fd44671c053c1}{prevEncryptionState});
+116 
+117    \textcolor{comment}{//Point to the current ticket encryption state}
+118    state = &ticketContext->\hyperlink{structTlsTicketContext_a17718f312fa71bf90c3b046e44bf160e}{encryptionState};
+119 
+120    \textcolor{comment}{//Check whether the ticket encryption state is valid}
+121    \textcolor{keywordflow}{if}(state->\hyperlink{structTlsTicketEncryptionState_ac32d4eacdd76de6fc7e4ba33deb03928}{valid})
+122    \{
+123       \textcolor{comment}{//Get current time}
+124       time = \hyperlink{os__port__chibios_8c_ab66a11272d40a916fa69dd8e4dc443d4}{osGetSystemTime}();
+125 
+126       \textcolor{comment}{//Check the validity of the encryption keys}
+127       \textcolor{keywordflow}{if}((time - state->\hyperlink{structTlsTicketEncryptionState_acd1f7694dc380aa6ff954dce48bfa9ce}{timestamp}) >= \hyperlink{tls_8h_ac2cb6bfc41ae757074ffbb39056e2709}{TLS\_TICKET\_LIFETIME})
+128       \{
+129          \textcolor{comment}{//Rotate keys}
+130          ticketContext->\hyperlink{structTlsTicketContext_a198a1a46a74ce01b4a1fd44671c053c1}{prevEncryptionState} = ticketContext->
+      \hyperlink{structTlsTicketContext_a17718f312fa71bf90c3b046e44bf160e}{encryptionState};
+131          ticketContext->\hyperlink{structTlsTicketContext_a17718f312fa71bf90c3b046e44bf160e}{encryptionState}.\hyperlink{structTlsTicketEncryptionState_ac32d4eacdd76de6fc7e4ba33deb03928}{valid} = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+132       \}
+133    \}
+134 
+135    \textcolor{comment}{//Invalid set of keys?}
+136    \textcolor{keywordflow}{if}(!state->\hyperlink{structTlsTicketEncryptionState_ac32d4eacdd76de6fc7e4ba33deb03928}{valid})
+137    \{
+138       \textcolor{comment}{//Generate a new set of keys}
+139       error = \hyperlink{tls__ticket_8c_af2e90a0baa28d5593f10fa1254844a83}{tlsGenerateTicketKeys}(ticketContext, context->prngAlgo,
+140          context->prngContext);
+141    \}
+142 
+143    \textcolor{comment}{//Check status code}
+144    \textcolor{keywordflow}{if}(!error)
+145    \{
+146       \textcolor{comment}{//Point to the IV}
+147       iv = ciphertext + \hyperlink{tls__ticket_8h_a5452f40f64a879b44a635abb2ab07628}{TLS\_TICKET\_KEY\_NAME\_SIZE};
+148       \textcolor{comment}{//Point to the data}
+149       data = iv + \hyperlink{tls__ticket_8h_a994dff7e526c0dc53201d1695c2f2025}{TLS\_TICKET\_IV\_SIZE};
+150       \textcolor{comment}{//Point to the buffer where to store the authentication tag}
+151       tag = data + plaintextLen;
+152 
+153       \textcolor{comment}{//Copy plaintext state}
+154       memmove(data, plaintext, plaintextLen);
+155       \textcolor{comment}{//Copy key name}
+156       memcpy(ciphertext, state->\hyperlink{structTlsTicketEncryptionState_a0a87a9954a33281e7891644f24924770}{keyName}, TLS\_TICKET\_KEY\_NAME\_SIZE);
+157 
+158       \textcolor{comment}{//Generate a random IV}
+159       error = context->prngAlgo->read(context->prngContext, iv,
+160          TLS\_TICKET\_IV\_SIZE);
+161    \}
+162 
+163    \textcolor{comment}{//Check status code}
+164    \textcolor{keywordflow}{if}(!error)
+165    \{
+166       \textcolor{comment}{//Initialize AES context}
+167       error = \hyperlink{aes_8c_a1786debf48f536d5dd454e4a8f7ecd0f}{aesInit}(&ticketContext->\hyperlink{structTlsTicketContext_a79e7955202ca564487149653daf99272}{aesContext}, state->\hyperlink{structTlsTicketEncryptionState_a9305708f5ec5626fde0314ba7627d036}{key},
+168          \hyperlink{tls__ticket_8h_a635960598196f4551883147633540063}{TLS\_TICKET\_KEY\_SIZE});
+169    \}
+170 
+171    \textcolor{comment}{//Check status code}
+172    \textcolor{keywordflow}{if}(!error)
+173    \{
+174       \textcolor{comment}{//Initialize GCM context}
+175       error = \hyperlink{gcm_8c_abc76ae24190694f6db77a7dc195072f9}{gcmInit}(&ticketContext->\hyperlink{structTlsTicketContext_a9dccce1f6388c835956bf82a3f4c0d3c}{gcmContext}, 
+      \hyperlink{aes_8h_ae075f5718fa6cdcfd6227f301c2ea202}{AES\_CIPHER\_ALGO},
+176          &ticketContext->\hyperlink{structTlsTicketContext_a79e7955202ca564487149653daf99272}{aesContext});
+177    \}
+178 
+179    \textcolor{comment}{//Check status code}
+180    \textcolor{keywordflow}{if}(!error)
+181    \{
+182       \textcolor{comment}{//Calculate the length of the encrypted ticket}
+183       *ciphertextLen = plaintextLen + TLS\_TICKET\_KEY\_NAME\_SIZE +
+184          TLS\_TICKET\_IV\_SIZE + \hyperlink{tls__ticket_8h_a584724e2c68e04a13b788b23f58fd9fb}{TLS\_TICKET\_TAG\_SIZE};
+185 
+186       \textcolor{comment}{//The actual state information in encrypted using AES-GCM}
+187       error = \hyperlink{gcm_8c_a2f5111c280fe4411127041f1c43d4346}{gcmEncrypt}(&ticketContext->\hyperlink{structTlsTicketContext_a9dccce1f6388c835956bf82a3f4c0d3c}{gcmContext}, iv, TLS\_TICKET\_IV\_SIZE,
+188          state->\hyperlink{structTlsTicketEncryptionState_a0a87a9954a33281e7891644f24924770}{keyName}, TLS\_TICKET\_KEY\_NAME\_SIZE, data, data, plaintextLen,
+189          tag, TLS\_TICKET\_TAG\_SIZE);
+190    \}
+191 
+192    \textcolor{comment}{//Release exclusive access to the ticket encryption context}
+193    \hyperlink{os__port__chibios_8c_a8e10e5b2c6d3877b5ba60e375ac45d79}{osReleaseMutex}(&ticketContext->\hyperlink{structTlsTicketContext_a849eb29051bd12f969adf692adcf77a1}{mutex});
+194 
+195    \textcolor{comment}{//Return status code}
+196    \textcolor{keywordflow}{return} error;
+197 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{tls__ticket_8c_ad3813e8c1e07d368b1aa50d0e7028fe3}\label{tls__ticket_8c_ad3813e8c1e07d368b1aa50d0e7028fe3}} 
+\index{tls\+\_\+ticket.\+c@{tls\+\_\+ticket.\+c}!tls\+Free\+Ticket\+Context@{tls\+Free\+Ticket\+Context}}
+\index{tls\+Free\+Ticket\+Context@{tls\+Free\+Ticket\+Context}!tls\+\_\+ticket.\+c@{tls\+\_\+ticket.\+c}}
+\subsubsection{\texorpdfstring{tls\+Free\+Ticket\+Context()}{tlsFreeTicketContext()}}
+{\footnotesize\ttfamily void tls\+Free\+Ticket\+Context (\begin{DoxyParamCaption}\item[{\hyperlink{structTlsTicketContext}{Tls\+Ticket\+Context} $\ast$}]{ticket\+Context }\end{DoxyParamCaption})}
+
+
+
+Properly dispose ticket encryption context. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em ticket\+Context} & Pointer to ticket encryption context to be released \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 427 of file tls\+\_\+ticket.\+c.
+
+
+\begin{DoxyCode}
+428 \{
+429    \textcolor{comment}{//Make sure the ticket encryption context is valid}
+430    \textcolor{keywordflow}{if}(ticketContext != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+431    \{
+432       \textcolor{comment}{//Release previously allocated resources}
+433       \hyperlink{os__port__chibios_8c_a2b0ba1e39227e4a4d52ee46bbee15c11}{osDeleteMutex}(&ticketContext->\hyperlink{structTlsTicketContext_a849eb29051bd12f969adf692adcf77a1}{mutex});
+434 
+435       \textcolor{comment}{//Erase ticket encryption context}
+436       memset(ticketContext, 0, \textcolor{keyword}{sizeof}(\hyperlink{structTlsTicketContext}{TlsTicketContext}));
+437    \}
+438 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{tls__ticket_8c_af2e90a0baa28d5593f10fa1254844a83}\label{tls__ticket_8c_af2e90a0baa28d5593f10fa1254844a83}} 
+\index{tls\+\_\+ticket.\+c@{tls\+\_\+ticket.\+c}!tls\+Generate\+Ticket\+Keys@{tls\+Generate\+Ticket\+Keys}}
+\index{tls\+Generate\+Ticket\+Keys@{tls\+Generate\+Ticket\+Keys}!tls\+\_\+ticket.\+c@{tls\+\_\+ticket.\+c}}
+\subsubsection{\texorpdfstring{tls\+Generate\+Ticket\+Keys()}{tlsGenerateTicketKeys()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} tls\+Generate\+Ticket\+Keys (\begin{DoxyParamCaption}\item[{\hyperlink{structTlsTicketContext}{Tls\+Ticket\+Context} $\ast$}]{ticket\+Context,  }\item[{const \hyperlink{structPrngAlgo}{Prng\+Algo} $\ast$}]{prng\+Algo,  }\item[{void $\ast$}]{prng\+Context }\end{DoxyParamCaption})}
+
+
+
+Generate a new set of keys. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em ticket\+Context} & Pointer to ticket encryption context \\
+\hline
+\mbox{\tt in}  & {\em prng\+Algo} & P\+R\+NG algorithm \\
+\hline
+\mbox{\tt in}  & {\em prng\+Context} & Pointer to the P\+R\+NG context \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 325 of file tls\+\_\+ticket.\+c.
+
+
+\begin{DoxyCode}
+327 \{
+328    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+329    \hyperlink{structTlsTicketEncryptionState}{TlsTicketEncryptionState} *state;
+330 
+331    \textcolor{comment}{//Point to the current ticket encryption state}
+332    state = &ticketContext->\hyperlink{structTlsTicketContext_a17718f312fa71bf90c3b046e44bf160e}{encryptionState};
+333 
+334    \textcolor{comment}{//The set of keys is not valid anymore}
+335    state->\hyperlink{structTlsTicketEncryptionState_ac32d4eacdd76de6fc7e4ba33deb03928}{valid} = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+336 
+337    \textcolor{comment}{//The key name should be randomly generated to avoid collisions between}
+338    \textcolor{comment}{//servers (refer to RFC 5077, section 4)}
+339    error = prngAlgo->\hyperlink{structPrngAlgo_a079621740ef14faacfcd05b84c9036eb}{read}(prngContext, state->\hyperlink{structTlsTicketEncryptionState_a0a87a9954a33281e7891644f24924770}{keyName},
+340       \hyperlink{tls__ticket_8h_a5452f40f64a879b44a635abb2ab07628}{TLS\_TICKET\_KEY\_NAME\_SIZE});
+341    \textcolor{comment}{//Any error to report?}
+342    \textcolor{keywordflow}{if}(error)
+343       \textcolor{keywordflow}{return} error;
+344 
+345    \textcolor{comment}{//Generate a random encryption key}
+346    error = prngAlgo->\hyperlink{structPrngAlgo_a079621740ef14faacfcd05b84c9036eb}{read}(prngContext, state->\hyperlink{structTlsTicketEncryptionState_a9305708f5ec5626fde0314ba7627d036}{key}, \hyperlink{tls__ticket_8h_a635960598196f4551883147633540063}{TLS\_TICKET\_KEY\_SIZE});
+347    \textcolor{comment}{//Any error to report?}
+348    \textcolor{keywordflow}{if}(error)
+349       \textcolor{keywordflow}{return} error;
+350 
+351    \textcolor{comment}{//Save current time}
+352    state->\hyperlink{structTlsTicketEncryptionState_acd1f7694dc380aa6ff954dce48bfa9ce}{timestamp} = \hyperlink{os__port__chibios_8c_ab66a11272d40a916fa69dd8e4dc443d4}{osGetSystemTime}();
+353    \textcolor{comment}{//The set of keys is valid}
+354    state->\hyperlink{structTlsTicketEncryptionState_ac32d4eacdd76de6fc7e4ba33deb03928}{valid} = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+355 
+356    \textcolor{comment}{//Successful processing}
+357    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+358 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{tls__ticket_8c_a900454bf2fd13397d121c59265d93365}\label{tls__ticket_8c_a900454bf2fd13397d121c59265d93365}} 
+\index{tls\+\_\+ticket.\+c@{tls\+\_\+ticket.\+c}!tls\+Init\+Ticket\+Context@{tls\+Init\+Ticket\+Context}}
+\index{tls\+Init\+Ticket\+Context@{tls\+Init\+Ticket\+Context}!tls\+\_\+ticket.\+c@{tls\+\_\+ticket.\+c}}
+\subsubsection{\texorpdfstring{tls\+Init\+Ticket\+Context()}{tlsInitTicketContext()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} tls\+Init\+Ticket\+Context (\begin{DoxyParamCaption}\item[{\hyperlink{structTlsTicketContext}{Tls\+Ticket\+Context} $\ast$}]{ticket\+Context }\end{DoxyParamCaption})}
+
+
+
+Initialize ticket encryption context. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em ticket\+Context} & Pointer to ticket encryption context \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 50 of file tls\+\_\+ticket.\+c.
+
+
+\begin{DoxyCode}
+51 \{
+52    \textcolor{comment}{//Make sure the ticket encryption context is valid}
+53    \textcolor{keywordflow}{if}(ticketContext == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+54       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+55 
+56    \textcolor{comment}{//Erase ticket encryption context}
+57    memset(ticketContext, 0, \textcolor{keyword}{sizeof}(\hyperlink{structTlsTicketContext}{TlsTicketContext}));
+58 
+59    \textcolor{comment}{//Create a mutex to prevent simultaneous access to the context}
+60    \textcolor{keywordflow}{if}(!\hyperlink{os__port__chibios_8c_a16627f901c807c29adf29a38fb1af16a}{osCreateMutex}(&ticketContext->\hyperlink{structTlsTicketContext_a849eb29051bd12f969adf692adcf77a1}{mutex}))
+61    \{
+62       \textcolor{comment}{//Report an error}
+63       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca528efe91b7a7e4bcc9a6de7d4b778c67}{ERROR\_OUT\_OF\_RESOURCES};
+64    \}
+65 
+66    \textcolor{comment}{//Sucessful initialization}
+67    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+68 \}
+\end{DoxyCode}

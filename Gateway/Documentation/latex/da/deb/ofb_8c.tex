@@ -1,0 +1,225 @@
+\hypertarget{ofb_8c}{}\section{cyclone\+\_\+crypto/cipher\+\_\+mode/ofb.c File Reference}
+\label{ofb_8c}\index{cyclone\+\_\+crypto/cipher\+\_\+mode/ofb.\+c@{cyclone\+\_\+crypto/cipher\+\_\+mode/ofb.\+c}}
+
+
+Output Feedback (O\+FB) mode.  
+
+
+{\ttfamily \#include \char`\"{}core/crypto.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}cipher\+\_\+mode/ofb.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}debug.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{ofb_8c_afcdf5e66fd927a7f4cc64295acd20407}{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}~\hyperlink{crypto__config_8h_a6afae3a9b63f9b55d979e667ee0e881d}{C\+R\+Y\+P\+T\+O\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ofb_8c_af72394420cc1b07a672024435593a146}{ofb\+Encrypt} (const \hyperlink{structCipherAlgo}{Cipher\+Algo} $\ast$cipher, void $\ast$context, \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} \hyperlink{ndp_8h_a2dee666f0c1fe072c549ff86b1d0a8ab}{s}, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{blake2s_8c_aec72267c81ad465adfa55640a636cd0b}{iv}, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{ndp_8h_a6519522ad9a6f45e7a8d25d31392a977}{p}, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{llmnr__common_8h_a2e5a04327b5658199f0f7bda2acceee1}{c}, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length})
+\begin{DoxyCompactList}\small\item\em O\+FB encryption. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ofb_8c_a600f11a89ceb48ccde97db9ac249e527}{ofb\+Decrypt} (const \hyperlink{structCipherAlgo}{Cipher\+Algo} $\ast$cipher, void $\ast$context, \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} \hyperlink{ndp_8h_a2dee666f0c1fe072c549ff86b1d0a8ab}{s}, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{blake2s_8c_aec72267c81ad465adfa55640a636cd0b}{iv}, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{llmnr__common_8h_a2e5a04327b5658199f0f7bda2acceee1}{c}, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{ndp_8h_a6519522ad9a6f45e7a8d25d31392a977}{p}, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length})
+\begin{DoxyCompactList}\small\item\em O\+FB decryption. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Output Feedback (O\+FB) mode. 
+
+\hypertarget{pic32mz__ef__curiosity_8h_License}{}\subsection{License}\label{pic32mz__ef__curiosity_8h_License}
+S\+P\+D\+X-\/\+License-\/\+Identifier\+: G\+P\+L-\/2.\+0-\/or-\/later
+
+Copyright (C) 2010-\/2019 Oryx Embedded S\+A\+RL. All rights reserved.
+
+This file is part of Cyclone\+Crypto Open.
+
+This program is free software; you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+
+You should have received a copy of the G\+NU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-\/1301, U\+SA.\hypertarget{tftp__server_8c_Description}{}\subsection{Description}\label{tftp__server_8c_Description}
+The Output Feedback (O\+FB) mode is a confidentiality mode that features the iteration of the forward cipher on an IV to generate a sequence of output blocks that are exclusive-\/\+O\+Red with the plaintext to produce the ciphertext, and vice versa. The O\+FB mode requires that the IV is a nonce, i.\+e., the IV must be unique for each execution of the mode under the given key. Refer to SP 800-\/38A for more details
+
+\begin{DoxyAuthor}{Author}
+Oryx Embedded S\+A\+RL (www.\+oryx-\/embedded.\+com) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+9.\+6 
+\end{DoxyVersion}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{ofb_8c_afcdf5e66fd927a7f4cc64295acd20407}\label{ofb_8c_afcdf5e66fd927a7f4cc64295acd20407}} 
+\index{ofb.\+c@{ofb.\+c}!T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+\index{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}!ofb.\+c@{ofb.\+c}}
+\subsubsection{\texorpdfstring{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}{TRACE\_LEVEL}}
+{\footnotesize\ttfamily \#define T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL~\hyperlink{crypto__config_8h_a6afae3a9b63f9b55d979e667ee0e881d}{C\+R\+Y\+P\+T\+O\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+
+
+
+Definition at line 41 of file ofb.\+c.
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{ofb_8c_a600f11a89ceb48ccde97db9ac249e527}\label{ofb_8c_a600f11a89ceb48ccde97db9ac249e527}} 
+\index{ofb.\+c@{ofb.\+c}!ofb\+Decrypt@{ofb\+Decrypt}}
+\index{ofb\+Decrypt@{ofb\+Decrypt}!ofb.\+c@{ofb.\+c}}
+\subsubsection{\texorpdfstring{ofb\+Decrypt()}{ofbDecrypt()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ofb\+Decrypt (\begin{DoxyParamCaption}\item[{const \hyperlink{structCipherAlgo}{Cipher\+Algo} $\ast$}]{cipher,  }\item[{void $\ast$}]{context,  }\item[{\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t}}]{s,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{iv,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{c,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{p,  }\item[{size\+\_\+t}]{length }\end{DoxyParamCaption})}
+
+
+
+O\+FB decryption. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em cipher} & Cipher algorithm \\
+\hline
+\mbox{\tt in}  & {\em context} & Cipher algorithm context \\
+\hline
+\mbox{\tt in}  & {\em s} & Size of the plaintext and ciphertext segments \\
+\hline
+\mbox{\tt in,out}  & {\em iv} & Initialization vector \\
+\hline
+\mbox{\tt in}  & {\em c} & Ciphertext to be decrypted \\
+\hline
+\mbox{\tt out}  & {\em p} & Plaintext resulting from the decryption \\
+\hline
+\mbox{\tt in}  & {\em length} & Total number of data bytes to be decrypted \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 124 of file ofb.\+c.
+
+
+\begin{DoxyCode}
+126 \{
+127    \textcolor{keywordtype}{size\_t} i;
+128    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+129    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} \hyperlink{dhcpv6__common_8h_a69c4569269da7faedfa431b065370468}{o}[16];
+130 
+131    \textcolor{comment}{//The parameter must be a multiple of 8}
+132    \textcolor{keywordflow}{if}((\hyperlink{md2_8c_adf356ff381033f761b7de5f76e763a45}{s} % 8) != 0)
+133       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+134 
+135    \textcolor{comment}{//Determine the size, in bytes, of the plaintext and ciphertext segments}
+136    \hyperlink{md2_8c_adf356ff381033f761b7de5f76e763a45}{s} = \hyperlink{md2_8c_adf356ff381033f761b7de5f76e763a45}{s} / 8;
+137 
+138    \textcolor{comment}{//Check the resulting value}
+139    \textcolor{keywordflow}{if}(s < 1 || s > cipher->\hyperlink{structCipherAlgo_a1f318963e641736f3c5836274ef758f1}{blockSize})
+140       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+141 
+142    \textcolor{comment}{//Process each ciphertext segment}
+143    \textcolor{keywordflow}{while}(\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} > 0)
+144    \{
+145       \textcolor{comment}{//Compute the number of bytes to process at a time}
+146       n = \hyperlink{os__port_8h_a3acffbd305ee72dcd4593c0d8af64a4f}{MIN}(\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \hyperlink{md2_8c_adf356ff381033f761b7de5f76e763a45}{s});
+147 
+148       \textcolor{comment}{//Compute O(j) = CIPH(I(j))}
+149       cipher->\hyperlink{structCipherAlgo_a61360848127c17c27fe5304588f7f211}{encryptBlock}(context, \hyperlink{blake2b_8c_a7776c99735c5a9d93817d8f7bd33d8e6}{iv}, o);
+150 
+151       \textcolor{comment}{//Compute P(j) = C(j) XOR MSB(O(j))}
+152       \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n}; i++)
+153       \{
+154          \hyperlink{ndp_8h_a6519522ad9a6f45e7a8d25d31392a977}{p}[i] = \hyperlink{aria_8c_a5dadc28804036d1b82e1dc027e95c9a6}{c}[i] ^ o[i];
+155       \}
+156 
+157       \textcolor{comment}{//Compute I(j+1) = LSB(I(j)) | O(j)}
+158       \hyperlink{cyclone__crypto_2core_2crypto_8h_ad9bc988e3454b747101a8163dfdc1618}{cryptoMemmove}(\hyperlink{blake2b_8c_a7776c99735c5a9d93817d8f7bd33d8e6}{iv}, \hyperlink{blake2b_8c_a7776c99735c5a9d93817d8f7bd33d8e6}{iv} + \hyperlink{md2_8c_adf356ff381033f761b7de5f76e763a45}{s}, cipher->\hyperlink{structCipherAlgo_a1f318963e641736f3c5836274ef758f1}{blockSize} - \hyperlink{md2_8c_adf356ff381033f761b7de5f76e763a45}{s});
+159       \hyperlink{cyclone__crypto_2core_2crypto_8h_a6724616c4014bb7e21f2660bd7b88be8}{cryptoMemcpy}(\hyperlink{blake2b_8c_a7776c99735c5a9d93817d8f7bd33d8e6}{iv} + cipher->\hyperlink{structCipherAlgo_a1f318963e641736f3c5836274ef758f1}{blockSize} - \hyperlink{md2_8c_adf356ff381033f761b7de5f76e763a45}{s}, o, \hyperlink{md2_8c_adf356ff381033f761b7de5f76e763a45}{s});
+160 
+161       \textcolor{comment}{//Next block}
+162       \hyperlink{aria_8c_a5dadc28804036d1b82e1dc027e95c9a6}{c} += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+163       \hyperlink{ndp_8h_a6519522ad9a6f45e7a8d25d31392a977}{p} += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+164       \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} -= \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+165    \}
+166 
+167    \textcolor{comment}{//Successful encryption}
+168    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+169 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ofb_8c_af72394420cc1b07a672024435593a146}\label{ofb_8c_af72394420cc1b07a672024435593a146}} 
+\index{ofb.\+c@{ofb.\+c}!ofb\+Encrypt@{ofb\+Encrypt}}
+\index{ofb\+Encrypt@{ofb\+Encrypt}!ofb.\+c@{ofb.\+c}}
+\subsubsection{\texorpdfstring{ofb\+Encrypt()}{ofbEncrypt()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ofb\+Encrypt (\begin{DoxyParamCaption}\item[{const \hyperlink{structCipherAlgo}{Cipher\+Algo} $\ast$}]{cipher,  }\item[{void $\ast$}]{context,  }\item[{\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t}}]{s,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{iv,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{p,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{c,  }\item[{size\+\_\+t}]{length }\end{DoxyParamCaption})}
+
+
+
+O\+FB encryption. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em cipher} & Cipher algorithm \\
+\hline
+\mbox{\tt in}  & {\em context} & Cipher algorithm context \\
+\hline
+\mbox{\tt in}  & {\em s} & Size of the plaintext and ciphertext segments \\
+\hline
+\mbox{\tt in,out}  & {\em iv} & Initialization vector \\
+\hline
+\mbox{\tt in}  & {\em p} & Plaintext to be encrypted \\
+\hline
+\mbox{\tt out}  & {\em c} & Ciphertext resulting from the encryption \\
+\hline
+\mbox{\tt in}  & {\em length} & Total number of data bytes to be encrypted \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 64 of file ofb.\+c.
+
+
+\begin{DoxyCode}
+66 \{
+67    \textcolor{keywordtype}{size\_t} i;
+68    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+69    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} \hyperlink{dhcpv6__common_8h_a69c4569269da7faedfa431b065370468}{o}[16];
+70 
+71    \textcolor{comment}{//The parameter must be a multiple of 8}
+72    \textcolor{keywordflow}{if}((\hyperlink{md2_8c_adf356ff381033f761b7de5f76e763a45}{s} % 8) != 0)
+73       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+74 
+75    \textcolor{comment}{//Determine the size, in bytes, of the plaintext and ciphertext segments}
+76    \hyperlink{md2_8c_adf356ff381033f761b7de5f76e763a45}{s} = \hyperlink{md2_8c_adf356ff381033f761b7de5f76e763a45}{s} / 8;
+77 
+78    \textcolor{comment}{//Check the resulting value}
+79    \textcolor{keywordflow}{if}(s < 1 || s > cipher->\hyperlink{structCipherAlgo_a1f318963e641736f3c5836274ef758f1}{blockSize})
+80       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+81 
+82    \textcolor{comment}{//Process each plaintext segment}
+83    \textcolor{keywordflow}{while}(\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} > 0)
+84    \{
+85       \textcolor{comment}{//Compute the number of bytes to process at a time}
+86       n = \hyperlink{os__port_8h_a3acffbd305ee72dcd4593c0d8af64a4f}{MIN}(\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \hyperlink{md2_8c_adf356ff381033f761b7de5f76e763a45}{s});
+87 
+88       \textcolor{comment}{//Compute O(j) = CIPH(I(j))}
+89       cipher->\hyperlink{structCipherAlgo_a61360848127c17c27fe5304588f7f211}{encryptBlock}(context, \hyperlink{blake2b_8c_a7776c99735c5a9d93817d8f7bd33d8e6}{iv}, o);
+90 
+91       \textcolor{comment}{//Compute C(j) = P(j) XOR MSB(O(j))}
+92       \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n}; i++)
+93       \{
+94          \hyperlink{aria_8c_a5dadc28804036d1b82e1dc027e95c9a6}{c}[i] = \hyperlink{ndp_8h_a6519522ad9a6f45e7a8d25d31392a977}{p}[i] ^ o[i];
+95       \}
+96 
+97       \textcolor{comment}{//Compute I(j+1) = LSB(I(j)) | O(j)}
+98       \hyperlink{cyclone__crypto_2core_2crypto_8h_ad9bc988e3454b747101a8163dfdc1618}{cryptoMemmove}(\hyperlink{blake2b_8c_a7776c99735c5a9d93817d8f7bd33d8e6}{iv}, \hyperlink{blake2b_8c_a7776c99735c5a9d93817d8f7bd33d8e6}{iv} + \hyperlink{md2_8c_adf356ff381033f761b7de5f76e763a45}{s}, cipher->\hyperlink{structCipherAlgo_a1f318963e641736f3c5836274ef758f1}{blockSize} - \hyperlink{md2_8c_adf356ff381033f761b7de5f76e763a45}{s});
+99       \hyperlink{cyclone__crypto_2core_2crypto_8h_a6724616c4014bb7e21f2660bd7b88be8}{cryptoMemcpy}(\hyperlink{blake2b_8c_a7776c99735c5a9d93817d8f7bd33d8e6}{iv} + cipher->\hyperlink{structCipherAlgo_a1f318963e641736f3c5836274ef758f1}{blockSize} - \hyperlink{md2_8c_adf356ff381033f761b7de5f76e763a45}{s}, o, \hyperlink{md2_8c_adf356ff381033f761b7de5f76e763a45}{s});
+100 
+101       \textcolor{comment}{//Next block}
+102       \hyperlink{ndp_8h_a6519522ad9a6f45e7a8d25d31392a977}{p} += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+103       \hyperlink{aria_8c_a5dadc28804036d1b82e1dc027e95c9a6}{c} += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+104       \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} -= \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+105    \}
+106 
+107    \textcolor{comment}{//Successful encryption}
+108    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+109 \}
+\end{DoxyCode}

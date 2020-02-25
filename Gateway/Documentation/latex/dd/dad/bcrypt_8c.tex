@@ -1,0 +1,397 @@
+\hypertarget{bcrypt_8c}{}\section{cyclone\+\_\+crypto/kdf/bcrypt.c File Reference}
+\label{bcrypt_8c}\index{cyclone\+\_\+crypto/kdf/bcrypt.\+c@{cyclone\+\_\+crypto/kdf/bcrypt.\+c}}
+
+
+bcrypt password hashing function  
+
+
+{\ttfamily \#include \char`\"{}core/crypto.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}kdf/bcrypt.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}cipher\+\_\+mode/ecb.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}encoding/radix64.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{bcrypt_8c_afcdf5e66fd927a7f4cc64295acd20407}{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}~\hyperlink{crypto__config_8h_a6afae3a9b63f9b55d979e667ee0e881d}{C\+R\+Y\+P\+T\+O\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{bcrypt_8c_a9c35e9328e7d591164517d16dd64fd51}{bcrypt\+Hash\+Password} (const \hyperlink{structPrngAlgo}{Prng\+Algo} $\ast$prng\+Algo, void $\ast$prng\+Context, \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} cost, const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$password, \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$\hyperlink{tls_8h_a17d89840e7296c323504b31fc6359606}{hash}, size\+\_\+t $\ast$hash\+Len)
+\begin{DoxyCompactList}\small\item\em Password hashing function. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{bcrypt_8c_a8d85d142aa3081f8bcac430618c5084d}{bcrypt\+Verify\+Password} (const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$password, const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$\hyperlink{tls_8h_a17d89840e7296c323504b31fc6359606}{hash})
+\begin{DoxyCompactList}\small\item\em Password verification function. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{bcrypt_8c_ab3b4d009d5e64d21ce40dd1f88ce735a}{bcrypt} (\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} cost, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$salt, const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$password, \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$\hyperlink{tls_8h_a17d89840e7296c323504b31fc6359606}{hash}, size\+\_\+t $\ast$hash\+Len)
+\begin{DoxyCompactList}\small\item\em bcrypt algorithm \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{bcrypt_8c_ac07fbfc2996e7a79cbd78c5c94925978}{eks\+Blowfish\+Setup} (\hyperlink{structBlowfishContext}{Blowfish\+Context} $\ast$context, \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} cost, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$salt, size\+\_\+t salt\+Len, const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$password, size\+\_\+t password\+Len)
+\begin{DoxyCompactList}\small\item\em Expensive key setup. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+bcrypt password hashing function 
+
+\hypertarget{pic32mz__ef__curiosity_8h_License}{}\subsection{License}\label{pic32mz__ef__curiosity_8h_License}
+S\+P\+D\+X-\/\+License-\/\+Identifier\+: G\+P\+L-\/2.\+0-\/or-\/later
+
+Copyright (C) 2010-\/2019 Oryx Embedded S\+A\+RL. All rights reserved.
+
+This file is part of Cyclone\+Crypto Open.
+
+This program is free software; you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+
+You should have received a copy of the G\+NU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-\/1301, U\+SA.
+
+\begin{DoxyAuthor}{Author}
+Oryx Embedded S\+A\+RL (www.\+oryx-\/embedded.\+com) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+9.\+6 
+\end{DoxyVersion}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{bcrypt_8c_afcdf5e66fd927a7f4cc64295acd20407}\label{bcrypt_8c_afcdf5e66fd927a7f4cc64295acd20407}} 
+\index{bcrypt.\+c@{bcrypt.\+c}!T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+\index{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}!bcrypt.\+c@{bcrypt.\+c}}
+\subsubsection{\texorpdfstring{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}{TRACE\_LEVEL}}
+{\footnotesize\ttfamily \#define T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL~\hyperlink{crypto__config_8h_a6afae3a9b63f9b55d979e667ee0e881d}{C\+R\+Y\+P\+T\+O\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+
+
+
+Definition at line 32 of file bcrypt.\+c.
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{bcrypt_8c_ab3b4d009d5e64d21ce40dd1f88ce735a}\label{bcrypt_8c_ab3b4d009d5e64d21ce40dd1f88ce735a}} 
+\index{bcrypt.\+c@{bcrypt.\+c}!bcrypt@{bcrypt}}
+\index{bcrypt@{bcrypt}!bcrypt.\+c@{bcrypt.\+c}}
+\subsubsection{\texorpdfstring{bcrypt()}{bcrypt()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} bcrypt (\begin{DoxyParamCaption}\item[{\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t}}]{cost,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{salt,  }\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{password,  }\item[{\hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{hash,  }\item[{size\+\_\+t $\ast$}]{hash\+Len }\end{DoxyParamCaption})}
+
+
+
+bcrypt algorithm 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em cost} & Key expansion iteration count as a power of two \\
+\hline
+\mbox{\tt in}  & {\em salt} & Random salt (16 bytes) \\
+\hline
+\mbox{\tt in}  & {\em password} & N\+U\+L\+L-\/terminated password to be encoded \\
+\hline
+\mbox{\tt out}  & {\em hash} & N\+U\+L\+L-\/terminated hash string \\
+\hline
+\mbox{\tt out}  & {\em hash\+Len} & Length of the hash string (optional parameter) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 158 of file bcrypt.\+c.
+
+
+\begin{DoxyCode}
+160 \{
+161    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+162    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+163    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+164    \textcolor{keywordtype}{size\_t} \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length};
+165    \hyperlink{structBlowfishContext}{BlowfishContext} *context;
+166    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} buffer[24];
+167 
+168    \textcolor{comment}{//Check parameters}
+169    \textcolor{keywordflow}{if}(salt == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || password == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || \hyperlink{tls_8h_a17d89840e7296c323504b31fc6359606}{hash} == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+170       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+171 
+172    \textcolor{comment}{//Allocate a memory buffer to hold the Blowfish context}
+173    context = \hyperlink{cyclone__crypto_2core_2crypto_8h_a48b53d16f66d31e5dcf82db3c1b882ba}{cryptoAllocMem}(\textcolor{keyword}{sizeof}(\hyperlink{structBlowfishContext}{BlowfishContext}));
+174 
+175    \textcolor{comment}{//Successful memory allocation?}
+176    \textcolor{keywordflow}{if}(context != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+177    \{
+178       \textcolor{comment}{//Calculate the length of the password (including the NULL-terminator byte)}
+179       length = \hyperlink{cyclone__crypto_2core_2crypto_8h_a60355e8a0b63bff69cedd877fc82c624}{cryptoStrlen}(password) + 1;
+180 
+181       \textcolor{comment}{//The key setup begins with a modified form of the standard Blowfish key}
+182       \textcolor{comment}{//setup, in which both the salt and password are used to set all subkeys}
+183       error = \hyperlink{bcrypt_8c_ac07fbfc2996e7a79cbd78c5c94925978}{eksBlowfishSetup}(context, cost, salt, 16, password, length);
+184 
+185       \textcolor{comment}{//Check status code}
+186       \textcolor{keywordflow}{if}(!error)
+187       \{
+188          \textcolor{comment}{//Initialize plaintext}
+189          \hyperlink{cyclone__crypto_2core_2crypto_8h_a6724616c4014bb7e21f2660bd7b88be8}{cryptoMemcpy}(buffer, \textcolor{stringliteral}{"OrpheanBeholderScryDoubt"}, 24);
+190 
+191          \textcolor{comment}{//Repeatedly encrypt the text "OrpheanBeholderScryDoubt" 64 times}
+192          \textcolor{keywordflow}{for}(i = 0; i < 64 && !error; i++)
+193          \{
+194             \textcolor{comment}{//Perform encryption using Blowfish in ECB mode}
+195             error = \hyperlink{ecb_8c_aa9991c83e48348b909f988b0525b5e58}{ecbEncrypt}(\hyperlink{blowfish_8h_af415af698497e1aa812995303b42b3ec}{BLOWFISH\_CIPHER\_ALGO}, context, buffer, buffer,
+       24);
+196          \}
+197       \}
+198 
+199       \textcolor{comment}{//Release Blowfish context}
+200       \hyperlink{cyclone__crypto_2core_2crypto_8h_ac8a223b176683db4e9eed4162774f870}{cryptoFreeMem}(context);
+201    \}
+202    \textcolor{keywordflow}{else}
+203    \{
+204       \textcolor{comment}{//Failed to allocate memory}
+205       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac0a554045048d2fb61387cf735676f69}{ERROR\_OUT\_OF\_MEMORY};
+206    \}
+207 
+208    \textcolor{comment}{//Check status code}
+209    \textcolor{keywordflow}{if}(!error)
+210    \{
+211       \textcolor{comment}{//bcrypt uses the $2a$ prefix in the hash string}
+212       length = \hyperlink{cyclone__crypto_2core_2crypto_8h_a617ddea230a7822ed867ff0542543cd2}{cryptoSprintf}(\hyperlink{tls_8h_a17d89840e7296c323504b31fc6359606}{hash}, \textcolor{stringliteral}{"$2a$%02u$"}, cost);
+213 
+214       \textcolor{comment}{//Concatenate the salt and the ciphertext}
+215       \hyperlink{radix64_8c_a44dce8adc254314bc8ba4d6acb98f315}{radix64Encode}(salt, 16, \hyperlink{tls_8h_a17d89840e7296c323504b31fc6359606}{hash} + length, &n);
+216       length += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+217       \hyperlink{radix64_8c_a44dce8adc254314bc8ba4d6acb98f315}{radix64Encode}(buffer, 23, \hyperlink{tls_8h_a17d89840e7296c323504b31fc6359606}{hash} + length, &n);
+218       length += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+219 
+220       \textcolor{comment}{//Return the length of the resulting hash string}
+221       \textcolor{keywordflow}{if}(hashLen != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+222       \{
+223          *hashLen = \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length};
+224       \}
+225    \}
+226 
+227    \textcolor{comment}{//Return status code}
+228    \textcolor{keywordflow}{return} error;
+229 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{bcrypt_8c_a9c35e9328e7d591164517d16dd64fd51}\label{bcrypt_8c_a9c35e9328e7d591164517d16dd64fd51}} 
+\index{bcrypt.\+c@{bcrypt.\+c}!bcrypt\+Hash\+Password@{bcrypt\+Hash\+Password}}
+\index{bcrypt\+Hash\+Password@{bcrypt\+Hash\+Password}!bcrypt.\+c@{bcrypt.\+c}}
+\subsubsection{\texorpdfstring{bcrypt\+Hash\+Password()}{bcryptHashPassword()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} bcrypt\+Hash\+Password (\begin{DoxyParamCaption}\item[{const \hyperlink{structPrngAlgo}{Prng\+Algo} $\ast$}]{prng\+Algo,  }\item[{void $\ast$}]{prng\+Context,  }\item[{\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t}}]{cost,  }\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{password,  }\item[{\hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{hash,  }\item[{size\+\_\+t $\ast$}]{hash\+Len }\end{DoxyParamCaption})}
+
+
+
+Password hashing function. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em prng\+Algo} & P\+R\+NG algorithm \\
+\hline
+\mbox{\tt in}  & {\em prng\+Context} & Pointer to the P\+R\+NG context \\
+\hline
+\mbox{\tt in}  & {\em cost} & Key expansion iteration count as a power of two \\
+\hline
+\mbox{\tt in}  & {\em password} & N\+U\+L\+L-\/terminated password to be encoded \\
+\hline
+\mbox{\tt out}  & {\em hash} & N\+U\+L\+L-\/terminated hash string \\
+\hline
+\mbox{\tt out}  & {\em hash\+Len} & Length of the hash string (optional parameter) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 55 of file bcrypt.\+c.
+
+
+\begin{DoxyCode}
+57 \{
+58    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+59    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} salt[16];
+60 
+61    \textcolor{comment}{//Check parameters}
+62    \textcolor{keywordflow}{if}(prngAlgo == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || prngContext == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || password == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} ||
+63       \hyperlink{tls_8h_a17d89840e7296c323504b31fc6359606}{hash} == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+64    \{
+65       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+66    \}
+67 
+68    \textcolor{comment}{//Generate a 16-byte random salt}
+69    error = prngAlgo->\hyperlink{structPrngAlgo_a079621740ef14faacfcd05b84c9036eb}{read}(prngContext, salt, \textcolor{keyword}{sizeof}(salt));
+70 
+71    \textcolor{comment}{//Check status code}
+72    \textcolor{keywordflow}{if}(!error)
+73    \{
+74       \textcolor{comment}{//Hash the password using bcrypt algorithm}
+75       error = \hyperlink{bcrypt_8c_ab3b4d009d5e64d21ce40dd1f88ce735a}{bcrypt}(cost, salt, password, \hyperlink{tls_8h_a17d89840e7296c323504b31fc6359606}{hash}, hashLen);
+76    \}
+77 
+78    \textcolor{comment}{//Return status code}
+79    \textcolor{keywordflow}{return} error;
+80 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{bcrypt_8c_a8d85d142aa3081f8bcac430618c5084d}\label{bcrypt_8c_a8d85d142aa3081f8bcac430618c5084d}} 
+\index{bcrypt.\+c@{bcrypt.\+c}!bcrypt\+Verify\+Password@{bcrypt\+Verify\+Password}}
+\index{bcrypt\+Verify\+Password@{bcrypt\+Verify\+Password}!bcrypt.\+c@{bcrypt.\+c}}
+\subsubsection{\texorpdfstring{bcrypt\+Verify\+Password()}{bcryptVerifyPassword()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} bcrypt\+Verify\+Password (\begin{DoxyParamCaption}\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{password,  }\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{hash }\end{DoxyParamCaption})}
+
+
+
+Password verification function. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em password} & N\+U\+L\+L-\/terminated password to be checked \\
+\hline
+\mbox{\tt in}  & {\em hash} & N\+U\+L\+L-\/terminated hash string \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 90 of file bcrypt.\+c.
+
+
+\begin{DoxyCode}
+91 \{
+92    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+93    \textcolor{keywordtype}{size\_t} i;
+94    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+95    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} cost;
+96    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} \hyperlink{web__socket_8h_a8a74907784be6c7786c2d060c8d7e10b}{mask};
+97    \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\_t} *\hyperlink{ndp_8h_a6519522ad9a6f45e7a8d25d31392a977}{p};
+98    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} salt[16];
+99    \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\_t} temp[\hyperlink{bcrypt_8h_a2d8f1265f741b235bc7f989497ce4aee}{BCRYPT\_HASH\_STRING\_LEN} + 1];
+100 
+101    \textcolor{comment}{//Check parameters}
+102    \textcolor{keywordflow}{if}(password == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || \hyperlink{tls_8h_a17d89840e7296c323504b31fc6359606}{hash} == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+103       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+104 
+105    \textcolor{comment}{//Check the length of the hash string}
+106    \textcolor{keywordflow}{if}(\hyperlink{cyclone__crypto_2core_2crypto_8h_a60355e8a0b63bff69cedd877fc82c624}{cryptoStrlen}(\hyperlink{tls_8h_a17d89840e7296c323504b31fc6359606}{hash}) != \hyperlink{bcrypt_8h_a2d8f1265f741b235bc7f989497ce4aee}{BCRYPT\_HASH\_STRING\_LEN})
+107       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca12537c62366b883bf1390ab32e516457}{ERROR\_INVALID\_PASSWORD};
+108 
+109    \textcolor{comment}{//bcrypt uses the $2a$ prefix in the hash string}
+110    \textcolor{keywordflow}{if}(\hyperlink{cyclone__crypto_2core_2crypto_8h_aad1b4995b60f205abd5d3f409e569a0c}{cryptoMemcmp}(\hyperlink{tls_8h_a17d89840e7296c323504b31fc6359606}{hash}, \textcolor{stringliteral}{"$2a$"}, 4))
+111       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca12537c62366b883bf1390ab32e516457}{ERROR\_INVALID\_PASSWORD};
+112 
+113    \textcolor{comment}{//Parse cost parameter}
+114    cost = \hyperlink{cyclone__crypto_2core_2crypto_8h_a06da550fc472f9d816aee5339dc1752e}{cryptoStrtoul}(\hyperlink{tls_8h_a17d89840e7296c323504b31fc6359606}{hash} + 4, &p, 10);
+115 
+116    \textcolor{comment}{//Malformed hash string?}
+117    \textcolor{keywordflow}{if}(p != (\hyperlink{tls_8h_a17d89840e7296c323504b31fc6359606}{hash} + 6) || *p != \textcolor{charliteral}{'$'})
+118       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca12537c62366b883bf1390ab32e516457}{ERROR\_INVALID\_PASSWORD};
+119 
+120    \textcolor{comment}{//Check the value of the cost parameter}
+121    \textcolor{keywordflow}{if}(cost < BCRYPT\_MIN\_COST || cost > \hyperlink{bcrypt_8h_ab834c85695cc2ddb32bacccb29797f24}{BCRYPT\_MAX\_COST})
+122       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca12537c62366b883bf1390ab32e516457}{ERROR\_INVALID\_PASSWORD};
+123 
+124    \textcolor{comment}{//Parse salt parameter}
+125    error = \hyperlink{radix64_8c_abf5b22c43598a2dff5c2949de736f73a}{radix64Decode}(\hyperlink{tls_8h_a17d89840e7296c323504b31fc6359606}{hash} + 7, 22, salt, &n);
+126    \textcolor{comment}{//Any error to report?}
+127    \textcolor{keywordflow}{if}(error)
+128       \textcolor{keywordflow}{return} error;
+129 
+130    \textcolor{comment}{//Hash the password using bcrypt algorithm}
+131    error = \hyperlink{bcrypt_8c_ab3b4d009d5e64d21ce40dd1f88ce735a}{bcrypt}(cost, salt, password, temp, &n);
+132    \textcolor{comment}{//Any error to report?}
+133    \textcolor{keywordflow}{if}(error)
+134       \textcolor{keywordflow}{return} error;
+135 
+136    \textcolor{comment}{//The calculated string is bitwise compared to the hash string. The}
+137    \textcolor{comment}{//password is correct if and only if the strings match}
+138    \textcolor{keywordflow}{for}(mask = 0, i = 0; i < \hyperlink{bcrypt_8h_a2d8f1265f741b235bc7f989497ce4aee}{BCRYPT\_HASH\_STRING\_LEN}; i++)
+139    \{
+140       mask |= temp[i] ^ \hyperlink{tls_8h_a17d89840e7296c323504b31fc6359606}{hash}[i];
+141    \}
+142 
+143    \textcolor{comment}{//Return status code}
+144    \textcolor{keywordflow}{return} (mask == 0) ? \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR} : \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca12537c62366b883bf1390ab32e516457}{ERROR\_INVALID\_PASSWORD};
+145 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{bcrypt_8c_ac07fbfc2996e7a79cbd78c5c94925978}\label{bcrypt_8c_ac07fbfc2996e7a79cbd78c5c94925978}} 
+\index{bcrypt.\+c@{bcrypt.\+c}!eks\+Blowfish\+Setup@{eks\+Blowfish\+Setup}}
+\index{eks\+Blowfish\+Setup@{eks\+Blowfish\+Setup}!bcrypt.\+c@{bcrypt.\+c}}
+\subsubsection{\texorpdfstring{eks\+Blowfish\+Setup()}{eksBlowfishSetup()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} eks\+Blowfish\+Setup (\begin{DoxyParamCaption}\item[{\hyperlink{structBlowfishContext}{Blowfish\+Context} $\ast$}]{context,  }\item[{\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t}}]{cost,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{salt,  }\item[{size\+\_\+t}]{salt\+Len,  }\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{password,  }\item[{size\+\_\+t}]{password\+Len }\end{DoxyParamCaption})}
+
+
+
+Expensive key setup. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the Blowfish context \\
+\hline
+\mbox{\tt in}  & {\em cost} & Key expansion iteration count as a power of 2 \\
+\hline
+\mbox{\tt in}  & {\em salt} & Random salt \\
+\hline
+\mbox{\tt in}  & {\em salt\+Len} & Length of the random salt, in bytes \\
+\hline
+\mbox{\tt in}  & {\em password} & N\+U\+L\+L-\/terminated password to be encoded \\
+\hline
+\mbox{\tt in}  & {\em password\+Len} & Length of the password, in bytes \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 243 of file bcrypt.\+c.
+
+
+\begin{DoxyCode}
+246 \{
+247    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+248    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} i;
+249    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+250 
+251    \textcolor{comment}{//Check the value of the cost parameter}
+252    \textcolor{keywordflow}{if}(cost < BCRYPT\_MIN\_COST || cost > \hyperlink{bcrypt_8h_ab834c85695cc2ddb32bacccb29797f24}{BCRYPT\_MAX\_COST})
+253       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+254 
+255    \textcolor{comment}{//The cost parameter specifies a key expansion iteration count as a power}
+256    \textcolor{comment}{//of two}
+257    n = 1U << cost;
+258 
+259    \textcolor{comment}{//Initialize Blowfish state}
+260    error = \hyperlink{blowfish_8c_a394433d9ac7e83d189df314cd47f3b67}{blowfishInitState}(context);
+261 
+262    \textcolor{comment}{//Check status code}
+263    \textcolor{keywordflow}{if}(!error)
+264    \{
+265       \textcolor{comment}{//Perform the first key expansion}
+266       error = \hyperlink{blowfish_8c_ad348348e42675b5bcc82be2585f9451f}{blowfishExpandKey}(context, salt, saltLen, (
+      \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *) password,
+267          passwordLen);
+268    \}
+269 
+270    \textcolor{comment}{//Check status code}
+271    \textcolor{keywordflow}{if}(!error)
+272    \{
+273       \textcolor{comment}{//Iterate as many times as desired}
+274       \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n}; i++)
+275       \{
+276          \textcolor{comment}{//Perform key expansion with password}
+277          error = \hyperlink{blowfish_8c_ad348348e42675b5bcc82be2585f9451f}{blowfishExpandKey}(context, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, 0, (
+      \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *) password,
+278             passwordLen);
+279          \textcolor{comment}{//Any error to report?}
+280          \textcolor{keywordflow}{if}(error)
+281             \textcolor{keywordflow}{break};
+282 
+283          \textcolor{comment}{//Perform key expansion with salt}
+284          error = \hyperlink{blowfish_8c_ad348348e42675b5bcc82be2585f9451f}{blowfishExpandKey}(context, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, 0, salt, saltLen);
+285          \textcolor{comment}{//Any error to report?}
+286          \textcolor{keywordflow}{if}(error)
+287             \textcolor{keywordflow}{break};
+288       \}
+289    \}
+290 
+291    \textcolor{comment}{//Return status code}
+292    \textcolor{keywordflow}{return} error;
+293 \}
+\end{DoxyCode}

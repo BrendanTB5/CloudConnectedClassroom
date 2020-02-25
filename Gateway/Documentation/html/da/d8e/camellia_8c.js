@@ -1,0 +1,27 @@
+var camellia_8c =
+[
+    [ "CAMELLIA_F", "da/d8e/camellia_8c.html#a3b6df36231572b90cfff7e0175a1a11c", null ],
+    [ "CAMELLIA_FL", "da/d8e/camellia_8c.html#a8e81bc8ddfc0612e79a9912b610b1771", null ],
+    [ "CAMELLIA_INV_FL", "da/d8e/camellia_8c.html#accfd57a28293d2b24735a988ac847bba", null ],
+    [ "CAMELLIA_P", "da/d8e/camellia_8c.html#af153390a98f074fc772919b138cf895a", null ],
+    [ "CAMELLIA_ROUND", "da/d8e/camellia_8c.html#a154e5792105e99fa242318f6ac8b82e0", null ],
+    [ "CAMELLIA_S", "da/d8e/camellia_8c.html#af283305b6282e28936036ab7a51a90d3", null ],
+    [ "KA", "da/d8e/camellia_8c.html#ac20b871b737ec964c3a7c440d411f969", null ],
+    [ "KB", "da/d8e/camellia_8c.html#a1841fd1a462d245d8c73dce55e2f45da", null ],
+    [ "KL", "da/d8e/camellia_8c.html#a81a7c36ecc75b2f02c2b6d2d6d49778e", null ],
+    [ "KR", "da/d8e/camellia_8c.html#a76f9425f5a9151312ae472a45a03b60c", null ],
+    [ "L", "da/d8e/camellia_8c.html#aa73214aa5f2f94f63d90bb4e3d99fe53", null ],
+    [ "R", "da/d8e/camellia_8c.html#a5c71a5e59a53413cd6c270266d63b031", null ],
+    [ "TRACE_LEVEL", "da/d8e/camellia_8c.html#afcdf5e66fd927a7f4cc64295acd20407", null ],
+    [ "camelliaDecryptBlock", "da/d8e/camellia_8c.html#a0312c04b9c38d4e956ef0f7baa5a2703", null ],
+    [ "camelliaEncryptBlock", "da/d8e/camellia_8c.html#ad3a28aca85720cfede64b88409905fc3", null ],
+    [ "camelliaInit", "da/d8e/camellia_8c.html#a40f037ff4c0ba16da488c8956f737eb8", null ],
+    [ "camelliaCipherAlgo", "da/d8e/camellia_8c.html#a593a58219e849b6e74672d970bd46a1a", null ],
+    [ "ks1", "da/d8e/camellia_8c.html#a816290e7a13c6b54677e41417c382765", null ],
+    [ "ks2", "da/d8e/camellia_8c.html#a9d5a54f5ab87f285a18ad2d08b0ae091", null ],
+    [ "sbox1", "da/d8e/camellia_8c.html#adf62d61dafd707b3ac689d2900d5bdb4", null ],
+    [ "sbox2", "da/d8e/camellia_8c.html#a2f8db1df67c9853982d5d3ac57c938a8", null ],
+    [ "sbox3", "da/d8e/camellia_8c.html#a008d0e4d49b9bc49b80b7d632e42c6d6", null ],
+    [ "sbox4", "da/d8e/camellia_8c.html#aa1458efd8027e8ee35d50d9cff5e7186", null ],
+    [ "sigma", "da/d8e/camellia_8c.html#a61428f6acc02d966c9771f969b643ec0", null ]
+];

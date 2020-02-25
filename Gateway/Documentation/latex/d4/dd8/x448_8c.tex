@@ -1,0 +1,205 @@
+\hypertarget{x448_8c}{}\section{cyclone\+\_\+crypto/ecc/x448.c File Reference}
+\label{x448_8c}\index{cyclone\+\_\+crypto/ecc/x448.\+c@{cyclone\+\_\+crypto/ecc/x448.\+c}}
+
+
+X448 function implementation.  
+
+
+{\ttfamily \#include \char`\"{}core/crypto.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ecc/ec\+\_\+curves.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ecc/curve448.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ecc/x448.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}debug.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{x448_8c_afcdf5e66fd927a7f4cc64295acd20407}{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}~\hyperlink{crypto__config_8h_a6afae3a9b63f9b55d979e667ee0e881d}{C\+R\+Y\+P\+T\+O\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{x448_8c_a6a03d7671dfcb72f00572d8fba52c91a}{x448} (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{ndp_8h_a4c5c6ceb8ed33456261fa907136e0c3a}{r}, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{sha512_8c_a3934111e8801bd86b261f4bac043efa6}{k}, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$u)
+\begin{DoxyCompactList}\small\item\em X448 function (scalar multiplication on Curve448) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+X448 function implementation. 
+
+\hypertarget{pic32mz__ef__curiosity_8h_License}{}\subsection{License}\label{pic32mz__ef__curiosity_8h_License}
+S\+P\+D\+X-\/\+License-\/\+Identifier\+: G\+P\+L-\/2.\+0-\/or-\/later
+
+Copyright (C) 2010-\/2019 Oryx Embedded S\+A\+RL. All rights reserved.
+
+This file is part of Cyclone\+Crypto Open.
+
+This program is free software; you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+
+You should have received a copy of the G\+NU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-\/1301, U\+SA.
+
+\begin{DoxyAuthor}{Author}
+Oryx Embedded S\+A\+RL (www.\+oryx-\/embedded.\+com) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+9.\+6 
+\end{DoxyVersion}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{x448_8c_afcdf5e66fd927a7f4cc64295acd20407}\label{x448_8c_afcdf5e66fd927a7f4cc64295acd20407}} 
+\index{x448.\+c@{x448.\+c}!T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+\index{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}!x448.\+c@{x448.\+c}}
+\subsubsection{\texorpdfstring{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}{TRACE\_LEVEL}}
+{\footnotesize\ttfamily \#define T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL~\hyperlink{crypto__config_8h_a6afae3a9b63f9b55d979e667ee0e881d}{C\+R\+Y\+P\+T\+O\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+
+
+
+Definition at line 32 of file x448.\+c.
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{x448_8c_a6a03d7671dfcb72f00572d8fba52c91a}\label{x448_8c_a6a03d7671dfcb72f00572d8fba52c91a}} 
+\index{x448.\+c@{x448.\+c}!x448@{x448}}
+\index{x448@{x448}!x448.\+c@{x448.\+c}}
+\subsubsection{\texorpdfstring{x448()}{x448()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} x448 (\begin{DoxyParamCaption}\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{r,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{k,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{u }\end{DoxyParamCaption})}
+
+
+
+X448 function (scalar multiplication on Curve448) 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em r} & Output u-\/coordinate \\
+\hline
+\mbox{\tt in}  & {\em k} & Input scalar \\
+\hline
+\mbox{\tt in}  & {\em u} & Input u-\/coordinate \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 53 of file x448.\+c.
+
+
+\begin{DoxyCode}
+54 \{
+55    \hyperlink{compiler__port_8h_a022c65af7f6c8d3947e8a37d64db6ad6}{int\_t} i;
+56    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} \hyperlink{dtls__misc_8h_ab590318ac859d0e57e15c3dd6c62a605}{b};
+57    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} swap;
+58    \hyperlink{structX448State}{X448State} *state;
+59 
+60    \textcolor{comment}{//Check parameters}
+61    \textcolor{keywordflow}{if}(\hyperlink{ndp_8h_a4c5c6ceb8ed33456261fa907136e0c3a}{r} == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || \hyperlink{md5_8c_af11ea3cdbca7345eb6a4a8ac5ce0434d}{k} == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || u == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+62       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+63 
+64    \textcolor{comment}{//Allocate working state}
+65    state = \hyperlink{cyclone__crypto_2core_2crypto_8h_a48b53d16f66d31e5dcf82db3c1b882ba}{cryptoAllocMem}(\textcolor{keyword}{sizeof}(\hyperlink{structX448State}{X448State}));
+66    \textcolor{comment}{//Failed to allocate memory?}
+67    \textcolor{keywordflow}{if}(state == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+68       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac0a554045048d2fb61387cf735676f69}{ERROR\_OUT\_OF\_MEMORY};
+69 
+70    \textcolor{comment}{//Copy scalar}
+71    \hyperlink{curve448_8c_adefb9b763312f68025f5607420aed329}{curve448Import}(state->\hyperlink{structX448State_a596780b22e97d281d46127df4e9aed1f}{k}, \hyperlink{md5_8c_af11ea3cdbca7345eb6a4a8ac5ce0434d}{k});
+72 
+73    \textcolor{comment}{//Set the two least significant bits of the first byte to 0, and the most}
+74    \textcolor{comment}{//significant bit of the last byte to 1}
+75    state->\hyperlink{structX448State_a596780b22e97d281d46127df4e9aed1f}{k}[0] &= 0xFFFFFFFC;
+76    state->\hyperlink{structX448State_a596780b22e97d281d46127df4e9aed1f}{k}[13] |= 0x80000000;
+77 
+78    \textcolor{comment}{//Copy input u-coordinate}
+79    \hyperlink{curve448_8c_adefb9b763312f68025f5607420aed329}{curve448Import}(state->\hyperlink{structX448State_a7e8c8bcd6718ccf02616c415eb1d8a8c}{u}, u);
+80 
+81    \textcolor{comment}{//Implementations must accept non-canonical values and process them as}
+82    \textcolor{comment}{//if they had been reduced modulo the field prime (refer to RFC 7748,}
+83    \textcolor{comment}{//section 5)}
+84    \hyperlink{curve448_8c_a95420270ecd754f541508d3142c041f5}{curve448Red}(state->\hyperlink{structX448State_a7e8c8bcd6718ccf02616c415eb1d8a8c}{u}, state->\hyperlink{structX448State_a7e8c8bcd6718ccf02616c415eb1d8a8c}{u}, 0);
+85 
+86    \textcolor{comment}{//Set X1 = 1}
+87    \hyperlink{curve448_8c_a3ac13c880f381f5349d061bd171bef60}{curve448SetInt}(state->\hyperlink{structX448State_a97014ace9f623a1ca53a7997a9c3651d}{x1}, 1);
+88    \textcolor{comment}{//Set Z1 = 0}
+89    \hyperlink{curve448_8c_a3ac13c880f381f5349d061bd171bef60}{curve448SetInt}(state->\hyperlink{structX448State_a8575219540e051b3de1cbf809e1e27ac}{z1}, 0);
+90    \textcolor{comment}{//Set X2 = U}
+91    \hyperlink{curve448_8c_a94b95a2737f6ff5016cde1280d48ee77}{curve448Copy}(state->\hyperlink{structX448State_a5c14a6c35df396ac024a2a9a4071f884}{x2}, state->\hyperlink{structX448State_a7e8c8bcd6718ccf02616c415eb1d8a8c}{u});
+92    \textcolor{comment}{//Set Z2 = 1}
+93    \hyperlink{curve448_8c_a3ac13c880f381f5349d061bd171bef60}{curve448SetInt}(state->\hyperlink{structX448State_a5347ad257da43817a6c521a0a383eb14}{z2}, 1);
+94 
+95    \textcolor{comment}{//Set swap = 0}
+96    swap = 0;
+97 
+98    \textcolor{comment}{//Montgomery ladder}
+99    \textcolor{keywordflow}{for}(i = \hyperlink{curve448_8h_ab6a4b53cd7663324ac1ef0e21f1cd7fc}{CURVE448\_BIT\_LEN} - 1; i >= 0; i--)
+100    \{
+101       \textcolor{comment}{//The scalar is processed in a left-to-right fashion}
+102       b = (state->\hyperlink{structX448State_a596780b22e97d281d46127df4e9aed1f}{k}[i / 32] >> (i % 32)) & 1;
+103 
+104       \textcolor{comment}{//Conditional swap}
+105       \hyperlink{curve448_8c_a89107f35ede21cc517dd452a4730072f}{curve448Swap}(state->\hyperlink{structX448State_a97014ace9f623a1ca53a7997a9c3651d}{x1}, state->\hyperlink{structX448State_a5c14a6c35df396ac024a2a9a4071f884}{x2}, swap ^ b);
+106       \hyperlink{curve448_8c_a89107f35ede21cc517dd452a4730072f}{curve448Swap}(state->\hyperlink{structX448State_a8575219540e051b3de1cbf809e1e27ac}{z1}, state->\hyperlink{structX448State_a5347ad257da43817a6c521a0a383eb14}{z2}, swap ^ b);
+107 
+108       \textcolor{comment}{//Save current bit value}
+109       swap = \hyperlink{dtls__misc_8h_ab590318ac859d0e57e15c3dd6c62a605}{b};
+110 
+111       \textcolor{comment}{//Compute T1 = X2 + Z2}
+112       \hyperlink{curve448_8c_a95607469c0c0c75d84234a41ad3b2987}{curve448Add}(state->\hyperlink{structX448State_a92dd1b576748a0dc26a0ed15a8ca3cd1}{t1}, state->\hyperlink{structX448State_a5c14a6c35df396ac024a2a9a4071f884}{x2}, state->\hyperlink{structX448State_a5347ad257da43817a6c521a0a383eb14}{z2});
+113       \textcolor{comment}{//Compute X2 = X2 - Z2}
+114       \hyperlink{curve448_8c_a60277698c2d05decaa3755fcf2e6dee8}{curve448Sub}(state->\hyperlink{structX448State_a5c14a6c35df396ac024a2a9a4071f884}{x2}, state->\hyperlink{structX448State_a5c14a6c35df396ac024a2a9a4071f884}{x2}, state->\hyperlink{structX448State_a5347ad257da43817a6c521a0a383eb14}{z2});
+115       \textcolor{comment}{//Compute Z2 = X1 + Z1}
+116       \hyperlink{curve448_8c_a95607469c0c0c75d84234a41ad3b2987}{curve448Add}(state->\hyperlink{structX448State_a5347ad257da43817a6c521a0a383eb14}{z2}, state->\hyperlink{structX448State_a97014ace9f623a1ca53a7997a9c3651d}{x1}, state->\hyperlink{structX448State_a8575219540e051b3de1cbf809e1e27ac}{z1});
+117       \textcolor{comment}{//Compute X1 = X1 - Z1}
+118       \hyperlink{curve448_8c_a60277698c2d05decaa3755fcf2e6dee8}{curve448Sub}(state->\hyperlink{structX448State_a97014ace9f623a1ca53a7997a9c3651d}{x1}, state->\hyperlink{structX448State_a97014ace9f623a1ca53a7997a9c3651d}{x1}, state->\hyperlink{structX448State_a8575219540e051b3de1cbf809e1e27ac}{z1});
+119       \textcolor{comment}{//Compute T1 = T1 * X1}
+120       \hyperlink{curve448_8c_a9e465ebba8466bf0c71c08fb4e8c5e7d}{curve448Mul}(state->\hyperlink{structX448State_a92dd1b576748a0dc26a0ed15a8ca3cd1}{t1}, state->\hyperlink{structX448State_a92dd1b576748a0dc26a0ed15a8ca3cd1}{t1}, state->\hyperlink{structX448State_a97014ace9f623a1ca53a7997a9c3651d}{x1});
+121       \textcolor{comment}{//Compute X2 = X2 * Z2}
+122       \hyperlink{curve448_8c_a9e465ebba8466bf0c71c08fb4e8c5e7d}{curve448Mul}(state->\hyperlink{structX448State_a5c14a6c35df396ac024a2a9a4071f884}{x2}, state->\hyperlink{structX448State_a5c14a6c35df396ac024a2a9a4071f884}{x2}, state->\hyperlink{structX448State_a5347ad257da43817a6c521a0a383eb14}{z2});
+123       \textcolor{comment}{//Compute Z2 = Z2 * Z2}
+124       \hyperlink{curve448_8c_aef5f312be16d281f6106adb9446c4eeb}{curve448Sqr}(state->\hyperlink{structX448State_a5347ad257da43817a6c521a0a383eb14}{z2}, state->\hyperlink{structX448State_a5347ad257da43817a6c521a0a383eb14}{z2});
+125       \textcolor{comment}{//Compute X1 = X1 * X1}
+126       \hyperlink{curve448_8c_aef5f312be16d281f6106adb9446c4eeb}{curve448Sqr}(state->\hyperlink{structX448State_a97014ace9f623a1ca53a7997a9c3651d}{x1}, state->\hyperlink{structX448State_a97014ace9f623a1ca53a7997a9c3651d}{x1});
+127       \textcolor{comment}{//Compute T2 = Z2 - X1}
+128       \hyperlink{curve448_8c_a60277698c2d05decaa3755fcf2e6dee8}{curve448Sub}(state->\hyperlink{structX448State_a07f88e49f9a84b704202974ecfd4c190}{t2}, state->\hyperlink{structX448State_a5347ad257da43817a6c521a0a383eb14}{z2}, state->\hyperlink{structX448State_a97014ace9f623a1ca53a7997a9c3651d}{x1});
+129       \textcolor{comment}{//Compute Z1 = T2 * a24}
+130       \hyperlink{curve448_8c_a5c6e67973c3ef80241ddd2d6b06ef7c5}{curve448MulInt}(state->\hyperlink{structX448State_a8575219540e051b3de1cbf809e1e27ac}{z1}, state->\hyperlink{structX448State_a07f88e49f9a84b704202974ecfd4c190}{t2}, \hyperlink{curve448_8h_a8d4b5b7d9953ecd89ccb7c94215f0807}{CURVE448\_A24});
+131       \textcolor{comment}{//Compute Z1 = Z1 + X1}
+132       \hyperlink{curve448_8c_a95607469c0c0c75d84234a41ad3b2987}{curve448Add}(state->\hyperlink{structX448State_a8575219540e051b3de1cbf809e1e27ac}{z1}, state->\hyperlink{structX448State_a8575219540e051b3de1cbf809e1e27ac}{z1}, state->\hyperlink{structX448State_a97014ace9f623a1ca53a7997a9c3651d}{x1});
+133       \textcolor{comment}{//Compute Z1 = Z1 * T2}
+134       \hyperlink{curve448_8c_a9e465ebba8466bf0c71c08fb4e8c5e7d}{curve448Mul}(state->\hyperlink{structX448State_a8575219540e051b3de1cbf809e1e27ac}{z1}, state->\hyperlink{structX448State_a8575219540e051b3de1cbf809e1e27ac}{z1}, state->\hyperlink{structX448State_a07f88e49f9a84b704202974ecfd4c190}{t2});
+135       \textcolor{comment}{//Compute X1 = X1 * Z2}
+136       \hyperlink{curve448_8c_a9e465ebba8466bf0c71c08fb4e8c5e7d}{curve448Mul}(state->\hyperlink{structX448State_a97014ace9f623a1ca53a7997a9c3651d}{x1}, state->\hyperlink{structX448State_a97014ace9f623a1ca53a7997a9c3651d}{x1}, state->\hyperlink{structX448State_a5347ad257da43817a6c521a0a383eb14}{z2});
+137       \textcolor{comment}{//Compute Z2 = T1 - X2}
+138       \hyperlink{curve448_8c_a60277698c2d05decaa3755fcf2e6dee8}{curve448Sub}(state->\hyperlink{structX448State_a5347ad257da43817a6c521a0a383eb14}{z2}, state->\hyperlink{structX448State_a92dd1b576748a0dc26a0ed15a8ca3cd1}{t1}, state->\hyperlink{structX448State_a5c14a6c35df396ac024a2a9a4071f884}{x2});
+139       \textcolor{comment}{//Compute Z2 = Z2 * Z2}
+140       \hyperlink{curve448_8c_aef5f312be16d281f6106adb9446c4eeb}{curve448Sqr}(state->\hyperlink{structX448State_a5347ad257da43817a6c521a0a383eb14}{z2}, state->\hyperlink{structX448State_a5347ad257da43817a6c521a0a383eb14}{z2});
+141       \textcolor{comment}{//Compute Z2 = Z2 * U}
+142       \hyperlink{curve448_8c_a9e465ebba8466bf0c71c08fb4e8c5e7d}{curve448Mul}(state->\hyperlink{structX448State_a5347ad257da43817a6c521a0a383eb14}{z2}, state->\hyperlink{structX448State_a5347ad257da43817a6c521a0a383eb14}{z2}, state->\hyperlink{structX448State_a7e8c8bcd6718ccf02616c415eb1d8a8c}{u});
+143       \textcolor{comment}{//Compute X2 = X2 + T1}
+144       \hyperlink{curve448_8c_a95607469c0c0c75d84234a41ad3b2987}{curve448Add}(state->\hyperlink{structX448State_a5c14a6c35df396ac024a2a9a4071f884}{x2}, state->\hyperlink{structX448State_a5c14a6c35df396ac024a2a9a4071f884}{x2}, state->\hyperlink{structX448State_a92dd1b576748a0dc26a0ed15a8ca3cd1}{t1});
+145       \textcolor{comment}{//Compute X2 = X2 * X2}
+146       \hyperlink{curve448_8c_aef5f312be16d281f6106adb9446c4eeb}{curve448Sqr}(state->\hyperlink{structX448State_a5c14a6c35df396ac024a2a9a4071f884}{x2}, state->\hyperlink{structX448State_a5c14a6c35df396ac024a2a9a4071f884}{x2});
+147    \}
+148 
+149    \textcolor{comment}{//Conditional swap}
+150    \hyperlink{curve448_8c_a89107f35ede21cc517dd452a4730072f}{curve448Swap}(state->\hyperlink{structX448State_a97014ace9f623a1ca53a7997a9c3651d}{x1}, state->\hyperlink{structX448State_a5c14a6c35df396ac024a2a9a4071f884}{x2}, swap);
+151    \hyperlink{curve448_8c_a89107f35ede21cc517dd452a4730072f}{curve448Swap}(state->\hyperlink{structX448State_a8575219540e051b3de1cbf809e1e27ac}{z1}, state->\hyperlink{structX448State_a5347ad257da43817a6c521a0a383eb14}{z2}, swap);
+152 
+153    \textcolor{comment}{//Retrieve affine representation}
+154    \hyperlink{curve448_8c_ac7719f974f4b271e3571760807e24cde}{curve448Inv}(state->\hyperlink{structX448State_a7e8c8bcd6718ccf02616c415eb1d8a8c}{u}, state->\hyperlink{structX448State_a8575219540e051b3de1cbf809e1e27ac}{z1});
+155    \hyperlink{curve448_8c_a9e465ebba8466bf0c71c08fb4e8c5e7d}{curve448Mul}(state->\hyperlink{structX448State_a7e8c8bcd6718ccf02616c415eb1d8a8c}{u}, state->\hyperlink{structX448State_a7e8c8bcd6718ccf02616c415eb1d8a8c}{u}, state->\hyperlink{structX448State_a97014ace9f623a1ca53a7997a9c3651d}{x1});
+156 
+157    \textcolor{comment}{//Copy output u-coordinate}
+158    \hyperlink{curve448_8c_a9039eeaa95f929f0cc5cf5c4120dfac0}{curve448Export}(state->\hyperlink{structX448State_a7e8c8bcd6718ccf02616c415eb1d8a8c}{u}, \hyperlink{ndp_8h_a4c5c6ceb8ed33456261fa907136e0c3a}{r});
+159 
+160    \textcolor{comment}{//Erase working state}
+161    \hyperlink{cyclone__crypto_2core_2crypto_8h_ad4465436e4ff353300fba4896012e18b}{cryptoMemset}(state, 0, \textcolor{keyword}{sizeof}(\hyperlink{structX448State}{X448State}));
+162    \textcolor{comment}{//Release working state}
+163    \hyperlink{cyclone__crypto_2core_2crypto_8h_ac8a223b176683db4e9eed4162774f870}{cryptoFreeMem}(state);
+164 
+165    \textcolor{comment}{//Successful processing}
+166    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+167 \}
+\end{DoxyCode}

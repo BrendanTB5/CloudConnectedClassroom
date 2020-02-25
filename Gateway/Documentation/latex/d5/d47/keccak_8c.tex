@@ -1,0 +1,661 @@
+\hypertarget{keccak_8c}{}\section{cyclone\+\_\+crypto/xof/keccak.c File Reference}
+\label{keccak_8c}\index{cyclone\+\_\+crypto/xof/keccak.\+c@{cyclone\+\_\+crypto/xof/keccak.\+c}}
+
+
+Keccak sponge function.  
+
+
+{\ttfamily \#include \char`\"{}core/crypto.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}xof/keccak.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{keccak_8c_afcdf5e66fd927a7f4cc64295acd20407}{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}~\hyperlink{crypto__config_8h_a6afae3a9b63f9b55d979e667ee0e881d}{C\+R\+Y\+P\+T\+O\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{keccak_8c_a77c7f2850d4221b642d01ee5eec9a240}{theta} (\hyperlink{keccak_8h_ad0c0a8baa1f82943a57b85bc3dfd3abc}{keccak\+\_\+lane\+\_\+t} \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}\mbox{[}5\mbox{]}\mbox{[}5\mbox{]})
+\begin{DoxyCompactList}\small\item\em Apply theta transformation. \end{DoxyCompactList}\item 
+static void \hyperlink{keccak_8c_a26fcaaf85e4181b40d296156901d2c22}{rho} (\hyperlink{keccak_8h_ad0c0a8baa1f82943a57b85bc3dfd3abc}{keccak\+\_\+lane\+\_\+t} \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}\mbox{[}5\mbox{]}\mbox{[}5\mbox{]})
+\begin{DoxyCompactList}\small\item\em Apply rho transformation. \end{DoxyCompactList}\item 
+static void \hyperlink{keccak_8c_a2afd6eb93c8ee23f157c4d81988811cc}{pi} (\hyperlink{keccak_8h_ad0c0a8baa1f82943a57b85bc3dfd3abc}{keccak\+\_\+lane\+\_\+t} \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}\mbox{[}5\mbox{]}\mbox{[}5\mbox{]})
+\begin{DoxyCompactList}\small\item\em Apply pi transformation. \end{DoxyCompactList}\item 
+static void \hyperlink{keccak_8c_a877780b67a485dd6f45199657ed248a6}{chi} (\hyperlink{keccak_8h_ad0c0a8baa1f82943a57b85bc3dfd3abc}{keccak\+\_\+lane\+\_\+t} \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}\mbox{[}5\mbox{]}\mbox{[}5\mbox{]})
+\begin{DoxyCompactList}\small\item\em Apply chi transformation. \end{DoxyCompactList}\item 
+static void \hyperlink{keccak_8c_a9f89168df466f1595e38bcc88a94b442}{iota} (\hyperlink{keccak_8h_ad0c0a8baa1f82943a57b85bc3dfd3abc}{keccak\+\_\+lane\+\_\+t} \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}\mbox{[}5\mbox{]}\mbox{[}5\mbox{]}, \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} index)
+\begin{DoxyCompactList}\small\item\em Apply iota transformation. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{keccak_8c_a07edc15e682ac1cd05b13dca6eb22aa0}{keccak\+Init} (\hyperlink{structKeccakContext}{Keccak\+Context} $\ast$context, \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} capacity)
+\begin{DoxyCompactList}\small\item\em Initialize Keccak context. \end{DoxyCompactList}\item 
+void \hyperlink{keccak_8c_a21ebb9748bcf8267acd81c8a870e6868}{keccak\+Absorb} (\hyperlink{structKeccakContext}{Keccak\+Context} $\ast$context, const void $\ast$input, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length})
+\begin{DoxyCompactList}\small\item\em Absorb data. \end{DoxyCompactList}\item 
+void \hyperlink{keccak_8c_a195e35ca81dc05a04dd7d264857658b9}{keccak\+Final} (\hyperlink{structKeccakContext}{Keccak\+Context} $\ast$context, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} pad)
+\begin{DoxyCompactList}\small\item\em Finish absorbing phase. \end{DoxyCompactList}\item 
+void \hyperlink{keccak_8c_a3592f8e7403386f61f59a9d446f5e6ad}{keccak\+Squeeze} (\hyperlink{structKeccakContext}{Keccak\+Context} $\ast$context, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$output, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length})
+\begin{DoxyCompactList}\small\item\em Extract data from the squeezing phase. \end{DoxyCompactList}\item 
+void \hyperlink{keccak_8c_a8a31781f7158b56f47f077f72ffc19e5}{keccak\+Permut\+Block} (\hyperlink{structKeccakContext}{Keccak\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Block permutation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static const \hyperlink{keccak_8h_ad0c0a8baa1f82943a57b85bc3dfd3abc}{keccak\+\_\+lane\+\_\+t} \hyperlink{keccak_8c_ae25a5dcd76fe0f701a8730f82edbf26d}{rc} \mbox{[}\hyperlink{keccak_8h_a317fd0868ad1885f05a1edadffc7b57e}{K\+E\+C\+C\+A\+K\+\_\+\+NR}\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Keccak sponge function. 
+
+\hypertarget{pic32mz__ef__curiosity_8h_License}{}\subsection{License}\label{pic32mz__ef__curiosity_8h_License}
+S\+P\+D\+X-\/\+License-\/\+Identifier\+: G\+P\+L-\/2.\+0-\/or-\/later
+
+Copyright (C) 2010-\/2019 Oryx Embedded S\+A\+RL. All rights reserved.
+
+This file is part of Cyclone\+Crypto Open.
+
+This program is free software; you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+
+You should have received a copy of the G\+NU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-\/1301, U\+SA.
+
+\begin{DoxyAuthor}{Author}
+Oryx Embedded S\+A\+RL (www.\+oryx-\/embedded.\+com) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+9.\+6 
+\end{DoxyVersion}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{keccak_8c_afcdf5e66fd927a7f4cc64295acd20407}\label{keccak_8c_afcdf5e66fd927a7f4cc64295acd20407}} 
+\index{keccak.\+c@{keccak.\+c}!T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+\index{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}!keccak.\+c@{keccak.\+c}}
+\subsubsection{\texorpdfstring{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}{TRACE\_LEVEL}}
+{\footnotesize\ttfamily \#define T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL~\hyperlink{crypto__config_8h_a6afae3a9b63f9b55d979e667ee0e881d}{C\+R\+Y\+P\+T\+O\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+
+
+
+Definition at line 32 of file keccak.\+c.
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{keccak_8c_a877780b67a485dd6f45199657ed248a6}\label{keccak_8c_a877780b67a485dd6f45199657ed248a6}} 
+\index{keccak.\+c@{keccak.\+c}!chi@{chi}}
+\index{chi@{chi}!keccak.\+c@{keccak.\+c}}
+\subsubsection{\texorpdfstring{chi()}{chi()}}
+{\footnotesize\ttfamily static void chi (\begin{DoxyParamCaption}\item[{\hyperlink{keccak_8h_ad0c0a8baa1f82943a57b85bc3dfd3abc}{keccak\+\_\+lane\+\_\+t}}]{a\mbox{[}5\mbox{]}\mbox{[}5\mbox{]} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Apply chi transformation. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in,out}  & {\em a} & State array \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 217 of file keccak.\+c.
+
+
+\begin{DoxyCode}
+218 \{
+219    \hyperlink{keccak_8h_ad0c0a8baa1f82943a57b85bc3dfd3abc}{keccak\_lane\_t} temp1;
+220    \hyperlink{keccak_8h_ad0c0a8baa1f82943a57b85bc3dfd3abc}{keccak\_lane\_t} temp2;
+221 
+222    \textcolor{comment}{//The effect of the chi transformation is to XOR each bit with}
+223    \textcolor{comment}{//a non linear function of two other bits in its row}
+224    temp1 = \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[0][0];
+225    temp2 = \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[0][1];
+226    \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[0][0] ^= ~\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[0][1] & \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[0][2];
+227    a[0][1] ^= ~a[0][2] & a[0][3];
+228    a[0][2] ^= ~a[0][3] & a[0][4];
+229    a[0][3] ^= ~a[0][4] & temp1;
+230    a[0][4] ^= ~temp1 & temp2;
+231 
+232    temp1 = a[1][0];
+233    temp2 = a[1][1];
+234    a[1][0] ^= ~a[1][1] & a[1][2];
+235    a[1][1] ^= ~a[1][2] & a[1][3];
+236    a[1][2] ^= ~a[1][3] & a[1][4];
+237    a[1][3] ^= ~a[1][4] & temp1;
+238    a[1][4] ^= ~temp1 & temp2;
+239 
+240    temp1 = a[2][0];
+241    temp2 = a[2][1];
+242    a[2][0] ^= ~a[2][1] & a[2][2];
+243    a[2][1] ^= ~a[2][2] & a[2][3];
+244    a[2][2] ^= ~a[2][3] & a[2][4];
+245    a[2][3] ^= ~a[2][4] & temp1;
+246    a[2][4] ^= ~temp1 & temp2;
+247 
+248    temp1 = a[3][0];
+249    temp2 = a[3][1];
+250    a[3][0] ^= ~a[3][1] & a[3][2];
+251    a[3][1] ^= ~a[3][2] & a[3][3];
+252    a[3][2] ^= ~a[3][3] & a[3][4];
+253    a[3][3] ^= ~a[3][4] & temp1;
+254    a[3][4] ^= ~temp1 & temp2;
+255 
+256    temp1 = a[4][0];
+257    temp2 = a[4][1];
+258    a[4][0] ^= ~a[4][1] & a[4][2];
+259    a[4][1] ^= ~a[4][2] & a[4][3];
+260    a[4][2] ^= ~a[4][3] & a[4][4];
+261    a[4][3] ^= ~a[4][4] & temp1;
+262    a[4][4] ^= ~temp1 & temp2;
+263 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{keccak_8c_a9f89168df466f1595e38bcc88a94b442}\label{keccak_8c_a9f89168df466f1595e38bcc88a94b442}} 
+\index{keccak.\+c@{keccak.\+c}!iota@{iota}}
+\index{iota@{iota}!keccak.\+c@{keccak.\+c}}
+\subsubsection{\texorpdfstring{iota()}{iota()}}
+{\footnotesize\ttfamily static void iota (\begin{DoxyParamCaption}\item[{\hyperlink{keccak_8h_ad0c0a8baa1f82943a57b85bc3dfd3abc}{keccak\+\_\+lane\+\_\+t}}]{a\mbox{[}5\mbox{]}\mbox{[}5\mbox{]},  }\item[{\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t}}]{index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Apply iota transformation. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in,out}  & {\em a} & State array \\
+\hline
+ & {\em } & \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 272 of file keccak.\+c.
+
+
+\begin{DoxyCode}
+273 \{
+274    \textcolor{comment}{//The iota transformation is parameterized by the round index}
+275    \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[0][0] ^= \hyperlink{keccak_8c_ae25a5dcd76fe0f701a8730f82edbf26d}{rc}[index];
+276 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{keccak_8c_a21ebb9748bcf8267acd81c8a870e6868}\label{keccak_8c_a21ebb9748bcf8267acd81c8a870e6868}} 
+\index{keccak.\+c@{keccak.\+c}!keccak\+Absorb@{keccak\+Absorb}}
+\index{keccak\+Absorb@{keccak\+Absorb}!keccak.\+c@{keccak.\+c}}
+\subsubsection{\texorpdfstring{keccak\+Absorb()}{keccakAbsorb()}}
+{\footnotesize\ttfamily void keccak\+Absorb (\begin{DoxyParamCaption}\item[{\hyperlink{structKeccakContext}{Keccak\+Context} $\ast$}]{context,  }\item[{const void $\ast$}]{input,  }\item[{size\+\_\+t}]{length }\end{DoxyParamCaption})}
+
+
+
+Absorb data. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the Keccak context \\
+\hline
+\mbox{\tt in}  & {\em input} & Pointer to the buffer being hashed \\
+\hline
+\mbox{\tt in}  & {\em length} & Length of the buffer \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 318 of file keccak.\+c.
+
+
+\begin{DoxyCode}
+319 \{
+320    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+321    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+322    \hyperlink{keccak_8h_ad0c0a8baa1f82943a57b85bc3dfd3abc}{keccak\_lane\_t} *\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a};
+323 
+324    \textcolor{comment}{//Point to the state array}
+325    a = (\hyperlink{keccak_8h_ad0c0a8baa1f82943a57b85bc3dfd3abc}{keccak\_lane\_t} *) context->\hyperlink{structKeccakContext_a990ac688d2a22e872cdab3d880418dc4}{a};
+326 
+327    \textcolor{comment}{//Absorbing phase}
+328    \textcolor{keywordflow}{while}(\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} > 0)
+329    \{
+330       \textcolor{comment}{//Limit the number of bytes to process at a time}
+331       n = \hyperlink{os__port_8h_a3acffbd305ee72dcd4593c0d8af64a4f}{MIN}(\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, context->\hyperlink{structKeccakContext_ae7a33ebbbcdcc2f688293684dfac9bc5}{blockSize} - context->\hyperlink{structKeccakContext_aa29155c613493a5da2480aad142ebc96}{length});
+332 
+333       \textcolor{comment}{//Copy the data to the buffer}
+334       \hyperlink{cyclone__crypto_2core_2crypto_8h_a6724616c4014bb7e21f2660bd7b88be8}{cryptoMemcpy}(context->\hyperlink{structKeccakContext_a449097a035be46c58179fa9a33f81bd6}{buffer} + context->\hyperlink{structKeccakContext_aa29155c613493a5da2480aad142ebc96}{length}, input, n);
+335 
+336       \textcolor{comment}{//Number of data bytes that have been buffered}
+337       context->\hyperlink{structKeccakContext_aa29155c613493a5da2480aad142ebc96}{length} += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+338 
+339       \textcolor{comment}{//Advance the data pointer}
+340       input = (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *) input + n;
+341       \textcolor{comment}{//Remaining bytes to process}
+342       \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} -= \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+343 
+344       \textcolor{comment}{//Absorb the message block by block}
+345       \textcolor{keywordflow}{if}(context->\hyperlink{structKeccakContext_aa29155c613493a5da2480aad142ebc96}{length} == context->\hyperlink{structKeccakContext_ae7a33ebbbcdcc2f688293684dfac9bc5}{blockSize})
+346       \{
+347          \textcolor{comment}{//Absorb the current block}
+348          \textcolor{keywordflow}{for}(i = 0; i < context->\hyperlink{structKeccakContext_ae7a33ebbbcdcc2f688293684dfac9bc5}{blockSize} / \textcolor{keyword}{sizeof}(\hyperlink{keccak_8h_ad0c0a8baa1f82943a57b85bc3dfd3abc}{keccak\_lane\_t}); i++)
+349          \{
+350             a[i] ^= \hyperlink{keccak_8h_afb7f7b06da6b64e6879d9b4f033b155d}{KECCAK\_LETOH}(context->\hyperlink{structKeccakContext_acfa449b5cd9c15e940b11703fb4cc937}{block}[i]);
+351          \}
+352 
+353          \textcolor{comment}{//Apply block permutation function}
+354          \hyperlink{keccak_8c_a8a31781f7158b56f47f077f72ffc19e5}{keccakPermutBlock}(context);
+355 
+356          \textcolor{comment}{//The input buffer is empty}
+357          context->\hyperlink{structKeccakContext_aa29155c613493a5da2480aad142ebc96}{length} = 0;
+358       \}
+359    \}
+360 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{keccak_8c_a195e35ca81dc05a04dd7d264857658b9}\label{keccak_8c_a195e35ca81dc05a04dd7d264857658b9}} 
+\index{keccak.\+c@{keccak.\+c}!keccak\+Final@{keccak\+Final}}
+\index{keccak\+Final@{keccak\+Final}!keccak.\+c@{keccak.\+c}}
+\subsubsection{\texorpdfstring{keccak\+Final()}{keccakFinal()}}
+{\footnotesize\ttfamily void keccak\+Final (\begin{DoxyParamCaption}\item[{\hyperlink{structKeccakContext}{Keccak\+Context} $\ast$}]{context,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}}]{pad }\end{DoxyParamCaption})}
+
+
+
+Finish absorbing phase. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the Keccak context \\
+\hline
+\mbox{\tt in}  & {\em pad} & Value of the padding byte (0x01 for Keccak, 0x06 for S\+H\+A-\/3 and 0x1F for X\+OF) \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 369 of file keccak.\+c.
+
+
+\begin{DoxyCode}
+370 \{
+371    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+372    \textcolor{keywordtype}{size\_t} q;
+373    \hyperlink{keccak_8h_ad0c0a8baa1f82943a57b85bc3dfd3abc}{keccak\_lane\_t} *\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a};
+374 
+375    \textcolor{comment}{//Point to the state array}
+376    a = (\hyperlink{keccak_8h_ad0c0a8baa1f82943a57b85bc3dfd3abc}{keccak\_lane\_t} *) context->\hyperlink{structKeccakContext_a990ac688d2a22e872cdab3d880418dc4}{a};
+377 
+378    \textcolor{comment}{//Compute the number of padding bytes}
+379    q = context->\hyperlink{structKeccakContext_ae7a33ebbbcdcc2f688293684dfac9bc5}{blockSize} - context->\hyperlink{structKeccakContext_aa29155c613493a5da2480aad142ebc96}{length};
+380 
+381    \textcolor{comment}{//Append padding}
+382    \hyperlink{cyclone__crypto_2core_2crypto_8h_ad4465436e4ff353300fba4896012e18b}{cryptoMemset}(context->\hyperlink{structKeccakContext_a449097a035be46c58179fa9a33f81bd6}{buffer} + context->\hyperlink{structKeccakContext_aa29155c613493a5da2480aad142ebc96}{length}, 0, q);
+383    context->\hyperlink{structKeccakContext_a449097a035be46c58179fa9a33f81bd6}{buffer}[context->\hyperlink{structKeccakContext_aa29155c613493a5da2480aad142ebc96}{length}] |= pad;
+384    context->\hyperlink{structKeccakContext_a449097a035be46c58179fa9a33f81bd6}{buffer}[context->\hyperlink{structKeccakContext_ae7a33ebbbcdcc2f688293684dfac9bc5}{blockSize} - 1] |= 0x80;
+385 
+386    \textcolor{comment}{//Absorb the final block}
+387    \textcolor{keywordflow}{for}(i = 0; i < context->\hyperlink{structKeccakContext_ae7a33ebbbcdcc2f688293684dfac9bc5}{blockSize} / \textcolor{keyword}{sizeof}(\hyperlink{keccak_8h_ad0c0a8baa1f82943a57b85bc3dfd3abc}{keccak\_lane\_t}); i++)
+388    \{
+389       a[i] ^= \hyperlink{keccak_8h_afb7f7b06da6b64e6879d9b4f033b155d}{KECCAK\_LETOH}(context->\hyperlink{structKeccakContext_acfa449b5cd9c15e940b11703fb4cc937}{block}[i]);
+390    \}
+391 
+392    \textcolor{comment}{//Apply block permutation function}
+393    \hyperlink{keccak_8c_a8a31781f7158b56f47f077f72ffc19e5}{keccakPermutBlock}(context);
+394 
+395    \textcolor{comment}{//Convert lanes to little-endian byte order}
+396    \textcolor{keywordflow}{for}(i = 0; i < context->\hyperlink{structKeccakContext_ae7a33ebbbcdcc2f688293684dfac9bc5}{blockSize} / \textcolor{keyword}{sizeof}(\hyperlink{keccak_8h_ad0c0a8baa1f82943a57b85bc3dfd3abc}{keccak\_lane\_t}); i++)
+397    \{
+398       a[i] = \hyperlink{keccak_8h_a0a828d8a1fca2a795060a6a264797398}{KECCAK\_HTOLE}(a[i]);
+399    \}
+400 
+401    \textcolor{comment}{//Number of bytes available in the output buffer}
+402    context->\hyperlink{structKeccakContext_aa29155c613493a5da2480aad142ebc96}{length} = context->\hyperlink{structKeccakContext_ae7a33ebbbcdcc2f688293684dfac9bc5}{blockSize};
+403 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{keccak_8c_a07edc15e682ac1cd05b13dca6eb22aa0}\label{keccak_8c_a07edc15e682ac1cd05b13dca6eb22aa0}} 
+\index{keccak.\+c@{keccak.\+c}!keccak\+Init@{keccak\+Init}}
+\index{keccak\+Init@{keccak\+Init}!keccak.\+c@{keccak.\+c}}
+\subsubsection{\texorpdfstring{keccak\+Init()}{keccakInit()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} keccak\+Init (\begin{DoxyParamCaption}\item[{\hyperlink{structKeccakContext}{Keccak\+Context} $\ast$}]{context,  }\item[{\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t}}]{capacity }\end{DoxyParamCaption})}
+
+
+
+Initialize Keccak context. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the Keccak context to initialize \\
+\hline
+\mbox{\tt in}  & {\em capacity} & Capacity of the sponge function \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 285 of file keccak.\+c.
+
+
+\begin{DoxyCode}
+286 \{
+287    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} rate;
+288 
+289    \textcolor{comment}{//Clear Keccak context}
+290    \hyperlink{cyclone__crypto_2core_2crypto_8h_ad4465436e4ff353300fba4896012e18b}{cryptoMemset}(context, 0, \textcolor{keyword}{sizeof}(\hyperlink{structKeccakContext}{KeccakContext}));
+291 
+292    \textcolor{comment}{//The capacity cannot exceed the width of a Keccak-p permutation}
+293    \textcolor{keywordflow}{if}(capacity >= \hyperlink{keccak_8h_a31051b70683aa36137549f71586607f3}{KECCAK\_B})
+294       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+295 
+296    \textcolor{comment}{//The rate depends on the capacity of the sponge function}
+297    rate = \hyperlink{keccak_8h_a31051b70683aa36137549f71586607f3}{KECCAK\_B} - capacity;
+298 
+299    \textcolor{comment}{//The rate must be multiple of the lane size}
+300    \textcolor{keywordflow}{if}((rate % \hyperlink{keccak_8h_ae237e4133eee999bdea9cbbfc897f66a}{KECCAK\_W}) != 0)
+301       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+302 
+303    \textcolor{comment}{//Save the block size, in bytes}
+304    context->\hyperlink{structKeccakContext_ae7a33ebbbcdcc2f688293684dfac9bc5}{blockSize} = rate / 8;
+305 
+306    \textcolor{comment}{//Successful initialization}
+307    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+308 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{keccak_8c_a8a31781f7158b56f47f077f72ffc19e5}\label{keccak_8c_a8a31781f7158b56f47f077f72ffc19e5}} 
+\index{keccak.\+c@{keccak.\+c}!keccak\+Permut\+Block@{keccak\+Permut\+Block}}
+\index{keccak\+Permut\+Block@{keccak\+Permut\+Block}!keccak.\+c@{keccak.\+c}}
+\subsubsection{\texorpdfstring{keccak\+Permut\+Block()}{keccakPermutBlock()}}
+{\footnotesize\ttfamily void keccak\+Permut\+Block (\begin{DoxyParamCaption}\item[{\hyperlink{structKeccakContext}{Keccak\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Block permutation. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the Keccak context \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 473 of file keccak.\+c.
+
+
+\begin{DoxyCode}
+474 \{
+475    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+476 
+477    \textcolor{comment}{//Each round consists of a sequence of five transformations,}
+478    \textcolor{comment}{//which are called the step mappings}
+479    \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{keccak_8h_a317fd0868ad1885f05a1edadffc7b57e}{KECCAK\_NR}; i++)
+480    \{
+481       \textcolor{comment}{//Apply theta step mapping}
+482       \hyperlink{keccak_8c_a77c7f2850d4221b642d01ee5eec9a240}{theta}(context->\hyperlink{structKeccakContext_a990ac688d2a22e872cdab3d880418dc4}{a});
+483       \textcolor{comment}{//Apply rho step mapping}
+484       \hyperlink{keccak_8c_a26fcaaf85e4181b40d296156901d2c22}{rho}(context->\hyperlink{structKeccakContext_a990ac688d2a22e872cdab3d880418dc4}{a});
+485       \textcolor{comment}{//Apply pi step mapping}
+486       \hyperlink{keccak_8c_a2afd6eb93c8ee23f157c4d81988811cc}{pi}(context->\hyperlink{structKeccakContext_a990ac688d2a22e872cdab3d880418dc4}{a});
+487       \textcolor{comment}{//Apply chi step mapping}
+488       \hyperlink{keccak_8c_a877780b67a485dd6f45199657ed248a6}{chi}(context->\hyperlink{structKeccakContext_a990ac688d2a22e872cdab3d880418dc4}{a});
+489       \textcolor{comment}{//Apply iota step mapping}
+490       \hyperlink{keccak_8c_a9f89168df466f1595e38bcc88a94b442}{iota}(context->\hyperlink{structKeccakContext_a990ac688d2a22e872cdab3d880418dc4}{a}, i);
+491    \}
+492 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{keccak_8c_a3592f8e7403386f61f59a9d446f5e6ad}\label{keccak_8c_a3592f8e7403386f61f59a9d446f5e6ad}} 
+\index{keccak.\+c@{keccak.\+c}!keccak\+Squeeze@{keccak\+Squeeze}}
+\index{keccak\+Squeeze@{keccak\+Squeeze}!keccak.\+c@{keccak.\+c}}
+\subsubsection{\texorpdfstring{keccak\+Squeeze()}{keccakSqueeze()}}
+{\footnotesize\ttfamily void keccak\+Squeeze (\begin{DoxyParamCaption}\item[{\hyperlink{structKeccakContext}{Keccak\+Context} $\ast$}]{context,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{output,  }\item[{size\+\_\+t}]{length }\end{DoxyParamCaption})}
+
+
+
+Extract data from the squeezing phase. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the Keccak context \\
+\hline
+\mbox{\tt out}  & {\em output} & Output string \\
+\hline
+\mbox{\tt in}  & {\em length} & Desired output length, in bytes \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 413 of file keccak.\+c.
+
+
+\begin{DoxyCode}
+414 \{
+415    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+416    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+417    \hyperlink{keccak_8h_ad0c0a8baa1f82943a57b85bc3dfd3abc}{keccak\_lane\_t} *\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a};
+418 
+419    \textcolor{comment}{//Point to the state array}
+420    a = (\hyperlink{keccak_8h_ad0c0a8baa1f82943a57b85bc3dfd3abc}{keccak\_lane\_t} *) context->\hyperlink{structKeccakContext_a990ac688d2a22e872cdab3d880418dc4}{a};
+421 
+422    \textcolor{comment}{//An arbitrary number of output bits can be squeezed out of the state}
+423    \textcolor{keywordflow}{while}(\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} > 0)
+424    \{
+425       \textcolor{comment}{//Check whether more data is required}
+426       \textcolor{keywordflow}{if}(context->\hyperlink{structKeccakContext_aa29155c613493a5da2480aad142ebc96}{length} == 0)
+427       \{
+428          \textcolor{comment}{//Convert lanes to host byte order}
+429          \textcolor{keywordflow}{for}(i = 0; i < context->\hyperlink{structKeccakContext_ae7a33ebbbcdcc2f688293684dfac9bc5}{blockSize} / \textcolor{keyword}{sizeof}(\hyperlink{keccak_8h_ad0c0a8baa1f82943a57b85bc3dfd3abc}{keccak\_lane\_t}); i++)
+430          \{
+431             a[i] = \hyperlink{keccak_8h_afb7f7b06da6b64e6879d9b4f033b155d}{KECCAK\_LETOH}(a[i]);
+432          \}
+433 
+434          \textcolor{comment}{//Apply block permutation function}
+435          \hyperlink{keccak_8c_a8a31781f7158b56f47f077f72ffc19e5}{keccakPermutBlock}(context);
+436 
+437          \textcolor{comment}{//Convert lanes to little-endian byte order}
+438          \textcolor{keywordflow}{for}(i = 0; i < context->\hyperlink{structKeccakContext_ae7a33ebbbcdcc2f688293684dfac9bc5}{blockSize} / \textcolor{keyword}{sizeof}(\hyperlink{keccak_8h_ad0c0a8baa1f82943a57b85bc3dfd3abc}{keccak\_lane\_t}); i++)
+439          \{
+440             a[i] = \hyperlink{keccak_8h_a0a828d8a1fca2a795060a6a264797398}{KECCAK\_HTOLE}(a[i]);
+441          \}
+442 
+443          \textcolor{comment}{//Number of bytes available in the output buffer}
+444          context->\hyperlink{structKeccakContext_aa29155c613493a5da2480aad142ebc96}{length} = context->\hyperlink{structKeccakContext_ae7a33ebbbcdcc2f688293684dfac9bc5}{blockSize};
+445       \}
+446 
+447       \textcolor{comment}{//Compute the number of bytes to process at a time}
+448       n = \hyperlink{os__port_8h_a3acffbd305ee72dcd4593c0d8af64a4f}{MIN}(\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, context->\hyperlink{structKeccakContext_aa29155c613493a5da2480aad142ebc96}{length});
+449 
+450       \textcolor{comment}{//Copy the output string}
+451       \textcolor{keywordflow}{if}(output != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+452       \{
+453          \hyperlink{cyclone__crypto_2core_2crypto_8h_a6724616c4014bb7e21f2660bd7b88be8}{cryptoMemcpy}(output, context->\hyperlink{structKeccakContext_a4196dad6ace978207ffd2013474e4062}{digest} + context->
+      \hyperlink{structKeccakContext_ae7a33ebbbcdcc2f688293684dfac9bc5}{blockSize} -
+454             context->\hyperlink{structKeccakContext_aa29155c613493a5da2480aad142ebc96}{length}, n);
+455       \}
+456 
+457       \textcolor{comment}{//Number of bytes available in the output buffer}
+458       context->\hyperlink{structKeccakContext_aa29155c613493a5da2480aad142ebc96}{length} -= \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+459 
+460       \textcolor{comment}{//Advance the data pointer}
+461       output = (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *) output + n;
+462       \textcolor{comment}{//Number of bytes that remains to be written}
+463       \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} -= \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+464    \}
+465 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{keccak_8c_a2afd6eb93c8ee23f157c4d81988811cc}\label{keccak_8c_a2afd6eb93c8ee23f157c4d81988811cc}} 
+\index{keccak.\+c@{keccak.\+c}!pi@{pi}}
+\index{pi@{pi}!keccak.\+c@{keccak.\+c}}
+\subsubsection{\texorpdfstring{pi()}{pi()}}
+{\footnotesize\ttfamily static void pi (\begin{DoxyParamCaption}\item[{\hyperlink{keccak_8h_ad0c0a8baa1f82943a57b85bc3dfd3abc}{keccak\+\_\+lane\+\_\+t}}]{a\mbox{[}5\mbox{]}\mbox{[}5\mbox{]} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Apply pi transformation. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in,out}  & {\em a} & State array \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 178 of file keccak.\+c.
+
+
+\begin{DoxyCode}
+179 \{
+180    \hyperlink{keccak_8h_ad0c0a8baa1f82943a57b85bc3dfd3abc}{keccak\_lane\_t} temp;
+181 
+182    \textcolor{comment}{//The effect of the pi transformation is to rearrange the}
+183    \textcolor{comment}{//positions of the lanes}
+184    temp = \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[0][1];
+185    \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[0][1] = \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[1][1];
+186    \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[1][1] = \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[1][4];
+187    \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[1][4] = \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[4][2];
+188    \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[4][2] = \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[2][4];
+189    \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[2][4] = \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[4][0];
+190    \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[4][0] = \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[0][2];
+191    \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[0][2] = \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[2][2];
+192    \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[2][2] = \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[2][3];
+193    \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[2][3] = \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[3][4];
+194    \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[3][4] = \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[4][3];
+195    \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[4][3] = \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[3][0];
+196    \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[3][0] = \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[0][4];
+197    \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[0][4] = \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[4][4];
+198    \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[4][4] = \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[4][1];
+199    \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[4][1] = \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[1][3];
+200    \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[1][3] = \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[3][1];
+201    \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[3][1] = \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[1][0];
+202    \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[1][0] = \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[0][3];
+203    \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[0][3] = \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[3][3];
+204    \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[3][3] = \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[3][2];
+205    \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[3][2] = \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[2][1];
+206    \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[2][1] = \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[1][2];
+207    \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[1][2] = \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[2][0];
+208    \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[2][0] = temp;
+209 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{keccak_8c_a26fcaaf85e4181b40d296156901d2c22}\label{keccak_8c_a26fcaaf85e4181b40d296156901d2c22}} 
+\index{keccak.\+c@{keccak.\+c}!rho@{rho}}
+\index{rho@{rho}!keccak.\+c@{keccak.\+c}}
+\subsubsection{\texorpdfstring{rho()}{rho()}}
+{\footnotesize\ttfamily static void rho (\begin{DoxyParamCaption}\item[{\hyperlink{keccak_8h_ad0c0a8baa1f82943a57b85bc3dfd3abc}{keccak\+\_\+lane\+\_\+t}}]{a\mbox{[}5\mbox{]}\mbox{[}5\mbox{]} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Apply rho transformation. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in,out}  & {\em a} & State array \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 138 of file keccak.\+c.
+
+
+\begin{DoxyCode}
+139 \{
+140    \textcolor{comment}{//The effect of the rho transformation is to rotate the bits of each lane by}
+141    \textcolor{comment}{//an offset, which depends on the fixed x and y coordinates of the lane}
+142    \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[0][1] = \hyperlink{keccak_8h_ae9823477237cce037814a248cff2d149}{KECCAK\_ROL}(\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[0][1], 1   % \hyperlink{keccak_8h_ae237e4133eee999bdea9cbbfc897f66a}{KECCAK\_W});
+143    \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[0][2] = \hyperlink{keccak_8h_ae9823477237cce037814a248cff2d149}{KECCAK\_ROL}(\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[0][2], 190 % \hyperlink{keccak_8h_ae237e4133eee999bdea9cbbfc897f66a}{KECCAK\_W});
+144    \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[0][3] = \hyperlink{keccak_8h_ae9823477237cce037814a248cff2d149}{KECCAK\_ROL}(\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[0][3], 28  % \hyperlink{keccak_8h_ae237e4133eee999bdea9cbbfc897f66a}{KECCAK\_W});
+145    \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[0][4] = \hyperlink{keccak_8h_ae9823477237cce037814a248cff2d149}{KECCAK\_ROL}(\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[0][4], 91  % \hyperlink{keccak_8h_ae237e4133eee999bdea9cbbfc897f66a}{KECCAK\_W});
+146 
+147    \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[1][0] = \hyperlink{keccak_8h_ae9823477237cce037814a248cff2d149}{KECCAK\_ROL}(\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[1][0], 36  % \hyperlink{keccak_8h_ae237e4133eee999bdea9cbbfc897f66a}{KECCAK\_W});
+148    \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[1][1] = \hyperlink{keccak_8h_ae9823477237cce037814a248cff2d149}{KECCAK\_ROL}(\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[1][1], 300 % \hyperlink{keccak_8h_ae237e4133eee999bdea9cbbfc897f66a}{KECCAK\_W});
+149    \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[1][2] = \hyperlink{keccak_8h_ae9823477237cce037814a248cff2d149}{KECCAK\_ROL}(\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[1][2], 6   % \hyperlink{keccak_8h_ae237e4133eee999bdea9cbbfc897f66a}{KECCAK\_W});
+150    \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[1][3] = \hyperlink{keccak_8h_ae9823477237cce037814a248cff2d149}{KECCAK\_ROL}(\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[1][3], 55  % \hyperlink{keccak_8h_ae237e4133eee999bdea9cbbfc897f66a}{KECCAK\_W});
+151    \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[1][4] = \hyperlink{keccak_8h_ae9823477237cce037814a248cff2d149}{KECCAK\_ROL}(\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[1][4], 276 % \hyperlink{keccak_8h_ae237e4133eee999bdea9cbbfc897f66a}{KECCAK\_W});
+152 
+153    \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[2][0] = \hyperlink{keccak_8h_ae9823477237cce037814a248cff2d149}{KECCAK\_ROL}(\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[2][0], 3   % \hyperlink{keccak_8h_ae237e4133eee999bdea9cbbfc897f66a}{KECCAK\_W});
+154    \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[2][1] = \hyperlink{keccak_8h_ae9823477237cce037814a248cff2d149}{KECCAK\_ROL}(\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[2][1], 10  % \hyperlink{keccak_8h_ae237e4133eee999bdea9cbbfc897f66a}{KECCAK\_W});
+155    \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[2][2] = \hyperlink{keccak_8h_ae9823477237cce037814a248cff2d149}{KECCAK\_ROL}(\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[2][2], 171 % \hyperlink{keccak_8h_ae237e4133eee999bdea9cbbfc897f66a}{KECCAK\_W});
+156    \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[2][3] = \hyperlink{keccak_8h_ae9823477237cce037814a248cff2d149}{KECCAK\_ROL}(\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[2][3], 153 % \hyperlink{keccak_8h_ae237e4133eee999bdea9cbbfc897f66a}{KECCAK\_W});
+157    \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[2][4] = \hyperlink{keccak_8h_ae9823477237cce037814a248cff2d149}{KECCAK\_ROL}(\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[2][4], 231 % \hyperlink{keccak_8h_ae237e4133eee999bdea9cbbfc897f66a}{KECCAK\_W});
+158 
+159    \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[3][0] = \hyperlink{keccak_8h_ae9823477237cce037814a248cff2d149}{KECCAK\_ROL}(\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[3][0], 105 % \hyperlink{keccak_8h_ae237e4133eee999bdea9cbbfc897f66a}{KECCAK\_W});
+160    \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[3][1] = \hyperlink{keccak_8h_ae9823477237cce037814a248cff2d149}{KECCAK\_ROL}(\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[3][1], 45  % \hyperlink{keccak_8h_ae237e4133eee999bdea9cbbfc897f66a}{KECCAK\_W});
+161    \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[3][2] = \hyperlink{keccak_8h_ae9823477237cce037814a248cff2d149}{KECCAK\_ROL}(\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[3][2], 15  % \hyperlink{keccak_8h_ae237e4133eee999bdea9cbbfc897f66a}{KECCAK\_W});
+162    \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[3][3] = \hyperlink{keccak_8h_ae9823477237cce037814a248cff2d149}{KECCAK\_ROL}(\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[3][3], 21  % \hyperlink{keccak_8h_ae237e4133eee999bdea9cbbfc897f66a}{KECCAK\_W});
+163    \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[3][4] = \hyperlink{keccak_8h_ae9823477237cce037814a248cff2d149}{KECCAK\_ROL}(\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[3][4], 136 % \hyperlink{keccak_8h_ae237e4133eee999bdea9cbbfc897f66a}{KECCAK\_W});
+164 
+165    \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[4][0] = \hyperlink{keccak_8h_ae9823477237cce037814a248cff2d149}{KECCAK\_ROL}(\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[4][0], 210 % \hyperlink{keccak_8h_ae237e4133eee999bdea9cbbfc897f66a}{KECCAK\_W});
+166    \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[4][1] = \hyperlink{keccak_8h_ae9823477237cce037814a248cff2d149}{KECCAK\_ROL}(\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[4][1], 66  % \hyperlink{keccak_8h_ae237e4133eee999bdea9cbbfc897f66a}{KECCAK\_W});
+167    \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[4][2] = \hyperlink{keccak_8h_ae9823477237cce037814a248cff2d149}{KECCAK\_ROL}(\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[4][2], 253 % \hyperlink{keccak_8h_ae237e4133eee999bdea9cbbfc897f66a}{KECCAK\_W});
+168    \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[4][3] = \hyperlink{keccak_8h_ae9823477237cce037814a248cff2d149}{KECCAK\_ROL}(\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[4][3], 120 % \hyperlink{keccak_8h_ae237e4133eee999bdea9cbbfc897f66a}{KECCAK\_W});
+169    \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[4][4] = \hyperlink{keccak_8h_ae9823477237cce037814a248cff2d149}{KECCAK\_ROL}(\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[4][4], 78  % \hyperlink{keccak_8h_ae237e4133eee999bdea9cbbfc897f66a}{KECCAK\_W});
+170 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{keccak_8c_a77c7f2850d4221b642d01ee5eec9a240}\label{keccak_8c_a77c7f2850d4221b642d01ee5eec9a240}} 
+\index{keccak.\+c@{keccak.\+c}!theta@{theta}}
+\index{theta@{theta}!keccak.\+c@{keccak.\+c}}
+\subsubsection{\texorpdfstring{theta()}{theta()}}
+{\footnotesize\ttfamily static void theta (\begin{DoxyParamCaption}\item[{\hyperlink{keccak_8h_ad0c0a8baa1f82943a57b85bc3dfd3abc}{keccak\+\_\+lane\+\_\+t}}]{a\mbox{[}5\mbox{]}\mbox{[}5\mbox{]} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Apply theta transformation. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in,out}  & {\em a} & State array \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 82 of file keccak.\+c.
+
+
+\begin{DoxyCode}
+83 \{
+84    \hyperlink{keccak_8h_ad0c0a8baa1f82943a57b85bc3dfd3abc}{keccak\_lane\_t} \hyperlink{aria_8c_a5dadc28804036d1b82e1dc027e95c9a6}{c}[5];
+85    \hyperlink{keccak_8h_ad0c0a8baa1f82943a57b85bc3dfd3abc}{keccak\_lane\_t} d[5];
+86 
+87    \textcolor{comment}{//The effect of the theta transformation is to XOR each bit in the}
+88    \textcolor{comment}{//state with the parities of two columns in the array}
+89    c[0] = \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[0][0] ^ \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[1][0] ^ \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[2][0] ^ \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[3][0] ^ \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[4][0];
+90    c[1] = a[0][1] ^ a[1][1] ^ a[2][1] ^ a[3][1] ^ a[4][1];
+91    c[2] = a[0][2] ^ a[1][2] ^ a[2][2] ^ a[3][2] ^ a[4][2];
+92    c[3] = a[0][3] ^ a[1][3] ^ a[2][3] ^ a[3][3] ^ a[4][3];
+93    c[4] = a[0][4] ^ a[1][4] ^ a[2][4] ^ a[3][4] ^ a[4][4];
+94 
+95    d[0] = c[4] ^ \hyperlink{keccak_8h_ae9823477237cce037814a248cff2d149}{KECCAK\_ROL}(c[1], 1);
+96    d[1] = c[0] ^ \hyperlink{keccak_8h_ae9823477237cce037814a248cff2d149}{KECCAK\_ROL}(c[2], 1);
+97    d[2] = c[1] ^ \hyperlink{keccak_8h_ae9823477237cce037814a248cff2d149}{KECCAK\_ROL}(c[3], 1);
+98    d[3] = c[2] ^ \hyperlink{keccak_8h_ae9823477237cce037814a248cff2d149}{KECCAK\_ROL}(c[4], 1);
+99    d[4] = c[3] ^ \hyperlink{keccak_8h_ae9823477237cce037814a248cff2d149}{KECCAK\_ROL}(c[0], 1);
+100 
+101    a[0][0] ^= d[0];
+102    a[1][0] ^= d[0];
+103    a[2][0] ^= d[0];
+104    a[3][0] ^= d[0];
+105    a[4][0] ^= d[0];
+106 
+107    a[0][1] ^= d[1];
+108    a[1][1] ^= d[1];
+109    a[2][1] ^= d[1];
+110    a[3][1] ^= d[1];
+111    a[4][1] ^= d[1];
+112 
+113    a[0][2] ^= d[2];
+114    a[1][2] ^= d[2];
+115    a[2][2] ^= d[2];
+116    a[3][2] ^= d[2];
+117    a[4][2] ^= d[2];
+118 
+119    a[0][3] ^= d[3];
+120    a[1][3] ^= d[3];
+121    a[2][3] ^= d[3];
+122    a[3][3] ^= d[3];
+123    a[4][3] ^= d[3];
+124 
+125    a[0][4] ^= d[4];
+126    a[1][4] ^= d[4];
+127    a[2][4] ^= d[4];
+128    a[3][4] ^= d[4];
+129    a[4][4] ^= d[4];
+130 \}
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{keccak_8c_ae25a5dcd76fe0f701a8730f82edbf26d}\label{keccak_8c_ae25a5dcd76fe0f701a8730f82edbf26d}} 
+\index{keccak.\+c@{keccak.\+c}!rc@{rc}}
+\index{rc@{rc}!keccak.\+c@{keccak.\+c}}
+\subsubsection{\texorpdfstring{rc}{rc}}
+{\footnotesize\ttfamily const \hyperlink{keccak_8h_ad0c0a8baa1f82943a57b85bc3dfd3abc}{keccak\+\_\+lane\+\_\+t} rc\mbox{[}\hyperlink{keccak_8h_a317fd0868ad1885f05a1edadffc7b57e}{K\+E\+C\+C\+A\+K\+\_\+\+NR}\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 42 of file keccak.\+c.
+

@@ -1,0 +1,1310 @@
+\hypertarget{http__server_8c}{}\section{cyclone\+\_\+tcp/http/http\+\_\+server.c File Reference}
+\label{http__server_8c}\index{cyclone\+\_\+tcp/http/http\+\_\+server.\+c@{cyclone\+\_\+tcp/http/http\+\_\+server.\+c}}
+
+
+H\+T\+TP server (Hyper\+Text Transfer Protocol)  
+
+
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}core/net.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}http/http\+\_\+server.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}http/http\+\_\+server\+\_\+auth.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}http/http\+\_\+server\+\_\+misc.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}http/mime.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}http/ssi.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}debug.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{http__server_8c_afcdf5e66fd927a7f4cc64295acd20407}{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}~\hyperlink{net__config_8h_ace1dd0cc4628f20c72a1d8dc9612d2f1}{H\+T\+T\+P\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{http__server_8c_a76d52d5fd562dd1f6351059642843b91}{http\+Server\+Get\+Default\+Settings} (\hyperlink{structHttpServerSettings}{Http\+Server\+Settings} $\ast$settings)
+\begin{DoxyCompactList}\small\item\em Initialize settings with default values. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{http__server_8c_af4c24deeba1bc7c225742c0b60c17665}{http\+Server\+Init} (\hyperlink{http__server_8h_a952abbfa31a2188c3d65357e79531e03}{Http\+Server\+Context} $\ast$context, const \hyperlink{structHttpServerSettings}{Http\+Server\+Settings} $\ast$settings)
+\begin{DoxyCompactList}\small\item\em H\+T\+TP server initialization. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{http__server_8c_ae083b17dc603e6a0d488be91e0c27b72}{http\+Server\+Start} (\hyperlink{http__server_8h_a952abbfa31a2188c3d65357e79531e03}{Http\+Server\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Start H\+T\+TP server. \end{DoxyCompactList}\item 
+void \hyperlink{http__server_8c_ae21cefaace6258eef1a4b62f35a2a51d}{http\+Listener\+Task} (void $\ast$param)
+\begin{DoxyCompactList}\small\item\em H\+T\+TP server listener task. \end{DoxyCompactList}\item 
+void \hyperlink{http__server_8c_ae2e4da5bf041a8cba9d4a7b542de3b40}{http\+Connection\+Task} (void $\ast$param)
+\begin{DoxyCompactList}\small\item\em Task that services requests from an active connection. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{http__server_8c_ae90b959869f2eec5ad37c951b156855f}{http\+Write\+Header} (\hyperlink{http__server_8h_a3506ecffde998ab02629dca83587d2f9}{Http\+Connection} $\ast$connection)
+\begin{DoxyCompactList}\small\item\em Send H\+T\+TP response header. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{http__server_8c_a9f40911386cfac98a44ba495f32e5b20}{http\+Read\+Stream} (\hyperlink{http__server_8h_a3506ecffde998ab02629dca83587d2f9}{Http\+Connection} $\ast$connection, void $\ast$\hyperlink{tftp__common_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, size\+\_\+t size, size\+\_\+t $\ast$received, \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} \hyperlink{nbns__common_8h_a1e87af3c18a2fd36c61faf89949bdc3f}{flags})
+\begin{DoxyCompactList}\small\item\em Read data from client request. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{http__server_8c_acb70b948502efdd99db7cf234fcb74db}{http\+Write\+Stream} (\hyperlink{http__server_8h_a3506ecffde998ab02629dca83587d2f9}{Http\+Connection} $\ast$connection, const void $\ast$\hyperlink{tftp__common_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length})
+\begin{DoxyCompactList}\small\item\em Write data to the client. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{http__server_8c_ad794634ec0494f8b61a9ea4d439552a1}{http\+Close\+Stream} (\hyperlink{http__server_8h_a3506ecffde998ab02629dca83587d2f9}{Http\+Connection} $\ast$connection)
+\begin{DoxyCompactList}\small\item\em Close output stream. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{http__server_8c_a5a3c4bdca30ec8a37ed8c43b4cff90ea}{http\+Send\+Response} (\hyperlink{http__server_8h_a3506ecffde998ab02629dca83587d2f9}{Http\+Connection} $\ast$connection, const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$uri)
+\begin{DoxyCompactList}\small\item\em Send H\+T\+TP response. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{http__server_8c_a79c2da1d4792e8f319d5ba29e2ff29e9}{http\+Send\+Error\+Response} (\hyperlink{http__server_8h_a3506ecffde998ab02629dca83587d2f9}{Http\+Connection} $\ast$connection, \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} \hyperlink{dhcpv6__common_8h_ade31e7fd99344e8c35f2c373af659551}{status\+Code}, const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$\hyperlink{pap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message})
+\begin{DoxyCompactList}\small\item\em Send error response to the client. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{http__server_8c_a41701229c26e817c51bfcc5b9f55db67}{http\+Send\+Redirect\+Response} (\hyperlink{http__server_8h_a3506ecffde998ab02629dca83587d2f9}{Http\+Connection} $\ast$connection, \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} \hyperlink{dhcpv6__common_8h_ade31e7fd99344e8c35f2c373af659551}{status\+Code}, const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$uri)
+\begin{DoxyCompactList}\small\item\em Send redirect response to the client. \end{DoxyCompactList}\item 
+\hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} \hyperlink{http__server_8c_ac756b6a7361ebec793bd18ffcdf689e6}{http\+Check\+Web\+Socket\+Handshake} (\hyperlink{http__server_8h_a3506ecffde998ab02629dca83587d2f9}{Http\+Connection} $\ast$connection)
+\begin{DoxyCompactList}\small\item\em Check whether the client\textquotesingle{}s handshake is valid. \end{DoxyCompactList}\item 
+\hyperlink{web__socket_8h_aad796fb4e3af91c4358c5b273d4a2028}{Web\+Socket} $\ast$ \hyperlink{http__server_8c_ae6a535310320fa3399d1287362183b4a}{http\+Upgrade\+To\+Web\+Socket} (\hyperlink{http__server_8h_a3506ecffde998ab02629dca83587d2f9}{Http\+Connection} $\ast$connection)
+\begin{DoxyCompactList}\small\item\em Upgrade an existing H\+T\+TP connection to a Web\+Socket. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+H\+T\+TP server (Hyper\+Text Transfer Protocol) 
+
+\hypertarget{pic32mz__ef__curiosity_8h_License}{}\subsection{License}\label{pic32mz__ef__curiosity_8h_License}
+S\+P\+D\+X-\/\+License-\/\+Identifier\+: G\+P\+L-\/2.\+0-\/or-\/later
+
+Copyright (C) 2010-\/2019 Oryx Embedded S\+A\+RL. All rights reserved.
+
+This file is part of Cyclone\+T\+CP Open.
+
+This program is free software; you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+
+You should have received a copy of the G\+NU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-\/1301, U\+SA.\hypertarget{tftp__server_8c_Description}{}\subsection{Description}\label{tftp__server_8c_Description}
+Using the Hyper\+Text Transfer Protocol, the H\+T\+TP server delivers web pages to browsers as well as other data files to web-\/based applications. Refers to the following R\+F\+Cs for complete details\+:
+\begin{DoxyItemize}
+\item R\+FC 1945\+: Hypertext Transfer Protocol -\/ H\+T\+T\+P/1.\+0
+\item R\+FC 2616\+: Hypertext Transfer Protocol -\/ H\+T\+T\+P/1.\+1
+\item R\+FC 2617\+: H\+T\+TP Authentication\+: Basic and Digest Access Authentication
+\item R\+FC 2818\+: H\+T\+TP Over T\+LS
+\end{DoxyItemize}
+
+\begin{DoxyAuthor}{Author}
+Oryx Embedded S\+A\+RL (www.\+oryx-\/embedded.\+com) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+9.\+6 
+\end{DoxyVersion}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{http__server_8c_afcdf5e66fd927a7f4cc64295acd20407}\label{http__server_8c_afcdf5e66fd927a7f4cc64295acd20407}} 
+\index{http\+\_\+server.\+c@{http\+\_\+server.\+c}!T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+\index{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}!http\+\_\+server.\+c@{http\+\_\+server.\+c}}
+\subsubsection{\texorpdfstring{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}{TRACE\_LEVEL}}
+{\footnotesize\ttfamily \#define T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL~\hyperlink{net__config_8h_ace1dd0cc4628f20c72a1d8dc9612d2f1}{H\+T\+T\+P\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+
+
+
+Definition at line 42 of file http\+\_\+server.\+c.
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{http__server_8c_ac756b6a7361ebec793bd18ffcdf689e6}\label{http__server_8c_ac756b6a7361ebec793bd18ffcdf689e6}} 
+\index{http\+\_\+server.\+c@{http\+\_\+server.\+c}!http\+Check\+Web\+Socket\+Handshake@{http\+Check\+Web\+Socket\+Handshake}}
+\index{http\+Check\+Web\+Socket\+Handshake@{http\+Check\+Web\+Socket\+Handshake}!http\+\_\+server.\+c@{http\+\_\+server.\+c}}
+\subsubsection{\texorpdfstring{http\+Check\+Web\+Socket\+Handshake()}{httpCheckWebSocketHandshake()}}
+{\footnotesize\ttfamily \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} http\+Check\+Web\+Socket\+Handshake (\begin{DoxyParamCaption}\item[{\hyperlink{http__server_8h_a3506ecffde998ab02629dca83587d2f9}{Http\+Connection} $\ast$}]{connection }\end{DoxyParamCaption})}
+
+
+
+Check whether the client\textquotesingle{}s handshake is valid. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em connection} & Structure representing an H\+T\+TP connection \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+T\+R\+UE if the Web\+Socket handshake is valid, else F\+A\+L\+SE 
+\end{DoxyReturn}
+
+
+Definition at line 928 of file http\+\_\+server.\+c.
+
+
+\begin{DoxyCode}
+929 \{
+930 \textcolor{preprocessor}{#if (HTTP\_SERVER\_WEB\_SOCKET\_SUPPORT == ENABLED)}
+931    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+932    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+933 
+934    \textcolor{comment}{//The request must contain an Upgrade header field whose value}
+935    \textcolor{comment}{//must include the "websocket" keyword}
+936    \textcolor{keywordflow}{if}(!connection->request.upgradeWebSocket)
+937       \textcolor{keywordflow}{return} \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+938 
+939    \textcolor{comment}{//The request must contain a Connection header field whose value}
+940    \textcolor{comment}{//must include the "Upgrade" token}
+941    \textcolor{keywordflow}{if}(!connection->request.connectionUpgrade)
+942       \textcolor{keywordflow}{return} \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+943 
+944    \textcolor{comment}{//Retrieve the length of the client's key}
+945    n = strlen(connection->request.clientKey);
+946 
+947    \textcolor{comment}{//The request must include a header field with the name Sec-WebSocket-Key}
+948    \textcolor{keywordflow}{if}(n == 0)
+949       \textcolor{keywordflow}{return} \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+950 
+951    \textcolor{comment}{//The value of the Sec-WebSocket-Key header field must be a 16-byte}
+952    \textcolor{comment}{//value that has been Base64-encoded}
+953    error = \hyperlink{base64_8c_ae360cde3e2ef08783ac2e01591b78530}{base64Decode}(connection->request.clientKey, n, connection->buffer, &n);
+954    \textcolor{comment}{//Decoding failed?}
+955    \textcolor{keywordflow}{if}(error)
+956       \textcolor{keywordflow}{return} \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+957 
+958    \textcolor{comment}{//Check the length of the resulting value}
+959    \textcolor{keywordflow}{if}(n != 16)
+960       \textcolor{keywordflow}{return} \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+961 
+962    \textcolor{comment}{//The client's handshake is valid}
+963    \textcolor{keywordflow}{return} \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+964 \textcolor{preprocessor}{#else}
+965    \textcolor{comment}{//WebSocket are not supported}
+966    \textcolor{keywordflow}{return} \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+967 \textcolor{preprocessor}{#endif}
+968 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{http__server_8c_ad794634ec0494f8b61a9ea4d439552a1}\label{http__server_8c_ad794634ec0494f8b61a9ea4d439552a1}} 
+\index{http\+\_\+server.\+c@{http\+\_\+server.\+c}!http\+Close\+Stream@{http\+Close\+Stream}}
+\index{http\+Close\+Stream@{http\+Close\+Stream}!http\+\_\+server.\+c@{http\+\_\+server.\+c}}
+\subsubsection{\texorpdfstring{http\+Close\+Stream()}{httpCloseStream()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} http\+Close\+Stream (\begin{DoxyParamCaption}\item[{\hyperlink{http__server_8h_a3506ecffde998ab02629dca83587d2f9}{Http\+Connection} $\ast$}]{connection }\end{DoxyParamCaption})}
+
+
+
+Close output stream. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em connection} & Structure representing an H\+T\+TP connection \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 715 of file http\+\_\+server.\+c.
+
+
+\begin{DoxyCode}
+716 \{
+717    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+718 
+719    \textcolor{comment}{//Use chunked encoding transfer?}
+720    \textcolor{keywordflow}{if}(connection->response.chunkedEncoding)
+721    \{
+722       \textcolor{comment}{//The chunked encoding is ended by any chunk whose size is zero}
+723       error = \hyperlink{http__server__misc_8c_a8d6b785321ab0843c72699bbc8c9d51b}{httpSend}(connection, \textcolor{stringliteral}{"0\(\backslash\)r\(\backslash\)n\(\backslash\)r\(\backslash\)n"}, 5, \hyperlink{http__common_8h_a8d138d340435fa37e2a654238ed6deaba29d27da0736277281f8e4f7f09accd08}{HTTP\_FLAG\_NO\_DELAY});
+724    \}
+725    \textcolor{keywordflow}{else}
+726    \{
+727       \textcolor{comment}{//Flush the send buffer}
+728       error = \hyperlink{http__server__misc_8c_a8d6b785321ab0843c72699bbc8c9d51b}{httpSend}(connection, \textcolor{stringliteral}{""}, 0, \hyperlink{http__common_8h_a8d138d340435fa37e2a654238ed6deaba29d27da0736277281f8e4f7f09accd08}{HTTP\_FLAG\_NO\_DELAY});
+729    \}
+730 
+731    \textcolor{comment}{//Return status code}
+732    \textcolor{keywordflow}{return} error;
+733 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{http__server_8c_ae2e4da5bf041a8cba9d4a7b542de3b40}\label{http__server_8c_ae2e4da5bf041a8cba9d4a7b542de3b40}} 
+\index{http\+\_\+server.\+c@{http\+\_\+server.\+c}!http\+Connection\+Task@{http\+Connection\+Task}}
+\index{http\+Connection\+Task@{http\+Connection\+Task}!http\+\_\+server.\+c@{http\+\_\+server.\+c}}
+\subsubsection{\texorpdfstring{http\+Connection\+Task()}{httpConnectionTask()}}
+{\footnotesize\ttfamily void http\+Connection\+Task (\begin{DoxyParamCaption}\item[{void $\ast$}]{param }\end{DoxyParamCaption})}
+
+
+
+Task that services requests from an active connection. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em param} & Structure representing an H\+T\+TP connection with a client \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 323 of file http\+\_\+server.\+c.
+
+
+\begin{DoxyCode}
+324 \{
+325    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+326    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} counter;
+327    \hyperlink{http__server_8h_a3506ecffde998ab02629dca83587d2f9}{HttpConnection} *connection;
+328 
+329    \textcolor{comment}{//Task prologue}
+330    \hyperlink{os__port__chibios_8h_abd3485ee30ab6a2de1208b0498a449cf}{osEnterTask}();
+331 
+332    \textcolor{comment}{//Point to the structure representing the HTTP connection}
+333    connection = (\hyperlink{http__server_8h_a3506ecffde998ab02629dca83587d2f9}{HttpConnection} *) param;
+334 
+335    \textcolor{comment}{//Endless loop}
+336    \textcolor{keywordflow}{while}(1)
+337    \{
+338       \textcolor{comment}{//Wait for an incoming connection attempt}
+339       \hyperlink{os__port__chibios_8c_a1dc707247e44dfefae5bec4a322fc78a}{osWaitForEvent}(&connection->startEvent, \hyperlink{os__port_8h_ab893de6f8a0ec8b0e6dd8097ff398019}{INFINITE\_DELAY});
+340 
+341       \textcolor{comment}{//Initialize status code}
+342       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+343 
+344       \textcolor{comment}{//Check status code}
+345       \textcolor{keywordflow}{if}(!error)
+346       \{
+347          \textcolor{comment}{//Process incoming requests}
+348          \textcolor{keywordflow}{for}(counter = 0; counter < \hyperlink{http__server_8h_aabb9bddb4d22875898d5d26201249375}{HTTP\_SERVER\_MAX\_REQUESTS}; counter++)
+349          \{
+350             \textcolor{comment}{//Debug message}
+351             \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"Waiting for request...\(\backslash\)r\(\backslash\)n"});
+352 
+353             \textcolor{comment}{//Clear request header}
+354             memset(&connection->request, 0, \textcolor{keyword}{sizeof}(\hyperlink{structHttpRequest}{HttpRequest}));
+355             \textcolor{comment}{//Clear response header}
+356             memset(&connection->response, 0, \textcolor{keyword}{sizeof}(\hyperlink{structHttpResponse}{HttpResponse}));
+357 
+358             \textcolor{comment}{//Read the HTTP request header and parse its contents}
+359             error = \hyperlink{http__server__misc_8c_ad0e8b805bb61bdb5cbc6368370d2cb52}{httpReadRequestHeader}(connection);
+360             \textcolor{comment}{//Any error to report?}
+361             \textcolor{keywordflow}{if}(error)
+362             \{
+363                \textcolor{comment}{//Debug message}
+364                \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"No HTTP request received or parsing error...\(\backslash\)r\(\backslash\)n"});
+365                \textcolor{keywordflow}{break};
+366             \}
+367 
+368             \textcolor{comment}{//Debug message}
+369             \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"Sending HTTP response to the client...\(\backslash\)r\(\backslash\)n"});
+370             
+371             
+372 
+373             \textcolor{comment}{//Check status code}
+374             \textcolor{keywordflow}{if}(!error)
+375             \{
+376                \textcolor{comment}{//Default HTTP header fields}
+377                \hyperlink{http__server__misc_8c_aafe1d6fec1869fb5f889d465c19f3306}{httpInitResponseHeader}(connection);
+378 
+379                \textcolor{comment}{//Invoke user-defined callback, if any}
+380                \textcolor{keywordflow}{if}(connection->settings->requestCallback != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+381                \{
+382                   error = connection->settings->requestCallback(connection,
+383                      connection->request.uri);
+384                \}
+385                \textcolor{keywordflow}{else}
+386                \{
+387                   \textcolor{comment}{//Keep processing...}
+388                   error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4cca37264afee88cb14cd105f0d59607}{ERROR\_NOT\_FOUND};
+389                \}
+390 
+391                \textcolor{comment}{//Check status code}
+392                \textcolor{keywordflow}{if}(error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4cca37264afee88cb14cd105f0d59607}{ERROR\_NOT\_FOUND})
+393                \{
+394 \textcolor{preprocessor}{#if (HTTP\_SERVER\_SSI\_SUPPORT == ENABLED)}
+395                   \textcolor{comment}{//Use server-side scripting to dynamically generate HTML code?}
+396                   \textcolor{keywordflow}{if}(\hyperlink{http__server__misc_8c_aebda8c10016605385b6958ff384013aa}{httpCompExtension}(connection->request.uri, \textcolor{stringliteral}{".stm"}) ||
+397                      \hyperlink{http__server__misc_8c_aebda8c10016605385b6958ff384013aa}{httpCompExtension}(connection->request.uri, \textcolor{stringliteral}{".shtm"}) ||
+398                      \hyperlink{http__server__misc_8c_aebda8c10016605385b6958ff384013aa}{httpCompExtension}(connection->request.uri, \textcolor{stringliteral}{".shtml"}))
+399                   \{
+400                      \textcolor{comment}{//SSI processing (Server Side Includes)}
+401                      error = \hyperlink{ssi_8c_afe14b7f41b8507b8d8c7d35dca53b2a4}{ssiExecuteScript}(connection, connection->request.uri, 0);
+402                   \}
+403                   \textcolor{keywordflow}{else}
+404 \textcolor{preprocessor}{#endif}
+405                   \{
+406                      \textcolor{comment}{//Set the maximum age for static resources}
+407                      connection->response.maxAge = \hyperlink{http__server_8h_a45826b439698856899d8b700d9c73670}{HTTP\_SERVER\_MAX\_AGE};
+408 
+409                      \textcolor{comment}{//Send the contents of the requested page}
+410                      error = \hyperlink{http__server_8c_a5a3c4bdca30ec8a37ed8c43b4cff90ea}{httpSendResponse}(connection, connection->request.uri);
+411                   \}
+412                \}
+413 
+414                \textcolor{comment}{//The requested resource is not available?}
+415                \textcolor{keywordflow}{if}(error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4cca37264afee88cb14cd105f0d59607}{ERROR\_NOT\_FOUND})
+416                \{
+417                   \textcolor{comment}{//Default HTTP header fields}
+418                   \hyperlink{http__server__misc_8c_aafe1d6fec1869fb5f889d465c19f3306}{httpInitResponseHeader}(connection);
+419 
+420                   \textcolor{comment}{//Invoke user-defined callback, if any}
+421                   \textcolor{keywordflow}{if}(connection->settings->uriNotFoundCallback != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+422                   \{
+423                      error = connection->settings->uriNotFoundCallback(connection,
+424                         connection->request.uri);
+425                   \}
+426                \}
+427             \}
+428             
+429             \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"Sending Error: %d\(\backslash\)r\(\backslash\)n"}, error);
+430             \textcolor{comment}{//Check status code}
+431             \textcolor{keywordflow}{if}(error)
+432             \{
+433                \textcolor{comment}{//Default HTTP header fields}
+434                \hyperlink{http__server__misc_8c_aafe1d6fec1869fb5f889d465c19f3306}{httpInitResponseHeader}(connection);
+435 
+436                \textcolor{comment}{//Bad request?}
+437                \textcolor{keywordflow}{if}(error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca58b9865a3dd951988ab2d8f53b0e4166}{ERROR\_INVALID\_REQUEST})
+438                \{
+439                   \textcolor{comment}{//Send an error 400 and close the connection immediately}
+440                   \hyperlink{http__server_8c_a79c2da1d4792e8f319d5ba29e2ff29e9}{httpSendErrorResponse}(connection, 400,
+441                      \textcolor{stringliteral}{"The request is badly formed"});
+442                \}
+443                \textcolor{comment}{//Authorization required?}
+444                \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caf39266cb112974885d37b09ef0f40f42}{ERROR\_AUTH\_REQUIRED})
+445                \{
+446                   \textcolor{comment}{//Send an error 401 and keep the connection alive}
+447                   error = \hyperlink{http__server_8c_a79c2da1d4792e8f319d5ba29e2ff29e9}{httpSendErrorResponse}(connection, 401,
+448                      \textcolor{stringliteral}{"Authorization required"});
+449                \}
+450                \textcolor{comment}{//Page not found?}
+451                \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4cca37264afee88cb14cd105f0d59607}{ERROR\_NOT\_FOUND})
+452                \{
+453                   \textcolor{comment}{//Send an error 404 and keep the connection alive}
+454                   error = \hyperlink{http__server_8c_a79c2da1d4792e8f319d5ba29e2ff29e9}{httpSendErrorResponse}(connection, 404,
+455                      \textcolor{stringliteral}{"The requested page could not be found"});
+456                \}
+457             \}
+458 
+459             \textcolor{comment}{//Internal error?}
+460             \textcolor{keywordflow}{if}(error)
+461             \{
+462                \textcolor{comment}{//Close the connection immediately}
+463                \textcolor{keywordflow}{break};
+464             \}
+465 
+466             \textcolor{comment}{//Check whether the connection is persistent or not}
+467             \textcolor{keywordflow}{if}(!connection->request.keepAlive || !connection->response.keepAlive)
+468             \{
+469                \textcolor{comment}{//Close the connection immediately}
+470                \textcolor{keywordflow}{break};
+471             \}
+472          \}
+473       \}
+474 
+475       \textcolor{comment}{//Valid socket handle?}
+476       \textcolor{keywordflow}{if}(connection->socket != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+477       \{
+478          \textcolor{comment}{//Debug message}
+479          \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"Graceful shutdown...\(\backslash\)r\(\backslash\)n"});
+480          \textcolor{comment}{//Graceful shutdown}
+481          \hyperlink{socket_8c_acc736b53dba4a0d3b11b63f75cdcfffb}{socketShutdown}(connection->socket, \hyperlink{socket_8h_a36ee33c18de64f549a6336d1aa7333b7a4c533f4b86ea89dfd6a508bb4262c76d}{SOCKET\_SD\_BOTH});
+482 
+483          \textcolor{comment}{//Debug message}
+484          \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"Closing socket...\(\backslash\)r\(\backslash\)n"});
+485          \textcolor{comment}{//Close socket}
+486          \hyperlink{socket_8c_ac5012e9f71c97e2ea0410f2c5baccb0e}{socketClose}(connection->socket);
+487       \}
+488       \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"CRASHES. NAH\(\backslash\)r\(\backslash\)n"});
+489       \textcolor{comment}{//Ready to serve the next connection request...}
+490       connection->running = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+491       \textcolor{comment}{//Release semaphore}
+492       \hyperlink{os__port__chibios_8c_a33555fb6374f981567026d77e3b687fc}{osReleaseSemaphore}(&connection->serverContext->semaphore);
+493       \textcolor{keywordflow}{if}(connection->endConnection == \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE})\{
+494           \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"FROM HTTP SERVER. DISCONNECT\(\backslash\)r\(\backslash\)n"});
+495           \hyperlink{os__port__chibios_8c_abb64215d94a3d144b27a7f1509386366}{osSuspendAllTasks}();
+496           \hyperlink{m2m__wifi__ex_8h_ae246003c58f2b8c6d9a3d33953eb8baa}{os\_m2m\_wifi\_disconnect}();
+497           \hyperlink{os__port__chibios_8c_a1116ffd72c17afc85cc9c6ac00f1b06c}{osResumeAllTasks}();
+498           
+499       \}
+500       
+501    \}
+502 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{http__server_8c_ae21cefaace6258eef1a4b62f35a2a51d}\label{http__server_8c_ae21cefaace6258eef1a4b62f35a2a51d}} 
+\index{http\+\_\+server.\+c@{http\+\_\+server.\+c}!http\+Listener\+Task@{http\+Listener\+Task}}
+\index{http\+Listener\+Task@{http\+Listener\+Task}!http\+\_\+server.\+c@{http\+\_\+server.\+c}}
+\subsubsection{\texorpdfstring{http\+Listener\+Task()}{httpListenerTask()}}
+{\footnotesize\ttfamily void http\+Listener\+Task (\begin{DoxyParamCaption}\item[{void $\ast$}]{param }\end{DoxyParamCaption})}
+
+
+
+H\+T\+TP server listener task. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em param} & Pointer to the H\+T\+TP server context \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 250 of file http\+\_\+server.\+c.
+
+
+\begin{DoxyCode}
+251 \{
+252    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+253    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} counter;
+254    \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t} clientPort;
+255    \hyperlink{structIpAddr}{IpAddr} clientIpAddr;
+256    \hyperlink{http__server_8h_a952abbfa31a2188c3d65357e79531e03}{HttpServerContext} *context;
+257    \hyperlink{http__server_8h_a3506ecffde998ab02629dca83587d2f9}{HttpConnection} *connection;
+258    \hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} *\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket};
+259 
+260    \textcolor{comment}{//Task prologue}
+261    \hyperlink{os__port__chibios_8h_abd3485ee30ab6a2de1208b0498a449cf}{osEnterTask}();
+262 
+263    \textcolor{comment}{//Retrieve the HTTP server context}
+264    context = (\hyperlink{http__server_8h_a952abbfa31a2188c3d65357e79531e03}{HttpServerContext} *) param;
+265 
+266    \textcolor{comment}{//Process incoming connections to the server}
+267    \textcolor{keywordflow}{for}(counter = 1; ; counter++)
+268    \{
+269       \textcolor{comment}{//Debug message}
+270       \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"Ready to accept a new connection...\(\backslash\)r\(\backslash\)n"});
+271 
+272       \textcolor{comment}{//Limit the number of simultaneous connections to the HTTP server}
+273       \hyperlink{os__port__chibios_8c_a77807eaba2cdb91423e0b238f5282e50}{osWaitForSemaphore}(&context->semaphore, \hyperlink{os__port_8h_ab893de6f8a0ec8b0e6dd8097ff398019}{INFINITE\_DELAY});
+274 
+275       \textcolor{comment}{//Loop through the connection table}
+276       \textcolor{keywordflow}{for}(i = 0; i < context->settings.maxConnections; i++)
+277       \{
+278          \textcolor{comment}{//Point to the current connection}
+279          connection = &context->connections[i];
+280 
+281          \textcolor{comment}{//Ready to service the client request?}
+282          \textcolor{keywordflow}{if}(!connection->running)
+283          \{
+284             \textcolor{comment}{//Accept an incoming connection}
+285             socket = \hyperlink{socket_8c_a00ec8a49fe1ee3597a0f7a2afbe46f00}{socketAccept}(context->socket, &clientIpAddr, &clientPort);
+286 
+287             \textcolor{comment}{//Make sure the socket handle is valid}
+288             \textcolor{keywordflow}{if}(socket != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+289             \{
+290                \textcolor{comment}{//Debug message}
+291                \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"Connection #%u established with client %s port %"} PRIu16 \textcolor{stringliteral}{"...\(\backslash\)r\(\backslash\)n"},
+292                   counter, \hyperlink{ip_8c_aecdb577de79f65f8c814d5f101c7c6ae}{ipAddrToString}(&clientIpAddr, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}), clientPort);
+293 
+294                \textcolor{comment}{//Reference to the HTTP server settings}
+295                connection->settings = &context->settings;
+296                \textcolor{comment}{//Reference to the HTTP server context}
+297                connection->serverContext = context;
+298                \textcolor{comment}{//Reference to the new socket}
+299                connection->socket = \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket};
+300 
+301                \textcolor{comment}{//Set timeout for blocking functions}
+302                \hyperlink{socket_8c_abdd29ac0ba4a644c726f5b1280680099}{socketSetTimeout}(connection->socket, 
+      \hyperlink{http__server_8h_ad3c60dd255112974bf9bb67ae4f5a289}{HTTP\_SERVER\_TIMEOUT});
+303 
+304                \textcolor{comment}{//The client connection task is now running...}
+305                connection->running = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+306                \textcolor{comment}{//Service the current connection request}
+307                \hyperlink{os__port__chibios_8c_afc1d64fc90afbf03baecfa636bb99ff7}{osSetEvent}(&connection->startEvent);
+308 
+309                \textcolor{comment}{//We are done}
+310                \textcolor{keywordflow}{break};
+311             \}
+312          \}
+313       \}
+314    \}
+315 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{http__server_8c_a9f40911386cfac98a44ba495f32e5b20}\label{http__server_8c_a9f40911386cfac98a44ba495f32e5b20}} 
+\index{http\+\_\+server.\+c@{http\+\_\+server.\+c}!http\+Read\+Stream@{http\+Read\+Stream}}
+\index{http\+Read\+Stream@{http\+Read\+Stream}!http\+\_\+server.\+c@{http\+\_\+server.\+c}}
+\subsubsection{\texorpdfstring{http\+Read\+Stream()}{httpReadStream()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} http\+Read\+Stream (\begin{DoxyParamCaption}\item[{\hyperlink{http__server_8h_a3506ecffde998ab02629dca83587d2f9}{Http\+Connection} $\ast$}]{connection,  }\item[{void $\ast$}]{data,  }\item[{size\+\_\+t}]{size,  }\item[{size\+\_\+t $\ast$}]{received,  }\item[{\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t}}]{flags }\end{DoxyParamCaption})}
+
+
+
+Read data from client request. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em connection} & Structure representing an H\+T\+TP connection \\
+\hline
+\mbox{\tt out}  & {\em data} & Buffer where to store the incoming data \\
+\hline
+\mbox{\tt in}  & {\em size} & Maximum number of bytes that can be received \\
+\hline
+\mbox{\tt out}  & {\em received} & Number of bytes that have been received \\
+\hline
+\mbox{\tt in}  & {\em flags} & Set of flags that influences the behavior of this function \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 544 of file http\+\_\+server.\+c.
+
+
+\begin{DoxyCode}
+546 \{
+547    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+548    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+549 
+550    \textcolor{comment}{//No data has been read yet}
+551    *received = 0;
+552 
+553    \textcolor{comment}{//Chunked encoding transfer is used?}
+554    \textcolor{keywordflow}{if}(connection->request.chunkedEncoding)
+555    \{
+556       \textcolor{comment}{//Point to the output buffer}
+557       \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\_t} *\hyperlink{ndp_8h_a6519522ad9a6f45e7a8d25d31392a977}{p} = \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data};
+558 
+559       \textcolor{comment}{//Read as much data as possible}
+560       \textcolor{keywordflow}{while}(*received < size)
+561       \{
+562          \textcolor{comment}{//End of HTTP request body?}
+563          \textcolor{keywordflow}{if}(connection->request.lastChunk)
+564             \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca8b7223773301a4f3dd811f1d35e13ce4}{ERROR\_END\_OF\_STREAM};
+565 
+566          \textcolor{comment}{//Acquire a new chunk when the current chunk}
+567          \textcolor{comment}{//has been completely consumed}
+568          \textcolor{keywordflow}{if}(connection->request.byteCount == 0)
+569          \{
+570             \textcolor{comment}{//The size of each chunk is sent right before the chunk itself}
+571             error = \hyperlink{http__server__misc_8c_acc3d795809c9a695d07ccdd0f084918f}{httpReadChunkSize}(connection);
+572             \textcolor{comment}{//Failed to decode the chunk-size field?}
+573             \textcolor{keywordflow}{if}(error)
+574                \textcolor{keywordflow}{return} error;
+575 
+576             \textcolor{comment}{//Any chunk whose size is zero terminates the data transfer}
+577             \textcolor{keywordflow}{if}(!connection->request.byteCount)
+578             \{
+579                \textcolor{comment}{//The user must be satisfied with data already on hand}
+580                \textcolor{keywordflow}{return} (*received > 0) ? \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR} : \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca8b7223773301a4f3dd811f1d35e13ce4}{ERROR\_END\_OF\_STREAM};
+581             \}
+582          \}
+583 
+584          \textcolor{comment}{//Limit the number of bytes to read at a time}
+585          n = \hyperlink{os__port_8h_a3acffbd305ee72dcd4593c0d8af64a4f}{MIN}(size - *received, connection->request.byteCount);
+586 
+587          \textcolor{comment}{//Read data}
+588          error = \hyperlink{http__server__misc_8c_a2b807b3ad3566b5ab129e02287b3535f}{httpReceive}(connection, p, n, &n, \hyperlink{tcp_8h_aa2585d779da0ab21273a8d92de9a0ebe}{flags});
+589          \textcolor{comment}{//Any error to report?}
+590          \textcolor{keywordflow}{if}(error)
+591             \textcolor{keywordflow}{return} error;
+592 
+593          \textcolor{comment}{//Total number of data that have been read}
+594          *received += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+595          \textcolor{comment}{//Number of bytes left to process in the current chunk}
+596          connection->request.byteCount -= \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+597 
+598          \textcolor{comment}{//The HTTP\_FLAG\_BREAK\_CHAR flag causes the function to stop reading}
+599          \textcolor{comment}{//data as soon as the specified break character is encountered}
+600          \textcolor{keywordflow}{if}(\hyperlink{tcp_8h_aa2585d779da0ab21273a8d92de9a0ebe}{flags} & \hyperlink{http__common_8h_a8d138d340435fa37e2a654238ed6deaba90a7e897d1bb172106224358b0de807d}{HTTP\_FLAG\_BREAK\_CRLF})
+601          \{
+602             \textcolor{comment}{//Check whether a break character has been received}
+603             \textcolor{keywordflow}{if}(p[n - 1] == \hyperlink{os__port_8h_a34a3aa6cbadec6a80ab1eae8efd0083d}{LSB}(\hyperlink{tcp_8h_aa2585d779da0ab21273a8d92de9a0ebe}{flags}))
+604                \textcolor{keywordflow}{break};
+605          \}
+606          \textcolor{comment}{//The HTTP\_FLAG\_WAIT\_ALL flag causes the function to return}
+607          \textcolor{comment}{//only when the requested number of bytes have been read}
+608          \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!(\hyperlink{tcp_8h_aa2585d779da0ab21273a8d92de9a0ebe}{flags} & \hyperlink{http__common_8h_a8d138d340435fa37e2a654238ed6deaba635b3d39aef6a064f5e10ca0440b5745}{HTTP\_FLAG\_WAIT\_ALL}))
+609          \{
+610             \textcolor{keywordflow}{break};
+611          \}
+612 
+613          \textcolor{comment}{//Advance data pointer}
+614          p += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+615       \}
+616    \}
+617    \textcolor{comment}{//Default encoding?}
+618    \textcolor{keywordflow}{else}
+619    \{
+620       \textcolor{comment}{//Return immediately if the end of the request body has been reached}
+621       \textcolor{keywordflow}{if}(!connection->request.byteCount)
+622          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca8b7223773301a4f3dd811f1d35e13ce4}{ERROR\_END\_OF\_STREAM};
+623 
+624       \textcolor{comment}{//Limit the number of bytes to read}
+625       n = \hyperlink{os__port_8h_a3acffbd305ee72dcd4593c0d8af64a4f}{MIN}(size, connection->request.byteCount);
+626 
+627       \textcolor{comment}{//Read data}
+628       error = \hyperlink{http__server__misc_8c_a2b807b3ad3566b5ab129e02287b3535f}{httpReceive}(connection, \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, n, received, \hyperlink{tcp_8h_aa2585d779da0ab21273a8d92de9a0ebe}{flags});
+629       \textcolor{comment}{//Any error to report?}
+630       \textcolor{keywordflow}{if}(error)
+631          \textcolor{keywordflow}{return} error;
+632 
+633       \textcolor{comment}{//Decrement the count of remaining bytes to read}
+634       connection->request.byteCount -= *received;
+635    \}
+636 
+637    \textcolor{comment}{//Successful read operation}
+638    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+639 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{http__server_8c_a79c2da1d4792e8f319d5ba29e2ff29e9}\label{http__server_8c_a79c2da1d4792e8f319d5ba29e2ff29e9}} 
+\index{http\+\_\+server.\+c@{http\+\_\+server.\+c}!http\+Send\+Error\+Response@{http\+Send\+Error\+Response}}
+\index{http\+Send\+Error\+Response@{http\+Send\+Error\+Response}!http\+\_\+server.\+c@{http\+\_\+server.\+c}}
+\subsubsection{\texorpdfstring{http\+Send\+Error\+Response()}{httpSendErrorResponse()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} http\+Send\+Error\+Response (\begin{DoxyParamCaption}\item[{\hyperlink{http__server_8h_a3506ecffde998ab02629dca83587d2f9}{Http\+Connection} $\ast$}]{connection,  }\item[{\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t}}]{status\+Code,  }\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{message }\end{DoxyParamCaption})}
+
+
+
+Send error response to the client. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em connection} & Structure representing an H\+T\+TP connection \\
+\hline
+\mbox{\tt in}  & {\em status\+Code} & H\+T\+TP status code \\
+\hline
+\mbox{\tt in}  & {\em message} & User message \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 797 of file http\+\_\+server.\+c.
+
+
+\begin{DoxyCode}
+799 \{
+800    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+801    \textcolor{keywordtype}{size\_t} \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length};
+802 
+803    \textcolor{comment}{//HTML response template}
+804    \textcolor{keyword}{static} \textcolor{keyword}{const} \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\_t} \textcolor{keyword}{template}[] =
+805       \textcolor{stringliteral}{"<!doctype html>\(\backslash\)r\(\backslash\)n"}
+806       \textcolor{stringliteral}{"<html>\(\backslash\)r\(\backslash\)n"}
+807       \textcolor{stringliteral}{"<head><title>Error %03d</title></head>\(\backslash\)r\(\backslash\)n"}
+808       \textcolor{stringliteral}{"<body>\(\backslash\)r\(\backslash\)n"}
+809       \textcolor{stringliteral}{"<h2>Error %03d</h2>\(\backslash\)r\(\backslash\)n"}
+810       \textcolor{stringliteral}{"<p>%s</p>\(\backslash\)r\(\backslash\)n"}
+811       \textcolor{stringliteral}{"</body>\(\backslash\)r\(\backslash\)n"}
+812       \textcolor{stringliteral}{"</html>\(\backslash\)r\(\backslash\)n"};
+813 
+814    \textcolor{comment}{//Compute the length of the response}
+815    length = strlen(\textcolor{keyword}{template}) + strlen(\hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}) - 4;
+816 
+817    \textcolor{comment}{//Check whether the HTTP request has a body}
+818    \textcolor{keywordflow}{if}(\hyperlink{os__port__windows_8h_ac99ec3f1036620727a68aa8c25a8963c}{strcasecmp}(connection->request.method, \textcolor{stringliteral}{"GET"}) &&
+819       \hyperlink{os__port__windows_8h_ac99ec3f1036620727a68aa8c25a8963c}{strcasecmp}(connection->request.method, \textcolor{stringliteral}{"HEAD"}) &&
+820       \hyperlink{os__port__windows_8h_ac99ec3f1036620727a68aa8c25a8963c}{strcasecmp}(connection->request.method, \textcolor{stringliteral}{"DELETE"}))
+821    \{
+822       \textcolor{comment}{//Drop the HTTP request body and close the connection after sending}
+823       \textcolor{comment}{//the HTTP response}
+824       connection->response.keepAlive = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+825    \}
+826 
+827    \textcolor{comment}{//Format HTTP response header}
+828    connection->response.statusCode = \hyperlink{dhcpv6__common_8h_ade31e7fd99344e8c35f2c373af659551}{statusCode};
+829    connection->response.contentType = \hyperlink{mime_8c_a9e79374594b83b65457d42c5589db7e0}{mimeGetType}(\textcolor{stringliteral}{".htm"});
+830    connection->response.chunkedEncoding = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+831    connection->response.contentLength = \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length};
+832 
+833    \textcolor{comment}{//Send the header to the client}
+834    error = \hyperlink{http__server_8c_ae90b959869f2eec5ad37c951b156855f}{httpWriteHeader}(connection);
+835    \textcolor{comment}{//Any error to report?}
+836    \textcolor{keywordflow}{if}(error)
+837       \textcolor{keywordflow}{return} error;
+838 
+839    \textcolor{comment}{//Format HTML response}
+840    sprintf(connection->buffer, \textcolor{keyword}{template}, \hyperlink{dhcpv6__common_8h_ade31e7fd99344e8c35f2c373af659551}{statusCode}, \hyperlink{dhcpv6__common_8h_ade31e7fd99344e8c35f2c373af659551}{statusCode}, 
+      \hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message});
+841 
+842    \textcolor{comment}{//Send response body}
+843    error = \hyperlink{http__server_8c_acb70b948502efdd99db7cf234fcb74db}{httpWriteStream}(connection, connection->buffer, length);
+844    \textcolor{comment}{//Any error to report?}
+845    \textcolor{keywordflow}{if}(error)
+846       \textcolor{keywordflow}{return} error;
+847 
+848    \textcolor{comment}{//Properly close output stream}
+849    error = \hyperlink{http__server_8c_ad794634ec0494f8b61a9ea4d439552a1}{httpCloseStream}(connection);
+850    \textcolor{comment}{//Return status code}
+851    \textcolor{keywordflow}{return} error;
+852 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{http__server_8c_a41701229c26e817c51bfcc5b9f55db67}\label{http__server_8c_a41701229c26e817c51bfcc5b9f55db67}} 
+\index{http\+\_\+server.\+c@{http\+\_\+server.\+c}!http\+Send\+Redirect\+Response@{http\+Send\+Redirect\+Response}}
+\index{http\+Send\+Redirect\+Response@{http\+Send\+Redirect\+Response}!http\+\_\+server.\+c@{http\+\_\+server.\+c}}
+\subsubsection{\texorpdfstring{http\+Send\+Redirect\+Response()}{httpSendRedirectResponse()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} http\+Send\+Redirect\+Response (\begin{DoxyParamCaption}\item[{\hyperlink{http__server_8h_a3506ecffde998ab02629dca83587d2f9}{Http\+Connection} $\ast$}]{connection,  }\item[{\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t}}]{status\+Code,  }\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{uri }\end{DoxyParamCaption})}
+
+
+
+Send redirect response to the client. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em connection} & Structure representing an H\+T\+TP connection \\
+\hline
+\mbox{\tt in}  & {\em status\+Code} & H\+T\+TP status code (301 for permanent redirects) \\
+\hline
+\mbox{\tt in}  & {\em uri} & N\+U\+L\+L-\/terminated string containing the redirect U\+RI \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 863 of file http\+\_\+server.\+c.
+
+
+\begin{DoxyCode}
+865 \{
+866    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+867    \textcolor{keywordtype}{size\_t} \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length};
+868 
+869    \textcolor{comment}{//HTML response template}
+870    \textcolor{keyword}{static} \textcolor{keyword}{const} \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\_t} \textcolor{keyword}{template}[] =
+871       \textcolor{stringliteral}{"<!doctype html>\(\backslash\)r\(\backslash\)n"}
+872       \textcolor{stringliteral}{"<html>\(\backslash\)r\(\backslash\)n"}
+873       \textcolor{stringliteral}{"<head><title>Moved</title></head>\(\backslash\)r\(\backslash\)n"}
+874       \textcolor{stringliteral}{"<body>\(\backslash\)r\(\backslash\)n"}
+875       \textcolor{stringliteral}{"<h2>Moved</h2>\(\backslash\)r\(\backslash\)n"}
+876       \textcolor{stringliteral}{"<p>This page has moved to <a href=\(\backslash\)"%s\(\backslash\)">%s</a>.</p>"}
+877       \textcolor{stringliteral}{"</body>\(\backslash\)r\(\backslash\)n"}
+878       \textcolor{stringliteral}{"</html>\(\backslash\)r\(\backslash\)n"};
+879 
+880    \textcolor{comment}{//Compute the length of the response}
+881    length = strlen(\textcolor{keyword}{template}) + 2 * strlen(uri) - 4;
+882 
+883    \textcolor{comment}{//Check whether the HTTP request has a body}
+884    \textcolor{keywordflow}{if}(\hyperlink{os__port__windows_8h_ac99ec3f1036620727a68aa8c25a8963c}{strcasecmp}(connection->request.method, \textcolor{stringliteral}{"GET"}) &&
+885       \hyperlink{os__port__windows_8h_ac99ec3f1036620727a68aa8c25a8963c}{strcasecmp}(connection->request.method, \textcolor{stringliteral}{"HEAD"}) &&
+886       \hyperlink{os__port__windows_8h_ac99ec3f1036620727a68aa8c25a8963c}{strcasecmp}(connection->request.method, \textcolor{stringliteral}{"DELETE"}))
+887    \{
+888       \textcolor{comment}{//Drop the HTTP request body and close the connection after sending}
+889       \textcolor{comment}{//the HTTP response}
+890       connection->response.keepAlive = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+891    \}
+892 
+893    \textcolor{comment}{//Format HTTP response header}
+894    connection->response.statusCode = \hyperlink{dhcpv6__common_8h_ade31e7fd99344e8c35f2c373af659551}{statusCode};
+895    connection->response.location = uri;
+896    connection->response.contentType = \hyperlink{mime_8c_a9e79374594b83b65457d42c5589db7e0}{mimeGetType}(\textcolor{stringliteral}{".htm"});
+897    connection->response.chunkedEncoding = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+898    connection->response.contentLength = \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length};
+899 
+900    \textcolor{comment}{//Send the header to the client}
+901    error = \hyperlink{http__server_8c_ae90b959869f2eec5ad37c951b156855f}{httpWriteHeader}(connection);
+902    \textcolor{comment}{//Any error to report?}
+903    \textcolor{keywordflow}{if}(error)
+904       \textcolor{keywordflow}{return} error;
+905 
+906    \textcolor{comment}{//Format HTML response}
+907    sprintf(connection->buffer, \textcolor{keyword}{template}, uri, uri);
+908 
+909    \textcolor{comment}{//Send response body}
+910    error = \hyperlink{http__server_8c_acb70b948502efdd99db7cf234fcb74db}{httpWriteStream}(connection, connection->buffer, length);
+911    \textcolor{comment}{//Any error to report?}
+912    \textcolor{keywordflow}{if}(error)
+913       \textcolor{keywordflow}{return} error;
+914 
+915    \textcolor{comment}{//Properly close output stream}
+916    error = \hyperlink{http__server_8c_ad794634ec0494f8b61a9ea4d439552a1}{httpCloseStream}(connection);
+917    \textcolor{comment}{//Return status code}
+918    \textcolor{keywordflow}{return} error;
+919 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{http__server_8c_a5a3c4bdca30ec8a37ed8c43b4cff90ea}\label{http__server_8c_a5a3c4bdca30ec8a37ed8c43b4cff90ea}} 
+\index{http\+\_\+server.\+c@{http\+\_\+server.\+c}!http\+Send\+Response@{http\+Send\+Response}}
+\index{http\+Send\+Response@{http\+Send\+Response}!http\+\_\+server.\+c@{http\+\_\+server.\+c}}
+\subsubsection{\texorpdfstring{http\+Send\+Response()}{httpSendResponse()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} http\+Send\+Response (\begin{DoxyParamCaption}\item[{\hyperlink{http__server_8h_a3506ecffde998ab02629dca83587d2f9}{Http\+Connection} $\ast$}]{connection,  }\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{uri }\end{DoxyParamCaption})}
+
+
+
+Send H\+T\+TP response. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em connection} & Structure representing an H\+T\+TP connection \\
+\hline
+\mbox{\tt in}  & {\em uri} & N\+U\+L\+L-\/terminated string containing the file to be sent in response \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 742 of file http\+\_\+server.\+c.
+
+
+\begin{DoxyCode}
+742                                                                         \{
+743     \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+744     \textcolor{keywordtype}{size\_t} \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length};
+745     \textcolor{keyword}{const} \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *\hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data};
+746 
+747     \textcolor{comment}{//Retrieve the full pathname}
+748     \hyperlink{http__server__misc_8c_a34edbde4371909896b60846f2545fbaa}{httpGetAbsolutePath}(connection, uri, connection->buffer,
+749             \hyperlink{http__server_8h_a7323ad0fee234d179bd1f679496174d2}{HTTP\_SERVER\_BUFFER\_SIZE});
+750 
+751 
+752     \textcolor{comment}{//Get the resource data associated with the URI}
+753     error = \hyperlink{resource__manager_8c_a0fe55f3dce16ce80683cae543c61f22c}{resGetData}(connection->buffer, &data, &length);
+754     \textcolor{comment}{//The specified URI cannot be found?}
+755     \textcolor{keywordflow}{if} (error)\{
+756         \textcolor{keywordflow}{return} error;
+757     \}
+758 
+759     \textcolor{comment}{//Format HTTP response header}
+760     connection->response.statusCode = 200;
+761     connection->response.contentType = \hyperlink{mime_8c_a9e79374594b83b65457d42c5589db7e0}{mimeGetType}(uri);
+762     connection->response.chunkedEncoding = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+763     connection->response.contentLength = \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length};
+764 
+765     \textcolor{comment}{//Send the header to the client}
+766     error = \hyperlink{http__server_8c_ae90b959869f2eec5ad37c951b156855f}{httpWriteHeader}(connection);
+767     \textcolor{comment}{//Any error to report?}
+768     \textcolor{keywordflow}{if} (error) \{
+769         \textcolor{comment}{//Return status code}
+770         \textcolor{keywordflow}{return} error;
+771     \}
+772 
+773 
+774     \textcolor{comment}{//Send response body}
+775     error = \hyperlink{http__server_8c_acb70b948502efdd99db7cf234fcb74db}{httpWriteStream}(connection, data, length);
+776     \textcolor{comment}{//Any error to report?}
+777     \textcolor{keywordflow}{if} (error)\{
+778         \textcolor{keywordflow}{return} error;
+779     \}
+780 
+781     \textcolor{comment}{//Properly close output stream}
+782     error = \hyperlink{http__server_8c_ad794634ec0494f8b61a9ea4d439552a1}{httpCloseStream}(connection);
+783 
+784     \textcolor{comment}{//Return status code}
+785     \textcolor{keywordflow}{return} error;
+786 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{http__server_8c_a76d52d5fd562dd1f6351059642843b91}\label{http__server_8c_a76d52d5fd562dd1f6351059642843b91}} 
+\index{http\+\_\+server.\+c@{http\+\_\+server.\+c}!http\+Server\+Get\+Default\+Settings@{http\+Server\+Get\+Default\+Settings}}
+\index{http\+Server\+Get\+Default\+Settings@{http\+Server\+Get\+Default\+Settings}!http\+\_\+server.\+c@{http\+\_\+server.\+c}}
+\subsubsection{\texorpdfstring{http\+Server\+Get\+Default\+Settings()}{httpServerGetDefaultSettings()}}
+{\footnotesize\ttfamily void http\+Server\+Get\+Default\+Settings (\begin{DoxyParamCaption}\item[{\hyperlink{structHttpServerSettings}{Http\+Server\+Settings} $\ast$}]{settings }\end{DoxyParamCaption})}
+
+
+
+Initialize settings with default values. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em settings} & Structure that contains H\+T\+TP server settings \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 63 of file http\+\_\+server.\+c.
+
+
+\begin{DoxyCode}
+64 \{
+65    \textcolor{comment}{//The HTTP server is not bound to any interface}
+66    settings->\hyperlink{structHttpServerSettings_a6bbe22548511f1840919ccb1a2de54dc}{interface} = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+67 
+68    \textcolor{comment}{//Listen to port 80}
+69    settings->\hyperlink{structHttpServerSettings_ac25483ccae9ee68803c66c74106b0488}{port} = \hyperlink{http__common_8h_a0906dae4a42c1fef9ec0cd0a5212ed4a}{HTTP\_PORT};
+70    \textcolor{comment}{//Maximum length of the pending connection queue}
+71    settings->\hyperlink{structHttpServerSettings_aa05118aaa9c4c355bc8c3c95ece110c9}{backlog} = \hyperlink{http__server_8h_aea8e74bcd8c8e03031fb08e1ea553f41}{HTTP\_SERVER\_BACKLOG};
+72 
+73    \textcolor{comment}{//Client connections}
+74    settings->\hyperlink{structHttpServerSettings_a156347727039cb538dc3c2d966517590}{maxConnections} = 0;
+75    settings->\hyperlink{structHttpServerSettings_aa3f92614da4bf57aae294024618b66c1}{connections} = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+76 
+77    \textcolor{comment}{//Specify the server's root directory}
+78    strcpy(settings->\hyperlink{structHttpServerSettings_a969e854f1d0a2b6cc6015aa854f7c88f}{rootDirectory}, \textcolor{stringliteral}{"/"});
+79    \textcolor{comment}{//Set default home page}
+80    strcpy(settings->\hyperlink{structHttpServerSettings_a9bdbfb6cff737fd113955ed3ac74045b}{defaultDocument}, \textcolor{stringliteral}{"index.htm"});
+81 
+82 \textcolor{preprocessor}{#if (HTTP\_SERVER\_TLS\_SUPPORT == ENABLED)}
+83    \textcolor{comment}{//TLS initialization callback function}
+84    settings->\hyperlink{structHttpServerSettings_a890f65c7a1d68d186e397bbd8a1622de}{tlsInitCallback} = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+85 \textcolor{preprocessor}{#endif}
+86 
+87 \textcolor{preprocessor}{#if (HTTP\_SERVER\_BASIC\_AUTH\_SUPPORT == ENABLED || HTTP\_SERVER\_DIGEST\_AUTH\_SUPPORT == ENABLED)}
+88    \textcolor{comment}{//Random data generation callback function}
+89    settings->\hyperlink{structHttpServerSettings_aeb1efb95fab8e249ead38a9123ae8277}{randCallback} = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+90    \textcolor{comment}{//HTTP authentication callback function}
+91    settings->\hyperlink{structHttpServerSettings_a8604bf4a86848e610a16f8151f97ab88}{authCallback} = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+92 \textcolor{preprocessor}{#endif}
+93 
+94    \textcolor{comment}{//CGI callback function}
+95    settings->\hyperlink{structHttpServerSettings_abee5b324f9d0469ec4011cd02a19db50}{cgiCallback} = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+96    \textcolor{comment}{//HTTP request callback function}
+97    settings->\hyperlink{structHttpServerSettings_ad4dd665b2139042aef4c86fd2bae0d2a}{requestCallback} = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+98    \textcolor{comment}{//URI not found callback function}
+99    settings->\hyperlink{structHttpServerSettings_adc5ffb952164a85c426fd76ffb30f2b2}{uriNotFoundCallback} = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+100 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{http__server_8c_af4c24deeba1bc7c225742c0b60c17665}\label{http__server_8c_af4c24deeba1bc7c225742c0b60c17665}} 
+\index{http\+\_\+server.\+c@{http\+\_\+server.\+c}!http\+Server\+Init@{http\+Server\+Init}}
+\index{http\+Server\+Init@{http\+Server\+Init}!http\+\_\+server.\+c@{http\+\_\+server.\+c}}
+\subsubsection{\texorpdfstring{http\+Server\+Init()}{httpServerInit()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} http\+Server\+Init (\begin{DoxyParamCaption}\item[{\hyperlink{http__server_8h_a952abbfa31a2188c3d65357e79531e03}{Http\+Server\+Context} $\ast$}]{context,  }\item[{const \hyperlink{structHttpServerSettings}{Http\+Server\+Settings} $\ast$}]{settings }\end{DoxyParamCaption})}
+
+
+
+H\+T\+TP server initialization. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the H\+T\+TP server context \\
+\hline
+\mbox{\tt in}  & {\em settings} & H\+T\+TP server specific settings \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 110 of file http\+\_\+server.\+c.
+
+
+\begin{DoxyCode}
+111 \{
+112    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+113    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+114    \hyperlink{http__server_8h_a3506ecffde998ab02629dca83587d2f9}{HttpConnection} *connection;
+115 
+116    \textcolor{comment}{//Debug message}
+117    \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"Initializing HTTP server...\(\backslash\)r\(\backslash\)n"});
+118 
+119    \textcolor{comment}{//Ensure the parameters are valid}
+120    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || settings == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+121       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+122 
+123    \textcolor{comment}{//Check settings}
+124    \textcolor{keywordflow}{if}(settings->\hyperlink{structHttpServerSettings_a156347727039cb538dc3c2d966517590}{maxConnections} == 0 || settings->\hyperlink{structHttpServerSettings_aa3f92614da4bf57aae294024618b66c1}{connections} == 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+125       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+126 
+127    \textcolor{comment}{//Clear the HTTP server context}
+128    memset(context, 0, \textcolor{keyword}{sizeof}(\hyperlink{http__server_8h_a952abbfa31a2188c3d65357e79531e03}{HttpServerContext}));
+129 
+130    \textcolor{comment}{//Save user settings}
+131    context->settings = *settings;
+132    \textcolor{comment}{//Client connections}
+133    context->\hyperlink{structHttpServerSettings_aa3f92614da4bf57aae294024618b66c1}{connections} = settings->\hyperlink{structHttpServerSettings_aa3f92614da4bf57aae294024618b66c1}{connections};
+134 
+135    \textcolor{comment}{//Create a semaphore to limit the number of simultaneous connections}
+136    \textcolor{keywordflow}{if}(!\hyperlink{os__port__chibios_8c_ab40200616c2421cd9baf2a9ec26de7b4}{osCreateSemaphore}(&context->semaphore, context->settings.maxConnections))
+137       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca528efe91b7a7e4bcc9a6de7d4b778c67}{ERROR\_OUT\_OF\_RESOURCES};
+138 
+139    \textcolor{comment}{//Loop through client connections}
+140    \textcolor{keywordflow}{for}(i = 0; i < context->settings.maxConnections; i++)
+141    \{
+142       \textcolor{comment}{//Point to the structure representing the client connection}
+143       connection = &context->connections[i];
+144 
+145       \textcolor{comment}{//Initialize the structure}
+146       memset(connection, 0, \textcolor{keyword}{sizeof}(\hyperlink{http__server_8h_a3506ecffde998ab02629dca83587d2f9}{HttpConnection}));
+147 
+148       \textcolor{comment}{//Create an event object to manage connection lifetime}
+149       \textcolor{keywordflow}{if}(!\hyperlink{os__port__chibios_8c_ac1658f3fed1eb64efcd47e4503a9ef2e}{osCreateEvent}(&connection->startEvent))
+150          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca528efe91b7a7e4bcc9a6de7d4b778c67}{ERROR\_OUT\_OF\_RESOURCES};
+151    \}
+152 
+153 \textcolor{preprocessor}{#if (HTTP\_SERVER\_TLS\_SUPPORT == ENABLED && TLS\_TICKET\_SUPPORT == ENABLED)}
+154    \textcolor{comment}{//Initialize ticket encryption context}
+155    error = \hyperlink{tls__ticket_8c_a900454bf2fd13397d121c59265d93365}{tlsInitTicketContext}(&context->tlsTicketContext);
+156    \textcolor{comment}{//Any error to report?}
+157    \textcolor{keywordflow}{if}(error)
+158       \textcolor{keywordflow}{return} error;
+159 \textcolor{preprocessor}{#endif}
+160 
+161 \textcolor{preprocessor}{#if (HTTP\_SERVER\_DIGEST\_AUTH\_SUPPORT == ENABLED)}
+162    \textcolor{comment}{//Create a mutex to prevent simultaneous access to the nonce cache}
+163    \textcolor{keywordflow}{if}(!\hyperlink{os__port__chibios_8c_a16627f901c807c29adf29a38fb1af16a}{osCreateMutex}(&context->nonceCacheMutex))
+164       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca528efe91b7a7e4bcc9a6de7d4b778c67}{ERROR\_OUT\_OF\_RESOURCES};
+165 \textcolor{preprocessor}{#endif}
+166 
+167    \textcolor{comment}{//Open a TCP socket}
+168    context->socket = \hyperlink{socket_8c_aa139bbf42b326b52eb08cf52771ac337}{socketOpen}(\hyperlink{socket_8h_aa78c7398fa81f7f62aa233159d4d8d97a9dab003c4dc9f7279e806241534d4859}{SOCKET\_TYPE\_STREAM}, 
+      \hyperlink{socket_8h_a56eb0e60bda5d1d8a2e702228405d969ae0f38a6f025bce7700b3cf0ddd04bb2a}{SOCKET\_IP\_PROTO\_TCP});
+169    \textcolor{comment}{//Failed to open socket?}
+170    \textcolor{keywordflow}{if}(context->socket == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+171       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cab721230e985e398cc0977dd729a12c61}{ERROR\_OPEN\_FAILED};
+172 
+173    \textcolor{comment}{//Set timeout for blocking functions}
+174    error = \hyperlink{socket_8c_abdd29ac0ba4a644c726f5b1280680099}{socketSetTimeout}(context->socket, \hyperlink{os__port_8h_ab893de6f8a0ec8b0e6dd8097ff398019}{INFINITE\_DELAY});
+175    \textcolor{comment}{//Any error to report?}
+176    \textcolor{keywordflow}{if}(error)
+177       \textcolor{keywordflow}{return} error;
+178 
+179    \textcolor{comment}{//Associate the socket with the relevant interface}
+180    error = \hyperlink{net__legacy_8h_a80bc49fa99e5654d8c345cd5c70d36d3}{socketBindToInterface}(context->socket, settings->
+      \hyperlink{structHttpServerSettings_a6bbe22548511f1840919ccb1a2de54dc}{interface});
+181    \textcolor{comment}{//Unable to bind the socket to the desired interface?}
+182    \textcolor{keywordflow}{if}(error)
+183       \textcolor{keywordflow}{return} error;
+184 
+185    \textcolor{comment}{//Bind newly created socket to port 80}
+186    error = \hyperlink{socket_8c_a56de93ca9f66782811dbe151d6da0b9c}{socketBind}(context->socket, &\hyperlink{ip_8c_a132481a9d89ddf554ea8bbbe342e5d5a}{IP\_ADDR\_ANY}, settings->
+      \hyperlink{structHttpServerSettings_ac25483ccae9ee68803c66c74106b0488}{port});
+187    \textcolor{comment}{//Failed to bind socket to port 80?}
+188    \textcolor{keywordflow}{if}(error)
+189       \textcolor{keywordflow}{return} error;
+190 
+191    \textcolor{comment}{//Place socket in listening state}
+192    error = \hyperlink{socket_8c_a96b275d0dd033cf5fc36ba1a9c4543e3}{socketListen}(context->socket, settings->\hyperlink{structHttpServerSettings_aa05118aaa9c4c355bc8c3c95ece110c9}{backlog});
+193    \textcolor{comment}{//Any failure to report?}
+194    \textcolor{keywordflow}{if}(error)
+195       \textcolor{keywordflow}{return} error;
+196 
+197    \textcolor{comment}{//Successful initialization}
+198    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+199 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{http__server_8c_ae083b17dc603e6a0d488be91e0c27b72}\label{http__server_8c_ae083b17dc603e6a0d488be91e0c27b72}} 
+\index{http\+\_\+server.\+c@{http\+\_\+server.\+c}!http\+Server\+Start@{http\+Server\+Start}}
+\index{http\+Server\+Start@{http\+Server\+Start}!http\+\_\+server.\+c@{http\+\_\+server.\+c}}
+\subsubsection{\texorpdfstring{http\+Server\+Start()}{httpServerStart()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} http\+Server\+Start (\begin{DoxyParamCaption}\item[{\hyperlink{http__server_8h_a952abbfa31a2188c3d65357e79531e03}{Http\+Server\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Start H\+T\+TP server. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the H\+T\+TP server context \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 208 of file http\+\_\+server.\+c.
+
+
+\begin{DoxyCode}
+209 \{
+210    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+211 
+212    \textcolor{comment}{//Debug message}
+213    \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"Starting HTTP server...\(\backslash\)r\(\backslash\)n"});
+214 
+215    \textcolor{comment}{//Make sure the HTTP server context is valid}
+216    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+217       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+218 
+219    \textcolor{comment}{//Loop through client connections}
+220    \textcolor{keywordflow}{for}(i = 0; i < context->settings.maxConnections; i++)
+221    \{
+222       \textcolor{comment}{//Create a task to service a given HTTP client connection}
+223       context->connections[i].taskHandle = \hyperlink{os__port__chibios_8c_aef8c6fe13a0df9e5cfaeb0501ecbac3e}{osCreateTask}(\textcolor{stringliteral}{"HTTP Connection"},
+224          \hyperlink{http__server_8c_ae2e4da5bf041a8cba9d4a7b542de3b40}{httpConnectionTask}, &context->connections[i],
+225          \hyperlink{http__server_8h_a55df2d73f0bb574020fbf90fb8938522}{HTTP\_SERVER\_STACK\_SIZE}, \hyperlink{http__server_8h_a10923ad09edf9ead7c8a42a8f0a9d063}{HTTP\_SERVER\_PRIORITY});
+226 
+227       \textcolor{comment}{//Unable to create the task?}
+228       \textcolor{keywordflow}{if}(context->connections[i].taskHandle == \hyperlink{os__port_8h_aa673e52d8b286c3b613ad127aa85d536}{OS\_INVALID\_HANDLE})
+229          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca528efe91b7a7e4bcc9a6de7d4b778c67}{ERROR\_OUT\_OF\_RESOURCES};
+230    \}
+231 
+232    \textcolor{comment}{//Create the HTTP server listener task}
+233    context->taskHandle = \hyperlink{os__port__chibios_8c_aef8c6fe13a0df9e5cfaeb0501ecbac3e}{osCreateTask}(\textcolor{stringliteral}{"HTTP Listener"}, 
+      \hyperlink{http__server_8c_ae21cefaace6258eef1a4b62f35a2a51d}{httpListenerTask},
+234       context, \hyperlink{http__server_8h_a55df2d73f0bb574020fbf90fb8938522}{HTTP\_SERVER\_STACK\_SIZE}, 
+      \hyperlink{http__server_8h_a10923ad09edf9ead7c8a42a8f0a9d063}{HTTP\_SERVER\_PRIORITY});
+235 
+236    \textcolor{comment}{//Unable to create the task?}
+237    \textcolor{keywordflow}{if}(context->taskHandle == \hyperlink{os__port_8h_aa673e52d8b286c3b613ad127aa85d536}{OS\_INVALID\_HANDLE})
+238       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca528efe91b7a7e4bcc9a6de7d4b778c67}{ERROR\_OUT\_OF\_RESOURCES};
+239 
+240    \textcolor{comment}{//The HTTP server has successfully started}
+241    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+242 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{http__server_8c_ae6a535310320fa3399d1287362183b4a}\label{http__server_8c_ae6a535310320fa3399d1287362183b4a}} 
+\index{http\+\_\+server.\+c@{http\+\_\+server.\+c}!http\+Upgrade\+To\+Web\+Socket@{http\+Upgrade\+To\+Web\+Socket}}
+\index{http\+Upgrade\+To\+Web\+Socket@{http\+Upgrade\+To\+Web\+Socket}!http\+\_\+server.\+c@{http\+\_\+server.\+c}}
+\subsubsection{\texorpdfstring{http\+Upgrade\+To\+Web\+Socket()}{httpUpgradeToWebSocket()}}
+{\footnotesize\ttfamily \hyperlink{web__socket_8h_aad796fb4e3af91c4358c5b273d4a2028}{Web\+Socket}$\ast$ http\+Upgrade\+To\+Web\+Socket (\begin{DoxyParamCaption}\item[{\hyperlink{http__server_8h_a3506ecffde998ab02629dca83587d2f9}{Http\+Connection} $\ast$}]{connection }\end{DoxyParamCaption})}
+
+
+
+Upgrade an existing H\+T\+TP connection to a Web\+Socket. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em connection} & Structure representing an H\+T\+TP connection \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Handle referencing the new Web\+Socket 
+\end{DoxyReturn}
+
+
+Definition at line 977 of file http\+\_\+server.\+c.
+
+
+\begin{DoxyCode}
+978 \{
+979    \hyperlink{web__socket_8h_aad796fb4e3af91c4358c5b273d4a2028}{WebSocket} *webSocket;
+980 
+981 \textcolor{preprocessor}{#if (HTTP\_SERVER\_WEB\_SOCKET\_SUPPORT == ENABLED)}
+982 \textcolor{preprocessor}{#if (HTTP\_SERVER\_TLS\_SUPPORT == ENABLED)}
+983    \textcolor{comment}{//Check whether a secure connection is being used}
+984    \textcolor{keywordflow}{if}(connection->tlsContext != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+985    \{
+986       \textcolor{comment}{//Upgrade the secure connection to a WebSocket}
+987       webSocket = \hyperlink{web__socket_8c_a3405a2e8818e5b35aae323f8b0f02ef8}{webSocketUpgradeSecureSocket}(connection->socket,
+988          connection->tlsContext);
+989    \}
+990    \textcolor{keywordflow}{else}
+991 \textcolor{preprocessor}{#endif}
+992    \{
+993       \textcolor{comment}{//Upgrade the connection to a WebSocket}
+994       webSocket = \hyperlink{web__socket_8c_a5c248cf726d2b629ba392b145c8d2640}{webSocketUpgradeSocket}(connection->socket);
+995    \}
+996 
+997    \textcolor{comment}{//Succesful upgrade?}
+998    \textcolor{keywordflow}{if}(webSocket != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+999    \{
+1000       \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+1001 
+1002       \textcolor{comment}{//Copy client's key}
+1003       error = \hyperlink{web__socket_8c_a34ff0ac46218d6a3fea6eda0410faebd}{webSocketSetClientKey}(webSocket, connection->request.clientKey);
+1004 
+1005       \textcolor{comment}{//Check status code}
+1006       \textcolor{keywordflow}{if}(!error)
+1007       \{
+1008 \textcolor{preprocessor}{#if (HTTP\_SERVER\_TLS\_SUPPORT == ENABLED)}
+1009          \textcolor{comment}{//Detach the TLS context from the HTTP connection}
+1010          connection->tlsContext = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+1011 \textcolor{preprocessor}{#endif}
+1012          \textcolor{comment}{//Detach the socket from the HTTP connection}
+1013          connection->socket = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+1014       \}
+1015       \textcolor{keywordflow}{else}
+1016       \{
+1017          \textcolor{comment}{//Clean up side effects}
+1018          \hyperlink{web__socket_8c_a9b9a31944d5466c54f9720d34403c4d6}{webSocketClose}(webSocket);
+1019          webSocket = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+1020       \}
+1021    \}
+1022 \textcolor{preprocessor}{#else}
+1023    \textcolor{comment}{//WebSockets are not supported}
+1024    webSocket = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+1025 \textcolor{preprocessor}{#endif}
+1026 
+1027    \textcolor{comment}{//Return a handle to the freshly created WebSocket}
+1028    \textcolor{keywordflow}{return} webSocket;
+1029 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{http__server_8c_ae90b959869f2eec5ad37c951b156855f}\label{http__server_8c_ae90b959869f2eec5ad37c951b156855f}} 
+\index{http\+\_\+server.\+c@{http\+\_\+server.\+c}!http\+Write\+Header@{http\+Write\+Header}}
+\index{http\+Write\+Header@{http\+Write\+Header}!http\+\_\+server.\+c@{http\+\_\+server.\+c}}
+\subsubsection{\texorpdfstring{http\+Write\+Header()}{httpWriteHeader()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} http\+Write\+Header (\begin{DoxyParamCaption}\item[{\hyperlink{http__server_8h_a3506ecffde998ab02629dca83587d2f9}{Http\+Connection} $\ast$}]{connection }\end{DoxyParamCaption})}
+
+
+
+Send H\+T\+TP response header. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em connection} & Structure representing an H\+T\+TP connection \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 511 of file http\+\_\+server.\+c.
+
+
+\begin{DoxyCode}
+512 \{
+513    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+514 
+515    \textcolor{comment}{//Format HTTP response header}
+516    error = \hyperlink{http__server__misc_8c_a7553d42376343d871d04ac7208deeda6}{httpFormatResponseHeader}(connection, connection->buffer);
+517 
+518    \textcolor{comment}{//Check status code}
+519    \textcolor{keywordflow}{if}(!error)
+520    \{
+521       \textcolor{comment}{//Debug message}
+522       \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"HTTP response header:\(\backslash\)r\(\backslash\)n%s"}, connection->buffer);
+523 
+524       \textcolor{comment}{//Send HTTP response header to the client}
+525       error = \hyperlink{http__server__misc_8c_a8d6b785321ab0843c72699bbc8c9d51b}{httpSend}(connection, connection->buffer,
+526          strlen(connection->buffer), \hyperlink{http__common_8h_a8d138d340435fa37e2a654238ed6deabaa62721f9fcda862318db5c8ae6d60a72}{HTTP\_FLAG\_DELAY});
+527    \}
+528 
+529    \textcolor{comment}{//Return status code}
+530    \textcolor{keywordflow}{return} error;
+531 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{http__server_8c_acb70b948502efdd99db7cf234fcb74db}\label{http__server_8c_acb70b948502efdd99db7cf234fcb74db}} 
+\index{http\+\_\+server.\+c@{http\+\_\+server.\+c}!http\+Write\+Stream@{http\+Write\+Stream}}
+\index{http\+Write\+Stream@{http\+Write\+Stream}!http\+\_\+server.\+c@{http\+\_\+server.\+c}}
+\subsubsection{\texorpdfstring{http\+Write\+Stream()}{httpWriteStream()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} http\+Write\+Stream (\begin{DoxyParamCaption}\item[{\hyperlink{http__server_8h_a3506ecffde998ab02629dca83587d2f9}{Http\+Connection} $\ast$}]{connection,  }\item[{const void $\ast$}]{data,  }\item[{size\+\_\+t}]{length }\end{DoxyParamCaption})}
+
+
+
+Write data to the client. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em connection} & Structure representing an H\+T\+TP connection \\
+\hline
+\mbox{\tt in}  & {\em data} & Buffer containing the data to be transmitted \\
+\hline
+\mbox{\tt in}  & {\em length} & Number of bytes to be transmitted \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 650 of file http\+\_\+server.\+c.
+
+
+\begin{DoxyCode}
+652 \{
+653    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+654    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+655 
+656    \textcolor{comment}{//Use chunked encoding transfer?}
+657    \textcolor{keywordflow}{if}(connection->response.chunkedEncoding)
+658    \{
+659       \textcolor{comment}{//Any data to send?}
+660       \textcolor{keywordflow}{if}(\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} > 0)
+661       \{
+662          \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\_t} \hyperlink{md2_8c_adf356ff381033f761b7de5f76e763a45}{s}[8];
+663 
+664          \textcolor{comment}{//The chunk-size field is a string of hex digits}
+665          \textcolor{comment}{//indicating the size of the chunk}
+666          n = sprintf(s, \textcolor{stringliteral}{"%X\(\backslash\)r\(\backslash\)n"}, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length});
+667 
+668          \textcolor{comment}{//Send the chunk-size field}
+669          error = \hyperlink{http__server__misc_8c_a8d6b785321ab0843c72699bbc8c9d51b}{httpSend}(connection, s, n, \hyperlink{http__common_8h_a8d138d340435fa37e2a654238ed6deabaa62721f9fcda862318db5c8ae6d60a72}{HTTP\_FLAG\_DELAY});
+670          \textcolor{comment}{//Failed to send data?}
+671          \textcolor{keywordflow}{if}(error)
+672             \textcolor{keywordflow}{return} error;
+673 
+674          \textcolor{comment}{//Send the chunk-data}
+675          error = \hyperlink{http__server__misc_8c_a8d6b785321ab0843c72699bbc8c9d51b}{httpSend}(connection, \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, 
+      \hyperlink{http__common_8h_a8d138d340435fa37e2a654238ed6deabaa62721f9fcda862318db5c8ae6d60a72}{HTTP\_FLAG\_DELAY});
+676          \textcolor{comment}{//Failed to send data?}
+677          \textcolor{keywordflow}{if}(error)
+678             \textcolor{keywordflow}{return} error;
+679 
+680          \textcolor{comment}{//Terminate the chunk-data by CRLF}
+681          error = \hyperlink{http__server__misc_8c_a8d6b785321ab0843c72699bbc8c9d51b}{httpSend}(connection, \textcolor{stringliteral}{"\(\backslash\)r\(\backslash\)n"}, 2, \hyperlink{http__common_8h_a8d138d340435fa37e2a654238ed6deabaa62721f9fcda862318db5c8ae6d60a72}{HTTP\_FLAG\_DELAY});
+682       \}
+683       \textcolor{keywordflow}{else}
+684       \{
+685          \textcolor{comment}{//Any chunk whose size is zero may terminate the data}
+686          \textcolor{comment}{//transfer and must be discarded}
+687          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+688       \}
+689    \}
+690    \textcolor{comment}{//Default encoding?}
+691    \textcolor{keywordflow}{else}
+692    \{
+693       \textcolor{comment}{//The length of the body shall not exceed the value}
+694       \textcolor{comment}{//specified in the Content-Length field}
+695       \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} = \hyperlink{os__port_8h_a3acffbd305ee72dcd4593c0d8af64a4f}{MIN}(\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, connection->response.byteCount);
+696 
+697       \textcolor{comment}{//Send user data}
+698       error = \hyperlink{http__server__misc_8c_a8d6b785321ab0843c72699bbc8c9d51b}{httpSend}(connection, \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, 
+      \hyperlink{http__common_8h_a8d138d340435fa37e2a654238ed6deabaa62721f9fcda862318db5c8ae6d60a72}{HTTP\_FLAG\_DELAY});
+699 
+700       \textcolor{comment}{//Decrement the count of remaining bytes to be transferred}
+701       connection->response.byteCount -= \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length};
+702    \}
+703 
+704    \textcolor{comment}{//Return status code}
+705    \textcolor{keywordflow}{return} error;
+706 \}
+\end{DoxyCode}

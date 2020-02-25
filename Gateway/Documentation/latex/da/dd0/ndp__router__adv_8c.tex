@@ -1,0 +1,986 @@
+\hypertarget{ndp__router__adv_8c}{}\section{cyclone\+\_\+tcp/ipv6/ndp\+\_\+router\+\_\+adv.c File Reference}
+\label{ndp__router__adv_8c}\index{cyclone\+\_\+tcp/ipv6/ndp\+\_\+router\+\_\+adv.\+c@{cyclone\+\_\+tcp/ipv6/ndp\+\_\+router\+\_\+adv.\+c}}
+
+
+Router advertisement service.  
+
+
+{\ttfamily \#include \char`\"{}core/net.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}core/ip.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ipv6/ipv6.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ipv6/ipv6\+\_\+misc.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ipv6/icmpv6.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ipv6/ndp.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ipv6/ndp\+\_\+cache.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ipv6/ndp\+\_\+misc.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ipv6/ndp\+\_\+router\+\_\+adv.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}mibs/ip\+\_\+mib\+\_\+module.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}debug.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{ndp__router__adv_8c_afcdf5e66fd927a7f4cc64295acd20407}{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}~\hyperlink{net__config_8h_a9b043f871643938bfb7bb24a351c144c}{N\+D\+P\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{ndp__router__adv_8c_a9791b8be432e433bc68e78b7c3dc8169}{ndp\+Router\+Adv\+Get\+Default\+Settings} (\hyperlink{structNdpRouterAdvSettings}{Ndp\+Router\+Adv\+Settings} $\ast$settings)
+\begin{DoxyCompactList}\small\item\em Initialize settings with default values. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ndp__router__adv_8c_a364d9a454d57bfaa2c55c1180a69fda5}{ndp\+Router\+Adv\+Init} (\hyperlink{structNdpRouterAdvContext}{Ndp\+Router\+Adv\+Context} $\ast$context, const \hyperlink{structNdpRouterAdvSettings}{Ndp\+Router\+Adv\+Settings} $\ast$settings)
+\begin{DoxyCompactList}\small\item\em RA service initialization. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ndp__router__adv_8c_a86c2e003c3a7118a4798befcabbf699b}{ndp\+Router\+Adv\+Start} (\hyperlink{structNdpRouterAdvContext}{Ndp\+Router\+Adv\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Start RA service. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ndp__router__adv_8c_af5d93dd46ba1f949191e2b9c6461a1f6}{ndp\+Router\+Adv\+Stop} (\hyperlink{structNdpRouterAdvContext}{Ndp\+Router\+Adv\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Stop RA service. \end{DoxyCompactList}\item 
+void \hyperlink{ndp__router__adv_8c_a65d87dfbf69457b2ae5072e2c2820a1e}{ndp\+Router\+Adv\+Tick} (\hyperlink{structNdpRouterAdvContext}{Ndp\+Router\+Adv\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em RA service timer handler. \end{DoxyCompactList}\item 
+void \hyperlink{ndp__router__adv_8c_a55ffb5f34a86b1283c7155926b2bb5c6}{ndp\+Router\+Adv\+Link\+Change\+Event} (\hyperlink{structNdpRouterAdvContext}{Ndp\+Router\+Adv\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Callback function for link change event. \end{DoxyCompactList}\item 
+void \hyperlink{ndp__router__adv_8c_a2fdab36d5dc04664ba00cbe16014af23}{ndp\+Process\+Router\+Sol} (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface, \hyperlink{ipv6_8h_a68061e0a0b502d880cbe60b645cfa2b7}{Ipv6\+Pseudo\+Header} $\ast$pseudo\+Header, const \hyperlink{structNetBuffer}{Net\+Buffer} $\ast$buffer, size\+\_\+t \hyperlink{pic32mz_2isr__support_8h_ac0542d92dfcd62c19170fd963f9e5052}{offset}, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} hop\+Limit)
+\begin{DoxyCompactList}\small\item\em Router Solicitation message processing. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ndp__router__adv_8c_a38789c40025e0980d3d2c47d9a321930}{ndp\+Send\+Router\+Adv} (\hyperlink{structNdpRouterAdvContext}{Ndp\+Router\+Adv\+Context} $\ast$context, \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} \hyperlink{ndp_8h_a3c1f069f0e60bd95262f7548a1bf89e4}{router\+Lifetime})
+\begin{DoxyCompactList}\small\item\em Send a Router Advertisement message. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\+\_\+t} \hyperlink{ndp__router__adv_8c_a7a7361c53c62d0008b3c45351ab44e8e}{ndp\+Router\+Adv\+Tick\+Counter}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Router advertisement service. 
+
+\hypertarget{pic32mz__ef__curiosity_8h_License}{}\subsection{License}\label{pic32mz__ef__curiosity_8h_License}
+S\+P\+D\+X-\/\+License-\/\+Identifier\+: G\+P\+L-\/2.\+0-\/or-\/later
+
+Copyright (C) 2010-\/2019 Oryx Embedded S\+A\+RL. All rights reserved.
+
+This file is part of Cyclone\+T\+CP Open.
+
+This program is free software; you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+
+You should have received a copy of the G\+NU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-\/1301, U\+SA.
+
+\begin{DoxyAuthor}{Author}
+Oryx Embedded S\+A\+RL (www.\+oryx-\/embedded.\+com) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+9.\+6 
+\end{DoxyVersion}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{ndp__router__adv_8c_afcdf5e66fd927a7f4cc64295acd20407}\label{ndp__router__adv_8c_afcdf5e66fd927a7f4cc64295acd20407}} 
+\index{ndp\+\_\+router\+\_\+adv.\+c@{ndp\+\_\+router\+\_\+adv.\+c}!T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+\index{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}!ndp\+\_\+router\+\_\+adv.\+c@{ndp\+\_\+router\+\_\+adv.\+c}}
+\subsubsection{\texorpdfstring{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}{TRACE\_LEVEL}}
+{\footnotesize\ttfamily \#define T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL~\hyperlink{net__config_8h_a9b043f871643938bfb7bb24a351c144c}{N\+D\+P\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+
+
+
+Definition at line 32 of file ndp\+\_\+router\+\_\+adv.\+c.
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{ndp__router__adv_8c_a2fdab36d5dc04664ba00cbe16014af23}\label{ndp__router__adv_8c_a2fdab36d5dc04664ba00cbe16014af23}} 
+\index{ndp\+\_\+router\+\_\+adv.\+c@{ndp\+\_\+router\+\_\+adv.\+c}!ndp\+Process\+Router\+Sol@{ndp\+Process\+Router\+Sol}}
+\index{ndp\+Process\+Router\+Sol@{ndp\+Process\+Router\+Sol}!ndp\+\_\+router\+\_\+adv.\+c@{ndp\+\_\+router\+\_\+adv.\+c}}
+\subsubsection{\texorpdfstring{ndp\+Process\+Router\+Sol()}{ndpProcessRouterSol()}}
+{\footnotesize\ttfamily void ndp\+Process\+Router\+Sol (\begin{DoxyParamCaption}\item[{\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$}]{interface,  }\item[{\hyperlink{ipv6_8h_a68061e0a0b502d880cbe60b645cfa2b7}{Ipv6\+Pseudo\+Header} $\ast$}]{pseudo\+Header,  }\item[{const \hyperlink{structNetBuffer}{Net\+Buffer} $\ast$}]{buffer,  }\item[{size\+\_\+t}]{offset,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}}]{hop\+Limit }\end{DoxyParamCaption})}
+
+
+
+Router Solicitation message processing. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em interface} & Underlying network interface \\
+\hline
+\mbox{\tt in}  & {\em pseudo\+Header} & I\+Pv6 pseudo header \\
+\hline
+\mbox{\tt in}  & {\em buffer} & Multi-\/part buffer containing the Router Advertisement message \\
+\hline
+\mbox{\tt in}  & {\em offset} & Offset to the first byte of the message \\
+\hline
+\mbox{\tt in}  & {\em hop\+Limit} & Hop Limit field from I\+Pv6 header \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 408 of file ndp\+\_\+router\+\_\+adv.\+c.
+
+
+\begin{DoxyCode}
+410 \{
+411    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+412    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+413    \textcolor{keywordtype}{size\_t} \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length};
+414    \hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\_t} \hyperlink{dhcpv6__common_8h_ae73654f333e4363463ad8c594eca1905}{time};
+415    \hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\_t} delay;
+416    \hyperlink{structNdpRouterAdvContext}{NdpRouterAdvContext} *context;
+417    \hyperlink{ndp_8h_a0d342407a414edc2cf6ea2fefbd24621}{NdpRouterSolMessage} *\hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message};
+418    \hyperlink{ndp_8h_a468b5bb872928c789dabecb62486ce8c}{NdpLinkLayerAddrOption} *option;
+419    \hyperlink{structNdpNeighborCacheEntry}{NdpNeighborCacheEntry} *entry;
+420 
+421    \textcolor{comment}{//Point to the RA service context}
+422    context = interface->ndpRouterAdvContext;
+423 
+424    \textcolor{comment}{//A host must silently discard any received Router Solicitation}
+425    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+426       \textcolor{keywordflow}{return};
+427 
+428    \textcolor{comment}{//Get current time}
+429    time = \hyperlink{os__port__chibios_8c_ab66a11272d40a916fa69dd8e4dc443d4}{osGetSystemTime}();
+430 
+431    \textcolor{comment}{//Retrieve the length of the message}
+432    length = \hyperlink{net__mem_8c_ac9dbcd9e28e61d8f4f6d2e9af2607b68}{netBufferGetLength}(buffer) - \hyperlink{pic32mz_2isr__support_8h_a12a5aed8a193ebbf9a641104a310610d}{offset};
+433 
+434    \textcolor{comment}{//Check the length of the Router Solicitation message}
+435    \textcolor{keywordflow}{if}(length < \textcolor{keyword}{sizeof}(\hyperlink{ndp_8h_a0d342407a414edc2cf6ea2fefbd24621}{NdpRouterSolMessage}))
+436       \textcolor{keywordflow}{return};
+437 
+438    \textcolor{comment}{//Point to the beginning of the message}
+439    message = \hyperlink{net__mem_8c_a20d30c9db547b3b2743368b589cf482b}{netBufferAt}(buffer, \hyperlink{pic32mz_2isr__support_8h_a12a5aed8a193ebbf9a641104a310610d}{offset});
+440    \textcolor{comment}{//Sanity check}
+441    \textcolor{keywordflow}{if}(message == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+442       \textcolor{keywordflow}{return};
+443 
+444    \textcolor{comment}{//Debug message}
+445    \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"Router Solicitation message received (%"} \hyperlink{compiler__port_8h_a2b7b0557dc6cd786df02dafbb51f5292}{PRIuSIZE} \textcolor{stringliteral}{" bytes)...\(\backslash\)r\(\backslash\)n"},
+446       length);
+447 
+448    \textcolor{comment}{//Dump message contents for debugging purpose}
+449    \hyperlink{ndp_8c_a7d9e788153f14c99e9d5b76bb5f3dc5e}{ndpDumpRouterSolMessage}(message);
+450 
+451    \textcolor{comment}{//The IPv6 Hop Limit field must have a value of 255 to ensure that the}
+452    \textcolor{comment}{//packet has not been forwarded by a router}
+453    \textcolor{keywordflow}{if}(hopLimit != \hyperlink{ndp_8h_aed9955a5c2a9d8b039e188d88f2bd923}{NDP\_HOP\_LIMIT})
+454       \textcolor{keywordflow}{return};
+455 
+456    \textcolor{comment}{//ICMPv6 Code must be 0}
+457    \textcolor{keywordflow}{if}(message->code)
+458       \textcolor{keywordflow}{return};
+459 
+460    \textcolor{comment}{//Calculate the length of the Options field}
+461    length -= \textcolor{keyword}{sizeof}(\hyperlink{ndp_8h_a0d342407a414edc2cf6ea2fefbd24621}{NdpRouterSolMessage});
+462 
+463    \textcolor{comment}{//Parse Options field}
+464    error = \hyperlink{ndp__misc_8c_a91cdf966964a174f131172ae9f4582de}{ndpCheckOptions}(message->options, length);
+465    \textcolor{comment}{//All included options must have a length that is greater than zero}
+466    \textcolor{keywordflow}{if}(error)
+467       \textcolor{keywordflow}{return};
+468 
+469    \textcolor{comment}{//Search for the Source Link-Layer Address option}
+470    option = \hyperlink{ndp__misc_8c_a6d3addbaab223cf3eab295c590e42f35}{ndpGetOption}(message->options,
+471       length, \hyperlink{ndp_8h_af1e00e3e4e4a40cf7cc766002871bf30a605af3b2b6f92741d213e15ec8bf7148}{NDP\_OPT\_SOURCE\_LINK\_LAYER\_ADDR});
+472 
+473    \textcolor{comment}{//Source Link-Layer Address option found?}
+474    \textcolor{keywordflow}{if}(option != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} && option->length == 1)
+475    \{
+476       \textcolor{comment}{//Debug message}
+477       \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  Source Link-Layer Address = %s\(\backslash\)r\(\backslash\)n"},
+478          \hyperlink{ethernet_8c_a9939c8165aa34316fdeb8b24258db4c4}{macAddrToString}(&option->linkLayerAddr, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}));
+479 
+480       \textcolor{comment}{//The Source Link-Layer Address option must not be included when the}
+481       \textcolor{comment}{//source IP address is the unspecified address}
+482       \textcolor{keywordflow}{if}(\hyperlink{ipv6_8h_ab1e93bd2152bc3f3b5642fd0216384d7}{ipv6CompAddr}(&pseudoHeader->srcAddr, &\hyperlink{ipv6_8c_aa4baeec4f7b8b166d2457787fb9eddf9}{IPV6\_UNSPECIFIED\_ADDR}))
+483          \textcolor{keywordflow}{return};
+484 
+485       \textcolor{comment}{//Search the Neighbor Cache for the source address of the solicitation}
+486       entry = \hyperlink{ndp__cache_8c_a4bb136704775638d094e9b9b0eab0c62}{ndpFindNeighborCacheEntry}(interface, &pseudoHeader->srcAddr);
+487 
+488       \textcolor{comment}{//No matching entry has been found?}
+489       \textcolor{keywordflow}{if}(!entry)
+490       \{
+491          \textcolor{comment}{//Create an entry}
+492          entry = \hyperlink{ndp__cache_8c_aa10560ab298b818966ff62cf4493b0e5}{ndpCreateNeighborCacheEntry}(interface);
+493 
+494          \textcolor{comment}{//Neighbor Cache entry successfully created?}
+495          \textcolor{keywordflow}{if}(entry)
+496          \{
+497             \textcolor{comment}{//Record the IPv6 and the corresponding MAC address}
+498             entry->\hyperlink{structNdpNeighborCacheEntry_a3c02dac138bb8d8ae45ad1de8c324221}{ipAddr} = pseudoHeader->srcAddr;
+499             entry->\hyperlink{structNdpNeighborCacheEntry_a1e8f8ff5e8f92123bb81a40643b13c2c}{macAddr} = option->linkLayerAddr;
+500             \textcolor{comment}{//The IsRouter flag must be set to FALSE}
+501             entry->\hyperlink{structNdpNeighborCacheEntry_af1bf52654360db588714ce7c21e20887}{isRouter} = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+502             \textcolor{comment}{//Save current time}
+503             entry->\hyperlink{structNdpNeighborCacheEntry_a09717542b16d54caabb3494f39b8864c}{timestamp} = \hyperlink{dhcpv6__common_8h_ae73654f333e4363463ad8c594eca1905}{time};
+504             \textcolor{comment}{//Enter the STALE state}
+505             entry->\hyperlink{structNdpNeighborCacheEntry_a574ecea20d21d33352612dcd9583e3d5}{state} = \hyperlink{ndp_8h_a97a48b3286230efa6a168a56910ea479ab6e55ba9d8e5319194d5fe9b9b83c684}{NDP\_STATE\_STALE};
+506          \}
+507       \}
+508       \textcolor{keywordflow}{else}
+509       \{
+510          \textcolor{comment}{//If a Neighbor Cache entry for the solicitation's sender exists the}
+511          \textcolor{comment}{//entry's IsRouter flag must be set to FALSE}
+512          entry->\hyperlink{structNdpNeighborCacheEntry_af1bf52654360db588714ce7c21e20887}{isRouter} = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+513 
+514          \textcolor{comment}{//INCOMPLETE state?}
+515          \textcolor{keywordflow}{if}(entry->\hyperlink{structNdpNeighborCacheEntry_a574ecea20d21d33352612dcd9583e3d5}{state} == \hyperlink{ndp_8h_a97a48b3286230efa6a168a56910ea479af1920f2caebfea1b46a7e9f9439bc6f9}{NDP\_STATE\_INCOMPLETE})
+516          \{
+517             \textcolor{comment}{//Record link-layer address}
+518             entry->\hyperlink{structNdpNeighborCacheEntry_a1e8f8ff5e8f92123bb81a40643b13c2c}{macAddr} = option->linkLayerAddr;
+519             \textcolor{comment}{//Send all the packets that are pending for transmission}
+520             n = \hyperlink{ndp__cache_8c_a1691e3229a1353a430185f4c5d29c958}{ndpSendQueuedPackets}(interface, entry);
+521             \textcolor{comment}{//Save current time}
+522             entry->\hyperlink{structNdpNeighborCacheEntry_a09717542b16d54caabb3494f39b8864c}{timestamp} = \hyperlink{dhcpv6__common_8h_ae73654f333e4363463ad8c594eca1905}{time};
+523 
+524             \textcolor{comment}{//Check whether any packets have been sent}
+525             \textcolor{keywordflow}{if}(n > 0)
+526             \{
+527                \textcolor{comment}{//Start delay timer}
+528                entry->\hyperlink{structNdpNeighborCacheEntry_a315eba9b9511bfbfc60b9559b37e7070}{timeout} = \hyperlink{ndp_8h_aec929b3037b2395eb6ac92c2bb1a8040}{NDP\_DELAY\_FIRST\_PROBE\_TIME};
+529                \textcolor{comment}{//Switch to the DELAY state}
+530                entry->\hyperlink{structNdpNeighborCacheEntry_a574ecea20d21d33352612dcd9583e3d5}{state} = \hyperlink{ndp_8h_a97a48b3286230efa6a168a56910ea479a4aea7ed554ee132a415f75034848d922}{NDP\_STATE\_DELAY};
+531             \}
+532             \textcolor{keywordflow}{else}
+533             \{
+534                \textcolor{comment}{//Enter the STALE state}
+535                entry->\hyperlink{structNdpNeighborCacheEntry_a574ecea20d21d33352612dcd9583e3d5}{state} = \hyperlink{ndp_8h_a97a48b3286230efa6a168a56910ea479ab6e55ba9d8e5319194d5fe9b9b83c684}{NDP\_STATE\_STALE};
+536             \}
+537          \}
+538          \textcolor{comment}{//REACHABLE, STALE, DELAY or PROBE state?}
+539          \textcolor{keywordflow}{else}
+540          \{
+541             \textcolor{comment}{//Different link-layer address than cached?}
+542             \textcolor{keywordflow}{if}(!\hyperlink{ethernet_8h_a800d9f928930baf027e925976c44b9b2}{macCompAddr}(&entry->\hyperlink{structNdpNeighborCacheEntry_a1e8f8ff5e8f92123bb81a40643b13c2c}{macAddr}, &option->linkLayerAddr))
+543             \{
+544                \textcolor{comment}{//Update link-layer address}
+545                entry->\hyperlink{structNdpNeighborCacheEntry_a1e8f8ff5e8f92123bb81a40643b13c2c}{macAddr} = option->linkLayerAddr;
+546                \textcolor{comment}{//Save current time}
+547                entry->\hyperlink{structNdpNeighborCacheEntry_a09717542b16d54caabb3494f39b8864c}{timestamp} = \hyperlink{dhcpv6__common_8h_ae73654f333e4363463ad8c594eca1905}{time};
+548                \textcolor{comment}{//Enter the STALE state}
+549                entry->\hyperlink{structNdpNeighborCacheEntry_a574ecea20d21d33352612dcd9583e3d5}{state} = \hyperlink{ndp_8h_a97a48b3286230efa6a168a56910ea479ab6e55ba9d8e5319194d5fe9b9b83c684}{NDP\_STATE\_STALE};
+550             \}
+551          \}
+552       \}
+553    \}
+554 
+555    \textcolor{comment}{//Upon receipt of a Router Solicitation, compute a random delay within the}
+556    \textcolor{comment}{//range 0 through MAX\_RA\_DELAY\_TIME}
+557    delay = \hyperlink{net_8c_af45ea0afc9806749114ec85e507014e1}{netGetRandRange}(0, \hyperlink{ndp_8h_ae26684140d4e1c846625ce5abd97449a}{NDP\_MAX\_RA\_DELAY\_TIME});
+558 
+559    \textcolor{comment}{//If the computed value corresponds to a time later than the time the next}
+560    \textcolor{comment}{//multicast Router Advertisement is scheduled to be sent, ignore the random}
+561    \textcolor{comment}{//delay and send the advertisement at the already-scheduled time}
+562    \textcolor{keywordflow}{if}(\hyperlink{os__port_8h_a25c13833ef003da02045a91b1080263a}{timeCompare}(time + delay, context->\hyperlink{structNdpRouterAdvContext_a04f8a4915f483d48dcc52bdadf0785c2}{timestamp} + context->
+      \hyperlink{structNdpRouterAdvContext_a7df6bf4f325f1f942f9d312d0b08ee39}{timeout}) > 0)
+563       \textcolor{keywordflow}{return};
+564 
+565    \textcolor{comment}{//Check whether the router sent a multicast Router Advertisement (solicited}
+566    \textcolor{comment}{//or unsolicited) within the last MIN\_DELAY\_BETWEEN\_RAS seconds}
+567    \textcolor{keywordflow}{if}(\hyperlink{os__port_8h_a25c13833ef003da02045a91b1080263a}{timeCompare}(time, context->\hyperlink{structNdpRouterAdvContext_a04f8a4915f483d48dcc52bdadf0785c2}{timestamp} + 
+      \hyperlink{ndp_8h_a7bd78f41f72a3779a84358433de39aad}{NDP\_MIN\_DELAY\_BETWEEN\_RAS}) < 0)
+568    \{
+569       \textcolor{comment}{//Schedule the advertisement to be sent at a time corresponding to}
+570       \textcolor{comment}{//MIN\_DELAY\_BETWEEN\_RAS plus the random value after the previous}
+571       \textcolor{comment}{//advertisement was sent. This ensures that the multicast Router}
+572       \textcolor{comment}{//Advertisements are rate limited}
+573       context->\hyperlink{structNdpRouterAdvContext_a7df6bf4f325f1f942f9d312d0b08ee39}{timeout} = \hyperlink{ndp_8h_a7bd78f41f72a3779a84358433de39aad}{NDP\_MIN\_DELAY\_BETWEEN\_RAS} + delay;
+574    \}
+575    \textcolor{keywordflow}{else}
+576    \{
+577       \textcolor{comment}{//Schedule the sending of a Router Advertisement at the time given by the}
+578       \textcolor{comment}{//random value}
+579       context->\hyperlink{structNdpRouterAdvContext_a7df6bf4f325f1f942f9d312d0b08ee39}{timeout} = time + delay - context->\hyperlink{structNdpRouterAdvContext_a04f8a4915f483d48dcc52bdadf0785c2}{timestamp};
+580    \}
+581 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ndp__router__adv_8c_a9791b8be432e433bc68e78b7c3dc8169}\label{ndp__router__adv_8c_a9791b8be432e433bc68e78b7c3dc8169}} 
+\index{ndp\+\_\+router\+\_\+adv.\+c@{ndp\+\_\+router\+\_\+adv.\+c}!ndp\+Router\+Adv\+Get\+Default\+Settings@{ndp\+Router\+Adv\+Get\+Default\+Settings}}
+\index{ndp\+Router\+Adv\+Get\+Default\+Settings@{ndp\+Router\+Adv\+Get\+Default\+Settings}!ndp\+\_\+router\+\_\+adv.\+c@{ndp\+\_\+router\+\_\+adv.\+c}}
+\subsubsection{\texorpdfstring{ndp\+Router\+Adv\+Get\+Default\+Settings()}{ndpRouterAdvGetDefaultSettings()}}
+{\footnotesize\ttfamily void ndp\+Router\+Adv\+Get\+Default\+Settings (\begin{DoxyParamCaption}\item[{\hyperlink{structNdpRouterAdvSettings}{Ndp\+Router\+Adv\+Settings} $\ast$}]{settings }\end{DoxyParamCaption})}
+
+
+
+Initialize settings with default values. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em settings} & Structure that contains the RA service configuration variables \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 59 of file ndp\+\_\+router\+\_\+adv.\+c.
+
+
+\begin{DoxyCode}
+60 \{
+61    \textcolor{comment}{//Underlying network interface}
+62    settings->\hyperlink{structNdpRouterAdvSettings_a17c7ee774c3b7353b2cd578b143cd292}{interface} = \hyperlink{net_8c_a991aba7eae4de79f30c6889d95cc6870}{netGetDefaultInterface}();
+63 
+64    \textcolor{comment}{//The maximum time allowed between sending unsolicited multicast}
+65    \textcolor{comment}{//Router Advertisements from the interface}
+66    settings->\hyperlink{structNdpRouterAdvSettings_ad3c7916d2d18ea5adb8dc9d4b20f20cd}{maxRtrAdvInterval} = \hyperlink{ndp_8h_a55f58bb5a4ad9849385560484872fc97}{NDP\_MAX\_RTR\_ADVERT\_INTERVAL};
+67 
+68    \textcolor{comment}{//The minimum time allowed between sending unsolicited multicast}
+69    \textcolor{comment}{//Router Advertisements from the interface}
+70    settings->\hyperlink{structNdpRouterAdvSettings_af7a8f0941a50dcf68e3139976e007410}{minRtrAdvInterval} = \hyperlink{ndp_8h_a55f58bb5a4ad9849385560484872fc97}{NDP\_MAX\_RTR\_ADVERT\_INTERVAL} / 
+      3;
+71 
+72    \textcolor{comment}{//The default value to be placed in the Cur Hop Limit field in the}
+73    \textcolor{comment}{//Router Advertisement messages sent by the router}
+74    settings->\hyperlink{structNdpRouterAdvSettings_a779ad67d06dd54657953fad2d16c532d}{curHopLimit} = 0;
+75 
+76    \textcolor{comment}{//The value to be placed in the Managed Address Configuration}
+77    \textcolor{comment}{//flag in the Router Advertisement}
+78    settings->\hyperlink{structNdpRouterAdvSettings_a79b155a3fd368f238c647d89bc9fff98}{managedFlag} = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+79 
+80    \textcolor{comment}{//The value to be placed in the Other Configuration flag}
+81    \textcolor{comment}{//in the Router Advertisement}
+82    settings->\hyperlink{structNdpRouterAdvSettings_a49f7625172ab30797afc3a3034a24c0f}{otherConfigFlag} = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+83 
+84    \textcolor{comment}{//The value to be placed in the Mobile IPv6 Home Agent}
+85    \textcolor{comment}{//flag in the Router Advertisement}
+86    settings->\hyperlink{structNdpRouterAdvSettings_a4c750f98ddf0e1cac2208d27fcf1f02d}{homeAgentFlag} = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+87 
+88    \textcolor{comment}{//The value to be placed in the Router Selection Preferences}
+89    \textcolor{comment}{//field in the Router Advertisement}
+90    settings->\hyperlink{structNdpRouterAdvSettings_a2780137e43743780e822c13c794d0227}{preference} = \hyperlink{ndp_8h_a25b0ae832229ccb56f0bf02329af2d45aff896570903c5d772f596f10d0ec8d7f}{NDP\_ROUTER\_SEL\_PREFERENCE\_MEDIUM};
+91 
+92    \textcolor{comment}{//The value to be placed in the Neighbor Discovery Proxy}
+93    \textcolor{comment}{//flag in the Router Advertisement}
+94    settings->\hyperlink{structNdpRouterAdvSettings_a282463d8148222815a4e68ea2328de09}{proxyFlag} = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+95 
+96    \textcolor{comment}{//The value to be placed in the Router Lifetime field of}
+97    \textcolor{comment}{//Router Advertisements sent from the interface}
+98    settings->\hyperlink{structNdpRouterAdvSettings_af9440a66b7fc353fe3e1bfd7da807f04}{defaultLifetime} = 3 * (\hyperlink{ndp_8h_a55f58bb5a4ad9849385560484872fc97}{NDP\_MAX\_RTR\_ADVERT\_INTERVAL} /
+       1000);
+99 
+100    \textcolor{comment}{//The value to be placed in the Reachable Time field in the}
+101    \textcolor{comment}{//Router Advertisement messages sent by the router}
+102    settings->\hyperlink{structNdpRouterAdvSettings_aa41a6dac5e9a347436e5ddad63ddb465}{reachableTime} = 0;
+103 
+104    \textcolor{comment}{//The value to be placed in the Retrans Timer field in the}
+105    \textcolor{comment}{//Router Advertisement messages sent by the router}
+106    settings->\hyperlink{structNdpRouterAdvSettings_a01938dfb7fd3120b30d1eaeb2cf08fe9}{retransTimer} = 0;
+107 
+108    \textcolor{comment}{//The value to be placed in the MTU option sent by the router}
+109    settings->\hyperlink{structNdpRouterAdvSettings_a5d6a42b54dd4ea6dcdd19a4cea463b4d}{linkMtu} = 0;
+110 
+111    \textcolor{comment}{//A list of prefixes to be placed in Prefix Information options (PIO)}
+112    \textcolor{comment}{//in Router Advertisement messages sent from the interface}
+113    settings->\hyperlink{structNdpRouterAdvSettings_a1c030cc97653fd960d2b2e7d9cea1686}{prefixList} = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+114    settings->\hyperlink{structNdpRouterAdvSettings_a92cd68cc2a6d00d163975883d96e4b8a}{prefixListLength} = 0;
+115 
+116    \textcolor{comment}{//A list of routes to be placed in Route Information options (RIO)}
+117    \textcolor{comment}{//in Router Advertisement messages sent from the interface}
+118    settings->\hyperlink{structNdpRouterAdvSettings_a417bf2852d471feb460689260e7c0947}{routeList} = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+119    settings->\hyperlink{structNdpRouterAdvSettings_abdaa4e2480f0ba5dadb7e7b00784aab5}{routeListLength} = 0;
+120 
+121    \textcolor{comment}{//A list of header compression contexts to be placed in the 6LoWPAN Context}
+122    \textcolor{comment}{//options (6CO) in Router Advertisement messages sent from the interface}
+123    settings->\hyperlink{structNdpRouterAdvSettings_ae96fbd40e70dc52651cf9e6462cbf121}{contextList} = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+124    settings->\hyperlink{structNdpRouterAdvSettings_ac4a679b32c25d5bc6d35b88f99cd0dcb}{contextListLength} = 0;
+125 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ndp__router__adv_8c_a364d9a454d57bfaa2c55c1180a69fda5}\label{ndp__router__adv_8c_a364d9a454d57bfaa2c55c1180a69fda5}} 
+\index{ndp\+\_\+router\+\_\+adv.\+c@{ndp\+\_\+router\+\_\+adv.\+c}!ndp\+Router\+Adv\+Init@{ndp\+Router\+Adv\+Init}}
+\index{ndp\+Router\+Adv\+Init@{ndp\+Router\+Adv\+Init}!ndp\+\_\+router\+\_\+adv.\+c@{ndp\+\_\+router\+\_\+adv.\+c}}
+\subsubsection{\texorpdfstring{ndp\+Router\+Adv\+Init()}{ndpRouterAdvInit()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ndp\+Router\+Adv\+Init (\begin{DoxyParamCaption}\item[{\hyperlink{structNdpRouterAdvContext}{Ndp\+Router\+Adv\+Context} $\ast$}]{context,  }\item[{const \hyperlink{structNdpRouterAdvSettings}{Ndp\+Router\+Adv\+Settings} $\ast$}]{settings }\end{DoxyParamCaption})}
+
+
+
+RA service initialization. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the RA service context \\
+\hline
+\mbox{\tt in}  & {\em settings} & RA service configuration variables \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 135 of file ndp\+\_\+router\+\_\+adv.\+c.
+
+
+\begin{DoxyCode}
+137 \{
+138    \hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{NetInterface} *interface;
+139 
+140    \textcolor{comment}{//Debug message}
+141    \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"Initializing Router Advertisement service...\(\backslash\)r\(\backslash\)n"});
+142 
+143    \textcolor{comment}{//Ensure the parameters are valid}
+144    \textcolor{keywordflow}{if}(!context || !settings)
+145       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+146 
+147    \textcolor{comment}{//Valid network interface?}
+148    \textcolor{keywordflow}{if}(!settings->\hyperlink{structNdpRouterAdvSettings_a17c7ee774c3b7353b2cd578b143cd292}{interface})
+149       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+150 
+151    \textcolor{comment}{//Get exclusive access}
+152    \hyperlink{os__port__chibios_8c_a58485224df4bfa522246d55b35bbd83a}{osAcquireMutex}(&\hyperlink{net_8c_afe31551ad26115fae8e575654346d441}{netMutex});
+153 
+154    \textcolor{comment}{//Point to the underlying network interface}
+155    \textcolor{keyword}{interface }= settings->interface;
+156 
+157    \textcolor{comment}{//Clear the RA service context}
+158    memset(context, 0, \textcolor{keyword}{sizeof}(\hyperlink{structNdpRouterAdvContext}{NdpRouterAdvContext}));
+159    \textcolor{comment}{//Save user settings}
+160    context->\hyperlink{structNdpRouterAdvContext_ac0f413b02fb1832bc4fb85c133784033}{settings} = *settings;
+161 
+162    \textcolor{comment}{//The RA service is currently disabled on the interface}
+163    context->\hyperlink{structNdpRouterAdvContext_a256316b87afc01c4cdc02edb941c7284}{running} = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+164    \textcolor{comment}{//Attach the RA service context to the network interface}
+165    interface->ndpRouterAdvContext = context;
+166 
+167    \textcolor{comment}{//Release exclusive access}
+168    \hyperlink{os__port__chibios_8c_a8e10e5b2c6d3877b5ba60e375ac45d79}{osReleaseMutex}(&\hyperlink{net_8c_afe31551ad26115fae8e575654346d441}{netMutex});
+169 
+170    \textcolor{comment}{//Successful initialization}
+171    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+172 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ndp__router__adv_8c_a55ffb5f34a86b1283c7155926b2bb5c6}\label{ndp__router__adv_8c_a55ffb5f34a86b1283c7155926b2bb5c6}} 
+\index{ndp\+\_\+router\+\_\+adv.\+c@{ndp\+\_\+router\+\_\+adv.\+c}!ndp\+Router\+Adv\+Link\+Change\+Event@{ndp\+Router\+Adv\+Link\+Change\+Event}}
+\index{ndp\+Router\+Adv\+Link\+Change\+Event@{ndp\+Router\+Adv\+Link\+Change\+Event}!ndp\+\_\+router\+\_\+adv.\+c@{ndp\+\_\+router\+\_\+adv.\+c}}
+\subsubsection{\texorpdfstring{ndp\+Router\+Adv\+Link\+Change\+Event()}{ndpRouterAdvLinkChangeEvent()}}
+{\footnotesize\ttfamily void ndp\+Router\+Adv\+Link\+Change\+Event (\begin{DoxyParamCaption}\item[{\hyperlink{structNdpRouterAdvContext}{Ndp\+Router\+Adv\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Callback function for link change event. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the RA service context \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 369 of file ndp\+\_\+router\+\_\+adv.\+c.
+
+
+\begin{DoxyCode}
+370 \{
+371    \hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{NetInterface} *interface;
+372 
+373    \textcolor{comment}{//Make sure the RA service has been properly instantiated}
+374    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+375       \textcolor{keywordflow}{return};
+376 
+377    \textcolor{comment}{//Point to the underlying network interface}
+378    \textcolor{keyword}{interface }= context->settings.interface;
+379 
+380    \textcolor{comment}{//Reset variables}
+381    context->\hyperlink{structNdpRouterAdvContext_a04f8a4915f483d48dcc52bdadf0785c2}{timestamp} = \hyperlink{os__port__chibios_8c_ab66a11272d40a916fa69dd8e4dc443d4}{osGetSystemTime}();
+382    context->\hyperlink{structNdpRouterAdvContext_a7df6bf4f325f1f942f9d312d0b08ee39}{timeout} = 0;
+383    context->\hyperlink{structNdpRouterAdvContext_a60ba076474e519acc836ce7ad891ddf8}{routerAdvCount} = 0;
+384 
+385    \textcolor{comment}{//Default Hop Limit value}
+386    \textcolor{keywordflow}{if}(context->\hyperlink{structNdpRouterAdvContext_ac0f413b02fb1832bc4fb85c133784033}{settings}.\hyperlink{structNdpRouterAdvSettings_a779ad67d06dd54657953fad2d16c532d}{curHopLimit} != 0)
+387       interface->ipv6Context.curHopLimit = context->\hyperlink{structNdpRouterAdvContext_ac0f413b02fb1832bc4fb85c133784033}{settings}.\hyperlink{structNdpRouterAdvSettings_a779ad67d06dd54657953fad2d16c532d}{curHopLimit};
+388 
+389    \textcolor{comment}{//The time a node assumes a neighbor is reachable}
+390    \textcolor{keywordflow}{if}(context->\hyperlink{structNdpRouterAdvContext_ac0f413b02fb1832bc4fb85c133784033}{settings}.\hyperlink{structNdpRouterAdvSettings_aa41a6dac5e9a347436e5ddad63ddb465}{reachableTime} != 0)
+391       interface->ndpContext.reachableTime = context->\hyperlink{structNdpRouterAdvContext_ac0f413b02fb1832bc4fb85c133784033}{settings}.
+      \hyperlink{structNdpRouterAdvSettings_aa41a6dac5e9a347436e5ddad63ddb465}{reachableTime};
+392 
+393    \textcolor{comment}{//The time between retransmissions of NS messages}
+394    \textcolor{keywordflow}{if}(context->\hyperlink{structNdpRouterAdvContext_ac0f413b02fb1832bc4fb85c133784033}{settings}.\hyperlink{structNdpRouterAdvSettings_a01938dfb7fd3120b30d1eaeb2cf08fe9}{retransTimer} != 0)
+395       interface->ndpContext.retransTimer = context->\hyperlink{structNdpRouterAdvContext_ac0f413b02fb1832bc4fb85c133784033}{settings}.
+      \hyperlink{structNdpRouterAdvSettings_a01938dfb7fd3120b30d1eaeb2cf08fe9}{retransTimer};
+396 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ndp__router__adv_8c_a86c2e003c3a7118a4798befcabbf699b}\label{ndp__router__adv_8c_a86c2e003c3a7118a4798befcabbf699b}} 
+\index{ndp\+\_\+router\+\_\+adv.\+c@{ndp\+\_\+router\+\_\+adv.\+c}!ndp\+Router\+Adv\+Start@{ndp\+Router\+Adv\+Start}}
+\index{ndp\+Router\+Adv\+Start@{ndp\+Router\+Adv\+Start}!ndp\+\_\+router\+\_\+adv.\+c@{ndp\+\_\+router\+\_\+adv.\+c}}
+\subsubsection{\texorpdfstring{ndp\+Router\+Adv\+Start()}{ndpRouterAdvStart()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ndp\+Router\+Adv\+Start (\begin{DoxyParamCaption}\item[{\hyperlink{structNdpRouterAdvContext}{Ndp\+Router\+Adv\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Start RA service. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the RA service context \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 181 of file ndp\+\_\+router\+\_\+adv.\+c.
+
+
+\begin{DoxyCode}
+182 \{
+183    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+184    \hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{NetInterface} *interface;
+185 
+186    \textcolor{comment}{//Check parameter}
+187    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+188       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+189 
+190    \textcolor{comment}{//Debug message}
+191    \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"Starting Router Advertisement service...\(\backslash\)r\(\backslash\)n"});
+192 
+193    \textcolor{comment}{//Get exclusive access}
+194    \hyperlink{os__port__chibios_8c_a58485224df4bfa522246d55b35bbd83a}{osAcquireMutex}(&\hyperlink{net_8c_afe31551ad26115fae8e575654346d441}{netMutex});
+195 
+196    \textcolor{comment}{//Check whether the service is running}
+197    \textcolor{keywordflow}{if}(!context->\hyperlink{structNdpRouterAdvContext_a256316b87afc01c4cdc02edb941c7284}{running})
+198    \{
+199       \textcolor{comment}{//Point to the underlying network interface}
+200       \textcolor{keyword}{interface }= context->settings.interface;
+201 
+202       \textcolor{comment}{//Join the All-Routers multicast address}
+203       error = \hyperlink{ipv6_8c_abbf3683ee76a53fdf931e58fabe6db6f}{ipv6JoinMulticastGroup}(interface, &
+      \hyperlink{ipv6_8c_aa8488194ba618b31711b0e7953af10d7}{IPV6\_LINK\_LOCAL\_ALL\_ROUTERS\_ADDR});
+204 
+205       \textcolor{comment}{//Successful membership registration?}
+206       \textcolor{keywordflow}{if}(!error)
+207       \{
+208          \textcolor{comment}{//Reset variables}
+209          context->\hyperlink{structNdpRouterAdvContext_a04f8a4915f483d48dcc52bdadf0785c2}{timestamp} = \hyperlink{os__port__chibios_8c_ab66a11272d40a916fa69dd8e4dc443d4}{osGetSystemTime}();
+210          context->\hyperlink{structNdpRouterAdvContext_a7df6bf4f325f1f942f9d312d0b08ee39}{timeout} = 0;
+211          context->\hyperlink{structNdpRouterAdvContext_a60ba076474e519acc836ce7ad891ddf8}{routerAdvCount} = 0;
+212 
+213          \textcolor{comment}{//Enable the router to forward packets to or from the interface}
+214          interface->ipv6Context.isRouter = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+215 
+216          \textcolor{comment}{//Default Hop Limit value}
+217          \textcolor{keywordflow}{if}(context->\hyperlink{structNdpRouterAdvContext_ac0f413b02fb1832bc4fb85c133784033}{settings}.\hyperlink{structNdpRouterAdvSettings_a779ad67d06dd54657953fad2d16c532d}{curHopLimit} != 0)
+218             interface->ipv6Context.curHopLimit = context->\hyperlink{structNdpRouterAdvContext_ac0f413b02fb1832bc4fb85c133784033}{settings}.
+      \hyperlink{structNdpRouterAdvSettings_a779ad67d06dd54657953fad2d16c532d}{curHopLimit};
+219 
+220          \textcolor{comment}{//The time a node assumes a neighbor is reachable}
+221          \textcolor{keywordflow}{if}(context->\hyperlink{structNdpRouterAdvContext_ac0f413b02fb1832bc4fb85c133784033}{settings}.\hyperlink{structNdpRouterAdvSettings_aa41a6dac5e9a347436e5ddad63ddb465}{reachableTime} != 0)
+222             interface->ndpContext.reachableTime = context->\hyperlink{structNdpRouterAdvContext_ac0f413b02fb1832bc4fb85c133784033}{settings}.
+      \hyperlink{structNdpRouterAdvSettings_aa41a6dac5e9a347436e5ddad63ddb465}{reachableTime};
+223 
+224          \textcolor{comment}{//The time between retransmissions of NS messages}
+225          \textcolor{keywordflow}{if}(context->\hyperlink{structNdpRouterAdvContext_ac0f413b02fb1832bc4fb85c133784033}{settings}.\hyperlink{structNdpRouterAdvSettings_a01938dfb7fd3120b30d1eaeb2cf08fe9}{retransTimer} != 0)
+226             interface->ndpContext.retransTimer = context->\hyperlink{structNdpRouterAdvContext_ac0f413b02fb1832bc4fb85c133784033}{settings}.
+      \hyperlink{structNdpRouterAdvSettings_a01938dfb7fd3120b30d1eaeb2cf08fe9}{retransTimer};
+227 
+228          \textcolor{comment}{//Start transmitting Router Advertisements}
+229          context->\hyperlink{structNdpRouterAdvContext_a256316b87afc01c4cdc02edb941c7284}{running} = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+230       \}
+231    \}
+232    \textcolor{keywordflow}{else}
+233    \{
+234       \textcolor{comment}{//The service is already running...}
+235       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+236    \}
+237 
+238    \textcolor{comment}{//Release exclusive access}
+239    \hyperlink{os__port__chibios_8c_a8e10e5b2c6d3877b5ba60e375ac45d79}{osReleaseMutex}(&\hyperlink{net_8c_afe31551ad26115fae8e575654346d441}{netMutex});
+240 
+241    \textcolor{comment}{//Return status code}
+242    \textcolor{keywordflow}{return} error;
+243 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ndp__router__adv_8c_af5d93dd46ba1f949191e2b9c6461a1f6}\label{ndp__router__adv_8c_af5d93dd46ba1f949191e2b9c6461a1f6}} 
+\index{ndp\+\_\+router\+\_\+adv.\+c@{ndp\+\_\+router\+\_\+adv.\+c}!ndp\+Router\+Adv\+Stop@{ndp\+Router\+Adv\+Stop}}
+\index{ndp\+Router\+Adv\+Stop@{ndp\+Router\+Adv\+Stop}!ndp\+\_\+router\+\_\+adv.\+c@{ndp\+\_\+router\+\_\+adv.\+c}}
+\subsubsection{\texorpdfstring{ndp\+Router\+Adv\+Stop()}{ndpRouterAdvStop()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ndp\+Router\+Adv\+Stop (\begin{DoxyParamCaption}\item[{\hyperlink{structNdpRouterAdvContext}{Ndp\+Router\+Adv\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Stop RA service. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the RA service context \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 252 of file ndp\+\_\+router\+\_\+adv.\+c.
+
+
+\begin{DoxyCode}
+253 \{
+254    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+255    \hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{NetInterface} *interface;
+256 
+257    \textcolor{comment}{//Check parameter}
+258    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+259       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+260 
+261    \textcolor{comment}{//Debug message}
+262    \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"Stopping Router Advertisement service...\(\backslash\)r\(\backslash\)n"});
+263 
+264    \textcolor{comment}{//Get exclusive access}
+265    \hyperlink{os__port__chibios_8c_a58485224df4bfa522246d55b35bbd83a}{osAcquireMutex}(&\hyperlink{net_8c_afe31551ad26115fae8e575654346d441}{netMutex});
+266 
+267    \textcolor{comment}{//Check whether the service is running}
+268    \textcolor{keywordflow}{if}(context->\hyperlink{structNdpRouterAdvContext_a256316b87afc01c4cdc02edb941c7284}{running})
+269    \{
+270       \textcolor{comment}{//Point to the underlying network interface}
+271       \textcolor{keyword}{interface }= context->settings.interface;
+272 
+273       \textcolor{comment}{//The router should transmit one or more final multicast Router}
+274       \textcolor{comment}{//Advertisements with a Router Lifetime field of zero}
+275       \hyperlink{ndp__router__adv_8c_a38789c40025e0980d3d2c47d9a321930}{ndpSendRouterAdv}(context, 0);
+276 
+277       \textcolor{comment}{//Leave the All-Routers multicast address}
+278       error = \hyperlink{ipv6_8c_a803fc8d3c2db73c8fa1f6bb4ee7abde4}{ipv6LeaveMulticastGroup}(interface, &
+      \hyperlink{ipv6_8c_aa8488194ba618b31711b0e7953af10d7}{IPV6\_LINK\_LOCAL\_ALL\_ROUTERS\_ADDR});
+279 
+280       \textcolor{comment}{//Restore default parameters}
+281       interface->ipv6Context.curHopLimit = \hyperlink{ipv6_8h_a4fe84d24aaf572493b0b7c5866f512b8}{IPV6\_DEFAULT\_HOP\_LIMIT};
+282       interface->ndpContext.reachableTime = \hyperlink{ndp_8h_aedca5344875b2ae8e08ee5d794dadd7f}{NDP\_REACHABLE\_TIME};
+283       interface->ndpContext.retransTimer = \hyperlink{ndp_8h_a28f80d67a8075ff1837c693c69374445}{NDP\_RETRANS\_TIMER};
+284 
+285       \textcolor{comment}{//Stop transmitting Router Advertisements}
+286       context->\hyperlink{structNdpRouterAdvContext_a256316b87afc01c4cdc02edb941c7284}{running} = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+287    \}
+288    \textcolor{keywordflow}{else}
+289    \{
+290       \textcolor{comment}{//The service is not running...}
+291       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+292    \}
+293 
+294    \textcolor{comment}{//Release exclusive access}
+295    \hyperlink{os__port__chibios_8c_a8e10e5b2c6d3877b5ba60e375ac45d79}{osReleaseMutex}(&\hyperlink{net_8c_afe31551ad26115fae8e575654346d441}{netMutex});
+296 
+297    \textcolor{comment}{//Return status code}
+298    \textcolor{keywordflow}{return} error;
+299 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ndp__router__adv_8c_a65d87dfbf69457b2ae5072e2c2820a1e}\label{ndp__router__adv_8c_a65d87dfbf69457b2ae5072e2c2820a1e}} 
+\index{ndp\+\_\+router\+\_\+adv.\+c@{ndp\+\_\+router\+\_\+adv.\+c}!ndp\+Router\+Adv\+Tick@{ndp\+Router\+Adv\+Tick}}
+\index{ndp\+Router\+Adv\+Tick@{ndp\+Router\+Adv\+Tick}!ndp\+\_\+router\+\_\+adv.\+c@{ndp\+\_\+router\+\_\+adv.\+c}}
+\subsubsection{\texorpdfstring{ndp\+Router\+Adv\+Tick()}{ndpRouterAdvTick()}}
+{\footnotesize\ttfamily void ndp\+Router\+Adv\+Tick (\begin{DoxyParamCaption}\item[{\hyperlink{structNdpRouterAdvContext}{Ndp\+Router\+Adv\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+RA service timer handler. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the RA service context \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 307 of file ndp\+\_\+router\+\_\+adv.\+c.
+
+
+\begin{DoxyCode}
+308 \{
+309    \hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\_t} \hyperlink{dhcpv6__common_8h_ae73654f333e4363463ad8c594eca1905}{time};
+310    \hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{NetInterface} *interface;
+311    \hyperlink{structNdpRouterAdvSettings}{NdpRouterAdvSettings} *settings;
+312 
+313    \textcolor{comment}{//Make sure the RA service has been properly instantiated}
+314    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+315       \textcolor{keywordflow}{return};
+316 
+317    \textcolor{comment}{//Point to the underlying network interface}
+318    \textcolor{keyword}{interface }= context->settings.interface;
+319    \textcolor{comment}{//Point to the router configuration variables}
+320    settings = &context->\hyperlink{structNdpRouterAdvContext_ac0f413b02fb1832bc4fb85c133784033}{settings};
+321 
+322    \textcolor{comment}{//Get current time}
+323    time = \hyperlink{os__port__chibios_8c_ab66a11272d40a916fa69dd8e4dc443d4}{osGetSystemTime}();
+324 
+325    \textcolor{comment}{//Make sure that the link is up and the service is running}
+326    \textcolor{keywordflow}{if}(interface->linkState && context->\hyperlink{structNdpRouterAdvContext_a256316b87afc01c4cdc02edb941c7284}{running})
+327    \{
+328       \textcolor{comment}{//Make sure that a valid link-local address has been assigned to the}
+329       \textcolor{comment}{//interface}
+330       \textcolor{keywordflow}{if}(\hyperlink{ipv6_8h_a0650f6186ad38b49662420902ae208ea}{ipv6GetLinkLocalAddrState}(interface) == 
+      \hyperlink{ipv6_8h_acb54c5e2b7ee1652f5bf055e14cc518daaa3a0ce422a678d8eb14a36f4c642d16}{IPV6\_ADDR\_STATE\_PREFERRED})
+331       \{
+332          \textcolor{comment}{//Check current time}
+333          \textcolor{keywordflow}{if}(\hyperlink{os__port_8h_a25c13833ef003da02045a91b1080263a}{timeCompare}(time, context->\hyperlink{structNdpRouterAdvContext_a04f8a4915f483d48dcc52bdadf0785c2}{timestamp} + context->
+      \hyperlink{structNdpRouterAdvContext_a7df6bf4f325f1f942f9d312d0b08ee39}{timeout}) >= 0)
+334          \{
+335             \textcolor{comment}{//Send an unsolicited Router Advertisement}
+336             \hyperlink{ndp__router__adv_8c_a38789c40025e0980d3d2c47d9a321930}{ndpSendRouterAdv}(context, context->\hyperlink{structNdpRouterAdvContext_ac0f413b02fb1832bc4fb85c133784033}{settings}.
+      \hyperlink{structNdpRouterAdvSettings_af9440a66b7fc353fe3e1bfd7da807f04}{defaultLifetime});
+337 
+338             \textcolor{comment}{//Save the time at which the message was sent}
+339             context->\hyperlink{structNdpRouterAdvContext_a04f8a4915f483d48dcc52bdadf0785c2}{timestamp} = \hyperlink{dhcpv6__common_8h_ae73654f333e4363463ad8c594eca1905}{time};
+340 
+341             \textcolor{comment}{//Whenever a multicast advertisement is sent from an interface, the}
+342             \textcolor{comment}{//timer is reset to a uniformly distributed random value between}
+343             \textcolor{comment}{//MinRtrAdvInterval and MaxRtrAdvInterval}
+344             context->\hyperlink{structNdpRouterAdvContext_a7df6bf4f325f1f942f9d312d0b08ee39}{timeout} = \hyperlink{net_8c_af45ea0afc9806749114ec85e507014e1}{netGetRandRange}(settings->minRtrAdvInterval,
+345                settings->maxRtrAdvInterval);
+346 
+347             \textcolor{comment}{//First Router Advertisements to be sent from this interface?}
+348             \textcolor{keywordflow}{if}(context->\hyperlink{structNdpRouterAdvContext_a60ba076474e519acc836ce7ad891ddf8}{routerAdvCount} < 
+      \hyperlink{ndp_8h_a158dc4cf3ee07e8b20ae4d9be4ae2352}{NDP\_MAX\_INITIAL\_RTR\_ADVERTISEMENTS})
+349             \{
+350                \textcolor{comment}{//For the first few advertisements sent from an interface when it}
+351                \textcolor{comment}{//becomes an advertising interface, the randomly chosen interval}
+352                \textcolor{comment}{//should not be greater than MAX\_INITIAL\_RTR\_ADVERT\_INTERVAL}
+353                context->\hyperlink{structNdpRouterAdvContext_a7df6bf4f325f1f942f9d312d0b08ee39}{timeout} = \hyperlink{os__port_8h_a3acffbd305ee72dcd4593c0d8af64a4f}{MIN}(context->\hyperlink{structNdpRouterAdvContext_a7df6bf4f325f1f942f9d312d0b08ee39}{timeout}, 
+      \hyperlink{ndp_8h_a50146e1e0a6c11f804fa3966874b6d3e}{NDP\_MAX\_INITIAL\_RTR\_ADVERT\_INTERVAL});
+354             \}
+355 
+356             \textcolor{comment}{//Increment counter}
+357             context->\hyperlink{structNdpRouterAdvContext_a60ba076474e519acc836ce7ad891ddf8}{routerAdvCount}++;
+358          \}
+359       \}
+360    \}
+361 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ndp__router__adv_8c_a38789c40025e0980d3d2c47d9a321930}\label{ndp__router__adv_8c_a38789c40025e0980d3d2c47d9a321930}} 
+\index{ndp\+\_\+router\+\_\+adv.\+c@{ndp\+\_\+router\+\_\+adv.\+c}!ndp\+Send\+Router\+Adv@{ndp\+Send\+Router\+Adv}}
+\index{ndp\+Send\+Router\+Adv@{ndp\+Send\+Router\+Adv}!ndp\+\_\+router\+\_\+adv.\+c@{ndp\+\_\+router\+\_\+adv.\+c}}
+\subsubsection{\texorpdfstring{ndp\+Send\+Router\+Adv()}{ndpSendRouterAdv()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ndp\+Send\+Router\+Adv (\begin{DoxyParamCaption}\item[{\hyperlink{structNdpRouterAdvContext}{Ndp\+Router\+Adv\+Context} $\ast$}]{context,  }\item[{\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t}}]{router\+Lifetime }\end{DoxyParamCaption})}
+
+
+
+Send a Router Advertisement message. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the RA service context \\
+\hline
+\mbox{\tt in}  & {\em router\+Lifetime} & Router Lifetime field \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 591 of file ndp\+\_\+router\+\_\+adv.\+c.
+
+
+\begin{DoxyCode}
+592 \{
+593    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+594    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+595    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+596    \textcolor{keywordtype}{size\_t} \hyperlink{pic32mz_2isr__support_8h_a12a5aed8a193ebbf9a641104a310610d}{offset};
+597    \textcolor{keywordtype}{size\_t} \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length};
+598    \hyperlink{structNetBuffer}{NetBuffer} *buffer;
+599    \hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{NetInterface} *interface;
+600    \hyperlink{ndp_8h_ad4e8bce6eb079bfe6e7681a6f6488c1e}{NdpRouterAdvMessage} *\hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message};
+601    \hyperlink{structNdpRouterAdvSettings}{NdpRouterAdvSettings} *settings;
+602    \hyperlink{ipv6_8h_a68061e0a0b502d880cbe60b645cfa2b7}{Ipv6PseudoHeader} pseudoHeader;
+603 \textcolor{preprocessor}{#if (ETH\_SUPPORT == ENABLED)}
+604    \hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{NetInterface} *logicalInterface;
+605 \textcolor{preprocessor}{#endif}
+606 
+607    \textcolor{comment}{//Point to the underlying network interface}
+608    \textcolor{keyword}{interface }= context->settings.interface;
+609    \textcolor{comment}{//Point to the router configuration variables}
+610    settings = &context->\hyperlink{structNdpRouterAdvContext_ac0f413b02fb1832bc4fb85c133784033}{settings};
+611 
+612    \textcolor{comment}{//The destination address is typically the all-nodes multicast address}
+613    pseudoHeader.destAddr = \hyperlink{ipv6_8c_a8e2b9466528a5be6596c59cf94ac56a4}{IPV6\_LINK\_LOCAL\_ALL\_NODES\_ADDR};
+614 
+615    \textcolor{comment}{//Routers must use their link-local address as the source for Router}
+616    \textcolor{comment}{//Advertisement messages so that hosts can uniquely identify routers}
+617    error = \hyperlink{ipv6__misc_8c_a1d69e11a455ee8895ec67061f554a174}{ipv6SelectSourceAddr}(&interface, &pseudoHeader.destAddr,
+618       &pseudoHeader.srcAddr);
+619 
+620    \textcolor{comment}{//No link-local address assigned to the interface?}
+621    \textcolor{keywordflow}{if}(error)
+622       \textcolor{keywordflow}{return} error;
+623 
+624    \textcolor{comment}{//Compute the maximum size of the Router Advertisement message}
+625    length = \textcolor{keyword}{sizeof}(\hyperlink{ndp_8h_ad4e8bce6eb079bfe6e7681a6f6488c1e}{NdpRouterAdvMessage}) +
+626       \textcolor{keyword}{sizeof}(\hyperlink{ndp_8h_a468b5bb872928c789dabecb62486ce8c}{NdpLinkLayerAddrOption}) + \textcolor{keyword}{sizeof}(\hyperlink{ndp_8h_afd8ec0d73acceaa61a42cf76985bf7c9}{NdpMtuOption}) +
+627       settings->prefixListLength * \textcolor{keyword}{sizeof}(\hyperlink{ndp_8h_a7da4a31f2fe9a81aabb5dfd8979ec3a6}{NdpPrefixInfoOption}) +
+628       settings->routeListLength * \textcolor{keyword}{sizeof}(\hyperlink{ndp_8h_a264d684d7c45041330ebb393ffd03f63}{NdpRouteInfoOption}) +
+629       settings->contextListLength * \textcolor{keyword}{sizeof}(\hyperlink{ndp_8h_a9db84ca35672a5353de2b679676e1f3d}{NdpContextOption});
+630 
+631    \textcolor{comment}{//Sanity check}
+632    \textcolor{keywordflow}{if}((length + \textcolor{keyword}{sizeof}(\hyperlink{ipv6_8h_ad553284c12e3a0d96dc8a4da1c5f6ea0}{Ipv6Header})) > \hyperlink{ipv6_8h_a34a355847abfca977d0ca4ed43dd05ae}{IPV6\_DEFAULT\_MTU})
+633       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cae9be6449970fca5714ab9957b16562a5}{ERROR\_FAILURE};
+634 
+635    \textcolor{comment}{//Allocate a memory buffer to hold the Router Advertisement message}
+636    buffer = \hyperlink{ip_8c_a2222fb64b1b18140283119eea309c1b3}{ipAllocBuffer}(length, &offset);
+637    \textcolor{comment}{//Failed to allocate memory?}
+638    \textcolor{keywordflow}{if}(buffer == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+639       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac0a554045048d2fb61387cf735676f69}{ERROR\_OUT\_OF\_MEMORY};
+640 
+641    \textcolor{comment}{//Point to the beginning of the message}
+642    message = \hyperlink{net__mem_8c_a20d30c9db547b3b2743368b589cf482b}{netBufferAt}(buffer, offset);
+643 
+644    \textcolor{comment}{//Format Router Advertisement message}
+645    message->type = \hyperlink{icmpv6_8h_a6bd3724b797b492017d0264d1ae5c609a366725c56a608a9a910a6cff642ee8ad}{ICMPV6\_TYPE\_ROUTER\_ADV};
+646    message->code = 0;
+647    message->checksum = 0;
+648    message->curHopLimit = settings->curHopLimit;
+649    message->m = settings->managedFlag;
+650    message->o = settings->otherConfigFlag;
+651    message->h = settings->homeAgentFlag;
+652    message->prf = settings->preference;
+653    message->p = settings->proxyFlag;
+654    message->reserved = 0;
+655    message->routerLifetime = \hyperlink{cpu__endian_8h_a800cdbf435a85a9b3ad4f0edc518472a}{htons}(\hyperlink{ndp_8h_a3c1f069f0e60bd95262f7548a1bf89e4}{routerLifetime});
+656    message->reachableTime = \hyperlink{cpu__endian_8h_a63baf217625b15caa7246af75b027380}{htonl}(settings->reachableTime);
+657    message->retransTimer = \hyperlink{cpu__endian_8h_a63baf217625b15caa7246af75b027380}{htonl}(settings->retransTimer);
+658 
+659    \textcolor{comment}{//If the Router Lifetime is zero, the preference value must be set to}
+660    \textcolor{comment}{//zero by the sender}
+661    \textcolor{keywordflow}{if}(\hyperlink{ndp_8h_a3c1f069f0e60bd95262f7548a1bf89e4}{routerLifetime} == 0)
+662       message->prf = \hyperlink{ndp_8h_a25b0ae832229ccb56f0bf02329af2d45aff896570903c5d772f596f10d0ec8d7f}{NDP\_ROUTER\_SEL\_PREFERENCE\_MEDIUM};
+663 
+664    \textcolor{comment}{//Length of the message, excluding any option}
+665    length = \textcolor{keyword}{sizeof}(\hyperlink{ndp_8h_ad4e8bce6eb079bfe6e7681a6f6488c1e}{NdpRouterAdvMessage});
+666 
+667 \textcolor{preprocessor}{#if (ETH\_SUPPORT == ENABLED)}
+668    \textcolor{comment}{//Point to the logical interface}
+669    logicalInterface = \hyperlink{nic_8c_a650d776d6513c3bb88671c3aedd782f0}{nicGetLogicalInterface}(interface);
+670 
+671    \textcolor{comment}{//Check whether a MAC address has been assigned to the interface}
+672    \textcolor{keywordflow}{if}(!\hyperlink{ethernet_8h_a800d9f928930baf027e925976c44b9b2}{macCompAddr}(&logicalInterface->macAddr, &\hyperlink{ethernet_8c_a24b2ce78dd643fe028d2e18c3b503f1f}{MAC\_UNSPECIFIED\_ADDR}))
+673    \{
+674       \textcolor{comment}{//Add Source Link-Layer Address option}
+675       \hyperlink{ndp__misc_8c_a30c9073c96be88de0b5768e07d22db8e}{ndpAddOption}(message, &length, \hyperlink{ndp_8h_af1e00e3e4e4a40cf7cc766002871bf30a605af3b2b6f92741d213e15ec8bf7148}{NDP\_OPT\_SOURCE\_LINK\_LAYER\_ADDR}
+      ,
+676          &logicalInterface->macAddr, \textcolor{keyword}{sizeof}(\hyperlink{ethernet_8h_a1e00ed3977e8a770e8b4ae4cb306d1c0}{MacAddr}));
+677    \}
+678 \textcolor{preprocessor}{#endif}
+679 
+680    \textcolor{comment}{//A value of zero indicates that no MTU option is sent}
+681    \textcolor{keywordflow}{if}(settings->linkMtu > 0)
+682    \{
+683       \hyperlink{ndp_8h_afd8ec0d73acceaa61a42cf76985bf7c9}{NdpMtuOption} mtuOption;
+684 
+685       \textcolor{comment}{//The MTU option specifies the recommended MTU for the link}
+686       mtuOption.reserved = 0;
+687       mtuOption.mtu = \hyperlink{cpu__endian_8h_a63baf217625b15caa7246af75b027380}{htonl}(settings->linkMtu);
+688 
+689       \textcolor{comment}{//Add MTU option}
+690       \hyperlink{ndp__misc_8c_a30c9073c96be88de0b5768e07d22db8e}{ndpAddOption}(message, &length, \hyperlink{ndp_8h_af1e00e3e4e4a40cf7cc766002871bf30acbe37e1b91f35c5dc750d54edf07453f}{NDP\_OPT\_MTU},
+691          (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *) &mtuOption + \textcolor{keyword}{sizeof}(\hyperlink{ndp_8h_a4703825ac5372088c82fde5ea118b93d}{NdpOption}),
+692          \textcolor{keyword}{sizeof}(\hyperlink{ndp_8h_afd8ec0d73acceaa61a42cf76985bf7c9}{NdpMtuOption}) - \textcolor{keyword}{sizeof}(\hyperlink{ndp_8h_a4703825ac5372088c82fde5ea118b93d}{NdpOption}));
+693    \}
+694 
+695    \textcolor{comment}{//Loop through the list of IPv6 prefixes}
+696    \textcolor{keywordflow}{for}(i = 0; i < settings->prefixListLength; i++)
+697    \{
+698       \hyperlink{ndp_8h_a7da4a31f2fe9a81aabb5dfd8979ec3a6}{NdpPrefixInfoOption} prefixInfoOption;
+699 
+700       \textcolor{comment}{//The Prefix Information option provide hosts with on-link prefixes and}
+701       \textcolor{comment}{//prefixes for Address Autoconfiguration}
+702       prefixInfoOption.prefixLength = settings->prefixList[i].length;
+703       prefixInfoOption.l = settings->prefixList[i].onLinkFlag;
+704       prefixInfoOption.a = settings->prefixList[i].autonomousFlag;
+705       prefixInfoOption.r = 0;
+706       prefixInfoOption.reserved1 = 0;
+707       prefixInfoOption.validLifetime = \hyperlink{cpu__endian_8h_a63baf217625b15caa7246af75b027380}{htonl}(settings->prefixList[i].validLifetime);
+708       prefixInfoOption.preferredLifetime = \hyperlink{cpu__endian_8h_a63baf217625b15caa7246af75b027380}{htonl}(settings->prefixList[i].preferredLifetime);
+709       prefixInfoOption.reserved2 = 0;
+710       prefixInfoOption.prefix = settings->prefixList[i].prefix;
+711 
+712       \textcolor{comment}{//Add Prefix Information option (PIO)}
+713       \hyperlink{ndp__misc_8c_a30c9073c96be88de0b5768e07d22db8e}{ndpAddOption}(message, &length, \hyperlink{ndp_8h_af1e00e3e4e4a40cf7cc766002871bf30a6a0ecdab157e41227db339c02d093cb2}{NDP\_OPT\_PREFIX\_INFORMATION},
+714          (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *) &prefixInfoOption + \textcolor{keyword}{sizeof}(\hyperlink{ndp_8h_a4703825ac5372088c82fde5ea118b93d}{NdpOption}),
+715          \textcolor{keyword}{sizeof}(\hyperlink{ndp_8h_a7da4a31f2fe9a81aabb5dfd8979ec3a6}{NdpPrefixInfoOption}) - \textcolor{keyword}{sizeof}(\hyperlink{ndp_8h_a4703825ac5372088c82fde5ea118b93d}{NdpOption}));
+716    \}
+717 
+718    \textcolor{comment}{//Loop through the list of routes}
+719    \textcolor{keywordflow}{for}(i = 0; i < settings->routeListLength; i++)
+720    \{
+721       \hyperlink{ndp_8h_a264d684d7c45041330ebb393ffd03f63}{NdpRouteInfoOption} routeInfoOption;
+722 
+723       \textcolor{comment}{//The Route Information option specifies prefixes that are reachable via}
+724       \textcolor{comment}{//the router}
+725       routeInfoOption.prefixLength = settings->routeList[i].length;
+726       routeInfoOption.reserved1 = 0;
+727       routeInfoOption.prf = settings->routeList[i].preference;
+728       routeInfoOption.reserved2 = 0;
+729       routeInfoOption.routeLifetime = \hyperlink{cpu__endian_8h_a63baf217625b15caa7246af75b027380}{htonl}(settings->routeList[i].routeLifetime);
+730       routeInfoOption.prefix = settings->routeList[i].prefix;
+731 
+732       \textcolor{comment}{//Add Route Information option (RIO)}
+733       \hyperlink{ndp__misc_8c_a30c9073c96be88de0b5768e07d22db8e}{ndpAddOption}(message, &length, \hyperlink{ndp_8h_af1e00e3e4e4a40cf7cc766002871bf30a001aeba8d2162e1ac3d98efc0dc78c73}{NDP\_OPT\_ROUTE\_INFORMATION},
+734          (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *) &routeInfoOption + \textcolor{keyword}{sizeof}(\hyperlink{ndp_8h_a4703825ac5372088c82fde5ea118b93d}{NdpOption}),
+735          \textcolor{keyword}{sizeof}(\hyperlink{ndp_8h_a264d684d7c45041330ebb393ffd03f63}{NdpRouteInfoOption}) - \textcolor{keyword}{sizeof}(\hyperlink{ndp_8h_a4703825ac5372088c82fde5ea118b93d}{NdpOption}));
+736    \}
+737 
+738    \textcolor{comment}{//Loop through the list of 6LoWPAN compression contexts}
+739    \textcolor{keywordflow}{for}(i = 0; i < settings->contextListLength; i++)
+740    \{
+741       \hyperlink{ndp_8h_a9db84ca35672a5353de2b679676e1f3d}{NdpContextOption} contextOption;
+742 
+743       \textcolor{comment}{//The 6LoWPAN Context option (6CO) carries prefix information for LoWPAN}
+744       \textcolor{comment}{//header compression}
+745       contextOption.contextLength = settings->contextList[i].length;
+746       contextOption.reserved1 = 0;
+747       contextOption.c = settings->contextList[i].compression;
+748       contextOption.cid = settings->contextList[i].cid;
+749       contextOption.reserved2 = 0;
+750       contextOption.validLifetime = \hyperlink{cpu__endian_8h_a800cdbf435a85a9b3ad4f0edc518472a}{htons}(settings->contextList[i].validLifetime);
+751       contextOption.contextPrefix = settings->contextList[i].prefix;
+752 
+753       \textcolor{comment}{//Calculate the length of the option in bytes}
+754       n = \textcolor{keyword}{sizeof}(\hyperlink{ndp_8h_a9db84ca35672a5353de2b679676e1f3d}{NdpContextOption}) - \textcolor{keyword}{sizeof}(\hyperlink{ipv6_8h_aed0cbc40c61ed5b4fb681ebc55237e89}{Ipv6Addr}) + (contextOption.
+      contextLength / 8);
+755 
+756       \textcolor{comment}{//Add 6LoWPAN Context option (6CO)}
+757       \hyperlink{ndp__misc_8c_a30c9073c96be88de0b5768e07d22db8e}{ndpAddOption}(message, &length, \hyperlink{ndp_8h_af1e00e3e4e4a40cf7cc766002871bf30a4fc50ddacce909dad20ab883c2fa2a8b}{NDP\_OPT\_6LOWPAN\_CONTEXT},
+758          (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *) &contextOption + \textcolor{keyword}{sizeof}(\hyperlink{ndp_8h_a4703825ac5372088c82fde5ea118b93d}{NdpOption}), n - \textcolor{keyword}{sizeof}(
+      \hyperlink{ndp_8h_a4703825ac5372088c82fde5ea118b93d}{NdpOption}));
+759    \}
+760 
+761    \textcolor{comment}{//Adjust the length of the multi-part buffer}
+762    \hyperlink{net__mem_8c_ac0a46f396754e069dd1ee65cdc559b28}{netBufferSetLength}(buffer, offset + length);
+763 
+764    \textcolor{comment}{//Format IPv6 pseudo header}
+765    pseudoHeader.length = \hyperlink{cpu__endian_8h_a63baf217625b15caa7246af75b027380}{htonl}(length);
+766    pseudoHeader.reserved = 0;
+767    pseudoHeader.nextHeader = \hyperlink{ipv6_8h_a551bec2628dfcc3b67c0fff52e486fa5a1abdcf5760ff2904781383db26717c83}{IPV6\_ICMPV6\_HEADER};
+768 
+769    \textcolor{comment}{//Calculate ICMPv6 header checksum}
+770    message->checksum = \hyperlink{ip_8c_a9ec0593d9dbb2adf3e67894c0349cef3}{ipCalcUpperLayerChecksumEx}(&pseudoHeader,
+771       \textcolor{keyword}{sizeof}(\hyperlink{ipv6_8h_a68061e0a0b502d880cbe60b645cfa2b7}{Ipv6PseudoHeader}), buffer, offset, length);
+772 
+773    \textcolor{comment}{//Total number of ICMP messages which this entity attempted to send}
+774    \hyperlink{ip__mib__module_8h_abbb1f41624dcbd4f21b44932e338a479}{IP\_MIB\_INC\_COUNTER32}(icmpv6Stats.icmpStatsOutMsgs, 1);
+775    \textcolor{comment}{//Increment per-message type ICMP counter}
+776    \hyperlink{ip__mib__module_8h_abbb1f41624dcbd4f21b44932e338a479}{IP\_MIB\_INC\_COUNTER32}(icmpv6MsgStatsTable.icmpMsgStatsOutPkts[
+      \hyperlink{icmpv6_8h_a6bd3724b797b492017d0264d1ae5c609a366725c56a608a9a910a6cff642ee8ad}{ICMPV6\_TYPE\_ROUTER\_ADV}], 1);
+777 
+778    \textcolor{comment}{//Debug message}
+779    \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"Sending Router Advertisement message (%"} \hyperlink{compiler__port_8h_a2b7b0557dc6cd786df02dafbb51f5292}{PRIuSIZE} \textcolor{stringliteral}{" bytes)...\(\backslash\)r\(\backslash\)n"},
+780       length);
+781 
+782    \textcolor{comment}{//Dump message contents for debugging purpose}
+783    \hyperlink{ndp_8c_a20c2cb4ecad744ec1fb6db91f6f2787e}{ndpDumpRouterAdvMessage}(message);
+784 
+785    \textcolor{comment}{//Send Router Advertisement message}
+786    error = \hyperlink{ipv6_8c_ae9edf1ac407897f91eb5caed37df7c3c}{ipv6SendDatagram}(interface, &pseudoHeader, buffer, offset, 
+      \hyperlink{ndp_8h_aed9955a5c2a9d8b039e188d88f2bd923}{NDP\_HOP\_LIMIT});
+787 
+788    \textcolor{comment}{//Free previously allocated memory}
+789    \hyperlink{net__mem_8c_aa33fc4dd2a71649194052f297c707d08}{netBufferFree}(buffer);
+790    \textcolor{comment}{//Return status code}
+791    \textcolor{keywordflow}{return} error;
+792 \}
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{ndp__router__adv_8c_a7a7361c53c62d0008b3c45351ab44e8e}\label{ndp__router__adv_8c_a7a7361c53c62d0008b3c45351ab44e8e}} 
+\index{ndp\+\_\+router\+\_\+adv.\+c@{ndp\+\_\+router\+\_\+adv.\+c}!ndp\+Router\+Adv\+Tick\+Counter@{ndp\+Router\+Adv\+Tick\+Counter}}
+\index{ndp\+Router\+Adv\+Tick\+Counter@{ndp\+Router\+Adv\+Tick\+Counter}!ndp\+\_\+router\+\_\+adv.\+c@{ndp\+\_\+router\+\_\+adv.\+c}}
+\subsubsection{\texorpdfstring{ndp\+Router\+Adv\+Tick\+Counter}{ndpRouterAdvTickCounter}}
+{\footnotesize\ttfamily \hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\+\_\+t} ndp\+Router\+Adv\+Tick\+Counter}
+
+
+
+Definition at line 51 of file ndp\+\_\+router\+\_\+adv.\+c.
+

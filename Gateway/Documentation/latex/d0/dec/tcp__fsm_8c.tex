@@ -1,0 +1,1420 @@
+\hypertarget{tcp__fsm_8c}{}\section{cyclone\+\_\+tcp/core/tcp\+\_\+fsm.c File Reference}
+\label{tcp__fsm_8c}\index{cyclone\+\_\+tcp/core/tcp\+\_\+fsm.\+c@{cyclone\+\_\+tcp/core/tcp\+\_\+fsm.\+c}}
+
+
+T\+CP finite state machine.  
+
+
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}core/net.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}core/ip.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}core/socket.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}core/tcp.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}core/tcp\+\_\+fsm.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}core/tcp\+\_\+misc.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}core/tcp\+\_\+timer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ipv4/ipv4.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ipv4/ipv4\+\_\+misc.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ipv6/ipv6.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}mibs/mib2\+\_\+module.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}mibs/tcp\+\_\+mib\+\_\+module.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}date\+\_\+time.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}debug.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{tcp__fsm_8c_afcdf5e66fd927a7f4cc64295acd20407}{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}~\hyperlink{net__config_8h_a1543cbd65f7ef07345d2b4e4ad740347}{T\+C\+P\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{tcp__fsm_8c_a5086f5fda51190b6c9bda7345ac11f09}{tcp\+Process\+Segment} (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface, \hyperlink{structIpPseudoHeader}{Ip\+Pseudo\+Header} $\ast$pseudo\+Header, const \hyperlink{structNetBuffer}{Net\+Buffer} $\ast$buffer, size\+\_\+t \hyperlink{pic32mz_2isr__support_8h_ac0542d92dfcd62c19170fd963f9e5052}{offset})
+\begin{DoxyCompactList}\small\item\em Incoming T\+CP segment processing. \end{DoxyCompactList}\item 
+void \hyperlink{tcp__fsm_8c_a1aa16555582428df8ef7f8d01af08533}{tcp\+State\+Closed} (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface, \hyperlink{structIpPseudoHeader}{Ip\+Pseudo\+Header} $\ast$pseudo\+Header, \hyperlink{tcp_8h_a38f08160c28f0a8e104907d2ee71fed5}{Tcp\+Header} $\ast$segment, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length})
+\begin{DoxyCompactList}\small\item\em C\+L\+O\+S\+ED state. \end{DoxyCompactList}\item 
+void \hyperlink{tcp__fsm_8c_a510ccbf4f60f36f42c07ed8ae0b86cad}{tcp\+State\+Listen} (\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$\hyperlink{bsd__socket_8h_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, \hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface, \hyperlink{structIpPseudoHeader}{Ip\+Pseudo\+Header} $\ast$pseudo\+Header, \hyperlink{tcp_8h_a38f08160c28f0a8e104907d2ee71fed5}{Tcp\+Header} $\ast$segment, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length})
+\begin{DoxyCompactList}\small\item\em L\+I\+S\+T\+EN state. \end{DoxyCompactList}\item 
+void \hyperlink{tcp__fsm_8c_a0e45ad4435be3ce236d0a690fc0821fa}{tcp\+State\+Syn\+Sent} (\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$\hyperlink{bsd__socket_8h_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, \hyperlink{tcp_8h_a38f08160c28f0a8e104907d2ee71fed5}{Tcp\+Header} $\ast$segment, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length})
+\begin{DoxyCompactList}\small\item\em S\+Y\+N-\/\+S\+E\+NT state. \end{DoxyCompactList}\item 
+void \hyperlink{tcp__fsm_8c_a61f050e298bd7e2ca3346f035dd3609a}{tcp\+State\+Syn\+Received} (\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$\hyperlink{bsd__socket_8h_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, \hyperlink{tcp_8h_a38f08160c28f0a8e104907d2ee71fed5}{Tcp\+Header} $\ast$segment, const \hyperlink{structNetBuffer}{Net\+Buffer} $\ast$buffer, size\+\_\+t \hyperlink{pic32mz_2isr__support_8h_ac0542d92dfcd62c19170fd963f9e5052}{offset}, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length})
+\begin{DoxyCompactList}\small\item\em S\+Y\+N-\/\+R\+E\+C\+E\+I\+V\+ED state. \end{DoxyCompactList}\item 
+void \hyperlink{tcp__fsm_8c_a4f418093a24e32c763ef5a4375b1b036}{tcp\+State\+Established} (\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$\hyperlink{bsd__socket_8h_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, \hyperlink{tcp_8h_a38f08160c28f0a8e104907d2ee71fed5}{Tcp\+Header} $\ast$segment, const \hyperlink{structNetBuffer}{Net\+Buffer} $\ast$buffer, size\+\_\+t \hyperlink{pic32mz_2isr__support_8h_ac0542d92dfcd62c19170fd963f9e5052}{offset}, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length})
+\begin{DoxyCompactList}\small\item\em E\+S\+T\+A\+B\+L\+I\+S\+H\+ED state. \end{DoxyCompactList}\item 
+void \hyperlink{tcp__fsm_8c_ae1498cf07703609e9d35eedac6eedbea}{tcp\+State\+Close\+Wait} (\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$\hyperlink{bsd__socket_8h_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, \hyperlink{tcp_8h_a38f08160c28f0a8e104907d2ee71fed5}{Tcp\+Header} $\ast$segment, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length})
+\begin{DoxyCompactList}\small\item\em C\+L\+O\+S\+E-\/\+W\+A\+IT state. \end{DoxyCompactList}\item 
+void \hyperlink{tcp__fsm_8c_a9018aec687c4832e4fd59f687a0a481e}{tcp\+State\+Last\+Ack} (\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$\hyperlink{bsd__socket_8h_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, \hyperlink{tcp_8h_a38f08160c28f0a8e104907d2ee71fed5}{Tcp\+Header} $\ast$segment, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length})
+\begin{DoxyCompactList}\small\item\em L\+A\+S\+T-\/\+A\+CK state. \end{DoxyCompactList}\item 
+void \hyperlink{tcp__fsm_8c_a179e04fe5abaa24e178e343e0fdf6e78}{tcp\+State\+Fin\+Wait1} (\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$\hyperlink{bsd__socket_8h_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, \hyperlink{tcp_8h_a38f08160c28f0a8e104907d2ee71fed5}{Tcp\+Header} $\ast$segment, const \hyperlink{structNetBuffer}{Net\+Buffer} $\ast$buffer, size\+\_\+t \hyperlink{pic32mz_2isr__support_8h_ac0542d92dfcd62c19170fd963f9e5052}{offset}, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length})
+\begin{DoxyCompactList}\small\item\em F\+I\+N-\/\+W\+A\+I\+T-\/1 state. \end{DoxyCompactList}\item 
+void \hyperlink{tcp__fsm_8c_ad2e5b1d64a2fac6b28b1f7566fd9f422}{tcp\+State\+Fin\+Wait2} (\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$\hyperlink{bsd__socket_8h_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, \hyperlink{tcp_8h_a38f08160c28f0a8e104907d2ee71fed5}{Tcp\+Header} $\ast$segment, const \hyperlink{structNetBuffer}{Net\+Buffer} $\ast$buffer, size\+\_\+t \hyperlink{pic32mz_2isr__support_8h_ac0542d92dfcd62c19170fd963f9e5052}{offset}, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length})
+\begin{DoxyCompactList}\small\item\em F\+I\+N-\/\+W\+A\+I\+T-\/2 state. \end{DoxyCompactList}\item 
+void \hyperlink{tcp__fsm_8c_a3c25d8bc8a50dcf8a7840b1a3006e164}{tcp\+State\+Closing} (\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$\hyperlink{bsd__socket_8h_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, \hyperlink{tcp_8h_a38f08160c28f0a8e104907d2ee71fed5}{Tcp\+Header} $\ast$segment, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length})
+\begin{DoxyCompactList}\small\item\em C\+L\+O\+S\+I\+NG state. \end{DoxyCompactList}\item 
+void \hyperlink{tcp__fsm_8c_a639447bb741040998bd9347e8f85a4a2}{tcp\+State\+Time\+Wait} (\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$\hyperlink{bsd__socket_8h_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, \hyperlink{tcp_8h_a38f08160c28f0a8e104907d2ee71fed5}{Tcp\+Header} $\ast$segment, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length})
+\begin{DoxyCompactList}\small\item\em T\+I\+M\+E-\/\+W\+A\+IT state. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+T\+CP finite state machine. 
+
+\hypertarget{pic32mz__ef__curiosity_8h_License}{}\subsection{License}\label{pic32mz__ef__curiosity_8h_License}
+S\+P\+D\+X-\/\+License-\/\+Identifier\+: G\+P\+L-\/2.\+0-\/or-\/later
+
+Copyright (C) 2010-\/2019 Oryx Embedded S\+A\+RL. All rights reserved.
+
+This file is part of Cyclone\+T\+CP Open.
+
+This program is free software; you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+
+You should have received a copy of the G\+NU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-\/1301, U\+SA.\hypertarget{tftp__server_8c_Description}{}\subsection{Description}\label{tftp__server_8c_Description}
+The T\+CP state machine progresses from one state to another in response to events (user calls, incoming segments and timeouts). This file describes the state transitions caused by incoming segments. Refer to the following R\+F\+Cs for complete details\+:
+\begin{DoxyItemize}
+\item R\+FC 793\+: Transmission Control Protocol
+\item R\+FC 1122\+: Requirements for Internet Hosts -\/ Communication Layers
+\end{DoxyItemize}
+
+\begin{DoxyAuthor}{Author}
+Oryx Embedded S\+A\+RL (www.\+oryx-\/embedded.\+com) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+9.\+6 
+\end{DoxyVersion}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{tcp__fsm_8c_afcdf5e66fd927a7f4cc64295acd20407}\label{tcp__fsm_8c_afcdf5e66fd927a7f4cc64295acd20407}} 
+\index{tcp\+\_\+fsm.\+c@{tcp\+\_\+fsm.\+c}!T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+\index{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}!tcp\+\_\+fsm.\+c@{tcp\+\_\+fsm.\+c}}
+\subsubsection{\texorpdfstring{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}{TRACE\_LEVEL}}
+{\footnotesize\ttfamily \#define T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL~\hyperlink{net__config_8h_a1543cbd65f7ef07345d2b4e4ad740347}{T\+C\+P\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+
+
+
+Definition at line 41 of file tcp\+\_\+fsm.\+c.
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{tcp__fsm_8c_a5086f5fda51190b6c9bda7345ac11f09}\label{tcp__fsm_8c_a5086f5fda51190b6c9bda7345ac11f09}} 
+\index{tcp\+\_\+fsm.\+c@{tcp\+\_\+fsm.\+c}!tcp\+Process\+Segment@{tcp\+Process\+Segment}}
+\index{tcp\+Process\+Segment@{tcp\+Process\+Segment}!tcp\+\_\+fsm.\+c@{tcp\+\_\+fsm.\+c}}
+\subsubsection{\texorpdfstring{tcp\+Process\+Segment()}{tcpProcessSegment()}}
+{\footnotesize\ttfamily void tcp\+Process\+Segment (\begin{DoxyParamCaption}\item[{\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$}]{interface,  }\item[{\hyperlink{structIpPseudoHeader}{Ip\+Pseudo\+Header} $\ast$}]{pseudo\+Header,  }\item[{const \hyperlink{structNetBuffer}{Net\+Buffer} $\ast$}]{buffer,  }\item[{size\+\_\+t}]{offset }\end{DoxyParamCaption})}
+
+
+
+Incoming T\+CP segment processing. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em interface} & Underlying network interface \\
+\hline
+\mbox{\tt in}  & {\em pseudo\+Header} & T\+CP pseudo header \\
+\hline
+\mbox{\tt in}  & {\em buffer} & Multi-\/part buffer that holds the incoming T\+CP segment \\
+\hline
+\mbox{\tt in}  & {\em offset} & Offset to the first byte of the T\+CP header \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 73 of file tcp\+\_\+fsm.\+c.
+
+
+\begin{DoxyCode}
+75 \{
+76    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+77    \textcolor{keywordtype}{size\_t} \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length};
+78    \hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} *\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket};
+79    \hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} *passiveSocket;
+80    \hyperlink{tcp_8h_a38f08160c28f0a8e104907d2ee71fed5}{TcpHeader} *segment;
+81 
+82    \textcolor{comment}{//Total number of segments received, including those received in error}
+83    \hyperlink{mib2__module_8h_abac73a39224e47d597f3b461620d2119}{MIB2\_INC\_COUNTER32}(tcpGroup.tcpInSegs, 1);
+84    \hyperlink{tcp__mib__module_8h_a296ad60b53152af0749116138a8ae227}{TCP\_MIB\_INC\_COUNTER32}(tcpInSegs, 1);
+85    \hyperlink{tcp__mib__module_8h_a253ad9db6b20e52ec432bb8c23ee309c}{TCP\_MIB\_INC\_COUNTER64}(tcpHCInSegs, 1);
+86 
+87    \textcolor{comment}{//A TCP implementation must silently discard an incoming segment that}
+88    \textcolor{comment}{//is addressed to a broadcast or multicast address (refer to RFC 1122,}
+89    \textcolor{comment}{//section 4.2.3.10)}
+90 \textcolor{preprocessor}{#if (IPV4\_SUPPORT == ENABLED)}
+91    \textcolor{keywordflow}{if}(pseudoHeader->\hyperlink{structIpPseudoHeader_aeff06b8d9c3e7e2ef3cdb8a3a14e8ad2}{length} == \textcolor{keyword}{sizeof}(\hyperlink{ipv4_8h_a0e92b64e038199f1bb6383f2a76f30b6}{Ipv4PseudoHeader}))
+92    \{
+93       \textcolor{comment}{//Ensure the destination address is not a broadcast address}
+94       \textcolor{keywordflow}{if}(\hyperlink{ipv4__misc_8c_a73422a205c437d811cf29972c3464e1c}{ipv4IsBroadcastAddr}(interface, pseudoHeader->
+      \hyperlink{structIpPseudoHeader_a4dd0d91580f30918dc7b5d5a430dba6a}{ipv4Data}.destAddr))
+95          \textcolor{keywordflow}{return};
+96       \textcolor{comment}{//Ensure the destination address is not a multicast address}
+97       \textcolor{keywordflow}{if}(\hyperlink{ipv4_8h_aada5b622e70acf16bd1cd5a9c08ea107}{ipv4IsMulticastAddr}(pseudoHeader->\hyperlink{structIpPseudoHeader_a4dd0d91580f30918dc7b5d5a430dba6a}{ipv4Data}.destAddr))
+98          \textcolor{keywordflow}{return};
+99    \}
+100    \textcolor{keywordflow}{else}
+101 \textcolor{preprocessor}{#endif}
+102 \textcolor{preprocessor}{#if (IPV6\_SUPPORT == ENABLED)}
+103    \textcolor{keywordflow}{if}(pseudoHeader->\hyperlink{structIpPseudoHeader_aeff06b8d9c3e7e2ef3cdb8a3a14e8ad2}{length} == \textcolor{keyword}{sizeof}(\hyperlink{ipv6_8h_a68061e0a0b502d880cbe60b645cfa2b7}{Ipv6PseudoHeader}))
+104    \{
+105       \textcolor{comment}{//Ensure the destination address is not a multicast address}
+106       \textcolor{keywordflow}{if}(\hyperlink{ipv6_8h_a68fbc1145d242384c90a670196a38495}{ipv6IsMulticastAddr}(&pseudoHeader->\hyperlink{structIpPseudoHeader_a5155846ca7e85218407a8374d035aab7}{ipv6Data}.destAddr))
+107          \textcolor{keywordflow}{return};
+108    \}
+109    \textcolor{keywordflow}{else}
+110 \textcolor{preprocessor}{#endif}
+111    \{
+112       \textcolor{comment}{//This should never occur...}
+113       \textcolor{keywordflow}{return};
+114    \}
+115 
+116    \textcolor{comment}{//Retrieve the length of the TCP segment}
+117    length = \hyperlink{net__mem_8c_ac9dbcd9e28e61d8f4f6d2e9af2607b68}{netBufferGetLength}(buffer) - \hyperlink{pic32mz_2isr__support_8h_a12a5aed8a193ebbf9a641104a310610d}{offset};
+118 
+119    \textcolor{comment}{//Point to the TCP header}
+120    segment = \hyperlink{net__mem_8c_a20d30c9db547b3b2743368b589cf482b}{netBufferAt}(buffer, \hyperlink{pic32mz_2isr__support_8h_a12a5aed8a193ebbf9a641104a310610d}{offset});
+121    \textcolor{comment}{//Sanity check}
+122    \textcolor{keywordflow}{if}(segment == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+123       \textcolor{keywordflow}{return};
+124 
+125    \textcolor{comment}{//Ensure the TCP header is valid}
+126    \textcolor{keywordflow}{if}(length < \textcolor{keyword}{sizeof}(\hyperlink{tcp_8h_a38f08160c28f0a8e104907d2ee71fed5}{TcpHeader}))
+127    \{
+128       \textcolor{comment}{//Debug message}
+129       \hyperlink{debug_8h_a72b9761add7486364dba449091cd2579}{TRACE\_WARNING}(\textcolor{stringliteral}{"TCP segment length is invalid!\(\backslash\)r\(\backslash\)n"});
+130 
+131       \textcolor{comment}{//Total number of segments received in error}
+132       \hyperlink{mib2__module_8h_abac73a39224e47d597f3b461620d2119}{MIB2\_INC\_COUNTER32}(tcpGroup.tcpInErrs, 1);
+133       \hyperlink{tcp__mib__module_8h_a296ad60b53152af0749116138a8ae227}{TCP\_MIB\_INC\_COUNTER32}(tcpInErrs, 1);
+134 
+135       \textcolor{comment}{//Exit immediately}
+136       \textcolor{keywordflow}{return};
+137    \}
+138 
+139    \textcolor{comment}{//Check header length}
+140    \textcolor{keywordflow}{if}(segment->dataOffset < 5 || ((\textcolor{keywordtype}{size\_t}) segment->dataOffset * 4) > length)
+141    \{
+142       \textcolor{comment}{//Debug message}
+143       \hyperlink{debug_8h_a72b9761add7486364dba449091cd2579}{TRACE\_WARNING}(\textcolor{stringliteral}{"TCP header length is invalid!\(\backslash\)r\(\backslash\)n"});
+144 
+145       \textcolor{comment}{//Total number of segments received in error}
+146       \hyperlink{mib2__module_8h_abac73a39224e47d597f3b461620d2119}{MIB2\_INC\_COUNTER32}(tcpGroup.tcpInErrs, 1);
+147       \hyperlink{tcp__mib__module_8h_a296ad60b53152af0749116138a8ae227}{TCP\_MIB\_INC\_COUNTER32}(tcpInErrs, 1);
+148 
+149       \textcolor{comment}{//Exit immediately}
+150       \textcolor{keywordflow}{return};
+151    \}
+152 
+153    \textcolor{comment}{//Verify TCP checksum}
+154    \textcolor{keywordflow}{if}(\hyperlink{ip_8c_a9ec0593d9dbb2adf3e67894c0349cef3}{ipCalcUpperLayerChecksumEx}(pseudoHeader->\hyperlink{structIpPseudoHeader_a87fecad80b6124a9af4a955525f1d39d}{data},
+155       pseudoHeader->\hyperlink{structIpPseudoHeader_aeff06b8d9c3e7e2ef3cdb8a3a14e8ad2}{length}, buffer, \hyperlink{pic32mz_2isr__support_8h_a12a5aed8a193ebbf9a641104a310610d}{offset}, length) != 0x0000)
+156    \{
+157       \textcolor{comment}{//Debug message}
+158       \hyperlink{debug_8h_a72b9761add7486364dba449091cd2579}{TRACE\_WARNING}(\textcolor{stringliteral}{"Wrong TCP header checksum!\(\backslash\)r\(\backslash\)n"});
+159 
+160       \textcolor{comment}{//Total number of segments received in error}
+161       \hyperlink{mib2__module_8h_abac73a39224e47d597f3b461620d2119}{MIB2\_INC\_COUNTER32}(tcpGroup.tcpInErrs, 1);
+162       \hyperlink{tcp__mib__module_8h_a296ad60b53152af0749116138a8ae227}{TCP\_MIB\_INC\_COUNTER32}(tcpInErrs, 1);
+163 
+164       \textcolor{comment}{//Exit immediately}
+165       \textcolor{keywordflow}{return};
+166    \}
+167 
+168    \textcolor{comment}{//No matching socket in the LISTEN state for the moment}
+169    passiveSocket = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+170 
+171    \textcolor{comment}{//Look through opened sockets}
+172    \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{socket_8h_ab793a8c76592a00fa3ea0510cd2ffe3a}{SOCKET\_MAX\_COUNT}; i++)
+173    \{
+174       \textcolor{comment}{//Point to the current socket}
+175       socket = \hyperlink{socket_8c_acdd76d8e01b4715c774c404b10f958da}{socketTable} + i;
+176 
+177       \textcolor{comment}{//TCP socket found?}
+178       \textcolor{keywordflow}{if}(socket->type != \hyperlink{socket_8h_aa78c7398fa81f7f62aa233159d4d8d97a9dab003c4dc9f7279e806241534d4859}{SOCKET\_TYPE\_STREAM})
+179          \textcolor{keywordflow}{continue};
+180       \textcolor{comment}{//Check whether the socket is bound to a particular interface}
+181       \textcolor{keywordflow}{if}(socket->interface && socket->interface != interface)
+182          \textcolor{keywordflow}{continue};
+183       \textcolor{comment}{//Check destination port number}
+184       \textcolor{keywordflow}{if}(socket->localPort != \hyperlink{cpu__endian_8h_a9312c6eb72e64f748ae0d0e0dc3ec9b9}{ntohs}(segment->destPort))
+185          \textcolor{keywordflow}{continue};
+186 
+187 \textcolor{preprocessor}{#if (IPV4\_SUPPORT == ENABLED)}
+188       \textcolor{comment}{//IPv4 packet received?}
+189       \textcolor{keywordflow}{if}(pseudoHeader->\hyperlink{structIpPseudoHeader_aeff06b8d9c3e7e2ef3cdb8a3a14e8ad2}{length} == \textcolor{keyword}{sizeof}(\hyperlink{ipv4_8h_a0e92b64e038199f1bb6383f2a76f30b6}{Ipv4PseudoHeader}))
+190       \{
+191          \textcolor{comment}{//Destination IP address filtering}
+192          \textcolor{keywordflow}{if}(socket->localIpAddr.length != 0)
+193          \{
+194             \textcolor{comment}{//An IPv4 address is expected}
+195             \textcolor{keywordflow}{if}(socket->localIpAddr.length != \textcolor{keyword}{sizeof}(\hyperlink{ipv4_8h_a411debb3d770caa0c06d3f73367da37f}{Ipv4Addr}))
+196                \textcolor{keywordflow}{continue};
+197             \textcolor{comment}{//Filter out non-matching addresses}
+198             \textcolor{keywordflow}{if}(socket->localIpAddr.ipv4Addr != pseudoHeader->\hyperlink{structIpPseudoHeader_a4dd0d91580f30918dc7b5d5a430dba6a}{ipv4Data}.destAddr)
+199                \textcolor{keywordflow}{continue};
+200          \}
+201 
+202          \textcolor{comment}{//Source IP address filtering}
+203          \textcolor{keywordflow}{if}(socket->remoteIpAddr.length != 0)
+204          \{
+205             \textcolor{comment}{//An IPv4 address is expected}
+206             \textcolor{keywordflow}{if}(socket->remoteIpAddr.length != \textcolor{keyword}{sizeof}(\hyperlink{ipv4_8h_a411debb3d770caa0c06d3f73367da37f}{Ipv4Addr}))
+207                \textcolor{keywordflow}{continue};
+208             \textcolor{comment}{//Filter out non-matching addresses}
+209             \textcolor{keywordflow}{if}(socket->remoteIpAddr.ipv4Addr != pseudoHeader->\hyperlink{structIpPseudoHeader_a4dd0d91580f30918dc7b5d5a430dba6a}{ipv4Data}.srcAddr)
+210                \textcolor{keywordflow}{continue};
+211          \}
+212       \}
+213       \textcolor{keywordflow}{else}
+214 \textcolor{preprocessor}{#endif}
+215 \textcolor{preprocessor}{#if (IPV6\_SUPPORT == ENABLED)}
+216       \textcolor{comment}{//IPv6 packet received?}
+217       \textcolor{keywordflow}{if}(pseudoHeader->\hyperlink{structIpPseudoHeader_aeff06b8d9c3e7e2ef3cdb8a3a14e8ad2}{length} == \textcolor{keyword}{sizeof}(\hyperlink{ipv6_8h_a68061e0a0b502d880cbe60b645cfa2b7}{Ipv6PseudoHeader}))
+218       \{
+219          \textcolor{comment}{//Destination IP address filtering}
+220          \textcolor{keywordflow}{if}(socket->localIpAddr.length != 0)
+221          \{
+222             \textcolor{comment}{//An IPv6 address is expected}
+223             \textcolor{keywordflow}{if}(socket->localIpAddr.length != \textcolor{keyword}{sizeof}(\hyperlink{ipv6_8h_aed0cbc40c61ed5b4fb681ebc55237e89}{Ipv6Addr}))
+224                \textcolor{keywordflow}{continue};
+225             \textcolor{comment}{//Filter out non-matching addresses}
+226             \textcolor{keywordflow}{if}(!\hyperlink{ipv6_8h_ab1e93bd2152bc3f3b5642fd0216384d7}{ipv6CompAddr}(&socket->localIpAddr.ipv6Addr, &pseudoHeader->
+      \hyperlink{structIpPseudoHeader_a5155846ca7e85218407a8374d035aab7}{ipv6Data}.destAddr))
+227                \textcolor{keywordflow}{continue};
+228          \}
+229 
+230          \textcolor{comment}{//Source IP address filtering}
+231          \textcolor{keywordflow}{if}(socket->remoteIpAddr.length != 0)
+232          \{
+233             \textcolor{comment}{//An IPv6 address is expected}
+234             \textcolor{keywordflow}{if}(socket->remoteIpAddr.length != \textcolor{keyword}{sizeof}(\hyperlink{ipv6_8h_aed0cbc40c61ed5b4fb681ebc55237e89}{Ipv6Addr}))
+235                \textcolor{keywordflow}{continue};
+236             \textcolor{comment}{//Filter out non-matching addresses}
+237             \textcolor{keywordflow}{if}(!\hyperlink{ipv6_8h_ab1e93bd2152bc3f3b5642fd0216384d7}{ipv6CompAddr}(&socket->remoteIpAddr.ipv6Addr, &pseudoHeader->
+      \hyperlink{structIpPseudoHeader_a5155846ca7e85218407a8374d035aab7}{ipv6Data}.srcAddr))
+238                \textcolor{keywordflow}{continue};
+239          \}
+240       \}
+241       \textcolor{keywordflow}{else}
+242 \textcolor{preprocessor}{#endif}
+243       \textcolor{comment}{//Invalid packet received?}
+244       \{
+245          \textcolor{comment}{//This should never occur...}
+246          \textcolor{keywordflow}{continue};
+247       \}
+248 
+249       \textcolor{comment}{//Keep track of the first matching socket in the LISTEN state}
+250       \textcolor{keywordflow}{if}(socket->state == \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfeca7f99d4d604cb5009b50f04f84f5cb1c6}{TCP\_STATE\_LISTEN} && passiveSocket == 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+251          passiveSocket = \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket};
+252 
+253       \textcolor{comment}{//Source port filtering}
+254       \textcolor{keywordflow}{if}(socket->remotePort != \hyperlink{cpu__endian_8h_a9312c6eb72e64f748ae0d0e0dc3ec9b9}{ntohs}(segment->srcPort))
+255          \textcolor{keywordflow}{continue};
+256 
+257       \textcolor{comment}{//A matching socket has been found}
+258       \textcolor{keywordflow}{break};
+259    \}
+260 
+261    \textcolor{comment}{//If no matching socket has been found then try to}
+262    \textcolor{comment}{//use the first matching socket in the LISTEN state}
+263    \textcolor{keywordflow}{if}(i >= SOCKET\_MAX\_COUNT)
+264       socket = passiveSocket;
+265 
+266    \textcolor{comment}{//Offset to the first data byte}
+267    \hyperlink{pic32mz_2isr__support_8h_a12a5aed8a193ebbf9a641104a310610d}{offset} += segment->dataOffset * 4;
+268    \textcolor{comment}{//Calculate the length of the data}
+269    length -= segment->dataOffset * 4;
+270 
+271    \textcolor{comment}{//Debug message}
+272    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"%s: TCP segment received (%"} \hyperlink{compiler__port_8h_a2b7b0557dc6cd786df02dafbb51f5292}{PRIuSIZE} \textcolor{stringliteral}{" data bytes)...\(\backslash\)r\(\backslash\)n"},
+273       \hyperlink{date__time_8c_ae15b3e664208ca7e4d6983921865cd74}{formatSystemTime}(\hyperlink{os__port__chibios_8c_ab66a11272d40a916fa69dd8e4dc443d4}{osGetSystemTime}(), \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}), length);
+274 
+275    \textcolor{comment}{//Dump TCP header contents for debugging purpose}
+276    \textcolor{keywordflow}{if}(socket == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+277       \hyperlink{tcp__misc_8c_a73fae08a3e43bdbf6a01ab32d8802949}{tcpDumpHeader}(segment, length, 0, 0);
+278    \textcolor{keywordflow}{else}
+279       \hyperlink{tcp__misc_8c_a73fae08a3e43bdbf6a01ab32d8802949}{tcpDumpHeader}(segment, length, socket->irs, socket->iss);
+280 
+281    \textcolor{comment}{//Convert from network byte order to host byte order}
+282    segment->srcPort = \hyperlink{cpu__endian_8h_a9312c6eb72e64f748ae0d0e0dc3ec9b9}{ntohs}(segment->srcPort);
+283    segment->destPort = \hyperlink{cpu__endian_8h_a9312c6eb72e64f748ae0d0e0dc3ec9b9}{ntohs}(segment->destPort);
+284    segment->seqNum = \hyperlink{cpu__endian_8h_a22f92ea3318059b7d88dfbd98d0cbc3e}{ntohl}(segment->seqNum);
+285    segment->ackNum = \hyperlink{cpu__endian_8h_a22f92ea3318059b7d88dfbd98d0cbc3e}{ntohl}(segment->ackNum);
+286    segment->window = \hyperlink{cpu__endian_8h_a9312c6eb72e64f748ae0d0e0dc3ec9b9}{ntohs}(segment->window);
+287    segment->urgentPointer = \hyperlink{cpu__endian_8h_a9312c6eb72e64f748ae0d0e0dc3ec9b9}{ntohs}(segment->urgentPointer);
+288 
+289    \textcolor{comment}{//Specified port is unreachable?}
+290    \textcolor{keywordflow}{if}(socket == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+291    \{
+292       \textcolor{comment}{//An incoming segment not containing a RST causes}
+293       \textcolor{comment}{//a reset to be sent in response}
+294       \textcolor{keywordflow}{if}(!(segment->flags & \hyperlink{tcp_8h_a4e6d97f0f2a3dc780d192efcdfe64aa7a2eaeb7e7c1984d0bd4d1cbb48b2b5ce4}{TCP\_FLAG\_RST}))
+295          \hyperlink{tcp__misc_8c_a07b59bd89778b5fd8cd9c57dfd7f2866}{tcpSendResetSegment}(interface, pseudoHeader, segment, length);
+296 
+297       \textcolor{comment}{//Return immediately}
+298       \textcolor{keywordflow}{return};
+299    \}
+300 
+301    \textcolor{comment}{//Check current state}
+302    \textcolor{keywordflow}{switch}(socket->state)
+303    \{
+304    \textcolor{comment}{//Process CLOSED state}
+305    \textcolor{keywordflow}{case} \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfeca1af39131036c81d79f09174d2fb6f788}{TCP\_STATE\_CLOSED}:
+306       \textcolor{comment}{//This is the default state that each connection starts in before}
+307       \textcolor{comment}{//the process of establishing it begins}
+308       \hyperlink{tcp__fsm_8c_a1aa16555582428df8ef7f8d01af08533}{tcpStateClosed}(interface, pseudoHeader, segment, length);
+309       \textcolor{keywordflow}{break};
+310    \textcolor{comment}{//Process LISTEN state}
+311    \textcolor{keywordflow}{case} \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfeca7f99d4d604cb5009b50f04f84f5cb1c6}{TCP\_STATE\_LISTEN}:
+312       \textcolor{comment}{//A device (normally a server) is waiting to receive a synchronize (SYN)}
+313       \textcolor{comment}{//message from a client. It has not yet sent its own SYN message}
+314       \hyperlink{tcp__fsm_8c_a510ccbf4f60f36f42c07ed8ae0b86cad}{tcpStateListen}(socket, interface, pseudoHeader, segment, length);
+315       \textcolor{keywordflow}{break};
+316    \textcolor{comment}{//Process SYN\_SENT state}
+317    \textcolor{keywordflow}{case} \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfeca63834296a6449f272b397d54a5536bfc}{TCP\_STATE\_SYN\_SENT}:
+318       \textcolor{comment}{//The device (normally a client) has sent a synchronize (SYN) message and}
+319       \textcolor{comment}{//is waiting for a matching SYN from the other device (usually a server)}
+320       \hyperlink{tcp__fsm_8c_a0e45ad4435be3ce236d0a690fc0821fa}{tcpStateSynSent}(socket, segment, length);
+321       \textcolor{keywordflow}{break};
+322    \textcolor{comment}{//Process SYN\_RECEIVED state}
+323    \textcolor{keywordflow}{case} \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfecadfce7e58cb083022157243f993d4ddc3}{TCP\_STATE\_SYN\_RECEIVED}:
+324       \textcolor{comment}{//The device has both received a SYN from its partner and sent its own SYN.}
+325       \textcolor{comment}{//It is now waiting for an ACK to its SYN to finish connection setup}
+326       \hyperlink{tcp__fsm_8c_a61f050e298bd7e2ca3346f035dd3609a}{tcpStateSynReceived}(socket, segment, buffer, \hyperlink{pic32mz_2isr__support_8h_a12a5aed8a193ebbf9a641104a310610d}{offset}, length);
+327       \textcolor{keywordflow}{break};
+328    \textcolor{comment}{//Process ESTABLISHED state}
+329    \textcolor{keywordflow}{case} \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfecaacb7ccce8d3fcdbc6635983251b22189}{TCP\_STATE\_ESTABLISHED}:
+330       \textcolor{comment}{//Data can be exchanged freely once both devices in the connection enter}
+331       \textcolor{comment}{//this state. This will continue until the connection is closed}
+332       \hyperlink{tcp__fsm_8c_a4f418093a24e32c763ef5a4375b1b036}{tcpStateEstablished}(socket, segment, buffer, \hyperlink{pic32mz_2isr__support_8h_a12a5aed8a193ebbf9a641104a310610d}{offset}, length);
+333       \textcolor{keywordflow}{break};
+334    \textcolor{comment}{//Process CLOSE\_WAIT state}
+335    \textcolor{keywordflow}{case} \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfecabd723866a1772c3180b372605cfbc963}{TCP\_STATE\_CLOSE\_WAIT}:
+336       \textcolor{comment}{//The device has received a close request (FIN) from the other device. It}
+337       \textcolor{comment}{//must now wait for the application to acknowledge this request and}
+338       \textcolor{comment}{//generate a matching request}
+339       \hyperlink{tcp__fsm_8c_ae1498cf07703609e9d35eedac6eedbea}{tcpStateCloseWait}(socket, segment, length);
+340       \textcolor{keywordflow}{break};
+341    \textcolor{comment}{//Process LAST\_ACK state}
+342    \textcolor{keywordflow}{case} \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfeca29f7d016b33a1856dfba699643c69260}{TCP\_STATE\_LAST\_ACK}:
+343       \textcolor{comment}{//A device that has already received a close request and acknowledged it,}
+344       \textcolor{comment}{//has sent its own FIN and is waiting for an ACK to this request}
+345       \hyperlink{tcp__fsm_8c_a9018aec687c4832e4fd59f687a0a481e}{tcpStateLastAck}(socket, segment, length);
+346       \textcolor{keywordflow}{break};
+347    \textcolor{comment}{//Process FIN\_WAIT\_1 state}
+348    \textcolor{keywordflow}{case} \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfecad80d0b794cc52f39180e65bd1da1b555}{TCP\_STATE\_FIN\_WAIT\_1}:
+349       \textcolor{comment}{//A device in this state is waiting for an ACK for a FIN it has sent, or}
+350       \textcolor{comment}{//is waiting for a connection termination request from the other device}
+351       \hyperlink{tcp__fsm_8c_a179e04fe5abaa24e178e343e0fdf6e78}{tcpStateFinWait1}(socket, segment, buffer, \hyperlink{pic32mz_2isr__support_8h_a12a5aed8a193ebbf9a641104a310610d}{offset}, length);
+352       \textcolor{keywordflow}{break};
+353    \textcolor{comment}{//Process FIN\_WAIT\_2 state}
+354    \textcolor{keywordflow}{case} \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfecac50f13616eeb349dc1aaa5cfd3422018}{TCP\_STATE\_FIN\_WAIT\_2}:
+355       \textcolor{comment}{//A device in this state has received an ACK for its request to terminate the}
+356       \textcolor{comment}{//connection and is now waiting for a matching FIN from the other device}
+357       \hyperlink{tcp__fsm_8c_ad2e5b1d64a2fac6b28b1f7566fd9f422}{tcpStateFinWait2}(socket, segment, buffer, \hyperlink{pic32mz_2isr__support_8h_a12a5aed8a193ebbf9a641104a310610d}{offset}, length);
+358       \textcolor{keywordflow}{break};
+359    \textcolor{comment}{//Process CLOSING state}
+360    \textcolor{keywordflow}{case} \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfecad9c881087c2449f9d8c7a2a2ab188f22}{TCP\_STATE\_CLOSING}:
+361       \textcolor{comment}{//The device has received a FIN from the other device and sent an ACK for}
+362       \textcolor{comment}{//it, but not yet received an ACK for its own FIN message}
+363       \hyperlink{tcp__fsm_8c_a3c25d8bc8a50dcf8a7840b1a3006e164}{tcpStateClosing}(socket, segment, length);
+364       \textcolor{keywordflow}{break};
+365    \textcolor{comment}{//Process TIME\_WAIT state}
+366    \textcolor{keywordflow}{case} \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfeca8fa1774b3f785db85813df1b8e158c56}{TCP\_STATE\_TIME\_WAIT}:
+367       \textcolor{comment}{//The device has now received a FIN from the other device and acknowledged}
+368       \textcolor{comment}{//it, and sent its own FIN and received an ACK for it. We are done, except}
+369       \textcolor{comment}{//for waiting to ensure the ACK is received and prevent potential overlap}
+370       \textcolor{comment}{//with new connections}
+371       \hyperlink{tcp__fsm_8c_a639447bb741040998bd9347e8f85a4a2}{tcpStateTimeWait}(socket, segment, length);
+372       \textcolor{keywordflow}{break};
+373    \textcolor{comment}{//Invalid state...}
+374    \textcolor{keywordflow}{default}:
+375       \textcolor{comment}{//Back to the CLOSED state}
+376       \hyperlink{tcp__misc_8c_af8741d2662dcc13ed4695fec3ef5a365}{tcpChangeState}(socket, \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfeca1af39131036c81d79f09174d2fb6f788}{TCP\_STATE\_CLOSED});
+377       \textcolor{comment}{//Silently discard incoming packet}
+378       \textcolor{keywordflow}{break};
+379    \}
+380 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{tcp__fsm_8c_a1aa16555582428df8ef7f8d01af08533}\label{tcp__fsm_8c_a1aa16555582428df8ef7f8d01af08533}} 
+\index{tcp\+\_\+fsm.\+c@{tcp\+\_\+fsm.\+c}!tcp\+State\+Closed@{tcp\+State\+Closed}}
+\index{tcp\+State\+Closed@{tcp\+State\+Closed}!tcp\+\_\+fsm.\+c@{tcp\+\_\+fsm.\+c}}
+\subsubsection{\texorpdfstring{tcp\+State\+Closed()}{tcpStateClosed()}}
+{\footnotesize\ttfamily void tcp\+State\+Closed (\begin{DoxyParamCaption}\item[{\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$}]{interface,  }\item[{\hyperlink{structIpPseudoHeader}{Ip\+Pseudo\+Header} $\ast$}]{pseudo\+Header,  }\item[{\hyperlink{tcp_8h_a38f08160c28f0a8e104907d2ee71fed5}{Tcp\+Header} $\ast$}]{segment,  }\item[{size\+\_\+t}]{length }\end{DoxyParamCaption})}
+
+
+
+C\+L\+O\+S\+ED state. 
+
+This is the default state that each connection starts in before the process of establishing it begins
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em interface} & Underlying network interface \\
+\hline
+\mbox{\tt in}  & {\em pseudo\+Header} & T\+CP pseudo header \\
+\hline
+\mbox{\tt in}  & {\em segment} & Incoming T\+CP segment \\
+\hline
+\mbox{\tt in}  & {\em length} & Length of the segment data \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 395 of file tcp\+\_\+fsm.\+c.
+
+
+\begin{DoxyCode}
+397 \{
+398    \textcolor{comment}{//Debug message}
+399    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"TCP FSM: CLOSED state\(\backslash\)r\(\backslash\)n"});
+400 
+401    \textcolor{comment}{//An incoming segment not containing a RST causes}
+402    \textcolor{comment}{//a reset to be sent in response}
+403    \textcolor{keywordflow}{if}(!(segment->flags & \hyperlink{tcp_8h_a4e6d97f0f2a3dc780d192efcdfe64aa7a2eaeb7e7c1984d0bd4d1cbb48b2b5ce4}{TCP\_FLAG\_RST}))
+404       \hyperlink{tcp__misc_8c_a07b59bd89778b5fd8cd9c57dfd7f2866}{tcpSendResetSegment}(interface, pseudoHeader, segment, 
+      \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length});
+405 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{tcp__fsm_8c_ae1498cf07703609e9d35eedac6eedbea}\label{tcp__fsm_8c_ae1498cf07703609e9d35eedac6eedbea}} 
+\index{tcp\+\_\+fsm.\+c@{tcp\+\_\+fsm.\+c}!tcp\+State\+Close\+Wait@{tcp\+State\+Close\+Wait}}
+\index{tcp\+State\+Close\+Wait@{tcp\+State\+Close\+Wait}!tcp\+\_\+fsm.\+c@{tcp\+\_\+fsm.\+c}}
+\subsubsection{\texorpdfstring{tcp\+State\+Close\+Wait()}{tcpStateCloseWait()}}
+{\footnotesize\ttfamily void tcp\+State\+Close\+Wait (\begin{DoxyParamCaption}\item[{\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$}]{socket,  }\item[{\hyperlink{tcp_8h_a38f08160c28f0a8e104907d2ee71fed5}{Tcp\+Header} $\ast$}]{segment,  }\item[{size\+\_\+t}]{length }\end{DoxyParamCaption})}
+
+
+
+C\+L\+O\+S\+E-\/\+W\+A\+IT state. 
+
+The device has received a close request (F\+IN) from the other device. It must now wait for the application to acknowledge this request and generate a matching request
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em socket} & Handle referencing the current socket \\
+\hline
+\mbox{\tt in}  & {\em segment} & Incoming T\+CP segment \\
+\hline
+\mbox{\tt in}  & {\em length} & Length of the segment data \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 840 of file tcp\+\_\+fsm.\+c.
+
+
+\begin{DoxyCode}
+841 \{
+842    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} \hyperlink{tcp_8h_aa2585d779da0ab21273a8d92de9a0ebe}{flags} = 0;
+843 
+844    \textcolor{comment}{//Debug message}
+845    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"TCP FSM: CLOSE-WAIT state\(\backslash\)r\(\backslash\)n"});
+846 
+847    \textcolor{comment}{//First check sequence number}
+848    \textcolor{keywordflow}{if}(\hyperlink{tcp__misc_8c_a3aa461df53441116e0217086b8fc705a}{tcpCheckSequenceNumber}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, segment, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}))
+849       \textcolor{keywordflow}{return};
+850 
+851    \textcolor{comment}{//Check the RST bit}
+852    \textcolor{keywordflow}{if}(segment->flags & \hyperlink{tcp_8h_a4e6d97f0f2a3dc780d192efcdfe64aa7a2eaeb7e7c1984d0bd4d1cbb48b2b5ce4}{TCP\_FLAG\_RST})
+853    \{
+854       \textcolor{comment}{//Switch to the CLOSED state}
+855       \hyperlink{tcp__misc_8c_af8741d2662dcc13ed4695fec3ef5a365}{tcpChangeState}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfeca1af39131036c81d79f09174d2fb6f788}{TCP\_STATE\_CLOSED});
+856 
+857       \textcolor{comment}{//Number of times TCP connections have made a direct transition to the}
+858       \textcolor{comment}{//CLOSED state from either the ESTABLISHED state or the CLOSE-WAIT state}
+859       \hyperlink{mib2__module_8h_abac73a39224e47d597f3b461620d2119}{MIB2\_INC\_COUNTER32}(tcpGroup.tcpEstabResets, 1);
+860       \hyperlink{tcp__mib__module_8h_a296ad60b53152af0749116138a8ae227}{TCP\_MIB\_INC\_COUNTER32}(tcpEstabResets, 1);
+861 
+862       \textcolor{comment}{//Return immediately}
+863       \textcolor{keywordflow}{return};
+864    \}
+865 
+866    \textcolor{comment}{//Check the SYN bit}
+867    \textcolor{keywordflow}{if}(\hyperlink{tcp__misc_8c_ad62359b91161be196effb675a48647c3}{tcpCheckSyn}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, segment, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}))
+868       \textcolor{keywordflow}{return};
+869    \textcolor{comment}{//Check the ACK field}
+870    \textcolor{keywordflow}{if}(\hyperlink{tcp__misc_8c_ab0f130378ae1ace2ca64d905d15b6f68}{tcpCheckAck}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, segment, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}))
+871       \textcolor{keywordflow}{return};
+872 
+873 \textcolor{preprocessor}{#if (TCP\_CONGEST\_CONTROL\_SUPPORT == ENABLED)}
+874    \textcolor{comment}{//Duplicate AK received?}
+875    \textcolor{keywordflow}{if}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->dupAckCount > 0)
+876       flags = \hyperlink{socket_8h_a36c1d45d435e2f0ebe609c31d0c2da16a2a3399f24cd678390ebf586c4ffefc8c}{SOCKET\_FLAG\_NO\_DELAY};
+877 \textcolor{preprocessor}{#endif}
+878 
+879    \textcolor{comment}{//The Nagle algorithm should be implemented to coalesce}
+880    \textcolor{comment}{//short segments (refer to RFC 1122 4.2.3.4)}
+881    \hyperlink{tcp__misc_8c_ab354828c280bda2e01554f5ea827d752}{tcpNagleAlgo}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, flags);
+882 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{tcp__fsm_8c_a3c25d8bc8a50dcf8a7840b1a3006e164}\label{tcp__fsm_8c_a3c25d8bc8a50dcf8a7840b1a3006e164}} 
+\index{tcp\+\_\+fsm.\+c@{tcp\+\_\+fsm.\+c}!tcp\+State\+Closing@{tcp\+State\+Closing}}
+\index{tcp\+State\+Closing@{tcp\+State\+Closing}!tcp\+\_\+fsm.\+c@{tcp\+\_\+fsm.\+c}}
+\subsubsection{\texorpdfstring{tcp\+State\+Closing()}{tcpStateClosing()}}
+{\footnotesize\ttfamily void tcp\+State\+Closing (\begin{DoxyParamCaption}\item[{\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$}]{socket,  }\item[{\hyperlink{tcp_8h_a38f08160c28f0a8e104907d2ee71fed5}{Tcp\+Header} $\ast$}]{segment,  }\item[{size\+\_\+t}]{length }\end{DoxyParamCaption})}
+
+
+
+C\+L\+O\+S\+I\+NG state. 
+
+The device has received a F\+IN from the other device and sent an A\+CK for it, but not yet received an A\+CK for its own F\+IN message
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em socket} & Handle referencing the current socket \\
+\hline
+\mbox{\tt in}  & {\em segment} & Incoming T\+CP segment \\
+\hline
+\mbox{\tt in}  & {\em length} & Length of the segment data \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 1092 of file tcp\+\_\+fsm.\+c.
+
+
+\begin{DoxyCode}
+1093 \{
+1094    \textcolor{comment}{//Debug message}
+1095    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"TCP FSM: CLOSING state\(\backslash\)r\(\backslash\)n"});
+1096 
+1097    \textcolor{comment}{//First check sequence number}
+1098    \textcolor{keywordflow}{if}(\hyperlink{tcp__misc_8c_a3aa461df53441116e0217086b8fc705a}{tcpCheckSequenceNumber}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, segment, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}))
+1099       \textcolor{keywordflow}{return};
+1100 
+1101    \textcolor{comment}{//Check the RST bit}
+1102    \textcolor{keywordflow}{if}(segment->flags & \hyperlink{tcp_8h_a4e6d97f0f2a3dc780d192efcdfe64aa7a2eaeb7e7c1984d0bd4d1cbb48b2b5ce4}{TCP\_FLAG\_RST})
+1103    \{
+1104       \textcolor{comment}{//Enter CLOSED state}
+1105       \hyperlink{tcp__misc_8c_af8741d2662dcc13ed4695fec3ef5a365}{tcpChangeState}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfeca1af39131036c81d79f09174d2fb6f788}{TCP\_STATE\_CLOSED});
+1106       \textcolor{comment}{//Return immediately}
+1107       \textcolor{keywordflow}{return};
+1108    \}
+1109 
+1110    \textcolor{comment}{//Check the SYN bit}
+1111    \textcolor{keywordflow}{if}(\hyperlink{tcp__misc_8c_ad62359b91161be196effb675a48647c3}{tcpCheckSyn}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, segment, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}))
+1112       \textcolor{keywordflow}{return};
+1113    \textcolor{comment}{//Check the ACK field}
+1114    \textcolor{keywordflow}{if}(\hyperlink{tcp__misc_8c_ab0f130378ae1ace2ca64d905d15b6f68}{tcpCheckAck}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, segment, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}))
+1115       \textcolor{keywordflow}{return};
+1116 
+1117    \textcolor{comment}{//If the ACK acknowledges our FIN then enter the TIME-WAIT}
+1118    \textcolor{comment}{//state, otherwise ignore the segment}
+1119    \textcolor{keywordflow}{if}(segment->ackNum == \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->sndNxt)
+1120    \{
+1121       \textcolor{comment}{//Release previously allocated resources}
+1122       \hyperlink{tcp__misc_8c_afdcebf22cbad213fdb1d751829db9fb3}{tcpDeleteControlBlock}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket});
+1123       \textcolor{comment}{//Start the 2MSL timer}
+1124       \hyperlink{tcp__timer_8c_ac28b31fb6e44b56d37fb37f2b34f8a67}{tcpTimerStart}(&\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->timeWaitTimer, \hyperlink{tcp_8h_ac7600c784459aedc792edbefd5041e2f}{TCP\_2MSL\_TIMER});
+1125       \textcolor{comment}{//Switch to the TIME-WAIT state}
+1126       \hyperlink{tcp__misc_8c_af8741d2662dcc13ed4695fec3ef5a365}{tcpChangeState}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfeca8fa1774b3f785db85813df1b8e158c56}{TCP\_STATE\_TIME\_WAIT});
+1127    \}
+1128 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{tcp__fsm_8c_a4f418093a24e32c763ef5a4375b1b036}\label{tcp__fsm_8c_a4f418093a24e32c763ef5a4375b1b036}} 
+\index{tcp\+\_\+fsm.\+c@{tcp\+\_\+fsm.\+c}!tcp\+State\+Established@{tcp\+State\+Established}}
+\index{tcp\+State\+Established@{tcp\+State\+Established}!tcp\+\_\+fsm.\+c@{tcp\+\_\+fsm.\+c}}
+\subsubsection{\texorpdfstring{tcp\+State\+Established()}{tcpStateEstablished()}}
+{\footnotesize\ttfamily void tcp\+State\+Established (\begin{DoxyParamCaption}\item[{\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$}]{socket,  }\item[{\hyperlink{tcp_8h_a38f08160c28f0a8e104907d2ee71fed5}{Tcp\+Header} $\ast$}]{segment,  }\item[{const \hyperlink{structNetBuffer}{Net\+Buffer} $\ast$}]{buffer,  }\item[{size\+\_\+t}]{offset,  }\item[{size\+\_\+t}]{length }\end{DoxyParamCaption})}
+
+
+
+E\+S\+T\+A\+B\+L\+I\+S\+H\+ED state. 
+
+Data can be exchanged freely once both devices in the connection enter this state. This will continue until the connection is closed
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em socket} & Handle referencing the current socket \\
+\hline
+\mbox{\tt in}  & {\em segment} & Incoming T\+CP segment \\
+\hline
+\mbox{\tt in}  & {\em buffer} & Multi-\/part buffer containing the incoming T\+CP segment \\
+\hline
+\mbox{\tt in}  & {\em offset} & Offset to the first data byte \\
+\hline
+\mbox{\tt in}  & {\em length} & Length of the segment data \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 763 of file tcp\+\_\+fsm.\+c.
+
+
+\begin{DoxyCode}
+765 \{
+766    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} \hyperlink{tcp_8h_aa2585d779da0ab21273a8d92de9a0ebe}{flags} = 0;
+767 
+768    \textcolor{comment}{//Debug message}
+769    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"TCP FSM: ESTABLISHED state\(\backslash\)r\(\backslash\)n"});
+770 
+771    \textcolor{comment}{//First check sequence number}
+772    \textcolor{keywordflow}{if}(\hyperlink{tcp__misc_8c_a3aa461df53441116e0217086b8fc705a}{tcpCheckSequenceNumber}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, segment, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}))
+773       \textcolor{keywordflow}{return};
+774 
+775    \textcolor{comment}{//Check the RST bit}
+776    \textcolor{keywordflow}{if}(segment->flags & \hyperlink{tcp_8h_a4e6d97f0f2a3dc780d192efcdfe64aa7a2eaeb7e7c1984d0bd4d1cbb48b2b5ce4}{TCP\_FLAG\_RST})
+777    \{
+778       \textcolor{comment}{//Switch to the CLOSED state}
+779       \hyperlink{tcp__misc_8c_af8741d2662dcc13ed4695fec3ef5a365}{tcpChangeState}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfeca1af39131036c81d79f09174d2fb6f788}{TCP\_STATE\_CLOSED});
+780 
+781       \textcolor{comment}{//Number of times TCP connections have made a direct transition to the}
+782       \textcolor{comment}{//CLOSED state from either the ESTABLISHED state or the CLOSE-WAIT state}
+783       \hyperlink{mib2__module_8h_abac73a39224e47d597f3b461620d2119}{MIB2\_INC\_COUNTER32}(tcpGroup.tcpEstabResets, 1);
+784       \hyperlink{tcp__mib__module_8h_a296ad60b53152af0749116138a8ae227}{TCP\_MIB\_INC\_COUNTER32}(tcpEstabResets, 1);
+785 
+786       \textcolor{comment}{//Return immediately}
+787       \textcolor{keywordflow}{return};
+788    \}
+789 
+790    \textcolor{comment}{//Check the SYN bit}
+791    \textcolor{keywordflow}{if}(\hyperlink{tcp__misc_8c_ad62359b91161be196effb675a48647c3}{tcpCheckSyn}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, segment, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}))
+792       \textcolor{keywordflow}{return};
+793    \textcolor{comment}{//Check the ACK field}
+794    \textcolor{keywordflow}{if}(\hyperlink{tcp__misc_8c_ab0f130378ae1ace2ca64d905d15b6f68}{tcpCheckAck}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, segment, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}))
+795       \textcolor{keywordflow}{return};
+796    \textcolor{comment}{//Process the segment text}
+797    \textcolor{keywordflow}{if}(\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} > 0)
+798       \hyperlink{tcp__misc_8c_ac10b3d33d536daffca5246fc1374ba1f}{tcpProcessSegmentData}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, segment, buffer, 
+      \hyperlink{pic32mz_2isr__support_8h_a12a5aed8a193ebbf9a641104a310610d}{offset}, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length});
+799 
+800    \textcolor{comment}{//Check the FIN bit}
+801    \textcolor{keywordflow}{if}(segment->flags & \hyperlink{tcp_8h_a4e6d97f0f2a3dc780d192efcdfe64aa7a332cfb33224b794e0be773cba056efa1}{TCP\_FLAG\_FIN})
+802    \{
+803       \textcolor{comment}{//The FIN can only be acknowledged if all the segment data}
+804       \textcolor{comment}{//has been successfully transferred to the receive buffer}
+805       \textcolor{keywordflow}{if}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->rcvNxt == (segment->seqNum + \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}))
+806       \{
+807          \textcolor{comment}{//Advance RCV.NXT over the FIN}
+808          \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->rcvNxt++;
+809          \textcolor{comment}{//Send an acknowledgment for the FIN}
+810          \hyperlink{tcp__misc_8c_acf2944966efe796f3bb867f9d7233591}{tcpSendSegment}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, \hyperlink{tcp_8h_a4e6d97f0f2a3dc780d192efcdfe64aa7aae4cbb82c7a2373576547ed119498a4a}{TCP\_FLAG\_ACK}, 
+      \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->sndNxt, \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->rcvNxt, 0, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE});
+811          \textcolor{comment}{//Switch to the CLOSE-WAIT state}
+812          \hyperlink{tcp__misc_8c_af8741d2662dcc13ed4695fec3ef5a365}{tcpChangeState}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfecabd723866a1772c3180b372605cfbc963}{TCP\_STATE\_CLOSE\_WAIT});
+813       \}
+814    \}
+815 
+816 \textcolor{preprocessor}{#if (TCP\_CONGEST\_CONTROL\_SUPPORT == ENABLED)}
+817    \textcolor{comment}{//Duplicate AK received?}
+818    \textcolor{keywordflow}{if}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->dupAckCount > 0)
+819       flags = \hyperlink{socket_8h_a36c1d45d435e2f0ebe609c31d0c2da16a2a3399f24cd678390ebf586c4ffefc8c}{SOCKET\_FLAG\_NO\_DELAY};
+820 \textcolor{preprocessor}{#endif}
+821 
+822    \textcolor{comment}{//The Nagle algorithm should be implemented to coalesce}
+823    \textcolor{comment}{//short segments (refer to RFC 1122 4.2.3.4)}
+824    \hyperlink{tcp__misc_8c_ab354828c280bda2e01554f5ea827d752}{tcpNagleAlgo}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, flags);
+825 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{tcp__fsm_8c_a179e04fe5abaa24e178e343e0fdf6e78}\label{tcp__fsm_8c_a179e04fe5abaa24e178e343e0fdf6e78}} 
+\index{tcp\+\_\+fsm.\+c@{tcp\+\_\+fsm.\+c}!tcp\+State\+Fin\+Wait1@{tcp\+State\+Fin\+Wait1}}
+\index{tcp\+State\+Fin\+Wait1@{tcp\+State\+Fin\+Wait1}!tcp\+\_\+fsm.\+c@{tcp\+\_\+fsm.\+c}}
+\subsubsection{\texorpdfstring{tcp\+State\+Fin\+Wait1()}{tcpStateFinWait1()}}
+{\footnotesize\ttfamily void tcp\+State\+Fin\+Wait1 (\begin{DoxyParamCaption}\item[{\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$}]{socket,  }\item[{\hyperlink{tcp_8h_a38f08160c28f0a8e104907d2ee71fed5}{Tcp\+Header} $\ast$}]{segment,  }\item[{const \hyperlink{structNetBuffer}{Net\+Buffer} $\ast$}]{buffer,  }\item[{size\+\_\+t}]{offset,  }\item[{size\+\_\+t}]{length }\end{DoxyParamCaption})}
+
+
+
+F\+I\+N-\/\+W\+A\+I\+T-\/1 state. 
+
+A device in this state is waiting for an A\+CK for a F\+IN it has sent, or is waiting for a connection termination request from the other device
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em socket} & Handle referencing the current socket \\
+\hline
+\mbox{\tt in}  & {\em segment} & Incoming T\+CP segment \\
+\hline
+\mbox{\tt in}  & {\em buffer} & Multi-\/part buffer containing the incoming T\+CP segment \\
+\hline
+\mbox{\tt in}  & {\em offset} & Offset to the first data byte \\
+\hline
+\mbox{\tt in}  & {\em length} & Length of the segment data \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 944 of file tcp\+\_\+fsm.\+c.
+
+
+\begin{DoxyCode}
+946 \{
+947    \textcolor{comment}{//Debug message}
+948    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"TCP FSM: FIN-WAIT-1 state\(\backslash\)r\(\backslash\)n"});
+949 
+950    \textcolor{comment}{//First check sequence number}
+951    \textcolor{keywordflow}{if}(\hyperlink{tcp__misc_8c_a3aa461df53441116e0217086b8fc705a}{tcpCheckSequenceNumber}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, segment, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}))
+952       \textcolor{keywordflow}{return};
+953 
+954    \textcolor{comment}{//Check the RST bit}
+955    \textcolor{keywordflow}{if}(segment->flags & \hyperlink{tcp_8h_a4e6d97f0f2a3dc780d192efcdfe64aa7a2eaeb7e7c1984d0bd4d1cbb48b2b5ce4}{TCP\_FLAG\_RST})
+956    \{
+957       \textcolor{comment}{//Switch to the CLOSED state}
+958       \hyperlink{tcp__misc_8c_af8741d2662dcc13ed4695fec3ef5a365}{tcpChangeState}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfeca1af39131036c81d79f09174d2fb6f788}{TCP\_STATE\_CLOSED});
+959       \textcolor{comment}{//Return immediately}
+960       \textcolor{keywordflow}{return};
+961    \}
+962 
+963    \textcolor{comment}{//Check the SYN bit}
+964    \textcolor{keywordflow}{if}(\hyperlink{tcp__misc_8c_ad62359b91161be196effb675a48647c3}{tcpCheckSyn}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, segment, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}))
+965       \textcolor{keywordflow}{return};
+966    \textcolor{comment}{//Check the ACK field}
+967    \textcolor{keywordflow}{if}(\hyperlink{tcp__misc_8c_ab0f130378ae1ace2ca64d905d15b6f68}{tcpCheckAck}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, segment, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}))
+968       \textcolor{keywordflow}{return};
+969 
+970    \textcolor{comment}{//Check whether our FIN is now acknowledged}
+971    \textcolor{keywordflow}{if}(segment->ackNum == \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->sndNxt)
+972    \{
+973       \textcolor{comment}{//Start the FIN-WAIT-2 timer to prevent the connection}
+974       \textcolor{comment}{//from staying in the FIN-WAIT-2 state forever}
+975       \hyperlink{tcp__timer_8c_ac28b31fb6e44b56d37fb37f2b34f8a67}{tcpTimerStart}(&\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->finWait2Timer, 
+      \hyperlink{tcp_8h_adbe5e26c6697be0dbc17eb0548796378}{TCP\_FIN\_WAIT\_2\_TIMER});
+976       \textcolor{comment}{//enter FIN-WAIT-2 and continue processing in that state}
+977       \hyperlink{tcp__misc_8c_af8741d2662dcc13ed4695fec3ef5a365}{tcpChangeState}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfecac50f13616eeb349dc1aaa5cfd3422018}{TCP\_STATE\_FIN\_WAIT\_2});
+978    \}
+979 
+980    \textcolor{comment}{//Process the segment text}
+981    \textcolor{keywordflow}{if}(\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} > 0)
+982       \hyperlink{tcp__misc_8c_ac10b3d33d536daffca5246fc1374ba1f}{tcpProcessSegmentData}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, segment, buffer, 
+      \hyperlink{pic32mz_2isr__support_8h_a12a5aed8a193ebbf9a641104a310610d}{offset}, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length});
+983 
+984    \textcolor{comment}{//Check the FIN bit}
+985    \textcolor{keywordflow}{if}(segment->flags & \hyperlink{tcp_8h_a4e6d97f0f2a3dc780d192efcdfe64aa7a332cfb33224b794e0be773cba056efa1}{TCP\_FLAG\_FIN})
+986    \{
+987       \textcolor{comment}{//The FIN can only be acknowledged if all the segment data}
+988       \textcolor{comment}{//has been successfully transferred to the receive buffer}
+989       \textcolor{keywordflow}{if}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->rcvNxt == (segment->seqNum + \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}))
+990       \{
+991          \textcolor{comment}{//Advance RCV.NXT over the FIN}
+992          \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->rcvNxt++;
+993          \textcolor{comment}{//Send an acknowledgment for the FIN}
+994          \hyperlink{tcp__misc_8c_acf2944966efe796f3bb867f9d7233591}{tcpSendSegment}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, \hyperlink{tcp_8h_a4e6d97f0f2a3dc780d192efcdfe64aa7aae4cbb82c7a2373576547ed119498a4a}{TCP\_FLAG\_ACK}, 
+      \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->sndNxt, \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->rcvNxt, 0, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE});
+995 
+996          \textcolor{comment}{//Check if our FIN has been acknowledged}
+997          \textcolor{keywordflow}{if}(segment->ackNum == \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->sndNxt)
+998          \{
+999             \textcolor{comment}{//Release previously allocated resources}
+1000             \hyperlink{tcp__misc_8c_afdcebf22cbad213fdb1d751829db9fb3}{tcpDeleteControlBlock}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket});
+1001             \textcolor{comment}{//Start the 2MSL timer}
+1002             \hyperlink{tcp__timer_8c_ac28b31fb6e44b56d37fb37f2b34f8a67}{tcpTimerStart}(&\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->timeWaitTimer, 
+      \hyperlink{tcp_8h_ac7600c784459aedc792edbefd5041e2f}{TCP\_2MSL\_TIMER});
+1003             \textcolor{comment}{//Switch to the TIME-WAIT state}
+1004             \hyperlink{tcp__misc_8c_af8741d2662dcc13ed4695fec3ef5a365}{tcpChangeState}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfeca8fa1774b3f785db85813df1b8e158c56}{TCP\_STATE\_TIME\_WAIT});
+1005          \}
+1006          \textcolor{keywordflow}{else}
+1007          \{
+1008             \textcolor{comment}{//If our FIN has not been acknowledged, then enter CLOSING state}
+1009             \hyperlink{tcp__misc_8c_af8741d2662dcc13ed4695fec3ef5a365}{tcpChangeState}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfecad9c881087c2449f9d8c7a2a2ab188f22}{TCP\_STATE\_CLOSING});
+1010          \}
+1011       \}
+1012    \}
+1013 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{tcp__fsm_8c_ad2e5b1d64a2fac6b28b1f7566fd9f422}\label{tcp__fsm_8c_ad2e5b1d64a2fac6b28b1f7566fd9f422}} 
+\index{tcp\+\_\+fsm.\+c@{tcp\+\_\+fsm.\+c}!tcp\+State\+Fin\+Wait2@{tcp\+State\+Fin\+Wait2}}
+\index{tcp\+State\+Fin\+Wait2@{tcp\+State\+Fin\+Wait2}!tcp\+\_\+fsm.\+c@{tcp\+\_\+fsm.\+c}}
+\subsubsection{\texorpdfstring{tcp\+State\+Fin\+Wait2()}{tcpStateFinWait2()}}
+{\footnotesize\ttfamily void tcp\+State\+Fin\+Wait2 (\begin{DoxyParamCaption}\item[{\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$}]{socket,  }\item[{\hyperlink{tcp_8h_a38f08160c28f0a8e104907d2ee71fed5}{Tcp\+Header} $\ast$}]{segment,  }\item[{const \hyperlink{structNetBuffer}{Net\+Buffer} $\ast$}]{buffer,  }\item[{size\+\_\+t}]{offset,  }\item[{size\+\_\+t}]{length }\end{DoxyParamCaption})}
+
+
+
+F\+I\+N-\/\+W\+A\+I\+T-\/2 state. 
+
+A device in this state has received an A\+CK for its request to terminate the connection and is now waiting for a matching F\+IN from the other device
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em socket} & Handle referencing the current socket \\
+\hline
+\mbox{\tt in}  & {\em segment} & Incoming T\+CP segment \\
+\hline
+\mbox{\tt in}  & {\em buffer} & Multi-\/part buffer containing the incoming T\+CP segment \\
+\hline
+\mbox{\tt in}  & {\em offset} & Offset to the first data byte \\
+\hline
+\mbox{\tt in}  & {\em length} & Length of the segment data \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 1029 of file tcp\+\_\+fsm.\+c.
+
+
+\begin{DoxyCode}
+1031 \{
+1032    \textcolor{comment}{//Debug message}
+1033    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"TCP FSM: FIN-WAIT-2 state\(\backslash\)r\(\backslash\)n"});
+1034 
+1035    \textcolor{comment}{//First check sequence number}
+1036    \textcolor{keywordflow}{if}(\hyperlink{tcp__misc_8c_a3aa461df53441116e0217086b8fc705a}{tcpCheckSequenceNumber}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, segment, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}))
+1037       \textcolor{keywordflow}{return};
+1038 
+1039    \textcolor{comment}{//Check the RST bit}
+1040    \textcolor{keywordflow}{if}(segment->flags & \hyperlink{tcp_8h_a4e6d97f0f2a3dc780d192efcdfe64aa7a2eaeb7e7c1984d0bd4d1cbb48b2b5ce4}{TCP\_FLAG\_RST})
+1041    \{
+1042       \textcolor{comment}{//Switch to the CLOSED state}
+1043       \hyperlink{tcp__misc_8c_af8741d2662dcc13ed4695fec3ef5a365}{tcpChangeState}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfeca1af39131036c81d79f09174d2fb6f788}{TCP\_STATE\_CLOSED});
+1044       \textcolor{comment}{//Return immediately}
+1045       \textcolor{keywordflow}{return};
+1046    \}
+1047 
+1048    \textcolor{comment}{//Check the SYN bit}
+1049    \textcolor{keywordflow}{if}(\hyperlink{tcp__misc_8c_ad62359b91161be196effb675a48647c3}{tcpCheckSyn}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, segment, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}))
+1050       \textcolor{keywordflow}{return};
+1051    \textcolor{comment}{//Check the ACK field}
+1052    \textcolor{keywordflow}{if}(\hyperlink{tcp__misc_8c_ab0f130378ae1ace2ca64d905d15b6f68}{tcpCheckAck}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, segment, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}))
+1053       \textcolor{keywordflow}{return};
+1054    \textcolor{comment}{//Process the segment text}
+1055    \textcolor{keywordflow}{if}(\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} > 0)
+1056       \hyperlink{tcp__misc_8c_ac10b3d33d536daffca5246fc1374ba1f}{tcpProcessSegmentData}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, segment, buffer, 
+      \hyperlink{pic32mz_2isr__support_8h_a12a5aed8a193ebbf9a641104a310610d}{offset}, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length});
+1057 
+1058    \textcolor{comment}{//Check the FIN bit}
+1059    \textcolor{keywordflow}{if}(segment->flags & \hyperlink{tcp_8h_a4e6d97f0f2a3dc780d192efcdfe64aa7a332cfb33224b794e0be773cba056efa1}{TCP\_FLAG\_FIN})
+1060    \{
+1061       \textcolor{comment}{//The FIN can only be acknowledged if all the segment data}
+1062       \textcolor{comment}{//has been successfully transferred to the receive buffer}
+1063       \textcolor{keywordflow}{if}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->rcvNxt == (segment->seqNum + \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}))
+1064       \{
+1065          \textcolor{comment}{//Advance RCV.NXT over the FIN}
+1066          \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->rcvNxt++;
+1067          \textcolor{comment}{//Send an acknowledgment for the FIN}
+1068          \hyperlink{tcp__misc_8c_acf2944966efe796f3bb867f9d7233591}{tcpSendSegment}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, \hyperlink{tcp_8h_a4e6d97f0f2a3dc780d192efcdfe64aa7aae4cbb82c7a2373576547ed119498a4a}{TCP\_FLAG\_ACK}, 
+      \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->sndNxt, \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->rcvNxt, 0, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE});
+1069 
+1070          \textcolor{comment}{//Release previously allocated resources}
+1071          \hyperlink{tcp__misc_8c_afdcebf22cbad213fdb1d751829db9fb3}{tcpDeleteControlBlock}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket});
+1072          \textcolor{comment}{//Start the 2MSL timer}
+1073          \hyperlink{tcp__timer_8c_ac28b31fb6e44b56d37fb37f2b34f8a67}{tcpTimerStart}(&\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->timeWaitTimer, \hyperlink{tcp_8h_ac7600c784459aedc792edbefd5041e2f}{TCP\_2MSL\_TIMER});
+1074          \textcolor{comment}{//Switch to the TIME\_WAIT state}
+1075          \hyperlink{tcp__misc_8c_af8741d2662dcc13ed4695fec3ef5a365}{tcpChangeState}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfeca8fa1774b3f785db85813df1b8e158c56}{TCP\_STATE\_TIME\_WAIT});
+1076       \}
+1077    \}
+1078 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{tcp__fsm_8c_a9018aec687c4832e4fd59f687a0a481e}\label{tcp__fsm_8c_a9018aec687c4832e4fd59f687a0a481e}} 
+\index{tcp\+\_\+fsm.\+c@{tcp\+\_\+fsm.\+c}!tcp\+State\+Last\+Ack@{tcp\+State\+Last\+Ack}}
+\index{tcp\+State\+Last\+Ack@{tcp\+State\+Last\+Ack}!tcp\+\_\+fsm.\+c@{tcp\+\_\+fsm.\+c}}
+\subsubsection{\texorpdfstring{tcp\+State\+Last\+Ack()}{tcpStateLastAck()}}
+{\footnotesize\ttfamily void tcp\+State\+Last\+Ack (\begin{DoxyParamCaption}\item[{\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$}]{socket,  }\item[{\hyperlink{tcp_8h_a38f08160c28f0a8e104907d2ee71fed5}{Tcp\+Header} $\ast$}]{segment,  }\item[{size\+\_\+t}]{length }\end{DoxyParamCaption})}
+
+
+
+L\+A\+S\+T-\/\+A\+CK state. 
+
+A device that has already received a close request and acknowledged it, has sent its own F\+IN and is waiting for an A\+CK to this request
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em socket} & Handle referencing the current socket \\
+\hline
+\mbox{\tt in}  & {\em segment} & Incoming T\+CP segment \\
+\hline
+\mbox{\tt in}  & {\em length} & Length of the segment data \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 896 of file tcp\+\_\+fsm.\+c.
+
+
+\begin{DoxyCode}
+897 \{
+898    \textcolor{comment}{//Debug message}
+899    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"TCP FSM: LAST-ACK state\(\backslash\)r\(\backslash\)n"});
+900 
+901    \textcolor{comment}{//First check sequence number}
+902    \textcolor{keywordflow}{if}(\hyperlink{tcp__misc_8c_a3aa461df53441116e0217086b8fc705a}{tcpCheckSequenceNumber}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, segment, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}))
+903       \textcolor{keywordflow}{return};
+904 
+905    \textcolor{comment}{//Check the RST bit}
+906    \textcolor{keywordflow}{if}(segment->flags & \hyperlink{tcp_8h_a4e6d97f0f2a3dc780d192efcdfe64aa7a2eaeb7e7c1984d0bd4d1cbb48b2b5ce4}{TCP\_FLAG\_RST})
+907    \{
+908       \textcolor{comment}{//Enter CLOSED state}
+909       \hyperlink{tcp__misc_8c_af8741d2662dcc13ed4695fec3ef5a365}{tcpChangeState}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfeca1af39131036c81d79f09174d2fb6f788}{TCP\_STATE\_CLOSED});
+910       \textcolor{comment}{//Return immediately}
+911       \textcolor{keywordflow}{return};
+912    \}
+913 
+914    \textcolor{comment}{//Check the SYN bit}
+915    \textcolor{keywordflow}{if}(\hyperlink{tcp__misc_8c_ad62359b91161be196effb675a48647c3}{tcpCheckSyn}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, segment, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}))
+916       \textcolor{keywordflow}{return};
+917    \textcolor{comment}{//If the ACK bit is off drop the segment and return}
+918    \textcolor{keywordflow}{if}(!(segment->flags & \hyperlink{tcp_8h_a4e6d97f0f2a3dc780d192efcdfe64aa7aae4cbb82c7a2373576547ed119498a4a}{TCP\_FLAG\_ACK}))
+919       \textcolor{keywordflow}{return};
+920 
+921    \textcolor{comment}{//The only thing that can arrive in this state is an}
+922    \textcolor{comment}{//acknowledgment of our FIN}
+923    \textcolor{keywordflow}{if}(segment->ackNum == \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->sndNxt)
+924    \{
+925       \textcolor{comment}{//Enter CLOSED state}
+926       \hyperlink{tcp__misc_8c_af8741d2662dcc13ed4695fec3ef5a365}{tcpChangeState}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfeca1af39131036c81d79f09174d2fb6f788}{TCP\_STATE\_CLOSED});
+927    \}
+928 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{tcp__fsm_8c_a510ccbf4f60f36f42c07ed8ae0b86cad}\label{tcp__fsm_8c_a510ccbf4f60f36f42c07ed8ae0b86cad}} 
+\index{tcp\+\_\+fsm.\+c@{tcp\+\_\+fsm.\+c}!tcp\+State\+Listen@{tcp\+State\+Listen}}
+\index{tcp\+State\+Listen@{tcp\+State\+Listen}!tcp\+\_\+fsm.\+c@{tcp\+\_\+fsm.\+c}}
+\subsubsection{\texorpdfstring{tcp\+State\+Listen()}{tcpStateListen()}}
+{\footnotesize\ttfamily void tcp\+State\+Listen (\begin{DoxyParamCaption}\item[{\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$}]{socket,  }\item[{\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$}]{interface,  }\item[{\hyperlink{structIpPseudoHeader}{Ip\+Pseudo\+Header} $\ast$}]{pseudo\+Header,  }\item[{\hyperlink{tcp_8h_a38f08160c28f0a8e104907d2ee71fed5}{Tcp\+Header} $\ast$}]{segment,  }\item[{size\+\_\+t}]{length }\end{DoxyParamCaption})}
+
+
+
+L\+I\+S\+T\+EN state. 
+
+A device (normally a server) is waiting to receive a synchronize (S\+YN) message from a client. It has not yet sent its own S\+YN message
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em socket} & Handle referencing the current socket \\
+\hline
+\mbox{\tt in}  & {\em interface} & Underlying network interface \\
+\hline
+\mbox{\tt in}  & {\em pseudo\+Header} & T\+CP pseudo header \\
+\hline
+\mbox{\tt in}  & {\em segment} & Incoming T\+CP segment \\
+\hline
+\mbox{\tt in}  & {\em length} & Length of the segment data \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 421 of file tcp\+\_\+fsm.\+c.
+
+
+\begin{DoxyCode}
+423 \{
+424    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+425    \hyperlink{tcp_8h_a5562fc6b2b8e28e99a3c0d1c36054b72}{TcpOption} *option;
+426    \hyperlink{struct__TcpSynQueueItem}{TcpSynQueueItem} *queueItem;
+427 
+428    \textcolor{comment}{//Debug message}
+429    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"TCP FSM: LISTEN state\(\backslash\)r\(\backslash\)n"});
+430 
+431    \textcolor{comment}{//An incoming RST should be ignored}
+432    \textcolor{keywordflow}{if}(segment->flags & \hyperlink{tcp_8h_a4e6d97f0f2a3dc780d192efcdfe64aa7a2eaeb7e7c1984d0bd4d1cbb48b2b5ce4}{TCP\_FLAG\_RST})
+433       \textcolor{keywordflow}{return};
+434 
+435    \textcolor{comment}{//Any acknowledgment is bad if it arrives on a connection}
+436    \textcolor{comment}{//still in the LISTEN state}
+437    \textcolor{keywordflow}{if}(segment->flags & \hyperlink{tcp_8h_a4e6d97f0f2a3dc780d192efcdfe64aa7aae4cbb82c7a2373576547ed119498a4a}{TCP\_FLAG\_ACK})
+438    \{
+439       \textcolor{comment}{//A reset segment should be formed for any arriving ACK-bearing segment}
+440       \hyperlink{tcp__misc_8c_a07b59bd89778b5fd8cd9c57dfd7f2866}{tcpSendResetSegment}(interface, pseudoHeader, segment, 
+      \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length});
+441       \textcolor{comment}{//Return immediately}
+442       \textcolor{keywordflow}{return};
+443    \}
+444 
+445    \textcolor{comment}{//Check the SYN bit}
+446    \textcolor{keywordflow}{if}(segment->flags & \hyperlink{tcp_8h_a4e6d97f0f2a3dc780d192efcdfe64aa7af2f8a42ff8bff07cbca1cd2ed6df9fae}{TCP\_FLAG\_SYN})
+447    \{
+448       \textcolor{comment}{//Silently drop duplicate SYN segments}
+449       \textcolor{keywordflow}{if}(\hyperlink{tcp__misc_8c_ac969fab95bfe0fe6d70d06c57e217640}{tcpIsDuplicateSyn}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, pseudoHeader, segment))
+450          \textcolor{keywordflow}{return};
+451 
+452       \textcolor{comment}{//Check whether the SYN queue is empty}
+453       \textcolor{keywordflow}{if}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->synQueue == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+454       \{
+455          \textcolor{comment}{//Allocate memory to save incoming data}
+456          queueItem = \hyperlink{net__mem_8c_abe64a91cd872768817509cc08eed6689}{memPoolAlloc}(\textcolor{keyword}{sizeof}(\hyperlink{struct__TcpSynQueueItem}{TcpSynQueueItem}));
+457          \textcolor{comment}{//Add the newly created item to the queue}
+458          \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->synQueue = queueItem;
+459       \}
+460       \textcolor{keywordflow}{else}
+461       \{
+462          \textcolor{comment}{//Point to the very first item}
+463          queueItem = \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->synQueue;
+464 
+465          \textcolor{comment}{//Reach the last item in the SYN queue}
+466          \textcolor{keywordflow}{for}(i = 1; queueItem->\hyperlink{struct__TcpSynQueueItem_aec234d81bcfbfba730e21c3affa37848}{next} != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}; i++)
+467             queueItem = queueItem->\hyperlink{struct__TcpSynQueueItem_aec234d81bcfbfba730e21c3affa37848}{next};
+468 
+469          \textcolor{comment}{//Make sure the SYN queue is not full}
+470          \textcolor{keywordflow}{if}(i >= \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->synQueueSize)
+471             \textcolor{keywordflow}{return};
+472 
+473          \textcolor{comment}{//Allocate memory to save incoming data}
+474          queueItem->\hyperlink{struct__TcpSynQueueItem_aec234d81bcfbfba730e21c3affa37848}{next} = \hyperlink{net__mem_8c_abe64a91cd872768817509cc08eed6689}{memPoolAlloc}(\textcolor{keyword}{sizeof}(\hyperlink{struct__TcpSynQueueItem}{TcpSynQueueItem}));
+475          \textcolor{comment}{//Point to the newly created item}
+476          queueItem = queueItem->\hyperlink{struct__TcpSynQueueItem_aec234d81bcfbfba730e21c3affa37848}{next};
+477       \}
+478 
+479       \textcolor{comment}{//Failed to allocate memory?}
+480       \textcolor{keywordflow}{if}(queueItem == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+481          \textcolor{keywordflow}{return};
+482 
+483 \textcolor{preprocessor}{#if (IPV4\_SUPPORT == ENABLED)}
+484       \textcolor{comment}{//IPv4 is currently used?}
+485       \textcolor{keywordflow}{if}(pseudoHeader->\hyperlink{structIpPseudoHeader_aeff06b8d9c3e7e2ef3cdb8a3a14e8ad2}{length} == \textcolor{keyword}{sizeof}(\hyperlink{ipv4_8h_a0e92b64e038199f1bb6383f2a76f30b6}{Ipv4PseudoHeader}))
+486       \{
+487          \textcolor{comment}{//Save the source IPv4 address}
+488          queueItem->\hyperlink{struct__TcpSynQueueItem_a6a25919b9ea8c17c7e85fcacfa52f6a1}{srcAddr}.\hyperlink{structIpAddr_ae61478bd1e79361fca7dd04a21aeb2f8}{length} = \textcolor{keyword}{sizeof}(\hyperlink{ipv4_8h_a411debb3d770caa0c06d3f73367da37f}{Ipv4Addr});
+489          queueItem->\hyperlink{struct__TcpSynQueueItem_a6a25919b9ea8c17c7e85fcacfa52f6a1}{srcAddr}.\hyperlink{structIpAddr_a8de6f49cb0461f57c1eda49bb1088916}{ipv4Addr} = pseudoHeader->\hyperlink{structIpPseudoHeader_a4dd0d91580f30918dc7b5d5a430dba6a}{ipv4Data}.srcAddr;
+490          \textcolor{comment}{//Save the destination IPv4 address}
+491          queueItem->\hyperlink{struct__TcpSynQueueItem_a6187af43e120966851c614da06753e2c}{destAddr}.\hyperlink{structIpAddr_ae61478bd1e79361fca7dd04a21aeb2f8}{length} = \textcolor{keyword}{sizeof}(\hyperlink{ipv4_8h_a411debb3d770caa0c06d3f73367da37f}{Ipv4Addr});
+492          queueItem->\hyperlink{struct__TcpSynQueueItem_a6187af43e120966851c614da06753e2c}{destAddr}.\hyperlink{structIpAddr_a8de6f49cb0461f57c1eda49bb1088916}{ipv4Addr} = pseudoHeader->\hyperlink{structIpPseudoHeader_a4dd0d91580f30918dc7b5d5a430dba6a}{ipv4Data}.destAddr;
+493       \}
+494       \textcolor{keywordflow}{else}
+495 \textcolor{preprocessor}{#endif}
+496 \textcolor{preprocessor}{#if (IPV6\_SUPPORT == ENABLED)}
+497       \textcolor{comment}{//IPv6 is currently used?}
+498       \textcolor{keywordflow}{if}(pseudoHeader->\hyperlink{structIpPseudoHeader_aeff06b8d9c3e7e2ef3cdb8a3a14e8ad2}{length} == \textcolor{keyword}{sizeof}(\hyperlink{ipv6_8h_a68061e0a0b502d880cbe60b645cfa2b7}{Ipv6PseudoHeader}))
+499       \{
+500          \textcolor{comment}{//Save the source IPv6 address}
+501          queueItem->\hyperlink{struct__TcpSynQueueItem_a6a25919b9ea8c17c7e85fcacfa52f6a1}{srcAddr}.\hyperlink{structIpAddr_ae61478bd1e79361fca7dd04a21aeb2f8}{length} = \textcolor{keyword}{sizeof}(\hyperlink{ipv6_8h_aed0cbc40c61ed5b4fb681ebc55237e89}{Ipv6Addr});
+502          queueItem->\hyperlink{struct__TcpSynQueueItem_a6a25919b9ea8c17c7e85fcacfa52f6a1}{srcAddr}.\hyperlink{structIpAddr_a9bc2340a9c0bc5a0b8aa9695b74e2ee6}{ipv6Addr} = pseudoHeader->\hyperlink{structIpPseudoHeader_a5155846ca7e85218407a8374d035aab7}{ipv6Data}.srcAddr;
+503          \textcolor{comment}{//Save the destination IPv6 address}
+504          queueItem->\hyperlink{struct__TcpSynQueueItem_a6187af43e120966851c614da06753e2c}{destAddr}.\hyperlink{structIpAddr_ae61478bd1e79361fca7dd04a21aeb2f8}{length} = \textcolor{keyword}{sizeof}(\hyperlink{ipv6_8h_aed0cbc40c61ed5b4fb681ebc55237e89}{Ipv6Addr});
+505          queueItem->\hyperlink{struct__TcpSynQueueItem_a6187af43e120966851c614da06753e2c}{destAddr}.\hyperlink{structIpAddr_a9bc2340a9c0bc5a0b8aa9695b74e2ee6}{ipv6Addr} = pseudoHeader->\hyperlink{structIpPseudoHeader_a5155846ca7e85218407a8374d035aab7}{ipv6Data}.destAddr;
+506       \}
+507       \textcolor{keywordflow}{else}
+508 \textcolor{preprocessor}{#endif}
+509       \textcolor{comment}{//Invalid pseudo header?}
+510       \{
+511          \textcolor{comment}{//This should never occur...}
+512          \textcolor{keywordflow}{return};
+513       \}
+514 
+515       \textcolor{comment}{//Initialize next field}
+516       queueItem->\hyperlink{struct__TcpSynQueueItem_aec234d81bcfbfba730e21c3affa37848}{next} = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+517       \textcolor{comment}{//Underlying network interface}
+518       queueItem->\hyperlink{struct__TcpSynQueueItem_a547cb108888dc5c24d68f917429f0c94}{interface} = interface;
+519       \textcolor{comment}{//Save the port number of the client}
+520       queueItem->\hyperlink{struct__TcpSynQueueItem_ab6f9b3ec9b271f14661b6c6d18fb3066}{srcPort} = segment->srcPort;
+521       \textcolor{comment}{//Save the initial sequence number}
+522       queueItem->\hyperlink{struct__TcpSynQueueItem_a9b4eaa2fcb2b66297f2b4439ecacbd24}{isn} = segment->seqNum;
+523       \textcolor{comment}{//Default MSS value}
+524       queueItem->\hyperlink{struct__TcpSynQueueItem_a51c3ba7f08a857f3afcf7a4d4432825e}{mss} = \hyperlink{os__port_8h_a3acffbd305ee72dcd4593c0d8af64a4f}{MIN}(\hyperlink{tcp_8h_aa4a906440587860da3261d78809a13a5}{TCP\_DEFAULT\_MSS}, \hyperlink{tcp_8h_a54e8d598d7db34761edb76924934b840}{TCP\_MAX\_MSS});
+525 
+526       \textcolor{comment}{//Get the maximum segment size}
+527       option = \hyperlink{tcp__misc_8c_aaf3149cdcf1570bfcfcec9c637f34e3b}{tcpGetOption}(segment, \hyperlink{tcp_8h_a064186fb289be38d3e1a71ecf446fe8caa534c3934b8bd83794d7892083275375}{TCP\_OPTION\_MAX\_SEGMENT\_SIZE});
+528 
+529       \textcolor{comment}{//Specified option found?}
+530       \textcolor{keywordflow}{if}(option != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} && option->length == 4)
+531       \{
+532          \textcolor{comment}{//Retrieve MSS value}
+533          memcpy(&queueItem->\hyperlink{struct__TcpSynQueueItem_a51c3ba7f08a857f3afcf7a4d4432825e}{mss}, option->value, 2);
+534          \textcolor{comment}{//Convert from network byte order to host byte order}
+535          queueItem->\hyperlink{struct__TcpSynQueueItem_a51c3ba7f08a857f3afcf7a4d4432825e}{mss} = \hyperlink{cpu__endian_8h_a9312c6eb72e64f748ae0d0e0dc3ec9b9}{ntohs}(queueItem->\hyperlink{struct__TcpSynQueueItem_a51c3ba7f08a857f3afcf7a4d4432825e}{mss});
+536 
+537          \textcolor{comment}{//Debug message}
+538          \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"Remote host MSS = %"} PRIu16 \textcolor{stringliteral}{"\(\backslash\)r\(\backslash\)n"}, queueItem->
+      \hyperlink{struct__TcpSynQueueItem_a51c3ba7f08a857f3afcf7a4d4432825e}{mss});
+539 
+540          \textcolor{comment}{//Make sure that the MSS advertised by the peer is acceptable}
+541          queueItem->\hyperlink{struct__TcpSynQueueItem_a51c3ba7f08a857f3afcf7a4d4432825e}{mss} = \hyperlink{os__port_8h_a3acffbd305ee72dcd4593c0d8af64a4f}{MIN}(queueItem->\hyperlink{struct__TcpSynQueueItem_a51c3ba7f08a857f3afcf7a4d4432825e}{mss}, \hyperlink{tcp_8h_a54e8d598d7db34761edb76924934b840}{TCP\_MAX\_MSS});
+542          queueItem->\hyperlink{struct__TcpSynQueueItem_a51c3ba7f08a857f3afcf7a4d4432825e}{mss} = \hyperlink{os__port_8h_afa99ec4acc4ecb2dc3c2d05da15d0e3f}{MAX}(queueItem->\hyperlink{struct__TcpSynQueueItem_a51c3ba7f08a857f3afcf7a4d4432825e}{mss}, \hyperlink{tcp_8h_aedd7de15002fd15efa1df5e0fcf0f68e}{TCP\_MIN\_MSS});
+543       \}
+544 
+545       \textcolor{comment}{//Notify user that a connection request is pending}
+546       \hyperlink{tcp__misc_8c_a1d69d8ed2662a74417c757291f540077}{tcpUpdateEvents}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket});
+547 
+548       \textcolor{comment}{//The rest of the processing described in RFC 793 will be done}
+549       \textcolor{comment}{//asynchronously when socketAccept() function is called}
+550    \}
+551 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{tcp__fsm_8c_a61f050e298bd7e2ca3346f035dd3609a}\label{tcp__fsm_8c_a61f050e298bd7e2ca3346f035dd3609a}} 
+\index{tcp\+\_\+fsm.\+c@{tcp\+\_\+fsm.\+c}!tcp\+State\+Syn\+Received@{tcp\+State\+Syn\+Received}}
+\index{tcp\+State\+Syn\+Received@{tcp\+State\+Syn\+Received}!tcp\+\_\+fsm.\+c@{tcp\+\_\+fsm.\+c}}
+\subsubsection{\texorpdfstring{tcp\+State\+Syn\+Received()}{tcpStateSynReceived()}}
+{\footnotesize\ttfamily void tcp\+State\+Syn\+Received (\begin{DoxyParamCaption}\item[{\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$}]{socket,  }\item[{\hyperlink{tcp_8h_a38f08160c28f0a8e104907d2ee71fed5}{Tcp\+Header} $\ast$}]{segment,  }\item[{const \hyperlink{structNetBuffer}{Net\+Buffer} $\ast$}]{buffer,  }\item[{size\+\_\+t}]{offset,  }\item[{size\+\_\+t}]{length }\end{DoxyParamCaption})}
+
+
+
+S\+Y\+N-\/\+R\+E\+C\+E\+I\+V\+ED state. 
+
+The device has both received a S\+YN from its partner and sent its own S\+YN. It is now waiting for an A\+CK to its S\+YN to finish connection setup
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em socket} & Handle referencing the current socket \\
+\hline
+\mbox{\tt in}  & {\em segment} & Incoming T\+CP segment \\
+\hline
+\mbox{\tt in}  & {\em buffer} & Multi-\/part buffer containing the incoming T\+CP segment \\
+\hline
+\mbox{\tt in}  & {\em offset} & Offset to the first data byte \\
+\hline
+\mbox{\tt in}  & {\em length} & Length of the segment data \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 690 of file tcp\+\_\+fsm.\+c.
+
+
+\begin{DoxyCode}
+692 \{
+693    \textcolor{comment}{//Debug message}
+694    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"TCP FSM: SYN-RECEIVED state\(\backslash\)r\(\backslash\)n"});
+695 
+696    \textcolor{comment}{//First check sequence number}
+697    \textcolor{keywordflow}{if}(\hyperlink{tcp__misc_8c_a3aa461df53441116e0217086b8fc705a}{tcpCheckSequenceNumber}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, segment, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}))
+698       \textcolor{keywordflow}{return};
+699 
+700    \textcolor{comment}{//Check the RST bit}
+701    \textcolor{keywordflow}{if}(segment->flags & \hyperlink{tcp_8h_a4e6d97f0f2a3dc780d192efcdfe64aa7a2eaeb7e7c1984d0bd4d1cbb48b2b5ce4}{TCP\_FLAG\_RST})
+702    \{
+703       \textcolor{comment}{//Return to CLOSED state}
+704       \hyperlink{tcp__misc_8c_af8741d2662dcc13ed4695fec3ef5a365}{tcpChangeState}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfeca1af39131036c81d79f09174d2fb6f788}{TCP\_STATE\_CLOSED});
+705 
+706       \textcolor{comment}{//Number of times TCP connections have made a direct transition to the}
+707       \textcolor{comment}{//CLOSED state from either the SYN-SENT state or the SYN-RECEIVED state}
+708       \hyperlink{mib2__module_8h_abac73a39224e47d597f3b461620d2119}{MIB2\_INC\_COUNTER32}(tcpGroup.tcpAttemptFails, 1);
+709       \hyperlink{tcp__mib__module_8h_a296ad60b53152af0749116138a8ae227}{TCP\_MIB\_INC\_COUNTER32}(tcpAttemptFails, 1);
+710 
+711       \textcolor{comment}{//Return immediately}
+712       \textcolor{keywordflow}{return};
+713    \}
+714 
+715    \textcolor{comment}{//Check the SYN bit}
+716    \textcolor{keywordflow}{if}(\hyperlink{tcp__misc_8c_ad62359b91161be196effb675a48647c3}{tcpCheckSyn}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, segment, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}))
+717       \textcolor{keywordflow}{return};
+718 
+719    \textcolor{comment}{//If the ACK bit is off drop the segment and return}
+720    \textcolor{keywordflow}{if}(!(segment->flags & \hyperlink{tcp_8h_a4e6d97f0f2a3dc780d192efcdfe64aa7aae4cbb82c7a2373576547ed119498a4a}{TCP\_FLAG\_ACK}))
+721       \textcolor{keywordflow}{return};
+722 
+723    \textcolor{comment}{//Make sure the acknowledgment number is valid}
+724    \textcolor{keywordflow}{if}(segment->ackNum != \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->sndNxt)
+725    \{
+726       \textcolor{comment}{//If the segment acknowledgment is not acceptable, form a reset}
+727       \textcolor{comment}{//segment and send it}
+728       \hyperlink{tcp__misc_8c_acf2944966efe796f3bb867f9d7233591}{tcpSendSegment}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, \hyperlink{tcp_8h_a4e6d97f0f2a3dc780d192efcdfe64aa7a2eaeb7e7c1984d0bd4d1cbb48b2b5ce4}{TCP\_FLAG\_RST}, segment->ackNum, 0, 0, 
+      \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE});
+729 
+730       \textcolor{comment}{//Drop the segment and return}
+731       \textcolor{keywordflow}{return};
+732    \}
+733 
+734    \textcolor{comment}{//Update the send window before entering ESTABLISHED state (refer to}
+735    \textcolor{comment}{//RFC 1122, section 4.2.2.20)}
+736    \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->sndWnd = segment->window;
+737    \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->sndWl1 = segment->seqNum;
+738    \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->sndWl2 = segment->ackNum;
+739 
+740    \textcolor{comment}{//Maximum send window it has seen so far on the connection}
+741    \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->maxSndWnd = segment->window;
+742 
+743    \textcolor{comment}{//Enter ESTABLISHED state}
+744    \hyperlink{tcp__misc_8c_af8741d2662dcc13ed4695fec3ef5a365}{tcpChangeState}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfecaacb7ccce8d3fcdbc6635983251b22189}{TCP\_STATE\_ESTABLISHED});
+745    \textcolor{comment}{//And continue processing...}
+746    \hyperlink{tcp__fsm_8c_a4f418093a24e32c763ef5a4375b1b036}{tcpStateEstablished}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, segment, buffer, \hyperlink{pic32mz_2isr__support_8h_a12a5aed8a193ebbf9a641104a310610d}{offset}, 
+      \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length});
+747 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{tcp__fsm_8c_a0e45ad4435be3ce236d0a690fc0821fa}\label{tcp__fsm_8c_a0e45ad4435be3ce236d0a690fc0821fa}} 
+\index{tcp\+\_\+fsm.\+c@{tcp\+\_\+fsm.\+c}!tcp\+State\+Syn\+Sent@{tcp\+State\+Syn\+Sent}}
+\index{tcp\+State\+Syn\+Sent@{tcp\+State\+Syn\+Sent}!tcp\+\_\+fsm.\+c@{tcp\+\_\+fsm.\+c}}
+\subsubsection{\texorpdfstring{tcp\+State\+Syn\+Sent()}{tcpStateSynSent()}}
+{\footnotesize\ttfamily void tcp\+State\+Syn\+Sent (\begin{DoxyParamCaption}\item[{\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$}]{socket,  }\item[{\hyperlink{tcp_8h_a38f08160c28f0a8e104907d2ee71fed5}{Tcp\+Header} $\ast$}]{segment,  }\item[{size\+\_\+t}]{length }\end{DoxyParamCaption})}
+
+
+
+S\+Y\+N-\/\+S\+E\+NT state. 
+
+The device (normally a client) has sent a synchronize (S\+YN) message and is waiting for a matching S\+YN from the other device (usually a server)
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em socket} & Handle referencing the current socket \\
+\hline
+\mbox{\tt in}  & {\em segment} & Incoming T\+CP segment \\
+\hline
+\mbox{\tt in}  & {\em length} & Length of the segment data \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 565 of file tcp\+\_\+fsm.\+c.
+
+
+\begin{DoxyCode}
+566 \{
+567    \hyperlink{tcp_8h_a5562fc6b2b8e28e99a3c0d1c36054b72}{TcpOption} *option;
+568 
+569    \textcolor{comment}{//Debug message}
+570    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"TCP FSM: SYN-SENT state\(\backslash\)r\(\backslash\)n"});
+571 
+572    \textcolor{comment}{//Check the ACK bit}
+573    \textcolor{keywordflow}{if}(segment->flags & \hyperlink{tcp_8h_a4e6d97f0f2a3dc780d192efcdfe64aa7aae4cbb82c7a2373576547ed119498a4a}{TCP\_FLAG\_ACK})
+574    \{
+575       \textcolor{comment}{//Make sure the acknowledgment number is valid}
+576       \textcolor{keywordflow}{if}(segment->ackNum != \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->sndNxt)
+577       \{
+578          \textcolor{comment}{//Send a reset segment unless the RST bit is set}
+579          \textcolor{keywordflow}{if}(!(segment->flags & \hyperlink{tcp_8h_a4e6d97f0f2a3dc780d192efcdfe64aa7a2eaeb7e7c1984d0bd4d1cbb48b2b5ce4}{TCP\_FLAG\_RST}))
+580             \hyperlink{tcp__misc_8c_acf2944966efe796f3bb867f9d7233591}{tcpSendSegment}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, \hyperlink{tcp_8h_a4e6d97f0f2a3dc780d192efcdfe64aa7a2eaeb7e7c1984d0bd4d1cbb48b2b5ce4}{TCP\_FLAG\_RST}, segment->ackNum, 0, 0, 
+      \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE});
+581 
+582          \textcolor{comment}{//Drop the segment and return}
+583          \textcolor{keywordflow}{return};
+584       \}
+585    \}
+586 
+587    \textcolor{comment}{//Check the RST bit}
+588    \textcolor{keywordflow}{if}(segment->flags & \hyperlink{tcp_8h_a4e6d97f0f2a3dc780d192efcdfe64aa7a2eaeb7e7c1984d0bd4d1cbb48b2b5ce4}{TCP\_FLAG\_RST})
+589    \{
+590       \textcolor{comment}{//Make sure the ACK is acceptable}
+591       \textcolor{keywordflow}{if}(segment->flags & \hyperlink{tcp_8h_a4e6d97f0f2a3dc780d192efcdfe64aa7aae4cbb82c7a2373576547ed119498a4a}{TCP\_FLAG\_ACK})
+592       \{
+593          \textcolor{comment}{//Enter CLOSED state}
+594          \hyperlink{tcp__misc_8c_af8741d2662dcc13ed4695fec3ef5a365}{tcpChangeState}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfeca1af39131036c81d79f09174d2fb6f788}{TCP\_STATE\_CLOSED});
+595 
+596          \textcolor{comment}{//Number of times TCP connections have made a direct transition to the}
+597          \textcolor{comment}{//CLOSED state from either the SYN-SENT state or the SYN-RECEIVED state}
+598          \hyperlink{mib2__module_8h_abac73a39224e47d597f3b461620d2119}{MIB2\_INC\_COUNTER32}(tcpGroup.tcpAttemptFails, 1);
+599          \hyperlink{tcp__mib__module_8h_a296ad60b53152af0749116138a8ae227}{TCP\_MIB\_INC\_COUNTER32}(tcpAttemptFails, 1);
+600       \}
+601 
+602       \textcolor{comment}{//Drop the segment and return}
+603       \textcolor{keywordflow}{return};
+604    \}
+605 
+606    \textcolor{comment}{//Check the SYN bit}
+607    \textcolor{keywordflow}{if}(segment->flags & \hyperlink{tcp_8h_a4e6d97f0f2a3dc780d192efcdfe64aa7af2f8a42ff8bff07cbca1cd2ed6df9fae}{TCP\_FLAG\_SYN})
+608    \{
+609       \textcolor{comment}{//Save initial receive sequence number}
+610       \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->irs = segment->seqNum;
+611       \textcolor{comment}{//Initialize RCV.NXT pointer}
+612       \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->rcvNxt = segment->seqNum + 1;
+613 
+614       \textcolor{comment}{//If there is an ACK, SND.UNA should be advanced to equal SEG.ACK}
+615       \textcolor{keywordflow}{if}(segment->flags & \hyperlink{tcp_8h_a4e6d97f0f2a3dc780d192efcdfe64aa7aae4cbb82c7a2373576547ed119498a4a}{TCP\_FLAG\_ACK})
+616          \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->sndUna = segment->ackNum;
+617 
+618       \textcolor{comment}{//Compute retransmission timeout}
+619       \hyperlink{tcp__misc_8c_a585e1a8e92af5a4740c55f0c0bd7ae08}{tcpComputeRto}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket});
+620 
+621       \textcolor{comment}{//Any segments on the retransmission queue which are thereby}
+622       \textcolor{comment}{//acknowledged should be removed}
+623       \hyperlink{tcp__misc_8c_a18731fd3f3545ac38f21ad9d570816d6}{tcpUpdateRetransmitQueue}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket});
+624 
+625       \textcolor{comment}{//Get the maximum segment size}
+626       option = \hyperlink{tcp__misc_8c_aaf3149cdcf1570bfcfcec9c637f34e3b}{tcpGetOption}(segment, \hyperlink{tcp_8h_a064186fb289be38d3e1a71ecf446fe8caa534c3934b8bd83794d7892083275375}{TCP\_OPTION\_MAX\_SEGMENT\_SIZE});
+627 
+628       \textcolor{comment}{//Specified option found?}
+629       \textcolor{keywordflow}{if}(option != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} && option->length == 4)
+630       \{
+631          \textcolor{comment}{//Retrieve MSS value}
+632          memcpy(&\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->smss, option->value, 2);
+633          \textcolor{comment}{//Convert from network byte order to host byte order}
+634          \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->smss = \hyperlink{cpu__endian_8h_a9312c6eb72e64f748ae0d0e0dc3ec9b9}{ntohs}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->smss);
+635 
+636          \textcolor{comment}{//Debug message}
+637          \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"Remote host MSS = %"} PRIu16 \textcolor{stringliteral}{"\(\backslash\)r\(\backslash\)n"}, \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->smss);
+638 
+639          \textcolor{comment}{//Make sure that the MSS advertised by the peer is acceptable}
+640          \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->smss = \hyperlink{os__port_8h_a3acffbd305ee72dcd4593c0d8af64a4f}{MIN}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->smss, \hyperlink{tcp_8h_a54e8d598d7db34761edb76924934b840}{TCP\_MAX\_MSS});
+641          \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->smss = \hyperlink{os__port_8h_afa99ec4acc4ecb2dc3c2d05da15d0e3f}{MAX}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->smss, \hyperlink{tcp_8h_aedd7de15002fd15efa1df5e0fcf0f68e}{TCP\_MIN\_MSS});
+642       \}
+643 
+644 \textcolor{preprocessor}{#if (TCP\_CONGEST\_CONTROL\_SUPPORT == ENABLED)}
+645       \textcolor{comment}{//Initial congestion window}
+646       \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->cwnd = \hyperlink{os__port_8h_a3acffbd305ee72dcd4593c0d8af64a4f}{MIN}(\hyperlink{tcp_8h_a7f8767b38b51f53547a5a4b3b9e2d478}{TCP\_INITIAL\_WINDOW} * \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->smss, 
+      \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->txBufferSize);
+647 \textcolor{preprocessor}{#endif}
+648 
+649       \textcolor{comment}{//Check whether our SYN has been acknowledged (SND.UNA > ISS)}
+650       \textcolor{keywordflow}{if}(\hyperlink{tcp_8h_adcfa1a4af128e2438f93db11c81c09cf}{TCP\_CMP\_SEQ}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->sndUna, \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->iss) > 0)
+651       \{
+652          \textcolor{comment}{//Update the send window before entering ESTABLISHED state (refer to}
+653          \textcolor{comment}{//RFC 1122, section 4.2.2.20)}
+654          \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->sndWnd = segment->window;
+655          \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->sndWl1 = segment->seqNum;
+656          \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->sndWl2 = segment->ackNum;
+657 
+658          \textcolor{comment}{//Maximum send window it has seen so far on the connection}
+659          \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->maxSndWnd = segment->window;
+660 
+661          \textcolor{comment}{//Form an ACK segment and send it}
+662          \hyperlink{tcp__misc_8c_acf2944966efe796f3bb867f9d7233591}{tcpSendSegment}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, \hyperlink{tcp_8h_a4e6d97f0f2a3dc780d192efcdfe64aa7aae4cbb82c7a2373576547ed119498a4a}{TCP\_FLAG\_ACK}, 
+      \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->sndNxt, \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->rcvNxt, 0, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE});
+663          \textcolor{comment}{//Switch to the ESTABLISHED state}
+664          \hyperlink{tcp__misc_8c_af8741d2662dcc13ed4695fec3ef5a365}{tcpChangeState}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfecaacb7ccce8d3fcdbc6635983251b22189}{TCP\_STATE\_ESTABLISHED});
+665       \}
+666       \textcolor{keywordflow}{else}
+667       \{
+668          \textcolor{comment}{//Form an SYN ACK segment and send it}
+669          \hyperlink{tcp__misc_8c_acf2944966efe796f3bb867f9d7233591}{tcpSendSegment}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, \hyperlink{tcp_8h_a4e6d97f0f2a3dc780d192efcdfe64aa7af2f8a42ff8bff07cbca1cd2ed6df9fae}{TCP\_FLAG\_SYN} | 
+      \hyperlink{tcp_8h_a4e6d97f0f2a3dc780d192efcdfe64aa7aae4cbb82c7a2373576547ed119498a4a}{TCP\_FLAG\_ACK}, \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->iss, \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->rcvNxt, 0, \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE});
+670          \textcolor{comment}{//Enter SYN-RECEIVED state}
+671          \hyperlink{tcp__misc_8c_af8741d2662dcc13ed4695fec3ef5a365}{tcpChangeState}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfecadfce7e58cb083022157243f993d4ddc3}{TCP\_STATE\_SYN\_RECEIVED});
+672       \}
+673    \}
+674 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{tcp__fsm_8c_a639447bb741040998bd9347e8f85a4a2}\label{tcp__fsm_8c_a639447bb741040998bd9347e8f85a4a2}} 
+\index{tcp\+\_\+fsm.\+c@{tcp\+\_\+fsm.\+c}!tcp\+State\+Time\+Wait@{tcp\+State\+Time\+Wait}}
+\index{tcp\+State\+Time\+Wait@{tcp\+State\+Time\+Wait}!tcp\+\_\+fsm.\+c@{tcp\+\_\+fsm.\+c}}
+\subsubsection{\texorpdfstring{tcp\+State\+Time\+Wait()}{tcpStateTimeWait()}}
+{\footnotesize\ttfamily void tcp\+State\+Time\+Wait (\begin{DoxyParamCaption}\item[{\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$}]{socket,  }\item[{\hyperlink{tcp_8h_a38f08160c28f0a8e104907d2ee71fed5}{Tcp\+Header} $\ast$}]{segment,  }\item[{size\+\_\+t}]{length }\end{DoxyParamCaption})}
+
+
+
+T\+I\+M\+E-\/\+W\+A\+IT state. 
+
+The device has now received a F\+IN from the other device and acknowledged it, and sent its own F\+IN and received an A\+CK for it. We are done, except for waiting to ensure the A\+CK is received and prevent potential overlap with new connections
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em socket} & Handle referencing the current socket \\
+\hline
+\mbox{\tt in}  & {\em segment} & Incoming T\+CP segment \\
+\hline
+\mbox{\tt in}  & {\em length} & Length of the segment data \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 1144 of file tcp\+\_\+fsm.\+c.
+
+
+\begin{DoxyCode}
+1145 \{
+1146    \textcolor{comment}{//Debug message}
+1147    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"TCP FSM: TIME-WAIT state\(\backslash\)r\(\backslash\)n"});
+1148 
+1149    \textcolor{comment}{//First check sequence number}
+1150    \textcolor{keywordflow}{if}(\hyperlink{tcp__misc_8c_a3aa461df53441116e0217086b8fc705a}{tcpCheckSequenceNumber}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, segment, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}))
+1151       \textcolor{keywordflow}{return};
+1152 
+1153    \textcolor{comment}{//Check the RST bit}
+1154    \textcolor{keywordflow}{if}(segment->flags & \hyperlink{tcp_8h_a4e6d97f0f2a3dc780d192efcdfe64aa7a2eaeb7e7c1984d0bd4d1cbb48b2b5ce4}{TCP\_FLAG\_RST})
+1155    \{
+1156       \textcolor{comment}{//Enter CLOSED state}
+1157       \hyperlink{tcp__misc_8c_af8741d2662dcc13ed4695fec3ef5a365}{tcpChangeState}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfeca1af39131036c81d79f09174d2fb6f788}{TCP\_STATE\_CLOSED});
+1158 
+1159       \textcolor{comment}{//Dispose the socket if the user does not have the ownership anymore}
+1160       \textcolor{keywordflow}{if}(!\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->ownedFlag)
+1161       \{
+1162          \textcolor{comment}{//Delete the TCB}
+1163          \hyperlink{tcp__misc_8c_afdcebf22cbad213fdb1d751829db9fb3}{tcpDeleteControlBlock}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket});
+1164          \textcolor{comment}{//Mark the socket as closed}
+1165          \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->type = \hyperlink{socket_8h_aa78c7398fa81f7f62aa233159d4d8d97a69a5ebbd0e9391abfc7f6798ebf73fb6}{SOCKET\_TYPE\_UNUSED};
+1166       \}
+1167 
+1168       \textcolor{comment}{//Return immediately}
+1169       \textcolor{keywordflow}{return};
+1170    \}
+1171 
+1172    \textcolor{comment}{//Check the SYN bit}
+1173    \textcolor{keywordflow}{if}(\hyperlink{tcp__misc_8c_ad62359b91161be196effb675a48647c3}{tcpCheckSyn}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, segment, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}))
+1174       \textcolor{keywordflow}{return};
+1175    \textcolor{comment}{//If the ACK bit is off drop the segment and return}
+1176    \textcolor{keywordflow}{if}(!(segment->flags & \hyperlink{tcp_8h_a4e6d97f0f2a3dc780d192efcdfe64aa7aae4cbb82c7a2373576547ed119498a4a}{TCP\_FLAG\_ACK}))
+1177       \textcolor{keywordflow}{return};
+1178 
+1179    \textcolor{comment}{//The only thing that can arrive in this state is a retransmission}
+1180    \textcolor{comment}{//of the remote FIN. Acknowledge it and restart the 2 MSL timeout}
+1181    \textcolor{keywordflow}{if}(segment->flags & \hyperlink{tcp_8h_a4e6d97f0f2a3dc780d192efcdfe64aa7a332cfb33224b794e0be773cba056efa1}{TCP\_FLAG\_FIN})
+1182    \{
+1183       \textcolor{comment}{//Send an acknowledgment for the FIN}
+1184       \hyperlink{tcp__misc_8c_acf2944966efe796f3bb867f9d7233591}{tcpSendSegment}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, \hyperlink{tcp_8h_a4e6d97f0f2a3dc780d192efcdfe64aa7aae4cbb82c7a2373576547ed119498a4a}{TCP\_FLAG\_ACK}, 
+      \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->sndNxt, \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->rcvNxt, 0, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE});
+1185       \textcolor{comment}{//Restart the 2MSL timer}
+1186       \hyperlink{tcp__timer_8c_ac28b31fb6e44b56d37fb37f2b34f8a67}{tcpTimerStart}(&\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->timeWaitTimer, \hyperlink{tcp_8h_ac7600c784459aedc792edbefd5041e2f}{TCP\_2MSL\_TIMER});
+1187    \}
+1188 \}
+\end{DoxyCode}

@@ -1,0 +1,329 @@
+\hypertarget{base64_8h}{}\section{cyclone\+\_\+crypto/encoding/base64.h File Reference}
+\label{base64_8h}\index{cyclone\+\_\+crypto/encoding/base64.\+h@{cyclone\+\_\+crypto/encoding/base64.\+h}}
+
+
+Base64 encoding scheme.  
+
+
+{\ttfamily \#include \char`\"{}core/crypto.\+h\char`\"{}}\newline
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{base64_8h_a6eb49435a26b3297e611264f6d1cbf5f}{base64\+Encode} (const void $\ast$input, size\+\_\+t input\+Len, \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$output, size\+\_\+t $\ast$output\+Len)
+\begin{DoxyCompactList}\small\item\em Base64 encoding algorithm. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{base64_8h_ae360cde3e2ef08783ac2e01591b78530}{base64\+Decode} (const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$input, size\+\_\+t input\+Len, void $\ast$output, size\+\_\+t $\ast$output\+Len)
+\begin{DoxyCompactList}\small\item\em Base64 decoding algorithm. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Base64 encoding scheme. 
+
+\hypertarget{pic32mz__ef__curiosity_8h_License}{}\subsection{License}\label{pic32mz__ef__curiosity_8h_License}
+S\+P\+D\+X-\/\+License-\/\+Identifier\+: G\+P\+L-\/2.\+0-\/or-\/later
+
+Copyright (C) 2010-\/2019 Oryx Embedded S\+A\+RL. All rights reserved.
+
+This file is part of Cyclone\+Crypto Open.
+
+This program is free software; you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+
+You should have received a copy of the G\+NU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-\/1301, U\+SA.
+
+\begin{DoxyAuthor}{Author}
+Oryx Embedded S\+A\+RL (www.\+oryx-\/embedded.\+com) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+9.\+6 
+\end{DoxyVersion}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{base64_8h_ae360cde3e2ef08783ac2e01591b78530}\label{base64_8h_ae360cde3e2ef08783ac2e01591b78530}} 
+\index{base64.\+h@{base64.\+h}!base64\+Decode@{base64\+Decode}}
+\index{base64\+Decode@{base64\+Decode}!base64.\+h@{base64.\+h}}
+\subsubsection{\texorpdfstring{base64\+Decode()}{base64Decode()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} base64\+Decode (\begin{DoxyParamCaption}\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{input,  }\item[{size\+\_\+t}]{input\+Len,  }\item[{void $\ast$}]{output,  }\item[{size\+\_\+t $\ast$}]{output\+Len }\end{DoxyParamCaption})}
+
+
+
+Base64 decoding algorithm. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em input} & Base64-\/encoded string \\
+\hline
+\mbox{\tt in}  & {\em input\+Len} & Length of the encoded string \\
+\hline
+\mbox{\tt out}  & {\em output} & Resulting decoded data \\
+\hline
+\mbox{\tt out}  & {\em output\+Len} & Length of the decoded data \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 194 of file base64.\+c.
+
+
+\begin{DoxyCode}
+196 \{
+197    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+198    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value};
+199    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} \hyperlink{aria_8c_a5dadc28804036d1b82e1dc027e95c9a6}{c};
+200    \textcolor{keywordtype}{size\_t} i;
+201    \textcolor{keywordtype}{size\_t} j;
+202    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+203    \textcolor{keywordtype}{size\_t} padLen;
+204    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *\hyperlink{ndp_8h_a6519522ad9a6f45e7a8d25d31392a977}{p};
+205 
+206    \textcolor{comment}{//Check parameters}
+207    \textcolor{keywordflow}{if}(input == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} && inputLen != 0)
+208       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+209    \textcolor{keywordflow}{if}(outputLen == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+210       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+211 
+212    \textcolor{comment}{//Initialize status code}
+213    error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+214 
+215    \textcolor{comment}{//Point to the buffer where to write the decoded data}
+216    p = (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *) output;
+217 
+218    \textcolor{comment}{//Initialize variables}
+219    j = 0;
+220    n = 0;
+221    value = 0;
+222    padLen = 0;
+223 
+224    \textcolor{comment}{//Process the Base64-encoded string}
+225    \textcolor{keywordflow}{for}(i = 0; i < inputLen && !error; i++)
+226    \{
+227       \textcolor{comment}{//Get current character}
+228       c = (\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t}) input[i];
+229 
+230       \textcolor{comment}{//Check the value of the current character}
+231       \textcolor{keywordflow}{if}(c == \textcolor{charliteral}{'\(\backslash\)r'} || c == \textcolor{charliteral}{'\(\backslash\)n'})
+232       \{
+233          \textcolor{comment}{//CR and LF characters should be ignored}
+234       \}
+235       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(c == \textcolor{charliteral}{'='})
+236       \{
+237          \textcolor{comment}{//Increment the number of pad characters}
+238          padLen++;
+239       \}
+240       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(c < 128 && \hyperlink{base64_8c_aea9a3517ae16dc211dd4788e4e5162cf}{base64DecTable}[c] < 64 && padLen == 0)
+241       \{
+242          \textcolor{comment}{//Decode the current character}
+243          value = (value << 6) | \hyperlink{base64_8c_aea9a3517ae16dc211dd4788e4e5162cf}{base64DecTable}[c];
+244 
+245          \textcolor{comment}{//Divide the input stream into blocks of 4 characters}
+246          \textcolor{keywordflow}{if}(++j == 4)
+247          \{
+248             \textcolor{comment}{//Map each 4-character block to 3 bytes}
+249             \textcolor{keywordflow}{if}(p != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+250             \{
+251                p[\hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n}] = (value >> 16) & 0xFF;
+252                p[n + 1] = (value >> 8) & 0xFF;
+253                p[n + 2] = value & 0xFF;
+254             \}
+255 
+256             \textcolor{comment}{//Adjust the length of the decoded data}
+257             n += 3;
+258 
+259             \textcolor{comment}{//Decode next block}
+260             j = 0;
+261             value = 0;
+262          \}
+263       \}
+264       \textcolor{keywordflow}{else}
+265       \{
+266          \textcolor{comment}{//Implementations must reject the encoded data if it contains}
+267          \textcolor{comment}{//characters outside the base alphabet (refer to RFC 4648,}
+268          \textcolor{comment}{//section 3.3)}
+269          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca72da934338a39cb699b6413f00691ddd}{ERROR\_INVALID\_CHARACTER};
+270       \}
+271    \}
+272 
+273    \textcolor{comment}{//Check status code}
+274    \textcolor{keywordflow}{if}(!error)
+275    \{
+276       \textcolor{comment}{//Check the number of pad characters}
+277       \textcolor{keywordflow}{if}(padLen == 0 && j == 0)
+278       \{
+279          \textcolor{comment}{//No pad characters in this case}
+280       \}
+281       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(padLen == 1 && j == 3)
+282       \{
+283          \textcolor{comment}{//The "=" sequence indicates that the last block contains only 2 bytes}
+284          \textcolor{keywordflow}{if}(p != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+285          \{
+286             \textcolor{comment}{//Decode the last two bytes}
+287             p[\hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n}] = (value >> 10) & 0xFF;
+288             p[n + 1] = (value >> 2) & 0xFF;
+289          \}
+290 
+291          \textcolor{comment}{//Adjust the length of the decoded data}
+292          n += 2;
+293       \}
+294       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(padLen == 2 && j == 2)
+295       \{
+296          \textcolor{comment}{//The "==" sequence indicates that the last block contains only 1 byte}
+297          \textcolor{keywordflow}{if}(p != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+298          \{
+299             \textcolor{comment}{//Decode the last byte}
+300             p[\hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n}] = (value >> 4) & 0xFF;
+301          \}
+302 
+303          \textcolor{comment}{//Adjust the length of the decoded data}
+304          n++;
+305          \textcolor{comment}{//Skip trailing pad characters}
+306          i++;
+307       \}
+308       \textcolor{keywordflow}{else}
+309       \{
+310          \textcolor{comment}{//The length of the input string must be a multiple of 4}
+311          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cae5c014519c3ac2540447887ddca1bd28}{ERROR\_INVALID\_LENGTH};
+312       \}
+313    \}
+314 
+315    \textcolor{comment}{//Total number of bytes that have been written}
+316    *outputLen = \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+317 
+318    \textcolor{comment}{//Return status code}
+319    \textcolor{keywordflow}{return} error;
+320 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{base64_8h_a6eb49435a26b3297e611264f6d1cbf5f}\label{base64_8h_a6eb49435a26b3297e611264f6d1cbf5f}} 
+\index{base64.\+h@{base64.\+h}!base64\+Encode@{base64\+Encode}}
+\index{base64\+Encode@{base64\+Encode}!base64.\+h@{base64.\+h}}
+\subsubsection{\texorpdfstring{base64\+Encode()}{base64Encode()}}
+{\footnotesize\ttfamily void base64\+Encode (\begin{DoxyParamCaption}\item[{const void $\ast$}]{input,  }\item[{size\+\_\+t}]{input\+Len,  }\item[{\hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{output,  }\item[{size\+\_\+t $\ast$}]{output\+Len }\end{DoxyParamCaption})}
+
+
+
+Base64 encoding algorithm. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em input} & Input data to encode \\
+\hline
+\mbox{\tt in}  & {\em input\+Len} & Length of the data to encode \\
+\hline
+\mbox{\tt out}  & {\em output} & N\+U\+L\+L-\/terminated string encoded with Base64 algorithm \\
+\hline
+\mbox{\tt out}  & {\em output\+Len} & Length of the encoded string (optional parameter) \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 78 of file base64.\+c.
+
+
+\begin{DoxyCode}
+80 \{
+81    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+82    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a};
+83    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} \hyperlink{dtls__misc_8h_ab590318ac859d0e57e15c3dd6c62a605}{b};
+84    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} \hyperlink{aria_8c_a5dadc28804036d1b82e1dc027e95c9a6}{c};
+85    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} d;
+86    \textcolor{keyword}{const} \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *\hyperlink{ndp_8h_a6519522ad9a6f45e7a8d25d31392a977}{p};
+87 
+88    \textcolor{comment}{//Point to the first byte of the input data}
+89    p = (\textcolor{keyword}{const} \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *) input;
+90 
+91    \textcolor{comment}{//Divide the input stream into blocks of 3 bytes}
+92    n = inputLen / 3;
+93 
+94    \textcolor{comment}{//A full encoding quantum is always completed at the end of a quantity}
+95    \textcolor{keywordflow}{if}(inputLen == (n * 3 + 1))
+96    \{
+97       \textcolor{comment}{//The final quantum of encoding input is exactly 8 bits}
+98       \textcolor{keywordflow}{if}(input != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} && output != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+99       \{
+100          \textcolor{comment}{//Read input data}
+101          a = (p[n * 3] & 0xFC) >> 2;
+102          b = (p[n * 3] & 0x03) << 4;
+103 
+104          \textcolor{comment}{//The final unit of encoded output will be two characters followed}
+105          \textcolor{comment}{//by two "=" padding characters}
+106          output[n * 4] = \hyperlink{base64_8c_aa29065bd9a3e795eb10b5d853fba0f1d}{base64EncTable}[\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}];
+107          output[n * 4 + 1] = \hyperlink{base64_8c_aa29065bd9a3e795eb10b5d853fba0f1d}{base64EncTable}[\hyperlink{dtls__misc_8h_ab590318ac859d0e57e15c3dd6c62a605}{b}];
+108          output[n * 4 + 2] = \textcolor{charliteral}{'='};
+109          output[n * 4 + 3] = \textcolor{charliteral}{'='};
+110          output[n * 4 + 4] = \textcolor{charliteral}{'\(\backslash\)0'};
+111       \}
+112 
+113       \textcolor{comment}{//Length of the encoded string (excluding the terminating NULL)}
+114       \textcolor{keywordflow}{if}(outputLen != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+115       \{
+116          *outputLen = n * 4 + 4;
+117       \}
+118    \}
+119    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(inputLen == (n * 3 + 2))
+120    \{
+121       \textcolor{comment}{//The final quantum of encoding input is exactly 16 bits}
+122       \textcolor{keywordflow}{if}(input != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} && output != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+123       \{
+124          \textcolor{comment}{//Read input data}
+125          a = (p[n * 3] & 0xFC) >> 2;
+126          b = ((p[n * 3] & 0x03) << 4) | ((p[n * 3 + 1] & 0xF0) >> 4);
+127          c = (p[n * 3 + 1] & 0x0F) << 2;
+128 
+129          \textcolor{comment}{//The final unit of encoded output will be three characters followed}
+130          \textcolor{comment}{//by one "=" padding character}
+131          output[n * 4] = \hyperlink{base64_8c_aa29065bd9a3e795eb10b5d853fba0f1d}{base64EncTable}[\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}];
+132          output[n * 4 + 1] = \hyperlink{base64_8c_aa29065bd9a3e795eb10b5d853fba0f1d}{base64EncTable}[\hyperlink{dtls__misc_8h_ab590318ac859d0e57e15c3dd6c62a605}{b}];
+133          output[n * 4 + 2] = \hyperlink{base64_8c_aa29065bd9a3e795eb10b5d853fba0f1d}{base64EncTable}[\hyperlink{aria_8c_a5dadc28804036d1b82e1dc027e95c9a6}{c}];
+134          output[n * 4 + 3] = \textcolor{charliteral}{'='};
+135          output[n * 4 + 4] = \textcolor{charliteral}{'\(\backslash\)0'};
+136       \}
+137 
+138       \textcolor{comment}{//Length of the encoded string (excluding the terminating NULL)}
+139       \textcolor{keywordflow}{if}(outputLen != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+140       \{
+141          *outputLen = n * 4 + 4;
+142       \}
+143    \}
+144    \textcolor{keywordflow}{else}
+145    \{
+146       \textcolor{comment}{//The final quantum of encoding input is an integral multiple of 24 bits}
+147       \textcolor{keywordflow}{if}(output != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+148       \{
+149          \textcolor{comment}{//The final unit of encoded output will be an integral multiple of 4}
+150          \textcolor{comment}{//characters with no "=" padding}
+151          output[n * 4] = \textcolor{charliteral}{'\(\backslash\)0'};
+152       \}
+153 
+154       \textcolor{comment}{//Length of the encoded string (excluding the terminating NULL)}
+155       \textcolor{keywordflow}{if}(outputLen != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+156       \{
+157          *outputLen = n * 4;
+158       \}
+159    \}
+160 
+161    \textcolor{comment}{//If the output parameter is NULL, then the function calculates the}
+162    \textcolor{comment}{//length of the resulting Base64 string without copying any data}
+163    \textcolor{keywordflow}{if}(input != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} && output != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+164    \{
+165       \textcolor{comment}{//The input data is processed block by block}
+166       \textcolor{keywordflow}{while}(n-- > 0)
+167       \{
+168          \textcolor{comment}{//Read input data}
+169          a = (p[n * 3] & 0xFC) >> 2;
+170          b = ((p[n * 3] & 0x03) << 4) | ((p[n * 3 + 1] & 0xF0) >> 4);
+171          c = ((p[n * 3 + 1] & 0x0F) << 2) | ((p[n * 3 + 2] & 0xC0) >> 6);
+172          d = p[n * 3 + 2] & 0x3F;
+173 
+174          \textcolor{comment}{//Map each 3-byte block to 4 printable characters using the Base64}
+175          \textcolor{comment}{//character set}
+176          output[n * 4] = \hyperlink{base64_8c_aa29065bd9a3e795eb10b5d853fba0f1d}{base64EncTable}[\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}];
+177          output[n * 4 + 1] = \hyperlink{base64_8c_aa29065bd9a3e795eb10b5d853fba0f1d}{base64EncTable}[\hyperlink{dtls__misc_8h_ab590318ac859d0e57e15c3dd6c62a605}{b}];
+178          output[n * 4 + 2] = \hyperlink{base64_8c_aa29065bd9a3e795eb10b5d853fba0f1d}{base64EncTable}[\hyperlink{aria_8c_a5dadc28804036d1b82e1dc027e95c9a6}{c}];
+179          output[n * 4 + 3] = \hyperlink{base64_8c_aa29065bd9a3e795eb10b5d853fba0f1d}{base64EncTable}[d];
+180       \}
+181    \}
+182 \}
+\end{DoxyCode}

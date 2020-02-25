@@ -1,0 +1,1432 @@
+\hypertarget{ppp__fsm_8h}{}\section{cyclone\+\_\+tcp/ppp/ppp\+\_\+fsm.h File Reference}
+\label{ppp__fsm_8h}\index{cyclone\+\_\+tcp/ppp/ppp\+\_\+fsm.\+h@{cyclone\+\_\+tcp/ppp/ppp\+\_\+fsm.\+h}}
+
+
+P\+PP finite state machine.  
+
+
+{\ttfamily \#include \char`\"{}core/net.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ppp/ppp.\+h\char`\"{}}\newline
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structPppCallbacks}{Ppp\+Callbacks}
+\begin{DoxyCompactList}\small\item\em P\+PP F\+SM actions. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef void($\ast$ \hyperlink{ppp__fsm_8h_af2c33e781717f7eeccba3b5ebac0524c}{Ppp\+This\+Layer\+Up}) (\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em This-\/\+Layer-\/\+Up callback function. \end{DoxyCompactList}\item 
+typedef void($\ast$ \hyperlink{ppp__fsm_8h_a85e4e4b76b9c6ee9a9ea183186e2f828}{Ppp\+This\+Layer\+Down}) (\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em This-\/\+Layer-\/\+Down callback function. \end{DoxyCompactList}\item 
+typedef void($\ast$ \hyperlink{ppp__fsm_8h_ac7f910cb18b43d86c18b79f95fd302a1}{Ppp\+This\+Layer\+Started}) (\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em This-\/\+Layer-\/\+Started callback function. \end{DoxyCompactList}\item 
+typedef void($\ast$ \hyperlink{ppp__fsm_8h_a454f389f6cb679de4cb58f445b01dec8}{Ppp\+This\+Layer\+Finished}) (\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em This-\/\+Layer-\/\+Finished callback function. \end{DoxyCompactList}\item 
+typedef void($\ast$ \hyperlink{ppp__fsm_8h_a65f1f9ed4177c139c61a532328cc4bbc}{Ppp\+Init\+Restart\+Count}) (\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$context, \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} \hyperlink{chap_8h_adfa040d04d16520129a735fff8fb1628}{value})
+\begin{DoxyCompactList}\small\item\em Initialize-\/\+Restart-\/\+Count callback function. \end{DoxyCompactList}\item 
+typedef void($\ast$ \hyperlink{ppp__fsm_8h_a64f6f78275b72385feff6b734cb3523c}{Ppp\+Zero\+Restart\+Count}) (\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Zero-\/\+Restart-\/\+Count callback function. \end{DoxyCompactList}\item 
+typedef \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t}($\ast$ \hyperlink{ppp__fsm_8h_a208d218e9a71164efa83c25973ed31ba}{Ppp\+Send\+Configure\+Req}) (\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Send-\/\+Configure-\/\+Request callback function. \end{DoxyCompactList}\item 
+typedef \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t}($\ast$ \hyperlink{ppp__fsm_8h_af1044cdf098c842dd6fad91d76453d46}{Ppp\+Send\+Configure\+Ack}) (\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$context, const \hyperlink{ppp_8h_a5f9516e80961edda7e2c0b9b964bdd66}{Ppp\+Configure\+Packet} $\ast$configure\+Req\+Packet)
+\begin{DoxyCompactList}\small\item\em Send-\/\+Configure-\/\+Ack callback function. \end{DoxyCompactList}\item 
+typedef \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t}($\ast$ \hyperlink{ppp__fsm_8h_a4c0ae4d9b8997fedf5ab69442042884a}{Ppp\+Send\+Configure\+Nak}) (\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$context, const \hyperlink{ppp_8h_a5f9516e80961edda7e2c0b9b964bdd66}{Ppp\+Configure\+Packet} $\ast$configure\+Req\+Packet)
+\begin{DoxyCompactList}\small\item\em Send-\/\+Configure-\/\+Nak callback function. \end{DoxyCompactList}\item 
+typedef \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t}($\ast$ \hyperlink{ppp__fsm_8h_a07e77c278b7ef0ae6032209a2a2e9355}{Ppp\+Send\+Configure\+Rej}) (\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$context, const \hyperlink{ppp_8h_a5f9516e80961edda7e2c0b9b964bdd66}{Ppp\+Configure\+Packet} $\ast$configure\+Req\+Packet)
+\begin{DoxyCompactList}\small\item\em Send-\/\+Configure-\/\+Reject callback function. \end{DoxyCompactList}\item 
+typedef \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t}($\ast$ \hyperlink{ppp__fsm_8h_a38c40607763e08bb9d1d2fce149c0649}{Ppp\+Send\+Terminate\+Req}) (\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Send-\/\+Terminate-\/\+Request callback function. \end{DoxyCompactList}\item 
+typedef \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t}($\ast$ \hyperlink{ppp__fsm_8h_a63a08a28d6915a0b14a6262ed45da948}{Ppp\+Send\+Terminate\+Ack}) (\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$context, const \hyperlink{ppp_8h_a224d9bad9d75f66f3d0284450ddf6fb4}{Ppp\+Terminate\+Packet} $\ast$terminate\+Req\+Packet)
+\begin{DoxyCompactList}\small\item\em Send-\/\+Terminate-\/\+Ack callback function. \end{DoxyCompactList}\item 
+typedef \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t}($\ast$ \hyperlink{ppp__fsm_8h_ac334e06c25673bbec798aa1bdf46e91e}{Ppp\+Send\+Code\+Rej}) (\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$context, const \hyperlink{ppp_8h_aa975a68f06316e1db0de962a31e30c2e}{Ppp\+Packet} $\ast$packet)
+\begin{DoxyCompactList}\small\item\em Send-\/\+Code-\/\+Reject callback function. \end{DoxyCompactList}\item 
+typedef \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t}($\ast$ \hyperlink{ppp__fsm_8h_a90deee6d649b10694b4c962bd1ec2946}{Ppp\+Send\+Echo\+Rep}) (\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$context, const \hyperlink{ppp_8h_a32588dc42d7123562908b651a0e6bf13}{Ppp\+Echo\+Packet} $\ast$echo\+Req\+Packet)
+\begin{DoxyCompactList}\small\item\em Send-\/\+Echo-\/\+Reply callback function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{ppp__fsm_8h_ac8891398361d78b0e913933626ebd232}{ppp\+Up\+Event} (\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$context, \hyperlink{structPppFsm}{Ppp\+Fsm} $\ast$fsm, const \hyperlink{structPppCallbacks}{Ppp\+Callbacks} $\ast$callbacks)
+\begin{DoxyCompactList}\small\item\em Process Up event. \end{DoxyCompactList}\item 
+void \hyperlink{ppp__fsm_8h_abada68985183c2e9b998f21ebb7cbe65}{ppp\+Down\+Event} (\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$context, \hyperlink{structPppFsm}{Ppp\+Fsm} $\ast$fsm, const \hyperlink{structPppCallbacks}{Ppp\+Callbacks} $\ast$callbacks)
+\begin{DoxyCompactList}\small\item\em Process Down event. \end{DoxyCompactList}\item 
+void \hyperlink{ppp__fsm_8h_a56a599e9081bd1ef91c41ecb597b9ba3}{ppp\+Open\+Event} (\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$context, \hyperlink{structPppFsm}{Ppp\+Fsm} $\ast$fsm, const \hyperlink{structPppCallbacks}{Ppp\+Callbacks} $\ast$callbacks)
+\begin{DoxyCompactList}\small\item\em Process Open event. \end{DoxyCompactList}\item 
+void \hyperlink{ppp__fsm_8h_a99f9adb8cee4039fd63439bd3401b7f9}{ppp\+Close\+Event} (\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$context, \hyperlink{structPppFsm}{Ppp\+Fsm} $\ast$fsm, const \hyperlink{structPppCallbacks}{Ppp\+Callbacks} $\ast$callbacks)
+\begin{DoxyCompactList}\small\item\em Process Close event. \end{DoxyCompactList}\item 
+void \hyperlink{ppp__fsm_8h_a36be609fbc1074aca17caeb84dc1430c}{ppp\+Timeout\+Event} (\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$context, \hyperlink{structPppFsm}{Ppp\+Fsm} $\ast$fsm, const \hyperlink{structPppCallbacks}{Ppp\+Callbacks} $\ast$callbacks)
+\begin{DoxyCompactList}\small\item\em Process Timeout event. \end{DoxyCompactList}\item 
+void \hyperlink{ppp__fsm_8h_af1c972a74fd368977eee1df1eedac2d4}{ppp\+Rcv\+Configure\+Req\+Event} (\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$context, \hyperlink{structPppFsm}{Ppp\+Fsm} $\ast$fsm, const \hyperlink{structPppCallbacks}{Ppp\+Callbacks} $\ast$callbacks, const \hyperlink{ppp_8h_a5f9516e80961edda7e2c0b9b964bdd66}{Ppp\+Configure\+Packet} $\ast$configure\+Req\+Packet, \hyperlink{ppp_8h_a961984e634b12a11d381115a46f14188}{Ppp\+Code} \hyperlink{ppp_8h_a966576744a473fafb7687f8e5649941f}{code})
+\begin{DoxyCompactList}\small\item\em Process Receive-\/\+Configure-\/\+Request event. \end{DoxyCompactList}\item 
+void \hyperlink{ppp__fsm_8h_a45bb9f242e43bee7a741258f86c9c276}{ppp\+Rcv\+Configure\+Ack\+Event} (\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$context, \hyperlink{structPppFsm}{Ppp\+Fsm} $\ast$fsm, const \hyperlink{structPppCallbacks}{Ppp\+Callbacks} $\ast$callbacks)
+\begin{DoxyCompactList}\small\item\em Process Receive-\/\+Configure-\/\+Ack event. \end{DoxyCompactList}\item 
+void \hyperlink{ppp__fsm_8h_afb660738da04688fc48d49afbca2b594}{ppp\+Rcv\+Configure\+Nak\+Event} (\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$context, \hyperlink{structPppFsm}{Ppp\+Fsm} $\ast$fsm, const \hyperlink{structPppCallbacks}{Ppp\+Callbacks} $\ast$callbacks)
+\begin{DoxyCompactList}\small\item\em Process Receive-\/\+Configure-\/\+Nak event. \end{DoxyCompactList}\item 
+void \hyperlink{ppp__fsm_8h_adf41be150eb29ecad7dcb966134f5d18}{ppp\+Rcv\+Terminate\+Req\+Event} (\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$context, \hyperlink{structPppFsm}{Ppp\+Fsm} $\ast$fsm, const \hyperlink{structPppCallbacks}{Ppp\+Callbacks} $\ast$callbacks, const \hyperlink{ppp_8h_a224d9bad9d75f66f3d0284450ddf6fb4}{Ppp\+Terminate\+Packet} $\ast$terminate\+Req\+Packet)
+\begin{DoxyCompactList}\small\item\em Process Receive-\/\+Terminate-\/\+Req event. \end{DoxyCompactList}\item 
+void \hyperlink{ppp__fsm_8h_aee79a99cb18b0c11f3d8a728d59b5ca8}{ppp\+Rcv\+Terminate\+Ack\+Event} (\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$context, \hyperlink{structPppFsm}{Ppp\+Fsm} $\ast$fsm, const \hyperlink{structPppCallbacks}{Ppp\+Callbacks} $\ast$callbacks)
+\begin{DoxyCompactList}\small\item\em Process Receive-\/\+Terminate-\/\+Ack event. \end{DoxyCompactList}\item 
+void \hyperlink{ppp__fsm_8h_acc5bb9360d00a9033e5aff533cfb9f79}{ppp\+Rcv\+Unknown\+Code\+Event} (\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$context, \hyperlink{structPppFsm}{Ppp\+Fsm} $\ast$fsm, const \hyperlink{structPppCallbacks}{Ppp\+Callbacks} $\ast$callbacks, const \hyperlink{ppp_8h_aa975a68f06316e1db0de962a31e30c2e}{Ppp\+Packet} $\ast$packet)
+\begin{DoxyCompactList}\small\item\em Process Receive-\/\+Unknown-\/\+Code event. \end{DoxyCompactList}\item 
+void \hyperlink{ppp__fsm_8h_ab0b7104a9aeef47cf8a3611f8ff0c49d}{ppp\+Rcv\+Code\+Rej\+Event} (\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$context, \hyperlink{structPppFsm}{Ppp\+Fsm} $\ast$fsm, const \hyperlink{structPppCallbacks}{Ppp\+Callbacks} $\ast$callbacks, \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} acceptable)
+\begin{DoxyCompactList}\small\item\em Process Receive-\/\+Code-\/\+Reject or Receive-\/\+Protocol-\/\+Reject event. \end{DoxyCompactList}\item 
+void \hyperlink{ppp__fsm_8h_afad7b1363587425fe776a7bd9299ef5a}{ppp\+Rcv\+Echo\+Req\+Event} (\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$context, \hyperlink{structPppFsm}{Ppp\+Fsm} $\ast$fsm, const \hyperlink{structPppCallbacks}{Ppp\+Callbacks} $\ast$callbacks, const \hyperlink{ppp_8h_a32588dc42d7123562908b651a0e6bf13}{Ppp\+Echo\+Packet} $\ast$echo\+Req\+Packet)
+\begin{DoxyCompactList}\small\item\em Process Receive-\/\+Echo-\/\+Request event. \end{DoxyCompactList}\item 
+void \hyperlink{ppp__fsm_8h_abe4c233cc4daa10eefa05cb161bb2002}{ppp\+Change\+State} (\hyperlink{structPppFsm}{Ppp\+Fsm} $\ast$fsm, \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbc}{Ppp\+State} new\+State)
+\begin{DoxyCompactList}\small\item\em Update P\+PP F\+SM state. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+P\+PP finite state machine. 
+
+\hypertarget{pic32mz__ef__curiosity_8h_License}{}\subsection{License}\label{pic32mz__ef__curiosity_8h_License}
+S\+P\+D\+X-\/\+License-\/\+Identifier\+: G\+P\+L-\/2.\+0-\/or-\/later
+
+Copyright (C) 2010-\/2019 Oryx Embedded S\+A\+RL. All rights reserved.
+
+This file is part of Cyclone\+T\+CP Open.
+
+This program is free software; you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+
+You should have received a copy of the G\+NU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-\/1301, U\+SA.
+
+\begin{DoxyAuthor}{Author}
+Oryx Embedded S\+A\+RL (www.\+oryx-\/embedded.\+com) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+9.\+6 
+\end{DoxyVersion}
+
+
+\subsection{Typedef Documentation}
+\mbox{\Hypertarget{ppp__fsm_8h_a65f1f9ed4177c139c61a532328cc4bbc}\label{ppp__fsm_8h_a65f1f9ed4177c139c61a532328cc4bbc}} 
+\index{ppp\+\_\+fsm.\+h@{ppp\+\_\+fsm.\+h}!Ppp\+Init\+Restart\+Count@{Ppp\+Init\+Restart\+Count}}
+\index{Ppp\+Init\+Restart\+Count@{Ppp\+Init\+Restart\+Count}!ppp\+\_\+fsm.\+h@{ppp\+\_\+fsm.\+h}}
+\subsubsection{\texorpdfstring{Ppp\+Init\+Restart\+Count}{PppInitRestartCount}}
+{\footnotesize\ttfamily typedef void($\ast$ Ppp\+Init\+Restart\+Count) (\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$context, \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} \hyperlink{chap_8h_adfa040d04d16520129a735fff8fb1628}{value})}
+
+
+
+Initialize-\/\+Restart-\/\+Count callback function. 
+
+
+
+Definition at line 76 of file ppp\+\_\+fsm.\+h.
+
+\mbox{\Hypertarget{ppp__fsm_8h_ac334e06c25673bbec798aa1bdf46e91e}\label{ppp__fsm_8h_ac334e06c25673bbec798aa1bdf46e91e}} 
+\index{ppp\+\_\+fsm.\+h@{ppp\+\_\+fsm.\+h}!Ppp\+Send\+Code\+Rej@{Ppp\+Send\+Code\+Rej}}
+\index{Ppp\+Send\+Code\+Rej@{Ppp\+Send\+Code\+Rej}!ppp\+\_\+fsm.\+h@{ppp\+\_\+fsm.\+h}}
+\subsubsection{\texorpdfstring{Ppp\+Send\+Code\+Rej}{PppSendCodeRej}}
+{\footnotesize\ttfamily typedef \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t}($\ast$ Ppp\+Send\+Code\+Rej) (\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$context, const \hyperlink{ppp_8h_aa975a68f06316e1db0de962a31e30c2e}{Ppp\+Packet} $\ast$packet)}
+
+
+
+Send-\/\+Code-\/\+Reject callback function. 
+
+
+
+Definition at line 136 of file ppp\+\_\+fsm.\+h.
+
+\mbox{\Hypertarget{ppp__fsm_8h_af1044cdf098c842dd6fad91d76453d46}\label{ppp__fsm_8h_af1044cdf098c842dd6fad91d76453d46}} 
+\index{ppp\+\_\+fsm.\+h@{ppp\+\_\+fsm.\+h}!Ppp\+Send\+Configure\+Ack@{Ppp\+Send\+Configure\+Ack}}
+\index{Ppp\+Send\+Configure\+Ack@{Ppp\+Send\+Configure\+Ack}!ppp\+\_\+fsm.\+h@{ppp\+\_\+fsm.\+h}}
+\subsubsection{\texorpdfstring{Ppp\+Send\+Configure\+Ack}{PppSendConfigureAck}}
+{\footnotesize\ttfamily typedef \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t}($\ast$ Ppp\+Send\+Configure\+Ack) (\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$context, const \hyperlink{ppp_8h_a5f9516e80961edda7e2c0b9b964bdd66}{Ppp\+Configure\+Packet} $\ast$configure\+Req\+Packet)}
+
+
+
+Send-\/\+Configure-\/\+Ack callback function. 
+
+
+
+Definition at line 97 of file ppp\+\_\+fsm.\+h.
+
+\mbox{\Hypertarget{ppp__fsm_8h_a4c0ae4d9b8997fedf5ab69442042884a}\label{ppp__fsm_8h_a4c0ae4d9b8997fedf5ab69442042884a}} 
+\index{ppp\+\_\+fsm.\+h@{ppp\+\_\+fsm.\+h}!Ppp\+Send\+Configure\+Nak@{Ppp\+Send\+Configure\+Nak}}
+\index{Ppp\+Send\+Configure\+Nak@{Ppp\+Send\+Configure\+Nak}!ppp\+\_\+fsm.\+h@{ppp\+\_\+fsm.\+h}}
+\subsubsection{\texorpdfstring{Ppp\+Send\+Configure\+Nak}{PppSendConfigureNak}}
+{\footnotesize\ttfamily typedef \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t}($\ast$ Ppp\+Send\+Configure\+Nak) (\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$context, const \hyperlink{ppp_8h_a5f9516e80961edda7e2c0b9b964bdd66}{Ppp\+Configure\+Packet} $\ast$configure\+Req\+Packet)}
+
+
+
+Send-\/\+Configure-\/\+Nak callback function. 
+
+
+
+Definition at line 105 of file ppp\+\_\+fsm.\+h.
+
+\mbox{\Hypertarget{ppp__fsm_8h_a07e77c278b7ef0ae6032209a2a2e9355}\label{ppp__fsm_8h_a07e77c278b7ef0ae6032209a2a2e9355}} 
+\index{ppp\+\_\+fsm.\+h@{ppp\+\_\+fsm.\+h}!Ppp\+Send\+Configure\+Rej@{Ppp\+Send\+Configure\+Rej}}
+\index{Ppp\+Send\+Configure\+Rej@{Ppp\+Send\+Configure\+Rej}!ppp\+\_\+fsm.\+h@{ppp\+\_\+fsm.\+h}}
+\subsubsection{\texorpdfstring{Ppp\+Send\+Configure\+Rej}{PppSendConfigureRej}}
+{\footnotesize\ttfamily typedef \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t}($\ast$ Ppp\+Send\+Configure\+Rej) (\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$context, const \hyperlink{ppp_8h_a5f9516e80961edda7e2c0b9b964bdd66}{Ppp\+Configure\+Packet} $\ast$configure\+Req\+Packet)}
+
+
+
+Send-\/\+Configure-\/\+Reject callback function. 
+
+
+
+Definition at line 113 of file ppp\+\_\+fsm.\+h.
+
+\mbox{\Hypertarget{ppp__fsm_8h_a208d218e9a71164efa83c25973ed31ba}\label{ppp__fsm_8h_a208d218e9a71164efa83c25973ed31ba}} 
+\index{ppp\+\_\+fsm.\+h@{ppp\+\_\+fsm.\+h}!Ppp\+Send\+Configure\+Req@{Ppp\+Send\+Configure\+Req}}
+\index{Ppp\+Send\+Configure\+Req@{Ppp\+Send\+Configure\+Req}!ppp\+\_\+fsm.\+h@{ppp\+\_\+fsm.\+h}}
+\subsubsection{\texorpdfstring{Ppp\+Send\+Configure\+Req}{PppSendConfigureReq}}
+{\footnotesize\ttfamily typedef \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t}($\ast$ Ppp\+Send\+Configure\+Req) (\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$context)}
+
+
+
+Send-\/\+Configure-\/\+Request callback function. 
+
+
+
+Definition at line 90 of file ppp\+\_\+fsm.\+h.
+
+\mbox{\Hypertarget{ppp__fsm_8h_a90deee6d649b10694b4c962bd1ec2946}\label{ppp__fsm_8h_a90deee6d649b10694b4c962bd1ec2946}} 
+\index{ppp\+\_\+fsm.\+h@{ppp\+\_\+fsm.\+h}!Ppp\+Send\+Echo\+Rep@{Ppp\+Send\+Echo\+Rep}}
+\index{Ppp\+Send\+Echo\+Rep@{Ppp\+Send\+Echo\+Rep}!ppp\+\_\+fsm.\+h@{ppp\+\_\+fsm.\+h}}
+\subsubsection{\texorpdfstring{Ppp\+Send\+Echo\+Rep}{PppSendEchoRep}}
+{\footnotesize\ttfamily typedef \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t}($\ast$ Ppp\+Send\+Echo\+Rep) (\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$context, const \hyperlink{ppp_8h_a32588dc42d7123562908b651a0e6bf13}{Ppp\+Echo\+Packet} $\ast$echo\+Req\+Packet)}
+
+
+
+Send-\/\+Echo-\/\+Reply callback function. 
+
+
+
+Definition at line 144 of file ppp\+\_\+fsm.\+h.
+
+\mbox{\Hypertarget{ppp__fsm_8h_a63a08a28d6915a0b14a6262ed45da948}\label{ppp__fsm_8h_a63a08a28d6915a0b14a6262ed45da948}} 
+\index{ppp\+\_\+fsm.\+h@{ppp\+\_\+fsm.\+h}!Ppp\+Send\+Terminate\+Ack@{Ppp\+Send\+Terminate\+Ack}}
+\index{Ppp\+Send\+Terminate\+Ack@{Ppp\+Send\+Terminate\+Ack}!ppp\+\_\+fsm.\+h@{ppp\+\_\+fsm.\+h}}
+\subsubsection{\texorpdfstring{Ppp\+Send\+Terminate\+Ack}{PppSendTerminateAck}}
+{\footnotesize\ttfamily typedef \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t}($\ast$ Ppp\+Send\+Terminate\+Ack) (\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$context, const \hyperlink{ppp_8h_a224d9bad9d75f66f3d0284450ddf6fb4}{Ppp\+Terminate\+Packet} $\ast$terminate\+Req\+Packet)}
+
+
+
+Send-\/\+Terminate-\/\+Ack callback function. 
+
+
+
+Definition at line 128 of file ppp\+\_\+fsm.\+h.
+
+\mbox{\Hypertarget{ppp__fsm_8h_a38c40607763e08bb9d1d2fce149c0649}\label{ppp__fsm_8h_a38c40607763e08bb9d1d2fce149c0649}} 
+\index{ppp\+\_\+fsm.\+h@{ppp\+\_\+fsm.\+h}!Ppp\+Send\+Terminate\+Req@{Ppp\+Send\+Terminate\+Req}}
+\index{Ppp\+Send\+Terminate\+Req@{Ppp\+Send\+Terminate\+Req}!ppp\+\_\+fsm.\+h@{ppp\+\_\+fsm.\+h}}
+\subsubsection{\texorpdfstring{Ppp\+Send\+Terminate\+Req}{PppSendTerminateReq}}
+{\footnotesize\ttfamily typedef \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t}($\ast$ Ppp\+Send\+Terminate\+Req) (\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$context)}
+
+
+
+Send-\/\+Terminate-\/\+Request callback function. 
+
+
+
+Definition at line 121 of file ppp\+\_\+fsm.\+h.
+
+\mbox{\Hypertarget{ppp__fsm_8h_a85e4e4b76b9c6ee9a9ea183186e2f828}\label{ppp__fsm_8h_a85e4e4b76b9c6ee9a9ea183186e2f828}} 
+\index{ppp\+\_\+fsm.\+h@{ppp\+\_\+fsm.\+h}!Ppp\+This\+Layer\+Down@{Ppp\+This\+Layer\+Down}}
+\index{Ppp\+This\+Layer\+Down@{Ppp\+This\+Layer\+Down}!ppp\+\_\+fsm.\+h@{ppp\+\_\+fsm.\+h}}
+\subsubsection{\texorpdfstring{Ppp\+This\+Layer\+Down}{PppThisLayerDown}}
+{\footnotesize\ttfamily typedef void($\ast$ Ppp\+This\+Layer\+Down) (\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$context)}
+
+
+
+This-\/\+Layer-\/\+Down callback function. 
+
+
+
+Definition at line 55 of file ppp\+\_\+fsm.\+h.
+
+\mbox{\Hypertarget{ppp__fsm_8h_a454f389f6cb679de4cb58f445b01dec8}\label{ppp__fsm_8h_a454f389f6cb679de4cb58f445b01dec8}} 
+\index{ppp\+\_\+fsm.\+h@{ppp\+\_\+fsm.\+h}!Ppp\+This\+Layer\+Finished@{Ppp\+This\+Layer\+Finished}}
+\index{Ppp\+This\+Layer\+Finished@{Ppp\+This\+Layer\+Finished}!ppp\+\_\+fsm.\+h@{ppp\+\_\+fsm.\+h}}
+\subsubsection{\texorpdfstring{Ppp\+This\+Layer\+Finished}{PppThisLayerFinished}}
+{\footnotesize\ttfamily typedef void($\ast$ Ppp\+This\+Layer\+Finished) (\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$context)}
+
+
+
+This-\/\+Layer-\/\+Finished callback function. 
+
+
+
+Definition at line 69 of file ppp\+\_\+fsm.\+h.
+
+\mbox{\Hypertarget{ppp__fsm_8h_ac7f910cb18b43d86c18b79f95fd302a1}\label{ppp__fsm_8h_ac7f910cb18b43d86c18b79f95fd302a1}} 
+\index{ppp\+\_\+fsm.\+h@{ppp\+\_\+fsm.\+h}!Ppp\+This\+Layer\+Started@{Ppp\+This\+Layer\+Started}}
+\index{Ppp\+This\+Layer\+Started@{Ppp\+This\+Layer\+Started}!ppp\+\_\+fsm.\+h@{ppp\+\_\+fsm.\+h}}
+\subsubsection{\texorpdfstring{Ppp\+This\+Layer\+Started}{PppThisLayerStarted}}
+{\footnotesize\ttfamily typedef void($\ast$ Ppp\+This\+Layer\+Started) (\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$context)}
+
+
+
+This-\/\+Layer-\/\+Started callback function. 
+
+
+
+Definition at line 62 of file ppp\+\_\+fsm.\+h.
+
+\mbox{\Hypertarget{ppp__fsm_8h_af2c33e781717f7eeccba3b5ebac0524c}\label{ppp__fsm_8h_af2c33e781717f7eeccba3b5ebac0524c}} 
+\index{ppp\+\_\+fsm.\+h@{ppp\+\_\+fsm.\+h}!Ppp\+This\+Layer\+Up@{Ppp\+This\+Layer\+Up}}
+\index{Ppp\+This\+Layer\+Up@{Ppp\+This\+Layer\+Up}!ppp\+\_\+fsm.\+h@{ppp\+\_\+fsm.\+h}}
+\subsubsection{\texorpdfstring{Ppp\+This\+Layer\+Up}{PppThisLayerUp}}
+{\footnotesize\ttfamily typedef void($\ast$ Ppp\+This\+Layer\+Up) (\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$context)}
+
+
+
+This-\/\+Layer-\/\+Up callback function. 
+
+
+
+Definition at line 48 of file ppp\+\_\+fsm.\+h.
+
+\mbox{\Hypertarget{ppp__fsm_8h_a64f6f78275b72385feff6b734cb3523c}\label{ppp__fsm_8h_a64f6f78275b72385feff6b734cb3523c}} 
+\index{ppp\+\_\+fsm.\+h@{ppp\+\_\+fsm.\+h}!Ppp\+Zero\+Restart\+Count@{Ppp\+Zero\+Restart\+Count}}
+\index{Ppp\+Zero\+Restart\+Count@{Ppp\+Zero\+Restart\+Count}!ppp\+\_\+fsm.\+h@{ppp\+\_\+fsm.\+h}}
+\subsubsection{\texorpdfstring{Ppp\+Zero\+Restart\+Count}{PppZeroRestartCount}}
+{\footnotesize\ttfamily typedef void($\ast$ Ppp\+Zero\+Restart\+Count) (\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$context)}
+
+
+
+Zero-\/\+Restart-\/\+Count callback function. 
+
+
+
+Definition at line 83 of file ppp\+\_\+fsm.\+h.
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{ppp__fsm_8h_abe4c233cc4daa10eefa05cb161bb2002}\label{ppp__fsm_8h_abe4c233cc4daa10eefa05cb161bb2002}} 
+\index{ppp\+\_\+fsm.\+h@{ppp\+\_\+fsm.\+h}!ppp\+Change\+State@{ppp\+Change\+State}}
+\index{ppp\+Change\+State@{ppp\+Change\+State}!ppp\+\_\+fsm.\+h@{ppp\+\_\+fsm.\+h}}
+\subsubsection{\texorpdfstring{ppp\+Change\+State()}{pppChangeState()}}
+{\footnotesize\ttfamily void ppp\+Change\+State (\begin{DoxyParamCaption}\item[{\hyperlink{structPppFsm}{Ppp\+Fsm} $\ast$}]{fsm,  }\item[{\hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbc}{Ppp\+State}}]{new\+State }\end{DoxyParamCaption})}
+
+
+
+Update P\+PP F\+SM state. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in,out}  & {\em fsm} & Finite state machine \\
+\hline
+\mbox{\tt in}  & {\em new\+State} & New P\+PP state to switch to \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 924 of file ppp\+\_\+fsm.\+c.
+
+
+\begin{DoxyCode}
+925 \{
+926 \textcolor{preprocessor}{#if (PPP\_TRACE\_LEVEL >= TRACE\_LEVEL\_INFO)}
+927    \textcolor{comment}{//PPP FSM states}
+928    \textcolor{keyword}{static} \textcolor{keyword}{const} \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\_t} *stateLabel[] =
+929    \{
+930       \textcolor{stringliteral}{"INITIAL"},  \textcolor{comment}{//0}
+931       \textcolor{stringliteral}{"STARTING"}, \textcolor{comment}{//1}
+932       \textcolor{stringliteral}{"CLOSED"},   \textcolor{comment}{//2}
+933       \textcolor{stringliteral}{"STOPPED"},  \textcolor{comment}{//3}
+934       \textcolor{stringliteral}{"CLOSING"},  \textcolor{comment}{//4}
+935       \textcolor{stringliteral}{"STOPPING"}, \textcolor{comment}{//5}
+936       \textcolor{stringliteral}{"REQ\_SENT"}, \textcolor{comment}{//6}
+937       \textcolor{stringliteral}{"ACK\_RCVD"}, \textcolor{comment}{//7}
+938       \textcolor{stringliteral}{"ACK\_SENT"}, \textcolor{comment}{//8}
+939       \textcolor{stringliteral}{"OPENED"}    \textcolor{comment}{//9}
+940    \};
+941 
+942    \textcolor{comment}{//Sanity check}
+943    \textcolor{keywordflow}{if}(fsm->\hyperlink{structPppFsm_ac5031e0c5bb00a8604a2cd1f3616c948}{state} < \hyperlink{os__port_8h_aa1394a41d43c0f3fd30febe41c7bb340}{arraysize}(stateLabel) && newState < \hyperlink{os__port_8h_aa1394a41d43c0f3fd30febe41c7bb340}{arraysize}(stateLabel))
+944    \{
+945       \textcolor{comment}{//Debug message}
+946       \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"PPP FSM: %s (%u) -> %s (%u)\(\backslash\)r\(\backslash\)n"}, stateLabel[fsm->
+      \hyperlink{structPppFsm_ac5031e0c5bb00a8604a2cd1f3616c948}{state}],
+947          fsm->\hyperlink{structPppFsm_ac5031e0c5bb00a8604a2cd1f3616c948}{state}, stateLabel[newState], newState);
+948    \}
+949 \textcolor{preprocessor}{#endif}
+950 
+951    \textcolor{comment}{//Switch to the new state}
+952    fsm->\hyperlink{structPppFsm_ac5031e0c5bb00a8604a2cd1f3616c948}{state} = newState;
+953 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ppp__fsm_8h_a99f9adb8cee4039fd63439bd3401b7f9}\label{ppp__fsm_8h_a99f9adb8cee4039fd63439bd3401b7f9}} 
+\index{ppp\+\_\+fsm.\+h@{ppp\+\_\+fsm.\+h}!ppp\+Close\+Event@{ppp\+Close\+Event}}
+\index{ppp\+Close\+Event@{ppp\+Close\+Event}!ppp\+\_\+fsm.\+h@{ppp\+\_\+fsm.\+h}}
+\subsubsection{\texorpdfstring{ppp\+Close\+Event()}{pppCloseEvent()}}
+{\footnotesize\ttfamily void ppp\+Close\+Event (\begin{DoxyParamCaption}\item[{\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$}]{context,  }\item[{\hyperlink{structPppFsm}{Ppp\+Fsm} $\ast$}]{fsm,  }\item[{const \hyperlink{structPppCallbacks}{Ppp\+Callbacks} $\ast$}]{callbacks }\end{DoxyParamCaption})}
+
+
+
+Process Close event. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & P\+PP context \\
+\hline
+\mbox{\tt in,out}  & {\em fsm} & Finite state machine \\
+\hline
+\mbox{\tt in}  & {\em callbacks} & F\+SM actions \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 189 of file ppp\+\_\+fsm.\+c.
+
+
+\begin{DoxyCode}
+191 \{
+192    \textcolor{comment}{//Check current state}
+193    \textcolor{keywordflow}{switch}(fsm->\hyperlink{structPppFsm_ac5031e0c5bb00a8604a2cd1f3616c948}{state})
+194    \{
+195    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca209062413b1ed1b40756deb6f417fb32}{PPP\_STATE\_0\_INITIAL}:
+196       \textcolor{comment}{//Stay in current state}
+197       \textcolor{keywordflow}{break};
+198    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca14a858b8cdfcd2bf2a0245765632d015}{PPP\_STATE\_1\_STARTING}:
+199       \textcolor{comment}{//Switch to the Initial state}
+200       \hyperlink{ppp__fsm_8c_abe4c233cc4daa10eefa05cb161bb2002}{pppChangeState}(fsm, \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca209062413b1ed1b40756deb6f417fb32}{PPP\_STATE\_0\_INITIAL});
+201       \textcolor{comment}{//Indicate to the lower layers that the automaton is entering the}
+202       \textcolor{comment}{//Initial, Closed or Stopped states. The lower layer is no longer}
+203       \textcolor{comment}{//needed for the link}
+204       callbacks->\hyperlink{structPppCallbacks_a615c0e66746e025074253d4a485c0f49}{thisLayerFinished}(context);
+205       \textcolor{keywordflow}{break};
+206    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca11f67dbd9e9bf368d15fa66c6bbd8a63}{PPP\_STATE\_2\_CLOSED}:
+207       \textcolor{comment}{//Stay in current state}
+208       \textcolor{keywordflow}{break};
+209    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbcaeb63f314525f9f0492681ff27e17a60d}{PPP\_STATE\_3\_STOPPED}:
+210       \textcolor{comment}{//Switch to the Closed state}
+211       \hyperlink{ppp__fsm_8c_abe4c233cc4daa10eefa05cb161bb2002}{pppChangeState}(fsm, \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca11f67dbd9e9bf368d15fa66c6bbd8a63}{PPP\_STATE\_2\_CLOSED});
+212       \textcolor{keywordflow}{break};
+213    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca517046b14cdbe60860cf08c716b4b632}{PPP\_STATE\_4\_CLOSING}:
+214       \textcolor{comment}{//Stay in current state}
+215       \textcolor{keywordflow}{break};
+216    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbcab38847d6dcd11489bd4332567652be69}{PPP\_STATE\_5\_STOPPING}:
+217       \textcolor{comment}{//Switch to the Closing state}
+218       \hyperlink{ppp__fsm_8c_abe4c233cc4daa10eefa05cb161bb2002}{pppChangeState}(fsm, \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca517046b14cdbe60860cf08c716b4b632}{PPP\_STATE\_4\_CLOSING});
+219       \textcolor{keywordflow}{break};
+220    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca653b3f614994a412630e2b5ab8cb9672}{PPP\_STATE\_6\_REQ\_SENT}:
+221    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbcaa3b3e7af857cbb3cd423beb052b3527d}{PPP\_STATE\_7\_ACK\_RCVD}:
+222    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca718e97f8e3cf50a96b56990eab353669}{PPP\_STATE\_8\_ACK\_SENT}:
+223       \textcolor{comment}{//Initialize restart counter}
+224       callbacks->\hyperlink{structPppCallbacks_aa601353760cb64fb60bf207e1fd9c281}{initRestartCount}(context, \hyperlink{ppp_8h_aa1392f622628794cf2b760eab6378977}{PPP\_MAX\_TERMINATE});
+225       \textcolor{comment}{//Send Terminate-Request packet}
+226       callbacks->\hyperlink{structPppCallbacks_a0a8578c4f6f59b0db9ffb1f9cd661024}{sendTerminateReq}(context);
+227       \textcolor{comment}{//Switch to the Closing state}
+228       \hyperlink{ppp__fsm_8c_abe4c233cc4daa10eefa05cb161bb2002}{pppChangeState}(fsm, \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca517046b14cdbe60860cf08c716b4b632}{PPP\_STATE\_4\_CLOSING});
+229       \textcolor{keywordflow}{break};
+230    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca3a46b5a98c799ee1827ef8aa0ddc4d07}{PPP\_STATE\_9\_OPENED}:
+231       \textcolor{comment}{//Initialize restart counter}
+232       callbacks->\hyperlink{structPppCallbacks_aa601353760cb64fb60bf207e1fd9c281}{initRestartCount}(context, \hyperlink{ppp_8h_aa1392f622628794cf2b760eab6378977}{PPP\_MAX\_TERMINATE});
+233       \textcolor{comment}{//Send Terminate-Request packet}
+234       callbacks->\hyperlink{structPppCallbacks_a0a8578c4f6f59b0db9ffb1f9cd661024}{sendTerminateReq}(context);
+235       \textcolor{comment}{//Switch to the Closing state}
+236       \hyperlink{ppp__fsm_8c_abe4c233cc4daa10eefa05cb161bb2002}{pppChangeState}(fsm, \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca517046b14cdbe60860cf08c716b4b632}{PPP\_STATE\_4\_CLOSING});
+237       \textcolor{comment}{//Indicate to the upper layers that the automaton is leaving the Opened}
+238       \textcolor{comment}{//state. The link is no longer available for network traffic}
+239       callbacks->\hyperlink{structPppCallbacks_a77b3640a9c7e6daae12df2b6912d1777}{thisLayerDown}(context);
+240       \textcolor{keywordflow}{break};
+241    \textcolor{keywordflow}{default}:
+242       \textcolor{comment}{//This event cannot occur in a properly implemented automaton.}
+243       \textcolor{comment}{//No transition is taken, and the implementation should not}
+244       \textcolor{comment}{//reset or freeze}
+245       \textcolor{keywordflow}{break};
+246    \}
+247 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ppp__fsm_8h_abada68985183c2e9b998f21ebb7cbe65}\label{ppp__fsm_8h_abada68985183c2e9b998f21ebb7cbe65}} 
+\index{ppp\+\_\+fsm.\+h@{ppp\+\_\+fsm.\+h}!ppp\+Down\+Event@{ppp\+Down\+Event}}
+\index{ppp\+Down\+Event@{ppp\+Down\+Event}!ppp\+\_\+fsm.\+h@{ppp\+\_\+fsm.\+h}}
+\subsubsection{\texorpdfstring{ppp\+Down\+Event()}{pppDownEvent()}}
+{\footnotesize\ttfamily void ppp\+Down\+Event (\begin{DoxyParamCaption}\item[{\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$}]{context,  }\item[{\hyperlink{structPppFsm}{Ppp\+Fsm} $\ast$}]{fsm,  }\item[{const \hyperlink{structPppCallbacks}{Ppp\+Callbacks} $\ast$}]{callbacks }\end{DoxyParamCaption})}
+
+
+
+Process Down event. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & P\+PP context \\
+\hline
+\mbox{\tt in,out}  & {\em fsm} & Finite state machine \\
+\hline
+\mbox{\tt in}  & {\em callbacks} & F\+SM actions \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 84 of file ppp\+\_\+fsm.\+c.
+
+
+\begin{DoxyCode}
+86 \{
+87    \textcolor{comment}{//Check current state}
+88    \textcolor{keywordflow}{switch}(fsm->\hyperlink{structPppFsm_ac5031e0c5bb00a8604a2cd1f3616c948}{state})
+89    \{
+90    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca11f67dbd9e9bf368d15fa66c6bbd8a63}{PPP\_STATE\_2\_CLOSED}:
+91       \textcolor{comment}{//Switch to the Initial state}
+92       \hyperlink{ppp__fsm_8c_abe4c233cc4daa10eefa05cb161bb2002}{pppChangeState}(fsm, \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca209062413b1ed1b40756deb6f417fb32}{PPP\_STATE\_0\_INITIAL});
+93       \textcolor{keywordflow}{break};
+94    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbcaeb63f314525f9f0492681ff27e17a60d}{PPP\_STATE\_3\_STOPPED}:
+95       \textcolor{comment}{//Switch to the Starting state}
+96       \hyperlink{ppp__fsm_8c_abe4c233cc4daa10eefa05cb161bb2002}{pppChangeState}(fsm, \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca14a858b8cdfcd2bf2a0245765632d015}{PPP\_STATE\_1\_STARTING});
+97       \textcolor{comment}{//Indicate to the lower layers that the automaton is entering the}
+98       \textcolor{comment}{//Starting state. The lower layer is needed for the link}
+99       callbacks->\hyperlink{structPppCallbacks_ade673782b1b8570a6edd46cbb5338ae2}{thisLayerStarted}(context);
+100       \textcolor{keywordflow}{break};
+101    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca517046b14cdbe60860cf08c716b4b632}{PPP\_STATE\_4\_CLOSING}:
+102       \textcolor{comment}{//Switch to the Initial state}
+103       \hyperlink{ppp__fsm_8c_abe4c233cc4daa10eefa05cb161bb2002}{pppChangeState}(fsm, \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca209062413b1ed1b40756deb6f417fb32}{PPP\_STATE\_0\_INITIAL});
+104       \textcolor{keywordflow}{break};
+105    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbcab38847d6dcd11489bd4332567652be69}{PPP\_STATE\_5\_STOPPING}:
+106    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca653b3f614994a412630e2b5ab8cb9672}{PPP\_STATE\_6\_REQ\_SENT}:
+107    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbcaa3b3e7af857cbb3cd423beb052b3527d}{PPP\_STATE\_7\_ACK\_RCVD}:
+108    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca718e97f8e3cf50a96b56990eab353669}{PPP\_STATE\_8\_ACK\_SENT}:
+109       \textcolor{comment}{//Switch to the Starting state}
+110       \hyperlink{ppp__fsm_8c_abe4c233cc4daa10eefa05cb161bb2002}{pppChangeState}(fsm, \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca14a858b8cdfcd2bf2a0245765632d015}{PPP\_STATE\_1\_STARTING});
+111       \textcolor{keywordflow}{break};
+112    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca3a46b5a98c799ee1827ef8aa0ddc4d07}{PPP\_STATE\_9\_OPENED}:
+113       \textcolor{comment}{//Switch to the Starting state}
+114       \hyperlink{ppp__fsm_8c_abe4c233cc4daa10eefa05cb161bb2002}{pppChangeState}(fsm, \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca14a858b8cdfcd2bf2a0245765632d015}{PPP\_STATE\_1\_STARTING});
+115       \textcolor{comment}{//Indicate to the upper layers that the automaton is leaving the Opened}
+116       \textcolor{comment}{//state. The link is no longer available for network traffic}
+117       callbacks->\hyperlink{structPppCallbacks_a77b3640a9c7e6daae12df2b6912d1777}{thisLayerDown}(context);
+118       \textcolor{keywordflow}{break};
+119    \textcolor{keywordflow}{default}:
+120       \textcolor{comment}{//This event cannot occur in a properly implemented automaton.}
+121       \textcolor{comment}{//No transition is taken, and the implementation should not}
+122       \textcolor{comment}{//reset or freeze}
+123       \textcolor{keywordflow}{break};
+124    \}
+125 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ppp__fsm_8h_a56a599e9081bd1ef91c41ecb597b9ba3}\label{ppp__fsm_8h_a56a599e9081bd1ef91c41ecb597b9ba3}} 
+\index{ppp\+\_\+fsm.\+h@{ppp\+\_\+fsm.\+h}!ppp\+Open\+Event@{ppp\+Open\+Event}}
+\index{ppp\+Open\+Event@{ppp\+Open\+Event}!ppp\+\_\+fsm.\+h@{ppp\+\_\+fsm.\+h}}
+\subsubsection{\texorpdfstring{ppp\+Open\+Event()}{pppOpenEvent()}}
+{\footnotesize\ttfamily void ppp\+Open\+Event (\begin{DoxyParamCaption}\item[{\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$}]{context,  }\item[{\hyperlink{structPppFsm}{Ppp\+Fsm} $\ast$}]{fsm,  }\item[{const \hyperlink{structPppCallbacks}{Ppp\+Callbacks} $\ast$}]{callbacks }\end{DoxyParamCaption})}
+
+
+
+Process Open event. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & P\+PP context \\
+\hline
+\mbox{\tt in,out}  & {\em fsm} & Finite state machine \\
+\hline
+\mbox{\tt in}  & {\em callbacks} & F\+SM actions \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 135 of file ppp\+\_\+fsm.\+c.
+
+
+\begin{DoxyCode}
+137 \{
+138    \textcolor{comment}{//Check current state}
+139    \textcolor{keywordflow}{switch}(fsm->\hyperlink{structPppFsm_ac5031e0c5bb00a8604a2cd1f3616c948}{state})
+140    \{
+141    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca209062413b1ed1b40756deb6f417fb32}{PPP\_STATE\_0\_INITIAL}:
+142       \textcolor{comment}{//Switch to the Starting state}
+143       \hyperlink{ppp__fsm_8c_abe4c233cc4daa10eefa05cb161bb2002}{pppChangeState}(fsm, \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca14a858b8cdfcd2bf2a0245765632d015}{PPP\_STATE\_1\_STARTING});
+144       \textcolor{comment}{//Indicate to the lower layers that the automaton is entering the}
+145       \textcolor{comment}{//Starting state. The lower layer is needed for the link}
+146       callbacks->\hyperlink{structPppCallbacks_ade673782b1b8570a6edd46cbb5338ae2}{thisLayerStarted}(context);
+147       \textcolor{keywordflow}{break};
+148    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca14a858b8cdfcd2bf2a0245765632d015}{PPP\_STATE\_1\_STARTING}:
+149       \textcolor{comment}{//Stay in current state}
+150       \textcolor{keywordflow}{break};
+151    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca11f67dbd9e9bf368d15fa66c6bbd8a63}{PPP\_STATE\_2\_CLOSED}:
+152       \textcolor{comment}{//Initialize restart counter}
+153       callbacks->\hyperlink{structPppCallbacks_aa601353760cb64fb60bf207e1fd9c281}{initRestartCount}(context, \hyperlink{ppp_8h_ade98270902a7a4bbec0f9953da456328}{PPP\_MAX\_CONFIGURE});
+154       \textcolor{comment}{//Send Configure-Request packet}
+155       callbacks->\hyperlink{structPppCallbacks_a3455ce2a17fe9180f016be4bf7a07a56}{sendConfigureReq}(context);
+156       \textcolor{comment}{//Switch to the Req-Sent state}
+157       \hyperlink{ppp__fsm_8c_abe4c233cc4daa10eefa05cb161bb2002}{pppChangeState}(fsm, \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca653b3f614994a412630e2b5ab8cb9672}{PPP\_STATE\_6\_REQ\_SENT});
+158       \textcolor{keywordflow}{break};
+159    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbcaeb63f314525f9f0492681ff27e17a60d}{PPP\_STATE\_3\_STOPPED}:
+160       \textcolor{comment}{//Stay in current state}
+161       \textcolor{keywordflow}{break};
+162    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca517046b14cdbe60860cf08c716b4b632}{PPP\_STATE\_4\_CLOSING}:
+163       \textcolor{comment}{//Switch to the Stopping state}
+164       \hyperlink{ppp__fsm_8c_abe4c233cc4daa10eefa05cb161bb2002}{pppChangeState}(fsm, \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbcab38847d6dcd11489bd4332567652be69}{PPP\_STATE\_5\_STOPPING});
+165       \textcolor{keywordflow}{break};
+166    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbcab38847d6dcd11489bd4332567652be69}{PPP\_STATE\_5\_STOPPING}:
+167    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca653b3f614994a412630e2b5ab8cb9672}{PPP\_STATE\_6\_REQ\_SENT}:
+168    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbcaa3b3e7af857cbb3cd423beb052b3527d}{PPP\_STATE\_7\_ACK\_RCVD}:
+169    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca718e97f8e3cf50a96b56990eab353669}{PPP\_STATE\_8\_ACK\_SENT}:
+170    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca3a46b5a98c799ee1827ef8aa0ddc4d07}{PPP\_STATE\_9\_OPENED}:
+171       \textcolor{comment}{//Stay in current state}
+172       \textcolor{keywordflow}{break};
+173    \textcolor{keywordflow}{default}:
+174       \textcolor{comment}{//This event cannot occur in a properly implemented automaton.}
+175       \textcolor{comment}{//No transition is taken, and the implementation should not}
+176       \textcolor{comment}{//reset or freeze}
+177       \textcolor{keywordflow}{break};
+178    \}
+179 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ppp__fsm_8h_ab0b7104a9aeef47cf8a3611f8ff0c49d}\label{ppp__fsm_8h_ab0b7104a9aeef47cf8a3611f8ff0c49d}} 
+\index{ppp\+\_\+fsm.\+h@{ppp\+\_\+fsm.\+h}!ppp\+Rcv\+Code\+Rej\+Event@{ppp\+Rcv\+Code\+Rej\+Event}}
+\index{ppp\+Rcv\+Code\+Rej\+Event@{ppp\+Rcv\+Code\+Rej\+Event}!ppp\+\_\+fsm.\+h@{ppp\+\_\+fsm.\+h}}
+\subsubsection{\texorpdfstring{ppp\+Rcv\+Code\+Rej\+Event()}{pppRcvCodeRejEvent()}}
+{\footnotesize\ttfamily void ppp\+Rcv\+Code\+Rej\+Event (\begin{DoxyParamCaption}\item[{\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$}]{context,  }\item[{\hyperlink{structPppFsm}{Ppp\+Fsm} $\ast$}]{fsm,  }\item[{const \hyperlink{structPppCallbacks}{Ppp\+Callbacks} $\ast$}]{callbacks,  }\item[{\hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t}}]{acceptable }\end{DoxyParamCaption})}
+
+
+
+Process Receive-\/\+Code-\/\+Reject or Receive-\/\+Protocol-\/\+Reject event. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & P\+PP context \\
+\hline
+\mbox{\tt in,out}  & {\em fsm} & Finite state machine \\
+\hline
+\mbox{\tt in}  & {\em callbacks} & F\+SM actions \\
+\hline
+\mbox{\tt in}  & {\em acceptable} & This parameter tells whether the rejected value is acceptable or catastrophic \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 792 of file ppp\+\_\+fsm.\+c.
+
+
+\begin{DoxyCode}
+794 \{
+795    \textcolor{comment}{//Check whether the rejected value is acceptable or catastrophic}
+796    \textcolor{keywordflow}{if}(acceptable)
+797    \{
+798       \textcolor{comment}{//The RXJ+ event arises when the rejected value is acceptable, such}
+799       \textcolor{comment}{//as a Code-Reject of an extended code, or a Protocol-Reject of a}
+800       \textcolor{comment}{//NCP. These are within the scope of normal operation}
+801       \textcolor{keywordflow}{switch}(fsm->\hyperlink{structPppFsm_ac5031e0c5bb00a8604a2cd1f3616c948}{state})
+802       \{
+803       \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca11f67dbd9e9bf368d15fa66c6bbd8a63}{PPP\_STATE\_2\_CLOSED}:
+804       \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbcaeb63f314525f9f0492681ff27e17a60d}{PPP\_STATE\_3\_STOPPED}:
+805       \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca517046b14cdbe60860cf08c716b4b632}{PPP\_STATE\_4\_CLOSING}:
+806       \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbcab38847d6dcd11489bd4332567652be69}{PPP\_STATE\_5\_STOPPING}:
+807       \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca653b3f614994a412630e2b5ab8cb9672}{PPP\_STATE\_6\_REQ\_SENT}:
+808          \textcolor{comment}{//Stay in current state}
+809          \textcolor{keywordflow}{break};
+810       \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbcaa3b3e7af857cbb3cd423beb052b3527d}{PPP\_STATE\_7\_ACK\_RCVD}:
+811          \textcolor{comment}{//Switch to the Req-Sent state}
+812          \hyperlink{ppp__fsm_8c_abe4c233cc4daa10eefa05cb161bb2002}{pppChangeState}(fsm, \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca653b3f614994a412630e2b5ab8cb9672}{PPP\_STATE\_6\_REQ\_SENT});
+813          \textcolor{keywordflow}{break};
+814       \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca718e97f8e3cf50a96b56990eab353669}{PPP\_STATE\_8\_ACK\_SENT}:
+815       \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca3a46b5a98c799ee1827ef8aa0ddc4d07}{PPP\_STATE\_9\_OPENED}:
+816          \textcolor{comment}{//Stay in current state}
+817          \textcolor{keywordflow}{break};
+818       \textcolor{keywordflow}{default}:
+819          \textcolor{comment}{//This event cannot occur in a properly implemented automaton.}
+820          \textcolor{comment}{//No transition is taken, and the implementation should not}
+821          \textcolor{comment}{//reset or freeze}
+822          \textcolor{keywordflow}{break};
+823       \}
+824    \}
+825    \textcolor{keywordflow}{else}
+826    \{
+827       \textcolor{comment}{//The RXJ- event arises when the rejected value is catastrophic,}
+828       \textcolor{comment}{//such as a Code-Reject of Configure-Request, or a Protocol-Reject}
+829       \textcolor{comment}{//of LCP! This event communicates an unrecoverable error that}
+830       \textcolor{comment}{//terminates the connection}
+831       \textcolor{keywordflow}{switch}(fsm->\hyperlink{structPppFsm_ac5031e0c5bb00a8604a2cd1f3616c948}{state})
+832       \{
+833       \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca11f67dbd9e9bf368d15fa66c6bbd8a63}{PPP\_STATE\_2\_CLOSED}:
+834       \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbcaeb63f314525f9f0492681ff27e17a60d}{PPP\_STATE\_3\_STOPPED}:
+835          \textcolor{comment}{//Indicate to the lower layers that the automaton is entering the}
+836          \textcolor{comment}{//Initial, Closed or Stopped states. The lower layer is no longer}
+837          \textcolor{comment}{//needed for the link}
+838          callbacks->\hyperlink{structPppCallbacks_a615c0e66746e025074253d4a485c0f49}{thisLayerFinished}(context);
+839          \textcolor{comment}{//Stay in current state}
+840          \textcolor{keywordflow}{break};
+841       \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca517046b14cdbe60860cf08c716b4b632}{PPP\_STATE\_4\_CLOSING}:
+842          \textcolor{comment}{//Switch to the Closed state}
+843          \hyperlink{ppp__fsm_8c_abe4c233cc4daa10eefa05cb161bb2002}{pppChangeState}(fsm, \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca11f67dbd9e9bf368d15fa66c6bbd8a63}{PPP\_STATE\_2\_CLOSED});
+844          \textcolor{comment}{//Indicate to the lower layers that the automaton is entering the}
+845          \textcolor{comment}{//Initial, Closed or Stopped states. The lower layer is no longer}
+846          \textcolor{comment}{//needed for the link}
+847          callbacks->\hyperlink{structPppCallbacks_a615c0e66746e025074253d4a485c0f49}{thisLayerFinished}(context);
+848          \textcolor{keywordflow}{break};
+849       \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbcab38847d6dcd11489bd4332567652be69}{PPP\_STATE\_5\_STOPPING}:
+850       \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca653b3f614994a412630e2b5ab8cb9672}{PPP\_STATE\_6\_REQ\_SENT}:
+851       \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbcaa3b3e7af857cbb3cd423beb052b3527d}{PPP\_STATE\_7\_ACK\_RCVD}:
+852       \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca718e97f8e3cf50a96b56990eab353669}{PPP\_STATE\_8\_ACK\_SENT}:
+853          \textcolor{comment}{//Switch to the Stopped state}
+854          \hyperlink{ppp__fsm_8c_abe4c233cc4daa10eefa05cb161bb2002}{pppChangeState}(fsm, \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbcaeb63f314525f9f0492681ff27e17a60d}{PPP\_STATE\_3\_STOPPED});
+855          \textcolor{comment}{//Indicate to the lower layers that the automaton is entering the}
+856          \textcolor{comment}{//Initial, Closed or Stopped states. The lower layer is no longer}
+857          \textcolor{comment}{//needed for the link}
+858          callbacks->\hyperlink{structPppCallbacks_a615c0e66746e025074253d4a485c0f49}{thisLayerFinished}(context);
+859          \textcolor{keywordflow}{break};
+860       \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca3a46b5a98c799ee1827ef8aa0ddc4d07}{PPP\_STATE\_9\_OPENED}:
+861          \textcolor{comment}{//Initialize restart counter}
+862          callbacks->\hyperlink{structPppCallbacks_aa601353760cb64fb60bf207e1fd9c281}{initRestartCount}(context, \hyperlink{ppp_8h_aa1392f622628794cf2b760eab6378977}{PPP\_MAX\_TERMINATE});
+863          \textcolor{comment}{//Send Terminate-Req packet}
+864          callbacks->\hyperlink{structPppCallbacks_a0a8578c4f6f59b0db9ffb1f9cd661024}{sendTerminateReq}(context);
+865          \textcolor{comment}{//Switch to the Stopping state}
+866          \hyperlink{ppp__fsm_8c_abe4c233cc4daa10eefa05cb161bb2002}{pppChangeState}(fsm, \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbcab38847d6dcd11489bd4332567652be69}{PPP\_STATE\_5\_STOPPING});
+867          \textcolor{comment}{//Indicate to the upper layers that the automaton is leaving the Opened}
+868          \textcolor{comment}{//state. The link is no longer available for network traffic}
+869          callbacks->\hyperlink{structPppCallbacks_a77b3640a9c7e6daae12df2b6912d1777}{thisLayerDown}(context);
+870          \textcolor{keywordflow}{break};
+871       \textcolor{keywordflow}{default}:
+872          \textcolor{comment}{//This event cannot occur in a properly implemented automaton.}
+873          \textcolor{comment}{//No transition is taken, and the implementation should not}
+874          \textcolor{comment}{//reset or freeze}
+875          \textcolor{keywordflow}{break};
+876       \}
+877    \}
+878 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ppp__fsm_8h_a45bb9f242e43bee7a741258f86c9c276}\label{ppp__fsm_8h_a45bb9f242e43bee7a741258f86c9c276}} 
+\index{ppp\+\_\+fsm.\+h@{ppp\+\_\+fsm.\+h}!ppp\+Rcv\+Configure\+Ack\+Event@{ppp\+Rcv\+Configure\+Ack\+Event}}
+\index{ppp\+Rcv\+Configure\+Ack\+Event@{ppp\+Rcv\+Configure\+Ack\+Event}!ppp\+\_\+fsm.\+h@{ppp\+\_\+fsm.\+h}}
+\subsubsection{\texorpdfstring{ppp\+Rcv\+Configure\+Ack\+Event()}{pppRcvConfigureAckEvent()}}
+{\footnotesize\ttfamily void ppp\+Rcv\+Configure\+Ack\+Event (\begin{DoxyParamCaption}\item[{\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$}]{context,  }\item[{\hyperlink{structPppFsm}{Ppp\+Fsm} $\ast$}]{fsm,  }\item[{const \hyperlink{structPppCallbacks}{Ppp\+Callbacks} $\ast$}]{callbacks }\end{DoxyParamCaption})}
+
+
+
+Process Receive-\/\+Configure-\/\+Ack event. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & P\+PP context \\
+\hline
+\mbox{\tt in,out}  & {\em fsm} & Finite state machine \\
+\hline
+\mbox{\tt in}  & {\em callbacks} & F\+SM actions \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 524 of file ppp\+\_\+fsm.\+c.
+
+
+\begin{DoxyCode}
+526 \{
+527    \textcolor{comment}{//Check current state}
+528    \textcolor{keywordflow}{switch}(fsm->\hyperlink{structPppFsm_ac5031e0c5bb00a8604a2cd1f3616c948}{state})
+529    \{
+530    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca11f67dbd9e9bf368d15fa66c6bbd8a63}{PPP\_STATE\_2\_CLOSED}:
+531    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbcaeb63f314525f9f0492681ff27e17a60d}{PPP\_STATE\_3\_STOPPED}:
+532       \textcolor{comment}{//Send Terminate-Ack packet}
+533       callbacks->\hyperlink{structPppCallbacks_a939301e4eed7462430bba254a6bf820b}{sendTerminateAck}(context, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+534       \textcolor{comment}{//Stay in current state}
+535       \textcolor{keywordflow}{break};
+536    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca517046b14cdbe60860cf08c716b4b632}{PPP\_STATE\_4\_CLOSING}:
+537    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbcab38847d6dcd11489bd4332567652be69}{PPP\_STATE\_5\_STOPPING}:
+538       \textcolor{comment}{//Stay in current state}
+539       \textcolor{keywordflow}{break};
+540    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca653b3f614994a412630e2b5ab8cb9672}{PPP\_STATE\_6\_REQ\_SENT}:
+541       \textcolor{comment}{//Initialize restart counter}
+542       callbacks->\hyperlink{structPppCallbacks_aa601353760cb64fb60bf207e1fd9c281}{initRestartCount}(context, \hyperlink{ppp_8h_ade98270902a7a4bbec0f9953da456328}{PPP\_MAX\_CONFIGURE});
+543       \textcolor{comment}{//Switch to the Ack-Rcvd state}
+544       fsm->\hyperlink{structPppFsm_ac5031e0c5bb00a8604a2cd1f3616c948}{state} = \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbcaa3b3e7af857cbb3cd423beb052b3527d}{PPP\_STATE\_7\_ACK\_RCVD};
+545       \textcolor{keywordflow}{break};
+546    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbcaa3b3e7af857cbb3cd423beb052b3527d}{PPP\_STATE\_7\_ACK\_RCVD}:
+547       \textcolor{comment}{//Send Configure-Request packet}
+548       callbacks->\hyperlink{structPppCallbacks_a3455ce2a17fe9180f016be4bf7a07a56}{sendConfigureReq}(context);
+549       \textcolor{comment}{//Switch to the Req-Sent state}
+550       \hyperlink{ppp__fsm_8c_abe4c233cc4daa10eefa05cb161bb2002}{pppChangeState}(fsm, \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca653b3f614994a412630e2b5ab8cb9672}{PPP\_STATE\_6\_REQ\_SENT});
+551       \textcolor{keywordflow}{break};
+552    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca718e97f8e3cf50a96b56990eab353669}{PPP\_STATE\_8\_ACK\_SENT}:
+553       \textcolor{comment}{//Initialize restart counter}
+554       callbacks->\hyperlink{structPppCallbacks_aa601353760cb64fb60bf207e1fd9c281}{initRestartCount}(context, \hyperlink{ppp_8h_ade98270902a7a4bbec0f9953da456328}{PPP\_MAX\_CONFIGURE});
+555       \textcolor{comment}{//Switch to the Opened state}
+556       \hyperlink{ppp__fsm_8c_abe4c233cc4daa10eefa05cb161bb2002}{pppChangeState}(fsm, \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca3a46b5a98c799ee1827ef8aa0ddc4d07}{PPP\_STATE\_9\_OPENED});
+557       \textcolor{comment}{//Indicate to the upper layers that the automaton is entering the}
+558       \textcolor{comment}{//Opened state. The link is available for network traffic}
+559       callbacks->\hyperlink{structPppCallbacks_ab370c1403e9b8a362747e6ea4e702b2f}{thisLayerUp}(context);
+560       \textcolor{keywordflow}{break};
+561    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca3a46b5a98c799ee1827ef8aa0ddc4d07}{PPP\_STATE\_9\_OPENED}:
+562       \textcolor{comment}{//Send Configure-Request packet}
+563       callbacks->\hyperlink{structPppCallbacks_a3455ce2a17fe9180f016be4bf7a07a56}{sendConfigureReq}(context);
+564       \textcolor{comment}{//Switch to the Req-Sent state}
+565       \hyperlink{ppp__fsm_8c_abe4c233cc4daa10eefa05cb161bb2002}{pppChangeState}(fsm, \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca653b3f614994a412630e2b5ab8cb9672}{PPP\_STATE\_6\_REQ\_SENT});
+566       \textcolor{comment}{//Indicate to the upper layers that the automaton is leaving the Opened}
+567       \textcolor{comment}{//state. The link is no longer available for network traffic}
+568       callbacks->\hyperlink{structPppCallbacks_a77b3640a9c7e6daae12df2b6912d1777}{thisLayerDown}(context);
+569       \textcolor{keywordflow}{break};
+570    \textcolor{keywordflow}{default}:
+571       \textcolor{comment}{//This event cannot occur in a properly implemented automaton.}
+572       \textcolor{comment}{//No transition is taken, and the implementation should not}
+573       \textcolor{comment}{//reset or freeze}
+574       \textcolor{keywordflow}{break};
+575    \}
+576 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ppp__fsm_8h_afb660738da04688fc48d49afbca2b594}\label{ppp__fsm_8h_afb660738da04688fc48d49afbca2b594}} 
+\index{ppp\+\_\+fsm.\+h@{ppp\+\_\+fsm.\+h}!ppp\+Rcv\+Configure\+Nak\+Event@{ppp\+Rcv\+Configure\+Nak\+Event}}
+\index{ppp\+Rcv\+Configure\+Nak\+Event@{ppp\+Rcv\+Configure\+Nak\+Event}!ppp\+\_\+fsm.\+h@{ppp\+\_\+fsm.\+h}}
+\subsubsection{\texorpdfstring{ppp\+Rcv\+Configure\+Nak\+Event()}{pppRcvConfigureNakEvent()}}
+{\footnotesize\ttfamily void ppp\+Rcv\+Configure\+Nak\+Event (\begin{DoxyParamCaption}\item[{\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$}]{context,  }\item[{\hyperlink{structPppFsm}{Ppp\+Fsm} $\ast$}]{fsm,  }\item[{const \hyperlink{structPppCallbacks}{Ppp\+Callbacks} $\ast$}]{callbacks }\end{DoxyParamCaption})}
+
+
+
+Process Receive-\/\+Configure-\/\+Nak event. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & P\+PP context \\
+\hline
+\mbox{\tt in,out}  & {\em fsm} & Finite state machine \\
+\hline
+\mbox{\tt in}  & {\em callbacks} & F\+SM actions \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 586 of file ppp\+\_\+fsm.\+c.
+
+
+\begin{DoxyCode}
+588 \{
+589    \textcolor{comment}{//Check current state}
+590    \textcolor{keywordflow}{switch}(fsm->\hyperlink{structPppFsm_ac5031e0c5bb00a8604a2cd1f3616c948}{state})
+591    \{
+592    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca11f67dbd9e9bf368d15fa66c6bbd8a63}{PPP\_STATE\_2\_CLOSED}:
+593    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbcaeb63f314525f9f0492681ff27e17a60d}{PPP\_STATE\_3\_STOPPED}:
+594       \textcolor{comment}{//Send Terminate-Ack packet}
+595       callbacks->\hyperlink{structPppCallbacks_a939301e4eed7462430bba254a6bf820b}{sendTerminateAck}(context, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+596       \textcolor{comment}{//Stay in current state}
+597       \textcolor{keywordflow}{break};
+598    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca517046b14cdbe60860cf08c716b4b632}{PPP\_STATE\_4\_CLOSING}:
+599    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbcab38847d6dcd11489bd4332567652be69}{PPP\_STATE\_5\_STOPPING}:
+600       \textcolor{comment}{//Stay in current state}
+601       \textcolor{keywordflow}{break};
+602    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca653b3f614994a412630e2b5ab8cb9672}{PPP\_STATE\_6\_REQ\_SENT}:
+603       \textcolor{comment}{//Initialize restart counter}
+604       callbacks->\hyperlink{structPppCallbacks_aa601353760cb64fb60bf207e1fd9c281}{initRestartCount}(context, \hyperlink{ppp_8h_ade98270902a7a4bbec0f9953da456328}{PPP\_MAX\_CONFIGURE});
+605       \textcolor{comment}{//Send Configure-Request packet}
+606       callbacks->\hyperlink{structPppCallbacks_a3455ce2a17fe9180f016be4bf7a07a56}{sendConfigureReq}(context);
+607       \textcolor{comment}{//Stay in current state}
+608       \textcolor{keywordflow}{break};
+609    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbcaa3b3e7af857cbb3cd423beb052b3527d}{PPP\_STATE\_7\_ACK\_RCVD}:
+610       \textcolor{comment}{//Send Configure-Request packet}
+611       callbacks->\hyperlink{structPppCallbacks_a3455ce2a17fe9180f016be4bf7a07a56}{sendConfigureReq}(context);
+612       \textcolor{comment}{//Switch to the Req-Sent state}
+613       \hyperlink{ppp__fsm_8c_abe4c233cc4daa10eefa05cb161bb2002}{pppChangeState}(fsm, \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca653b3f614994a412630e2b5ab8cb9672}{PPP\_STATE\_6\_REQ\_SENT});
+614       \textcolor{keywordflow}{break};
+615    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca718e97f8e3cf50a96b56990eab353669}{PPP\_STATE\_8\_ACK\_SENT}:
+616       \textcolor{comment}{//Initialize restart counter}
+617       callbacks->\hyperlink{structPppCallbacks_aa601353760cb64fb60bf207e1fd9c281}{initRestartCount}(context, \hyperlink{ppp_8h_ade98270902a7a4bbec0f9953da456328}{PPP\_MAX\_CONFIGURE});
+618       \textcolor{comment}{//Send Configure-Request packet}
+619       callbacks->\hyperlink{structPppCallbacks_a3455ce2a17fe9180f016be4bf7a07a56}{sendConfigureReq}(context);
+620       \textcolor{comment}{//Stay in current state}
+621       \textcolor{keywordflow}{break};
+622    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca3a46b5a98c799ee1827ef8aa0ddc4d07}{PPP\_STATE\_9\_OPENED}:
+623       \textcolor{comment}{//Send Configure-Request packet}
+624       callbacks->\hyperlink{structPppCallbacks_a3455ce2a17fe9180f016be4bf7a07a56}{sendConfigureReq}(context);
+625       \textcolor{comment}{//Switch to the Req-Sent state}
+626       \hyperlink{ppp__fsm_8c_abe4c233cc4daa10eefa05cb161bb2002}{pppChangeState}(fsm, \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca653b3f614994a412630e2b5ab8cb9672}{PPP\_STATE\_6\_REQ\_SENT});
+627       \textcolor{comment}{//Indicate to the upper layers that the automaton is leaving the Opened}
+628       \textcolor{comment}{//state. The link is no longer available for network traffic}
+629       callbacks->\hyperlink{structPppCallbacks_a77b3640a9c7e6daae12df2b6912d1777}{thisLayerDown}(context);
+630       \textcolor{keywordflow}{break};
+631    \textcolor{keywordflow}{default}:
+632       \textcolor{comment}{//This event cannot occur in a properly implemented automaton.}
+633       \textcolor{comment}{//No transition is taken, and the implementation should not}
+634       \textcolor{comment}{//reset or freeze}
+635       \textcolor{keywordflow}{break};
+636    \}
+637 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ppp__fsm_8h_af1c972a74fd368977eee1df1eedac2d4}\label{ppp__fsm_8h_af1c972a74fd368977eee1df1eedac2d4}} 
+\index{ppp\+\_\+fsm.\+h@{ppp\+\_\+fsm.\+h}!ppp\+Rcv\+Configure\+Req\+Event@{ppp\+Rcv\+Configure\+Req\+Event}}
+\index{ppp\+Rcv\+Configure\+Req\+Event@{ppp\+Rcv\+Configure\+Req\+Event}!ppp\+\_\+fsm.\+h@{ppp\+\_\+fsm.\+h}}
+\subsubsection{\texorpdfstring{ppp\+Rcv\+Configure\+Req\+Event()}{pppRcvConfigureReqEvent()}}
+{\footnotesize\ttfamily void ppp\+Rcv\+Configure\+Req\+Event (\begin{DoxyParamCaption}\item[{\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$}]{context,  }\item[{\hyperlink{structPppFsm}{Ppp\+Fsm} $\ast$}]{fsm,  }\item[{const \hyperlink{structPppCallbacks}{Ppp\+Callbacks} $\ast$}]{callbacks,  }\item[{const \hyperlink{ppp_8h_a5f9516e80961edda7e2c0b9b964bdd66}{Ppp\+Configure\+Packet} $\ast$}]{configure\+Req\+Packet,  }\item[{\hyperlink{ppp_8h_a961984e634b12a11d381115a46f14188}{Ppp\+Code}}]{code }\end{DoxyParamCaption})}
+
+
+
+Process Receive-\/\+Configure-\/\+Request event. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & P\+PP context \\
+\hline
+\mbox{\tt in,out}  & {\em fsm} & Finite state machine \\
+\hline
+\mbox{\tt in}  & {\em callbacks} & F\+SM actions \\
+\hline
+\mbox{\tt in}  & {\em configure\+Req\+Packet} & Configure-\/\+Request packet received from the peer \\
+\hline
+\mbox{\tt in}  & {\em code} & Tells whether the configuration options are acceptable \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 335 of file ppp\+\_\+fsm.\+c.
+
+
+\begin{DoxyCode}
+337 \{
+338    \textcolor{comment}{//Check whether the configuration options are acceptable}
+339    \textcolor{keywordflow}{if}(\hyperlink{coap__common_8h_a966576744a473fafb7687f8e5649941f}{code} == \hyperlink{ppp_8h_a961984e634b12a11d381115a46f14188a915e8fc9f7c9bacb22b54dbccd684591}{PPP\_CODE\_CONFIGURE\_ACK})
+340    \{
+341       \textcolor{comment}{//If every configuration option received in the Configure-Request is}
+342       \textcolor{comment}{//recognizable and all values are acceptable, then the implementation}
+343       \textcolor{comment}{//must transmit a Configure-Ack}
+344       \textcolor{keywordflow}{switch}(fsm->\hyperlink{structPppFsm_ac5031e0c5bb00a8604a2cd1f3616c948}{state})
+345       \{
+346       \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca11f67dbd9e9bf368d15fa66c6bbd8a63}{PPP\_STATE\_2\_CLOSED}:
+347          \textcolor{comment}{//Send Terminate-Ack packet}
+348          callbacks->\hyperlink{structPppCallbacks_a939301e4eed7462430bba254a6bf820b}{sendTerminateAck}(context, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+349          \textcolor{comment}{//Stay in current state}
+350          \textcolor{keywordflow}{break};
+351       \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbcaeb63f314525f9f0492681ff27e17a60d}{PPP\_STATE\_3\_STOPPED}:
+352          \textcolor{comment}{//Initialize restart counter}
+353          callbacks->\hyperlink{structPppCallbacks_aa601353760cb64fb60bf207e1fd9c281}{initRestartCount}(context, \hyperlink{ppp_8h_ade98270902a7a4bbec0f9953da456328}{PPP\_MAX\_CONFIGURE});
+354          \textcolor{comment}{//Send Configure-Request packet}
+355          callbacks->\hyperlink{structPppCallbacks_a3455ce2a17fe9180f016be4bf7a07a56}{sendConfigureReq}(context);
+356          \textcolor{comment}{//Send Configure-Ack packet}
+357          callbacks->\hyperlink{structPppCallbacks_ab2f369eb64bdca99ca48d9ea70d7e033}{sendConfigureAck}(context, configureReqPacket);
+358          \textcolor{comment}{//Switch to the Ack-Sent state}
+359          \hyperlink{ppp__fsm_8c_abe4c233cc4daa10eefa05cb161bb2002}{pppChangeState}(fsm, \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca718e97f8e3cf50a96b56990eab353669}{PPP\_STATE\_8\_ACK\_SENT});
+360          \textcolor{keywordflow}{break};
+361       \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca517046b14cdbe60860cf08c716b4b632}{PPP\_STATE\_4\_CLOSING}:
+362       \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbcab38847d6dcd11489bd4332567652be69}{PPP\_STATE\_5\_STOPPING}:
+363          \textcolor{comment}{//Stay in current state}
+364          \textcolor{keywordflow}{break};
+365       \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca653b3f614994a412630e2b5ab8cb9672}{PPP\_STATE\_6\_REQ\_SENT}:
+366          \textcolor{comment}{//Send Configure-Ack packet}
+367          callbacks->\hyperlink{structPppCallbacks_ab2f369eb64bdca99ca48d9ea70d7e033}{sendConfigureAck}(context, configureReqPacket);
+368          \textcolor{comment}{//Switch to the Ack-Sent state}
+369          \hyperlink{ppp__fsm_8c_abe4c233cc4daa10eefa05cb161bb2002}{pppChangeState}(fsm, \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca718e97f8e3cf50a96b56990eab353669}{PPP\_STATE\_8\_ACK\_SENT});
+370          \textcolor{keywordflow}{break};
+371       \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbcaa3b3e7af857cbb3cd423beb052b3527d}{PPP\_STATE\_7\_ACK\_RCVD}:
+372          \textcolor{comment}{//Send Configure-Ack packet}
+373          callbacks->\hyperlink{structPppCallbacks_ab2f369eb64bdca99ca48d9ea70d7e033}{sendConfigureAck}(context, configureReqPacket);
+374          \textcolor{comment}{//Switch to the Opened state}
+375          \hyperlink{ppp__fsm_8c_abe4c233cc4daa10eefa05cb161bb2002}{pppChangeState}(fsm, \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca3a46b5a98c799ee1827ef8aa0ddc4d07}{PPP\_STATE\_9\_OPENED});
+376          \textcolor{comment}{//Indicate to the upper layers that the automaton is entering the}
+377          \textcolor{comment}{//Opened state. The link is available for network traffic}
+378          callbacks->\hyperlink{structPppCallbacks_ab370c1403e9b8a362747e6ea4e702b2f}{thisLayerUp}(context);
+379          \textcolor{keywordflow}{break};
+380       \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca718e97f8e3cf50a96b56990eab353669}{PPP\_STATE\_8\_ACK\_SENT}:
+381          \textcolor{comment}{//Send Configure-Ack packet}
+382          callbacks->\hyperlink{structPppCallbacks_ab2f369eb64bdca99ca48d9ea70d7e033}{sendConfigureAck}(context, configureReqPacket);
+383          \textcolor{comment}{//Stay in current state}
+384          \textcolor{keywordflow}{break};
+385       \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca3a46b5a98c799ee1827ef8aa0ddc4d07}{PPP\_STATE\_9\_OPENED}:
+386          \textcolor{comment}{//Send Configure-Request packet}
+387          callbacks->\hyperlink{structPppCallbacks_a3455ce2a17fe9180f016be4bf7a07a56}{sendConfigureReq}(context);
+388          \textcolor{comment}{//Send Configure-Ack packet}
+389          callbacks->\hyperlink{structPppCallbacks_ab2f369eb64bdca99ca48d9ea70d7e033}{sendConfigureAck}(context, configureReqPacket);
+390          \textcolor{comment}{//Switch to the Ack-Sent state}
+391          \hyperlink{ppp__fsm_8c_abe4c233cc4daa10eefa05cb161bb2002}{pppChangeState}(fsm, \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca718e97f8e3cf50a96b56990eab353669}{PPP\_STATE\_8\_ACK\_SENT});
+392          \textcolor{comment}{//Indicate to the upper layers that the automaton is leaving the Opened}
+393          \textcolor{comment}{//state. The link is no longer available for network traffic}
+394          callbacks->\hyperlink{structPppCallbacks_a77b3640a9c7e6daae12df2b6912d1777}{thisLayerDown}(context);
+395          \textcolor{keywordflow}{break};
+396       \textcolor{keywordflow}{default}:
+397          \textcolor{comment}{//This event cannot occur in a properly implemented automaton.}
+398          \textcolor{comment}{//No transition is taken, and the implementation should not}
+399          \textcolor{comment}{//reset or freeze}
+400          \textcolor{keywordflow}{break};
+401       \}
+402    \}
+403    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(\hyperlink{coap__common_8h_a966576744a473fafb7687f8e5649941f}{code} == \hyperlink{ppp_8h_a961984e634b12a11d381115a46f14188aed576599db22b88142cb2cd4e71986be}{PPP\_CODE\_CONFIGURE\_NAK})
+404    \{
+405       \textcolor{comment}{//If all configuration options are recognizable, but some values are not}
+406       \textcolor{comment}{//acceptable, then the implementation must transmit a Configure-Nak}
+407       \textcolor{keywordflow}{switch}(fsm->\hyperlink{structPppFsm_ac5031e0c5bb00a8604a2cd1f3616c948}{state})
+408       \{
+409       \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca11f67dbd9e9bf368d15fa66c6bbd8a63}{PPP\_STATE\_2\_CLOSED}:
+410          \textcolor{comment}{//Send Terminate-Ack packet}
+411          callbacks->\hyperlink{structPppCallbacks_a939301e4eed7462430bba254a6bf820b}{sendTerminateAck}(context, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+412          \textcolor{comment}{//Stay in current state}
+413          \textcolor{keywordflow}{break};
+414       \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbcaeb63f314525f9f0492681ff27e17a60d}{PPP\_STATE\_3\_STOPPED}:
+415          \textcolor{comment}{//Initialize restart counter}
+416          callbacks->\hyperlink{structPppCallbacks_aa601353760cb64fb60bf207e1fd9c281}{initRestartCount}(context, \hyperlink{ppp_8h_ade98270902a7a4bbec0f9953da456328}{PPP\_MAX\_CONFIGURE});
+417          \textcolor{comment}{//Send Configure-Request packet}
+418          callbacks->\hyperlink{structPppCallbacks_a3455ce2a17fe9180f016be4bf7a07a56}{sendConfigureReq}(context);
+419          \textcolor{comment}{//Send Configure-Nak packet}
+420          callbacks->\hyperlink{structPppCallbacks_ac5d4b33b82d9d7553b6e8cf27a677349}{sendConfigureNak}(context, configureReqPacket);
+421          \textcolor{comment}{//Switch to the Req-Sent state}
+422          \hyperlink{ppp__fsm_8c_abe4c233cc4daa10eefa05cb161bb2002}{pppChangeState}(fsm, \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca653b3f614994a412630e2b5ab8cb9672}{PPP\_STATE\_6\_REQ\_SENT});
+423          \textcolor{keywordflow}{break};
+424       \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca517046b14cdbe60860cf08c716b4b632}{PPP\_STATE\_4\_CLOSING}:
+425       \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbcab38847d6dcd11489bd4332567652be69}{PPP\_STATE\_5\_STOPPING}:
+426          \textcolor{comment}{//Stay in current state}
+427          \textcolor{keywordflow}{break};
+428       \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca653b3f614994a412630e2b5ab8cb9672}{PPP\_STATE\_6\_REQ\_SENT}:
+429       \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbcaa3b3e7af857cbb3cd423beb052b3527d}{PPP\_STATE\_7\_ACK\_RCVD}:
+430          \textcolor{comment}{//Send Configure-Nak packet}
+431          callbacks->\hyperlink{structPppCallbacks_ac5d4b33b82d9d7553b6e8cf27a677349}{sendConfigureNak}(context, configureReqPacket);
+432          \textcolor{comment}{//Stay in current state}
+433          \textcolor{keywordflow}{break};
+434       \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca718e97f8e3cf50a96b56990eab353669}{PPP\_STATE\_8\_ACK\_SENT}:
+435          \textcolor{comment}{//Send Configure-Nak packet}
+436          callbacks->\hyperlink{structPppCallbacks_ac5d4b33b82d9d7553b6e8cf27a677349}{sendConfigureNak}(context, configureReqPacket);
+437          \textcolor{comment}{//Switch to the Req-Sent state}
+438          \hyperlink{ppp__fsm_8c_abe4c233cc4daa10eefa05cb161bb2002}{pppChangeState}(fsm, \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca653b3f614994a412630e2b5ab8cb9672}{PPP\_STATE\_6\_REQ\_SENT});
+439          \textcolor{keywordflow}{break};
+440       \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca3a46b5a98c799ee1827ef8aa0ddc4d07}{PPP\_STATE\_9\_OPENED}:
+441          \textcolor{comment}{//Send Configure-Request packet}
+442          callbacks->\hyperlink{structPppCallbacks_a3455ce2a17fe9180f016be4bf7a07a56}{sendConfigureReq}(context);
+443          \textcolor{comment}{//Send Configure-Nak packet}
+444          callbacks->\hyperlink{structPppCallbacks_ac5d4b33b82d9d7553b6e8cf27a677349}{sendConfigureNak}(context, configureReqPacket);
+445          \textcolor{comment}{//Switch to the Req-Sent state}
+446          \hyperlink{ppp__fsm_8c_abe4c233cc4daa10eefa05cb161bb2002}{pppChangeState}(fsm, \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca653b3f614994a412630e2b5ab8cb9672}{PPP\_STATE\_6\_REQ\_SENT});
+447          \textcolor{comment}{//Indicate to the upper layers that the automaton is leaving the Opened}
+448          \textcolor{comment}{//state. The link is no longer available for network traffic}
+449          callbacks->\hyperlink{structPppCallbacks_a77b3640a9c7e6daae12df2b6912d1777}{thisLayerDown}(context);
+450          \textcolor{keywordflow}{break};
+451       \textcolor{keywordflow}{default}:
+452          \textcolor{comment}{//This event cannot occur in a properly implemented automaton.}
+453          \textcolor{comment}{//No transition is taken, and the implementation should not}
+454          \textcolor{comment}{//reset or freeze}
+455          \textcolor{keywordflow}{break};
+456       \}
+457    \}
+458    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(\hyperlink{coap__common_8h_a966576744a473fafb7687f8e5649941f}{code} == \hyperlink{ppp_8h_a961984e634b12a11d381115a46f14188a5bd41f9dd646b4a1dd42c2f98f22cedd}{PPP\_CODE\_CONFIGURE\_REJ})
+459    \{
+460       \textcolor{comment}{//If some configuration options received in the Configure-Request are not}
+461       \textcolor{comment}{//recognizable or not acceptable for negotiation, then the implementation}
+462       \textcolor{comment}{//must transmit a Configure-Reject}
+463       \textcolor{keywordflow}{switch}(fsm->\hyperlink{structPppFsm_ac5031e0c5bb00a8604a2cd1f3616c948}{state})
+464       \{
+465       \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca11f67dbd9e9bf368d15fa66c6bbd8a63}{PPP\_STATE\_2\_CLOSED}:
+466          \textcolor{comment}{//Send Terminate-Ack packet}
+467          callbacks->\hyperlink{structPppCallbacks_a939301e4eed7462430bba254a6bf820b}{sendTerminateAck}(context, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+468          \textcolor{comment}{//Stay in current state}
+469          \textcolor{keywordflow}{break};
+470       \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbcaeb63f314525f9f0492681ff27e17a60d}{PPP\_STATE\_3\_STOPPED}:
+471          \textcolor{comment}{//Initialize restart counter}
+472          callbacks->\hyperlink{structPppCallbacks_aa601353760cb64fb60bf207e1fd9c281}{initRestartCount}(context, \hyperlink{ppp_8h_ade98270902a7a4bbec0f9953da456328}{PPP\_MAX\_CONFIGURE});
+473          \textcolor{comment}{//Send Configure-Request packet}
+474          callbacks->\hyperlink{structPppCallbacks_a3455ce2a17fe9180f016be4bf7a07a56}{sendConfigureReq}(context);
+475          \textcolor{comment}{//Send Configure-Reject packet}
+476          callbacks->\hyperlink{structPppCallbacks_ab3f96661dba20a0d51d08bfc395519f7}{sendConfigureRej}(context, configureReqPacket);
+477          \textcolor{comment}{//Switch to the Req-Sent state}
+478          \hyperlink{ppp__fsm_8c_abe4c233cc4daa10eefa05cb161bb2002}{pppChangeState}(fsm, \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca653b3f614994a412630e2b5ab8cb9672}{PPP\_STATE\_6\_REQ\_SENT});
+479          \textcolor{keywordflow}{break};
+480       \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca517046b14cdbe60860cf08c716b4b632}{PPP\_STATE\_4\_CLOSING}:
+481       \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbcab38847d6dcd11489bd4332567652be69}{PPP\_STATE\_5\_STOPPING}:
+482          \textcolor{comment}{//Stay in current state}
+483          \textcolor{keywordflow}{break};
+484       \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca653b3f614994a412630e2b5ab8cb9672}{PPP\_STATE\_6\_REQ\_SENT}:
+485       \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbcaa3b3e7af857cbb3cd423beb052b3527d}{PPP\_STATE\_7\_ACK\_RCVD}:
+486          \textcolor{comment}{//Send Configure-Reject packet}
+487          callbacks->\hyperlink{structPppCallbacks_ab3f96661dba20a0d51d08bfc395519f7}{sendConfigureRej}(context, configureReqPacket);
+488          \textcolor{comment}{//Stay in current state}
+489          \textcolor{keywordflow}{break};
+490       \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca718e97f8e3cf50a96b56990eab353669}{PPP\_STATE\_8\_ACK\_SENT}:
+491          \textcolor{comment}{//Send Configure-Reject packet}
+492          callbacks->\hyperlink{structPppCallbacks_ab3f96661dba20a0d51d08bfc395519f7}{sendConfigureRej}(context, configureReqPacket);
+493          \textcolor{comment}{//Switch to the Req-Sent state}
+494          \hyperlink{ppp__fsm_8c_abe4c233cc4daa10eefa05cb161bb2002}{pppChangeState}(fsm, \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca653b3f614994a412630e2b5ab8cb9672}{PPP\_STATE\_6\_REQ\_SENT});
+495          \textcolor{keywordflow}{break};
+496       \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca3a46b5a98c799ee1827ef8aa0ddc4d07}{PPP\_STATE\_9\_OPENED}:
+497          \textcolor{comment}{//Send Configure-Request packet}
+498          callbacks->\hyperlink{structPppCallbacks_a3455ce2a17fe9180f016be4bf7a07a56}{sendConfigureReq}(context);
+499          \textcolor{comment}{//Send Configure-Reject packet}
+500          callbacks->\hyperlink{structPppCallbacks_ab3f96661dba20a0d51d08bfc395519f7}{sendConfigureRej}(context, configureReqPacket);
+501          \textcolor{comment}{//Switch to the Req-Sent state}
+502          \hyperlink{ppp__fsm_8c_abe4c233cc4daa10eefa05cb161bb2002}{pppChangeState}(fsm, \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca653b3f614994a412630e2b5ab8cb9672}{PPP\_STATE\_6\_REQ\_SENT});
+503          \textcolor{comment}{//Indicate to the upper layers that the automaton is leaving the Opened}
+504          \textcolor{comment}{//state. The link is no longer available for network traffic}
+505          callbacks->\hyperlink{structPppCallbacks_a77b3640a9c7e6daae12df2b6912d1777}{thisLayerDown}(context);
+506          \textcolor{keywordflow}{break};
+507       \textcolor{keywordflow}{default}:
+508          \textcolor{comment}{//This event cannot occur in a properly implemented automaton.}
+509          \textcolor{comment}{//No transition is taken, and the implementation should not}
+510          \textcolor{comment}{//reset or freeze}
+511          \textcolor{keywordflow}{break};
+512       \}
+513    \}
+514 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ppp__fsm_8h_afad7b1363587425fe776a7bd9299ef5a}\label{ppp__fsm_8h_afad7b1363587425fe776a7bd9299ef5a}} 
+\index{ppp\+\_\+fsm.\+h@{ppp\+\_\+fsm.\+h}!ppp\+Rcv\+Echo\+Req\+Event@{ppp\+Rcv\+Echo\+Req\+Event}}
+\index{ppp\+Rcv\+Echo\+Req\+Event@{ppp\+Rcv\+Echo\+Req\+Event}!ppp\+\_\+fsm.\+h@{ppp\+\_\+fsm.\+h}}
+\subsubsection{\texorpdfstring{ppp\+Rcv\+Echo\+Req\+Event()}{pppRcvEchoReqEvent()}}
+{\footnotesize\ttfamily void ppp\+Rcv\+Echo\+Req\+Event (\begin{DoxyParamCaption}\item[{\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$}]{context,  }\item[{\hyperlink{structPppFsm}{Ppp\+Fsm} $\ast$}]{fsm,  }\item[{const \hyperlink{structPppCallbacks}{Ppp\+Callbacks} $\ast$}]{callbacks,  }\item[{const \hyperlink{ppp_8h_a32588dc42d7123562908b651a0e6bf13}{Ppp\+Echo\+Packet} $\ast$}]{echo\+Req\+Packet }\end{DoxyParamCaption})}
+
+
+
+Process Receive-\/\+Echo-\/\+Request event. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & P\+PP context \\
+\hline
+\mbox{\tt in,out}  & {\em fsm} & Finite state machine \\
+\hline
+\mbox{\tt in}  & {\em callbacks} & F\+SM actions \\
+\hline
+\mbox{\tt in}  & {\em echo\+Req\+Packet} & Echo-\/\+Request packet received from the peer \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 889 of file ppp\+\_\+fsm.\+c.
+
+
+\begin{DoxyCode}
+891 \{
+892    \textcolor{comment}{//Check current state}
+893    \textcolor{keywordflow}{switch}(fsm->\hyperlink{structPppFsm_ac5031e0c5bb00a8604a2cd1f3616c948}{state})
+894    \{
+895    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca11f67dbd9e9bf368d15fa66c6bbd8a63}{PPP\_STATE\_2\_CLOSED}:
+896    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbcaeb63f314525f9f0492681ff27e17a60d}{PPP\_STATE\_3\_STOPPED}:
+897    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca517046b14cdbe60860cf08c716b4b632}{PPP\_STATE\_4\_CLOSING}:
+898    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbcab38847d6dcd11489bd4332567652be69}{PPP\_STATE\_5\_STOPPING}:
+899    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca653b3f614994a412630e2b5ab8cb9672}{PPP\_STATE\_6\_REQ\_SENT}:
+900    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbcaa3b3e7af857cbb3cd423beb052b3527d}{PPP\_STATE\_7\_ACK\_RCVD}:
+901    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca718e97f8e3cf50a96b56990eab353669}{PPP\_STATE\_8\_ACK\_SENT}:
+902       \textcolor{comment}{//Stay in current state}
+903       \textcolor{keywordflow}{break};
+904    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca3a46b5a98c799ee1827ef8aa0ddc4d07}{PPP\_STATE\_9\_OPENED}:
+905       \textcolor{comment}{//Send Echo-Reply packet}
+906       callbacks->\hyperlink{structPppCallbacks_a7b6d16374b35c43b82f7b3da0dbc87da}{sendEchoRep}(context, echoReqPacket);
+907       \textcolor{comment}{//Stay in current state}
+908       \textcolor{keywordflow}{break};
+909    \textcolor{keywordflow}{default}:
+910       \textcolor{comment}{//This event cannot occur in a properly implemented automaton.}
+911       \textcolor{comment}{//No transition is taken, and the implementation should not}
+912       \textcolor{comment}{//reset or freeze}
+913       \textcolor{keywordflow}{break};
+914    \}
+915 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ppp__fsm_8h_aee79a99cb18b0c11f3d8a728d59b5ca8}\label{ppp__fsm_8h_aee79a99cb18b0c11f3d8a728d59b5ca8}} 
+\index{ppp\+\_\+fsm.\+h@{ppp\+\_\+fsm.\+h}!ppp\+Rcv\+Terminate\+Ack\+Event@{ppp\+Rcv\+Terminate\+Ack\+Event}}
+\index{ppp\+Rcv\+Terminate\+Ack\+Event@{ppp\+Rcv\+Terminate\+Ack\+Event}!ppp\+\_\+fsm.\+h@{ppp\+\_\+fsm.\+h}}
+\subsubsection{\texorpdfstring{ppp\+Rcv\+Terminate\+Ack\+Event()}{pppRcvTerminateAckEvent()}}
+{\footnotesize\ttfamily void ppp\+Rcv\+Terminate\+Ack\+Event (\begin{DoxyParamCaption}\item[{\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$}]{context,  }\item[{\hyperlink{structPppFsm}{Ppp\+Fsm} $\ast$}]{fsm,  }\item[{const \hyperlink{structPppCallbacks}{Ppp\+Callbacks} $\ast$}]{callbacks }\end{DoxyParamCaption})}
+
+
+
+Process Receive-\/\+Terminate-\/\+Ack event. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & P\+PP context \\
+\hline
+\mbox{\tt in,out}  & {\em fsm} & Finite state machine \\
+\hline
+\mbox{\tt in}  & {\em callbacks} & F\+SM actions \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 697 of file ppp\+\_\+fsm.\+c.
+
+
+\begin{DoxyCode}
+699 \{
+700    \textcolor{comment}{//Check current state}
+701    \textcolor{keywordflow}{switch}(fsm->\hyperlink{structPppFsm_ac5031e0c5bb00a8604a2cd1f3616c948}{state})
+702    \{
+703    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca11f67dbd9e9bf368d15fa66c6bbd8a63}{PPP\_STATE\_2\_CLOSED}:
+704    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbcaeb63f314525f9f0492681ff27e17a60d}{PPP\_STATE\_3\_STOPPED}:
+705       \textcolor{comment}{//Stay in current state}
+706       \textcolor{keywordflow}{break};
+707    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca517046b14cdbe60860cf08c716b4b632}{PPP\_STATE\_4\_CLOSING}:
+708       \textcolor{comment}{//Switch to the Closed state}
+709       \hyperlink{ppp__fsm_8c_abe4c233cc4daa10eefa05cb161bb2002}{pppChangeState}(fsm, \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca11f67dbd9e9bf368d15fa66c6bbd8a63}{PPP\_STATE\_2\_CLOSED});
+710       \textcolor{comment}{//Indicate to the lower layers that the automaton is entering the}
+711       \textcolor{comment}{//Initial, Closed or Stopped states. The lower layer is no longer}
+712       \textcolor{comment}{//needed for the link}
+713       callbacks->\hyperlink{structPppCallbacks_a615c0e66746e025074253d4a485c0f49}{thisLayerFinished}(context);
+714       \textcolor{keywordflow}{break};
+715    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbcab38847d6dcd11489bd4332567652be69}{PPP\_STATE\_5\_STOPPING}:
+716       \textcolor{comment}{//Switch to the Stopped state}
+717       \hyperlink{ppp__fsm_8c_abe4c233cc4daa10eefa05cb161bb2002}{pppChangeState}(fsm, \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbcaeb63f314525f9f0492681ff27e17a60d}{PPP\_STATE\_3\_STOPPED});
+718       \textcolor{comment}{//Indicate to the lower layers that the automaton is entering the}
+719       \textcolor{comment}{//Initial, Closed or Stopped states. The lower layer is no longer}
+720       \textcolor{comment}{//needed for the link}
+721       callbacks->\hyperlink{structPppCallbacks_a615c0e66746e025074253d4a485c0f49}{thisLayerFinished}(context);
+722       \textcolor{keywordflow}{break};
+723    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca653b3f614994a412630e2b5ab8cb9672}{PPP\_STATE\_6\_REQ\_SENT}:
+724    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbcaa3b3e7af857cbb3cd423beb052b3527d}{PPP\_STATE\_7\_ACK\_RCVD}:
+725       \textcolor{comment}{//Switch to the Req-Sent state}
+726       \hyperlink{ppp__fsm_8c_abe4c233cc4daa10eefa05cb161bb2002}{pppChangeState}(fsm, \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca653b3f614994a412630e2b5ab8cb9672}{PPP\_STATE\_6\_REQ\_SENT});
+727       \textcolor{keywordflow}{break};
+728    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca718e97f8e3cf50a96b56990eab353669}{PPP\_STATE\_8\_ACK\_SENT}:
+729       \textcolor{comment}{//Stay in current state}
+730       \textcolor{keywordflow}{break};
+731    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca3a46b5a98c799ee1827ef8aa0ddc4d07}{PPP\_STATE\_9\_OPENED}:
+732       \textcolor{comment}{//Send Configure-Req packet}
+733       callbacks->\hyperlink{structPppCallbacks_a3455ce2a17fe9180f016be4bf7a07a56}{sendConfigureReq}(context);
+734       \textcolor{comment}{//Switch to the Req-Sent state}
+735       \hyperlink{ppp__fsm_8c_abe4c233cc4daa10eefa05cb161bb2002}{pppChangeState}(fsm, \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca653b3f614994a412630e2b5ab8cb9672}{PPP\_STATE\_6\_REQ\_SENT});
+736       \textcolor{comment}{//Indicate to the upper layers that the automaton is leaving the Opened}
+737       \textcolor{comment}{//state. The link is no longer available for network traffic}
+738       callbacks->\hyperlink{structPppCallbacks_a77b3640a9c7e6daae12df2b6912d1777}{thisLayerDown}(context);
+739       \textcolor{keywordflow}{break};
+740    \textcolor{keywordflow}{default}:
+741       \textcolor{comment}{//This event cannot occur in a properly implemented automaton.}
+742       \textcolor{comment}{//No transition is taken, and the implementation should not}
+743       \textcolor{comment}{//reset or freeze}
+744       \textcolor{keywordflow}{break};
+745    \}
+746 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ppp__fsm_8h_adf41be150eb29ecad7dcb966134f5d18}\label{ppp__fsm_8h_adf41be150eb29ecad7dcb966134f5d18}} 
+\index{ppp\+\_\+fsm.\+h@{ppp\+\_\+fsm.\+h}!ppp\+Rcv\+Terminate\+Req\+Event@{ppp\+Rcv\+Terminate\+Req\+Event}}
+\index{ppp\+Rcv\+Terminate\+Req\+Event@{ppp\+Rcv\+Terminate\+Req\+Event}!ppp\+\_\+fsm.\+h@{ppp\+\_\+fsm.\+h}}
+\subsubsection{\texorpdfstring{ppp\+Rcv\+Terminate\+Req\+Event()}{pppRcvTerminateReqEvent()}}
+{\footnotesize\ttfamily void ppp\+Rcv\+Terminate\+Req\+Event (\begin{DoxyParamCaption}\item[{\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$}]{context,  }\item[{\hyperlink{structPppFsm}{Ppp\+Fsm} $\ast$}]{fsm,  }\item[{const \hyperlink{structPppCallbacks}{Ppp\+Callbacks} $\ast$}]{callbacks,  }\item[{const \hyperlink{ppp_8h_a224d9bad9d75f66f3d0284450ddf6fb4}{Ppp\+Terminate\+Packet} $\ast$}]{terminate\+Req\+Packet }\end{DoxyParamCaption})}
+
+
+
+Process Receive-\/\+Terminate-\/\+Req event. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & P\+PP context \\
+\hline
+\mbox{\tt in,out}  & {\em fsm} & Finite state machine \\
+\hline
+\mbox{\tt in}  & {\em callbacks} & F\+SM actions \\
+\hline
+\mbox{\tt in}  & {\em terminate\+Req\+Packet} & Terminate-\/\+Request packet received from the peer \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 648 of file ppp\+\_\+fsm.\+c.
+
+
+\begin{DoxyCode}
+650 \{
+651    \textcolor{comment}{//Check current state}
+652    \textcolor{keywordflow}{switch}(fsm->\hyperlink{structPppFsm_ac5031e0c5bb00a8604a2cd1f3616c948}{state})
+653    \{
+654    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca11f67dbd9e9bf368d15fa66c6bbd8a63}{PPP\_STATE\_2\_CLOSED}:
+655    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbcaeb63f314525f9f0492681ff27e17a60d}{PPP\_STATE\_3\_STOPPED}:
+656    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca517046b14cdbe60860cf08c716b4b632}{PPP\_STATE\_4\_CLOSING}:
+657    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbcab38847d6dcd11489bd4332567652be69}{PPP\_STATE\_5\_STOPPING}:
+658       \textcolor{comment}{//Send Terminate-Ack packet}
+659       callbacks->\hyperlink{structPppCallbacks_a939301e4eed7462430bba254a6bf820b}{sendTerminateAck}(context, terminateReqPacket);
+660       \textcolor{comment}{//Stay in current state}
+661       \textcolor{keywordflow}{break};
+662    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca653b3f614994a412630e2b5ab8cb9672}{PPP\_STATE\_6\_REQ\_SENT}:
+663    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbcaa3b3e7af857cbb3cd423beb052b3527d}{PPP\_STATE\_7\_ACK\_RCVD}:
+664    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca718e97f8e3cf50a96b56990eab353669}{PPP\_STATE\_8\_ACK\_SENT}:
+665       \textcolor{comment}{//Send Terminate-Ack packet}
+666       callbacks->\hyperlink{structPppCallbacks_a939301e4eed7462430bba254a6bf820b}{sendTerminateAck}(context, terminateReqPacket);
+667       \textcolor{comment}{//Switch to the Req-Sent state}
+668       \hyperlink{ppp__fsm_8c_abe4c233cc4daa10eefa05cb161bb2002}{pppChangeState}(fsm, \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca653b3f614994a412630e2b5ab8cb9672}{PPP\_STATE\_6\_REQ\_SENT});
+669       \textcolor{keywordflow}{break};
+670    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca3a46b5a98c799ee1827ef8aa0ddc4d07}{PPP\_STATE\_9\_OPENED}:
+671       \textcolor{comment}{//Zero restart counter}
+672       callbacks->\hyperlink{structPppCallbacks_a1a15264a659c18750ed7ca41dc893e04}{zeroRestartCount}(context);
+673       \textcolor{comment}{//Send Terminate-Ack packet}
+674       callbacks->\hyperlink{structPppCallbacks_a939301e4eed7462430bba254a6bf820b}{sendTerminateAck}(context, terminateReqPacket);
+675       \textcolor{comment}{//Switch to the Stopping state}
+676       \hyperlink{ppp__fsm_8c_abe4c233cc4daa10eefa05cb161bb2002}{pppChangeState}(fsm, \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbcab38847d6dcd11489bd4332567652be69}{PPP\_STATE\_5\_STOPPING});
+677       \textcolor{comment}{//Indicate to the upper layers that the automaton is leaving the Opened}
+678       \textcolor{comment}{//state. The link is no longer available for network traffic}
+679       callbacks->\hyperlink{structPppCallbacks_a77b3640a9c7e6daae12df2b6912d1777}{thisLayerDown}(context);
+680       \textcolor{keywordflow}{break};
+681    \textcolor{keywordflow}{default}:
+682       \textcolor{comment}{//This event cannot occur in a properly implemented automaton.}
+683       \textcolor{comment}{//No transition is taken, and the implementation should not}
+684       \textcolor{comment}{//reset or freeze}
+685       \textcolor{keywordflow}{break};
+686    \}
+687 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ppp__fsm_8h_acc5bb9360d00a9033e5aff533cfb9f79}\label{ppp__fsm_8h_acc5bb9360d00a9033e5aff533cfb9f79}} 
+\index{ppp\+\_\+fsm.\+h@{ppp\+\_\+fsm.\+h}!ppp\+Rcv\+Unknown\+Code\+Event@{ppp\+Rcv\+Unknown\+Code\+Event}}
+\index{ppp\+Rcv\+Unknown\+Code\+Event@{ppp\+Rcv\+Unknown\+Code\+Event}!ppp\+\_\+fsm.\+h@{ppp\+\_\+fsm.\+h}}
+\subsubsection{\texorpdfstring{ppp\+Rcv\+Unknown\+Code\+Event()}{pppRcvUnknownCodeEvent()}}
+{\footnotesize\ttfamily void ppp\+Rcv\+Unknown\+Code\+Event (\begin{DoxyParamCaption}\item[{\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$}]{context,  }\item[{\hyperlink{structPppFsm}{Ppp\+Fsm} $\ast$}]{fsm,  }\item[{const \hyperlink{structPppCallbacks}{Ppp\+Callbacks} $\ast$}]{callbacks,  }\item[{const \hyperlink{ppp_8h_aa975a68f06316e1db0de962a31e30c2e}{Ppp\+Packet} $\ast$}]{packet }\end{DoxyParamCaption})}
+
+
+
+Process Receive-\/\+Unknown-\/\+Code event. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & P\+PP context \\
+\hline
+\mbox{\tt in,out}  & {\em fsm} & Finite state machine \\
+\hline
+\mbox{\tt in}  & {\em callbacks} & F\+SM actions \\
+\hline
+\mbox{\tt in}  & {\em packet} & Un-\/interpretable packet received from the peer \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 757 of file ppp\+\_\+fsm.\+c.
+
+
+\begin{DoxyCode}
+759 \{
+760    \textcolor{comment}{//Check current state}
+761    \textcolor{keywordflow}{switch}(fsm->\hyperlink{structPppFsm_ac5031e0c5bb00a8604a2cd1f3616c948}{state})
+762    \{
+763    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca11f67dbd9e9bf368d15fa66c6bbd8a63}{PPP\_STATE\_2\_CLOSED}:
+764    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbcaeb63f314525f9f0492681ff27e17a60d}{PPP\_STATE\_3\_STOPPED}:
+765    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca517046b14cdbe60860cf08c716b4b632}{PPP\_STATE\_4\_CLOSING}:
+766    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbcab38847d6dcd11489bd4332567652be69}{PPP\_STATE\_5\_STOPPING}:
+767    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca653b3f614994a412630e2b5ab8cb9672}{PPP\_STATE\_6\_REQ\_SENT}:
+768    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbcaa3b3e7af857cbb3cd423beb052b3527d}{PPP\_STATE\_7\_ACK\_RCVD}:
+769    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca718e97f8e3cf50a96b56990eab353669}{PPP\_STATE\_8\_ACK\_SENT}:
+770    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca3a46b5a98c799ee1827ef8aa0ddc4d07}{PPP\_STATE\_9\_OPENED}:
+771       \textcolor{comment}{//Send Reject-Code packet}
+772       callbacks->\hyperlink{structPppCallbacks_ab8237b5d2c93c01190c790d63a1ae720}{sendCodeRej}(context, packet);
+773       \textcolor{comment}{//Stay in current state}
+774       \textcolor{keywordflow}{break};
+775    \textcolor{keywordflow}{default}:
+776       \textcolor{comment}{//This event cannot occur in a properly implemented automaton.}
+777       \textcolor{comment}{//No transition is taken, and the implementation should not}
+778       \textcolor{comment}{//reset or freeze}
+779       \textcolor{keywordflow}{break};
+780    \}
+781 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ppp__fsm_8h_a36be609fbc1074aca17caeb84dc1430c}\label{ppp__fsm_8h_a36be609fbc1074aca17caeb84dc1430c}} 
+\index{ppp\+\_\+fsm.\+h@{ppp\+\_\+fsm.\+h}!ppp\+Timeout\+Event@{ppp\+Timeout\+Event}}
+\index{ppp\+Timeout\+Event@{ppp\+Timeout\+Event}!ppp\+\_\+fsm.\+h@{ppp\+\_\+fsm.\+h}}
+\subsubsection{\texorpdfstring{ppp\+Timeout\+Event()}{pppTimeoutEvent()}}
+{\footnotesize\ttfamily void ppp\+Timeout\+Event (\begin{DoxyParamCaption}\item[{\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$}]{context,  }\item[{\hyperlink{structPppFsm}{Ppp\+Fsm} $\ast$}]{fsm,  }\item[{const \hyperlink{structPppCallbacks}{Ppp\+Callbacks} $\ast$}]{callbacks }\end{DoxyParamCaption})}
+
+
+
+Process Timeout event. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & P\+PP context \\
+\hline
+\mbox{\tt in,out}  & {\em fsm} & Finite state machine \\
+\hline
+\mbox{\tt in}  & {\em callbacks} & F\+SM actions \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 257 of file ppp\+\_\+fsm.\+c.
+
+
+\begin{DoxyCode}
+259 \{
+260    \textcolor{comment}{//The restart counter is greater than zero (TO+ event)}
+261    \textcolor{keywordflow}{if}(fsm->\hyperlink{structPppFsm_a20a9aac97e60dc38126906103e421c26}{restartCounter} > 0)
+262    \{
+263       \textcolor{comment}{//Check current state}
+264       \textcolor{keywordflow}{switch}(fsm->\hyperlink{structPppFsm_ac5031e0c5bb00a8604a2cd1f3616c948}{state})
+265       \{
+266       \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca517046b14cdbe60860cf08c716b4b632}{PPP\_STATE\_4\_CLOSING}:
+267       \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbcab38847d6dcd11489bd4332567652be69}{PPP\_STATE\_5\_STOPPING}:
+268          \textcolor{comment}{//Send Terminate-Request packet}
+269          callbacks->\hyperlink{structPppCallbacks_a0a8578c4f6f59b0db9ffb1f9cd661024}{sendTerminateReq}(context);
+270          \textcolor{comment}{//Stay in current state}
+271          \textcolor{keywordflow}{break};
+272       \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca653b3f614994a412630e2b5ab8cb9672}{PPP\_STATE\_6\_REQ\_SENT}:
+273       \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbcaa3b3e7af857cbb3cd423beb052b3527d}{PPP\_STATE\_7\_ACK\_RCVD}:
+274          \textcolor{comment}{//Send Configuration-Request packet}
+275          callbacks->\hyperlink{structPppCallbacks_a3455ce2a17fe9180f016be4bf7a07a56}{sendConfigureReq}(context);
+276          \textcolor{comment}{//Switch to the Req-Sent state}
+277          \hyperlink{ppp__fsm_8c_abe4c233cc4daa10eefa05cb161bb2002}{pppChangeState}(fsm, \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca653b3f614994a412630e2b5ab8cb9672}{PPP\_STATE\_6\_REQ\_SENT});
+278          \textcolor{keywordflow}{break};
+279       \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca718e97f8e3cf50a96b56990eab353669}{PPP\_STATE\_8\_ACK\_SENT}:
+280          \textcolor{comment}{//Send Configuration-Request packet}
+281          callbacks->\hyperlink{structPppCallbacks_a3455ce2a17fe9180f016be4bf7a07a56}{sendConfigureReq}(context);
+282          \textcolor{comment}{//Stay in current state}
+283          \textcolor{keywordflow}{break};
+284       \textcolor{keywordflow}{default}:
+285          \textcolor{comment}{//This event cannot occur in a properly implemented automaton.}
+286          \textcolor{comment}{//No transition is taken, and the implementation should not}
+287          \textcolor{comment}{//reset or freeze}
+288          \textcolor{keywordflow}{break};
+289       \}
+290    \}
+291    \textcolor{comment}{//The restart counter is not greater than zero (TO- event)}
+292    \textcolor{keywordflow}{else}
+293    \{
+294       \textcolor{comment}{//Check current state}
+295       \textcolor{keywordflow}{switch}(fsm->\hyperlink{structPppFsm_ac5031e0c5bb00a8604a2cd1f3616c948}{state})
+296       \{
+297       \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca517046b14cdbe60860cf08c716b4b632}{PPP\_STATE\_4\_CLOSING}:
+298          \textcolor{comment}{//Switch to the Closed state}
+299          \hyperlink{ppp__fsm_8c_abe4c233cc4daa10eefa05cb161bb2002}{pppChangeState}(fsm, \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca11f67dbd9e9bf368d15fa66c6bbd8a63}{PPP\_STATE\_2\_CLOSED});
+300          \textcolor{comment}{//Indicate to the lower layers that the automaton is entering the}
+301          \textcolor{comment}{//Initial, Closed or Stopped states. The lower layer is no longer}
+302          \textcolor{comment}{//needed for the link}
+303          callbacks->\hyperlink{structPppCallbacks_a615c0e66746e025074253d4a485c0f49}{thisLayerFinished}(context);
+304          \textcolor{keywordflow}{break};
+305       \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbcab38847d6dcd11489bd4332567652be69}{PPP\_STATE\_5\_STOPPING}:
+306       \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca653b3f614994a412630e2b5ab8cb9672}{PPP\_STATE\_6\_REQ\_SENT}:
+307       \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbcaa3b3e7af857cbb3cd423beb052b3527d}{PPP\_STATE\_7\_ACK\_RCVD}:
+308       \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca718e97f8e3cf50a96b56990eab353669}{PPP\_STATE\_8\_ACK\_SENT}:
+309          \textcolor{comment}{//Switch to the Stopped state}
+310          \hyperlink{ppp__fsm_8c_abe4c233cc4daa10eefa05cb161bb2002}{pppChangeState}(fsm, \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbcaeb63f314525f9f0492681ff27e17a60d}{PPP\_STATE\_3\_STOPPED});
+311          \textcolor{comment}{//Indicate to the lower layers that the automaton is entering the}
+312          \textcolor{comment}{//Initial, Closed or Stopped states. The lower layer is no longer}
+313          \textcolor{comment}{//needed for the link}
+314          callbacks->\hyperlink{structPppCallbacks_a615c0e66746e025074253d4a485c0f49}{thisLayerFinished}(context);
+315          \textcolor{keywordflow}{break};
+316       \textcolor{keywordflow}{default}:
+317          \textcolor{comment}{//This event cannot occur in a properly implemented automaton.}
+318          \textcolor{comment}{//No transition is taken, and the implementation should not}
+319          \textcolor{comment}{//reset or freeze}
+320          \textcolor{keywordflow}{break};
+321       \}
+322    \}
+323 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ppp__fsm_8h_ac8891398361d78b0e913933626ebd232}\label{ppp__fsm_8h_ac8891398361d78b0e913933626ebd232}} 
+\index{ppp\+\_\+fsm.\+h@{ppp\+\_\+fsm.\+h}!ppp\+Up\+Event@{ppp\+Up\+Event}}
+\index{ppp\+Up\+Event@{ppp\+Up\+Event}!ppp\+\_\+fsm.\+h@{ppp\+\_\+fsm.\+h}}
+\subsubsection{\texorpdfstring{ppp\+Up\+Event()}{pppUpEvent()}}
+{\footnotesize\ttfamily void ppp\+Up\+Event (\begin{DoxyParamCaption}\item[{\hyperlink{ppp_8h_a896c00dd8ba8bad09b3f442b7aa5ad9c}{Ppp\+Context} $\ast$}]{context,  }\item[{\hyperlink{structPppFsm}{Ppp\+Fsm} $\ast$}]{fsm,  }\item[{const \hyperlink{structPppCallbacks}{Ppp\+Callbacks} $\ast$}]{callbacks }\end{DoxyParamCaption})}
+
+
+
+Process Up event. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & P\+PP context \\
+\hline
+\mbox{\tt in,out}  & {\em fsm} & Finite state machine \\
+\hline
+\mbox{\tt in}  & {\em callbacks} & F\+SM actions \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 50 of file ppp\+\_\+fsm.\+c.
+
+
+\begin{DoxyCode}
+52 \{
+53    \textcolor{comment}{//Check current state}
+54    \textcolor{keywordflow}{switch}(fsm->\hyperlink{structPppFsm_ac5031e0c5bb00a8604a2cd1f3616c948}{state})
+55    \{
+56    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca209062413b1ed1b40756deb6f417fb32}{PPP\_STATE\_0\_INITIAL}:
+57       \textcolor{comment}{//Switch to the Closed state}
+58       \hyperlink{ppp__fsm_8c_abe4c233cc4daa10eefa05cb161bb2002}{pppChangeState}(fsm, \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca11f67dbd9e9bf368d15fa66c6bbd8a63}{PPP\_STATE\_2\_CLOSED});
+59       \textcolor{keywordflow}{break};
+60    \textcolor{keywordflow}{case} \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca14a858b8cdfcd2bf2a0245765632d015}{PPP\_STATE\_1\_STARTING}:
+61       \textcolor{comment}{//Initialize restart counter}
+62       callbacks->\hyperlink{structPppCallbacks_aa601353760cb64fb60bf207e1fd9c281}{initRestartCount}(context, \hyperlink{ppp_8h_ade98270902a7a4bbec0f9953da456328}{PPP\_MAX\_CONFIGURE});
+63       \textcolor{comment}{//Send Configure-Request packet}
+64       callbacks->\hyperlink{structPppCallbacks_a3455ce2a17fe9180f016be4bf7a07a56}{sendConfigureReq}(context);
+65       \textcolor{comment}{//Switch to the Req-Sent state}
+66       \hyperlink{ppp__fsm_8c_abe4c233cc4daa10eefa05cb161bb2002}{pppChangeState}(fsm, \hyperlink{ppp_8h_a4cd9e6fb37bf811037ccb89b4f314bbca653b3f614994a412630e2b5ab8cb9672}{PPP\_STATE\_6\_REQ\_SENT});
+67       \textcolor{keywordflow}{break};
+68    \textcolor{keywordflow}{default}:
+69       \textcolor{comment}{//This event cannot occur in a properly implemented automaton.}
+70       \textcolor{comment}{//No transition is taken, and the implementation should not}
+71       \textcolor{comment}{//reset or freeze}
+72       \textcolor{keywordflow}{break};
+73    \}
+74 \}
+\end{DoxyCode}

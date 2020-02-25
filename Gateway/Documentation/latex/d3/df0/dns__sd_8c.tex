@@ -1,0 +1,2547 @@
+\hypertarget{dns__sd_8c}{}\section{cyclone\+\_\+tcp/dns\+\_\+sd/dns\+\_\+sd.c File Reference}
+\label{dns__sd_8c}\index{cyclone\+\_\+tcp/dns\+\_\+sd/dns\+\_\+sd.\+c@{cyclone\+\_\+tcp/dns\+\_\+sd/dns\+\_\+sd.\+c}}
+
+
+D\+N\+S-\/\+SD (D\+N\+S-\/\+Based Service Discovery)  
+
+
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$ctype.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}core/net.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}mdns/mdns\+\_\+common.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}mdns/mdns\+\_\+responder.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}dns/dns\+\_\+debug.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}dns\+\_\+sd/dns\+\_\+sd.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}str.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}debug.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{dns__sd_8c_afcdf5e66fd927a7f4cc64295acd20407}{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}~D\+N\+S\+\_\+\+S\+D\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{dns__sd_8c_a3d107ec136ae352e36b22dbcec01dad1}{dns\+Sd\+Get\+Default\+Settings} (\hyperlink{structDnsSdSettings}{Dns\+Sd\+Settings} $\ast$settings)
+\begin{DoxyCompactList}\small\item\em Initialize settings with default values. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{dns__sd_8c_ac75a335a3adf5753a851f6d402bdf6b7}{dns\+Sd\+Init} (\hyperlink{dns__sd_8h_a616b4c4abbffa3a360ee2f40bea72cf7}{Dns\+Sd\+Context} $\ast$context, const \hyperlink{structDnsSdSettings}{Dns\+Sd\+Settings} $\ast$settings)
+\begin{DoxyCompactList}\small\item\em D\+N\+S-\/\+DS initialization. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{dns__sd_8c_aa1a3d67f41264633e220c4989a4a0afb}{dns\+Sd\+Start} (\hyperlink{dns__sd_8h_a616b4c4abbffa3a360ee2f40bea72cf7}{Dns\+Sd\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Start m\+D\+NS responder. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{dns__sd_8c_a2cc65b84e2cafae43b4ceff6c5ef931e}{dns\+Sd\+Stop} (\hyperlink{dns__sd_8h_a616b4c4abbffa3a360ee2f40bea72cf7}{Dns\+Sd\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Stop m\+D\+NS responder. \end{DoxyCompactList}\item 
+\hyperlink{mdns__responder_8h_a96ee67ecc8252ba576e72c97cd8f7fd3}{Mdns\+State} \hyperlink{dns__sd_8c_a8b53c2c709a4473e89d60a85a3d2f20d}{dns\+Sd\+Get\+State} (\hyperlink{dns__sd_8h_a616b4c4abbffa3a360ee2f40bea72cf7}{Dns\+Sd\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Retrieve current state. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{dns__sd_8c_a85676ec43b582bf84ba70d843381095a}{dns\+Sd\+Set\+Instance\+Name} (\hyperlink{dns__sd_8h_a616b4c4abbffa3a360ee2f40bea72cf7}{Dns\+Sd\+Context} $\ast$context, const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$instance\+Name)
+\begin{DoxyCompactList}\small\item\em Set service instance name. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{dns__sd_8c_a8637bd963ebff00f879c58d3c908b26e}{dns\+Sd\+Register\+Service} (\hyperlink{dns__sd_8h_a616b4c4abbffa3a360ee2f40bea72cf7}{Dns\+Sd\+Context} $\ast$context, const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$service\+Name, \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} \hyperlink{dns__common_8h_a0815784d41b3c13d42ce22367abfba1d}{priority}, \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} \hyperlink{dns__common_8h_a3c304b42c785c4cc5fa46842e2845a6b}{weight}, \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} \hyperlink{dns__common_8h_a8e0798404bf2cf5dabb84c5ba9a4f236}{port}, const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$metadata)
+\begin{DoxyCompactList}\small\item\em Register a D\+N\+S-\/\+SD service. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{dns__sd_8c_a24e6d0c56393ce9e0fa2cb39a4def8f6}{dns\+Sd\+Unregister\+Service} (\hyperlink{dns__sd_8h_a616b4c4abbffa3a360ee2f40bea72cf7}{Dns\+Sd\+Context} $\ast$context, const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$service\+Name)
+\begin{DoxyCompactList}\small\item\em Unregister a D\+N\+S-\/\+SD service. \end{DoxyCompactList}\item 
+\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} \hyperlink{dns__sd_8c_a31ab1c653a7c76144ac3a75eda938017}{dns\+Sd\+Get\+Num\+Services} (\hyperlink{dns__sd_8h_a616b4c4abbffa3a360ee2f40bea72cf7}{Dns\+Sd\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Get the number of registered services. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{dns__sd_8c_a1c979323e188c71ba4e21432be27b969}{dns\+Sd\+Start\+Probing} (\hyperlink{dns__sd_8h_a616b4c4abbffa3a360ee2f40bea72cf7}{Dns\+Sd\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Restart probing process. \end{DoxyCompactList}\item 
+void \hyperlink{dns__sd_8c_ac68d11ba729d01dbd0957b4cc09bb5cc}{dns\+Sd\+Tick} (\hyperlink{dns__sd_8h_a616b4c4abbffa3a360ee2f40bea72cf7}{Dns\+Sd\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em D\+N\+S-\/\+SD responder timer handler. \end{DoxyCompactList}\item 
+void \hyperlink{dns__sd_8c_a6aeb243478f2d1878c585bc0743a3221}{dns\+Sd\+Link\+Change\+Event} (\hyperlink{dns__sd_8h_a616b4c4abbffa3a360ee2f40bea72cf7}{Dns\+Sd\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Callback function for link change event. \end{DoxyCompactList}\item 
+void \hyperlink{dns__sd_8c_a2be3edeed328e1cf5cb9a99098fc318e}{dns\+Sd\+Change\+State} (\hyperlink{dns__sd_8h_a616b4c4abbffa3a360ee2f40bea72cf7}{Dns\+Sd\+Context} $\ast$context, \hyperlink{mdns__responder_8h_a96ee67ecc8252ba576e72c97cd8f7fd3}{Mdns\+State} new\+State, \hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\+\_\+t} delay)
+\begin{DoxyCompactList}\small\item\em Update F\+SM state. \end{DoxyCompactList}\item 
+void \hyperlink{dns__sd_8c_a24ef5edd81bf1039c908d79f315f6925}{dns\+Sd\+Change\+Instance\+Name} (\hyperlink{dns__sd_8h_a616b4c4abbffa3a360ee2f40bea72cf7}{Dns\+Sd\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Programmatically change the service instance name. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{dns__sd_8c_af483c7c7e217f353deefb446957b4518}{dns\+Sd\+Send\+Probe} (\hyperlink{dns__sd_8h_a616b4c4abbffa3a360ee2f40bea72cf7}{Dns\+Sd\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Send probe packet. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{dns__sd_8c_a5740709eba1830f3ece625cf4b6d296a}{dns\+Sd\+Send\+Announcement} (\hyperlink{dns__sd_8h_a616b4c4abbffa3a360ee2f40bea72cf7}{Dns\+Sd\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Send announcement packet. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{dns__sd_8c_a2bf675953147ee6150c2e6788117b284}{dns\+Sd\+Send\+Goodbye} (\hyperlink{dns__sd_8h_a616b4c4abbffa3a360ee2f40bea72cf7}{Dns\+Sd\+Context} $\ast$context, const \hyperlink{structDnsSdService}{Dns\+Sd\+Service} $\ast$service)
+\begin{DoxyCompactList}\small\item\em Send goodbye packet. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{dns__sd_8c_a15ce05880f66f53ee603f6fe4ac15613}{dns\+Sd\+Parse\+Question} (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface, const \hyperlink{structMdnsMessage}{Mdns\+Message} $\ast$query, size\+\_\+t \hyperlink{pic32mz_2isr__support_8h_ac0542d92dfcd62c19170fd963f9e5052}{offset}, const \hyperlink{dns__common_8h_ac1ef063cc8bc932118463092c282f188}{Dns\+Question} $\ast$question, \hyperlink{structMdnsMessage}{Mdns\+Message} $\ast$response)
+\begin{DoxyCompactList}\small\item\em Parse a question. \end{DoxyCompactList}\item 
+void \hyperlink{dns__sd_8c_a9c0b0d6f064fa26e94f5396041803fa9}{dns\+Sd\+Parse\+Ns\+Record} (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface, const \hyperlink{structMdnsMessage}{Mdns\+Message} $\ast$query, size\+\_\+t \hyperlink{pic32mz_2isr__support_8h_ac0542d92dfcd62c19170fd963f9e5052}{offset}, const \hyperlink{dns__common_8h_a801d4a933cd802d56c5450013b4c0969}{Dns\+Resource\+Record} $\ast$record)
+\begin{DoxyCompactList}\small\item\em Parse a resource record from the Authority Section. \end{DoxyCompactList}\item 
+void \hyperlink{dns__sd_8c_a6798c58627559624f9021f86f95f4ee6}{dns\+Sd\+Parse\+An\+Record} (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface, const \hyperlink{structMdnsMessage}{Mdns\+Message} $\ast$response, size\+\_\+t \hyperlink{pic32mz_2isr__support_8h_ac0542d92dfcd62c19170fd963f9e5052}{offset}, const \hyperlink{dns__common_8h_a801d4a933cd802d56c5450013b4c0969}{Dns\+Resource\+Record} $\ast$record)
+\begin{DoxyCompactList}\small\item\em Parse a resource record from the Answer Section. \end{DoxyCompactList}\item 
+void \hyperlink{dns__sd_8c_a6cbe9ebfd668ed81e14bb040c8ee274c}{dns\+Sd\+Generate\+Additional\+Records} (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface, \hyperlink{structMdnsMessage}{Mdns\+Message} $\ast$response, \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} legacy\+Unicast)
+\begin{DoxyCompactList}\small\item\em Additional record generation. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{dns__sd_8c_a4868845573db7c48cb9a219167d45176}{dns\+Sd\+Add\+Service\+Enum\+Ptr\+Record} (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface, \hyperlink{structMdnsMessage}{Mdns\+Message} $\ast$\hyperlink{pap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}, const \hyperlink{structDnsSdService}{Dns\+Sd\+Service} $\ast$service, \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t} \hyperlink{dns__common_8h_a48b9f3382e0929bbd75cda2bf2838126}{ttl})
+\begin{DoxyCompactList}\small\item\em Add P\+TR record to a m\+D\+NS message (in response to a meta-\/query) \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{dns__sd_8c_aaebef4e47ae091d213c56de4ecea263d}{dns\+Sd\+Add\+Ptr\+Record} (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface, \hyperlink{structMdnsMessage}{Mdns\+Message} $\ast$\hyperlink{pap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}, const \hyperlink{structDnsSdService}{Dns\+Sd\+Service} $\ast$service, \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t} \hyperlink{dns__common_8h_a48b9f3382e0929bbd75cda2bf2838126}{ttl})
+\begin{DoxyCompactList}\small\item\em Add P\+TR record to a m\+D\+NS message. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{dns__sd_8c_af47b2d7f33b144326c337ea574d0a6c1}{dns\+Sd\+Add\+Srv\+Record} (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface, \hyperlink{structMdnsMessage}{Mdns\+Message} $\ast$\hyperlink{pap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}, const \hyperlink{structDnsSdService}{Dns\+Sd\+Service} $\ast$service, \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} cache\+Flush, \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t} \hyperlink{dns__common_8h_a48b9f3382e0929bbd75cda2bf2838126}{ttl})
+\begin{DoxyCompactList}\small\item\em Add S\+RV record to a m\+D\+NS message. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{dns__sd_8c_ae172402f69ea0e1bf53d8d98320e782f}{dns\+Sd\+Add\+Txt\+Record} (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface, \hyperlink{structMdnsMessage}{Mdns\+Message} $\ast$\hyperlink{pap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}, const \hyperlink{structDnsSdService}{Dns\+Sd\+Service} $\ast$service, \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} cache\+Flush, \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t} \hyperlink{dns__common_8h_a48b9f3382e0929bbd75cda2bf2838126}{ttl})
+\begin{DoxyCompactList}\small\item\em Add T\+XT record to a m\+D\+NS message. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{dns__sd_8c_a897d66768759ea04152f4720d6c007fb}{dns\+Sd\+Add\+Nsec\+Record} (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface, \hyperlink{structMdnsMessage}{Mdns\+Message} $\ast$\hyperlink{pap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}, const \hyperlink{structDnsSdService}{Dns\+Sd\+Service} $\ast$service, \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} cache\+Flush, \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t} \hyperlink{dns__common_8h_a48b9f3382e0929bbd75cda2bf2838126}{ttl})
+\begin{DoxyCompactList}\small\item\em Add N\+S\+EC record to a m\+D\+NS message. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\+\_\+t} \hyperlink{dns__sd_8c_af478f9554cd38e6072cdfed76fc59e61}{dns\+Sd\+Tick\+Counter}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+D\+N\+S-\/\+SD (D\+N\+S-\/\+Based Service Discovery) 
+
+\hypertarget{pic32mz__ef__curiosity_8h_License}{}\subsection{License}\label{pic32mz__ef__curiosity_8h_License}
+S\+P\+D\+X-\/\+License-\/\+Identifier\+: G\+P\+L-\/2.\+0-\/or-\/later
+
+Copyright (C) 2010-\/2019 Oryx Embedded S\+A\+RL. All rights reserved.
+
+This file is part of Cyclone\+T\+CP Open.
+
+This program is free software; you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+
+You should have received a copy of the G\+NU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-\/1301, U\+SA.\hypertarget{tftp__server_8c_Description}{}\subsection{Description}\label{tftp__server_8c_Description}
+D\+N\+S-\/\+SD allows clients to discover a list of named instances of that desired service, using standard D\+NS queries. Refer to the following R\+F\+Cs for complete details\+:
+\begin{DoxyItemize}
+\item R\+FC 6763\+: D\+N\+S-\/\+Based Service Discovery
+\item R\+FC 2782\+: A D\+NS RR for specifying the location of services (D\+NS S\+RV)
+\end{DoxyItemize}
+
+\begin{DoxyAuthor}{Author}
+Oryx Embedded S\+A\+RL (www.\+oryx-\/embedded.\+com) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+9.\+6 
+\end{DoxyVersion}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{dns__sd_8c_afcdf5e66fd927a7f4cc64295acd20407}\label{dns__sd_8c_afcdf5e66fd927a7f4cc64295acd20407}} 
+\index{dns\+\_\+sd.\+c@{dns\+\_\+sd.\+c}!T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+\index{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}!dns\+\_\+sd.\+c@{dns\+\_\+sd.\+c}}
+\subsubsection{\texorpdfstring{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}{TRACE\_LEVEL}}
+{\footnotesize\ttfamily \#define T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL~D\+N\+S\+\_\+\+S\+D\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}
+
+
+
+Definition at line 40 of file dns\+\_\+sd.\+c.
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{dns__sd_8c_a897d66768759ea04152f4720d6c007fb}\label{dns__sd_8c_a897d66768759ea04152f4720d6c007fb}} 
+\index{dns\+\_\+sd.\+c@{dns\+\_\+sd.\+c}!dns\+Sd\+Add\+Nsec\+Record@{dns\+Sd\+Add\+Nsec\+Record}}
+\index{dns\+Sd\+Add\+Nsec\+Record@{dns\+Sd\+Add\+Nsec\+Record}!dns\+\_\+sd.\+c@{dns\+\_\+sd.\+c}}
+\subsubsection{\texorpdfstring{dns\+Sd\+Add\+Nsec\+Record()}{dnsSdAddNsecRecord()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} dns\+Sd\+Add\+Nsec\+Record (\begin{DoxyParamCaption}\item[{\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$}]{interface,  }\item[{\hyperlink{structMdnsMessage}{Mdns\+Message} $\ast$}]{message,  }\item[{const \hyperlink{structDnsSdService}{Dns\+Sd\+Service} $\ast$}]{service,  }\item[{\hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t}}]{cache\+Flush,  }\item[{\hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t}}]{ttl }\end{DoxyParamCaption})}
+
+
+
+Add N\+S\+EC record to a m\+D\+NS message. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em interface} & Underlying network interface \\
+\hline
+\mbox{\tt in,out}  & {\em message} & Pointer to the m\+D\+NS message \\
+\hline
+\mbox{\tt in}  & {\em service} & Pointer to a D\+N\+S-\/\+SD service \\
+\hline
+\mbox{\tt in}  & {\em cache\+Flush} & Cache-\/flush bit \\
+\hline
+\mbox{\tt in}  & {\em ttl} & Resource record T\+TL (cache lifetime) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 1896 of file dns\+\_\+sd.\+c.
+
+
+\begin{DoxyCode}
+1898 \{
+1899    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1900    \textcolor{keywordtype}{size\_t} \hyperlink{pic32mz_2isr__support_8h_a12a5aed8a193ebbf9a641104a310610d}{offset};
+1901    \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\_t} duplicate;
+1902    \textcolor{keywordtype}{size\_t} bitmapLength;
+1903    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} bitmap[8];
+1904    \hyperlink{dns__sd_8h_a616b4c4abbffa3a360ee2f40bea72cf7}{DnsSdContext} *context;
+1905    \hyperlink{dns__common_8h_a801d4a933cd802d56c5450013b4c0969}{DnsResourceRecord} *record;
+1906 
+1907    \textcolor{comment}{//Point to the DNS-SD context}
+1908    context = interface->dnsSdContext;
+1909 
+1910    \textcolor{comment}{//Check whether the resource record is already present in the Answer}
+1911    \textcolor{comment}{//Section of the message}
+1912    duplicate = \hyperlink{mdns__common_8c_afaea9bc4752331623276122fd01f6d51}{mdnsCheckDuplicateRecord}(message, context->instanceName,
+1913       service->\hyperlink{structDnsSdService_abc60a53b69dd0843ceefa6e7a7b0443c}{name}, \textcolor{stringliteral}{".local"}, \hyperlink{dns__common_8h_aa24a9fb31b6fb3858a24a8d8682e23d1ae9c0d287d3e1c67403e2dc01928f6e43}{DNS\_RR\_TYPE\_NSEC});
+1914 
+1915    \textcolor{comment}{//The duplicates should be suppressed and the resource record should}
+1916    \textcolor{comment}{//appear only once in the list}
+1917    \textcolor{keywordflow}{if}(!duplicate)
+1918    \{
+1919       \textcolor{comment}{//The bitmap identifies the resource record types that exist}
+1920       memset(bitmap, 0, \textcolor{keyword}{sizeof}(bitmap));
+1921 
+1922       \textcolor{comment}{//TXT resource record is supported}
+1923       \hyperlink{dns__common_8h_a13c81542d759522739062dd3e21fff20}{DNS\_SET\_NSEC\_BITMAP}(bitmap, \hyperlink{dns__common_8h_aa24a9fb31b6fb3858a24a8d8682e23d1a6439fec6c56c1fb7fd51fb55190eb0e0}{DNS\_RR\_TYPE\_TXT});
+1924       \textcolor{comment}{//SRV resource record is supported}
+1925       \hyperlink{dns__common_8h_a13c81542d759522739062dd3e21fff20}{DNS\_SET\_NSEC\_BITMAP}(bitmap, \hyperlink{dns__common_8h_aa24a9fb31b6fb3858a24a8d8682e23d1a2fe0a9e93403ff6c34c4a4ce79e0c13c}{DNS\_RR\_TYPE\_SRV});
+1926 
+1927       \textcolor{comment}{//Compute the length of the bitmap}
+1928       \textcolor{keywordflow}{for}(bitmapLength = \textcolor{keyword}{sizeof}(bitmap); bitmapLength > 0; bitmapLength--)
+1929       \{
+1930          \textcolor{comment}{//Trailing zero octets in the bitmap must be omitted...}
+1931          \textcolor{keywordflow}{if}(bitmap[bitmapLength - 1] != 0x00)
+1932             \textcolor{keywordflow}{break};
+1933       \}
+1934 
+1935       \textcolor{comment}{//Set the position to the end of the buffer}
+1936       offset = message->\hyperlink{structMdnsMessage_ad1ebbfad05745924fdeee3389f270e52}{length};
+1937 
+1938       \textcolor{comment}{//The first pass calculates the length of the DNS encoded instance name}
+1939       n = \hyperlink{mdns__common_8c_a5e982ed651cae31a97f043d2258e3fc0}{mdnsEncodeName}(context->instanceName, service->\hyperlink{structDnsSdService_abc60a53b69dd0843ceefa6e7a7b0443c}{name}, \textcolor{stringliteral}{".local"}, 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+1940 
+1941       \textcolor{comment}{//Check the length of the resulting mDNS message}
+1942       \textcolor{keywordflow}{if}((offset + n) > \hyperlink{mdns__common_8h_abed9326bbb44eaf624d42cea4089f367}{MDNS\_MESSAGE\_MAX\_SIZE})
+1943          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca67f2e3bde0b243044afa635130f722cf}{ERROR\_MESSAGE\_TOO\_LONG};
+1944 
+1945       \textcolor{comment}{//The second pass encodes the instance name using the DNS name notation}
+1946       offset += \hyperlink{mdns__common_8c_a5e982ed651cae31a97f043d2258e3fc0}{mdnsEncodeName}(context->instanceName, service->
+      \hyperlink{structDnsSdService_abc60a53b69dd0843ceefa6e7a7b0443c}{name},
+1947          \textcolor{stringliteral}{".local"}, (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *) message->\hyperlink{structMdnsMessage_ac5ab08c143472d040db637c76c972cab}{dnsHeader} + offset);
+1948 
+1949       \textcolor{comment}{//Consider the length of the resource record itself}
+1950       \textcolor{keywordflow}{if}((offset + \textcolor{keyword}{sizeof}(\hyperlink{dns__common_8h_a801d4a933cd802d56c5450013b4c0969}{DnsResourceRecord})) > 
+      \hyperlink{mdns__common_8h_abed9326bbb44eaf624d42cea4089f367}{MDNS\_MESSAGE\_MAX\_SIZE})
+1951          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca67f2e3bde0b243044afa635130f722cf}{ERROR\_MESSAGE\_TOO\_LONG};
+1952 
+1953       \textcolor{comment}{//Point to the corresponding resource record}
+1954       record = \hyperlink{dns__common_8h_a4f1a2722ba292be26060ec5693e1f280}{DNS\_GET\_RESOURCE\_RECORD}(message->\hyperlink{structMdnsMessage_ac5ab08c143472d040db637c76c972cab}{dnsHeader}, offset);
+1955 
+1956       \textcolor{comment}{//Fill in resource record}
+1957       record->rtype = \hyperlink{cpu__endian_8h_a15540dbaeee98b6df80805f92e2f6759}{HTONS}(\hyperlink{dns__common_8h_aa24a9fb31b6fb3858a24a8d8682e23d1ae9c0d287d3e1c67403e2dc01928f6e43}{DNS\_RR\_TYPE\_NSEC});
+1958       record->rclass = \hyperlink{cpu__endian_8h_a15540dbaeee98b6df80805f92e2f6759}{HTONS}(\hyperlink{dns__common_8h_aa541e7289dae8934f7f37e74c15cc5a5ae4d96c0329f035328ba190627f2782e9}{DNS\_RR\_CLASS\_IN});
+1959       record->ttl = \hyperlink{cpu__endian_8h_a63baf217625b15caa7246af75b027380}{htonl}(\hyperlink{dns__common_8h_a48b9f3382e0929bbd75cda2bf2838126}{ttl});
+1960 
+1961       \textcolor{comment}{//Check whether the cache-flush bit should be set}
+1962       \textcolor{keywordflow}{if}(cacheFlush)
+1963          record->rclass |= \hyperlink{cpu__endian_8h_a15540dbaeee98b6df80805f92e2f6759}{HTONS}(\hyperlink{mdns__common_8h_ac8f63bafad3fb67887a45586c82f71e9}{MDNS\_RCLASS\_CACHE\_FLUSH});
+1964 
+1965       \textcolor{comment}{//Advance write index}
+1966       offset += \textcolor{keyword}{sizeof}(\hyperlink{dns__common_8h_a801d4a933cd802d56c5450013b4c0969}{DnsResourceRecord});
+1967 
+1968       \textcolor{comment}{//Check the length of the resulting mDNS message}
+1969       \textcolor{keywordflow}{if}((offset + n + 2) > \hyperlink{mdns__common_8h_abed9326bbb44eaf624d42cea4089f367}{MDNS\_MESSAGE\_MAX\_SIZE})
+1970          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca67f2e3bde0b243044afa635130f722cf}{ERROR\_MESSAGE\_TOO\_LONG};
+1971 
+1972       \textcolor{comment}{//The Next Domain Name field contains the record's own name}
+1973       \hyperlink{mdns__common_8c_a5e982ed651cae31a97f043d2258e3fc0}{mdnsEncodeName}(context->instanceName, service->\hyperlink{structDnsSdService_abc60a53b69dd0843ceefa6e7a7b0443c}{name},
+1974          \textcolor{stringliteral}{".local"}, record->rdata);
+1975 
+1976       \textcolor{comment}{//DNS NSEC record is limited to Window Block number zero}
+1977       record->rdata[n++] = 0;
+1978       \textcolor{comment}{//The Bitmap Length is a value in the range 1-32}
+1979       record->rdata[n++] = bitmapLength;
+1980 
+1981       \textcolor{comment}{//The Bitmap data identifies the resource record types that exist}
+1982       memcpy(record->rdata + n, bitmap, bitmapLength);
+1983 
+1984       \textcolor{comment}{//Convert length field to network byte order}
+1985       record->rdlength = \hyperlink{cpu__endian_8h_a800cdbf435a85a9b3ad4f0edc518472a}{htons}(n + bitmapLength);
+1986 
+1987       \textcolor{comment}{//Number of resource records in the answer section}
+1988       message->\hyperlink{structMdnsMessage_ac5ab08c143472d040db637c76c972cab}{dnsHeader}->ancount++;
+1989       \textcolor{comment}{//Update the length of the DNS message}
+1990       message->\hyperlink{structMdnsMessage_ad1ebbfad05745924fdeee3389f270e52}{length} = offset + n + bitmapLength;
+1991    \}
+1992 
+1993    \textcolor{comment}{//Successful processing}
+1994    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+1995 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{dns__sd_8c_aaebef4e47ae091d213c56de4ecea263d}\label{dns__sd_8c_aaebef4e47ae091d213c56de4ecea263d}} 
+\index{dns\+\_\+sd.\+c@{dns\+\_\+sd.\+c}!dns\+Sd\+Add\+Ptr\+Record@{dns\+Sd\+Add\+Ptr\+Record}}
+\index{dns\+Sd\+Add\+Ptr\+Record@{dns\+Sd\+Add\+Ptr\+Record}!dns\+\_\+sd.\+c@{dns\+\_\+sd.\+c}}
+\subsubsection{\texorpdfstring{dns\+Sd\+Add\+Ptr\+Record()}{dnsSdAddPtrRecord()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} dns\+Sd\+Add\+Ptr\+Record (\begin{DoxyParamCaption}\item[{\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$}]{interface,  }\item[{\hyperlink{structMdnsMessage}{Mdns\+Message} $\ast$}]{message,  }\item[{const \hyperlink{structDnsSdService}{Dns\+Sd\+Service} $\ast$}]{service,  }\item[{\hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t}}]{ttl }\end{DoxyParamCaption})}
+
+
+
+Add P\+TR record to a m\+D\+NS message. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em interface} & Underlying network interface \\
+\hline
+\mbox{\tt in,out}  & {\em message} & Pointer to the m\+D\+NS message \\
+\hline
+\mbox{\tt in}  & {\em service} & Pointer to a D\+N\+S-\/\+SD service \\
+\hline
+\mbox{\tt in}  & {\em ttl} & Resource record T\+TL (cache lifetime) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 1630 of file dns\+\_\+sd.\+c.
+
+
+\begin{DoxyCode}
+1632 \{
+1633    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1634    \textcolor{keywordtype}{size\_t} \hyperlink{pic32mz_2isr__support_8h_a12a5aed8a193ebbf9a641104a310610d}{offset};
+1635    \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\_t} duplicate;
+1636    \hyperlink{dns__sd_8h_a616b4c4abbffa3a360ee2f40bea72cf7}{DnsSdContext} *context;
+1637    \hyperlink{dns__common_8h_a801d4a933cd802d56c5450013b4c0969}{DnsResourceRecord} *record;
+1638 
+1639    \textcolor{comment}{//Point to the DNS-SD context}
+1640    context = interface->dnsSdContext;
+1641 
+1642    \textcolor{comment}{//Check whether the resource record is already present in the Answer}
+1643    \textcolor{comment}{//Section of the message}
+1644    duplicate = \hyperlink{mdns__common_8c_afaea9bc4752331623276122fd01f6d51}{mdnsCheckDuplicateRecord}(message, \textcolor{stringliteral}{""},
+1645       service->\hyperlink{structDnsSdService_abc60a53b69dd0843ceefa6e7a7b0443c}{name}, \textcolor{stringliteral}{".local"}, \hyperlink{dns__common_8h_aa24a9fb31b6fb3858a24a8d8682e23d1a23a2ea11b5bb8ab8d6d088de58be553b}{DNS\_RR\_TYPE\_PTR});
+1646 
+1647    \textcolor{comment}{//The duplicates should be suppressed and the resource record should}
+1648    \textcolor{comment}{//appear only once in the list}
+1649    \textcolor{keywordflow}{if}(!duplicate)
+1650    \{
+1651       \textcolor{comment}{//Set the position to the end of the buffer}
+1652       offset = message->\hyperlink{structMdnsMessage_ad1ebbfad05745924fdeee3389f270e52}{length};
+1653 
+1654       \textcolor{comment}{//The first pass calculates the length of the DNS encoded service name}
+1655       n = \hyperlink{mdns__common_8c_a5e982ed651cae31a97f043d2258e3fc0}{mdnsEncodeName}(\textcolor{stringliteral}{""}, service->\hyperlink{structDnsSdService_abc60a53b69dd0843ceefa6e7a7b0443c}{name}, \textcolor{stringliteral}{".local"}, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+1656 
+1657       \textcolor{comment}{//Check the length of the resulting mDNS message}
+1658       \textcolor{keywordflow}{if}((offset + n) > \hyperlink{mdns__common_8h_abed9326bbb44eaf624d42cea4089f367}{MDNS\_MESSAGE\_MAX\_SIZE})
+1659          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca67f2e3bde0b243044afa635130f722cf}{ERROR\_MESSAGE\_TOO\_LONG};
+1660 
+1661       \textcolor{comment}{//Encode the service name using the DNS name notation}
+1662       offset += \hyperlink{mdns__common_8c_a5e982ed651cae31a97f043d2258e3fc0}{mdnsEncodeName}(\textcolor{stringliteral}{""}, service->\hyperlink{structDnsSdService_abc60a53b69dd0843ceefa6e7a7b0443c}{name},
+1663          \textcolor{stringliteral}{".local"}, (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *) message->\hyperlink{structMdnsMessage_ac5ab08c143472d040db637c76c972cab}{dnsHeader} + offset);
+1664 
+1665       \textcolor{comment}{//Consider the length of the resource record itself}
+1666       \textcolor{keywordflow}{if}((offset + \textcolor{keyword}{sizeof}(\hyperlink{dns__common_8h_a801d4a933cd802d56c5450013b4c0969}{DnsResourceRecord})) > 
+      \hyperlink{mdns__common_8h_abed9326bbb44eaf624d42cea4089f367}{MDNS\_MESSAGE\_MAX\_SIZE})
+1667          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca67f2e3bde0b243044afa635130f722cf}{ERROR\_MESSAGE\_TOO\_LONG};
+1668 
+1669       \textcolor{comment}{//Point to the corresponding resource record}
+1670       record = \hyperlink{dns__common_8h_a4f1a2722ba292be26060ec5693e1f280}{DNS\_GET\_RESOURCE\_RECORD}(message->\hyperlink{structMdnsMessage_ac5ab08c143472d040db637c76c972cab}{dnsHeader}, offset);
+1671 
+1672       \textcolor{comment}{//Fill in resource record}
+1673       record->rtype = \hyperlink{cpu__endian_8h_a15540dbaeee98b6df80805f92e2f6759}{HTONS}(\hyperlink{dns__common_8h_aa24a9fb31b6fb3858a24a8d8682e23d1a23a2ea11b5bb8ab8d6d088de58be553b}{DNS\_RR\_TYPE\_PTR});
+1674       record->rclass = \hyperlink{cpu__endian_8h_a15540dbaeee98b6df80805f92e2f6759}{HTONS}(\hyperlink{dns__common_8h_aa541e7289dae8934f7f37e74c15cc5a5ae4d96c0329f035328ba190627f2782e9}{DNS\_RR\_CLASS\_IN});
+1675       record->ttl = \hyperlink{cpu__endian_8h_a63baf217625b15caa7246af75b027380}{htonl}(\hyperlink{dns__common_8h_a48b9f3382e0929bbd75cda2bf2838126}{ttl});
+1676 
+1677       \textcolor{comment}{//Advance write index}
+1678       offset += \textcolor{keyword}{sizeof}(\hyperlink{dns__common_8h_a801d4a933cd802d56c5450013b4c0969}{DnsResourceRecord});
+1679 
+1680       \textcolor{comment}{//The first pass calculates the length of the DNS encoded instance name}
+1681       n = \hyperlink{mdns__common_8c_a5e982ed651cae31a97f043d2258e3fc0}{mdnsEncodeName}(context->instanceName, service->\hyperlink{structDnsSdService_abc60a53b69dd0843ceefa6e7a7b0443c}{name}, \textcolor{stringliteral}{".local"}, 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+1682 
+1683       \textcolor{comment}{//Check the length of the resulting mDNS message}
+1684       \textcolor{keywordflow}{if}((offset + n) > \hyperlink{mdns__common_8h_abed9326bbb44eaf624d42cea4089f367}{MDNS\_MESSAGE\_MAX\_SIZE})
+1685          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca67f2e3bde0b243044afa635130f722cf}{ERROR\_MESSAGE\_TOO\_LONG};
+1686 
+1687       \textcolor{comment}{//The second pass encodes the instance name using DNS notation}
+1688       n = \hyperlink{mdns__common_8c_a5e982ed651cae31a97f043d2258e3fc0}{mdnsEncodeName}(context->instanceName,
+1689          service->\hyperlink{structDnsSdService_abc60a53b69dd0843ceefa6e7a7b0443c}{name}, \textcolor{stringliteral}{".local"}, record->rdata);
+1690 
+1691       \textcolor{comment}{//Convert length field to network byte order}
+1692       record->rdlength = \hyperlink{cpu__endian_8h_a800cdbf435a85a9b3ad4f0edc518472a}{htons}(n);
+1693 
+1694       \textcolor{comment}{//Number of resource records in the answer section}
+1695       message->\hyperlink{structMdnsMessage_ac5ab08c143472d040db637c76c972cab}{dnsHeader}->ancount++;
+1696       \textcolor{comment}{//Update the length of the DNS message}
+1697       message->\hyperlink{structMdnsMessage_ad1ebbfad05745924fdeee3389f270e52}{length} = offset + \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1698    \}
+1699 
+1700    \textcolor{comment}{//Successful processing}
+1701    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+1702 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{dns__sd_8c_a4868845573db7c48cb9a219167d45176}\label{dns__sd_8c_a4868845573db7c48cb9a219167d45176}} 
+\index{dns\+\_\+sd.\+c@{dns\+\_\+sd.\+c}!dns\+Sd\+Add\+Service\+Enum\+Ptr\+Record@{dns\+Sd\+Add\+Service\+Enum\+Ptr\+Record}}
+\index{dns\+Sd\+Add\+Service\+Enum\+Ptr\+Record@{dns\+Sd\+Add\+Service\+Enum\+Ptr\+Record}!dns\+\_\+sd.\+c@{dns\+\_\+sd.\+c}}
+\subsubsection{\texorpdfstring{dns\+Sd\+Add\+Service\+Enum\+Ptr\+Record()}{dnsSdAddServiceEnumPtrRecord()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} dns\+Sd\+Add\+Service\+Enum\+Ptr\+Record (\begin{DoxyParamCaption}\item[{\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$}]{interface,  }\item[{\hyperlink{structMdnsMessage}{Mdns\+Message} $\ast$}]{message,  }\item[{const \hyperlink{structDnsSdService}{Dns\+Sd\+Service} $\ast$}]{service,  }\item[{\hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t}}]{ttl }\end{DoxyParamCaption})}
+
+
+
+Add P\+TR record to a m\+D\+NS message (in response to a meta-\/query) 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em interface} & Underlying network interface \\
+\hline
+\mbox{\tt in,out}  & {\em message} & Pointer to the m\+D\+NS message \\
+\hline
+\mbox{\tt in}  & {\em service} & Pointer to a D\+N\+S-\/\+SD service \\
+\hline
+\mbox{\tt in}  & {\em ttl} & Resource record T\+TL (cache lifetime) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 1561 of file dns\+\_\+sd.\+c.
+
+
+\begin{DoxyCode}
+1563 \{
+1564    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1565    \textcolor{keywordtype}{size\_t} \hyperlink{pic32mz_2isr__support_8h_a12a5aed8a193ebbf9a641104a310610d}{offset};
+1566    \hyperlink{dns__common_8h_a801d4a933cd802d56c5450013b4c0969}{DnsResourceRecord} *record;
+1567 
+1568    \textcolor{comment}{//Set the position to the end of the buffer}
+1569    offset = message->\hyperlink{structMdnsMessage_ad1ebbfad05745924fdeee3389f270e52}{length};
+1570 
+1571    \textcolor{comment}{//The first pass calculates the length of the DNS encoded service name}
+1572    n = \hyperlink{mdns__common_8c_a5e982ed651cae31a97f043d2258e3fc0}{mdnsEncodeName}(\textcolor{stringliteral}{""}, \textcolor{stringliteral}{"\_services.\_dns-sd.\_udp"}, \textcolor{stringliteral}{".local"}, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+1573 
+1574    \textcolor{comment}{//Check the length of the resulting mDNS message}
+1575    \textcolor{keywordflow}{if}((offset + n) > \hyperlink{mdns__common_8h_abed9326bbb44eaf624d42cea4089f367}{MDNS\_MESSAGE\_MAX\_SIZE})
+1576       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca67f2e3bde0b243044afa635130f722cf}{ERROR\_MESSAGE\_TOO\_LONG};
+1577 
+1578    \textcolor{comment}{//The second pass encodes the service name using the DNS name notation}
+1579    offset += \hyperlink{mdns__common_8c_a5e982ed651cae31a97f043d2258e3fc0}{mdnsEncodeName}(\textcolor{stringliteral}{""}, \textcolor{stringliteral}{"\_services.\_dns-sd.\_udp"},
+1580       \textcolor{stringliteral}{".local"}, (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *) message->\hyperlink{structMdnsMessage_ac5ab08c143472d040db637c76c972cab}{dnsHeader} + offset);
+1581 
+1582    \textcolor{comment}{//Consider the length of the resource record itself}
+1583    \textcolor{keywordflow}{if}((offset + \textcolor{keyword}{sizeof}(\hyperlink{dns__common_8h_a801d4a933cd802d56c5450013b4c0969}{DnsResourceRecord})) > 
+      \hyperlink{mdns__common_8h_abed9326bbb44eaf624d42cea4089f367}{MDNS\_MESSAGE\_MAX\_SIZE})
+1584       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca67f2e3bde0b243044afa635130f722cf}{ERROR\_MESSAGE\_TOO\_LONG};
+1585 
+1586    \textcolor{comment}{//Point to the corresponding resource record}
+1587    record = \hyperlink{dns__common_8h_a4f1a2722ba292be26060ec5693e1f280}{DNS\_GET\_RESOURCE\_RECORD}(message->\hyperlink{structMdnsMessage_ac5ab08c143472d040db637c76c972cab}{dnsHeader}, offset);
+1588 
+1589    \textcolor{comment}{//Fill in resource record}
+1590    record->rtype = \hyperlink{cpu__endian_8h_a15540dbaeee98b6df80805f92e2f6759}{HTONS}(\hyperlink{dns__common_8h_aa24a9fb31b6fb3858a24a8d8682e23d1a23a2ea11b5bb8ab8d6d088de58be553b}{DNS\_RR\_TYPE\_PTR});
+1591    record->rclass = \hyperlink{cpu__endian_8h_a15540dbaeee98b6df80805f92e2f6759}{HTONS}(\hyperlink{dns__common_8h_aa541e7289dae8934f7f37e74c15cc5a5ae4d96c0329f035328ba190627f2782e9}{DNS\_RR\_CLASS\_IN});
+1592    record->ttl = \hyperlink{cpu__endian_8h_a63baf217625b15caa7246af75b027380}{htonl}(\hyperlink{dns__common_8h_a48b9f3382e0929bbd75cda2bf2838126}{ttl});
+1593 
+1594    \textcolor{comment}{//Advance write index}
+1595    offset += \textcolor{keyword}{sizeof}(\hyperlink{dns__common_8h_a801d4a933cd802d56c5450013b4c0969}{DnsResourceRecord});
+1596 
+1597    \textcolor{comment}{//The first pass calculates the length of the DNS encoded service name}
+1598    n = \hyperlink{mdns__common_8c_a5e982ed651cae31a97f043d2258e3fc0}{mdnsEncodeName}(\textcolor{stringliteral}{""}, service->\hyperlink{structDnsSdService_abc60a53b69dd0843ceefa6e7a7b0443c}{name}, \textcolor{stringliteral}{".local"}, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+1599 
+1600    \textcolor{comment}{//Check the length of the resulting mDNS message}
+1601    \textcolor{keywordflow}{if}((offset + n) > \hyperlink{mdns__common_8h_abed9326bbb44eaf624d42cea4089f367}{MDNS\_MESSAGE\_MAX\_SIZE})
+1602       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca67f2e3bde0b243044afa635130f722cf}{ERROR\_MESSAGE\_TOO\_LONG};
+1603 
+1604    \textcolor{comment}{//The second pass encodes the service name using DNS notation}
+1605    n = \hyperlink{mdns__common_8c_a5e982ed651cae31a97f043d2258e3fc0}{mdnsEncodeName}(\textcolor{stringliteral}{""}, service->\hyperlink{structDnsSdService_abc60a53b69dd0843ceefa6e7a7b0443c}{name},
+1606       \textcolor{stringliteral}{".local"}, record->rdata);
+1607 
+1608    \textcolor{comment}{//Convert length field to network byte order}
+1609    record->rdlength = \hyperlink{cpu__endian_8h_a800cdbf435a85a9b3ad4f0edc518472a}{htons}(n);
+1610 
+1611    \textcolor{comment}{//Number of resource records in the answer section}
+1612    message->\hyperlink{structMdnsMessage_ac5ab08c143472d040db637c76c972cab}{dnsHeader}->ancount++;
+1613    \textcolor{comment}{//Update the length of the DNS message}
+1614    message->\hyperlink{structMdnsMessage_ad1ebbfad05745924fdeee3389f270e52}{length} = offset + \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1615 
+1616    \textcolor{comment}{//Successful processing}
+1617    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+1618 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{dns__sd_8c_af47b2d7f33b144326c337ea574d0a6c1}\label{dns__sd_8c_af47b2d7f33b144326c337ea574d0a6c1}} 
+\index{dns\+\_\+sd.\+c@{dns\+\_\+sd.\+c}!dns\+Sd\+Add\+Srv\+Record@{dns\+Sd\+Add\+Srv\+Record}}
+\index{dns\+Sd\+Add\+Srv\+Record@{dns\+Sd\+Add\+Srv\+Record}!dns\+\_\+sd.\+c@{dns\+\_\+sd.\+c}}
+\subsubsection{\texorpdfstring{dns\+Sd\+Add\+Srv\+Record()}{dnsSdAddSrvRecord()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} dns\+Sd\+Add\+Srv\+Record (\begin{DoxyParamCaption}\item[{\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$}]{interface,  }\item[{\hyperlink{structMdnsMessage}{Mdns\+Message} $\ast$}]{message,  }\item[{const \hyperlink{structDnsSdService}{Dns\+Sd\+Service} $\ast$}]{service,  }\item[{\hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t}}]{cache\+Flush,  }\item[{\hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t}}]{ttl }\end{DoxyParamCaption})}
+
+
+
+Add S\+RV record to a m\+D\+NS message. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em interface} & Underlying network interface \\
+\hline
+\mbox{\tt in,out}  & {\em message} & Pointer to the m\+D\+NS message \\
+\hline
+\mbox{\tt in}  & {\em service} & Pointer to a D\+N\+S-\/\+SD service \\
+\hline
+\mbox{\tt in}  & {\em cache\+Flush} & Cache-\/flush bit \\
+\hline
+\mbox{\tt in}  & {\em ttl} & Resource record T\+TL (cache lifetime) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 1715 of file dns\+\_\+sd.\+c.
+
+
+\begin{DoxyCode}
+1717 \{
+1718    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1719    \textcolor{keywordtype}{size\_t} \hyperlink{pic32mz_2isr__support_8h_a12a5aed8a193ebbf9a641104a310610d}{offset};
+1720    \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\_t} duplicate;
+1721    \hyperlink{mdns__responder_8h_a568880b401f701b835db7d635fb0ea38}{MdnsResponderContext} *mdnsResponderContext;
+1722    \hyperlink{dns__sd_8h_a616b4c4abbffa3a360ee2f40bea72cf7}{DnsSdContext} *dnsSdContext;
+1723    \hyperlink{dns__common_8h_a6275a745cd58902d1cf42966a3c077c8}{DnsSrvResourceRecord} *record;
+1724 
+1725    \textcolor{comment}{//Point to the mDNS responder context}
+1726    mdnsResponderContext = interface->mdnsResponderContext;
+1727    \textcolor{comment}{//Point to the DNS-SD context}
+1728    dnsSdContext = interface->dnsSdContext;
+1729 
+1730    \textcolor{comment}{//Check whether the resource record is already present in the Answer}
+1731    \textcolor{comment}{//Section of the message}
+1732    duplicate = \hyperlink{mdns__common_8c_afaea9bc4752331623276122fd01f6d51}{mdnsCheckDuplicateRecord}(message, dnsSdContext->instanceName,
+1733       service->\hyperlink{structDnsSdService_abc60a53b69dd0843ceefa6e7a7b0443c}{name}, \textcolor{stringliteral}{".local"}, \hyperlink{dns__common_8h_aa24a9fb31b6fb3858a24a8d8682e23d1a2fe0a9e93403ff6c34c4a4ce79e0c13c}{DNS\_RR\_TYPE\_SRV});
+1734 
+1735    \textcolor{comment}{//The duplicates should be suppressed and the resource record should}
+1736    \textcolor{comment}{//appear only once in the list}
+1737    \textcolor{keywordflow}{if}(!duplicate)
+1738    \{
+1739       \textcolor{comment}{//Set the position to the end of the buffer}
+1740       offset = message->\hyperlink{structMdnsMessage_ad1ebbfad05745924fdeee3389f270e52}{length};
+1741 
+1742       \textcolor{comment}{//The first pass calculates the length of the DNS encoded instance name}
+1743       n = \hyperlink{mdns__common_8c_a5e982ed651cae31a97f043d2258e3fc0}{mdnsEncodeName}(dnsSdContext->instanceName,
+1744          service->\hyperlink{structDnsSdService_abc60a53b69dd0843ceefa6e7a7b0443c}{name}, \textcolor{stringliteral}{".local"}, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+1745 
+1746       \textcolor{comment}{//Check the length of the resulting mDNS message}
+1747       \textcolor{keywordflow}{if}((offset + n) > \hyperlink{mdns__common_8h_abed9326bbb44eaf624d42cea4089f367}{MDNS\_MESSAGE\_MAX\_SIZE})
+1748          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca67f2e3bde0b243044afa635130f722cf}{ERROR\_MESSAGE\_TOO\_LONG};
+1749 
+1750       \textcolor{comment}{//The second pass encodes the instance name using DNS notation}
+1751       offset += \hyperlink{mdns__common_8c_a5e982ed651cae31a97f043d2258e3fc0}{mdnsEncodeName}(dnsSdContext->instanceName,
+1752          service->\hyperlink{structDnsSdService_abc60a53b69dd0843ceefa6e7a7b0443c}{name}, \textcolor{stringliteral}{".local"}, (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *) message->\hyperlink{structMdnsMessage_ac5ab08c143472d040db637c76c972cab}{dnsHeader} + offset);
+1753 
+1754       \textcolor{comment}{//Consider the length of the resource record itself}
+1755       \textcolor{keywordflow}{if}((offset + \textcolor{keyword}{sizeof}(\hyperlink{dns__common_8h_a6275a745cd58902d1cf42966a3c077c8}{DnsSrvResourceRecord})) > 
+      \hyperlink{mdns__common_8h_abed9326bbb44eaf624d42cea4089f367}{MDNS\_MESSAGE\_MAX\_SIZE})
+1756          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca67f2e3bde0b243044afa635130f722cf}{ERROR\_MESSAGE\_TOO\_LONG};
+1757 
+1758       \textcolor{comment}{//Point to the corresponding resource record}
+1759       record = (\hyperlink{dns__common_8h_a6275a745cd58902d1cf42966a3c077c8}{DnsSrvResourceRecord} *) 
+      \hyperlink{dns__common_8h_a4f1a2722ba292be26060ec5693e1f280}{DNS\_GET\_RESOURCE\_RECORD}(message->\hyperlink{structMdnsMessage_ac5ab08c143472d040db637c76c972cab}{dnsHeader}, offset);
+1760 
+1761       \textcolor{comment}{//Fill in resource record}
+1762       record->rtype = \hyperlink{cpu__endian_8h_a15540dbaeee98b6df80805f92e2f6759}{HTONS}(\hyperlink{dns__common_8h_aa24a9fb31b6fb3858a24a8d8682e23d1a2fe0a9e93403ff6c34c4a4ce79e0c13c}{DNS\_RR\_TYPE\_SRV});
+1763       record->rclass = \hyperlink{cpu__endian_8h_a15540dbaeee98b6df80805f92e2f6759}{HTONS}(\hyperlink{dns__common_8h_aa541e7289dae8934f7f37e74c15cc5a5ae4d96c0329f035328ba190627f2782e9}{DNS\_RR\_CLASS\_IN});
+1764       record->ttl = \hyperlink{cpu__endian_8h_a63baf217625b15caa7246af75b027380}{htonl}(\hyperlink{dns__common_8h_a48b9f3382e0929bbd75cda2bf2838126}{ttl});
+1765       record->priority = \hyperlink{cpu__endian_8h_a800cdbf435a85a9b3ad4f0edc518472a}{htons}(service->\hyperlink{structDnsSdService_afe6d19247c710cfd1eaa9f427488e498}{priority});
+1766       record->weight = \hyperlink{cpu__endian_8h_a800cdbf435a85a9b3ad4f0edc518472a}{htons}(service->\hyperlink{structDnsSdService_a5a9548cecc8e63b7029f48fe83059234}{weight});
+1767       record->port = \hyperlink{cpu__endian_8h_a800cdbf435a85a9b3ad4f0edc518472a}{htons}(service->\hyperlink{structDnsSdService_abf6fd1a073f7294ec927abb9b676c86a}{port});
+1768 
+1769       \textcolor{comment}{//Check whether the cache-flush bit should be set}
+1770       \textcolor{keywordflow}{if}(cacheFlush)
+1771          record->rclass |= \hyperlink{cpu__endian_8h_a15540dbaeee98b6df80805f92e2f6759}{HTONS}(\hyperlink{mdns__common_8h_ac8f63bafad3fb67887a45586c82f71e9}{MDNS\_RCLASS\_CACHE\_FLUSH});
+1772 
+1773       \textcolor{comment}{//Advance write index}
+1774       offset += \textcolor{keyword}{sizeof}(\hyperlink{dns__common_8h_a6275a745cd58902d1cf42966a3c077c8}{DnsSrvResourceRecord});
+1775 
+1776       \textcolor{comment}{//The first pass calculates the length of the DNS encoded target name}
+1777       n = \hyperlink{mdns__common_8c_a5e982ed651cae31a97f043d2258e3fc0}{mdnsEncodeName}(\textcolor{stringliteral}{""}, mdnsResponderContext->hostname,
+1778          \textcolor{stringliteral}{".local"}, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+1779 
+1780       \textcolor{comment}{//Check the length of the resulting mDNS message}
+1781       \textcolor{keywordflow}{if}((offset + n) > \hyperlink{mdns__common_8h_abed9326bbb44eaf624d42cea4089f367}{MDNS\_MESSAGE\_MAX\_SIZE})
+1782          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca67f2e3bde0b243044afa635130f722cf}{ERROR\_MESSAGE\_TOO\_LONG};
+1783 
+1784       \textcolor{comment}{//The second pass encodes the target name using DNS notation}
+1785       n = \hyperlink{mdns__common_8c_a5e982ed651cae31a97f043d2258e3fc0}{mdnsEncodeName}(\textcolor{stringliteral}{""}, mdnsResponderContext->hostname,
+1786          \textcolor{stringliteral}{".local"}, record->target);
+1787 
+1788       \textcolor{comment}{//Calculate data length}
+1789       record->rdlength = \hyperlink{cpu__endian_8h_a800cdbf435a85a9b3ad4f0edc518472a}{htons}(\textcolor{keyword}{sizeof}(\hyperlink{dns__common_8h_a6275a745cd58902d1cf42966a3c077c8}{DnsSrvResourceRecord}) -
+1790          \textcolor{keyword}{sizeof}(\hyperlink{dns__common_8h_a801d4a933cd802d56c5450013b4c0969}{DnsResourceRecord}) + n);
+1791 
+1792       \textcolor{comment}{//Number of resource records in the answer section}
+1793       message->\hyperlink{structMdnsMessage_ac5ab08c143472d040db637c76c972cab}{dnsHeader}->ancount++;
+1794       \textcolor{comment}{//Update the length of the DNS message}
+1795       message->\hyperlink{structMdnsMessage_ad1ebbfad05745924fdeee3389f270e52}{length} = offset + \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1796    \}
+1797 
+1798    \textcolor{comment}{//Successful processing}
+1799    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+1800 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{dns__sd_8c_ae172402f69ea0e1bf53d8d98320e782f}\label{dns__sd_8c_ae172402f69ea0e1bf53d8d98320e782f}} 
+\index{dns\+\_\+sd.\+c@{dns\+\_\+sd.\+c}!dns\+Sd\+Add\+Txt\+Record@{dns\+Sd\+Add\+Txt\+Record}}
+\index{dns\+Sd\+Add\+Txt\+Record@{dns\+Sd\+Add\+Txt\+Record}!dns\+\_\+sd.\+c@{dns\+\_\+sd.\+c}}
+\subsubsection{\texorpdfstring{dns\+Sd\+Add\+Txt\+Record()}{dnsSdAddTxtRecord()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} dns\+Sd\+Add\+Txt\+Record (\begin{DoxyParamCaption}\item[{\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$}]{interface,  }\item[{\hyperlink{structMdnsMessage}{Mdns\+Message} $\ast$}]{message,  }\item[{const \hyperlink{structDnsSdService}{Dns\+Sd\+Service} $\ast$}]{service,  }\item[{\hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t}}]{cache\+Flush,  }\item[{\hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t}}]{ttl }\end{DoxyParamCaption})}
+
+
+
+Add T\+XT record to a m\+D\+NS message. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em interface} & Underlying network interface \\
+\hline
+\mbox{\tt in,out}  & {\em message} & Pointer to the m\+D\+NS message \\
+\hline
+\mbox{\tt in}  & {\em service} & Pointer to a D\+N\+S-\/\+SD service \\
+\hline
+\mbox{\tt in}  & {\em cache\+Flush} & Cache-\/flush bit \\
+\hline
+\mbox{\tt in}  & {\em ttl} & Resource record T\+TL (cache lifetime) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 1813 of file dns\+\_\+sd.\+c.
+
+
+\begin{DoxyCode}
+1815 \{
+1816    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1817    \textcolor{keywordtype}{size\_t} \hyperlink{pic32mz_2isr__support_8h_a12a5aed8a193ebbf9a641104a310610d}{offset};
+1818    \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\_t} duplicate;
+1819    \hyperlink{dns__sd_8h_a616b4c4abbffa3a360ee2f40bea72cf7}{DnsSdContext} *context;
+1820    \hyperlink{dns__common_8h_a801d4a933cd802d56c5450013b4c0969}{DnsResourceRecord} *record;
+1821 
+1822    \textcolor{comment}{//Point to the DNS-SD context}
+1823    context = interface->dnsSdContext;
+1824 
+1825    \textcolor{comment}{//Check whether the resource record is already present in the Answer}
+1826    \textcolor{comment}{//Section of the message}
+1827    duplicate = \hyperlink{mdns__common_8c_afaea9bc4752331623276122fd01f6d51}{mdnsCheckDuplicateRecord}(message, context->instanceName,
+1828       service->\hyperlink{structDnsSdService_abc60a53b69dd0843ceefa6e7a7b0443c}{name}, \textcolor{stringliteral}{".local"}, \hyperlink{dns__common_8h_aa24a9fb31b6fb3858a24a8d8682e23d1a6439fec6c56c1fb7fd51fb55190eb0e0}{DNS\_RR\_TYPE\_TXT});
+1829 
+1830    \textcolor{comment}{//The duplicates should be suppressed and the resource record should}
+1831    \textcolor{comment}{//appear only once in the list}
+1832    \textcolor{keywordflow}{if}(!duplicate)
+1833    \{
+1834       \textcolor{comment}{//Set the position to the end of the buffer}
+1835       offset = message->\hyperlink{structMdnsMessage_ad1ebbfad05745924fdeee3389f270e52}{length};
+1836 
+1837       \textcolor{comment}{//The first pass calculates the length of the DNS encoded instance name}
+1838       n = \hyperlink{mdns__common_8c_a5e982ed651cae31a97f043d2258e3fc0}{mdnsEncodeName}(context->instanceName, service->\hyperlink{structDnsSdService_abc60a53b69dd0843ceefa6e7a7b0443c}{name}, \textcolor{stringliteral}{".local"}, 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+1839 
+1840       \textcolor{comment}{//Check the length of the resulting mDNS message}
+1841       \textcolor{keywordflow}{if}((offset + n) > \hyperlink{mdns__common_8h_abed9326bbb44eaf624d42cea4089f367}{MDNS\_MESSAGE\_MAX\_SIZE})
+1842          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca67f2e3bde0b243044afa635130f722cf}{ERROR\_MESSAGE\_TOO\_LONG};
+1843 
+1844       \textcolor{comment}{//The second pass encodes the instance name using DNS notation}
+1845       offset += \hyperlink{mdns__common_8c_a5e982ed651cae31a97f043d2258e3fc0}{mdnsEncodeName}(context->instanceName,
+1846          service->\hyperlink{structDnsSdService_abc60a53b69dd0843ceefa6e7a7b0443c}{name}, \textcolor{stringliteral}{".local"}, (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *) message->\hyperlink{structMdnsMessage_ac5ab08c143472d040db637c76c972cab}{dnsHeader} + offset);
+1847 
+1848       \textcolor{comment}{//Consider the length of the resource record itself}
+1849       \textcolor{keywordflow}{if}((offset + \textcolor{keyword}{sizeof}(\hyperlink{dns__common_8h_a801d4a933cd802d56c5450013b4c0969}{DnsResourceRecord})) > 
+      \hyperlink{mdns__common_8h_abed9326bbb44eaf624d42cea4089f367}{MDNS\_MESSAGE\_MAX\_SIZE})
+1850          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca67f2e3bde0b243044afa635130f722cf}{ERROR\_MESSAGE\_TOO\_LONG};
+1851 
+1852       \textcolor{comment}{//Point to the corresponding resource record}
+1853       record = \hyperlink{dns__common_8h_a4f1a2722ba292be26060ec5693e1f280}{DNS\_GET\_RESOURCE\_RECORD}(message->\hyperlink{structMdnsMessage_ac5ab08c143472d040db637c76c972cab}{dnsHeader}, offset);
+1854 
+1855       \textcolor{comment}{//Fill in resource record}
+1856       record->rtype = \hyperlink{cpu__endian_8h_a15540dbaeee98b6df80805f92e2f6759}{HTONS}(\hyperlink{dns__common_8h_aa24a9fb31b6fb3858a24a8d8682e23d1a6439fec6c56c1fb7fd51fb55190eb0e0}{DNS\_RR\_TYPE\_TXT});
+1857       record->rclass = \hyperlink{cpu__endian_8h_a15540dbaeee98b6df80805f92e2f6759}{HTONS}(\hyperlink{dns__common_8h_aa541e7289dae8934f7f37e74c15cc5a5ae4d96c0329f035328ba190627f2782e9}{DNS\_RR\_CLASS\_IN});
+1858       record->ttl = \hyperlink{cpu__endian_8h_a63baf217625b15caa7246af75b027380}{htonl}(\hyperlink{dns__common_8h_a48b9f3382e0929bbd75cda2bf2838126}{ttl});
+1859       record->rdlength = \hyperlink{cpu__endian_8h_a800cdbf435a85a9b3ad4f0edc518472a}{htons}(service->\hyperlink{structDnsSdService_a09d63607034e43aa05f059e1e0ba3e81}{metadataLength});
+1860 
+1861       \textcolor{comment}{//Check whether the cache-flush bit should be set}
+1862       \textcolor{keywordflow}{if}(cacheFlush)
+1863          record->rclass |= \hyperlink{cpu__endian_8h_a15540dbaeee98b6df80805f92e2f6759}{HTONS}(\hyperlink{mdns__common_8h_ac8f63bafad3fb67887a45586c82f71e9}{MDNS\_RCLASS\_CACHE\_FLUSH});
+1864 
+1865       \textcolor{comment}{//Advance write index}
+1866       offset += \textcolor{keyword}{sizeof}(\hyperlink{dns__common_8h_a801d4a933cd802d56c5450013b4c0969}{DnsResourceRecord});
+1867 
+1868       \textcolor{comment}{//Check the length of the resulting mDNS message}
+1869       \textcolor{keywordflow}{if}((offset + service->\hyperlink{structDnsSdService_a09d63607034e43aa05f059e1e0ba3e81}{metadataLength}) > 
+      \hyperlink{mdns__common_8h_abed9326bbb44eaf624d42cea4089f367}{MDNS\_MESSAGE\_MAX\_SIZE})
+1870          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca67f2e3bde0b243044afa635130f722cf}{ERROR\_MESSAGE\_TOO\_LONG};
+1871 
+1872       \textcolor{comment}{//Copy metadata}
+1873       memcpy(record->rdata, service->\hyperlink{structDnsSdService_acdddadde600948cb3f18ac8b50aa6faa}{metadata}, service->\hyperlink{structDnsSdService_a09d63607034e43aa05f059e1e0ba3e81}{metadataLength});
+1874 
+1875       \textcolor{comment}{//Update the length of the DNS message}
+1876       message->\hyperlink{structMdnsMessage_ad1ebbfad05745924fdeee3389f270e52}{length} = offset + service->\hyperlink{structDnsSdService_a09d63607034e43aa05f059e1e0ba3e81}{metadataLength};
+1877       \textcolor{comment}{//Number of resource records in the answer section}
+1878       message->\hyperlink{structMdnsMessage_ac5ab08c143472d040db637c76c972cab}{dnsHeader}->ancount++;
+1879    \}
+1880 
+1881    \textcolor{comment}{//Successful processing}
+1882    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+1883 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{dns__sd_8c_a24ef5edd81bf1039c908d79f315f6925}\label{dns__sd_8c_a24ef5edd81bf1039c908d79f315f6925}} 
+\index{dns\+\_\+sd.\+c@{dns\+\_\+sd.\+c}!dns\+Sd\+Change\+Instance\+Name@{dns\+Sd\+Change\+Instance\+Name}}
+\index{dns\+Sd\+Change\+Instance\+Name@{dns\+Sd\+Change\+Instance\+Name}!dns\+\_\+sd.\+c@{dns\+\_\+sd.\+c}}
+\subsubsection{\texorpdfstring{dns\+Sd\+Change\+Instance\+Name()}{dnsSdChangeInstanceName()}}
+{\footnotesize\ttfamily void dns\+Sd\+Change\+Instance\+Name (\begin{DoxyParamCaption}\item[{\hyperlink{dns__sd_8h_a616b4c4abbffa3a360ee2f40bea72cf7}{Dns\+Sd\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Programmatically change the service instance name. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the D\+N\+S-\/\+SD context \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 723 of file dns\+\_\+sd.\+c.
+
+
+\begin{DoxyCode}
+724 \{
+725    \textcolor{keywordtype}{size\_t} i;
+726    \textcolor{keywordtype}{size\_t} \hyperlink{ndp_8h_a6b3284d8492267a77ca46948daf5545e}{m};
+727    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+728    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} index;
+729    \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\_t} \hyperlink{md2_8c_adf356ff381033f761b7de5f76e763a45}{s}[16];
+730 
+731    \textcolor{comment}{//Retrieve the length of the string}
+732    n = strlen(context->instanceName);
+733 
+734    \textcolor{comment}{//Parse the string backwards}
+735    \textcolor{keywordflow}{for}(i = n; i > 0; i--)
+736    \{
+737       \textcolor{comment}{//Last character?}
+738       \textcolor{keywordflow}{if}(i == n)
+739       \{
+740          \textcolor{comment}{//Check whether the last character is a bracket}
+741          \textcolor{keywordflow}{if}(context->instanceName[i - 1] != \textcolor{charliteral}{')'})
+742             \textcolor{keywordflow}{break};
+743       \}
+744       \textcolor{keywordflow}{else}
+745       \{
+746          \textcolor{comment}{//Check whether the current character is a digit}
+747          \textcolor{keywordflow}{if}(!isdigit((\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t}) context->instanceName[i - 1]))
+748             \textcolor{keywordflow}{break};
+749       \}
+750    \}
+751 
+752    \textcolor{comment}{//Any number following the service instance name?}
+753    \textcolor{keywordflow}{if}(context->instanceName[i] != \textcolor{charliteral}{'\(\backslash\)0'})
+754    \{
+755       \textcolor{comment}{//Retrieve the number at the end of the name}
+756       index = atoi(context->instanceName + i);
+757       \textcolor{comment}{//Increment the value}
+758       index++;
+759 
+760       \textcolor{comment}{//Check the length of the name}
+761       \textcolor{keywordflow}{if}(i >= 2)
+762       \{
+763          \textcolor{comment}{//Discard any space and bracket that may precede the number}
+764          \textcolor{keywordflow}{if}(context->instanceName[i - 2] == \textcolor{charliteral}{' '} &&
+765             context->instanceName[i - 1] == \textcolor{charliteral}{'('})
+766          \{
+767             i -= 2;
+768          \}
+769       \}
+770 
+771       \textcolor{comment}{//Strip the digits}
+772       context->instanceName[i] = \textcolor{charliteral}{'\(\backslash\)0'};
+773    \}
+774    \textcolor{keywordflow}{else}
+775    \{
+776       \textcolor{comment}{//Append the digit "2" to the name}
+777       index = 2;
+778    \}
+779 
+780    \textcolor{comment}{//Convert the number to a string of characters}
+781    m = sprintf(s, \textcolor{stringliteral}{" (%"} PRIu32 \textcolor{stringliteral}{")"}, index);
+782 
+783    \textcolor{comment}{//Sanity check}
+784    \textcolor{keywordflow}{if}((i + m) <= \hyperlink{dns__sd_8h_acbbd239513bf1078f6b8b4b7bccff7cf}{DNS\_SD\_MAX\_INSTANCE\_NAME\_LEN})
+785    \{
+786       \textcolor{comment}{//Programmatically change the service instance name}
+787       strcat(context->instanceName, s);
+788    \}
+789 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{dns__sd_8c_a2be3edeed328e1cf5cb9a99098fc318e}\label{dns__sd_8c_a2be3edeed328e1cf5cb9a99098fc318e}} 
+\index{dns\+\_\+sd.\+c@{dns\+\_\+sd.\+c}!dns\+Sd\+Change\+State@{dns\+Sd\+Change\+State}}
+\index{dns\+Sd\+Change\+State@{dns\+Sd\+Change\+State}!dns\+\_\+sd.\+c@{dns\+\_\+sd.\+c}}
+\subsubsection{\texorpdfstring{dns\+Sd\+Change\+State()}{dnsSdChangeState()}}
+{\footnotesize\ttfamily void dns\+Sd\+Change\+State (\begin{DoxyParamCaption}\item[{\hyperlink{dns__sd_8h_a616b4c4abbffa3a360ee2f40bea72cf7}{Dns\+Sd\+Context} $\ast$}]{context,  }\item[{\hyperlink{mdns__responder_8h_a96ee67ecc8252ba576e72c97cd8f7fd3}{Mdns\+State}}]{new\+State,  }\item[{\hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\+\_\+t}}]{delay }\end{DoxyParamCaption})}
+
+
+
+Update F\+SM state. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the D\+N\+S-\/\+SD context \\
+\hline
+\mbox{\tt in}  & {\em new\+State} & New state to switch to \\
+\hline
+\mbox{\tt in}  & {\em delay} & Initial delay \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 688 of file dns\+\_\+sd.\+c.
+
+
+\begin{DoxyCode}
+690 \{
+691    \hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{NetInterface} *interface;
+692 
+693    \textcolor{comment}{//Point to the underlying network interface}
+694    \textcolor{keyword}{interface }= context->settings.interface;
+695 
+696    \textcolor{comment}{//Set time stamp}
+697    context->timestamp = \hyperlink{os__port__chibios_8c_ab66a11272d40a916fa69dd8e4dc443d4}{osGetSystemTime}();
+698    \textcolor{comment}{//Set initial delay}
+699    context->timeout = delay;
+700    \textcolor{comment}{//Reset retransmission counter}
+701    context->retransmitCount = 0;
+702    \textcolor{comment}{//Switch to the new state}
+703    context->state = newState;
+704 
+705    \textcolor{comment}{//Any registered callback?}
+706    \textcolor{keywordflow}{if}(context->settings.stateChangeEvent != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+707    \{
+708       \textcolor{comment}{//Release exclusive access}
+709       \hyperlink{os__port__chibios_8c_a8e10e5b2c6d3877b5ba60e375ac45d79}{osReleaseMutex}(&\hyperlink{net_8c_afe31551ad26115fae8e575654346d441}{netMutex});
+710       \textcolor{comment}{//Invoke user callback function}
+711       context->settings.stateChangeEvent(context, interface, newState);
+712       \textcolor{comment}{//Get exclusive access}
+713       \hyperlink{os__port__chibios_8c_a58485224df4bfa522246d55b35bbd83a}{osAcquireMutex}(&\hyperlink{net_8c_afe31551ad26115fae8e575654346d441}{netMutex});
+714    \}
+715 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{dns__sd_8c_a6cbe9ebfd668ed81e14bb040c8ee274c}\label{dns__sd_8c_a6cbe9ebfd668ed81e14bb040c8ee274c}} 
+\index{dns\+\_\+sd.\+c@{dns\+\_\+sd.\+c}!dns\+Sd\+Generate\+Additional\+Records@{dns\+Sd\+Generate\+Additional\+Records}}
+\index{dns\+Sd\+Generate\+Additional\+Records@{dns\+Sd\+Generate\+Additional\+Records}!dns\+\_\+sd.\+c@{dns\+\_\+sd.\+c}}
+\subsubsection{\texorpdfstring{dns\+Sd\+Generate\+Additional\+Records()}{dnsSdGenerateAdditionalRecords()}}
+{\footnotesize\ttfamily void dns\+Sd\+Generate\+Additional\+Records (\begin{DoxyParamCaption}\item[{\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$}]{interface,  }\item[{\hyperlink{structMdnsMessage}{Mdns\+Message} $\ast$}]{response,  }\item[{\hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t}}]{legacy\+Unicast }\end{DoxyParamCaption})}
+
+
+
+Additional record generation. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em interface} & Underlying network interface \\
+\hline
+\mbox{\tt in,out}  & {\em response} & m\+D\+NS response message \\
+\hline
+\mbox{\tt in}  & {\em legacy\+Unicast} & This flag is set for legacy unicast responses \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 1407 of file dns\+\_\+sd.\+c.
+
+
+\begin{DoxyCode}
+1409 \{
+1410    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+1411    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+1412    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} j;
+1413    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+1414    \textcolor{keywordtype}{size\_t} \hyperlink{pic32mz_2isr__support_8h_a12a5aed8a193ebbf9a641104a310610d}{offset};
+1415    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} \hyperlink{dns__common_8h_a2a5577b198ba758438292038bbab5437}{ancount};
+1416    \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t} \hyperlink{dns__common_8h_ab71c0274cba7f2fc8f94ded11b72917a}{rclass};
+1417    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} \hyperlink{dns__common_8h_a48b9f3382e0929bbd75cda2bf2838126}{ttl};
+1418    \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\_t} cacheFlush;
+1419    \hyperlink{dns__sd_8h_a616b4c4abbffa3a360ee2f40bea72cf7}{DnsSdContext} *context;
+1420    \hyperlink{structDnsSdService}{DnsSdService} *service;
+1421    \hyperlink{dns__common_8h_a801d4a933cd802d56c5450013b4c0969}{DnsResourceRecord} *record;
+1422 
+1423    \textcolor{comment}{//Point to the DNS-SD context}
+1424    context = interface->dnsSdContext;
+1425    \textcolor{comment}{//Make sure DNS-SD has been properly instantiated}
+1426    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1427       \textcolor{keywordflow}{return};
+1428 
+1429    \textcolor{comment}{//No registered services?}
+1430    \textcolor{keywordflow}{if}(\hyperlink{dns__sd_8c_a31ab1c653a7c76144ac3a75eda938017}{dnsSdGetNumServices}(context) == 0)
+1431       \textcolor{keywordflow}{return};
+1432 
+1433    \textcolor{comment}{//mDNS responses must not contain any questions in the Question Section}
+1434    \textcolor{keywordflow}{if}(response->\hyperlink{structMdnsMessage_ac5ab08c143472d040db637c76c972cab}{dnsHeader}->qdcount != 0)
+1435       \textcolor{keywordflow}{return};
+1436 
+1437    \textcolor{comment}{//Get the TTL resource record}
+1438    ttl = context->settings.ttl;
+1439 
+1440    \textcolor{comment}{//Check whether the querier originating the query is a simple resolver}
+1441    \textcolor{keywordflow}{if}(legacyUnicast)
+1442    \{
+1443       \textcolor{comment}{//The resource record TTL given in a legacy unicast response should}
+1444       \textcolor{comment}{//not be greater than ten seconds, even if the true TTL of the mDNS}
+1445       \textcolor{comment}{//resource record is higher}
+1446       ttl = \hyperlink{os__port_8h_a3acffbd305ee72dcd4593c0d8af64a4f}{MIN}(ttl, \hyperlink{mdns__common_8h_a909578ac09bb6948e089bece875b866a}{MDNS\_LEGACY\_UNICAST\_RR\_TTL});
+1447 
+1448       \textcolor{comment}{//The cache-flush bit must not be set in legacy unicast responses}
+1449       cacheFlush = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+1450    \}
+1451    \textcolor{keywordflow}{else}
+1452    \{
+1453       \textcolor{comment}{//The cache-bit should be set for unique resource records}
+1454       cacheFlush = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+1455    \}
+1456 
+1457    \textcolor{comment}{//Point to the first resource record}
+1458    offset = \textcolor{keyword}{sizeof}(\hyperlink{dns__common_8h_a5caa7816ce531b3920054e974a0679f3}{DnsHeader});
+1459 
+1460    \textcolor{comment}{//Save the number of resource records in the Answer Section}
+1461    ancount = response->\hyperlink{structMdnsMessage_ac5ab08c143472d040db637c76c972cab}{dnsHeader}->ancount;
+1462 
+1463    \textcolor{comment}{//Parse the Answer Section}
+1464    \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{dns__common_8h_a2a5577b198ba758438292038bbab5437}{ancount}; i++)
+1465    \{
+1466       \textcolor{comment}{//Parse resource record name}
+1467       n = \hyperlink{dns__common_8c_a6a5df1aead8f61467e9bf5e739ea5de0}{dnsParseName}(response->\hyperlink{structMdnsMessage_ac5ab08c143472d040db637c76c972cab}{dnsHeader}, response->
+      \hyperlink{structMdnsMessage_ad1ebbfad05745924fdeee3389f270e52}{length}, offset, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, 0);
+1468       \textcolor{comment}{//Invalid name?}
+1469       \textcolor{keywordflow}{if}(!n)
+1470          \textcolor{keywordflow}{break};
+1471 
+1472       \textcolor{comment}{//Point to the associated resource record}
+1473       record = \hyperlink{dns__common_8h_a4f1a2722ba292be26060ec5693e1f280}{DNS\_GET\_RESOURCE\_RECORD}(response->
+      \hyperlink{structMdnsMessage_ac5ab08c143472d040db637c76c972cab}{dnsHeader}, n);
+1474       \textcolor{comment}{//Point to the resource data}
+1475       n += \textcolor{keyword}{sizeof}(\hyperlink{dns__common_8h_a801d4a933cd802d56c5450013b4c0969}{DnsResourceRecord});
+1476 
+1477       \textcolor{comment}{//Make sure the resource record is valid}
+1478       \textcolor{keywordflow}{if}(n > response->\hyperlink{structMdnsMessage_ad1ebbfad05745924fdeee3389f270e52}{length})
+1479          \textcolor{keywordflow}{break};
+1480       \textcolor{keywordflow}{if}((n + \hyperlink{cpu__endian_8h_a9312c6eb72e64f748ae0d0e0dc3ec9b9}{ntohs}(record->rdlength)) > response->\hyperlink{structMdnsMessage_ad1ebbfad05745924fdeee3389f270e52}{length})
+1481          \textcolor{keywordflow}{break};
+1482 
+1483       \textcolor{comment}{//Convert the record class to host byte order}
+1484       rclass = \hyperlink{cpu__endian_8h_a9312c6eb72e64f748ae0d0e0dc3ec9b9}{ntohs}(record->rclass);
+1485       \textcolor{comment}{//Discard the cache-flush bit}
+1486       rclass &= ~\hyperlink{mdns__common_8h_ac8f63bafad3fb67887a45586c82f71e9}{MDNS\_RCLASS\_CACHE\_FLUSH};
+1487 
+1488       \textcolor{comment}{//Loop through the list of registered services}
+1489       \textcolor{keywordflow}{for}(j = 0; j < \hyperlink{dns__sd_8h_a561a3da46162838063fd14c5135d01c7}{DNS\_SD\_SERVICE\_LIST\_SIZE}; j++)
+1490       \{
+1491          \textcolor{comment}{//Point to the current entry}
+1492          service = &context->serviceList[j];
+1493 
+1494          \textcolor{comment}{//Valid service?}
+1495          \textcolor{keywordflow}{if}(service->\hyperlink{structDnsSdService_abc60a53b69dd0843ceefa6e7a7b0443c}{name}[0] != \textcolor{charliteral}{'\(\backslash\)0'})
+1496          \{
+1497             \textcolor{comment}{//Check the class of the resource record}
+1498             \textcolor{keywordflow}{if}(rclass == \hyperlink{dns__common_8h_aa541e7289dae8934f7f37e74c15cc5a5ae4d96c0329f035328ba190627f2782e9}{DNS\_RR\_CLASS\_IN})
+1499             \{
+1500                \textcolor{comment}{//PTR record?}
+1501                \textcolor{keywordflow}{if}(\hyperlink{cpu__endian_8h_a9312c6eb72e64f748ae0d0e0dc3ec9b9}{ntohs}(record->rtype) == \hyperlink{dns__common_8h_aa24a9fb31b6fb3858a24a8d8682e23d1a23a2ea11b5bb8ab8d6d088de58be553b}{DNS\_RR\_TYPE\_PTR})
+1502                \{
+1503                   \textcolor{comment}{//Compare service name}
+1504                   \textcolor{keywordflow}{if}(!\hyperlink{mdns__common_8c_ae5c1c848e56ea78f8656ce7941251c75}{mdnsCompareName}(response->\hyperlink{structMdnsMessage_ac5ab08c143472d040db637c76c972cab}{dnsHeader}, response->
+      \hyperlink{structMdnsMessage_ad1ebbfad05745924fdeee3389f270e52}{length},
+1505                      offset, \textcolor{stringliteral}{""}, service->\hyperlink{structDnsSdService_abc60a53b69dd0843ceefa6e7a7b0443c}{name}, \textcolor{stringliteral}{".local"}, 0))
+1506                   \{
+1507                      \textcolor{comment}{//Format SRV resource record}
+1508                      error = \hyperlink{dns__sd_8c_af47b2d7f33b144326c337ea574d0a6c1}{dnsSdAddSrvRecord}(interface,
+1509                         response, service, cacheFlush, ttl);
+1510                      \textcolor{comment}{//Any error to report?}
+1511                      \textcolor{keywordflow}{if}(error)
+1512                         \textcolor{keywordflow}{return};
+1513 
+1514                      \textcolor{comment}{//Format TXT resource record}
+1515                      error = \hyperlink{dns__sd_8c_ae172402f69ea0e1bf53d8d98320e782f}{dnsSdAddTxtRecord}(interface,
+1516                         response, service, cacheFlush, ttl);
+1517                      \textcolor{comment}{//Any error to report?}
+1518                      \textcolor{keywordflow}{if}(error)
+1519                         \textcolor{keywordflow}{return};
+1520                   \}
+1521                \}
+1522                \textcolor{comment}{//SRV record?}
+1523                \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(\hyperlink{cpu__endian_8h_a9312c6eb72e64f748ae0d0e0dc3ec9b9}{ntohs}(record->rtype) == \hyperlink{dns__common_8h_aa24a9fb31b6fb3858a24a8d8682e23d1a2fe0a9e93403ff6c34c4a4ce79e0c13c}{DNS\_RR\_TYPE\_SRV})
+1524                \{
+1525                   \textcolor{comment}{//Compare service name}
+1526                   \textcolor{keywordflow}{if}(!\hyperlink{mdns__common_8c_ae5c1c848e56ea78f8656ce7941251c75}{mdnsCompareName}(response->\hyperlink{structMdnsMessage_ac5ab08c143472d040db637c76c972cab}{dnsHeader}, response->
+      \hyperlink{structMdnsMessage_ad1ebbfad05745924fdeee3389f270e52}{length},
+1527                      offset, context->instanceName, service->\hyperlink{structDnsSdService_abc60a53b69dd0843ceefa6e7a7b0443c}{name}, \textcolor{stringliteral}{".local"}, 0))
+1528                   \{
+1529                      \textcolor{comment}{//Format TXT resource record}
+1530                      error = \hyperlink{dns__sd_8c_ae172402f69ea0e1bf53d8d98320e782f}{dnsSdAddTxtRecord}(interface,
+1531                         response, service, cacheFlush, ttl);
+1532                      \textcolor{comment}{//Any error to report?}
+1533                      \textcolor{keywordflow}{if}(error)
+1534                         \textcolor{keywordflow}{return};
+1535                   \}
+1536                \}
+1537             \}
+1538          \}
+1539       \}
+1540 
+1541       \textcolor{comment}{//Point to the next resource record}
+1542       offset = n + \hyperlink{cpu__endian_8h_a9312c6eb72e64f748ae0d0e0dc3ec9b9}{ntohs}(record->rdlength);
+1543    \}
+1544 
+1545    \textcolor{comment}{//Number of resource records in the Additional Section}
+1546    response->\hyperlink{structMdnsMessage_ac5ab08c143472d040db637c76c972cab}{dnsHeader}->arcount += response->\hyperlink{structMdnsMessage_ac5ab08c143472d040db637c76c972cab}{dnsHeader}->ancount - 
+      \hyperlink{dns__common_8h_a2a5577b198ba758438292038bbab5437}{ancount};
+1547    \textcolor{comment}{//Number of resource records in the Answer Section}
+1548    response->\hyperlink{structMdnsMessage_ac5ab08c143472d040db637c76c972cab}{dnsHeader}->ancount = \hyperlink{dns__common_8h_a2a5577b198ba758438292038bbab5437}{ancount};
+1549 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{dns__sd_8c_a3d107ec136ae352e36b22dbcec01dad1}\label{dns__sd_8c_a3d107ec136ae352e36b22dbcec01dad1}} 
+\index{dns\+\_\+sd.\+c@{dns\+\_\+sd.\+c}!dns\+Sd\+Get\+Default\+Settings@{dns\+Sd\+Get\+Default\+Settings}}
+\index{dns\+Sd\+Get\+Default\+Settings@{dns\+Sd\+Get\+Default\+Settings}!dns\+\_\+sd.\+c@{dns\+\_\+sd.\+c}}
+\subsubsection{\texorpdfstring{dns\+Sd\+Get\+Default\+Settings()}{dnsSdGetDefaultSettings()}}
+{\footnotesize\ttfamily void dns\+Sd\+Get\+Default\+Settings (\begin{DoxyParamCaption}\item[{\hyperlink{structDnsSdSettings}{Dns\+Sd\+Settings} $\ast$}]{settings }\end{DoxyParamCaption})}
+
+
+
+Initialize settings with default values. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em settings} & Structure that contains D\+N\+S-\/\+SD settings \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 65 of file dns\+\_\+sd.\+c.
+
+
+\begin{DoxyCode}
+66 \{
+67    \textcolor{comment}{//Use default interface}
+68    settings->\hyperlink{structDnsSdSettings_a44bec3533618076ff5b1695be49b873d}{interface} = \hyperlink{net_8c_a991aba7eae4de79f30c6889d95cc6870}{netGetDefaultInterface}();
+69 
+70    \textcolor{comment}{//Number of announcement packets}
+71    settings->\hyperlink{structDnsSdSettings_a0538afd7122031fbd37245a78655d878}{numAnnouncements} = \hyperlink{mdns__responder_8h_a117e46a43fc28293cad3ebd6efd61072}{MDNS\_ANNOUNCE\_NUM};
+72    \textcolor{comment}{//TTL resource record}
+73    settings->\hyperlink{structDnsSdSettings_aff4d040c3aaa0aec91652624a1bd5e2d}{ttl} = \hyperlink{dns__sd_8h_ac353abf6edc070ff92d7ad4b33a1f15d}{DNS\_SD\_DEFAULT\_RR\_TTL};
+74    \textcolor{comment}{//FSM state change event}
+75    settings->\hyperlink{structDnsSdSettings_a6c414366d64ac6a010da9aa6b5b7ad20}{stateChangeEvent} = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+76 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{dns__sd_8c_a31ab1c653a7c76144ac3a75eda938017}\label{dns__sd_8c_a31ab1c653a7c76144ac3a75eda938017}} 
+\index{dns\+\_\+sd.\+c@{dns\+\_\+sd.\+c}!dns\+Sd\+Get\+Num\+Services@{dns\+Sd\+Get\+Num\+Services}}
+\index{dns\+Sd\+Get\+Num\+Services@{dns\+Sd\+Get\+Num\+Services}!dns\+\_\+sd.\+c@{dns\+\_\+sd.\+c}}
+\subsubsection{\texorpdfstring{dns\+Sd\+Get\+Num\+Services()}{dnsSdGetNumServices()}}
+{\footnotesize\ttfamily \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} dns\+Sd\+Get\+Num\+Services (\begin{DoxyParamCaption}\item[{\hyperlink{dns__sd_8h_a616b4c4abbffa3a360ee2f40bea72cf7}{Dns\+Sd\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Get the number of registered services. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the D\+N\+S-\/\+SD context \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Number of registered services 
+\end{DoxyReturn}
+
+
+Definition at line 450 of file dns\+\_\+sd.\+c.
+
+
+\begin{DoxyCode}
+451 \{
+452    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+453    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+454 
+455    \textcolor{comment}{//Number of registered services}
+456    n = 0;
+457 
+458    \textcolor{comment}{//Check parameter}
+459    \textcolor{keywordflow}{if}(context != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+460    \{
+461       \textcolor{comment}{//Valid instance name?}
+462       \textcolor{keywordflow}{if}(context->instanceName[0] != \textcolor{charliteral}{'\(\backslash\)0'})
+463       \{
+464          \textcolor{comment}{//Loop through the list of registered services}
+465          \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{dns__sd_8h_a561a3da46162838063fd14c5135d01c7}{DNS\_SD\_SERVICE\_LIST\_SIZE}; i++)
+466          \{
+467             \textcolor{comment}{//Check if the entry is currently in use}
+468             \textcolor{keywordflow}{if}(context->serviceList[i].name[0] != \textcolor{charliteral}{'\(\backslash\)0'})
+469                n++;
+470          \}
+471       \}
+472    \}
+473 
+474    \textcolor{comment}{//Return the number of registered services}
+475    \textcolor{keywordflow}{return} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+476 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{dns__sd_8c_a8b53c2c709a4473e89d60a85a3d2f20d}\label{dns__sd_8c_a8b53c2c709a4473e89d60a85a3d2f20d}} 
+\index{dns\+\_\+sd.\+c@{dns\+\_\+sd.\+c}!dns\+Sd\+Get\+State@{dns\+Sd\+Get\+State}}
+\index{dns\+Sd\+Get\+State@{dns\+Sd\+Get\+State}!dns\+\_\+sd.\+c@{dns\+\_\+sd.\+c}}
+\subsubsection{\texorpdfstring{dns\+Sd\+Get\+State()}{dnsSdGetState()}}
+{\footnotesize\ttfamily \hyperlink{mdns__responder_8h_a96ee67ecc8252ba576e72c97cd8f7fd3}{Mdns\+State} dns\+Sd\+Get\+State (\begin{DoxyParamCaption}\item[{\hyperlink{dns__sd_8h_a616b4c4abbffa3a360ee2f40bea72cf7}{Dns\+Sd\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Retrieve current state. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the D\+N\+S-\/\+SD context \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Current D\+N\+S-\/\+SD state 
+\end{DoxyReturn}
+
+
+Definition at line 190 of file dns\+\_\+sd.\+c.
+
+
+\begin{DoxyCode}
+191 \{
+192    \hyperlink{mdns__responder_8h_a96ee67ecc8252ba576e72c97cd8f7fd3}{MdnsState} state;
+193 
+194    \textcolor{comment}{//Get exclusive access}
+195    \hyperlink{os__port__chibios_8c_a58485224df4bfa522246d55b35bbd83a}{osAcquireMutex}(&\hyperlink{net_8c_afe31551ad26115fae8e575654346d441}{netMutex});
+196    \textcolor{comment}{//Get current state}
+197    state = context->state;
+198    \textcolor{comment}{//Release exclusive access}
+199    \hyperlink{os__port__chibios_8c_a8e10e5b2c6d3877b5ba60e375ac45d79}{osReleaseMutex}(&\hyperlink{net_8c_afe31551ad26115fae8e575654346d441}{netMutex});
+200 
+201    \textcolor{comment}{//Return current state}
+202    \textcolor{keywordflow}{return} state;
+203 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{dns__sd_8c_ac75a335a3adf5753a851f6d402bdf6b7}\label{dns__sd_8c_ac75a335a3adf5753a851f6d402bdf6b7}} 
+\index{dns\+\_\+sd.\+c@{dns\+\_\+sd.\+c}!dns\+Sd\+Init@{dns\+Sd\+Init}}
+\index{dns\+Sd\+Init@{dns\+Sd\+Init}!dns\+\_\+sd.\+c@{dns\+\_\+sd.\+c}}
+\subsubsection{\texorpdfstring{dns\+Sd\+Init()}{dnsSdInit()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} dns\+Sd\+Init (\begin{DoxyParamCaption}\item[{\hyperlink{dns__sd_8h_a616b4c4abbffa3a360ee2f40bea72cf7}{Dns\+Sd\+Context} $\ast$}]{context,  }\item[{const \hyperlink{structDnsSdSettings}{Dns\+Sd\+Settings} $\ast$}]{settings }\end{DoxyParamCaption})}
+
+
+
+D\+N\+S-\/\+DS initialization. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the D\+N\+S-\/\+SD context \\
+\hline
+\mbox{\tt in}  & {\em settings} & D\+N\+S-\/\+SD specific settings \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 86 of file dns\+\_\+sd.\+c.
+
+
+\begin{DoxyCode}
+87 \{
+88    \hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{NetInterface} *interface;
+89 
+90    \textcolor{comment}{//Debug message}
+91    \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"Initializing DNS-SD...\(\backslash\)r\(\backslash\)n"});
+92 
+93    \textcolor{comment}{//Ensure the parameters are valid}
+94    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || settings == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+95       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+96 
+97    \textcolor{comment}{//Invalid network interface?}
+98    \textcolor{keywordflow}{if}(settings->\hyperlink{structDnsSdSettings_a44bec3533618076ff5b1695be49b873d}{interface} == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+99       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+100 
+101    \textcolor{comment}{//Point to the underlying network interface}
+102    \textcolor{keyword}{interface }= settings->interface;
+103 
+104    \textcolor{comment}{//Clear the DNS-SD context}
+105    memset(context, 0, \textcolor{keyword}{sizeof}(\hyperlink{dns__sd_8h_a616b4c4abbffa3a360ee2f40bea72cf7}{DnsSdContext}));
+106    \textcolor{comment}{//Save user settings}
+107    context->settings = *settings;
+108 
+109    \textcolor{comment}{//DNS-SD is currently suspended}
+110    context->running = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+111    \textcolor{comment}{//Initialize state machine}
+112    context->state = \hyperlink{mdns__responder_8h_a96ee67ecc8252ba576e72c97cd8f7fd3a07bf42369da461365aaa364eb11851eb}{MDNS\_STATE\_INIT};
+113 
+114    \textcolor{comment}{//Attach the DNS-SD context to the network interface}
+115    interface->dnsSdContext = context;
+116 
+117    \textcolor{comment}{//Successful initialization}
+118    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+119 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{dns__sd_8c_a6aeb243478f2d1878c585bc0743a3221}\label{dns__sd_8c_a6aeb243478f2d1878c585bc0743a3221}} 
+\index{dns\+\_\+sd.\+c@{dns\+\_\+sd.\+c}!dns\+Sd\+Link\+Change\+Event@{dns\+Sd\+Link\+Change\+Event}}
+\index{dns\+Sd\+Link\+Change\+Event@{dns\+Sd\+Link\+Change\+Event}!dns\+\_\+sd.\+c@{dns\+\_\+sd.\+c}}
+\subsubsection{\texorpdfstring{dns\+Sd\+Link\+Change\+Event()}{dnsSdLinkChangeEvent()}}
+{\footnotesize\ttfamily void dns\+Sd\+Link\+Change\+Event (\begin{DoxyParamCaption}\item[{\hyperlink{dns__sd_8h_a616b4c4abbffa3a360ee2f40bea72cf7}{Dns\+Sd\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Callback function for link change event. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the D\+N\+S-\/\+SD context \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 669 of file dns\+\_\+sd.\+c.
+
+
+\begin{DoxyCode}
+670 \{
+671    \textcolor{comment}{//Make sure DNS-SD has been properly instantiated}
+672    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+673       \textcolor{keywordflow}{return};
+674 
+675    \textcolor{comment}{//Whenever a mDNS responder receives an indication of a link}
+676    \textcolor{comment}{//change event, it must perform probing and announcing}
+677    \hyperlink{dns__sd_8c_a2be3edeed328e1cf5cb9a99098fc318e}{dnsSdChangeState}(context, \hyperlink{mdns__responder_8h_a96ee67ecc8252ba576e72c97cd8f7fd3a07bf42369da461365aaa364eb11851eb}{MDNS\_STATE\_INIT}, 0);
+678 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{dns__sd_8c_a6798c58627559624f9021f86f95f4ee6}\label{dns__sd_8c_a6798c58627559624f9021f86f95f4ee6}} 
+\index{dns\+\_\+sd.\+c@{dns\+\_\+sd.\+c}!dns\+Sd\+Parse\+An\+Record@{dns\+Sd\+Parse\+An\+Record}}
+\index{dns\+Sd\+Parse\+An\+Record@{dns\+Sd\+Parse\+An\+Record}!dns\+\_\+sd.\+c@{dns\+\_\+sd.\+c}}
+\subsubsection{\texorpdfstring{dns\+Sd\+Parse\+An\+Record()}{dnsSdParseAnRecord()}}
+{\footnotesize\ttfamily void dns\+Sd\+Parse\+An\+Record (\begin{DoxyParamCaption}\item[{\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$}]{interface,  }\item[{const \hyperlink{structMdnsMessage}{Mdns\+Message} $\ast$}]{response,  }\item[{size\+\_\+t}]{offset,  }\item[{const \hyperlink{dns__common_8h_a801d4a933cd802d56c5450013b4c0969}{Dns\+Resource\+Record} $\ast$}]{record }\end{DoxyParamCaption})}
+
+
+
+Parse a resource record from the Answer Section. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em interface} & Underlying network interface \\
+\hline
+\mbox{\tt in}  & {\em response} & Incoming m\+D\+NS response message \\
+\hline
+\mbox{\tt in}  & {\em offset} & Offset to first byte of the resource record to be checked \\
+\hline
+\mbox{\tt in}  & {\em record} & Pointer to the resource record \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 1337 of file dns\+\_\+sd.\+c.
+
+
+\begin{DoxyCode}
+1339 \{
+1340    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+1341    \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t} \hyperlink{dns__common_8h_ab71c0274cba7f2fc8f94ded11b72917a}{rclass};
+1342    \hyperlink{dns__sd_8h_a616b4c4abbffa3a360ee2f40bea72cf7}{DnsSdContext} *context;
+1343    \hyperlink{structDnsSdService}{DnsSdService} *service;
+1344 
+1345    \textcolor{comment}{//Point to the DNS-SD context}
+1346    context = interface->dnsSdContext;
+1347    \textcolor{comment}{//Make sure DNS-SD has been properly instantiated}
+1348    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1349       \textcolor{keywordflow}{return};
+1350 
+1351    \textcolor{comment}{//Any services registered?}
+1352    \textcolor{keywordflow}{if}(\hyperlink{dns__sd_8c_a31ab1c653a7c76144ac3a75eda938017}{dnsSdGetNumServices}(context) > 0)
+1353    \{
+1354       \textcolor{comment}{//Loop through the list of registered services}
+1355       \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{dns__sd_8h_a561a3da46162838063fd14c5135d01c7}{DNS\_SD\_SERVICE\_LIST\_SIZE}; i++)
+1356       \{
+1357          \textcolor{comment}{//Point to the current entry}
+1358          service = &context->serviceList[i];
+1359 
+1360          \textcolor{comment}{//Valid service?}
+1361          \textcolor{keywordflow}{if}(service->\hyperlink{structDnsSdService_abc60a53b69dd0843ceefa6e7a7b0443c}{name}[0] != \textcolor{charliteral}{'\(\backslash\)0'})
+1362          \{
+1363             \textcolor{comment}{//Check for conflicts}
+1364             \textcolor{keywordflow}{if}(!\hyperlink{mdns__common_8c_ae5c1c848e56ea78f8656ce7941251c75}{mdnsCompareName}(response->\hyperlink{structMdnsMessage_ac5ab08c143472d040db637c76c972cab}{dnsHeader}, response->
+      \hyperlink{structMdnsMessage_ad1ebbfad05745924fdeee3389f270e52}{length}, \hyperlink{pic32mz_2isr__support_8h_a12a5aed8a193ebbf9a641104a310610d}{offset},
+1365                context->instanceName, service->\hyperlink{structDnsSdService_abc60a53b69dd0843ceefa6e7a7b0443c}{name}, \textcolor{stringliteral}{".local"}, 0))
+1366             \{
+1367                \textcolor{comment}{//Convert the class to host byte order}
+1368                rclass = \hyperlink{cpu__endian_8h_a9312c6eb72e64f748ae0d0e0dc3ec9b9}{ntohs}(record->rclass);
+1369                \textcolor{comment}{//Discard Cache Flush flag}
+1370                rclass &= ~\hyperlink{mdns__common_8h_ac8f63bafad3fb67887a45586c82f71e9}{MDNS\_RCLASS\_CACHE\_FLUSH};
+1371 
+1372                \textcolor{comment}{//Check the class of the resource record}
+1373                \textcolor{keywordflow}{if}(rclass == \hyperlink{dns__common_8h_aa541e7289dae8934f7f37e74c15cc5a5ae4d96c0329f035328ba190627f2782e9}{DNS\_RR\_CLASS\_IN})
+1374                \{
+1375                   \textcolor{comment}{//SRV resource record found?}
+1376                   \textcolor{keywordflow}{if}(\hyperlink{cpu__endian_8h_a9312c6eb72e64f748ae0d0e0dc3ec9b9}{ntohs}(record->rtype) == \hyperlink{dns__common_8h_aa24a9fb31b6fb3858a24a8d8682e23d1a2fe0a9e93403ff6c34c4a4ce79e0c13c}{DNS\_RR\_TYPE\_SRV})
+1377                   \{
+1378                      \textcolor{comment}{//Compute the offset of the first byte of the rdata}
+1379                      \hyperlink{pic32mz_2isr__support_8h_a12a5aed8a193ebbf9a641104a310610d}{offset} = record->rdata - (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *) response->
+      \hyperlink{structMdnsMessage_ac5ab08c143472d040db637c76c972cab}{dnsHeader};
+1380 
+1381                      \textcolor{comment}{//A conflict occurs when a mDNS responder has a unique record for}
+1382                      \textcolor{comment}{//which it is currently authoritative, and it receives a mDNS}
+1383                      \textcolor{comment}{//response message containing a record with the same name, rrtype}
+1384                      \textcolor{comment}{//and rrclass, but inconsistent rdata}
+1385                      \textcolor{keywordflow}{if}(\hyperlink{mdns__common_8c_ae5c1c848e56ea78f8656ce7941251c75}{mdnsCompareName}(response->\hyperlink{structMdnsMessage_ac5ab08c143472d040db637c76c972cab}{dnsHeader}, response->
+      \hyperlink{structMdnsMessage_ad1ebbfad05745924fdeee3389f270e52}{length}, \hyperlink{pic32mz_2isr__support_8h_a12a5aed8a193ebbf9a641104a310610d}{offset},
+1386                         context->instanceName, \textcolor{stringliteral}{""}, \textcolor{stringliteral}{".local"}, 0))
+1387                      \{
+1388                         \textcolor{comment}{//The service instance name is already in use by some other host}
+1389                         context->conflict = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+1390                      \}
+1391                   \}
+1392                \}
+1393             \}
+1394          \}
+1395       \}
+1396    \}
+1397 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{dns__sd_8c_a9c0b0d6f064fa26e94f5396041803fa9}\label{dns__sd_8c_a9c0b0d6f064fa26e94f5396041803fa9}} 
+\index{dns\+\_\+sd.\+c@{dns\+\_\+sd.\+c}!dns\+Sd\+Parse\+Ns\+Record@{dns\+Sd\+Parse\+Ns\+Record}}
+\index{dns\+Sd\+Parse\+Ns\+Record@{dns\+Sd\+Parse\+Ns\+Record}!dns\+\_\+sd.\+c@{dns\+\_\+sd.\+c}}
+\subsubsection{\texorpdfstring{dns\+Sd\+Parse\+Ns\+Record()}{dnsSdParseNsRecord()}}
+{\footnotesize\ttfamily void dns\+Sd\+Parse\+Ns\+Record (\begin{DoxyParamCaption}\item[{\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$}]{interface,  }\item[{const \hyperlink{structMdnsMessage}{Mdns\+Message} $\ast$}]{query,  }\item[{size\+\_\+t}]{offset,  }\item[{const \hyperlink{dns__common_8h_a801d4a933cd802d56c5450013b4c0969}{Dns\+Resource\+Record} $\ast$}]{record }\end{DoxyParamCaption})}
+
+
+
+Parse a resource record from the Authority Section. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em interface} & Underlying network interface \\
+\hline
+\mbox{\tt in}  & {\em query} & Incoming m\+D\+NS query message \\
+\hline
+\mbox{\tt in}  & {\em offset} & Offset to first byte of the resource record \\
+\hline
+\mbox{\tt in}  & {\em record} & Pointer to the resource record \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 1242 of file dns\+\_\+sd.\+c.
+
+
+\begin{DoxyCode}
+1244 \{
+1245    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+1246    \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t} \hyperlink{dns__common_8h_ab71c0274cba7f2fc8f94ded11b72917a}{rclass};
+1247    \hyperlink{dns__sd_8h_a616b4c4abbffa3a360ee2f40bea72cf7}{DnsSdContext} *context;
+1248    \hyperlink{structDnsSdService}{DnsSdService} *service;
+1249    \hyperlink{dns__common_8h_a6275a745cd58902d1cf42966a3c077c8}{DnsSrvResourceRecord} *srvRecord;
+1250 
+1251    \textcolor{comment}{//Point to the DNS-SD context}
+1252    context = interface->dnsSdContext;
+1253    \textcolor{comment}{//Make sure DNS-SD has been properly instantiated}
+1254    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1255       \textcolor{keywordflow}{return};
+1256 
+1257    \textcolor{comment}{//Any services registered?}
+1258    \textcolor{keywordflow}{if}(\hyperlink{dns__sd_8c_a31ab1c653a7c76144ac3a75eda938017}{dnsSdGetNumServices}(context) > 0)
+1259    \{
+1260       \textcolor{comment}{//Loop through the list of registered services}
+1261       \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{dns__sd_8h_a561a3da46162838063fd14c5135d01c7}{DNS\_SD\_SERVICE\_LIST\_SIZE}; i++)
+1262       \{
+1263          \textcolor{comment}{//Point to the current entry}
+1264          service = &context->serviceList[i];
+1265 
+1266          \textcolor{comment}{//Valid service?}
+1267          \textcolor{keywordflow}{if}(service->\hyperlink{structDnsSdService_abc60a53b69dd0843ceefa6e7a7b0443c}{name}[0] != \textcolor{charliteral}{'\(\backslash\)0'})
+1268          \{
+1269             \textcolor{comment}{//Apply tie-breaking rules}
+1270             \textcolor{keywordflow}{if}(!\hyperlink{mdns__common_8c_ae5c1c848e56ea78f8656ce7941251c75}{mdnsCompareName}(query->\hyperlink{structMdnsMessage_ac5ab08c143472d040db637c76c972cab}{dnsHeader}, query->
+      \hyperlink{structMdnsMessage_ad1ebbfad05745924fdeee3389f270e52}{length}, \hyperlink{pic32mz_2isr__support_8h_a12a5aed8a193ebbf9a641104a310610d}{offset},
+1271                context->instanceName, service->\hyperlink{structDnsSdService_abc60a53b69dd0843ceefa6e7a7b0443c}{name}, \textcolor{stringliteral}{".local"}, 0))
+1272             \{
+1273                \textcolor{comment}{//Convert the class to host byte order}
+1274                rclass = \hyperlink{cpu__endian_8h_a9312c6eb72e64f748ae0d0e0dc3ec9b9}{ntohs}(record->rclass);
+1275                \textcolor{comment}{//Discard Cache Flush flag}
+1276                rclass &= ~\hyperlink{mdns__common_8h_ac8f63bafad3fb67887a45586c82f71e9}{MDNS\_RCLASS\_CACHE\_FLUSH};
+1277 
+1278                \textcolor{comment}{//Check the class of the resource record}
+1279                \textcolor{keywordflow}{if}(rclass == \hyperlink{dns__common_8h_aa541e7289dae8934f7f37e74c15cc5a5ae4d96c0329f035328ba190627f2782e9}{DNS\_RR\_CLASS\_IN})
+1280                \{
+1281                   \textcolor{comment}{//SRV resource record found?}
+1282                   \textcolor{keywordflow}{if}(\hyperlink{cpu__endian_8h_a9312c6eb72e64f748ae0d0e0dc3ec9b9}{ntohs}(record->rtype) == \hyperlink{dns__common_8h_aa24a9fb31b6fb3858a24a8d8682e23d1a2fe0a9e93403ff6c34c4a4ce79e0c13c}{DNS\_RR\_TYPE\_SRV})
+1283                   \{
+1284                      \textcolor{comment}{//Cast resource record}
+1285                      srvRecord = (\hyperlink{dns__common_8h_a6275a745cd58902d1cf42966a3c077c8}{DnsSrvResourceRecord} *) record;
+1286 
+1287                      \textcolor{comment}{//Compare Priority fields}
+1288                      \textcolor{keywordflow}{if}(\hyperlink{cpu__endian_8h_a9312c6eb72e64f748ae0d0e0dc3ec9b9}{ntohs}(srvRecord->priority) > service->\hyperlink{structDnsSdService_afe6d19247c710cfd1eaa9f427488e498}{priority})
+1289                      \{
+1290                         context->tieBreakLost = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+1291                      \}
+1292                      \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(\hyperlink{cpu__endian_8h_a9312c6eb72e64f748ae0d0e0dc3ec9b9}{ntohs}(srvRecord->priority) == service->
+      \hyperlink{structDnsSdService_afe6d19247c710cfd1eaa9f427488e498}{priority})
+1293                      \{
+1294                         \textcolor{comment}{//Compare Weight fields}
+1295                         \textcolor{keywordflow}{if}(\hyperlink{cpu__endian_8h_a9312c6eb72e64f748ae0d0e0dc3ec9b9}{ntohs}(srvRecord->weight) > service->\hyperlink{structDnsSdService_a5a9548cecc8e63b7029f48fe83059234}{weight})
+1296                         \{
+1297                            context->tieBreakLost = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+1298                         \}
+1299                         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(\hyperlink{cpu__endian_8h_a9312c6eb72e64f748ae0d0e0dc3ec9b9}{ntohs}(srvRecord->weight) == service->\hyperlink{structDnsSdService_a5a9548cecc8e63b7029f48fe83059234}{weight})
+1300                         \{
+1301                            \textcolor{comment}{//Compare Port fields}
+1302                            \textcolor{keywordflow}{if}(\hyperlink{cpu__endian_8h_a9312c6eb72e64f748ae0d0e0dc3ec9b9}{ntohs}(srvRecord->port) > service->\hyperlink{structDnsSdService_abf6fd1a073f7294ec927abb9b676c86a}{port})
+1303                            \{
+1304                               context->tieBreakLost = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+1305                            \}
+1306                            \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(\hyperlink{cpu__endian_8h_a9312c6eb72e64f748ae0d0e0dc3ec9b9}{ntohs}(srvRecord->port) == service->\hyperlink{structDnsSdService_abf6fd1a073f7294ec927abb9b676c86a}{port})
+1307                            \{
+1308                               \textcolor{comment}{//Compute the offset of the first byte of the target}
+1309                               \hyperlink{pic32mz_2isr__support_8h_a12a5aed8a193ebbf9a641104a310610d}{offset} = srvRecord->target - (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *) query->
+      \hyperlink{structMdnsMessage_ac5ab08c143472d040db637c76c972cab}{dnsHeader};
+1310 
+1311                               \textcolor{keywordflow}{if}(\hyperlink{mdns__common_8c_ae5c1c848e56ea78f8656ce7941251c75}{mdnsCompareName}(query->\hyperlink{structMdnsMessage_ac5ab08c143472d040db637c76c972cab}{dnsHeader}, query->
+      \hyperlink{structMdnsMessage_ad1ebbfad05745924fdeee3389f270e52}{length}, \hyperlink{pic32mz_2isr__support_8h_a12a5aed8a193ebbf9a641104a310610d}{offset},
+1312                                  context->instanceName, \textcolor{stringliteral}{""}, \textcolor{stringliteral}{".local"}, 0) > 0)
+1313                               \{
+1314                                  \textcolor{comment}{//The host has lost the tie-break}
+1315                                  context->tieBreakLost = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+1316                               \}
+1317                            \}
+1318                         \}
+1319                      \}
+1320                   \}
+1321                \}
+1322             \}
+1323          \}
+1324       \}
+1325    \}
+1326 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{dns__sd_8c_a15ce05880f66f53ee603f6fe4ac15613}\label{dns__sd_8c_a15ce05880f66f53ee603f6fe4ac15613}} 
+\index{dns\+\_\+sd.\+c@{dns\+\_\+sd.\+c}!dns\+Sd\+Parse\+Question@{dns\+Sd\+Parse\+Question}}
+\index{dns\+Sd\+Parse\+Question@{dns\+Sd\+Parse\+Question}!dns\+\_\+sd.\+c@{dns\+\_\+sd.\+c}}
+\subsubsection{\texorpdfstring{dns\+Sd\+Parse\+Question()}{dnsSdParseQuestion()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} dns\+Sd\+Parse\+Question (\begin{DoxyParamCaption}\item[{\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$}]{interface,  }\item[{const \hyperlink{structMdnsMessage}{Mdns\+Message} $\ast$}]{query,  }\item[{size\+\_\+t}]{offset,  }\item[{const \hyperlink{dns__common_8h_ac1ef063cc8bc932118463092c282f188}{Dns\+Question} $\ast$}]{question,  }\item[{\hyperlink{structMdnsMessage}{Mdns\+Message} $\ast$}]{response }\end{DoxyParamCaption})}
+
+
+
+Parse a question. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em interface} & Underlying network interface \\
+\hline
+\mbox{\tt in}  & {\em query} & Incoming m\+D\+NS query message \\
+\hline
+\mbox{\tt in}  & {\em offset} & Offset to first byte of the question \\
+\hline
+\mbox{\tt in}  & {\em question} & Pointer to the question \\
+\hline
+\mbox{\tt in,out}  & {\em response} & m\+D\+NS response message \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 1083 of file dns\+\_\+sd.\+c.
+
+
+\begin{DoxyCode}
+1085 \{
+1086    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+1087    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+1088    \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t} \hyperlink{dns__common_8h_ac94c665afc6c72c418f3caa344bc480e}{qclass};
+1089    \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t} \hyperlink{dns__common_8h_a92ac313e0c65dcd831a91b495aa7b282}{qtype};
+1090    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} \hyperlink{dns__common_8h_a48b9f3382e0929bbd75cda2bf2838126}{ttl};
+1091    \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\_t} cacheFlush;
+1092    \hyperlink{dns__sd_8h_a616b4c4abbffa3a360ee2f40bea72cf7}{DnsSdContext} *context;
+1093    \hyperlink{structDnsSdService}{DnsSdService} *service;
+1094 
+1095    \textcolor{comment}{//Point to the DNS-SD context}
+1096    context = interface->dnsSdContext;
+1097    \textcolor{comment}{//Make sure DNS-SD has been properly instantiated}
+1098    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1099       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+1100 
+1101    \textcolor{comment}{//Check the state of the mDNS responder}
+1102    \textcolor{keywordflow}{if}(context->state != \hyperlink{mdns__responder_8h_a96ee67ecc8252ba576e72c97cd8f7fd3a5669572319cfacc11b9d9fd5c70a6933}{MDNS\_STATE\_ANNOUNCING} &&
+1103       context->state != \hyperlink{mdns__responder_8h_a96ee67ecc8252ba576e72c97cd8f7fd3a94d5f006d5512a42d0a63b7cc981b626}{MDNS\_STATE\_IDLE})
+1104    \{
+1105       \textcolor{comment}{//Do not respond to mDNS queries during probing}
+1106       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+1107    \}
+1108 
+1109    \textcolor{comment}{//Convert the query class to host byte order}
+1110    qclass = \hyperlink{cpu__endian_8h_a9312c6eb72e64f748ae0d0e0dc3ec9b9}{ntohs}(question->qclass);
+1111    \textcolor{comment}{//Discard QU flag}
+1112    qclass &= ~\hyperlink{mdns__common_8h_ac11a61056f0e21d666d58a0e433848df}{MDNS\_QCLASS\_QU};
+1113 
+1114    \textcolor{comment}{//Convert the query type to host byte order}
+1115    qtype = \hyperlink{cpu__endian_8h_a9312c6eb72e64f748ae0d0e0dc3ec9b9}{ntohs}(question->qtype);
+1116 
+1117    \textcolor{comment}{//Get the TTL resource record}
+1118    ttl = context->settings.ttl;
+1119 
+1120    \textcolor{comment}{//Check whether the querier originating the query is a simple resolver}
+1121    \textcolor{keywordflow}{if}(\hyperlink{cpu__endian_8h_a9312c6eb72e64f748ae0d0e0dc3ec9b9}{ntohs}(query->\hyperlink{structMdnsMessage_acd6f1b81f088caf914bbb89240d3f261}{udpHeader}->srcPort) != \hyperlink{mdns__common_8h_ab16900c77e60e00f401b684c45a37c34}{MDNS\_PORT})
+1122    \{
+1123       \textcolor{comment}{//The resource record TTL given in a legacy unicast response should}
+1124       \textcolor{comment}{//not be greater than ten seconds, even if the true TTL of the mDNS}
+1125       \textcolor{comment}{//resource record is higher}
+1126       ttl = \hyperlink{os__port_8h_a3acffbd305ee72dcd4593c0d8af64a4f}{MIN}(ttl, \hyperlink{mdns__common_8h_a909578ac09bb6948e089bece875b866a}{MDNS\_LEGACY\_UNICAST\_RR\_TTL});
+1127 
+1128       \textcolor{comment}{//The cache-flush bit must not be set in legacy unicast responses}
+1129       cacheFlush = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+1130    \}
+1131    \textcolor{keywordflow}{else}
+1132    \{
+1133       \textcolor{comment}{//The cache-bit should be set for unique resource records}
+1134       cacheFlush = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+1135    \}
+1136 
+1137    \textcolor{comment}{//Any registered services?}
+1138    \textcolor{keywordflow}{if}(\hyperlink{dns__sd_8c_a31ab1c653a7c76144ac3a75eda938017}{dnsSdGetNumServices}(context) > 0)
+1139    \{
+1140       \textcolor{comment}{//Loop through the list of registered services}
+1141       \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{dns__sd_8h_a561a3da46162838063fd14c5135d01c7}{DNS\_SD\_SERVICE\_LIST\_SIZE}; i++)
+1142       \{
+1143          \textcolor{comment}{//Point to the current entry}
+1144          service = &context->serviceList[i];
+1145 
+1146          \textcolor{comment}{//Valid service?}
+1147          \textcolor{keywordflow}{if}(service->\hyperlink{structDnsSdService_abc60a53b69dd0843ceefa6e7a7b0443c}{name}[0] != \textcolor{charliteral}{'\(\backslash\)0'})
+1148          \{
+1149             \textcolor{comment}{//Check the class of the query}
+1150             \textcolor{keywordflow}{if}(qclass == \hyperlink{dns__common_8h_aa541e7289dae8934f7f37e74c15cc5a5ae4d96c0329f035328ba190627f2782e9}{DNS\_RR\_CLASS\_IN} || qclass == 
+      \hyperlink{dns__common_8h_aa541e7289dae8934f7f37e74c15cc5a5a5bb41b9beab96e5a78ec7023756e8d3b}{DNS\_RR\_CLASS\_ANY})
+1151             \{
+1152                \textcolor{comment}{//Compare service name}
+1153                \textcolor{keywordflow}{if}(!\hyperlink{mdns__common_8c_ae5c1c848e56ea78f8656ce7941251c75}{mdnsCompareName}(query->\hyperlink{structMdnsMessage_ac5ab08c143472d040db637c76c972cab}{dnsHeader}, query->
+      \hyperlink{structMdnsMessage_ad1ebbfad05745924fdeee3389f270e52}{length},
+1154                   \hyperlink{pic32mz_2isr__support_8h_a12a5aed8a193ebbf9a641104a310610d}{offset}, \textcolor{stringliteral}{""}, \textcolor{stringliteral}{"\_services.\_dns-sd.\_udp"}, \textcolor{stringliteral}{".local"}, 0))
+1155                \{
+1156                   \textcolor{comment}{//PTR query?}
+1157                   \textcolor{keywordflow}{if}(qtype == \hyperlink{dns__common_8h_aa24a9fb31b6fb3858a24a8d8682e23d1a23a2ea11b5bb8ab8d6d088de58be553b}{DNS\_RR\_TYPE\_PTR} || qtype == 
+      \hyperlink{dns__common_8h_aa24a9fb31b6fb3858a24a8d8682e23d1a8f6102b9591501cd59e38352db0f94b0}{DNS\_RR\_TYPE\_ANY})
+1158                   \{
+1159                      \textcolor{comment}{//Format PTR resource record (service type enumeration)}
+1160                      error = \hyperlink{dns__sd_8c_a4868845573db7c48cb9a219167d45176}{dnsSdAddServiceEnumPtrRecord}(interface,
+1161                         response, service, ttl);
+1162                      \textcolor{comment}{//Any error to report?}
+1163                      \textcolor{keywordflow}{if}(error)
+1164                         \textcolor{keywordflow}{return} error;
+1165 
+1166                      \textcolor{comment}{//Update the number of shared resource records}
+1167                      response->\hyperlink{structMdnsMessage_a0d87d66898216dc4e73abc9a2189bdde}{sharedRecordCount}++;
+1168                   \}
+1169                \}
+1170                \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!\hyperlink{mdns__common_8c_ae5c1c848e56ea78f8656ce7941251c75}{mdnsCompareName}(query->\hyperlink{structMdnsMessage_ac5ab08c143472d040db637c76c972cab}{dnsHeader}, query->
+      \hyperlink{structMdnsMessage_ad1ebbfad05745924fdeee3389f270e52}{length},
+1171                   \hyperlink{pic32mz_2isr__support_8h_a12a5aed8a193ebbf9a641104a310610d}{offset}, \textcolor{stringliteral}{""}, service->\hyperlink{structDnsSdService_abc60a53b69dd0843ceefa6e7a7b0443c}{name}, \textcolor{stringliteral}{".local"}, 0))
+1172                \{
+1173                   \textcolor{comment}{//PTR query?}
+1174                   \textcolor{keywordflow}{if}(qtype == \hyperlink{dns__common_8h_aa24a9fb31b6fb3858a24a8d8682e23d1a23a2ea11b5bb8ab8d6d088de58be553b}{DNS\_RR\_TYPE\_PTR} || qtype == 
+      \hyperlink{dns__common_8h_aa24a9fb31b6fb3858a24a8d8682e23d1a8f6102b9591501cd59e38352db0f94b0}{DNS\_RR\_TYPE\_ANY})
+1175                   \{
+1176                      \textcolor{comment}{//Format PTR resource record}
+1177                      error = \hyperlink{dns__sd_8c_aaebef4e47ae091d213c56de4ecea263d}{dnsSdAddPtrRecord}(interface, response,
+1178                         service, ttl);
+1179                      \textcolor{comment}{//Any error to report?}
+1180                      \textcolor{keywordflow}{if}(error)
+1181                         \textcolor{keywordflow}{return} error;
+1182 
+1183                      \textcolor{comment}{//Update the number of shared resource records}
+1184                      response->\hyperlink{structMdnsMessage_a0d87d66898216dc4e73abc9a2189bdde}{sharedRecordCount}++;
+1185                   \}
+1186                \}
+1187                \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!\hyperlink{mdns__common_8c_ae5c1c848e56ea78f8656ce7941251c75}{mdnsCompareName}(query->\hyperlink{structMdnsMessage_ac5ab08c143472d040db637c76c972cab}{dnsHeader}, query->
+      \hyperlink{structMdnsMessage_ad1ebbfad05745924fdeee3389f270e52}{length}, \hyperlink{pic32mz_2isr__support_8h_a12a5aed8a193ebbf9a641104a310610d}{offset},
+1188                   context->instanceName, service->\hyperlink{structDnsSdService_abc60a53b69dd0843ceefa6e7a7b0443c}{name}, \textcolor{stringliteral}{".local"}, 0))
+1189                \{
+1190                   \textcolor{comment}{//SRV query?}
+1191                   \textcolor{keywordflow}{if}(qtype == \hyperlink{dns__common_8h_aa24a9fb31b6fb3858a24a8d8682e23d1a2fe0a9e93403ff6c34c4a4ce79e0c13c}{DNS\_RR\_TYPE\_SRV} || qtype == 
+      \hyperlink{dns__common_8h_aa24a9fb31b6fb3858a24a8d8682e23d1a8f6102b9591501cd59e38352db0f94b0}{DNS\_RR\_TYPE\_ANY})
+1192                   \{
+1193                      \textcolor{comment}{//Format SRV resource record}
+1194                      error = \hyperlink{dns__sd_8c_af47b2d7f33b144326c337ea574d0a6c1}{dnsSdAddSrvRecord}(interface, response,
+1195                         service, cacheFlush, ttl);
+1196                      \textcolor{comment}{//Any error to report?}
+1197                      \textcolor{keywordflow}{if}(error)
+1198                         \textcolor{keywordflow}{return} error;
+1199                   \}
+1200 
+1201                   \textcolor{comment}{//TXT query?}
+1202                   \textcolor{keywordflow}{if}(qtype == \hyperlink{dns__common_8h_aa24a9fb31b6fb3858a24a8d8682e23d1a6439fec6c56c1fb7fd51fb55190eb0e0}{DNS\_RR\_TYPE\_TXT} || qtype == 
+      \hyperlink{dns__common_8h_aa24a9fb31b6fb3858a24a8d8682e23d1a8f6102b9591501cd59e38352db0f94b0}{DNS\_RR\_TYPE\_ANY})
+1203                   \{
+1204                      \textcolor{comment}{//Format TXT resource record}
+1205                      error = \hyperlink{dns__sd_8c_ae172402f69ea0e1bf53d8d98320e782f}{dnsSdAddTxtRecord}(interface, response,
+1206                         service, cacheFlush, ttl);
+1207                      \textcolor{comment}{//Any error to report?}
+1208                      \textcolor{keywordflow}{if}(error)
+1209                         \textcolor{keywordflow}{return} error;
+1210                   \}
+1211 
+1212                   \textcolor{comment}{//NSEC query?}
+1213                   \textcolor{keywordflow}{if}(qtype != \hyperlink{dns__common_8h_aa24a9fb31b6fb3858a24a8d8682e23d1a2fe0a9e93403ff6c34c4a4ce79e0c13c}{DNS\_RR\_TYPE\_SRV} && qtype != 
+      \hyperlink{dns__common_8h_aa24a9fb31b6fb3858a24a8d8682e23d1a6439fec6c56c1fb7fd51fb55190eb0e0}{DNS\_RR\_TYPE\_TXT})
+1214                   \{
+1215                      \textcolor{comment}{//Format NSEC resource record}
+1216                      error = \hyperlink{dns__sd_8c_a897d66768759ea04152f4720d6c007fb}{dnsSdAddNsecRecord}(interface, response,
+1217                         service, cacheFlush, ttl);
+1218                      \textcolor{comment}{//Any error to report?}
+1219                      \textcolor{keywordflow}{if}(error)
+1220                         \textcolor{keywordflow}{return} error;
+1221                   \}
+1222                \}
+1223             \}
+1224          \}
+1225       \}
+1226    \}
+1227 
+1228    \textcolor{comment}{//Successful processing}
+1229    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+1230 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{dns__sd_8c_a8637bd963ebff00f879c58d3c908b26e}\label{dns__sd_8c_a8637bd963ebff00f879c58d3c908b26e}} 
+\index{dns\+\_\+sd.\+c@{dns\+\_\+sd.\+c}!dns\+Sd\+Register\+Service@{dns\+Sd\+Register\+Service}}
+\index{dns\+Sd\+Register\+Service@{dns\+Sd\+Register\+Service}!dns\+\_\+sd.\+c@{dns\+\_\+sd.\+c}}
+\subsubsection{\texorpdfstring{dns\+Sd\+Register\+Service()}{dnsSdRegisterService()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} dns\+Sd\+Register\+Service (\begin{DoxyParamCaption}\item[{\hyperlink{dns__sd_8h_a616b4c4abbffa3a360ee2f40bea72cf7}{Dns\+Sd\+Context} $\ast$}]{context,  }\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{service\+Name,  }\item[{\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t}}]{priority,  }\item[{\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t}}]{weight,  }\item[{\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t}}]{port,  }\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{metadata }\end{DoxyParamCaption})}
+
+
+
+Register a D\+N\+S-\/\+SD service. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the D\+N\+S-\/\+SD context \\
+\hline
+\mbox{\tt in}  & {\em service\+Name} & N\+U\+L\+L-\/terminated string that contains the name of the service to be registered \\
+\hline
+\mbox{\tt in}  & {\em priority} & Priority field \\
+\hline
+\mbox{\tt in}  & {\em weight} & Weight field \\
+\hline
+\mbox{\tt in}  & {\em port} & Port number \\
+\hline
+\mbox{\tt in}  & {\em metadata} & N\+U\+L\+L-\/terminated string that contains the discovery-\/time metadata (T\+XT record) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 267 of file dns\+\_\+sd.\+c.
+
+
+\begin{DoxyCode}
+269 \{
+270    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+271    \textcolor{keywordtype}{size\_t} i;
+272    \textcolor{keywordtype}{size\_t} j;
+273    \textcolor{keywordtype}{size\_t} \hyperlink{md5_8c_af11ea3cdbca7345eb6a4a8ac5ce0434d}{k};
+274    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+275    \hyperlink{structDnsSdService}{DnsSdService} *entry;
+276    \hyperlink{structDnsSdService}{DnsSdService} *firstFreeEntry;
+277 
+278    \textcolor{comment}{//Check parameters}
+279    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || serviceName == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || metadata == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+280       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+281 
+282    \textcolor{comment}{//Get exclusive access}
+283    \hyperlink{os__port__chibios_8c_a58485224df4bfa522246d55b35bbd83a}{osAcquireMutex}(&\hyperlink{net_8c_afe31551ad26115fae8e575654346d441}{netMutex});
+284 
+285    \textcolor{comment}{//Keep track of the first free entry}
+286    firstFreeEntry = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+287 
+288    \textcolor{comment}{//Loop through the list of registered services}
+289    \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{dns__sd_8h_a561a3da46162838063fd14c5135d01c7}{DNS\_SD\_SERVICE\_LIST\_SIZE}; i++)
+290    \{
+291       \textcolor{comment}{//Point to the current entry}
+292       entry = &context->serviceList[i];
+293 
+294       \textcolor{comment}{//Check if the entry is currently in use}
+295       \textcolor{keywordflow}{if}(entry->\hyperlink{structDnsSdService_abc60a53b69dd0843ceefa6e7a7b0443c}{name}[0] != \textcolor{charliteral}{'\(\backslash\)0'})
+296       \{
+297          \textcolor{comment}{//Check whether the specified service is already registered}
+298          \textcolor{keywordflow}{if}(!\hyperlink{os__port__windows_8h_ac99ec3f1036620727a68aa8c25a8963c}{strcasecmp}(entry->\hyperlink{structDnsSdService_abc60a53b69dd0843ceefa6e7a7b0443c}{name}, serviceName))
+299             \textcolor{keywordflow}{break};
+300       \}
+301       \textcolor{keywordflow}{else}
+302       \{
+303          \textcolor{comment}{//Keep track of the first free entry}
+304          \textcolor{keywordflow}{if}(firstFreeEntry == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+305             firstFreeEntry = entry;
+306       \}
+307    \}
+308 
+309    \textcolor{comment}{//If the specified service is not yet registered, then a new}
+310    \textcolor{comment}{//entry should be created}
+311    \textcolor{keywordflow}{if}(i >= DNS\_SD\_SERVICE\_LIST\_SIZE)
+312       entry = firstFreeEntry;
+313 
+314    \textcolor{comment}{//Check whether the service list runs out of space}
+315    \textcolor{keywordflow}{if}(entry != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+316    \{
+317       \textcolor{comment}{//Service name}
+318       \hyperlink{str_8c_ac10cb0bca1fb0c39b2c765afd068486d}{strSafeCopy}(entry->\hyperlink{structDnsSdService_abc60a53b69dd0843ceefa6e7a7b0443c}{name}, serviceName, 
+      \hyperlink{dns__sd_8h_a3338b6aea1abcee2bd66fa62c1f1bbdf}{DNS\_SD\_MAX\_SERVICE\_NAME\_LEN});
+319 
+320       \textcolor{comment}{//Priority field}
+321       entry->\hyperlink{structDnsSdService_afe6d19247c710cfd1eaa9f427488e498}{priority} = \hyperlink{dns__common_8h_a0815784d41b3c13d42ce22367abfba1d}{priority};
+322       \textcolor{comment}{//Weight field}
+323       entry->\hyperlink{structDnsSdService_a5a9548cecc8e63b7029f48fe83059234}{weight} = \hyperlink{dns__common_8h_a3c304b42c785c4cc5fa46842e2845a6b}{weight};
+324       \textcolor{comment}{//Port number}
+325       entry->\hyperlink{structDnsSdService_abf6fd1a073f7294ec927abb9b676c86a}{port} = \hyperlink{dns__common_8h_a8e0798404bf2cf5dabb84c5ba9a4f236}{port};
+326 
+327       \textcolor{comment}{//Clear TXT record}
+328       entry->\hyperlink{structDnsSdService_a09d63607034e43aa05f059e1e0ba3e81}{metadataLength} = 0;
+329 
+330       \textcolor{comment}{//Point to the beginning of the information string}
+331       i = 0;
+332       j = 0;
+333 
+334       \textcolor{comment}{//Point to the beginning of the resulting TXT record data}
+335       k = 0;
+336 
+337       \textcolor{comment}{//Format TXT record}
+338       \textcolor{keywordflow}{while}(1)
+339       \{
+340          \textcolor{comment}{//End of text data?}
+341          \textcolor{keywordflow}{if}(metadata[i] == \textcolor{charliteral}{'\(\backslash\)0'} || metadata[i] == \textcolor{charliteral}{';'})
+342          \{
+343             \textcolor{comment}{//Calculate the length of the text data}
+344             n = \hyperlink{os__port_8h_a3acffbd305ee72dcd4593c0d8af64a4f}{MIN}(i - j, \hyperlink{stdint_8h_aeb4e270a084ee26fe73e799861bd0252}{UINT8\_MAX});
+345 
+346             \textcolor{comment}{//Check the length of the resulting TXT record}
+347             \textcolor{keywordflow}{if}((entry->\hyperlink{structDnsSdService_a09d63607034e43aa05f059e1e0ba3e81}{metadataLength} + n + 1) > 
+      \hyperlink{dns__sd_8h_ab5fb0408ad9338aa081959533e30bd0b}{DNS\_SD\_MAX\_METADATA\_LEN})
+348                \textcolor{keywordflow}{break};
+349 
+350             \textcolor{comment}{//Write length field}
+351             entry->\hyperlink{structDnsSdService_acdddadde600948cb3f18ac8b50aa6faa}{metadata}[\hyperlink{md5_8c_af11ea3cdbca7345eb6a4a8ac5ce0434d}{k}] = \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+352             \textcolor{comment}{//Write text data}
+353             memcpy(entry->\hyperlink{structDnsSdService_acdddadde600948cb3f18ac8b50aa6faa}{metadata} + k + 1, metadata + j, n);
+354 
+355             \textcolor{comment}{//Jump to the next text data}
+356             j = i + 1;
+357             \textcolor{comment}{//Advance write index}
+358             k += n + 1;
+359 
+360             \textcolor{comment}{//Update the length of the TXT record}
+361             entry->\hyperlink{structDnsSdService_a09d63607034e43aa05f059e1e0ba3e81}{metadataLength} += n + 1;
+362 
+363             \textcolor{comment}{//End of string detected?}
+364             \textcolor{keywordflow}{if}(metadata[i] == \textcolor{charliteral}{'\(\backslash\)0'})
+365                \textcolor{keywordflow}{break};
+366          \}
+367 
+368          \textcolor{comment}{//Advance read index}
+369          i++;
+370       \}
+371 
+372       \textcolor{comment}{//Empty TXT record?}
+373       \textcolor{keywordflow}{if}(!entry->\hyperlink{structDnsSdService_a09d63607034e43aa05f059e1e0ba3e81}{metadataLength})
+374       \{
+375          \textcolor{comment}{//An empty TXT record shall contain a single zero byte}
+376          entry->\hyperlink{structDnsSdService_acdddadde600948cb3f18ac8b50aa6faa}{metadata}[0] = 0;
+377          entry->\hyperlink{structDnsSdService_a09d63607034e43aa05f059e1e0ba3e81}{metadataLength} = 1;
+378       \}
+379 
+380       \textcolor{comment}{//Restart probing process}
+381       \hyperlink{dns__sd_8c_a1c979323e188c71ba4e21432be27b969}{dnsSdStartProbing}(context);
+382 
+383       \textcolor{comment}{//Successful processing}
+384       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+385    \}
+386    \textcolor{keywordflow}{else}
+387    \{
+388       \textcolor{comment}{//The service list is full}
+389       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cae9be6449970fca5714ab9957b16562a5}{ERROR\_FAILURE};
+390    \}
+391 
+392    \textcolor{comment}{//Release exclusive access}
+393    \hyperlink{os__port__chibios_8c_a8e10e5b2c6d3877b5ba60e375ac45d79}{osReleaseMutex}(&\hyperlink{net_8c_afe31551ad26115fae8e575654346d441}{netMutex});
+394 
+395    \textcolor{comment}{//Return error code}
+396    \textcolor{keywordflow}{return} error;
+397 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{dns__sd_8c_a5740709eba1830f3ece625cf4b6d296a}\label{dns__sd_8c_a5740709eba1830f3ece625cf4b6d296a}} 
+\index{dns\+\_\+sd.\+c@{dns\+\_\+sd.\+c}!dns\+Sd\+Send\+Announcement@{dns\+Sd\+Send\+Announcement}}
+\index{dns\+Sd\+Send\+Announcement@{dns\+Sd\+Send\+Announcement}!dns\+\_\+sd.\+c@{dns\+\_\+sd.\+c}}
+\subsubsection{\texorpdfstring{dns\+Sd\+Send\+Announcement()}{dnsSdSendAnnouncement()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} dns\+Sd\+Send\+Announcement (\begin{DoxyParamCaption}\item[{\hyperlink{dns__sd_8h_a616b4c4abbffa3a360ee2f40bea72cf7}{Dns\+Sd\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Send announcement packet. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the D\+N\+S-\/\+SD context \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 914 of file dns\+\_\+sd.\+c.
+
+
+\begin{DoxyCode}
+915 \{
+916    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+917    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+918    \hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{NetInterface} *interface;
+919    \hyperlink{structDnsSdService}{DnsSdService} *service;
+920    \hyperlink{structMdnsMessage}{MdnsMessage} \hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message};
+921 
+922    \textcolor{comment}{//Point to the underlying network interface}
+923    \textcolor{keyword}{interface }= context->settings.interface;
+924 
+925    \textcolor{comment}{//Create an empty mDNS response message}
+926    error = \hyperlink{mdns__common_8c_a5c5005850cf4d8dd089bbd62641aa9ba}{mdnsCreateMessage}(&message, \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE});
+927    \textcolor{comment}{//Any error to report?}
+928    \textcolor{keywordflow}{if}(error)
+929       \textcolor{keywordflow}{return} error;
+930 
+931    \textcolor{comment}{//Start of exception handling block}
+932    \textcolor{keywordflow}{do}
+933    \{
+934       \textcolor{comment}{//Send an unsolicited mDNS response containing, in the Answer Section,}
+935       \textcolor{comment}{//all of its newly registered resource records}
+936       \textcolor{keywordflow}{if}(\hyperlink{dns__sd_8c_a31ab1c653a7c76144ac3a75eda938017}{dnsSdGetNumServices}(context) > 0)
+937       \{
+938          \textcolor{comment}{//Loop through the list of registered services}
+939          \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{dns__sd_8h_a561a3da46162838063fd14c5135d01c7}{DNS\_SD\_SERVICE\_LIST\_SIZE}; i++)
+940          \{
+941             \textcolor{comment}{//Point to the current entry}
+942             service = &context->serviceList[i];
+943 
+944             \textcolor{comment}{//Valid service?}
+945             \textcolor{keywordflow}{if}(service->\hyperlink{structDnsSdService_abc60a53b69dd0843ceefa6e7a7b0443c}{name}[0] != \textcolor{charliteral}{'\(\backslash\)0'})
+946             \{
+947                \textcolor{comment}{//Format PTR resource record (service type enumeration)}
+948                error = \hyperlink{dns__sd_8c_a4868845573db7c48cb9a219167d45176}{dnsSdAddServiceEnumPtrRecord}(interface,
+949                   &message, service, \hyperlink{dns__sd_8h_ac353abf6edc070ff92d7ad4b33a1f15d}{DNS\_SD\_DEFAULT\_RR\_TTL});
+950                \textcolor{comment}{//Any error to report?}
+951                \textcolor{keywordflow}{if}(error)
+952                   \textcolor{keywordflow}{break};
+953 
+954                \textcolor{comment}{//Format PTR resource record}
+955                error = \hyperlink{dns__sd_8c_aaebef4e47ae091d213c56de4ecea263d}{dnsSdAddPtrRecord}(interface, &message,
+956                   service, \hyperlink{dns__sd_8h_ac353abf6edc070ff92d7ad4b33a1f15d}{DNS\_SD\_DEFAULT\_RR\_TTL});
+957                \textcolor{comment}{//Any error to report?}
+958                \textcolor{keywordflow}{if}(error)
+959                   \textcolor{keywordflow}{break};
+960 
+961                \textcolor{comment}{//Format SRV resource record}
+962                error = \hyperlink{dns__sd_8c_af47b2d7f33b144326c337ea574d0a6c1}{dnsSdAddSrvRecord}(interface, &message,
+963                   service, \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE}, \hyperlink{dns__sd_8h_ac353abf6edc070ff92d7ad4b33a1f15d}{DNS\_SD\_DEFAULT\_RR\_TTL});
+964                \textcolor{comment}{//Any error to report?}
+965                \textcolor{keywordflow}{if}(error)
+966                   \textcolor{keywordflow}{break};
+967 
+968                \textcolor{comment}{//Format TXT resource record}
+969                error = \hyperlink{dns__sd_8c_ae172402f69ea0e1bf53d8d98320e782f}{dnsSdAddTxtRecord}(interface, &message,
+970                   service, \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE}, \hyperlink{dns__sd_8h_ac353abf6edc070ff92d7ad4b33a1f15d}{DNS\_SD\_DEFAULT\_RR\_TTL});
+971                \textcolor{comment}{//Any error to report?}
+972                \textcolor{keywordflow}{if}(error)
+973                   \textcolor{keywordflow}{break};
+974             \}
+975          \}
+976       \}
+977 
+978       \textcolor{comment}{//Propagate exception if necessary}
+979       \textcolor{keywordflow}{if}(error)
+980          \textcolor{keywordflow}{break};
+981 
+982       \textcolor{comment}{//Send mDNS message}
+983       error = \hyperlink{mdns__common_8c_ae9c33998a8a019066d4da724a80f6674}{mdnsSendMessage}(interface, &message, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, 
+      \hyperlink{mdns__common_8h_ab16900c77e60e00f401b684c45a37c34}{MDNS\_PORT});
+984 
+985       \textcolor{comment}{//End of exception handling block}
+986    \} \textcolor{keywordflow}{while}(0);
+987 
+988    \textcolor{comment}{//Free previously allocated memory}
+989    \hyperlink{mdns__common_8c_a07a3be8974e6aa1ec47c6364a9ddaafd}{mdnsDeleteMessage}(&message);
+990 
+991    \textcolor{comment}{//Return status code}
+992    \textcolor{keywordflow}{return} error;
+993 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{dns__sd_8c_a2bf675953147ee6150c2e6788117b284}\label{dns__sd_8c_a2bf675953147ee6150c2e6788117b284}} 
+\index{dns\+\_\+sd.\+c@{dns\+\_\+sd.\+c}!dns\+Sd\+Send\+Goodbye@{dns\+Sd\+Send\+Goodbye}}
+\index{dns\+Sd\+Send\+Goodbye@{dns\+Sd\+Send\+Goodbye}!dns\+\_\+sd.\+c@{dns\+\_\+sd.\+c}}
+\subsubsection{\texorpdfstring{dns\+Sd\+Send\+Goodbye()}{dnsSdSendGoodbye()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} dns\+Sd\+Send\+Goodbye (\begin{DoxyParamCaption}\item[{\hyperlink{dns__sd_8h_a616b4c4abbffa3a360ee2f40bea72cf7}{Dns\+Sd\+Context} $\ast$}]{context,  }\item[{const \hyperlink{structDnsSdService}{Dns\+Sd\+Service} $\ast$}]{service }\end{DoxyParamCaption})}
+
+
+
+Send goodbye packet. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the D\+N\+S-\/\+SD context \\
+\hline
+\mbox{\tt in}  & {\em service} & Pointer to a D\+N\+S-\/\+SD service \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 1003 of file dns\+\_\+sd.\+c.
+
+
+\begin{DoxyCode}
+1004 \{
+1005    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+1006    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+1007    \hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{NetInterface} *interface;
+1008    \hyperlink{structDnsSdService}{DnsSdService} *entry;
+1009    \hyperlink{structMdnsMessage}{MdnsMessage} \hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message};
+1010 
+1011    \textcolor{comment}{//Point to the underlying network interface}
+1012    \textcolor{keyword}{interface }= context->settings.interface;
+1013 
+1014    \textcolor{comment}{//Create an empty mDNS response message}
+1015    error = \hyperlink{mdns__common_8c_a5c5005850cf4d8dd089bbd62641aa9ba}{mdnsCreateMessage}(&message, \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE});
+1016    \textcolor{comment}{//Any error to report?}
+1017    \textcolor{keywordflow}{if}(error)
+1018       \textcolor{keywordflow}{return} error;
+1019 
+1020    \textcolor{comment}{//Loop through the list of registered services}
+1021    \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{dns__sd_8h_a561a3da46162838063fd14c5135d01c7}{DNS\_SD\_SERVICE\_LIST\_SIZE}; i++)
+1022    \{
+1023       \textcolor{comment}{//Point to the current entry}
+1024       entry = &context->serviceList[i];
+1025 
+1026       \textcolor{comment}{//Valid service?}
+1027       \textcolor{keywordflow}{if}(entry->\hyperlink{structDnsSdService_abc60a53b69dd0843ceefa6e7a7b0443c}{name}[0] != \textcolor{charliteral}{'\(\backslash\)0'})
+1028       \{
+1029          \textcolor{keywordflow}{if}(service == entry || service == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1030          \{
+1031             \textcolor{comment}{//Format PTR resource record (service type enumeration)}
+1032             error = \hyperlink{dns__sd_8c_a4868845573db7c48cb9a219167d45176}{dnsSdAddServiceEnumPtrRecord}(interface, &message, entry, 0)
+      ;
+1033             \textcolor{comment}{//Any error to report?}
+1034             \textcolor{keywordflow}{if}(error)
+1035                \textcolor{keywordflow}{break};
+1036 
+1037             \textcolor{comment}{//Format PTR resource record}
+1038             error = \hyperlink{dns__sd_8c_aaebef4e47ae091d213c56de4ecea263d}{dnsSdAddPtrRecord}(interface, &message, entry, 0);
+1039             \textcolor{comment}{//Any error to report?}
+1040             \textcolor{keywordflow}{if}(error)
+1041                \textcolor{keywordflow}{break};
+1042 
+1043             \textcolor{comment}{//Format SRV resource record}
+1044             error = \hyperlink{dns__sd_8c_af47b2d7f33b144326c337ea574d0a6c1}{dnsSdAddSrvRecord}(interface, &message, entry, 
+      \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE}, 0);
+1045             \textcolor{comment}{//Any error to report?}
+1046             \textcolor{keywordflow}{if}(error)
+1047                \textcolor{keywordflow}{break};
+1048 
+1049             \textcolor{comment}{//Format TXT resource record}
+1050             error = \hyperlink{dns__sd_8c_ae172402f69ea0e1bf53d8d98320e782f}{dnsSdAddTxtRecord}(interface, &message, entry, 
+      \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE}, 0);
+1051             \textcolor{comment}{//Any error to report?}
+1052             \textcolor{keywordflow}{if}(error)
+1053                \textcolor{keywordflow}{break};
+1054          \}
+1055       \}
+1056    \}
+1057 
+1058    \textcolor{comment}{//Check status code}
+1059    \textcolor{keywordflow}{if}(!error)
+1060    \{
+1061       \textcolor{comment}{//Send mDNS message}
+1062       error = \hyperlink{mdns__common_8c_ae9c33998a8a019066d4da724a80f6674}{mdnsSendMessage}(interface, &message, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, 
+      \hyperlink{mdns__common_8h_ab16900c77e60e00f401b684c45a37c34}{MDNS\_PORT});
+1063    \}
+1064 
+1065    \textcolor{comment}{//Free previously allocated memory}
+1066    \hyperlink{mdns__common_8c_a07a3be8974e6aa1ec47c6364a9ddaafd}{mdnsDeleteMessage}(&message);
+1067 
+1068    \textcolor{comment}{//Return status code}
+1069    \textcolor{keywordflow}{return} error;
+1070 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{dns__sd_8c_af483c7c7e217f353deefb446957b4518}\label{dns__sd_8c_af483c7c7e217f353deefb446957b4518}} 
+\index{dns\+\_\+sd.\+c@{dns\+\_\+sd.\+c}!dns\+Sd\+Send\+Probe@{dns\+Sd\+Send\+Probe}}
+\index{dns\+Sd\+Send\+Probe@{dns\+Sd\+Send\+Probe}!dns\+\_\+sd.\+c@{dns\+\_\+sd.\+c}}
+\subsubsection{\texorpdfstring{dns\+Sd\+Send\+Probe()}{dnsSdSendProbe()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} dns\+Sd\+Send\+Probe (\begin{DoxyParamCaption}\item[{\hyperlink{dns__sd_8h_a616b4c4abbffa3a360ee2f40bea72cf7}{Dns\+Sd\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Send probe packet. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the D\+N\+S-\/\+SD context \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 798 of file dns\+\_\+sd.\+c.
+
+
+\begin{DoxyCode}
+799 \{
+800    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+801    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+802    \hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{NetInterface} *interface;
+803    \hyperlink{dns__common_8h_ac1ef063cc8bc932118463092c282f188}{DnsQuestion} *dnsQuestion;
+804    \hyperlink{structDnsSdService}{DnsSdService} *service;
+805    \hyperlink{structMdnsMessage}{MdnsMessage} \hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message};
+806 
+807    \textcolor{comment}{//Point to the underlying network interface}
+808    \textcolor{keyword}{interface }= context->settings.interface;
+809 
+810    \textcolor{comment}{//Create an empty mDNS query message}
+811    error = \hyperlink{mdns__common_8c_a5c5005850cf4d8dd089bbd62641aa9ba}{mdnsCreateMessage}(&message, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE});
+812    \textcolor{comment}{//Any error to report?}
+813    \textcolor{keywordflow}{if}(error)
+814       \textcolor{keywordflow}{return} error;
+815 
+816    \textcolor{comment}{//Start of exception handling block}
+817    \textcolor{keywordflow}{do}
+818    \{
+819       \textcolor{comment}{//For all those resource records that a mDNS responder desires to be}
+820       \textcolor{comment}{//unique on the local link, it must send a mDNS query asking for those}
+821       \textcolor{comment}{//resource records, to see if any of them are already in use}
+822       \textcolor{keywordflow}{if}(\hyperlink{dns__sd_8c_a31ab1c653a7c76144ac3a75eda938017}{dnsSdGetNumServices}(context) > 0)
+823       \{
+824          \textcolor{comment}{//Loop through the list of registered services}
+825          \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{dns__sd_8h_a561a3da46162838063fd14c5135d01c7}{DNS\_SD\_SERVICE\_LIST\_SIZE}; i++)
+826          \{
+827             \textcolor{comment}{//Point to the current entry}
+828             service = &context->serviceList[i];
+829 
+830             \textcolor{comment}{//Valid service?}
+831             \textcolor{keywordflow}{if}(service->\hyperlink{structDnsSdService_abc60a53b69dd0843ceefa6e7a7b0443c}{name}[0] != \textcolor{charliteral}{'\(\backslash\)0'})
+832             \{
+833                \textcolor{comment}{//Encode the service name using DNS notation}
+834                message.\hyperlink{structMdnsMessage_ad1ebbfad05745924fdeee3389f270e52}{length} += \hyperlink{mdns__common_8c_a5e982ed651cae31a97f043d2258e3fc0}{mdnsEncodeName}(context->instanceName, service->
+      \hyperlink{structDnsSdService_abc60a53b69dd0843ceefa6e7a7b0443c}{name},
+835                   \textcolor{stringliteral}{".local"}, (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *) message.\hyperlink{structMdnsMessage_ac5ab08c143472d040db637c76c972cab}{dnsHeader} + message.
+      \hyperlink{structMdnsMessage_ad1ebbfad05745924fdeee3389f270e52}{length});
+836 
+837                \textcolor{comment}{//Point to the corresponding question structure}
+838                dnsQuestion = \hyperlink{dns__common_8h_a66ca704f3f850dcbb2f3ceefe90afcc5}{DNS\_GET\_QUESTION}(message.\hyperlink{structMdnsMessage_ac5ab08c143472d040db637c76c972cab}{dnsHeader}, message.
+      \hyperlink{structMdnsMessage_ad1ebbfad05745924fdeee3389f270e52}{length});
+839 
+840                \textcolor{comment}{//The probes should be sent as QU questions with the unicast-response}
+841                \textcolor{comment}{//bit set, to allow a defending host to respond immediately via unicast}
+842                dnsQuestion->qtype = \hyperlink{cpu__endian_8h_a15540dbaeee98b6df80805f92e2f6759}{HTONS}(\hyperlink{dns__common_8h_aa24a9fb31b6fb3858a24a8d8682e23d1a8f6102b9591501cd59e38352db0f94b0}{DNS\_RR\_TYPE\_ANY});
+843                dnsQuestion->qclass = \hyperlink{cpu__endian_8h_a15540dbaeee98b6df80805f92e2f6759}{HTONS}(\hyperlink{mdns__common_8h_ac11a61056f0e21d666d58a0e433848df}{MDNS\_QCLASS\_QU} | 
+      \hyperlink{dns__common_8h_aa541e7289dae8934f7f37e74c15cc5a5ae4d96c0329f035328ba190627f2782e9}{DNS\_RR\_CLASS\_IN});
+844 
+845                \textcolor{comment}{//Update the length of the mDNS query message}
+846                message.\hyperlink{structMdnsMessage_ad1ebbfad05745924fdeee3389f270e52}{length} += \textcolor{keyword}{sizeof}(\hyperlink{dns__common_8h_ac1ef063cc8bc932118463092c282f188}{DnsQuestion});
+847 
+848                \textcolor{comment}{//Number of questions in the Question Section}
+849                message.\hyperlink{structMdnsMessage_ac5ab08c143472d040db637c76c972cab}{dnsHeader}->qdcount++;
+850             \}
+851          \}
+852       \}
+853 
+854       \textcolor{comment}{//A probe query can be distinguished from a normal query by the fact that}
+855       \textcolor{comment}{//a probe query contains a proposed record in the Authority Section that}
+856       \textcolor{comment}{//answers the question in the Question Section}
+857       \textcolor{keywordflow}{if}(\hyperlink{dns__sd_8c_a31ab1c653a7c76144ac3a75eda938017}{dnsSdGetNumServices}(context) > 0)
+858       \{
+859          \textcolor{comment}{//Loop through the list of registered services}
+860          \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{dns__sd_8h_a561a3da46162838063fd14c5135d01c7}{DNS\_SD\_SERVICE\_LIST\_SIZE}; i++)
+861          \{
+862             \textcolor{comment}{//Point to the current entry}
+863             service = &context->serviceList[i];
+864 
+865             \textcolor{comment}{//Valid service?}
+866             \textcolor{keywordflow}{if}(service->\hyperlink{structDnsSdService_abc60a53b69dd0843ceefa6e7a7b0443c}{name}[0] != \textcolor{charliteral}{'\(\backslash\)0'})
+867             \{
+868                \textcolor{comment}{//Format SRV resource record}
+869                error = \hyperlink{dns__sd_8c_af47b2d7f33b144326c337ea574d0a6c1}{dnsSdAddSrvRecord}(interface, &message,
+870                   service, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, \hyperlink{dns__sd_8h_ac353abf6edc070ff92d7ad4b33a1f15d}{DNS\_SD\_DEFAULT\_RR\_TTL});
+871                \textcolor{comment}{//Any error to report?}
+872                \textcolor{keywordflow}{if}(error)
+873                   \textcolor{keywordflow}{break};
+874 
+875                \textcolor{comment}{//Format TXT resource record}
+876                error = \hyperlink{dns__sd_8c_ae172402f69ea0e1bf53d8d98320e782f}{dnsSdAddTxtRecord}(interface, &message,
+877                   service, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, \hyperlink{dns__sd_8h_ac353abf6edc070ff92d7ad4b33a1f15d}{DNS\_SD\_DEFAULT\_RR\_TTL});
+878                \textcolor{comment}{//Any error to report?}
+879                \textcolor{keywordflow}{if}(error)
+880                   \textcolor{keywordflow}{break};
+881             \}
+882          \}
+883       \}
+884 
+885       \textcolor{comment}{//Propagate exception if necessary}
+886       \textcolor{keywordflow}{if}(error)
+887          \textcolor{keywordflow}{break};
+888 
+889       \textcolor{comment}{//Number of resource records in the Authority Section}
+890       message.\hyperlink{structMdnsMessage_ac5ab08c143472d040db637c76c972cab}{dnsHeader}->nscount = message.\hyperlink{structMdnsMessage_ac5ab08c143472d040db637c76c972cab}{dnsHeader}->ancount;
+891       \textcolor{comment}{//Number of resource records in the Answer Section}
+892       message.\hyperlink{structMdnsMessage_ac5ab08c143472d040db637c76c972cab}{dnsHeader}->ancount = 0;
+893 
+894       \textcolor{comment}{//Send mDNS message}
+895       error = \hyperlink{mdns__common_8c_ae9c33998a8a019066d4da724a80f6674}{mdnsSendMessage}(interface, &message, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, 
+      \hyperlink{mdns__common_8h_ab16900c77e60e00f401b684c45a37c34}{MDNS\_PORT});
+896 
+897       \textcolor{comment}{//End of exception handling block}
+898    \} \textcolor{keywordflow}{while}(0);
+899 
+900    \textcolor{comment}{//Free previously allocated memory}
+901    \hyperlink{mdns__common_8c_a07a3be8974e6aa1ec47c6364a9ddaafd}{mdnsDeleteMessage}(&message);
+902 
+903    \textcolor{comment}{//Return status code}
+904    \textcolor{keywordflow}{return} error;
+905 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{dns__sd_8c_a85676ec43b582bf84ba70d843381095a}\label{dns__sd_8c_a85676ec43b582bf84ba70d843381095a}} 
+\index{dns\+\_\+sd.\+c@{dns\+\_\+sd.\+c}!dns\+Sd\+Set\+Instance\+Name@{dns\+Sd\+Set\+Instance\+Name}}
+\index{dns\+Sd\+Set\+Instance\+Name@{dns\+Sd\+Set\+Instance\+Name}!dns\+\_\+sd.\+c@{dns\+\_\+sd.\+c}}
+\subsubsection{\texorpdfstring{dns\+Sd\+Set\+Instance\+Name()}{dnsSdSetInstanceName()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} dns\+Sd\+Set\+Instance\+Name (\begin{DoxyParamCaption}\item[{\hyperlink{dns__sd_8h_a616b4c4abbffa3a360ee2f40bea72cf7}{Dns\+Sd\+Context} $\ast$}]{context,  }\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{instance\+Name }\end{DoxyParamCaption})}
+
+
+
+Set service instance name. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the D\+N\+S-\/\+SD context \\
+\hline
+\mbox{\tt in}  & {\em instance\+Name} & N\+U\+L\+L-\/terminated string that contains the service instance name \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 214 of file dns\+\_\+sd.\+c.
+
+
+\begin{DoxyCode}
+215 \{
+216    \hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{NetInterface} *interface;
+217 
+218    \textcolor{comment}{//Check parameters}
+219    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || instanceName == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+220       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+221 
+222    \textcolor{comment}{//Get exclusive access}
+223    \hyperlink{os__port__chibios_8c_a58485224df4bfa522246d55b35bbd83a}{osAcquireMutex}(&\hyperlink{net_8c_afe31551ad26115fae8e575654346d441}{netMutex});
+224 
+225    \textcolor{comment}{//Point to the underlying network interface}
+226    \textcolor{keyword}{interface }= context->settings.interface;
+227 
+228    \textcolor{comment}{//Any registered services?}
+229    \textcolor{keywordflow}{if}(\hyperlink{dns__sd_8c_a31ab1c653a7c76144ac3a75eda938017}{dnsSdGetNumServices}(context) > 0)
+230    \{
+231       \textcolor{comment}{//Check whether the link is up}
+232       \textcolor{keywordflow}{if}(interface->linkState)
+233       \{
+234          \textcolor{comment}{//Send a goodbye packet}
+235          \hyperlink{dns__sd_8c_a2bf675953147ee6150c2e6788117b284}{dnsSdSendGoodbye}(context, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+236       \}
+237    \}
+238 
+239    \textcolor{comment}{//Set instance name}
+240    \hyperlink{str_8c_ac10cb0bca1fb0c39b2c765afd068486d}{strSafeCopy}(context->instanceName, instanceName,
+241       \hyperlink{dns__sd_8h_acbbd239513bf1078f6b8b4b7bccff7cf}{DNS\_SD\_MAX\_INSTANCE\_NAME\_LEN});
+242 
+243    \textcolor{comment}{//Restart probing process}
+244    \hyperlink{dns__sd_8c_a1c979323e188c71ba4e21432be27b969}{dnsSdStartProbing}(context);
+245 
+246    \textcolor{comment}{//Release exclusive access}
+247    \hyperlink{os__port__chibios_8c_a8e10e5b2c6d3877b5ba60e375ac45d79}{osReleaseMutex}(&\hyperlink{net_8c_afe31551ad26115fae8e575654346d441}{netMutex});
+248 
+249    \textcolor{comment}{//Successful processing}
+250    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+251 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{dns__sd_8c_aa1a3d67f41264633e220c4989a4a0afb}\label{dns__sd_8c_aa1a3d67f41264633e220c4989a4a0afb}} 
+\index{dns\+\_\+sd.\+c@{dns\+\_\+sd.\+c}!dns\+Sd\+Start@{dns\+Sd\+Start}}
+\index{dns\+Sd\+Start@{dns\+Sd\+Start}!dns\+\_\+sd.\+c@{dns\+\_\+sd.\+c}}
+\subsubsection{\texorpdfstring{dns\+Sd\+Start()}{dnsSdStart()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} dns\+Sd\+Start (\begin{DoxyParamCaption}\item[{\hyperlink{dns__sd_8h_a616b4c4abbffa3a360ee2f40bea72cf7}{Dns\+Sd\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Start m\+D\+NS responder. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the D\+N\+S-\/\+SD context \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 128 of file dns\+\_\+sd.\+c.
+
+
+\begin{DoxyCode}
+129 \{
+130    \textcolor{comment}{//Check parameter}
+131    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+132       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+133 
+134    \textcolor{comment}{//Debug message}
+135    \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"Starting DNS-SD...\(\backslash\)r\(\backslash\)n"});
+136 
+137    \textcolor{comment}{//Get exclusive access}
+138    \hyperlink{os__port__chibios_8c_a58485224df4bfa522246d55b35bbd83a}{osAcquireMutex}(&\hyperlink{net_8c_afe31551ad26115fae8e575654346d441}{netMutex});
+139 
+140    \textcolor{comment}{//Start DNS-SD}
+141    context->running = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+142    \textcolor{comment}{//Initialize state machine}
+143    context->state = \hyperlink{mdns__responder_8h_a96ee67ecc8252ba576e72c97cd8f7fd3a07bf42369da461365aaa364eb11851eb}{MDNS\_STATE\_INIT};
+144 
+145    \textcolor{comment}{//Release exclusive access}
+146    \hyperlink{os__port__chibios_8c_a8e10e5b2c6d3877b5ba60e375ac45d79}{osReleaseMutex}(&\hyperlink{net_8c_afe31551ad26115fae8e575654346d441}{netMutex});
+147 
+148    \textcolor{comment}{//Successful processing}
+149    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+150 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{dns__sd_8c_a1c979323e188c71ba4e21432be27b969}\label{dns__sd_8c_a1c979323e188c71ba4e21432be27b969}} 
+\index{dns\+\_\+sd.\+c@{dns\+\_\+sd.\+c}!dns\+Sd\+Start\+Probing@{dns\+Sd\+Start\+Probing}}
+\index{dns\+Sd\+Start\+Probing@{dns\+Sd\+Start\+Probing}!dns\+\_\+sd.\+c@{dns\+\_\+sd.\+c}}
+\subsubsection{\texorpdfstring{dns\+Sd\+Start\+Probing()}{dnsSdStartProbing()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} dns\+Sd\+Start\+Probing (\begin{DoxyParamCaption}\item[{\hyperlink{dns__sd_8h_a616b4c4abbffa3a360ee2f40bea72cf7}{Dns\+Sd\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Restart probing process. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the D\+N\+S-\/\+SD context \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 485 of file dns\+\_\+sd.\+c.
+
+
+\begin{DoxyCode}
+486 \{
+487    \textcolor{comment}{//Check parameter}
+488    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+489       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+490 
+491    \textcolor{comment}{//Force DNS-SD to start probing again}
+492    context->state = \hyperlink{mdns__responder_8h_a96ee67ecc8252ba576e72c97cd8f7fd3a07bf42369da461365aaa364eb11851eb}{MDNS\_STATE\_INIT};
+493 
+494    \textcolor{comment}{//Successful processing}
+495    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+496 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{dns__sd_8c_a2cc65b84e2cafae43b4ceff6c5ef931e}\label{dns__sd_8c_a2cc65b84e2cafae43b4ceff6c5ef931e}} 
+\index{dns\+\_\+sd.\+c@{dns\+\_\+sd.\+c}!dns\+Sd\+Stop@{dns\+Sd\+Stop}}
+\index{dns\+Sd\+Stop@{dns\+Sd\+Stop}!dns\+\_\+sd.\+c@{dns\+\_\+sd.\+c}}
+\subsubsection{\texorpdfstring{dns\+Sd\+Stop()}{dnsSdStop()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} dns\+Sd\+Stop (\begin{DoxyParamCaption}\item[{\hyperlink{dns__sd_8h_a616b4c4abbffa3a360ee2f40bea72cf7}{Dns\+Sd\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Stop m\+D\+NS responder. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the D\+N\+S-\/\+SD context \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 159 of file dns\+\_\+sd.\+c.
+
+
+\begin{DoxyCode}
+160 \{
+161    \textcolor{comment}{//Check parameter}
+162    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+163       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+164 
+165    \textcolor{comment}{//Debug message}
+166    \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"Stopping DNS-SD...\(\backslash\)r\(\backslash\)n"});
+167 
+168    \textcolor{comment}{//Get exclusive access}
+169    \hyperlink{os__port__chibios_8c_a58485224df4bfa522246d55b35bbd83a}{osAcquireMutex}(&\hyperlink{net_8c_afe31551ad26115fae8e575654346d441}{netMutex});
+170 
+171    \textcolor{comment}{//Suspend DNS-SD}
+172    context->running = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+173    \textcolor{comment}{//Reinitialize state machine}
+174    context->state = \hyperlink{mdns__responder_8h_a96ee67ecc8252ba576e72c97cd8f7fd3a07bf42369da461365aaa364eb11851eb}{MDNS\_STATE\_INIT};
+175 
+176    \textcolor{comment}{//Release exclusive access}
+177    \hyperlink{os__port__chibios_8c_a8e10e5b2c6d3877b5ba60e375ac45d79}{osReleaseMutex}(&\hyperlink{net_8c_afe31551ad26115fae8e575654346d441}{netMutex});
+178 
+179    \textcolor{comment}{//Successful processing}
+180    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+181 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{dns__sd_8c_ac68d11ba729d01dbd0957b4cc09bb5cc}\label{dns__sd_8c_ac68d11ba729d01dbd0957b4cc09bb5cc}} 
+\index{dns\+\_\+sd.\+c@{dns\+\_\+sd.\+c}!dns\+Sd\+Tick@{dns\+Sd\+Tick}}
+\index{dns\+Sd\+Tick@{dns\+Sd\+Tick}!dns\+\_\+sd.\+c@{dns\+\_\+sd.\+c}}
+\subsubsection{\texorpdfstring{dns\+Sd\+Tick()}{dnsSdTick()}}
+{\footnotesize\ttfamily void dns\+Sd\+Tick (\begin{DoxyParamCaption}\item[{\hyperlink{dns__sd_8h_a616b4c4abbffa3a360ee2f40bea72cf7}{Dns\+Sd\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+D\+N\+S-\/\+SD responder timer handler. 
+
+This routine must be periodically called by the T\+C\+P/\+IP stack to manage D\+N\+S-\/\+SD operation
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the D\+N\+S-\/\+SD context \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 508 of file dns\+\_\+sd.\+c.
+
+
+\begin{DoxyCode}
+509 \{
+510    \hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\_t} \hyperlink{dhcpv6__common_8h_ae73654f333e4363463ad8c594eca1905}{time};
+511    \hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\_t} delay;
+512    \hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{NetInterface} *interface;
+513 
+514    \textcolor{comment}{//Make sure DNS-SD has been properly instantiated}
+515    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+516       \textcolor{keywordflow}{return};
+517 
+518    \textcolor{comment}{//Point to the underlying network interface}
+519    \textcolor{keyword}{interface }= context->settings.interface;
+520 
+521    \textcolor{comment}{//Get current time}
+522    time = \hyperlink{os__port__chibios_8c_ab66a11272d40a916fa69dd8e4dc443d4}{osGetSystemTime}();
+523 
+524    \textcolor{comment}{//Check current state}
+525    \textcolor{keywordflow}{if}(context->state == \hyperlink{mdns__responder_8h_a96ee67ecc8252ba576e72c97cd8f7fd3a07bf42369da461365aaa364eb11851eb}{MDNS\_STATE\_INIT})
+526    \{
+527       \textcolor{comment}{//Ensure the mDNS and DNS-SD services are running}
+528       \textcolor{keywordflow}{if}(context->running && interface->mdnsResponderContext != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+529       \{
+530          \textcolor{comment}{//Wait for mDNS probing to complete}
+531          \textcolor{keywordflow}{if}(interface->mdnsResponderContext->state == \hyperlink{mdns__responder_8h_a96ee67ecc8252ba576e72c97cd8f7fd3a5669572319cfacc11b9d9fd5c70a6933}{MDNS\_STATE\_ANNOUNCING} ||
+532             interface->mdnsResponderContext->state == \hyperlink{mdns__responder_8h_a96ee67ecc8252ba576e72c97cd8f7fd3a94d5f006d5512a42d0a63b7cc981b626}{MDNS\_STATE\_IDLE})
+533          \{
+534             \textcolor{comment}{//Any registered services?}
+535             \textcolor{keywordflow}{if}(\hyperlink{dns__sd_8c_a31ab1c653a7c76144ac3a75eda938017}{dnsSdGetNumServices}(context) > 0)
+536             \{
+537                \textcolor{comment}{//Initial random delay}
+538                delay = \hyperlink{net_8c_af45ea0afc9806749114ec85e507014e1}{netGetRandRange}(\hyperlink{mdns__responder_8h_a7471afd8ab708e1e6f27ca54a41ecc31}{MDNS\_RAND\_DELAY\_MIN}, 
+      \hyperlink{mdns__responder_8h_a8e6f1dcd2e7c284c05d3a1369a1b28cb}{MDNS\_RAND\_DELAY\_MAX});
+539                \textcolor{comment}{//Perform probing}
+540                \hyperlink{dns__sd_8c_a2be3edeed328e1cf5cb9a99098fc318e}{dnsSdChangeState}(context, \hyperlink{mdns__responder_8h_a96ee67ecc8252ba576e72c97cd8f7fd3afe2b52e127507e69fe1782db03bc234e}{MDNS\_STATE\_PROBING}, delay);
+541             \}
+542          \}
+543       \}
+544    \}
+545    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->state == \hyperlink{mdns__responder_8h_a96ee67ecc8252ba576e72c97cd8f7fd3afe2b52e127507e69fe1782db03bc234e}{MDNS\_STATE\_PROBING})
+546    \{
+547       \textcolor{comment}{//Probing failed?}
+548       \textcolor{keywordflow}{if}(context->conflict && context->retransmitCount > 0)
+549       \{
+550          \textcolor{comment}{//Programmatically change the service instance name}
+551          \hyperlink{dns__sd_8c_a24ef5edd81bf1039c908d79f315f6925}{dnsSdChangeInstanceName}(context);
+552          \textcolor{comment}{//Probe again, and repeat as necessary until a unique name is found}
+553          \hyperlink{dns__sd_8c_a2be3edeed328e1cf5cb9a99098fc318e}{dnsSdChangeState}(context, \hyperlink{mdns__responder_8h_a96ee67ecc8252ba576e72c97cd8f7fd3afe2b52e127507e69fe1782db03bc234e}{MDNS\_STATE\_PROBING}, 0);
+554       \}
+555       \textcolor{comment}{//Tie-break lost?}
+556       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->tieBreakLost && context->retransmitCount > 0)
+557       \{
+558          \textcolor{comment}{//The host defers to the winning host by waiting one second, and}
+559          \textcolor{comment}{//then begins probing for this record again}
+560          \hyperlink{dns__sd_8c_a2be3edeed328e1cf5cb9a99098fc318e}{dnsSdChangeState}(context, \hyperlink{mdns__responder_8h_a96ee67ecc8252ba576e72c97cd8f7fd3afe2b52e127507e69fe1782db03bc234e}{MDNS\_STATE\_PROBING}, 
+      \hyperlink{mdns__responder_8h_a710d6b6bffaacff828baae713ae6702d}{MDNS\_PROBE\_DEFER});
+561       \}
+562       \textcolor{keywordflow}{else}
+563       \{
+564          \textcolor{comment}{//Check current time}
+565          \textcolor{keywordflow}{if}(\hyperlink{os__port_8h_a25c13833ef003da02045a91b1080263a}{timeCompare}(time, context->timestamp + context->timeout) >= 0)
+566          \{
+567             \textcolor{comment}{//Probing is on-going?}
+568             \textcolor{keywordflow}{if}(context->retransmitCount < \hyperlink{mdns__responder_8h_a7c7cd62b00b21fe62a16cf7a04680452}{MDNS\_PROBE\_NUM})
+569             \{
+570                \textcolor{comment}{//First probe?}
+571                \textcolor{keywordflow}{if}(context->retransmitCount == 0)
+572                \{
+573                   \textcolor{comment}{//Apparently conflicting mDNS responses received before the}
+574                   \textcolor{comment}{//first probe packet is sent must be silently ignored}
+575                   context->conflict = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+576                   context->tieBreakLost = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+577                \}
+578 
+579                \textcolor{comment}{//Send probe packet}
+580                \hyperlink{dns__sd_8c_af483c7c7e217f353deefb446957b4518}{dnsSdSendProbe}(context);
+581 
+582                \textcolor{comment}{//Save the time at which the packet was sent}
+583                context->timestamp = \hyperlink{dhcpv6__common_8h_ae73654f333e4363463ad8c594eca1905}{time};
+584                \textcolor{comment}{//Time interval between subsequent probe packets}
+585                context->timeout = \hyperlink{mdns__responder_8h_a1067b123a81b11edaf8965deddb49215}{MDNS\_PROBE\_DELAY};
+586                \textcolor{comment}{//Increment retransmission counter}
+587                context->retransmitCount++;
+588             \}
+589             \textcolor{comment}{//Probing is complete?}
+590             \textcolor{keywordflow}{else}
+591             \{
+592                \textcolor{comment}{//The mDNS responder must send unsolicited mDNS responses}
+593                \textcolor{comment}{//containing all of its newly registered resource records}
+594                \textcolor{keywordflow}{if}(context->settings.numAnnouncements > 0)
+595                   \hyperlink{dns__sd_8c_a2be3edeed328e1cf5cb9a99098fc318e}{dnsSdChangeState}(context, 
+      \hyperlink{mdns__responder_8h_a96ee67ecc8252ba576e72c97cd8f7fd3a5669572319cfacc11b9d9fd5c70a6933}{MDNS\_STATE\_ANNOUNCING}, 0);
+596                \textcolor{keywordflow}{else}
+597                   \hyperlink{dns__sd_8c_a2be3edeed328e1cf5cb9a99098fc318e}{dnsSdChangeState}(context, \hyperlink{mdns__responder_8h_a96ee67ecc8252ba576e72c97cd8f7fd3a94d5f006d5512a42d0a63b7cc981b626}{MDNS\_STATE\_IDLE}, 0);
+598             \}
+599          \}
+600       \}
+601    \}
+602    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->state == \hyperlink{mdns__responder_8h_a96ee67ecc8252ba576e72c97cd8f7fd3a5669572319cfacc11b9d9fd5c70a6933}{MDNS\_STATE\_ANNOUNCING})
+603    \{
+604       \textcolor{comment}{//Whenever a mDNS responder receives any mDNS response (solicited or}
+605       \textcolor{comment}{//otherwise) containing a conflicting resource record, the conflict}
+606       \textcolor{comment}{//must be resolved}
+607       \textcolor{keywordflow}{if}(context->conflict)
+608       \{
+609          \textcolor{comment}{//Probe again, and repeat as necessary until a unique name is found}
+610          \hyperlink{dns__sd_8c_a2be3edeed328e1cf5cb9a99098fc318e}{dnsSdChangeState}(context, \hyperlink{mdns__responder_8h_a96ee67ecc8252ba576e72c97cd8f7fd3afe2b52e127507e69fe1782db03bc234e}{MDNS\_STATE\_PROBING}, 0);
+611       \}
+612       \textcolor{keywordflow}{else}
+613       \{
+614          \textcolor{comment}{//Check current time}
+615          \textcolor{keywordflow}{if}(\hyperlink{os__port_8h_a25c13833ef003da02045a91b1080263a}{timeCompare}(time, context->timestamp + context->timeout) >= 0)
+616          \{
+617             \textcolor{comment}{//Send announcement packet}
+618             \hyperlink{dns__sd_8c_a5740709eba1830f3ece625cf4b6d296a}{dnsSdSendAnnouncement}(context);
+619 
+620             \textcolor{comment}{//Save the time at which the packet was sent}
+621             context->timestamp = \hyperlink{dhcpv6__common_8h_ae73654f333e4363463ad8c594eca1905}{time};
+622             \textcolor{comment}{//Increment retransmission counter}
+623             context->retransmitCount++;
+624 
+625             \textcolor{comment}{//First announcement packet?}
+626             \textcolor{keywordflow}{if}(context->retransmitCount == 1)
+627             \{
+628                \textcolor{comment}{//The mDNS responder must send at least two unsolicited}
+629                \textcolor{comment}{//responses, one second apart}
+630                context->timeout = \hyperlink{mdns__responder_8h_a1c8efded400eb0e4c9c24628a56a593b}{MDNS\_ANNOUNCE\_DELAY};
+631             \}
+632             \textcolor{keywordflow}{else}
+633             \{
+634                \textcolor{comment}{//To provide increased robustness against packet loss, a mDNS}
+635                \textcolor{comment}{//responder may send up to eight unsolicited responses, provided}
+636                \textcolor{comment}{//that the interval between unsolicited responses increases by}
+637                \textcolor{comment}{//at least a factor of two with every response sent}
+638                context->timeout *= 2;
+639             \}
+640 
+641             \textcolor{comment}{//Last announcement packet?}
+642             \textcolor{keywordflow}{if}(context->retransmitCount >= context->settings.numAnnouncements)
+643             \{
+644                \textcolor{comment}{//A mDNS responder must not send regular periodic announcements}
+645                \hyperlink{dns__sd_8c_a2be3edeed328e1cf5cb9a99098fc318e}{dnsSdChangeState}(context, \hyperlink{mdns__responder_8h_a96ee67ecc8252ba576e72c97cd8f7fd3a94d5f006d5512a42d0a63b7cc981b626}{MDNS\_STATE\_IDLE}, 0);
+646             \}
+647          \}
+648       \}
+649    \}
+650    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->state == \hyperlink{mdns__responder_8h_a96ee67ecc8252ba576e72c97cd8f7fd3a94d5f006d5512a42d0a63b7cc981b626}{MDNS\_STATE\_IDLE})
+651    \{
+652       \textcolor{comment}{//Whenever a mDNS responder receives any mDNS response (solicited or}
+653       \textcolor{comment}{//otherwise) containing a conflicting resource record, the conflict}
+654       \textcolor{comment}{//must be resolved}
+655       \textcolor{keywordflow}{if}(context->conflict)
+656       \{
+657          \textcolor{comment}{//Probe again, and repeat as necessary until a unique name is found}
+658          \hyperlink{dns__sd_8c_a2be3edeed328e1cf5cb9a99098fc318e}{dnsSdChangeState}(context, \hyperlink{mdns__responder_8h_a96ee67ecc8252ba576e72c97cd8f7fd3afe2b52e127507e69fe1782db03bc234e}{MDNS\_STATE\_PROBING}, 0);
+659       \}
+660    \}
+661 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{dns__sd_8c_a24e6d0c56393ce9e0fa2cb39a4def8f6}\label{dns__sd_8c_a24e6d0c56393ce9e0fa2cb39a4def8f6}} 
+\index{dns\+\_\+sd.\+c@{dns\+\_\+sd.\+c}!dns\+Sd\+Unregister\+Service@{dns\+Sd\+Unregister\+Service}}
+\index{dns\+Sd\+Unregister\+Service@{dns\+Sd\+Unregister\+Service}!dns\+\_\+sd.\+c@{dns\+\_\+sd.\+c}}
+\subsubsection{\texorpdfstring{dns\+Sd\+Unregister\+Service()}{dnsSdUnregisterService()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} dns\+Sd\+Unregister\+Service (\begin{DoxyParamCaption}\item[{\hyperlink{dns__sd_8h_a616b4c4abbffa3a360ee2f40bea72cf7}{Dns\+Sd\+Context} $\ast$}]{context,  }\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{service\+Name }\end{DoxyParamCaption})}
+
+
+
+Unregister a D\+N\+S-\/\+SD service. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the D\+N\+S-\/\+SD context \\
+\hline
+\mbox{\tt in}  & {\em service\+Name} & N\+U\+L\+L-\/terminated string that contains the name of the service to be unregistered \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 408 of file dns\+\_\+sd.\+c.
+
+
+\begin{DoxyCode}
+409 \{
+410    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+411    \hyperlink{structDnsSdService}{DnsSdService} *entry;
+412 
+413    \textcolor{comment}{//Check parameters}
+414    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || serviceName == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+415       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+416 
+417    \textcolor{comment}{//Get exclusive access}
+418    \hyperlink{os__port__chibios_8c_a58485224df4bfa522246d55b35bbd83a}{osAcquireMutex}(&\hyperlink{net_8c_afe31551ad26115fae8e575654346d441}{netMutex});
+419 
+420    \textcolor{comment}{//Loop through the list of registered services}
+421    \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{dns__sd_8h_a561a3da46162838063fd14c5135d01c7}{DNS\_SD\_SERVICE\_LIST\_SIZE}; i++)
+422    \{
+423       \textcolor{comment}{//Point to the current entry}
+424       entry = &context->serviceList[i];
+425 
+426       \textcolor{comment}{//Service name found?}
+427       \textcolor{keywordflow}{if}(!\hyperlink{os__port__windows_8h_ac99ec3f1036620727a68aa8c25a8963c}{strcasecmp}(entry->\hyperlink{structDnsSdService_abc60a53b69dd0843ceefa6e7a7b0443c}{name}, serviceName))
+428       \{
+429          \textcolor{comment}{//Send a goodbye packet}
+430          \hyperlink{dns__sd_8c_a2bf675953147ee6150c2e6788117b284}{dnsSdSendGoodbye}(context, entry);
+431          \textcolor{comment}{//Remove the service from the list}
+432          entry->\hyperlink{structDnsSdService_abc60a53b69dd0843ceefa6e7a7b0443c}{name}[0] = \textcolor{charliteral}{'\(\backslash\)0'};
+433       \}
+434    \}
+435 
+436    \textcolor{comment}{//Release exclusive access}
+437    \hyperlink{os__port__chibios_8c_a8e10e5b2c6d3877b5ba60e375ac45d79}{osReleaseMutex}(&\hyperlink{net_8c_afe31551ad26115fae8e575654346d441}{netMutex});
+438 
+439    \textcolor{comment}{//Successful processing}
+440    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+441 \}
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{dns__sd_8c_af478f9554cd38e6072cdfed76fc59e61}\label{dns__sd_8c_af478f9554cd38e6072cdfed76fc59e61}} 
+\index{dns\+\_\+sd.\+c@{dns\+\_\+sd.\+c}!dns\+Sd\+Tick\+Counter@{dns\+Sd\+Tick\+Counter}}
+\index{dns\+Sd\+Tick\+Counter@{dns\+Sd\+Tick\+Counter}!dns\+\_\+sd.\+c@{dns\+\_\+sd.\+c}}
+\subsubsection{\texorpdfstring{dns\+Sd\+Tick\+Counter}{dnsSdTickCounter}}
+{\footnotesize\ttfamily \hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\+\_\+t} dns\+Sd\+Tick\+Counter}
+
+
+
+Definition at line 57 of file dns\+\_\+sd.\+c.
+

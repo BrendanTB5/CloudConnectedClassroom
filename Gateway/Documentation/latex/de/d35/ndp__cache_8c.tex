@@ -1,0 +1,660 @@
+\hypertarget{ndp__cache_8c}{}\section{cyclone\+\_\+tcp/ipv6/ndp\+\_\+cache.c File Reference}
+\label{ndp__cache_8c}\index{cyclone\+\_\+tcp/ipv6/ndp\+\_\+cache.\+c@{cyclone\+\_\+tcp/ipv6/ndp\+\_\+cache.\+c}}
+
+
+Neighbor and destination cache management.  
+
+
+{\ttfamily \#include \char`\"{}core/net.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ipv6/ipv6\+\_\+misc.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ipv6/icmpv6.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ipv6/ndp.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ipv6/ndp\+\_\+cache.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ipv6/ndp\+\_\+misc.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}debug.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{ndp__cache_8c_afcdf5e66fd927a7f4cc64295acd20407}{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}~\hyperlink{net__config_8h_a9b043f871643938bfb7bb24a351c144c}{N\+D\+P\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structNdpNeighborCacheEntry}{Ndp\+Neighbor\+Cache\+Entry} $\ast$ \hyperlink{ndp__cache_8c_aa10560ab298b818966ff62cf4493b0e5}{ndp\+Create\+Neighbor\+Cache\+Entry} (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface)
+\begin{DoxyCompactList}\small\item\em Create a new entry in the Neighbor cache. \end{DoxyCompactList}\item 
+\hyperlink{structNdpNeighborCacheEntry}{Ndp\+Neighbor\+Cache\+Entry} $\ast$ \hyperlink{ndp__cache_8c_a4bb136704775638d094e9b9b0eab0c62}{ndp\+Find\+Neighbor\+Cache\+Entry} (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface, const \hyperlink{ipv6_8h_aed0cbc40c61ed5b4fb681ebc55237e89}{Ipv6\+Addr} $\ast$\hyperlink{ipcp_8h_a11542dd5a4de5976a89188df3d53b42d}{ip\+Addr})
+\begin{DoxyCompactList}\small\item\em Search the Neighbor cache for a given I\+Pv6 address. \end{DoxyCompactList}\item 
+void \hyperlink{ndp__cache_8c_adefd18b05d210d7cdba584d514d2088c}{ndp\+Update\+Neighbor\+Cache} (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface)
+\begin{DoxyCompactList}\small\item\em Periodically update Neighbor cache. \end{DoxyCompactList}\item 
+void \hyperlink{ndp__cache_8c_a3e78f99b9a9fd56561aa5c28dd0f4fe7}{ndp\+Flush\+Neighbor\+Cache} (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface)
+\begin{DoxyCompactList}\small\item\em Flush Neighbor cache. \end{DoxyCompactList}\item 
+\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} \hyperlink{ndp__cache_8c_a1691e3229a1353a430185f4c5d29c958}{ndp\+Send\+Queued\+Packets} (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface, \hyperlink{structNdpNeighborCacheEntry}{Ndp\+Neighbor\+Cache\+Entry} $\ast$entry)
+\begin{DoxyCompactList}\small\item\em Send packets that are waiting for address resolution. \end{DoxyCompactList}\item 
+void \hyperlink{ndp__cache_8c_a9618ec7dd18b69571366189dc1eeb3d8}{ndp\+Flush\+Queued\+Packets} (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface, \hyperlink{structNdpNeighborCacheEntry}{Ndp\+Neighbor\+Cache\+Entry} $\ast$entry)
+\begin{DoxyCompactList}\small\item\em Flush packet queue. \end{DoxyCompactList}\item 
+\hyperlink{structNdpDestCacheEntry}{Ndp\+Dest\+Cache\+Entry} $\ast$ \hyperlink{ndp__cache_8c_af21f9dcd84454d9cda4e48a2bf227c92}{ndp\+Create\+Dest\+Cache\+Entry} (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface)
+\begin{DoxyCompactList}\small\item\em Create a new entry in the Destination Cache. \end{DoxyCompactList}\item 
+\hyperlink{structNdpDestCacheEntry}{Ndp\+Dest\+Cache\+Entry} $\ast$ \hyperlink{ndp__cache_8c_a8fff27f53999959c6e2964700774a25d}{ndp\+Find\+Dest\+Cache\+Entry} (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface, const \hyperlink{ipv6_8h_aed0cbc40c61ed5b4fb681ebc55237e89}{Ipv6\+Addr} $\ast$\hyperlink{ndp_8h_ab217f0ee2104c7c5529a4ece1f77e02c}{dest\+Addr})
+\begin{DoxyCompactList}\small\item\em Search the Destination Cache for a given destination address. \end{DoxyCompactList}\item 
+void \hyperlink{ndp__cache_8c_a37506956e2aa6b664eef6acf9137e9ef}{ndp\+Flush\+Dest\+Cache} (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface)
+\begin{DoxyCompactList}\small\item\em Flush Destination Cache. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Neighbor and destination cache management. 
+
+\hypertarget{pic32mz__ef__curiosity_8h_License}{}\subsection{License}\label{pic32mz__ef__curiosity_8h_License}
+S\+P\+D\+X-\/\+License-\/\+Identifier\+: G\+P\+L-\/2.\+0-\/or-\/later
+
+Copyright (C) 2010-\/2019 Oryx Embedded S\+A\+RL. All rights reserved.
+
+This file is part of Cyclone\+T\+CP Open.
+
+This program is free software; you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+
+You should have received a copy of the G\+NU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-\/1301, U\+SA.
+
+\begin{DoxyAuthor}{Author}
+Oryx Embedded S\+A\+RL (www.\+oryx-\/embedded.\+com) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+9.\+6 
+\end{DoxyVersion}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{ndp__cache_8c_afcdf5e66fd927a7f4cc64295acd20407}\label{ndp__cache_8c_afcdf5e66fd927a7f4cc64295acd20407}} 
+\index{ndp\+\_\+cache.\+c@{ndp\+\_\+cache.\+c}!T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+\index{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}!ndp\+\_\+cache.\+c@{ndp\+\_\+cache.\+c}}
+\subsubsection{\texorpdfstring{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}{TRACE\_LEVEL}}
+{\footnotesize\ttfamily \#define T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL~\hyperlink{net__config_8h_a9b043f871643938bfb7bb24a351c144c}{N\+D\+P\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+
+
+
+Definition at line 32 of file ndp\+\_\+cache.\+c.
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{ndp__cache_8c_af21f9dcd84454d9cda4e48a2bf227c92}\label{ndp__cache_8c_af21f9dcd84454d9cda4e48a2bf227c92}} 
+\index{ndp\+\_\+cache.\+c@{ndp\+\_\+cache.\+c}!ndp\+Create\+Dest\+Cache\+Entry@{ndp\+Create\+Dest\+Cache\+Entry}}
+\index{ndp\+Create\+Dest\+Cache\+Entry@{ndp\+Create\+Dest\+Cache\+Entry}!ndp\+\_\+cache.\+c@{ndp\+\_\+cache.\+c}}
+\subsubsection{\texorpdfstring{ndp\+Create\+Dest\+Cache\+Entry()}{ndpCreateDestCacheEntry()}}
+{\footnotesize\ttfamily \hyperlink{structNdpDestCacheEntry}{Ndp\+Dest\+Cache\+Entry}$\ast$ ndp\+Create\+Dest\+Cache\+Entry (\begin{DoxyParamCaption}\item[{\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$}]{interface }\end{DoxyParamCaption})}
+
+
+
+Create a new entry in the Destination Cache. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em interface} & Underlying network interface \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Pointer to the newly created entry 
+\end{DoxyReturn}
+
+
+Definition at line 395 of file ndp\+\_\+cache.\+c.
+
+
+\begin{DoxyCode}
+396 \{
+397    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+398    \hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\_t} \hyperlink{dhcpv6__common_8h_ae73654f333e4363463ad8c594eca1905}{time};
+399    \hyperlink{structNdpDestCacheEntry}{NdpDestCacheEntry} *entry;
+400    \hyperlink{structNdpDestCacheEntry}{NdpDestCacheEntry} *oldestEntry;
+401 
+402    \textcolor{comment}{//Get current time}
+403    time = \hyperlink{os__port__chibios_8c_ab66a11272d40a916fa69dd8e4dc443d4}{osGetSystemTime}();
+404 
+405    \textcolor{comment}{//Keep track of the oldest entry}
+406    oldestEntry = &interface->ndpContext.destCache[0];
+407 
+408    \textcolor{comment}{//Loop through Destination cache entries}
+409    \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{ndp_8h_a7b0ca1a78a956c8d64de4b00b7a724aa}{NDP\_DEST\_CACHE\_SIZE}; i++)
+410    \{
+411       \textcolor{comment}{//Point to the current entry}
+412       entry = &interface->ndpContext.destCache[i];
+413 
+414       \textcolor{comment}{//Check whether the entry is currently in used or not}
+415       \textcolor{keywordflow}{if}(\hyperlink{ipv6_8h_ab1e93bd2152bc3f3b5642fd0216384d7}{ipv6CompAddr}(&entry->\hyperlink{structNdpDestCacheEntry_a7ae9c14d0f1debbf7e5a756d4edb20ff}{destAddr}, &
+      \hyperlink{ipv6_8c_aa4baeec4f7b8b166d2457787fb9eddf9}{IPV6\_UNSPECIFIED\_ADDR}))
+416       \{
+417          \textcolor{comment}{//Erase contents}
+418          memset(entry, 0, \textcolor{keyword}{sizeof}(\hyperlink{structNdpDestCacheEntry}{NdpDestCacheEntry}));
+419          \textcolor{comment}{//Return a pointer to the Destination cache entry}
+420          \textcolor{keywordflow}{return} entry;
+421       \}
+422 
+423       \textcolor{comment}{//Keep track of the oldest entry in the table}
+424       \textcolor{keywordflow}{if}((time - entry->\hyperlink{structNdpDestCacheEntry_a8474c35e89cb368fafe1e73ce9210f34}{timestamp}) > (time - oldestEntry->\hyperlink{structNdpDestCacheEntry_a8474c35e89cb368fafe1e73ce9210f34}{timestamp}))
+425       \{
+426          oldestEntry = entry;
+427       \}
+428    \}
+429 
+430    \textcolor{comment}{//The oldest entry is removed whenever the table runs out of space}
+431    memset(oldestEntry, 0, \textcolor{keyword}{sizeof}(\hyperlink{structNdpDestCacheEntry}{NdpDestCacheEntry}));
+432 
+433    \textcolor{comment}{//Return a pointer to the Destination cache entry}
+434    \textcolor{keywordflow}{return} oldestEntry;
+435 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ndp__cache_8c_aa10560ab298b818966ff62cf4493b0e5}\label{ndp__cache_8c_aa10560ab298b818966ff62cf4493b0e5}} 
+\index{ndp\+\_\+cache.\+c@{ndp\+\_\+cache.\+c}!ndp\+Create\+Neighbor\+Cache\+Entry@{ndp\+Create\+Neighbor\+Cache\+Entry}}
+\index{ndp\+Create\+Neighbor\+Cache\+Entry@{ndp\+Create\+Neighbor\+Cache\+Entry}!ndp\+\_\+cache.\+c@{ndp\+\_\+cache.\+c}}
+\subsubsection{\texorpdfstring{ndp\+Create\+Neighbor\+Cache\+Entry()}{ndpCreateNeighborCacheEntry()}}
+{\footnotesize\ttfamily \hyperlink{structNdpNeighborCacheEntry}{Ndp\+Neighbor\+Cache\+Entry}$\ast$ ndp\+Create\+Neighbor\+Cache\+Entry (\begin{DoxyParamCaption}\item[{\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$}]{interface }\end{DoxyParamCaption})}
+
+
+
+Create a new entry in the Neighbor cache. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em interface} & Underlying network interface \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Pointer to the newly created entry 
+\end{DoxyReturn}
+
+
+Definition at line 53 of file ndp\+\_\+cache.\+c.
+
+
+\begin{DoxyCode}
+54 \{
+55    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+56    \hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\_t} \hyperlink{dhcpv6__common_8h_ae73654f333e4363463ad8c594eca1905}{time};
+57    \hyperlink{structNdpNeighborCacheEntry}{NdpNeighborCacheEntry} *entry;
+58    \hyperlink{structNdpNeighborCacheEntry}{NdpNeighborCacheEntry} *oldestEntry;
+59 
+60    \textcolor{comment}{//Get current time}
+61    time = \hyperlink{os__port__chibios_8c_ab66a11272d40a916fa69dd8e4dc443d4}{osGetSystemTime}();
+62 
+63    \textcolor{comment}{//Keep track of the oldest entry}
+64    oldestEntry = &interface->ndpContext.neighborCache[0];
+65 
+66    \textcolor{comment}{//Loop through Neighbor cache entries}
+67    \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{ndp_8h_ae64ddc051e0a2cb9f6061cdf4b6bf1a3}{NDP\_NEIGHBOR\_CACHE\_SIZE}; i++)
+68    \{
+69       \textcolor{comment}{//Point to the current entry}
+70       entry = &interface->ndpContext.neighborCache[i];
+71 
+72       \textcolor{comment}{//Check whether the entry is currently in used or not}
+73       \textcolor{keywordflow}{if}(entry->\hyperlink{structNdpNeighborCacheEntry_a574ecea20d21d33352612dcd9583e3d5}{state} == \hyperlink{ndp_8h_a97a48b3286230efa6a168a56910ea479a0ce6c3f6937fa0755c2e6a12d2b4d006}{NDP\_STATE\_NONE})
+74       \{
+75          \textcolor{comment}{//Erase contents}
+76          memset(entry, 0, \textcolor{keyword}{sizeof}(\hyperlink{structNdpNeighborCacheEntry}{NdpNeighborCacheEntry}));
+77          \textcolor{comment}{//Return a pointer to the Neighbor cache entry}
+78          \textcolor{keywordflow}{return} entry;
+79       \}
+80 
+81       \textcolor{comment}{//Keep track of the oldest entry in the table}
+82       \textcolor{keywordflow}{if}((time - entry->\hyperlink{structNdpNeighborCacheEntry_a09717542b16d54caabb3494f39b8864c}{timestamp}) > (time - oldestEntry->\hyperlink{structNdpNeighborCacheEntry_a09717542b16d54caabb3494f39b8864c}{timestamp}))
+83       \{
+84          oldestEntry = entry;
+85       \}
+86    \}
+87 
+88    \textcolor{comment}{//Drop any pending packets}
+89    \hyperlink{ndp__cache_8c_a9618ec7dd18b69571366189dc1eeb3d8}{ndpFlushQueuedPackets}(interface, oldestEntry);
+90    \textcolor{comment}{//The oldest entry is removed whenever the table runs out of space}
+91    memset(oldestEntry, 0, \textcolor{keyword}{sizeof}(\hyperlink{structNdpNeighborCacheEntry}{NdpNeighborCacheEntry}));
+92 
+93    \textcolor{comment}{//Return a pointer to the Neighbor cache entry}
+94    \textcolor{keywordflow}{return} oldestEntry;
+95 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ndp__cache_8c_a8fff27f53999959c6e2964700774a25d}\label{ndp__cache_8c_a8fff27f53999959c6e2964700774a25d}} 
+\index{ndp\+\_\+cache.\+c@{ndp\+\_\+cache.\+c}!ndp\+Find\+Dest\+Cache\+Entry@{ndp\+Find\+Dest\+Cache\+Entry}}
+\index{ndp\+Find\+Dest\+Cache\+Entry@{ndp\+Find\+Dest\+Cache\+Entry}!ndp\+\_\+cache.\+c@{ndp\+\_\+cache.\+c}}
+\subsubsection{\texorpdfstring{ndp\+Find\+Dest\+Cache\+Entry()}{ndpFindDestCacheEntry()}}
+{\footnotesize\ttfamily \hyperlink{structNdpDestCacheEntry}{Ndp\+Dest\+Cache\+Entry}$\ast$ ndp\+Find\+Dest\+Cache\+Entry (\begin{DoxyParamCaption}\item[{\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$}]{interface,  }\item[{const \hyperlink{ipv6_8h_aed0cbc40c61ed5b4fb681ebc55237e89}{Ipv6\+Addr} $\ast$}]{dest\+Addr }\end{DoxyParamCaption})}
+
+
+
+Search the Destination Cache for a given destination address. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em interface} & Underlying network interface \\
+\hline
+\mbox{\tt in}  & {\em dest\+Addr} & Destination I\+Pv6 address \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A pointer to the matching entry is returned. N\+U\+LL is returned if the specified address could not be found in the Destination cache 
+\end{DoxyReturn}
+
+
+Definition at line 446 of file ndp\+\_\+cache.\+c.
+
+
+\begin{DoxyCode}
+447 \{
+448    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+449    \hyperlink{structNdpDestCacheEntry}{NdpDestCacheEntry} *entry;
+450 
+451    \textcolor{comment}{//Loop through Destination Cache entries}
+452    \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{ndp_8h_a7b0ca1a78a956c8d64de4b00b7a724aa}{NDP\_DEST\_CACHE\_SIZE}; i++)
+453    \{
+454       \textcolor{comment}{//Point to the current entry}
+455       entry = &interface->ndpContext.destCache[i];
+456 
+457       \textcolor{comment}{//Current entry matches the specified destination address?}
+458       \textcolor{keywordflow}{if}(\hyperlink{ipv6_8h_ab1e93bd2152bc3f3b5642fd0216384d7}{ipv6CompAddr}(&entry->\hyperlink{structNdpDestCacheEntry_a7ae9c14d0f1debbf7e5a756d4edb20ff}{destAddr}, \hyperlink{ethernet_8h_a00f00b33d6300737183211cc435fa7e2}{destAddr}))
+459          \textcolor{keywordflow}{return} entry;
+460    \}
+461 
+462    \textcolor{comment}{//No matching entry in Destination Cache...}
+463    \textcolor{keywordflow}{return} \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+464 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ndp__cache_8c_a4bb136704775638d094e9b9b0eab0c62}\label{ndp__cache_8c_a4bb136704775638d094e9b9b0eab0c62}} 
+\index{ndp\+\_\+cache.\+c@{ndp\+\_\+cache.\+c}!ndp\+Find\+Neighbor\+Cache\+Entry@{ndp\+Find\+Neighbor\+Cache\+Entry}}
+\index{ndp\+Find\+Neighbor\+Cache\+Entry@{ndp\+Find\+Neighbor\+Cache\+Entry}!ndp\+\_\+cache.\+c@{ndp\+\_\+cache.\+c}}
+\subsubsection{\texorpdfstring{ndp\+Find\+Neighbor\+Cache\+Entry()}{ndpFindNeighborCacheEntry()}}
+{\footnotesize\ttfamily \hyperlink{structNdpNeighborCacheEntry}{Ndp\+Neighbor\+Cache\+Entry}$\ast$ ndp\+Find\+Neighbor\+Cache\+Entry (\begin{DoxyParamCaption}\item[{\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$}]{interface,  }\item[{const \hyperlink{ipv6_8h_aed0cbc40c61ed5b4fb681ebc55237e89}{Ipv6\+Addr} $\ast$}]{ip\+Addr }\end{DoxyParamCaption})}
+
+
+
+Search the Neighbor cache for a given I\+Pv6 address. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em interface} & Underlying network interface \\
+\hline
+\mbox{\tt in}  & {\em ip\+Addr} & I\+Pv6 address \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A pointer to the matching entry is returned. N\+U\+LL is returned if the specified I\+Pv6 address could not be found in the Neighbor cache 
+\end{DoxyReturn}
+
+
+Definition at line 106 of file ndp\+\_\+cache.\+c.
+
+
+\begin{DoxyCode}
+107 \{
+108    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+109    \hyperlink{structNdpNeighborCacheEntry}{NdpNeighborCacheEntry} *entry;
+110 
+111    \textcolor{comment}{//Loop through Neighbor cache entries}
+112    \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{ndp_8h_ae64ddc051e0a2cb9f6061cdf4b6bf1a3}{NDP\_NEIGHBOR\_CACHE\_SIZE}; i++)
+113    \{
+114       \textcolor{comment}{//Point to the current entry}
+115       entry = &interface->ndpContext.neighborCache[i];
+116 
+117       \textcolor{comment}{//Check whether the entry is currently in used}
+118       \textcolor{keywordflow}{if}(entry->\hyperlink{structNdpNeighborCacheEntry_a574ecea20d21d33352612dcd9583e3d5}{state} != \hyperlink{ndp_8h_a97a48b3286230efa6a168a56910ea479a0ce6c3f6937fa0755c2e6a12d2b4d006}{NDP\_STATE\_NONE})
+119       \{
+120          \textcolor{comment}{//Current entry matches the specified address?}
+121          \textcolor{keywordflow}{if}(\hyperlink{ipv6_8h_ab1e93bd2152bc3f3b5642fd0216384d7}{ipv6CompAddr}(&entry->\hyperlink{structNdpNeighborCacheEntry_a3c02dac138bb8d8ae45ad1de8c324221}{ipAddr}, \hyperlink{mib__common_8h_a3860e959b1b7dd73686a6e11424805e2}{ipAddr}))
+122             \textcolor{keywordflow}{return} entry;
+123       \}
+124    \}
+125 
+126    \textcolor{comment}{//No matching entry in Neighbor cache...}
+127    \textcolor{keywordflow}{return} \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+128 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ndp__cache_8c_a37506956e2aa6b664eef6acf9137e9ef}\label{ndp__cache_8c_a37506956e2aa6b664eef6acf9137e9ef}} 
+\index{ndp\+\_\+cache.\+c@{ndp\+\_\+cache.\+c}!ndp\+Flush\+Dest\+Cache@{ndp\+Flush\+Dest\+Cache}}
+\index{ndp\+Flush\+Dest\+Cache@{ndp\+Flush\+Dest\+Cache}!ndp\+\_\+cache.\+c@{ndp\+\_\+cache.\+c}}
+\subsubsection{\texorpdfstring{ndp\+Flush\+Dest\+Cache()}{ndpFlushDestCache()}}
+{\footnotesize\ttfamily void ndp\+Flush\+Dest\+Cache (\begin{DoxyParamCaption}\item[{\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$}]{interface }\end{DoxyParamCaption})}
+
+
+
+Flush Destination Cache. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em interface} & Underlying network interface \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 472 of file ndp\+\_\+cache.\+c.
+
+
+\begin{DoxyCode}
+473 \{
+474    \textcolor{comment}{//Clear the Destination Cache}
+475    memset(interface->ndpContext.destCache, 0,
+476       \textcolor{keyword}{sizeof}(interface->ndpContext.destCache));
+477 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ndp__cache_8c_a3e78f99b9a9fd56561aa5c28dd0f4fe7}\label{ndp__cache_8c_a3e78f99b9a9fd56561aa5c28dd0f4fe7}} 
+\index{ndp\+\_\+cache.\+c@{ndp\+\_\+cache.\+c}!ndp\+Flush\+Neighbor\+Cache@{ndp\+Flush\+Neighbor\+Cache}}
+\index{ndp\+Flush\+Neighbor\+Cache@{ndp\+Flush\+Neighbor\+Cache}!ndp\+\_\+cache.\+c@{ndp\+\_\+cache.\+c}}
+\subsubsection{\texorpdfstring{ndp\+Flush\+Neighbor\+Cache()}{ndpFlushNeighborCache()}}
+{\footnotesize\ttfamily void ndp\+Flush\+Neighbor\+Cache (\begin{DoxyParamCaption}\item[{\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$}]{interface }\end{DoxyParamCaption})}
+
+
+
+Flush Neighbor cache. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em interface} & Underlying network interface \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 267 of file ndp\+\_\+cache.\+c.
+
+
+\begin{DoxyCode}
+268 \{
+269    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+270    \hyperlink{structNdpNeighborCacheEntry}{NdpNeighborCacheEntry} *entry;
+271 
+272    \textcolor{comment}{//Loop through Neighbor cache entries}
+273    \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{ndp_8h_ae64ddc051e0a2cb9f6061cdf4b6bf1a3}{NDP\_NEIGHBOR\_CACHE\_SIZE}; i++)
+274    \{
+275       \textcolor{comment}{//Point to the current entry}
+276       entry = &interface->ndpContext.neighborCache[i];
+277 
+278       \textcolor{comment}{//Drop packets that are waiting for address resolution}
+279       \hyperlink{ndp__cache_8c_a9618ec7dd18b69571366189dc1eeb3d8}{ndpFlushQueuedPackets}(interface, entry);
+280       \textcolor{comment}{//Release Neighbor cache entry}
+281       entry->\hyperlink{structNdpNeighborCacheEntry_a574ecea20d21d33352612dcd9583e3d5}{state} = \hyperlink{ndp_8h_a97a48b3286230efa6a168a56910ea479a0ce6c3f6937fa0755c2e6a12d2b4d006}{NDP\_STATE\_NONE};
+282    \}
+283 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ndp__cache_8c_a9618ec7dd18b69571366189dc1eeb3d8}\label{ndp__cache_8c_a9618ec7dd18b69571366189dc1eeb3d8}} 
+\index{ndp\+\_\+cache.\+c@{ndp\+\_\+cache.\+c}!ndp\+Flush\+Queued\+Packets@{ndp\+Flush\+Queued\+Packets}}
+\index{ndp\+Flush\+Queued\+Packets@{ndp\+Flush\+Queued\+Packets}!ndp\+\_\+cache.\+c@{ndp\+\_\+cache.\+c}}
+\subsubsection{\texorpdfstring{ndp\+Flush\+Queued\+Packets()}{ndpFlushQueuedPackets()}}
+{\footnotesize\ttfamily void ndp\+Flush\+Queued\+Packets (\begin{DoxyParamCaption}\item[{\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$}]{interface,  }\item[{\hyperlink{structNdpNeighborCacheEntry}{Ndp\+Neighbor\+Cache\+Entry} $\ast$}]{entry }\end{DoxyParamCaption})}
+
+
+
+Flush packet queue. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em interface} & Underlying network interface \\
+\hline
+\mbox{\tt in}  & {\em entry} & Pointer to a Neighbor cache entry \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 352 of file ndp\+\_\+cache.\+c.
+
+
+\begin{DoxyCode}
+353 \{
+354    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+355    \hyperlink{structNdpQueueItem}{NdpQueueItem} *item;
+356 
+357    \textcolor{comment}{//Check current state}
+358    \textcolor{keywordflow}{if}(entry->\hyperlink{structNdpNeighborCacheEntry_a574ecea20d21d33352612dcd9583e3d5}{state} == \hyperlink{ndp_8h_a97a48b3286230efa6a168a56910ea479af1920f2caebfea1b46a7e9f9439bc6f9}{NDP\_STATE\_INCOMPLETE})
+359    \{
+360       \textcolor{comment}{//Loop through the queued packets}
+361       \textcolor{keywordflow}{for}(i = 0; i < entry->\hyperlink{structNdpNeighborCacheEntry_ac6639d88295e91df681f7e0fcb88c83b}{queueSize}; i++)
+362       \{
+363          \textcolor{comment}{//Point to the current queue item}
+364          item = &entry->\hyperlink{structNdpNeighborCacheEntry_a96ee1ce22a34ce6fbe999554aed2ec3d}{queue}[i];
+365 
+366          \textcolor{comment}{//Check whether the address resolution has failed}
+367          \textcolor{keywordflow}{if}(entry->\hyperlink{structNdpNeighborCacheEntry_a4814680905745d10b71447d63db67a1c}{retransmitCount} >= \hyperlink{ndp_8h_af91e6a3ec19705ecc494808909d4ffca}{NDP\_MAX\_MULTICAST\_SOLICIT})
+368          \{
+369             \textcolor{comment}{//Check whether the packet has been forwarded}
+370             \textcolor{keywordflow}{if}(item->\hyperlink{structNdpQueueItem_ae42a51fd4d60583ddc7a323c9e2c6863}{srcInterface} != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+371             \{
+372                \textcolor{comment}{//A Destination Unreachable message should be generated by a}
+373                \textcolor{comment}{//router in response to a packet that cannot be delivered}
+374                \hyperlink{icmpv6_8c_a8243f4f8b640432620ed384e865a32cd}{icmpv6SendErrorMessage}(item->\hyperlink{structNdpQueueItem_ae42a51fd4d60583ddc7a323c9e2c6863}{srcInterface}, 
+      \hyperlink{icmpv6_8h_a6bd3724b797b492017d0264d1ae5c609a1a1c28c95ecd1db9a0f41e4ab6a2bae4}{ICMPV6\_TYPE\_DEST\_UNREACHABLE},
+375                   \hyperlink{icmpv6_8h_a89cf082548c4c8060f8422cdde948d36a2c2e0257cc600257bde0a3c3333d75a5}{ICMPV6\_CODE\_ADDR\_UNREACHABLE}, 0, item->
+      \hyperlink{structNdpQueueItem_a082af3807557108029732db38c0343e6}{buffer}, item->\hyperlink{structNdpQueueItem_a35dd0104a5c90df40b99e85e84b2e194}{offset});
+376             \}
+377          \}
+378 
+379          \textcolor{comment}{//Release memory buffer}
+380          \hyperlink{net__mem_8c_aa33fc4dd2a71649194052f297c707d08}{netBufferFree}(item->\hyperlink{structNdpQueueItem_a082af3807557108029732db38c0343e6}{buffer});
+381       \}
+382    \}
+383 
+384    \textcolor{comment}{//The queue is now empty}
+385    entry->\hyperlink{structNdpNeighborCacheEntry_ac6639d88295e91df681f7e0fcb88c83b}{queueSize} = 0;
+386 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ndp__cache_8c_a1691e3229a1353a430185f4c5d29c958}\label{ndp__cache_8c_a1691e3229a1353a430185f4c5d29c958}} 
+\index{ndp\+\_\+cache.\+c@{ndp\+\_\+cache.\+c}!ndp\+Send\+Queued\+Packets@{ndp\+Send\+Queued\+Packets}}
+\index{ndp\+Send\+Queued\+Packets@{ndp\+Send\+Queued\+Packets}!ndp\+\_\+cache.\+c@{ndp\+\_\+cache.\+c}}
+\subsubsection{\texorpdfstring{ndp\+Send\+Queued\+Packets()}{ndpSendQueuedPackets()}}
+{\footnotesize\ttfamily \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} ndp\+Send\+Queued\+Packets (\begin{DoxyParamCaption}\item[{\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$}]{interface,  }\item[{\hyperlink{structNdpNeighborCacheEntry}{Ndp\+Neighbor\+Cache\+Entry} $\ast$}]{entry }\end{DoxyParamCaption})}
+
+
+
+Send packets that are waiting for address resolution. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em interface} & Underlying network interface \\
+\hline
+\mbox{\tt in}  & {\em entry} & Pointer to a Neighbor cache entry \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The number of packets that have been sent 
+\end{DoxyReturn}
+
+
+Definition at line 293 of file ndp\+\_\+cache.\+c.
+
+
+\begin{DoxyCode}
+294 \{
+295    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+296    \hyperlink{structNdpQueueItem}{NdpQueueItem} *item;
+297 \textcolor{preprocessor}{#if (ETH\_SUPPORT == ENABLED)}
+298    \hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{NetInterface} *physicalInterface;
+299 
+300    \textcolor{comment}{//Point to the physical interface}
+301    physicalInterface = \hyperlink{nic_8c_aa8f48265895dab1633056c2dcd796355}{nicGetPhysicalInterface}(interface);
+302 \textcolor{preprocessor}{#endif}
+303 
+304    \textcolor{comment}{//Reset packet counter}
+305    i = 0;
+306 
+307    \textcolor{comment}{//Check current state}
+308    \textcolor{keywordflow}{if}(entry->\hyperlink{structNdpNeighborCacheEntry_a574ecea20d21d33352612dcd9583e3d5}{state} == \hyperlink{ndp_8h_a97a48b3286230efa6a168a56910ea479af1920f2caebfea1b46a7e9f9439bc6f9}{NDP\_STATE\_INCOMPLETE})
+309    \{
+310       \textcolor{comment}{//Loop through the queued packets}
+311       \textcolor{keywordflow}{for}(i = 0; i < entry->\hyperlink{structNdpNeighborCacheEntry_ac6639d88295e91df681f7e0fcb88c83b}{queueSize}; i++)
+312       \{
+313          \textcolor{comment}{//Point to the current queue item}
+314          item = &entry->\hyperlink{structNdpNeighborCacheEntry_a96ee1ce22a34ce6fbe999554aed2ec3d}{queue}[i];
+315 
+316 \textcolor{preprocessor}{#if (ETH\_SUPPORT == ENABLED)}
+317          \textcolor{comment}{//Ethernet interface?}
+318          \textcolor{keywordflow}{if}(physicalInterface->nicDriver != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} &&
+319             physicalInterface->nicDriver->type == \hyperlink{nic_8h_ac1ce8659a9797513ecd9cc1afedce40ba84802cab6ee937691c3d76122ffaffcd}{NIC\_TYPE\_ETHERNET})
+320          \{
+321             \textcolor{keywordtype}{size\_t} \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length};
+322 
+323             \textcolor{comment}{//Retrieve the length of the IPv6 packet}
+324             length = \hyperlink{net__mem_8c_ac9dbcd9e28e61d8f4f6d2e9af2607b68}{netBufferGetLength}(item->\hyperlink{structNdpQueueItem_a082af3807557108029732db38c0343e6}{buffer}) - item->
+      \hyperlink{structNdpQueueItem_a35dd0104a5c90df40b99e85e84b2e194}{offset};
+325             \textcolor{comment}{//Update IP statistics}
+326             \hyperlink{ipv6__misc_8c_a85a88896558084d85128a3e998df8936}{ipv6UpdateOutStats}(interface, &entry->\hyperlink{structNdpNeighborCacheEntry_a3c02dac138bb8d8ae45ad1de8c324221}{ipAddr}, length);
+327 
+328             \textcolor{comment}{//Send the IPv6 packet}
+329             \hyperlink{ethernet_8c_ad56ff94d4390f5821d1f1249fb0fea89}{ethSendFrame}(interface, &entry->\hyperlink{structNdpNeighborCacheEntry_a1e8f8ff5e8f92123bb81a40643b13c2c}{macAddr},
+330                item->\hyperlink{structNdpQueueItem_a082af3807557108029732db38c0343e6}{buffer}, item->\hyperlink{structNdpQueueItem_a35dd0104a5c90df40b99e85e84b2e194}{offset}, \hyperlink{ethernet_8h_a527bb7f81d1c0869a7fc3f38b05ceaafa25656a190cde184dea6bc6568dd8bb39}{ETH\_TYPE\_IPV6});
+331          \}
+332 \textcolor{preprocessor}{#endif}
+333          \textcolor{comment}{//Release memory buffer}
+334          \hyperlink{net__mem_8c_aa33fc4dd2a71649194052f297c707d08}{netBufferFree}(item->\hyperlink{structNdpQueueItem_a082af3807557108029732db38c0343e6}{buffer});
+335       \}
+336    \}
+337 
+338    \textcolor{comment}{//The queue is now empty}
+339    entry->\hyperlink{structNdpNeighborCacheEntry_ac6639d88295e91df681f7e0fcb88c83b}{queueSize} = 0;
+340 
+341    \textcolor{comment}{//Return the number of packets that have been sent}
+342    \textcolor{keywordflow}{return} i;
+343 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ndp__cache_8c_adefd18b05d210d7cdba584d514d2088c}\label{ndp__cache_8c_adefd18b05d210d7cdba584d514d2088c}} 
+\index{ndp\+\_\+cache.\+c@{ndp\+\_\+cache.\+c}!ndp\+Update\+Neighbor\+Cache@{ndp\+Update\+Neighbor\+Cache}}
+\index{ndp\+Update\+Neighbor\+Cache@{ndp\+Update\+Neighbor\+Cache}!ndp\+\_\+cache.\+c@{ndp\+\_\+cache.\+c}}
+\subsubsection{\texorpdfstring{ndp\+Update\+Neighbor\+Cache()}{ndpUpdateNeighborCache()}}
+{\footnotesize\ttfamily void ndp\+Update\+Neighbor\+Cache (\begin{DoxyParamCaption}\item[{\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$}]{interface }\end{DoxyParamCaption})}
+
+
+
+Periodically update Neighbor cache. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em interface} & Underlying network interface \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 136 of file ndp\+\_\+cache.\+c.
+
+
+\begin{DoxyCode}
+137 \{
+138    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+139    \hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\_t} \hyperlink{dhcpv6__common_8h_ae73654f333e4363463ad8c594eca1905}{time};
+140    \hyperlink{structNdpNeighborCacheEntry}{NdpNeighborCacheEntry} *entry;
+141 
+142    \textcolor{comment}{//Get current time}
+143    time = \hyperlink{os__port__chibios_8c_ab66a11272d40a916fa69dd8e4dc443d4}{osGetSystemTime}();
+144 
+145    \textcolor{comment}{//Go through Neighbor cache}
+146    \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{ndp_8h_ae64ddc051e0a2cb9f6061cdf4b6bf1a3}{NDP\_NEIGHBOR\_CACHE\_SIZE}; i++)
+147    \{
+148       \textcolor{comment}{//Point to the current entry}
+149       entry = &interface->ndpContext.neighborCache[i];
+150 
+151       \textcolor{comment}{//INCOMPLETE state?}
+152       \textcolor{keywordflow}{if}(entry->\hyperlink{structNdpNeighborCacheEntry_a574ecea20d21d33352612dcd9583e3d5}{state} == \hyperlink{ndp_8h_a97a48b3286230efa6a168a56910ea479af1920f2caebfea1b46a7e9f9439bc6f9}{NDP\_STATE\_INCOMPLETE})
+153       \{
+154          \textcolor{comment}{//The Neighbor Solicitation timed out?}
+155          \textcolor{keywordflow}{if}(\hyperlink{os__port_8h_a25c13833ef003da02045a91b1080263a}{timeCompare}(time, entry->\hyperlink{structNdpNeighborCacheEntry_a09717542b16d54caabb3494f39b8864c}{timestamp} + entry->
+      \hyperlink{structNdpNeighborCacheEntry_a315eba9b9511bfbfc60b9559b37e7070}{timeout}) >= 0)
+156          \{
+157             \textcolor{comment}{//Increment retransmission counter}
+158             entry->\hyperlink{structNdpNeighborCacheEntry_a4814680905745d10b71447d63db67a1c}{retransmitCount}++;
+159 
+160             \textcolor{comment}{//Check whether the maximum number of retransmissions has been exceeded}
+161             \textcolor{keywordflow}{if}(entry->\hyperlink{structNdpNeighborCacheEntry_a4814680905745d10b71447d63db67a1c}{retransmitCount} < \hyperlink{ndp_8h_af91e6a3ec19705ecc494808909d4ffca}{NDP\_MAX\_MULTICAST\_SOLICIT})
+162             \{
+163                \textcolor{comment}{//Retransmit the multicast Neighbor Solicitation message}
+164                \hyperlink{ndp_8c_aa2d7bb550603db3b3e48a150c4e30d49}{ndpSendNeighborSol}(interface, &entry->\hyperlink{structNdpNeighborCacheEntry_a3c02dac138bb8d8ae45ad1de8c324221}{ipAddr}, 
+      \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE});
+165 
+166                \textcolor{comment}{//Save the time at which the message was sent}
+167                entry->\hyperlink{structNdpNeighborCacheEntry_a09717542b16d54caabb3494f39b8864c}{timestamp} = \hyperlink{dhcpv6__common_8h_ae73654f333e4363463ad8c594eca1905}{time};
+168                \textcolor{comment}{//Set timeout value}
+169                entry->\hyperlink{structNdpNeighborCacheEntry_a315eba9b9511bfbfc60b9559b37e7070}{timeout} = interface->ndpContext.retransTimer;
+170             \}
+171             \textcolor{keywordflow}{else}
+172             \{
+173                \textcolor{comment}{//Drop packets that are waiting for address resolution}
+174                \hyperlink{ndp__cache_8c_a9618ec7dd18b69571366189dc1eeb3d8}{ndpFlushQueuedPackets}(interface, entry);
+175                \textcolor{comment}{//The entry should be deleted since address resolution has failed}
+176                entry->\hyperlink{structNdpNeighborCacheEntry_a574ecea20d21d33352612dcd9583e3d5}{state} = \hyperlink{ndp_8h_a97a48b3286230efa6a168a56910ea479a0ce6c3f6937fa0755c2e6a12d2b4d006}{NDP\_STATE\_NONE};
+177             \}
+178          \}
+179       \}
+180       \textcolor{comment}{//REACHABLE state?}
+181       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(entry->\hyperlink{structNdpNeighborCacheEntry_a574ecea20d21d33352612dcd9583e3d5}{state} == \hyperlink{ndp_8h_a97a48b3286230efa6a168a56910ea479aae3dbf31bcbade29e680b87bcef30530}{NDP\_STATE\_REACHABLE})
+182       \{
+183          \textcolor{comment}{//Periodically time out Neighbor cache entries}
+184          \textcolor{keywordflow}{if}(\hyperlink{os__port_8h_a25c13833ef003da02045a91b1080263a}{timeCompare}(time, entry->\hyperlink{structNdpNeighborCacheEntry_a09717542b16d54caabb3494f39b8864c}{timestamp} + entry->
+      \hyperlink{structNdpNeighborCacheEntry_a315eba9b9511bfbfc60b9559b37e7070}{timeout}) >= 0)
+185          \{
+186             \textcolor{comment}{//Save current time}
+187             entry->\hyperlink{structNdpNeighborCacheEntry_a09717542b16d54caabb3494f39b8864c}{timestamp} = \hyperlink{os__port__chibios_8c_ab66a11272d40a916fa69dd8e4dc443d4}{osGetSystemTime}();
+188             \textcolor{comment}{//Enter STALE state}
+189             entry->\hyperlink{structNdpNeighborCacheEntry_a574ecea20d21d33352612dcd9583e3d5}{state} = \hyperlink{ndp_8h_a97a48b3286230efa6a168a56910ea479ab6e55ba9d8e5319194d5fe9b9b83c684}{NDP\_STATE\_STALE};
+190          \}
+191       \}
+192       \textcolor{comment}{//STALE state?}
+193       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(entry->\hyperlink{structNdpNeighborCacheEntry_a574ecea20d21d33352612dcd9583e3d5}{state} == \hyperlink{ndp_8h_a97a48b3286230efa6a168a56910ea479ab6e55ba9d8e5319194d5fe9b9b83c684}{NDP\_STATE\_STALE})
+194       \{
+195          \textcolor{comment}{//The neighbor is no longer known to be reachable but until traffic}
+196          \textcolor{comment}{//is sent to the neighbor, no attempt should be made to verify its}
+197          \textcolor{comment}{//reachability}
+198       \}
+199       \textcolor{comment}{//DELAY state?}
+200       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(entry->\hyperlink{structNdpNeighborCacheEntry_a574ecea20d21d33352612dcd9583e3d5}{state} == \hyperlink{ndp_8h_a97a48b3286230efa6a168a56910ea479a4aea7ed554ee132a415f75034848d922}{NDP\_STATE\_DELAY})
+201       \{
+202          \textcolor{comment}{//Wait for the specified delay before sending the first probe}
+203          \textcolor{keywordflow}{if}(\hyperlink{os__port_8h_a25c13833ef003da02045a91b1080263a}{timeCompare}(time, entry->\hyperlink{structNdpNeighborCacheEntry_a09717542b16d54caabb3494f39b8864c}{timestamp} + entry->
+      \hyperlink{structNdpNeighborCacheEntry_a315eba9b9511bfbfc60b9559b37e7070}{timeout}) >= 0)
+204          \{
+205             \hyperlink{ipv6_8h_aed0cbc40c61ed5b4fb681ebc55237e89}{Ipv6Addr} \hyperlink{mib__common_8h_a3860e959b1b7dd73686a6e11424805e2}{ipAddr};
+206 
+207             \textcolor{comment}{//Save the time at which the message was sent}
+208             entry->\hyperlink{structNdpNeighborCacheEntry_a09717542b16d54caabb3494f39b8864c}{timestamp} = \hyperlink{dhcpv6__common_8h_ae73654f333e4363463ad8c594eca1905}{time};
+209             \textcolor{comment}{//Set timeout value}
+210             entry->\hyperlink{structNdpNeighborCacheEntry_a315eba9b9511bfbfc60b9559b37e7070}{timeout} = interface->ndpContext.retransTimer;
+211             \textcolor{comment}{//Switch to the PROBE state}
+212             entry->\hyperlink{structNdpNeighborCacheEntry_a574ecea20d21d33352612dcd9583e3d5}{state} = \hyperlink{ndp_8h_a97a48b3286230efa6a168a56910ea479a21a1c63531cb61379e26b2c5ae05aa16}{NDP\_STATE\_PROBE};
+213 
+214             \textcolor{comment}{//Target address}
+215             ipAddr = entry->\hyperlink{structNdpNeighborCacheEntry_a3c02dac138bb8d8ae45ad1de8c324221}{ipAddr};
+216 
+217             \textcolor{comment}{//Send a unicast Neighbor Solicitation message}
+218             \hyperlink{ndp_8c_aa2d7bb550603db3b3e48a150c4e30d49}{ndpSendNeighborSol}(interface, &ipAddr, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE});
+219          \}
+220       \}
+221       \textcolor{comment}{//PROBE state?}
+222       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(entry->\hyperlink{structNdpNeighborCacheEntry_a574ecea20d21d33352612dcd9583e3d5}{state} == \hyperlink{ndp_8h_a97a48b3286230efa6a168a56910ea479a21a1c63531cb61379e26b2c5ae05aa16}{NDP\_STATE\_PROBE})
+223       \{
+224          \textcolor{comment}{//The request timed out?}
+225          \textcolor{keywordflow}{if}(\hyperlink{os__port_8h_a25c13833ef003da02045a91b1080263a}{timeCompare}(time, entry->\hyperlink{structNdpNeighborCacheEntry_a09717542b16d54caabb3494f39b8864c}{timestamp} + entry->
+      \hyperlink{structNdpNeighborCacheEntry_a315eba9b9511bfbfc60b9559b37e7070}{timeout}) >= 0)
+226          \{
+227             \textcolor{comment}{//Increment retransmission counter}
+228             entry->\hyperlink{structNdpNeighborCacheEntry_a4814680905745d10b71447d63db67a1c}{retransmitCount}++;
+229 
+230             \textcolor{comment}{//Check whether the maximum number of retransmissions has been exceeded}
+231             \textcolor{keywordflow}{if}(entry->\hyperlink{structNdpNeighborCacheEntry_a4814680905745d10b71447d63db67a1c}{retransmitCount} < \hyperlink{ndp_8h_a2b0bdf51f188548710f6a688e384f9b8}{NDP\_MAX\_UNICAST\_SOLICIT})
+232             \{
+233                \hyperlink{ipv6_8h_aed0cbc40c61ed5b4fb681ebc55237e89}{Ipv6Addr} \hyperlink{mib__common_8h_a3860e959b1b7dd73686a6e11424805e2}{ipAddr};
+234 
+235                \textcolor{comment}{//Save the time at which the packet was sent}
+236                entry->\hyperlink{structNdpNeighborCacheEntry_a09717542b16d54caabb3494f39b8864c}{timestamp} = \hyperlink{dhcpv6__common_8h_ae73654f333e4363463ad8c594eca1905}{time};
+237                \textcolor{comment}{//Set timeout value}
+238                entry->\hyperlink{structNdpNeighborCacheEntry_a315eba9b9511bfbfc60b9559b37e7070}{timeout} = interface->ndpContext.retransTimer;
+239 
+240                \textcolor{comment}{//Target address}
+241                ipAddr = entry->\hyperlink{structNdpNeighborCacheEntry_a3c02dac138bb8d8ae45ad1de8c324221}{ipAddr};
+242 
+243                \textcolor{comment}{//Send a unicast Neighbor Solicitation message}
+244                \hyperlink{ndp_8c_aa2d7bb550603db3b3e48a150c4e30d49}{ndpSendNeighborSol}(interface, &ipAddr, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE});
+245             \}
+246             \textcolor{keywordflow}{else}
+247             \{
+248                \textcolor{comment}{//The entry should be deleted since the host is not reachable anymore}
+249                entry->\hyperlink{structNdpNeighborCacheEntry_a574ecea20d21d33352612dcd9583e3d5}{state} = \hyperlink{ndp_8h_a97a48b3286230efa6a168a56910ea479a0ce6c3f6937fa0755c2e6a12d2b4d006}{NDP\_STATE\_NONE};
+250 
+251                \textcolor{comment}{//If at some point communication ceases to proceed, as determined}
+252                \textcolor{comment}{//by the Neighbor Unreachability Detection algorithm, next-hop}
+253                \textcolor{comment}{//determination may need to be performed again...}
+254                \hyperlink{ndp__misc_8c_a66a620811139785755682cb22a997b47}{ndpUpdateNextHop}(interface, &entry->\hyperlink{structNdpNeighborCacheEntry_a3c02dac138bb8d8ae45ad1de8c324221}{ipAddr});
+255             \}
+256          \}
+257       \}
+258    \}
+259 \}
+\end{DoxyCode}

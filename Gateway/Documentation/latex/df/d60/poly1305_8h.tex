@@ -1,0 +1,415 @@
+\hypertarget{poly1305_8h}{}\section{cyclone\+\_\+crypto/mac/poly1305.h File Reference}
+\label{poly1305_8h}\index{cyclone\+\_\+crypto/mac/poly1305.\+h@{cyclone\+\_\+crypto/mac/poly1305.\+h}}
+
+
+Poly1305 message-\/authentication code.  
+
+
+{\ttfamily \#include \char`\"{}core/crypto.\+h\char`\"{}}\newline
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structPoly1305Context}{Poly1305\+Context}
+\begin{DoxyCompactList}\small\item\em Poly1305 context. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{poly1305_8h_a0cbf44db09885b116048800e002a7898}{poly1305\+Init} (\hyperlink{structPoly1305Context}{Poly1305\+Context} $\ast$context, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$key)
+\begin{DoxyCompactList}\small\item\em Initialize Poly1305 message-\/authentication code computation. \end{DoxyCompactList}\item 
+void \hyperlink{poly1305_8h_a6492c927f98ec62d800baafdbf5536cf}{poly1305\+Update} (\hyperlink{structPoly1305Context}{Poly1305\+Context} $\ast$context, const void $\ast$\hyperlink{tftp__common_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length})
+\begin{DoxyCompactList}\small\item\em Update Poly1305 message-\/authentication code computation. \end{DoxyCompactList}\item 
+void \hyperlink{poly1305_8h_ac0e870e7907162c666bcd032cf07c204}{poly1305\+Final} (\hyperlink{structPoly1305Context}{Poly1305\+Context} $\ast$context, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$tag)
+\begin{DoxyCompactList}\small\item\em Finalize Poly1305 message-\/authentication code computation. \end{DoxyCompactList}\item 
+void \hyperlink{poly1305_8h_a1c907b79ff57afc221f6de7fe050f45f}{poly1305\+Process\+Block} (\hyperlink{structPoly1305Context}{Poly1305\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Process message in 16-\/byte blocks. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Poly1305 message-\/authentication code. 
+
+\hypertarget{pic32mz__ef__curiosity_8h_License}{}\subsection{License}\label{pic32mz__ef__curiosity_8h_License}
+S\+P\+D\+X-\/\+License-\/\+Identifier\+: G\+P\+L-\/2.\+0-\/or-\/later
+
+Copyright (C) 2010-\/2019 Oryx Embedded S\+A\+RL. All rights reserved.
+
+This file is part of Cyclone\+Crypto Open.
+
+This program is free software; you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+
+You should have received a copy of the G\+NU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-\/1301, U\+SA.
+
+\begin{DoxyAuthor}{Author}
+Oryx Embedded S\+A\+RL (www.\+oryx-\/embedded.\+com) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+9.\+6 
+\end{DoxyVersion}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{poly1305_8h_ac0e870e7907162c666bcd032cf07c204}\label{poly1305_8h_ac0e870e7907162c666bcd032cf07c204}} 
+\index{poly1305.\+h@{poly1305.\+h}!poly1305\+Final@{poly1305\+Final}}
+\index{poly1305\+Final@{poly1305\+Final}!poly1305.\+h@{poly1305.\+h}}
+\subsubsection{\texorpdfstring{poly1305\+Final()}{poly1305Final()}}
+{\footnotesize\ttfamily void poly1305\+Final (\begin{DoxyParamCaption}\item[{\hyperlink{structPoly1305Context}{Poly1305\+Context} $\ast$}]{context,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{tag }\end{DoxyParamCaption})}
+
+
+
+Finalize Poly1305 message-\/authentication code computation. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the Poly1305 context \\
+\hline
+\mbox{\tt out}  & {\em tag} & Calculated message-\/authentication code \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 127 of file poly1305.\+c.
+
+
+\begin{DoxyCode}
+128 \{
+129    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} \hyperlink{web__socket_8h_a8a74907784be6c7786c2d060c8d7e10b}{mask};
+130    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} \hyperlink{dtls__misc_8h_ab590318ac859d0e57e15c3dd6c62a605}{b}[4];
+131 
+132    \textcolor{comment}{//Process the last block}
+133    \textcolor{keywordflow}{if}(context->\hyperlink{structPoly1305Context_a5e026316dee7aa495f38d3db5331ab20}{size} != 0)
+134       \hyperlink{poly1305_8c_a1c907b79ff57afc221f6de7fe050f45f}{poly1305ProcessBlock}(context);
+135 
+136    \textcolor{comment}{//Save the accumulator}
+137    b[0] = context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[0] & 0xFFFFFFFF;
+138    b[1] = context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[1] & 0xFFFFFFFF;
+139    b[2] = context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[2] & 0xFFFFFFFF;
+140    b[3] = context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[3] & 0xFFFFFFFF;
+141 
+142    \textcolor{comment}{//Compute a + 5}
+143    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[0] += 5;
+144 
+145    \textcolor{comment}{//Propagate the carry}
+146    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[1] += context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[0] >> 32;
+147    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[2] += context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[1] >> 32;
+148    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[3] += context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[2] >> 32;
+149    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[4] += context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[3] >> 32;
+150 
+151    \textcolor{comment}{//If (a + 5) >= 2^130, form a mask with the value 0x00000000. Else,}
+152    \textcolor{comment}{//form a mask with the value 0xffffffff}
+153    mask = ((context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[4] & 0x04) >> 2) - 1;
+154 
+155    \textcolor{comment}{//Select between ((a - (2^130 - 5)) % 2^128) and (a % 2^128)}
+156    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[0] = (context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[0] & ~mask) | (b[0] & mask);
+157    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[1] = (context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[1] & ~mask) | (b[1] & mask);
+158    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[2] = (context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[2] & ~mask) | (b[2] & mask);
+159    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[3] = (context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[3] & ~mask) | (b[3] & mask);
+160 
+161    \textcolor{comment}{//Finally, the value of the secret key s is added to the accumulator}
+162    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[0] += context->\hyperlink{structPoly1305Context_a01116bfecf43bff20e0bedd9368851a2}{s}[0];
+163    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[1] += context->\hyperlink{structPoly1305Context_a01116bfecf43bff20e0bedd9368851a2}{s}[1];
+164    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[2] += context->\hyperlink{structPoly1305Context_a01116bfecf43bff20e0bedd9368851a2}{s}[2];
+165    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[3] += context->\hyperlink{structPoly1305Context_a01116bfecf43bff20e0bedd9368851a2}{s}[3];
+166 
+167    \textcolor{comment}{//Propagate the carry}
+168    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[1] += context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[0] >> 32;
+169    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[2] += context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[1] >> 32;
+170    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[3] += context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[2] >> 32;
+171    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[4] += context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[3] >> 32;
+172 
+173    \textcolor{comment}{//We only consider the least significant bits}
+174    b[0] = context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[0] & 0xFFFFFFFF;
+175    b[1] = context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[1] & 0xFFFFFFFF;
+176    b[2] = context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[2] & 0xFFFFFFFF;
+177    b[3] = context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[3] & 0xFFFFFFFF;
+178 
+179    \textcolor{comment}{//The result is serialized as a little-endian number, producing}
+180    \textcolor{comment}{//the 16 byte tag}
+181    \hyperlink{cpu__endian_8h_a9dc2aacccbeaa4c76dc3870ef4486a88}{STORE32LE}(b[0], tag);
+182    \hyperlink{cpu__endian_8h_a9dc2aacccbeaa4c76dc3870ef4486a88}{STORE32LE}(b[1], tag + 4);
+183    \hyperlink{cpu__endian_8h_a9dc2aacccbeaa4c76dc3870ef4486a88}{STORE32LE}(b[2], tag + 8);
+184    \hyperlink{cpu__endian_8h_a9dc2aacccbeaa4c76dc3870ef4486a88}{STORE32LE}(b[3], tag + 12);
+185 
+186    \textcolor{comment}{//Clear the accumulator}
+187    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[0] = 0;
+188    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[1] = 0;
+189    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[2] = 0;
+190    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[3] = 0;
+191    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[4] = 0;
+192    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[5] = 0;
+193    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[6] = 0;
+194    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[7] = 0;
+195 
+196    \textcolor{comment}{//Clear r and s}
+197    context->\hyperlink{structPoly1305Context_a7194202b23c39cda66f4feae4689895e}{r}[0] = 0;
+198    context->\hyperlink{structPoly1305Context_a7194202b23c39cda66f4feae4689895e}{r}[1] = 0;
+199    context->\hyperlink{structPoly1305Context_a7194202b23c39cda66f4feae4689895e}{r}[2] = 0;
+200    context->\hyperlink{structPoly1305Context_a7194202b23c39cda66f4feae4689895e}{r}[3] = 0;
+201    context->\hyperlink{structPoly1305Context_a01116bfecf43bff20e0bedd9368851a2}{s}[0] = 0;
+202    context->\hyperlink{structPoly1305Context_a01116bfecf43bff20e0bedd9368851a2}{s}[1] = 0;
+203    context->\hyperlink{structPoly1305Context_a01116bfecf43bff20e0bedd9368851a2}{s}[2] = 0;
+204    context->\hyperlink{structPoly1305Context_a01116bfecf43bff20e0bedd9368851a2}{s}[3] = 0;
+205 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{poly1305_8h_a0cbf44db09885b116048800e002a7898}\label{poly1305_8h_a0cbf44db09885b116048800e002a7898}} 
+\index{poly1305.\+h@{poly1305.\+h}!poly1305\+Init@{poly1305\+Init}}
+\index{poly1305\+Init@{poly1305\+Init}!poly1305.\+h@{poly1305.\+h}}
+\subsubsection{\texorpdfstring{poly1305\+Init()}{poly1305Init()}}
+{\footnotesize\ttfamily void poly1305\+Init (\begin{DoxyParamCaption}\item[{\hyperlink{structPoly1305Context}{Poly1305\+Context} $\ast$}]{context,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{key }\end{DoxyParamCaption})}
+
+
+
+Initialize Poly1305 message-\/authentication code computation. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the Poly1305 context to initialize \\
+\hline
+\mbox{\tt in}  & {\em key} & Pointer to the 256-\/bit key \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 49 of file poly1305.\+c.
+
+
+\begin{DoxyCode}
+50 \{
+51    \textcolor{comment}{//The 256-bit key is partitioned into two parts, called r and s}
+52    context->\hyperlink{structPoly1305Context_a7194202b23c39cda66f4feae4689895e}{r}[0] = \hyperlink{cpu__endian_8h_a7a6ecaee0bc600cae5a7dead20594920}{LOAD32LE}(key);
+53    context->\hyperlink{structPoly1305Context_a7194202b23c39cda66f4feae4689895e}{r}[1] = \hyperlink{cpu__endian_8h_a7a6ecaee0bc600cae5a7dead20594920}{LOAD32LE}(key + 4);
+54    context->\hyperlink{structPoly1305Context_a7194202b23c39cda66f4feae4689895e}{r}[2] = \hyperlink{cpu__endian_8h_a7a6ecaee0bc600cae5a7dead20594920}{LOAD32LE}(key + 8);
+55    context->\hyperlink{structPoly1305Context_a7194202b23c39cda66f4feae4689895e}{r}[3] = \hyperlink{cpu__endian_8h_a7a6ecaee0bc600cae5a7dead20594920}{LOAD32LE}(key + 12);
+56    context->\hyperlink{structPoly1305Context_a01116bfecf43bff20e0bedd9368851a2}{s}[0] = \hyperlink{cpu__endian_8h_a7a6ecaee0bc600cae5a7dead20594920}{LOAD32LE}(key + 16);
+57    context->\hyperlink{structPoly1305Context_a01116bfecf43bff20e0bedd9368851a2}{s}[1] = \hyperlink{cpu__endian_8h_a7a6ecaee0bc600cae5a7dead20594920}{LOAD32LE}(key + 20);
+58    context->\hyperlink{structPoly1305Context_a01116bfecf43bff20e0bedd9368851a2}{s}[2] = \hyperlink{cpu__endian_8h_a7a6ecaee0bc600cae5a7dead20594920}{LOAD32LE}(key + 24);
+59    context->\hyperlink{structPoly1305Context_a01116bfecf43bff20e0bedd9368851a2}{s}[3] = \hyperlink{cpu__endian_8h_a7a6ecaee0bc600cae5a7dead20594920}{LOAD32LE}(key + 28);
+60 
+61    \textcolor{comment}{//Certain bits of r are required to be 0}
+62    context->\hyperlink{structPoly1305Context_a7194202b23c39cda66f4feae4689895e}{r}[0] &= 0x0FFFFFFF;
+63    context->\hyperlink{structPoly1305Context_a7194202b23c39cda66f4feae4689895e}{r}[1] &= 0x0FFFFFFC;
+64    context->\hyperlink{structPoly1305Context_a7194202b23c39cda66f4feae4689895e}{r}[2] &= 0x0FFFFFFC;
+65    context->\hyperlink{structPoly1305Context_a7194202b23c39cda66f4feae4689895e}{r}[3] &= 0x0FFFFFFC;
+66 
+67    \textcolor{comment}{//The accumulator is set to zero}
+68    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[0] = 0;
+69    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[1] = 0;
+70    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[2] = 0;
+71    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[3] = 0;
+72    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[4] = 0;
+73    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[5] = 0;
+74    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[6] = 0;
+75    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[7] = 0;
+76 
+77    \textcolor{comment}{//Number of bytes in the buffer}
+78    context->\hyperlink{structPoly1305Context_a5e026316dee7aa495f38d3db5331ab20}{size} = 0;
+79 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{poly1305_8h_a1c907b79ff57afc221f6de7fe050f45f}\label{poly1305_8h_a1c907b79ff57afc221f6de7fe050f45f}} 
+\index{poly1305.\+h@{poly1305.\+h}!poly1305\+Process\+Block@{poly1305\+Process\+Block}}
+\index{poly1305\+Process\+Block@{poly1305\+Process\+Block}!poly1305.\+h@{poly1305.\+h}}
+\subsubsection{\texorpdfstring{poly1305\+Process\+Block()}{poly1305ProcessBlock()}}
+{\footnotesize\ttfamily void poly1305\+Process\+Block (\begin{DoxyParamCaption}\item[{\hyperlink{structPoly1305Context}{Poly1305\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Process message in 16-\/byte blocks. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the Poly1305 context \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 213 of file poly1305.\+c.
+
+
+\begin{DoxyCode}
+214 \{
+215    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}[5];
+216    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} \hyperlink{ndp_8h_a4c5c6ceb8ed33456261fa907136e0c3a}{r}[4];
+217    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+218 
+219    \textcolor{comment}{//Retrieve the length of the last block}
+220    n = context->\hyperlink{structPoly1305Context_a5e026316dee7aa495f38d3db5331ab20}{size};
+221 
+222    \textcolor{comment}{//Add one bit beyond the number of octets. For a 16-byte block,}
+223    \textcolor{comment}{//this is equivalent to adding 2^128 to the number. For the shorter}
+224    \textcolor{comment}{//block, it can be 2^120, 2^112, or any power of two that is evenly}
+225    \textcolor{comment}{//divisible by 8, all the way down to 2^8}
+226    context->\hyperlink{structPoly1305Context_a91d2142b82af28b80579e63ab1f9f2b3}{buffer}[n++] = 0x01;
+227 
+228    \textcolor{comment}{//If the resulting block is not 17 bytes long (the last block),}
+229    \textcolor{comment}{//pad it with zeros}
+230    \textcolor{keywordflow}{while}(n < 17)
+231       context->\hyperlink{structPoly1305Context_a91d2142b82af28b80579e63ab1f9f2b3}{buffer}[n++] = 0x00;
+232 
+233    \textcolor{comment}{//Read the block as a little-endian number}
+234    a[0] = \hyperlink{cpu__endian_8h_a7a6ecaee0bc600cae5a7dead20594920}{LOAD32LE}(context->\hyperlink{structPoly1305Context_a91d2142b82af28b80579e63ab1f9f2b3}{buffer});
+235    a[1] = \hyperlink{cpu__endian_8h_a7a6ecaee0bc600cae5a7dead20594920}{LOAD32LE}(context->\hyperlink{structPoly1305Context_a91d2142b82af28b80579e63ab1f9f2b3}{buffer} + 4);
+236    a[2] = \hyperlink{cpu__endian_8h_a7a6ecaee0bc600cae5a7dead20594920}{LOAD32LE}(context->\hyperlink{structPoly1305Context_a91d2142b82af28b80579e63ab1f9f2b3}{buffer} + 8);
+237    a[3] = \hyperlink{cpu__endian_8h_a7a6ecaee0bc600cae5a7dead20594920}{LOAD32LE}(context->\hyperlink{structPoly1305Context_a91d2142b82af28b80579e63ab1f9f2b3}{buffer} + 12);
+238    a[4] = context->\hyperlink{structPoly1305Context_a91d2142b82af28b80579e63ab1f9f2b3}{buffer}[16];
+239 
+240    \textcolor{comment}{//Add this number to the accumulator}
+241    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[0] += a[0];
+242    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[1] += a[1];
+243    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[2] += a[2];
+244    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[3] += a[3];
+245    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[4] += a[4];
+246 
+247    \textcolor{comment}{//Propagate the carry}
+248    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[1] += context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[0] >> 32;
+249    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[2] += context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[1] >> 32;
+250    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[3] += context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[2] >> 32;
+251    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[4] += context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[3] >> 32;
+252 
+253    \textcolor{comment}{//We only consider the least significant bits}
+254    a[0] = context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[0] & 0xFFFFFFFF;
+255    a[1] = context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[1] & 0xFFFFFFFF;
+256    a[2] = context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[2] & 0xFFFFFFFF;
+257    a[3] = context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[3] & 0xFFFFFFFF;
+258    a[4] = context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[4] & 0xFFFFFFFF;
+259 
+260    \textcolor{comment}{//Copy r}
+261    r[0] = context->\hyperlink{structPoly1305Context_a7194202b23c39cda66f4feae4689895e}{r}[0];
+262    r[1] = context->\hyperlink{structPoly1305Context_a7194202b23c39cda66f4feae4689895e}{r}[1];
+263    r[2] = context->\hyperlink{structPoly1305Context_a7194202b23c39cda66f4feae4689895e}{r}[2];
+264    r[3] = context->\hyperlink{structPoly1305Context_a7194202b23c39cda66f4feae4689895e}{r}[3];
+265 
+266    \textcolor{comment}{//Multiply the accumulator by r}
+267    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[0] = (\hyperlink{stdint_8h_aec6fcb673ff035718c238c8c9d544c47}{uint64\_t}) a[0] * r[0];
+268    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[1] = (\hyperlink{stdint_8h_aec6fcb673ff035718c238c8c9d544c47}{uint64\_t}) a[0] * r[1] + (\hyperlink{stdint_8h_aec6fcb673ff035718c238c8c9d544c47}{uint64\_t}) a[1] * r[0];
+269    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[2] = (\hyperlink{stdint_8h_aec6fcb673ff035718c238c8c9d544c47}{uint64\_t}) a[0] * r[2] + (\hyperlink{stdint_8h_aec6fcb673ff035718c238c8c9d544c47}{uint64\_t}) a[1] * r[1] + (
+      \hyperlink{stdint_8h_aec6fcb673ff035718c238c8c9d544c47}{uint64\_t}) a[2] * r[0];
+270    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[3] = (\hyperlink{stdint_8h_aec6fcb673ff035718c238c8c9d544c47}{uint64\_t}) a[0] * r[3] + (\hyperlink{stdint_8h_aec6fcb673ff035718c238c8c9d544c47}{uint64\_t}) a[1] * r[2] + (
+      \hyperlink{stdint_8h_aec6fcb673ff035718c238c8c9d544c47}{uint64\_t}) a[2] * r[1] + (\hyperlink{stdint_8h_aec6fcb673ff035718c238c8c9d544c47}{uint64\_t}) a[3] * r[0];
+271    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[4] = (\hyperlink{stdint_8h_aec6fcb673ff035718c238c8c9d544c47}{uint64\_t}) a[1] * r[3] + (\hyperlink{stdint_8h_aec6fcb673ff035718c238c8c9d544c47}{uint64\_t}) a[2] * r[2] + (
+      \hyperlink{stdint_8h_aec6fcb673ff035718c238c8c9d544c47}{uint64\_t}) a[3] * r[1] + (\hyperlink{stdint_8h_aec6fcb673ff035718c238c8c9d544c47}{uint64\_t}) a[4] * r[0];
+272    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[5] = (\hyperlink{stdint_8h_aec6fcb673ff035718c238c8c9d544c47}{uint64\_t}) a[2] * r[3] + (\hyperlink{stdint_8h_aec6fcb673ff035718c238c8c9d544c47}{uint64\_t}) a[3] * r[2] + (
+      \hyperlink{stdint_8h_aec6fcb673ff035718c238c8c9d544c47}{uint64\_t}) a[4] * r[1];
+273    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[6] = (\hyperlink{stdint_8h_aec6fcb673ff035718c238c8c9d544c47}{uint64\_t}) a[3] * r[3] + (\hyperlink{stdint_8h_aec6fcb673ff035718c238c8c9d544c47}{uint64\_t}) a[4] * r[2];
+274    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[7] = (\hyperlink{stdint_8h_aec6fcb673ff035718c238c8c9d544c47}{uint64\_t}) a[4] * r[3];
+275 
+276    \textcolor{comment}{//Propagate the carry}
+277    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[1] += context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[0] >> 32;
+278    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[2] += context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[1] >> 32;
+279    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[3] += context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[2] >> 32;
+280    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[4] += context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[3] >> 32;
+281    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[5] += context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[4] >> 32;
+282    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[6] += context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[5] >> 32;
+283    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[7] += context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[6] >> 32;
+284 
+285    \textcolor{comment}{//Save the high part of the accumulator}
+286    a[0] = context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[4] & 0xFFFFFFFC;
+287    a[1] = context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[5] & 0xFFFFFFFF;
+288    a[2] = context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[6] & 0xFFFFFFFF;
+289    a[3] = context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[7] & 0xFFFFFFFF;
+290 
+291    \textcolor{comment}{//We only consider the least significant bits}
+292    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[0] &= 0xFFFFFFFF;
+293    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[1] &= 0xFFFFFFFF;
+294    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[2] &= 0xFFFFFFFF;
+295    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[3] &= 0xFFFFFFFF;
+296    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[4] &= 0x00000003;
+297 
+298    \textcolor{comment}{//Perform fast modular reduction (first pass)}
+299    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[0] += a[0];
+300    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[0] += (a[0] >> 2) | (a[1] << 30);
+301    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[1] += a[1];
+302    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[1] += (a[1] >> 2) | (a[2] << 30);
+303    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[2] += a[2];
+304    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[2] += (a[2] >> 2) | (a[3] << 30);
+305    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[3] += a[3];
+306    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[3] += (a[3] >> 2);
+307 
+308    \textcolor{comment}{//Propagate the carry}
+309    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[1] += context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[0] >> 32;
+310    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[2] += context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[1] >> 32;
+311    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[3] += context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[2] >> 32;
+312    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[4] += context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[3] >> 32;
+313 
+314    \textcolor{comment}{//Save the high part of the accumulator}
+315    a[0] = context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[4] & 0xFFFFFFFC;
+316 
+317    \textcolor{comment}{//We only consider the least significant bits}
+318    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[0] &= 0xFFFFFFFF;
+319    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[1] &= 0xFFFFFFFF;
+320    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[2] &= 0xFFFFFFFF;
+321    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[3] &= 0xFFFFFFFF;
+322    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[4] &= 0x00000003;
+323 
+324    \textcolor{comment}{//Perform fast modular reduction (second pass)}
+325    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[0] += a[0];
+326    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[0] += a[0] >> 2;
+327 
+328    \textcolor{comment}{//Propagate the carry}
+329    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[1] += context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[0] >> 32;
+330    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[2] += context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[1] >> 32;
+331    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[3] += context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[2] >> 32;
+332    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[4] += context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[3] >> 32;
+333 
+334    \textcolor{comment}{//We only consider the least significant bits}
+335    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[0] &= 0xFFFFFFFF;
+336    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[1] &= 0xFFFFFFFF;
+337    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[2] &= 0xFFFFFFFF;
+338    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[3] &= 0xFFFFFFFF;
+339    context->\hyperlink{structPoly1305Context_a95f600b1ce1dd03fecac15eda1d7b6e5}{a}[4] &= 0x00000003;
+340 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{poly1305_8h_a6492c927f98ec62d800baafdbf5536cf}\label{poly1305_8h_a6492c927f98ec62d800baafdbf5536cf}} 
+\index{poly1305.\+h@{poly1305.\+h}!poly1305\+Update@{poly1305\+Update}}
+\index{poly1305\+Update@{poly1305\+Update}!poly1305.\+h@{poly1305.\+h}}
+\subsubsection{\texorpdfstring{poly1305\+Update()}{poly1305Update()}}
+{\footnotesize\ttfamily void poly1305\+Update (\begin{DoxyParamCaption}\item[{\hyperlink{structPoly1305Context}{Poly1305\+Context} $\ast$}]{context,  }\item[{const void $\ast$}]{data,  }\item[{size\+\_\+t}]{length }\end{DoxyParamCaption})}
+
+
+
+Update Poly1305 message-\/authentication code computation. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the Poly1305 context \\
+\hline
+\mbox{\tt in}  & {\em data} & Pointer to the input message \\
+\hline
+\mbox{\tt in}  & {\em length} & Length of the input message \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 89 of file poly1305.\+c.
+
+
+\begin{DoxyCode}
+90 \{
+91    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+92 
+93    \textcolor{comment}{//Process the incoming data}
+94    \textcolor{keywordflow}{while}(\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} > 0)
+95    \{
+96       \textcolor{comment}{//The buffer can hold at most 16 bytes}
+97       n = \hyperlink{os__port_8h_a3acffbd305ee72dcd4593c0d8af64a4f}{MIN}(\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, 16 - context->\hyperlink{structPoly1305Context_a5e026316dee7aa495f38d3db5331ab20}{size});
+98 
+99       \textcolor{comment}{//Copy the data to the buffer}
+100       \hyperlink{cyclone__crypto_2core_2crypto_8h_a6724616c4014bb7e21f2660bd7b88be8}{cryptoMemcpy}(context->\hyperlink{structPoly1305Context_a91d2142b82af28b80579e63ab1f9f2b3}{buffer} + context->\hyperlink{structPoly1305Context_a5e026316dee7aa495f38d3db5331ab20}{size}, \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, n);
+101 
+102       \textcolor{comment}{//Update the Poly1305 context}
+103       context->\hyperlink{structPoly1305Context_a5e026316dee7aa495f38d3db5331ab20}{size} += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+104       \textcolor{comment}{//Advance the data pointer}
+105       \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data} = (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *) \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data} + n;
+106       \textcolor{comment}{//Remaining bytes to process}
+107       \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} -= \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+108 
+109       \textcolor{comment}{//Process message in 16-byte blocks}
+110       \textcolor{keywordflow}{if}(context->\hyperlink{structPoly1305Context_a5e026316dee7aa495f38d3db5331ab20}{size} == 16)
+111       \{
+112          \textcolor{comment}{//Transform the 16-byte block}
+113          \hyperlink{poly1305_8c_a1c907b79ff57afc221f6de7fe050f45f}{poly1305ProcessBlock}(context);
+114          \textcolor{comment}{//Empty the buffer}
+115          context->\hyperlink{structPoly1305Context_a5e026316dee7aa495f38d3db5331ab20}{size} = 0;
+116       \}
+117    \}
+118 \}
+\end{DoxyCode}

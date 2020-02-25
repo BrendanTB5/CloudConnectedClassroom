@@ -1,0 +1,1952 @@
+\hypertarget{tls__signature_8c}{}\section{cyclone\+\_\+ssl/tls\+\_\+signature.c File Reference}
+\label{tls__signature_8c}\index{cyclone\+\_\+ssl/tls\+\_\+signature.\+c@{cyclone\+\_\+ssl/tls\+\_\+signature.\+c}}
+
+
+R\+S\+A/\+D\+S\+A/\+E\+C\+D\+S\+A/\+Ed\+D\+SA signature generation and verification.  
+
+
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}tls.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}tls\+\_\+signature.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}tls\+\_\+transcript\+\_\+hash.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}tls\+\_\+misc.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}pkix/pem\+\_\+import.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}pkc/rsa.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}pkc/dsa.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ecc/ecdsa.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ecc/ed25519.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ecc/ed448.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}debug.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{tls__signature_8c_afcdf5e66fd927a7f4cc64295acd20407}{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}~\hyperlink{tls__config_8h_afee42a623033dac888291d1993985206}{T\+L\+S\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{tls__signature_8c_ad721a7cba2bdeb68ea9f4a43c9b6c2cc}{tls\+Select\+Signature\+Scheme} (\hyperlink{tls_8h_ac09f7a286c0cdf9b07ee1edd107946f5}{Tls\+Context} $\ast$context, const \hyperlink{structTlsCertDesc}{Tls\+Cert\+Desc} $\ast$cert, const \hyperlink{tls_8h_a52f8ea223987ee1e857b6687f38d3888}{Tls\+Sign\+Hash\+Algos} $\ast$supported\+Sign\+Algos)
+\begin{DoxyCompactList}\small\item\em Select the algorithm to be used when generating digital signatures. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{tls__signature_8c_a07a3479608a65af8f3d18563a8e41f43}{tls\+Generate\+Signature} (\hyperlink{tls_8h_ac09f7a286c0cdf9b07ee1edd107946f5}{Tls\+Context} $\ast$context, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{ndp_8h_a6519522ad9a6f45e7a8d25d31392a977}{p}, size\+\_\+t $\ast$\hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length})
+\begin{DoxyCompactList}\small\item\em Digital signature generation(S\+SL 3.\+0, T\+LS 1.\+0 or T\+LS 1.\+1) \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{tls__signature_8c_a15ddf6f6b2111125bc180fcae4bb6fd8}{tls\+Verify\+Signature} (\hyperlink{tls_8h_ac09f7a286c0cdf9b07ee1edd107946f5}{Tls\+Context} $\ast$context, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{ndp_8h_a6519522ad9a6f45e7a8d25d31392a977}{p}, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length})
+\begin{DoxyCompactList}\small\item\em Digital signature verification (S\+SL 3.\+0, T\+LS 1.\+0 and T\+LS 1.\+1) \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{tls__signature_8c_a97215ed0441ecd8d4f5fc073b2300bae}{tls12\+Generate\+Signature} (\hyperlink{tls_8h_ac09f7a286c0cdf9b07ee1edd107946f5}{Tls\+Context} $\ast$context, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{ndp_8h_a6519522ad9a6f45e7a8d25d31392a977}{p}, size\+\_\+t $\ast$\hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length})
+\begin{DoxyCompactList}\small\item\em Digital signature generation(T\+LS 1.\+2) \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{tls__signature_8c_a9becdc76c429a991386747d7974d47e1}{tls12\+Verify\+Signature} (\hyperlink{tls_8h_ac09f7a286c0cdf9b07ee1edd107946f5}{Tls\+Context} $\ast$context, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{ndp_8h_a6519522ad9a6f45e7a8d25d31392a977}{p}, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length})
+\begin{DoxyCompactList}\small\item\em Digital signature verification (T\+LS 1.\+2) \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{tls__signature_8c_af6c383197c9d99d7845e8602c997e494}{tls\+Generate\+Rsa\+Signature} (const \hyperlink{structRsaPrivateKey}{Rsa\+Private\+Key} $\ast$key, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$digest, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{tls_8h_af27e6d4ea3add14cd8cc9aa275d716ad}{signature}, size\+\_\+t $\ast$signature\+Len)
+\begin{DoxyCompactList}\small\item\em Generate R\+SA signature (S\+SL 3.\+0, T\+LS 1.\+0 and T\+LS 1.\+1) \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{tls__signature_8c_a5271b7427830d34327644c6717e9f03d}{tls\+Verify\+Rsa\+Signature} (const \hyperlink{structRsaPublicKey}{Rsa\+Public\+Key} $\ast$key, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$digest, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{tls_8h_af27e6d4ea3add14cd8cc9aa275d716ad}{signature}, size\+\_\+t signature\+Len)
+\begin{DoxyCompactList}\small\item\em Verify R\+SA signature (S\+SL 3.\+0, T\+LS 1.\+0 and T\+LS 1.\+1) \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{tls__signature_8c_a2fb5acdd086627e2071e8ec9118253a8}{tls\+Generate\+Dsa\+Signature} (\hyperlink{tls_8h_ac09f7a286c0cdf9b07ee1edd107946f5}{Tls\+Context} $\ast$context, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$digest, size\+\_\+t digest\+Len, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{tls_8h_af27e6d4ea3add14cd8cc9aa275d716ad}{signature}, size\+\_\+t $\ast$signature\+Len)
+\begin{DoxyCompactList}\small\item\em Generate D\+SA signature. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{tls__signature_8c_a4ca472906bb02377b837ff2d96c18331}{tls\+Verify\+Dsa\+Signature} (\hyperlink{tls_8h_ac09f7a286c0cdf9b07ee1edd107946f5}{Tls\+Context} $\ast$context, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$digest, size\+\_\+t digest\+Len, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{tls_8h_af27e6d4ea3add14cd8cc9aa275d716ad}{signature}, size\+\_\+t signature\+Len)
+\begin{DoxyCompactList}\small\item\em Verify D\+SA signature. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{tls__signature_8c_ac858056ee74a931fb3c0f0ad42120664}{tls\+Generate\+Ecdsa\+Signature} (\hyperlink{tls_8h_ac09f7a286c0cdf9b07ee1edd107946f5}{Tls\+Context} $\ast$context, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$digest, size\+\_\+t digest\+Len, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{tls_8h_af27e6d4ea3add14cd8cc9aa275d716ad}{signature}, size\+\_\+t $\ast$signature\+Len)
+\begin{DoxyCompactList}\small\item\em Generate E\+C\+D\+SA signature. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{tls__signature_8c_a2a3f114dca59434482fce803095be646}{tls\+Verify\+Ecdsa\+Signature} (\hyperlink{tls_8h_ac09f7a286c0cdf9b07ee1edd107946f5}{Tls\+Context} $\ast$context, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$digest, size\+\_\+t digest\+Len, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{tls_8h_af27e6d4ea3add14cd8cc9aa275d716ad}{signature}, size\+\_\+t signature\+Len)
+\begin{DoxyCompactList}\small\item\em Verify E\+C\+D\+SA signature. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{tls__signature_8c_a8fcd4df412699843f8b084729fbbb250}{tls\+Generate\+Eddsa\+Signature} (\hyperlink{tls_8h_ac09f7a286c0cdf9b07ee1edd107946f5}{Tls\+Context} $\ast$context, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{pap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}, size\+\_\+t message\+Len, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{tls_8h_af27e6d4ea3add14cd8cc9aa275d716ad}{signature}, size\+\_\+t $\ast$signature\+Len)
+\begin{DoxyCompactList}\small\item\em Generate Ed\+D\+SA signature. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{tls__signature_8c_aec1f4642d666fa3172c729a6d59a9313}{tls\+Verify\+Eddsa\+Signature} (\hyperlink{tls_8h_ac09f7a286c0cdf9b07ee1edd107946f5}{Tls\+Context} $\ast$context, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{pap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}, size\+\_\+t message\+Len, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$\hyperlink{tls_8h_af27e6d4ea3add14cd8cc9aa275d716ad}{signature}, size\+\_\+t signature\+Len)
+\begin{DoxyCompactList}\small\item\em Verify Ed\+D\+SA signature. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+R\+S\+A/\+D\+S\+A/\+E\+C\+D\+S\+A/\+Ed\+D\+SA signature generation and verification. 
+
+\hypertarget{pic32mz__ef__curiosity_8h_License}{}\subsection{License}\label{pic32mz__ef__curiosity_8h_License}
+S\+P\+D\+X-\/\+License-\/\+Identifier\+: G\+P\+L-\/2.\+0-\/or-\/later
+
+Copyright (C) 2010-\/2019 Oryx Embedded S\+A\+RL. All rights reserved.
+
+This file is part of Cyclone\+S\+SL Open.
+
+This program is free software; you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+
+You should have received a copy of the G\+NU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-\/1301, U\+SA.
+
+\begin{DoxyAuthor}{Author}
+Oryx Embedded S\+A\+RL (www.\+oryx-\/embedded.\+com) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+9.\+6 
+\end{DoxyVersion}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{tls__signature_8c_afcdf5e66fd927a7f4cc64295acd20407}\label{tls__signature_8c_afcdf5e66fd927a7f4cc64295acd20407}} 
+\index{tls\+\_\+signature.\+c@{tls\+\_\+signature.\+c}!T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+\index{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}!tls\+\_\+signature.\+c@{tls\+\_\+signature.\+c}}
+\subsubsection{\texorpdfstring{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}{TRACE\_LEVEL}}
+{\footnotesize\ttfamily \#define T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL~\hyperlink{tls__config_8h_afee42a623033dac888291d1993985206}{T\+L\+S\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+
+
+
+Definition at line 32 of file tls\+\_\+signature.\+c.
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{tls__signature_8c_a97215ed0441ecd8d4f5fc073b2300bae}\label{tls__signature_8c_a97215ed0441ecd8d4f5fc073b2300bae}} 
+\index{tls\+\_\+signature.\+c@{tls\+\_\+signature.\+c}!tls12\+Generate\+Signature@{tls12\+Generate\+Signature}}
+\index{tls12\+Generate\+Signature@{tls12\+Generate\+Signature}!tls\+\_\+signature.\+c@{tls\+\_\+signature.\+c}}
+\subsubsection{\texorpdfstring{tls12\+Generate\+Signature()}{tls12GenerateSignature()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} tls12\+Generate\+Signature (\begin{DoxyParamCaption}\item[{\hyperlink{tls_8h_ac09f7a286c0cdf9b07ee1edd107946f5}{Tls\+Context} $\ast$}]{context,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{p,  }\item[{size\+\_\+t $\ast$}]{length }\end{DoxyParamCaption})}
+
+
+
+Digital signature generation(T\+LS 1.\+2) 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the T\+LS context \\
+\hline
+\mbox{\tt out}  & {\em p} & Buffer where to store the digitally-\/signed element \\
+\hline
+\mbox{\tt out}  & {\em length} & Length of the digitally-\/signed element \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 580 of file tls\+\_\+signature.\+c.
+
+
+\begin{DoxyCode}
+582 \{
+583    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+584    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+585    \hyperlink{tls_8h_ad6758810e829828a20529e27e0f1fb6a}{Tls12DigitalSignature} *\hyperlink{tls_8h_af27e6d4ea3add14cd8cc9aa275d716ad}{signature};
+586    \textcolor{keyword}{const} \hyperlink{structHashAlgo}{HashAlgo} *hashAlgo;
+587 
+588    \textcolor{comment}{//Point to the digitally-signed element}
+589    signature = (\hyperlink{tls_8h_ad6758810e829828a20529e27e0f1fb6a}{Tls12DigitalSignature} *) \hyperlink{ndp_8h_a6519522ad9a6f45e7a8d25d31392a977}{p};
+590 
+591    \textcolor{comment}{//Retrieve the hash algorithm used for signing}
+592    \textcolor{keywordflow}{if}(context->signAlgo == \hyperlink{tls_8h_abe6ce436cb0d777df29e0af7bf800223ae82458ac6b05ba0e3851a5804f7d5e57}{TLS\_SIGN\_ALGO\_RSA\_PSS\_RSAE\_SHA256} ||
+593       context->signAlgo == \hyperlink{tls_8h_abe6ce436cb0d777df29e0af7bf800223ad23a08f2a2e5d3231cc9c2ce2e223a8d}{TLS\_SIGN\_ALGO\_RSA\_PSS\_PSS\_SHA256})
+594    \{
+595       \textcolor{comment}{//The hashing is intrinsic to the signature algorithm}
+596       hashAlgo = \hyperlink{tls__misc_8c_a0540f6f41d033803f8c6b9f5efe391e8}{tlsGetHashAlgo}(\hyperlink{tls_8h_a98b0299cd7e197edc67123642089156da7912aa0ea6b40af839a3d4be331fe182}{TLS\_HASH\_ALGO\_SHA256});
+597    \}
+598    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->signAlgo == \hyperlink{tls_8h_abe6ce436cb0d777df29e0af7bf800223aef95b8f001c19481fef0409a91b56ce4}{TLS\_SIGN\_ALGO\_RSA\_PSS\_RSAE\_SHA384} ||
+599       context->signAlgo == \hyperlink{tls_8h_abe6ce436cb0d777df29e0af7bf800223aeb67836989d29de8af7c31ea0ddbe1b7}{TLS\_SIGN\_ALGO\_RSA\_PSS\_PSS\_SHA384})
+600    \{
+601       \textcolor{comment}{//The hashing is intrinsic to the signature algorithm}
+602       hashAlgo = \hyperlink{tls__misc_8c_a0540f6f41d033803f8c6b9f5efe391e8}{tlsGetHashAlgo}(\hyperlink{tls_8h_a98b0299cd7e197edc67123642089156da53b125010bbd797aa333a41bd1264edb}{TLS\_HASH\_ALGO\_SHA384});
+603    \}
+604    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->signAlgo == \hyperlink{tls_8h_abe6ce436cb0d777df29e0af7bf800223a53d5e91921faf4103349e699d188ea5f}{TLS\_SIGN\_ALGO\_RSA\_PSS\_RSAE\_SHA512} ||
+605       context->signAlgo == \hyperlink{tls_8h_abe6ce436cb0d777df29e0af7bf800223a1f76baf2d64af86ca98e164c9089a77c}{TLS\_SIGN\_ALGO\_RSA\_PSS\_PSS\_SHA512})
+606    \{
+607       \textcolor{comment}{//The hashing is intrinsic to the signature algorithm}
+608       hashAlgo = \hyperlink{tls__misc_8c_a0540f6f41d033803f8c6b9f5efe391e8}{tlsGetHashAlgo}(\hyperlink{tls_8h_a98b0299cd7e197edc67123642089156da81cc682c95330532471fe9b48fed6acf}{TLS\_HASH\_ALGO\_SHA512});
+609    \}
+610    \textcolor{keywordflow}{else}
+611    \{
+612       \textcolor{comment}{//Select the relevant hash algorithm}
+613       hashAlgo = \hyperlink{tls__misc_8c_a0540f6f41d033803f8c6b9f5efe391e8}{tlsGetHashAlgo}(context->signHashAlgo);
+614    \}
+615 
+616    \textcolor{comment}{//Digest all the handshake messages starting at ClientHello}
+617    \textcolor{keywordflow}{if}(hashAlgo == \hyperlink{sha1_8h_a2529d805a2d0a0ca32114c810cc6cb1b}{SHA1\_HASH\_ALGO})
+618    \{
+619       \textcolor{comment}{//Use SHA-1 hash algorithm}
+620       error = \hyperlink{tls__transcript__hash_8c_a177688a47fa85bb7fbe3f3ef755f493b}{tlsFinalizeTranscriptHash}(context, 
+      \hyperlink{sha1_8h_a2529d805a2d0a0ca32114c810cc6cb1b}{SHA1\_HASH\_ALGO},
+621          context->transcriptSha1Context, \textcolor{stringliteral}{""}, context->clientVerifyData);
+622    \}
+623    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(hashAlgo == context->cipherSuite.prfHashAlgo)
+624    \{
+625       \textcolor{comment}{//Use PRF hash algorithm (SHA-256 or SHA-384)}
+626       error = \hyperlink{tls__transcript__hash_8c_a177688a47fa85bb7fbe3f3ef755f493b}{tlsFinalizeTranscriptHash}(context, hashAlgo,
+627          context->transcriptHashContext, \textcolor{stringliteral}{""}, context->clientVerifyData);
+628    \}
+629    \textcolor{keywordflow}{else}
+630    \{
+631       \textcolor{comment}{//The specified hash algorithm is not supported}
+632       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4c54d9b14297edac328805943cf95795}{ERROR\_UNSUPPORTED\_SIGNATURE\_ALGO};
+633    \}
+634 
+635    \textcolor{comment}{//Handshake message hash successfully computed?}
+636    \textcolor{keywordflow}{if}(!error)
+637    \{
+638 \textcolor{preprocessor}{#if (TLS\_RSA\_SIGN\_SUPPORT == ENABLED)}
+639       \textcolor{comment}{//RSASSA-PKCS1-v1\_5 signature scheme?}
+640       \textcolor{keywordflow}{if}(context->signAlgo == \hyperlink{tls_8h_abe6ce436cb0d777df29e0af7bf800223a84a0f0f40c0affb557a7e5f157b4e1f5}{TLS\_SIGN\_ALGO\_RSA})
+641       \{
+642          \hyperlink{structRsaPrivateKey}{RsaPrivateKey} privateKey;
+643 
+644          \textcolor{comment}{//Initialize RSA private key}
+645          \hyperlink{rsa_8c_ad454d9bc34f7d9fa5717180707365e69}{rsaInitPrivateKey}(&privateKey);
+646 
+647          \textcolor{comment}{//Set the relevant signature algorithm}
+648          signature->algorithm.signature = \hyperlink{tls_8h_abe6ce436cb0d777df29e0af7bf800223a84a0f0f40c0affb557a7e5f157b4e1f5}{TLS\_SIGN\_ALGO\_RSA};
+649          signature->algorithm.hash = context->signHashAlgo;
+650 
+651          \textcolor{comment}{//Decode the PEM structure that holds the RSA private key}
+652          error = \hyperlink{certificate_2pem__import_8c_a3d276f00ad49589056269bfe8abbb664}{pemImportRsaPrivateKey}(context->cert->privateKey,
+653             context->cert->privateKeyLen, &privateKey);
+654 
+655          \textcolor{comment}{//Check status code}
+656          \textcolor{keywordflow}{if}(!error)
+657          \{
+658             \textcolor{comment}{//Generate RSA signature (RSASSA-PKCS1-v1\_5 signature scheme)}
+659             error = \hyperlink{rsa_8c_aa11231857578f3d094759dd7789015b8}{rsassaPkcs1v15Sign}(&privateKey, hashAlgo,
+660                context->clientVerifyData, signature->value, &n);
+661          \}
+662 
+663          \textcolor{comment}{//Release previously allocated resources}
+664          \hyperlink{rsa_8c_a14ee0338e3149b934552c40b97c8f096}{rsaFreePrivateKey}(&privateKey);
+665       \}
+666       \textcolor{keywordflow}{else}
+667 \textcolor{preprocessor}{#endif}
+668 \textcolor{preprocessor}{#if (TLS\_RSA\_PSS\_SIGN\_SUPPORT == ENABLED)}
+669       \textcolor{comment}{//RSASSA-PSS signature scheme?}
+670       \textcolor{keywordflow}{if}(context->signAlgo == \hyperlink{tls_8h_abe6ce436cb0d777df29e0af7bf800223ae82458ac6b05ba0e3851a5804f7d5e57}{TLS\_SIGN\_ALGO\_RSA\_PSS\_RSAE\_SHA256} ||
+671          context->signAlgo == \hyperlink{tls_8h_abe6ce436cb0d777df29e0af7bf800223aef95b8f001c19481fef0409a91b56ce4}{TLS\_SIGN\_ALGO\_RSA\_PSS\_RSAE\_SHA384} ||
+672          context->signAlgo == \hyperlink{tls_8h_abe6ce436cb0d777df29e0af7bf800223a53d5e91921faf4103349e699d188ea5f}{TLS\_SIGN\_ALGO\_RSA\_PSS\_RSAE\_SHA512} ||
+673          context->signAlgo == \hyperlink{tls_8h_abe6ce436cb0d777df29e0af7bf800223ad23a08f2a2e5d3231cc9c2ce2e223a8d}{TLS\_SIGN\_ALGO\_RSA\_PSS\_PSS\_SHA256} ||
+674          context->signAlgo == \hyperlink{tls_8h_abe6ce436cb0d777df29e0af7bf800223aeb67836989d29de8af7c31ea0ddbe1b7}{TLS\_SIGN\_ALGO\_RSA\_PSS\_PSS\_SHA384} ||
+675          context->signAlgo == \hyperlink{tls_8h_abe6ce436cb0d777df29e0af7bf800223a1f76baf2d64af86ca98e164c9089a77c}{TLS\_SIGN\_ALGO\_RSA\_PSS\_PSS\_SHA512})
+676       \{
+677          \hyperlink{structRsaPrivateKey}{RsaPrivateKey} privateKey;
+678 
+679          \textcolor{comment}{//Initialize RSA private key}
+680          \hyperlink{rsa_8c_ad454d9bc34f7d9fa5717180707365e69}{rsaInitPrivateKey}(&privateKey);
+681 
+682          \textcolor{comment}{//Set the relevant signature algorithm}
+683          signature->algorithm.signature = context->signAlgo;
+684          signature->algorithm.hash = \hyperlink{tls_8h_a98b0299cd7e197edc67123642089156dab77721d4496c39c41f5984cfd7515882}{TLS\_HASH\_ALGO\_INTRINSIC};
+685 
+686          \textcolor{comment}{//Decode the PEM structure that holds the RSA private key}
+687          error = \hyperlink{certificate_2pem__import_8c_a3d276f00ad49589056269bfe8abbb664}{pemImportRsaPrivateKey}(context->cert->privateKey,
+688             context->cert->privateKeyLen, &privateKey);
+689 
+690          \textcolor{comment}{//Check status code}
+691          \textcolor{keywordflow}{if}(!error)
+692          \{
+693             \textcolor{comment}{//Generate RSA signature (RSASSA-PSS signature scheme)}
+694             error = \hyperlink{rsa_8c_a2bc9405e58c8ce947d411cd9751e96b2}{rsassaPssSign}(context->prngAlgo, context->prngContext,
+695                &privateKey, hashAlgo, hashAlgo->\hyperlink{structHashAlgo_a0c8ccdb22ea395ccdd8decd06401d22e}{digestSize},
+696                context->clientVerifyData, signature->value, &n);
+697          \}
+698 
+699          \textcolor{comment}{//Release previously allocated resources}
+700          \hyperlink{rsa_8c_a14ee0338e3149b934552c40b97c8f096}{rsaFreePrivateKey}(&privateKey);
+701       \}
+702       \textcolor{keywordflow}{else}
+703 \textcolor{preprocessor}{#endif}
+704 \textcolor{preprocessor}{#if (TLS\_DSA\_SIGN\_SUPPORT == ENABLED)}
+705       \textcolor{comment}{//DSA signature scheme?}
+706       \textcolor{keywordflow}{if}(context->signAlgo == \hyperlink{tls_8h_abe6ce436cb0d777df29e0af7bf800223a8d024e93d33282e5cb2a1665fb69153d}{TLS\_SIGN\_ALGO\_DSA})
+707       \{
+708          \textcolor{comment}{//Set the relevant signature algorithm}
+709          signature->algorithm.signature = \hyperlink{tls_8h_abe6ce436cb0d777df29e0af7bf800223a8d024e93d33282e5cb2a1665fb69153d}{TLS\_SIGN\_ALGO\_DSA};
+710          signature->algorithm.hash = context->signHashAlgo;
+711 
+712          \textcolor{comment}{//Generate a DSA signature using the client's private key}
+713          error = \hyperlink{tls__signature_8c_a2fb5acdd086627e2071e8ec9118253a8}{tlsGenerateDsaSignature}(context, context->clientVerifyData,
+714             hashAlgo->\hyperlink{structHashAlgo_a0c8ccdb22ea395ccdd8decd06401d22e}{digestSize}, signature->value, &n);
+715       \}
+716       \textcolor{keywordflow}{else}
+717 \textcolor{preprocessor}{#endif}
+718 \textcolor{preprocessor}{#if (TLS\_ECDSA\_SIGN\_SUPPORT == ENABLED)}
+719       \textcolor{comment}{//ECDSA signature scheme?}
+720       \textcolor{keywordflow}{if}(context->signAlgo == \hyperlink{tls_8h_abe6ce436cb0d777df29e0af7bf800223a47f4ec2313cd5ce1755fc2485cfdd49a}{TLS\_SIGN\_ALGO\_ECDSA})
+721       \{
+722          \textcolor{comment}{//Set the relevant signature algorithm}
+723          signature->algorithm.signature = \hyperlink{tls_8h_abe6ce436cb0d777df29e0af7bf800223a47f4ec2313cd5ce1755fc2485cfdd49a}{TLS\_SIGN\_ALGO\_ECDSA};
+724          signature->algorithm.hash = context->signHashAlgo;
+725 
+726          \textcolor{comment}{//Generate an ECDSA signature using the client's private key}
+727          error = \hyperlink{tls__signature_8c_ac858056ee74a931fb3c0f0ad42120664}{tlsGenerateEcdsaSignature}(context, context->clientVerifyData,
+728             hashAlgo->\hyperlink{structHashAlgo_a0c8ccdb22ea395ccdd8decd06401d22e}{digestSize}, signature->value, &n);
+729       \}
+730       \textcolor{keywordflow}{else}
+731 \textcolor{preprocessor}{#endif}
+732       \textcolor{comment}{//Invalid signature scheme?}
+733       \{
+734          \textcolor{comment}{//Report an error}
+735          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4c54d9b14297edac328805943cf95795}{ERROR\_UNSUPPORTED\_SIGNATURE\_ALGO};
+736       \}
+737    \}
+738 
+739    \textcolor{comment}{//Check status code}
+740    \textcolor{keywordflow}{if}(!error)
+741    \{
+742       \textcolor{comment}{//The signature is preceded by a 2-byte length field}
+743       signature->length = \hyperlink{cpu__endian_8h_a800cdbf435a85a9b3ad4f0edc518472a}{htons}(n);
+744       \textcolor{comment}{//Total length of the digitally-signed element}
+745       *\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} = \textcolor{keyword}{sizeof}(\hyperlink{tls_8h_ad6758810e829828a20529e27e0f1fb6a}{Tls12DigitalSignature}) + n;
+746    \}
+747 
+748    \textcolor{comment}{//Return status code}
+749    \textcolor{keywordflow}{return} error;
+750 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{tls__signature_8c_a9becdc76c429a991386747d7974d47e1}\label{tls__signature_8c_a9becdc76c429a991386747d7974d47e1}} 
+\index{tls\+\_\+signature.\+c@{tls\+\_\+signature.\+c}!tls12\+Verify\+Signature@{tls12\+Verify\+Signature}}
+\index{tls12\+Verify\+Signature@{tls12\+Verify\+Signature}!tls\+\_\+signature.\+c@{tls\+\_\+signature.\+c}}
+\subsubsection{\texorpdfstring{tls12\+Verify\+Signature()}{tls12VerifySignature()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} tls12\+Verify\+Signature (\begin{DoxyParamCaption}\item[{\hyperlink{tls_8h_ac09f7a286c0cdf9b07ee1edd107946f5}{Tls\+Context} $\ast$}]{context,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{p,  }\item[{size\+\_\+t}]{length }\end{DoxyParamCaption})}
+
+
+
+Digital signature verification (T\+LS 1.\+2) 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the T\+LS context \\
+\hline
+\mbox{\tt in}  & {\em p} & Pointer to the digitally-\/signed element to be verified \\
+\hline
+\mbox{\tt in}  & {\em length} & Length of the digitally-\/signed element \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 761 of file tls\+\_\+signature.\+c.
+
+
+\begin{DoxyCode}
+763 \{
+764    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+765    \textcolor{keyword}{const} \hyperlink{tls_8h_ad6758810e829828a20529e27e0f1fb6a}{Tls12DigitalSignature} *\hyperlink{tls_8h_af27e6d4ea3add14cd8cc9aa275d716ad}{signature};
+766    \textcolor{keyword}{const} \hyperlink{structHashAlgo}{HashAlgo} *hashAlgo;
+767 
+768    \textcolor{comment}{//Point to the digitally-signed element}
+769    signature = (\hyperlink{tls_8h_ad6758810e829828a20529e27e0f1fb6a}{Tls12DigitalSignature} *) \hyperlink{ndp_8h_a6519522ad9a6f45e7a8d25d31392a977}{p};
+770 
+771    \textcolor{comment}{//Check the length of the digitally-signed element}
+772    \textcolor{keywordflow}{if}(\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} < \textcolor{keyword}{sizeof}(\hyperlink{tls_8h_ad6758810e829828a20529e27e0f1fb6a}{Tls12DigitalSignature}))
+773       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca9468adacac8c37004024dd0095ba2768}{ERROR\_DECODING\_FAILED};
+774    \textcolor{keywordflow}{if}(\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} != (\textcolor{keyword}{sizeof}(\hyperlink{tls_8h_ad6758810e829828a20529e27e0f1fb6a}{Tls12DigitalSignature}) + 
+      \hyperlink{cpu__endian_8h_a9312c6eb72e64f748ae0d0e0dc3ec9b9}{ntohs}(signature->length)))
+775       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca9468adacac8c37004024dd0095ba2768}{ERROR\_DECODING\_FAILED};
+776 
+777    \textcolor{comment}{//Retrieve the hash algorithm used for signing}
+778    \textcolor{keywordflow}{if}(signature->algorithm.signature == \hyperlink{tls_8h_abe6ce436cb0d777df29e0af7bf800223ae82458ac6b05ba0e3851a5804f7d5e57}{TLS\_SIGN\_ALGO\_RSA\_PSS\_RSAE\_SHA256} 
+      ||
+779       signature->algorithm.signature == \hyperlink{tls_8h_abe6ce436cb0d777df29e0af7bf800223ad23a08f2a2e5d3231cc9c2ce2e223a8d}{TLS\_SIGN\_ALGO\_RSA\_PSS\_PSS\_SHA256})
+780    \{
+781       \textcolor{comment}{//The hashing is intrinsic to the signature algorithm}
+782       \textcolor{keywordflow}{if}(signature->algorithm.hash == \hyperlink{tls_8h_a98b0299cd7e197edc67123642089156dab77721d4496c39c41f5984cfd7515882}{TLS\_HASH\_ALGO\_INTRINSIC})
+783          hashAlgo = \hyperlink{tls__misc_8c_a0540f6f41d033803f8c6b9f5efe391e8}{tlsGetHashAlgo}(\hyperlink{tls_8h_a98b0299cd7e197edc67123642089156da7912aa0ea6b40af839a3d4be331fe182}{TLS\_HASH\_ALGO\_SHA256});
+784       \textcolor{keywordflow}{else}
+785          hashAlgo = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+786    \}
+787    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(signature->algorithm.signature == \hyperlink{tls_8h_abe6ce436cb0d777df29e0af7bf800223aef95b8f001c19481fef0409a91b56ce4}{TLS\_SIGN\_ALGO\_RSA\_PSS\_RSAE\_SHA384}
+       ||
+788       signature->algorithm.signature == \hyperlink{tls_8h_abe6ce436cb0d777df29e0af7bf800223aeb67836989d29de8af7c31ea0ddbe1b7}{TLS\_SIGN\_ALGO\_RSA\_PSS\_PSS\_SHA384})
+789    \{
+790       \textcolor{comment}{//The hashing is intrinsic to the signature algorithm}
+791       \textcolor{keywordflow}{if}(signature->algorithm.hash == \hyperlink{tls_8h_a98b0299cd7e197edc67123642089156dab77721d4496c39c41f5984cfd7515882}{TLS\_HASH\_ALGO\_INTRINSIC})
+792          hashAlgo = \hyperlink{tls__misc_8c_a0540f6f41d033803f8c6b9f5efe391e8}{tlsGetHashAlgo}(\hyperlink{tls_8h_a98b0299cd7e197edc67123642089156da53b125010bbd797aa333a41bd1264edb}{TLS\_HASH\_ALGO\_SHA384});
+793       \textcolor{keywordflow}{else}
+794          hashAlgo = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+795    \}
+796    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(signature->algorithm.signature == \hyperlink{tls_8h_abe6ce436cb0d777df29e0af7bf800223a53d5e91921faf4103349e699d188ea5f}{TLS\_SIGN\_ALGO\_RSA\_PSS\_RSAE\_SHA512}
+       ||
+797       signature->algorithm.signature == \hyperlink{tls_8h_abe6ce436cb0d777df29e0af7bf800223a1f76baf2d64af86ca98e164c9089a77c}{TLS\_SIGN\_ALGO\_RSA\_PSS\_PSS\_SHA512})
+798    \{
+799       \textcolor{comment}{//The hashing is intrinsic to the signature algorithm}
+800       \textcolor{keywordflow}{if}(signature->algorithm.hash == \hyperlink{tls_8h_a98b0299cd7e197edc67123642089156dab77721d4496c39c41f5984cfd7515882}{TLS\_HASH\_ALGO\_INTRINSIC})
+801          hashAlgo = \hyperlink{tls__misc_8c_a0540f6f41d033803f8c6b9f5efe391e8}{tlsGetHashAlgo}(\hyperlink{tls_8h_a98b0299cd7e197edc67123642089156da81cc682c95330532471fe9b48fed6acf}{TLS\_HASH\_ALGO\_SHA512});
+802       \textcolor{keywordflow}{else}
+803          hashAlgo = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+804    \}
+805    \textcolor{keywordflow}{else}
+806    \{
+807       \textcolor{comment}{//This field indicates the hash algorithm that is used}
+808       hashAlgo = \hyperlink{tls__misc_8c_a0540f6f41d033803f8c6b9f5efe391e8}{tlsGetHashAlgo}(signature->algorithm.hash);
+809    \}
+810 
+811    \textcolor{comment}{//Digest all the handshake messages starting at ClientHello}
+812    \textcolor{keywordflow}{if}(hashAlgo == \hyperlink{sha1_8h_a2529d805a2d0a0ca32114c810cc6cb1b}{SHA1\_HASH\_ALGO})
+813    \{
+814       \textcolor{comment}{//Use SHA-1 hash algorithm}
+815       error = \hyperlink{tls__transcript__hash_8c_a177688a47fa85bb7fbe3f3ef755f493b}{tlsFinalizeTranscriptHash}(context, 
+      \hyperlink{sha1_8h_a2529d805a2d0a0ca32114c810cc6cb1b}{SHA1\_HASH\_ALGO},
+816          context->transcriptSha1Context, \textcolor{stringliteral}{""}, context->clientVerifyData);
+817    \}
+818    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(hashAlgo == context->cipherSuite.prfHashAlgo)
+819    \{
+820       \textcolor{comment}{//Use PRF hash algorithm (SHA-256 or SHA-384)}
+821       error = \hyperlink{tls__transcript__hash_8c_a177688a47fa85bb7fbe3f3ef755f493b}{tlsFinalizeTranscriptHash}(context, hashAlgo,
+822          context->transcriptHashContext, \textcolor{stringliteral}{""}, context->clientVerifyData);
+823    \}
+824    \textcolor{keywordflow}{else}
+825    \{
+826       \textcolor{comment}{//The specified hash algorithm is not supported}
+827       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca6e8db1d17e3aad53ecc5a4ff62df6f48}{ERROR\_INVALID\_SIGNATURE};
+828    \}
+829 
+830    \textcolor{comment}{//Check status code}
+831    \textcolor{keywordflow}{if}(!error)
+832    \{
+833 \textcolor{preprocessor}{#if (TLS\_RSA\_SIGN\_SUPPORT == ENABLED)}
+834       \textcolor{comment}{//RSASSA-PKCS1-v1\_5 signature scheme?}
+835       \textcolor{keywordflow}{if}(signature->algorithm.signature == \hyperlink{tls_8h_abe6ce436cb0d777df29e0af7bf800223a84a0f0f40c0affb557a7e5f157b4e1f5}{TLS\_SIGN\_ALGO\_RSA} &&
+836          context->peerCertType == \hyperlink{tls_8h_a9bd45859e2bffbd3edb8beff07240ffda3a76023fc80c787bffed357a4560351b}{TLS\_CERT\_RSA\_SIGN})
+837       \{
+838          \textcolor{comment}{//Verify RSA signature (RSASSA-PKCS1-v1\_5 signature scheme)}
+839          error = \hyperlink{rsa_8c_ac8bc3701e41ec2201abf77a280dfbc01}{rsassaPkcs1v15Verify}(&context->peerRsaPublicKey,
+840             hashAlgo, context->clientVerifyData, signature->value,
+841             \hyperlink{cpu__endian_8h_a9312c6eb72e64f748ae0d0e0dc3ec9b9}{ntohs}(signature->length));
+842       \}
+843       \textcolor{keywordflow}{else}
+844 \textcolor{preprocessor}{#endif}
+845 \textcolor{preprocessor}{#if (TLS\_RSA\_PSS\_SIGN\_SUPPORT == ENABLED)}
+846       \textcolor{comment}{//RSASSA-PSS signature scheme (with public key OID rsaEncryption)?}
+847       \textcolor{keywordflow}{if}(signature->algorithm.signature == \hyperlink{tls_8h_abe6ce436cb0d777df29e0af7bf800223ae82458ac6b05ba0e3851a5804f7d5e57}{TLS\_SIGN\_ALGO\_RSA\_PSS\_RSAE\_SHA256}
+       ||
+848          signature->algorithm.signature == \hyperlink{tls_8h_abe6ce436cb0d777df29e0af7bf800223aef95b8f001c19481fef0409a91b56ce4}{TLS\_SIGN\_ALGO\_RSA\_PSS\_RSAE\_SHA384}
+       ||
+849          signature->algorithm.signature == \hyperlink{tls_8h_abe6ce436cb0d777df29e0af7bf800223a53d5e91921faf4103349e699d188ea5f}{TLS\_SIGN\_ALGO\_RSA\_PSS\_RSAE\_SHA512}
+      )
+850       \{
+851          \textcolor{comment}{//Enforce the type of the certificate provided by the peer}
+852          \textcolor{keywordflow}{if}(context->peerCertType == \hyperlink{tls_8h_a9bd45859e2bffbd3edb8beff07240ffda3a76023fc80c787bffed357a4560351b}{TLS\_CERT\_RSA\_SIGN})
+853          \{
+854             \textcolor{comment}{//Verify RSA signature (RSASSA-PSS signature scheme)}
+855             error = \hyperlink{rsa_8c_a353c0daced94ff0a95ec1067f6f9048c}{rsassaPssVerify}(&context->peerRsaPublicKey, hashAlgo,
+856                hashAlgo->\hyperlink{structHashAlgo_a0c8ccdb22ea395ccdd8decd06401d22e}{digestSize}, context->clientVerifyData,
+857                signature->value, \hyperlink{cpu__endian_8h_a9312c6eb72e64f748ae0d0e0dc3ec9b9}{ntohs}(signature->length));
+858          \}
+859          \textcolor{keywordflow}{else}
+860          \{
+861             \textcolor{comment}{//Invalid certificate}
+862             error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca6e8db1d17e3aad53ecc5a4ff62df6f48}{ERROR\_INVALID\_SIGNATURE};
+863          \}
+864       \}
+865       \textcolor{keywordflow}{else}
+866 \textcolor{preprocessor}{#endif}
+867 \textcolor{preprocessor}{#if (TLS\_RSA\_PSS\_SIGN\_SUPPORT == ENABLED)}
+868       \textcolor{comment}{//RSASSA-PSS signature scheme (with public key OID RSASSA-PSS)?}
+869       \textcolor{keywordflow}{if}(signature->algorithm.signature == \hyperlink{tls_8h_abe6ce436cb0d777df29e0af7bf800223ad23a08f2a2e5d3231cc9c2ce2e223a8d}{TLS\_SIGN\_ALGO\_RSA\_PSS\_PSS\_SHA256}
+       ||
+870          signature->algorithm.signature == \hyperlink{tls_8h_abe6ce436cb0d777df29e0af7bf800223aeb67836989d29de8af7c31ea0ddbe1b7}{TLS\_SIGN\_ALGO\_RSA\_PSS\_PSS\_SHA384}
+       ||
+871          signature->algorithm.signature == \hyperlink{tls_8h_abe6ce436cb0d777df29e0af7bf800223a1f76baf2d64af86ca98e164c9089a77c}{TLS\_SIGN\_ALGO\_RSA\_PSS\_PSS\_SHA512}
+      )
+872       \{
+873          \textcolor{comment}{//Enforce the type of the certificate provided by the peer}
+874          \textcolor{keywordflow}{if}(context->peerCertType == \hyperlink{tls_8h_a9bd45859e2bffbd3edb8beff07240ffda99a10e4ee12c5c331833b13d5a145480}{TLS\_CERT\_RSA\_PSS\_SIGN})
+875          \{
+876             \textcolor{comment}{//Verify RSA signature (RSASSA-PSS signature scheme)}
+877             error = \hyperlink{rsa_8c_a353c0daced94ff0a95ec1067f6f9048c}{rsassaPssVerify}(&context->peerRsaPublicKey, hashAlgo,
+878                hashAlgo->\hyperlink{structHashAlgo_a0c8ccdb22ea395ccdd8decd06401d22e}{digestSize}, context->clientVerifyData,
+879                signature->value, \hyperlink{cpu__endian_8h_a9312c6eb72e64f748ae0d0e0dc3ec9b9}{ntohs}(signature->length));
+880          \}
+881          \textcolor{keywordflow}{else}
+882          \{
+883             \textcolor{comment}{//Invalid certificate}
+884             error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca6e8db1d17e3aad53ecc5a4ff62df6f48}{ERROR\_INVALID\_SIGNATURE};
+885          \}
+886       \}
+887       \textcolor{keywordflow}{else}
+888 \textcolor{preprocessor}{#endif}
+889 \textcolor{preprocessor}{#if (TLS\_DSA\_SIGN\_SUPPORT == ENABLED)}
+890       \textcolor{comment}{//DSA signature scheme?}
+891       \textcolor{keywordflow}{if}(signature->algorithm.signature == \hyperlink{tls_8h_abe6ce436cb0d777df29e0af7bf800223a8d024e93d33282e5cb2a1665fb69153d}{TLS\_SIGN\_ALGO\_DSA} &&
+892          context->peerCertType == \hyperlink{tls_8h_a9bd45859e2bffbd3edb8beff07240ffda925aea3c96483609ae2867b10693b4c4}{TLS\_CERT\_DSS\_SIGN})
+893       \{
+894          \textcolor{comment}{//Verify DSA signature using client's public key}
+895          error = \hyperlink{tls__signature_8c_a4ca472906bb02377b837ff2d96c18331}{tlsVerifyDsaSignature}(context, context->clientVerifyData,
+896             hashAlgo->\hyperlink{structHashAlgo_a0c8ccdb22ea395ccdd8decd06401d22e}{digestSize}, signature->value, \hyperlink{cpu__endian_8h_a9312c6eb72e64f748ae0d0e0dc3ec9b9}{ntohs}(signature->length));
+897       \}
+898       \textcolor{keywordflow}{else}
+899 \textcolor{preprocessor}{#endif}
+900 \textcolor{preprocessor}{#if (TLS\_ECDSA\_SIGN\_SUPPORT == ENABLED)}
+901       \textcolor{comment}{//ECDSA signature scheme?}
+902       \textcolor{keywordflow}{if}(signature->algorithm.signature == \hyperlink{tls_8h_abe6ce436cb0d777df29e0af7bf800223a47f4ec2313cd5ce1755fc2485cfdd49a}{TLS\_SIGN\_ALGO\_ECDSA} &&
+903          context->peerCertType == \hyperlink{tls_8h_a9bd45859e2bffbd3edb8beff07240ffdab47f2dd2c4d36761f920f8a1af97f6ec}{TLS\_CERT\_ECDSA\_SIGN})
+904       \{
+905          \textcolor{comment}{//Verify ECDSA signature using client's public key}
+906          error = \hyperlink{tls__signature_8c_a2a3f114dca59434482fce803095be646}{tlsVerifyEcdsaSignature}(context, context->clientVerifyData,
+907             hashAlgo->\hyperlink{structHashAlgo_a0c8ccdb22ea395ccdd8decd06401d22e}{digestSize}, signature->value, \hyperlink{cpu__endian_8h_a9312c6eb72e64f748ae0d0e0dc3ec9b9}{ntohs}(signature->length));
+908       \}
+909       \textcolor{keywordflow}{else}
+910 \textcolor{preprocessor}{#endif}
+911       \textcolor{comment}{//Invalid signature scheme?}
+912       \{
+913          \textcolor{comment}{//Report an error}
+914          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca6e8db1d17e3aad53ecc5a4ff62df6f48}{ERROR\_INVALID\_SIGNATURE};
+915       \}
+916    \}
+917 
+918    \textcolor{comment}{//Return status code}
+919    \textcolor{keywordflow}{return} error;
+920 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{tls__signature_8c_a2fb5acdd086627e2071e8ec9118253a8}\label{tls__signature_8c_a2fb5acdd086627e2071e8ec9118253a8}} 
+\index{tls\+\_\+signature.\+c@{tls\+\_\+signature.\+c}!tls\+Generate\+Dsa\+Signature@{tls\+Generate\+Dsa\+Signature}}
+\index{tls\+Generate\+Dsa\+Signature@{tls\+Generate\+Dsa\+Signature}!tls\+\_\+signature.\+c@{tls\+\_\+signature.\+c}}
+\subsubsection{\texorpdfstring{tls\+Generate\+Dsa\+Signature()}{tlsGenerateDsaSignature()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} tls\+Generate\+Dsa\+Signature (\begin{DoxyParamCaption}\item[{\hyperlink{tls_8h_ac09f7a286c0cdf9b07ee1edd107946f5}{Tls\+Context} $\ast$}]{context,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{digest,  }\item[{size\+\_\+t}]{digest\+Len,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{signature,  }\item[{size\+\_\+t $\ast$}]{signature\+Len }\end{DoxyParamCaption})}
+
+
+
+Generate D\+SA signature. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the T\+LS context \\
+\hline
+\mbox{\tt in}  & {\em digest} & Digest of the message to be signed \\
+\hline
+\mbox{\tt in}  & {\em digest\+Len} & Length in octets of the digest \\
+\hline
+\mbox{\tt out}  & {\em signature} & Resulting signature \\
+\hline
+\mbox{\tt out}  & {\em signature\+Len} & Length of the resulting signature \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 1188 of file tls\+\_\+signature.\+c.
+
+
+\begin{DoxyCode}
+1190 \{
+1191 \textcolor{preprocessor}{#if (TLS\_DSA\_SIGN\_SUPPORT == ENABLED)}
+1192    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+1193    \hyperlink{structDsaPrivateKey}{DsaPrivateKey} privateKey;
+1194    \hyperlink{structDsaSignature}{DsaSignature} dsaSignature;
+1195 
+1196    \textcolor{comment}{//Initialize DSA private key}
+1197    \hyperlink{dsa_8c_aaa7e172f2b82c9c31a9a6638cecb2a4c}{dsaInitPrivateKey}(&privateKey);
+1198    \textcolor{comment}{//Initialize DSA signature}
+1199    \hyperlink{dsa_8c_a6ebbad1e693d6967da33e2a1338912c7}{dsaInitSignature}(&dsaSignature);
+1200 
+1201    \textcolor{comment}{//Decode the PEM structure that holds the DSA private key}
+1202    error = \hyperlink{certificate_2pem__import_8c_a123592ae82dda17101073d06323386b8}{pemImportDsaPrivateKey}(context->cert->privateKey,
+1203       context->cert->privateKeyLen, &privateKey);
+1204 
+1205    \textcolor{comment}{//Check status code}
+1206    \textcolor{keywordflow}{if}(!error)
+1207    \{
+1208       \textcolor{comment}{//Generate DSA signature}
+1209       error = \hyperlink{dsa_8c_a8fd22ce221e40d536537ec45c8e89895}{dsaGenerateSignature}(context->prngAlgo, context->prngContext,
+1210          &privateKey, digest, digestLen, &dsaSignature);
+1211    \}
+1212 
+1213    \textcolor{comment}{//Check status code}
+1214    \textcolor{keywordflow}{if}(!error)
+1215    \{
+1216       \textcolor{comment}{//Encode the resulting (R, S) integer pair using ASN.1}
+1217       error = \hyperlink{dsa_8c_af4e812722524ed43ff16494d2f4ffbb5}{dsaWriteSignature}(&dsaSignature, \hyperlink{tls_8h_af27e6d4ea3add14cd8cc9aa275d716ad}{signature}, signatureLen);
+1218    \}
+1219 
+1220    \textcolor{comment}{//Free previously allocated resources}
+1221    \hyperlink{dsa_8c_a028cb6faf1b5384b57e740fe95f58c60}{dsaFreePrivateKey}(&privateKey);
+1222    \hyperlink{dsa_8c_a78f8ff9636dd1677e22b637476c88e9d}{dsaFreeSignature}(&dsaSignature);
+1223 
+1224    \textcolor{comment}{//Return status code}
+1225    \textcolor{keywordflow}{return} error;
+1226 \textcolor{preprocessor}{#else}
+1227    \textcolor{comment}{//DSA signature generation is not supported}
+1228    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cab61c5ef368fbf03fdc1fb566c63f2f9a}{ERROR\_NOT\_IMPLEMENTED};
+1229 \textcolor{preprocessor}{#endif}
+1230 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{tls__signature_8c_ac858056ee74a931fb3c0f0ad42120664}\label{tls__signature_8c_ac858056ee74a931fb3c0f0ad42120664}} 
+\index{tls\+\_\+signature.\+c@{tls\+\_\+signature.\+c}!tls\+Generate\+Ecdsa\+Signature@{tls\+Generate\+Ecdsa\+Signature}}
+\index{tls\+Generate\+Ecdsa\+Signature@{tls\+Generate\+Ecdsa\+Signature}!tls\+\_\+signature.\+c@{tls\+\_\+signature.\+c}}
+\subsubsection{\texorpdfstring{tls\+Generate\+Ecdsa\+Signature()}{tlsGenerateEcdsaSignature()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} tls\+Generate\+Ecdsa\+Signature (\begin{DoxyParamCaption}\item[{\hyperlink{tls_8h_ac09f7a286c0cdf9b07ee1edd107946f5}{Tls\+Context} $\ast$}]{context,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{digest,  }\item[{size\+\_\+t}]{digest\+Len,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{signature,  }\item[{size\+\_\+t $\ast$}]{signature\+Len }\end{DoxyParamCaption})}
+
+
+
+Generate E\+C\+D\+SA signature. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the T\+LS context \\
+\hline
+\mbox{\tt in}  & {\em digest} & Digest of the message to be signed \\
+\hline
+\mbox{\tt in}  & {\em digest\+Len} & Length in octets of the digest \\
+\hline
+\mbox{\tt out}  & {\em signature} & Resulting signature \\
+\hline
+\mbox{\tt out}  & {\em signature\+Len} & Length of the resulting signature \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 1291 of file tls\+\_\+signature.\+c.
+
+
+\begin{DoxyCode}
+1293 \{
+1294 \textcolor{preprocessor}{#if (TLS\_ECDSA\_SIGN\_SUPPORT == ENABLED)}
+1295    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+1296    \hyperlink{structEcdsaSignature}{EcdsaSignature} ecdsaSignature;
+1297 
+1298    \textcolor{comment}{//Initialize ECDSA signature}
+1299    \hyperlink{ecdsa_8c_aef8cd9a530146f44fc0597eb67480133}{ecdsaInitSignature}(&ecdsaSignature);
+1300 
+1301 \textcolor{preprocessor}{#if (TLS\_ECC\_CALLBACK\_SUPPORT == ENABLED)}
+1302    \textcolor{comment}{//Any registered callback?}
+1303    \textcolor{keywordflow}{if}(context->ecdsaSignCallback != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1304    \{
+1305       \textcolor{comment}{//Invoke user callback function}
+1306       error = context->ecdsaSignCallback(context, digest, digestLen,
+1307          &ecdsaSignature);
+1308    \}
+1309    \textcolor{keywordflow}{else}
+1310 \textcolor{preprocessor}{#endif}
+1311    \{
+1312       \hyperlink{structEcDomainParameters}{EcDomainParameters} params;
+1313       \hyperlink{structMpi}{Mpi} privateKey;
+1314 
+1315       \textcolor{comment}{//Initialize EC domain parameters}
+1316       \hyperlink{ec_8c_a5b5132fb8adf668ffa74ec10e7e63441}{ecInitDomainParameters}(&params);
+1317       \textcolor{comment}{//Initialize EC private key}
+1318       \hyperlink{mpi_8c_a6f30959dcaabfb16e96cc47ef90515a6}{mpiInit}(&privateKey);
+1319 
+1320       \textcolor{comment}{//Decode the PEM structure that holds the EC domain parameters}
+1321       error = \hyperlink{certificate_2pem__import_8c_a5d76a217bb3b6fad9de9aa71bcd8317f}{pemImportEcParameters}(context->cert->privateKey,
+1322          context->cert->privateKeyLen, &params);
+1323 
+1324       \textcolor{comment}{//Check status code}
+1325       \textcolor{keywordflow}{if}(!error)
+1326       \{
+1327          \textcolor{comment}{//Decode the PEM structure that holds the EC private key}
+1328          error = \hyperlink{certificate_2pem__import_8c_a9d39070535c6536d833ace8e6dedde82}{pemImportEcPrivateKey}(context->cert->privateKey,
+1329             context->cert->privateKeyLen, &privateKey);
+1330       \}
+1331 
+1332       \textcolor{comment}{//Check status code}
+1333       \textcolor{keywordflow}{if}(!error)
+1334       \{
+1335          \textcolor{comment}{//Generate ECDSA signature}
+1336          error = \hyperlink{ecdsa_8c_a8f4a74d48b4e59e1682a6dc05fee42fe}{ecdsaGenerateSignature}(context->prngAlgo, context->prngContext,
+1337             &params, &privateKey, digest, digestLen, &ecdsaSignature);
+1338       \}
+1339 
+1340       \textcolor{comment}{//Release previously allocated resources}
+1341       \hyperlink{ec_8c_a256993c154cf87c3d9d18138a1365eca}{ecFreeDomainParameters}(&params);
+1342       \hyperlink{mpi_8c_a9dc5be2f62d37d3854fa61beab3a61ad}{mpiFree}(&privateKey);
+1343    \}
+1344 
+1345    \textcolor{comment}{//Check status code}
+1346    \textcolor{keywordflow}{if}(!error)
+1347    \{
+1348       \textcolor{comment}{//Encode the resulting (R, S) integer pair using ASN.1}
+1349       error = \hyperlink{ecdsa_8c_a38bfa167c941721c005548c336c44d51}{ecdsaWriteSignature}(&ecdsaSignature, \hyperlink{tls_8h_af27e6d4ea3add14cd8cc9aa275d716ad}{signature}, signatureLen);
+1350    \}
+1351 
+1352    \textcolor{comment}{//Release previously allocated resources}
+1353    \hyperlink{ecdsa_8c_a6f4daa07ea8815b8c67b47c4b089d157}{ecdsaFreeSignature}(&ecdsaSignature);
+1354 
+1355    \textcolor{comment}{//Return status code}
+1356    \textcolor{keywordflow}{return} error;
+1357 \textcolor{preprocessor}{#else}
+1358    \textcolor{comment}{//ECDSA signature generation is not supported}
+1359    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cab61c5ef368fbf03fdc1fb566c63f2f9a}{ERROR\_NOT\_IMPLEMENTED};
+1360 \textcolor{preprocessor}{#endif}
+1361 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{tls__signature_8c_a8fcd4df412699843f8b084729fbbb250}\label{tls__signature_8c_a8fcd4df412699843f8b084729fbbb250}} 
+\index{tls\+\_\+signature.\+c@{tls\+\_\+signature.\+c}!tls\+Generate\+Eddsa\+Signature@{tls\+Generate\+Eddsa\+Signature}}
+\index{tls\+Generate\+Eddsa\+Signature@{tls\+Generate\+Eddsa\+Signature}!tls\+\_\+signature.\+c@{tls\+\_\+signature.\+c}}
+\subsubsection{\texorpdfstring{tls\+Generate\+Eddsa\+Signature()}{tlsGenerateEddsaSignature()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} tls\+Generate\+Eddsa\+Signature (\begin{DoxyParamCaption}\item[{\hyperlink{tls_8h_ac09f7a286c0cdf9b07ee1edd107946f5}{Tls\+Context} $\ast$}]{context,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{message,  }\item[{size\+\_\+t}]{message\+Len,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{signature,  }\item[{size\+\_\+t $\ast$}]{signature\+Len }\end{DoxyParamCaption})}
+
+
+
+Generate Ed\+D\+SA signature. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the T\+LS context \\
+\hline
+\mbox{\tt in}  & {\em message} & Pointer to the message to be signed \\
+\hline
+\mbox{\tt in}  & {\em message\+Len} & Length of the message, in bytes \\
+\hline
+\mbox{\tt out}  & {\em signature} & Resulting signature \\
+\hline
+\mbox{\tt out}  & {\em signature\+Len} & Length of the resulting signature \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 1442 of file tls\+\_\+signature.\+c.
+
+
+\begin{DoxyCode}
+1444 \{
+1445 \textcolor{preprocessor}{#if (TLS\_EDDSA\_SIGN\_SUPPORT == ENABLED)}
+1446    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+1447 
+1448 \textcolor{preprocessor}{#if (TLS\_ED25519\_SUPPORT == ENABLED)}
+1449    \textcolor{comment}{//Ed25519 elliptic curve?}
+1450    \textcolor{keywordflow}{if}(context->cert->type == \hyperlink{tls_8h_a9bd45859e2bffbd3edb8beff07240ffda949e4ce74babee5ea5e6a01282283512}{TLS\_CERT\_ED25519\_SIGN})
+1451    \{
+1452       \hyperlink{structEddsaPrivateKey}{EddsaPrivateKey} privateKey;
+1453 
+1454       \textcolor{comment}{//Initialize EdDSA private key}
+1455       \hyperlink{eddsa_8c_ada310a968c94db7b6532ece183405093}{eddsaInitPrivateKey}(&privateKey);
+1456 
+1457       \textcolor{comment}{//Decode the PEM structure that holds the EdDSA private key}
+1458       error = \hyperlink{certificate_2pem__import_8c_a54cf0a5cee9bf4c0e25866b26f1752e0}{pemImportEddsaPrivateKey}(context->cert->privateKey,
+1459          context->cert->privateKeyLen, &privateKey);
+1460 
+1461       \textcolor{comment}{//Check the length of the EdDSA private key}
+1462       \textcolor{keywordflow}{if}(\hyperlink{mpi_8c_a8599cb7537c854ae3b2442144c7f853b}{mpiGetByteLength}(&privateKey.\hyperlink{structEddsaPrivateKey_a58ef5164bc00df5a7ee8adc18fa2b63a}{d}) == 
+      \hyperlink{ed25519_8h_aed3a21b9d4421f2fc69bc1dd92af50ab}{ED25519\_PRIVATE\_KEY\_LEN})
+1463       \{
+1464          \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} d[\hyperlink{ed25519_8h_aed3a21b9d4421f2fc69bc1dd92af50ab}{ED25519\_PRIVATE\_KEY\_LEN}];
+1465 
+1466          \textcolor{comment}{//Retrieve private key}
+1467          error = \hyperlink{mpi_8c_aad846b0b5a3560243e1bf8601ad1b6a5}{mpiExport}(&privateKey.\hyperlink{structEddsaPrivateKey_a58ef5164bc00df5a7ee8adc18fa2b63a}{d}, d, \hyperlink{ed25519_8h_aed3a21b9d4421f2fc69bc1dd92af50ab}{ED25519\_PRIVATE\_KEY\_LEN},
+1468             \hyperlink{mpi_8h_a5fe4159c7c390c604067e854b41d337fa637c0a6e803a47db52875c6818674c60}{MPI\_FORMAT\_LITTLE\_ENDIAN});
+1469 
+1470          \textcolor{comment}{//Check status code}
+1471          \textcolor{keywordflow}{if}(!error)
+1472          \{
+1473             \textcolor{comment}{//Generate Ed25519 signature (PureEdDSA mode)}
+1474             error = \hyperlink{ed25519_8c_ab4014bf39652bc11ca5ce38131705eef}{ed25519GenerateSignature}(d, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, 
+      \hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}, messageLen,
+1475                \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, 0, 0, \hyperlink{tls_8h_af27e6d4ea3add14cd8cc9aa275d716ad}{signature});
+1476          \}
+1477 
+1478          \textcolor{comment}{//Length of the resulting EdDSA signature}
+1479          *signatureLen = \hyperlink{ed25519_8h_a6b45906484d3c938aef3a114e3d1a8ea}{ED25519\_SIGNATURE\_LEN};
+1480       \}
+1481       \textcolor{keywordflow}{else}
+1482       \{
+1483          \textcolor{comment}{//The length of the EdDSA private key is not valid}
+1484          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca31846fcd73423f08cca08d9acf9b3f8e}{ERROR\_INVALID\_KEY};
+1485       \}
+1486 
+1487       \textcolor{comment}{//Free previously allocated resources}
+1488       \hyperlink{eddsa_8c_a91e6371d69fb2a796878d8b43a1924c6}{eddsaFreePrivateKey}(&privateKey);
+1489    \}
+1490    \textcolor{keywordflow}{else}
+1491 \textcolor{preprocessor}{#endif}
+1492 \textcolor{preprocessor}{#if (TLS\_ED448\_SUPPORT == ENABLED)}
+1493    \textcolor{comment}{//Ed448 elliptic curve?}
+1494    \textcolor{keywordflow}{if}(context->cert->type == \hyperlink{tls_8h_a9bd45859e2bffbd3edb8beff07240ffda07a1b669a85b822306b5a95aa069ed27}{TLS\_CERT\_ED448\_SIGN})
+1495    \{
+1496       \hyperlink{structEddsaPrivateKey}{EddsaPrivateKey} privateKey;
+1497 
+1498       \textcolor{comment}{//Initialize EdDSA private key}
+1499       \hyperlink{eddsa_8c_ada310a968c94db7b6532ece183405093}{eddsaInitPrivateKey}(&privateKey);
+1500 
+1501       \textcolor{comment}{//Decode the PEM structure that holds the EdDSA private key}
+1502       error = \hyperlink{certificate_2pem__import_8c_a54cf0a5cee9bf4c0e25866b26f1752e0}{pemImportEddsaPrivateKey}(context->cert->privateKey,
+1503          context->cert->privateKeyLen, &privateKey);
+1504 
+1505       \textcolor{comment}{//Check the length of the EdDSA private key}
+1506       \textcolor{keywordflow}{if}(\hyperlink{mpi_8c_a8599cb7537c854ae3b2442144c7f853b}{mpiGetByteLength}(&privateKey.\hyperlink{structEddsaPrivateKey_a58ef5164bc00df5a7ee8adc18fa2b63a}{d}) == 
+      \hyperlink{ed448_8h_a26f2969270eebc560926f8bada35cb65}{ED448\_PRIVATE\_KEY\_LEN})
+1507       \{
+1508          \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} d[\hyperlink{ed448_8h_a26f2969270eebc560926f8bada35cb65}{ED448\_PRIVATE\_KEY\_LEN}];
+1509 
+1510          \textcolor{comment}{//Retrieve private key}
+1511          error = \hyperlink{mpi_8c_aad846b0b5a3560243e1bf8601ad1b6a5}{mpiExport}(&privateKey.\hyperlink{structEddsaPrivateKey_a58ef5164bc00df5a7ee8adc18fa2b63a}{d}, d, \hyperlink{ed448_8h_a26f2969270eebc560926f8bada35cb65}{ED448\_PRIVATE\_KEY\_LEN},
+1512             \hyperlink{mpi_8h_a5fe4159c7c390c604067e854b41d337fa637c0a6e803a47db52875c6818674c60}{MPI\_FORMAT\_LITTLE\_ENDIAN});
+1513 
+1514          \textcolor{comment}{//Check status code}
+1515          \textcolor{keywordflow}{if}(!error)
+1516          \{
+1517             \textcolor{comment}{//Generate Ed448 signature (PureEdDSA mode)}
+1518             error = \hyperlink{ed448_8c_a6c02071081eff48fb9e6c6b8c5342377}{ed448GenerateSignature}(d, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, 
+      \hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}, messageLen,
+1519                \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, 0, 0, \hyperlink{tls_8h_af27e6d4ea3add14cd8cc9aa275d716ad}{signature});
+1520          \}
+1521 
+1522          \textcolor{comment}{//Length of the resulting EdDSA signature}
+1523          *signatureLen = \hyperlink{ed448_8h_a6faeb89fbb8744bcc8ec3333ec22b099}{ED448\_SIGNATURE\_LEN};
+1524       \}
+1525       \textcolor{keywordflow}{else}
+1526       \{
+1527          \textcolor{comment}{//The length of the EdDSA private key is not valid}
+1528          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca31846fcd73423f08cca08d9acf9b3f8e}{ERROR\_INVALID\_KEY};
+1529       \}
+1530 
+1531       \textcolor{comment}{//Free previously allocated resources}
+1532       \hyperlink{eddsa_8c_a91e6371d69fb2a796878d8b43a1924c6}{eddsaFreePrivateKey}(&privateKey);
+1533    \}
+1534    \textcolor{keywordflow}{else}
+1535 \textcolor{preprocessor}{#endif}
+1536    \textcolor{comment}{//Invalid signature algorithm?}
+1537    \{
+1538       \textcolor{comment}{//Report an error}
+1539       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4c54d9b14297edac328805943cf95795}{ERROR\_UNSUPPORTED\_SIGNATURE\_ALGO};
+1540    \}
+1541 
+1542    \textcolor{comment}{//Return status code}
+1543    \textcolor{keywordflow}{return} error;
+1544 \textcolor{preprocessor}{#else}
+1545    \textcolor{comment}{//EdDSA signature generation is not supported}
+1546    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cab61c5ef368fbf03fdc1fb566c63f2f9a}{ERROR\_NOT\_IMPLEMENTED};
+1547 \textcolor{preprocessor}{#endif}
+1548 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{tls__signature_8c_af6c383197c9d99d7845e8602c997e494}\label{tls__signature_8c_af6c383197c9d99d7845e8602c997e494}} 
+\index{tls\+\_\+signature.\+c@{tls\+\_\+signature.\+c}!tls\+Generate\+Rsa\+Signature@{tls\+Generate\+Rsa\+Signature}}
+\index{tls\+Generate\+Rsa\+Signature@{tls\+Generate\+Rsa\+Signature}!tls\+\_\+signature.\+c@{tls\+\_\+signature.\+c}}
+\subsubsection{\texorpdfstring{tls\+Generate\+Rsa\+Signature()}{tlsGenerateRsaSignature()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} tls\+Generate\+Rsa\+Signature (\begin{DoxyParamCaption}\item[{const \hyperlink{structRsaPrivateKey}{Rsa\+Private\+Key} $\ast$}]{key,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{digest,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{signature,  }\item[{size\+\_\+t $\ast$}]{signature\+Len }\end{DoxyParamCaption})}
+
+
+
+Generate R\+SA signature (S\+SL 3.\+0, T\+LS 1.\+0 and T\+LS 1.\+1) 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em key} & Signer\textquotesingle{}s R\+SA private key \\
+\hline
+\mbox{\tt in}  & {\em digest} & Digest of the message to be signed \\
+\hline
+\mbox{\tt out}  & {\em signature} & Resulting signature \\
+\hline
+\mbox{\tt out}  & {\em signature\+Len} & Length of the resulting signature \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 934 of file tls\+\_\+signature.\+c.
+
+
+\begin{DoxyCode}
+936 \{
+937 \textcolor{preprocessor}{#if (TLS\_RSA\_SIGN\_SUPPORT == ENABLED)}
+938    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+939    \textcolor{keywordtype}{size\_t} \hyperlink{md5_8c_af11ea3cdbca7345eb6a4a8ac5ce0434d}{k};
+940    \textcolor{keywordtype}{size\_t} paddingLen;
+941    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *em;
+942    \hyperlink{structMpi}{Mpi} \hyperlink{ndp_8h_a6b3284d8492267a77ca46948daf5545e}{m};
+943    \hyperlink{structMpi}{Mpi} \hyperlink{md2_8c_adf356ff381033f761b7de5f76e763a45}{s};
+944 
+945    \textcolor{comment}{//Debug message}
+946    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"RSA signature generation...\(\backslash\)r\(\backslash\)n"});
+947    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  Modulus:\(\backslash\)r\(\backslash\)n"});
+948    \hyperlink{debug_8h_a9c9f3b28f2daf14d77b401512c189d93}{TRACE\_DEBUG\_MPI}(\textcolor{stringliteral}{"    "}, &key->\hyperlink{structRsaPrivateKey_aaccaccd76db1a21201bf06eb6ecdd8ac}{n});
+949    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  Public exponent:\(\backslash\)r\(\backslash\)n"});
+950    \hyperlink{debug_8h_a9c9f3b28f2daf14d77b401512c189d93}{TRACE\_DEBUG\_MPI}(\textcolor{stringliteral}{"    "}, &key->\hyperlink{structRsaPrivateKey_a590822495b6caceae5f8880cacc51b9c}{e});
+951    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  Private exponent:\(\backslash\)r\(\backslash\)n"});
+952    \hyperlink{debug_8h_a9c9f3b28f2daf14d77b401512c189d93}{TRACE\_DEBUG\_MPI}(\textcolor{stringliteral}{"    "}, &key->\hyperlink{structRsaPrivateKey_aea064a2875da9d2a44c7e7c02e157728}{d});
+953    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  Prime 1:\(\backslash\)r\(\backslash\)n"});
+954    \hyperlink{debug_8h_a9c9f3b28f2daf14d77b401512c189d93}{TRACE\_DEBUG\_MPI}(\textcolor{stringliteral}{"    "}, &key->\hyperlink{structRsaPrivateKey_a1fc8b1ca097c70244db691916f33f891}{p});
+955    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  Prime 2:\(\backslash\)r\(\backslash\)n"});
+956    \hyperlink{debug_8h_a9c9f3b28f2daf14d77b401512c189d93}{TRACE\_DEBUG\_MPI}(\textcolor{stringliteral}{"    "}, &key->\hyperlink{structRsaPrivateKey_aefd3ef59482ac00637165b624625fef5}{q});
+957    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  Prime exponent 1:\(\backslash\)r\(\backslash\)n"});
+958    \hyperlink{debug_8h_a9c9f3b28f2daf14d77b401512c189d93}{TRACE\_DEBUG\_MPI}(\textcolor{stringliteral}{"    "}, &key->\hyperlink{structRsaPrivateKey_ab101b4e579a4799f12d3acd237e72b34}{dp});
+959    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  Prime exponent 2:\(\backslash\)r\(\backslash\)n"});
+960    \hyperlink{debug_8h_a9c9f3b28f2daf14d77b401512c189d93}{TRACE\_DEBUG\_MPI}(\textcolor{stringliteral}{"    "}, &key->\hyperlink{structRsaPrivateKey_a9e72909ef8af48ce9a813ba32ba0287d}{dq});
+961    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  Coefficient:\(\backslash\)r\(\backslash\)n"});
+962    \hyperlink{debug_8h_a9c9f3b28f2daf14d77b401512c189d93}{TRACE\_DEBUG\_MPI}(\textcolor{stringliteral}{"    "}, &key->\hyperlink{structRsaPrivateKey_a3dac28e0d48293032c18c968faadf57c}{qinv});
+963    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  Message digest:\(\backslash\)r\(\backslash\)n"});
+964    \hyperlink{debug_8h_a1f71019169d85407d8827300ed43bdf0}{TRACE\_DEBUG\_ARRAY}(\textcolor{stringliteral}{"    "}, digest, \hyperlink{md5_8h_ad86b38d6ab14e243543904e30f26bed2}{MD5\_DIGEST\_SIZE} + 
+      \hyperlink{sha1_8h_a3ba9296b223f1b3c710d6b812fd860e8}{SHA1\_DIGEST\_SIZE});
+965 
+966    \textcolor{comment}{//Initialize multiple-precision integers}
+967    \hyperlink{mpi_8c_a6f30959dcaabfb16e96cc47ef90515a6}{mpiInit}(&m);
+968    \hyperlink{mpi_8c_a6f30959dcaabfb16e96cc47ef90515a6}{mpiInit}(&s);
+969 
+970    \textcolor{comment}{//Get the length in octets of the modulus n}
+971    k = \hyperlink{mpi_8c_a8599cb7537c854ae3b2442144c7f853b}{mpiGetByteLength}(&key->\hyperlink{structRsaPrivateKey_aaccaccd76db1a21201bf06eb6ecdd8ac}{n});
+972 
+973    \textcolor{comment}{//Check the length of the modulus}
+974    \textcolor{keywordflow}{if}(k < (\hyperlink{md5_8h_ad86b38d6ab14e243543904e30f26bed2}{MD5\_DIGEST\_SIZE} + \hyperlink{sha1_8h_a3ba9296b223f1b3c710d6b812fd860e8}{SHA1\_DIGEST\_SIZE} + 11))
+975       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca31846fcd73423f08cca08d9acf9b3f8e}{ERROR\_INVALID\_KEY};
+976 
+977    \textcolor{comment}{//Point to the buffer where the encoded message EM will be generated}
+978    em = \hyperlink{tls_8h_af27e6d4ea3add14cd8cc9aa275d716ad}{signature};
+979 
+980    \textcolor{comment}{//The leading 0x00 octet ensures that the encoded message,}
+981    \textcolor{comment}{//converted to an integer, is less than the modulus}
+982    em[0] = 0x00;
+983    \textcolor{comment}{//Block type 0x01 is used for private-key operations}
+984    em[1] = 0x01;
+985 
+986    \textcolor{comment}{//Compute the length of the padding string PS}
+987    paddingLen = k - (\hyperlink{md5_8h_ad86b38d6ab14e243543904e30f26bed2}{MD5\_DIGEST\_SIZE} + \hyperlink{sha1_8h_a3ba9296b223f1b3c710d6b812fd860e8}{SHA1\_DIGEST\_SIZE} + 3);
+988    \textcolor{comment}{//Fill the padding string with 0xFF}
+989    memset(em + 2, 0xFF, paddingLen);
+990    \textcolor{comment}{//Append a 0x00 octet to PS}
+991    em[paddingLen + 2] = 0x00;
+992 
+993    \textcolor{comment}{//Append the digest value}
+994    memcpy(em + paddingLen + 3, digest, \hyperlink{md5_8h_ad86b38d6ab14e243543904e30f26bed2}{MD5\_DIGEST\_SIZE} + 
+      \hyperlink{sha1_8h_a3ba9296b223f1b3c710d6b812fd860e8}{SHA1\_DIGEST\_SIZE});
+995 
+996    \textcolor{comment}{//Debug message}
+997    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  Encoded message\(\backslash\)r\(\backslash\)n"});
+998    \hyperlink{debug_8h_a1f71019169d85407d8827300ed43bdf0}{TRACE\_DEBUG\_ARRAY}(\textcolor{stringliteral}{"    "}, em, k);
+999 
+1000    \textcolor{comment}{//Start of exception handling block}
+1001    \textcolor{keywordflow}{do}
+1002    \{
+1003       \textcolor{comment}{//Convert the encoded message EM to an integer message representative m}
+1004       error = \hyperlink{mpi_8c_a844d59498f4acce9d69ae55570b521f3}{mpiImport}(&m, em, k, \hyperlink{mpi_8h_a5fe4159c7c390c604067e854b41d337fa0912b5922ecee206ec51e40d5285f77e}{MPI\_FORMAT\_BIG\_ENDIAN});
+1005       \textcolor{comment}{//Conversion failed?}
+1006       \textcolor{keywordflow}{if}(error)
+1007          \textcolor{keywordflow}{break};
+1008 
+1009       \textcolor{comment}{//Apply the RSASP1 signature primitive}
+1010       error = \hyperlink{rsa_8c_a36efdd5187b817ffb4a5c1eebcdec68c}{rsasp1}(key, &m, &s);
+1011       \textcolor{comment}{//Any error to report?}
+1012       \textcolor{keywordflow}{if}(error)
+1013          \textcolor{keywordflow}{break};
+1014 
+1015       \textcolor{comment}{//Convert the signature representative s to a signature of length k octets}
+1016       error = \hyperlink{mpi_8c_aad846b0b5a3560243e1bf8601ad1b6a5}{mpiExport}(&s, \hyperlink{tls_8h_af27e6d4ea3add14cd8cc9aa275d716ad}{signature}, k, 
+      \hyperlink{mpi_8h_a5fe4159c7c390c604067e854b41d337fa0912b5922ecee206ec51e40d5285f77e}{MPI\_FORMAT\_BIG\_ENDIAN});
+1017       \textcolor{comment}{//Conversion failed?}
+1018       \textcolor{keywordflow}{if}(error)
+1019          \textcolor{keywordflow}{break};
+1020 
+1021       \textcolor{comment}{//Length of the resulting signature}
+1022       *signatureLen = \hyperlink{md5_8c_af11ea3cdbca7345eb6a4a8ac5ce0434d}{k};
+1023 
+1024       \textcolor{comment}{//Debug message}
+1025       \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  Signature:\(\backslash\)r\(\backslash\)n"});
+1026       \hyperlink{debug_8h_a1f71019169d85407d8827300ed43bdf0}{TRACE\_DEBUG\_ARRAY}(\textcolor{stringliteral}{"    "}, \hyperlink{tls_8h_af27e6d4ea3add14cd8cc9aa275d716ad}{signature}, *signatureLen);
+1027 
+1028       \textcolor{comment}{//End of exception handling block}
+1029    \} \textcolor{keywordflow}{while}(0);
+1030 
+1031    \textcolor{comment}{//Free previously allocated memory}
+1032    \hyperlink{mpi_8c_a9dc5be2f62d37d3854fa61beab3a61ad}{mpiFree}(&m);
+1033    \hyperlink{mpi_8c_a9dc5be2f62d37d3854fa61beab3a61ad}{mpiFree}(&s);
+1034 
+1035    \textcolor{comment}{//Return status code}
+1036    \textcolor{keywordflow}{return} error;
+1037 \textcolor{preprocessor}{#else}
+1038    \textcolor{comment}{//RSA signature generation is not supported}
+1039    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cab61c5ef368fbf03fdc1fb566c63f2f9a}{ERROR\_NOT\_IMPLEMENTED};
+1040 \textcolor{preprocessor}{#endif}
+1041 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{tls__signature_8c_a07a3479608a65af8f3d18563a8e41f43}\label{tls__signature_8c_a07a3479608a65af8f3d18563a8e41f43}} 
+\index{tls\+\_\+signature.\+c@{tls\+\_\+signature.\+c}!tls\+Generate\+Signature@{tls\+Generate\+Signature}}
+\index{tls\+Generate\+Signature@{tls\+Generate\+Signature}!tls\+\_\+signature.\+c@{tls\+\_\+signature.\+c}}
+\subsubsection{\texorpdfstring{tls\+Generate\+Signature()}{tlsGenerateSignature()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} tls\+Generate\+Signature (\begin{DoxyParamCaption}\item[{\hyperlink{tls_8h_ac09f7a286c0cdf9b07ee1edd107946f5}{Tls\+Context} $\ast$}]{context,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{p,  }\item[{size\+\_\+t $\ast$}]{length }\end{DoxyParamCaption})}
+
+
+
+Digital signature generation(S\+SL 3.\+0, T\+LS 1.\+0 or T\+LS 1.\+1) 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the T\+LS context \\
+\hline
+\mbox{\tt out}  & {\em p} & Buffer where to store the digitally-\/signed element \\
+\hline
+\mbox{\tt out}  & {\em length} & Length of the digitally-\/signed element \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 359 of file tls\+\_\+signature.\+c.
+
+
+\begin{DoxyCode}
+361 \{
+362    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+363    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+364    \hyperlink{tls_8h_a8e07cba48fef31563460ba8f90ad5f1d}{TlsDigitalSignature} *\hyperlink{tls_8h_af27e6d4ea3add14cd8cc9aa275d716ad}{signature};
+365 
+366    \textcolor{comment}{//The digitally-signed element does not convey the signature algorithm}
+367    \textcolor{comment}{//to use, and hence implementations need to inspect the certificate to}
+368    \textcolor{comment}{//find out the signature algorithm to use}
+369    signature = (\hyperlink{tls_8h_a8e07cba48fef31563460ba8f90ad5f1d}{TlsDigitalSignature} *) \hyperlink{ndp_8h_a6519522ad9a6f45e7a8d25d31392a977}{p};
+370 
+371 \textcolor{preprocessor}{#if (TLS\_RSA\_SIGN\_SUPPORT == ENABLED)}
+372    \textcolor{comment}{//RSA certificate?}
+373    \textcolor{keywordflow}{if}(context->cert->type == \hyperlink{tls_8h_a9bd45859e2bffbd3edb8beff07240ffda3a76023fc80c787bffed357a4560351b}{TLS\_CERT\_RSA\_SIGN})
+374    \{
+375       \hyperlink{structRsaPrivateKey}{RsaPrivateKey} privateKey;
+376 
+377       \textcolor{comment}{//Initialize RSA private key}
+378       \hyperlink{rsa_8c_ad454d9bc34f7d9fa5717180707365e69}{rsaInitPrivateKey}(&privateKey);
+379 
+380       \textcolor{comment}{//Digest all the handshake messages starting at ClientHello using MD5}
+381       error = \hyperlink{tls__transcript__hash_8c_a177688a47fa85bb7fbe3f3ef755f493b}{tlsFinalizeTranscriptHash}(context, 
+      \hyperlink{md5_8h_adcb5ecbd7a360856b056f053b0d8343d}{MD5\_HASH\_ALGO},
+382          context->transcriptMd5Context, \textcolor{stringliteral}{""}, context->clientVerifyData);
+383 
+384       \textcolor{comment}{//Check status code}
+385       \textcolor{keywordflow}{if}(!error)
+386       \{
+387          \textcolor{comment}{//Digest all the handshake messages starting at ClientHello using SHA-1}
+388          error = \hyperlink{tls__transcript__hash_8c_a177688a47fa85bb7fbe3f3ef755f493b}{tlsFinalizeTranscriptHash}(context, 
+      \hyperlink{sha1_8h_a2529d805a2d0a0ca32114c810cc6cb1b}{SHA1\_HASH\_ALGO},
+389             context->transcriptSha1Context, \textcolor{stringliteral}{""},
+390             context->clientVerifyData + \hyperlink{md5_8h_ad86b38d6ab14e243543904e30f26bed2}{MD5\_DIGEST\_SIZE});
+391       \}
+392 
+393       \textcolor{comment}{//Check status code}
+394       \textcolor{keywordflow}{if}(!error)
+395       \{
+396          \textcolor{comment}{//Decode the PEM structure that holds the RSA private key}
+397          error = \hyperlink{certificate_2pem__import_8c_a3d276f00ad49589056269bfe8abbb664}{pemImportRsaPrivateKey}(context->cert->privateKey,
+398             context->cert->privateKeyLen, &privateKey);
+399       \}
+400 
+401       \textcolor{comment}{//Check status code}
+402       \textcolor{keywordflow}{if}(!error)
+403       \{
+404          \textcolor{comment}{//Generate an RSA signature using the client's private key}
+405          error = \hyperlink{tls__signature_8c_af6c383197c9d99d7845e8602c997e494}{tlsGenerateRsaSignature}(&privateKey,
+406             context->clientVerifyData, signature->value, &n);
+407       \}
+408 
+409       \textcolor{comment}{//Release previously allocated resources}
+410       \hyperlink{rsa_8c_a14ee0338e3149b934552c40b97c8f096}{rsaFreePrivateKey}(&privateKey);
+411    \}
+412    \textcolor{keywordflow}{else}
+413 \textcolor{preprocessor}{#endif}
+414 \textcolor{preprocessor}{#if (TLS\_DSA\_SIGN\_SUPPORT == ENABLED)}
+415    \textcolor{comment}{//DSA certificate?}
+416    \textcolor{keywordflow}{if}(context->cert->type == \hyperlink{tls_8h_a9bd45859e2bffbd3edb8beff07240ffda925aea3c96483609ae2867b10693b4c4}{TLS\_CERT\_DSS\_SIGN})
+417    \{
+418       \textcolor{comment}{//Digest all the handshake messages starting at ClientHello}
+419       error = \hyperlink{tls__transcript__hash_8c_a177688a47fa85bb7fbe3f3ef755f493b}{tlsFinalizeTranscriptHash}(context, 
+      \hyperlink{sha1_8h_a2529d805a2d0a0ca32114c810cc6cb1b}{SHA1\_HASH\_ALGO},
+420          context->transcriptSha1Context, \textcolor{stringliteral}{""}, context->clientVerifyData);
+421 
+422       \textcolor{comment}{//Check status code}
+423       \textcolor{keywordflow}{if}(!error)
+424       \{
+425          \textcolor{comment}{//Generate a DSA signature using the client's private key}
+426          error = \hyperlink{tls__signature_8c_a2fb5acdd086627e2071e8ec9118253a8}{tlsGenerateDsaSignature}(context, context->clientVerifyData,
+427             \hyperlink{sha1_8h_a3ba9296b223f1b3c710d6b812fd860e8}{SHA1\_DIGEST\_SIZE}, signature->value, &n);
+428       \}
+429    \}
+430    \textcolor{keywordflow}{else}
+431 \textcolor{preprocessor}{#endif}
+432 \textcolor{preprocessor}{#if (TLS\_ECDSA\_SIGN\_SUPPORT == ENABLED)}
+433    \textcolor{comment}{//ECDSA certificate?}
+434    \textcolor{keywordflow}{if}(context->cert->type == \hyperlink{tls_8h_a9bd45859e2bffbd3edb8beff07240ffdab47f2dd2c4d36761f920f8a1af97f6ec}{TLS\_CERT\_ECDSA\_SIGN})
+435    \{
+436       \textcolor{comment}{//Digest all the handshake messages starting at ClientHello}
+437       error = \hyperlink{tls__transcript__hash_8c_a177688a47fa85bb7fbe3f3ef755f493b}{tlsFinalizeTranscriptHash}(context, 
+      \hyperlink{sha1_8h_a2529d805a2d0a0ca32114c810cc6cb1b}{SHA1\_HASH\_ALGO},
+438          context->transcriptSha1Context, \textcolor{stringliteral}{""}, context->clientVerifyData);
+439 
+440       \textcolor{comment}{//Check status code}
+441       \textcolor{keywordflow}{if}(!error)
+442       \{
+443          \textcolor{comment}{//Generate an ECDSA signature using the client's private key}
+444          error = \hyperlink{tls__signature_8c_ac858056ee74a931fb3c0f0ad42120664}{tlsGenerateEcdsaSignature}(context, context->clientVerifyData,
+445             \hyperlink{sha1_8h_a3ba9296b223f1b3c710d6b812fd860e8}{SHA1\_DIGEST\_SIZE}, signature->value, &n);
+446       \}
+447    \}
+448    \textcolor{keywordflow}{else}
+449 \textcolor{preprocessor}{#endif}
+450    \textcolor{comment}{//Invalid certificate?}
+451    \{
+452       \textcolor{comment}{//Report an error}
+453       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4c54d9b14297edac328805943cf95795}{ERROR\_UNSUPPORTED\_SIGNATURE\_ALGO};
+454    \}
+455 
+456    \textcolor{comment}{//Check status code}
+457    \textcolor{keywordflow}{if}(!error)
+458    \{
+459       \textcolor{comment}{//The signature is preceded by a 2-byte length field}
+460       signature->length = \hyperlink{cpu__endian_8h_a800cdbf435a85a9b3ad4f0edc518472a}{htons}(n);
+461       \textcolor{comment}{//Total length of the digitally-signed element}
+462       *\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} = \textcolor{keyword}{sizeof}(\hyperlink{tls_8h_a8e07cba48fef31563460ba8f90ad5f1d}{TlsDigitalSignature}) + n;
+463    \}
+464 
+465    \textcolor{comment}{//Return status code}
+466    \textcolor{keywordflow}{return} error;
+467 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{tls__signature_8c_ad721a7cba2bdeb68ea9f4a43c9b6c2cc}\label{tls__signature_8c_ad721a7cba2bdeb68ea9f4a43c9b6c2cc}} 
+\index{tls\+\_\+signature.\+c@{tls\+\_\+signature.\+c}!tls\+Select\+Signature\+Scheme@{tls\+Select\+Signature\+Scheme}}
+\index{tls\+Select\+Signature\+Scheme@{tls\+Select\+Signature\+Scheme}!tls\+\_\+signature.\+c@{tls\+\_\+signature.\+c}}
+\subsubsection{\texorpdfstring{tls\+Select\+Signature\+Scheme()}{tlsSelectSignatureScheme()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} tls\+Select\+Signature\+Scheme (\begin{DoxyParamCaption}\item[{\hyperlink{tls_8h_ac09f7a286c0cdf9b07ee1edd107946f5}{Tls\+Context} $\ast$}]{context,  }\item[{const \hyperlink{structTlsCertDesc}{Tls\+Cert\+Desc} $\ast$}]{cert,  }\item[{const \hyperlink{tls_8h_a52f8ea223987ee1e857b6687f38d3888}{Tls\+Sign\+Hash\+Algos} $\ast$}]{supported\+Sign\+Algos }\end{DoxyParamCaption})}
+
+
+
+Select the algorithm to be used when generating digital signatures. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the T\+LS context \\
+\hline
+\mbox{\tt in}  & {\em cert} & End entity certificate \\
+\hline
+\mbox{\tt in}  & {\em supported\+Sign\+Algos} & List of supported signature/hash algorithm pairs \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 60 of file tls\+\_\+signature.\+c.
+
+
+\begin{DoxyCode}
+62 \{
+63    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+64    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+65    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+66    \textcolor{keyword}{const} \hyperlink{structHashAlgo}{HashAlgo} *hashAlgo;
+67    \textcolor{keyword}{const} \hyperlink{tls_8h_a5c96bca6675e08f0abe6e3efb0a78eb3}{TlsSignHashAlgo} *\hyperlink{ndp_8h_a6519522ad9a6f45e7a8d25d31392a977}{p};
+68 
+69    \textcolor{comment}{//Initialize status code}
+70    error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca70d82df53df56c9d4a943d5539ccc4bc}{ERROR\_HANDSHAKE\_FAILED};
+71 
+72    \textcolor{comment}{//Default signature algorithm}
+73    context->signAlgo = \hyperlink{tls_8h_abe6ce436cb0d777df29e0af7bf800223adefcf9ed77bc31b349e8d2429e16b2ff}{TLS\_SIGN\_ALGO\_ANONYMOUS};
+74    context->signHashAlgo = \hyperlink{tls_8h_a98b0299cd7e197edc67123642089156da5f0d1790061632495ba22e58486033a3}{TLS\_HASH\_ALGO\_NONE};
+75 
+76 \textcolor{preprocessor}{#if (TLS\_RSA\_SIGN\_SUPPORT == ENABLED || TLS\_RSA\_PSS\_SIGN\_SUPPORT == ENABLED || \(\backslash\)}
+77 \textcolor{preprocessor}{   TLS\_DSA\_SIGN\_SUPPORT == ENABLED || TLS\_ECDSA\_SIGN\_SUPPORT == ENABLED)}
+78    \textcolor{comment}{//RSA, DSA or ECDSA certificate?}
+79    \textcolor{keywordflow}{if}(cert->\hyperlink{structTlsCertDesc_af06c965a4e4273bfb971f6ab67c715a2}{type} == \hyperlink{tls_8h_a9bd45859e2bffbd3edb8beff07240ffda3a76023fc80c787bffed357a4560351b}{TLS\_CERT\_RSA\_SIGN} ||
+80       cert->\hyperlink{structTlsCertDesc_af06c965a4e4273bfb971f6ab67c715a2}{type} == \hyperlink{tls_8h_a9bd45859e2bffbd3edb8beff07240ffda925aea3c96483609ae2867b10693b4c4}{TLS\_CERT\_DSS\_SIGN} ||
+81       cert->\hyperlink{structTlsCertDesc_af06c965a4e4273bfb971f6ab67c715a2}{type} == \hyperlink{tls_8h_a9bd45859e2bffbd3edb8beff07240ffdab47f2dd2c4d36761f920f8a1af97f6ec}{TLS\_CERT\_ECDSA\_SIGN})
+82    \{
+83       \textcolor{comment}{//Check whether the peer has provided a list of supported hash/signature}
+84       \textcolor{comment}{//algorithm pairs}
+85       \textcolor{keywordflow}{if}(supportedSignAlgos != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+86       \{
+87          \hyperlink{tls_8h_a98b0299cd7e197edc67123642089156d}{TlsHashAlgo} hashAlgoId;
+88 
+89          \textcolor{comment}{//Process the list and select the relevant signature algorithm}
+90          p = supportedSignAlgos->value;
+91          \textcolor{comment}{//Get the number of hash/signature algorithm pairs present in the list}
+92          n = \hyperlink{cpu__endian_8h_a9312c6eb72e64f748ae0d0e0dc3ec9b9}{ntohs}(supportedSignAlgos->length) / \textcolor{keyword}{sizeof}(\hyperlink{tls_8h_a5c96bca6675e08f0abe6e3efb0a78eb3}{TlsSignHashAlgo});
+93 
+94          \textcolor{comment}{//The hash algorithm to be used when generating signatures must be}
+95          \textcolor{comment}{//one of those present in the list}
+96          \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n}; i++)
+97          \{
+98             \textcolor{comment}{//Reset the hash algorithm identifier to its default value}
+99             hashAlgoId = \hyperlink{tls_8h_a98b0299cd7e197edc67123642089156da5f0d1790061632495ba22e58486033a3}{TLS\_HASH\_ALGO\_NONE};
+100 
+101 \textcolor{preprocessor}{#if (TLS\_RSA\_SIGN\_SUPPORT == ENABLED)}
+102             \textcolor{comment}{//RSA signature scheme?}
+103             \textcolor{keywordflow}{if}(cert->\hyperlink{structTlsCertDesc_af06c965a4e4273bfb971f6ab67c715a2}{type} == \hyperlink{tls_8h_a9bd45859e2bffbd3edb8beff07240ffda3a76023fc80c787bffed357a4560351b}{TLS\_CERT\_RSA\_SIGN} &&
+104                p[i].signature == \hyperlink{tls_8h_abe6ce436cb0d777df29e0af7bf800223a84a0f0f40c0affb557a7e5f157b4e1f5}{TLS\_SIGN\_ALGO\_RSA})
+105             \{
+106                \textcolor{comment}{//In TLS 1.3, RSASSA-PKCS1-v1\_5 signature algorithms refer}
+107                \textcolor{comment}{//solely to signatures which appear in certificates and are}
+108                \textcolor{comment}{//not defined for use in signed TLS handshake messages}
+109                \textcolor{keywordflow}{if}(context->version <= \hyperlink{tls_8h_af97e91c5fb95fb0957e5f37ec9e9eae8}{TLS\_VERSION\_1\_2})
+110                \{
+111                   \textcolor{comment}{//Select current hash algorithm}
+112                   hashAlgoId = (\hyperlink{tls_8h_a98b0299cd7e197edc67123642089156d}{TlsHashAlgo}) p[i].\hyperlink{tls_8h_a17d89840e7296c323504b31fc6359606}{hash};
+113                \}
+114             \}
+115             \textcolor{keywordflow}{else}
+116 \textcolor{preprocessor}{#endif}
+117 \textcolor{preprocessor}{#if (TLS\_RSA\_PSS\_SIGN\_SUPPORT == ENABLED)}
+118             \textcolor{comment}{//RSA-PSS signature scheme?}
+119             \textcolor{keywordflow}{if}(cert->\hyperlink{structTlsCertDesc_af06c965a4e4273bfb971f6ab67c715a2}{type} == \hyperlink{tls_8h_a9bd45859e2bffbd3edb8beff07240ffda3a76023fc80c787bffed357a4560351b}{TLS\_CERT\_RSA\_SIGN} &&
+120                p[i].hash == \hyperlink{tls_8h_a98b0299cd7e197edc67123642089156dab77721d4496c39c41f5984cfd7515882}{TLS\_HASH\_ALGO\_INTRINSIC})
+121             \{
+122                \textcolor{comment}{//TLS 1.2 and TLS 1.3 support RSASSA-PSS signature schemes}
+123                \textcolor{keywordflow}{if}(context->version >= \hyperlink{tls_8h_af97e91c5fb95fb0957e5f37ec9e9eae8}{TLS\_VERSION\_1\_2})
+124                \{
+125                   \textcolor{comment}{//Check RSA-PSS signature scheme}
+126                   \textcolor{keywordflow}{if}(p[i].\hyperlink{tls_8h_af27e6d4ea3add14cd8cc9aa275d716ad}{signature} == 
+      \hyperlink{tls_8h_abe6ce436cb0d777df29e0af7bf800223ae82458ac6b05ba0e3851a5804f7d5e57}{TLS\_SIGN\_ALGO\_RSA\_PSS\_RSAE\_SHA256})
+127                   \{
+128                      \textcolor{comment}{//RSASSA-PSS RSAE signature scheme with SHA-256}
+129                      hashAlgoId = \hyperlink{tls_8h_a98b0299cd7e197edc67123642089156da7912aa0ea6b40af839a3d4be331fe182}{TLS\_HASH\_ALGO\_SHA256};
+130                   \}
+131                   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(p[i].\hyperlink{tls_8h_af27e6d4ea3add14cd8cc9aa275d716ad}{signature} == 
+      \hyperlink{tls_8h_abe6ce436cb0d777df29e0af7bf800223aef95b8f001c19481fef0409a91b56ce4}{TLS\_SIGN\_ALGO\_RSA\_PSS\_RSAE\_SHA384})
+132                   \{
+133                      \textcolor{comment}{//RSASSA-PSS RSAE signature scheme with SHA-384}
+134                      hashAlgoId = \hyperlink{tls_8h_a98b0299cd7e197edc67123642089156da53b125010bbd797aa333a41bd1264edb}{TLS\_HASH\_ALGO\_SHA384};
+135                   \}
+136                   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(p[i].\hyperlink{tls_8h_af27e6d4ea3add14cd8cc9aa275d716ad}{signature} == 
+      \hyperlink{tls_8h_abe6ce436cb0d777df29e0af7bf800223a53d5e91921faf4103349e699d188ea5f}{TLS\_SIGN\_ALGO\_RSA\_PSS\_RSAE\_SHA512})
+137                   \{
+138                      \textcolor{comment}{//RSASSA-PSS RSAE signature scheme with SHA-512}
+139                      hashAlgoId = \hyperlink{tls_8h_a98b0299cd7e197edc67123642089156da81cc682c95330532471fe9b48fed6acf}{TLS\_HASH\_ALGO\_SHA512};
+140                   \}
+141                \}
+142             \}
+143             \textcolor{keywordflow}{else}
+144 \textcolor{preprocessor}{#endif}
+145 \textcolor{preprocessor}{#if (TLS\_DSA\_SIGN\_SUPPORT == ENABLED)}
+146             \textcolor{comment}{//DSA signature scheme?}
+147             \textcolor{keywordflow}{if}(cert->\hyperlink{structTlsCertDesc_af06c965a4e4273bfb971f6ab67c715a2}{type} == \hyperlink{tls_8h_a9bd45859e2bffbd3edb8beff07240ffda925aea3c96483609ae2867b10693b4c4}{TLS\_CERT\_DSS\_SIGN} &&
+148                p[i].signature == \hyperlink{tls_8h_abe6ce436cb0d777df29e0af7bf800223a8d024e93d33282e5cb2a1665fb69153d}{TLS\_SIGN\_ALGO\_DSA})
+149             \{
+150                \textcolor{comment}{//TLS 1.3 removes support for DSA certificates}
+151                \textcolor{keywordflow}{if}(context->version <= \hyperlink{tls_8h_af97e91c5fb95fb0957e5f37ec9e9eae8}{TLS\_VERSION\_1\_2})
+152                \{
+153                   \textcolor{comment}{//Select current hash algorithm}
+154                   hashAlgoId = (\hyperlink{tls_8h_a98b0299cd7e197edc67123642089156d}{TlsHashAlgo}) p[i].\hyperlink{tls_8h_a17d89840e7296c323504b31fc6359606}{hash};
+155                \}
+156             \}
+157             \textcolor{keywordflow}{else}
+158 \textcolor{preprocessor}{#endif}
+159 \textcolor{preprocessor}{#if (TLS\_ECDSA\_SIGN\_SUPPORT == ENABLED)}
+160             \textcolor{comment}{//ECDSA signature scheme?}
+161             \textcolor{keywordflow}{if}(cert->\hyperlink{structTlsCertDesc_af06c965a4e4273bfb971f6ab67c715a2}{type} == \hyperlink{tls_8h_a9bd45859e2bffbd3edb8beff07240ffdab47f2dd2c4d36761f920f8a1af97f6ec}{TLS\_CERT\_ECDSA\_SIGN} &&
+162                p[i].signature == \hyperlink{tls_8h_abe6ce436cb0d777df29e0af7bf800223a47f4ec2313cd5ce1755fc2485cfdd49a}{TLS\_SIGN\_ALGO\_ECDSA})
+163             \{
+164                \textcolor{comment}{//Version of TLS prior to TLS 1.3?}
+165                \textcolor{keywordflow}{if}(context->version <= \hyperlink{tls_8h_af97e91c5fb95fb0957e5f37ec9e9eae8}{TLS\_VERSION\_1\_2})
+166                \{
+167                   \textcolor{comment}{//Select current hash algorithm}
+168                   hashAlgoId = (\hyperlink{tls_8h_a98b0299cd7e197edc67123642089156d}{TlsHashAlgo}) p[i].\hyperlink{tls_8h_a17d89840e7296c323504b31fc6359606}{hash};
+169                \}
+170                \textcolor{keywordflow}{else}
+171                \{
+172                   \textcolor{comment}{//Check elliptic curve and hash algorithm}
+173                   \textcolor{keywordflow}{if}(cert->\hyperlink{structTlsCertDesc_a8b80a193be9a9d1064b2226ce1dce6bd}{namedCurve} == \hyperlink{tls_8h_ae51675bb94f1945c0eed549ef93e6b51a754392bfe03e9ee5988cebb5c8466df2}{TLS\_GROUP\_SECP256R1} &&
+174                      p[i].hash == \hyperlink{tls_8h_a98b0299cd7e197edc67123642089156da7912aa0ea6b40af839a3d4be331fe182}{TLS\_HASH\_ALGO\_SHA256})
+175                   \{
+176                      \textcolor{comment}{//Select current hash algorithm}
+177                      hashAlgoId = \hyperlink{tls_8h_a98b0299cd7e197edc67123642089156da7912aa0ea6b40af839a3d4be331fe182}{TLS\_HASH\_ALGO\_SHA256};
+178                   \}
+179                   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(cert->\hyperlink{structTlsCertDesc_a8b80a193be9a9d1064b2226ce1dce6bd}{namedCurve} == \hyperlink{tls_8h_ae51675bb94f1945c0eed549ef93e6b51a7b115315b032f03ca3df4c5c81481922}{TLS\_GROUP\_SECP384R1} &&
+180                      p[i].hash == \hyperlink{tls_8h_a98b0299cd7e197edc67123642089156da53b125010bbd797aa333a41bd1264edb}{TLS\_HASH\_ALGO\_SHA384})
+181                   \{
+182                      \textcolor{comment}{//Select current hash algorithm}
+183                      hashAlgoId = \hyperlink{tls_8h_a98b0299cd7e197edc67123642089156da53b125010bbd797aa333a41bd1264edb}{TLS\_HASH\_ALGO\_SHA384};
+184                   \}
+185                   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(cert->\hyperlink{structTlsCertDesc_a8b80a193be9a9d1064b2226ce1dce6bd}{namedCurve} == \hyperlink{tls_8h_ae51675bb94f1945c0eed549ef93e6b51a3d705e99288a83f62e76b79bef246c59}{TLS\_GROUP\_SECP521R1} &&
+186                      p[i].hash == \hyperlink{tls_8h_a98b0299cd7e197edc67123642089156da81cc682c95330532471fe9b48fed6acf}{TLS\_HASH\_ALGO\_SHA512})
+187                   \{
+188                      \textcolor{comment}{//Select current hash algorithm}
+189                      hashAlgoId = \hyperlink{tls_8h_a98b0299cd7e197edc67123642089156da81cc682c95330532471fe9b48fed6acf}{TLS\_HASH\_ALGO\_SHA512};
+190                   \}
+191                \}
+192             \}
+193             \textcolor{keywordflow}{else}
+194 \textcolor{preprocessor}{#endif}
+195             \textcolor{comment}{//Unknown signature scheme?}
+196             \{
+197                \textcolor{comment}{//Just for sanity}
+198             \}
+199 
+200             \textcolor{comment}{//Get the hash algorithm that matches the specified identifier}
+201             hashAlgo = \hyperlink{tls__misc_8c_a0540f6f41d033803f8c6b9f5efe391e8}{tlsGetHashAlgo}(hashAlgoId);
+202 
+203             \textcolor{comment}{//Check whether the hash algorithm is supported}
+204             \textcolor{keywordflow}{if}(hashAlgo != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+205             \{
+206                \textcolor{comment}{//In TLS versions prior to 1.3, the client implementation can only}
+207                \textcolor{comment}{//generate a CertificateVerify using SHA-1 or the hash used by}
+208                \textcolor{comment}{//the PRF. Supporting all hash algorithms would require the client}
+209                \textcolor{comment}{//to maintain hashes for every possible signature algorithm that}
+210                \textcolor{comment}{//the server may request...}
+211                \textcolor{keywordflow}{if}(context->version == \hyperlink{tls_8h_ab44dc642afbfbd72926ab1f94634cd4d}{TLS\_VERSION\_1\_3} ||
+212                   context->entity == \hyperlink{tls_8h_acb21bc158664d823d899d760edd8135ba3ddde9cb0be1b78b5b7e1e2ba1704a44}{TLS\_CONNECTION\_END\_SERVER} ||
+213                   hashAlgoId == \hyperlink{tls_8h_a98b0299cd7e197edc67123642089156daf10e82baa9d43e28ef949fd55fcfb65f}{TLS\_HASH\_ALGO\_SHA1} ||
+214                   hashAlgo == context->cipherSuite.prfHashAlgo)
+215                \{
+216                   \textcolor{comment}{//The signature algorithm is acceptable}
+217                   context->signAlgo = (\hyperlink{tls_8h_abe6ce436cb0d777df29e0af7bf800223}{TlsSignatureAlgo}) p[i].
+      \hyperlink{tls_8h_af27e6d4ea3add14cd8cc9aa275d716ad}{signature};
+218                   context->signHashAlgo = (\hyperlink{tls_8h_a98b0299cd7e197edc67123642089156d}{TlsHashAlgo}) hashAlgoId;
+219                   \textcolor{keywordflow}{break};
+220                \}
+221             \}
+222          \}
+223       \}
+224       \textcolor{keywordflow}{else}
+225       \{
+226          \textcolor{comment}{//Version of TLS prior to TLS 1.3?}
+227          \textcolor{keywordflow}{if}(context->version <= \hyperlink{tls_8h_af97e91c5fb95fb0957e5f37ec9e9eae8}{TLS\_VERSION\_1\_2})
+228          \{
+229             \textcolor{comment}{//Select the default hash algorithm to be used when generating RSA,}
+230             \textcolor{comment}{//DSA or ECDSA signatures}
+231             \textcolor{keywordflow}{if}(\hyperlink{tls__misc_8c_a0540f6f41d033803f8c6b9f5efe391e8}{tlsGetHashAlgo}(\hyperlink{tls_8h_a98b0299cd7e197edc67123642089156daf10e82baa9d43e28ef949fd55fcfb65f}{TLS\_HASH\_ALGO\_SHA1}) != 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+232             \{
+233                \textcolor{comment}{//Select SHA-1 hash algorithm}
+234                context->signAlgo = cert->\hyperlink{structTlsCertDesc_a6859e171d20df5e0c0ec12b940d90822}{signAlgo};
+235                context->signHashAlgo = \hyperlink{tls_8h_a98b0299cd7e197edc67123642089156daf10e82baa9d43e28ef949fd55fcfb65f}{TLS\_HASH\_ALGO\_SHA1};
+236             \}
+237             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(\hyperlink{tls__misc_8c_a0540f6f41d033803f8c6b9f5efe391e8}{tlsGetHashAlgo}(\hyperlink{tls_8h_a98b0299cd7e197edc67123642089156da7912aa0ea6b40af839a3d4be331fe182}{TLS\_HASH\_ALGO\_SHA256}) != 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+238             \{
+239                \textcolor{comment}{//Select SHA-256 hash algorithm}
+240                context->signAlgo = cert->\hyperlink{structTlsCertDesc_a6859e171d20df5e0c0ec12b940d90822}{signAlgo};
+241                context->signHashAlgo = \hyperlink{tls_8h_a98b0299cd7e197edc67123642089156da7912aa0ea6b40af839a3d4be331fe182}{TLS\_HASH\_ALGO\_SHA256};
+242             \}
+243             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(\hyperlink{tls__misc_8c_a0540f6f41d033803f8c6b9f5efe391e8}{tlsGetHashAlgo}(\hyperlink{tls_8h_a98b0299cd7e197edc67123642089156da53b125010bbd797aa333a41bd1264edb}{TLS\_HASH\_ALGO\_SHA384}) != 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+244             \{
+245                \textcolor{comment}{//Select SHA-384 hash algorithm}
+246                context->signAlgo = cert->\hyperlink{structTlsCertDesc_a6859e171d20df5e0c0ec12b940d90822}{signAlgo};
+247                context->signHashAlgo = \hyperlink{tls_8h_a98b0299cd7e197edc67123642089156da53b125010bbd797aa333a41bd1264edb}{TLS\_HASH\_ALGO\_SHA384};
+248             \}
+249             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(\hyperlink{tls__misc_8c_a0540f6f41d033803f8c6b9f5efe391e8}{tlsGetHashAlgo}(\hyperlink{tls_8h_a98b0299cd7e197edc67123642089156da81cc682c95330532471fe9b48fed6acf}{TLS\_HASH\_ALGO\_SHA512}) != 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+250             \{
+251                \textcolor{comment}{//Select SHA-512 hash algorithm}
+252                context->signAlgo = cert->\hyperlink{structTlsCertDesc_a6859e171d20df5e0c0ec12b940d90822}{signAlgo};
+253                context->signHashAlgo = \hyperlink{tls_8h_a98b0299cd7e197edc67123642089156da81cc682c95330532471fe9b48fed6acf}{TLS\_HASH\_ALGO\_SHA512};
+254             \}
+255             \textcolor{keywordflow}{else}
+256             \{
+257                \textcolor{comment}{//Just for sanity}
+258             \}
+259          \}
+260       \}
+261    \}
+262    \textcolor{keywordflow}{else}
+263 \textcolor{preprocessor}{#endif}
+264 \textcolor{preprocessor}{#if (TLS\_RSA\_PSS\_SIGN\_SUPPORT == ENABLED)}
+265    \textcolor{comment}{//RSA-PSS certificate?}
+266    \textcolor{keywordflow}{if}(cert->\hyperlink{structTlsCertDesc_af06c965a4e4273bfb971f6ab67c715a2}{type} == \hyperlink{tls_8h_a9bd45859e2bffbd3edb8beff07240ffda99a10e4ee12c5c331833b13d5a145480}{TLS\_CERT\_RSA\_PSS\_SIGN})
+267    \{
+268       \textcolor{comment}{//TLS 1.2 and TLS 1.3 support RSASSA-PSS signature schemes}
+269       \textcolor{keywordflow}{if}(context->version >= \hyperlink{tls_8h_af97e91c5fb95fb0957e5f37ec9e9eae8}{TLS\_VERSION\_1\_2})
+270       \{
+271          \textcolor{comment}{//Check whether the peer has provided a list of supported hash/signature}
+272          \textcolor{comment}{//algorithm pairs}
+273          \textcolor{keywordflow}{if}(supportedSignAlgos != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+274          \{
+275             \hyperlink{tls_8h_a98b0299cd7e197edc67123642089156d}{TlsHashAlgo} hashAlgoId;
+276 
+277             \textcolor{comment}{//Process the list and select the relevant signature algorithm}
+278             p = supportedSignAlgos->value;
+279             \textcolor{comment}{//Get the number of hash/signature algorithm pairs present in the list}
+280             n = \hyperlink{cpu__endian_8h_a9312c6eb72e64f748ae0d0e0dc3ec9b9}{ntohs}(supportedSignAlgos->length) / \textcolor{keyword}{sizeof}(\hyperlink{tls_8h_a5c96bca6675e08f0abe6e3efb0a78eb3}{TlsSignHashAlgo});
+281 
+282             \textcolor{comment}{//The hash algorithm to be used when generating signatures must be}
+283             \textcolor{comment}{//one of those present in the list}
+284             \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n}; i++)
+285             \{
+286                \textcolor{comment}{//The hashing is intrinsic to the signature algorithm}
+287                \textcolor{keywordflow}{if}(p[i].\hyperlink{tls_8h_a17d89840e7296c323504b31fc6359606}{hash} == \hyperlink{tls_8h_a98b0299cd7e197edc67123642089156dab77721d4496c39c41f5984cfd7515882}{TLS\_HASH\_ALGO\_INTRINSIC})
+288                \{
+289                   \textcolor{comment}{//Check signature scheme}
+290                   \textcolor{keywordflow}{if}(p[i].\hyperlink{tls_8h_af27e6d4ea3add14cd8cc9aa275d716ad}{signature} == \hyperlink{tls_8h_abe6ce436cb0d777df29e0af7bf800223ad23a08f2a2e5d3231cc9c2ce2e223a8d}{TLS\_SIGN\_ALGO\_RSA\_PSS\_PSS\_SHA256}
+      )
+291                      hashAlgoId = \hyperlink{tls_8h_a98b0299cd7e197edc67123642089156da7912aa0ea6b40af839a3d4be331fe182}{TLS\_HASH\_ALGO\_SHA256};
+292                   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(p[i].\hyperlink{tls_8h_af27e6d4ea3add14cd8cc9aa275d716ad}{signature} == 
+      \hyperlink{tls_8h_abe6ce436cb0d777df29e0af7bf800223aeb67836989d29de8af7c31ea0ddbe1b7}{TLS\_SIGN\_ALGO\_RSA\_PSS\_PSS\_SHA384})
+293                      hashAlgoId = \hyperlink{tls_8h_a98b0299cd7e197edc67123642089156da53b125010bbd797aa333a41bd1264edb}{TLS\_HASH\_ALGO\_SHA384};
+294                   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(p[i].\hyperlink{tls_8h_af27e6d4ea3add14cd8cc9aa275d716ad}{signature} == 
+      \hyperlink{tls_8h_abe6ce436cb0d777df29e0af7bf800223a1f76baf2d64af86ca98e164c9089a77c}{TLS\_SIGN\_ALGO\_RSA\_PSS\_PSS\_SHA512})
+295                      hashAlgoId = \hyperlink{tls_8h_a98b0299cd7e197edc67123642089156da81cc682c95330532471fe9b48fed6acf}{TLS\_HASH\_ALGO\_SHA512};
+296                   \textcolor{keywordflow}{else}
+297                      hashAlgoId = \hyperlink{tls_8h_a98b0299cd7e197edc67123642089156da5f0d1790061632495ba22e58486033a3}{TLS\_HASH\_ALGO\_NONE};
+298 
+299                   \textcolor{comment}{//Check whether the hash algorithm is supported}
+300                   \textcolor{keywordflow}{if}(\hyperlink{tls__misc_8c_a0540f6f41d033803f8c6b9f5efe391e8}{tlsGetHashAlgo}(hashAlgoId) != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+301                   \{
+302                      \textcolor{comment}{//Acceptable hash algorithm found}
+303                      context->signAlgo = (\hyperlink{tls_8h_abe6ce436cb0d777df29e0af7bf800223}{TlsSignatureAlgo}) p[i].
+      \hyperlink{tls_8h_af27e6d4ea3add14cd8cc9aa275d716ad}{signature};
+304                      context->signHashAlgo = (\hyperlink{tls_8h_a98b0299cd7e197edc67123642089156d}{TlsHashAlgo}) p[i].\hyperlink{tls_8h_a17d89840e7296c323504b31fc6359606}{hash};
+305                      \textcolor{keywordflow}{break};
+306                   \}
+307                \}
+308             \}
+309          \}
+310       \}
+311    \}
+312    \textcolor{keywordflow}{else}
+313 \textcolor{preprocessor}{#endif}
+314 \textcolor{preprocessor}{#if (TLS\_EDDSA\_SIGN\_SUPPORT == ENABLED)}
+315    \textcolor{comment}{//EdDSA certificate?}
+316    \textcolor{keywordflow}{if}(cert->\hyperlink{structTlsCertDesc_af06c965a4e4273bfb971f6ab67c715a2}{type} == \hyperlink{tls_8h_a9bd45859e2bffbd3edb8beff07240ffda949e4ce74babee5ea5e6a01282283512}{TLS\_CERT\_ED25519\_SIGN} ||
+317       cert->\hyperlink{structTlsCertDesc_af06c965a4e4273bfb971f6ab67c715a2}{type} == \hyperlink{tls_8h_a9bd45859e2bffbd3edb8beff07240ffda07a1b669a85b822306b5a95aa069ed27}{TLS\_CERT\_ED448\_SIGN})
+318    \{
+319       \textcolor{comment}{//TLS 1.2 or TLS 1.3 currently selected?}
+320       \textcolor{keywordflow}{if}((context->version >= \hyperlink{tls_8h_af97e91c5fb95fb0957e5f37ec9e9eae8}{TLS\_VERSION\_1\_2} &&
+321          context->entity == \hyperlink{tls_8h_acb21bc158664d823d899d760edd8135ba3ddde9cb0be1b78b5b7e1e2ba1704a44}{TLS\_CONNECTION\_END\_SERVER}) ||
+322          (context->version >= \hyperlink{tls_8h_ab44dc642afbfbd72926ab1f94634cd4d}{TLS\_VERSION\_1\_3} &&
+323          context->entity == \hyperlink{tls_8h_acb21bc158664d823d899d760edd8135ba7f216418b2d898ed01cf9376fd9b3d6d}{TLS\_CONNECTION\_END\_CLIENT}))
+324       \{
+325          \textcolor{comment}{//Ed25519 and Ed448 are used in PureEdDSA mode, without pre-hashing}
+326          context->signAlgo = cert->\hyperlink{structTlsCertDesc_a6859e171d20df5e0c0ec12b940d90822}{signAlgo};
+327          context->signHashAlgo = \hyperlink{tls_8h_a98b0299cd7e197edc67123642089156dab77721d4496c39c41f5984cfd7515882}{TLS\_HASH\_ALGO\_INTRINSIC};
+328       \}
+329    \}
+330    \textcolor{keywordflow}{else}
+331 \textcolor{preprocessor}{#endif}
+332    \textcolor{comment}{//Unsupported signature algorithm?}
+333    \{
+334       \textcolor{comment}{//Just for sanity}
+335    \}
+336 
+337    \textcolor{comment}{//If no acceptable choices are presented, return an error}
+338    \textcolor{keywordflow}{if}(context->signAlgo != \hyperlink{tls_8h_abe6ce436cb0d777df29e0af7bf800223adefcf9ed77bc31b349e8d2429e16b2ff}{TLS\_SIGN\_ALGO\_ANONYMOUS} &&
+339       context->signHashAlgo != \hyperlink{tls_8h_a98b0299cd7e197edc67123642089156da5f0d1790061632495ba22e58486033a3}{TLS\_HASH\_ALGO\_NONE})
+340    \{
+341       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+342    \}
+343 
+344    \textcolor{comment}{//Return status code}
+345    \textcolor{keywordflow}{return} error;
+346 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{tls__signature_8c_a4ca472906bb02377b837ff2d96c18331}\label{tls__signature_8c_a4ca472906bb02377b837ff2d96c18331}} 
+\index{tls\+\_\+signature.\+c@{tls\+\_\+signature.\+c}!tls\+Verify\+Dsa\+Signature@{tls\+Verify\+Dsa\+Signature}}
+\index{tls\+Verify\+Dsa\+Signature@{tls\+Verify\+Dsa\+Signature}!tls\+\_\+signature.\+c@{tls\+\_\+signature.\+c}}
+\subsubsection{\texorpdfstring{tls\+Verify\+Dsa\+Signature()}{tlsVerifyDsaSignature()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} tls\+Verify\+Dsa\+Signature (\begin{DoxyParamCaption}\item[{\hyperlink{tls_8h_ac09f7a286c0cdf9b07ee1edd107946f5}{Tls\+Context} $\ast$}]{context,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{digest,  }\item[{size\+\_\+t}]{digest\+Len,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{signature,  }\item[{size\+\_\+t}]{signature\+Len }\end{DoxyParamCaption})}
+
+
+
+Verify D\+SA signature. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the T\+LS context \\
+\hline
+\mbox{\tt in}  & {\em digest} & Digest of the message whose signature is to be verified \\
+\hline
+\mbox{\tt in}  & {\em digest\+Len} & Length in octets of the digest \\
+\hline
+\mbox{\tt in}  & {\em signature} & Signature to be verified \\
+\hline
+\mbox{\tt in}  & {\em signature\+Len} & Length of the signature to be verified \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 1243 of file tls\+\_\+signature.\+c.
+
+
+\begin{DoxyCode}
+1245 \{
+1246 \textcolor{preprocessor}{#if (TLS\_DSA\_SIGN\_SUPPORT == ENABLED)}
+1247    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+1248    \hyperlink{structDsaSignature}{DsaSignature} dsaSignature;
+1249 
+1250    \textcolor{comment}{//Initialize DSA signature}
+1251    \hyperlink{dsa_8c_a6ebbad1e693d6967da33e2a1338912c7}{dsaInitSignature}(&dsaSignature);
+1252 
+1253    \textcolor{comment}{//Read the ASN.1 encoded DSA signature}
+1254    error = \hyperlink{dsa_8c_a05526f7cfcf22483963264e0500bc724}{dsaReadSignature}(\hyperlink{tls_8h_af27e6d4ea3add14cd8cc9aa275d716ad}{signature}, signatureLen, &dsaSignature);
+1255 
+1256    \textcolor{comment}{//Check status code}
+1257    \textcolor{keywordflow}{if}(!error)
+1258    \{
+1259       \textcolor{comment}{//DSA signature verification}
+1260       error = \hyperlink{dsa_8c_a551e9301249e713b9925e2a7f6d7ed79}{dsaVerifySignature}(&context->peerDsaPublicKey,
+1261          digest, digestLen, &dsaSignature);
+1262    \}
+1263    \textcolor{keywordflow}{else}
+1264    \{
+1265       \textcolor{comment}{//Malformed DSA signature}
+1266       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca6e8db1d17e3aad53ecc5a4ff62df6f48}{ERROR\_INVALID\_SIGNATURE};
+1267    \}
+1268 
+1269    \textcolor{comment}{//Free previously allocated resources}
+1270    \hyperlink{dsa_8c_a78f8ff9636dd1677e22b637476c88e9d}{dsaFreeSignature}(&dsaSignature);
+1271 
+1272    \textcolor{comment}{//Return status code}
+1273    \textcolor{keywordflow}{return} error;
+1274 \textcolor{preprocessor}{#else}
+1275    \textcolor{comment}{//DSA signature verification is not supported}
+1276    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cab61c5ef368fbf03fdc1fb566c63f2f9a}{ERROR\_NOT\_IMPLEMENTED};
+1277 \textcolor{preprocessor}{#endif}
+1278 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{tls__signature_8c_a2a3f114dca59434482fce803095be646}\label{tls__signature_8c_a2a3f114dca59434482fce803095be646}} 
+\index{tls\+\_\+signature.\+c@{tls\+\_\+signature.\+c}!tls\+Verify\+Ecdsa\+Signature@{tls\+Verify\+Ecdsa\+Signature}}
+\index{tls\+Verify\+Ecdsa\+Signature@{tls\+Verify\+Ecdsa\+Signature}!tls\+\_\+signature.\+c@{tls\+\_\+signature.\+c}}
+\subsubsection{\texorpdfstring{tls\+Verify\+Ecdsa\+Signature()}{tlsVerifyEcdsaSignature()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} tls\+Verify\+Ecdsa\+Signature (\begin{DoxyParamCaption}\item[{\hyperlink{tls_8h_ac09f7a286c0cdf9b07ee1edd107946f5}{Tls\+Context} $\ast$}]{context,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{digest,  }\item[{size\+\_\+t}]{digest\+Len,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{signature,  }\item[{size\+\_\+t}]{signature\+Len }\end{DoxyParamCaption})}
+
+
+
+Verify E\+C\+D\+SA signature. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the T\+LS context \\
+\hline
+\mbox{\tt in}  & {\em digest} & Digest of the message whose signature is to be verified \\
+\hline
+\mbox{\tt in}  & {\em digest\+Len} & Length in octets of the digest \\
+\hline
+\mbox{\tt in}  & {\em signature} & Signature to be verified \\
+\hline
+\mbox{\tt in}  & {\em signature\+Len} & Length of the signature to be verified \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 1374 of file tls\+\_\+signature.\+c.
+
+
+\begin{DoxyCode}
+1376 \{
+1377 \textcolor{preprocessor}{#if (TLS\_ECDSA\_SIGN\_SUPPORT == ENABLED)}
+1378    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+1379    \hyperlink{structEcdsaSignature}{EcdsaSignature} ecdsaSignature;
+1380 
+1381    \textcolor{comment}{//Initialize ECDSA signature}
+1382    \hyperlink{ecdsa_8c_aef8cd9a530146f44fc0597eb67480133}{ecdsaInitSignature}(&ecdsaSignature);
+1383 
+1384    \textcolor{comment}{//Read the ASN.1 encoded ECDSA signature}
+1385    error = \hyperlink{ecdsa_8c_a51f5efbd49199a8d8db36b694f0683ff}{ecdsaReadSignature}(\hyperlink{tls_8h_af27e6d4ea3add14cd8cc9aa275d716ad}{signature}, signatureLen, &ecdsaSignature);
+1386 
+1387    \textcolor{comment}{//Check status code}
+1388    \textcolor{keywordflow}{if}(!error)
+1389    \{
+1390 \textcolor{preprocessor}{#if (TLS\_ECC\_CALLBACK\_SUPPORT == ENABLED)}
+1391       \textcolor{comment}{//Any registered callback?}
+1392       \textcolor{keywordflow}{if}(context->ecdsaVerifyCallback != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1393       \{
+1394          \textcolor{comment}{//Invoke user callback function}
+1395          error = context->ecdsaVerifyCallback(context, digest, digestLen,
+1396             &ecdsaSignature);
+1397       \}
+1398       \textcolor{keywordflow}{else}
+1399 \textcolor{preprocessor}{#endif}
+1400       \{
+1401          \textcolor{comment}{//No callback function defined}
+1402          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caae7cba11578605e61d5137cea3752cb9}{ERROR\_UNSUPPORTED\_ELLIPTIC\_CURVE};
+1403       \}
+1404 
+1405       \textcolor{comment}{//Check status code}
+1406       \textcolor{keywordflow}{if}(error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caae7cba11578605e61d5137cea3752cb9}{ERROR\_UNSUPPORTED\_ELLIPTIC\_CURVE} ||
+1407          error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca6957066f9ec0cf529b8ce09644a030ee}{ERROR\_UNSUPPORTED\_HASH\_ALGO})
+1408       \{
+1409          \textcolor{comment}{//ECDSA signature verification}
+1410          error = \hyperlink{ecdsa_8c_a34b9fa4b6962c63ed4edf6f4ec1b6f6d}{ecdsaVerifySignature}(&context->peerEcParams,
+1411             &context->peerEcPublicKey, digest, digestLen, &ecdsaSignature);
+1412       \}
+1413    \}
+1414    \textcolor{keywordflow}{else}
+1415    \{
+1416       \textcolor{comment}{//Malformed ECDSA signature}
+1417       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca6e8db1d17e3aad53ecc5a4ff62df6f48}{ERROR\_INVALID\_SIGNATURE};
+1418    \}
+1419 
+1420    \textcolor{comment}{//Free previously allocated resources}
+1421    \hyperlink{ecdsa_8c_a6f4daa07ea8815b8c67b47c4b089d157}{ecdsaFreeSignature}(&ecdsaSignature);
+1422 
+1423    \textcolor{comment}{//Return status code}
+1424    \textcolor{keywordflow}{return} error;
+1425 \textcolor{preprocessor}{#else}
+1426    \textcolor{comment}{//ECDSA signature verification is not supported}
+1427    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cab61c5ef368fbf03fdc1fb566c63f2f9a}{ERROR\_NOT\_IMPLEMENTED};
+1428 \textcolor{preprocessor}{#endif}
+1429 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{tls__signature_8c_aec1f4642d666fa3172c729a6d59a9313}\label{tls__signature_8c_aec1f4642d666fa3172c729a6d59a9313}} 
+\index{tls\+\_\+signature.\+c@{tls\+\_\+signature.\+c}!tls\+Verify\+Eddsa\+Signature@{tls\+Verify\+Eddsa\+Signature}}
+\index{tls\+Verify\+Eddsa\+Signature@{tls\+Verify\+Eddsa\+Signature}!tls\+\_\+signature.\+c@{tls\+\_\+signature.\+c}}
+\subsubsection{\texorpdfstring{tls\+Verify\+Eddsa\+Signature()}{tlsVerifyEddsaSignature()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} tls\+Verify\+Eddsa\+Signature (\begin{DoxyParamCaption}\item[{\hyperlink{tls_8h_ac09f7a286c0cdf9b07ee1edd107946f5}{Tls\+Context} $\ast$}]{context,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{message,  }\item[{size\+\_\+t}]{message\+Len,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{signature,  }\item[{size\+\_\+t}]{signature\+Len }\end{DoxyParamCaption})}
+
+
+
+Verify Ed\+D\+SA signature. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the T\+LS context \\
+\hline
+\mbox{\tt in}  & {\em message} & Message whose signature is to be verified \\
+\hline
+\mbox{\tt in}  & {\em message\+Len} & Length of the message, in bytes \\
+\hline
+\mbox{\tt in}  & {\em signature} & Signature to be verified \\
+\hline
+\mbox{\tt in}  & {\em signature\+Len} & Length of the signature to be verified \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 1561 of file tls\+\_\+signature.\+c.
+
+
+\begin{DoxyCode}
+1563 \{
+1564 \textcolor{preprocessor}{#if (TLS\_EDDSA\_SIGN\_SUPPORT == ENABLED)}
+1565    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+1566 
+1567 \textcolor{preprocessor}{#if (TLS\_ED25519\_SUPPORT == ENABLED)}
+1568    \textcolor{comment}{//Ed25519 elliptic curve?}
+1569    \textcolor{keywordflow}{if}(context->peerEcParams.type == \hyperlink{ec__curves_8h_af38fa6633c02444318870a309134ca21a6455980db55e8a3cf891beddd08c0319}{EC\_CURVE\_TYPE\_ED25519})
+1570    \{
+1571       \textcolor{comment}{//Check the length of the EdDSA signature}
+1572       \textcolor{keywordflow}{if}(signatureLen == \hyperlink{ed25519_8h_a6b45906484d3c938aef3a114e3d1a8ea}{ED25519\_SIGNATURE\_LEN})
+1573       \{
+1574          \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} publicKey[\hyperlink{ed25519_8h_a5fdd1f73dec2be868a8ed5d2e129bb5e}{ED25519\_PUBLIC\_KEY\_LEN}];
+1575 
+1576          \textcolor{comment}{//Get peer's public key}
+1577          error = \hyperlink{mpi_8c_aad846b0b5a3560243e1bf8601ad1b6a5}{mpiExport}(&context->peerEcPublicKey.x, publicKey,
+1578             \hyperlink{ed25519_8h_a5fdd1f73dec2be868a8ed5d2e129bb5e}{ED25519\_PUBLIC\_KEY\_LEN}, 
+      \hyperlink{mpi_8h_a5fe4159c7c390c604067e854b41d337fa637c0a6e803a47db52875c6818674c60}{MPI\_FORMAT\_LITTLE\_ENDIAN});
+1579 
+1580          \textcolor{comment}{//Check status code}
+1581          \textcolor{keywordflow}{if}(!error)
+1582          \{
+1583             \textcolor{comment}{//Verify Ed25519 signature (PureEdDSA mode)}
+1584             error = \hyperlink{ed25519_8c_a5f517039b2a85e2dbdcf26791e7d1b2c}{ed25519VerifySignature}(publicKey, 
+      \hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}, messageLen,
+1585                \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, 0, 0, \hyperlink{tls_8h_af27e6d4ea3add14cd8cc9aa275d716ad}{signature});
+1586          \}
+1587       \}
+1588       \textcolor{keywordflow}{else}
+1589       \{
+1590          \textcolor{comment}{//The length of the EdDSA signature is not valid}
+1591          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca6e8db1d17e3aad53ecc5a4ff62df6f48}{ERROR\_INVALID\_SIGNATURE};
+1592       \}
+1593    \}
+1594    \textcolor{keywordflow}{else}
+1595 \textcolor{preprocessor}{#endif}
+1596 \textcolor{preprocessor}{#if (TLS\_ED448\_SUPPORT == ENABLED)}
+1597    \textcolor{comment}{//Ed448 elliptic curve?}
+1598    \textcolor{keywordflow}{if}(context->peerEcParams.type == \hyperlink{ec__curves_8h_af38fa6633c02444318870a309134ca21ab3f6074846d01c1bd8d1980ca9fc4a62}{EC\_CURVE\_TYPE\_ED448})
+1599    \{
+1600       \textcolor{comment}{//Check the length of the EdDSA signature}
+1601       \textcolor{keywordflow}{if}(signatureLen == \hyperlink{ed448_8h_a6faeb89fbb8744bcc8ec3333ec22b099}{ED448\_SIGNATURE\_LEN})
+1602       \{
+1603          \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} publicKey[\hyperlink{ed448_8h_a452cd73807c6a5607ede7ba57cbc3e6a}{ED448\_PUBLIC\_KEY\_LEN}];
+1604 
+1605          \textcolor{comment}{//Get peer's public key}
+1606          error = \hyperlink{mpi_8c_aad846b0b5a3560243e1bf8601ad1b6a5}{mpiExport}(&context->peerEcPublicKey.x, publicKey,
+1607             \hyperlink{ed448_8h_a452cd73807c6a5607ede7ba57cbc3e6a}{ED448\_PUBLIC\_KEY\_LEN}, \hyperlink{mpi_8h_a5fe4159c7c390c604067e854b41d337fa637c0a6e803a47db52875c6818674c60}{MPI\_FORMAT\_LITTLE\_ENDIAN});
+1608 
+1609          \textcolor{comment}{//Check status code}
+1610          \textcolor{keywordflow}{if}(!error)
+1611          \{
+1612             \textcolor{comment}{//Verify Ed448 signature (PureEdDSA mode)}
+1613             error = \hyperlink{ed448_8c_ab6f6de548796083dfc337efbc7542084}{ed448VerifySignature}(publicKey, \hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}, messageLen,
+1614                \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, 0, 0, \hyperlink{tls_8h_af27e6d4ea3add14cd8cc9aa275d716ad}{signature});
+1615          \}
+1616       \}
+1617       \textcolor{keywordflow}{else}
+1618       \{
+1619          \textcolor{comment}{//The length of the EdDSA signature is not valid}
+1620          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca6e8db1d17e3aad53ecc5a4ff62df6f48}{ERROR\_INVALID\_SIGNATURE};
+1621       \}
+1622    \}
+1623    \textcolor{keywordflow}{else}
+1624 \textcolor{preprocessor}{#endif}
+1625    \textcolor{comment}{//Invalid signature algorithm?}
+1626    \{
+1627       \textcolor{comment}{//Report an error}
+1628       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4c54d9b14297edac328805943cf95795}{ERROR\_UNSUPPORTED\_SIGNATURE\_ALGO};
+1629    \}
+1630 
+1631    \textcolor{comment}{//Return status code}
+1632    \textcolor{keywordflow}{return} error;
+1633 \textcolor{preprocessor}{#else}
+1634    \textcolor{comment}{//EdDSA signature verification is not supported}
+1635    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cab61c5ef368fbf03fdc1fb566c63f2f9a}{ERROR\_NOT\_IMPLEMENTED};
+1636 \textcolor{preprocessor}{#endif}
+1637 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{tls__signature_8c_a5271b7427830d34327644c6717e9f03d}\label{tls__signature_8c_a5271b7427830d34327644c6717e9f03d}} 
+\index{tls\+\_\+signature.\+c@{tls\+\_\+signature.\+c}!tls\+Verify\+Rsa\+Signature@{tls\+Verify\+Rsa\+Signature}}
+\index{tls\+Verify\+Rsa\+Signature@{tls\+Verify\+Rsa\+Signature}!tls\+\_\+signature.\+c@{tls\+\_\+signature.\+c}}
+\subsubsection{\texorpdfstring{tls\+Verify\+Rsa\+Signature()}{tlsVerifyRsaSignature()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} tls\+Verify\+Rsa\+Signature (\begin{DoxyParamCaption}\item[{const \hyperlink{structRsaPublicKey}{Rsa\+Public\+Key} $\ast$}]{key,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{digest,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{signature,  }\item[{size\+\_\+t}]{signature\+Len }\end{DoxyParamCaption})}
+
+
+
+Verify R\+SA signature (S\+SL 3.\+0, T\+LS 1.\+0 and T\+LS 1.\+1) 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em key} & Signer\textquotesingle{}s R\+SA public key \\
+\hline
+\mbox{\tt in}  & {\em digest} & Digest of the message whose signature is to be verified \\
+\hline
+\mbox{\tt in}  & {\em signature} & Signature to be verified \\
+\hline
+\mbox{\tt in}  & {\em signature\+Len} & Length of the signature to be verified \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 1053 of file tls\+\_\+signature.\+c.
+
+
+\begin{DoxyCode}
+1055 \{
+1056 \textcolor{preprocessor}{#if (TLS\_RSA\_SIGN\_SUPPORT == ENABLED)}
+1057    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+1058    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+1059    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} \hyperlink{md5_8c_af11ea3cdbca7345eb6a4a8ac5ce0434d}{k};
+1060    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *em;
+1061    \hyperlink{structMpi}{Mpi} \hyperlink{md2_8c_adf356ff381033f761b7de5f76e763a45}{s};
+1062    \hyperlink{structMpi}{Mpi} \hyperlink{ndp_8h_a6b3284d8492267a77ca46948daf5545e}{m};
+1063 
+1064    \textcolor{comment}{//Debug message}
+1065    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"RSA signature verification...\(\backslash\)r\(\backslash\)n"});
+1066    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  Modulus:\(\backslash\)r\(\backslash\)n"});
+1067    \hyperlink{debug_8h_a9c9f3b28f2daf14d77b401512c189d93}{TRACE\_DEBUG\_MPI}(\textcolor{stringliteral}{"    "}, &key->\hyperlink{structRsaPublicKey_a51b3d236796d7d46c15d3e6bc7e5acb2}{n});
+1068    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  Public exponent:\(\backslash\)r\(\backslash\)n"});
+1069    \hyperlink{debug_8h_a9c9f3b28f2daf14d77b401512c189d93}{TRACE\_DEBUG\_MPI}(\textcolor{stringliteral}{"    "}, &key->\hyperlink{structRsaPublicKey_af293e256864ab9ac9f80d1e6552693da}{e});
+1070    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  Message digest:\(\backslash\)r\(\backslash\)n"});
+1071    \hyperlink{debug_8h_a1f71019169d85407d8827300ed43bdf0}{TRACE\_DEBUG\_ARRAY}(\textcolor{stringliteral}{"    "}, digest, \hyperlink{md5_8h_ad86b38d6ab14e243543904e30f26bed2}{MD5\_DIGEST\_SIZE} + 
+      \hyperlink{sha1_8h_a3ba9296b223f1b3c710d6b812fd860e8}{SHA1\_DIGEST\_SIZE});
+1072    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  Signature:\(\backslash\)r\(\backslash\)n"});
+1073    \hyperlink{debug_8h_a1f71019169d85407d8827300ed43bdf0}{TRACE\_DEBUG\_ARRAY}(\textcolor{stringliteral}{"    "}, \hyperlink{tls_8h_af27e6d4ea3add14cd8cc9aa275d716ad}{signature}, signatureLen);
+1074 
+1075    \textcolor{comment}{//Get the length in octets of the modulus n}
+1076    k = \hyperlink{mpi_8c_a8599cb7537c854ae3b2442144c7f853b}{mpiGetByteLength}(&key->\hyperlink{structRsaPublicKey_a51b3d236796d7d46c15d3e6bc7e5acb2}{n});
+1077 
+1078    \textcolor{comment}{//Check the length of the signature}
+1079    \textcolor{keywordflow}{if}(signatureLen != k)
+1080       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca6e8db1d17e3aad53ecc5a4ff62df6f48}{ERROR\_INVALID\_SIGNATURE};
+1081 
+1082    \textcolor{comment}{//Initialize multiple-precision integers}
+1083    \hyperlink{mpi_8c_a6f30959dcaabfb16e96cc47ef90515a6}{mpiInit}(&s);
+1084    \hyperlink{mpi_8c_a6f30959dcaabfb16e96cc47ef90515a6}{mpiInit}(&m);
+1085 
+1086    \textcolor{comment}{//Allocate a memory buffer to hold the encoded message}
+1087    em = \hyperlink{tls_8h_a00504a83fb06cb4206f7205664ffeeb4}{tlsAllocMem}(k);
+1088    \textcolor{comment}{//Failed to allocate memory?}
+1089    \textcolor{keywordflow}{if}(em == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1090       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac0a554045048d2fb61387cf735676f69}{ERROR\_OUT\_OF\_MEMORY};
+1091 
+1092    \textcolor{comment}{//Start of exception handling block}
+1093    \textcolor{keywordflow}{do}
+1094    \{
+1095       \textcolor{comment}{//Convert the signature to an integer signature representative s}
+1096       error = \hyperlink{mpi_8c_a844d59498f4acce9d69ae55570b521f3}{mpiImport}(&s, \hyperlink{tls_8h_af27e6d4ea3add14cd8cc9aa275d716ad}{signature}, signatureLen, 
+      \hyperlink{mpi_8h_a5fe4159c7c390c604067e854b41d337fa0912b5922ecee206ec51e40d5285f77e}{MPI\_FORMAT\_BIG\_ENDIAN});
+1097       \textcolor{comment}{//Conversion failed?}
+1098       \textcolor{keywordflow}{if}(error)
+1099          \textcolor{keywordflow}{break};
+1100 
+1101       \textcolor{comment}{//Apply the RSAVP1 verification primitive}
+1102       error = \hyperlink{rsa_8c_ae3bd572570d3ad77ce2cf5169f8b4417}{rsavp1}(key, &s, &m);
+1103       \textcolor{comment}{//Any error to report?}
+1104       \textcolor{keywordflow}{if}(error)
+1105          \textcolor{keywordflow}{break};
+1106 
+1107       \textcolor{comment}{//Convert the message representative m to an encoded message EM of}
+1108       \textcolor{comment}{//length k octets}
+1109       error = \hyperlink{mpi_8c_aad846b0b5a3560243e1bf8601ad1b6a5}{mpiExport}(&m, em, k, \hyperlink{mpi_8h_a5fe4159c7c390c604067e854b41d337fa0912b5922ecee206ec51e40d5285f77e}{MPI\_FORMAT\_BIG\_ENDIAN});
+1110       \textcolor{comment}{//Conversion failed?}
+1111       \textcolor{keywordflow}{if}(error)
+1112          \textcolor{keywordflow}{break};
+1113 
+1114       \textcolor{comment}{//Debug message}
+1115       \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  Encoded message\(\backslash\)r\(\backslash\)n"});
+1116       \hyperlink{debug_8h_a1f71019169d85407d8827300ed43bdf0}{TRACE\_DEBUG\_ARRAY}(\textcolor{stringliteral}{"    "}, em, k);
+1117 
+1118       \textcolor{comment}{//Assume an error...}
+1119       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca6e8db1d17e3aad53ecc5a4ff62df6f48}{ERROR\_INVALID\_SIGNATURE};
+1120 
+1121       \textcolor{comment}{//The first octet of EM must have a value of 0x00}
+1122       \textcolor{keywordflow}{if}(em[0] != 0x00)
+1123          \textcolor{keywordflow}{break};
+1124       \textcolor{comment}{//The block type BT shall be 0x01}
+1125       \textcolor{keywordflow}{if}(em[1] != 0x01)
+1126          \textcolor{keywordflow}{break};
+1127 
+1128       \textcolor{comment}{//Check the padding string PS}
+1129       \textcolor{keywordflow}{for}(i = 2; i < \hyperlink{md5_8c_af11ea3cdbca7345eb6a4a8ac5ce0434d}{k}; i++)
+1130       \{
+1131          \textcolor{comment}{//A 0x00 octet indicates the end of the padding string}
+1132          \textcolor{keywordflow}{if}(em[i] == 0x00)
+1133             \textcolor{keywordflow}{break};
+1134 
+1135          \textcolor{comment}{//Each byte of PS must be set to 0xFF when the block type is 0x01}
+1136          \textcolor{keywordflow}{if}(em[i] != 0xFF)
+1137             \textcolor{keywordflow}{break};
+1138       \}
+1139 
+1140       \textcolor{comment}{//Check whether the padding string is properly terminated}
+1141       \textcolor{keywordflow}{if}(i >= k || em[i] != 0x00)
+1142          \textcolor{keywordflow}{break};
+1143 
+1144       \textcolor{comment}{//The length of PS cannot be less than 8 octets}
+1145       \textcolor{keywordflow}{if}(i < 10)
+1146          \textcolor{keywordflow}{break};
+1147 
+1148       \textcolor{comment}{//Check the length of the digest}
+1149       \textcolor{keywordflow}{if}((k - i - 1) != (\hyperlink{md5_8h_ad86b38d6ab14e243543904e30f26bed2}{MD5\_DIGEST\_SIZE} + \hyperlink{sha1_8h_a3ba9296b223f1b3c710d6b812fd860e8}{SHA1\_DIGEST\_SIZE}))
+1150          \textcolor{keywordflow}{break};
+1151       \textcolor{comment}{//Check the digest value}
+1152       \textcolor{keywordflow}{if}(memcmp(digest, em + i + 1, \hyperlink{md5_8h_ad86b38d6ab14e243543904e30f26bed2}{MD5\_DIGEST\_SIZE} + 
+      \hyperlink{sha1_8h_a3ba9296b223f1b3c710d6b812fd860e8}{SHA1\_DIGEST\_SIZE}))
+1153          \textcolor{keywordflow}{break};
+1154 
+1155       \textcolor{comment}{//The RSA signature is valid}
+1156       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+1157 
+1158       \textcolor{comment}{//End of exception handling block}
+1159    \} \textcolor{keywordflow}{while}(0);
+1160 
+1161    \textcolor{comment}{//Release multiple precision integers}
+1162    \hyperlink{mpi_8c_a9dc5be2f62d37d3854fa61beab3a61ad}{mpiFree}(&s);
+1163    \hyperlink{mpi_8c_a9dc5be2f62d37d3854fa61beab3a61ad}{mpiFree}(&m);
+1164    \textcolor{comment}{//Release previously allocated memory}
+1165    \hyperlink{tls_8h_a3bf186204f261ff5d65b31794917f742}{tlsFreeMem}(em);
+1166 
+1167    \textcolor{comment}{//Return status code}
+1168    \textcolor{keywordflow}{return} error;
+1169 \textcolor{preprocessor}{#else}
+1170    \textcolor{comment}{//RSA signature verification is not supported}
+1171    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cab61c5ef368fbf03fdc1fb566c63f2f9a}{ERROR\_NOT\_IMPLEMENTED};
+1172 \textcolor{preprocessor}{#endif}
+1173 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{tls__signature_8c_a15ddf6f6b2111125bc180fcae4bb6fd8}\label{tls__signature_8c_a15ddf6f6b2111125bc180fcae4bb6fd8}} 
+\index{tls\+\_\+signature.\+c@{tls\+\_\+signature.\+c}!tls\+Verify\+Signature@{tls\+Verify\+Signature}}
+\index{tls\+Verify\+Signature@{tls\+Verify\+Signature}!tls\+\_\+signature.\+c@{tls\+\_\+signature.\+c}}
+\subsubsection{\texorpdfstring{tls\+Verify\+Signature()}{tlsVerifySignature()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} tls\+Verify\+Signature (\begin{DoxyParamCaption}\item[{\hyperlink{tls_8h_ac09f7a286c0cdf9b07ee1edd107946f5}{Tls\+Context} $\ast$}]{context,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{p,  }\item[{size\+\_\+t}]{length }\end{DoxyParamCaption})}
+
+
+
+Digital signature verification (S\+SL 3.\+0, T\+LS 1.\+0 and T\+LS 1.\+1) 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the T\+LS context \\
+\hline
+\mbox{\tt in}  & {\em p} & Pointer to the digitally-\/signed element to be verified \\
+\hline
+\mbox{\tt in}  & {\em length} & Length of the digitally-\/signed element \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 478 of file tls\+\_\+signature.\+c.
+
+
+\begin{DoxyCode}
+480 \{
+481    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+482    \textcolor{keyword}{const} \hyperlink{tls_8h_a8e07cba48fef31563460ba8f90ad5f1d}{TlsDigitalSignature} *\hyperlink{tls_8h_af27e6d4ea3add14cd8cc9aa275d716ad}{signature};
+483 
+484    \textcolor{comment}{//The digitally-signed element does not convey the signature algorithm}
+485    \textcolor{comment}{//to use, and hence implementations need to inspect the certificate to}
+486    \textcolor{comment}{//find out the signature algorithm to use}
+487    signature = (\hyperlink{tls_8h_a8e07cba48fef31563460ba8f90ad5f1d}{TlsDigitalSignature} *) \hyperlink{ndp_8h_a6519522ad9a6f45e7a8d25d31392a977}{p};
+488 
+489    \textcolor{comment}{//Check the length of the digitally-signed element}
+490    \textcolor{keywordflow}{if}(\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} < \textcolor{keyword}{sizeof}(\hyperlink{tls_8h_a8e07cba48fef31563460ba8f90ad5f1d}{TlsDigitalSignature}))
+491       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca9468adacac8c37004024dd0095ba2768}{ERROR\_DECODING\_FAILED};
+492    \textcolor{keywordflow}{if}(\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} != (\textcolor{keyword}{sizeof}(\hyperlink{tls_8h_a8e07cba48fef31563460ba8f90ad5f1d}{TlsDigitalSignature}) + \hyperlink{cpu__endian_8h_a9312c6eb72e64f748ae0d0e0dc3ec9b9}{ntohs}(signature->length)))
+493       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca9468adacac8c37004024dd0095ba2768}{ERROR\_DECODING\_FAILED};
+494 
+495 \textcolor{preprocessor}{#if (TLS\_RSA\_SIGN\_SUPPORT == ENABLED)}
+496    \textcolor{comment}{//RSA certificate?}
+497    \textcolor{keywordflow}{if}(context->peerCertType == \hyperlink{tls_8h_a9bd45859e2bffbd3edb8beff07240ffda3a76023fc80c787bffed357a4560351b}{TLS\_CERT\_RSA\_SIGN})
+498    \{
+499       \textcolor{comment}{//Digest all the handshake messages starting at ClientHello using MD5}
+500       error = \hyperlink{tls__transcript__hash_8c_a177688a47fa85bb7fbe3f3ef755f493b}{tlsFinalizeTranscriptHash}(context, 
+      \hyperlink{md5_8h_adcb5ecbd7a360856b056f053b0d8343d}{MD5\_HASH\_ALGO},
+501          context->transcriptMd5Context, \textcolor{stringliteral}{""}, context->clientVerifyData);
+502 
+503       \textcolor{comment}{//Check status code}
+504       \textcolor{keywordflow}{if}(!error)
+505       \{
+506          \textcolor{comment}{//Digest all the handshake messages starting at ClientHello using SHA-1}
+507          error = \hyperlink{tls__transcript__hash_8c_a177688a47fa85bb7fbe3f3ef755f493b}{tlsFinalizeTranscriptHash}(context, 
+      \hyperlink{sha1_8h_a2529d805a2d0a0ca32114c810cc6cb1b}{SHA1\_HASH\_ALGO},
+508             context->transcriptSha1Context, \textcolor{stringliteral}{""},
+509             context->clientVerifyData + \hyperlink{md5_8h_ad86b38d6ab14e243543904e30f26bed2}{MD5\_DIGEST\_SIZE});
+510       \}
+511 
+512       \textcolor{comment}{//Check status code}
+513       \textcolor{keywordflow}{if}(!error)
+514       \{
+515          \textcolor{comment}{//Verify RSA signature using client's public key}
+516          error = \hyperlink{tls__signature_8c_a5271b7427830d34327644c6717e9f03d}{tlsVerifyRsaSignature}(&context->peerRsaPublicKey,
+517             context->clientVerifyData, signature->value,
+518             \hyperlink{cpu__endian_8h_a9312c6eb72e64f748ae0d0e0dc3ec9b9}{ntohs}(signature->length));
+519       \}
+520    \}
+521    \textcolor{keywordflow}{else}
+522 \textcolor{preprocessor}{#endif}
+523 \textcolor{preprocessor}{#if (TLS\_DSA\_SIGN\_SUPPORT == ENABLED)}
+524    \textcolor{comment}{//DSA certificate?}
+525    \textcolor{keywordflow}{if}(context->peerCertType == \hyperlink{tls_8h_a9bd45859e2bffbd3edb8beff07240ffda925aea3c96483609ae2867b10693b4c4}{TLS\_CERT\_DSS\_SIGN})
+526    \{
+527       \textcolor{comment}{//Digest all the handshake messages starting at ClientHello}
+528       error = \hyperlink{tls__transcript__hash_8c_a177688a47fa85bb7fbe3f3ef755f493b}{tlsFinalizeTranscriptHash}(context, 
+      \hyperlink{sha1_8h_a2529d805a2d0a0ca32114c810cc6cb1b}{SHA1\_HASH\_ALGO},
+529          context->transcriptSha1Context, \textcolor{stringliteral}{""}, context->clientVerifyData);
+530 
+531       \textcolor{comment}{//Check status code}
+532       \textcolor{keywordflow}{if}(!error)
+533       \{
+534          \textcolor{comment}{//Verify DSA signature using client's public key}
+535          error = \hyperlink{tls__signature_8c_a4ca472906bb02377b837ff2d96c18331}{tlsVerifyDsaSignature}(context, context->clientVerifyData,
+536             \hyperlink{sha1_8h_a3ba9296b223f1b3c710d6b812fd860e8}{SHA1\_DIGEST\_SIZE}, signature->value, \hyperlink{cpu__endian_8h_a9312c6eb72e64f748ae0d0e0dc3ec9b9}{ntohs}(signature->length));
+537       \}
+538    \}
+539    \textcolor{keywordflow}{else}
+540 \textcolor{preprocessor}{#endif}
+541 \textcolor{preprocessor}{#if (TLS\_ECDSA\_SIGN\_SUPPORT == ENABLED)}
+542    \textcolor{comment}{//ECDSA certificate?}
+543    \textcolor{keywordflow}{if}(context->peerCertType == \hyperlink{tls_8h_a9bd45859e2bffbd3edb8beff07240ffdab47f2dd2c4d36761f920f8a1af97f6ec}{TLS\_CERT\_ECDSA\_SIGN})
+544    \{
+545       \textcolor{comment}{//Digest all the handshake messages starting at ClientHello}
+546       error = \hyperlink{tls__transcript__hash_8c_a177688a47fa85bb7fbe3f3ef755f493b}{tlsFinalizeTranscriptHash}(context, 
+      \hyperlink{sha1_8h_a2529d805a2d0a0ca32114c810cc6cb1b}{SHA1\_HASH\_ALGO},
+547          context->transcriptSha1Context, \textcolor{stringliteral}{""}, context->clientVerifyData);
+548 
+549       \textcolor{comment}{//Check status code}
+550       \textcolor{keywordflow}{if}(!error)
+551       \{
+552          \textcolor{comment}{//Verify ECDSA signature using client's public key}
+553          error = \hyperlink{tls__signature_8c_a2a3f114dca59434482fce803095be646}{tlsVerifyEcdsaSignature}(context, context->clientVerifyData,
+554             \hyperlink{sha1_8h_a3ba9296b223f1b3c710d6b812fd860e8}{SHA1\_DIGEST\_SIZE}, signature->value, \hyperlink{cpu__endian_8h_a9312c6eb72e64f748ae0d0e0dc3ec9b9}{ntohs}(signature->length));
+555       \}
+556    \}
+557    \textcolor{keywordflow}{else}
+558 \textcolor{preprocessor}{#endif}
+559    \textcolor{comment}{//Invalid signature algorithm?}
+560    \{
+561       \textcolor{comment}{//Report an error}
+562       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca6e8db1d17e3aad53ecc5a4ff62df6f48}{ERROR\_INVALID\_SIGNATURE};
+563    \}
+564 
+565    \textcolor{comment}{//Return status code}
+566    \textcolor{keywordflow}{return} error;
+567 \}
+\end{DoxyCode}

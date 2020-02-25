@@ -1,0 +1,189 @@
+\hypertarget{m2m__wifi_8h}{}\section{third\+\_\+party/atmel/devices/wilc1000/driver/include/m2m\+\_\+wifi.h File Reference}
+\label{m2m__wifi_8h}\index{third\+\_\+party/atmel/devices/wilc1000/driver/include/m2m\+\_\+wifi.\+h@{third\+\_\+party/atmel/devices/wilc1000/driver/include/m2m\+\_\+wifi.\+h}}
+{\ttfamily \#include \char`\"{}common/include/nm\+\_\+common.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}driver/include/m2m\+\_\+types.\+h\char`\"{}}\newline
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structtstrEthInitParam}{tstr\+Eth\+Init\+Param}
+\begin{DoxyCompactList}\small\item\em Structure to hold ethernet interface parameters. Structure is to be defined and have its attributes set,based on the application\textquotesingle{}s functiality before a call is made to the initialize the wi-\/fi operations by calling the \hyperlink{group__WifiInitFn_ga73c734812e844d96d860c4e93e9daf35}{m2m\+\_\+wifi\+\_\+init} function. Part of the wi-\/fi configuration structure \hyperlink{structtstrWifiInitParam}{tstr\+Wifi\+Init\+Param}. \end{DoxyCompactList}\item 
+struct \hyperlink{structtstrM2MDataBufCtrl}{tstr\+M2\+M\+Data\+Buf\+Ctrl}
+\begin{DoxyCompactList}\small\item\em Structure holding the incoming buffer\textquotesingle{}s data size information, indicating the data size of the buffer and the remaining buffer\textquotesingle{}s data size . The data of the buffer which holds the packet sent to the host is placed in the \hyperlink{structtstrEthInitParam}{tstr\+Eth\+Init\+Param} structure in the au8eth\+Rcv\+Buf attribute. This following information is retreived in the host when an event \hyperlink{group__WlanEnums_gga064de09dec1d5e88ed8d075fa40f57dea2d2336ccd8bfda6e083b0ec6b8d798ba}{M2\+M\+\_\+\+W\+I\+F\+I\+\_\+\+R\+E\+S\+P\+\_\+\+E\+T\+H\+E\+R\+N\+E\+T\+\_\+\+R\+X\+\_\+\+P\+A\+C\+K\+ET} is received in the wi-\/fi callback function \hyperlink{group__WlanEnums_gac5302f32839285fe8375c159087aa8a1}{tpf\+App\+Wifi\+Cb}. \end{DoxyCompactList}\item 
+struct \hyperlink{structtstrWifiInitParam}{tstr\+Wifi\+Init\+Param}
+\begin{DoxyCompactList}\small\item\em Structure, holding the Wi-\/\+Fi configuration attributes such as the Wi-\/\+Fi callback, monitoring mode callback and Ethernet parameter initialization structure. Such configuration parameters are required to be set before calling the Wi-\/\+Fi initialization function \hyperlink{group__WifiSetCustInfoElementFn_ga13d5fa7a0c71fd59bbf36a61923835cc}{pf\+App\+Wifi\+Cb} attribute must be set to handle the wi-\/fi callback operations. \hyperlink{group__WifiSetCustInfoElementFn_gabbd16bbde19ebb6cea2ff732b84421e8}{pf\+App\+Mon\+Cb} attribute, is optional based on wether the application requires the monitoring mode configuration, and can there not be set before the initialization. \hyperlink{group__WifiSetCustInfoElementFn_gac72757e663d13b9c446735a5dca54eb1}{str\+Eth\+Init\+Param} structure must be set to handle ethernet packet. \end{DoxyCompactList}\item 
+union \hyperlink{uniontuCtrlStruct}{tu\+Ctrl\+Struct}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef void($\ast$ \hyperlink{group__WlanEnums_gac5302f32839285fe8375c159087aa8a1}{tpf\+App\+Wifi\+Cb}) (\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} u8\+Msg\+Type, void $\ast$pv\+Msg)
+\begin{DoxyCompactList}\small\item\em Wi-\/\+Fi\textquotesingle{}s main callback function handler, for handling the M2\+M\+\_\+\+W\+I\+FI events received on the Wi-\/\+Fi interface. Such notifications are received in response to Wi-\/\+Fi/\+P2P operations such as \hyperlink{group__WifiRequestScanFn_ga499dfa24a19c2e84776aeabedf897135}{m2m\+\_\+wifi\+\_\+request\+\_\+scan}, \hyperlink{group__WifiConnectFn_ga19c9871147efe70f5d9c2cc2cdd5bff0}{m2m\+\_\+wifi\+\_\+connect}. Wi-\/\+Fi/\+P2P operations are implemented in an asynchronous mode, and all incoming information/status are to be handled through this callback function when the corresponding notification is received. Applications are expected to assign this wi-\/fi callback function by calling \hyperlink{group__WifiInitFn_ga73c734812e844d96d860c4e93e9daf35}{m2m\+\_\+wifi\+\_\+init}. \end{DoxyCompactList}\item 
+typedef void($\ast$ \hyperlink{group__WlanEnums_ga9dda38bbac67906396ad1b1e0419502d}{tpf\+App\+Eth\+Cb}) (\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} u8\+Msg\+Type, void $\ast$pv\+Msg, void $\ast$pv\+Ctrl\+Buf)
+\begin{DoxyCompactList}\small\item\em Ethernet notification callback function receiving events as defined in the Wi-\/\+Fi reponses enumeration \hyperlink{group__WlanEnums_ga064de09dec1d5e88ed8d075fa40f57de}{tenu\+M2m\+Sta\+Cmd}. \end{DoxyCompactList}\item 
+typedef void($\ast$ \hyperlink{group__WlanEnums_ga8d2753e870245dad4932cee1777c6eb6}{tpf\+App\+Mon\+Cb}) (\hyperlink{structtstrM2MWifiRxPacketInfo}{tstr\+M2\+M\+Wifi\+Rx\+Packet\+Info} $\ast$pstr\+Wifi\+Rx\+Packet, \hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} $\ast$pu8\+Payload, \hyperlink{group__DataT_ga1daa745171fc6e31d942c161422a76f9}{uint16} u16\+Payload\+Size)
+\begin{DoxyCompactList}\small\item\em Wi-\/\+Fi monitoring mode callback function. This function delivers all received wi-\/\+Fi packets through the Wi-\/\+Fi interface. Applications requiring to operate in the monitoring should call the asynchronous function m2m\+\_\+wifi\+\_\+enable\+\_\+monitoring\+\_\+mode and expect to receive the wi-\/fi packets through this callback function, when the event ....is received. To disable the monitoring mode a call to \hyperlink{group__WifiDisableMonitorModeFn_ga22d6c3d2f63fceac652835994cb15594}{m2m\+\_\+wifi\+\_\+disable\+\_\+monitoring\+\_\+mode} should be made. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{group__WlanEnums_ga593eb9b713b71fcc9cae6e81393b40d9}{tenu\+Wifi\+Frame\+Type} \{ \hyperlink{group__WlanEnums_gga593eb9b713b71fcc9cae6e81393b40d9a6882ae19eda3dcf275595670d49d709e}{M\+A\+N\+A\+G\+E\+M\+E\+NT} = 0x00, 
+\hyperlink{group__WlanEnums_gga593eb9b713b71fcc9cae6e81393b40d9af722a5faa36087c914da53ebe4711f08}{C\+O\+N\+T\+R\+OL} = 0x04, 
+\hyperlink{group__WlanEnums_gga593eb9b713b71fcc9cae6e81393b40d9a297b5ad5452f3000106b51741f65aee9}{D\+A\+T\+A\+\_\+\+B\+A\+S\+I\+C\+T\+Y\+PE} = 0x08, 
+\hyperlink{group__WlanEnums_gga593eb9b713b71fcc9cae6e81393b40d9afe4c21755babfece7188666f75c7386b}{R\+E\+S\+E\+R\+V\+ED} = 0x0C
+ \}\begin{DoxyCompactList}\small\item\em Enumeration for Wi-\/\+Fi M\+AC frame type codes (2-\/bit) The following types are used to identify the type of frame sent or received. Each frame type constitues a number of frame subtypes as defined in \hyperlink{group__WlanEnums_gaef9606d02acd4b3ce5497f5eb4176f2a}{tenu\+Sub\+Types} to specify the exact type of frame. Values are defined as per the I\+E\+EE 802.\+11 standard. \end{DoxyCompactList}
+\item 
+enum \hyperlink{group__WlanEnums_gaef9606d02acd4b3ce5497f5eb4176f2a}{tenu\+Sub\+Types} \{ \newline
+\hyperlink{group__WlanEnums_ggaef9606d02acd4b3ce5497f5eb4176f2aabae20e552cd67979613556b2be4113e8}{A\+S\+S\+O\+C\+\_\+\+R\+EQ} = 0x00, 
+\hyperlink{group__WlanEnums_ggaef9606d02acd4b3ce5497f5eb4176f2aaa6abe5695d84bf0f0d006569aa9aea7e}{A\+S\+S\+O\+C\+\_\+\+R\+SP} = 0x10, 
+\hyperlink{group__WlanEnums_ggaef9606d02acd4b3ce5497f5eb4176f2aa863ca62311bb153e09bb52445b6e1f2f}{R\+E\+A\+S\+S\+O\+C\+\_\+\+R\+EQ} = 0x20, 
+\hyperlink{group__WlanEnums_ggaef9606d02acd4b3ce5497f5eb4176f2aa310b74270d2591c28928082cc3328569}{R\+E\+A\+S\+S\+O\+C\+\_\+\+R\+SP} = 0x30, 
+\newline
+\hyperlink{group__WlanEnums_ggaef9606d02acd4b3ce5497f5eb4176f2aac8cd42b7b2fc65972ce0c0f6c8f452a2}{P\+R\+O\+B\+E\+\_\+\+R\+EQ} = 0x40, 
+\hyperlink{group__WlanEnums_ggaef9606d02acd4b3ce5497f5eb4176f2aa055cfd1314c9f917aa87ebe3078e4332}{P\+R\+O\+B\+E\+\_\+\+R\+SP} = 0x50, 
+\hyperlink{group__WlanEnums_ggaef9606d02acd4b3ce5497f5eb4176f2aad4a0a7cbd9a8091a1af294934148de22}{B\+E\+A\+C\+ON} = 0x80, 
+\hyperlink{group__WlanEnums_ggaef9606d02acd4b3ce5497f5eb4176f2aa1613b5021ad245ff58189bb14b0f32eb}{A\+T\+IM} = 0x90, 
+\newline
+\hyperlink{group__WlanEnums_ggaef9606d02acd4b3ce5497f5eb4176f2aabaa37bf941c611db9966ae76e31925dc}{D\+I\+S\+A\+S\+OC} = 0x\+A0, 
+\hyperlink{group__WlanEnums_ggaef9606d02acd4b3ce5497f5eb4176f2aa8b22fbb60fcbd7a4a5e1e6ff6ee38218}{A\+U\+TH} = 0x\+B0, 
+\hyperlink{group__WlanEnums_ggaef9606d02acd4b3ce5497f5eb4176f2aa470e72168ff79e6614d5591cc1c8164c}{D\+E\+A\+U\+TH} = 0x\+C0, 
+\hyperlink{group__WlanEnums_ggaef9606d02acd4b3ce5497f5eb4176f2aae1bb1460cb779888412e634e983be161}{A\+C\+T\+I\+ON} = 0x\+D0, 
+\newline
+\hyperlink{group__WlanEnums_ggaef9606d02acd4b3ce5497f5eb4176f2aa0604abf34a06ba9170a84ce72c8bdd26}{P\+S\+\_\+\+P\+O\+LL} = 0x\+A4, 
+\hyperlink{group__WlanEnums_ggaef9606d02acd4b3ce5497f5eb4176f2aae58caa68ff8b6e4838007985c7e3ae66}{R\+TS} = 0x\+B4, 
+\hyperlink{group__WlanEnums_ggaef9606d02acd4b3ce5497f5eb4176f2aa97dc7d7bbe8a217f4bc934b4a868c521}{C\+TS} = 0x\+C4, 
+\hyperlink{group__WlanEnums_ggaef9606d02acd4b3ce5497f5eb4176f2aa41246e9c8691b7e33bc79b345e06b48e}{A\+CK} = 0x\+D4, 
+\newline
+\hyperlink{group__WlanEnums_ggaef9606d02acd4b3ce5497f5eb4176f2aa76d6e1b70122616465bb85bd1360f8fa}{C\+F\+E\+ND} = 0x\+E4, 
+\hyperlink{group__WlanEnums_ggaef9606d02acd4b3ce5497f5eb4176f2aa543d3dcdd4480205fc0655c1e57c3cad}{C\+F\+E\+N\+D\+\_\+\+A\+CK} = 0x\+F4, 
+\hyperlink{group__WlanEnums_ggaef9606d02acd4b3ce5497f5eb4176f2aa493bcd43d6dc30f9f885b23a950fa470}{B\+L\+O\+C\+K\+A\+C\+K\+\_\+\+R\+EQ} = 0x84, 
+\hyperlink{group__WlanEnums_ggaef9606d02acd4b3ce5497f5eb4176f2aa45304f2fd26d746643b76c90ba88683a}{B\+L\+O\+C\+K\+A\+CK} = 0x94, 
+\newline
+\hyperlink{group__WlanEnums_ggaef9606d02acd4b3ce5497f5eb4176f2aa9d7d6f31868d66330397c967c4afd2d2}{D\+A\+TA} = 0x08, 
+\hyperlink{group__WlanEnums_ggaef9606d02acd4b3ce5497f5eb4176f2aaa7bc234cc9ed1c7531797d6c9779186f}{D\+A\+T\+A\+\_\+\+A\+CK} = 0x18, 
+\hyperlink{group__WlanEnums_ggaef9606d02acd4b3ce5497f5eb4176f2aade2f9cb62411e577fbb2a6d6881f1545}{D\+A\+T\+A\+\_\+\+P\+O\+LL} = 0x28, 
+\hyperlink{group__WlanEnums_ggaef9606d02acd4b3ce5497f5eb4176f2aa205dc8ebd5a98b3f18e2dd0d3c536fe8}{D\+A\+T\+A\+\_\+\+P\+O\+L\+L\+\_\+\+A\+CK} = 0x38, 
+\newline
+\hyperlink{group__WlanEnums_ggaef9606d02acd4b3ce5497f5eb4176f2aaa8af0f1d2b03befca7f17d06c9cbdb35}{N\+U\+L\+L\+\_\+\+F\+R\+A\+ME} = 0x48, 
+\hyperlink{group__WlanEnums_ggaef9606d02acd4b3ce5497f5eb4176f2aa2c3b861797504cf9022aeffd600b1240}{C\+F\+A\+CK} = 0x58, 
+\hyperlink{group__WlanEnums_ggaef9606d02acd4b3ce5497f5eb4176f2aad36d6ae97370ffb670604e499a1c8d4a}{C\+F\+P\+O\+LL} = 0x68, 
+\hyperlink{group__WlanEnums_ggaef9606d02acd4b3ce5497f5eb4176f2aacf13f4e2e98e2712856606f2a6df699d}{C\+F\+P\+O\+L\+L\+\_\+\+A\+CK} = 0x78, 
+\newline
+\hyperlink{group__WlanEnums_ggaef9606d02acd4b3ce5497f5eb4176f2aa57aa937260928691e2d7b08f48f9581e}{Q\+O\+S\+\_\+\+D\+A\+TA} = 0x88, 
+\hyperlink{group__WlanEnums_ggaef9606d02acd4b3ce5497f5eb4176f2aa2b5be9292077af54b0426a9805d3fa7b}{Q\+O\+S\+\_\+\+D\+A\+T\+A\+\_\+\+A\+CK} = 0x98, 
+\hyperlink{group__WlanEnums_ggaef9606d02acd4b3ce5497f5eb4176f2aaef7d3a1d9dd3bd587a7016348e6121da}{Q\+O\+S\+\_\+\+D\+A\+T\+A\+\_\+\+P\+O\+LL} = 0x\+A8, 
+\hyperlink{group__WlanEnums_ggaef9606d02acd4b3ce5497f5eb4176f2aa0207859096642ab4ba81504cda04abdc}{Q\+O\+S\+\_\+\+D\+A\+T\+A\+\_\+\+P\+O\+L\+L\+\_\+\+A\+CK} = 0x\+B8, 
+\newline
+\hyperlink{group__WlanEnums_ggaef9606d02acd4b3ce5497f5eb4176f2aa69adad58f221a480d5ab5c6697080dbf}{Q\+O\+S\+\_\+\+N\+U\+L\+L\+\_\+\+F\+R\+A\+ME} = 0x\+C8, 
+\hyperlink{group__WlanEnums_ggaef9606d02acd4b3ce5497f5eb4176f2aac36e98a77c23d49bf4a9041e493f252d}{Q\+O\+S\+\_\+\+C\+F\+P\+O\+LL} = 0x\+E8, 
+\hyperlink{group__WlanEnums_ggaef9606d02acd4b3ce5497f5eb4176f2aa3b3abf32075064d4f01049fd02a67c7b}{Q\+O\+S\+\_\+\+C\+F\+P\+O\+L\+L\+\_\+\+A\+CK} = 0x\+F8
+ \}\begin{DoxyCompactList}\small\item\em Enumeration for Wi-\/\+Fi M\+AC Frame subtype code (6-\/bit). The frame subtypes fall into one of the three frame type groups as defined in \hyperlink{group__WlanEnums_ga593eb9b713b71fcc9cae6e81393b40d9}{tenu\+Wifi\+Frame\+Type} (M\+A\+N\+A\+G\+E\+M\+E\+NT, C\+O\+N\+T\+R\+OL \& D\+A\+TA). Values are defined as per the I\+E\+EE 802.\+11 standard. \end{DoxyCompactList}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group__BSPDefine_gaecc0323d771e41ef81a76b5f12783e22}{N\+M\+I\+\_\+\+A\+PI} \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} \hyperlink{group__WifiInitFn_ga73c734812e844d96d860c4e93e9daf35}{m2m\+\_\+wifi\+\_\+init} (\hyperlink{structtstrWifiInitParam}{tstr\+Wifi\+Init\+Param} $\ast$p\+Wifi\+Init\+Param)
+\item 
+\hyperlink{group__BSPDefine_gaecc0323d771e41ef81a76b5f12783e22}{N\+M\+I\+\_\+\+A\+PI} \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} \hyperlink{group__WifiDeinitFn_gacadee10a536f3e9817f26aa52b0bb954}{m2m\+\_\+wifi\+\_\+deinit} (void $\ast$arg)
+\item 
+\hyperlink{group__BSPDefine_gaecc0323d771e41ef81a76b5f12783e22}{N\+M\+I\+\_\+\+A\+PI} \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} \hyperlink{group__WifiHandleEventsFn_ga461a4edc057cec8c00cf124a07aa3b02}{m2m\+\_\+wifi\+\_\+handle\+\_\+events} (void $\ast$arg)
+\item 
+\hyperlink{group__BSPDefine_gaecc0323d771e41ef81a76b5f12783e22}{N\+M\+I\+\_\+\+A\+PI} \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} \hyperlink{group__WifiConnectFn_ga19c9871147efe70f5d9c2cc2cdd5bff0}{m2m\+\_\+wifi\+\_\+connect} (char $\ast$pc\+Ssid, \hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} u8\+Ssid\+Len, \hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} u8\+Sec\+Type, \hyperlink{uniontuniM2MWifiAuth}{tuni\+M2\+M\+Wifi\+Auth} $\ast$puni\+Auth\+Info, \hyperlink{group__DataT_ga1daa745171fc6e31d942c161422a76f9}{uint16} u16\+Ch)
+\item 
+\hyperlink{group__BSPDefine_gaecc0323d771e41ef81a76b5f12783e22}{N\+M\+I\+\_\+\+A\+PI} \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} \hyperlink{group__WifiDisconnectFn_gac8b0100ec59a1b0852e4801f6879120f}{m2m\+\_\+wifi\+\_\+disconnect} (void)
+\item 
+\hyperlink{group__BSPDefine_gaecc0323d771e41ef81a76b5f12783e22}{N\+M\+I\+\_\+\+A\+PI} \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} \hyperlink{group__GetConnectionInfoFn_gaf42861a22b362fd4d74939a009eb6592}{m2m\+\_\+wifi\+\_\+get\+\_\+connection\+\_\+info} (void)
+\begin{DoxyCompactList}\small\item\em Request the status information of the currently connected Wi-\/\+Fi AP. The result is passed to the Wi-\/\+Fi notification callback with the event \hyperlink{group__WlanEnums_gga064de09dec1d5e88ed8d075fa40f57dea35767ad0217ab92b149bc77e79610d33}{M2\+M\+\_\+\+W\+I\+F\+I\+\_\+\+R\+E\+S\+P\+\_\+\+C\+O\+N\+N\+\_\+\+I\+N\+FO}. \end{DoxyCompactList}\item 
+\hyperlink{group__BSPDefine_gaecc0323d771e41ef81a76b5f12783e22}{N\+M\+I\+\_\+\+A\+PI} \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} \hyperlink{group__WifiSetMacAddFn_gae9a57d265b208dbd4a1dbc79e6ac5278}{m2m\+\_\+wifi\+\_\+set\+\_\+mac\+\_\+address} (\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} au8\+Mac\+Address0\mbox{[}6\mbox{]}, \hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} au8\+Mac\+Address1\mbox{[}6\mbox{]})
+\begin{DoxyCompactList}\small\item\em Assign M\+AC addresses to the W\+I\+LC device. \end{DoxyCompactList}\item 
+\hyperlink{group__BSPDefine_gaecc0323d771e41ef81a76b5f12783e22}{N\+M\+I\+\_\+\+A\+PI} \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} \hyperlink{group__WifiWpsFn_ga2130dab81af44784dac78e2ae8c2601c}{m2m\+\_\+wifi\+\_\+wps} (\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} u8\+Trigger\+Type, const char $\ast$pc\+Pin\+Number)
+\item 
+\hyperlink{group__BSPDefine_gaecc0323d771e41ef81a76b5f12783e22}{N\+M\+I\+\_\+\+A\+PI} \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} \hyperlink{group__WifiWpsDisableFn_gaeaf588c8639ed58897b765cc4b77f5b6}{m2m\+\_\+wifi\+\_\+wps\+\_\+disable} (void)
+\begin{DoxyCompactList}\small\item\em Disable the W\+I\+LC W\+PS operation. \end{DoxyCompactList}\item 
+\hyperlink{group__BSPDefine_gaecc0323d771e41ef81a76b5f12783e22}{N\+M\+I\+\_\+\+A\+PI} \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} \hyperlink{group__WifiP2PFn_ga9d2daba93e1e2e33bde42edd359eb2f2}{m2m\+\_\+wifi\+\_\+p2p} (\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} u8\+Channel, \hyperlink{group__WlanEnums_ga0b97cca65d26d6163cabcb708e5759df}{tenu\+P2\+P\+Trigger} enu\+Trigger, \hyperlink{group__DataT_ga1daa745171fc6e31d942c161422a76f9}{uint16} u16\+W\+P\+S\+\_\+\+Cfg\+Mehods)
+\item 
+\hyperlink{group__BSPDefine_gaecc0323d771e41ef81a76b5f12783e22}{N\+M\+I\+\_\+\+A\+PI} \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} \hyperlink{group__WifiP2PDisconnectFn_ga461b81d9e3c60433906384c791398cd4}{m2m\+\_\+wifi\+\_\+p2p\+\_\+disconnect} (void)
+\item 
+\hyperlink{group__BSPDefine_gaecc0323d771e41ef81a76b5f12783e22}{N\+M\+I\+\_\+\+A\+PI} \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} \hyperlink{group__WifiEnableApFn_gab34cff419964df3c4e1ed86076aef7ce}{m2m\+\_\+wifi\+\_\+enable\+\_\+ap} (\hyperlink{group__BSPDefine_ga0c33b494a68ce28497e7ce8e5e95feff}{C\+O\+N\+ST} \hyperlink{structtstrM2MAPConfig}{tstr\+M2\+M\+A\+P\+Config} $\ast$pstr\+M2\+M\+A\+P\+Config)
+\item 
+\hyperlink{group__BSPDefine_gaecc0323d771e41ef81a76b5f12783e22}{N\+M\+I\+\_\+\+A\+PI} \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} \hyperlink{group__WifiDisableApFn_ga69d3d1d687a493fa31c05109cfe3d05a}{m2m\+\_\+wifi\+\_\+disable\+\_\+ap} (void)
+\item 
+\hyperlink{group__BSPDefine_gaecc0323d771e41ef81a76b5f12783e22}{N\+M\+I\+\_\+\+A\+PI} \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} \hyperlink{group__GetConnectionInfoFn_ga567fc3927ab3a93e232cc3e4c29c673b}{m2m\+\_\+wifi\+\_\+ap\+\_\+get\+\_\+assoc\+\_\+info} (void)
+\begin{DoxyCompactList}\small\item\em Request the status information of the currently connected stations to the W\+I\+L\+C1000 AP. The result is passed to the Wi-\/\+Fi notification callback with the event \hyperlink{group__WlanEnums_ggaa62989ea5e2977b374a04db81c89d524ae44909b7e419ce7c69f64ab8399ea67d}{M2\+M\+\_\+\+W\+I\+F\+I\+\_\+\+R\+E\+S\+P\+\_\+\+A\+P\+\_\+\+A\+S\+S\+O\+C\+\_\+\+I\+N\+FO}. \end{DoxyCompactList}\item 
+\hyperlink{group__BSPDefine_gaecc0323d771e41ef81a76b5f12783e22}{N\+M\+I\+\_\+\+A\+PI} \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} \hyperlink{group__WifiDisableApFn_gafc6b3c4d3e41b821c37a6884b06481e0}{m2m\+\_\+wifi\+\_\+ap\+\_\+add\+\_\+black\+\_\+list} (\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} b\+Add\+New\+Entry, \hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} $\ast$mac\+\_\+addr)
+\item 
+\hyperlink{group__BSPDefine_gaecc0323d771e41ef81a76b5f12783e22}{N\+M\+I\+\_\+\+A\+PI} \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} \hyperlink{group__WifiSetScanOptionFn_ga588ab7517c383d5f814a7a55125dd83b}{m2m\+\_\+wifi\+\_\+set\+\_\+scan\+\_\+options} (\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} u8\+Num\+Of\+Slot, \hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} u8\+Slot\+Time)
+\item 
+\hyperlink{group__BSPDefine_gaecc0323d771e41ef81a76b5f12783e22}{N\+M\+I\+\_\+\+A\+PI} \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} \hyperlink{group__WifiSetScanRegionFn_ga68c36d05bbbec08c800137eabddb6d92}{m2m\+\_\+wifi\+\_\+set\+\_\+scan\+\_\+region} (\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} Scan\+Region)
+\item 
+\hyperlink{group__BSPDefine_gaecc0323d771e41ef81a76b5f12783e22}{N\+M\+I\+\_\+\+A\+PI} \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} \hyperlink{group__WifiSetScanRegionFn_gace941c5ceb0d191e1605b85f0a8dcb73}{m2m\+\_\+wifi\+\_\+set\+\_\+scan\+\_\+list} (\hyperlink{structtstrM2MScanList}{tstr\+M2\+M\+Scan\+List} $\ast$pstr\+Scan\+List)
+\item 
+\hyperlink{group__BSPDefine_gaecc0323d771e41ef81a76b5f12783e22}{N\+M\+I\+\_\+\+A\+PI} \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} \hyperlink{group__WifiRequestScanFn_ga499dfa24a19c2e84776aeabedf897135}{m2m\+\_\+wifi\+\_\+request\+\_\+scan} (\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} ch)
+\item 
+\hyperlink{group__BSPDefine_gaecc0323d771e41ef81a76b5f12783e22}{N\+M\+I\+\_\+\+A\+PI} \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} \hyperlink{group__WifiRequestScanFn_gac02213169dee5603574c3f364345f1f6}{m2m\+\_\+wifi\+\_\+request\+\_\+scan\+\_\+ssid} (\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} ch, char $\ast$pcssid)
+\item 
+\hyperlink{group__BSPDefine_gaecc0323d771e41ef81a76b5f12783e22}{N\+M\+I\+\_\+\+A\+PI} \hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} \hyperlink{group__WifiGetNumAPFoundFn_gac92223273822358f4aee6e133b11815d}{m2m\+\_\+wifi\+\_\+get\+\_\+num\+\_\+ap\+\_\+found} (void)
+\begin{DoxyCompactList}\small\item\em Reads the number of AP\textquotesingle{}s found in the last Scan Request, The function read the number of AP\textquotesingle{}s from global variable which updated in the wifi\+\_\+cb in M2\+M\+\_\+\+W\+I\+F\+I\+\_\+\+R\+E\+S\+P\+\_\+\+S\+C\+A\+N\+\_\+\+D\+O\+NE. \end{DoxyCompactList}\item 
+\hyperlink{group__BSPDefine_gaecc0323d771e41ef81a76b5f12783e22}{N\+M\+I\+\_\+\+A\+PI} \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} \hyperlink{group__WifiReqScanResult_ga2585ee08ee8ecac67155ec99dd4d0863}{m2m\+\_\+wifi\+\_\+req\+\_\+scan\+\_\+result} (\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} index)
+\begin{DoxyCompactList}\small\item\em Reads the AP information from the Scan Result list with the given index, the response received in wifi\+\_\+cb M2\+M\+\_\+\+W\+I\+F\+I\+\_\+\+R\+E\+S\+P\+\_\+\+S\+C\+A\+N\+\_\+\+R\+E\+S\+U\+LT, the response pointer should be casted with \hyperlink{structtstrM2mWifiscanResult}{tstr\+M2m\+Wifiscan\+Result} structure. \end{DoxyCompactList}\item 
+\hyperlink{group__BSPDefine_gaecc0323d771e41ef81a76b5f12783e22}{N\+M\+I\+\_\+\+A\+PI} \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} \hyperlink{group__WifiReqCurrentRssiFn_gaeb2391da3ba8b116b9a2275c09920f04}{m2m\+\_\+wifi\+\_\+req\+\_\+curr\+\_\+rssi} (void)
+\begin{DoxyCompactList}\small\item\em Request the current R\+S\+SI for the current connected AP, the response received in wifi\+\_\+cb M2\+M\+\_\+\+W\+I\+F\+I\+\_\+\+R\+E\+S\+P\+\_\+\+C\+U\+R\+R\+E\+N\+T\+\_\+\+R\+S\+SI. \end{DoxyCompactList}\item 
+\hyperlink{group__BSPDefine_gaecc0323d771e41ef81a76b5f12783e22}{N\+M\+I\+\_\+\+A\+PI} \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} \hyperlink{group__WifiGetOtpMacAddFn_gadb7460d1e0b162decddb7b520e6dbf7b}{m2m\+\_\+wifi\+\_\+get\+\_\+otp\+\_\+mac\+\_\+address} (\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} $\ast$pu8\+Mac\+Addr, \hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} $\ast$pu8\+Is\+Valid)
+\begin{DoxyCompactList}\small\item\em Request the M\+AC address stored on the O\+TP (one time programmable) memory of the device. (the function is Blocking until response received) \end{DoxyCompactList}\item 
+\hyperlink{group__BSPDefine_gaecc0323d771e41ef81a76b5f12783e22}{N\+M\+I\+\_\+\+A\+PI} \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} \hyperlink{group__WifiGetMacAddFn_gac091fddf2dfe77d8674803d0a4588408}{m2m\+\_\+wifi\+\_\+get\+\_\+mac\+\_\+address} (\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} $\ast$pu8\+Mac\+Addr0, \hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} $\ast$pu8\+Mac\+Addr1)
+\begin{DoxyCompactList}\small\item\em Request the current M\+AC addresses of the device (the working mac addresses). (the function is Blocking until response received) \end{DoxyCompactList}\item 
+\hyperlink{group__BSPDefine_gaecc0323d771e41ef81a76b5f12783e22}{N\+M\+I\+\_\+\+A\+PI} \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} \hyperlink{group__SetSleepModeFn_gaeea00cc2149c37ac91e2cb5882dadd14}{m2m\+\_\+wifi\+\_\+set\+\_\+sleep\+\_\+mode} (\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} Ps\+Typ, \hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} Bcast\+En)
+\begin{DoxyCompactList}\small\item\em Set the power saving mode for the W\+I\+L\+C1000. \end{DoxyCompactList}\item 
+\hyperlink{group__BSPDefine_gaecc0323d771e41ef81a76b5f12783e22}{N\+M\+I\+\_\+\+A\+PI} \hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} \hyperlink{group__GetSleepModeFn_gae50c5ac6b830890833fcfb6ad910530f}{m2m\+\_\+wifi\+\_\+get\+\_\+sleep\+\_\+mode} (void)
+\begin{DoxyCompactList}\small\item\em Get the current Power save mode. \end{DoxyCompactList}\item 
+\hyperlink{group__BSPDefine_gaecc0323d771e41ef81a76b5f12783e22}{N\+M\+I\+\_\+\+A\+PI} \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} \hyperlink{group__WlanEnums_gac93d56dc53ba0a5a02b669c800b7ae62}{m2m\+\_\+wifi\+\_\+set\+\_\+p2p\+\_\+pin} (\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} $\ast$pu8\+Pin\+Number, \hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} u8\+Pin\+Length)
+\item 
+\hyperlink{group__BSPDefine_gaecc0323d771e41ef81a76b5f12783e22}{N\+M\+I\+\_\+\+A\+PI} \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} \hyperlink{m2m__wifi_8h_a25d63ac165f19310f6ed73d115ad9155}{m2m\+\_\+wifi\+\_\+allow\+\_\+p2p\+\_\+connection} (void)
+\item 
+\hyperlink{group__BSPDefine_gaecc0323d771e41ef81a76b5f12783e22}{N\+M\+I\+\_\+\+A\+PI} \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} \hyperlink{group__WifiSetLsnIntFn_gae97a08e321adfa528b5ec7a42788d3fc}{m2m\+\_\+wifi\+\_\+set\+\_\+lsn\+\_\+int} (\hyperlink{structtstrM2mLsnInt}{tstr\+M2m\+Lsn\+Int} $\ast$pstr\+M2m\+Lsn\+Int)
+\begin{DoxyCompactList}\small\item\em Set the Wi-\/\+Fi listen interval for power save operation. It is represented in units of AP Beacon periods. \end{DoxyCompactList}\item 
+\hyperlink{group__BSPDefine_gaecc0323d771e41ef81a76b5f12783e22}{N\+M\+I\+\_\+\+A\+PI} \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} \hyperlink{group__WifiEnableMonitorModeFn_gac208f9fc4c1ac93d3fc3e8a81c3c2223}{m2m\+\_\+wifi\+\_\+enable\+\_\+monitoring\+\_\+mode} (\hyperlink{structtstrM2MWifiMonitorModeCtrl}{tstr\+M2\+M\+Wifi\+Monitor\+Mode\+Ctrl} $\ast$pstr\+Mtr\+Ctrl)
+\item 
+\hyperlink{group__BSPDefine_gaecc0323d771e41ef81a76b5f12783e22}{N\+M\+I\+\_\+\+A\+PI} \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} \hyperlink{group__WifiDisableMonitorModeFn_ga22d6c3d2f63fceac652835994cb15594}{m2m\+\_\+wifi\+\_\+disable\+\_\+monitoring\+\_\+mode} (void)
+\item 
+\hyperlink{group__BSPDefine_gaecc0323d771e41ef81a76b5f12783e22}{N\+M\+I\+\_\+\+A\+PI} \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} \hyperlink{group__WifiDisableMonitorModeFn_gade1916a9e1b4885877ce0551bda545d7}{m2m\+\_\+wifi\+\_\+change\+\_\+monitoring\+\_\+channel} (\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} u8\+Channel\+ID)
+\item 
+\hyperlink{group__BSPDefine_gaecc0323d771e41ef81a76b5f12783e22}{N\+M\+I\+\_\+\+A\+PI} \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} \hyperlink{group__SendWlanPktFn_gaaa0ae5733351b8946ad3c6737ae768fe}{m2m\+\_\+wifi\+\_\+send\+\_\+wlan\+\_\+pkt} (\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} $\ast$pu8\+Wlan\+Packet, \hyperlink{group__DataT_ga1daa745171fc6e31d942c161422a76f9}{uint16} u16\+Wlan\+Header\+Length, \hyperlink{group__DataT_ga1daa745171fc6e31d942c161422a76f9}{uint16} u16\+Wlan\+Pkt\+Size)
+\item 
+\hyperlink{group__BSPDefine_gaecc0323d771e41ef81a76b5f12783e22}{N\+M\+I\+\_\+\+A\+PI} \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} \hyperlink{group__WifiSendEthernetPktFn_ga6771776ed3f1c4c60bf51108dc46fa96}{m2m\+\_\+wifi\+\_\+send\+\_\+ethernet\+\_\+pkt} (\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} $\ast$pu8\+Packet, \hyperlink{group__DataT_ga1daa745171fc6e31d942c161422a76f9}{uint16} u16\+Packet\+Size, \hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} u8\+Ifc\+Id)
+\end{DoxyCompactItemize}
+\textbf{ }\par
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group__BSPDefine_gaecc0323d771e41ef81a76b5f12783e22}{N\+M\+I\+\_\+\+A\+PI} \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} \hyperlink{group__WlanEnums_ga629eca5105680e2807ffeb05181aa152}{m2m\+\_\+wifi\+\_\+set\+\_\+device\+\_\+name} (\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} $\ast$pu8\+Device\+Name, \hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} u8\+Device\+Name\+Length)
+\begin{DoxyCompactList}\small\item\em Set the W\+I\+L\+C1000 device name which is used as P2P device name. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{m2m__wifi_8h_a25d63ac165f19310f6ed73d115ad9155}\label{m2m__wifi_8h_a25d63ac165f19310f6ed73d115ad9155}} 
+\index{m2m\+\_\+wifi.\+h@{m2m\+\_\+wifi.\+h}!m2m\+\_\+wifi\+\_\+allow\+\_\+p2p\+\_\+connection@{m2m\+\_\+wifi\+\_\+allow\+\_\+p2p\+\_\+connection}}
+\index{m2m\+\_\+wifi\+\_\+allow\+\_\+p2p\+\_\+connection@{m2m\+\_\+wifi\+\_\+allow\+\_\+p2p\+\_\+connection}!m2m\+\_\+wifi.\+h@{m2m\+\_\+wifi.\+h}}
+\subsubsection{\texorpdfstring{m2m\+\_\+wifi\+\_\+allow\+\_\+p2p\+\_\+connection()}{m2m\_wifi\_allow\_p2p\_connection()}}
+{\footnotesize\ttfamily \hyperlink{group__BSPDefine_gaecc0323d771e41ef81a76b5f12783e22}{N\+M\+I\+\_\+\+A\+PI} \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} m2m\+\_\+wifi\+\_\+allow\+\_\+p2p\+\_\+connection (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em None} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyWarning}{Warning}
+The p2p mode must have be enabled and active before a m2m\+\_\+wifi\+\_\+set\+\_\+p2p\+\_\+pin can be called. 
+\end{DoxyWarning}
+\begin{DoxyReturn}{Returns}
+The function returns \hyperlink{nm__common_8h_a9ef27ba27aafdd1aa3a79d3ba2c36b8f}{M2\+M\+\_\+\+S\+U\+C\+C\+E\+SS} for successful operations and a negative value otherwise. 
+\end{DoxyReturn}
+
+
+Definition at line 791 of file m2m\+\_\+wifi.\+c.
+
+
+\begin{DoxyCode}
+792 \{
+793     \textcolor{comment}{/* pushbutton doesn't require PIN Number */}
+794     \textcolor{keywordflow}{return} \hyperlink{group__WlanEnums_gac93d56dc53ba0a5a02b669c800b7ae62}{m2m\_wifi\_set\_p2p\_pin}(0,0);
+795 \}
+\end{DoxyCode}

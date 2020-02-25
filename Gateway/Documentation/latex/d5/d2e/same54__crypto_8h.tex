@@ -1,0 +1,98 @@
+\hypertarget{same54__crypto_8h}{}\section{cyclone\+\_\+crypto/hardware/same54\+\_\+crypto.h File Reference}
+\label{same54__crypto_8h}\index{cyclone\+\_\+crypto/hardware/same54\+\_\+crypto.\+h@{cyclone\+\_\+crypto/hardware/same54\+\_\+crypto.\+h}}
+
+
+S\+A\+M\+E54 hardware cryptography accelerator.  
+
+
+{\ttfamily \#include \char`\"{}os\+\_\+port.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}core/crypto.\+h\char`\"{}}\newline
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{same54__crypto_8h_a3e4d7b097b605c01b4c34fcb504059b5}{same54\+Crypto\+Init} (void)
+\begin{DoxyCompactList}\small\item\em Cryptography accelerator initialization. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structOsMutex}{Os\+Mutex} \hyperlink{same54__crypto_8h_ac5bef711d0d922bda5fc6243d399612a}{same54\+Crypto\+Mutex}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+S\+A\+M\+E54 hardware cryptography accelerator. 
+
+\hypertarget{pic32mz__ef__curiosity_8h_License}{}\subsection{License}\label{pic32mz__ef__curiosity_8h_License}
+S\+P\+D\+X-\/\+License-\/\+Identifier\+: G\+P\+L-\/2.\+0-\/or-\/later
+
+Copyright (C) 2010-\/2019 Oryx Embedded S\+A\+RL. All rights reserved.
+
+This file is part of Cyclone\+Crypto Open.
+
+This program is free software; you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+
+You should have received a copy of the G\+NU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-\/1301, U\+SA.
+
+\begin{DoxyAuthor}{Author}
+Oryx Embedded S\+A\+RL (www.\+oryx-\/embedded.\+com) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+9.\+6 
+\end{DoxyVersion}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{same54__crypto_8h_a3e4d7b097b605c01b4c34fcb504059b5}\label{same54__crypto_8h_a3e4d7b097b605c01b4c34fcb504059b5}} 
+\index{same54\+\_\+crypto.\+h@{same54\+\_\+crypto.\+h}!same54\+Crypto\+Init@{same54\+Crypto\+Init}}
+\index{same54\+Crypto\+Init@{same54\+Crypto\+Init}!same54\+\_\+crypto.\+h@{same54\+\_\+crypto.\+h}}
+\subsubsection{\texorpdfstring{same54\+Crypto\+Init()}{same54CryptoInit()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} same54\+Crypto\+Init (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Cryptography accelerator initialization. 
+
+
+
+Definition at line 51 of file same54\+\_\+crypto.\+c.
+
+
+\begin{DoxyCode}
+52 \{
+53    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+54 
+55    \textcolor{comment}{//Create a mutex to prevent simultaneous access to the cryptography}
+56    \textcolor{comment}{//accelerator}
+57    \textcolor{keywordflow}{if}(!\hyperlink{os__port__chibios_8c_a16627f901c807c29adf29a38fb1af16a}{osCreateMutex}(&\hyperlink{same54__crypto_8c_ac5bef711d0d922bda5fc6243d399612a}{same54CryptoMutex}))
+58    \{
+59       \textcolor{comment}{//Failed to create mutex}
+60       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca528efe91b7a7e4bcc9a6de7d4b778c67}{ERROR\_OUT\_OF\_RESOURCES};
+61    \}
+62 
+63    \textcolor{comment}{//Enable TRNG peripheral clock}
+64    MCLK->APBCMASK.reg |= MCLK\_APBCMASK\_TRNG;
+65    \textcolor{comment}{//Enable TRNG}
+66    TRNG->CTRLA.reg |= TRNG\_CTRLA\_ENABLE;
+67 
+68    \textcolor{comment}{//Initialize public key accelerator}
+69    error = \hyperlink{samd51__crypto__pukcc_8c_ac2204ce75455e8e0be1d075463d6dd4e}{pukccInit}();
+70 
+71    \textcolor{comment}{//Return status code}
+72    \textcolor{keywordflow}{return} error;
+73 \}
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{same54__crypto_8h_ac5bef711d0d922bda5fc6243d399612a}\label{same54__crypto_8h_ac5bef711d0d922bda5fc6243d399612a}} 
+\index{same54\+\_\+crypto.\+h@{same54\+\_\+crypto.\+h}!same54\+Crypto\+Mutex@{same54\+Crypto\+Mutex}}
+\index{same54\+Crypto\+Mutex@{same54\+Crypto\+Mutex}!same54\+\_\+crypto.\+h@{same54\+\_\+crypto.\+h}}
+\subsubsection{\texorpdfstring{same54\+Crypto\+Mutex}{same54CryptoMutex}}
+{\footnotesize\ttfamily \hyperlink{structOsMutex}{Os\+Mutex} same54\+Crypto\+Mutex}
+
+
+
+Definition at line 44 of file same54\+\_\+crypto.\+c.
+

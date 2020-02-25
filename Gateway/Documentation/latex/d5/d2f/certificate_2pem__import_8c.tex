@@ -1,0 +1,2872 @@
+\hypertarget{certificate_2pem__import_8c}{}\section{cyclone\+\_\+crypto/certificate/pem\+\_\+import.c File Reference}
+\label{certificate_2pem__import_8c}\index{cyclone\+\_\+crypto/certificate/pem\+\_\+import.\+c@{cyclone\+\_\+crypto/certificate/pem\+\_\+import.\+c}}
+{\ttfamily \#include \char`\"{}core/crypto.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}certificate/pem\+\_\+import.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}encoding/asn1.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}encoding/oid.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}encoding/base64.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}mpi/mpi.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}debug.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{certificate_2pem__import_8c_afcdf5e66fd927a7f4cc64295acd20407}{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}~\hyperlink{crypto__config_8h_a6afae3a9b63f9b55d979e667ee0e881d}{C\+R\+Y\+P\+T\+O\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{certificate_2pem__import_8c_a0afa6464bcb0c1a2e17488fef1d3c3a8}{pem\+Import\+Dh\+Parameters} (const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$input, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length}, \hyperlink{structDhParameters}{Dh\+Parameters} $\ast$params)
+\begin{DoxyCompactList}\small\item\em Decode a P\+EM file containing Diffie-\/\+Hellman parameters. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{certificate_2pem__import_8c_a93fcb70196ecbfad4c0b907c9d81c00a}{pem\+Import\+Rsa\+Public\+Key} (const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$input, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length}, \hyperlink{structRsaPublicKey}{Rsa\+Public\+Key} $\ast$key)
+\begin{DoxyCompactList}\small\item\em Decode a P\+EM file containing a R\+SA public key. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{certificate_2pem__import_8c_a3d276f00ad49589056269bfe8abbb664}{pem\+Import\+Rsa\+Private\+Key} (const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$input, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length}, \hyperlink{structRsaPrivateKey}{Rsa\+Private\+Key} $\ast$key)
+\begin{DoxyCompactList}\small\item\em Decode a P\+EM file containing a R\+SA private key. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{certificate_2pem__import_8c_a5fc5ddd5c103b7cd6d44bf46dec0fdda}{pem\+Import\+Dsa\+Public\+Key} (const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$input, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length}, \hyperlink{structDsaPublicKey}{Dsa\+Public\+Key} $\ast$key)
+\begin{DoxyCompactList}\small\item\em Decode a P\+EM file containing a D\+SA public key. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{certificate_2pem__import_8c_a123592ae82dda17101073d06323386b8}{pem\+Import\+Dsa\+Private\+Key} (const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$input, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length}, \hyperlink{structDsaPrivateKey}{Dsa\+Private\+Key} $\ast$key)
+\begin{DoxyCompactList}\small\item\em Decode a P\+EM file containing a D\+SA private key. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{certificate_2pem__import_8c_a5d76a217bb3b6fad9de9aa71bcd8317f}{pem\+Import\+Ec\+Parameters} (const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$input, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length}, \hyperlink{structEcDomainParameters}{Ec\+Domain\+Parameters} $\ast$params)
+\begin{DoxyCompactList}\small\item\em Decode a P\+EM file containing EC domain parameters. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{certificate_2pem__import_8c_aabfdd540ffe38f75019d501aa50648eb}{pem\+Import\+Ec\+Public\+Key} (const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$input, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length}, \hyperlink{structEcPoint}{Ec\+Point} $\ast$key)
+\begin{DoxyCompactList}\small\item\em Decode a P\+EM file containing an EC public key. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{certificate_2pem__import_8c_a9d39070535c6536d833ace8e6dedde82}{pem\+Import\+Ec\+Private\+Key} (const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$input, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length}, \hyperlink{structMpi}{Mpi} $\ast$key)
+\begin{DoxyCompactList}\small\item\em Decode a P\+EM file containing an EC private key. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{certificate_2pem__import_8c_a4b4c81159fa7296b5237335d845867dc}{pem\+Import\+Eddsa\+Public\+Key} (const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$input, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length}, \hyperlink{structEddsaPublicKey}{Eddsa\+Public\+Key} $\ast$key)
+\begin{DoxyCompactList}\small\item\em Decode a P\+EM file containing a Ed\+D\+SA public key. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{certificate_2pem__import_8c_a54cf0a5cee9bf4c0e25866b26f1752e0}{pem\+Import\+Eddsa\+Private\+Key} (const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$input, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length}, \hyperlink{structEddsaPrivateKey}{Eddsa\+Private\+Key} $\ast$key)
+\begin{DoxyCompactList}\small\item\em Decode a P\+EM file containing a Ed\+D\+SA private key. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{certificate_2pem__import_8c_a861695b3eda2ba8ca5ea2a5b2715c152}{pem\+Import\+Certificate} (const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$$\ast$input, size\+\_\+t $\ast$input\+Len, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$$\ast$output, size\+\_\+t $\ast$output\+Size, size\+\_\+t $\ast$output\+Len)
+\begin{DoxyCompactList}\small\item\em Decode a P\+EM file containing a certificate. \end{DoxyCompactList}\item 
+\hyperlink{compiler__port_8h_a022c65af7f6c8d3947e8a37d64db6ad6}{int\+\_\+t} \hyperlink{certificate_2pem__import_8c_a9019bb246bd8a7c6abeae29608050d5b}{pem\+Search\+Tag} (const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$\hyperlink{ndp_8h_a2dee666f0c1fe072c549ff86b1d0a8ab}{s}, size\+\_\+t s\+Len, const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$tag, size\+\_\+t tag\+Len)
+\begin{DoxyCompactList}\small\item\em Search a string for a given tag. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{certificate_2pem__import_8c_afcdf5e66fd927a7f4cc64295acd20407}\label{certificate_2pem__import_8c_afcdf5e66fd927a7f4cc64295acd20407}} 
+\index{certificate/pem\+\_\+import.\+c@{certificate/pem\+\_\+import.\+c}!T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+\index{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}!certificate/pem\+\_\+import.\+c@{certificate/pem\+\_\+import.\+c}}
+\subsubsection{\texorpdfstring{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}{TRACE\_LEVEL}}
+{\footnotesize\ttfamily \#define T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL~\hyperlink{crypto__config_8h_a6afae3a9b63f9b55d979e667ee0e881d}{C\+R\+Y\+P\+T\+O\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+
+
+
+Definition at line 32 of file pem\+\_\+import.\+c.
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{certificate_2pem__import_8c_a861695b3eda2ba8ca5ea2a5b2715c152}\label{certificate_2pem__import_8c_a861695b3eda2ba8ca5ea2a5b2715c152}} 
+\index{certificate/pem\+\_\+import.\+c@{certificate/pem\+\_\+import.\+c}!pem\+Import\+Certificate@{pem\+Import\+Certificate}}
+\index{pem\+Import\+Certificate@{pem\+Import\+Certificate}!certificate/pem\+\_\+import.\+c@{certificate/pem\+\_\+import.\+c}}
+\subsubsection{\texorpdfstring{pem\+Import\+Certificate()}{pemImportCertificate()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} pem\+Import\+Certificate (\begin{DoxyParamCaption}\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$$\ast$}]{input,  }\item[{size\+\_\+t $\ast$}]{input\+Len,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$$\ast$}]{output,  }\item[{size\+\_\+t $\ast$}]{output\+Size,  }\item[{size\+\_\+t $\ast$}]{output\+Len }\end{DoxyParamCaption})}
+
+
+
+Decode a P\+EM file containing a certificate. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in,out}  & {\em input} & Pointer to the P\+EM structure \\
+\hline
+\mbox{\tt in,out}  & {\em input\+Len} & Length of the P\+EM structure \\
+\hline
+\mbox{\tt in,out}  & {\em output} & Pointer to the D\+ER encoded certificate \\
+\hline
+\mbox{\tt in,out}  & {\em output\+Size} & Size of the memory block that holds the D\+ER certificate \\
+\hline
+\mbox{\tt out}  & {\em output\+Len} & Length of the D\+ER encoded certificate \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 2482 of file pem\+\_\+import.\+c.
+
+
+\begin{DoxyCode}
+2484 \{
+2485    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+2486    \textcolor{keywordtype}{size\_t} \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length};
+2487    \textcolor{keywordtype}{size\_t} i;
+2488    \textcolor{keywordtype}{size\_t} j;
+2489    \hyperlink{compiler__port_8h_a022c65af7f6c8d3947e8a37d64db6ad6}{int\_t} \hyperlink{md5_8c_af11ea3cdbca7345eb6a4a8ac5ce0434d}{k};
+2490 
+2491    \textcolor{comment}{//Check parameters}
+2492    \textcolor{keywordflow}{if}(input == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || inputLen == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+2493       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+2494    \textcolor{keywordflow}{if}(output == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || outputSize == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || outputLen == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+2495       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+2496 
+2497    \textcolor{comment}{//Search for the beginning tag}
+2498    k = \hyperlink{certificate_2pem__import_8c_a9019bb246bd8a7c6abeae29608050d5b}{pemSearchTag}(*input, *inputLen, \textcolor{stringliteral}{"-----BEGIN CERTIFICATE-----"}, 27);
+2499    \textcolor{comment}{//Failed to find the specified tag?}
+2500    \textcolor{keywordflow}{if}(k < 0)
+2501       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca488b657f8cc2e6c29df47f282e8ff3ad}{ERROR\_END\_OF\_FILE};
+2502 
+2503    \textcolor{comment}{//Advance the input pointer over the tag}
+2504    *input += k + 27;
+2505    *inputLen -= k + 27;
+2506 
+2507    \textcolor{comment}{//Search for the end tag}
+2508    k = \hyperlink{certificate_2pem__import_8c_a9019bb246bd8a7c6abeae29608050d5b}{pemSearchTag}(*input, *inputLen, \textcolor{stringliteral}{"-----END CERTIFICATE-----"}, 25);
+2509    \textcolor{comment}{//Invalid PEM file?}
+2510    \textcolor{keywordflow}{if}(k <= 0)
+2511       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca92e7b26953f11d1bc4f4526fad39aed0}{ERROR\_INVALID\_SYNTAX};
+2512 
+2513    \textcolor{comment}{//Length of the PEM structure}
+2514    length = \hyperlink{md5_8c_af11ea3cdbca7345eb6a4a8ac5ce0434d}{k};
+2515 
+2516    \textcolor{comment}{//Increase buffer size?}
+2517    \textcolor{keywordflow}{if}(length > *outputSize)
+2518    \{
+2519       \textcolor{comment}{//Release previously allocated buffer if necessary}
+2520       \textcolor{keywordflow}{if}(*output != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+2521       \{
+2522          \hyperlink{cyclone__crypto_2core_2crypto_8h_ac8a223b176683db4e9eed4162774f870}{cryptoFreeMem}(*output);
+2523          *output = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+2524          *outputSize = 0;
+2525       \}
+2526 
+2527       \textcolor{comment}{//Allocate a memory buffer to hold the decoded data}
+2528       *output = \hyperlink{cyclone__crypto_2core_2crypto_8h_a48b53d16f66d31e5dcf82db3c1b882ba}{cryptoAllocMem}(length);
+2529       \textcolor{comment}{//Failed to allocate memory?}
+2530       \textcolor{keywordflow}{if}(*output == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+2531          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac0a554045048d2fb61387cf735676f69}{ERROR\_OUT\_OF\_MEMORY};
+2532 
+2533       \textcolor{comment}{//Record the size of the buffer}
+2534       *outputSize = \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length};
+2535    \}
+2536 
+2537    \textcolor{comment}{//Copy the contents of the PEM structure}
+2538    \hyperlink{cyclone__crypto_2core_2crypto_8h_a6724616c4014bb7e21f2660bd7b88be8}{cryptoMemcpy}(*output, *input, length);
+2539 
+2540    \textcolor{comment}{//Advance the input pointer over the certificate}
+2541    *input += length + 25;
+2542    *inputLen -= length + 25;
+2543 
+2544    \textcolor{comment}{//Remove carriage returns and line feeds}
+2545    \textcolor{keywordflow}{for}(i = 0, j = 0; i < \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}; i++)
+2546    \{
+2547       \textcolor{keywordflow}{if}((*output)[i] != \textcolor{charliteral}{'\(\backslash\)r'} && (*output)[i] != \textcolor{charliteral}{'\(\backslash\)n'})
+2548          (*output)[j++] = (*output)[i];
+2549    \}
+2550 
+2551    \textcolor{comment}{//Start of exception handling block}
+2552    \textcolor{keywordflow}{do}
+2553    \{
+2554       \textcolor{comment}{//The contents of the PEM file is Base64-encoded}
+2555       error = \hyperlink{base64_8c_ae360cde3e2ef08783ac2e01591b78530}{base64Decode}((\hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\_t} *) *output, j, *output, &length);
+2556       \textcolor{comment}{//Failed to decode the file?}
+2557       \textcolor{keywordflow}{if}(error)
+2558          \textcolor{keywordflow}{break};
+2559 
+2560       \textcolor{comment}{//Display ASN.1 structure}
+2561       error = \hyperlink{asn1_8c_adfebd6c0e21cc4d23414ff98aa9e9a69}{asn1DumpObject}(*output, length, 0);
+2562       \textcolor{comment}{//Any error to report?}
+2563       \textcolor{keywordflow}{if}(error)
+2564          \textcolor{keywordflow}{break};
+2565 
+2566       \textcolor{comment}{//End of exception handling block}
+2567    \} \textcolor{keywordflow}{while}(0);
+2568 
+2569    \textcolor{comment}{//Clean up side effects}
+2570    \textcolor{keywordflow}{if}(error)
+2571    \{
+2572       \textcolor{comment}{//Release previously allocated memory}
+2573       \hyperlink{cyclone__crypto_2core_2crypto_8h_ac8a223b176683db4e9eed4162774f870}{cryptoFreeMem}(*output);
+2574       *output = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+2575       *outputSize = 0;
+2576    \}
+2577 
+2578    \textcolor{comment}{//Size of the decoded certificate}
+2579    *outputLen = \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length};
+2580    \textcolor{comment}{//Return status code}
+2581    \textcolor{keywordflow}{return} error;
+2582 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{certificate_2pem__import_8c_a0afa6464bcb0c1a2e17488fef1d3c3a8}\label{certificate_2pem__import_8c_a0afa6464bcb0c1a2e17488fef1d3c3a8}} 
+\index{certificate/pem\+\_\+import.\+c@{certificate/pem\+\_\+import.\+c}!pem\+Import\+Dh\+Parameters@{pem\+Import\+Dh\+Parameters}}
+\index{pem\+Import\+Dh\+Parameters@{pem\+Import\+Dh\+Parameters}!certificate/pem\+\_\+import.\+c@{certificate/pem\+\_\+import.\+c}}
+\subsubsection{\texorpdfstring{pem\+Import\+Dh\+Parameters()}{pemImportDhParameters()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} pem\+Import\+Dh\+Parameters (\begin{DoxyParamCaption}\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{input,  }\item[{size\+\_\+t}]{length,  }\item[{\hyperlink{structDhParameters}{Dh\+Parameters} $\ast$}]{params }\end{DoxyParamCaption})}
+
+
+
+Decode a P\+EM file containing Diffie-\/\+Hellman parameters. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em input} & Pointer to the P\+EM structure \\
+\hline
+\mbox{\tt in}  & {\em length} & Length of the P\+EM structure \\
+\hline
+\mbox{\tt out}  & {\em params} & Diffie-\/\+Hellman parameters resulting from the parsing process \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 55 of file pem\+\_\+import.\+c.
+
+
+\begin{DoxyCode}
+56 \{
+57 \textcolor{preprocessor}{#if (DH\_SUPPORT == ENABLED)}
+58    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+59    \textcolor{keywordtype}{size\_t} i;
+60    \textcolor{keywordtype}{size\_t} j;
+61    \hyperlink{compiler__port_8h_a022c65af7f6c8d3947e8a37d64db6ad6}{int\_t} \hyperlink{md5_8c_af11ea3cdbca7345eb6a4a8ac5ce0434d}{k};
+62    \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\_t} *buffer;
+63    \textcolor{keyword}{const} \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *\hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data};
+64    \hyperlink{structAsn1Tag}{Asn1Tag} tag;
+65 
+66    \textcolor{comment}{//Check parameters}
+67    \textcolor{keywordflow}{if}(input == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} && \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} != 0)
+68       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+69    \textcolor{keywordflow}{if}(params == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+70       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+71 
+72    \textcolor{comment}{//Search for the beginning tag}
+73    k = \hyperlink{certificate_2pem__import_8c_a9019bb246bd8a7c6abeae29608050d5b}{pemSearchTag}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"-----BEGIN DH PARAMETERS-----"}, 29);
+74    \textcolor{comment}{//Failed to find the specified tag?}
+75    \textcolor{keywordflow}{if}(k < 0)
+76       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca92e7b26953f11d1bc4f4526fad39aed0}{ERROR\_INVALID\_SYNTAX};
+77 
+78    \textcolor{comment}{//Advance the pointer over the tag}
+79    input += k + 29;
+80    \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} -= k + 29;
+81 
+82    \textcolor{comment}{//Search for the end tag}
+83    k = \hyperlink{certificate_2pem__import_8c_a9019bb246bd8a7c6abeae29608050d5b}{pemSearchTag}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"-----END DH PARAMETERS-----"}, 27);
+84    \textcolor{comment}{//Invalid PEM file?}
+85    \textcolor{keywordflow}{if}(k <= 0)
+86       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca92e7b26953f11d1bc4f4526fad39aed0}{ERROR\_INVALID\_SYNTAX};
+87 
+88    \textcolor{comment}{//Length of the PEM structure}
+89    \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} = \hyperlink{md5_8c_af11ea3cdbca7345eb6a4a8ac5ce0434d}{k};
+90 
+91    \textcolor{comment}{//Allocate a memory buffer to hold the decoded data}
+92    buffer = \hyperlink{cyclone__crypto_2core_2crypto_8h_a48b53d16f66d31e5dcf82db3c1b882ba}{cryptoAllocMem}(\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length});
+93    \textcolor{comment}{//Failed to allocate memory?}
+94    \textcolor{keywordflow}{if}(buffer == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+95       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac0a554045048d2fb61387cf735676f69}{ERROR\_OUT\_OF\_MEMORY};
+96 
+97    \textcolor{comment}{//Copy the contents of the PEM structure}
+98    \hyperlink{cyclone__crypto_2core_2crypto_8h_a6724616c4014bb7e21f2660bd7b88be8}{cryptoMemcpy}(buffer, input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length});
+99 
+100    \textcolor{comment}{//Remove carriage returns and line feeds}
+101    \textcolor{keywordflow}{for}(i = 0, j = 0; i < \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}; i++)
+102    \{
+103       \textcolor{keywordflow}{if}(buffer[i] != \textcolor{charliteral}{'\(\backslash\)r'} && buffer[i] != \textcolor{charliteral}{'\(\backslash\)n'})
+104          buffer[j++] = buffer[i];
+105    \}
+106 
+107    \textcolor{comment}{//Start of exception handling block}
+108    \textcolor{keywordflow}{do}
+109    \{
+110       \textcolor{comment}{//The contents of the PEM file is Base64-encoded}
+111       error = \hyperlink{base64_8c_ae360cde3e2ef08783ac2e01591b78530}{base64Decode}(buffer, j, buffer, &length);
+112       \textcolor{comment}{//Failed to decode the file?}
+113       \textcolor{keywordflow}{if}(error)
+114          \textcolor{keywordflow}{break};
+115 
+116       \textcolor{comment}{//Point to the resulting ASN.1 structure}
+117       data = (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *) buffer;
+118 
+119       \textcolor{comment}{//Display ASN.1 structure}
+120       error = \hyperlink{asn1_8c_adfebd6c0e21cc4d23414ff98aa9e9a69}{asn1DumpObject}(data, length, 0);
+121       \textcolor{comment}{//Any error to report?}
+122       \textcolor{keywordflow}{if}(error)
+123          \textcolor{keywordflow}{break};
+124 
+125       \textcolor{comment}{//The Diffie-Hellman parameters are encapsulated within a sequence}
+126       error = \hyperlink{asn1_8c_a5df4a5a14b22837b3dea3525608a9122}{asn1ReadSequence}(data, length, &tag);
+127       \textcolor{comment}{//Failed to decode ASN.1 tag?}
+128       \textcolor{keywordflow}{if}(error)
+129          \textcolor{keywordflow}{break};
+130 
+131       \textcolor{comment}{//Point to the first field of the sequence}
+132       data = tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value};
+133       length = tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length};
+134 
+135       \textcolor{comment}{//Read the prime modulus}
+136       error = \hyperlink{asn1_8c_aa73309637560abf8e42288890c19d641}{asn1ReadMpi}(data, length, &tag, &params->\hyperlink{structDhParameters_ae39a6a92b952ae9c49c66c5c9c131a3b}{p});
+137       \textcolor{comment}{//Any error to report?}
+138       \textcolor{keywordflow}{if}(error)
+139          \textcolor{keywordflow}{break};
+140 
+141       \textcolor{comment}{//Point to the next field}
+142       data += tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+143       length -= tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+144 
+145       \textcolor{comment}{//Read the generator}
+146       error = \hyperlink{asn1_8c_aa73309637560abf8e42288890c19d641}{asn1ReadMpi}(data, length, &tag, &params->\hyperlink{structDhParameters_abc22697d6ee37e502b54f988a1c4393d}{g});
+147       \textcolor{comment}{//Any error to report?}
+148       \textcolor{keywordflow}{if}(error)
+149          \textcolor{keywordflow}{break};
+150 
+151       \textcolor{comment}{//Debug message}
+152       \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"Diffie-Hellman parameters:\(\backslash\)r\(\backslash\)n"});
+153       \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  Prime modulus:\(\backslash\)r\(\backslash\)n"});
+154       \hyperlink{debug_8h_a9c9f3b28f2daf14d77b401512c189d93}{TRACE\_DEBUG\_MPI}(\textcolor{stringliteral}{"    "}, &params->\hyperlink{structDhParameters_ae39a6a92b952ae9c49c66c5c9c131a3b}{p});
+155       \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  Generator:\(\backslash\)r\(\backslash\)n"});
+156       \hyperlink{debug_8h_a9c9f3b28f2daf14d77b401512c189d93}{TRACE\_DEBUG\_MPI}(\textcolor{stringliteral}{"    "}, &params->\hyperlink{structDhParameters_abc22697d6ee37e502b54f988a1c4393d}{g});
+157 
+158       \textcolor{comment}{//End of exception handling block}
+159    \} \textcolor{keywordflow}{while}(0);
+160 
+161    \textcolor{comment}{//Release previously allocated memory}
+162    \hyperlink{cyclone__crypto_2core_2crypto_8h_ac8a223b176683db4e9eed4162774f870}{cryptoFreeMem}(buffer);
+163 
+164    \textcolor{comment}{//Any error to report?}
+165    \textcolor{keywordflow}{if}(error)
+166    \{
+167       \textcolor{comment}{//Clean up side effects}
+168       \hyperlink{mpi_8c_a9dc5be2f62d37d3854fa61beab3a61ad}{mpiFree}(&params->\hyperlink{structDhParameters_ae39a6a92b952ae9c49c66c5c9c131a3b}{p});
+169       \hyperlink{mpi_8c_a9dc5be2f62d37d3854fa61beab3a61ad}{mpiFree}(&params->\hyperlink{structDhParameters_abc22697d6ee37e502b54f988a1c4393d}{g});
+170    \}
+171 
+172    \textcolor{comment}{//Return status code}
+173    \textcolor{keywordflow}{return} error;
+174 \textcolor{preprocessor}{#else}
+175    \textcolor{comment}{//Not implemented}
+176    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cab61c5ef368fbf03fdc1fb566c63f2f9a}{ERROR\_NOT\_IMPLEMENTED};
+177 \textcolor{preprocessor}{#endif}
+178 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{certificate_2pem__import_8c_a123592ae82dda17101073d06323386b8}\label{certificate_2pem__import_8c_a123592ae82dda17101073d06323386b8}} 
+\index{certificate/pem\+\_\+import.\+c@{certificate/pem\+\_\+import.\+c}!pem\+Import\+Dsa\+Private\+Key@{pem\+Import\+Dsa\+Private\+Key}}
+\index{pem\+Import\+Dsa\+Private\+Key@{pem\+Import\+Dsa\+Private\+Key}!certificate/pem\+\_\+import.\+c@{certificate/pem\+\_\+import.\+c}}
+\subsubsection{\texorpdfstring{pem\+Import\+Dsa\+Private\+Key()}{pemImportDsaPrivateKey()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} pem\+Import\+Dsa\+Private\+Key (\begin{DoxyParamCaption}\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{input,  }\item[{size\+\_\+t}]{length,  }\item[{\hyperlink{structDsaPrivateKey}{Dsa\+Private\+Key} $\ast$}]{key }\end{DoxyParamCaption})}
+
+
+
+Decode a P\+EM file containing a D\+SA private key. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em input} & Pointer to the P\+EM structure \\
+\hline
+\mbox{\tt in}  & {\em length} & Length of the P\+EM structure \\
+\hline
+\mbox{\tt out}  & {\em key} & D\+SA private key resulting from the parsing process \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 1059 of file pem\+\_\+import.\+c.
+
+
+\begin{DoxyCode}
+1060 \{
+1061 \textcolor{preprocessor}{#if (DSA\_SUPPORT == ENABLED)}
+1062    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+1063    \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\_t} pkcs8Format;
+1064    \textcolor{keywordtype}{size\_t} i;
+1065    \textcolor{keywordtype}{size\_t} j;
+1066    \hyperlink{compiler__port_8h_a022c65af7f6c8d3947e8a37d64db6ad6}{int\_t} \hyperlink{md5_8c_af11ea3cdbca7345eb6a4a8ac5ce0434d}{k};
+1067    \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\_t} *buffer;
+1068    \textcolor{keyword}{const} \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *\hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data};
+1069    \textcolor{keyword}{const} \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *privateKey;
+1070    \textcolor{keywordtype}{size\_t} privateKeyLen;
+1071    \hyperlink{structAsn1Tag}{Asn1Tag} tag;
+1072 
+1073    \textcolor{comment}{//Check parameters}
+1074    \textcolor{keywordflow}{if}(input == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} && \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} != 0)
+1075       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+1076    \textcolor{keywordflow}{if}(key == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1077       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+1078 
+1079    \textcolor{comment}{//Initialize private key}
+1080    privateKey = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+1081    privateKeyLen = 0;
+1082 
+1083    \textcolor{comment}{//PKCS #8 format?}
+1084    \textcolor{keywordflow}{if}(\hyperlink{certificate_2pem__import_8c_a9019bb246bd8a7c6abeae29608050d5b}{pemSearchTag}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"-----BEGIN PRIVATE KEY-----"}, 27) >= 0)
+1085    \{
+1086       \textcolor{comment}{//Search for the beginning tag}
+1087       k = \hyperlink{certificate_2pem__import_8c_a9019bb246bd8a7c6abeae29608050d5b}{pemSearchTag}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"-----BEGIN PRIVATE KEY-----"}, 27);
+1088       \textcolor{comment}{//Failed to find the specified tag?}
+1089       \textcolor{keywordflow}{if}(k < 0)
+1090          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca92e7b26953f11d1bc4f4526fad39aed0}{ERROR\_INVALID\_SYNTAX};
+1091 
+1092       \textcolor{comment}{//Advance the pointer over the tag}
+1093       input += k + 27;
+1094       \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} -= k + 27;
+1095 
+1096       \textcolor{comment}{//Search for the end tag}
+1097       k = \hyperlink{certificate_2pem__import_8c_a9019bb246bd8a7c6abeae29608050d5b}{pemSearchTag}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"-----END PRIVATE KEY-----"}, 25);
+1098       \textcolor{comment}{//Invalid PEM file?}
+1099       \textcolor{keywordflow}{if}(k <= 0)
+1100          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca92e7b26953f11d1bc4f4526fad39aed0}{ERROR\_INVALID\_SYNTAX};
+1101 
+1102       \textcolor{comment}{//Length of the PEM structure}
+1103       \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} = \hyperlink{md5_8c_af11ea3cdbca7345eb6a4a8ac5ce0434d}{k};
+1104 
+1105       \textcolor{comment}{//The structure of the private key is described by PKCS #8}
+1106       pkcs8Format = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+1107    \}
+1108    \textcolor{keywordflow}{else}
+1109    \{
+1110       \textcolor{comment}{//Search for the beginning tag}
+1111       k = \hyperlink{certificate_2pem__import_8c_a9019bb246bd8a7c6abeae29608050d5b}{pemSearchTag}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"-----BEGIN DSA PRIVATE KEY-----"}, 31);
+1112       \textcolor{comment}{//Failed to find the specified tag?}
+1113       \textcolor{keywordflow}{if}(k < 0)
+1114          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca92e7b26953f11d1bc4f4526fad39aed0}{ERROR\_INVALID\_SYNTAX};
+1115 
+1116       \textcolor{comment}{//Advance the pointer over the tag}
+1117       input += k + 31;
+1118       \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} -= k + 31;
+1119 
+1120       \textcolor{comment}{//Search for the end tag}
+1121       k = \hyperlink{certificate_2pem__import_8c_a9019bb246bd8a7c6abeae29608050d5b}{pemSearchTag}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"-----END DSA PRIVATE KEY-----"}, 29);
+1122       \textcolor{comment}{//Invalid PEM file?}
+1123       \textcolor{keywordflow}{if}(k <= 0)
+1124          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca92e7b26953f11d1bc4f4526fad39aed0}{ERROR\_INVALID\_SYNTAX};
+1125 
+1126       \textcolor{comment}{//Length of the PEM structure}
+1127       \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} = \hyperlink{md5_8c_af11ea3cdbca7345eb6a4a8ac5ce0434d}{k};
+1128 
+1129       \textcolor{comment}{//The structure of the private key is described by RFC 4211, section 4.2.2.2}
+1130       pkcs8Format = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+1131    \}
+1132 
+1133    \textcolor{comment}{//Allocate a memory buffer to hold the decoded data}
+1134    buffer = \hyperlink{cyclone__crypto_2core_2crypto_8h_a48b53d16f66d31e5dcf82db3c1b882ba}{cryptoAllocMem}(\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length});
+1135    \textcolor{comment}{//Failed to allocate memory?}
+1136    \textcolor{keywordflow}{if}(buffer == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1137       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac0a554045048d2fb61387cf735676f69}{ERROR\_OUT\_OF\_MEMORY};
+1138 
+1139    \textcolor{comment}{//Copy the contents of the PEM structure}
+1140    \hyperlink{cyclone__crypto_2core_2crypto_8h_a6724616c4014bb7e21f2660bd7b88be8}{cryptoMemcpy}(buffer, input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length});
+1141 
+1142    \textcolor{comment}{//Remove carriage returns and line feeds}
+1143    \textcolor{keywordflow}{for}(i = 0, j = 0; i < \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}; i++)
+1144    \{
+1145       \textcolor{keywordflow}{if}(buffer[i] != \textcolor{charliteral}{'\(\backslash\)r'} && buffer[i] != \textcolor{charliteral}{'\(\backslash\)n'})
+1146          buffer[j++] = buffer[i];
+1147    \}
+1148 
+1149    \textcolor{comment}{//Start of exception handling block}
+1150    \textcolor{keywordflow}{do}
+1151    \{
+1152       \textcolor{comment}{//The contents of the PEM file is Base64-encoded}
+1153       error = \hyperlink{base64_8c_ae360cde3e2ef08783ac2e01591b78530}{base64Decode}(buffer, j, buffer, &length);
+1154       \textcolor{comment}{//Failed to decode the file?}
+1155       \textcolor{keywordflow}{if}(error)
+1156          \textcolor{keywordflow}{break};
+1157 
+1158       \textcolor{comment}{//Point to the resulting ASN.1 structure}
+1159       data = (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *) buffer;
+1160 
+1161       \textcolor{comment}{//Display ASN.1 structure}
+1162       error = \hyperlink{asn1_8c_adfebd6c0e21cc4d23414ff98aa9e9a69}{asn1DumpObject}(data, length, 0);
+1163       \textcolor{comment}{//Any error to report?}
+1164       \textcolor{keywordflow}{if}(error)
+1165          \textcolor{keywordflow}{break};
+1166 
+1167       \textcolor{comment}{//PKCS #8 format?}
+1168       \textcolor{keywordflow}{if}(pkcs8Format)
+1169       \{
+1170          \textcolor{comment}{//PKCS #8 describes a generic syntax for encoding private keys}
+1171          error = \hyperlink{asn1_8c_a5df4a5a14b22837b3dea3525608a9122}{asn1ReadSequence}(data, length, &tag);
+1172          \textcolor{comment}{//Failed to decode ASN.1 tag?}
+1173          \textcolor{keywordflow}{if}(error)
+1174             \textcolor{keywordflow}{break};
+1175 
+1176          \textcolor{comment}{//Point to the first field of the sequence}
+1177          data = tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value};
+1178          length = tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length};
+1179 
+1180          \textcolor{comment}{//Read the version field}
+1181          error = \hyperlink{asn1_8c_a1abd5e2bb0488ff85fb1d94392f80dc4}{asn1ReadTag}(data, length, &tag);
+1182          \textcolor{comment}{//Failed to decode ASN.1 tag?}
+1183          \textcolor{keywordflow}{if}(error)
+1184             \textcolor{keywordflow}{break};
+1185 
+1186          \textcolor{comment}{//Enforce encoding, class and type}
+1187          error = \hyperlink{asn1_8c_a73fa06e5d71abe974aa6ad8fb53ecaa2}{asn1CheckTag}(&tag, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, \hyperlink{asn1_8h_ab3589ac11c049bfda069aa3ecf683578}{ASN1\_CLASS\_UNIVERSAL}, 
+      \hyperlink{asn1_8h_a1b0f39cb3d87e425703ba389df9da1dfaf49fe8465a80ebfbe92fe0f0622ec994}{ASN1\_TYPE\_INTEGER});
+1188          \textcolor{comment}{//Invalid tag?}
+1189          \textcolor{keywordflow}{if}(error)
+1190             \textcolor{keywordflow}{break};
+1191 
+1192          \textcolor{comment}{//Skip the version field}
+1193          data += tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+1194          length -= tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+1195 
+1196          \textcolor{comment}{//Read the privateKeyAlgorithm field}
+1197          error = \hyperlink{asn1_8c_a5df4a5a14b22837b3dea3525608a9122}{asn1ReadSequence}(data, length, &tag);
+1198          \textcolor{comment}{//Failed to decode ASN.1 tag?}
+1199          \textcolor{keywordflow}{if}(error)
+1200             \textcolor{keywordflow}{break};
+1201 
+1202          \textcolor{comment}{//Save the position of the privateKey field}
+1203          privateKey = data + tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+1204          privateKeyLen = length - tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+1205 
+1206          \textcolor{comment}{//Point to the first field of the sequence}
+1207          data = tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value};
+1208          length = tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length};
+1209 
+1210          \textcolor{comment}{//Read the algorithm identifier (OID)}
+1211          error = \hyperlink{asn1_8c_a1abd5e2bb0488ff85fb1d94392f80dc4}{asn1ReadTag}(data, length, &tag);
+1212          \textcolor{comment}{//Failed to decode ASN.1 tag?}
+1213          \textcolor{keywordflow}{if}(error)
+1214             \textcolor{keywordflow}{break};
+1215 
+1216          \textcolor{comment}{//Check algorithm identifier}
+1217          error = \hyperlink{asn1_8c_a565e797369dd4ec4b722954715507907}{asn1CheckOid}(&tag, \hyperlink{dsa_8c_aec62d423add8486c829eacb574ebe4f3}{DSA\_OID}, \textcolor{keyword}{sizeof}(\hyperlink{dsa_8c_aec62d423add8486c829eacb574ebe4f3}{DSA\_OID}));
+1218          \textcolor{comment}{//Wrong identifier?}
+1219          \textcolor{keywordflow}{if}(error)
+1220             \textcolor{keywordflow}{break};
+1221 
+1222          \textcolor{comment}{//Point to the next field}
+1223          data += tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+1224          length -= tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+1225 
+1226          \textcolor{comment}{//The DSA parameters are encapsulated within a sequence}
+1227          error = \hyperlink{asn1_8c_a5df4a5a14b22837b3dea3525608a9122}{asn1ReadSequence}(data, length, &tag);
+1228          \textcolor{comment}{//Failed to decode ASN.1 tag?}
+1229          \textcolor{keywordflow}{if}(error)
+1230             \textcolor{keywordflow}{break};
+1231 
+1232          \textcolor{comment}{//Point to the first field of the sequence}
+1233          data = tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value};
+1234          length = tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length};
+1235       \}
+1236       \textcolor{keywordflow}{else}
+1237       \{
+1238          \textcolor{comment}{//The DSA parameters and keys are encapsulated within a sequence}
+1239          error = \hyperlink{asn1_8c_a5df4a5a14b22837b3dea3525608a9122}{asn1ReadSequence}(data, length, &tag);
+1240          \textcolor{comment}{//Failed to decode ASN.1 tag?}
+1241          \textcolor{keywordflow}{if}(error)
+1242             \textcolor{keywordflow}{break};
+1243 
+1244          \textcolor{comment}{//Point to the first field of the sequence}
+1245          data = tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value};
+1246          length = tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length};
+1247 
+1248          \textcolor{comment}{//Read the version}
+1249          error = \hyperlink{asn1_8c_a1abd5e2bb0488ff85fb1d94392f80dc4}{asn1ReadTag}(data, length, &tag);
+1250          \textcolor{comment}{//Failed to decode ASN.1 tag?}
+1251          \textcolor{keywordflow}{if}(error)
+1252             \textcolor{keywordflow}{break};
+1253 
+1254          \textcolor{comment}{//Enforce encoding, class and type}
+1255          error = \hyperlink{asn1_8c_a73fa06e5d71abe974aa6ad8fb53ecaa2}{asn1CheckTag}(&tag, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, \hyperlink{asn1_8h_ab3589ac11c049bfda069aa3ecf683578}{ASN1\_CLASS\_UNIVERSAL}, 
+      \hyperlink{asn1_8h_a1b0f39cb3d87e425703ba389df9da1dfaf49fe8465a80ebfbe92fe0f0622ec994}{ASN1\_TYPE\_INTEGER});
+1256          \textcolor{comment}{//Invalid tag?}
+1257          \textcolor{keywordflow}{if}(error)
+1258             \textcolor{keywordflow}{break};
+1259 
+1260          \textcolor{comment}{//Skip the version field}
+1261          data += tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+1262          length -= tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+1263       \}
+1264 
+1265       \textcolor{comment}{//Read p}
+1266       error = \hyperlink{asn1_8c_aa73309637560abf8e42288890c19d641}{asn1ReadMpi}(data, length, &tag, &key->\hyperlink{structDsaPrivateKey_a8f8fd999b327a6bbff828cb04e31772e}{p});
+1267       \textcolor{comment}{//Any error to report?}
+1268       \textcolor{keywordflow}{if}(error)
+1269          \textcolor{keywordflow}{break};
+1270 
+1271       \textcolor{comment}{//Point to the next field}
+1272       data += tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+1273       length -= tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+1274 
+1275       \textcolor{comment}{//Read q}
+1276       error = \hyperlink{asn1_8c_aa73309637560abf8e42288890c19d641}{asn1ReadMpi}(data, length, &tag, &key->\hyperlink{structDsaPrivateKey_a57748f022f498aaf35d7b30f562af7ca}{q});
+1277       \textcolor{comment}{//Any error to report?}
+1278       \textcolor{keywordflow}{if}(error)
+1279          \textcolor{keywordflow}{break};
+1280 
+1281       \textcolor{comment}{//Point to the next field}
+1282       data += tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+1283       length -= tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+1284 
+1285       \textcolor{comment}{//Read g}
+1286       error = \hyperlink{asn1_8c_aa73309637560abf8e42288890c19d641}{asn1ReadMpi}(data, length, &tag, &key->\hyperlink{structDsaPrivateKey_a78da170adbc7f1a7eeb95e6bc52d4124}{g});
+1287       \textcolor{comment}{//Any error to report?}
+1288       \textcolor{keywordflow}{if}(error)
+1289          \textcolor{keywordflow}{break};
+1290 
+1291       \textcolor{comment}{//Point to the next field}
+1292       data += tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+1293       length -= tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+1294 
+1295       \textcolor{comment}{//PKCS #8 format?}
+1296       \textcolor{keywordflow}{if}(pkcs8Format)
+1297       \{
+1298          \textcolor{comment}{//The privateKey field is encapsulated within an octet string}
+1299          error = \hyperlink{asn1_8c_a08b7995f0473e1ff62a9061f31410b2f}{asn1ReadOctetString}(privateKey, privateKeyLen, &tag);
+1300          \textcolor{comment}{//Failed to decode ASN.1 tag?}
+1301          \textcolor{keywordflow}{if}(error)
+1302             \textcolor{keywordflow}{break};
+1303 
+1304          \textcolor{comment}{//Point to the content of the privateKey structure}
+1305          data = tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value};
+1306          length = tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length};
+1307 
+1308          \textcolor{comment}{//Display ASN.1 structure}
+1309          error = \hyperlink{asn1_8c_adfebd6c0e21cc4d23414ff98aa9e9a69}{asn1DumpObject}(data, length, 0);
+1310          \textcolor{comment}{//Any error to report?}
+1311          \textcolor{keywordflow}{if}(error)
+1312             \textcolor{keywordflow}{break};
+1313       \}
+1314       \textcolor{keywordflow}{else}
+1315       \{
+1316          \textcolor{comment}{//Read the public value}
+1317          error = \hyperlink{asn1_8c_a1abd5e2bb0488ff85fb1d94392f80dc4}{asn1ReadTag}(data, length, &tag);
+1318          \textcolor{comment}{//Failed to decode ASN.1 tag?}
+1319          \textcolor{keywordflow}{if}(error)
+1320             \textcolor{keywordflow}{break};
+1321 
+1322          \textcolor{comment}{//Enforce encoding, class and type}
+1323          error = \hyperlink{asn1_8c_a73fa06e5d71abe974aa6ad8fb53ecaa2}{asn1CheckTag}(&tag, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, \hyperlink{asn1_8h_ab3589ac11c049bfda069aa3ecf683578}{ASN1\_CLASS\_UNIVERSAL}, 
+      \hyperlink{asn1_8h_a1b0f39cb3d87e425703ba389df9da1dfaf49fe8465a80ebfbe92fe0f0622ec994}{ASN1\_TYPE\_INTEGER});
+1324          \textcolor{comment}{//Invalid tag?}
+1325          \textcolor{keywordflow}{if}(error)
+1326             \textcolor{keywordflow}{break};
+1327 
+1328          \textcolor{comment}{//Skip the public value}
+1329          data += tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+1330          length -= tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+1331       \}
+1332 
+1333       \textcolor{comment}{//Read the private value}
+1334       error = \hyperlink{asn1_8c_aa73309637560abf8e42288890c19d641}{asn1ReadMpi}(data, length, &tag, &key->\hyperlink{structDsaPrivateKey_ac5b101c89f19f59b4cddd85429f1c30e}{x});
+1335       \textcolor{comment}{//Any error to report?}
+1336       \textcolor{keywordflow}{if}(error)
+1337          \textcolor{keywordflow}{break};
+1338 
+1339       \textcolor{comment}{//Debug message}
+1340       \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"DSA private key:\(\backslash\)r\(\backslash\)n"});
+1341       \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  p:\(\backslash\)r\(\backslash\)n"});
+1342       \hyperlink{debug_8h_a9c9f3b28f2daf14d77b401512c189d93}{TRACE\_DEBUG\_MPI}(\textcolor{stringliteral}{"    "}, &key->\hyperlink{structDsaPrivateKey_a8f8fd999b327a6bbff828cb04e31772e}{p});
+1343       \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  q:\(\backslash\)r\(\backslash\)n"});
+1344       \hyperlink{debug_8h_a9c9f3b28f2daf14d77b401512c189d93}{TRACE\_DEBUG\_MPI}(\textcolor{stringliteral}{"    "}, &key->\hyperlink{structDsaPrivateKey_a57748f022f498aaf35d7b30f562af7ca}{q});
+1345       \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  g:\(\backslash\)r\(\backslash\)n"});
+1346       \hyperlink{debug_8h_a9c9f3b28f2daf14d77b401512c189d93}{TRACE\_DEBUG\_MPI}(\textcolor{stringliteral}{"    "}, &key->\hyperlink{structDsaPrivateKey_a78da170adbc7f1a7eeb95e6bc52d4124}{g});
+1347       \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  x:\(\backslash\)r\(\backslash\)n"});
+1348       \hyperlink{debug_8h_a9c9f3b28f2daf14d77b401512c189d93}{TRACE\_DEBUG\_MPI}(\textcolor{stringliteral}{"    "}, &key->\hyperlink{structDsaPrivateKey_ac5b101c89f19f59b4cddd85429f1c30e}{x});
+1349 
+1350       \textcolor{comment}{//End of exception handling block}
+1351    \} \textcolor{keywordflow}{while}(0);
+1352 
+1353    \textcolor{comment}{//Release previously allocated memory}
+1354    \hyperlink{cyclone__crypto_2core_2crypto_8h_ac8a223b176683db4e9eed4162774f870}{cryptoFreeMem}(buffer);
+1355 
+1356    \textcolor{comment}{//Any error to report?}
+1357    \textcolor{keywordflow}{if}(error)
+1358    \{
+1359       \textcolor{comment}{//Clean up side effects}
+1360       \hyperlink{dsa_8c_a028cb6faf1b5384b57e740fe95f58c60}{dsaFreePrivateKey}(key);
+1361    \}
+1362 
+1363    \textcolor{comment}{//Return status code}
+1364    \textcolor{keywordflow}{return} error;
+1365 \textcolor{preprocessor}{#else}
+1366    \textcolor{comment}{//Not implemented}
+1367    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cab61c5ef368fbf03fdc1fb566c63f2f9a}{ERROR\_NOT\_IMPLEMENTED};
+1368 \textcolor{preprocessor}{#endif}
+1369 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{certificate_2pem__import_8c_a5fc5ddd5c103b7cd6d44bf46dec0fdda}\label{certificate_2pem__import_8c_a5fc5ddd5c103b7cd6d44bf46dec0fdda}} 
+\index{certificate/pem\+\_\+import.\+c@{certificate/pem\+\_\+import.\+c}!pem\+Import\+Dsa\+Public\+Key@{pem\+Import\+Dsa\+Public\+Key}}
+\index{pem\+Import\+Dsa\+Public\+Key@{pem\+Import\+Dsa\+Public\+Key}!certificate/pem\+\_\+import.\+c@{certificate/pem\+\_\+import.\+c}}
+\subsubsection{\texorpdfstring{pem\+Import\+Dsa\+Public\+Key()}{pemImportDsaPublicKey()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} pem\+Import\+Dsa\+Public\+Key (\begin{DoxyParamCaption}\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{input,  }\item[{size\+\_\+t}]{length,  }\item[{\hyperlink{structDsaPublicKey}{Dsa\+Public\+Key} $\ast$}]{key }\end{DoxyParamCaption})}
+
+
+
+Decode a P\+EM file containing a D\+SA public key. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em input} & Pointer to the P\+EM structure \\
+\hline
+\mbox{\tt in}  & {\em length} & Length of the P\+EM structure \\
+\hline
+\mbox{\tt out}  & {\em key} & D\+SA public key resulting from the parsing process \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 749 of file pem\+\_\+import.\+c.
+
+
+\begin{DoxyCode}
+750 \{
+751 \textcolor{preprocessor}{#if (DSA\_SUPPORT == ENABLED)}
+752    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+753    \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\_t} pkcs8Format;
+754    \textcolor{keywordtype}{size\_t} i;
+755    \textcolor{keywordtype}{size\_t} j;
+756    \hyperlink{compiler__port_8h_a022c65af7f6c8d3947e8a37d64db6ad6}{int\_t} \hyperlink{md5_8c_af11ea3cdbca7345eb6a4a8ac5ce0434d}{k};
+757    \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\_t} *buffer;
+758    \textcolor{keyword}{const} \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *\hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data};
+759    \textcolor{keyword}{const} \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *publicKey;
+760    \textcolor{keywordtype}{size\_t} publicKeyLen;
+761    \hyperlink{structAsn1Tag}{Asn1Tag} tag;
+762 
+763    \textcolor{comment}{//Check parameters}
+764    \textcolor{keywordflow}{if}(input == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} && \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} != 0)
+765       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+766    \textcolor{keywordflow}{if}(key == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+767       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+768 
+769    \textcolor{comment}{//PKCS #8 format?}
+770    \textcolor{keywordflow}{if}(\hyperlink{certificate_2pem__import_8c_a9019bb246bd8a7c6abeae29608050d5b}{pemSearchTag}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"-----BEGIN PUBLIC KEY-----"}, 26) >= 0)
+771    \{
+772       \textcolor{comment}{//Search for the beginning tag}
+773       k = \hyperlink{certificate_2pem__import_8c_a9019bb246bd8a7c6abeae29608050d5b}{pemSearchTag}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"-----BEGIN PUBLIC KEY-----"}, 26);
+774       \textcolor{comment}{//Failed to find the specified tag?}
+775       \textcolor{keywordflow}{if}(k < 0)
+776          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca92e7b26953f11d1bc4f4526fad39aed0}{ERROR\_INVALID\_SYNTAX};
+777 
+778       \textcolor{comment}{//Advance the pointer over the tag}
+779       input += k + 26;
+780       \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} -= k + 26;
+781 
+782       \textcolor{comment}{//Search for the end tag}
+783       k = \hyperlink{certificate_2pem__import_8c_a9019bb246bd8a7c6abeae29608050d5b}{pemSearchTag}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"-----END PUBLIC KEY-----"}, 24);
+784       \textcolor{comment}{//Invalid PEM file?}
+785       \textcolor{keywordflow}{if}(k <= 0)
+786          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca92e7b26953f11d1bc4f4526fad39aed0}{ERROR\_INVALID\_SYNTAX};
+787 
+788       \textcolor{comment}{//Length of the PEM structure}
+789       \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} = \hyperlink{md5_8c_af11ea3cdbca7345eb6a4a8ac5ce0434d}{k};
+790 
+791       \textcolor{comment}{//The structure of the private key is described by PKCS #8}
+792       pkcs8Format = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+793    \}
+794    \textcolor{keywordflow}{else}
+795    \{
+796       \textcolor{comment}{//Search for the beginning tag}
+797       k = \hyperlink{certificate_2pem__import_8c_a9019bb246bd8a7c6abeae29608050d5b}{pemSearchTag}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"-----BEGIN DSA PUBLIC KEY-----"}, 30);
+798       \textcolor{comment}{//Failed to find the specified tag?}
+799       \textcolor{keywordflow}{if}(k < 0)
+800          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca92e7b26953f11d1bc4f4526fad39aed0}{ERROR\_INVALID\_SYNTAX};
+801 
+802       \textcolor{comment}{//Advance the pointer over the tag}
+803       input += k + 30;
+804       \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} -= k + 30;
+805 
+806       \textcolor{comment}{//Search for the end tag}
+807       k = \hyperlink{certificate_2pem__import_8c_a9019bb246bd8a7c6abeae29608050d5b}{pemSearchTag}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"-----END DSA PUBLIC KEY-----"}, 28);
+808       \textcolor{comment}{//Invalid PEM file?}
+809       \textcolor{keywordflow}{if}(k <= 0)
+810          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca92e7b26953f11d1bc4f4526fad39aed0}{ERROR\_INVALID\_SYNTAX};
+811 
+812       \textcolor{comment}{//Length of the PEM structure}
+813       \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} = \hyperlink{md5_8c_af11ea3cdbca7345eb6a4a8ac5ce0434d}{k};
+814 
+815       \textcolor{comment}{//The structure of the private key is described by PKCS #1}
+816       pkcs8Format = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+817    \}
+818 
+819    \textcolor{comment}{//Allocate a memory buffer to hold the decoded data}
+820    buffer = \hyperlink{cyclone__crypto_2core_2crypto_8h_a48b53d16f66d31e5dcf82db3c1b882ba}{cryptoAllocMem}(\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length});
+821    \textcolor{comment}{//Failed to allocate memory?}
+822    \textcolor{keywordflow}{if}(buffer == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+823       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac0a554045048d2fb61387cf735676f69}{ERROR\_OUT\_OF\_MEMORY};
+824 
+825    \textcolor{comment}{//Copy the contents of the PEM structure}
+826    \hyperlink{cyclone__crypto_2core_2crypto_8h_a6724616c4014bb7e21f2660bd7b88be8}{cryptoMemcpy}(buffer, input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length});
+827 
+828    \textcolor{comment}{//Remove carriage returns and line feeds}
+829    \textcolor{keywordflow}{for}(i = 0, j = 0; i < \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}; i++)
+830    \{
+831       \textcolor{keywordflow}{if}(buffer[i] != \textcolor{charliteral}{'\(\backslash\)r'} && buffer[i] != \textcolor{charliteral}{'\(\backslash\)n'})
+832          buffer[j++] = buffer[i];
+833    \}
+834 
+835    \textcolor{comment}{//Start of exception handling block}
+836    \textcolor{keywordflow}{do}
+837    \{
+838       \textcolor{comment}{//The contents of the PEM file is Base64-encoded}
+839       error = \hyperlink{base64_8c_ae360cde3e2ef08783ac2e01591b78530}{base64Decode}(buffer, j, buffer, &length);
+840       \textcolor{comment}{//Failed to decode the file?}
+841       \textcolor{keywordflow}{if}(error)
+842          \textcolor{keywordflow}{break};
+843 
+844       \textcolor{comment}{//Point to the resulting ASN.1 structure}
+845       data = (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *) buffer;
+846 
+847       \textcolor{comment}{//Display ASN.1 structure}
+848       error = \hyperlink{asn1_8c_adfebd6c0e21cc4d23414ff98aa9e9a69}{asn1DumpObject}(data, length, 0);
+849       \textcolor{comment}{//Any error to report?}
+850       \textcolor{keywordflow}{if}(error)
+851          \textcolor{keywordflow}{break};
+852 
+853       \textcolor{comment}{//PKCS #8 format?}
+854       \textcolor{keywordflow}{if}(pkcs8Format)
+855       \{
+856          \textcolor{comment}{//PKCS #8 describes a generic syntax for encoding public keys}
+857          error = \hyperlink{asn1_8c_a5df4a5a14b22837b3dea3525608a9122}{asn1ReadSequence}(data, length, &tag);
+858          \textcolor{comment}{//Failed to decode ASN.1 tag?}
+859          \textcolor{keywordflow}{if}(error)
+860             \textcolor{keywordflow}{break};
+861 
+862          \textcolor{comment}{//Point to the first field of the sequence}
+863          data = tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value};
+864          length = tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length};
+865 
+866          \textcolor{comment}{//Read the publicKeyAlgorithm field}
+867          error = \hyperlink{asn1_8c_a5df4a5a14b22837b3dea3525608a9122}{asn1ReadSequence}(data, length, &tag);
+868          \textcolor{comment}{//Failed to decode ASN.1 tag?}
+869          \textcolor{keywordflow}{if}(error)
+870             \textcolor{keywordflow}{break};
+871 
+872          \textcolor{comment}{//Save the position of the publicKey field}
+873          publicKey = data + tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+874          publicKeyLen = length - tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+875 
+876          \textcolor{comment}{//Point to the first field of the sequence}
+877          data = tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value};
+878          length = tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length};
+879 
+880          \textcolor{comment}{//Read the algorithm identifier (OID)}
+881          error = \hyperlink{asn1_8c_a1abd5e2bb0488ff85fb1d94392f80dc4}{asn1ReadTag}(data, length, &tag);
+882          \textcolor{comment}{//Failed to decode ASN.1 tag?}
+883          \textcolor{keywordflow}{if}(error)
+884             \textcolor{keywordflow}{break};
+885 
+886          \textcolor{comment}{//Check algorithm identifier}
+887          error = \hyperlink{asn1_8c_a565e797369dd4ec4b722954715507907}{asn1CheckOid}(&tag, \hyperlink{dsa_8c_aec62d423add8486c829eacb574ebe4f3}{DSA\_OID}, \textcolor{keyword}{sizeof}(\hyperlink{dsa_8c_aec62d423add8486c829eacb574ebe4f3}{DSA\_OID}));
+888          \textcolor{comment}{//Wrong identifier?}
+889          \textcolor{keywordflow}{if}(error)
+890             \textcolor{keywordflow}{break};
+891 
+892          \textcolor{comment}{//Point to the next field}
+893          data += tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+894          length -= tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+895 
+896          \textcolor{comment}{//The DSA parameters are encapsulated within a sequence}
+897          error = \hyperlink{asn1_8c_a5df4a5a14b22837b3dea3525608a9122}{asn1ReadSequence}(data, length, &tag);
+898          \textcolor{comment}{//Failed to decode ASN.1 tag?}
+899          \textcolor{keywordflow}{if}(error)
+900             \textcolor{keywordflow}{break};
+901 
+902          \textcolor{comment}{//Point to the first field of the sequence}
+903          data = tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value};
+904          length = tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length};
+905 
+906          \textcolor{comment}{//Read p}
+907          error = \hyperlink{asn1_8c_aa73309637560abf8e42288890c19d641}{asn1ReadMpi}(data, length, &tag, &key->\hyperlink{structDsaPublicKey_a273f5bed06a946fd672c94283f49fc3e}{p});
+908          \textcolor{comment}{//Any error to report?}
+909          \textcolor{keywordflow}{if}(error)
+910             \textcolor{keywordflow}{break};
+911 
+912          \textcolor{comment}{//Point to the next field}
+913          data += tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+914          length -= tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+915 
+916          \textcolor{comment}{//Read q}
+917          error = \hyperlink{asn1_8c_aa73309637560abf8e42288890c19d641}{asn1ReadMpi}(data, length, &tag, &key->\hyperlink{structDsaPublicKey_a7961fbb82f0c5c56b577d2247ffc9172}{q});
+918          \textcolor{comment}{//Any error to report?}
+919          \textcolor{keywordflow}{if}(error)
+920             \textcolor{keywordflow}{break};
+921 
+922          \textcolor{comment}{//Point to the next field}
+923          data += tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+924          length -= tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+925 
+926          \textcolor{comment}{//Read g}
+927          error = \hyperlink{asn1_8c_aa73309637560abf8e42288890c19d641}{asn1ReadMpi}(data, length, &tag, &key->\hyperlink{structDsaPublicKey_a910d43db2650efb256373b06521a23bf}{g});
+928          \textcolor{comment}{//Any error to report?}
+929          \textcolor{keywordflow}{if}(error)
+930             \textcolor{keywordflow}{break};
+931 
+932          \textcolor{comment}{//The publicKey field is encapsulated within an bit string}
+933          error = \hyperlink{asn1_8c_a1abd5e2bb0488ff85fb1d94392f80dc4}{asn1ReadTag}(publicKey, publicKeyLen, &tag);
+934          \textcolor{comment}{//Failed to decode ASN.1 tag?}
+935          \textcolor{keywordflow}{if}(error)
+936             \textcolor{keywordflow}{break};
+937 
+938          \textcolor{comment}{//Enforce encoding, class and type}
+939          error = \hyperlink{asn1_8c_a73fa06e5d71abe974aa6ad8fb53ecaa2}{asn1CheckTag}(&tag, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, \hyperlink{asn1_8h_ab3589ac11c049bfda069aa3ecf683578}{ASN1\_CLASS\_UNIVERSAL}, 
+      \hyperlink{asn1_8h_a1b0f39cb3d87e425703ba389df9da1dfab40c213cd2fda439f157e8e4523d020c}{ASN1\_TYPE\_BIT\_STRING});
+940          \textcolor{comment}{//Invalid tag?}
+941          \textcolor{keywordflow}{if}(error)
+942             \textcolor{keywordflow}{break};
+943 
+944          \textcolor{comment}{//The bit string shall contain an initial octet which encodes the number}
+945          \textcolor{comment}{//of unused bits in the final subsequent octet}
+946          \textcolor{keywordflow}{if}(tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length} < 1 || tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value}[0] != 0x00)
+947          \{
+948             \textcolor{comment}{//Report an error}
+949             error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca92e7b26953f11d1bc4f4526fad39aed0}{ERROR\_INVALID\_SYNTAX};
+950             \textcolor{keywordflow}{break};
+951          \}
+952 
+953          \textcolor{comment}{//Point to the content of the publicKey structure}
+954          data = tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value} + 1;
+955          length = tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length} - 1;
+956 
+957          \textcolor{comment}{//Display ASN.1 structure}
+958          error = \hyperlink{asn1_8c_adfebd6c0e21cc4d23414ff98aa9e9a69}{asn1DumpObject}(data, length, 0);
+959          \textcolor{comment}{//Any error to report?}
+960          \textcolor{keywordflow}{if}(error)
+961             \textcolor{keywordflow}{break};
+962 
+963          \textcolor{comment}{//Read the public value}
+964          error = \hyperlink{asn1_8c_aa73309637560abf8e42288890c19d641}{asn1ReadMpi}(data, length, &tag, &key->\hyperlink{structDsaPublicKey_a47d0a3368a5a61e48cc36ed0414392a6}{y});
+965          \textcolor{comment}{//Any error to report?}
+966          \textcolor{keywordflow}{if}(error)
+967             \textcolor{keywordflow}{break};
+968       \}
+969       \textcolor{keywordflow}{else}
+970       \{
+971          \textcolor{comment}{//The DSA key and parameters are encapsulated within a sequence}
+972          error = \hyperlink{asn1_8c_a5df4a5a14b22837b3dea3525608a9122}{asn1ReadSequence}(data, length, &tag);
+973          \textcolor{comment}{//Failed to decode ASN.1 tag?}
+974          \textcolor{keywordflow}{if}(error)
+975             \textcolor{keywordflow}{break};
+976 
+977          \textcolor{comment}{//Point to the first field of the sequence}
+978          data = tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value};
+979          length = tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length};
+980 
+981          \textcolor{comment}{//Read the public value}
+982          error = \hyperlink{asn1_8c_aa73309637560abf8e42288890c19d641}{asn1ReadMpi}(data, length, &tag, &key->\hyperlink{structDsaPublicKey_a47d0a3368a5a61e48cc36ed0414392a6}{y});
+983          \textcolor{comment}{//Any error to report?}
+984          \textcolor{keywordflow}{if}(error)
+985             \textcolor{keywordflow}{break};
+986 
+987          \textcolor{comment}{//Point to the next field}
+988          data += tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+989          length -= tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+990 
+991          \textcolor{comment}{//Read p}
+992          error = \hyperlink{asn1_8c_aa73309637560abf8e42288890c19d641}{asn1ReadMpi}(data, length, &tag, &key->\hyperlink{structDsaPublicKey_a273f5bed06a946fd672c94283f49fc3e}{p});
+993          \textcolor{comment}{//Any error to report?}
+994          \textcolor{keywordflow}{if}(error)
+995             \textcolor{keywordflow}{break};
+996 
+997          \textcolor{comment}{//Point to the next field}
+998          data += tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+999          length -= tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+1000 
+1001          \textcolor{comment}{//Read q}
+1002          error = \hyperlink{asn1_8c_aa73309637560abf8e42288890c19d641}{asn1ReadMpi}(data, length, &tag, &key->\hyperlink{structDsaPublicKey_a7961fbb82f0c5c56b577d2247ffc9172}{q});
+1003          \textcolor{comment}{//Any error to report?}
+1004          \textcolor{keywordflow}{if}(error)
+1005             \textcolor{keywordflow}{break};
+1006 
+1007          \textcolor{comment}{//Point to the next field}
+1008          data += tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+1009          length -= tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+1010 
+1011          \textcolor{comment}{//Read g}
+1012          error = \hyperlink{asn1_8c_aa73309637560abf8e42288890c19d641}{asn1ReadMpi}(data, length, &tag, &key->\hyperlink{structDsaPublicKey_a910d43db2650efb256373b06521a23bf}{g});
+1013          \textcolor{comment}{//Any error to report?}
+1014          \textcolor{keywordflow}{if}(error)
+1015             \textcolor{keywordflow}{break};
+1016       \}
+1017 
+1018       \textcolor{comment}{//Debug message}
+1019       \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"DSA public key:\(\backslash\)r\(\backslash\)n"});
+1020       \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  p:\(\backslash\)r\(\backslash\)n"});
+1021       \hyperlink{debug_8h_a9c9f3b28f2daf14d77b401512c189d93}{TRACE\_DEBUG\_MPI}(\textcolor{stringliteral}{"    "}, &key->\hyperlink{structDsaPublicKey_a273f5bed06a946fd672c94283f49fc3e}{p});
+1022       \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  q:\(\backslash\)r\(\backslash\)n"});
+1023       \hyperlink{debug_8h_a9c9f3b28f2daf14d77b401512c189d93}{TRACE\_DEBUG\_MPI}(\textcolor{stringliteral}{"    "}, &key->\hyperlink{structDsaPublicKey_a7961fbb82f0c5c56b577d2247ffc9172}{q});
+1024       \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  g:\(\backslash\)r\(\backslash\)n"});
+1025       \hyperlink{debug_8h_a9c9f3b28f2daf14d77b401512c189d93}{TRACE\_DEBUG\_MPI}(\textcolor{stringliteral}{"    "}, &key->\hyperlink{structDsaPublicKey_a910d43db2650efb256373b06521a23bf}{g});
+1026       \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  y:\(\backslash\)r\(\backslash\)n"});
+1027       \hyperlink{debug_8h_a9c9f3b28f2daf14d77b401512c189d93}{TRACE\_DEBUG\_MPI}(\textcolor{stringliteral}{"    "}, &key->\hyperlink{structDsaPublicKey_a47d0a3368a5a61e48cc36ed0414392a6}{y});
+1028 
+1029       \textcolor{comment}{//End of exception handling block}
+1030    \} \textcolor{keywordflow}{while}(0);
+1031 
+1032    \textcolor{comment}{//Release previously allocated memory}
+1033    \hyperlink{cyclone__crypto_2core_2crypto_8h_ac8a223b176683db4e9eed4162774f870}{cryptoFreeMem}(buffer);
+1034 
+1035    \textcolor{comment}{//Any error to report?}
+1036    \textcolor{keywordflow}{if}(error)
+1037    \{
+1038       \textcolor{comment}{//Clean up side effects}
+1039       \hyperlink{dsa_8c_aecb06a7f6d0f7df028b6a30284fa0016}{dsaFreePublicKey}(key);
+1040    \}
+1041 
+1042    \textcolor{comment}{//Return status code}
+1043    \textcolor{keywordflow}{return} error;
+1044 \textcolor{preprocessor}{#else}
+1045    \textcolor{comment}{//Not implemented}
+1046    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cab61c5ef368fbf03fdc1fb566c63f2f9a}{ERROR\_NOT\_IMPLEMENTED};
+1047 \textcolor{preprocessor}{#endif}
+1048 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{certificate_2pem__import_8c_a5d76a217bb3b6fad9de9aa71bcd8317f}\label{certificate_2pem__import_8c_a5d76a217bb3b6fad9de9aa71bcd8317f}} 
+\index{certificate/pem\+\_\+import.\+c@{certificate/pem\+\_\+import.\+c}!pem\+Import\+Ec\+Parameters@{pem\+Import\+Ec\+Parameters}}
+\index{pem\+Import\+Ec\+Parameters@{pem\+Import\+Ec\+Parameters}!certificate/pem\+\_\+import.\+c@{certificate/pem\+\_\+import.\+c}}
+\subsubsection{\texorpdfstring{pem\+Import\+Ec\+Parameters()}{pemImportEcParameters()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} pem\+Import\+Ec\+Parameters (\begin{DoxyParamCaption}\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{input,  }\item[{size\+\_\+t}]{length,  }\item[{\hyperlink{structEcDomainParameters}{Ec\+Domain\+Parameters} $\ast$}]{params }\end{DoxyParamCaption})}
+
+
+
+Decode a P\+EM file containing EC domain parameters. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em input} & Pointer to the P\+EM structure \\
+\hline
+\mbox{\tt in}  & {\em length} & Length of the P\+EM structure \\
+\hline
+\mbox{\tt out}  & {\em params} & EC domain parameters \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 1380 of file pem\+\_\+import.\+c.
+
+
+\begin{DoxyCode}
+1381 \{
+1382 \textcolor{preprocessor}{#if (EC\_SUPPORT == ENABLED)}
+1383    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+1384    \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\_t} ecParamsFormat;
+1385    \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\_t} pkcs8Format;
+1386    \textcolor{keywordtype}{size\_t} i;
+1387    \textcolor{keywordtype}{size\_t} j;
+1388    \hyperlink{compiler__port_8h_a022c65af7f6c8d3947e8a37d64db6ad6}{int\_t} \hyperlink{md5_8c_af11ea3cdbca7345eb6a4a8ac5ce0434d}{k};
+1389    \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\_t} *buffer;
+1390    \textcolor{keyword}{const} \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *\hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data};
+1391    \hyperlink{structAsn1Tag}{Asn1Tag} tag;
+1392    \textcolor{keyword}{const} \hyperlink{structEcCurveInfo}{EcCurveInfo} *curveInfo;
+1393 
+1394    \textcolor{comment}{//Check parameters}
+1395    \textcolor{keywordflow}{if}(input == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} && \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} != 0)
+1396       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+1397    \textcolor{keywordflow}{if}(params == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1398       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+1399 
+1400    \textcolor{comment}{//Initialize variables}
+1401    ecParamsFormat = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+1402    pkcs8Format = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+1403 
+1404    \textcolor{comment}{//Check format}
+1405    \textcolor{keywordflow}{if}(\hyperlink{certificate_2pem__import_8c_a9019bb246bd8a7c6abeae29608050d5b}{pemSearchTag}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"-----BEGIN EC PARAMETERS-----"}, 29) >= 0)
+1406    \{
+1407       \textcolor{comment}{//Search for the beginning tag}
+1408       k = \hyperlink{certificate_2pem__import_8c_a9019bb246bd8a7c6abeae29608050d5b}{pemSearchTag}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"-----BEGIN EC PARAMETERS-----"}, 29);
+1409       \textcolor{comment}{//Failed to find the specified tag?}
+1410       \textcolor{keywordflow}{if}(k < 0)
+1411          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca92e7b26953f11d1bc4f4526fad39aed0}{ERROR\_INVALID\_SYNTAX};
+1412 
+1413       \textcolor{comment}{//Advance the pointer over the tag}
+1414       input += k + 29;
+1415       \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} -= k + 29;
+1416 
+1417       \textcolor{comment}{//Search for the end tag}
+1418       k = \hyperlink{certificate_2pem__import_8c_a9019bb246bd8a7c6abeae29608050d5b}{pemSearchTag}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"-----END EC PARAMETERS-----"}, 27);
+1419       \textcolor{comment}{//Invalid PEM file?}
+1420       \textcolor{keywordflow}{if}(k <= 0)
+1421          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca92e7b26953f11d1bc4f4526fad39aed0}{ERROR\_INVALID\_SYNTAX};
+1422 
+1423       \textcolor{comment}{//Length of the PEM structure}
+1424       \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} = \hyperlink{md5_8c_af11ea3cdbca7345eb6a4a8ac5ce0434d}{k};
+1425 
+1426       \textcolor{comment}{//The structure is described by RFC 3279, section 2.3.5}
+1427       ecParamsFormat = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+1428    \}
+1429    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(\hyperlink{certificate_2pem__import_8c_a9019bb246bd8a7c6abeae29608050d5b}{pemSearchTag}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"-----BEGIN PRIVATE KEY-----"}, 27) >= 0)
+1430    \{
+1431       \textcolor{comment}{//Search for the beginning tag}
+1432       k = \hyperlink{certificate_2pem__import_8c_a9019bb246bd8a7c6abeae29608050d5b}{pemSearchTag}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"-----BEGIN PRIVATE KEY-----"}, 27);
+1433       \textcolor{comment}{//Failed to find the specified tag?}
+1434       \textcolor{keywordflow}{if}(k < 0)
+1435          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca92e7b26953f11d1bc4f4526fad39aed0}{ERROR\_INVALID\_SYNTAX};
+1436 
+1437       \textcolor{comment}{//Advance the pointer over the tag}
+1438       input += k + 27;
+1439       \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} -= k + 27;
+1440 
+1441       \textcolor{comment}{//Search for the end tag}
+1442       k = \hyperlink{certificate_2pem__import_8c_a9019bb246bd8a7c6abeae29608050d5b}{pemSearchTag}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"-----END PRIVATE KEY-----"}, 25);
+1443       \textcolor{comment}{//Invalid PEM file?}
+1444       \textcolor{keywordflow}{if}(k <= 0)
+1445          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca92e7b26953f11d1bc4f4526fad39aed0}{ERROR\_INVALID\_SYNTAX};
+1446 
+1447       \textcolor{comment}{//Length of the PEM structure}
+1448       \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} = \hyperlink{md5_8c_af11ea3cdbca7345eb6a4a8ac5ce0434d}{k};
+1449 
+1450       \textcolor{comment}{//The structure is described by RFC 5208 (PKCS #8)}
+1451       pkcs8Format = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+1452    \}
+1453    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(\hyperlink{certificate_2pem__import_8c_a9019bb246bd8a7c6abeae29608050d5b}{pemSearchTag}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"-----BEGIN EC PRIVATE KEY-----"}, 30) >= 0)
+1454    \{
+1455       \textcolor{comment}{//Search for the beginning tag}
+1456       k = \hyperlink{certificate_2pem__import_8c_a9019bb246bd8a7c6abeae29608050d5b}{pemSearchTag}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"-----BEGIN EC PRIVATE KEY-----"}, 30);
+1457       \textcolor{comment}{//Failed to find the specified tag?}
+1458       \textcolor{keywordflow}{if}(k < 0)
+1459          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca92e7b26953f11d1bc4f4526fad39aed0}{ERROR\_INVALID\_SYNTAX};
+1460 
+1461       \textcolor{comment}{//Advance the pointer over the tag}
+1462       input += k + 30;
+1463       \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} -= k + 30;
+1464 
+1465       \textcolor{comment}{//Search for the end tag}
+1466       k = \hyperlink{certificate_2pem__import_8c_a9019bb246bd8a7c6abeae29608050d5b}{pemSearchTag}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"-----END EC PRIVATE KEY-----"}, 28);
+1467       \textcolor{comment}{//Invalid PEM file?}
+1468       \textcolor{keywordflow}{if}(k <= 0)
+1469          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca92e7b26953f11d1bc4f4526fad39aed0}{ERROR\_INVALID\_SYNTAX};
+1470 
+1471       \textcolor{comment}{//Length of the PEM structure}
+1472       \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} = \hyperlink{md5_8c_af11ea3cdbca7345eb6a4a8ac5ce0434d}{k};
+1473 
+1474       \textcolor{comment}{//The structure of the private key is described by PKCS #1}
+1475    \}
+1476 
+1477    \textcolor{comment}{//Allocate a memory buffer to hold the decoded data}
+1478    buffer = \hyperlink{cyclone__crypto_2core_2crypto_8h_a48b53d16f66d31e5dcf82db3c1b882ba}{cryptoAllocMem}(\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length});
+1479    \textcolor{comment}{//Failed to allocate memory?}
+1480    \textcolor{keywordflow}{if}(buffer == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1481       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac0a554045048d2fb61387cf735676f69}{ERROR\_OUT\_OF\_MEMORY};
+1482 
+1483    \textcolor{comment}{//Copy the contents of the PEM structure}
+1484    \hyperlink{cyclone__crypto_2core_2crypto_8h_a6724616c4014bb7e21f2660bd7b88be8}{cryptoMemcpy}(buffer, input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length});
+1485 
+1486    \textcolor{comment}{//Remove carriage returns and line feeds}
+1487    \textcolor{keywordflow}{for}(i = 0, j = 0; i < \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}; i++)
+1488    \{
+1489       \textcolor{keywordflow}{if}(buffer[i] != \textcolor{charliteral}{'\(\backslash\)r'} && buffer[i] != \textcolor{charliteral}{'\(\backslash\)n'})
+1490          buffer[j++] = buffer[i];
+1491    \}
+1492 
+1493    \textcolor{comment}{//Start of exception handling block}
+1494    \textcolor{keywordflow}{do}
+1495    \{
+1496       \textcolor{comment}{//The contents of the PEM file is Base64-encoded}
+1497       error = \hyperlink{base64_8c_ae360cde3e2ef08783ac2e01591b78530}{base64Decode}(buffer, j, buffer, &length);
+1498       \textcolor{comment}{//Failed to decode the file?}
+1499       \textcolor{keywordflow}{if}(error)
+1500          \textcolor{keywordflow}{break};
+1501 
+1502       \textcolor{comment}{//Point to the resulting ASN.1 structure}
+1503       data = (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *) buffer;
+1504 
+1505       \textcolor{comment}{//Display ASN.1 structure}
+1506       error = \hyperlink{asn1_8c_adfebd6c0e21cc4d23414ff98aa9e9a69}{asn1DumpObject}(data, length, 0);
+1507       \textcolor{comment}{//Any error to report?}
+1508       \textcolor{keywordflow}{if}(error)
+1509          \textcolor{keywordflow}{break};
+1510 
+1511       \textcolor{comment}{//Check format}
+1512       \textcolor{keywordflow}{if}(ecParamsFormat)
+1513       \{
+1514          \textcolor{comment}{//Just for sanity}
+1515       \}
+1516       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(pkcs8Format)
+1517       \{
+1518          \textcolor{comment}{//PKCS #8 describes a generic syntax for encoding private keys}
+1519          error = \hyperlink{asn1_8c_a5df4a5a14b22837b3dea3525608a9122}{asn1ReadSequence}(data, length, &tag);
+1520          \textcolor{comment}{//Failed to decode ASN.1 tag?}
+1521          \textcolor{keywordflow}{if}(error)
+1522             \textcolor{keywordflow}{break};
+1523 
+1524          \textcolor{comment}{//Point to the first field of the sequence}
+1525          data = tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value};
+1526          length = tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length};
+1527 
+1528          \textcolor{comment}{//Read the version field}
+1529          error = \hyperlink{asn1_8c_a1abd5e2bb0488ff85fb1d94392f80dc4}{asn1ReadTag}(data, length, &tag);
+1530          \textcolor{comment}{//Failed to decode ASN.1 tag?}
+1531          \textcolor{keywordflow}{if}(error)
+1532             \textcolor{keywordflow}{break};
+1533 
+1534          \textcolor{comment}{//Enforce encoding, class and type}
+1535          error = \hyperlink{asn1_8c_a73fa06e5d71abe974aa6ad8fb53ecaa2}{asn1CheckTag}(&tag, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, \hyperlink{asn1_8h_ab3589ac11c049bfda069aa3ecf683578}{ASN1\_CLASS\_UNIVERSAL}, 
+      \hyperlink{asn1_8h_a1b0f39cb3d87e425703ba389df9da1dfaf49fe8465a80ebfbe92fe0f0622ec994}{ASN1\_TYPE\_INTEGER});
+1536          \textcolor{comment}{//Invalid tag?}
+1537          \textcolor{keywordflow}{if}(error)
+1538             \textcolor{keywordflow}{break};
+1539 
+1540          \textcolor{comment}{//Skip the version field}
+1541          data += tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+1542          length -= tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+1543 
+1544          \textcolor{comment}{//Read the privateKeyAlgorithm field}
+1545          error = \hyperlink{asn1_8c_a5df4a5a14b22837b3dea3525608a9122}{asn1ReadSequence}(data, length, &tag);
+1546          \textcolor{comment}{//Failed to decode ASN.1 tag?}
+1547          \textcolor{keywordflow}{if}(error)
+1548             \textcolor{keywordflow}{break};
+1549 
+1550          \textcolor{comment}{//Point to the first field of the sequence}
+1551          data = tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value};
+1552          length = tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length};
+1553 
+1554          \textcolor{comment}{//Read the algorithm identifier (OID)}
+1555          error = \hyperlink{asn1_8c_a1abd5e2bb0488ff85fb1d94392f80dc4}{asn1ReadTag}(data, length, &tag);
+1556          \textcolor{comment}{//Failed to decode ASN.1 tag?}
+1557          \textcolor{keywordflow}{if}(error)
+1558             \textcolor{keywordflow}{break};
+1559 
+1560          \textcolor{comment}{//Check algorithm identifier}
+1561          error = \hyperlink{asn1_8c_a565e797369dd4ec4b722954715507907}{asn1CheckOid}(&tag, \hyperlink{ec_8c_a5ff93c201b1e50b6fda04774a2fa537c}{EC\_PUBLIC\_KEY\_OID}, \textcolor{keyword}{sizeof}(
+      \hyperlink{ec_8c_a5ff93c201b1e50b6fda04774a2fa537c}{EC\_PUBLIC\_KEY\_OID}));
+1562          \textcolor{comment}{//Wrong identifier?}
+1563          \textcolor{keywordflow}{if}(error)
+1564             \textcolor{keywordflow}{break};
+1565 
+1566          \textcolor{comment}{//Point to the next field}
+1567          data += tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+1568          length += tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+1569       \}
+1570       \textcolor{keywordflow}{else}
+1571       \{
+1572          \textcolor{comment}{//The EC parameters are encapsulated within a sequence}
+1573          error = \hyperlink{asn1_8c_a5df4a5a14b22837b3dea3525608a9122}{asn1ReadSequence}(data, length, &tag);
+1574          \textcolor{comment}{//Failed to decode ASN.1 tag?}
+1575          \textcolor{keywordflow}{if}(error)
+1576             \textcolor{keywordflow}{break};
+1577 
+1578          \textcolor{comment}{//Point to the first field of the sequence}
+1579          data = tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value};
+1580          length = tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length};
+1581 
+1582          \textcolor{comment}{//Read the version field}
+1583          error = \hyperlink{asn1_8c_a1abd5e2bb0488ff85fb1d94392f80dc4}{asn1ReadTag}(data, length, &tag);
+1584          \textcolor{comment}{//Failed to decode ASN.1 tag?}
+1585          \textcolor{keywordflow}{if}(error)
+1586             \textcolor{keywordflow}{break};
+1587 
+1588          \textcolor{comment}{//Enforce encoding, class and type}
+1589          error = \hyperlink{asn1_8c_a73fa06e5d71abe974aa6ad8fb53ecaa2}{asn1CheckTag}(&tag, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, \hyperlink{asn1_8h_ab3589ac11c049bfda069aa3ecf683578}{ASN1\_CLASS\_UNIVERSAL}, 
+      \hyperlink{asn1_8h_a1b0f39cb3d87e425703ba389df9da1dfaf49fe8465a80ebfbe92fe0f0622ec994}{ASN1\_TYPE\_INTEGER});
+1590          \textcolor{comment}{//Invalid tag?}
+1591          \textcolor{keywordflow}{if}(error)
+1592             \textcolor{keywordflow}{break};
+1593 
+1594          \textcolor{comment}{//Skip the version field}
+1595          data += tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+1596          length -= tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+1597 
+1598          \textcolor{comment}{//Read the privateKey field}
+1599          error = \hyperlink{asn1_8c_a08b7995f0473e1ff62a9061f31410b2f}{asn1ReadOctetString}(data, length, &tag);
+1600          \textcolor{comment}{//Failed to decode ASN.1 tag?}
+1601          \textcolor{keywordflow}{if}(error)
+1602             \textcolor{keywordflow}{break};
+1603 
+1604          \textcolor{comment}{//Skip the privateKey field}
+1605          data += tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+1606          length -= tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+1607 
+1608          \textcolor{comment}{//Explicit tagging shall be used to encode the curve identifier}
+1609          error = \hyperlink{asn1_8c_a1abd5e2bb0488ff85fb1d94392f80dc4}{asn1ReadTag}(data, length, &tag);
+1610          \textcolor{comment}{//Failed to decode ASN.1 tag?}
+1611          \textcolor{keywordflow}{if}(error)
+1612             \textcolor{keywordflow}{return} error;
+1613 
+1614          \textcolor{comment}{//Enforce encoding, class and type}
+1615          error = \hyperlink{asn1_8c_a73fa06e5d71abe974aa6ad8fb53ecaa2}{asn1CheckTag}(&tag, \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE}, 
+      \hyperlink{asn1_8h_aed381d50c77b8c9f962b5359d6115c97}{ASN1\_CLASS\_CONTEXT\_SPECIFIC}, 0);
+1616          \textcolor{comment}{//Failed to decode ASN.1 tag?}
+1617          \textcolor{keywordflow}{if}(error)
+1618             \textcolor{keywordflow}{return} error;
+1619 
+1620          \textcolor{comment}{//Read the inner tag}
+1621          data = tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value};
+1622          length = tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length};
+1623       \}
+1624 
+1625       \textcolor{comment}{//Read the curve identifier}
+1626       error = \hyperlink{asn1_8c_a842c029a80fcf3c0c1a2a8bf1ba2d96c}{asn1ReadOid}(data, length, &tag);
+1627       \textcolor{comment}{//Failed to decode ASN.1 tag?}
+1628       \textcolor{keywordflow}{if}(error)
+1629          \textcolor{keywordflow}{break};
+1630 
+1631       \textcolor{comment}{//Retrieve EC domain parameters}
+1632       curveInfo = \hyperlink{ec__curves_8c_a0e60cf6994283f6bf5bcf56e86f9adbe}{ecGetCurveInfo}(tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value}, tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length});
+1633       \textcolor{comment}{//Make sure the specified elliptic curve is supported}
+1634       \textcolor{keywordflow}{if}(curveInfo == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1635       \{
+1636          \textcolor{comment}{//Report an error}
+1637          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca152b24f57c941cb736772696416eb7c2}{ERROR\_ILLEGAL\_PARAMETER};
+1638          \textcolor{comment}{//Exit immediately}
+1639          \textcolor{keywordflow}{break};
+1640       \}
+1641 
+1642       \textcolor{comment}{//Load EC domain parameters}
+1643       error = \hyperlink{ec_8c_ab3d7ebcb8fd2e79990ef25e39a68f4a5}{ecLoadDomainParameters}(params, curveInfo);
+1644       \textcolor{comment}{//Any error to report?}
+1645       \textcolor{keywordflow}{if}(error)
+1646          \textcolor{keywordflow}{break};
+1647 
+1648       \textcolor{comment}{//End of exception handling block}
+1649    \} \textcolor{keywordflow}{while}(0);
+1650 
+1651    \textcolor{comment}{//Release previously allocated memory}
+1652    \hyperlink{cyclone__crypto_2core_2crypto_8h_ac8a223b176683db4e9eed4162774f870}{cryptoFreeMem}(buffer);
+1653 
+1654    \textcolor{comment}{//Any error to report?}
+1655    \textcolor{keywordflow}{if}(error)
+1656    \{
+1657       \textcolor{comment}{//Clean up side effects}
+1658       \hyperlink{ec_8c_a256993c154cf87c3d9d18138a1365eca}{ecFreeDomainParameters}(params);
+1659    \}
+1660 
+1661    \textcolor{comment}{//Return status code}
+1662    \textcolor{keywordflow}{return} error;
+1663 \textcolor{preprocessor}{#else}
+1664    \textcolor{comment}{//Not implemented}
+1665    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cab61c5ef368fbf03fdc1fb566c63f2f9a}{ERROR\_NOT\_IMPLEMENTED};
+1666 \textcolor{preprocessor}{#endif}
+1667 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{certificate_2pem__import_8c_a9d39070535c6536d833ace8e6dedde82}\label{certificate_2pem__import_8c_a9d39070535c6536d833ace8e6dedde82}} 
+\index{certificate/pem\+\_\+import.\+c@{certificate/pem\+\_\+import.\+c}!pem\+Import\+Ec\+Private\+Key@{pem\+Import\+Ec\+Private\+Key}}
+\index{pem\+Import\+Ec\+Private\+Key@{pem\+Import\+Ec\+Private\+Key}!certificate/pem\+\_\+import.\+c@{certificate/pem\+\_\+import.\+c}}
+\subsubsection{\texorpdfstring{pem\+Import\+Ec\+Private\+Key()}{pemImportEcPrivateKey()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} pem\+Import\+Ec\+Private\+Key (\begin{DoxyParamCaption}\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{input,  }\item[{size\+\_\+t}]{length,  }\item[{\hyperlink{structMpi}{Mpi} $\ast$}]{key }\end{DoxyParamCaption})}
+
+
+
+Decode a P\+EM file containing an EC private key. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em input} & Pointer to the P\+EM structure \\
+\hline
+\mbox{\tt in}  & {\em length} & Length of the P\+EM structure \\
+\hline
+\mbox{\tt out}  & {\em key} & EC private key resulting from the parsing process \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 1886 of file pem\+\_\+import.\+c.
+
+
+\begin{DoxyCode}
+1887 \{
+1888 \textcolor{preprocessor}{#if (EC\_SUPPORT == ENABLED)}
+1889    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+1890    \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\_t} pkcs8Format;
+1891    \textcolor{keywordtype}{size\_t} i;
+1892    \textcolor{keywordtype}{size\_t} j;
+1893    \hyperlink{compiler__port_8h_a022c65af7f6c8d3947e8a37d64db6ad6}{int\_t} \hyperlink{md5_8c_af11ea3cdbca7345eb6a4a8ac5ce0434d}{k};
+1894    \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\_t} *buffer;
+1895    \textcolor{keyword}{const} \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *\hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data};
+1896    \hyperlink{structAsn1Tag}{Asn1Tag} tag;
+1897 
+1898    \textcolor{comment}{//Check parameters}
+1899    \textcolor{keywordflow}{if}(input == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} && \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} != 0)
+1900       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+1901    \textcolor{keywordflow}{if}(key == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1902       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+1903 
+1904    \textcolor{comment}{//PKCS #8 format?}
+1905    \textcolor{keywordflow}{if}(\hyperlink{certificate_2pem__import_8c_a9019bb246bd8a7c6abeae29608050d5b}{pemSearchTag}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"-----BEGIN PRIVATE KEY-----"}, 27) >= 0)
+1906    \{
+1907       \textcolor{comment}{//Search for the beginning tag}
+1908       k = \hyperlink{certificate_2pem__import_8c_a9019bb246bd8a7c6abeae29608050d5b}{pemSearchTag}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"-----BEGIN PRIVATE KEY-----"}, 27);
+1909       \textcolor{comment}{//Failed to find the specified tag?}
+1910       \textcolor{keywordflow}{if}(k < 0)
+1911          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca92e7b26953f11d1bc4f4526fad39aed0}{ERROR\_INVALID\_SYNTAX};
+1912 
+1913       \textcolor{comment}{//Advance the pointer over the tag}
+1914       input += k + 27;
+1915       \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} -= k + 27;
+1916 
+1917       \textcolor{comment}{//Search for the end tag}
+1918       k = \hyperlink{certificate_2pem__import_8c_a9019bb246bd8a7c6abeae29608050d5b}{pemSearchTag}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"-----END PRIVATE KEY-----"}, 25);
+1919       \textcolor{comment}{//Invalid PEM file?}
+1920       \textcolor{keywordflow}{if}(k <= 0)
+1921          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca92e7b26953f11d1bc4f4526fad39aed0}{ERROR\_INVALID\_SYNTAX};
+1922 
+1923       \textcolor{comment}{//Length of the PEM structure}
+1924       \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} = \hyperlink{md5_8c_af11ea3cdbca7345eb6a4a8ac5ce0434d}{k};
+1925 
+1926       \textcolor{comment}{//The structure of the private key is described by PKCS #8}
+1927       pkcs8Format = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+1928    \}
+1929    \textcolor{keywordflow}{else}
+1930    \{
+1931       \textcolor{comment}{//Search for the beginning tag}
+1932       k = \hyperlink{certificate_2pem__import_8c_a9019bb246bd8a7c6abeae29608050d5b}{pemSearchTag}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"-----BEGIN EC PRIVATE KEY-----"}, 30);
+1933       \textcolor{comment}{//Failed to find the specified tag?}
+1934       \textcolor{keywordflow}{if}(k < 0)
+1935          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca92e7b26953f11d1bc4f4526fad39aed0}{ERROR\_INVALID\_SYNTAX};
+1936 
+1937       \textcolor{comment}{//Advance the pointer over the tag}
+1938       input += k + 30;
+1939       \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} -= k + 30;
+1940 
+1941       \textcolor{comment}{//Search for the end tag}
+1942       k = \hyperlink{certificate_2pem__import_8c_a9019bb246bd8a7c6abeae29608050d5b}{pemSearchTag}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"-----END EC PRIVATE KEY-----"}, 28);
+1943       \textcolor{comment}{//Invalid PEM file?}
+1944       \textcolor{keywordflow}{if}(k <= 0)
+1945          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca92e7b26953f11d1bc4f4526fad39aed0}{ERROR\_INVALID\_SYNTAX};
+1946 
+1947       \textcolor{comment}{//Length of the PEM structure}
+1948       \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} = \hyperlink{md5_8c_af11ea3cdbca7345eb6a4a8ac5ce0434d}{k};
+1949 
+1950       \textcolor{comment}{//The structure of the private key is described by RFC 5915}
+1951       pkcs8Format = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+1952    \}
+1953 
+1954    \textcolor{comment}{//Allocate a memory buffer to hold the decoded data}
+1955    buffer = \hyperlink{cyclone__crypto_2core_2crypto_8h_a48b53d16f66d31e5dcf82db3c1b882ba}{cryptoAllocMem}(\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length});
+1956    \textcolor{comment}{//Failed to allocate memory?}
+1957    \textcolor{keywordflow}{if}(buffer == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1958       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac0a554045048d2fb61387cf735676f69}{ERROR\_OUT\_OF\_MEMORY};
+1959 
+1960    \textcolor{comment}{//Copy the contents of the PEM structure}
+1961    \hyperlink{cyclone__crypto_2core_2crypto_8h_a6724616c4014bb7e21f2660bd7b88be8}{cryptoMemcpy}(buffer, input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length});
+1962 
+1963    \textcolor{comment}{//Remove carriage returns and line feeds}
+1964    \textcolor{keywordflow}{for}(i = 0, j = 0; i < \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}; i++)
+1965    \{
+1966       \textcolor{keywordflow}{if}(buffer[i] != \textcolor{charliteral}{'\(\backslash\)r'} && buffer[i] != \textcolor{charliteral}{'\(\backslash\)n'})
+1967          buffer[j++] = buffer[i];
+1968    \}
+1969 
+1970    \textcolor{comment}{//Start of exception handling block}
+1971    \textcolor{keywordflow}{do}
+1972    \{
+1973       \textcolor{comment}{//The contents of the PEM file is Base64-encoded}
+1974       error = \hyperlink{base64_8c_ae360cde3e2ef08783ac2e01591b78530}{base64Decode}(buffer, j, buffer, &length);
+1975       \textcolor{comment}{//Failed to decode the file?}
+1976       \textcolor{keywordflow}{if}(error)
+1977          \textcolor{keywordflow}{break};
+1978 
+1979       \textcolor{comment}{//Point to the resulting ASN.1 structure}
+1980       data = (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *) buffer;
+1981 
+1982       \textcolor{comment}{//Display ASN.1 structure}
+1983       error = \hyperlink{asn1_8c_adfebd6c0e21cc4d23414ff98aa9e9a69}{asn1DumpObject}(data, length, 0);
+1984       \textcolor{comment}{//Any error to report?}
+1985       \textcolor{keywordflow}{if}(error)
+1986          \textcolor{keywordflow}{break};
+1987 
+1988       \textcolor{comment}{//PKCS #8 format?}
+1989       \textcolor{keywordflow}{if}(pkcs8Format)
+1990       \{
+1991          \textcolor{comment}{//PKCS #8 describes a generic syntax for encoding private keys}
+1992          error = \hyperlink{asn1_8c_a5df4a5a14b22837b3dea3525608a9122}{asn1ReadSequence}(data, length, &tag);
+1993          \textcolor{comment}{//Failed to decode ASN.1 tag?}
+1994          \textcolor{keywordflow}{if}(error)
+1995             \textcolor{keywordflow}{break};
+1996 
+1997          \textcolor{comment}{//Point to the first field of the sequence}
+1998          data = tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value};
+1999          length = tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length};
+2000 
+2001          \textcolor{comment}{//Read the version field}
+2002          error = \hyperlink{asn1_8c_a1abd5e2bb0488ff85fb1d94392f80dc4}{asn1ReadTag}(data, length, &tag);
+2003          \textcolor{comment}{//Failed to decode ASN.1 tag?}
+2004          \textcolor{keywordflow}{if}(error)
+2005             \textcolor{keywordflow}{break};
+2006 
+2007          \textcolor{comment}{//Enforce encoding, class and type}
+2008          error = \hyperlink{asn1_8c_a73fa06e5d71abe974aa6ad8fb53ecaa2}{asn1CheckTag}(&tag, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, \hyperlink{asn1_8h_ab3589ac11c049bfda069aa3ecf683578}{ASN1\_CLASS\_UNIVERSAL}, 
+      \hyperlink{asn1_8h_a1b0f39cb3d87e425703ba389df9da1dfaf49fe8465a80ebfbe92fe0f0622ec994}{ASN1\_TYPE\_INTEGER});
+2009          \textcolor{comment}{//Invalid tag?}
+2010          \textcolor{keywordflow}{if}(error)
+2011             \textcolor{keywordflow}{break};
+2012 
+2013          \textcolor{comment}{//Skip the version field}
+2014          data += tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+2015          length -= tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+2016 
+2017          \textcolor{comment}{//Read the privateKeyAlgorithm field}
+2018          error = \hyperlink{asn1_8c_a5df4a5a14b22837b3dea3525608a9122}{asn1ReadSequence}(data, length, &tag);
+2019          \textcolor{comment}{//Failed to decode ASN.1 tag?}
+2020          \textcolor{keywordflow}{if}(error)
+2021             \textcolor{keywordflow}{break};
+2022 
+2023          \textcolor{comment}{//Save the position of the privateKey field}
+2024          data += tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+2025          length -= tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+2026 
+2027          \textcolor{comment}{//Read the algorithm identifier (OID)}
+2028          error = \hyperlink{asn1_8c_a1abd5e2bb0488ff85fb1d94392f80dc4}{asn1ReadTag}(tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value}, tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length}, &tag);
+2029          \textcolor{comment}{//Failed to decode ASN.1 tag?}
+2030          \textcolor{keywordflow}{if}(error)
+2031             \textcolor{keywordflow}{break};
+2032 
+2033          \textcolor{comment}{//Check algorithm identifier}
+2034          error = \hyperlink{asn1_8c_a565e797369dd4ec4b722954715507907}{asn1CheckOid}(&tag, \hyperlink{ec_8c_a5ff93c201b1e50b6fda04774a2fa537c}{EC\_PUBLIC\_KEY\_OID}, \textcolor{keyword}{sizeof}(
+      \hyperlink{ec_8c_a5ff93c201b1e50b6fda04774a2fa537c}{EC\_PUBLIC\_KEY\_OID}));
+2035          \textcolor{comment}{//Wrong identifier?}
+2036          \textcolor{keywordflow}{if}(error)
+2037             \textcolor{keywordflow}{break};
+2038 
+2039          \textcolor{comment}{//The privateKey field is encapsulated within an octet string}
+2040          error = \hyperlink{asn1_8c_a08b7995f0473e1ff62a9061f31410b2f}{asn1ReadOctetString}(data, length, &tag);
+2041          \textcolor{comment}{//Failed to decode ASN.1 tag?}
+2042          \textcolor{keywordflow}{if}(error)
+2043             \textcolor{keywordflow}{break};
+2044 
+2045          \textcolor{comment}{//Point to the content of the privateKey structure}
+2046          data = tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value};
+2047          length = tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length};
+2048 
+2049          \textcolor{comment}{//Display ASN.1 structure}
+2050          error = \hyperlink{asn1_8c_adfebd6c0e21cc4d23414ff98aa9e9a69}{asn1DumpObject}(data, length, 0);
+2051          \textcolor{comment}{//Any error to report?}
+2052          \textcolor{keywordflow}{if}(error)
+2053             \textcolor{keywordflow}{break};
+2054       \}
+2055 
+2056       \textcolor{comment}{//Read the contents of the privateKey structure}
+2057       error = \hyperlink{asn1_8c_a5df4a5a14b22837b3dea3525608a9122}{asn1ReadSequence}(data, length, &tag);
+2058       \textcolor{comment}{//Failed to decode ASN.1 tag?}
+2059       \textcolor{keywordflow}{if}(error)
+2060          \textcolor{keywordflow}{break};
+2061 
+2062       \textcolor{comment}{//Point to the first field of the sequence}
+2063       data = tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value};
+2064       length = tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length};
+2065 
+2066       \textcolor{comment}{//Read the version field}
+2067       error = \hyperlink{asn1_8c_a1abd5e2bb0488ff85fb1d94392f80dc4}{asn1ReadTag}(data, length, &tag);
+2068       \textcolor{comment}{//Failed to decode ASN.1 tag?}
+2069       \textcolor{keywordflow}{if}(error)
+2070          \textcolor{keywordflow}{break};
+2071 
+2072       \textcolor{comment}{//Enforce encoding, class and type}
+2073       error = \hyperlink{asn1_8c_a73fa06e5d71abe974aa6ad8fb53ecaa2}{asn1CheckTag}(&tag, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, \hyperlink{asn1_8h_ab3589ac11c049bfda069aa3ecf683578}{ASN1\_CLASS\_UNIVERSAL}, 
+      \hyperlink{asn1_8h_a1b0f39cb3d87e425703ba389df9da1dfaf49fe8465a80ebfbe92fe0f0622ec994}{ASN1\_TYPE\_INTEGER});
+2074       \textcolor{comment}{//Invalid tag?}
+2075       \textcolor{keywordflow}{if}(error)
+2076          \textcolor{keywordflow}{break};
+2077 
+2078       \textcolor{comment}{//Skip the version field}
+2079       data += tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+2080       length -= tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+2081 
+2082       \textcolor{comment}{//Read the privateKey field}
+2083       error = \hyperlink{asn1_8c_a08b7995f0473e1ff62a9061f31410b2f}{asn1ReadOctetString}(data, length, &tag);
+2084       \textcolor{comment}{//Failed to decode ASN.1 tag?}
+2085       \textcolor{keywordflow}{if}(error)
+2086          \textcolor{keywordflow}{break};
+2087 
+2088       \textcolor{comment}{//Read the EC private key}
+2089       error = \hyperlink{crypto__legacy_8h_abcebe7f916d9073a85492596ec3924fa}{mpiReadRaw}(key, tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value}, tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length});
+2090       \textcolor{comment}{//Any error to report?}
+2091       \textcolor{keywordflow}{if}(error)
+2092          \textcolor{keywordflow}{break};
+2093 
+2094       \textcolor{comment}{//Debug message}
+2095       \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"EC private key:\(\backslash\)r\(\backslash\)n"});
+2096       \hyperlink{debug_8h_a9c9f3b28f2daf14d77b401512c189d93}{TRACE\_DEBUG\_MPI}(\textcolor{stringliteral}{"  "}, key);
+2097 
+2098       \textcolor{comment}{//End of exception handling block}
+2099    \} \textcolor{keywordflow}{while}(0);
+2100 
+2101    \textcolor{comment}{//Release previously allocated memory}
+2102    \hyperlink{cyclone__crypto_2core_2crypto_8h_ac8a223b176683db4e9eed4162774f870}{cryptoFreeMem}(buffer);
+2103 
+2104    \textcolor{comment}{//Any error to report?}
+2105    \textcolor{keywordflow}{if}(error)
+2106    \{
+2107       \textcolor{comment}{//Clean up side effects}
+2108       \hyperlink{mpi_8c_a9dc5be2f62d37d3854fa61beab3a61ad}{mpiFree}(key);
+2109    \}
+2110 
+2111    \textcolor{comment}{//Return status code}
+2112    \textcolor{keywordflow}{return} error;
+2113 \textcolor{preprocessor}{#else}
+2114    \textcolor{comment}{//Not implemented}
+2115    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cab61c5ef368fbf03fdc1fb566c63f2f9a}{ERROR\_NOT\_IMPLEMENTED};
+2116 \textcolor{preprocessor}{#endif}
+2117 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{certificate_2pem__import_8c_aabfdd540ffe38f75019d501aa50648eb}\label{certificate_2pem__import_8c_aabfdd540ffe38f75019d501aa50648eb}} 
+\index{certificate/pem\+\_\+import.\+c@{certificate/pem\+\_\+import.\+c}!pem\+Import\+Ec\+Public\+Key@{pem\+Import\+Ec\+Public\+Key}}
+\index{pem\+Import\+Ec\+Public\+Key@{pem\+Import\+Ec\+Public\+Key}!certificate/pem\+\_\+import.\+c@{certificate/pem\+\_\+import.\+c}}
+\subsubsection{\texorpdfstring{pem\+Import\+Ec\+Public\+Key()}{pemImportEcPublicKey()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} pem\+Import\+Ec\+Public\+Key (\begin{DoxyParamCaption}\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{input,  }\item[{size\+\_\+t}]{length,  }\item[{\hyperlink{structEcPoint}{Ec\+Point} $\ast$}]{key }\end{DoxyParamCaption})}
+
+
+
+Decode a P\+EM file containing an EC public key. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em input} & Pointer to the P\+EM structure \\
+\hline
+\mbox{\tt in}  & {\em length} & Length of the P\+EM structure \\
+\hline
+\mbox{\tt out}  & {\em key} & EC public key resulting from the parsing process \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 1678 of file pem\+\_\+import.\+c.
+
+
+\begin{DoxyCode}
+1679 \{
+1680 \textcolor{preprocessor}{#if (ED25519\_SUPPORT == ENABLED || ED448\_SUPPORT == ENABLED)}
+1681    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+1682    \textcolor{keywordtype}{size\_t} i;
+1683    \textcolor{keywordtype}{size\_t} j;
+1684    \hyperlink{compiler__port_8h_a022c65af7f6c8d3947e8a37d64db6ad6}{int\_t} \hyperlink{md5_8c_af11ea3cdbca7345eb6a4a8ac5ce0434d}{k};
+1685    \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\_t} *buffer;
+1686    \textcolor{keyword}{const} \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *\hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data};
+1687    \textcolor{keyword}{const} \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *publicKey;
+1688    \textcolor{keywordtype}{size\_t} publicKeyLen;
+1689    \textcolor{keyword}{const} \hyperlink{structEcCurveInfo}{EcCurveInfo} *curveInfo;
+1690    \hyperlink{structEcDomainParameters}{EcDomainParameters} params;
+1691    \hyperlink{structAsn1Tag}{Asn1Tag} tag;
+1692 
+1693    \textcolor{comment}{//Check parameters}
+1694    \textcolor{keywordflow}{if}(input == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} && \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} != 0)
+1695       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+1696    \textcolor{keywordflow}{if}(key == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1697       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+1698 
+1699    \textcolor{comment}{//Search for the beginning tag}
+1700    k = \hyperlink{certificate_2pem__import_8c_a9019bb246bd8a7c6abeae29608050d5b}{pemSearchTag}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"-----BEGIN PUBLIC KEY-----"}, 26);
+1701    \textcolor{comment}{//Failed to find the specified tag?}
+1702    \textcolor{keywordflow}{if}(k < 0)
+1703       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca92e7b26953f11d1bc4f4526fad39aed0}{ERROR\_INVALID\_SYNTAX};
+1704 
+1705    \textcolor{comment}{//Advance the pointer over the tag}
+1706    input += k + 26;
+1707    \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} -= k + 26;
+1708 
+1709    \textcolor{comment}{//Search for the end tag}
+1710    k = \hyperlink{certificate_2pem__import_8c_a9019bb246bd8a7c6abeae29608050d5b}{pemSearchTag}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"-----END PUBLIC KEY-----"}, 24);
+1711    \textcolor{comment}{//Invalid PEM file?}
+1712    \textcolor{keywordflow}{if}(k <= 0)
+1713       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca92e7b26953f11d1bc4f4526fad39aed0}{ERROR\_INVALID\_SYNTAX};
+1714 
+1715    \textcolor{comment}{//Length of the PEM structure}
+1716    \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} = \hyperlink{md5_8c_af11ea3cdbca7345eb6a4a8ac5ce0434d}{k};
+1717 
+1718    \textcolor{comment}{//Allocate a memory buffer to hold the decoded data}
+1719    buffer = \hyperlink{cyclone__crypto_2core_2crypto_8h_a48b53d16f66d31e5dcf82db3c1b882ba}{cryptoAllocMem}(\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length});
+1720    \textcolor{comment}{//Failed to allocate memory?}
+1721    \textcolor{keywordflow}{if}(buffer == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1722       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac0a554045048d2fb61387cf735676f69}{ERROR\_OUT\_OF\_MEMORY};
+1723 
+1724    \textcolor{comment}{//Copy the contents of the PEM structure}
+1725    \hyperlink{cyclone__crypto_2core_2crypto_8h_a6724616c4014bb7e21f2660bd7b88be8}{cryptoMemcpy}(buffer, input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length});
+1726 
+1727    \textcolor{comment}{//Remove carriage returns and line feeds}
+1728    \textcolor{keywordflow}{for}(i = 0, j = 0; i < \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}; i++)
+1729    \{
+1730       \textcolor{keywordflow}{if}(buffer[i] != \textcolor{charliteral}{'\(\backslash\)r'} && buffer[i] != \textcolor{charliteral}{'\(\backslash\)n'})
+1731          buffer[j++] = buffer[i];
+1732    \}
+1733 
+1734    \textcolor{comment}{//Initialize EC domain parameters}
+1735    \hyperlink{ec_8c_a5b5132fb8adf668ffa74ec10e7e63441}{ecInitDomainParameters}(&params);
+1736 
+1737    \textcolor{comment}{//Start of exception handling block}
+1738    \textcolor{keywordflow}{do}
+1739    \{
+1740       \textcolor{comment}{//The contents of the PEM file is Base64-encoded}
+1741       error = \hyperlink{base64_8c_ae360cde3e2ef08783ac2e01591b78530}{base64Decode}(buffer, j, buffer, &length);
+1742       \textcolor{comment}{//Failed to decode the file?}
+1743       \textcolor{keywordflow}{if}(error)
+1744          \textcolor{keywordflow}{break};
+1745 
+1746       \textcolor{comment}{//Point to the resulting ASN.1 structure}
+1747       data = (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *) buffer;
+1748 
+1749       \textcolor{comment}{//Display ASN.1 structure}
+1750       error = \hyperlink{asn1_8c_adfebd6c0e21cc4d23414ff98aa9e9a69}{asn1DumpObject}(data, length, 0);
+1751       \textcolor{comment}{//Any error to report?}
+1752       \textcolor{keywordflow}{if}(error)
+1753          \textcolor{keywordflow}{break};
+1754 
+1755       \textcolor{comment}{//PKCS #8 describes a generic syntax for encoding public keys}
+1756       error = \hyperlink{asn1_8c_a5df4a5a14b22837b3dea3525608a9122}{asn1ReadSequence}(data, length, &tag);
+1757       \textcolor{comment}{//Failed to decode ASN.1 tag?}
+1758       \textcolor{keywordflow}{if}(error)
+1759          \textcolor{keywordflow}{break};
+1760 
+1761       \textcolor{comment}{//Point to the first field of the sequence}
+1762       data = tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value};
+1763       length = tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length};
+1764 
+1765       \textcolor{comment}{//Read the publicKeyAlgorithm field}
+1766       error = \hyperlink{asn1_8c_a5df4a5a14b22837b3dea3525608a9122}{asn1ReadSequence}(data, length, &tag);
+1767       \textcolor{comment}{//Failed to decode ASN.1 tag?}
+1768       \textcolor{keywordflow}{if}(error)
+1769          \textcolor{keywordflow}{break};
+1770 
+1771       \textcolor{comment}{//Save the position of the publicKey field}
+1772       publicKey = data + tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+1773       publicKeyLen = length - tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+1774 
+1775       \textcolor{comment}{//Point to the first field of the sequence}
+1776       data = tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value};
+1777       length = tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length};
+1778 
+1779       \textcolor{comment}{//Read the algorithm identifier (OID)}
+1780       error = \hyperlink{asn1_8c_a1abd5e2bb0488ff85fb1d94392f80dc4}{asn1ReadTag}(data, length, &tag);
+1781       \textcolor{comment}{//Failed to decode ASN.1 tag?}
+1782       \textcolor{keywordflow}{if}(error)
+1783          \textcolor{keywordflow}{break};
+1784 
+1785       \textcolor{comment}{//Check algorithm identifier}
+1786       error = \hyperlink{asn1_8c_a565e797369dd4ec4b722954715507907}{asn1CheckOid}(&tag, \hyperlink{ec_8c_a5ff93c201b1e50b6fda04774a2fa537c}{EC\_PUBLIC\_KEY\_OID}, \textcolor{keyword}{sizeof}(
+      \hyperlink{ec_8c_a5ff93c201b1e50b6fda04774a2fa537c}{EC\_PUBLIC\_KEY\_OID}));
+1787       \textcolor{comment}{//Wrong identifier?}
+1788       \textcolor{keywordflow}{if}(error)
+1789          \textcolor{keywordflow}{break};
+1790 
+1791       \textcolor{comment}{//Point to the next field}
+1792       data += tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+1793       length -= tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+1794 
+1795       \textcolor{comment}{//Read the curve identifier}
+1796       error = \hyperlink{asn1_8c_a842c029a80fcf3c0c1a2a8bf1ba2d96c}{asn1ReadOid}(data, length, &tag);
+1797       \textcolor{comment}{//Failed to decode ASN.1 tag?}
+1798       \textcolor{keywordflow}{if}(error)
+1799          \textcolor{keywordflow}{break};
+1800 
+1801       \textcolor{comment}{//Retrieve EC domain parameters}
+1802       curveInfo = \hyperlink{ec__curves_8c_a0e60cf6994283f6bf5bcf56e86f9adbe}{ecGetCurveInfo}(tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value}, tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length});
+1803       \textcolor{comment}{//Make sure the specified elliptic curve is supported}
+1804       \textcolor{keywordflow}{if}(curveInfo == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1805       \{
+1806          \textcolor{comment}{//Report an error}
+1807          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca152b24f57c941cb736772696416eb7c2}{ERROR\_ILLEGAL\_PARAMETER};
+1808          \textcolor{comment}{//Exit immediately}
+1809          \textcolor{keywordflow}{break};
+1810       \}
+1811 
+1812       \textcolor{comment}{//Load EC domain parameters}
+1813       error = \hyperlink{ec_8c_ab3d7ebcb8fd2e79990ef25e39a68f4a5}{ecLoadDomainParameters}(&params, curveInfo);
+1814       \textcolor{comment}{//Any error to report?}
+1815       \textcolor{keywordflow}{if}(error)
+1816          \textcolor{keywordflow}{break};
+1817 
+1818       \textcolor{comment}{//The publicKey field is encapsulated within an bit string}
+1819       error = \hyperlink{asn1_8c_a1abd5e2bb0488ff85fb1d94392f80dc4}{asn1ReadTag}(publicKey, publicKeyLen, &tag);
+1820       \textcolor{comment}{//Failed to decode ASN.1 tag?}
+1821       \textcolor{keywordflow}{if}(error)
+1822          \textcolor{keywordflow}{break};
+1823 
+1824       \textcolor{comment}{//Enforce encoding, class and type}
+1825       error = \hyperlink{asn1_8c_a73fa06e5d71abe974aa6ad8fb53ecaa2}{asn1CheckTag}(&tag, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, \hyperlink{asn1_8h_ab3589ac11c049bfda069aa3ecf683578}{ASN1\_CLASS\_UNIVERSAL}, 
+      \hyperlink{asn1_8h_a1b0f39cb3d87e425703ba389df9da1dfab40c213cd2fda439f157e8e4523d020c}{ASN1\_TYPE\_BIT\_STRING});
+1826       \textcolor{comment}{//Invalid tag?}
+1827       \textcolor{keywordflow}{if}(error)
+1828          \textcolor{keywordflow}{break};
+1829 
+1830       \textcolor{comment}{//The bit string shall contain an initial octet which encodes the number}
+1831       \textcolor{comment}{//of unused bits in the final subsequent octet}
+1832       \textcolor{keywordflow}{if}(tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length} < 1 || tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value}[0] != 0x00)
+1833       \{
+1834          \textcolor{comment}{//Report an error}
+1835          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca92e7b26953f11d1bc4f4526fad39aed0}{ERROR\_INVALID\_SYNTAX};
+1836          \textcolor{keywordflow}{break};
+1837       \}
+1838 
+1839       \textcolor{comment}{//Point to the content of the publicKey structure}
+1840       data = tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value} + 1;
+1841       length = tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length} - 1;
+1842 
+1843       \textcolor{comment}{//Read the EC public key}
+1844       error = \hyperlink{ec_8c_ae707a9a99979ce0b291ac6c0f8d380fd}{ecImport}(&params, key, data, length);
+1845       \textcolor{comment}{//Any error to report?}
+1846       \textcolor{keywordflow}{if}(error)
+1847          \textcolor{keywordflow}{break};
+1848 
+1849       \textcolor{comment}{//Debug message}
+1850       \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  Public key X:\(\backslash\)r\(\backslash\)n"});
+1851       \hyperlink{debug_8h_a9c9f3b28f2daf14d77b401512c189d93}{TRACE\_DEBUG\_MPI}(\textcolor{stringliteral}{"    "}, &key->\hyperlink{structEcPoint_a08f3fbb7a7d07607306bd8d6200629af}{x});
+1852       \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  Public key Y:\(\backslash\)r\(\backslash\)n"});
+1853       \hyperlink{debug_8h_a9c9f3b28f2daf14d77b401512c189d93}{TRACE\_DEBUG\_MPI}(\textcolor{stringliteral}{"    "}, &key->\hyperlink{structEcPoint_a2102dff813849bd0eaed8a1a5e64ec1f}{y});
+1854 
+1855       \textcolor{comment}{//End of exception handling block}
+1856    \} \textcolor{keywordflow}{while}(0);
+1857 
+1858    \textcolor{comment}{//Release previously allocated memory}
+1859    \hyperlink{ec_8c_a256993c154cf87c3d9d18138a1365eca}{ecFreeDomainParameters}(&params);
+1860    \hyperlink{cyclone__crypto_2core_2crypto_8h_ac8a223b176683db4e9eed4162774f870}{cryptoFreeMem}(buffer);
+1861 
+1862    \textcolor{comment}{//Any error to report?}
+1863    \textcolor{keywordflow}{if}(error)
+1864    \{
+1865       \textcolor{comment}{//Clean up side effects}
+1866       \hyperlink{ec_8c_ae4a9276eac491f8acbb6d0916287411b}{ecFree}(key);
+1867    \}
+1868 
+1869    \textcolor{comment}{//Return status code}
+1870    \textcolor{keywordflow}{return} error;
+1871 \textcolor{preprocessor}{#else}
+1872    \textcolor{comment}{//Not implemented}
+1873    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cab61c5ef368fbf03fdc1fb566c63f2f9a}{ERROR\_NOT\_IMPLEMENTED};
+1874 \textcolor{preprocessor}{#endif}
+1875 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{certificate_2pem__import_8c_a54cf0a5cee9bf4c0e25866b26f1752e0}\label{certificate_2pem__import_8c_a54cf0a5cee9bf4c0e25866b26f1752e0}} 
+\index{certificate/pem\+\_\+import.\+c@{certificate/pem\+\_\+import.\+c}!pem\+Import\+Eddsa\+Private\+Key@{pem\+Import\+Eddsa\+Private\+Key}}
+\index{pem\+Import\+Eddsa\+Private\+Key@{pem\+Import\+Eddsa\+Private\+Key}!certificate/pem\+\_\+import.\+c@{certificate/pem\+\_\+import.\+c}}
+\subsubsection{\texorpdfstring{pem\+Import\+Eddsa\+Private\+Key()}{pemImportEddsaPrivateKey()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} pem\+Import\+Eddsa\+Private\+Key (\begin{DoxyParamCaption}\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{input,  }\item[{size\+\_\+t}]{length,  }\item[{\hyperlink{structEddsaPrivateKey}{Eddsa\+Private\+Key} $\ast$}]{key }\end{DoxyParamCaption})}
+
+
+
+Decode a P\+EM file containing a Ed\+D\+SA private key. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em input} & Pointer to the P\+EM structure \\
+\hline
+\mbox{\tt in}  & {\em length} & Length of the P\+EM structure \\
+\hline
+\mbox{\tt out}  & {\em key} & Ed\+D\+SA private key resulting from the parsing process \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 2298 of file pem\+\_\+import.\+c.
+
+
+\begin{DoxyCode}
+2299 \{
+2300 \textcolor{preprocessor}{#if (ED25519\_SUPPORT == ENABLED || ED448\_SUPPORT == ENABLED)}
+2301    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+2302    \textcolor{keywordtype}{size\_t} i;
+2303    \textcolor{keywordtype}{size\_t} j;
+2304    \hyperlink{compiler__port_8h_a022c65af7f6c8d3947e8a37d64db6ad6}{int\_t} \hyperlink{md5_8c_af11ea3cdbca7345eb6a4a8ac5ce0434d}{k};
+2305    \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\_t} *buffer;
+2306    \textcolor{keyword}{const} \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *\hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data};
+2307    \hyperlink{structAsn1Tag}{Asn1Tag} tag;
+2308 
+2309    \textcolor{comment}{//Check parameters}
+2310    \textcolor{keywordflow}{if}(input == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} && \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} != 0)
+2311       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+2312    \textcolor{keywordflow}{if}(key == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+2313       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+2314 
+2315    \textcolor{comment}{//Search for the beginning tag}
+2316    k = \hyperlink{certificate_2pem__import_8c_a9019bb246bd8a7c6abeae29608050d5b}{pemSearchTag}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"-----BEGIN PRIVATE KEY-----"}, 27);
+2317    \textcolor{comment}{//Failed to find the specified tag?}
+2318    \textcolor{keywordflow}{if}(k < 0)
+2319       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca92e7b26953f11d1bc4f4526fad39aed0}{ERROR\_INVALID\_SYNTAX};
+2320 
+2321    \textcolor{comment}{//Advance the pointer over the tag}
+2322    input += k + 27;
+2323    \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} -= k + 27;
+2324 
+2325    \textcolor{comment}{//Search for the end tag}
+2326    k = \hyperlink{certificate_2pem__import_8c_a9019bb246bd8a7c6abeae29608050d5b}{pemSearchTag}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"-----END PRIVATE KEY-----"}, 25);
+2327    \textcolor{comment}{//Invalid PEM file?}
+2328    \textcolor{keywordflow}{if}(k <= 0)
+2329       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca92e7b26953f11d1bc4f4526fad39aed0}{ERROR\_INVALID\_SYNTAX};
+2330 
+2331    \textcolor{comment}{//Length of the PEM structure}
+2332    \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} = \hyperlink{md5_8c_af11ea3cdbca7345eb6a4a8ac5ce0434d}{k};
+2333 
+2334    \textcolor{comment}{//Allocate a memory buffer to hold the decoded data}
+2335    buffer = \hyperlink{cyclone__crypto_2core_2crypto_8h_a48b53d16f66d31e5dcf82db3c1b882ba}{cryptoAllocMem}(\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length});
+2336    \textcolor{comment}{//Failed to allocate memory?}
+2337    \textcolor{keywordflow}{if}(buffer == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+2338       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac0a554045048d2fb61387cf735676f69}{ERROR\_OUT\_OF\_MEMORY};
+2339 
+2340    \textcolor{comment}{//Copy the contents of the PEM structure}
+2341    \hyperlink{cyclone__crypto_2core_2crypto_8h_a6724616c4014bb7e21f2660bd7b88be8}{cryptoMemcpy}(buffer, input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length});
+2342 
+2343    \textcolor{comment}{//Remove carriage returns and line feeds}
+2344    \textcolor{keywordflow}{for}(i = 0, j = 0; i < \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}; i++)
+2345    \{
+2346       \textcolor{keywordflow}{if}(buffer[i] != \textcolor{charliteral}{'\(\backslash\)r'} && buffer[i] != \textcolor{charliteral}{'\(\backslash\)n'})
+2347          buffer[j++] = buffer[i];
+2348    \}
+2349 
+2350    \textcolor{comment}{//Start of exception handling block}
+2351    \textcolor{keywordflow}{do}
+2352    \{
+2353       \textcolor{comment}{//The contents of the PEM file is Base64-encoded}
+2354       error = \hyperlink{base64_8c_ae360cde3e2ef08783ac2e01591b78530}{base64Decode}(buffer, j, buffer, &length);
+2355       \textcolor{comment}{//Failed to decode the file?}
+2356       \textcolor{keywordflow}{if}(error)
+2357          \textcolor{keywordflow}{break};
+2358 
+2359       \textcolor{comment}{//Point to the resulting ASN.1 structure}
+2360       data = (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *) buffer;
+2361 
+2362       \textcolor{comment}{//Display ASN.1 structure}
+2363       error = \hyperlink{asn1_8c_adfebd6c0e21cc4d23414ff98aa9e9a69}{asn1DumpObject}(data, length, 0);
+2364       \textcolor{comment}{//Any error to report?}
+2365       \textcolor{keywordflow}{if}(error)
+2366          \textcolor{keywordflow}{break};
+2367 
+2368       \textcolor{comment}{//The EdDSA private key is encapsulated within a sequence}
+2369       error = \hyperlink{asn1_8c_a5df4a5a14b22837b3dea3525608a9122}{asn1ReadSequence}(data, length, &tag);
+2370       \textcolor{comment}{//Failed to decode ASN.1 tag?}
+2371       \textcolor{keywordflow}{if}(error)
+2372          \textcolor{keywordflow}{break};
+2373 
+2374       \textcolor{comment}{//Point to the first field of the sequence}
+2375       data = tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value};
+2376       length = tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length};
+2377 
+2378       \textcolor{comment}{//Read the version field}
+2379       error = \hyperlink{asn1_8c_a1abd5e2bb0488ff85fb1d94392f80dc4}{asn1ReadTag}(data, length, &tag);
+2380       \textcolor{comment}{//Failed to decode ASN.1 tag?}
+2381       \textcolor{keywordflow}{if}(error)
+2382          \textcolor{keywordflow}{break};
+2383 
+2384       \textcolor{comment}{//Enforce encoding, class and type}
+2385       error = \hyperlink{asn1_8c_a73fa06e5d71abe974aa6ad8fb53ecaa2}{asn1CheckTag}(&tag, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, \hyperlink{asn1_8h_ab3589ac11c049bfda069aa3ecf683578}{ASN1\_CLASS\_UNIVERSAL}, 
+      \hyperlink{asn1_8h_a1b0f39cb3d87e425703ba389df9da1dfaf49fe8465a80ebfbe92fe0f0622ec994}{ASN1\_TYPE\_INTEGER});
+2386       \textcolor{comment}{//Invalid tag?}
+2387       \textcolor{keywordflow}{if}(error)
+2388          \textcolor{keywordflow}{break};
+2389 
+2390       \textcolor{comment}{//Skip the version field}
+2391       data += tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+2392       length -= tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+2393 
+2394       \textcolor{comment}{//Read the privateKeyAlgorithm field}
+2395       error = \hyperlink{asn1_8c_a5df4a5a14b22837b3dea3525608a9122}{asn1ReadSequence}(data, length, &tag);
+2396       \textcolor{comment}{//Failed to decode ASN.1 tag?}
+2397       \textcolor{keywordflow}{if}(error)
+2398          \textcolor{keywordflow}{break};
+2399 
+2400       \textcolor{comment}{//Save the position of the privateKey field}
+2401       data += tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+2402       length -= tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+2403 
+2404       \textcolor{comment}{//Read the algorithm identifier (OID)}
+2405       error = \hyperlink{asn1_8c_a1abd5e2bb0488ff85fb1d94392f80dc4}{asn1ReadTag}(tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value}, tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length}, &tag);
+2406       \textcolor{comment}{//Failed to decode ASN.1 tag?}
+2407       \textcolor{keywordflow}{if}(error)
+2408          \textcolor{keywordflow}{break};
+2409 
+2410       \textcolor{comment}{//Check algorithm identifier}
+2411       \textcolor{keywordflow}{if}(\hyperlink{asn1_8c_a565e797369dd4ec4b722954715507907}{asn1CheckOid}(&tag, \hyperlink{ec__curves_8c_a0c0db5ac9072998c05e021d51fd03992}{ED25519\_OID}, \textcolor{keyword}{sizeof}(
+      \hyperlink{ec__curves_8c_a0c0db5ac9072998c05e021d51fd03992}{ED25519\_OID})) &&
+2412          \hyperlink{asn1_8c_a565e797369dd4ec4b722954715507907}{asn1CheckOid}(&tag, \hyperlink{ec__curves_8c_ad355985d25e281438e8d813c171aea13}{ED448\_OID}, \textcolor{keyword}{sizeof}(\hyperlink{ec__curves_8c_ad355985d25e281438e8d813c171aea13}{ED448\_OID})))
+2413       \{
+2414          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca2bc2298123e24e3d82592b5c68c20612}{ERROR\_WRONG\_IDENTIFIER};
+2415          \textcolor{keywordflow}{break};
+2416       \}
+2417 
+2418       \textcolor{comment}{//The privateKey field is encapsulated within an octet string}
+2419       error = \hyperlink{asn1_8c_a08b7995f0473e1ff62a9061f31410b2f}{asn1ReadOctetString}(data, length, &tag);
+2420       \textcolor{comment}{//Failed to decode ASN.1 tag?}
+2421       \textcolor{keywordflow}{if}(error)
+2422          \textcolor{keywordflow}{break};
+2423 
+2424       \textcolor{comment}{//Point to the content of the privateKey structure}
+2425       data = tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value};
+2426       length = tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length};
+2427 
+2428       \textcolor{comment}{//Display ASN.1 structure}
+2429       error = \hyperlink{asn1_8c_adfebd6c0e21cc4d23414ff98aa9e9a69}{asn1DumpObject}(data, length, 0);
+2430       \textcolor{comment}{//Any error to report?}
+2431       \textcolor{keywordflow}{if}(error)
+2432          \textcolor{keywordflow}{break};
+2433 
+2434       \textcolor{comment}{//Read the privateKey field}
+2435       error = \hyperlink{asn1_8c_a08b7995f0473e1ff62a9061f31410b2f}{asn1ReadOctetString}(data, length, &tag);
+2436       \textcolor{comment}{//Failed to decode ASN.1 tag?}
+2437       \textcolor{keywordflow}{if}(error)
+2438          \textcolor{keywordflow}{break};
+2439 
+2440       \textcolor{comment}{//Read the EdDSA private key}
+2441       error = \hyperlink{mpi_8c_a844d59498f4acce9d69ae55570b521f3}{mpiImport}(&key->\hyperlink{structEddsaPrivateKey_a58ef5164bc00df5a7ee8adc18fa2b63a}{d}, tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value}, tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length}, 
+      \hyperlink{mpi_8h_a5fe4159c7c390c604067e854b41d337fa637c0a6e803a47db52875c6818674c60}{MPI\_FORMAT\_LITTLE\_ENDIAN});
+2442       \textcolor{comment}{//Any error to report?}
+2443       \textcolor{keywordflow}{if}(error)
+2444          \textcolor{keywordflow}{break};
+2445 
+2446       \textcolor{comment}{//Debug message}
+2447       \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"EdDSA private key:\(\backslash\)r\(\backslash\)n"});
+2448       \hyperlink{debug_8h_a9c9f3b28f2daf14d77b401512c189d93}{TRACE\_DEBUG\_MPI}(\textcolor{stringliteral}{"  "}, &key->\hyperlink{structEddsaPrivateKey_a58ef5164bc00df5a7ee8adc18fa2b63a}{d});
+2449 
+2450       \textcolor{comment}{//End of exception handling block}
+2451    \} \textcolor{keywordflow}{while}(0);
+2452 
+2453    \textcolor{comment}{//Release previously allocated memory}
+2454    \hyperlink{cyclone__crypto_2core_2crypto_8h_ac8a223b176683db4e9eed4162774f870}{cryptoFreeMem}(buffer);
+2455 
+2456    \textcolor{comment}{//Any error to report?}
+2457    \textcolor{keywordflow}{if}(error)
+2458    \{
+2459       \textcolor{comment}{//Clean up side effects}
+2460       \hyperlink{eddsa_8c_a91e6371d69fb2a796878d8b43a1924c6}{eddsaFreePrivateKey}(key);
+2461    \}
+2462 
+2463    \textcolor{comment}{//Return status code}
+2464    \textcolor{keywordflow}{return} error;
+2465 \textcolor{preprocessor}{#else}
+2466    \textcolor{comment}{//Not implemented}
+2467    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cab61c5ef368fbf03fdc1fb566c63f2f9a}{ERROR\_NOT\_IMPLEMENTED};
+2468 \textcolor{preprocessor}{#endif}
+2469 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{certificate_2pem__import_8c_a4b4c81159fa7296b5237335d845867dc}\label{certificate_2pem__import_8c_a4b4c81159fa7296b5237335d845867dc}} 
+\index{certificate/pem\+\_\+import.\+c@{certificate/pem\+\_\+import.\+c}!pem\+Import\+Eddsa\+Public\+Key@{pem\+Import\+Eddsa\+Public\+Key}}
+\index{pem\+Import\+Eddsa\+Public\+Key@{pem\+Import\+Eddsa\+Public\+Key}!certificate/pem\+\_\+import.\+c@{certificate/pem\+\_\+import.\+c}}
+\subsubsection{\texorpdfstring{pem\+Import\+Eddsa\+Public\+Key()}{pemImportEddsaPublicKey()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} pem\+Import\+Eddsa\+Public\+Key (\begin{DoxyParamCaption}\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{input,  }\item[{size\+\_\+t}]{length,  }\item[{\hyperlink{structEddsaPublicKey}{Eddsa\+Public\+Key} $\ast$}]{key }\end{DoxyParamCaption})}
+
+
+
+Decode a P\+EM file containing a Ed\+D\+SA public key. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em input} & Pointer to the P\+EM structure \\
+\hline
+\mbox{\tt in}  & {\em length} & Length of the P\+EM structure \\
+\hline
+\mbox{\tt out}  & {\em key} & Ed\+D\+SA public key resulting from the parsing process \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 2128 of file pem\+\_\+import.\+c.
+
+
+\begin{DoxyCode}
+2129 \{
+2130 \textcolor{preprocessor}{#if (ED25519\_SUPPORT == ENABLED || ED448\_SUPPORT == ENABLED)}
+2131    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+2132    \textcolor{keywordtype}{size\_t} i;
+2133    \textcolor{keywordtype}{size\_t} j;
+2134    \hyperlink{compiler__port_8h_a022c65af7f6c8d3947e8a37d64db6ad6}{int\_t} \hyperlink{md5_8c_af11ea3cdbca7345eb6a4a8ac5ce0434d}{k};
+2135    \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\_t} *buffer;
+2136    \textcolor{keyword}{const} \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *\hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data};
+2137    \hyperlink{structAsn1Tag}{Asn1Tag} tag;
+2138 
+2139    \textcolor{comment}{//Check parameters}
+2140    \textcolor{keywordflow}{if}(input == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} && \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} != 0)
+2141       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+2142    \textcolor{keywordflow}{if}(key == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+2143       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+2144 
+2145    \textcolor{comment}{//Search for the beginning tag}
+2146    k = \hyperlink{certificate_2pem__import_8c_a9019bb246bd8a7c6abeae29608050d5b}{pemSearchTag}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"-----BEGIN PUBLIC KEY-----"}, 26);
+2147    \textcolor{comment}{//Failed to find the specified tag?}
+2148    \textcolor{keywordflow}{if}(k < 0)
+2149       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca92e7b26953f11d1bc4f4526fad39aed0}{ERROR\_INVALID\_SYNTAX};
+2150 
+2151    \textcolor{comment}{//Advance the pointer over the tag}
+2152    input += k + 26;
+2153    \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} -= k + 26;
+2154 
+2155    \textcolor{comment}{//Search for the end tag}
+2156    k = \hyperlink{certificate_2pem__import_8c_a9019bb246bd8a7c6abeae29608050d5b}{pemSearchTag}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"-----END PUBLIC KEY-----"}, 24);
+2157    \textcolor{comment}{//Invalid PEM file?}
+2158    \textcolor{keywordflow}{if}(k <= 0)
+2159       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca92e7b26953f11d1bc4f4526fad39aed0}{ERROR\_INVALID\_SYNTAX};
+2160 
+2161    \textcolor{comment}{//Length of the PEM structure}
+2162    \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} = \hyperlink{md5_8c_af11ea3cdbca7345eb6a4a8ac5ce0434d}{k};
+2163 
+2164    \textcolor{comment}{//Allocate a memory buffer to hold the decoded data}
+2165    buffer = \hyperlink{cyclone__crypto_2core_2crypto_8h_a48b53d16f66d31e5dcf82db3c1b882ba}{cryptoAllocMem}(\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length});
+2166    \textcolor{comment}{//Failed to allocate memory?}
+2167    \textcolor{keywordflow}{if}(buffer == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+2168       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac0a554045048d2fb61387cf735676f69}{ERROR\_OUT\_OF\_MEMORY};
+2169 
+2170    \textcolor{comment}{//Copy the contents of the PEM structure}
+2171    \hyperlink{cyclone__crypto_2core_2crypto_8h_a6724616c4014bb7e21f2660bd7b88be8}{cryptoMemcpy}(buffer, input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length});
+2172 
+2173    \textcolor{comment}{//Remove carriage returns and line feeds}
+2174    \textcolor{keywordflow}{for}(i = 0, j = 0; i < \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}; i++)
+2175    \{
+2176       \textcolor{keywordflow}{if}(buffer[i] != \textcolor{charliteral}{'\(\backslash\)r'} && buffer[i] != \textcolor{charliteral}{'\(\backslash\)n'})
+2177          buffer[j++] = buffer[i];
+2178    \}
+2179 
+2180    \textcolor{comment}{//Start of exception handling block}
+2181    \textcolor{keywordflow}{do}
+2182    \{
+2183       \textcolor{comment}{//The contents of the PEM file is Base64-encoded}
+2184       error = \hyperlink{base64_8c_ae360cde3e2ef08783ac2e01591b78530}{base64Decode}(buffer, j, buffer, &length);
+2185       \textcolor{comment}{//Failed to decode the file?}
+2186       \textcolor{keywordflow}{if}(error)
+2187          \textcolor{keywordflow}{break};
+2188 
+2189       \textcolor{comment}{//Point to the resulting ASN.1 structure}
+2190       data = (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *) buffer;
+2191 
+2192       \textcolor{comment}{//Display ASN.1 structure}
+2193       error = \hyperlink{asn1_8c_adfebd6c0e21cc4d23414ff98aa9e9a69}{asn1DumpObject}(data, length, 0);
+2194       \textcolor{comment}{//Any error to report?}
+2195       \textcolor{keywordflow}{if}(error)
+2196          \textcolor{keywordflow}{break};
+2197 
+2198       \textcolor{comment}{//PKCS #8 describes a generic syntax for encoding public keys}
+2199       error = \hyperlink{asn1_8c_a5df4a5a14b22837b3dea3525608a9122}{asn1ReadSequence}(data, length, &tag);
+2200       \textcolor{comment}{//Failed to decode ASN.1 tag?}
+2201       \textcolor{keywordflow}{if}(error)
+2202          \textcolor{keywordflow}{break};
+2203 
+2204       \textcolor{comment}{//Point to the first field of the sequence}
+2205       data = tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value};
+2206       length = tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length};
+2207 
+2208       \textcolor{comment}{//Read the publicKeyAlgorithm field}
+2209       error = \hyperlink{asn1_8c_a5df4a5a14b22837b3dea3525608a9122}{asn1ReadSequence}(data, length, &tag);
+2210       \textcolor{comment}{//Failed to decode ASN.1 tag?}
+2211       \textcolor{keywordflow}{if}(error)
+2212          \textcolor{keywordflow}{break};
+2213 
+2214       \textcolor{comment}{//Save the position of the publicKey field}
+2215       data += tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+2216       length -= tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+2217 
+2218       \textcolor{comment}{//Read the algorithm identifier (OID)}
+2219       error = \hyperlink{asn1_8c_a1abd5e2bb0488ff85fb1d94392f80dc4}{asn1ReadTag}(tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value}, tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length}, &tag);
+2220       \textcolor{comment}{//Failed to decode ASN.1 tag?}
+2221       \textcolor{keywordflow}{if}(error)
+2222          \textcolor{keywordflow}{break};
+2223 
+2224       \textcolor{comment}{//Check algorithm identifier}
+2225       \textcolor{keywordflow}{if}(\hyperlink{asn1_8c_a565e797369dd4ec4b722954715507907}{asn1CheckOid}(&tag, \hyperlink{ec__curves_8c_a0c0db5ac9072998c05e021d51fd03992}{ED25519\_OID}, \textcolor{keyword}{sizeof}(
+      \hyperlink{ec__curves_8c_a0c0db5ac9072998c05e021d51fd03992}{ED25519\_OID})) &&
+2226          \hyperlink{asn1_8c_a565e797369dd4ec4b722954715507907}{asn1CheckOid}(&tag, \hyperlink{ec__curves_8c_ad355985d25e281438e8d813c171aea13}{ED448\_OID}, \textcolor{keyword}{sizeof}(\hyperlink{ec__curves_8c_ad355985d25e281438e8d813c171aea13}{ED448\_OID})))
+2227       \{
+2228          \textcolor{comment}{//Report an error}
+2229          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca2bc2298123e24e3d82592b5c68c20612}{ERROR\_WRONG\_IDENTIFIER};
+2230          \textcolor{keywordflow}{break};
+2231       \}
+2232 
+2233       \textcolor{comment}{//The publicKey field is encapsulated within an bit string}
+2234       error = \hyperlink{asn1_8c_a1abd5e2bb0488ff85fb1d94392f80dc4}{asn1ReadTag}(data, length, &tag);
+2235       \textcolor{comment}{//Failed to decode ASN.1 tag?}
+2236       \textcolor{keywordflow}{if}(error)
+2237          \textcolor{keywordflow}{break};
+2238 
+2239       \textcolor{comment}{//Enforce encoding, class and type}
+2240       error = \hyperlink{asn1_8c_a73fa06e5d71abe974aa6ad8fb53ecaa2}{asn1CheckTag}(&tag, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, \hyperlink{asn1_8h_ab3589ac11c049bfda069aa3ecf683578}{ASN1\_CLASS\_UNIVERSAL}, 
+      \hyperlink{asn1_8h_a1b0f39cb3d87e425703ba389df9da1dfab40c213cd2fda439f157e8e4523d020c}{ASN1\_TYPE\_BIT\_STRING});
+2241       \textcolor{comment}{//Invalid tag?}
+2242       \textcolor{keywordflow}{if}(error)
+2243          \textcolor{keywordflow}{break};
+2244 
+2245       \textcolor{comment}{//The bit string shall contain an initial octet which encodes the number}
+2246       \textcolor{comment}{//of unused bits in the final subsequent octet}
+2247       \textcolor{keywordflow}{if}(tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length} < 1 || tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value}[0] != 0x00)
+2248       \{
+2249          \textcolor{comment}{//Report an error}
+2250          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca92e7b26953f11d1bc4f4526fad39aed0}{ERROR\_INVALID\_SYNTAX};
+2251          \textcolor{keywordflow}{break};
+2252       \}
+2253 
+2254       \textcolor{comment}{//Point to the content of the publicKey structure}
+2255       data = tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value} + 1;
+2256       length = tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length} - 1;
+2257 
+2258       \textcolor{comment}{//Read the EdDSA public key}
+2259       error = \hyperlink{mpi_8c_a844d59498f4acce9d69ae55570b521f3}{mpiImport}(&key->\hyperlink{structEddsaPublicKey_ad64b6fac961042422df3f17bd5f01f9e}{q}, data, length, 
+      \hyperlink{mpi_8h_a5fe4159c7c390c604067e854b41d337fa637c0a6e803a47db52875c6818674c60}{MPI\_FORMAT\_LITTLE\_ENDIAN});
+2260       \textcolor{comment}{//Any error to report?}
+2261       \textcolor{keywordflow}{if}(error)
+2262          \textcolor{keywordflow}{break};
+2263 
+2264       \textcolor{comment}{//Debug message}
+2265       \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"EdDSA public key:\(\backslash\)r\(\backslash\)n"});
+2266       \hyperlink{debug_8h_a9c9f3b28f2daf14d77b401512c189d93}{TRACE\_DEBUG\_MPI}(\textcolor{stringliteral}{"  "}, &key->\hyperlink{structEddsaPublicKey_ad64b6fac961042422df3f17bd5f01f9e}{q});
+2267 
+2268       \textcolor{comment}{//End of exception handling block}
+2269    \} \textcolor{keywordflow}{while}(0);
+2270 
+2271    \textcolor{comment}{//Release previously allocated memory}
+2272    \hyperlink{cyclone__crypto_2core_2crypto_8h_ac8a223b176683db4e9eed4162774f870}{cryptoFreeMem}(buffer);
+2273 
+2274    \textcolor{comment}{//Any error to report?}
+2275    \textcolor{keywordflow}{if}(error)
+2276    \{
+2277       \textcolor{comment}{//Clean up side effects}
+2278       \hyperlink{eddsa_8c_ad3facfe31e3941abeab8a29d500e387b}{eddsaFreePublicKey}(key);
+2279    \}
+2280 
+2281    \textcolor{comment}{//Return status code}
+2282    \textcolor{keywordflow}{return} error;
+2283 \textcolor{preprocessor}{#else}
+2284    \textcolor{comment}{//Not implemented}
+2285    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cab61c5ef368fbf03fdc1fb566c63f2f9a}{ERROR\_NOT\_IMPLEMENTED};
+2286 \textcolor{preprocessor}{#endif}
+2287 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{certificate_2pem__import_8c_a3d276f00ad49589056269bfe8abbb664}\label{certificate_2pem__import_8c_a3d276f00ad49589056269bfe8abbb664}} 
+\index{certificate/pem\+\_\+import.\+c@{certificate/pem\+\_\+import.\+c}!pem\+Import\+Rsa\+Private\+Key@{pem\+Import\+Rsa\+Private\+Key}}
+\index{pem\+Import\+Rsa\+Private\+Key@{pem\+Import\+Rsa\+Private\+Key}!certificate/pem\+\_\+import.\+c@{certificate/pem\+\_\+import.\+c}}
+\subsubsection{\texorpdfstring{pem\+Import\+Rsa\+Private\+Key()}{pemImportRsaPrivateKey()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} pem\+Import\+Rsa\+Private\+Key (\begin{DoxyParamCaption}\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{input,  }\item[{size\+\_\+t}]{length,  }\item[{\hyperlink{structRsaPrivateKey}{Rsa\+Private\+Key} $\ast$}]{key }\end{DoxyParamCaption})}
+
+
+
+Decode a P\+EM file containing a R\+SA private key. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em input} & Pointer to the P\+EM structure \\
+\hline
+\mbox{\tt in}  & {\em length} & Length of the P\+EM structure \\
+\hline
+\mbox{\tt out}  & {\em key} & R\+SA private key resulting from the parsing process \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 425 of file pem\+\_\+import.\+c.
+
+
+\begin{DoxyCode}
+426 \{
+427 \textcolor{preprocessor}{#if (RSA\_SUPPORT == ENABLED)}
+428    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+429    \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\_t} pkcs8Format;
+430    \textcolor{keywordtype}{size\_t} i;
+431    \textcolor{keywordtype}{size\_t} j;
+432    \hyperlink{compiler__port_8h_a022c65af7f6c8d3947e8a37d64db6ad6}{int\_t} \hyperlink{md5_8c_af11ea3cdbca7345eb6a4a8ac5ce0434d}{k};
+433    \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\_t} *buffer;
+434    \textcolor{keyword}{const} \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *\hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data};
+435    \hyperlink{structAsn1Tag}{Asn1Tag} tag;
+436 
+437    \textcolor{comment}{//Check parameters}
+438    \textcolor{keywordflow}{if}(input == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} && \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} != 0)
+439       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+440    \textcolor{keywordflow}{if}(key == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+441       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+442 
+443    \textcolor{comment}{//PKCS #8 format?}
+444    \textcolor{keywordflow}{if}(\hyperlink{certificate_2pem__import_8c_a9019bb246bd8a7c6abeae29608050d5b}{pemSearchTag}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"-----BEGIN PRIVATE KEY-----"}, 27) >= 0)
+445    \{
+446       \textcolor{comment}{//Search for the beginning tag}
+447       k = \hyperlink{certificate_2pem__import_8c_a9019bb246bd8a7c6abeae29608050d5b}{pemSearchTag}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"-----BEGIN PRIVATE KEY-----"}, 27);
+448       \textcolor{comment}{//Failed to find the specified tag?}
+449       \textcolor{keywordflow}{if}(k < 0)
+450          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca92e7b26953f11d1bc4f4526fad39aed0}{ERROR\_INVALID\_SYNTAX};
+451 
+452       \textcolor{comment}{//Advance the pointer over the tag}
+453       input += k + 27;
+454       \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} -= k + 27;
+455 
+456       \textcolor{comment}{//Search for the end tag}
+457       k = \hyperlink{certificate_2pem__import_8c_a9019bb246bd8a7c6abeae29608050d5b}{pemSearchTag}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"-----END PRIVATE KEY-----"}, 25);
+458       \textcolor{comment}{//Invalid PEM file?}
+459       \textcolor{keywordflow}{if}(k <= 0)
+460          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca92e7b26953f11d1bc4f4526fad39aed0}{ERROR\_INVALID\_SYNTAX};
+461 
+462       \textcolor{comment}{//Length of the PEM structure}
+463       \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} = \hyperlink{md5_8c_af11ea3cdbca7345eb6a4a8ac5ce0434d}{k};
+464 
+465       \textcolor{comment}{//The structure of the private key is described by PKCS #8}
+466       pkcs8Format = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+467    \}
+468    \textcolor{keywordflow}{else}
+469    \{
+470       \textcolor{comment}{//Search for the beginning tag}
+471       k = \hyperlink{certificate_2pem__import_8c_a9019bb246bd8a7c6abeae29608050d5b}{pemSearchTag}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"-----BEGIN RSA PRIVATE KEY-----"}, 31);
+472       \textcolor{comment}{//Failed to find the specified tag?}
+473       \textcolor{keywordflow}{if}(k < 0)
+474          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca92e7b26953f11d1bc4f4526fad39aed0}{ERROR\_INVALID\_SYNTAX};
+475 
+476       \textcolor{comment}{//Advance the pointer over the tag}
+477       input += k + 31;
+478       \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} -= k + 31;
+479 
+480       \textcolor{comment}{//Search for the end tag}
+481       k = \hyperlink{certificate_2pem__import_8c_a9019bb246bd8a7c6abeae29608050d5b}{pemSearchTag}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"-----END RSA PRIVATE KEY-----"}, 29);
+482       \textcolor{comment}{//Invalid PEM file?}
+483       \textcolor{keywordflow}{if}(k <= 0)
+484          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca92e7b26953f11d1bc4f4526fad39aed0}{ERROR\_INVALID\_SYNTAX};
+485 
+486       \textcolor{comment}{//Length of the PEM structure}
+487       \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} = \hyperlink{md5_8c_af11ea3cdbca7345eb6a4a8ac5ce0434d}{k};
+488 
+489       \textcolor{comment}{//The structure of the private key is described by PKCS #1}
+490       pkcs8Format = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+491    \}
+492 
+493    \textcolor{comment}{//Allocate a memory buffer to hold the decoded data}
+494    buffer = \hyperlink{cyclone__crypto_2core_2crypto_8h_a48b53d16f66d31e5dcf82db3c1b882ba}{cryptoAllocMem}(\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length});
+495    \textcolor{comment}{//Failed to allocate memory?}
+496    \textcolor{keywordflow}{if}(buffer == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+497       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac0a554045048d2fb61387cf735676f69}{ERROR\_OUT\_OF\_MEMORY};
+498 
+499    \textcolor{comment}{//Copy the contents of the PEM structure}
+500    \hyperlink{cyclone__crypto_2core_2crypto_8h_a6724616c4014bb7e21f2660bd7b88be8}{cryptoMemcpy}(buffer, input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length});
+501 
+502    \textcolor{comment}{//Remove carriage returns and line feeds}
+503    \textcolor{keywordflow}{for}(i = 0, j = 0; i < \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}; i++)
+504    \{
+505       \textcolor{keywordflow}{if}(buffer[i] != \textcolor{charliteral}{'\(\backslash\)r'} && buffer[i] != \textcolor{charliteral}{'\(\backslash\)n'})
+506          buffer[j++] = buffer[i];
+507    \}
+508 
+509    \textcolor{comment}{//Start of exception handling block}
+510    \textcolor{keywordflow}{do}
+511    \{
+512       \textcolor{comment}{//The contents of the PEM file is Base64-encoded}
+513       error = \hyperlink{base64_8c_ae360cde3e2ef08783ac2e01591b78530}{base64Decode}(buffer, j, buffer, &length);
+514       \textcolor{comment}{//Failed to decode the file?}
+515       \textcolor{keywordflow}{if}(error)
+516          \textcolor{keywordflow}{break};
+517 
+518       \textcolor{comment}{//Point to the resulting ASN.1 structure}
+519       data = (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *) buffer;
+520 
+521       \textcolor{comment}{//Display ASN.1 structure}
+522       error = \hyperlink{asn1_8c_adfebd6c0e21cc4d23414ff98aa9e9a69}{asn1DumpObject}(data, length, 0);
+523       \textcolor{comment}{//Any error to report?}
+524       \textcolor{keywordflow}{if}(error)
+525          \textcolor{keywordflow}{break};
+526 
+527       \textcolor{comment}{//PKCS #8 format?}
+528       \textcolor{keywordflow}{if}(pkcs8Format)
+529       \{
+530          \textcolor{comment}{//PKCS #8 describes a generic syntax for encoding private keys}
+531          error = \hyperlink{asn1_8c_a5df4a5a14b22837b3dea3525608a9122}{asn1ReadSequence}(data, length, &tag);
+532          \textcolor{comment}{//Failed to decode ASN.1 tag?}
+533          \textcolor{keywordflow}{if}(error)
+534             \textcolor{keywordflow}{break};
+535 
+536          \textcolor{comment}{//Point to the first field of the sequence}
+537          data = tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value};
+538          length = tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length};
+539 
+540          \textcolor{comment}{//Read the version field}
+541          error = \hyperlink{asn1_8c_a1abd5e2bb0488ff85fb1d94392f80dc4}{asn1ReadTag}(data, length, &tag);
+542          \textcolor{comment}{//Failed to decode ASN.1 tag?}
+543          \textcolor{keywordflow}{if}(error)
+544             \textcolor{keywordflow}{break};
+545 
+546          \textcolor{comment}{//Enforce encoding, class and type}
+547          error = \hyperlink{asn1_8c_a73fa06e5d71abe974aa6ad8fb53ecaa2}{asn1CheckTag}(&tag, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, \hyperlink{asn1_8h_ab3589ac11c049bfda069aa3ecf683578}{ASN1\_CLASS\_UNIVERSAL}, 
+      \hyperlink{asn1_8h_a1b0f39cb3d87e425703ba389df9da1dfaf49fe8465a80ebfbe92fe0f0622ec994}{ASN1\_TYPE\_INTEGER});
+548          \textcolor{comment}{//Invalid tag?}
+549          \textcolor{keywordflow}{if}(error)
+550             \textcolor{keywordflow}{break};
+551 
+552          \textcolor{comment}{//Skip the version field}
+553          data += tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+554          length -= tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+555 
+556          \textcolor{comment}{//Read the privateKeyAlgorithm field}
+557          error = \hyperlink{asn1_8c_a5df4a5a14b22837b3dea3525608a9122}{asn1ReadSequence}(data, length, &tag);
+558          \textcolor{comment}{//Failed to decode ASN.1 tag?}
+559          \textcolor{keywordflow}{if}(error)
+560             \textcolor{keywordflow}{break};
+561 
+562          \textcolor{comment}{//Save the position of the privateKey field}
+563          data += tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+564          length -= tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+565 
+566          \textcolor{comment}{//Read the algorithm identifier (OID)}
+567          error = \hyperlink{asn1_8c_a1abd5e2bb0488ff85fb1d94392f80dc4}{asn1ReadTag}(tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value}, tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length}, &tag);
+568          \textcolor{comment}{//Failed to decode ASN.1 tag?}
+569          \textcolor{keywordflow}{if}(error)
+570             \textcolor{keywordflow}{break};
+571 
+572          \textcolor{comment}{//Check algorithm identifier}
+573          \textcolor{keywordflow}{if}(\hyperlink{asn1_8c_a565e797369dd4ec4b722954715507907}{asn1CheckOid}(&tag, \hyperlink{rsa_8c_a05da0bdcba7d0be3da2cc921a8a0dd50}{RSA\_ENCRYPTION\_OID}, \textcolor{keyword}{sizeof}(
+      \hyperlink{rsa_8c_a05da0bdcba7d0be3da2cc921a8a0dd50}{RSA\_ENCRYPTION\_OID})) &&
+574             \hyperlink{asn1_8c_a565e797369dd4ec4b722954715507907}{asn1CheckOid}(&tag, \hyperlink{rsa_8c_ac136e2cc009f56598c67cf31f37c0d2b}{RSASSA\_PSS\_OID}, \textcolor{keyword}{sizeof}(
+      \hyperlink{rsa_8c_ac136e2cc009f56598c67cf31f37c0d2b}{RSASSA\_PSS\_OID})))
+575          \{
+576             \textcolor{comment}{//Report an error}
+577             error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca2bc2298123e24e3d82592b5c68c20612}{ERROR\_WRONG\_IDENTIFIER};
+578             \textcolor{keywordflow}{break};
+579          \}
+580 
+581          \textcolor{comment}{//The privateKey field is encapsulated within an octet string}
+582          error = \hyperlink{asn1_8c_a08b7995f0473e1ff62a9061f31410b2f}{asn1ReadOctetString}(data, length, &tag);
+583          \textcolor{comment}{//Failed to decode ASN.1 tag?}
+584          \textcolor{keywordflow}{if}(error)
+585             \textcolor{keywordflow}{break};
+586 
+587          \textcolor{comment}{//Point to the content of the privateKey structure}
+588          data = tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value};
+589          length = tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length};
+590 
+591          \textcolor{comment}{//Display ASN.1 structure}
+592          error = \hyperlink{asn1_8c_adfebd6c0e21cc4d23414ff98aa9e9a69}{asn1DumpObject}(data, length, 0);
+593          \textcolor{comment}{//Any error to report?}
+594          \textcolor{keywordflow}{if}(error)
+595             \textcolor{keywordflow}{break};
+596       \}
+597 
+598       \textcolor{comment}{//Read the contents of the privateKey structure}
+599       error = \hyperlink{asn1_8c_a5df4a5a14b22837b3dea3525608a9122}{asn1ReadSequence}(data, length, &tag);
+600       \textcolor{comment}{//Failed to decode ASN.1 tag?}
+601       \textcolor{keywordflow}{if}(error)
+602          \textcolor{keywordflow}{break};
+603 
+604       \textcolor{comment}{//Point to the first field of the sequence}
+605       data = tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value};
+606       length = tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length};
+607 
+608       \textcolor{comment}{//Read the version field}
+609       error = \hyperlink{asn1_8c_a1abd5e2bb0488ff85fb1d94392f80dc4}{asn1ReadTag}(data, length, &tag);
+610       \textcolor{comment}{//Failed to decode ASN.1 tag?}
+611       \textcolor{keywordflow}{if}(error)
+612          \textcolor{keywordflow}{break};
+613 
+614       \textcolor{comment}{//Enforce encoding, class and type}
+615       error = \hyperlink{asn1_8c_a73fa06e5d71abe974aa6ad8fb53ecaa2}{asn1CheckTag}(&tag, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, \hyperlink{asn1_8h_ab3589ac11c049bfda069aa3ecf683578}{ASN1\_CLASS\_UNIVERSAL}, 
+      \hyperlink{asn1_8h_a1b0f39cb3d87e425703ba389df9da1dfaf49fe8465a80ebfbe92fe0f0622ec994}{ASN1\_TYPE\_INTEGER});
+616       \textcolor{comment}{//Invalid tag?}
+617       \textcolor{keywordflow}{if}(error)
+618          \textcolor{keywordflow}{break};
+619 
+620       \textcolor{comment}{//Skip the version field}
+621       data += tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+622       length -= tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+623 
+624       \textcolor{comment}{//Read the modulus}
+625       error = \hyperlink{asn1_8c_aa73309637560abf8e42288890c19d641}{asn1ReadMpi}(data, length, &tag, &key->\hyperlink{structRsaPrivateKey_aaccaccd76db1a21201bf06eb6ecdd8ac}{n});
+626       \textcolor{comment}{//Any error to report?}
+627       \textcolor{keywordflow}{if}(error)
+628          \textcolor{keywordflow}{break};
+629 
+630       \textcolor{comment}{//Point to the next field}
+631       data += tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+632       length -= tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+633 
+634       \textcolor{comment}{//Read the public exponent}
+635       error = \hyperlink{asn1_8c_aa73309637560abf8e42288890c19d641}{asn1ReadMpi}(data, length, &tag, &key->\hyperlink{structRsaPrivateKey_a590822495b6caceae5f8880cacc51b9c}{e});
+636       \textcolor{comment}{//Any error to report?}
+637       \textcolor{keywordflow}{if}(error)
+638          \textcolor{keywordflow}{break};
+639 
+640       \textcolor{comment}{//Point to the next field}
+641       data += tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+642       length -= tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+643 
+644       \textcolor{comment}{//Read the private exponent}
+645       error = \hyperlink{asn1_8c_aa73309637560abf8e42288890c19d641}{asn1ReadMpi}(data, length, &tag, &key->\hyperlink{structRsaPrivateKey_aea064a2875da9d2a44c7e7c02e157728}{d});
+646       \textcolor{comment}{//Any error to report?}
+647       \textcolor{keywordflow}{if}(error)
+648          \textcolor{keywordflow}{break};
+649 
+650       \textcolor{comment}{//Point to the next field}
+651       data += tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+652       length -= tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+653 
+654       \textcolor{comment}{//Read the first factor}
+655       error = \hyperlink{asn1_8c_aa73309637560abf8e42288890c19d641}{asn1ReadMpi}(data, length, &tag, &key->\hyperlink{structRsaPrivateKey_a1fc8b1ca097c70244db691916f33f891}{p});
+656       \textcolor{comment}{//Any error to report?}
+657       \textcolor{keywordflow}{if}(error)
+658          \textcolor{keywordflow}{break};
+659 
+660       \textcolor{comment}{//Point to the next field}
+661       data += tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+662       length -= tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+663 
+664       \textcolor{comment}{//Read the second factor}
+665       error = \hyperlink{asn1_8c_aa73309637560abf8e42288890c19d641}{asn1ReadMpi}(data, length, &tag, &key->\hyperlink{structRsaPrivateKey_aefd3ef59482ac00637165b624625fef5}{q});
+666       \textcolor{comment}{//Any error to report?}
+667       \textcolor{keywordflow}{if}(error)
+668          \textcolor{keywordflow}{break};
+669 
+670       \textcolor{comment}{//Point to the next field}
+671       data += tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+672       length -= tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+673 
+674       \textcolor{comment}{//Read the first exponent}
+675       error = \hyperlink{asn1_8c_aa73309637560abf8e42288890c19d641}{asn1ReadMpi}(data, length, &tag, &key->\hyperlink{structRsaPrivateKey_ab101b4e579a4799f12d3acd237e72b34}{dp});
+676       \textcolor{comment}{//Any error to report?}
+677       \textcolor{keywordflow}{if}(error)
+678          \textcolor{keywordflow}{break};
+679 
+680       \textcolor{comment}{//Point to the next field}
+681       data += tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+682       length -= tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+683 
+684       \textcolor{comment}{//Read the second exponent}
+685       error = \hyperlink{asn1_8c_aa73309637560abf8e42288890c19d641}{asn1ReadMpi}(data, length, &tag, &key->\hyperlink{structRsaPrivateKey_a9e72909ef8af48ce9a813ba32ba0287d}{dq});
+686       \textcolor{comment}{//Any error to report?}
+687       \textcolor{keywordflow}{if}(error)
+688          \textcolor{keywordflow}{break};
+689 
+690       \textcolor{comment}{//Point to the next field}
+691       data += tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+692       length -= tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+693 
+694       \textcolor{comment}{//Read the coefficient}
+695       error = \hyperlink{asn1_8c_aa73309637560abf8e42288890c19d641}{asn1ReadMpi}(data, length, &tag, &key->\hyperlink{structRsaPrivateKey_a3dac28e0d48293032c18c968faadf57c}{qinv});
+696       \textcolor{comment}{//Any error to report?}
+697       \textcolor{keywordflow}{if}(error)
+698          \textcolor{keywordflow}{break};
+699 
+700       \textcolor{comment}{//Debug message}
+701       \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"RSA private key:\(\backslash\)r\(\backslash\)n"});
+702       \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  Modulus:\(\backslash\)r\(\backslash\)n"});
+703       \hyperlink{debug_8h_a9c9f3b28f2daf14d77b401512c189d93}{TRACE\_DEBUG\_MPI}(\textcolor{stringliteral}{"    "}, &key->\hyperlink{structRsaPrivateKey_aaccaccd76db1a21201bf06eb6ecdd8ac}{n});
+704       \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  Public exponent:\(\backslash\)r\(\backslash\)n"});
+705       \hyperlink{debug_8h_a9c9f3b28f2daf14d77b401512c189d93}{TRACE\_DEBUG\_MPI}(\textcolor{stringliteral}{"    "}, &key->\hyperlink{structRsaPrivateKey_a590822495b6caceae5f8880cacc51b9c}{e});
+706       \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  Private exponent:\(\backslash\)r\(\backslash\)n"});
+707       \hyperlink{debug_8h_a9c9f3b28f2daf14d77b401512c189d93}{TRACE\_DEBUG\_MPI}(\textcolor{stringliteral}{"    "}, &key->\hyperlink{structRsaPrivateKey_aea064a2875da9d2a44c7e7c02e157728}{d});
+708       \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  Prime 1:\(\backslash\)r\(\backslash\)n"});
+709       \hyperlink{debug_8h_a9c9f3b28f2daf14d77b401512c189d93}{TRACE\_DEBUG\_MPI}(\textcolor{stringliteral}{"    "}, &key->\hyperlink{structRsaPrivateKey_a1fc8b1ca097c70244db691916f33f891}{p});
+710       \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  Prime 2:\(\backslash\)r\(\backslash\)n"});
+711       \hyperlink{debug_8h_a9c9f3b28f2daf14d77b401512c189d93}{TRACE\_DEBUG\_MPI}(\textcolor{stringliteral}{"    "}, &key->\hyperlink{structRsaPrivateKey_aefd3ef59482ac00637165b624625fef5}{q});
+712       \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  Prime exponent 1:\(\backslash\)r\(\backslash\)n"});
+713       \hyperlink{debug_8h_a9c9f3b28f2daf14d77b401512c189d93}{TRACE\_DEBUG\_MPI}(\textcolor{stringliteral}{"    "}, &key->\hyperlink{structRsaPrivateKey_ab101b4e579a4799f12d3acd237e72b34}{dp});
+714       \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  Prime exponent 2:\(\backslash\)r\(\backslash\)n"});
+715       \hyperlink{debug_8h_a9c9f3b28f2daf14d77b401512c189d93}{TRACE\_DEBUG\_MPI}(\textcolor{stringliteral}{"    "}, &key->\hyperlink{structRsaPrivateKey_a9e72909ef8af48ce9a813ba32ba0287d}{dq});
+716       \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  Coefficient:\(\backslash\)r\(\backslash\)n"});
+717       \hyperlink{debug_8h_a9c9f3b28f2daf14d77b401512c189d93}{TRACE\_DEBUG\_MPI}(\textcolor{stringliteral}{"    "}, &key->\hyperlink{structRsaPrivateKey_a3dac28e0d48293032c18c968faadf57c}{qinv});
+718 
+719       \textcolor{comment}{//End of exception handling block}
+720    \} \textcolor{keywordflow}{while}(0);
+721 
+722    \textcolor{comment}{//Release previously allocated memory}
+723    \hyperlink{cyclone__crypto_2core_2crypto_8h_ac8a223b176683db4e9eed4162774f870}{cryptoFreeMem}(buffer);
+724 
+725    \textcolor{comment}{//Any error to report?}
+726    \textcolor{keywordflow}{if}(error)
+727    \{
+728       \textcolor{comment}{//Clean up side effects}
+729       \hyperlink{rsa_8c_a14ee0338e3149b934552c40b97c8f096}{rsaFreePrivateKey}(key);
+730    \}
+731 
+732    \textcolor{comment}{//Return status code}
+733    \textcolor{keywordflow}{return} error;
+734 \textcolor{preprocessor}{#else}
+735    \textcolor{comment}{//Not implemented}
+736    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cab61c5ef368fbf03fdc1fb566c63f2f9a}{ERROR\_NOT\_IMPLEMENTED};
+737 \textcolor{preprocessor}{#endif}
+738 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{certificate_2pem__import_8c_a93fcb70196ecbfad4c0b907c9d81c00a}\label{certificate_2pem__import_8c_a93fcb70196ecbfad4c0b907c9d81c00a}} 
+\index{certificate/pem\+\_\+import.\+c@{certificate/pem\+\_\+import.\+c}!pem\+Import\+Rsa\+Public\+Key@{pem\+Import\+Rsa\+Public\+Key}}
+\index{pem\+Import\+Rsa\+Public\+Key@{pem\+Import\+Rsa\+Public\+Key}!certificate/pem\+\_\+import.\+c@{certificate/pem\+\_\+import.\+c}}
+\subsubsection{\texorpdfstring{pem\+Import\+Rsa\+Public\+Key()}{pemImportRsaPublicKey()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} pem\+Import\+Rsa\+Public\+Key (\begin{DoxyParamCaption}\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{input,  }\item[{size\+\_\+t}]{length,  }\item[{\hyperlink{structRsaPublicKey}{Rsa\+Public\+Key} $\ast$}]{key }\end{DoxyParamCaption})}
+
+
+
+Decode a P\+EM file containing a R\+SA public key. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em input} & Pointer to the P\+EM structure \\
+\hline
+\mbox{\tt in}  & {\em length} & Length of the P\+EM structure \\
+\hline
+\mbox{\tt out}  & {\em key} & R\+SA public key resulting from the parsing process \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 190 of file pem\+\_\+import.\+c.
+
+
+\begin{DoxyCode}
+191 \{
+192 \textcolor{preprocessor}{#if (RSA\_SUPPORT == ENABLED)}
+193    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+194    \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\_t} pkcs8Format;
+195    \textcolor{keywordtype}{size\_t} i;
+196    \textcolor{keywordtype}{size\_t} j;
+197    \hyperlink{compiler__port_8h_a022c65af7f6c8d3947e8a37d64db6ad6}{int\_t} \hyperlink{md5_8c_af11ea3cdbca7345eb6a4a8ac5ce0434d}{k};
+198    \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\_t} *buffer;
+199    \textcolor{keyword}{const} \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *\hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data};
+200    \hyperlink{structAsn1Tag}{Asn1Tag} tag;
+201 
+202    \textcolor{comment}{//Check parameters}
+203    \textcolor{keywordflow}{if}(input == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} && \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} != 0)
+204       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+205    \textcolor{keywordflow}{if}(key == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+206       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+207 
+208    \textcolor{comment}{//PKCS #8 format?}
+209    \textcolor{keywordflow}{if}(\hyperlink{certificate_2pem__import_8c_a9019bb246bd8a7c6abeae29608050d5b}{pemSearchTag}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"-----BEGIN PUBLIC KEY-----"}, 26) >= 0)
+210    \{
+211       \textcolor{comment}{//Search for the beginning tag}
+212       k = \hyperlink{certificate_2pem__import_8c_a9019bb246bd8a7c6abeae29608050d5b}{pemSearchTag}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"-----BEGIN PUBLIC KEY-----"}, 26);
+213       \textcolor{comment}{//Failed to find the specified tag?}
+214       \textcolor{keywordflow}{if}(k < 0)
+215          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca92e7b26953f11d1bc4f4526fad39aed0}{ERROR\_INVALID\_SYNTAX};
+216 
+217       \textcolor{comment}{//Advance the pointer over the tag}
+218       input += k + 26;
+219       \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} -= k + 26;
+220 
+221       \textcolor{comment}{//Search for the end tag}
+222       k = \hyperlink{certificate_2pem__import_8c_a9019bb246bd8a7c6abeae29608050d5b}{pemSearchTag}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"-----END PUBLIC KEY-----"}, 24);
+223       \textcolor{comment}{//Invalid PEM file?}
+224       \textcolor{keywordflow}{if}(k <= 0)
+225          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca92e7b26953f11d1bc4f4526fad39aed0}{ERROR\_INVALID\_SYNTAX};
+226 
+227       \textcolor{comment}{//Length of the PEM structure}
+228       \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} = \hyperlink{md5_8c_af11ea3cdbca7345eb6a4a8ac5ce0434d}{k};
+229 
+230       \textcolor{comment}{//The structure of the private key is described by PKCS #8}
+231       pkcs8Format = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+232    \}
+233    \textcolor{keywordflow}{else}
+234    \{
+235       \textcolor{comment}{//Search for the beginning tag}
+236       k = \hyperlink{certificate_2pem__import_8c_a9019bb246bd8a7c6abeae29608050d5b}{pemSearchTag}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"-----BEGIN RSA PUBLIC KEY-----"}, 30);
+237       \textcolor{comment}{//Failed to find the specified tag?}
+238       \textcolor{keywordflow}{if}(k < 0)
+239          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca92e7b26953f11d1bc4f4526fad39aed0}{ERROR\_INVALID\_SYNTAX};
+240 
+241       \textcolor{comment}{//Advance the pointer over the tag}
+242       input += k + 30;
+243       \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} -= k + 30;
+244 
+245       \textcolor{comment}{//Search for the end tag}
+246       k = \hyperlink{certificate_2pem__import_8c_a9019bb246bd8a7c6abeae29608050d5b}{pemSearchTag}(input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \textcolor{stringliteral}{"-----END RSA PUBLIC KEY-----"}, 28);
+247       \textcolor{comment}{//Invalid PEM file?}
+248       \textcolor{keywordflow}{if}(k <= 0)
+249          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca92e7b26953f11d1bc4f4526fad39aed0}{ERROR\_INVALID\_SYNTAX};
+250 
+251       \textcolor{comment}{//Length of the PEM structure}
+252       \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} = \hyperlink{md5_8c_af11ea3cdbca7345eb6a4a8ac5ce0434d}{k};
+253 
+254       \textcolor{comment}{//The structure of the private key is described by PKCS #1}
+255       pkcs8Format = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+256    \}
+257 
+258    \textcolor{comment}{//Allocate a memory buffer to hold the decoded data}
+259    buffer = \hyperlink{cyclone__crypto_2core_2crypto_8h_a48b53d16f66d31e5dcf82db3c1b882ba}{cryptoAllocMem}(\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length});
+260    \textcolor{comment}{//Failed to allocate memory?}
+261    \textcolor{keywordflow}{if}(buffer == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+262       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac0a554045048d2fb61387cf735676f69}{ERROR\_OUT\_OF\_MEMORY};
+263 
+264    \textcolor{comment}{//Copy the contents of the PEM structure}
+265    \hyperlink{cyclone__crypto_2core_2crypto_8h_a6724616c4014bb7e21f2660bd7b88be8}{cryptoMemcpy}(buffer, input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length});
+266 
+267    \textcolor{comment}{//Remove carriage returns and line feeds}
+268    \textcolor{keywordflow}{for}(i = 0, j = 0; i < \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}; i++)
+269    \{
+270       \textcolor{keywordflow}{if}(buffer[i] != \textcolor{charliteral}{'\(\backslash\)r'} && buffer[i] != \textcolor{charliteral}{'\(\backslash\)n'})
+271          buffer[j++] = buffer[i];
+272    \}
+273 
+274    \textcolor{comment}{//Start of exception handling block}
+275    \textcolor{keywordflow}{do}
+276    \{
+277       \textcolor{comment}{//The contents of the PEM file is Base64-encoded}
+278       error = \hyperlink{base64_8c_ae360cde3e2ef08783ac2e01591b78530}{base64Decode}(buffer, j, buffer, &length);
+279       \textcolor{comment}{//Failed to decode the file?}
+280       \textcolor{keywordflow}{if}(error)
+281          \textcolor{keywordflow}{break};
+282 
+283       \textcolor{comment}{//Point to the resulting ASN.1 structure}
+284       data = (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *) buffer;
+285 
+286       \textcolor{comment}{//Display ASN.1 structure}
+287       error = \hyperlink{asn1_8c_adfebd6c0e21cc4d23414ff98aa9e9a69}{asn1DumpObject}(data, length, 0);
+288       \textcolor{comment}{//Any error to report?}
+289       \textcolor{keywordflow}{if}(error)
+290          \textcolor{keywordflow}{break};
+291 
+292       \textcolor{comment}{//PKCS #8 format?}
+293       \textcolor{keywordflow}{if}(pkcs8Format)
+294       \{
+295          \textcolor{comment}{//PKCS #8 describes a generic syntax for encoding public keys}
+296          error = \hyperlink{asn1_8c_a5df4a5a14b22837b3dea3525608a9122}{asn1ReadSequence}(data, length, &tag);
+297          \textcolor{comment}{//Failed to decode ASN.1 tag?}
+298          \textcolor{keywordflow}{if}(error)
+299             \textcolor{keywordflow}{break};
+300 
+301          \textcolor{comment}{//Point to the first field of the sequence}
+302          data = tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value};
+303          length = tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length};
+304 
+305          \textcolor{comment}{//Read the publicKeyAlgorithm field}
+306          error = \hyperlink{asn1_8c_a5df4a5a14b22837b3dea3525608a9122}{asn1ReadSequence}(data, length, &tag);
+307          \textcolor{comment}{//Failed to decode ASN.1 tag?}
+308          \textcolor{keywordflow}{if}(error)
+309             \textcolor{keywordflow}{break};
+310 
+311          \textcolor{comment}{//Save the position of the publicKey field}
+312          data += tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+313          length -= tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+314 
+315          \textcolor{comment}{//Read the algorithm identifier (OID)}
+316          error = \hyperlink{asn1_8c_a1abd5e2bb0488ff85fb1d94392f80dc4}{asn1ReadTag}(tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value}, tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length}, &tag);
+317          \textcolor{comment}{//Failed to decode ASN.1 tag?}
+318          \textcolor{keywordflow}{if}(error)
+319             \textcolor{keywordflow}{break};
+320 
+321          \textcolor{comment}{//Check algorithm identifier}
+322          \textcolor{keywordflow}{if}(\hyperlink{asn1_8c_a565e797369dd4ec4b722954715507907}{asn1CheckOid}(&tag, \hyperlink{rsa_8c_a05da0bdcba7d0be3da2cc921a8a0dd50}{RSA\_ENCRYPTION\_OID}, \textcolor{keyword}{sizeof}(
+      \hyperlink{rsa_8c_a05da0bdcba7d0be3da2cc921a8a0dd50}{RSA\_ENCRYPTION\_OID})) &&
+323             \hyperlink{asn1_8c_a565e797369dd4ec4b722954715507907}{asn1CheckOid}(&tag, \hyperlink{rsa_8c_ac136e2cc009f56598c67cf31f37c0d2b}{RSASSA\_PSS\_OID}, \textcolor{keyword}{sizeof}(
+      \hyperlink{rsa_8c_ac136e2cc009f56598c67cf31f37c0d2b}{RSASSA\_PSS\_OID})))
+324          \{
+325             \textcolor{comment}{//Report an error}
+326             error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca2bc2298123e24e3d82592b5c68c20612}{ERROR\_WRONG\_IDENTIFIER};
+327             \textcolor{keywordflow}{break};
+328          \}
+329 
+330          \textcolor{comment}{//The publicKey field is encapsulated within an bit string}
+331          error = \hyperlink{asn1_8c_a1abd5e2bb0488ff85fb1d94392f80dc4}{asn1ReadTag}(data, length, &tag);
+332          \textcolor{comment}{//Failed to decode ASN.1 tag?}
+333          \textcolor{keywordflow}{if}(error)
+334             \textcolor{keywordflow}{break};
+335 
+336          \textcolor{comment}{//Enforce encoding, class and type}
+337          error = \hyperlink{asn1_8c_a73fa06e5d71abe974aa6ad8fb53ecaa2}{asn1CheckTag}(&tag, \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}, \hyperlink{asn1_8h_ab3589ac11c049bfda069aa3ecf683578}{ASN1\_CLASS\_UNIVERSAL}, 
+      \hyperlink{asn1_8h_a1b0f39cb3d87e425703ba389df9da1dfab40c213cd2fda439f157e8e4523d020c}{ASN1\_TYPE\_BIT\_STRING});
+338          \textcolor{comment}{//Invalid tag?}
+339          \textcolor{keywordflow}{if}(error)
+340             \textcolor{keywordflow}{break};
+341 
+342          \textcolor{comment}{//The bit string shall contain an initial octet which encodes the number}
+343          \textcolor{comment}{//of unused bits in the final subsequent octet}
+344          \textcolor{keywordflow}{if}(tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length} < 1 || tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value}[0] != 0x00)
+345          \{
+346             \textcolor{comment}{//Report an error}
+347             error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca92e7b26953f11d1bc4f4526fad39aed0}{ERROR\_INVALID\_SYNTAX};
+348             \textcolor{keywordflow}{break};
+349          \}
+350 
+351          \textcolor{comment}{//Point to the content of the publicKey structure}
+352          data = tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value} + 1;
+353          length = tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length} - 1;
+354 
+355          \textcolor{comment}{//Display ASN.1 structure}
+356          error = \hyperlink{asn1_8c_adfebd6c0e21cc4d23414ff98aa9e9a69}{asn1DumpObject}(data, length, 0);
+357          \textcolor{comment}{//Any error to report?}
+358          \textcolor{keywordflow}{if}(error)
+359             \textcolor{keywordflow}{break};
+360       \}
+361 
+362       \textcolor{comment}{//Read the contents of the publicKey structure}
+363       error = \hyperlink{asn1_8c_a5df4a5a14b22837b3dea3525608a9122}{asn1ReadSequence}(data, length, &tag);
+364       \textcolor{comment}{//Failed to decode ASN.1 tag?}
+365       \textcolor{keywordflow}{if}(error)
+366          \textcolor{keywordflow}{break};
+367 
+368       \textcolor{comment}{//Point to the first field of the sequence}
+369       data = tag.\hyperlink{structAsn1Tag_a90f3832fa59c62feb4fb8be9d8b11b29}{value};
+370       length = tag.\hyperlink{structAsn1Tag_a5131e751817ae2cbfdaf031c2ce97f3d}{length};
+371 
+372       \textcolor{comment}{//Read the modulus}
+373       error = \hyperlink{asn1_8c_aa73309637560abf8e42288890c19d641}{asn1ReadMpi}(data, length, &tag, &key->\hyperlink{structRsaPublicKey_a51b3d236796d7d46c15d3e6bc7e5acb2}{n});
+374       \textcolor{comment}{//Any error to report?}
+375       \textcolor{keywordflow}{if}(error)
+376          \textcolor{keywordflow}{break};
+377 
+378       \textcolor{comment}{//Point to the next field}
+379       data += tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+380       length -= tag.\hyperlink{structAsn1Tag_a27df45a2d65de5a2a1289a64e43149bf}{totalLength};
+381 
+382       \textcolor{comment}{//Read the public exponent}
+383       error = \hyperlink{asn1_8c_aa73309637560abf8e42288890c19d641}{asn1ReadMpi}(data, length, &tag, &key->\hyperlink{structRsaPublicKey_af293e256864ab9ac9f80d1e6552693da}{e});
+384       \textcolor{comment}{//Any error to report?}
+385       \textcolor{keywordflow}{if}(error)
+386          \textcolor{keywordflow}{break};
+387 
+388       \textcolor{comment}{//Debug message}
+389       \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"RSA public key:\(\backslash\)r\(\backslash\)n"});
+390       \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  Modulus:\(\backslash\)r\(\backslash\)n"});
+391       \hyperlink{debug_8h_a9c9f3b28f2daf14d77b401512c189d93}{TRACE\_DEBUG\_MPI}(\textcolor{stringliteral}{"    "}, &key->\hyperlink{structRsaPublicKey_a51b3d236796d7d46c15d3e6bc7e5acb2}{n});
+392       \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  Public exponent:\(\backslash\)r\(\backslash\)n"});
+393       \hyperlink{debug_8h_a9c9f3b28f2daf14d77b401512c189d93}{TRACE\_DEBUG\_MPI}(\textcolor{stringliteral}{"    "}, &key->\hyperlink{structRsaPublicKey_af293e256864ab9ac9f80d1e6552693da}{e});
+394 
+395       \textcolor{comment}{//End of exception handling block}
+396    \} \textcolor{keywordflow}{while}(0);
+397 
+398    \textcolor{comment}{//Release previously allocated memory}
+399    \hyperlink{cyclone__crypto_2core_2crypto_8h_ac8a223b176683db4e9eed4162774f870}{cryptoFreeMem}(buffer);
+400 
+401    \textcolor{comment}{//Any error to report?}
+402    \textcolor{keywordflow}{if}(error)
+403    \{
+404       \textcolor{comment}{//Clean up side effects}
+405       \hyperlink{rsa_8c_a6dc1711d56454b2a6e565199509d884e}{rsaFreePublicKey}(key);
+406    \}
+407 
+408    \textcolor{comment}{//Return status code}
+409    \textcolor{keywordflow}{return} error;
+410 \textcolor{preprocessor}{#else}
+411    \textcolor{comment}{//Not implemented}
+412    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cab61c5ef368fbf03fdc1fb566c63f2f9a}{ERROR\_NOT\_IMPLEMENTED};
+413 \textcolor{preprocessor}{#endif}
+414 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{certificate_2pem__import_8c_a9019bb246bd8a7c6abeae29608050d5b}\label{certificate_2pem__import_8c_a9019bb246bd8a7c6abeae29608050d5b}} 
+\index{certificate/pem\+\_\+import.\+c@{certificate/pem\+\_\+import.\+c}!pem\+Search\+Tag@{pem\+Search\+Tag}}
+\index{pem\+Search\+Tag@{pem\+Search\+Tag}!certificate/pem\+\_\+import.\+c@{certificate/pem\+\_\+import.\+c}}
+\subsubsection{\texorpdfstring{pem\+Search\+Tag()}{pemSearchTag()}}
+{\footnotesize\ttfamily \hyperlink{compiler__port_8h_a022c65af7f6c8d3947e8a37d64db6ad6}{int\+\_\+t} pem\+Search\+Tag (\begin{DoxyParamCaption}\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{s,  }\item[{size\+\_\+t}]{s\+Len,  }\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{tag,  }\item[{size\+\_\+t}]{tag\+Len }\end{DoxyParamCaption})}
+
+
+
+Search a string for a given tag. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em s} & String to search \\
+\hline
+\mbox{\tt in}  & {\em s\+Len} & Length of the string to search \\
+\hline
+\mbox{\tt in}  & {\em tag} & String containing the tag to search for \\
+\hline
+\mbox{\tt in}  & {\em tag\+Len} & Length of the tag \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The index of the first occurrence of the tag in the string, or -\/1 if the tag does not appear in the string 
+\end{DoxyReturn}
+
+
+Definition at line 2595 of file pem\+\_\+import.\+c.
+
+
+\begin{DoxyCode}
+2596 \{
+2597    \textcolor{keywordtype}{size\_t} i;
+2598    \textcolor{keywordtype}{size\_t} j;
+2599 
+2600    \textcolor{comment}{//Loop through input string}
+2601    \textcolor{keywordflow}{for}(i = 0; (i + tagLen) <= sLen; i++)
+2602    \{
+2603       \textcolor{comment}{//Compare current substring with the given tag}
+2604       \textcolor{keywordflow}{for}(j = 0; j < tagLen; j++)
+2605       \{
+2606          \textcolor{keywordflow}{if}(\hyperlink{md2_8c_adf356ff381033f761b7de5f76e763a45}{s}[i + j] != tag[j])
+2607             \textcolor{keywordflow}{break};
+2608       \}
+2609 
+2610       \textcolor{comment}{//Check whether the tag has been found}
+2611       \textcolor{keywordflow}{if}(j == tagLen)
+2612          \textcolor{keywordflow}{return} i;
+2613    \}
+2614 
+2615    \textcolor{comment}{//The tag does not appear in the string}
+2616    \textcolor{keywordflow}{return} -1;
+2617 \}
+\end{DoxyCode}

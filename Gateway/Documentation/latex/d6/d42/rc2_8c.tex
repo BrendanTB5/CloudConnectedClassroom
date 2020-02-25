@@ -1,0 +1,389 @@
+\hypertarget{rc2_8c}{}\section{cyclone\+\_\+crypto/cipher/rc2.c File Reference}
+\label{rc2_8c}\index{cyclone\+\_\+crypto/cipher/rc2.\+c@{cyclone\+\_\+crypto/cipher/rc2.\+c}}
+
+
+R\+C2 block cipher.  
+
+
+{\ttfamily \#include \char`\"{}core/crypto.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}cipher/rc2.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}debug.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{rc2_8c_afcdf5e66fd927a7f4cc64295acd20407}{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}~\hyperlink{crypto__config_8h_a6afae3a9b63f9b55d979e667ee0e881d}{C\+R\+Y\+P\+T\+O\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{rc2_8c_a74f247a4da253172dec8d1e0f7e32410}{rc2\+Init} (\hyperlink{structRc2Context}{Rc2\+Context} $\ast$context, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$key, size\+\_\+t key\+Len)
+\begin{DoxyCompactList}\small\item\em Initialize a R\+C2 context using the supplied key. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{rc2_8c_acea0ab83330388b52bbc7bdc9ffbd576}{rc2\+Init\+Ex} (\hyperlink{structRc2Context}{Rc2\+Context} $\ast$context, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$key, size\+\_\+t key\+Len, \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} effective\+Key\+Len)
+\begin{DoxyCompactList}\small\item\em Initialize a R\+C2 context using the supplied key. \end{DoxyCompactList}\item 
+void \hyperlink{rc2_8c_acbd93a9e25c2e70789d5dbce06450d2c}{rc2\+Encrypt\+Block} (\hyperlink{structRc2Context}{Rc2\+Context} $\ast$context, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$input, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$output)
+\begin{DoxyCompactList}\small\item\em Encrypt a 16-\/byte block using R\+C2 algorithm. \end{DoxyCompactList}\item 
+void \hyperlink{rc2_8c_a4ccaf0bab97f09e0310ac5e886f42a74}{rc2\+Decrypt\+Block} (\hyperlink{structRc2Context}{Rc2\+Context} $\ast$context, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$input, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$output)
+\begin{DoxyCompactList}\small\item\em Decrypt a 16-\/byte block using R\+C2 algorithm. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} \hyperlink{rc2_8c_a5c4917b2883e8358befc82347b0cdbf0}{pi\+Table} \mbox{[}256\mbox{]}
+\item 
+const \hyperlink{structCipherAlgo}{Cipher\+Algo} \hyperlink{rc2_8c_a79b39cc36e9dca07513b417dd01817c2}{rc2\+Cipher\+Algo}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+R\+C2 block cipher. 
+
+\hypertarget{pic32mz__ef__curiosity_8h_License}{}\subsection{License}\label{pic32mz__ef__curiosity_8h_License}
+S\+P\+D\+X-\/\+License-\/\+Identifier\+: G\+P\+L-\/2.\+0-\/or-\/later
+
+Copyright (C) 2010-\/2019 Oryx Embedded S\+A\+RL. All rights reserved.
+
+This file is part of Cyclone\+Crypto Open.
+
+This program is free software; you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+
+You should have received a copy of the G\+NU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-\/1301, U\+SA.\hypertarget{tftp__server_8c_Description}{}\subsection{Description}\label{tftp__server_8c_Description}
+R\+C2 is a block encryption algorithm, which may be considered as a proposal for a D\+ES replacement. The input and output block sizes are 64 bits each. The key size is variable, from one byte up to 128 bytes. Refer to R\+FC 2268 for more details
+
+\begin{DoxyAuthor}{Author}
+Oryx Embedded S\+A\+RL (www.\+oryx-\/embedded.\+com) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+9.\+6 
+\end{DoxyVersion}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{rc2_8c_afcdf5e66fd927a7f4cc64295acd20407}\label{rc2_8c_afcdf5e66fd927a7f4cc64295acd20407}} 
+\index{rc2.\+c@{rc2.\+c}!T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+\index{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}!rc2.\+c@{rc2.\+c}}
+\subsubsection{\texorpdfstring{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}{TRACE\_LEVEL}}
+{\footnotesize\ttfamily \#define T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL~\hyperlink{crypto__config_8h_a6afae3a9b63f9b55d979e667ee0e881d}{C\+R\+Y\+P\+T\+O\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+
+
+
+Definition at line 39 of file rc2.\+c.
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{rc2_8c_a4ccaf0bab97f09e0310ac5e886f42a74}\label{rc2_8c_a4ccaf0bab97f09e0310ac5e886f42a74}} 
+\index{rc2.\+c@{rc2.\+c}!rc2\+Decrypt\+Block@{rc2\+Decrypt\+Block}}
+\index{rc2\+Decrypt\+Block@{rc2\+Decrypt\+Block}!rc2.\+c@{rc2.\+c}}
+\subsubsection{\texorpdfstring{rc2\+Decrypt\+Block()}{rc2DecryptBlock()}}
+{\footnotesize\ttfamily void rc2\+Decrypt\+Block (\begin{DoxyParamCaption}\item[{\hyperlink{structRc2Context}{Rc2\+Context} $\ast$}]{context,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{input,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{output }\end{DoxyParamCaption})}
+
+
+
+Decrypt a 16-\/byte block using R\+C2 algorithm. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the R\+C2 context \\
+\hline
+\mbox{\tt in}  & {\em input} & Ciphertext block to decrypt \\
+\hline
+\mbox{\tt out}  & {\em output} & Plaintext block resulting from decryption \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 226 of file rc2.\+c.
+
+
+\begin{DoxyCode}
+227 \{
+228    \hyperlink{compiler__port_8h_a022c65af7f6c8d3947e8a37d64db6ad6}{int\_t} i;
+229    \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t} r0;
+230    \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t} r1;
+231    \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t} r2;
+232    \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t} r3;
+233 
+234    \textcolor{comment}{//The ciphertext is divided into four 16-bit registers}
+235    r0 = \hyperlink{cpu__endian_8h_a182c2e79417bf46407b27a505fdb06c2}{LOAD16LE}(input + 0);
+236    r1 = \hyperlink{cpu__endian_8h_a182c2e79417bf46407b27a505fdb06c2}{LOAD16LE}(input + 2);
+237    r2 = \hyperlink{cpu__endian_8h_a182c2e79417bf46407b27a505fdb06c2}{LOAD16LE}(input + 4);
+238    r3 = \hyperlink{cpu__endian_8h_a182c2e79417bf46407b27a505fdb06c2}{LOAD16LE}(input + 6);
+239 
+240    \textcolor{comment}{//Apply 16 rounds}
+241    \textcolor{keywordflow}{for}(i = 15; i >= 0; i--)
+242    \{
+243       \textcolor{comment}{//Perform r-mixing round}
+244       r3 = \hyperlink{cyclone__crypto_2core_2crypto_8h_a9da6d60b00f781fbeafbabda9b73f3e6}{ROR16}(r3, 5);
+245       r3 -= (r0 & ~r2) + (r1 & r2) + context->\hyperlink{structRc2Context_a5f8fb41c7bc89383e86d498556f010e4}{k}[i * 4 + 3];
+246       r2 = \hyperlink{cyclone__crypto_2core_2crypto_8h_a9da6d60b00f781fbeafbabda9b73f3e6}{ROR16}(r2, 3);
+247       r2 -= (r3 & ~r1) + (r0 & r1) + context->\hyperlink{structRc2Context_a5f8fb41c7bc89383e86d498556f010e4}{k}[i * 4 + 2];
+248       r1 = \hyperlink{cyclone__crypto_2core_2crypto_8h_a9da6d60b00f781fbeafbabda9b73f3e6}{ROR16}(r1, 2);
+249       r1 -= (r2 & ~r0) + (r3 & r0) + context->\hyperlink{structRc2Context_a5f8fb41c7bc89383e86d498556f010e4}{k}[i * 4 + 1];
+250       r0 = \hyperlink{cyclone__crypto_2core_2crypto_8h_a9da6d60b00f781fbeafbabda9b73f3e6}{ROR16}(r0, 1);
+251       r0 -= (r1 & ~r3) + (r2 & r3) + context->\hyperlink{structRc2Context_a5f8fb41c7bc89383e86d498556f010e4}{k}[i * 4];
+252 
+253       \textcolor{comment}{//5th and 11th rounds require special processing}
+254       \textcolor{keywordflow}{if}(i == 5 || i == 11)
+255       \{
+256          \textcolor{comment}{//Perform r-mashing round}
+257          r3 -= context->\hyperlink{structRc2Context_a5f8fb41c7bc89383e86d498556f010e4}{k}[r2 % 64];
+258          r2 -= context->\hyperlink{structRc2Context_a5f8fb41c7bc89383e86d498556f010e4}{k}[r1 % 64];
+259          r1 -= context->\hyperlink{structRc2Context_a5f8fb41c7bc89383e86d498556f010e4}{k}[r0 % 64];
+260          r0 -= context->\hyperlink{structRc2Context_a5f8fb41c7bc89383e86d498556f010e4}{k}[r3 % 64];
+261       \}
+262    \}
+263 
+264    \textcolor{comment}{//The resulting value is the plaintext}
+265    \hyperlink{cpu__endian_8h_a09b5a0f32b9bf8ba46ab08a113a7848c}{STORE16LE}(r0, output + 0);
+266    \hyperlink{cpu__endian_8h_a09b5a0f32b9bf8ba46ab08a113a7848c}{STORE16LE}(r1, output + 2);
+267    \hyperlink{cpu__endian_8h_a09b5a0f32b9bf8ba46ab08a113a7848c}{STORE16LE}(r2, output + 4);
+268    \hyperlink{cpu__endian_8h_a09b5a0f32b9bf8ba46ab08a113a7848c}{STORE16LE}(r3, output + 6);
+269 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{rc2_8c_acbd93a9e25c2e70789d5dbce06450d2c}\label{rc2_8c_acbd93a9e25c2e70789d5dbce06450d2c}} 
+\index{rc2.\+c@{rc2.\+c}!rc2\+Encrypt\+Block@{rc2\+Encrypt\+Block}}
+\index{rc2\+Encrypt\+Block@{rc2\+Encrypt\+Block}!rc2.\+c@{rc2.\+c}}
+\subsubsection{\texorpdfstring{rc2\+Encrypt\+Block()}{rc2EncryptBlock()}}
+{\footnotesize\ttfamily void rc2\+Encrypt\+Block (\begin{DoxyParamCaption}\item[{\hyperlink{structRc2Context}{Rc2\+Context} $\ast$}]{context,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{input,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{output }\end{DoxyParamCaption})}
+
+
+
+Encrypt a 16-\/byte block using R\+C2 algorithm. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the R\+C2 context \\
+\hline
+\mbox{\tt in}  & {\em input} & Plaintext block to encrypt \\
+\hline
+\mbox{\tt out}  & {\em output} & Ciphertext block resulting from encryption \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 173 of file rc2.\+c.
+
+
+\begin{DoxyCode}
+174 \{
+175    \hyperlink{compiler__port_8h_a022c65af7f6c8d3947e8a37d64db6ad6}{int\_t} i;
+176    \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t} r0;
+177    \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t} r1;
+178    \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t} r2;
+179    \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t} r3;
+180 
+181    \textcolor{comment}{//The plaintext is divided into four 16-bit registers}
+182    r0 = \hyperlink{cpu__endian_8h_a182c2e79417bf46407b27a505fdb06c2}{LOAD16LE}(input + 0);
+183    r1 = \hyperlink{cpu__endian_8h_a182c2e79417bf46407b27a505fdb06c2}{LOAD16LE}(input + 2);
+184    r2 = \hyperlink{cpu__endian_8h_a182c2e79417bf46407b27a505fdb06c2}{LOAD16LE}(input + 4);
+185    r3 = \hyperlink{cpu__endian_8h_a182c2e79417bf46407b27a505fdb06c2}{LOAD16LE}(input + 6);
+186 
+187    \textcolor{comment}{//Apply 16 rounds}
+188    \textcolor{keywordflow}{for}(i = 0; i < 16; i++)
+189    \{
+190       \textcolor{comment}{//Perform mixing round}
+191       r0 += (r1 & ~r3) + (r2 & r3) + context->\hyperlink{structRc2Context_a5f8fb41c7bc89383e86d498556f010e4}{k}[i * 4];
+192       r0 = \hyperlink{cyclone__crypto_2core_2crypto_8h_acaf43bf2405b339c22836f16b147e265}{ROL16}(r0, 1);
+193       r1 += (r2 & ~r0) + (r3 & r0) + context->\hyperlink{structRc2Context_a5f8fb41c7bc89383e86d498556f010e4}{k}[i * 4 + 1];
+194       r1 = \hyperlink{cyclone__crypto_2core_2crypto_8h_acaf43bf2405b339c22836f16b147e265}{ROL16}(r1, 2);
+195       r2 += (r3 & ~r1) + (r0 & r1) + context->\hyperlink{structRc2Context_a5f8fb41c7bc89383e86d498556f010e4}{k}[i * 4 + 2];
+196       r2 = \hyperlink{cyclone__crypto_2core_2crypto_8h_acaf43bf2405b339c22836f16b147e265}{ROL16}(r2, 3);
+197       r3 += (r0 & ~r2) + (r1 & r2) + context->\hyperlink{structRc2Context_a5f8fb41c7bc89383e86d498556f010e4}{k}[i * 4 + 3];
+198       r3 = \hyperlink{cyclone__crypto_2core_2crypto_8h_acaf43bf2405b339c22836f16b147e265}{ROL16}(r3, 5);
+199 
+200       \textcolor{comment}{//5th and 11th rounds require special processing}
+201       \textcolor{keywordflow}{if}(i == 4 || i == 10)
+202       \{
+203          \textcolor{comment}{//Perform mashing round}
+204          r0 += context->\hyperlink{structRc2Context_a5f8fb41c7bc89383e86d498556f010e4}{k}[r3 % 64];
+205          r1 += context->\hyperlink{structRc2Context_a5f8fb41c7bc89383e86d498556f010e4}{k}[r0 % 64];
+206          r2 += context->\hyperlink{structRc2Context_a5f8fb41c7bc89383e86d498556f010e4}{k}[r1 % 64];
+207          r3 += context->\hyperlink{structRc2Context_a5f8fb41c7bc89383e86d498556f010e4}{k}[r2 % 64];
+208       \}
+209    \}
+210 
+211    \textcolor{comment}{//The resulting value is the ciphertext}
+212    \hyperlink{cpu__endian_8h_a09b5a0f32b9bf8ba46ab08a113a7848c}{STORE16LE}(r0, output + 0);
+213    \hyperlink{cpu__endian_8h_a09b5a0f32b9bf8ba46ab08a113a7848c}{STORE16LE}(r1, output + 2);
+214    \hyperlink{cpu__endian_8h_a09b5a0f32b9bf8ba46ab08a113a7848c}{STORE16LE}(r2, output + 4);
+215    \hyperlink{cpu__endian_8h_a09b5a0f32b9bf8ba46ab08a113a7848c}{STORE16LE}(r3, output + 6);
+216 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{rc2_8c_a74f247a4da253172dec8d1e0f7e32410}\label{rc2_8c_a74f247a4da253172dec8d1e0f7e32410}} 
+\index{rc2.\+c@{rc2.\+c}!rc2\+Init@{rc2\+Init}}
+\index{rc2\+Init@{rc2\+Init}!rc2.\+c@{rc2.\+c}}
+\subsubsection{\texorpdfstring{rc2\+Init()}{rc2Init()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} rc2\+Init (\begin{DoxyParamCaption}\item[{\hyperlink{structRc2Context}{Rc2\+Context} $\ast$}]{context,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{key,  }\item[{size\+\_\+t}]{key\+Len }\end{DoxyParamCaption})}
+
+
+
+Initialize a R\+C2 context using the supplied key. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the R\+C2 context to initialize \\
+\hline
+\mbox{\tt in}  & {\em key} & Pointer to the key \\
+\hline
+\mbox{\tt in}  & {\em key\+Len} & Length of the key \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 93 of file rc2.\+c.
+
+
+\begin{DoxyCode}
+94 \{
+95    \textcolor{comment}{//Initialize a RC2 context}
+96    \textcolor{keywordflow}{return} \hyperlink{rc2_8c_acea0ab83330388b52bbc7bdc9ffbd576}{rc2InitEx}(context, key, keyLen, keyLen * 8);
+97 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{rc2_8c_acea0ab83330388b52bbc7bdc9ffbd576}\label{rc2_8c_acea0ab83330388b52bbc7bdc9ffbd576}} 
+\index{rc2.\+c@{rc2.\+c}!rc2\+Init\+Ex@{rc2\+Init\+Ex}}
+\index{rc2\+Init\+Ex@{rc2\+Init\+Ex}!rc2.\+c@{rc2.\+c}}
+\subsubsection{\texorpdfstring{rc2\+Init\+Ex()}{rc2InitEx()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} rc2\+Init\+Ex (\begin{DoxyParamCaption}\item[{\hyperlink{structRc2Context}{Rc2\+Context} $\ast$}]{context,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{key,  }\item[{size\+\_\+t}]{key\+Len,  }\item[{\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t}}]{effective\+Key\+Len }\end{DoxyParamCaption})}
+
+
+
+Initialize a R\+C2 context using the supplied key. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the R\+C2 context to initialize \\
+\hline
+\mbox{\tt in}  & {\em key} & Pointer to the key \\
+\hline
+\mbox{\tt in}  & {\em key\+Len} & Length of the key (T) \\
+\hline
+\mbox{\tt in}  & {\em effective\+Key\+Len} & Maximum effective key length, in bits (T1) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 109 of file rc2.\+c.
+
+
+\begin{DoxyCode}
+111 \{
+112    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+113    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} \hyperlink{pic32mx_2isr__support_8h_ae3781fcb0354b09ca351bdf76301666b}{t8};
+114    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} tm;
+115 
+116    \textcolor{comment}{//Check parameters}
+117    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || key == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+118       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+119 
+120    \textcolor{comment}{//Make sure the key length is acceptable}
+121    \textcolor{keywordflow}{if}(keyLen < 1 || keyLen > 128)
+122       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca3764b2929469f1eb1bf7af50b40df62f}{ERROR\_INVALID\_KEY\_LENGTH};
+123 
+124    \textcolor{comment}{//Make sure the maximum effective key length is acceptable}
+125    \textcolor{keywordflow}{if}(effectiveKeyLen < 1 || effectiveKeyLen > 1024)
+126       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca3764b2929469f1eb1bf7af50b40df62f}{ERROR\_INVALID\_KEY\_LENGTH};
+127 
+128    \textcolor{comment}{//The key expansion algorithm begins by placing the supplied T-byte key}
+129    \textcolor{comment}{//into bytes L[0], ..., L[T-1] of the key buffer}
+130    \hyperlink{cyclone__crypto_2core_2crypto_8h_a6724616c4014bb7e21f2660bd7b88be8}{cryptoMemcpy}(context->\hyperlink{structRc2Context_a4bae73d72c8d515d39d11364a4ff7d99}{l}, key, keyLen);
+131 
+132    \textcolor{comment}{//The key expansion algorithm then computes the effective key length in}
+133    \textcolor{comment}{//bytes T8}
+134    t8 = (effectiveKeyLen + 7) / 8;
+135 
+136    \textcolor{comment}{//The mask TM has its 8 - (8*T8 - T1) least significant bits set}
+137    tm = 0xFF >> (8 * t8 - effectiveKeyLen);
+138 
+139    \textcolor{comment}{//First loop of the key expansion operation}
+140    \textcolor{keywordflow}{for}(i = keyLen; i < 128; i++)
+141    \{
+142       context->\hyperlink{structRc2Context_a4bae73d72c8d515d39d11364a4ff7d99}{l}[i] = \hyperlink{rc2_8c_a5c4917b2883e8358befc82347b0cdbf0}{piTable}[(context->\hyperlink{structRc2Context_a4bae73d72c8d515d39d11364a4ff7d99}{l}[i - 1] + context->\hyperlink{structRc2Context_a4bae73d72c8d515d39d11364a4ff7d99}{l}[i - keyLen]) & 0xFF];
+143    \}
+144 
+145    \textcolor{comment}{//The intermediate step's bitwise AND operation reduces the search space}
+146    \textcolor{comment}{//for L[128-T8] so that the effective number of key bits is T1}
+147    context->\hyperlink{structRc2Context_a4bae73d72c8d515d39d11364a4ff7d99}{l}[128 - \hyperlink{pic32mx_2isr__support_8h_ae3781fcb0354b09ca351bdf76301666b}{t8}] = \hyperlink{rc2_8c_a5c4917b2883e8358befc82347b0cdbf0}{piTable}[context->\hyperlink{structRc2Context_a4bae73d72c8d515d39d11364a4ff7d99}{l}[128 - \hyperlink{pic32mx_2isr__support_8h_ae3781fcb0354b09ca351bdf76301666b}{t8}] & tm];
+148 
+149    \textcolor{comment}{//Second loop of the key expansion operation}
+150    \textcolor{keywordflow}{for}(i = 128 - t8; i > 0; i--)
+151    \{
+152       context->\hyperlink{structRc2Context_a4bae73d72c8d515d39d11364a4ff7d99}{l}[i - 1] = \hyperlink{rc2_8c_a5c4917b2883e8358befc82347b0cdbf0}{piTable}[context->\hyperlink{structRc2Context_a4bae73d72c8d515d39d11364a4ff7d99}{l}[i] ^ context->\hyperlink{structRc2Context_a4bae73d72c8d515d39d11364a4ff7d99}{l}[i + t8 - 1]];
+153    \}
+154 
+155    \textcolor{comment}{//The low-order byte of each K word is given before the high-order byte}
+156    \textcolor{keywordflow}{for}(i = 0; i < 64; i++)
+157    \{
+158       context->\hyperlink{structRc2Context_a5f8fb41c7bc89383e86d498556f010e4}{k}[i] = \hyperlink{cpu__endian_8h_a7d0c2c1dc4394b648d1513efcaa33fcd}{letoh16}(context->\hyperlink{structRc2Context_a5f8fb41c7bc89383e86d498556f010e4}{k}[i]);
+159    \}
+160 
+161    \textcolor{comment}{//No error to report}
+162    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+163 \}
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{rc2_8c_a5c4917b2883e8358befc82347b0cdbf0}\label{rc2_8c_a5c4917b2883e8358befc82347b0cdbf0}} 
+\index{rc2.\+c@{rc2.\+c}!pi\+Table@{pi\+Table}}
+\index{pi\+Table@{pi\+Table}!rc2.\+c@{rc2.\+c}}
+\subsubsection{\texorpdfstring{pi\+Table}{piTable}}
+{\footnotesize\ttfamily \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} pi\+Table\mbox{[}256\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=
+\{
+   0xD9, 0x78, 0xF9, 0xC4, 0x19, 0xDD, 0xB5, 0xED, 0x28, 0xE9, 0xFD, 0x79, 0x4A, 0xA0, 0xD8, 0x9D,
+   0xC6, 0x7E, 0x37, 0x83, 0x2B, 0x76, 0x53, 0x8E, 0x62, 0x4C, 0x64, 0x88, 0x44, 0x8B, 0xFB, 0xA2,
+   0x17, 0x9A, 0x59, 0xF5, 0x87, 0xB3, 0x4F, 0x13, 0x61, 0x45, 0x6D, 0x8D, 0x09, 0x81, 0x7D, 0x32,
+   0xBD, 0x8F, 0x40, 0xEB, 0x86, 0xB7, 0x7B, 0x0B, 0xF0, 0x95, 0x21, 0x22, 0x5C, 0x6B, 0x4E, 0x82,
+   0x54, 0xD6, 0x65, 0x93, 0xCE, 0x60, 0xB2, 0x1C, 0x73, 0x56, 0xC0, 0x14, 0xA7, 0x8C, 0xF1, 0xDC,
+   0x12, 0x75, 0xCA, 0x1F, 0x3B, 0xBE, 0xE4, 0xD1, 0x42, 0x3D, 0xD4, 0x30, 0xA3, 0x3C, 0xB6, 0x26,
+   0x6F, 0xBF, 0x0E, 0xDA, 0x46, 0x69, 0x07, 0x57, 0x27, 0xF2, 0x1D, 0x9B, 0xBC, 0x94, 0x43, 0x03,
+   0xF8, 0x11, 0xC7, 0xF6, 0x90, 0xEF, 0x3E, 0xE7, 0x06, 0xC3, 0xD5, 0x2F, 0xC8, 0x66, 0x1E, 0xD7,
+   0x08, 0xE8, 0xEA, 0xDE, 0x80, 0x52, 0xEE, 0xF7, 0x84, 0xAA, 0x72, 0xAC, 0x35, 0x4D, 0x6A, 0x2A,
+   0x96, 0x1A, 0xD2, 0x71, 0x5A, 0x15, 0x49, 0x74, 0x4B, 0x9F, 0xD0, 0x5E, 0x04, 0x18, 0xA4, 0xEC,
+   0xC2, 0xE0, 0x41, 0x6E, 0x0F, 0x51, 0xCB, 0xCC, 0x24, 0x91, 0xAF, 0x50, 0xA1, 0xF4, 0x70, 0x39,
+   0x99, 0x7C, 0x3A, 0x85, 0x23, 0xB8, 0xB4, 0x7A, 0xFC, 0x02, 0x36, 0x5B, 0x25, 0x55, 0x97, 0x31,
+   0x2D, 0x5D, 0xFA, 0x98, 0xE3, 0x8A, 0x92, 0xAE, 0x05, 0xDF, 0x29, 0x10, 0x67, 0x6C, 0xBA, 0xC9,
+   0xD3, 0x00, 0xE6, 0xCF, 0xE1, 0x9E, 0xA8, 0x2C, 0x63, 0x16, 0x01, 0x3F, 0x58, 0xE2, 0x89, 0xA9,
+   0x0D, 0x38, 0x34, 0x1B, 0xAB, 0x33, 0xFF, 0xB0, 0xBB, 0x48, 0x0C, 0x5F, 0xB9, 0xB1, 0xCD, 0x2E,
+   0xC5, 0xF3, 0xDB, 0x47, 0xE5, 0xA5, 0x9C, 0x77, 0x0A, 0xA6, 0x20, 0x68, 0xFE, 0x7F, 0xC1, 0xAD
+\}
+\end{DoxyCode}
+
+
+Definition at line 50 of file rc2.\+c.
+
+\mbox{\Hypertarget{rc2_8c_a79b39cc36e9dca07513b417dd01817c2}\label{rc2_8c_a79b39cc36e9dca07513b417dd01817c2}} 
+\index{rc2.\+c@{rc2.\+c}!rc2\+Cipher\+Algo@{rc2\+Cipher\+Algo}}
+\index{rc2\+Cipher\+Algo@{rc2\+Cipher\+Algo}!rc2.\+c@{rc2.\+c}}
+\subsubsection{\texorpdfstring{rc2\+Cipher\+Algo}{rc2CipherAlgo}}
+{\footnotesize\ttfamily const \hyperlink{structCipherAlgo}{Cipher\+Algo} rc2\+Cipher\+Algo}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=
+\{
+   \textcolor{stringliteral}{"RC2"},
+   \textcolor{keyword}{sizeof}(\hyperlink{structRc2Context}{Rc2Context}),
+   \hyperlink{cyclone__crypto_2core_2crypto_8h_ae03a6c8f32ed798857924d908aacc49bac347f6aa82618d4d57fe85cba6520ce9}{CIPHER\_ALGO\_TYPE\_BLOCK},
+   \hyperlink{rc2_8h_a4c0eac4cc8a756b1379bbf1ad6b52df6}{RC2\_BLOCK\_SIZE},
+   (\hyperlink{cyclone__crypto_2core_2crypto_8h_a1a0f02cdb8a3295caa1b87db2785e678}{CipherAlgoInit}) \hyperlink{rc2_8c_a74f247a4da253172dec8d1e0f7e32410}{rc2Init},
+   \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL},
+   \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL},
+   (\hyperlink{cyclone__crypto_2core_2crypto_8h_a4b511302b7e4f6ff51dd72f5abde7077}{CipherAlgoEncryptBlock}) \hyperlink{rc2_8c_acbd93a9e25c2e70789d5dbce06450d2c}{rc2EncryptBlock},
+   (\hyperlink{cyclone__crypto_2core_2crypto_8h_a15510227bd1c7721d1e3af2480069990}{CipherAlgoDecryptBlock}) \hyperlink{rc2_8c_a4ccaf0bab97f09e0310ac5e886f42a74}{rc2DecryptBlock}
+\}
+\end{DoxyCode}
+
+
+Definition at line 71 of file rc2.\+c.
+

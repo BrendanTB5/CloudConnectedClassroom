@@ -1,0 +1,798 @@
+\hypertarget{ipv6__routing_8c}{}\section{cyclone\+\_\+tcp/ipv6/ipv6\+\_\+routing.c File Reference}
+\label{ipv6__routing_8c}\index{cyclone\+\_\+tcp/ipv6/ipv6\+\_\+routing.\+c@{cyclone\+\_\+tcp/ipv6/ipv6\+\_\+routing.\+c}}
+
+
+I\+Pv6 routing.  
+
+
+{\ttfamily \#include $<$limits.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}core/net.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}core/ip.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ipv6/ipv6.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ipv6/ipv6\+\_\+misc.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ipv6/ipv6\+\_\+routing.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ipv6/icmpv6.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ipv6/ndp.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}debug.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{ipv6__routing_8c_afcdf5e66fd927a7f4cc64295acd20407}{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}~\hyperlink{net__config_8h_abdf5ff5f080602055c37443bec1fe78c}{I\+P\+V6\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ipv6__routing_8c_aa899a8d0b19a336c88b265a77849c312}{ipv6\+Init\+Routing} (void)
+\begin{DoxyCompactList}\small\item\em Initialize I\+Pv6 routing table. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ipv6__routing_8c_aebdc4a7d0a4ce5c43f2394e611ac5bbe}{ipv6\+Enable\+Routing} (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface, \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t} enable)
+\begin{DoxyCompactList}\small\item\em Enable routing for the specified interface. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ipv6__routing_8c_ad0ac365c0f9a93091a88ec4e50d94418}{ipv6\+Add\+Route} (const \hyperlink{ipv6_8h_aed0cbc40c61ed5b4fb681ebc55237e89}{Ipv6\+Addr} $\ast$\hyperlink{mqtt__sn__common_8h_acf4a7a7457f3d922d7118075fc1a300b}{prefix}, \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} \hyperlink{dhcpv6__common_8h_abb09026544955eb74f4c326ebe446013}{prefix\+Len}, \hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface, const \hyperlink{ipv6_8h_aed0cbc40c61ed5b4fb681ebc55237e89}{Ipv6\+Addr} $\ast$next\+Hop, \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} metric)
+\begin{DoxyCompactList}\small\item\em Add a new entry in the I\+Pv6 routing table. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ipv6__routing_8c_aace7ed11099d9657dd7027e284ae35c9}{ipv6\+Delete\+Route} (const \hyperlink{ipv6_8h_aed0cbc40c61ed5b4fb681ebc55237e89}{Ipv6\+Addr} $\ast$\hyperlink{mqtt__sn__common_8h_acf4a7a7457f3d922d7118075fc1a300b}{prefix}, \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} \hyperlink{dhcpv6__common_8h_abb09026544955eb74f4c326ebe446013}{prefix\+Len})
+\begin{DoxyCompactList}\small\item\em Remove an entry from the I\+Pv6 routing table. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ipv6__routing_8c_a7be8094c959ec2929200e69c04e8f53b}{ipv6\+Delete\+All\+Routes} (void)
+\begin{DoxyCompactList}\small\item\em Delete all routes from the I\+Pv6 routing table. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ipv6__routing_8c_a3c53f33e7daba87d19e200c715c7030f}{ipv6\+Forward\+Packet} (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$src\+Interface, \hyperlink{structNetBuffer}{Net\+Buffer} $\ast$\hyperlink{ndp_8h_a6c97f605f59d957e1720030e1b1058e5}{ip\+Packet}, size\+\_\+t ip\+Packet\+Offset)
+\begin{DoxyCompactList}\small\item\em Forward an I\+Pv6 packet. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{structIpv6RoutingTableEntry}{Ipv6\+Routing\+Table\+Entry} \hyperlink{ipv6__routing_8c_ad925e555bcc78b4487bfd09c57c76e25}{ipv6\+Routing\+Table} \mbox{[}\hyperlink{ipv6__routing_8h_a4002ce2fc9c895640b3bfc7c351899e8}{I\+P\+V6\+\_\+\+R\+O\+U\+T\+I\+N\+G\+\_\+\+T\+A\+B\+L\+E\+\_\+\+S\+I\+ZE}\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+I\+Pv6 routing. 
+
+\hypertarget{pic32mz__ef__curiosity_8h_License}{}\subsection{License}\label{pic32mz__ef__curiosity_8h_License}
+S\+P\+D\+X-\/\+License-\/\+Identifier\+: G\+P\+L-\/2.\+0-\/or-\/later
+
+Copyright (C) 2010-\/2019 Oryx Embedded S\+A\+RL. All rights reserved.
+
+This file is part of Cyclone\+T\+CP Open.
+
+This program is free software; you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+
+You should have received a copy of the G\+NU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-\/1301, U\+SA.
+
+\begin{DoxyAuthor}{Author}
+Oryx Embedded S\+A\+RL (www.\+oryx-\/embedded.\+com) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+9.\+6 
+\end{DoxyVersion}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{ipv6__routing_8c_afcdf5e66fd927a7f4cc64295acd20407}\label{ipv6__routing_8c_afcdf5e66fd927a7f4cc64295acd20407}} 
+\index{ipv6\+\_\+routing.\+c@{ipv6\+\_\+routing.\+c}!T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+\index{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}!ipv6\+\_\+routing.\+c@{ipv6\+\_\+routing.\+c}}
+\subsubsection{\texorpdfstring{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}{TRACE\_LEVEL}}
+{\footnotesize\ttfamily \#define T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL~\hyperlink{net__config_8h_abdf5ff5f080602055c37443bec1fe78c}{I\+P\+V6\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+
+
+
+Definition at line 32 of file ipv6\+\_\+routing.\+c.
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{ipv6__routing_8c_ad0ac365c0f9a93091a88ec4e50d94418}\label{ipv6__routing_8c_ad0ac365c0f9a93091a88ec4e50d94418}} 
+\index{ipv6\+\_\+routing.\+c@{ipv6\+\_\+routing.\+c}!ipv6\+Add\+Route@{ipv6\+Add\+Route}}
+\index{ipv6\+Add\+Route@{ipv6\+Add\+Route}!ipv6\+\_\+routing.\+c@{ipv6\+\_\+routing.\+c}}
+\subsubsection{\texorpdfstring{ipv6\+Add\+Route()}{ipv6AddRoute()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ipv6\+Add\+Route (\begin{DoxyParamCaption}\item[{const \hyperlink{ipv6_8h_aed0cbc40c61ed5b4fb681ebc55237e89}{Ipv6\+Addr} $\ast$}]{prefix,  }\item[{\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t}}]{prefix\+Len,  }\item[{\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$}]{interface,  }\item[{const \hyperlink{ipv6_8h_aed0cbc40c61ed5b4fb681ebc55237e89}{Ipv6\+Addr} $\ast$}]{next\+Hop,  }\item[{\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t}}]{metric }\end{DoxyParamCaption})}
+
+
+
+Add a new entry in the I\+Pv6 routing table. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em prefix} & Network destination \\
+\hline
+\mbox{\tt in}  & {\em prefix\+Len} & Length of the prefix, in bits \\
+\hline
+\mbox{\tt in}  & {\em interface} & Network interface where to forward the packet \\
+\hline
+\mbox{\tt in}  & {\em next\+Hop} & I\+Pv6 address of the next hop \\
+\hline
+\mbox{\tt in}  & {\em metric} & Metric value \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 103 of file ipv6\+\_\+routing.\+c.
+
+
+\begin{DoxyCode}
+105 \{
+106    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+107    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+108    \hyperlink{structIpv6RoutingTableEntry}{Ipv6RoutingTableEntry} *entry;
+109    \hyperlink{structIpv6RoutingTableEntry}{Ipv6RoutingTableEntry} *firstFreeEntry;
+110 
+111    \textcolor{comment}{//Check parameters}
+112    \textcolor{keywordflow}{if}(\hyperlink{dhcpv6__common_8h_a82020d9f611b297873f5caeecb4e93c1}{prefix} == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || interface == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+113       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+114 
+115    \textcolor{comment}{//Keep track of the first free entry}
+116    firstFreeEntry = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+117 
+118    \textcolor{comment}{//Get exclusive access}
+119    \hyperlink{os__port__chibios_8c_a58485224df4bfa522246d55b35bbd83a}{osAcquireMutex}(&\hyperlink{net_8c_afe31551ad26115fae8e575654346d441}{netMutex});
+120 
+121    \textcolor{comment}{//Loop through routing table entries}
+122    \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{ipv6__routing_8h_a4002ce2fc9c895640b3bfc7c351899e8}{IPV6\_ROUTING\_TABLE\_SIZE}; i++)
+123    \{
+124       \textcolor{comment}{//Point to the current entry}
+125       entry = &\hyperlink{ipv6__routing_8c_ad925e555bcc78b4487bfd09c57c76e25}{ipv6RoutingTable}[i];
+126 
+127       \textcolor{comment}{//Valid entry?}
+128       \textcolor{keywordflow}{if}(entry->\hyperlink{structIpv6RoutingTableEntry_ae9580bbd1518a8088d3fd3782874a400}{valid})
+129       \{
+130          \textcolor{comment}{//Check prefix length}
+131          \textcolor{keywordflow}{if}(entry->\hyperlink{structIpv6RoutingTableEntry_afa6df2620a8ea56487ec240f9ea38a81}{prefixLen} == \hyperlink{dhcpv6__common_8h_abb09026544955eb74f4c326ebe446013}{prefixLen})
+132          \{
+133             \textcolor{comment}{//Check whether the current entry matches the specified destination}
+134             \textcolor{keywordflow}{if}(\hyperlink{ipv6__misc_8c_a6cf8eae90cab177c8b32b1bf1709952b}{ipv6CompPrefix}(&entry->\hyperlink{structIpv6RoutingTableEntry_ad65e1df278c1729e94aa4fbf24a243e0}{prefix}, \hyperlink{dhcpv6__common_8h_a82020d9f611b297873f5caeecb4e93c1}{prefix}, 
+      \hyperlink{dhcpv6__common_8h_abb09026544955eb74f4c326ebe446013}{prefixLen}))
+135                \textcolor{keywordflow}{break};
+136          \}
+137       \}
+138       \textcolor{keywordflow}{else}
+139       \{
+140          \textcolor{comment}{//Keep track of the first free entry}
+141          \textcolor{keywordflow}{if}(firstFreeEntry == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+142             firstFreeEntry = entry;
+143       \}
+144    \}
+145 
+146    \textcolor{comment}{//If the routing table does not contain the specified destination,}
+147    \textcolor{comment}{//then a new entry should be created}
+148    \textcolor{keywordflow}{if}(i >= IPV6\_ROUTING\_TABLE\_SIZE)
+149       entry = firstFreeEntry;
+150 
+151    \textcolor{comment}{//Check whether the routing table runs out of space}
+152    \textcolor{keywordflow}{if}(entry != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+153    \{
+154       \textcolor{comment}{//Network destination}
+155       entry->\hyperlink{structIpv6RoutingTableEntry_ad65e1df278c1729e94aa4fbf24a243e0}{prefix} = *\hyperlink{dhcpv6__common_8h_a82020d9f611b297873f5caeecb4e93c1}{prefix};
+156       entry->\hyperlink{structIpv6RoutingTableEntry_afa6df2620a8ea56487ec240f9ea38a81}{prefixLen} = \hyperlink{dhcpv6__common_8h_abb09026544955eb74f4c326ebe446013}{prefixLen};
+157 
+158       \textcolor{comment}{//Interface where to forward the packet}
+159       entry->\hyperlink{structIpv6RoutingTableEntry_ab13eefd552d99929780012e98e026a7d}{interface} = interface;
+160 
+161       \textcolor{comment}{//Address of the next hop}
+162       \textcolor{keywordflow}{if}(nextHop != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+163          entry->\hyperlink{structIpv6RoutingTableEntry_aca563bb1b384a2dd6eb5f52de10f79bb}{nextHop} = *nextHop;
+164       \textcolor{keywordflow}{else}
+165          entry->\hyperlink{structIpv6RoutingTableEntry_aca563bb1b384a2dd6eb5f52de10f79bb}{nextHop} = \hyperlink{ipv6_8c_aa4baeec4f7b8b166d2457787fb9eddf9}{IPV6\_UNSPECIFIED\_ADDR};
+166 
+167       \textcolor{comment}{//Metric value}
+168       entry->\hyperlink{structIpv6RoutingTableEntry_a71c00d6422a11d1c5b060dcbd8f4f2c5}{metric} = metric;
+169       \textcolor{comment}{//The entry is now valid}
+170       entry->\hyperlink{structIpv6RoutingTableEntry_ae9580bbd1518a8088d3fd3782874a400}{valid} = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+171 
+172       \textcolor{comment}{//Sucessful processing}
+173       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+174    \}
+175    \textcolor{keywordflow}{else}
+176    \{
+177       \textcolor{comment}{//The routing table is full}
+178       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cae9be6449970fca5714ab9957b16562a5}{ERROR\_FAILURE};
+179    \}
+180 
+181    \textcolor{comment}{//Release exclusive access}
+182    \hyperlink{os__port__chibios_8c_a8e10e5b2c6d3877b5ba60e375ac45d79}{osReleaseMutex}(&\hyperlink{net_8c_afe31551ad26115fae8e575654346d441}{netMutex});
+183 
+184    \textcolor{comment}{//Return status code}
+185    \textcolor{keywordflow}{return} error;
+186 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ipv6__routing_8c_a7be8094c959ec2929200e69c04e8f53b}\label{ipv6__routing_8c_a7be8094c959ec2929200e69c04e8f53b}} 
+\index{ipv6\+\_\+routing.\+c@{ipv6\+\_\+routing.\+c}!ipv6\+Delete\+All\+Routes@{ipv6\+Delete\+All\+Routes}}
+\index{ipv6\+Delete\+All\+Routes@{ipv6\+Delete\+All\+Routes}!ipv6\+\_\+routing.\+c@{ipv6\+\_\+routing.\+c}}
+\subsubsection{\texorpdfstring{ipv6\+Delete\+All\+Routes()}{ipv6DeleteAllRoutes()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ipv6\+Delete\+All\+Routes (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Delete all routes from the I\+Pv6 routing table. 
+
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 245 of file ipv6\+\_\+routing.\+c.
+
+
+\begin{DoxyCode}
+246 \{
+247    \textcolor{comment}{//Get exclusive access}
+248    \hyperlink{os__port__chibios_8c_a58485224df4bfa522246d55b35bbd83a}{osAcquireMutex}(&\hyperlink{net_8c_afe31551ad26115fae8e575654346d441}{netMutex});
+249    \textcolor{comment}{//Clear the routing table}
+250    memset(\hyperlink{ipv6__routing_8c_ad925e555bcc78b4487bfd09c57c76e25}{ipv6RoutingTable}, 0, \textcolor{keyword}{sizeof}(\hyperlink{ipv6__routing_8c_ad925e555bcc78b4487bfd09c57c76e25}{ipv6RoutingTable}));
+251    \textcolor{comment}{//Release exclusive access}
+252    \hyperlink{os__port__chibios_8c_a8e10e5b2c6d3877b5ba60e375ac45d79}{osReleaseMutex}(&\hyperlink{net_8c_afe31551ad26115fae8e575654346d441}{netMutex});
+253 
+254    \textcolor{comment}{//Successful processing}
+255    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+256 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ipv6__routing_8c_aace7ed11099d9657dd7027e284ae35c9}\label{ipv6__routing_8c_aace7ed11099d9657dd7027e284ae35c9}} 
+\index{ipv6\+\_\+routing.\+c@{ipv6\+\_\+routing.\+c}!ipv6\+Delete\+Route@{ipv6\+Delete\+Route}}
+\index{ipv6\+Delete\+Route@{ipv6\+Delete\+Route}!ipv6\+\_\+routing.\+c@{ipv6\+\_\+routing.\+c}}
+\subsubsection{\texorpdfstring{ipv6\+Delete\+Route()}{ipv6DeleteRoute()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ipv6\+Delete\+Route (\begin{DoxyParamCaption}\item[{const \hyperlink{ipv6_8h_aed0cbc40c61ed5b4fb681ebc55237e89}{Ipv6\+Addr} $\ast$}]{prefix,  }\item[{\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t}}]{prefix\+Len }\end{DoxyParamCaption})}
+
+
+
+Remove an entry from the I\+Pv6 routing table. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em prefix} & Network destination \\
+\hline
+\mbox{\tt in}  & {\em prefix\+Len} & Length of the prefix, in bits \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 196 of file ipv6\+\_\+routing.\+c.
+
+
+\begin{DoxyCode}
+197 \{
+198    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+199    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+200    \hyperlink{structIpv6RoutingTableEntry}{Ipv6RoutingTableEntry} *entry;
+201 
+202    \textcolor{comment}{//Initialize status code}
+203    error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4cca37264afee88cb14cd105f0d59607}{ERROR\_NOT\_FOUND};
+204 
+205    \textcolor{comment}{//Get exclusive access}
+206    \hyperlink{os__port__chibios_8c_a58485224df4bfa522246d55b35bbd83a}{osAcquireMutex}(&\hyperlink{net_8c_afe31551ad26115fae8e575654346d441}{netMutex});
+207 
+208    \textcolor{comment}{//Loop through routing table entries}
+209    \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{ipv6__routing_8h_a4002ce2fc9c895640b3bfc7c351899e8}{IPV6\_ROUTING\_TABLE\_SIZE}; i++)
+210    \{
+211       \textcolor{comment}{//Point to the current entry}
+212       entry = &\hyperlink{ipv6__routing_8c_ad925e555bcc78b4487bfd09c57c76e25}{ipv6RoutingTable}[i];
+213 
+214       \textcolor{comment}{//Valid entry?}
+215       \textcolor{keywordflow}{if}(entry->\hyperlink{structIpv6RoutingTableEntry_ae9580bbd1518a8088d3fd3782874a400}{valid})
+216       \{
+217          \textcolor{comment}{//Check prefix length}
+218          \textcolor{keywordflow}{if}(entry->\hyperlink{structIpv6RoutingTableEntry_afa6df2620a8ea56487ec240f9ea38a81}{prefixLen} == \hyperlink{dhcpv6__common_8h_abb09026544955eb74f4c326ebe446013}{prefixLen})
+219          \{
+220             \textcolor{comment}{//Check whether the current entry matches the specified destination}
+221             \textcolor{keywordflow}{if}(\hyperlink{ipv6__misc_8c_a6cf8eae90cab177c8b32b1bf1709952b}{ipv6CompPrefix}(&entry->\hyperlink{structIpv6RoutingTableEntry_ad65e1df278c1729e94aa4fbf24a243e0}{prefix}, \hyperlink{dhcpv6__common_8h_a82020d9f611b297873f5caeecb4e93c1}{prefix}, 
+      \hyperlink{dhcpv6__common_8h_abb09026544955eb74f4c326ebe446013}{prefixLen}))
+222             \{
+223                \textcolor{comment}{//Delete current entry}
+224                entry->\hyperlink{structIpv6RoutingTableEntry_ae9580bbd1518a8088d3fd3782874a400}{valid} = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+225                \textcolor{comment}{//The route was successfully deleted from the routing table}
+226                error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+227             \}
+228          \}
+229       \}
+230    \}
+231 
+232    \textcolor{comment}{//Release exclusive access}
+233    \hyperlink{os__port__chibios_8c_a8e10e5b2c6d3877b5ba60e375ac45d79}{osReleaseMutex}(&\hyperlink{net_8c_afe31551ad26115fae8e575654346d441}{netMutex});
+234 
+235    \textcolor{comment}{//Return status code}
+236    \textcolor{keywordflow}{return} error;
+237 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ipv6__routing_8c_aebdc4a7d0a4ce5c43f2394e611ac5bbe}\label{ipv6__routing_8c_aebdc4a7d0a4ce5c43f2394e611ac5bbe}} 
+\index{ipv6\+\_\+routing.\+c@{ipv6\+\_\+routing.\+c}!ipv6\+Enable\+Routing@{ipv6\+Enable\+Routing}}
+\index{ipv6\+Enable\+Routing@{ipv6\+Enable\+Routing}!ipv6\+\_\+routing.\+c@{ipv6\+\_\+routing.\+c}}
+\subsubsection{\texorpdfstring{ipv6\+Enable\+Routing()}{ipv6EnableRouting()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ipv6\+Enable\+Routing (\begin{DoxyParamCaption}\item[{\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$}]{interface,  }\item[{\hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\+\_\+t}}]{enable }\end{DoxyParamCaption})}
+
+
+
+Enable routing for the specified interface. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em interface} & Underlying network interface \\
+\hline
+\mbox{\tt in}  & {\em enable} & When the flag is set to T\+R\+UE, routing is enabled on the interface and the router can forward packets to or from the interface \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 75 of file ipv6\+\_\+routing.\+c.
+
+
+\begin{DoxyCode}
+76 \{
+77    \textcolor{comment}{//Check parameters}
+78    \textcolor{keywordflow}{if}(interface == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+79       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+80 
+81    \textcolor{comment}{//Get exclusive access}
+82    \hyperlink{os__port__chibios_8c_a58485224df4bfa522246d55b35bbd83a}{osAcquireMutex}(&\hyperlink{net_8c_afe31551ad26115fae8e575654346d441}{netMutex});
+83    \textcolor{comment}{//Enable or disable routing}
+84    interface->ipv6Context.isRouter = enable;
+85    \textcolor{comment}{//Release exclusive access}
+86    \hyperlink{os__port__chibios_8c_a8e10e5b2c6d3877b5ba60e375ac45d79}{osReleaseMutex}(&\hyperlink{net_8c_afe31551ad26115fae8e575654346d441}{netMutex});
+87 
+88    \textcolor{comment}{//Successful processing}
+89    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+90 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ipv6__routing_8c_a3c53f33e7daba87d19e200c715c7030f}\label{ipv6__routing_8c_a3c53f33e7daba87d19e200c715c7030f}} 
+\index{ipv6\+\_\+routing.\+c@{ipv6\+\_\+routing.\+c}!ipv6\+Forward\+Packet@{ipv6\+Forward\+Packet}}
+\index{ipv6\+Forward\+Packet@{ipv6\+Forward\+Packet}!ipv6\+\_\+routing.\+c@{ipv6\+\_\+routing.\+c}}
+\subsubsection{\texorpdfstring{ipv6\+Forward\+Packet()}{ipv6ForwardPacket()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ipv6\+Forward\+Packet (\begin{DoxyParamCaption}\item[{\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$}]{src\+Interface,  }\item[{\hyperlink{structNetBuffer}{Net\+Buffer} $\ast$}]{ip\+Packet,  }\item[{size\+\_\+t}]{ip\+Packet\+Offset }\end{DoxyParamCaption})}
+
+
+
+Forward an I\+Pv6 packet. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em src\+Interface} & Network interface on which the packet was received \\
+\hline
+\mbox{\tt in}  & {\em ip\+Packet} & Multi-\/part buffer that holds the I\+Pv6 packet to forward \\
+\hline
+\mbox{\tt in}  & {\em ip\+Packet\+Offset} & Offset to the first byte of the I\+Pv6 packet \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 267 of file ipv6\+\_\+routing.\+c.
+
+
+\begin{DoxyCode}
+269 \{
+270    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+271    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+272    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} metric;
+273    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} \hyperlink{dhcpv6__common_8h_abb09026544955eb74f4c326ebe446013}{prefixLen};
+274    \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\_t} match;
+275    \textcolor{keywordtype}{size\_t} \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length};
+276    \textcolor{keywordtype}{size\_t} destOffset;
+277    \hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{NetInterface} *destInterface;
+278    \hyperlink{structNetBuffer}{NetBuffer} *destBuffer;
+279    \hyperlink{ipv6_8h_ad553284c12e3a0d96dc8a4da1c5f6ea0}{Ipv6Header} *ipHeader;
+280    \hyperlink{structIpv6RoutingTableEntry}{Ipv6RoutingTableEntry} *entry;
+281    \hyperlink{ipv6_8h_aed0cbc40c61ed5b4fb681ebc55237e89}{Ipv6Addr} \hyperlink{ipcp_8h_a752e1719cf65f78dfec6274352cb56df}{destIpAddr};
+282 \textcolor{preprocessor}{#if (ETH\_SUPPORT == ENABLED)}
+283    \hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{NetInterface} *physicalInterface;
+284 \textcolor{preprocessor}{#endif}
+285 
+286    \textcolor{comment}{//Silently drop any IP packets received on an interface that has}
+287    \textcolor{comment}{//not been assigned a valid link-local address}
+288    \textcolor{keywordflow}{if}(\hyperlink{ipv6_8h_a0650f6186ad38b49662420902ae208ea}{ipv6GetLinkLocalAddrState}(srcInterface) != 
+      \hyperlink{ipv6_8h_acb54c5e2b7ee1652f5bf055e14cc518daaa3a0ce422a678d8eb14a36f4c642d16}{IPV6\_ADDR\_STATE\_PREFERRED})
+289       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca87925068eccab5b84c3b48065f3bf5b7}{ERROR\_NOT\_CONFIGURED};
+290 
+291    \textcolor{comment}{//If routing is not enabled on the interface, then the router cannot}
+292    \textcolor{comment}{//forward packets from the interface}
+293    \textcolor{keywordflow}{if}(!srcInterface->ipv6Context.isRouter)
+294       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cae9be6449970fca5714ab9957b16562a5}{ERROR\_FAILURE};
+295 
+296    \textcolor{comment}{//Calculate the length of the IPv6 packet}
+297    length = \hyperlink{net__mem_8c_ac9dbcd9e28e61d8f4f6d2e9af2607b68}{netBufferGetLength}(ipPacket) - ipPacketOffset;
+298 
+299    \textcolor{comment}{//Ensure the packet length is greater than 40 bytes}
+300    \textcolor{keywordflow}{if}(length < \textcolor{keyword}{sizeof}(\hyperlink{ipv6_8h_ad553284c12e3a0d96dc8a4da1c5f6ea0}{Ipv6Header}))
+301       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cae5c014519c3ac2540447887ddca1bd28}{ERROR\_INVALID\_LENGTH};
+302 
+303    \textcolor{comment}{//Point to the IPv6 header}
+304    ipHeader = \hyperlink{net__mem_8c_a20d30c9db547b3b2743368b589cf482b}{netBufferAt}(ipPacket, ipPacketOffset);
+305 
+306    \textcolor{comment}{//Sanity check}
+307    \textcolor{keywordflow}{if}(ipHeader == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+308       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cae9be6449970fca5714ab9957b16562a5}{ERROR\_FAILURE};
+309 
+310    \textcolor{comment}{//An IPv6 packet with a source address of unspecified must never be}
+311    \textcolor{comment}{//forwarded by an IPv6 router (refer to RFC section 3513 2.5.2)}
+312    \textcolor{keywordflow}{if}(\hyperlink{ipv6_8h_ab1e93bd2152bc3f3b5642fd0216384d7}{ipv6CompAddr}(&ipHeader->srcAddr, &\hyperlink{ipv6_8c_aa4baeec4f7b8b166d2457787fb9eddf9}{IPV6\_UNSPECIFIED\_ADDR}))
+313       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca21cbabf2c791471c05a9bc2710638aec}{ERROR\_INVALID\_ADDRESS};
+314 
+315    \textcolor{comment}{//The unspecified address must not be used as the destination address}
+316    \textcolor{comment}{//of IPv6 packets (refer to RFC section 3513 2.5.2)}
+317    \textcolor{keywordflow}{if}(\hyperlink{ipv6_8h_ab1e93bd2152bc3f3b5642fd0216384d7}{ipv6CompAddr}(&ipHeader->destAddr, &\hyperlink{ipv6_8c_aa4baeec4f7b8b166d2457787fb9eddf9}{IPV6\_UNSPECIFIED\_ADDR}))
+318       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca21cbabf2c791471c05a9bc2710638aec}{ERROR\_INVALID\_ADDRESS};
+319 
+320    \textcolor{comment}{//An IPv6 packet with a destination address of loopback must never be}
+321    \textcolor{comment}{//forwarded by an IPv6 router (refer to RFC 3513 section 2.5.3)}
+322    \textcolor{keywordflow}{if}(\hyperlink{ipv6_8h_ab1e93bd2152bc3f3b5642fd0216384d7}{ipv6CompAddr}(&ipHeader->destAddr, &\hyperlink{ipv6_8c_ace4700d46a3a068b34f83bda5b2b7a31}{IPV6\_LOOPBACK\_ADDR}))
+323       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca21cbabf2c791471c05a9bc2710638aec}{ERROR\_INVALID\_ADDRESS};
+324 
+325    \textcolor{comment}{//Check whether the destination address is a link-local address}
+326    \textcolor{keywordflow}{if}(\hyperlink{ipv6_8h_a6f8d54c7cac75d512f6311e6f34e04ee}{ipv6IsLinkLocalUnicastAddr}(&ipHeader->destAddr))
+327    \{
+328       \textcolor{comment}{//Forward the packet on the same network interface}
+329       destInterface = srcInterface;
+330       \textcolor{comment}{//Next hop}
+331       destIpAddr = ipHeader->destAddr;
+332    \}
+333    \textcolor{keywordflow}{else}
+334    \{
+335       \textcolor{comment}{//Lowest metric value}
+336       metric = UINT\_MAX;
+337       \textcolor{comment}{//Longest prefix length}
+338       prefixLen = 0;
+339       \textcolor{comment}{//Outgoing network interface}
+340       destInterface = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+341 
+342       \textcolor{comment}{//Route determination process}
+343       \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{ipv6__routing_8h_a4002ce2fc9c895640b3bfc7c351899e8}{IPV6\_ROUTING\_TABLE\_SIZE}; i++)
+344       \{
+345          \textcolor{comment}{//Point to the current entry}
+346          entry = &\hyperlink{ipv6__routing_8c_ad925e555bcc78b4487bfd09c57c76e25}{ipv6RoutingTable}[i];
+347 
+348          \textcolor{comment}{//Valid entry?}
+349          \textcolor{keywordflow}{if}(entry->\hyperlink{structIpv6RoutingTableEntry_ae9580bbd1518a8088d3fd3782874a400}{valid} && entry->\hyperlink{structIpv6RoutingTableEntry_ab13eefd552d99929780012e98e026a7d}{interface} != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+350          \{
+351             \textcolor{comment}{//Clear flag}
+352             match = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+353 
+354             \textcolor{comment}{//Do not forward any IP packets to an interface that has not}
+355             \textcolor{comment}{//been assigned a valid link-local address...}
+356             \textcolor{keywordflow}{if}(\hyperlink{ipv6_8h_a0650f6186ad38b49662420902ae208ea}{ipv6GetLinkLocalAddrState}(entry->
+      \hyperlink{structIpv6RoutingTableEntry_ab13eefd552d99929780012e98e026a7d}{interface}) == \hyperlink{ipv6_8h_acb54c5e2b7ee1652f5bf055e14cc518daaa3a0ce422a678d8eb14a36f4c642d16}{IPV6\_ADDR\_STATE\_PREFERRED})
+357             \{
+358                \textcolor{comment}{//If routing is enabled on the interface, then the router}
+359                \textcolor{comment}{//can forward packets to the interface}
+360                \textcolor{keywordflow}{if}(entry->\hyperlink{structIpv6RoutingTableEntry_ab13eefd552d99929780012e98e026a7d}{interface}->ipv6Context.isRouter)
+361                \{
+362                   \textcolor{comment}{//Compare the destination address with the current entry for a match}
+363                   \textcolor{keywordflow}{if}(\hyperlink{ipv6__misc_8c_a6cf8eae90cab177c8b32b1bf1709952b}{ipv6CompPrefix}(&ipHeader->destAddr, &entry->
+      \hyperlink{structIpv6RoutingTableEntry_ad65e1df278c1729e94aa4fbf24a243e0}{prefix}, entry->\hyperlink{structIpv6RoutingTableEntry_afa6df2620a8ea56487ec240f9ea38a81}{prefixLen}))
+364                   \{
+365                      \textcolor{comment}{//The longest matching route is the most specific route to the}
+366                      \textcolor{comment}{//destination IPv6 address...}
+367                      \textcolor{keywordflow}{if}(entry->\hyperlink{structIpv6RoutingTableEntry_afa6df2620a8ea56487ec240f9ea38a81}{prefixLen} > prefixLen)
+368                      \{
+369                         \textcolor{comment}{//Give the current route the higher precedence}
+370                         match = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+371                      \}
+372                      \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(entry->\hyperlink{structIpv6RoutingTableEntry_afa6df2620a8ea56487ec240f9ea38a81}{prefixLen} == prefixLen)
+373                      \{
+374                         \textcolor{comment}{//If multiple entries with the longest match are found, the}
+375                         \textcolor{comment}{//router uses the lowest metric to select the best route}
+376                         \textcolor{keywordflow}{if}(entry->\hyperlink{structIpv6RoutingTableEntry_a71c00d6422a11d1c5b060dcbd8f4f2c5}{metric} < metric)
+377                         \{
+378                            \textcolor{comment}{//Give the current route the higher precedence}
+379                            match = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+380                         \}
+381                      \}
+382                   \}
+383                \}
+384             \}
+385 
+386             \textcolor{comment}{//Matching entry?}
+387             \textcolor{keywordflow}{if}(match)
+388             \{
+389                \textcolor{comment}{//Select the current route}
+390                metric = entry->\hyperlink{structIpv6RoutingTableEntry_a71c00d6422a11d1c5b060dcbd8f4f2c5}{metric};
+391                prefixLen = entry->\hyperlink{structIpv6RoutingTableEntry_afa6df2620a8ea56487ec240f9ea38a81}{prefixLen};
+392 
+393                \textcolor{comment}{//Outgoing interface on which to forward the packet}
+394                destInterface = entry->\hyperlink{structIpv6RoutingTableEntry_ab13eefd552d99929780012e98e026a7d}{interface};
+395 
+396                \textcolor{comment}{//Next hop}
+397                \textcolor{keywordflow}{if}(!\hyperlink{ipv6_8h_ab1e93bd2152bc3f3b5642fd0216384d7}{ipv6CompAddr}(&entry->\hyperlink{structIpv6RoutingTableEntry_aca563bb1b384a2dd6eb5f52de10f79bb}{nextHop}, &
+      \hyperlink{ipv6_8c_aa4baeec4f7b8b166d2457787fb9eddf9}{IPV6\_UNSPECIFIED\_ADDR}))
+398                   destIpAddr = entry->\hyperlink{structIpv6RoutingTableEntry_aca563bb1b384a2dd6eb5f52de10f79bb}{nextHop};
+399                \textcolor{keywordflow}{else}
+400                   destIpAddr = ipHeader->destAddr;
+401             \}
+402          \}
+403       \}
+404    \}
+405 
+406    \textcolor{comment}{//No route to the destination?}
+407    \textcolor{keywordflow}{if}(destInterface == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+408    \{
+409       \textcolor{comment}{//A Destination Unreachable message should be generated by a router}
+410       \textcolor{comment}{//in response to a packet that cannot be delivered}
+411       \hyperlink{icmpv6_8c_a8243f4f8b640432620ed384e865a32cd}{icmpv6SendErrorMessage}(srcInterface, 
+      \hyperlink{icmpv6_8h_a6bd3724b797b492017d0264d1ae5c609a1a1c28c95ecd1db9a0f41e4ab6a2bae4}{ICMPV6\_TYPE\_DEST\_UNREACHABLE},
+412          \hyperlink{icmpv6_8h_a89cf082548c4c8060f8422cdde948d36ae03775b5dd01382dbb2fa207e3415361}{ICMPV6\_CODE\_NO\_ROUTE\_TO\_DEST}, 0, ipPacket, ipPacketOffset);
+413 
+414       \textcolor{comment}{//Exit immediately}
+415       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4cb699f8833527b8a0ab6ae79bd21b89}{ERROR\_NO\_ROUTE};
+416    \}
+417 
+418    \textcolor{comment}{//Check whether the length of the IPv6 packet is larger than the link MTU}
+419    \textcolor{keywordflow}{if}(length > destInterface->ipv6Context.linkMtu)
+420    \{
+421       \textcolor{comment}{//A Packet Too Big must be sent by a router in response to a packet}
+422       \textcolor{comment}{//that it cannot forward because the packet is larger than the MTU}
+423       \textcolor{comment}{//of the outgoing link}
+424       \hyperlink{icmpv6_8c_a8243f4f8b640432620ed384e865a32cd}{icmpv6SendErrorMessage}(srcInterface, 
+      \hyperlink{icmpv6_8h_a6bd3724b797b492017d0264d1ae5c609a397a58621d6c1c750502b5dd772d5985}{ICMPV6\_TYPE\_PACKET\_TOO\_BIG},
+425          0, destInterface->ipv6Context.linkMtu, ipPacket, ipPacketOffset);
+426 
+427       \textcolor{comment}{//Exit immediately}
+428       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cae5c014519c3ac2540447887ddca1bd28}{ERROR\_INVALID\_LENGTH};
+429    \}
+430 
+431    \textcolor{comment}{//Check whether the packet is explicitly addressed to the router itself}
+432    \textcolor{keywordflow}{if}(!\hyperlink{ipv6__misc_8c_acf063c0c23ac317d11b9973f3e05e1ac}{ipv6CheckDestAddr}(destInterface, &ipHeader->destAddr))
+433    \{
+434       \textcolor{comment}{//Valid unicast address?}
+435       \textcolor{keywordflow}{if}(!\hyperlink{ipv6_8h_a68fbc1145d242384c90a670196a38495}{ipv6IsMulticastAddr}(&ipHeader->destAddr))
+436       \{
+437          \textcolor{comment}{//Process IPv6 packet}
+438          \textcolor{comment}{//ipv6ProcessPacket(destInterface, ipPacket, ipPacketOffset);}
+439          \textcolor{comment}{//Exit immediately}
+440          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+441       \}
+442    \}
+443 
+444    \textcolor{comment}{//Check whether the IPv6 packet is about to be sent out the interface}
+445    \textcolor{comment}{//on which it was received}
+446    \textcolor{keywordflow}{if}(destInterface == srcInterface)
+447    \{
+448 \textcolor{preprocessor}{#if (NDP\_SUPPORT == ENABLED)}
+449       \textcolor{comment}{//A router should send a Redirect message whenever it forwards a packet}
+450       \textcolor{comment}{//that is not explicitly addressed to itself in which the source address}
+451       \textcolor{comment}{//identifies a neighbor, and}
+452       \textcolor{keywordflow}{if}(\hyperlink{ipv6__misc_8c_ab10ec233f3239c6238bb4f5995543a79}{ipv6IsOnLink}(srcInterface, &ipHeader->srcAddr))
+453       \{
+454          \textcolor{comment}{//The router determines that a better first-hop node resides on the}
+455          \textcolor{comment}{//same link as the sending node for the destination address of the}
+456          \textcolor{comment}{//packet being forwarded, and}
+457          \textcolor{keywordflow}{if}(\hyperlink{ipv6__misc_8c_ab10ec233f3239c6238bb4f5995543a79}{ipv6IsOnLink}(destInterface, &destIpAddr))
+458          \{
+459             \textcolor{comment}{//The destination address of the packet is not a multicast address}
+460             \textcolor{keywordflow}{if}(!\hyperlink{ipv6_8h_a68fbc1145d242384c90a670196a38495}{ipv6IsMulticastAddr}(&ipHeader->destAddr))
+461             \{
+462                \textcolor{comment}{//Transmit a Redirect message}
+463                \hyperlink{ndp_8c_a1f5f38f7a18c49e25a1d81821a813491}{ndpSendRedirect}(srcInterface, &destIpAddr, ipPacket, ipPacketOffset);
+464             \}
+465          \}
+466       \}
+467 \textcolor{preprocessor}{#endif}
+468    \}
+469    \textcolor{keywordflow}{else}
+470    \{
+471       \textcolor{comment}{//Check whether the scope of the source address is smaller than the}
+472       \textcolor{comment}{//scope of the destination address}
+473       \textcolor{keywordflow}{if}(\hyperlink{ipv6__misc_8c_ae8e5c6bac9c8898bc4b3486777f24bd2}{ipv6GetAddrScope}(&ipHeader->srcAddr) < \hyperlink{ipv6__misc_8c_ae8e5c6bac9c8898bc4b3486777f24bd2}{ipv6GetAddrScope}(&ipHeader
+      ->destAddr))
+474       \{
+475          \textcolor{comment}{//A Destination Unreachable message should be generated by a router}
+476          \textcolor{comment}{//in response to a packet that cannot be delivered without leaving}
+477          \textcolor{comment}{//the scope of the source address}
+478          \hyperlink{icmpv6_8c_a8243f4f8b640432620ed384e865a32cd}{icmpv6SendErrorMessage}(srcInterface, 
+      \hyperlink{icmpv6_8h_a6bd3724b797b492017d0264d1ae5c609a1a1c28c95ecd1db9a0f41e4ab6a2bae4}{ICMPV6\_TYPE\_DEST\_UNREACHABLE},
+479             \hyperlink{icmpv6_8h_a89cf082548c4c8060f8422cdde948d36a9b28d90136f7e6a4c2edcab2b55680c3}{ICMPV6\_CODE\_BEYOND\_SCOPE\_OF\_SRC\_ADDR}, 0, ipPacket, 
+      ipPacketOffset);
+480 
+481          \textcolor{comment}{//Exit immediately}
+482          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca21cbabf2c791471c05a9bc2710638aec}{ERROR\_INVALID\_ADDRESS};
+483       \}
+484    \}
+485 
+486    \textcolor{comment}{//Hop Limit exceeded in transit?}
+487    \textcolor{keywordflow}{if}(ipHeader->hopLimit <= 1)
+488    \{
+489       \textcolor{comment}{//If a router receives a packet with a Hop Limit of zero, or if a router}
+490       \textcolor{comment}{//decrements a packet's Hop Limit to zero, it must discard the packet}
+491       \textcolor{comment}{//and originate an ICMPv6 Time Exceeded message}
+492       \hyperlink{icmpv6_8c_a8243f4f8b640432620ed384e865a32cd}{icmpv6SendErrorMessage}(srcInterface, 
+      \hyperlink{icmpv6_8h_a6bd3724b797b492017d0264d1ae5c609aa5b348b9c2abd7c47211e3e877583868}{ICMPV6\_TYPE\_TIME\_EXCEEDED},
+493          \hyperlink{icmpv6_8h_ae6d0d1de2d71fd96ff9bfe10bbabdfeda5a9468e4995ba3c7661074f20223ceed}{ICMPV6\_CODE\_HOP\_LIMIT\_EXCEEDED}, 0, ipPacket, ipPacketOffset);
+494 
+495       \textcolor{comment}{//Exit immediately}
+496       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cae9be6449970fca5714ab9957b16562a5}{ERROR\_FAILURE};
+497    \}
+498 
+499    \textcolor{comment}{//The Hop-by-Hop Options header, when present, must immediately follow}
+500    \textcolor{comment}{//the IPv6 header. Its presence is indicated by the value zero in the}
+501    \textcolor{comment}{//Next Header field of the IPv6 header}
+502    \textcolor{keywordflow}{if}(ipHeader->nextHeader == \hyperlink{ipv6_8h_a551bec2628dfcc3b67c0fff52e486fa5a7d9e55773589ce4c01ae3cef56707ae3}{IPV6\_HOP\_BY\_HOP\_OPT\_HEADER})
+503    \{
+504       \textcolor{comment}{//Point to the extension header}
+505       \textcolor{keywordtype}{size\_t} headerOffset = ipPacketOffset + \textcolor{keyword}{sizeof}(\hyperlink{ipv6_8h_ad553284c12e3a0d96dc8a4da1c5f6ea0}{Ipv6Header});
+506 
+507       \textcolor{comment}{//Calculate the offset of the Next Header field}
+508       \textcolor{keywordtype}{size\_t} nextHeaderOffset = ipPacketOffset +
+509          &ipHeader->nextHeader - (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *) ipHeader;
+510 
+511       \textcolor{comment}{//The Hop-by-Hop Options header is used to carry optional information}
+512       \textcolor{comment}{//that must be examined by every node along a packet's delivery path}
+513       error = \hyperlink{ipv6_8c_adc31fc580729831a6333d10fe3d69520}{ipv6ParseHopByHopOptHeader}(srcInterface,
+514          ipPacket, ipPacketOffset, &headerOffset, &nextHeaderOffset);
+515 
+516       \textcolor{comment}{//Any error while processing the extension header?}
+517       \textcolor{keywordflow}{if}(error)
+518          \textcolor{keywordflow}{return} error;
+519    \}
+520 
+521    \textcolor{comment}{//Allocate a buffer to hold the IPv6 packet}
+522    destBuffer = \hyperlink{ethernet_8c_aadabeac7d0393741647e30f80f482c84}{ethAllocBuffer}(length, &destOffset);
+523 
+524    \textcolor{comment}{//Successful memory allocation?}
+525    \textcolor{keywordflow}{if}(destBuffer != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+526    \{
+527       \textcolor{comment}{//Copy IPv6 header}
+528       error = \hyperlink{net__mem_8c_a553a02631efd217192800ad3cdf9bbba}{netBufferCopy}(destBuffer, destOffset,
+529          ipPacket, ipPacketOffset, length);
+530 
+531       \textcolor{comment}{//Check status code}
+532       \textcolor{keywordflow}{if}(!error)
+533       \{
+534          \textcolor{comment}{//Point to the IPv6 header}
+535          ipHeader = \hyperlink{net__mem_8c_a20d30c9db547b3b2743368b589cf482b}{netBufferAt}(destBuffer, destOffset);
+536          \textcolor{comment}{//Every time a router forwards a packet, it decrements the Hop Limit field}
+537          ipHeader->hopLimit--;
+538 
+539 \textcolor{preprocessor}{#if (ETH\_SUPPORT == ENABLED)}
+540          \textcolor{comment}{//Point to the physical interface}
+541          physicalInterface = \hyperlink{nic_8c_aa8f48265895dab1633056c2dcd796355}{nicGetPhysicalInterface}(destInterface);
+542 
+543          \textcolor{comment}{//Ethernet interface?}
+544          \textcolor{keywordflow}{if}(physicalInterface->nicDriver != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} &&
+545             physicalInterface->nicDriver->type == \hyperlink{nic_8h_ac1ce8659a9797513ecd9cc1afedce40ba84802cab6ee937691c3d76122ffaffcd}{NIC\_TYPE\_ETHERNET})
+546          \{
+547             \hyperlink{ethernet_8h_a1e00ed3977e8a770e8b4ae4cb306d1c0}{MacAddr} destMacAddr;
+548 
+549             \textcolor{comment}{//Destination IPv6 address}
+550             \textcolor{keywordflow}{if}(\hyperlink{ipv6_8h_ab1e93bd2152bc3f3b5642fd0216384d7}{ipv6CompAddr}(&destIpAddr, &\hyperlink{ipv6_8c_aa4baeec4f7b8b166d2457787fb9eddf9}{IPV6\_UNSPECIFIED\_ADDR}))
+551                destIpAddr = ipHeader->destAddr;
+552 
+553             \textcolor{comment}{//Check whether the destination IPv6 address is a multicast address?}
+554             \textcolor{keywordflow}{if}(\hyperlink{ipv6_8h_a68fbc1145d242384c90a670196a38495}{ipv6IsMulticastAddr}(&destIpAddr))
+555             \{
+556                \textcolor{comment}{//Map IPv6 multicast address to MAC-layer multicast address}
+557                error = \hyperlink{ipv6__misc_8c_a453cf0d6b405a92b209956fdc99e035f}{ipv6MapMulticastAddrToMac}(&destIpAddr, &destMacAddr);
+558             \}
+559             \textcolor{keywordflow}{else}
+560             \{
+561                \textcolor{comment}{//Resolve host address using Neighbor Discovery protocol}
+562                error = \hyperlink{ndp_8c_af4c9241c9bdc3e1ef99481060de5cc02}{ndpResolve}(destInterface, &destIpAddr, &destMacAddr);
+563             \}
+564 
+565             \textcolor{comment}{//Successful address resolution?}
+566             \textcolor{keywordflow}{if}(!error)
+567             \{
+568                \textcolor{comment}{//Debug message}
+569                \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"Forwarding IPv6 packet to %s (%"} \hyperlink{compiler__port_8h_a2b7b0557dc6cd786df02dafbb51f5292}{PRIuSIZE} \textcolor{stringliteral}{" bytes)...\(\backslash\)r\(\backslash\)n"},
+570                   destInterface->name, length);
+571                \textcolor{comment}{//Dump IP header contents for debugging purpose}
+572                \hyperlink{ipv6_8c_ad377f2e5653e13df4df2867038626fc6}{ipv6DumpHeader}(ipHeader);
+573 
+574                \textcolor{comment}{//Send Ethernet frame}
+575                error = \hyperlink{ethernet_8c_ad56ff94d4390f5821d1f1249fb0fea89}{ethSendFrame}(destInterface, &destMacAddr,
+576                   destBuffer, destOffset, \hyperlink{ethernet_8h_a527bb7f81d1c0869a7fc3f38b05ceaafa25656a190cde184dea6bc6568dd8bb39}{ETH\_TYPE\_IPV6});
+577             \}
+578             \textcolor{comment}{//Address resolution is in progress?}
+579             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca14596397b69ee6fd1d74ca77fb55e186}{ERROR\_IN\_PROGRESS})
+580             \{
+581                \textcolor{comment}{//Debug message}
+582                \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"Enqueuing IPv6 packet (%"} \hyperlink{compiler__port_8h_a2b7b0557dc6cd786df02dafbb51f5292}{PRIuSIZE} \textcolor{stringliteral}{" bytes)...\(\backslash\)r\(\backslash\)n"}, length);
+583                \textcolor{comment}{//Dump IP header contents for debugging purpose}
+584                \hyperlink{ipv6_8c_ad377f2e5653e13df4df2867038626fc6}{ipv6DumpHeader}(ipHeader);
+585 
+586                \textcolor{comment}{//Enqueue packets waiting for address resolution}
+587                error = \hyperlink{ndp_8c_a25dabd46635fe898b551abf46cf83599}{ndpEnqueuePacket}(srcInterface, destInterface,
+588                   &destIpAddr, destBuffer, destOffset);
+589             \}
+590             \textcolor{comment}{//Address resolution failed?}
+591             \textcolor{keywordflow}{else}
+592             \{
+593                \textcolor{comment}{//Debug message}
+594                \hyperlink{debug_8h_a72b9761add7486364dba449091cd2579}{TRACE\_WARNING}(\textcolor{stringliteral}{"Cannot map IPv6 address to Ethernet address!\(\backslash\)r\(\backslash\)n"});
+595             \}
+596          \}
+597          \textcolor{keywordflow}{else}
+598 \textcolor{preprocessor}{#endif}
+599 \textcolor{preprocessor}{#if (PPP\_SUPPORT == ENABLED)}
+600          \textcolor{comment}{//PPP interface?}
+601          \textcolor{keywordflow}{if}(destInterface->nicDriver != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} &&
+602             destInterface->nicDriver->type == \hyperlink{nic_8h_ac1ce8659a9797513ecd9cc1afedce40bafe21fcd3851e27a8b4ac8f6ea0a692df}{NIC\_TYPE\_PPP})
+603          \{
+604             \textcolor{comment}{//Debug message}
+605             \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"Forwarding IPv6 packet to %s (%"} \hyperlink{compiler__port_8h_a2b7b0557dc6cd786df02dafbb51f5292}{PRIuSIZE} \textcolor{stringliteral}{" bytes)...\(\backslash\)r\(\backslash\)n"},
+606                destInterface->name, length);
+607             \textcolor{comment}{//Dump IP header contents for debugging purpose}
+608             \hyperlink{ipv6_8c_ad377f2e5653e13df4df2867038626fc6}{ipv6DumpHeader}(ipHeader);
+609 
+610             \textcolor{comment}{//Send PPP frame}
+611             error = \hyperlink{ppp_8c_aaacd84d6af940a50fa94b67324b080ea}{pppSendFrame}(destInterface, destBuffer, destOffset, 
+      \hyperlink{ppp_8h_a5d2e3565b503cd5cb131aaff4e0ba9c2af1df03be97aa4a98a941e011c9fedcbd}{PPP\_PROTOCOL\_IPV6});
+612          \}
+613          \textcolor{keywordflow}{else}
+614 \textcolor{preprocessor}{#endif}
+615          \textcolor{comment}{//6LoWPAN interface?}
+616          \textcolor{keywordflow}{if}(destInterface->nicDriver != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} &&
+617             destInterface->nicDriver->type == \hyperlink{nic_8h_ac1ce8659a9797513ecd9cc1afedce40ba5b85ff07103ab20b9b081b4b263619ea}{NIC\_TYPE\_6LOWPAN})
+618          \{
+619             \textcolor{comment}{//Debug message}
+620             \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"Forwarding IPv6 packet to %s (%"} \hyperlink{compiler__port_8h_a2b7b0557dc6cd786df02dafbb51f5292}{PRIuSIZE} \textcolor{stringliteral}{" bytes)...\(\backslash\)r\(\backslash\)n"},
+621                destInterface->name, length);
+622             \textcolor{comment}{//Dump IP header contents for debugging purpose}
+623             \hyperlink{ipv6_8c_ad377f2e5653e13df4df2867038626fc6}{ipv6DumpHeader}(ipHeader);
+624 
+625             \textcolor{comment}{//Send the packet over the specified link}
+626             error = \hyperlink{nic_8c_af480b2743ecb07bc0312f2bbcecdb287}{nicSendPacket}(destInterface, destBuffer, destOffset);
+627          \}
+628          \textcolor{keywordflow}{else}
+629          \textcolor{comment}{//Unknown interface type?}
+630          \{
+631             \textcolor{comment}{//Report an error}
+632             error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca18648c6804c77e30234b0e60e646718b}{ERROR\_INVALID\_INTERFACE};
+633          \}
+634       \}
+635 
+636       \textcolor{comment}{//Free previously allocated memory}
+637       \hyperlink{net__mem_8c_aa33fc4dd2a71649194052f297c707d08}{netBufferFree}(destBuffer);
+638    \}
+639    \textcolor{keywordflow}{else}
+640    \{
+641       \textcolor{comment}{//Failed to allocate memory}
+642       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac0a554045048d2fb61387cf735676f69}{ERROR\_OUT\_OF\_MEMORY};
+643    \}
+644 
+645    \textcolor{comment}{//Return status code}
+646    \textcolor{keywordflow}{return} error;
+647 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ipv6__routing_8c_aa899a8d0b19a336c88b265a77849c312}\label{ipv6__routing_8c_aa899a8d0b19a336c88b265a77849c312}} 
+\index{ipv6\+\_\+routing.\+c@{ipv6\+\_\+routing.\+c}!ipv6\+Init\+Routing@{ipv6\+Init\+Routing}}
+\index{ipv6\+Init\+Routing@{ipv6\+Init\+Routing}!ipv6\+\_\+routing.\+c@{ipv6\+\_\+routing.\+c}}
+\subsubsection{\texorpdfstring{ipv6\+Init\+Routing()}{ipv6InitRouting()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ipv6\+Init\+Routing (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Initialize I\+Pv6 routing table. 
+
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 57 of file ipv6\+\_\+routing.\+c.
+
+
+\begin{DoxyCode}
+58 \{
+59    \textcolor{comment}{//Clear the routing table}
+60    memset(\hyperlink{ipv6__routing_8c_ad925e555bcc78b4487bfd09c57c76e25}{ipv6RoutingTable}, 0, \textcolor{keyword}{sizeof}(\hyperlink{ipv6__routing_8c_ad925e555bcc78b4487bfd09c57c76e25}{ipv6RoutingTable}));
+61 
+62    \textcolor{comment}{//Successful initialization}
+63    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+64 \}
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{ipv6__routing_8c_ad925e555bcc78b4487bfd09c57c76e25}\label{ipv6__routing_8c_ad925e555bcc78b4487bfd09c57c76e25}} 
+\index{ipv6\+\_\+routing.\+c@{ipv6\+\_\+routing.\+c}!ipv6\+Routing\+Table@{ipv6\+Routing\+Table}}
+\index{ipv6\+Routing\+Table@{ipv6\+Routing\+Table}!ipv6\+\_\+routing.\+c@{ipv6\+\_\+routing.\+c}}
+\subsubsection{\texorpdfstring{ipv6\+Routing\+Table}{ipv6RoutingTable}}
+{\footnotesize\ttfamily \hyperlink{structIpv6RoutingTableEntry}{Ipv6\+Routing\+Table\+Entry} ipv6\+Routing\+Table\mbox{[}\hyperlink{ipv6__routing_8h_a4002ce2fc9c895640b3bfc7c351899e8}{I\+P\+V6\+\_\+\+R\+O\+U\+T\+I\+N\+G\+\_\+\+T\+A\+B\+L\+E\+\_\+\+S\+I\+ZE}\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 49 of file ipv6\+\_\+routing.\+c.
+

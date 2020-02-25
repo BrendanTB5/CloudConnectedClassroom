@@ -1,0 +1,665 @@
+\hypertarget{des_8c}{}\section{cyclone\+\_\+crypto/cipher/des.c File Reference}
+\label{des_8c}\index{cyclone\+\_\+crypto/cipher/des.\+c@{cyclone\+\_\+crypto/cipher/des.\+c}}
+
+
+D\+ES (Data Encryption Standard)  
+
+
+{\ttfamily \#include \char`\"{}core/crypto.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}cipher/des.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{des_8c_afcdf5e66fd927a7f4cc64295acd20407}{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}~\hyperlink{crypto__config_8h_a6afae3a9b63f9b55d979e667ee0e881d}{C\+R\+Y\+P\+T\+O\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}
+\item 
+\#define \hyperlink{des_8c_a78e4547299de7bcb50068736636a8327}{R\+O\+L28}(\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a},  \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n})~((((\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}) $<$$<$ (\hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n})) $\vert$ ((\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}) $>$$>$ (28 -\/ (\hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n})))) \& 0x0\+F\+F\+F\+F\+F\+F\+F)
+\item 
+\#define \hyperlink{des_8c_a9db7ea9a125f4dc02bb8591ea81ee3ee}{D\+E\+S\+\_\+\+IP}(left,  right)
+\item 
+\#define \hyperlink{des_8c_a9c1815859597b51850fed659f4f3dace}{D\+E\+S\+\_\+\+FP}(left,  right)
+\item 
+\#define \hyperlink{des_8c_a0a6c0a841dd3b32a696cbb2c7948de41}{D\+E\+S\+\_\+\+R\+O\+U\+ND}(left,  right,  ks)
+\item 
+\#define \hyperlink{des_8c_a64f190cf042d0d87d57f7337066068c0}{D\+E\+S\+\_\+\+P\+C1}(left,  right)
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{des_8c_afadda7acbe44a36384a5d463e9356cb2}{des\+Init} (\hyperlink{structDesContext}{Des\+Context} $\ast$context, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$key, size\+\_\+t key\+Len)
+\begin{DoxyCompactList}\small\item\em Initialize a D\+ES context using the supplied key. \end{DoxyCompactList}\item 
+void \hyperlink{des_8c_aa775fbbff698bd0168c4d0fc84869a8f}{des\+Encrypt\+Block} (\hyperlink{structDesContext}{Des\+Context} $\ast$context, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$input, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$output)
+\begin{DoxyCompactList}\small\item\em Encrypt a 8-\/byte block using D\+ES algorithm. \end{DoxyCompactList}\item 
+void \hyperlink{des_8c_a3211e55b31b1e6c04f84e385494bd31c}{des\+Decrypt\+Block} (\hyperlink{structDesContext}{Des\+Context} $\ast$context, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$input, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$output)
+\begin{DoxyCompactList}\small\item\em Decrypt a 8-\/byte block using D\+ES algorithm. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static const \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t} \hyperlink{des_8c_a4850c8c80059cfcc836d2606371d71ab}{sp1} \mbox{[}64\mbox{]}
+\item 
+static const \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t} \hyperlink{des_8c_af2a469af64860889d734c3a918c1583c}{sp2} \mbox{[}64\mbox{]}
+\item 
+static const \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t} \hyperlink{des_8c_a8152edc9f75c73e90dac2175ff397add}{sp3} \mbox{[}64\mbox{]}
+\item 
+static const \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t} \hyperlink{des_8c_aeaa92dd529a1a4e7a62cecb5305dfd1a}{sp4} \mbox{[}64\mbox{]}
+\item 
+static const \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t} \hyperlink{des_8c_a4ae1cf32130a7649faee3820489ecd3b}{sp5} \mbox{[}64\mbox{]}
+\item 
+static const \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t} \hyperlink{des_8c_a187a70d97665176a388aed1f33ef3a56}{sp6} \mbox{[}64\mbox{]}
+\item 
+static const \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t} \hyperlink{des_8c_a9a60157672d3bf517348a718a5efaf4d}{sp7} \mbox{[}64\mbox{]}
+\item 
+static const \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t} \hyperlink{des_8c_a5a8db889d151c6f7f059473dff388344}{sp8} \mbox{[}64\mbox{]}
+\item 
+const \hyperlink{structCipherAlgo}{Cipher\+Algo} \hyperlink{des_8c_a436ae8b9f8e27c5f377f37aaf6b14428}{des\+Cipher\+Algo}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+D\+ES (Data Encryption Standard) 
+
+\hypertarget{pic32mz__ef__curiosity_8h_License}{}\subsection{License}\label{pic32mz__ef__curiosity_8h_License}
+S\+P\+D\+X-\/\+License-\/\+Identifier\+: G\+P\+L-\/2.\+0-\/or-\/later
+
+Copyright (C) 2010-\/2019 Oryx Embedded S\+A\+RL. All rights reserved.
+
+This file is part of Cyclone\+Crypto Open.
+
+This program is free software; you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+
+You should have received a copy of the G\+NU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-\/1301, U\+SA.\hypertarget{tftp__server_8c_Description}{}\subsection{Description}\label{tftp__server_8c_Description}
+D\+ES is an encryption algorithm designed to encipher and decipher blocks of 64 bits under control of a 64-\/bit key. Refer to F\+I\+PS 46-\/3 for more details
+
+\begin{DoxyAuthor}{Author}
+Oryx Embedded S\+A\+RL (www.\+oryx-\/embedded.\+com) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+9.\+6 
+\end{DoxyVersion}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{des_8c_a9c1815859597b51850fed659f4f3dace}\label{des_8c_a9c1815859597b51850fed659f4f3dace}} 
+\index{des.\+c@{des.\+c}!D\+E\+S\+\_\+\+FP@{D\+E\+S\+\_\+\+FP}}
+\index{D\+E\+S\+\_\+\+FP@{D\+E\+S\+\_\+\+FP}!des.\+c@{des.\+c}}
+\subsubsection{\texorpdfstring{D\+E\+S\+\_\+\+FP}{DES\_FP}}
+{\footnotesize\ttfamily \#define D\+E\+S\+\_\+\+FP(\begin{DoxyParamCaption}\item[{}]{left,  }\item[{}]{right }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}
+\{ \(\backslash\)
+   left = \hyperlink{cyclone__crypto_2core_2crypto_8h_a1e84182b178c5f242e4ba717e6dcd0e5}{ROR32}(left, 1); \(\backslash\)
+   right = \hyperlink{cyclone__crypto_2core_2crypto_8h_a1e84182b178c5f242e4ba717e6dcd0e5}{ROR32}(right, 1); \(\backslash\)
+   temp = ((left >> 1) ^ right) & 0x55555555; \(\backslash\)
+   right ^= temp; \(\backslash\)
+   left ^= temp << 1; \(\backslash\)
+   temp = ((right >> 8) ^ left) & 0x00FF00FF; \(\backslash\)
+   left ^= temp; \(\backslash\)
+   right ^= temp << 8; \(\backslash\)
+   temp = ((right >> 2) ^ left) & 0x33333333; \(\backslash\)
+   left ^= temp; \(\backslash\)
+   right ^= temp << 2; \(\backslash\)
+   temp = ((left >> 16) ^ right) & 0x0000FFFF; \(\backslash\)
+   right ^= temp; \(\backslash\)
+   left ^= temp << 16; \(\backslash\)
+   temp = ((left >> 4) ^ right) & 0x0F0F0F0F; \(\backslash\)
+   right ^= temp; \(\backslash\)
+   left ^= temp << 4; \(\backslash\)
+\}
+\end{DoxyCode}
+
+
+Definition at line 72 of file des.\+c.
+
+\mbox{\Hypertarget{des_8c_a9db7ea9a125f4dc02bb8591ea81ee3ee}\label{des_8c_a9db7ea9a125f4dc02bb8591ea81ee3ee}} 
+\index{des.\+c@{des.\+c}!D\+E\+S\+\_\+\+IP@{D\+E\+S\+\_\+\+IP}}
+\index{D\+E\+S\+\_\+\+IP@{D\+E\+S\+\_\+\+IP}!des.\+c@{des.\+c}}
+\subsubsection{\texorpdfstring{D\+E\+S\+\_\+\+IP}{DES\_IP}}
+{\footnotesize\ttfamily \#define D\+E\+S\+\_\+\+IP(\begin{DoxyParamCaption}\item[{}]{left,  }\item[{}]{right }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}
+\{ \(\backslash\)
+   temp = ((left >> 4) ^ right) & 0x0F0F0F0F; \(\backslash\)
+   right ^= temp; \(\backslash\)
+   left ^= temp << 4; \(\backslash\)
+   temp = ((left >> 16) ^ right) & 0x0000FFFF; \(\backslash\)
+   right ^= temp; \(\backslash\)
+   left ^= temp << 16; \(\backslash\)
+   temp = ((right >> 2) ^ left) & 0x33333333; \(\backslash\)
+   left ^= temp; \(\backslash\)
+   right ^= temp << 2; \(\backslash\)
+   temp = ((right >> 8) ^ left) & 0x00FF00FF; \(\backslash\)
+   left ^= temp; \(\backslash\)
+   right ^= temp << 8; \(\backslash\)
+   temp = ((left >> 1) ^ right) & 0x55555555; \(\backslash\)
+   right ^= temp; \(\backslash\)
+   left ^= temp << 1; \(\backslash\)
+   left = \hyperlink{cyclone__crypto_2core_2crypto_8h_ad5e52b5ea688101f11d0bf34dc3a8b4b}{ROL32}(left, 1); \(\backslash\)
+   right = \hyperlink{cyclone__crypto_2core_2crypto_8h_ad5e52b5ea688101f11d0bf34dc3a8b4b}{ROL32}(right, 1); \(\backslash\)
+\}
+\end{DoxyCode}
+
+
+Definition at line 50 of file des.\+c.
+
+\mbox{\Hypertarget{des_8c_a64f190cf042d0d87d57f7337066068c0}\label{des_8c_a64f190cf042d0d87d57f7337066068c0}} 
+\index{des.\+c@{des.\+c}!D\+E\+S\+\_\+\+P\+C1@{D\+E\+S\+\_\+\+P\+C1}}
+\index{D\+E\+S\+\_\+\+P\+C1@{D\+E\+S\+\_\+\+P\+C1}!des.\+c@{des.\+c}}
+\subsubsection{\texorpdfstring{D\+E\+S\+\_\+\+P\+C1}{DES\_PC1}}
+{\footnotesize\ttfamily \#define D\+E\+S\+\_\+\+P\+C1(\begin{DoxyParamCaption}\item[{}]{left,  }\item[{}]{right }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}
+\{ \(\backslash\)
+   uint32\_t temp; \(\backslash\)
+   temp = ((left >> 4) ^ right) & 0x0F0F0F0F; \(\backslash\)
+   right ^= temp; \(\backslash\)
+   left ^= (temp << 4); \(\backslash\)
+   temp = ((right >> 16) ^ left) & 0x0000FFFF; \(\backslash\)
+   left ^= temp; \(\backslash\)
+   right ^= (temp << 16); \(\backslash\)
+   temp = ((left >> 2) ^ right) & 0x33333333; \(\backslash\)
+   right ^= temp; \(\backslash\)
+   left ^= (temp << 2); \(\backslash\)
+   temp = ((right >> 16) ^ left) & 0x0000FFFF; \(\backslash\)
+   left ^= temp; \(\backslash\)
+   right ^= (temp << 16); \(\backslash\)
+   temp = ((left >> 1) ^ right) & 0x55555555; \(\backslash\)
+   right ^= temp; \(\backslash\)
+   left ^= (temp << 1); \(\backslash\)
+   temp = ((right >> 8) ^ left) & 0x00FF00FF; \(\backslash\)
+   left ^= temp; \(\backslash\)
+   right ^= (temp << 8); \(\backslash\)
+   temp = ((left >> 1) ^ right) & 0x55555555; \(\backslash\)
+   right ^= temp; \(\backslash\)
+   left ^= (temp << 1); \(\backslash\)
+   temp = (left << 8) | ((right >> 20) & 0x000000F0); \(\backslash\)
+   left = ((right << 20) & 0x0FF00000); \(\backslash\)
+   left |= ((right << 4) & 0x000FF000); \(\backslash\)
+   left |= ((right >> 12) & 0x00000FF0); \(\backslash\)
+   left |= ((right >> 28) & 0x0000000F); \(\backslash\)
+   right = temp >> 4; \(\backslash\)
+\}
+\end{DoxyCode}
+
+
+Definition at line 112 of file des.\+c.
+
+\mbox{\Hypertarget{des_8c_a0a6c0a841dd3b32a696cbb2c7948de41}\label{des_8c_a0a6c0a841dd3b32a696cbb2c7948de41}} 
+\index{des.\+c@{des.\+c}!D\+E\+S\+\_\+\+R\+O\+U\+ND@{D\+E\+S\+\_\+\+R\+O\+U\+ND}}
+\index{D\+E\+S\+\_\+\+R\+O\+U\+ND@{D\+E\+S\+\_\+\+R\+O\+U\+ND}!des.\+c@{des.\+c}}
+\subsubsection{\texorpdfstring{D\+E\+S\+\_\+\+R\+O\+U\+ND}{DES\_ROUND}}
+{\footnotesize\ttfamily \#define D\+E\+S\+\_\+\+R\+O\+U\+ND(\begin{DoxyParamCaption}\item[{}]{left,  }\item[{}]{right,  }\item[{}]{ks }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}
+\{ \(\backslash\)
+   temp = right ^ *(ks); \(\backslash\)
+   left ^= \hyperlink{des_8c_af2a469af64860889d734c3a918c1583c}{sp2}[(temp >> 24) & 0x3F]; \(\backslash\)
+   left ^= \hyperlink{des_8c_aeaa92dd529a1a4e7a62cecb5305dfd1a}{sp4}[(temp >> 16) & 0x3F]; \(\backslash\)
+   left ^= \hyperlink{des_8c_a187a70d97665176a388aed1f33ef3a56}{sp6}[(temp >> 8) & 0x3F]; \(\backslash\)
+   left ^= \hyperlink{des_8c_a5a8db889d151c6f7f059473dff388344}{sp8}[temp & 0x3F]; \(\backslash\)
+   temp = \hyperlink{cyclone__crypto_2core_2crypto_8h_a1e84182b178c5f242e4ba717e6dcd0e5}{ROR32}(right, 4) ^ *(ks + 1); \(\backslash\)
+   left ^= \hyperlink{des_8c_a4850c8c80059cfcc836d2606371d71ab}{sp1}[(temp >> 24) & 0x3F]; \(\backslash\)
+   left ^= \hyperlink{des_8c_a8152edc9f75c73e90dac2175ff397add}{sp3}[(temp >> 16) & 0x3F]; \(\backslash\)
+   left ^= \hyperlink{des_8c_a4ae1cf32130a7649faee3820489ecd3b}{sp5}[(temp >> 8) & 0x3F]; \(\backslash\)
+   left ^= \hyperlink{des_8c_a9a60157672d3bf517348a718a5efaf4d}{sp7}[temp & 0x3F]; \(\backslash\)
+   temp = right; \(\backslash\)
+   right = left; \(\backslash\)
+   left = temp; \(\backslash\)
+\}
+\end{DoxyCode}
+
+
+Definition at line 94 of file des.\+c.
+
+\mbox{\Hypertarget{des_8c_a78e4547299de7bcb50068736636a8327}\label{des_8c_a78e4547299de7bcb50068736636a8327}} 
+\index{des.\+c@{des.\+c}!R\+O\+L28@{R\+O\+L28}}
+\index{R\+O\+L28@{R\+O\+L28}!des.\+c@{des.\+c}}
+\subsubsection{\texorpdfstring{R\+O\+L28}{ROL28}}
+{\footnotesize\ttfamily \#define R\+O\+L28(\begin{DoxyParamCaption}\item[{}]{\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a},  }\item[{}]{\hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n} }\end{DoxyParamCaption})~((((\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}) $<$$<$ (\hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n})) $\vert$ ((\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a}) $>$$>$ (28 -\/ (\hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n})))) \& 0x0\+F\+F\+F\+F\+F\+F\+F)}
+
+
+
+Definition at line 47 of file des.\+c.
+
+\mbox{\Hypertarget{des_8c_afcdf5e66fd927a7f4cc64295acd20407}\label{des_8c_afcdf5e66fd927a7f4cc64295acd20407}} 
+\index{des.\+c@{des.\+c}!T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+\index{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}!des.\+c@{des.\+c}}
+\subsubsection{\texorpdfstring{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}{TRACE\_LEVEL}}
+{\footnotesize\ttfamily \#define T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL~\hyperlink{crypto__config_8h_a6afae3a9b63f9b55d979e667ee0e881d}{C\+R\+Y\+P\+T\+O\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+
+
+
+Definition at line 37 of file des.\+c.
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{des_8c_a3211e55b31b1e6c04f84e385494bd31c}\label{des_8c_a3211e55b31b1e6c04f84e385494bd31c}} 
+\index{des.\+c@{des.\+c}!des\+Decrypt\+Block@{des\+Decrypt\+Block}}
+\index{des\+Decrypt\+Block@{des\+Decrypt\+Block}!des.\+c@{des.\+c}}
+\subsubsection{\texorpdfstring{des\+Decrypt\+Block()}{desDecryptBlock()}}
+{\footnotesize\ttfamily void des\+Decrypt\+Block (\begin{DoxyParamCaption}\item[{\hyperlink{structDesContext}{Des\+Context} $\ast$}]{context,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{input,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{output }\end{DoxyParamCaption})}
+
+
+
+Decrypt a 8-\/byte block using D\+ES algorithm. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the D\+ES context \\
+\hline
+\mbox{\tt in}  & {\em input} & Ciphertext block to decrypt \\
+\hline
+\mbox{\tt out}  & {\em output} & Plaintext block resulting from decryption \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 386 of file des.\+c.
+
+
+\begin{DoxyCode}
+387 \{
+388    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+389    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} left;
+390    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} right;
+391    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} temp;
+392 
+393    \textcolor{comment}{//Keys in the key schedule must be applied in reverse order}
+394    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} *ks = context->\hyperlink{structDesContext_af0d2a0720c948a57d588cc95f8c60a06}{ks} + 30;
+395 
+396    \textcolor{comment}{//Copy the ciphertext from the input buffer}
+397    left = \hyperlink{cpu__endian_8h_a1be529d679835eda85cf5541e7926ca7}{LOAD32BE}(input + 0);
+398    right = \hyperlink{cpu__endian_8h_a1be529d679835eda85cf5541e7926ca7}{LOAD32BE}(input + 4);
+399 
+400    \textcolor{comment}{//Initial permutation}
+401    \hyperlink{des_8c_a9db7ea9a125f4dc02bb8591ea81ee3ee}{DES\_IP}(left, right);
+402 
+403    \textcolor{comment}{//16 rounds of computation are needed}
+404    \textcolor{keywordflow}{for}(i = 0; i < 16; i++, ks -= 2)
+405    \{
+406       \hyperlink{des_8c_a0a6c0a841dd3b32a696cbb2c7948de41}{DES\_ROUND}(left, right, ks);
+407    \}
+408 
+409    \textcolor{comment}{//Inverse IP permutation}
+410    \hyperlink{des_8c_a9c1815859597b51850fed659f4f3dace}{DES\_FP}(right, left);
+411 
+412    \textcolor{comment}{//Copy the resulting plaintext}
+413    \hyperlink{cpu__endian_8h_a8663906e08e818efa91dd6f65a7e636d}{STORE32BE}(right, output + 0);
+414    \hyperlink{cpu__endian_8h_a8663906e08e818efa91dd6f65a7e636d}{STORE32BE}(left, output + 4);
+415 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{des_8c_aa775fbbff698bd0168c4d0fc84869a8f}\label{des_8c_aa775fbbff698bd0168c4d0fc84869a8f}} 
+\index{des.\+c@{des.\+c}!des\+Encrypt\+Block@{des\+Encrypt\+Block}}
+\index{des\+Encrypt\+Block@{des\+Encrypt\+Block}!des.\+c@{des.\+c}}
+\subsubsection{\texorpdfstring{des\+Encrypt\+Block()}{desEncryptBlock()}}
+{\footnotesize\ttfamily void des\+Encrypt\+Block (\begin{DoxyParamCaption}\item[{\hyperlink{structDesContext}{Des\+Context} $\ast$}]{context,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{input,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{output }\end{DoxyParamCaption})}
+
+
+
+Encrypt a 8-\/byte block using D\+ES algorithm. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the D\+ES context \\
+\hline
+\mbox{\tt in}  & {\em input} & Plaintext block to encrypt \\
+\hline
+\mbox{\tt out}  & {\em output} & Ciphertext block resulting from encryption \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 347 of file des.\+c.
+
+
+\begin{DoxyCode}
+348 \{
+349    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+350    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} left;
+351    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} right;
+352    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} temp;
+353 
+354    \textcolor{comment}{//Key schedule}
+355    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} *ks = context->\hyperlink{structDesContext_af0d2a0720c948a57d588cc95f8c60a06}{ks};
+356 
+357    \textcolor{comment}{//Copy the plaintext from the input buffer}
+358    left = \hyperlink{cpu__endian_8h_a1be529d679835eda85cf5541e7926ca7}{LOAD32BE}(input + 0);
+359    right = \hyperlink{cpu__endian_8h_a1be529d679835eda85cf5541e7926ca7}{LOAD32BE}(input + 4);
+360 
+361    \textcolor{comment}{//Initial permutation}
+362    \hyperlink{des_8c_a9db7ea9a125f4dc02bb8591ea81ee3ee}{DES\_IP}(left, right);
+363 
+364    \textcolor{comment}{//16 rounds of computation are needed}
+365    \textcolor{keywordflow}{for}(i = 0; i < 16; i++, ks += 2)
+366    \{
+367       \hyperlink{des_8c_a0a6c0a841dd3b32a696cbb2c7948de41}{DES\_ROUND}(left, right, ks);
+368    \}
+369 
+370    \textcolor{comment}{//Inverse IP permutation}
+371    \hyperlink{des_8c_a9c1815859597b51850fed659f4f3dace}{DES\_FP}(right, left);
+372 
+373    \textcolor{comment}{//Copy the resulting ciphertext}
+374    \hyperlink{cpu__endian_8h_a8663906e08e818efa91dd6f65a7e636d}{STORE32BE}(right, output + 0);
+375    \hyperlink{cpu__endian_8h_a8663906e08e818efa91dd6f65a7e636d}{STORE32BE}(left, output + 4);
+376 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{des_8c_afadda7acbe44a36384a5d463e9356cb2}\label{des_8c_afadda7acbe44a36384a5d463e9356cb2}} 
+\index{des.\+c@{des.\+c}!des\+Init@{des\+Init}}
+\index{des\+Init@{des\+Init}!des.\+c@{des.\+c}}
+\subsubsection{\texorpdfstring{des\+Init()}{desInit()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} des\+Init (\begin{DoxyParamCaption}\item[{\hyperlink{structDesContext}{Des\+Context} $\ast$}]{context,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{key,  }\item[{size\+\_\+t}]{key\+Len }\end{DoxyParamCaption})}
+
+
+
+Initialize a D\+ES context using the supplied key. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the D\+ES context to initialize \\
+\hline
+\mbox{\tt in}  & {\em key} & Pointer to the key \\
+\hline
+\mbox{\tt in}  & {\em key\+Len} & Length of the key (must be set to 8) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 271 of file des.\+c.
+
+
+\begin{DoxyCode}
+272 \{
+273    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+274    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} \hyperlink{aria_8c_a5dadc28804036d1b82e1dc027e95c9a6}{c};
+275    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} d;
+276 
+277    \textcolor{comment}{//Check parameters}
+278    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || key == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+279       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+280 
+281    \textcolor{comment}{//Invalid key length?}
+282    \textcolor{keywordflow}{if}(keyLen != 8)
+283       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca3764b2929469f1eb1bf7af50b40df62f}{ERROR\_INVALID\_KEY\_LENGTH};
+284 
+285    \textcolor{comment}{//Copy the key}
+286    c = \hyperlink{cpu__endian_8h_a1be529d679835eda85cf5541e7926ca7}{LOAD32BE}(key + 0);
+287    d = \hyperlink{cpu__endian_8h_a1be529d679835eda85cf5541e7926ca7}{LOAD32BE}(key + 4);
+288 
+289    \textcolor{comment}{//Permuted choice 1}
+290    \hyperlink{des_8c_a64f190cf042d0d87d57f7337066068c0}{DES\_PC1}(c, d);
+291 
+292    \textcolor{comment}{//Generate the key schedule}
+293    \textcolor{keywordflow}{for}(i = 0; i < 16; i++)
+294    \{
+295       \textcolor{comment}{//Individual blocks are shifted left}
+296       \textcolor{keywordflow}{if}(i == 0 || i == 1 || i == 8 || i == 15)
+297       \{
+298          c = \hyperlink{des_8c_a78e4547299de7bcb50068736636a8327}{ROL28}(c, 1);
+299          d = \hyperlink{des_8c_a78e4547299de7bcb50068736636a8327}{ROL28}(d, 1);
+300       \}
+301       \textcolor{keywordflow}{else}
+302       \{
+303          c = \hyperlink{des_8c_a78e4547299de7bcb50068736636a8327}{ROL28}(c, 2);
+304          d = \hyperlink{des_8c_a78e4547299de7bcb50068736636a8327}{ROL28}(d, 2);
+305       \}
+306 
+307       \textcolor{comment}{//Permuted choice 2}
+308       context->\hyperlink{structDesContext_af0d2a0720c948a57d588cc95f8c60a06}{ks}[2 * i] =
+309          ((c << 4)  & 0x24000000) | ((c << 28) & 0x10000000) |
+310          ((c << 14) & 0x08000000) | ((c << 18) & 0x02080000) |
+311          ((c << 6)  & 0x01000000) | ((c << 9)  & 0x00200000) |
+312          ((c >> 1)  & 0x00100000) | ((c << 10) & 0x00040000) |
+313          ((c << 2)  & 0x00020000) | ((c >> 10) & 0x00010000) |
+314          ((d >> 13) & 0x00002000) | ((d >> 4)  & 0x00001000) |
+315          ((d << 6)  & 0x00000800) | ((d >> 1)  & 0x00000400) |
+316          ((d >> 14) & 0x00000200) | ((d)       & 0x00000100) |
+317          ((d >> 5)  & 0x00000020) | ((d >> 10) & 0x00000010) |
+318          ((d >> 3)  & 0x00000008) | ((d >> 18) & 0x00000004) |
+319          ((d >> 26) & 0x00000002) | ((d >> 24) & 0x00000001);
+320 
+321       context->\hyperlink{structDesContext_af0d2a0720c948a57d588cc95f8c60a06}{ks}[2 * i + 1] =
+322          ((c << 15) & 0x20000000) | ((c << 17) & 0x10000000) |
+323          ((c << 10) & 0x08000000) | ((c << 22) & 0x04000000) |
+324          ((c >> 2)  & 0x02000000) | ((c << 1)  & 0x01000000) |
+325          ((c << 16) & 0x00200000) | ((c << 11) & 0x00100000) |
+326          ((c << 3)  & 0x00080000) | ((c >> 6)  & 0x00040000) |
+327          ((c << 15) & 0x00020000) | ((c >> 4)  & 0x00010000) |
+328          ((d >> 2)  & 0x00002000) | ((d << 8)  & 0x00001000) |
+329          ((d >> 14) & 0x00000808) | ((d >> 9)  & 0x00000400) |
+330          ((d)       & 0x00000200) | ((d << 7)  & 0x00000100) |
+331          ((d >> 7)  & 0x00000020) | ((d >> 3)  & 0x00000011) |
+332          ((d << 2)  & 0x00000004) | ((d >> 21) & 0x00000002);
+333    \}
+334 
+335    \textcolor{comment}{//No error to report}
+336    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+337 \}
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{des_8c_a436ae8b9f8e27c5f377f37aaf6b14428}\label{des_8c_a436ae8b9f8e27c5f377f37aaf6b14428}} 
+\index{des.\+c@{des.\+c}!des\+Cipher\+Algo@{des\+Cipher\+Algo}}
+\index{des\+Cipher\+Algo@{des\+Cipher\+Algo}!des.\+c@{des.\+c}}
+\subsubsection{\texorpdfstring{des\+Cipher\+Algo}{desCipherAlgo}}
+{\footnotesize\ttfamily const \hyperlink{structCipherAlgo}{Cipher\+Algo} des\+Cipher\+Algo}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=
+\{
+   \textcolor{stringliteral}{"DES"},
+   \textcolor{keyword}{sizeof}(\hyperlink{structDesContext}{DesContext}),
+   \hyperlink{cyclone__crypto_2core_2crypto_8h_ae03a6c8f32ed798857924d908aacc49bac347f6aa82618d4d57fe85cba6520ce9}{CIPHER\_ALGO\_TYPE\_BLOCK},
+   \hyperlink{des_8h_a8a583bbd17418046705ca55b6dbbe652}{DES\_BLOCK\_SIZE},
+   (\hyperlink{cyclone__crypto_2core_2crypto_8h_a1a0f02cdb8a3295caa1b87db2785e678}{CipherAlgoInit}) \hyperlink{des_8c_afadda7acbe44a36384a5d463e9356cb2}{desInit},
+   \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL},
+   \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL},
+   (\hyperlink{cyclone__crypto_2core_2crypto_8h_a4b511302b7e4f6ff51dd72f5abde7077}{CipherAlgoEncryptBlock}) \hyperlink{des_8c_aa775fbbff698bd0168c4d0fc84869a8f}{desEncryptBlock},
+   (\hyperlink{cyclone__crypto_2core_2crypto_8h_a15510227bd1c7721d1e3af2480069990}{CipherAlgoDecryptBlock}) \hyperlink{des_8c_a3211e55b31b1e6c04f84e385494bd31c}{desDecryptBlock}
+\}
+\end{DoxyCode}
+
+
+Definition at line 249 of file des.\+c.
+
+\mbox{\Hypertarget{des_8c_a4850c8c80059cfcc836d2606371d71ab}\label{des_8c_a4850c8c80059cfcc836d2606371d71ab}} 
+\index{des.\+c@{des.\+c}!sp1@{sp1}}
+\index{sp1@{sp1}!des.\+c@{des.\+c}}
+\subsubsection{\texorpdfstring{sp1}{sp1}}
+{\footnotesize\ttfamily const \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t} sp1\mbox{[}64\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=
+\{
+   0x01010400, 0x00000000, 0x00010000, 0x01010404, 0x01010004, 0x00010404, 0x00000004, 0x00010000,
+   0x00000400, 0x01010400, 0x01010404, 0x00000400, 0x01000404, 0x01010004, 0x01000000, 0x00000004,
+   0x00000404, 0x01000400, 0x01000400, 0x00010400, 0x00010400, 0x01010000, 0x01010000, 0x01000404,
+   0x00010004, 0x01000004, 0x01000004, 0x00010004, 0x00000000, 0x00000404, 0x00010404, 0x01000000,
+   0x00010000, 0x01010404, 0x00000004, 0x01010000, 0x01010400, 0x01000000, 0x01000000, 0x00000400,
+   0x01010004, 0x00010000, 0x00010400, 0x01000004, 0x00000400, 0x00000004, 0x01000404, 0x00010404,
+   0x01010404, 0x00010004, 0x01010000, 0x01000404, 0x01000004, 0x00000404, 0x00010404, 0x01010400,
+   0x00000404, 0x01000400, 0x01000400, 0x00000000, 0x00010004, 0x00010400, 0x00000000, 0x01010004
+\}
+\end{DoxyCode}
+
+
+Definition at line 145 of file des.\+c.
+
+\mbox{\Hypertarget{des_8c_af2a469af64860889d734c3a918c1583c}\label{des_8c_af2a469af64860889d734c3a918c1583c}} 
+\index{des.\+c@{des.\+c}!sp2@{sp2}}
+\index{sp2@{sp2}!des.\+c@{des.\+c}}
+\subsubsection{\texorpdfstring{sp2}{sp2}}
+{\footnotesize\ttfamily const \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t} sp2\mbox{[}64\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=
+\{
+   0x80108020, 0x80008000, 0x00008000, 0x00108020, 0x00100000, 0x00000020, 0x80100020, 0x80008020,
+   0x80000020, 0x80108020, 0x80108000, 0x80000000, 0x80008000, 0x00100000, 0x00000020, 0x80100020,
+   0x00108000, 0x00100020, 0x80008020, 0x00000000, 0x80000000, 0x00008000, 0x00108020, 0x80100000,
+   0x00100020, 0x80000020, 0x00000000, 0x00108000, 0x00008020, 0x80108000, 0x80100000, 0x00008020,
+   0x00000000, 0x00108020, 0x80100020, 0x00100000, 0x80008020, 0x80100000, 0x80108000, 0x00008000,
+   0x80100000, 0x80008000, 0x00000020, 0x80108020, 0x00108020, 0x00000020, 0x00008000, 0x80000000,
+   0x00008020, 0x80108000, 0x00100000, 0x80000020, 0x00100020, 0x80008020, 0x80000020, 0x00100020,
+   0x00108000, 0x00000000, 0x80008000, 0x00008020, 0x80000000, 0x80100020, 0x80108020, 0x00108000
+\}
+\end{DoxyCode}
+
+
+Definition at line 158 of file des.\+c.
+
+\mbox{\Hypertarget{des_8c_a8152edc9f75c73e90dac2175ff397add}\label{des_8c_a8152edc9f75c73e90dac2175ff397add}} 
+\index{des.\+c@{des.\+c}!sp3@{sp3}}
+\index{sp3@{sp3}!des.\+c@{des.\+c}}
+\subsubsection{\texorpdfstring{sp3}{sp3}}
+{\footnotesize\ttfamily const \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t} sp3\mbox{[}64\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=
+\{
+   0x00000208, 0x08020200, 0x00000000, 0x08020008, 0x08000200, 0x00000000, 0x00020208, 0x08000200,
+   0x00020008, 0x08000008, 0x08000008, 0x00020000, 0x08020208, 0x00020008, 0x08020000, 0x00000208,
+   0x08000000, 0x00000008, 0x08020200, 0x00000200, 0x00020200, 0x08020000, 0x08020008, 0x00020208,
+   0x08000208, 0x00020200, 0x00020000, 0x08000208, 0x00000008, 0x08020208, 0x00000200, 0x08000000,
+   0x08020200, 0x08000000, 0x00020008, 0x00000208, 0x00020000, 0x08020200, 0x08000200, 0x00000000,
+   0x00000200, 0x00020008, 0x08020208, 0x08000200, 0x08000008, 0x00000200, 0x00000000, 0x08020008,
+   0x08000208, 0x00020000, 0x08000000, 0x08020208, 0x00000008, 0x00020208, 0x00020200, 0x08000008,
+   0x08020000, 0x08000208, 0x00000208, 0x08020000, 0x00020208, 0x00000008, 0x08020008, 0x00020200
+\}
+\end{DoxyCode}
+
+
+Definition at line 171 of file des.\+c.
+
+\mbox{\Hypertarget{des_8c_aeaa92dd529a1a4e7a62cecb5305dfd1a}\label{des_8c_aeaa92dd529a1a4e7a62cecb5305dfd1a}} 
+\index{des.\+c@{des.\+c}!sp4@{sp4}}
+\index{sp4@{sp4}!des.\+c@{des.\+c}}
+\subsubsection{\texorpdfstring{sp4}{sp4}}
+{\footnotesize\ttfamily const \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t} sp4\mbox{[}64\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=
+\{
+   0x00802001, 0x00002081, 0x00002081, 0x00000080, 0x00802080, 0x00800081, 0x00800001, 0x00002001,
+   0x00000000, 0x00802000, 0x00802000, 0x00802081, 0x00000081, 0x00000000, 0x00800080, 0x00800001,
+   0x00000001, 0x00002000, 0x00800000, 0x00802001, 0x00000080, 0x00800000, 0x00002001, 0x00002080,
+   0x00800081, 0x00000001, 0x00002080, 0x00800080, 0x00002000, 0x00802080, 0x00802081, 0x00000081,
+   0x00800080, 0x00800001, 0x00802000, 0x00802081, 0x00000081, 0x00000000, 0x00000000, 0x00802000,
+   0x00002080, 0x00800080, 0x00800081, 0x00000001, 0x00802001, 0x00002081, 0x00002081, 0x00000080,
+   0x00802081, 0x00000081, 0x00000001, 0x00002000, 0x00800001, 0x00002001, 0x00802080, 0x00800081,
+   0x00002001, 0x00002080, 0x00800000, 0x00802001, 0x00000080, 0x00800000, 0x00002000, 0x00802080
+\}
+\end{DoxyCode}
+
+
+Definition at line 184 of file des.\+c.
+
+\mbox{\Hypertarget{des_8c_a4ae1cf32130a7649faee3820489ecd3b}\label{des_8c_a4ae1cf32130a7649faee3820489ecd3b}} 
+\index{des.\+c@{des.\+c}!sp5@{sp5}}
+\index{sp5@{sp5}!des.\+c@{des.\+c}}
+\subsubsection{\texorpdfstring{sp5}{sp5}}
+{\footnotesize\ttfamily const \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t} sp5\mbox{[}64\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=
+\{
+   0x00000100, 0x02080100, 0x02080000, 0x42000100, 0x00080000, 0x00000100, 0x40000000, 0x02080000,
+   0x40080100, 0x00080000, 0x02000100, 0x40080100, 0x42000100, 0x42080000, 0x00080100, 0x40000000,
+   0x02000000, 0x40080000, 0x40080000, 0x00000000, 0x40000100, 0x42080100, 0x42080100, 0x02000100,
+   0x42080000, 0x40000100, 0x00000000, 0x42000000, 0x02080100, 0x02000000, 0x42000000, 0x00080100,
+   0x00080000, 0x42000100, 0x00000100, 0x02000000, 0x40000000, 0x02080000, 0x42000100, 0x40080100,
+   0x02000100, 0x40000000, 0x42080000, 0x02080100, 0x40080100, 0x00000100, 0x02000000, 0x42080000,
+   0x42080100, 0x00080100, 0x42000000, 0x42080100, 0x02080000, 0x00000000, 0x40080000, 0x42000000,
+   0x00080100, 0x02000100, 0x40000100, 0x00080000, 0x00000000, 0x40080000, 0x02080100, 0x40000100
+\}
+\end{DoxyCode}
+
+
+Definition at line 197 of file des.\+c.
+
+\mbox{\Hypertarget{des_8c_a187a70d97665176a388aed1f33ef3a56}\label{des_8c_a187a70d97665176a388aed1f33ef3a56}} 
+\index{des.\+c@{des.\+c}!sp6@{sp6}}
+\index{sp6@{sp6}!des.\+c@{des.\+c}}
+\subsubsection{\texorpdfstring{sp6}{sp6}}
+{\footnotesize\ttfamily const \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t} sp6\mbox{[}64\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=
+\{
+   0x20000010, 0x20400000, 0x00004000, 0x20404010, 0x20400000, 0x00000010, 0x20404010, 0x00400000,
+   0x20004000, 0x00404010, 0x00400000, 0x20000010, 0x00400010, 0x20004000, 0x20000000, 0x00004010,
+   0x00000000, 0x00400010, 0x20004010, 0x00004000, 0x00404000, 0x20004010, 0x00000010, 0x20400010,
+   0x20400010, 0x00000000, 0x00404010, 0x20404000, 0x00004010, 0x00404000, 0x20404000, 0x20000000,
+   0x20004000, 0x00000010, 0x20400010, 0x00404000, 0x20404010, 0x00400000, 0x00004010, 0x20000010,
+   0x00400000, 0x20004000, 0x20000000, 0x00004010, 0x20000010, 0x20404010, 0x00404000, 0x20400000,
+   0x00404010, 0x20404000, 0x00000000, 0x20400010, 0x00000010, 0x00004000, 0x20400000, 0x00404010,
+   0x00004000, 0x00400010, 0x20004010, 0x00000000, 0x20404000, 0x20000000, 0x00400010, 0x20004010
+\}
+\end{DoxyCode}
+
+
+Definition at line 210 of file des.\+c.
+
+\mbox{\Hypertarget{des_8c_a9a60157672d3bf517348a718a5efaf4d}\label{des_8c_a9a60157672d3bf517348a718a5efaf4d}} 
+\index{des.\+c@{des.\+c}!sp7@{sp7}}
+\index{sp7@{sp7}!des.\+c@{des.\+c}}
+\subsubsection{\texorpdfstring{sp7}{sp7}}
+{\footnotesize\ttfamily const \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t} sp7\mbox{[}64\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=
+\{
+   0x00200000, 0x04200002, 0x04000802, 0x00000000, 0x00000800, 0x04000802, 0x00200802, 0x04200800,
+   0x04200802, 0x00200000, 0x00000000, 0x04000002, 0x00000002, 0x04000000, 0x04200002, 0x00000802,
+   0x04000800, 0x00200802, 0x00200002, 0x04000800, 0x04000002, 0x04200000, 0x04200800, 0x00200002,
+   0x04200000, 0x00000800, 0x00000802, 0x04200802, 0x00200800, 0x00000002, 0x04000000, 0x00200800,
+   0x04000000, 0x00200800, 0x00200000, 0x04000802, 0x04000802, 0x04200002, 0x04200002, 0x00000002,
+   0x00200002, 0x04000000, 0x04000800, 0x00200000, 0x04200800, 0x00000802, 0x00200802, 0x04200800,
+   0x00000802, 0x04000002, 0x04200802, 0x04200000, 0x00200800, 0x00000000, 0x00000002, 0x04200802,
+   0x00000000, 0x00200802, 0x04200000, 0x00000800, 0x04000002, 0x04000800, 0x00000800, 0x00200002
+\}
+\end{DoxyCode}
+
+
+Definition at line 223 of file des.\+c.
+
+\mbox{\Hypertarget{des_8c_a5a8db889d151c6f7f059473dff388344}\label{des_8c_a5a8db889d151c6f7f059473dff388344}} 
+\index{des.\+c@{des.\+c}!sp8@{sp8}}
+\index{sp8@{sp8}!des.\+c@{des.\+c}}
+\subsubsection{\texorpdfstring{sp8}{sp8}}
+{\footnotesize\ttfamily const \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t} sp8\mbox{[}64\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=
+\{
+   0x10001040, 0x00001000, 0x00040000, 0x10041040, 0x10000000, 0x10001040, 0x00000040, 0x10000000,
+   0x00040040, 0x10040000, 0x10041040, 0x00041000, 0x10041000, 0x00041040, 0x00001000, 0x00000040,
+   0x10040000, 0x10000040, 0x10001000, 0x00001040, 0x00041000, 0x00040040, 0x10040040, 0x10041000,
+   0x00001040, 0x00000000, 0x00000000, 0x10040040, 0x10000040, 0x10001000, 0x00041040, 0x00040000,
+   0x00041040, 0x00040000, 0x10041000, 0x00001000, 0x00000040, 0x10040040, 0x00001000, 0x00041040,
+   0x10001000, 0x00000040, 0x10000040, 0x10040000, 0x10040040, 0x10000000, 0x00040000, 0x10001040,
+   0x00000000, 0x10041040, 0x00040040, 0x10000040, 0x10040000, 0x10001000, 0x10001040, 0x00000000,
+   0x10041040, 0x00041000, 0x00041000, 0x00001040, 0x00001040, 0x00040040, 0x10000000, 0x10041000
+\}
+\end{DoxyCode}
+
+
+Definition at line 236 of file des.\+c.
+

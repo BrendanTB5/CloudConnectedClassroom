@@ -1,0 +1,509 @@
+\hypertarget{tiger_8c}{}\section{cyclone\+\_\+crypto/hash/tiger.c File Reference}
+\label{tiger_8c}\index{cyclone\+\_\+crypto/hash/tiger.\+c@{cyclone\+\_\+crypto/hash/tiger.\+c}}
+
+
+Tiger hash function.  
+
+
+{\ttfamily \#include \char`\"{}core/crypto.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}hash/tiger.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{tiger_8c_afcdf5e66fd927a7f4cc64295acd20407}{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}~\hyperlink{crypto__config_8h_a6afae3a9b63f9b55d979e667ee0e881d}{C\+R\+Y\+P\+T\+O\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}
+\item 
+\#define \hyperlink{tiger_8c_a09a9d90abab2c7016281628a4425429e}{R\+O\+U\+ND}(\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a},  \hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b},  \hyperlink{llmnr__common_8h_a2e5a04327b5658199f0f7bda2acceee1}{c},  x,  mul)
+\item 
+\#define \hyperlink{tiger_8c_a7b01d710c801f57367cb34c82130b2ef}{K\+E\+Y\+\_\+\+S\+C\+H\+E\+D\+U\+LE}(x)
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{tiger_8c_a0bcfe5c3653670a365a12ed5db4fc243}{tiger\+Compute} (const void $\ast$\hyperlink{tftp__common_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length}, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$digest)
+\begin{DoxyCompactList}\small\item\em Digest a message using Tiger. \end{DoxyCompactList}\item 
+void \hyperlink{tiger_8c_a1696414ca515d90d18db8f40d01c3331}{tiger\+Init} (\hyperlink{structTigerContext}{Tiger\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Initialize Tiger message digest context. \end{DoxyCompactList}\item 
+void \hyperlink{tiger_8c_a48e5f94c3a0ab81bcd214f6c3410fe10}{tiger\+Update} (\hyperlink{structTigerContext}{Tiger\+Context} $\ast$context, const void $\ast$\hyperlink{tftp__common_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length})
+\begin{DoxyCompactList}\small\item\em Update the Tiger context with a portion of the message being hashed. \end{DoxyCompactList}\item 
+void \hyperlink{tiger_8c_a6f4baf983fcfe2c55de19281b081a46d}{tiger\+Final} (\hyperlink{structTigerContext}{Tiger\+Context} $\ast$context, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$digest)
+\begin{DoxyCompactList}\small\item\em Finish the Tiger message digest. \end{DoxyCompactList}\item 
+void \hyperlink{tiger_8c_adedbd5758b59c43e5feaadca83e08466}{tiger\+Process\+Block} (\hyperlink{structTigerContext}{Tiger\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Process message in 16-\/word blocks. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} \hyperlink{tiger_8c_ae1cca62951c2df9f5bf77fda3dcdd423}{padding} \mbox{[}64\mbox{]}
+\item 
+static const \hyperlink{stdint_8h_aec6fcb673ff035718c238c8c9d544c47}{uint64\+\_\+t} \hyperlink{tiger_8c_a5017152cac85e29a2dc5d8d74de9e07c}{t1} \mbox{[}256\mbox{]}
+\item 
+static const \hyperlink{stdint_8h_aec6fcb673ff035718c238c8c9d544c47}{uint64\+\_\+t} \hyperlink{tiger_8c_a42a80c4c472115c0fcb04a076526ecf5}{t2} \mbox{[}256\mbox{]}
+\item 
+static const \hyperlink{stdint_8h_aec6fcb673ff035718c238c8c9d544c47}{uint64\+\_\+t} \hyperlink{tiger_8c_a275db56faf9780608afff7d4fb462caf}{t3} \mbox{[}256\mbox{]}
+\item 
+static const \hyperlink{stdint_8h_aec6fcb673ff035718c238c8c9d544c47}{uint64\+\_\+t} \hyperlink{tiger_8c_ad08af49192ab7f0c36cebbb4dee62ce8}{t4} \mbox{[}256\mbox{]}
+\item 
+const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} \hyperlink{tiger_8c_a8ed5836b52f176d12958676eb82a1d26}{tiger\+Oid} \mbox{[}9\mbox{]} = \{0x2\+B, 0x06, 0x01, 0x04, 0x01, 0x\+D\+A, 0x47, 0x0\+C, 0x02\}
+\item 
+const \hyperlink{structHashAlgo}{Hash\+Algo} \hyperlink{tiger_8c_ac506bcd179f66e8a8c034dc166da4c12}{tiger\+Hash\+Algo}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Tiger hash function. 
+
+\hypertarget{pic32mz__ef__curiosity_8h_License}{}\subsection{License}\label{pic32mz__ef__curiosity_8h_License}
+S\+P\+D\+X-\/\+License-\/\+Identifier\+: G\+P\+L-\/2.\+0-\/or-\/later
+
+Copyright (C) 2010-\/2019 Oryx Embedded S\+A\+RL. All rights reserved.
+
+This file is part of Cyclone\+Crypto Open.
+
+This program is free software; you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+
+You should have received a copy of the G\+NU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-\/1301, U\+SA.
+
+\begin{DoxyAuthor}{Author}
+Oryx Embedded S\+A\+RL (www.\+oryx-\/embedded.\+com) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+9.\+6 
+\end{DoxyVersion}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{tiger_8c_a7b01d710c801f57367cb34c82130b2ef}\label{tiger_8c_a7b01d710c801f57367cb34c82130b2ef}} 
+\index{tiger.\+c@{tiger.\+c}!K\+E\+Y\+\_\+\+S\+C\+H\+E\+D\+U\+LE@{K\+E\+Y\+\_\+\+S\+C\+H\+E\+D\+U\+LE}}
+\index{K\+E\+Y\+\_\+\+S\+C\+H\+E\+D\+U\+LE@{K\+E\+Y\+\_\+\+S\+C\+H\+E\+D\+U\+LE}!tiger.\+c@{tiger.\+c}}
+\subsubsection{\texorpdfstring{K\+E\+Y\+\_\+\+S\+C\+H\+E\+D\+U\+LE}{KEY\_SCHEDULE}}
+{\footnotesize\ttfamily \#define K\+E\+Y\+\_\+\+S\+C\+H\+E\+D\+U\+LE(\begin{DoxyParamCaption}\item[{}]{x }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}
+\{ \(\backslash\)
+   x[0] -= x[7] ^ 0xA5A5A5A5A5A5A5A5; \(\backslash\)
+   x[1] ^= x[0]; \(\backslash\)
+   x[2] += x[1]; \(\backslash\)
+   x[3] -= x[2] ^ ((~x[1]) << 19); \(\backslash\)
+   x[4] ^= x[3]; \(\backslash\)
+   x[5] += x[4]; \(\backslash\)
+   x[6] -= x[5] ^ ((~x[4]) >> 23); \(\backslash\)
+   x[7] ^= x[6]; \(\backslash\)
+   x[0] += x[7]; \(\backslash\)
+   x[1] -= x[0] ^ ((~x[7]) << 19); \(\backslash\)
+   x[2] ^= x[1]; \(\backslash\)
+   x[3] += x[2]; \(\backslash\)
+   x[4] -= x[3] ^ ((~x[2]) >> 23); \(\backslash\)
+   x[5] ^= x[4]; \(\backslash\)
+   x[6] += x[5]; \(\backslash\)
+   x[7] -= x[6] ^ 0x0123456789ABCDEF; \(\backslash\)
+\}
+\end{DoxyCode}
+
+
+Definition at line 51 of file tiger.\+c.
+
+\mbox{\Hypertarget{tiger_8c_a09a9d90abab2c7016281628a4425429e}\label{tiger_8c_a09a9d90abab2c7016281628a4425429e}} 
+\index{tiger.\+c@{tiger.\+c}!R\+O\+U\+ND@{R\+O\+U\+ND}}
+\index{R\+O\+U\+ND@{R\+O\+U\+ND}!tiger.\+c@{tiger.\+c}}
+\subsubsection{\texorpdfstring{R\+O\+U\+ND}{ROUND}}
+{\footnotesize\ttfamily \#define R\+O\+U\+ND(\begin{DoxyParamCaption}\item[{}]{\hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a},  }\item[{}]{\hyperlink{nbns__common_8h_a4313c9563516f94387762ab05763456b}{b},  }\item[{}]{\hyperlink{llmnr__common_8h_a2e5a04327b5658199f0f7bda2acceee1}{c},  }\item[{}]{x,  }\item[{}]{mul }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}
+\{ \(\backslash\)
+      c ^= x; \(\backslash\)
+      a -= \hyperlink{tiger_8c_a5017152cac85e29a2dc5d8d74de9e07c}{t1}[\hyperlink{aria_8c_a5dadc28804036d1b82e1dc027e95c9a6}{c} & 0xFF] ^ \hyperlink{tiger_8c_a42a80c4c472115c0fcb04a076526ecf5}{t2}[(\hyperlink{aria_8c_a5dadc28804036d1b82e1dc027e95c9a6}{c} >> 16) & 0xFF] ^ \hyperlink{tiger_8c_a275db56faf9780608afff7d4fb462caf}{t3}[(\hyperlink{aria_8c_a5dadc28804036d1b82e1dc027e95c9a6}{c} >> 32) & 0xFF] ^ 
+      \hyperlink{tiger_8c_ad08af49192ab7f0c36cebbb4dee62ce8}{t4}[(\hyperlink{aria_8c_a5dadc28804036d1b82e1dc027e95c9a6}{c} >> 48) & 0xFF]; \(\backslash\)
+      b += \hyperlink{tiger_8c_ad08af49192ab7f0c36cebbb4dee62ce8}{t4}[(\hyperlink{aria_8c_a5dadc28804036d1b82e1dc027e95c9a6}{c} >> 8) & 0xFF] ^ \hyperlink{tiger_8c_a275db56faf9780608afff7d4fb462caf}{t3}[(\hyperlink{aria_8c_a5dadc28804036d1b82e1dc027e95c9a6}{c} >> 24) & 0xFF] ^ \hyperlink{tiger_8c_a42a80c4c472115c0fcb04a076526ecf5}{t2}[(\hyperlink{aria_8c_a5dadc28804036d1b82e1dc027e95c9a6}{c} >> 40) & 0xFF] ^ 
+      \hyperlink{tiger_8c_a5017152cac85e29a2dc5d8d74de9e07c}{t1}[(\hyperlink{aria_8c_a5dadc28804036d1b82e1dc027e95c9a6}{c} >> 56) & 0xFF]; \(\backslash\)
+      b *= mul; \(\backslash\)
+\}
+\end{DoxyCode}
+
+
+Definition at line 42 of file tiger.\+c.
+
+\mbox{\Hypertarget{tiger_8c_afcdf5e66fd927a7f4cc64295acd20407}\label{tiger_8c_afcdf5e66fd927a7f4cc64295acd20407}} 
+\index{tiger.\+c@{tiger.\+c}!T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+\index{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}!tiger.\+c@{tiger.\+c}}
+\subsubsection{\texorpdfstring{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}{TRACE\_LEVEL}}
+{\footnotesize\ttfamily \#define T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL~\hyperlink{crypto__config_8h_a6afae3a9b63f9b55d979e667ee0e881d}{C\+R\+Y\+P\+T\+O\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+
+
+
+Definition at line 32 of file tiger.\+c.
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{tiger_8c_a0bcfe5c3653670a365a12ed5db4fc243}\label{tiger_8c_a0bcfe5c3653670a365a12ed5db4fc243}} 
+\index{tiger.\+c@{tiger.\+c}!tiger\+Compute@{tiger\+Compute}}
+\index{tiger\+Compute@{tiger\+Compute}!tiger.\+c@{tiger.\+c}}
+\subsubsection{\texorpdfstring{tiger\+Compute()}{tigerCompute()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} tiger\+Compute (\begin{DoxyParamCaption}\item[{const void $\ast$}]{data,  }\item[{size\+\_\+t}]{length,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{digest }\end{DoxyParamCaption})}
+
+
+
+Digest a message using Tiger. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em data} & Pointer to the message being hashed \\
+\hline
+\mbox{\tt in}  & {\em length} & Length of the message \\
+\hline
+\mbox{\tt out}  & {\em digest} & Pointer to the calculated digest \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 386 of file tiger.\+c.
+
+
+\begin{DoxyCode}
+387 \{
+388    \textcolor{comment}{//Allocate a memory buffer to hold the Tiger context}
+389    \hyperlink{structTigerContext}{TigerContext} *context = \hyperlink{cyclone__crypto_2core_2crypto_8h_a48b53d16f66d31e5dcf82db3c1b882ba}{cryptoAllocMem}(\textcolor{keyword}{sizeof}(
+      \hyperlink{structTigerContext}{TigerContext}));
+390    \textcolor{comment}{//Failed to allocate memory?}
+391    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+392       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac0a554045048d2fb61387cf735676f69}{ERROR\_OUT\_OF\_MEMORY};
+393 
+394    \textcolor{comment}{//Initialize the Tiger context}
+395    \hyperlink{tiger_8c_a1696414ca515d90d18db8f40d01c3331}{tigerInit}(context);
+396    \textcolor{comment}{//Digest the message}
+397    \hyperlink{tiger_8c_a48e5f94c3a0ab81bcd214f6c3410fe10}{tigerUpdate}(context, \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length});
+398    \textcolor{comment}{//Finalize the Tiger message digest}
+399    \hyperlink{tiger_8c_a6f4baf983fcfe2c55de19281b081a46d}{tigerFinal}(context, digest);
+400 
+401    \textcolor{comment}{//Free previously allocated memory}
+402    \hyperlink{cyclone__crypto_2core_2crypto_8h_ac8a223b176683db4e9eed4162774f870}{cryptoFreeMem}(context);
+403    \textcolor{comment}{//Successful processing}
+404    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+405 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{tiger_8c_a6f4baf983fcfe2c55de19281b081a46d}\label{tiger_8c_a6f4baf983fcfe2c55de19281b081a46d}} 
+\index{tiger.\+c@{tiger.\+c}!tiger\+Final@{tiger\+Final}}
+\index{tiger\+Final@{tiger\+Final}!tiger.\+c@{tiger.\+c}}
+\subsubsection{\texorpdfstring{tiger\+Final()}{tigerFinal()}}
+{\footnotesize\ttfamily void tiger\+Final (\begin{DoxyParamCaption}\item[{\hyperlink{structTigerContext}{Tiger\+Context} $\ast$}]{context,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{digest }\end{DoxyParamCaption})}
+
+
+
+Finish the Tiger message digest. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the Tiger context \\
+\hline
+\mbox{\tt out}  & {\em digest} & Calculated digest (optional parameter) \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 473 of file tiger.\+c.
+
+
+\begin{DoxyCode}
+474 \{
+475    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+476    \textcolor{keywordtype}{size\_t} paddingSize;
+477    \hyperlink{stdint_8h_aec6fcb673ff035718c238c8c9d544c47}{uint64\_t} \hyperlink{resource__manager_8h_afd8a6a01e3b212857df6efb82e06f682}{totalSize};
+478 
+479    \textcolor{comment}{//Length of the original message (before padding)}
+480    totalSize = context->\hyperlink{structTigerContext_a2d2f2089fef588839923dd19bbcac2e5}{totalSize} * 8;
+481 
+482    \textcolor{comment}{//Pad the message so that its length is congruent to 56 modulo 64}
+483    \textcolor{keywordflow}{if}(context->\hyperlink{structTigerContext_aa3ff260b3910a8d860222d6807264218}{size} < 56)
+484       paddingSize = 56 - context->\hyperlink{structTigerContext_aa3ff260b3910a8d860222d6807264218}{size};
+485    \textcolor{keywordflow}{else}
+486       paddingSize = 64 + 56 - context->\hyperlink{structTigerContext_aa3ff260b3910a8d860222d6807264218}{size};
+487 
+488    \textcolor{comment}{//Append padding}
+489    \hyperlink{tiger_8c_a48e5f94c3a0ab81bcd214f6c3410fe10}{tigerUpdate}(context, \hyperlink{tiger_8c_ae1cca62951c2df9f5bf77fda3dcdd423}{padding}, paddingSize);
+490 
+491    \textcolor{comment}{//Append the length of the original message}
+492    context->\hyperlink{structTigerContext_ad02bc24aa1dea4fa38c1f8e22593a4e5}{x}[7] = \hyperlink{cpu__endian_8h_abe3c4432bb369f72cfb6b3dfd89e113a}{htole64}(totalSize);
+493 
+494    \textcolor{comment}{//Calculate the message digest}
+495    \hyperlink{tiger_8c_adedbd5758b59c43e5feaadca83e08466}{tigerProcessBlock}(context);
+496 
+497    \textcolor{comment}{//Convert from host byte order to little-endian byte order}
+498    \textcolor{keywordflow}{for}(i = 0; i < 3; i++)
+499    \{
+500       context->\hyperlink{structTigerContext_a8e54fa64e078ac5f8b1ebeaefd0ca602}{h}[i] = \hyperlink{cpu__endian_8h_abe3c4432bb369f72cfb6b3dfd89e113a}{htole64}(context->\hyperlink{structTigerContext_a8e54fa64e078ac5f8b1ebeaefd0ca602}{h}[i]);
+501    \}
+502 
+503    \textcolor{comment}{//Copy the resulting digest}
+504    \textcolor{keywordflow}{if}(digest != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+505       \hyperlink{cyclone__crypto_2core_2crypto_8h_a6724616c4014bb7e21f2660bd7b88be8}{cryptoMemcpy}(digest, context->\hyperlink{structTigerContext_a6fcc8a58aa0d1dc1ffc3d6892ee5b834}{digest}, \hyperlink{tiger_8h_a39cf9e804edd04c3518fab854a934baa}{TIGER\_DIGEST\_SIZE});
+506 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{tiger_8c_a1696414ca515d90d18db8f40d01c3331}\label{tiger_8c_a1696414ca515d90d18db8f40d01c3331}} 
+\index{tiger.\+c@{tiger.\+c}!tiger\+Init@{tiger\+Init}}
+\index{tiger\+Init@{tiger\+Init}!tiger.\+c@{tiger.\+c}}
+\subsubsection{\texorpdfstring{tiger\+Init()}{tigerInit()}}
+{\footnotesize\ttfamily void tiger\+Init (\begin{DoxyParamCaption}\item[{\hyperlink{structTigerContext}{Tiger\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Initialize Tiger message digest context. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the Tiger context to initialize \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 413 of file tiger.\+c.
+
+
+\begin{DoxyCode}
+414 \{
+415    \textcolor{comment}{//Set initial hash value}
+416    context->\hyperlink{structTigerContext_a8e54fa64e078ac5f8b1ebeaefd0ca602}{h}[0] = 0x0123456789ABCDEF;
+417    context->\hyperlink{structTigerContext_a8e54fa64e078ac5f8b1ebeaefd0ca602}{h}[1] = 0xFEDCBA9876543210;
+418    context->\hyperlink{structTigerContext_a8e54fa64e078ac5f8b1ebeaefd0ca602}{h}[2] = 0xF096A5B4C3B2E187;
+419 
+420    \textcolor{comment}{//Number of bytes in the buffer}
+421    context->\hyperlink{structTigerContext_aa3ff260b3910a8d860222d6807264218}{size} = 0;
+422    \textcolor{comment}{//Total length of the message}
+423    context->\hyperlink{structTigerContext_a2d2f2089fef588839923dd19bbcac2e5}{totalSize} = 0;
+424 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{tiger_8c_adedbd5758b59c43e5feaadca83e08466}\label{tiger_8c_adedbd5758b59c43e5feaadca83e08466}} 
+\index{tiger.\+c@{tiger.\+c}!tiger\+Process\+Block@{tiger\+Process\+Block}}
+\index{tiger\+Process\+Block@{tiger\+Process\+Block}!tiger.\+c@{tiger.\+c}}
+\subsubsection{\texorpdfstring{tiger\+Process\+Block()}{tigerProcessBlock()}}
+{\footnotesize\ttfamily void tiger\+Process\+Block (\begin{DoxyParamCaption}\item[{\hyperlink{structTigerContext}{Tiger\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Process message in 16-\/word blocks. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the Tiger context \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 514 of file tiger.\+c.
+
+
+\begin{DoxyCode}
+515 \{
+516    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+517 
+518    \textcolor{comment}{//Initialize the 4 working registers}
+519    \hyperlink{stdint_8h_aec6fcb673ff035718c238c8c9d544c47}{uint64\_t} \hyperlink{ndp_8h_af4007aacd75b22aee32dba9ea96082c0}{a} = context->\hyperlink{structTigerContext_a8e54fa64e078ac5f8b1ebeaefd0ca602}{h}[0];
+520    \hyperlink{stdint_8h_aec6fcb673ff035718c238c8c9d544c47}{uint64\_t} \hyperlink{dtls__misc_8h_ab590318ac859d0e57e15c3dd6c62a605}{b} = context->\hyperlink{structTigerContext_a8e54fa64e078ac5f8b1ebeaefd0ca602}{h}[1];
+521    \hyperlink{stdint_8h_aec6fcb673ff035718c238c8c9d544c47}{uint64\_t} \hyperlink{aria_8c_a5dadc28804036d1b82e1dc027e95c9a6}{c} = context->\hyperlink{structTigerContext_a8e54fa64e078ac5f8b1ebeaefd0ca602}{h}[2];
+522 
+523    \textcolor{comment}{//Each 512-bit message block is divided into eight 64-bit words}
+524    \hyperlink{stdint_8h_aec6fcb673ff035718c238c8c9d544c47}{uint64\_t} *x = context->\hyperlink{structTigerContext_ad02bc24aa1dea4fa38c1f8e22593a4e5}{x};
+525 
+526    \textcolor{comment}{//Convert from little-endian byte order to host byte order}
+527    \textcolor{keywordflow}{for}(i = 0; i < 8; i++)
+528    \{
+529       x[i] = \hyperlink{cpu__endian_8h_a19763700b12cc422823f51d1ee3b4b6b}{letoh64}(x[i]);
+530    \}
+531 
+532    \textcolor{comment}{//The computation consists of three passes}
+533    \hyperlink{tiger_8c_a09a9d90abab2c7016281628a4425429e}{ROUND}(a, b, c, x[0], 5);
+534    \hyperlink{tiger_8c_a09a9d90abab2c7016281628a4425429e}{ROUND}(b, c, a, x[1], 5);
+535    \hyperlink{tiger_8c_a09a9d90abab2c7016281628a4425429e}{ROUND}(c, a, b, x[2], 5);
+536    \hyperlink{tiger_8c_a09a9d90abab2c7016281628a4425429e}{ROUND}(a, b, c, x[3], 5);
+537    \hyperlink{tiger_8c_a09a9d90abab2c7016281628a4425429e}{ROUND}(b, c, a, x[4], 5);
+538    \hyperlink{tiger_8c_a09a9d90abab2c7016281628a4425429e}{ROUND}(c, a, b, x[5], 5);
+539    \hyperlink{tiger_8c_a09a9d90abab2c7016281628a4425429e}{ROUND}(a, b, c, x[6], 5);
+540    \hyperlink{tiger_8c_a09a9d90abab2c7016281628a4425429e}{ROUND}(b, c, a, x[7], 5);
+541    \hyperlink{tiger_8c_a7b01d710c801f57367cb34c82130b2ef}{KEY\_SCHEDULE}(x);
+542    \hyperlink{tiger_8c_a09a9d90abab2c7016281628a4425429e}{ROUND}(c, a, b, x[0], 7);
+543    \hyperlink{tiger_8c_a09a9d90abab2c7016281628a4425429e}{ROUND}(a, b, c, x[1], 7);
+544    \hyperlink{tiger_8c_a09a9d90abab2c7016281628a4425429e}{ROUND}(b, c, a, x[2], 7);
+545    \hyperlink{tiger_8c_a09a9d90abab2c7016281628a4425429e}{ROUND}(c, a, b, x[3], 7);
+546    \hyperlink{tiger_8c_a09a9d90abab2c7016281628a4425429e}{ROUND}(a, b, c, x[4], 7);
+547    \hyperlink{tiger_8c_a09a9d90abab2c7016281628a4425429e}{ROUND}(b, c, a, x[5], 7);
+548    \hyperlink{tiger_8c_a09a9d90abab2c7016281628a4425429e}{ROUND}(c, a, b, x[6], 7);
+549    \hyperlink{tiger_8c_a09a9d90abab2c7016281628a4425429e}{ROUND}(a, b, c, x[7], 7);
+550    \hyperlink{tiger_8c_a7b01d710c801f57367cb34c82130b2ef}{KEY\_SCHEDULE}(x);
+551    \hyperlink{tiger_8c_a09a9d90abab2c7016281628a4425429e}{ROUND}(b, c, a, x[0], 9);
+552    \hyperlink{tiger_8c_a09a9d90abab2c7016281628a4425429e}{ROUND}(c, a, b, x[1], 9);
+553    \hyperlink{tiger_8c_a09a9d90abab2c7016281628a4425429e}{ROUND}(a, b, c, x[2], 9);
+554    \hyperlink{tiger_8c_a09a9d90abab2c7016281628a4425429e}{ROUND}(b, c, a, x[3], 9);
+555    \hyperlink{tiger_8c_a09a9d90abab2c7016281628a4425429e}{ROUND}(c, a, b, x[4], 9);
+556    \hyperlink{tiger_8c_a09a9d90abab2c7016281628a4425429e}{ROUND}(a, b, c, x[5], 9);
+557    \hyperlink{tiger_8c_a09a9d90abab2c7016281628a4425429e}{ROUND}(b, c, a, x[6], 9);
+558    \hyperlink{tiger_8c_a09a9d90abab2c7016281628a4425429e}{ROUND}(c, a, b, x[7], 9);
+559 
+560    \textcolor{comment}{//Update the hash value}
+561    context->\hyperlink{structTigerContext_a8e54fa64e078ac5f8b1ebeaefd0ca602}{h}[0] = a ^ context->\hyperlink{structTigerContext_a8e54fa64e078ac5f8b1ebeaefd0ca602}{h}[0];
+562    context->\hyperlink{structTigerContext_a8e54fa64e078ac5f8b1ebeaefd0ca602}{h}[1] = b - context->\hyperlink{structTigerContext_a8e54fa64e078ac5f8b1ebeaefd0ca602}{h}[1];
+563    context->\hyperlink{structTigerContext_a8e54fa64e078ac5f8b1ebeaefd0ca602}{h}[2] = c + context->\hyperlink{structTigerContext_a8e54fa64e078ac5f8b1ebeaefd0ca602}{h}[2];
+564 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{tiger_8c_a48e5f94c3a0ab81bcd214f6c3410fe10}\label{tiger_8c_a48e5f94c3a0ab81bcd214f6c3410fe10}} 
+\index{tiger.\+c@{tiger.\+c}!tiger\+Update@{tiger\+Update}}
+\index{tiger\+Update@{tiger\+Update}!tiger.\+c@{tiger.\+c}}
+\subsubsection{\texorpdfstring{tiger\+Update()}{tigerUpdate()}}
+{\footnotesize\ttfamily void tiger\+Update (\begin{DoxyParamCaption}\item[{\hyperlink{structTigerContext}{Tiger\+Context} $\ast$}]{context,  }\item[{const void $\ast$}]{data,  }\item[{size\+\_\+t}]{length }\end{DoxyParamCaption})}
+
+
+
+Update the Tiger context with a portion of the message being hashed. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the Tiger context \\
+\hline
+\mbox{\tt in}  & {\em data} & Pointer to the buffer being hashed \\
+\hline
+\mbox{\tt in}  & {\em length} & Length of the buffer \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 434 of file tiger.\+c.
+
+
+\begin{DoxyCode}
+435 \{
+436    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+437 
+438    \textcolor{comment}{//Process the incoming data}
+439    \textcolor{keywordflow}{while}(\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} > 0)
+440    \{
+441       \textcolor{comment}{//The buffer can hold at most 64 bytes}
+442       n = \hyperlink{os__port_8h_a3acffbd305ee72dcd4593c0d8af64a4f}{MIN}(\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, 64 - context->\hyperlink{structTigerContext_aa3ff260b3910a8d860222d6807264218}{size});
+443 
+444       \textcolor{comment}{//Copy the data to the buffer}
+445       \hyperlink{cyclone__crypto_2core_2crypto_8h_a6724616c4014bb7e21f2660bd7b88be8}{cryptoMemcpy}(context->\hyperlink{structTigerContext_ad927797ce2825ae62c485d5bd912cf43}{buffer} + context->\hyperlink{structTigerContext_aa3ff260b3910a8d860222d6807264218}{size}, \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, n);
+446 
+447       \textcolor{comment}{//Update the Tiger context}
+448       context->\hyperlink{structTigerContext_aa3ff260b3910a8d860222d6807264218}{size} += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+449       context->\hyperlink{structTigerContext_a2d2f2089fef588839923dd19bbcac2e5}{totalSize} += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+450       \textcolor{comment}{//Advance the data pointer}
+451       \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data} = (\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *) \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data} + n;
+452       \textcolor{comment}{//Remaining bytes to process}
+453       \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} -= \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+454 
+455       \textcolor{comment}{//Process message in 16-word blocks}
+456       \textcolor{keywordflow}{if}(context->\hyperlink{structTigerContext_aa3ff260b3910a8d860222d6807264218}{size} == 64)
+457       \{
+458          \textcolor{comment}{//Transform the 16-word block}
+459          \hyperlink{tiger_8c_adedbd5758b59c43e5feaadca83e08466}{tigerProcessBlock}(context);
+460          \textcolor{comment}{//Empty the buffer}
+461          context->\hyperlink{structTigerContext_aa3ff260b3910a8d860222d6807264218}{size} = 0;
+462       \}
+463    \}
+464 \}
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{tiger_8c_ae1cca62951c2df9f5bf77fda3dcdd423}\label{tiger_8c_ae1cca62951c2df9f5bf77fda3dcdd423}} 
+\index{tiger.\+c@{tiger.\+c}!padding@{padding}}
+\index{padding@{padding}!tiger.\+c@{tiger.\+c}}
+\subsubsection{\texorpdfstring{padding}{padding}}
+{\footnotesize\ttfamily const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} padding\mbox{[}64\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=
+\{
+   0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+\}
+\end{DoxyCode}
+
+
+Definition at line 72 of file tiger.\+c.
+
+\mbox{\Hypertarget{tiger_8c_a5017152cac85e29a2dc5d8d74de9e07c}\label{tiger_8c_a5017152cac85e29a2dc5d8d74de9e07c}} 
+\index{tiger.\+c@{tiger.\+c}!t1@{t1}}
+\index{t1@{t1}!tiger.\+c@{tiger.\+c}}
+\subsubsection{\texorpdfstring{t1}{t1}}
+{\footnotesize\ttfamily const \hyperlink{stdint_8h_aec6fcb673ff035718c238c8c9d544c47}{uint64\+\_\+t} t1\mbox{[}256\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 81 of file tiger.\+c.
+
+\mbox{\Hypertarget{tiger_8c_a42a80c4c472115c0fcb04a076526ecf5}\label{tiger_8c_a42a80c4c472115c0fcb04a076526ecf5}} 
+\index{tiger.\+c@{tiger.\+c}!t2@{t2}}
+\index{t2@{t2}!tiger.\+c@{tiger.\+c}}
+\subsubsection{\texorpdfstring{t2}{t2}}
+{\footnotesize\ttfamily const \hyperlink{stdint_8h_aec6fcb673ff035718c238c8c9d544c47}{uint64\+\_\+t} t2\mbox{[}256\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 150 of file tiger.\+c.
+
+\mbox{\Hypertarget{tiger_8c_a275db56faf9780608afff7d4fb462caf}\label{tiger_8c_a275db56faf9780608afff7d4fb462caf}} 
+\index{tiger.\+c@{tiger.\+c}!t3@{t3}}
+\index{t3@{t3}!tiger.\+c@{tiger.\+c}}
+\subsubsection{\texorpdfstring{t3}{t3}}
+{\footnotesize\ttfamily const \hyperlink{stdint_8h_aec6fcb673ff035718c238c8c9d544c47}{uint64\+\_\+t} t3\mbox{[}256\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 219 of file tiger.\+c.
+
+\mbox{\Hypertarget{tiger_8c_ad08af49192ab7f0c36cebbb4dee62ce8}\label{tiger_8c_ad08af49192ab7f0c36cebbb4dee62ce8}} 
+\index{tiger.\+c@{tiger.\+c}!t4@{t4}}
+\index{t4@{t4}!tiger.\+c@{tiger.\+c}}
+\subsubsection{\texorpdfstring{t4}{t4}}
+{\footnotesize\ttfamily const \hyperlink{stdint_8h_aec6fcb673ff035718c238c8c9d544c47}{uint64\+\_\+t} t4\mbox{[}256\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 288 of file tiger.\+c.
+
+\mbox{\Hypertarget{tiger_8c_ac506bcd179f66e8a8c034dc166da4c12}\label{tiger_8c_ac506bcd179f66e8a8c034dc166da4c12}} 
+\index{tiger.\+c@{tiger.\+c}!tiger\+Hash\+Algo@{tiger\+Hash\+Algo}}
+\index{tiger\+Hash\+Algo@{tiger\+Hash\+Algo}!tiger.\+c@{tiger.\+c}}
+\subsubsection{\texorpdfstring{tiger\+Hash\+Algo}{tigerHashAlgo}}
+{\footnotesize\ttfamily const \hyperlink{structHashAlgo}{Hash\+Algo} tiger\+Hash\+Algo}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=
+\{
+   \textcolor{stringliteral}{"TIGER"},
+   \hyperlink{tiger_8c_a8ed5836b52f176d12958676eb82a1d26}{tigerOid},
+   \textcolor{keyword}{sizeof}(\hyperlink{tiger_8c_a8ed5836b52f176d12958676eb82a1d26}{tigerOid}),
+   \textcolor{keyword}{sizeof}(\hyperlink{structTigerContext}{TigerContext}),
+   \hyperlink{tiger_8h_a3b7470a5d2f4fd75a0ae43d244d68d79}{TIGER\_BLOCK\_SIZE},
+   \hyperlink{tiger_8h_a39cf9e804edd04c3518fab854a934baa}{TIGER\_DIGEST\_SIZE},
+   \hyperlink{tiger_8h_a0c0d300b4617c3e050b0180985171e20}{TIGER\_MIN\_PAD\_SIZE},
+   \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE},
+   (\hyperlink{cyclone__crypto_2core_2crypto_8h_a02fe893af436f6d8a574897a59748592}{HashAlgoCompute}) \hyperlink{tiger_8c_a0bcfe5c3653670a365a12ed5db4fc243}{tigerCompute},
+   (\hyperlink{cyclone__crypto_2core_2crypto_8h_afc5ce55917bd80825aa610848f402caf}{HashAlgoInit}) \hyperlink{tiger_8c_a1696414ca515d90d18db8f40d01c3331}{tigerInit},
+   (\hyperlink{cyclone__crypto_2core_2crypto_8h_a3d1fb45d6ca7822d20873ddbc8e39b89}{HashAlgoUpdate}) \hyperlink{tiger_8c_a48e5f94c3a0ab81bcd214f6c3410fe10}{tigerUpdate},
+   (\hyperlink{cyclone__crypto_2core_2crypto_8h_a0a272470b5f95692d2e2e882f75844b3}{HashAlgoFinal}) \hyperlink{tiger_8c_a6f4baf983fcfe2c55de19281b081a46d}{tigerFinal},
+   \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}
+\}
+\end{DoxyCode}
+
+
+Definition at line 360 of file tiger.\+c.
+
+\mbox{\Hypertarget{tiger_8c_a8ed5836b52f176d12958676eb82a1d26}\label{tiger_8c_a8ed5836b52f176d12958676eb82a1d26}} 
+\index{tiger.\+c@{tiger.\+c}!tiger\+Oid@{tiger\+Oid}}
+\index{tiger\+Oid@{tiger\+Oid}!tiger.\+c@{tiger.\+c}}
+\subsubsection{\texorpdfstring{tiger\+Oid}{tigerOid}}
+{\footnotesize\ttfamily const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} tiger\+Oid\mbox{[}9\mbox{]} = \{0x2\+B, 0x06, 0x01, 0x04, 0x01, 0x\+D\+A, 0x47, 0x0\+C, 0x02\}}
+
+
+
+Definition at line 357 of file tiger.\+c.
+

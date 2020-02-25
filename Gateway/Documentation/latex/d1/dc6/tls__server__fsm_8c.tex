@@ -1,0 +1,423 @@
+\hypertarget{tls__server__fsm_8c}{}\section{cyclone\+\_\+ssl/tls\+\_\+server\+\_\+fsm.c File Reference}
+\label{tls__server__fsm_8c}\index{cyclone\+\_\+ssl/tls\+\_\+server\+\_\+fsm.\+c@{cyclone\+\_\+ssl/tls\+\_\+server\+\_\+fsm.\+c}}
+
+
+T\+LS state machine (T\+LS server)  
+
+
+{\ttfamily \#include \char`\"{}tls.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}tls\+\_\+handshake.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}tls\+\_\+server.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}tls\+\_\+server\+\_\+fsm.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}tls\+\_\+common.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}tls\+\_\+cache.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}tls\+\_\+record.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}tls\+\_\+misc.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}tls13\+\_\+server.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}tls13\+\_\+common.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}tls13\+\_\+key\+\_\+material.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}debug.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{tls__server__fsm_8c_afcdf5e66fd927a7f4cc64295acd20407}{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}~\hyperlink{tls__config_8h_afee42a623033dac888291d1993985206}{T\+L\+S\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{tls__server__fsm_8c_a28347628b27e36732d617324e8694ecd}{tls\+Perform\+Server\+Handshake} (\hyperlink{tls_8h_ac09f7a286c0cdf9b07ee1edd107946f5}{Tls\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em T\+LS server handshake. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{tls__server__fsm_8c_aac0e365e07c9b42faf4f23dfcf9a9f27}{tls\+Parse\+Client\+Handshake\+Message} (\hyperlink{tls_8h_ac09f7a286c0cdf9b07ee1edd107946f5}{Tls\+Context} $\ast$context, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} \hyperlink{mqtt__sn__common_8h_a9d7facd71a8c8355a77006f5a6dcd420}{msg\+Type}, const void $\ast$\hyperlink{pap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length})
+\begin{DoxyCompactList}\small\item\em Parse client\textquotesingle{}s handshake message. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+T\+LS state machine (T\+LS server) 
+
+\hypertarget{pic32mz__ef__curiosity_8h_License}{}\subsection{License}\label{pic32mz__ef__curiosity_8h_License}
+S\+P\+D\+X-\/\+License-\/\+Identifier\+: G\+P\+L-\/2.\+0-\/or-\/later
+
+Copyright (C) 2010-\/2019 Oryx Embedded S\+A\+RL. All rights reserved.
+
+This file is part of Cyclone\+S\+SL Open.
+
+This program is free software; you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+
+You should have received a copy of the G\+NU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-\/1301, U\+SA.
+
+\begin{DoxyAuthor}{Author}
+Oryx Embedded S\+A\+RL (www.\+oryx-\/embedded.\+com) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+9.\+6 
+\end{DoxyVersion}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{tls__server__fsm_8c_afcdf5e66fd927a7f4cc64295acd20407}\label{tls__server__fsm_8c_afcdf5e66fd927a7f4cc64295acd20407}} 
+\index{tls\+\_\+server\+\_\+fsm.\+c@{tls\+\_\+server\+\_\+fsm.\+c}!T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+\index{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}!tls\+\_\+server\+\_\+fsm.\+c@{tls\+\_\+server\+\_\+fsm.\+c}}
+\subsubsection{\texorpdfstring{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}{TRACE\_LEVEL}}
+{\footnotesize\ttfamily \#define T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL~\hyperlink{tls__config_8h_afee42a623033dac888291d1993985206}{T\+L\+S\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+
+
+
+Definition at line 32 of file tls\+\_\+server\+\_\+fsm.\+c.
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{tls__server__fsm_8c_aac0e365e07c9b42faf4f23dfcf9a9f27}\label{tls__server__fsm_8c_aac0e365e07c9b42faf4f23dfcf9a9f27}} 
+\index{tls\+\_\+server\+\_\+fsm.\+c@{tls\+\_\+server\+\_\+fsm.\+c}!tls\+Parse\+Client\+Handshake\+Message@{tls\+Parse\+Client\+Handshake\+Message}}
+\index{tls\+Parse\+Client\+Handshake\+Message@{tls\+Parse\+Client\+Handshake\+Message}!tls\+\_\+server\+\_\+fsm.\+c@{tls\+\_\+server\+\_\+fsm.\+c}}
+\subsubsection{\texorpdfstring{tls\+Parse\+Client\+Handshake\+Message()}{tlsParseClientHandshakeMessage()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} tls\+Parse\+Client\+Handshake\+Message (\begin{DoxyParamCaption}\item[{\hyperlink{tls_8h_ac09f7a286c0cdf9b07ee1edd107946f5}{Tls\+Context} $\ast$}]{context,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}}]{msg\+Type,  }\item[{const void $\ast$}]{message,  }\item[{size\+\_\+t}]{length }\end{DoxyParamCaption})}
+
+
+
+Parse client\textquotesingle{}s handshake message. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the T\+LS context \\
+\hline
+\mbox{\tt in}  & {\em msg\+Type} & Handshake message type \\
+\hline
+\mbox{\tt in}  & {\em message} & Pointer to the handshake message to parse \\
+\hline
+\mbox{\tt in}  & {\em length} & Length of the handshake messaged \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 292 of file tls\+\_\+server\+\_\+fsm.\+c.
+
+
+\begin{DoxyCode}
+294 \{
+295    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+296 
+297    \textcolor{comment}{//Check handshake message type}
+298    \textcolor{keywordflow}{switch}(\hyperlink{dtls__misc_8h_a9d7facd71a8c8355a77006f5a6dcd420}{msgType})
+299    \{
+300    \textcolor{comment}{//ClientHello message received?}
+301    \textcolor{keywordflow}{case} \hyperlink{tls_8h_aea257240929f03e1e6ea3c7ab65ddb9ba374f2754185de2cef4ffb42530ce16a8}{TLS\_TYPE\_CLIENT\_HELLO}:
+302       \textcolor{comment}{//When a client first connects to a server, it is required to send the}
+303       \textcolor{comment}{//ClientHello as its first message}
+304       error = \hyperlink{tls__server_8c_a38ce6b990031f07a875c795599ccd5d4}{tlsParseClientHello}(context, \hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}, 
+      \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length});
+305       \textcolor{keywordflow}{break};
+306 
+307    \textcolor{comment}{//Certificate message received?}
+308    \textcolor{keywordflow}{case} \hyperlink{tls_8h_aea257240929f03e1e6ea3c7ab65ddb9bab621c6882cff8d5b59980875b6ce7cfc}{TLS\_TYPE\_CERTIFICATE}:
+309       \textcolor{comment}{//This is the first message the client can send after receiving a}
+310       \textcolor{comment}{//ServerHelloDone message. This message is only sent if the server}
+311       \textcolor{comment}{//requests a certificate}
+312       error = \hyperlink{tls__common_8c_a8ea298350bb1262e85bca00a448122f3}{tlsParseCertificate}(context, \hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}, 
+      \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length});
+313       \textcolor{keywordflow}{break};
+314 
+315    \textcolor{comment}{//CertificateVerify message received?}
+316    \textcolor{keywordflow}{case} \hyperlink{tls_8h_aea257240929f03e1e6ea3c7ab65ddb9ba43d7fd238682404358c9831b0048aa18}{TLS\_TYPE\_CERTIFICATE\_VERIFY}:
+317       \textcolor{comment}{//This message is used to provide explicit verification of a client}
+318       \textcolor{comment}{//certificate. This message is only sent following a client certificate}
+319       \textcolor{comment}{//that has signing capability. When sent, it must immediately follow}
+320       \textcolor{comment}{//the clientKeyExchange message}
+321       error = \hyperlink{tls__common_8c_a28b47eb94395efb96c6b4d274a5aeb38}{tlsParseCertificateVerify}(context, 
+      \hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length});
+322       \textcolor{keywordflow}{break};
+323 
+324    \textcolor{comment}{//Finished message received?}
+325    \textcolor{keywordflow}{case} \hyperlink{tls_8h_aea257240929f03e1e6ea3c7ab65ddb9baa70dd3c1f4f49e708201d020a2125b9f}{TLS\_TYPE\_FINISHED}:
+326       \textcolor{comment}{//A Finished message is always sent immediately after a ChangeCipherSpec}
+327       \textcolor{comment}{//message to verify that the key exchange and authentication processes}
+328       \textcolor{comment}{//were successful}
+329       error = \hyperlink{tls__common_8c_ad2a518c781f8297e7b21fdbeb569de31}{tlsParseFinished}(context, \hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length});
+330       \textcolor{keywordflow}{break};
+331 
+332 \textcolor{preprocessor}{#if (TLS\_MAX\_VERSION >= SSL\_VERSION\_3\_0 && TLS\_MIN\_VERSION <= TLS\_VERSION\_1\_2)}
+333    \textcolor{comment}{//ClientKeyExchange message received?}
+334    \textcolor{keywordflow}{case} \hyperlink{tls_8h_aea257240929f03e1e6ea3c7ab65ddb9bac60c488eb103ba58049875235476f1cc}{TLS\_TYPE\_CLIENT\_KEY\_EXCHANGE}:
+335       \textcolor{comment}{//This message must immediately follow the client certificate message, if}
+336       \textcolor{comment}{//it is sent. Otherwise, it must be the first message sent by the client}
+337       \textcolor{comment}{//after it receives the ServerHelloDone message}
+338       error = \hyperlink{tls__server_8c_a204fb38ba0d5de7703844660c79e0b40}{tlsParseClientKeyExchange}(context, 
+      \hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length});
+339       \textcolor{keywordflow}{break};
+340 \textcolor{preprocessor}{#endif}
+341 
+342 \textcolor{preprocessor}{#if (TLS\_MAX\_VERSION >= TLS\_VERSION\_1\_3 && TLS\_MIN\_VERSION <= TLS\_VERSION\_1\_3)}
+343    \textcolor{comment}{//KeyUpdate message received?}
+344    \textcolor{keywordflow}{case} \hyperlink{tls_8h_aea257240929f03e1e6ea3c7ab65ddb9bab97fd5abc6c82fbde3813a4f585323f2}{TLS\_TYPE\_KEY\_UPDATE}:
+345       \textcolor{comment}{//The KeyUpdate handshake message is used to indicate that the client is}
+346       \textcolor{comment}{//updating its sending cryptographic keys. This message can be sent by}
+347       \textcolor{comment}{//the client after it has sent a Finished message}
+348       error = \hyperlink{tls13__common_8h_a2c0e9ef093247bf63593fc36c33e6c8a}{tls13ParseKeyUpdate}(context, \hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}, 
+      \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length});
+349       \textcolor{keywordflow}{break};
+350 \textcolor{preprocessor}{#endif}
+351 
+352    \textcolor{comment}{//Invalid handshake message received?}
+353    \textcolor{keywordflow}{default}:
+354       \textcolor{comment}{//Report an error}
+355       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cafb4f7e4640c9d495bf35ee668d620b17}{ERROR\_UNEXPECTED\_MESSAGE};
+356       \textcolor{keywordflow}{break};
+357    \}
+358 
+359    \textcolor{comment}{//Return status code}
+360    \textcolor{keywordflow}{return} error;
+361 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{tls__server__fsm_8c_a28347628b27e36732d617324e8694ecd}\label{tls__server__fsm_8c_a28347628b27e36732d617324e8694ecd}} 
+\index{tls\+\_\+server\+\_\+fsm.\+c@{tls\+\_\+server\+\_\+fsm.\+c}!tls\+Perform\+Server\+Handshake@{tls\+Perform\+Server\+Handshake}}
+\index{tls\+Perform\+Server\+Handshake@{tls\+Perform\+Server\+Handshake}!tls\+\_\+server\+\_\+fsm.\+c@{tls\+\_\+server\+\_\+fsm.\+c}}
+\subsubsection{\texorpdfstring{tls\+Perform\+Server\+Handshake()}{tlsPerformServerHandshake()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} tls\+Perform\+Server\+Handshake (\begin{DoxyParamCaption}\item[{\hyperlink{tls_8h_ac09f7a286c0cdf9b07ee1edd107946f5}{Tls\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+T\+LS server handshake. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the T\+LS context \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 58 of file tls\+\_\+server\+\_\+fsm.\+c.
+
+
+\begin{DoxyCode}
+59 \{
+60    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+61 
+62    \textcolor{comment}{//Initialize status code}
+63    error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+64 
+65    \textcolor{comment}{//Wait for the handshake to complete}
+66    \textcolor{keywordflow}{while}(!error)
+67    \{
+68       \textcolor{comment}{//TLS protocol?}
+69       \textcolor{keywordflow}{if}(context->transportProtocol == \hyperlink{tls_8h_a25cb7e3df9004160eb21eac9377dc89fa2fbbbd6c318570d570225144f3c6c244}{TLS\_TRANSPORT\_PROTOCOL\_STREAM})
+70       \{
+71          \textcolor{comment}{//Check current state}
+72          \textcolor{keywordflow}{if}(context->state != \hyperlink{tls_8h_a02bb4c8aa7988b33fe4d4836d8ff4a4da91123cf9d82ef3aac68e9e091ef5c9f9}{TLS\_STATE\_INIT} &&
+73             context->state != \hyperlink{tls_8h_a02bb4c8aa7988b33fe4d4836d8ff4a4da182b100e092b0058c72d76006b7981fd}{TLS\_STATE\_CLOSED})
+74          \{
+75             \textcolor{comment}{//Flush send buffer}
+76             error = \hyperlink{tls__record_8c_ae8f8c035d23eb99d1d5642d4ce644715}{tlsWriteProtocolData}(context, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, 0, 
+      \hyperlink{tls_8h_a6fad1efb9f011dc3f76039976bef896ca86bbddd09b8894c9f1bcf5c721b0d412}{TLS\_TYPE\_NONE});
+77             \textcolor{comment}{//Any error to report?}
+78             \textcolor{keywordflow}{if}(error)
+79                \textcolor{keywordflow}{break};
+80          \}
+81       \}
+82 
+83       \textcolor{comment}{//Check whether the handshake is complete}
+84       \textcolor{keywordflow}{if}(context->state == \hyperlink{tls_8h_a02bb4c8aa7988b33fe4d4836d8ff4a4da7ff3a76e0b1787b6d0026e533a89649b}{TLS\_STATE\_APPLICATION\_DATA})
+85       \{
+86          \textcolor{comment}{//At this is point, the handshake is complete and the server starts}
+87          \textcolor{comment}{//to exchange application-layer data}
+88          \textcolor{keywordflow}{break};
+89       \}
+90 
+91       \textcolor{comment}{//The TLS handshake is implemented as a state machine representing the}
+92       \textcolor{comment}{//current location in the protocol}
+93       \textcolor{keywordflow}{switch}(context->state)
+94       \{
+95       \textcolor{comment}{//Initial state?}
+96       \textcolor{keywordflow}{case} \hyperlink{tls_8h_a02bb4c8aa7988b33fe4d4836d8ff4a4da91123cf9d82ef3aac68e9e091ef5c9f9}{TLS\_STATE\_INIT}:
+97          \textcolor{comment}{//TLS handshake initialization}
+98          error = \hyperlink{tls__handshake_8c_a89760024b4640ed45d9961d0cd91d4d3}{tlsInitHandshake}(context);
+99          \textcolor{keywordflow}{break};
+100 
+101       \textcolor{comment}{//Sending ServerHello message?}
+102       \textcolor{keywordflow}{case} \hyperlink{tls_8h_a02bb4c8aa7988b33fe4d4836d8ff4a4da69787ce8e1f218e8e47defe7af1c601a}{TLS\_STATE\_SERVER\_HELLO}:
+103       \textcolor{keywordflow}{case} \hyperlink{tls_8h_a02bb4c8aa7988b33fe4d4836d8ff4a4da22971523377f52c52b251553e373b4c8}{TLS\_STATE\_SERVER\_HELLO\_2}:
+104          \textcolor{comment}{//The server will send this message in response to a ClientHello}
+105          \textcolor{comment}{//message when it was able to find an acceptable set of algorithms}
+106          error = \hyperlink{tls__server_8c_a67975b6b6f060d494e01cc75e171fecf}{tlsSendServerHello}(context);
+107          \textcolor{keywordflow}{break};
+108 
+109       \textcolor{comment}{//Sending Certificate message?}
+110       \textcolor{keywordflow}{case} \hyperlink{tls_8h_a02bb4c8aa7988b33fe4d4836d8ff4a4da09790eaca7bac9c6bfd5b3e0775b6074}{TLS\_STATE\_SERVER\_CERTIFICATE}:
+111          \textcolor{comment}{//The server must send a Certificate message whenever the agreed-}
+112          \textcolor{comment}{//upon key exchange method uses certificates for authentication. This}
+113          \textcolor{comment}{//message will always immediately follow the ServerHello message}
+114          error = \hyperlink{tls__common_8c_ae447dcb4133c50b4baf93b4808824474}{tlsSendCertificate}(context);
+115          \textcolor{keywordflow}{break};
+116 
+117       \textcolor{comment}{//Sending Certificate message?}
+118       \textcolor{keywordflow}{case} \hyperlink{tls_8h_a02bb4c8aa7988b33fe4d4836d8ff4a4dae316fcecd0b42b329c94f5c3102d8783}{TLS\_STATE\_CERTIFICATE\_REQUEST}:
+119          \textcolor{comment}{//A non-anonymous server can optionally request a certificate from the}
+120          \textcolor{comment}{//client, if appropriate for the selected cipher suite. This message,}
+121          \textcolor{comment}{//if sent, will immediately follow the ServerKeyExchange message}
+122          error = \hyperlink{tls__server_8c_a5f8b0853322153b88ff07e7bea633835}{tlsSendCertificateRequest}(context);
+123          \textcolor{keywordflow}{break};
+124 
+125       \textcolor{comment}{//Sending ChangeCipherSpec message?}
+126       \textcolor{keywordflow}{case} \hyperlink{tls_8h_a02bb4c8aa7988b33fe4d4836d8ff4a4da0023cfdc8ed0f0062637380bee3683a0}{TLS\_STATE\_SERVER\_CHANGE\_CIPHER\_SPEC}:
+127       \textcolor{keywordflow}{case} \hyperlink{tls_8h_a02bb4c8aa7988b33fe4d4836d8ff4a4da2064050523f96771d69ecb8fe15ff8f7}{TLS\_STATE\_SERVER\_CHANGE\_CIPHER\_SPEC\_2}:
+128          \textcolor{comment}{//The ChangeCipherSpec message is sent by the server and to notify the}
+129          \textcolor{comment}{//client that subsequent records will be protected under the newly}
+130          \textcolor{comment}{//negotiated CipherSpec and keys}
+131          error = \hyperlink{tls__common_8c_a4a916411e28b77ed86195f311ebebb4b}{tlsSendChangeCipherSpec}(context);
+132          \textcolor{keywordflow}{break};
+133 
+134       \textcolor{comment}{//Sending Finished message?}
+135       \textcolor{keywordflow}{case} \hyperlink{tls_8h_a02bb4c8aa7988b33fe4d4836d8ff4a4da4638034a43094f0a8409cc8f0163d23b}{TLS\_STATE\_SERVER\_FINISHED}:
+136          \textcolor{comment}{//A Finished message is always sent immediately after a ChangeCipherSpec}
+137          \textcolor{comment}{//message to verify that the key exchange and authentication processes}
+138          \textcolor{comment}{//were successful}
+139          error = \hyperlink{tls__common_8c_a6830d5e2c36cf6293e93369370d8e4c2}{tlsSendFinished}(context);
+140          \textcolor{keywordflow}{break};
+141 
+142 \textcolor{preprocessor}{#if (DTLS\_SUPPORT == ENABLED)}
+143       \textcolor{comment}{//Sending HelloVerifyRequest message?}
+144       \textcolor{keywordflow}{case} \hyperlink{tls_8h_a02bb4c8aa7988b33fe4d4836d8ff4a4da28df1d3e7276c71ab9e2f8c75cdeef2e}{TLS\_STATE\_HELLO\_VERIFY\_REQUEST}:
+145          \textcolor{comment}{//When the client sends its ClientHello message to the server, the}
+146          \textcolor{comment}{//server may respond with a HelloVerifyRequest message}
+147          error = \hyperlink{dtls__misc_8c_ad7ccef14f7e585d2e38c55db67cbe14b}{dtlsSendHelloVerifyRequest}(context);
+148          \textcolor{keywordflow}{break};
+149 \textcolor{preprocessor}{#endif}
+150 
+151 \textcolor{preprocessor}{#if (TLS\_MAX\_VERSION >= SSL\_VERSION\_3\_0 && TLS\_MIN\_VERSION <= TLS\_VERSION\_1\_2)}
+152       \textcolor{comment}{//Sending ServerKeyExchange message?}
+153       \textcolor{keywordflow}{case} \hyperlink{tls_8h_a02bb4c8aa7988b33fe4d4836d8ff4a4da8ed746876fcd686d131f90d04809fd32}{TLS\_STATE\_SERVER\_KEY\_EXCHANGE}:
+154          \textcolor{comment}{//The ServerKeyExchange message is sent by the server only when the}
+155          \textcolor{comment}{//server Certificate message (if sent) does not contain enough data}
+156          \textcolor{comment}{//to allow the client to exchange a premaster secret}
+157          error = \hyperlink{tls__server_8c_a5b4084306cc9d8e1d083e272cd98aef1}{tlsSendServerKeyExchange}(context);
+158          \textcolor{keywordflow}{break};
+159 
+160       \textcolor{comment}{//Sending ServerHelloDone message?}
+161       \textcolor{keywordflow}{case} \hyperlink{tls_8h_a02bb4c8aa7988b33fe4d4836d8ff4a4dacfeeaa75eec1aecc4c975236b2af1f9c}{TLS\_STATE\_SERVER\_HELLO\_DONE}:
+162          \textcolor{comment}{//The ServerHelloDone message is sent by the server to indicate the}
+163          \textcolor{comment}{//end of the ServerHello and associated messages}
+164          error = \hyperlink{tls__server_8c_a1bc3bb08a169817c6105f9f5f13f58ac}{tlsSendServerHelloDone}(context);
+165          \textcolor{keywordflow}{break};
+166 \textcolor{preprocessor}{#endif}
+167 
+168 \textcolor{preprocessor}{#if (TLS\_MAX\_VERSION >= TLS\_VERSION\_1\_3 && TLS\_MIN\_VERSION <= TLS\_VERSION\_1\_3)}
+169       \textcolor{comment}{//Sending HelloRetryRequest message?}
+170       \textcolor{keywordflow}{case} \hyperlink{tls_8h_a02bb4c8aa7988b33fe4d4836d8ff4a4daa874b96bf23b3215942a719bbad609b5}{TLS\_STATE\_HELLO\_RETRY\_REQUEST}:
+171          \textcolor{comment}{//The server sends a HelloRetryRequest message if the ClientHello}
+172          \textcolor{comment}{//message does not contain sufficient information to proceed with}
+173          \textcolor{comment}{//the handshake}
+174          error = \hyperlink{tls13__server_8h_ae7d80ad3dc19b47d0eeea9fcd7c48510}{tls13SendHelloRetryRequest}(context);
+175          \textcolor{keywordflow}{break};
+176 
+177       \textcolor{comment}{//Handshake traffic key generation?}
+178       \textcolor{keywordflow}{case} \hyperlink{tls_8h_a02bb4c8aa7988b33fe4d4836d8ff4a4daeb443224abb7649fc9e8adf3e51864a2}{TLS\_STATE\_HANDSHAKE\_TRAFFIC\_KEYS}:
+179          \textcolor{comment}{//Compute handshake traffic keys}
+180          error = \hyperlink{tls13__key__material_8h_a5a007be4a677342cdf83df08c92d59a7}{tls13GenerateHandshakeTrafficKeys}(context);
+181          \textcolor{keywordflow}{break};
+182 
+183       \textcolor{comment}{//Sending EncryptedExtensions message?}
+184       \textcolor{keywordflow}{case} \hyperlink{tls_8h_a02bb4c8aa7988b33fe4d4836d8ff4a4daf72c48e789c26be573d3726c9e7ad163}{TLS\_STATE\_ENCRYPTED\_EXTENSIONS}:
+185          \textcolor{comment}{//The server sends the EncryptedExtensions message immediately after}
+186          \textcolor{comment}{//the ServerHello message. The EncryptedExtensions message contains}
+187          \textcolor{comment}{//extensions that can be protected}
+188          error = \hyperlink{tls13__server_8h_a50a9fb5a345227b295e96bc203ae90b3}{tls13SendEncryptedExtensions}(context);
+189          \textcolor{keywordflow}{break};
+190 
+191       \textcolor{comment}{//Sending CertificateVerify message?}
+192       \textcolor{keywordflow}{case} \hyperlink{tls_8h_a02bb4c8aa7988b33fe4d4836d8ff4a4da21097ff5428ba2ba5b8be925fd42224b}{TLS\_STATE\_SERVER\_CERTIFICATE\_VERIFY}:
+193          \textcolor{comment}{//Servers must send this message when authenticating via a}
+194          \textcolor{comment}{//certificate. When sent, this message must appear immediately}
+195          \textcolor{comment}{//after the Certificate message}
+196          error = \hyperlink{tls__common_8c_ad10693e5b3286d3df6fca1597c61201e}{tlsSendCertificateVerify}(context);
+197          \textcolor{keywordflow}{break};
+198 
+199       \textcolor{comment}{//Server application traffic key generation?}
+200       \textcolor{keywordflow}{case} \hyperlink{tls_8h_a02bb4c8aa7988b33fe4d4836d8ff4a4da4540b72ab65fe29516e8148fbb43261d}{TLS\_STATE\_SERVER\_APP\_TRAFFIC\_KEYS}:
+201          \textcolor{comment}{//Compute server application traffic keys}
+202          error = \hyperlink{tls13__key__material_8h_a3ff36fe11c6a23b6e036e456f5fccfac}{tls13GenerateServerAppTrafficKeys}(context);
+203          \textcolor{keywordflow}{break};
+204 
+205       \textcolor{comment}{//Client application traffic key generation?}
+206       \textcolor{keywordflow}{case} \hyperlink{tls_8h_a02bb4c8aa7988b33fe4d4836d8ff4a4da429690fe1b1bd88bcc256dc5ec811448}{TLS\_STATE\_CLIENT\_APP\_TRAFFIC\_KEYS}:
+207          \textcolor{comment}{//Compute client application traffic keys}
+208          error = \hyperlink{tls13__key__material_8h_a149f0e82a98fbe08b175f47c9a47682f}{tls13GenerateClientAppTrafficKeys}(context);
+209          \textcolor{keywordflow}{break};
+210 
+211       \textcolor{comment}{//Sending NewSessionTicket message message?}
+212       \textcolor{keywordflow}{case} \hyperlink{tls_8h_a02bb4c8aa7988b33fe4d4836d8ff4a4da954d937d822fd40f512efbaa5526a4be}{TLS\_STATE\_NEW\_SESSION\_TICKET}:
+213          \textcolor{comment}{//At any time after the server has received the client Finished}
+214          \textcolor{comment}{//message, it may send a NewSessionTicket message}
+215          error = \hyperlink{tls13__server_8h_a39e474955e495f505d405f125707ccb0}{tls13SendNewSessionTicket}(context);
+216          \textcolor{keywordflow}{break};
+217 
+218       \textcolor{comment}{//Sending KeyUpdate message?}
+219       \textcolor{keywordflow}{case} \hyperlink{tls_8h_a02bb4c8aa7988b33fe4d4836d8ff4a4da68485949c9524dff9175a025cac5f3b8}{TLS\_STATE\_KEY\_UPDATE}:
+220          \textcolor{comment}{//The KeyUpdate handshake message is used to indicate that the sender}
+221          \textcolor{comment}{//is updating its sending cryptographic keys}
+222          error = \hyperlink{tls13__common_8h_a0f8477a44383f9efb6abab5203865a16}{tls13SendKeyUpdate}(context);
+223          \textcolor{keywordflow}{break};
+224 \textcolor{preprocessor}{#endif}
+225 
+226       \textcolor{comment}{//Waiting for a message from the client?}
+227       \textcolor{keywordflow}{case} \hyperlink{tls_8h_a02bb4c8aa7988b33fe4d4836d8ff4a4dade201db86ae38480c06696f3a48e0170}{TLS\_STATE\_CLIENT\_HELLO}:
+228       \textcolor{keywordflow}{case} \hyperlink{tls_8h_a02bb4c8aa7988b33fe4d4836d8ff4a4da535ebf5eb2c0397b2d6ed43669f63a7d}{TLS\_STATE\_CLIENT\_HELLO\_2}:
+229       \textcolor{keywordflow}{case} \hyperlink{tls_8h_a02bb4c8aa7988b33fe4d4836d8ff4a4daf228b75114f59a280fff6ec472c5a251}{TLS\_STATE\_CLIENT\_CERTIFICATE}:
+230       \textcolor{keywordflow}{case} \hyperlink{tls_8h_a02bb4c8aa7988b33fe4d4836d8ff4a4daec55a02fa5725d9b44460666d30b3a5c}{TLS\_STATE\_CLIENT\_KEY\_EXCHANGE}:
+231       \textcolor{keywordflow}{case} \hyperlink{tls_8h_a02bb4c8aa7988b33fe4d4836d8ff4a4da0f0ff1805dfdec56bba42cbd8f42097b}{TLS\_STATE\_CLIENT\_CERTIFICATE\_VERIFY}:
+232       \textcolor{keywordflow}{case} \hyperlink{tls_8h_a02bb4c8aa7988b33fe4d4836d8ff4a4daf4ad5e0b1c92eb5991962aa9f3a6932b}{TLS\_STATE\_CLIENT\_CHANGE\_CIPHER\_SPEC}:
+233       \textcolor{keywordflow}{case} \hyperlink{tls_8h_a02bb4c8aa7988b33fe4d4836d8ff4a4da3cb415075672864bb35731a372a18fbd}{TLS\_STATE\_CLIENT\_FINISHED}:
+234          \textcolor{comment}{//Receive client's message}
+235          error = \hyperlink{tls__handshake_8c_a56fc0a8992b1b7e5a2420f9557b39561}{tlsReceiveHandshakeMessage}(context);
+236          \textcolor{keywordflow}{break};
+237 
+238       \textcolor{comment}{//Sending Alert message?}
+239       \textcolor{keywordflow}{case} \hyperlink{tls_8h_a02bb4c8aa7988b33fe4d4836d8ff4a4dabb02ceb758f4c4dedc2aabf472677fbe}{TLS\_STATE\_CLOSING}:
+240          \textcolor{comment}{//Mark the TLS connection as closed}
+241          context->state = \hyperlink{tls_8h_a02bb4c8aa7988b33fe4d4836d8ff4a4da182b100e092b0058c72d76006b7981fd}{TLS\_STATE\_CLOSED};
+242          \textcolor{keywordflow}{break};
+243 
+244       \textcolor{comment}{//TLS connection closed?}
+245       \textcolor{keywordflow}{case} \hyperlink{tls_8h_a02bb4c8aa7988b33fe4d4836d8ff4a4da182b100e092b0058c72d76006b7981fd}{TLS\_STATE\_CLOSED}:
+246          \textcolor{comment}{//Debug message}
+247          \hyperlink{debug_8h_a72b9761add7486364dba449091cd2579}{TRACE\_WARNING}(\textcolor{stringliteral}{"TLS handshake failure!\(\backslash\)r\(\backslash\)n"});
+248          \textcolor{comment}{//Report an error}
+249          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca70d82df53df56c9d4a943d5539ccc4bc}{ERROR\_HANDSHAKE\_FAILED};
+250          \textcolor{keywordflow}{break};
+251 
+252       \textcolor{comment}{//Invalid state?}
+253       \textcolor{keywordflow}{default}:
+254          \textcolor{comment}{//Report an error}
+255          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac17950207f5a741c1f2a1f5edb64c22e}{ERROR\_UNEXPECTED\_STATE};
+256          \textcolor{keywordflow}{break};
+257       \}
+258    \}
+259 
+260    \textcolor{comment}{//Successful TLS handshake?}
+261    \textcolor{keywordflow}{if}(!error)
+262    \{
+263 \textcolor{preprocessor}{#if (TLS\_MAX\_VERSION >= SSL\_VERSION\_3\_0 && TLS\_MIN\_VERSION <= TLS\_VERSION\_1\_2)}
+264       \textcolor{comment}{//Version of TLS prior to TLS 1.3?}
+265       \textcolor{keywordflow}{if}(context->version <= \hyperlink{tls_8h_af97e91c5fb95fb0957e5f37ec9e9eae8}{TLS\_VERSION\_1\_2})
+266       \{
+267          \textcolor{comment}{//Save current session in the session cache for further reuse}
+268          \hyperlink{tls__cache_8c_a541cae4b88bf90c090e2096004368f75}{tlsSaveToCache}(context);
+269       \}
+270 \textcolor{preprocessor}{#endif}
+271    \}
+272    \textcolor{keywordflow}{else}
+273    \{
+274       \textcolor{comment}{//Send an alert message to the client, if applicable}
+275       \hyperlink{tls__misc_8c_ae43b7ef806126baf125c46cdb9424e87}{tlsProcessError}(context, error);
+276    \}
+277 
+278    \textcolor{comment}{//Return status code}
+279    \textcolor{keywordflow}{return} error;
+280 \}
+\end{DoxyCode}

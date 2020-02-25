@@ -1,0 +1,278 @@
+\hypertarget{resource__manager_8c}{}\section{common/resource\+\_\+manager.c File Reference}
+\label{resource__manager_8c}\index{common/resource\+\_\+manager.\+c@{common/resource\+\_\+manager.\+c}}
+
+
+Embedded resource management.  
+
+
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}os\+\_\+port.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}resource\+\_\+manager.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}debug.\+h\char`\"{}}\newline
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{resource__manager_8c_a0fe55f3dce16ce80683cae543c61f22c}{res\+Get\+Data} (const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$path, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$$\ast$\hyperlink{tftp__common_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, size\+\_\+t $\ast$\hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length})
+\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{resource__manager_8c_a8ced2c909789d5e065fbea60465e6d5f}{res\+Search\+File} (const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$path, \hyperlink{structDirEntry}{Dir\+Entry} $\ast$dir\+Entry)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} \hyperlink{resource__manager_8c_a369fab9cf831846ad1a1d6bd33a86fa1}{res} \mbox{[}$\,$\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Embedded resource management. 
+
+\hypertarget{pic32mz__ef__curiosity_8h_License}{}\subsection{License}\label{pic32mz__ef__curiosity_8h_License}
+S\+P\+D\+X-\/\+License-\/\+Identifier\+: G\+P\+L-\/2.\+0-\/or-\/later
+
+Copyright (C) 2010-\/2019 Oryx Embedded S\+A\+RL. All rights reserved.
+
+This program is free software; you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+
+You should have received a copy of the G\+NU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-\/1301, U\+SA.
+
+\begin{DoxyAuthor}{Author}
+Oryx Embedded S\+A\+RL (www.\+oryx-\/embedded.\+com) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+9.\+6 
+\end{DoxyVersion}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{resource__manager_8c_a0fe55f3dce16ce80683cae543c61f22c}\label{resource__manager_8c_a0fe55f3dce16ce80683cae543c61f22c}} 
+\index{resource\+\_\+manager.\+c@{resource\+\_\+manager.\+c}!res\+Get\+Data@{res\+Get\+Data}}
+\index{res\+Get\+Data@{res\+Get\+Data}!resource\+\_\+manager.\+c@{resource\+\_\+manager.\+c}}
+\subsubsection{\texorpdfstring{res\+Get\+Data()}{resGetData()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} res\+Get\+Data (\begin{DoxyParamCaption}\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{path,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$$\ast$}]{data,  }\item[{size\+\_\+t $\ast$}]{length }\end{DoxyParamCaption})}
+
+
+
+Definition at line 39 of file resource\+\_\+manager.\+c.
+
+
+\begin{DoxyCode}
+40 \{
+41    \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\_t} found;
+42    \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\_t} match;
+43    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+44    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} dirLength;
+45    \hyperlink{resource__manager_8h_a708c9369ac3ce603bd0b5f6ffde05964}{ResEntry} *resEntry;
+46 
+47    \textcolor{comment}{//Point to the resource header}
+48    \hyperlink{resource__manager_8h_acec072f8d98bf27c85418d0b270365d8}{ResHeader} *resHeader = (\hyperlink{resource__manager_8h_acec072f8d98bf27c85418d0b270365d8}{ResHeader} *) \hyperlink{resource__manager_8c_a369fab9cf831846ad1a1d6bd33a86fa1}{res};
+49 
+50    \textcolor{comment}{//Make sure the resource data is valid}
+51    \textcolor{keywordflow}{if}(resHeader->totalSize < \textcolor{keyword}{sizeof}(\hyperlink{resource__manager_8h_acec072f8d98bf27c85418d0b270365d8}{ResHeader}))
+52       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4247c17fd5c6e57d05ee74f95688b639}{ERROR\_INVALID\_RESOURCE};
+53 
+54    \textcolor{comment}{//Retrieve the length of the root directory}
+55    dirLength = resHeader->rootEntry.dataLength;
+56    \textcolor{comment}{//Point to the contents of the root directory}
+57    resEntry = (\hyperlink{resource__manager_8h_a708c9369ac3ce603bd0b5f6ffde05964}{ResEntry} *) (\hyperlink{resource__manager_8c_a369fab9cf831846ad1a1d6bd33a86fa1}{res} + resHeader->rootEntry.dataStart);
+58 
+59    \textcolor{comment}{//Parse the entire path}
+60    \textcolor{keywordflow}{for}(found = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}; !found && path[0] != \textcolor{charliteral}{'\(\backslash\)0'}; path += n + 1)
+61    \{
+62       \textcolor{comment}{//Search for the separator that terminates the current token}
+63       \textcolor{keywordflow}{for}(n = 0; path[\hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n}] != \textcolor{charliteral}{'\(\backslash\)\(\backslash\)'} && path[\hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n}] != \textcolor{charliteral}{'/'} && path[\hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n}] != \textcolor{charliteral}{'\(\backslash\)0'}; n++);
+64 
+65       \textcolor{keywordflow}{if}(n == 0 && path[n] != \textcolor{charliteral}{'\(\backslash\)0'})
+66       \{
+67          path++;
+68          \textcolor{keywordflow}{for}(n = 0; path[\hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n}] != \textcolor{charliteral}{'\(\backslash\)\(\backslash\)'} && path[\hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n}] != \textcolor{charliteral}{'/'} && path[\hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n}] != \textcolor{charliteral}{'\(\backslash\)0'}; n++);
+69       \}
+70 
+71       \textcolor{comment}{//Loop through the directory}
+72       \textcolor{keywordflow}{for}(match = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}; !match && dirLength > 0; )
+73       \{
+74          \textcolor{comment}{//Check the number of remaining bytes}
+75          \textcolor{keywordflow}{if}(dirLength < \textcolor{keyword}{sizeof}(\hyperlink{resource__manager_8h_a708c9369ac3ce603bd0b5f6ffde05964}{ResEntry}))
+76             \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4247c17fd5c6e57d05ee74f95688b639}{ERROR\_INVALID\_RESOURCE};
+77          \textcolor{comment}{//Make sure the entry is valid}
+78          \textcolor{keywordflow}{if}(dirLength < (\textcolor{keyword}{sizeof}(\hyperlink{resource__manager_8h_a708c9369ac3ce603bd0b5f6ffde05964}{ResEntry}) + resEntry->nameLength))
+79             \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4247c17fd5c6e57d05ee74f95688b639}{ERROR\_INVALID\_RESOURCE};
+80 
+81          \textcolor{comment}{//Compare current entry name against the expected one}
+82          \textcolor{keywordflow}{if}(resEntry->nameLength == n && !\hyperlink{os__port__windows_8h_aba00036f71bb67f8600b239a39cf5ec9}{strncasecmp}(resEntry->name, path, n))
+83          \{
+84             \textcolor{comment}{//Check the type of the entry}
+85             \textcolor{keywordflow}{if}(resEntry->type == \hyperlink{resource__manager_8h_af056974bdbbf81e99a9d58e34c88c7faa0d823bf9b088e1ef3a19bc216f2e53c4}{RES\_TYPE\_DIR})
+86             \{
+87                \textcolor{comment}{//Save the length of the directory}
+88                dirLength = resEntry->dataLength;
+89                \textcolor{comment}{//Point to the contents of the directory}
+90                resEntry = (\hyperlink{resource__manager_8h_a708c9369ac3ce603bd0b5f6ffde05964}{ResEntry} *) (\hyperlink{resource__manager_8c_a369fab9cf831846ad1a1d6bd33a86fa1}{res} + resEntry->dataStart);
+91             \}
+92             \textcolor{keywordflow}{else}
+93             \{
+94                \textcolor{comment}{//A file may only appear at the end of the path}
+95                \textcolor{keywordflow}{if}(path[n] != \textcolor{charliteral}{'\(\backslash\)0'})
+96                   \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4cca37264afee88cb14cd105f0d59607}{ERROR\_NOT\_FOUND};
+97 
+98                \textcolor{comment}{//The search process is complete}
+99                found = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+100             \}
+101             \textcolor{comment}{//The current entry matches the specified path}
+102             match = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+103          \}
+104          \textcolor{keywordflow}{else}
+105          \{
+106             \textcolor{comment}{//Remaining bytes to process}
+107             dirLength -= \textcolor{keyword}{sizeof}(\hyperlink{resource__manager_8h_a708c9369ac3ce603bd0b5f6ffde05964}{ResEntry}) + resEntry->nameLength;
+108             \textcolor{comment}{//Point to the next entry}
+109             resEntry = (\hyperlink{resource__manager_8h_a708c9369ac3ce603bd0b5f6ffde05964}{ResEntry} *) ((\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *) resEntry + \textcolor{keyword}{sizeof}(
+      \hyperlink{resource__manager_8h_a708c9369ac3ce603bd0b5f6ffde05964}{ResEntry}) + resEntry->nameLength);
+110          \}
+111       \}
+112 
+113       \textcolor{comment}{//Unable to find the specified file?}
+114       \textcolor{keywordflow}{if}(!match)
+115          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4cca37264afee88cb14cd105f0d59607}{ERROR\_NOT\_FOUND};
+116    \}
+117 
+118    \textcolor{comment}{//Unable to find the specified file?}
+119    \textcolor{keywordflow}{if}(!found)
+120       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4cca37264afee88cb14cd105f0d59607}{ERROR\_NOT\_FOUND};
+121    \textcolor{comment}{//Enforce the entry type}
+122    \textcolor{keywordflow}{if}(resEntry->type != \hyperlink{resource__manager_8h_af056974bdbbf81e99a9d58e34c88c7faa09f1f91fd5adcf4bb32b2f20baa56e31}{RES\_TYPE\_FILE})
+123       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4cca37264afee88cb14cd105f0d59607}{ERROR\_NOT\_FOUND};
+124 
+125    \textcolor{comment}{//Return the location of the specified resource}
+126    *\hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data} = \hyperlink{resource__manager_8c_a369fab9cf831846ad1a1d6bd33a86fa1}{res} + resEntry->dataStart;
+127    \textcolor{comment}{//Return the length of the resource}
+128    *\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} = resEntry->dataLength;
+129 
+130    \textcolor{comment}{//Successful processing}
+131    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+132 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{resource__manager_8c_a8ced2c909789d5e065fbea60465e6d5f}\label{resource__manager_8c_a8ced2c909789d5e065fbea60465e6d5f}} 
+\index{resource\+\_\+manager.\+c@{resource\+\_\+manager.\+c}!res\+Search\+File@{res\+Search\+File}}
+\index{res\+Search\+File@{res\+Search\+File}!resource\+\_\+manager.\+c@{resource\+\_\+manager.\+c}}
+\subsubsection{\texorpdfstring{res\+Search\+File()}{resSearchFile()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} res\+Search\+File (\begin{DoxyParamCaption}\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{path,  }\item[{\hyperlink{structDirEntry}{Dir\+Entry} $\ast$}]{dir\+Entry }\end{DoxyParamCaption})}
+
+
+
+Definition at line 135 of file resource\+\_\+manager.\+c.
+
+
+\begin{DoxyCode}
+136 \{
+137    \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\_t} found;
+138    \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\_t} match;
+139    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+140    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length};
+141    \hyperlink{resource__manager_8h_a708c9369ac3ce603bd0b5f6ffde05964}{ResEntry} *resEntry;
+142 
+143    \textcolor{comment}{//Point to the resource header}
+144    \hyperlink{resource__manager_8h_acec072f8d98bf27c85418d0b270365d8}{ResHeader} *resHeader = (\hyperlink{resource__manager_8h_acec072f8d98bf27c85418d0b270365d8}{ResHeader} *) \hyperlink{resource__manager_8c_a369fab9cf831846ad1a1d6bd33a86fa1}{res};
+145 
+146    \textcolor{comment}{//Make sure the resource data is valid}
+147    \textcolor{keywordflow}{if}(resHeader->totalSize < \textcolor{keyword}{sizeof}(\hyperlink{resource__manager_8h_acec072f8d98bf27c85418d0b270365d8}{ResHeader}))
+148       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4247c17fd5c6e57d05ee74f95688b639}{ERROR\_INVALID\_RESOURCE};
+149 
+150    \textcolor{comment}{//Retrieve the length of the root directory}
+151    length = resHeader->rootEntry.dataLength;
+152    \textcolor{comment}{//Point to the contents of the root directory}
+153    resEntry = (\hyperlink{resource__manager_8h_a708c9369ac3ce603bd0b5f6ffde05964}{ResEntry} *) (\hyperlink{resource__manager_8c_a369fab9cf831846ad1a1d6bd33a86fa1}{res} + resHeader->rootEntry.dataStart);
+154 
+155    \textcolor{comment}{//Parse the entire path}
+156    \textcolor{keywordflow}{for}(found = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}; !found && path[0] != \textcolor{charliteral}{'\(\backslash\)0'}; path += n + 1)
+157    \{
+158       \textcolor{comment}{//Search for the separator that terminates the current token}
+159       \textcolor{keywordflow}{for}(n = 0; path[\hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n}] != \textcolor{charliteral}{'\(\backslash\)\(\backslash\)'} && path[\hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n}] != \textcolor{charliteral}{'/'} && path[\hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n}] != \textcolor{charliteral}{'\(\backslash\)0'}; n++);
+160 
+161       \textcolor{keywordflow}{if}(n == 0 && path[n] != \textcolor{charliteral}{'\(\backslash\)0'})
+162       \{
+163          path++;
+164          \textcolor{keywordflow}{for}(n = 0; path[\hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n}] != \textcolor{charliteral}{'\(\backslash\)\(\backslash\)'} && path[\hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n}] != \textcolor{charliteral}{'/'} && path[\hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n}] != \textcolor{charliteral}{'\(\backslash\)0'}; n++);
+165       \}
+166 
+167       \textcolor{comment}{//Loop through the directory}
+168       \textcolor{keywordflow}{for}(match = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE}; !match && length > 0; )
+169       \{
+170          \textcolor{comment}{//Check the number of remaining bytes}
+171          \textcolor{keywordflow}{if}(length < \textcolor{keyword}{sizeof}(\hyperlink{resource__manager_8h_a708c9369ac3ce603bd0b5f6ffde05964}{ResEntry}))
+172             \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4247c17fd5c6e57d05ee74f95688b639}{ERROR\_INVALID\_RESOURCE};
+173          \textcolor{comment}{//Make sure the entry is valid}
+174          \textcolor{keywordflow}{if}(length < (\textcolor{keyword}{sizeof}(\hyperlink{resource__manager_8h_a708c9369ac3ce603bd0b5f6ffde05964}{ResEntry}) + resEntry->nameLength))
+175             \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4247c17fd5c6e57d05ee74f95688b639}{ERROR\_INVALID\_RESOURCE};
+176 
+177          \textcolor{comment}{//Compare current entry name against the expected one}
+178          \textcolor{keywordflow}{if}(resEntry->nameLength == n && !\hyperlink{os__port__windows_8h_aba00036f71bb67f8600b239a39cf5ec9}{strncasecmp}(resEntry->name, path, n))
+179          \{
+180             \textcolor{comment}{//Check the type of the entry}
+181             \textcolor{keywordflow}{if}(resEntry->type == \hyperlink{resource__manager_8h_af056974bdbbf81e99a9d58e34c88c7faa0d823bf9b088e1ef3a19bc216f2e53c4}{RES\_TYPE\_DIR})
+182             \{
+183                \textcolor{comment}{//Save the length of the directory}
+184                length = resEntry->dataLength;
+185                \textcolor{comment}{//Point to the contents of the directory}
+186                resEntry = (\hyperlink{resource__manager_8h_a708c9369ac3ce603bd0b5f6ffde05964}{ResEntry} *) (\hyperlink{resource__manager_8c_a369fab9cf831846ad1a1d6bd33a86fa1}{res} + resEntry->dataStart);
+187             \}
+188             \textcolor{keywordflow}{else}
+189             \{
+190                \textcolor{comment}{//A file may only appear at the end of the path}
+191                \textcolor{keywordflow}{if}(path[n] != \textcolor{charliteral}{'\(\backslash\)0'})
+192                   \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca62bb3e19c7e34b7eaf8e1fdadd52149c}{ERROR\_INVALID\_PATH};
+193 
+194                \textcolor{comment}{//The search process is complete}
+195                found = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+196             \}
+197             \textcolor{comment}{//The current entry matches the specified path}
+198             match = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+199          \}
+200          \textcolor{keywordflow}{else}
+201          \{
+202             \textcolor{comment}{//Remaining bytes to process}
+203             length -= \textcolor{keyword}{sizeof}(\hyperlink{resource__manager_8h_a708c9369ac3ce603bd0b5f6ffde05964}{ResEntry}) + resEntry->nameLength;
+204             \textcolor{comment}{//Point to the next entry}
+205             resEntry = (\hyperlink{resource__manager_8h_a708c9369ac3ce603bd0b5f6ffde05964}{ResEntry} *) ((\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} *) resEntry + \textcolor{keyword}{sizeof}(
+      \hyperlink{resource__manager_8h_a708c9369ac3ce603bd0b5f6ffde05964}{ResEntry}) + resEntry->nameLength);
+206          \}
+207       \}
+208 
+209       \textcolor{comment}{//Unable to find the specified file?}
+210       \textcolor{keywordflow}{if}(!match)
+211          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4cca37264afee88cb14cd105f0d59607}{ERROR\_NOT\_FOUND};
+212    \}
+213 
+214    \textcolor{comment}{//Unable to find the specified file?}
+215    \textcolor{keywordflow}{if}(!found)
+216       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4cca37264afee88cb14cd105f0d59607}{ERROR\_NOT\_FOUND};
+217 
+218    \textcolor{comment}{//Return information about the file}
+219    dirEntry->\hyperlink{structDirEntry_adeb5570e6f7540b047206013d57d4871}{type} = resEntry->type;
+220    dirEntry->\hyperlink{structDirEntry_a3868566fb2e5c61cdbff7c0a07836d27}{volume} = 0;
+221    dirEntry->\hyperlink{structDirEntry_aedadd10204139bc3a865f544a871f480}{dataStart} = resEntry->dataStart;
+222    dirEntry->\hyperlink{structDirEntry_ac1360f7a06f37d3a685102f77be55ca6}{dataLength} = resEntry->dataLength;
+223    dirEntry->\hyperlink{structDirEntry_a98d2a3c2a7b3b52b71682ded82f11333}{nameLength} = 0; \textcolor{comment}{//resEntry->nameLength;}
+224    \textcolor{comment}{//Copy the filename}
+225    \textcolor{comment}{//strncpy(dirEntry->name, resEntry->name, dirEntry->nameLength);}
+226    \textcolor{comment}{//Properly terminate the filename}
+227    \textcolor{comment}{//dirEntry->name[dirEntry->nameLength] = '\(\backslash\)0';}
+228 
+229    \textcolor{comment}{//Successful processing}
+230    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+231 \}
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{resource__manager_8c_a369fab9cf831846ad1a1d6bd33a86fa1}\label{resource__manager_8c_a369fab9cf831846ad1a1d6bd33a86fa1}} 
+\index{resource\+\_\+manager.\+c@{resource\+\_\+manager.\+c}!res@{res}}
+\index{res@{res}!resource\+\_\+manager.\+c@{resource\+\_\+manager.\+c}}
+\subsubsection{\texorpdfstring{res}{res}}
+{\footnotesize\ttfamily const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} res\mbox{[}$\,$\mbox{]}}
+
+
+
+Definition at line 1 of file res.\+c.
+

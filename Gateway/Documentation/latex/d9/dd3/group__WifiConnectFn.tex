@@ -1,0 +1,145 @@
+\hypertarget{group__WifiConnectFn}{}\section{m2m\+\_\+wifi\+\_\+connect}
+\label{group__WifiConnectFn}\index{m2m\+\_\+wifi\+\_\+connect@{m2m\+\_\+wifi\+\_\+connect}}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group__BSPDefine_gaecc0323d771e41ef81a76b5f12783e22}{N\+M\+I\+\_\+\+A\+PI} \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} \hyperlink{group__WifiConnectFn_ga19c9871147efe70f5d9c2cc2cdd5bff0}{m2m\+\_\+wifi\+\_\+connect} (char $\ast$pc\+Ssid, \hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} u8\+Ssid\+Len, \hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} u8\+Sec\+Type, \hyperlink{uniontuniM2MWifiAuth}{tuni\+M2\+M\+Wifi\+Auth} $\ast$puni\+Auth\+Info, \hyperlink{group__DataT_ga1daa745171fc6e31d942c161422a76f9}{uint16} u16\+Ch)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Asynchronous wi-\/fi connection function to a specific AP. Prior to a successful connection, the application developers must know the S\+S\+ID of the AP, the security type, the authentication information parameters and the channel number to which the connection will be established. The connection status is known when a response of \hyperlink{group__WlanEnums_gga064de09dec1d5e88ed8d075fa40f57deabb42b3025c56c51d915a1fa4abd2dbd0}{M2\+M\+\_\+\+W\+I\+F\+I\+\_\+\+R\+E\+S\+P\+\_\+\+C\+O\+N\+\_\+\+S\+T\+A\+T\+E\+\_\+\+C\+H\+A\+N\+G\+ED} is received based on the states defined in \hyperlink{group__WlanEnums_ga460c311f58f4c40c3d20eec9e99db586}{tenu\+M2m\+Conn\+State}, successful connection is defined by \hyperlink{group__WlanEnums_gga460c311f58f4c40c3d20eec9e99db586a9196649c19ee10e2168e08a5b4785938}{M2\+M\+\_\+\+W\+I\+F\+I\+\_\+\+C\+O\+N\+N\+E\+C\+T\+ED}. If W\+I\+LC didn\textquotesingle{}t find the requested AP in its latest scan results, it would trigger a new scan. If the AP wasn\textquotesingle{}t found after scanning, it will return a M2\+M\+\_\+\+W\+I\+F\+I\+\_\+\+R\+E\+S\+P\+\_\+\+C\+O\+N\+\_\+\+S\+T\+A\+T\+E\+\_\+\+C\+H\+A\+N\+G\+ED with error M2\+M\+\_\+\+E\+R\+R\+\_\+\+A\+P\+\_\+\+N\+O\+T\+\_\+\+F\+O\+U\+ND. 
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group__WifiConnectFn_ga19c9871147efe70f5d9c2cc2cdd5bff0}\label{group__WifiConnectFn_ga19c9871147efe70f5d9c2cc2cdd5bff0}} 
+\index{m2m\+\_\+wifi\+\_\+connect@{m2m\+\_\+wifi\+\_\+connect}!m2m\+\_\+wifi\+\_\+connect@{m2m\+\_\+wifi\+\_\+connect}}
+\index{m2m\+\_\+wifi\+\_\+connect@{m2m\+\_\+wifi\+\_\+connect}!m2m\+\_\+wifi\+\_\+connect@{m2m\+\_\+wifi\+\_\+connect}}
+\subsubsection{\texorpdfstring{m2m\+\_\+wifi\+\_\+connect()}{m2m\_wifi\_connect()}}
+{\footnotesize\ttfamily \hyperlink{group__BSPDefine_gaecc0323d771e41ef81a76b5f12783e22}{N\+M\+I\+\_\+\+A\+PI} \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} m2m\+\_\+wifi\+\_\+connect (\begin{DoxyParamCaption}\item[{char $\ast$}]{pc\+Ssid,  }\item[{\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8}}]{u8\+Ssid\+Len,  }\item[{\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8}}]{u8\+Sec\+Type,  }\item[{\hyperlink{uniontuniM2MWifiAuth}{tuni\+M2\+M\+Wifi\+Auth} $\ast$}]{puni\+Auth\+Info,  }\item[{\hyperlink{group__DataT_ga1daa745171fc6e31d942c161422a76f9}{uint16}}]{u16\+Ch }\end{DoxyParamCaption})}
+
+
+
+{\ttfamily \#include $<$\hyperlink{m2m__wifi_8h}{third\+\_\+party/atmel/devices/wilc1000/driver/include/m2m\+\_\+wifi.\+h}$>$}
+
+
+
+Definition at line 216 of file m2m\+\_\+wifi.\+c.
+
+
+\begin{DoxyCode}
+217 \{
+218     \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8}              ret = \hyperlink{nm__common_8h_a9ef27ba27aafdd1aa3a79d3ba2c36b8f}{M2M\_SUCCESS};
+219     \hyperlink{structtstrM2mWifiConnect}{tstrM2mWifiConnect}*   pstrConnect = &guCtrlStruct.strM2mWifiConnect;
+220     \hyperlink{structtstrM2MWifiSecInfo}{tstrM2MWifiSecInfo}    *pstrAuthInfo;
+221 
+222     \textcolor{keywordflow}{if}(u8SecType != \hyperlink{group__WlanEnums_ggaa232a09c953ec8200c13774f94107b05a81b513753be791c13b73d0b2d3639b69}{M2M\_WIFI\_SEC\_OPEN})
+223     \{
+224         \textcolor{keywordflow}{if}((puniAuthInfo == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}))
+225         \{
+226             \hyperlink{nm__common_8h_a34d005df494e50b05cd38b80f318d7ac}{M2M\_ERR}(\textcolor{stringliteral}{"Auth parameters INVALID\(\backslash\)r\(\backslash\)n"});
+227             ret = \hyperlink{nm__common_8h_a39ed05df730834f2255971ca9879996e}{M2M\_ERR\_FAIL};
+228             \textcolor{keywordflow}{goto} ERR1;
+229         \}
+230     \}
+231     \textcolor{keywordflow}{if}((u8SsidLen<=0)||(u8SsidLen>=\hyperlink{group__WlanDefines_gab2bd95c18ede2fbc07b44c5660cc0097}{M2M\_MAX\_SSID\_LEN}))
+232     \{
+233         \hyperlink{nm__common_8h_a34d005df494e50b05cd38b80f318d7ac}{M2M\_ERR}(\textcolor{stringliteral}{"SSID LEN INVALID\(\backslash\)r\(\backslash\)n"});
+234         ret = \hyperlink{nm__common_8h_a39ed05df730834f2255971ca9879996e}{M2M\_ERR\_FAIL};
+235         \textcolor{keywordflow}{goto} ERR1;
+236     \}
+237 
+238     \textcolor{keywordflow}{if}(u16Ch>\hyperlink{group__WlanEnums_gga2a91dd671e2672dba1a7ed45230f3a99a6421cfaf77ed29e91106d39e69e4a970}{M2M\_WIFI\_CH\_14})
+239     \{
+240         \textcolor{keywordflow}{if}(u16Ch!=\hyperlink{group__WlanEnums_gga2a91dd671e2672dba1a7ed45230f3a99a9ab262cc4f83b59a0710ffb80134c637}{M2M\_WIFI\_CH\_ALL})
+241         \{
+242             \hyperlink{nm__common_8h_a34d005df494e50b05cd38b80f318d7ac}{M2M\_ERR}(\textcolor{stringliteral}{"CH INVALID\(\backslash\)r\(\backslash\)n"});
+243             ret = \hyperlink{nm__common_8h_a39ed05df730834f2255971ca9879996e}{M2M\_ERR\_FAIL};
+244             \textcolor{keywordflow}{goto} ERR1;
+245         \}
+246     \}
+247 
+248 
+249     \hyperlink{nm__common_8h_a62b30b611dfcc58e190254d1f663470a}{m2m\_memcpy}(pstrConnect->\hyperlink{structtstrM2mWifiConnect_a74af255fcf9e3f7db52ccd308359e7d3}{au8SSID}, (\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8}*)pcSsid, u8SsidLen);
+250     pstrConnect->\hyperlink{structtstrM2mWifiConnect_a74af255fcf9e3f7db52ccd308359e7d3}{au8SSID}[u8SsidLen]  = 0;
+251     pstrConnect->\hyperlink{structtstrM2mWifiConnect_acfe42b3cc91f29b734505c22f8240d96}{u16Ch}             = \hyperlink{nm__bsp_8h_a22348273616354c0ac8a3de5ce4fb963}{NM\_BSP\_B\_L\_16}(u16Ch);
+252 
+253     pstrAuthInfo = &pstrConnect->\hyperlink{structtstrM2mWifiConnect_a2fa396b7a30634994c27eeda397bbfde}{strSec};
+254     pstrAuthInfo->\hyperlink{structtstrM2MWifiSecInfo_a22de34616e189f348274276e57d9d909}{u8SecType}        = u8SecType;
+255 
+256     \textcolor{keywordflow}{if}(u8SecType == \hyperlink{group__WlanEnums_ggaa232a09c953ec8200c13774f94107b05a0bb64825e9635113bbab91934b214780}{M2M\_WIFI\_SEC\_WEP})
+257     \{
+258         \hyperlink{structtstrM2mWifiWepParams}{tstrM2mWifiWepParams}    * pstrWepParams = &(puniAuthInfo->
+      \hyperlink{uniontuniM2MWifiAuth_aa2cfdea0ab317d0a2b20274fdedd20b2}{strWepInfo});
+259         \hyperlink{structtstrM2mWifiWepParams}{tstrM2mWifiWepParams}    *pstrWep = &pstrAuthInfo->
+      \hyperlink{structtstrM2MWifiSecInfo_abdd40dd09a9db1ae2952ab8de06d3274}{uniAuth}.\hyperlink{uniontuniM2MWifiAuth_aa2cfdea0ab317d0a2b20274fdedd20b2}{strWepInfo};
+260         pstrWep->\hyperlink{structtstrM2mWifiWepParams_adfecc4478aca1ef7aa677c316e547a44}{u8KeyIndx} =pstrWepParams->\hyperlink{structtstrM2mWifiWepParams_adfecc4478aca1ef7aa677c316e547a44}{u8KeyIndx}-1;
+261 
+262         \textcolor{keywordflow}{if}(pstrWep->\hyperlink{structtstrM2mWifiWepParams_adfecc4478aca1ef7aa677c316e547a44}{u8KeyIndx} >= \hyperlink{group__WlanDefines_gad8adc3240afeb11434b2c34d5c15ea00}{WEP\_KEY\_MAX\_INDEX})
+263         \{
+264             \hyperlink{nm__common_8h_a34d005df494e50b05cd38b80f318d7ac}{M2M\_ERR}(\textcolor{stringliteral}{"Invalid Wep key index %d\(\backslash\)r\(\backslash\)n"}, pstrWep->\hyperlink{structtstrM2mWifiWepParams_adfecc4478aca1ef7aa677c316e547a44}{u8KeyIndx});
+265             ret = \hyperlink{nm__common_8h_a39ed05df730834f2255971ca9879996e}{M2M\_ERR\_FAIL};
+266             \textcolor{keywordflow}{goto} ERR1;
+267         \}
+268         pstrWep->\hyperlink{structtstrM2mWifiWepParams_ab2b55069d2a0efc1b6b4eba924dabe1b}{u8KeySz} = pstrWepParams->\hyperlink{structtstrM2mWifiWepParams_ab2b55069d2a0efc1b6b4eba924dabe1b}{u8KeySz}-1;
+269         \textcolor{keywordflow}{if} ((pstrWep->\hyperlink{structtstrM2mWifiWepParams_ab2b55069d2a0efc1b6b4eba924dabe1b}{u8KeySz} != \hyperlink{group__WlanDefines_ga4cfa81969980f3edea139634eeeb7ee1}{WEP\_40\_KEY\_STRING\_SIZE})&& (pstrWep->
+      \hyperlink{structtstrM2mWifiWepParams_ab2b55069d2a0efc1b6b4eba924dabe1b}{u8KeySz} != \hyperlink{group__WlanDefines_ga087f8be759b11ec0fe841d21e60367f5}{WEP\_104\_KEY\_STRING\_SIZE}))
+270         \{
+271             \hyperlink{nm__common_8h_a34d005df494e50b05cd38b80f318d7ac}{M2M\_ERR}(\textcolor{stringliteral}{"Invalid Wep key length %d\(\backslash\)r\(\backslash\)n"}, pstrWep->\hyperlink{structtstrM2mWifiWepParams_ab2b55069d2a0efc1b6b4eba924dabe1b}{u8KeySz});
+272             ret = \hyperlink{nm__common_8h_a39ed05df730834f2255971ca9879996e}{M2M\_ERR\_FAIL};
+273             \textcolor{keywordflow}{goto} ERR1;
+274         \}
+275         \hyperlink{nm__common_8h_a62b30b611dfcc58e190254d1f663470a}{m2m\_memcpy}((\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8}*)pstrWep->\hyperlink{structtstrM2mWifiWepParams_ad522f2c7dc7f4d974be95f6c8a705a13}{au8WepKey},(\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8}*)pstrWepParams->
+      \hyperlink{structtstrM2mWifiWepParams_ad522f2c7dc7f4d974be95f6c8a705a13}{au8WepKey}, pstrWepParams->\hyperlink{structtstrM2mWifiWepParams_ab2b55069d2a0efc1b6b4eba924dabe1b}{u8KeySz});
+276         pstrWep->\hyperlink{structtstrM2mWifiWepParams_ad522f2c7dc7f4d974be95f6c8a705a13}{au8WepKey}[pstrWepParams->\hyperlink{structtstrM2mWifiWepParams_ab2b55069d2a0efc1b6b4eba924dabe1b}{u8KeySz}] = 0;
+277         pstrWep->\hyperlink{structtstrM2mWifiWepParams_a89c70e5905a86f093a28812879d1612b}{u8WepAuthType} = pstrWepParams->\hyperlink{structtstrM2mWifiWepParams_a89c70e5905a86f093a28812879d1612b}{u8WepAuthType};
+278 
+279     \}
+280     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(u8SecType == \hyperlink{group__WlanEnums_ggaa232a09c953ec8200c13774f94107b05a951d0504fc8e173e60df8ee871f16697}{M2M\_WIFI\_SEC\_WPA\_PSK})
+281     \{
+282         \hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8}  u8KeyLen;
+283         \textcolor{keywordflow}{if}((\hyperlink{nm__common_8h_a3c10c83b6b5eda6b18bbc40ca411eeb4}{m2m\_strlen}(puniAuthInfo->\hyperlink{uniontuniM2MWifiAuth_a690bf7d430705e5564cf5df90197a59c}{au8PSK})<=0)||(\hyperlink{nm__common_8h_a3c10c83b6b5eda6b18bbc40ca411eeb4}{m2m\_strlen}(puniAuthInfo->
+      \hyperlink{uniontuniM2MWifiAuth_a690bf7d430705e5564cf5df90197a59c}{au8PSK})>=\hyperlink{group__WlanDefines_ga790a7e0471ff8a179238863dc2021f6d}{M2M\_MAX\_PSK\_LEN}))
+284         \{
+285             \hyperlink{nm__common_8h_a34d005df494e50b05cd38b80f318d7ac}{M2M\_ERR}(\textcolor{stringliteral}{"PSK LEN INVALID\(\backslash\)r\(\backslash\)n"});
+286             ret = \hyperlink{nm__common_8h_a39ed05df730834f2255971ca9879996e}{M2M\_ERR\_FAIL};
+287             \textcolor{keywordflow}{goto} ERR1;
+288         \}
+289         
+290         u8KeyLen = \hyperlink{nm__common_8h_a3c10c83b6b5eda6b18bbc40ca411eeb4}{m2m\_strlen}((\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8}*)puniAuthInfo->\hyperlink{uniontuniM2MWifiAuth_a690bf7d430705e5564cf5df90197a59c}{au8PSK}) + 1;
+291         
+292 \textcolor{preprocessor}{#ifdef COMPUTE\_PMK\_IN\_HOST}
+293         pstrAuthInfo->\hyperlink{structtstrM2MWifiSecInfo_acd91f409d3ade8e74232ed8c28df6e15}{u8IsPMKUsed} = 1;
+294         \hyperlink{third__party_2atmel_2devices_2wilc1000_2drv__hash_2crypto_8h_a318c7e175b5bc9991153031d59b52ac0}{pbkdf2\_sha1}((\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8}*)puniAuthInfo->\hyperlink{uniontuniM2MWifiAuth_a690bf7d430705e5564cf5df90197a59c}{au8PSK},u8KeyLen-1,pstrConnect->
+      \hyperlink{structtstrM2mWifiConnect_a74af255fcf9e3f7db52ccd308359e7d3}{au8SSID},\hyperlink{nm__common_8h_a3c10c83b6b5eda6b18bbc40ca411eeb4}{m2m\_strlen}(pstrConnect->\hyperlink{structtstrM2mWifiConnect_a74af255fcf9e3f7db52ccd308359e7d3}{au8SSID}),
+295             pstrAuthInfo->\hyperlink{structtstrM2MWifiSecInfo_abdd40dd09a9db1ae2952ab8de06d3274}{uniAuth}.\hyperlink{uniontuniM2MWifiAuth_a69944bf252794877fc76c4e84dd6c2c2}{au8PMK});     
+296 \textcolor{preprocessor}{#else  }
+297         pstrAuthInfo->\hyperlink{structtstrM2MWifiSecInfo_acd91f409d3ade8e74232ed8c28df6e15}{u8IsPMKUsed} = 0;
+298         \hyperlink{nm__common_8h_a62b30b611dfcc58e190254d1f663470a}{m2m\_memcpy}(pstrAuthInfo->\hyperlink{structtstrM2MWifiSecInfo_abdd40dd09a9db1ae2952ab8de06d3274}{uniAuth}.\hyperlink{uniontuniM2MWifiAuth_a690bf7d430705e5564cf5df90197a59c}{au8PSK}, (\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8}*)puniAuthInfo->
+      \hyperlink{uniontuniM2MWifiAuth_a690bf7d430705e5564cf5df90197a59c}{au8PSK}, u8KeyLen);
+299 \textcolor{preprocessor}{#endif}
+300     \}
+301     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(u8SecType == \hyperlink{group__WlanEnums_ggaa232a09c953ec8200c13774f94107b05a0fcff26361d2f1e5378abf20e51913b5}{M2M\_WIFI\_SEC\_802\_1X})
+302     \{
+303         \hyperlink{nm__common_8h_a62b30b611dfcc58e190254d1f663470a}{m2m\_memcpy}((\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8}*)&pstrAuthInfo->\hyperlink{structtstrM2MWifiSecInfo_abdd40dd09a9db1ae2952ab8de06d3274}{uniAuth}.
+      \hyperlink{uniontuniM2MWifiAuth_a6200150169d009f5da0d51be9e7dee15}{strCred1x}, (\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8}*)(&puniAuthInfo->\hyperlink{uniontuniM2MWifiAuth_a6200150169d009f5da0d51be9e7dee15}{strCred1x}), \textcolor{keyword}{sizeof}(
+      \hyperlink{structtstr1xAuthCredentials}{tstr1xAuthCredentials}));
+304     \}
+305     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(u8SecType == \hyperlink{group__WlanEnums_ggaa232a09c953ec8200c13774f94107b05a81b513753be791c13b73d0b2d3639b69}{M2M\_WIFI\_SEC\_OPEN})
+306     \{
+307 
+308     \}
+309     \textcolor{keywordflow}{else}
+310     \{
+311         \hyperlink{nm__common_8h_a34d005df494e50b05cd38b80f318d7ac}{M2M\_ERR}(\textcolor{stringliteral}{"undefined sec type\(\backslash\)r\(\backslash\)n"});
+312         ret = \hyperlink{nm__common_8h_a39ed05df730834f2255971ca9879996e}{M2M\_ERR\_FAIL};
+313         \textcolor{keywordflow}{goto} ERR1;
+314     \}
+315 
+316     ret = \hyperlink{m2m__hif_8c_a13ba8ad11b2ac39516ca787386d16ce0}{hif\_send}(\hyperlink{nm__common_8h_a9ab02eb1aea02a75c3f5aade4eef1276aeb9a7d57324ba4b8a6c2a5f46dd499c2}{M2M\_REQ\_GRP\_WIFI}, 
+      \hyperlink{group__WlanEnums_gga064de09dec1d5e88ed8d075fa40f57deaec25dcbb234f8f287439533565ace5e2}{M2M\_WIFI\_REQ\_CONNECT}, (\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8}*)pstrConnect, \textcolor{keyword}{sizeof}(
+      \hyperlink{structtstrM2mWifiConnect}{tstrM2mWifiConnect}),\hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, 0,0);
+317 
+318 ERR1:
+319     \textcolor{keywordflow}{return} ret;
+320 \}
+\end{DoxyCode}

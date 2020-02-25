@@ -1,0 +1,82 @@
+\hypertarget{strtok__r_8c}{}\section{demo/microchip/pic32mz\+\_\+ef\+\_\+curiosity/wifi\+\_\+http\+\_\+server\+\_\+demo/src/strtok\+\_\+r.c File Reference}
+\label{strtok__r_8c}\index{demo/microchip/pic32mz\+\_\+ef\+\_\+curiosity/wifi\+\_\+http\+\_\+server\+\_\+demo/src/strtok\+\_\+r.\+c@{demo/microchip/pic32mz\+\_\+ef\+\_\+curiosity/wifi\+\_\+http\+\_\+server\+\_\+demo/src/strtok\+\_\+r.\+c}}
+{\ttfamily \#include $<$string.\+h$>$}\newline
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+char $\ast$ \hyperlink{strtok__r_8c_af18c3fca5cc30bc1313728d45c031ae9}{strtok\+\_\+r} (char $\ast$\hyperlink{ndp_8h_a2dee666f0c1fe072c549ff86b1d0a8ab}{s}, const char $\ast$delim, char $\ast$$\ast$\hyperlink{ipv6__frag_8h_a7179af054cf318941e1a12e964965935}{last})
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{strtok__r_8c_af18c3fca5cc30bc1313728d45c031ae9}\label{strtok__r_8c_af18c3fca5cc30bc1313728d45c031ae9}} 
+\index{strtok\+\_\+r.\+c@{strtok\+\_\+r.\+c}!strtok\+\_\+r@{strtok\+\_\+r}}
+\index{strtok\+\_\+r@{strtok\+\_\+r}!strtok\+\_\+r.\+c@{strtok\+\_\+r.\+c}}
+\subsubsection{\texorpdfstring{strtok\+\_\+r()}{strtok\_r()}}
+{\footnotesize\ttfamily char$\ast$ strtok\+\_\+r (\begin{DoxyParamCaption}\item[{char $\ast$}]{s,  }\item[{const char $\ast$}]{delim,  }\item[{char $\ast$$\ast$}]{last }\end{DoxyParamCaption})}
+
+
+
+Definition at line 46 of file strtok\+\_\+r.\+c.
+
+
+\begin{DoxyCode}
+47 \{
+48     \textcolor{keywordtype}{char} *spanp;
+49     \textcolor{keywordtype}{int} \hyperlink{aria_8c_a5dadc28804036d1b82e1dc027e95c9a6}{c}, sc;
+50     \textcolor{keywordtype}{char} *tok;
+51 
+52     \textcolor{keywordflow}{if} (\hyperlink{md2_8c_adf356ff381033f761b7de5f76e763a45}{s} == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} && (\hyperlink{md2_8c_adf356ff381033f761b7de5f76e763a45}{s} = *\hyperlink{ipv4__frag_8h_a7179af054cf318941e1a12e964965935}{last}) == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+53     \{
+54         \textcolor{keywordflow}{return} \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+55     \}
+56 
+57     \textcolor{comment}{/*}
+58 \textcolor{comment}{     * Skip (span) leading delimiters (s += strspn(s, delim), sort of).}
+59 \textcolor{comment}{     */}
+60 cont:
+61     c = *\hyperlink{md2_8c_adf356ff381033f761b7de5f76e763a45}{s}++;
+62     \textcolor{keywordflow}{for} (spanp = (\textcolor{keywordtype}{char} *)delim; (sc = *spanp++) != 0; )
+63     \{
+64         \textcolor{keywordflow}{if} (c == sc)
+65         \{
+66             \textcolor{keywordflow}{goto} cont;
+67         \}
+68     \}
+69 
+70     \textcolor{keywordflow}{if} (c == 0)        \textcolor{comment}{/* no non-delimiter characters */}
+71     \{
+72         *\hyperlink{ipv4__frag_8h_a7179af054cf318941e1a12e964965935}{last} = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+73         \textcolor{keywordflow}{return} \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+74     \}
+75     tok = \hyperlink{md2_8c_adf356ff381033f761b7de5f76e763a45}{s} - 1;
+76 
+77     \textcolor{comment}{/*}
+78 \textcolor{comment}{     * Scan token (scan for delimiters: s += strcspn(s, delim), sort of).}
+79 \textcolor{comment}{     * Note that delim must have one NUL; we stop if we see that, too.}
+80 \textcolor{comment}{     */}
+81     \textcolor{keywordflow}{for} (;;)
+82     \{
+83         c = *\hyperlink{md2_8c_adf356ff381033f761b7de5f76e763a45}{s}++;
+84         spanp = (\textcolor{keywordtype}{char} *)delim;
+85         \textcolor{keywordflow}{do}
+86         \{
+87             \textcolor{keywordflow}{if} ((sc = *spanp++) == \hyperlink{aria_8c_a5dadc28804036d1b82e1dc027e95c9a6}{c})
+88             \{
+89                 \textcolor{keywordflow}{if} (c == 0)
+90                 \{
+91                     \hyperlink{md2_8c_adf356ff381033f761b7de5f76e763a45}{s} = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+92                 \}
+93                 \textcolor{keywordflow}{else}
+94                 \{
+95                     \textcolor{keywordtype}{char} *\hyperlink{ethernet_8h_aaa9bda35d7b2e3d98ecec180d3f628c0}{w} = \hyperlink{md2_8c_adf356ff381033f761b7de5f76e763a45}{s} - 1;
+96                     *w = \textcolor{charliteral}{'\(\backslash\)0'};
+97                 \}
+98                 *\hyperlink{ipv4__frag_8h_a7179af054cf318941e1a12e964965935}{last} = \hyperlink{md2_8c_adf356ff381033f761b7de5f76e763a45}{s};
+99                 \textcolor{keywordflow}{return} tok;
+100             \}
+101         \}
+102         \textcolor{keywordflow}{while} (sc != 0);
+103     \}
+104 \}
+\end{DoxyCode}

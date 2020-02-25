@@ -1,0 +1,844 @@
+\hypertarget{ipv4__frag_8c}{}\section{cyclone\+\_\+tcp/ipv4/ipv4\+\_\+frag.c File Reference}
+\label{ipv4__frag_8c}\index{cyclone\+\_\+tcp/ipv4/ipv4\+\_\+frag.\+c@{cyclone\+\_\+tcp/ipv4/ipv4\+\_\+frag.\+c}}
+
+
+I\+Pv4 fragmentation and reassembly.  
+
+
+{\ttfamily \#include \char`\"{}core/net.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}core/ip.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ipv4/ipv4.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ipv4/ipv4\+\_\+frag.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ipv4/icmp.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}mibs/mib2\+\_\+module.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}mibs/ip\+\_\+mib\+\_\+module.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}debug.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{ipv4__frag_8c_afcdf5e66fd927a7f4cc64295acd20407}{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}~\hyperlink{net__config_8h_a0384acc5ed8c18c2d0afe444d5d8084f}{I\+P\+V4\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ipv4__frag_8c_a5d11277faa86011f8af76dfb1fa66b89}{ipv4\+Fragment\+Datagram} (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface, \hyperlink{ipv4_8h_a0e92b64e038199f1bb6383f2a76f30b6}{Ipv4\+Pseudo\+Header} $\ast$pseudo\+Header, \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} \hyperlink{nbns__common_8h_a4fc3a0c58dfbd1e68224521185cb9384}{id}, const \hyperlink{structNetBuffer}{Net\+Buffer} $\ast$payload, size\+\_\+t payload\+Offset, \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} \hyperlink{nbns__common_8h_a1e87af3c18a2fd36c61faf89949bdc3f}{flags})
+\begin{DoxyCompactList}\small\item\em Fragment an I\+Pv4 datagram into smaller packets. \end{DoxyCompactList}\item 
+void \hyperlink{ipv4__frag_8c_ae67bb7ae73d166f3e5512367201bf56f}{ipv4\+Reassemble\+Datagram} (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface, const \hyperlink{ipv4_8h_a294daf3717d3c22ffb24cbd3485ddbfc}{Ipv4\+Header} $\ast$packet, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length})
+\begin{DoxyCompactList}\small\item\em I\+Pv4 datagram reassembly algorithm. \end{DoxyCompactList}\item 
+void \hyperlink{ipv4__frag_8c_a86806a9fdc060c28f608f9f6200aaf85}{ipv4\+Frag\+Tick} (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface)
+\begin{DoxyCompactList}\small\item\em Fragment reassembly timeout handler. \end{DoxyCompactList}\item 
+\hyperlink{structIpv4FragDesc}{Ipv4\+Frag\+Desc} $\ast$ \hyperlink{ipv4__frag_8c_a313d3fdd865a973eef067e2084c69698}{ipv4\+Search\+Frag\+Queue} (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface, const \hyperlink{ipv4_8h_a294daf3717d3c22ffb24cbd3485ddbfc}{Ipv4\+Header} $\ast$packet)
+\begin{DoxyCompactList}\small\item\em Search for a matching datagram in the reassembly queue. \end{DoxyCompactList}\item 
+void \hyperlink{ipv4__frag_8c_adb718624cdcaafbe31ff17e874c7ee43}{ipv4\+Flush\+Frag\+Queue} (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface)
+\begin{DoxyCompactList}\small\item\em Flush I\+Pv4 reassembly queue. \end{DoxyCompactList}\item 
+\hyperlink{ipv4__frag_8h_a1b631b885944e53a63cfe6ea99a2d27e}{Ipv4\+Hole\+Desc} $\ast$ \hyperlink{ipv4__frag_8c_a1821e6107214685008d2aa0f39ea8fd9}{ipv4\+Find\+Hole} (\hyperlink{structIpv4FragDesc}{Ipv4\+Frag\+Desc} $\ast$frag, \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} \hyperlink{pic32mz_2isr__support_8h_ac0542d92dfcd62c19170fd963f9e5052}{offset})
+\begin{DoxyCompactList}\small\item\em Retrieve hole descriptor. \end{DoxyCompactList}\item 
+void \hyperlink{ipv4__frag_8c_aebd99ec1318463f29c974f48efcb3765}{ipv4\+Dump\+Hole\+List} (\hyperlink{structIpv4FragDesc}{Ipv4\+Frag\+Desc} $\ast$frag)
+\begin{DoxyCompactList}\small\item\em Dump hole descriptor list. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\+\_\+t} \hyperlink{ipv4__frag_8c_a9746ee5d6e5f0f3c6a9bd554f1a6f509}{ipv4\+Frag\+Tick\+Counter}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+I\+Pv4 fragmentation and reassembly. 
+
+\hypertarget{pic32mz__ef__curiosity_8h_License}{}\subsection{License}\label{pic32mz__ef__curiosity_8h_License}
+S\+P\+D\+X-\/\+License-\/\+Identifier\+: G\+P\+L-\/2.\+0-\/or-\/later
+
+Copyright (C) 2010-\/2019 Oryx Embedded S\+A\+RL. All rights reserved.
+
+This file is part of Cyclone\+T\+CP Open.
+
+This program is free software; you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+
+You should have received a copy of the G\+NU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-\/1301, U\+SA.\hypertarget{tftp__server_8c_Description}{}\subsection{Description}\label{tftp__server_8c_Description}
+The Internet Protocol (IP) implements datagram fragmentation, so that packets may be formed that can pass through a link with a smaller maximum transmission unit (M\+TU) than the original datagram size. Refer to the following R\+F\+Cs for complete details\+:
+\begin{DoxyItemize}
+\item R\+FC 791\+: Internet Protocol specification
+\item R\+FC 815\+: IP datagram reassembly algorithms
+\end{DoxyItemize}
+
+\begin{DoxyAuthor}{Author}
+Oryx Embedded S\+A\+RL (www.\+oryx-\/embedded.\+com) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+9.\+6 
+\end{DoxyVersion}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{ipv4__frag_8c_afcdf5e66fd927a7f4cc64295acd20407}\label{ipv4__frag_8c_afcdf5e66fd927a7f4cc64295acd20407}} 
+\index{ipv4\+\_\+frag.\+c@{ipv4\+\_\+frag.\+c}!T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+\index{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}!ipv4\+\_\+frag.\+c@{ipv4\+\_\+frag.\+c}}
+\subsubsection{\texorpdfstring{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}{TRACE\_LEVEL}}
+{\footnotesize\ttfamily \#define T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL~\hyperlink{net__config_8h_a0384acc5ed8c18c2d0afe444d5d8084f}{I\+P\+V4\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+
+
+
+Definition at line 41 of file ipv4\+\_\+frag.\+c.
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{ipv4__frag_8c_aebd99ec1318463f29c974f48efcb3765}\label{ipv4__frag_8c_aebd99ec1318463f29c974f48efcb3765}} 
+\index{ipv4\+\_\+frag.\+c@{ipv4\+\_\+frag.\+c}!ipv4\+Dump\+Hole\+List@{ipv4\+Dump\+Hole\+List}}
+\index{ipv4\+Dump\+Hole\+List@{ipv4\+Dump\+Hole\+List}!ipv4\+\_\+frag.\+c@{ipv4\+\_\+frag.\+c}}
+\subsubsection{\texorpdfstring{ipv4\+Dump\+Hole\+List()}{ipv4DumpHoleList()}}
+{\footnotesize\ttfamily void ipv4\+Dump\+Hole\+List (\begin{DoxyParamCaption}\item[{\hyperlink{structIpv4FragDesc}{Ipv4\+Frag\+Desc} $\ast$}]{frag }\end{DoxyParamCaption})}
+
+
+
+Dump hole descriptor list. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em frag} & I\+Pv4 fragment descriptor \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 653 of file ipv4\+\_\+frag.\+c.
+
+
+\begin{DoxyCode}
+654 \{
+655 \textcolor{comment}{//Check debugging level}
+656 \textcolor{preprocessor}{#if (TRACE\_LEVEL >= TRACE\_LEVEL\_DEBUG)}
+657    \hyperlink{ipv4__frag_8h_a1b631b885944e53a63cfe6ea99a2d27e}{Ipv4HoleDesc} *hole;
+658 
+659    \textcolor{comment}{//Debug message}
+660    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"Hole descriptor list:\(\backslash\)r\(\backslash\)n"});
+661    \textcolor{comment}{//Select the first hole descriptor from the list}
+662    hole = \hyperlink{ipv4__frag_8c_a1821e6107214685008d2aa0f39ea8fd9}{ipv4FindHole}(frag, frag->\hyperlink{structIpv4FragDesc_aecd2b578651ed97157db0013466e4e33}{firstHole});
+663 
+664    \textcolor{comment}{//Loop through the hole descriptor list}
+665    \textcolor{keywordflow}{while}(hole != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+666    \{
+667       \textcolor{comment}{//Display current hole}
+668       \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"  %"} PRIu16 \textcolor{stringliteral}{" - %"} PRIu16 \textcolor{stringliteral}{"\(\backslash\)r\(\backslash\)n"}, hole->first, hole->last);
+669       \textcolor{comment}{//Select the next hole descriptor from the list}
+670       hole = \hyperlink{ipv4__frag_8c_a1821e6107214685008d2aa0f39ea8fd9}{ipv4FindHole}(frag, hole->next);
+671    \}
+672 \textcolor{preprocessor}{#endif}
+673 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ipv4__frag_8c_a1821e6107214685008d2aa0f39ea8fd9}\label{ipv4__frag_8c_a1821e6107214685008d2aa0f39ea8fd9}} 
+\index{ipv4\+\_\+frag.\+c@{ipv4\+\_\+frag.\+c}!ipv4\+Find\+Hole@{ipv4\+Find\+Hole}}
+\index{ipv4\+Find\+Hole@{ipv4\+Find\+Hole}!ipv4\+\_\+frag.\+c@{ipv4\+\_\+frag.\+c}}
+\subsubsection{\texorpdfstring{ipv4\+Find\+Hole()}{ipv4FindHole()}}
+{\footnotesize\ttfamily \hyperlink{ipv4__frag_8h_a1b631b885944e53a63cfe6ea99a2d27e}{Ipv4\+Hole\+Desc}$\ast$ ipv4\+Find\+Hole (\begin{DoxyParamCaption}\item[{\hyperlink{structIpv4FragDesc}{Ipv4\+Frag\+Desc} $\ast$}]{frag,  }\item[{\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t}}]{offset }\end{DoxyParamCaption})}
+
+
+
+Retrieve hole descriptor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em frag} & I\+Pv4 fragment descriptor \\
+\hline
+\mbox{\tt in}  & {\em offset} & Offset of the hole \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A pointer to the hole descriptor is returned if the specified offset is valid. Otherwise N\+U\+LL is returned 
+\end{DoxyReturn}
+
+
+Definition at line 641 of file ipv4\+\_\+frag.\+c.
+
+
+\begin{DoxyCode}
+642 \{
+643    \textcolor{comment}{//Return a pointer to the hole descriptor}
+644    \textcolor{keywordflow}{return} \hyperlink{net__mem_8c_a20d30c9db547b3b2743368b589cf482b}{netBufferAt}((\hyperlink{structNetBuffer}{NetBuffer} *) &frag->\hyperlink{structIpv4FragDesc_a348be10f5e00d0cf9bcb1b18c5c367cb}{buffer}, frag->
+      \hyperlink{structIpv4FragDesc_a252d5cce2a3261863d1f4a55e33d4fdc}{headerLength} + \hyperlink{pic32mz_2isr__support_8h_a12a5aed8a193ebbf9a641104a310610d}{offset});
+645 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ipv4__frag_8c_adb718624cdcaafbe31ff17e874c7ee43}\label{ipv4__frag_8c_adb718624cdcaafbe31ff17e874c7ee43}} 
+\index{ipv4\+\_\+frag.\+c@{ipv4\+\_\+frag.\+c}!ipv4\+Flush\+Frag\+Queue@{ipv4\+Flush\+Frag\+Queue}}
+\index{ipv4\+Flush\+Frag\+Queue@{ipv4\+Flush\+Frag\+Queue}!ipv4\+\_\+frag.\+c@{ipv4\+\_\+frag.\+c}}
+\subsubsection{\texorpdfstring{ipv4\+Flush\+Frag\+Queue()}{ipv4FlushFragQueue()}}
+{\footnotesize\ttfamily void ipv4\+Flush\+Frag\+Queue (\begin{DoxyParamCaption}\item[{\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$}]{interface }\end{DoxyParamCaption})}
+
+
+
+Flush I\+Pv4 reassembly queue. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em interface} & Underlying network interface \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 620 of file ipv4\+\_\+frag.\+c.
+
+
+\begin{DoxyCode}
+621 \{
+622    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+623 
+624    \textcolor{comment}{//Loop through the reassembly queue}
+625    \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{ipv4__frag_8h_a007e85abc30c64c635bd354573ccb669}{IPV4\_MAX\_FRAG\_DATAGRAMS}; i++)
+626    \{
+627       \textcolor{comment}{//Drop any partially reconstructed datagram}
+628       \hyperlink{net__mem_8c_ac0a46f396754e069dd1ee65cdc559b28}{netBufferSetLength}((\hyperlink{structNetBuffer}{NetBuffer} *) &interface->ipv4Context.fragQueue[i].
+      buffer, 0);
+629    \}
+630 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ipv4__frag_8c_a5d11277faa86011f8af76dfb1fa66b89}\label{ipv4__frag_8c_a5d11277faa86011f8af76dfb1fa66b89}} 
+\index{ipv4\+\_\+frag.\+c@{ipv4\+\_\+frag.\+c}!ipv4\+Fragment\+Datagram@{ipv4\+Fragment\+Datagram}}
+\index{ipv4\+Fragment\+Datagram@{ipv4\+Fragment\+Datagram}!ipv4\+\_\+frag.\+c@{ipv4\+\_\+frag.\+c}}
+\subsubsection{\texorpdfstring{ipv4\+Fragment\+Datagram()}{ipv4FragmentDatagram()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ipv4\+Fragment\+Datagram (\begin{DoxyParamCaption}\item[{\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$}]{interface,  }\item[{\hyperlink{ipv4_8h_a0e92b64e038199f1bb6383f2a76f30b6}{Ipv4\+Pseudo\+Header} $\ast$}]{pseudo\+Header,  }\item[{\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t}}]{id,  }\item[{const \hyperlink{structNetBuffer}{Net\+Buffer} $\ast$}]{payload,  }\item[{size\+\_\+t}]{payload\+Offset,  }\item[{\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t}}]{flags }\end{DoxyParamCaption})}
+
+
+
+Fragment an I\+Pv4 datagram into smaller packets. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em interface} & Underlying network interface \\
+\hline
+\mbox{\tt in}  & {\em pseudo\+Header} & I\+Pv4 pseudo header \\
+\hline
+\mbox{\tt in}  & {\em id} & Fragment identification \\
+\hline
+\mbox{\tt in}  & {\em payload} & Multi-\/part buffer containing the payload \\
+\hline
+\mbox{\tt in}  & {\em payload\+Offset} & Offset to the first payload byte \\
+\hline
+\mbox{\tt in}  & {\em flags} & Set of flags that influences the behavior of this function \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 71 of file ipv4\+\_\+frag.\+c.
+
+
+\begin{DoxyCode}
+74 \{
+75    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+76    \textcolor{keywordtype}{size\_t} \hyperlink{pic32mz_2isr__support_8h_a12a5aed8a193ebbf9a641104a310610d}{offset};
+77    \textcolor{keywordtype}{size\_t} \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length};
+78    \textcolor{keywordtype}{size\_t} \hyperlink{ipv6_8h_ae4d38aba40b6dddf544612da0726cd7e}{payloadLen};
+79    \textcolor{keywordtype}{size\_t} fragmentOffset;
+80    \textcolor{keywordtype}{size\_t} maxFragmentSize;
+81    \hyperlink{structNetBuffer}{NetBuffer} *fragment;
+82 
+83    \textcolor{comment}{//Number of IP datagrams that would require fragmentation in order to be transmitted}
+84    \hyperlink{ip__mib__module_8h_abbb1f41624dcbd4f21b44932e338a479}{IP\_MIB\_INC\_COUNTER32}(ipv4SystemStats.ipSystemStatsOutFragReqds, 1);
+85    \hyperlink{ip__mib__module_8h_abbb1f41624dcbd4f21b44932e338a479}{IP\_MIB\_INC\_COUNTER32}(ipv4IfStatsTable[interface->index].ipIfStatsOutFragReqds, 1);
+86 
+87    \textcolor{comment}{//Retrieve the length of the payload}
+88    payloadLen = \hyperlink{net__mem_8c_ac9dbcd9e28e61d8f4f6d2e9af2607b68}{netBufferGetLength}(payload) - payloadOffset;
+89 
+90    \textcolor{comment}{//Allocate a memory buffer to hold IP fragments}
+91    fragment = \hyperlink{ip_8c_a2222fb64b1b18140283119eea309c1b3}{ipAllocBuffer}(0, &fragmentOffset);
+92    \textcolor{comment}{//Failed to allocate memory?}
+93    \textcolor{keywordflow}{if}(!fragment)
+94       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac0a554045048d2fb61387cf735676f69}{ERROR\_OUT\_OF\_MEMORY};
+95 
+96    \textcolor{comment}{//Determine the maximum payload size for fragmented packets}
+97    maxFragmentSize = interface->ipv4Context.linkMtu - \textcolor{keyword}{sizeof}(\hyperlink{ipv4_8h_a294daf3717d3c22ffb24cbd3485ddbfc}{Ipv4Header});
+98    \textcolor{comment}{//The size shall be a multiple of 8-byte blocks}
+99    maxFragmentSize -= (maxFragmentSize % 8);
+100 
+101    \textcolor{comment}{//Initialize error code}
+102    error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+103 
+104    \textcolor{comment}{//Split the payload into multiple IP fragments}
+105    \textcolor{keywordflow}{for}(offset = 0; offset < \hyperlink{ipv6_8h_ae4d38aba40b6dddf544612da0726cd7e}{payloadLen}; offset += \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length})
+106    \{
+107       \textcolor{comment}{//Flush the contents of the fragment}
+108       error = \hyperlink{net__mem_8c_ac0a46f396754e069dd1ee65cdc559b28}{netBufferSetLength}(fragment, fragmentOffset);
+109       \textcolor{comment}{//Sanity check}
+110       \textcolor{keywordflow}{if}(error)
+111          \textcolor{keywordflow}{break};
+112 
+113       \textcolor{comment}{//Process the last fragment?}
+114       \textcolor{keywordflow}{if}((payloadLen - offset) <= maxFragmentSize)
+115       \{
+116          \textcolor{comment}{//Size of the current fragment}
+117          length = payloadLen - \hyperlink{pic32mz_2isr__support_8h_a12a5aed8a193ebbf9a641104a310610d}{offset};
+118          \textcolor{comment}{//Copy fragment data}
+119          \hyperlink{net__mem_8c_aba4fe2d850142e40a9a668afeb2a0c8a}{netBufferConcat}(fragment, payload, payloadOffset + offset, length);
+120 
+121          \textcolor{comment}{//Do not set the MF flag for the last fragment}
+122          error = \hyperlink{ipv4_8c_a734c893cd8dbc022fd17fdef09acb273}{ipv4SendPacket}(interface, pseudoHeader, \textcolor{keywordtype}{id},
+123             offset / 8, fragment, fragmentOffset, \hyperlink{tcp_8h_aa2585d779da0ab21273a8d92de9a0ebe}{flags});
+124       \}
+125       \textcolor{keywordflow}{else}
+126       \{
+127          \textcolor{comment}{//Size of the current fragment (must be a multiple of 8-byte blocks)}
+128          length = maxFragmentSize;
+129          \textcolor{comment}{//Copy fragment data}
+130          \hyperlink{net__mem_8c_aba4fe2d850142e40a9a668afeb2a0c8a}{netBufferConcat}(fragment, payload, payloadOffset + offset, length);
+131 
+132          \textcolor{comment}{//Fragmented packets must have the MF flag set}
+133          error = \hyperlink{ipv4_8c_a734c893cd8dbc022fd17fdef09acb273}{ipv4SendPacket}(interface, pseudoHeader, \textcolor{keywordtype}{id},
+134             \hyperlink{ipv4_8h_a7c459ba922a9ef666bed308f4d46b18ca2b0328e4b88e37de72e50b0045fce2d5}{IPV4\_FLAG\_MF} | (offset / 8), fragment, fragmentOffset, 
+      \hyperlink{tcp_8h_aa2585d779da0ab21273a8d92de9a0ebe}{flags});
+135       \}
+136 
+137       \textcolor{comment}{//Failed to send current IP packet?}
+138       \textcolor{keywordflow}{if}(error)
+139          \textcolor{keywordflow}{break};
+140 
+141       \textcolor{comment}{//Number of IP datagram fragments that have been generated as a result}
+142       \textcolor{comment}{//of fragmentation at this entity}
+143       \hyperlink{mib2__module_8h_abac73a39224e47d597f3b461620d2119}{MIB2\_INC\_COUNTER32}(ipGroup.ipFragCreates, 1);
+144       \hyperlink{ip__mib__module_8h_abbb1f41624dcbd4f21b44932e338a479}{IP\_MIB\_INC\_COUNTER32}(ipv4SystemStats.ipSystemStatsOutFragCreates, 1);
+145       \hyperlink{ip__mib__module_8h_abbb1f41624dcbd4f21b44932e338a479}{IP\_MIB\_INC\_COUNTER32}(ipv4IfStatsTable[interface->index].ipIfStatsOutFragCreates, 
+      1);
+146    \}
+147 
+148    \textcolor{comment}{//Check status code}
+149    \textcolor{keywordflow}{if}(error)
+150    \{
+151       \textcolor{comment}{//Number of IP datagrams that have been discarded because they needed}
+152       \textcolor{comment}{//to be fragmented at this entity but could not be}
+153       \hyperlink{mib2__module_8h_abac73a39224e47d597f3b461620d2119}{MIB2\_INC\_COUNTER32}(ipGroup.ipFragFails, 1);
+154       \hyperlink{ip__mib__module_8h_abbb1f41624dcbd4f21b44932e338a479}{IP\_MIB\_INC\_COUNTER32}(ipv4SystemStats.ipSystemStatsOutFragFails, 1);
+155       \hyperlink{ip__mib__module_8h_abbb1f41624dcbd4f21b44932e338a479}{IP\_MIB\_INC\_COUNTER32}(ipv4IfStatsTable[interface->index].ipIfStatsOutFragFails, 1)
+      ;
+156    \}
+157    \textcolor{keywordflow}{else}
+158    \{
+159       \textcolor{comment}{//Number of IP datagrams that have been successfully fragmented at this entity}
+160       \hyperlink{mib2__module_8h_abac73a39224e47d597f3b461620d2119}{MIB2\_INC\_COUNTER32}(ipGroup.ipFragOKs, 1);
+161       \hyperlink{ip__mib__module_8h_abbb1f41624dcbd4f21b44932e338a479}{IP\_MIB\_INC\_COUNTER32}(ipv4SystemStats.ipSystemStatsOutFragOKs, 1);
+162       \hyperlink{ip__mib__module_8h_abbb1f41624dcbd4f21b44932e338a479}{IP\_MIB\_INC\_COUNTER32}(ipv4IfStatsTable[interface->index].ipIfStatsOutFragOKs, 1);
+163    \}
+164 
+165    \textcolor{comment}{//Free previously allocated memory}
+166    \hyperlink{net__mem_8c_aa33fc4dd2a71649194052f297c707d08}{netBufferFree}(fragment);
+167    \textcolor{comment}{//Return status code}
+168    \textcolor{keywordflow}{return} error;
+169 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ipv4__frag_8c_a86806a9fdc060c28f608f9f6200aaf85}\label{ipv4__frag_8c_a86806a9fdc060c28f608f9f6200aaf85}} 
+\index{ipv4\+\_\+frag.\+c@{ipv4\+\_\+frag.\+c}!ipv4\+Frag\+Tick@{ipv4\+Frag\+Tick}}
+\index{ipv4\+Frag\+Tick@{ipv4\+Frag\+Tick}!ipv4\+\_\+frag.\+c@{ipv4\+\_\+frag.\+c}}
+\subsubsection{\texorpdfstring{ipv4\+Frag\+Tick()}{ipv4FragTick()}}
+{\footnotesize\ttfamily void ipv4\+Frag\+Tick (\begin{DoxyParamCaption}\item[{\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$}]{interface }\end{DoxyParamCaption})}
+
+
+
+Fragment reassembly timeout handler. 
+
+This routine must be periodically called by the T\+C\+P/\+IP stack to handle I\+Pv4 fragment reassembly timeout
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em interface} & Underlying network interface \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 449 of file ipv4\+\_\+frag.\+c.
+
+
+\begin{DoxyCode}
+450 \{
+451    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+452    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+453    \hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\_t} \hyperlink{dhcpv6__common_8h_ae73654f333e4363463ad8c594eca1905}{time};
+454    \hyperlink{ipv4__frag_8h_a1b631b885944e53a63cfe6ea99a2d27e}{Ipv4HoleDesc} *hole;
+455 
+456    \textcolor{comment}{//Get current time}
+457    time = \hyperlink{os__port__chibios_8c_ab66a11272d40a916fa69dd8e4dc443d4}{osGetSystemTime}();
+458 
+459    \textcolor{comment}{//Loop through the reassembly queue}
+460    \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{ipv4__frag_8h_a007e85abc30c64c635bd354573ccb669}{IPV4\_MAX\_FRAG\_DATAGRAMS}; i++)
+461    \{
+462       \textcolor{comment}{//Point to the current entry in the reassembly queue}
+463       \hyperlink{structIpv4FragDesc}{Ipv4FragDesc} *frag = &interface->ipv4Context.fragQueue[i];
+464 
+465       \textcolor{comment}{//Make sure the entry is currently in use}
+466       \textcolor{keywordflow}{if}(frag->\hyperlink{structIpv4FragDesc_a348be10f5e00d0cf9bcb1b18c5c367cb}{buffer}.\hyperlink{structIpv4ReassemblyBuffer_a4a9c06b42f872f493fbc5bc39fc0b6d7}{chunkCount} > 0)
+467       \{
+468          \textcolor{comment}{//If the timer runs out, the partially-reassembled datagram must be}
+469          \textcolor{comment}{//discarded and ICMP Time Exceeded message sent to the source host}
+470          \textcolor{keywordflow}{if}((time - frag->\hyperlink{structIpv4FragDesc_a1cbafc6835eb22a2945d4bef3090d82a}{timestamp}) >= \hyperlink{ipv4__frag_8h_a483962653de7d49f8287948edfa53ba8}{IPV4\_FRAG\_TIME\_TO\_LIVE})
+471          \{
+472             \textcolor{comment}{//Debug message}
+473             \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"IPv4 fragment reassembly timeout...\(\backslash\)r\(\backslash\)n"});
+474             \textcolor{comment}{//Dump IP header contents for debugging purpose}
+475             \hyperlink{ipv4_8c_a965e56b2df9d8aad2be5f479b4caa50a}{ipv4DumpHeader}(frag->\hyperlink{structIpv4FragDesc_a348be10f5e00d0cf9bcb1b18c5c367cb}{buffer}.\hyperlink{structIpv4ReassemblyBuffer_a2a7cff0216aa758d344ffbeb6be481cf}{chunk}[0].
+      \hyperlink{structChunkDesc_a014aac6efdc5722e058a9b67ca5f8358}{address});
+476 
+477             \textcolor{comment}{//Number of failures detected by the IP reassembly algorithm}
+478             \hyperlink{mib2__module_8h_abac73a39224e47d597f3b461620d2119}{MIB2\_INC\_COUNTER32}(ipGroup.ipReasmFails, 1);
+479             \hyperlink{ip__mib__module_8h_abbb1f41624dcbd4f21b44932e338a479}{IP\_MIB\_INC\_COUNTER32}(ipv4SystemStats.ipSystemStatsReasmFails, 1);
+480             \hyperlink{ip__mib__module_8h_abbb1f41624dcbd4f21b44932e338a479}{IP\_MIB\_INC\_COUNTER32}(ipv4IfStatsTable[interface->index].ipIfStatsReasmFails
+      , 1);
+481 
+482             \textcolor{comment}{//Point to the first hole descriptor}
+483             hole = \hyperlink{ipv4__frag_8c_a1821e6107214685008d2aa0f39ea8fd9}{ipv4FindHole}(frag, frag->\hyperlink{structIpv4FragDesc_aecd2b578651ed97157db0013466e4e33}{firstHole});
+484 
+485             \textcolor{comment}{//Make sure the fragment zero has been received}
+486             \textcolor{comment}{//before sending an ICMP message}
+487             \textcolor{keywordflow}{if}(hole != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} && hole->first > 0)
+488             \{
+489                \textcolor{comment}{//Fix the size of the reconstructed datagram}
+490                error = \hyperlink{net__mem_8c_ac0a46f396754e069dd1ee65cdc559b28}{netBufferSetLength}((\hyperlink{structNetBuffer}{NetBuffer} *) &frag->
+      \hyperlink{structIpv4FragDesc_a348be10f5e00d0cf9bcb1b18c5c367cb}{buffer},
+491                   frag->\hyperlink{structIpv4FragDesc_a252d5cce2a3261863d1f4a55e33d4fdc}{headerLength} + hole->first);
+492 
+493                \textcolor{comment}{//Check status code}
+494                \textcolor{keywordflow}{if}(!error)
+495                \{
+496                   \textcolor{comment}{//Send an ICMP Time Exceeded message}
+497                   \hyperlink{icmp_8c_a9360e2c67e5001ebcceb50e81081901b}{icmpSendErrorMessage}(interface, 
+      \hyperlink{icmp_8h_a19857c9f7d9a5734a6256d79d5abcf80ac6c6848528e6853bf9c0193ae3fca3f1}{ICMP\_TYPE\_TIME\_EXCEEDED},
+498                      \hyperlink{icmp_8h_a2cf3555b4c51950bd61fc14ab3123a35aef4fe34de08762b9358508686c42c689}{ICMP\_CODE\_REASSEMBLY\_TIME\_EXCEEDED}, 0, (
+      \hyperlink{structNetBuffer}{NetBuffer} *) &frag->\hyperlink{structIpv4FragDesc_a348be10f5e00d0cf9bcb1b18c5c367cb}{buffer}, 0);
+499                \}
+500             \}
+501 
+502             \textcolor{comment}{//Drop the partially reconstructed datagram}
+503             \hyperlink{net__mem_8c_ac0a46f396754e069dd1ee65cdc559b28}{netBufferSetLength}((\hyperlink{structNetBuffer}{NetBuffer} *) &frag->
+      \hyperlink{structIpv4FragDesc_a348be10f5e00d0cf9bcb1b18c5c367cb}{buffer}, 0);
+504          \}
+505       \}
+506    \}
+507 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ipv4__frag_8c_ae67bb7ae73d166f3e5512367201bf56f}\label{ipv4__frag_8c_ae67bb7ae73d166f3e5512367201bf56f}} 
+\index{ipv4\+\_\+frag.\+c@{ipv4\+\_\+frag.\+c}!ipv4\+Reassemble\+Datagram@{ipv4\+Reassemble\+Datagram}}
+\index{ipv4\+Reassemble\+Datagram@{ipv4\+Reassemble\+Datagram}!ipv4\+\_\+frag.\+c@{ipv4\+\_\+frag.\+c}}
+\subsubsection{\texorpdfstring{ipv4\+Reassemble\+Datagram()}{ipv4ReassembleDatagram()}}
+{\footnotesize\ttfamily void ipv4\+Reassemble\+Datagram (\begin{DoxyParamCaption}\item[{\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$}]{interface,  }\item[{const \hyperlink{ipv4_8h_a294daf3717d3c22ffb24cbd3485ddbfc}{Ipv4\+Header} $\ast$}]{packet,  }\item[{size\+\_\+t}]{length }\end{DoxyParamCaption})}
+
+
+
+I\+Pv4 datagram reassembly algorithm. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em interface} & Underlying network interface \\
+\hline
+\mbox{\tt in}  & {\em packet} & Pointer to the I\+Pv4 fragmented packet \\
+\hline
+\mbox{\tt in}  & {\em length} & Packet length including header and payload \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 179 of file ipv4\+\_\+frag.\+c.
+
+
+\begin{DoxyCode}
+181 \{
+182    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+183    \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t} \hyperlink{pic32mz_2isr__support_8h_a12a5aed8a193ebbf9a641104a310610d}{offset};
+184    \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t} dataFirst;
+185    \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t} dataLast;
+186    \hyperlink{structIpv4FragDesc}{Ipv4FragDesc} *frag;
+187    \hyperlink{ipv4__frag_8h_a1b631b885944e53a63cfe6ea99a2d27e}{Ipv4HoleDesc} *hole;
+188    \hyperlink{ipv4__frag_8h_a1b631b885944e53a63cfe6ea99a2d27e}{Ipv4HoleDesc} *prevHole;
+189 
+190    \textcolor{comment}{//Number of IP fragments received which needed to be reassembled}
+191    \hyperlink{mib2__module_8h_abac73a39224e47d597f3b461620d2119}{MIB2\_INC\_COUNTER32}(ipGroup.ipReasmReqds, 1);
+192    \hyperlink{ip__mib__module_8h_abbb1f41624dcbd4f21b44932e338a479}{IP\_MIB\_INC\_COUNTER32}(ipv4SystemStats.ipSystemStatsReasmReqds, 1);
+193    \hyperlink{ip__mib__module_8h_abbb1f41624dcbd4f21b44932e338a479}{IP\_MIB\_INC\_COUNTER32}(ipv4IfStatsTable[interface->index].ipIfStatsReasmReqds, 1);
+194 
+195    \textcolor{comment}{//Get the length of the payload}
+196    \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} -= packet->headerLength * 4;
+197    \textcolor{comment}{//Convert the fragment offset from network byte order}
+198    offset = \hyperlink{cpu__endian_8h_a9312c6eb72e64f748ae0d0e0dc3ec9b9}{ntohs}(packet->fragmentOffset);
+199 
+200    \textcolor{comment}{//Every fragment except the last must contain a multiple of 8 bytes of data}
+201    \textcolor{keywordflow}{if}((offset & \hyperlink{ipv4_8h_a7c459ba922a9ef666bed308f4d46b18ca2b0328e4b88e37de72e50b0045fce2d5}{IPV4\_FLAG\_MF}) && (\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} % 8))
+202    \{
+203       \textcolor{comment}{//Number of failures detected by the IP reassembly algorithm}
+204       \hyperlink{mib2__module_8h_abac73a39224e47d597f3b461620d2119}{MIB2\_INC\_COUNTER32}(ipGroup.ipReasmFails, 1);
+205       \hyperlink{ip__mib__module_8h_abbb1f41624dcbd4f21b44932e338a479}{IP\_MIB\_INC\_COUNTER32}(ipv4SystemStats.ipSystemStatsReasmFails, 1);
+206       \hyperlink{ip__mib__module_8h_abbb1f41624dcbd4f21b44932e338a479}{IP\_MIB\_INC\_COUNTER32}(ipv4IfStatsTable[interface->index].ipIfStatsReasmFails, 1);
+207 
+208       \textcolor{comment}{//Drop the incoming fragment}
+209       \textcolor{keywordflow}{return};
+210    \}
+211 
+212    \textcolor{comment}{//Calculate the index of the first byte}
+213    dataFirst = (offset & \hyperlink{ipv4_8h_a7c459ba922a9ef666bed308f4d46b18ca3e8c743221c78becc1d1e6deba996396}{IPV4\_OFFSET\_MASK}) * 8;
+214    \textcolor{comment}{//Calculate the index immediately following the last byte}
+215    dataLast = dataFirst + (\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t}) \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length};
+216 
+217    \textcolor{comment}{//Search for a matching IP datagram being reassembled}
+218    frag = \hyperlink{ipv4__frag_8c_a313d3fdd865a973eef067e2084c69698}{ipv4SearchFragQueue}(interface, packet);
+219 
+220    \textcolor{comment}{//No matching entry in the reassembly queue?}
+221    \textcolor{keywordflow}{if}(frag == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+222    \{
+223       \textcolor{comment}{//Number of failures detected by the IP reassembly algorithm}
+224       \hyperlink{mib2__module_8h_abac73a39224e47d597f3b461620d2119}{MIB2\_INC\_COUNTER32}(ipGroup.ipReasmFails, 1);
+225       \hyperlink{ip__mib__module_8h_abbb1f41624dcbd4f21b44932e338a479}{IP\_MIB\_INC\_COUNTER32}(ipv4SystemStats.ipSystemStatsReasmFails, 1);
+226       \hyperlink{ip__mib__module_8h_abbb1f41624dcbd4f21b44932e338a479}{IP\_MIB\_INC\_COUNTER32}(ipv4IfStatsTable[interface->index].ipIfStatsReasmFails, 1);
+227 
+228       \textcolor{comment}{//Drop the incoming fragment}
+229       \textcolor{keywordflow}{return};
+230    \}
+231 
+232    \textcolor{comment}{//The very first fragment requires special handling}
+233    \textcolor{keywordflow}{if}(!(offset & \hyperlink{ipv4_8h_a7c459ba922a9ef666bed308f4d46b18ca3e8c743221c78becc1d1e6deba996396}{IPV4\_OFFSET\_MASK}))
+234    \{
+235       \textcolor{comment}{//Calculate the length of the IP header including options}
+236       frag->headerLength = packet->headerLength * 4;
+237 
+238       \textcolor{comment}{//Enforce the size of the reconstructed datagram}
+239       \textcolor{keywordflow}{if}((frag->headerLength + frag->dataLen) > \hyperlink{ipv4__frag_8h_a3f9a052384f25fdf9c6f5c32cb32e9ce}{IPV4\_MAX\_FRAG\_DATAGRAM\_SIZE})
+240       \{
+241          \textcolor{comment}{//Number of failures detected by the IP reassembly algorithm}
+242          \hyperlink{mib2__module_8h_abac73a39224e47d597f3b461620d2119}{MIB2\_INC\_COUNTER32}(ipGroup.ipReasmFails, 1);
+243          \hyperlink{ip__mib__module_8h_abbb1f41624dcbd4f21b44932e338a479}{IP\_MIB\_INC\_COUNTER32}(ipv4SystemStats.ipSystemStatsReasmFails, 1);
+244          \hyperlink{ip__mib__module_8h_abbb1f41624dcbd4f21b44932e338a479}{IP\_MIB\_INC\_COUNTER32}(ipv4IfStatsTable[interface->index].ipIfStatsReasmFails, 1
+      );
+245 
+246          \textcolor{comment}{//Drop the reconstructed datagram}
+247          \hyperlink{net__mem_8c_ac0a46f396754e069dd1ee65cdc559b28}{netBufferSetLength}((\hyperlink{structNetBuffer}{NetBuffer} *) &frag->buffer, 0);
+248          \textcolor{comment}{//Exit immediately}
+249          \textcolor{keywordflow}{return};
+250       \}
+251 
+252       \textcolor{comment}{//Make sure the IP header entirely fits in the first chunk}
+253       \textcolor{keywordflow}{if}(frag->headerLength > frag->buffer.chunk[0].size)
+254       \{
+255          \textcolor{comment}{//Number of failures detected by the IP reassembly algorithm}
+256          \hyperlink{mib2__module_8h_abac73a39224e47d597f3b461620d2119}{MIB2\_INC\_COUNTER32}(ipGroup.ipReasmFails, 1);
+257          \hyperlink{ip__mib__module_8h_abbb1f41624dcbd4f21b44932e338a479}{IP\_MIB\_INC\_COUNTER32}(ipv4SystemStats.ipSystemStatsReasmFails, 1);
+258          \hyperlink{ip__mib__module_8h_abbb1f41624dcbd4f21b44932e338a479}{IP\_MIB\_INC\_COUNTER32}(ipv4IfStatsTable[interface->index].ipIfStatsReasmFails, 1
+      );
+259 
+260          \textcolor{comment}{//Drop the reconstructed datagram}
+261          \hyperlink{net__mem_8c_ac0a46f396754e069dd1ee65cdc559b28}{netBufferSetLength}((\hyperlink{structNetBuffer}{NetBuffer} *) &frag->buffer, 0);
+262          \textcolor{comment}{//Exit immediately}
+263          \textcolor{keywordflow}{return};
+264       \}
+265 
+266       \textcolor{comment}{//Fix the length of the first chunk}
+267       frag->buffer.chunk[0].length = (\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t}) frag->headerLength;
+268       \textcolor{comment}{//Always take the IP header from the first fragment}
+269       \hyperlink{net__mem_8c_a977e79aab71b4b39772ff8256abb8b55}{netBufferWrite}((\hyperlink{structNetBuffer}{NetBuffer} *) &frag->buffer, 0, packet, frag->headerLength);
+270    \}
+271 
+272    \textcolor{comment}{//It may be necessary to increase the size of the buffer...}
+273    \textcolor{keywordflow}{if}(dataLast > frag->dataLen)
+274    \{
+275       \textcolor{comment}{//Enforce the size of the reconstructed datagram}
+276       \textcolor{keywordflow}{if}((frag->headerLength + dataLast) > \hyperlink{ipv4__frag_8h_a3f9a052384f25fdf9c6f5c32cb32e9ce}{IPV4\_MAX\_FRAG\_DATAGRAM\_SIZE})
+277       \{
+278          \textcolor{comment}{//Number of failures detected by the IP reassembly algorithm}
+279          \hyperlink{mib2__module_8h_abac73a39224e47d597f3b461620d2119}{MIB2\_INC\_COUNTER32}(ipGroup.ipReasmFails, 1);
+280          \hyperlink{ip__mib__module_8h_abbb1f41624dcbd4f21b44932e338a479}{IP\_MIB\_INC\_COUNTER32}(ipv4SystemStats.ipSystemStatsReasmFails, 1);
+281          \hyperlink{ip__mib__module_8h_abbb1f41624dcbd4f21b44932e338a479}{IP\_MIB\_INC\_COUNTER32}(ipv4IfStatsTable[interface->index].ipIfStatsReasmFails, 1
+      );
+282 
+283          \textcolor{comment}{//Drop the reconstructed datagram}
+284          \hyperlink{net__mem_8c_ac0a46f396754e069dd1ee65cdc559b28}{netBufferSetLength}((\hyperlink{structNetBuffer}{NetBuffer} *) &frag->buffer, 0);
+285          \textcolor{comment}{//Exit immediately}
+286          \textcolor{keywordflow}{return};
+287       \}
+288 
+289       \textcolor{comment}{//Adjust the size of the reconstructed datagram}
+290       error = \hyperlink{net__mem_8c_ac0a46f396754e069dd1ee65cdc559b28}{netBufferSetLength}((\hyperlink{structNetBuffer}{NetBuffer} *) &frag->buffer,
+291          frag->headerLength + dataLast + \textcolor{keyword}{sizeof}(\hyperlink{ipv4__frag_8h_a1b631b885944e53a63cfe6ea99a2d27e}{Ipv4HoleDesc}));
+292 
+293       \textcolor{comment}{//Any error to report?}
+294       \textcolor{keywordflow}{if}(error)
+295       \{
+296          \textcolor{comment}{//Number of failures detected by the IP reassembly algorithm}
+297          \hyperlink{mib2__module_8h_abac73a39224e47d597f3b461620d2119}{MIB2\_INC\_COUNTER32}(ipGroup.ipReasmFails, 1);
+298          \hyperlink{ip__mib__module_8h_abbb1f41624dcbd4f21b44932e338a479}{IP\_MIB\_INC\_COUNTER32}(ipv4SystemStats.ipSystemStatsReasmFails, 1);
+299          \hyperlink{ip__mib__module_8h_abbb1f41624dcbd4f21b44932e338a479}{IP\_MIB\_INC\_COUNTER32}(ipv4IfStatsTable[interface->index].ipIfStatsReasmFails, 1
+      );
+300 
+301          \textcolor{comment}{//Drop the reconstructed datagram}
+302          \hyperlink{net__mem_8c_ac0a46f396754e069dd1ee65cdc559b28}{netBufferSetLength}((\hyperlink{structNetBuffer}{NetBuffer} *) &frag->buffer, 0);
+303          \textcolor{comment}{//Exit immediately}
+304          \textcolor{keywordflow}{return};
+305       \}
+306 
+307       \textcolor{comment}{//Actual length of the payload}
+308       frag->dataLen = dataLast;
+309    \}
+310 
+311    \textcolor{comment}{//Select the first hole descriptor from the list}
+312    hole = \hyperlink{ipv4__frag_8c_a1821e6107214685008d2aa0f39ea8fd9}{ipv4FindHole}(frag, frag->firstHole);
+313    \textcolor{comment}{//Keep track of the previous hole in the list}
+314    prevHole = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+315 
+316    \textcolor{comment}{//Iterate through the hole descriptors}
+317    \textcolor{keywordflow}{while}(hole != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+318    \{
+319       \textcolor{comment}{//Save lower and upper boundaries for later use}
+320       \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t} holeFirst = hole->first;
+321       \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t} holeLast = hole->last;
+322 
+323       \textcolor{comment}{//Check whether the newly arrived fragment interacts with this hole}
+324       \textcolor{comment}{//in some way}
+325       \textcolor{keywordflow}{if}(dataFirst < holeLast && dataLast > holeFirst)
+326       \{
+327          \textcolor{comment}{//The current descriptor is no longer valid. We will destroy it,}
+328          \textcolor{comment}{//and in the next two steps, we will determine whether or not it}
+329          \textcolor{comment}{//is necessary to create any new hole descriptors}
+330          \textcolor{keywordflow}{if}(prevHole != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+331             prevHole->next = hole->next;
+332          \textcolor{keywordflow}{else}
+333             frag->firstHole = hole->next;
+334 
+335          \textcolor{comment}{//Is there still a hole at the beginning of the segment?}
+336          \textcolor{keywordflow}{if}(dataFirst > holeFirst)
+337          \{
+338             \textcolor{comment}{//Create a new entry that describes this hole}
+339             hole = \hyperlink{ipv4__frag_8c_a1821e6107214685008d2aa0f39ea8fd9}{ipv4FindHole}(frag, holeFirst);
+340             hole->first = holeFirst;
+341             hole->last = dataFirst;
+342 
+343             \textcolor{comment}{//Insert the newly created entry into the hole descriptor list}
+344             \textcolor{keywordflow}{if}(prevHole != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+345             \{
+346                hole->next = prevHole->next;
+347                prevHole->next = hole->first;
+348             \}
+349             \textcolor{keywordflow}{else}
+350             \{
+351                hole->next = frag->firstHole;
+352                frag->firstHole = hole->first;
+353             \}
+354 
+355             \textcolor{comment}{//Always keep track of the previous hole}
+356             prevHole = hole;
+357          \}
+358 
+359          \textcolor{comment}{//Is there still a hole at the end of the segment?}
+360          \textcolor{keywordflow}{if}(dataLast < holeLast && (offset & IPV4\_FLAG\_MF))
+361          \{
+362             \textcolor{comment}{//Create a new entry that describes this hole}
+363             hole = \hyperlink{ipv4__frag_8c_a1821e6107214685008d2aa0f39ea8fd9}{ipv4FindHole}(frag, dataLast);
+364             hole->first = dataLast;
+365             hole->last = holeLast;
+366 
+367             \textcolor{comment}{//Insert the newly created entry into the hole descriptor list}
+368             \textcolor{keywordflow}{if}(prevHole != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+369             \{
+370                hole->next = prevHole->next;
+371                prevHole->next = hole->first;
+372             \}
+373             \textcolor{keywordflow}{else}
+374             \{
+375                hole->next = frag->firstHole;
+376                frag->firstHole = hole->first;
+377             \}
+378 
+379             \textcolor{comment}{//Always keep track of the previous hole}
+380             prevHole = hole;
+381          \}
+382       \}
+383       \textcolor{keywordflow}{else}
+384       \{
+385          \textcolor{comment}{//The newly arrived fragment does not interact with the current hole}
+386          prevHole = hole;
+387       \}
+388 
+389       \textcolor{comment}{//Select the next hole descriptor from the list}
+390       hole = \hyperlink{ipv4__frag_8c_a1821e6107214685008d2aa0f39ea8fd9}{ipv4FindHole}(frag, prevHole ? prevHole->next : frag->firstHole);
+391    \}
+392 
+393    \textcolor{comment}{//Copy data from the fragment to the reassembly buffer}
+394    \hyperlink{net__mem_8c_a977e79aab71b4b39772ff8256abb8b55}{netBufferWrite}((\hyperlink{structNetBuffer}{NetBuffer} *) &frag->buffer,
+395       frag->headerLength + dataFirst, \hyperlink{ipv4_8h_aa44264bce0cc808e537d7859dbca3067}{IPV4\_DATA}(packet), \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length});
+396 
+397    \textcolor{comment}{//Dump hole descriptor list}
+398    \hyperlink{ipv4__frag_8c_aebd99ec1318463f29c974f48efcb3765}{ipv4DumpHoleList}(frag);
+399 
+400    \textcolor{comment}{//If the hole descriptor list is empty, the reassembly process is now complete}
+401    \textcolor{keywordflow}{if}(!\hyperlink{ipv4__frag_8c_a1821e6107214685008d2aa0f39ea8fd9}{ipv4FindHole}(frag, frag->firstHole))
+402    \{
+403       \textcolor{comment}{//Discard the extra hole descriptor that follows the reconstructed datagram}
+404       error = \hyperlink{net__mem_8c_ac0a46f396754e069dd1ee65cdc559b28}{netBufferSetLength}((\hyperlink{structNetBuffer}{NetBuffer} *) &frag->buffer,
+405          frag->headerLength + frag->dataLen);
+406 
+407       \textcolor{comment}{//Check status code}
+408       \textcolor{keywordflow}{if}(error)
+409       \{
+410          \textcolor{comment}{//Number of failures detected by the IP reassembly algorithm}
+411          \hyperlink{mib2__module_8h_abac73a39224e47d597f3b461620d2119}{MIB2\_INC\_COUNTER32}(ipGroup.ipReasmFails, 1);
+412          \hyperlink{ip__mib__module_8h_abbb1f41624dcbd4f21b44932e338a479}{IP\_MIB\_INC\_COUNTER32}(ipv4SystemStats.ipSystemStatsReasmFails, 1);
+413          \hyperlink{ip__mib__module_8h_abbb1f41624dcbd4f21b44932e338a479}{IP\_MIB\_INC\_COUNTER32}(ipv4IfStatsTable[interface->index].ipIfStatsReasmFails, 1
+      );
+414       \}
+415       \textcolor{keywordflow}{else}
+416       \{
+417          \textcolor{comment}{//Point to the IP header}
+418          \hyperlink{ipv4_8h_a294daf3717d3c22ffb24cbd3485ddbfc}{Ipv4Header} *datagram = \hyperlink{net__mem_8c_a20d30c9db547b3b2743368b589cf482b}{netBufferAt}((\hyperlink{structNetBuffer}{NetBuffer} *) &frag->buffer, 0);
+419 
+420          \textcolor{comment}{//Fix IP header}
+421          datagram->totalLength = \hyperlink{cpu__endian_8h_a800cdbf435a85a9b3ad4f0edc518472a}{htons}(frag->headerLength + frag->dataLen);
+422          datagram->fragmentOffset = 0;
+423          datagram->headerChecksum = 0;
+424 
+425          \textcolor{comment}{//Number of IP datagrams successfully reassembled}
+426          \hyperlink{mib2__module_8h_abac73a39224e47d597f3b461620d2119}{MIB2\_INC\_COUNTER32}(ipGroup.ipReasmOKs, 1);
+427          \hyperlink{ip__mib__module_8h_abbb1f41624dcbd4f21b44932e338a479}{IP\_MIB\_INC\_COUNTER32}(ipv4SystemStats.ipSystemStatsReasmOKs, 1);
+428          \hyperlink{ip__mib__module_8h_abbb1f41624dcbd4f21b44932e338a479}{IP\_MIB\_INC\_COUNTER32}(ipv4IfStatsTable[interface->index].ipIfStatsReasmOKs, 1);
+429 
+430          \textcolor{comment}{//Pass the original IPv4 datagram to the higher protocol layer}
+431          \hyperlink{ipv4_8c_a5940b487951061965ba49576ac3366ea}{ipv4ProcessDatagram}(interface, (\hyperlink{structNetBuffer}{NetBuffer} *) &frag->buffer);
+432       \}
+433 
+434       \textcolor{comment}{//Release previously allocated memory}
+435       \hyperlink{net__mem_8c_ac0a46f396754e069dd1ee65cdc559b28}{netBufferSetLength}((\hyperlink{structNetBuffer}{NetBuffer} *) &frag->buffer, 0);
+436    \}
+437 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ipv4__frag_8c_a313d3fdd865a973eef067e2084c69698}\label{ipv4__frag_8c_a313d3fdd865a973eef067e2084c69698}} 
+\index{ipv4\+\_\+frag.\+c@{ipv4\+\_\+frag.\+c}!ipv4\+Search\+Frag\+Queue@{ipv4\+Search\+Frag\+Queue}}
+\index{ipv4\+Search\+Frag\+Queue@{ipv4\+Search\+Frag\+Queue}!ipv4\+\_\+frag.\+c@{ipv4\+\_\+frag.\+c}}
+\subsubsection{\texorpdfstring{ipv4\+Search\+Frag\+Queue()}{ipv4SearchFragQueue()}}
+{\footnotesize\ttfamily \hyperlink{structIpv4FragDesc}{Ipv4\+Frag\+Desc}$\ast$ ipv4\+Search\+Frag\+Queue (\begin{DoxyParamCaption}\item[{\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$}]{interface,  }\item[{const \hyperlink{ipv4_8h_a294daf3717d3c22ffb24cbd3485ddbfc}{Ipv4\+Header} $\ast$}]{packet }\end{DoxyParamCaption})}
+
+
+
+Search for a matching datagram in the reassembly queue. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em interface} & Underlying network interface \\
+\hline
+\mbox{\tt in}  & {\em packet} & Incoming I\+Pv4 packet \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Matching fragment descriptor 
+\end{DoxyReturn}
+
+
+Definition at line 517 of file ipv4\+\_\+frag.\+c.
+
+
+\begin{DoxyCode}
+519 \{
+520    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+521    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+522    \hyperlink{ipv4_8h_a294daf3717d3c22ffb24cbd3485ddbfc}{Ipv4Header} *datagram;
+523    \hyperlink{structIpv4FragDesc}{Ipv4FragDesc} *frag;
+524    \hyperlink{ipv4__frag_8h_a1b631b885944e53a63cfe6ea99a2d27e}{Ipv4HoleDesc} *hole;
+525 
+526    \textcolor{comment}{//Search for a matching IP datagram being reassembled}
+527    \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{ipv4__frag_8h_a007e85abc30c64c635bd354573ccb669}{IPV4\_MAX\_FRAG\_DATAGRAMS}; i++)
+528    \{
+529       \textcolor{comment}{//Point to the current entry in the reassembly queue}
+530       frag = &interface->ipv4Context.fragQueue[i];
+531 
+532       \textcolor{comment}{//Check whether the current entry is used?}
+533       \textcolor{keywordflow}{if}(frag->\hyperlink{structIpv4FragDesc_a348be10f5e00d0cf9bcb1b18c5c367cb}{buffer}.\hyperlink{structIpv4ReassemblyBuffer_a4a9c06b42f872f493fbc5bc39fc0b6d7}{chunkCount} > 0)
+534       \{
+535          \textcolor{comment}{//Point to the corresponding datagram}
+536          datagram = \hyperlink{net__mem_8c_a20d30c9db547b3b2743368b589cf482b}{netBufferAt}((\hyperlink{structNetBuffer}{NetBuffer} *) &frag->\hyperlink{structIpv4FragDesc_a348be10f5e00d0cf9bcb1b18c5c367cb}{buffer}, 0);
+537 
+538          \textcolor{comment}{//Check source and destination addresses}
+539          \textcolor{keywordflow}{if}(datagram->srcAddr != packet->srcAddr)
+540             \textcolor{keywordflow}{continue};
+541          \textcolor{keywordflow}{if}(datagram->destAddr != packet->destAddr)
+542             \textcolor{keywordflow}{continue};
+543          \textcolor{comment}{//Compare identification and protocol fields}
+544          \textcolor{keywordflow}{if}(datagram->identification != packet->identification)
+545             \textcolor{keywordflow}{continue};
+546          \textcolor{keywordflow}{if}(datagram->protocol != packet->protocol)
+547             \textcolor{keywordflow}{continue};
+548 
+549          \textcolor{comment}{//A matching entry has been found in the reassembly queue}
+550          \textcolor{keywordflow}{return} frag;
+551       \}
+552    \}
+553 
+554    \textcolor{comment}{//If the current packet does not match an existing entry}
+555    \textcolor{comment}{//in the reassembly queue, then create a new entry}
+556    \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{ipv4__frag_8h_a007e85abc30c64c635bd354573ccb669}{IPV4\_MAX\_FRAG\_DATAGRAMS}; i++)
+557    \{
+558       \textcolor{comment}{//Point to the current entry in the reassembly queue}
+559       frag = &interface->ipv4Context.fragQueue[i];
+560 
+561       \textcolor{comment}{//The current entry is free?}
+562       \textcolor{keywordflow}{if}(!frag->\hyperlink{structIpv4FragDesc_a348be10f5e00d0cf9bcb1b18c5c367cb}{buffer}.\hyperlink{structIpv4ReassemblyBuffer_a4a9c06b42f872f493fbc5bc39fc0b6d7}{chunkCount})
+563       \{
+564          \textcolor{comment}{//Number of chunks that comprise the reassembly buffer}
+565          frag->\hyperlink{structIpv4FragDesc_a348be10f5e00d0cf9bcb1b18c5c367cb}{buffer}.\hyperlink{structIpv4ReassemblyBuffer_ae12403b25f09034a743e45debe206c69}{maxChunkCount} = \hyperlink{os__port_8h_aa1394a41d43c0f3fd30febe41c7bb340}{arraysize}(frag->
+      \hyperlink{structIpv4FragDesc_a348be10f5e00d0cf9bcb1b18c5c367cb}{buffer}.\hyperlink{structIpv4ReassemblyBuffer_a2a7cff0216aa758d344ffbeb6be481cf}{chunk});
+566 
+567          \textcolor{comment}{//Allocate sufficient memory to hold the IPv4 header and}
+568          \textcolor{comment}{//the first hole descriptor}
+569          error = \hyperlink{net__mem_8c_ac0a46f396754e069dd1ee65cdc559b28}{netBufferSetLength}((\hyperlink{structNetBuffer}{NetBuffer} *) &frag->
+      \hyperlink{structIpv4FragDesc_a348be10f5e00d0cf9bcb1b18c5c367cb}{buffer},
+570             \hyperlink{net__mem_8h_a8870c81bed70c77d981277a24c0174bc}{NET\_MEM\_POOL\_BUFFER\_SIZE} + \textcolor{keyword}{sizeof}(
+      \hyperlink{ipv4__frag_8h_a1b631b885944e53a63cfe6ea99a2d27e}{Ipv4HoleDesc}));
+571 
+572          \textcolor{comment}{//Failed to allocate memory?}
+573          \textcolor{keywordflow}{if}(error)
+574          \{
+575             \textcolor{comment}{//Clean up side effects}
+576             \hyperlink{net__mem_8c_ac0a46f396754e069dd1ee65cdc559b28}{netBufferSetLength}((\hyperlink{structNetBuffer}{NetBuffer} *) &frag->
+      \hyperlink{structIpv4FragDesc_a348be10f5e00d0cf9bcb1b18c5c367cb}{buffer}, 0);
+577             \textcolor{comment}{//Exit immediately}
+578             \textcolor{keywordflow}{return} \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+579          \}
+580 
+581          \textcolor{comment}{//Initial length of the reconstructed datagram}
+582          frag->\hyperlink{structIpv4FragDesc_a252d5cce2a3261863d1f4a55e33d4fdc}{headerLength} = packet->headerLength * 4;
+583          frag->\hyperlink{structIpv4FragDesc_ae0496f42fdecf5ead0db14b0eca0419d}{dataLen} = 0;
+584 
+585          \textcolor{comment}{//Fix the length of the first chunk}
+586          frag->\hyperlink{structIpv4FragDesc_a348be10f5e00d0cf9bcb1b18c5c367cb}{buffer}.\hyperlink{structIpv4ReassemblyBuffer_a2a7cff0216aa758d344ffbeb6be481cf}{chunk}[0].\hyperlink{structChunkDesc_a4bdd57a9363511126fe5cd6d30c51c81}{length} = (\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t}) frag->
+      \hyperlink{structIpv4FragDesc_a252d5cce2a3261863d1f4a55e33d4fdc}{headerLength};
+587          \textcolor{comment}{//Copy IPv4 header from the incoming fragment}
+588          \hyperlink{net__mem_8c_a977e79aab71b4b39772ff8256abb8b55}{netBufferWrite}((\hyperlink{structNetBuffer}{NetBuffer} *) &frag->\hyperlink{structIpv4FragDesc_a348be10f5e00d0cf9bcb1b18c5c367cb}{buffer}, 0, packet, frag->
+      \hyperlink{structIpv4FragDesc_a252d5cce2a3261863d1f4a55e33d4fdc}{headerLength});
+589 
+590          \textcolor{comment}{//Save current time}
+591          frag->\hyperlink{structIpv4FragDesc_a1cbafc6835eb22a2945d4bef3090d82a}{timestamp} = \hyperlink{os__port__chibios_8c_ab66a11272d40a916fa69dd8e4dc443d4}{osGetSystemTime}();
+592          \textcolor{comment}{//Create a new entry in the hole descriptor list}
+593          frag->\hyperlink{structIpv4FragDesc_aecd2b578651ed97157db0013466e4e33}{firstHole} = 0;
+594 
+595          \textcolor{comment}{//Point to first hole descriptor}
+596          hole = \hyperlink{ipv4__frag_8c_a1821e6107214685008d2aa0f39ea8fd9}{ipv4FindHole}(frag, frag->\hyperlink{structIpv4FragDesc_aecd2b578651ed97157db0013466e4e33}{firstHole});
+597          \textcolor{comment}{//The entry describes the datagram as being completely missing}
+598          hole->first = 0;
+599          hole->last = \hyperlink{ipv4__frag_8h_a311f3a32c208fe4929b9fbd555bc3426}{IPV4\_INFINITY};
+600          hole->next = \hyperlink{ipv4__frag_8h_a311f3a32c208fe4929b9fbd555bc3426}{IPV4\_INFINITY};
+601 
+602          \textcolor{comment}{//Dump hole descriptor list}
+603          \hyperlink{ipv4__frag_8c_aebd99ec1318463f29c974f48efcb3765}{ipv4DumpHoleList}(frag);
+604 
+605          \textcolor{comment}{//Return the matching fragment descriptor}
+606          \textcolor{keywordflow}{return} frag;
+607       \}
+608    \}
+609 
+610    \textcolor{comment}{//The reassembly queue is full}
+611    \textcolor{keywordflow}{return} \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+612 \}
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{ipv4__frag_8c_a9746ee5d6e5f0f3c6a9bd554f1a6f509}\label{ipv4__frag_8c_a9746ee5d6e5f0f3c6a9bd554f1a6f509}} 
+\index{ipv4\+\_\+frag.\+c@{ipv4\+\_\+frag.\+c}!ipv4\+Frag\+Tick\+Counter@{ipv4\+Frag\+Tick\+Counter}}
+\index{ipv4\+Frag\+Tick\+Counter@{ipv4\+Frag\+Tick\+Counter}!ipv4\+\_\+frag.\+c@{ipv4\+\_\+frag.\+c}}
+\subsubsection{\texorpdfstring{ipv4\+Frag\+Tick\+Counter}{ipv4FragTickCounter}}
+{\footnotesize\ttfamily \hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\+\_\+t} ipv4\+Frag\+Tick\+Counter}
+
+
+
+Definition at line 57 of file ipv4\+\_\+frag.\+c.
+

@@ -1,0 +1,1751 @@
+\hypertarget{socket_8c}{}\section{cyclone\+\_\+tcp/core/socket.c File Reference}
+\label{socket_8c}\index{cyclone\+\_\+tcp/core/socket.\+c@{cyclone\+\_\+tcp/core/socket.\+c}}
+
+
+Socket A\+PI.  
+
+
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}core/net.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}core/socket.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}core/raw\+\_\+socket.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}core/udp.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}core/tcp.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}core/tcp\+\_\+misc.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}dns/dns\+\_\+client.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}mdns/mdns\+\_\+client.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}netbios/nbns\+\_\+client.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}llmnr/llmnr\+\_\+client.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}debug.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{socket_8c_afcdf5e66fd927a7f4cc64295acd20407}{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}~\hyperlink{net__config_8h_a54dc2e8c6df7c17be0ae5b336c6f3363}{S\+O\+C\+K\+E\+T\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{socket_8c_a0d875c0cf5ad68f72f23e982602f5aa2}{socket\+Init} (void)
+\begin{DoxyCompactList}\small\item\em Socket related initialization. \end{DoxyCompactList}\item 
+\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$ \hyperlink{socket_8c_aa139bbf42b326b52eb08cf52771ac337}{socket\+Open} (\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} \hyperlink{ppp_8h_a1d127017fb298b889f4ba24752d08b8e}{type}, \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} \hyperlink{lcp_8h_ab551400c74271f35d0c79f81d29cffbb}{protocol})
+\begin{DoxyCompactList}\small\item\em Create a socket (U\+DP or T\+CP) \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{socket_8c_abdd29ac0ba4a644c726f5b1280680099}{socket\+Set\+Timeout} (\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$\hyperlink{bsd__socket_8h_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, \hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\+\_\+t} timeout)
+\begin{DoxyCompactList}\small\item\em Set timeout value for blocking operations. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{socket_8c_aedf25ddaf93caf6fb4a9e47dae20c831}{socket\+Set\+Tx\+Buffer\+Size} (\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$\hyperlink{bsd__socket_8h_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, size\+\_\+t size)
+\begin{DoxyCompactList}\small\item\em Specify the size of the send buffer. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{socket_8c_ade5d61125056ad265723b44f236bdb20}{socket\+Set\+Rx\+Buffer\+Size} (\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$\hyperlink{bsd__socket_8h_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, size\+\_\+t size)
+\begin{DoxyCompactList}\small\item\em Specify the size of the receive buffer. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{socket_8c_a014878addaa120654ac3370335e8bd92}{socket\+Set\+Interface} (\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$\hyperlink{bsd__socket_8h_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, \hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface)
+\begin{DoxyCompactList}\small\item\em Bind a socket to a particular network interface. \end{DoxyCompactList}\item 
+\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$ \hyperlink{socket_8c_a5f7f436ed06e8781888517f29eba7610}{socket\+Get\+Interface} (\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$\hyperlink{bsd__socket_8h_a3f8f3a2707fbc87fc30aa70f31f53218}{socket})
+\begin{DoxyCompactList}\small\item\em Retrieve the underlying interface. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{socket_8c_a56de93ca9f66782811dbe151d6da0b9c}{socket\+Bind} (\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$\hyperlink{bsd__socket_8h_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, const \hyperlink{structIpAddr}{Ip\+Addr} $\ast$local\+Ip\+Addr, \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} local\+Port)
+\begin{DoxyCompactList}\small\item\em Associate a local address with a socket. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{socket_8c_aff3e3c0abc332f42189fce8f362fbd63}{socket\+Connect} (\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$\hyperlink{bsd__socket_8h_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, const \hyperlink{structIpAddr}{Ip\+Addr} $\ast$remote\+Ip\+Addr, \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} remote\+Port)
+\begin{DoxyCompactList}\small\item\em Establish a connection to a specified socket. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{socket_8c_a96b275d0dd033cf5fc36ba1a9c4543e3}{socket\+Listen} (\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$\hyperlink{bsd__socket_8h_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} backlog)
+\begin{DoxyCompactList}\small\item\em Place a socket in the listening state. \end{DoxyCompactList}\item 
+\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$ \hyperlink{socket_8c_a00ec8a49fe1ee3597a0f7a2afbe46f00}{socket\+Accept} (\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$\hyperlink{bsd__socket_8h_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, \hyperlink{structIpAddr}{Ip\+Addr} $\ast$client\+Ip\+Addr, \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} $\ast$client\+Port)
+\begin{DoxyCompactList}\small\item\em Permit an incoming connection attempt on a socket. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{socket_8c_aa4eeb3a3294d14d681675ba9f0d3e568}{socket\+Send} (\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$\hyperlink{bsd__socket_8h_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, const void $\ast$\hyperlink{tftp__common_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length}, size\+\_\+t $\ast$written, \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} \hyperlink{nbns__common_8h_a1e87af3c18a2fd36c61faf89949bdc3f}{flags})
+\begin{DoxyCompactList}\small\item\em Send data to a connected socket. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{socket_8c_a5985321fef9f287f84c4004aaa78920e}{socket\+Send\+To} (\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$\hyperlink{bsd__socket_8h_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, const \hyperlink{structIpAddr}{Ip\+Addr} $\ast$\hyperlink{ipcp_8h_a752e1719cf65f78dfec6274352cb56df}{dest\+Ip\+Addr}, \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} \hyperlink{udp_8h_af15d713ad2bc92686abfa6ab012b5039}{dest\+Port}, const void $\ast$\hyperlink{tftp__common_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length}, size\+\_\+t $\ast$written, \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} \hyperlink{nbns__common_8h_a1e87af3c18a2fd36c61faf89949bdc3f}{flags})
+\begin{DoxyCompactList}\small\item\em Send a datagram to a specific destination. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{socket_8c_a894c7bf0bfd4e3886fc584ed7ebbb087}{socket\+Receive} (\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$\hyperlink{bsd__socket_8h_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, void $\ast$\hyperlink{tftp__common_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, size\+\_\+t size, size\+\_\+t $\ast$received, \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} \hyperlink{nbns__common_8h_a1e87af3c18a2fd36c61faf89949bdc3f}{flags})
+\begin{DoxyCompactList}\small\item\em Receive data from a connected socket. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{socket_8c_a26af4b642b71708e1408fc94483f90bb}{socket\+Receive\+From} (\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$\hyperlink{bsd__socket_8h_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, \hyperlink{structIpAddr}{Ip\+Addr} $\ast$\hyperlink{ipcp_8h_a8ddffb4d02fcd8ad856313d3e208c34f}{src\+Ip\+Addr}, \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} $\ast$\hyperlink{udp_8h_a26ebbf4f65c3f6fd9959d9cecef5c9d8}{src\+Port}, void $\ast$\hyperlink{tftp__common_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, size\+\_\+t size, size\+\_\+t $\ast$received, \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} \hyperlink{nbns__common_8h_a1e87af3c18a2fd36c61faf89949bdc3f}{flags})
+\begin{DoxyCompactList}\small\item\em Receive a datagram from a connectionless socket. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{socket_8c_a8417ca0c48a905179e0275603a98a849}{socket\+Receive\+Ex} (\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$\hyperlink{bsd__socket_8h_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, \hyperlink{structIpAddr}{Ip\+Addr} $\ast$\hyperlink{ipcp_8h_a8ddffb4d02fcd8ad856313d3e208c34f}{src\+Ip\+Addr}, \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} $\ast$\hyperlink{udp_8h_a26ebbf4f65c3f6fd9959d9cecef5c9d8}{src\+Port}, \hyperlink{structIpAddr}{Ip\+Addr} $\ast$\hyperlink{ipcp_8h_a752e1719cf65f78dfec6274352cb56df}{dest\+Ip\+Addr}, void $\ast$\hyperlink{tftp__common_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, size\+\_\+t size, size\+\_\+t $\ast$received, \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} \hyperlink{nbns__common_8h_a1e87af3c18a2fd36c61faf89949bdc3f}{flags})
+\begin{DoxyCompactList}\small\item\em Receive a datagram. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{socket_8c_aee73814e98b4258f707284521341420a}{socket\+Get\+Local\+Addr} (\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$\hyperlink{bsd__socket_8h_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, \hyperlink{structIpAddr}{Ip\+Addr} $\ast$local\+Ip\+Addr, \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} $\ast$local\+Port)
+\begin{DoxyCompactList}\small\item\em Retrieve the local address for a given socket. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{socket_8c_aeb04e3b375708898d2330e9c67c4e1a9}{socket\+Get\+Remote\+Addr} (\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$\hyperlink{bsd__socket_8h_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, \hyperlink{structIpAddr}{Ip\+Addr} $\ast$remote\+Ip\+Addr, \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} $\ast$remote\+Port)
+\begin{DoxyCompactList}\small\item\em Retrieve the address of the peer to which a socket is connected. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{socket_8c_acc736b53dba4a0d3b11b63f75cdcfffb}{socket\+Shutdown} (\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$\hyperlink{bsd__socket_8h_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} how)
+\begin{DoxyCompactList}\small\item\em Disable reception, transmission, or both. \end{DoxyCompactList}\item 
+void \hyperlink{socket_8c_ac5012e9f71c97e2ea0410f2c5baccb0e}{socket\+Close} (\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$\hyperlink{bsd__socket_8h_a3f8f3a2707fbc87fc30aa70f31f53218}{socket})
+\begin{DoxyCompactList}\small\item\em Close an existing socket. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{socket_8c_a57ec969d9a3deee2dae93fe0a891e583}{socket\+Poll} (\hyperlink{structSocketEventDesc}{Socket\+Event\+Desc} $\ast$event\+Desc, \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} size, \hyperlink{structOsEvent}{Os\+Event} $\ast$ext\+Event, \hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\+\_\+t} timeout)
+\begin{DoxyCompactList}\small\item\em Wait for one of a set of sockets to become ready to perform I/O. \end{DoxyCompactList}\item 
+void \hyperlink{socket_8c_a2a034bca17a40ea29d238c8f45d8a842}{socket\+Register\+Events} (\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$\hyperlink{bsd__socket_8h_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, \hyperlink{structOsEvent}{Os\+Event} $\ast$event, \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} event\+Mask)
+\begin{DoxyCompactList}\small\item\em Subscribe to the specified socket events. \end{DoxyCompactList}\item 
+void \hyperlink{socket_8c_a3baa68d9d7c771a38463123a595075ff}{socket\+Unregister\+Events} (\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$\hyperlink{bsd__socket_8h_a3f8f3a2707fbc87fc30aa70f31f53218}{socket})
+\begin{DoxyCompactList}\small\item\em Unsubscribe previously registered events. \end{DoxyCompactList}\item 
+\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} \hyperlink{socket_8c_ac445bb2c530b9c51d11d3bb07b13c1c4}{socket\+Get\+Events} (\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$\hyperlink{bsd__socket_8h_a3f8f3a2707fbc87fc30aa70f31f53218}{socket})
+\begin{DoxyCompactList}\small\item\em Retrieve event flags for a specified socket. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{socket_8c_a9e1dd7c4ae3261bc4bb9e287c21d3c51}{get\+Host\+By\+Name} (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface, const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$\hyperlink{resource__manager_8h_a26532d7194d592ae8da35222073f36d6}{name}, \hyperlink{structIpAddr}{Ip\+Addr} $\ast$\hyperlink{ipcp_8h_a11542dd5a4de5976a89188df3d53b42d}{ip\+Addr}, \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} \hyperlink{nbns__common_8h_a1e87af3c18a2fd36c61faf89949bdc3f}{flags})
+\begin{DoxyCompactList}\small\item\em Resolve a host name into an IP address. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} \hyperlink{socket_8c_acdd76d8e01b4715c774c404b10f958da}{socket\+Table} \mbox{[}\hyperlink{net__config_8h_ab793a8c76592a00fa3ea0510cd2ffe3a}{S\+O\+C\+K\+E\+T\+\_\+\+M\+A\+X\+\_\+\+C\+O\+U\+NT}\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Socket A\+PI. 
+
+\hypertarget{pic32mz__ef__curiosity_8h_License}{}\subsection{License}\label{pic32mz__ef__curiosity_8h_License}
+S\+P\+D\+X-\/\+License-\/\+Identifier\+: G\+P\+L-\/2.\+0-\/or-\/later
+
+Copyright (C) 2010-\/2019 Oryx Embedded S\+A\+RL. All rights reserved.
+
+This file is part of Cyclone\+T\+CP Open.
+
+This program is free software; you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+
+You should have received a copy of the G\+NU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-\/1301, U\+SA.
+
+\begin{DoxyAuthor}{Author}
+Oryx Embedded S\+A\+RL (www.\+oryx-\/embedded.\+com) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+9.\+6 
+\end{DoxyVersion}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{socket_8c_afcdf5e66fd927a7f4cc64295acd20407}\label{socket_8c_afcdf5e66fd927a7f4cc64295acd20407}} 
+\index{socket.\+c@{socket.\+c}!T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+\index{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}!socket.\+c@{socket.\+c}}
+\subsubsection{\texorpdfstring{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}{TRACE\_LEVEL}}
+{\footnotesize\ttfamily \#define T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL~\hyperlink{net__config_8h_a54dc2e8c6df7c17be0ae5b336c6f3363}{S\+O\+C\+K\+E\+T\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+
+
+
+Definition at line 32 of file socket.\+c.
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{socket_8c_a9e1dd7c4ae3261bc4bb9e287c21d3c51}\label{socket_8c_a9e1dd7c4ae3261bc4bb9e287c21d3c51}} 
+\index{socket.\+c@{socket.\+c}!get\+Host\+By\+Name@{get\+Host\+By\+Name}}
+\index{get\+Host\+By\+Name@{get\+Host\+By\+Name}!socket.\+c@{socket.\+c}}
+\subsubsection{\texorpdfstring{get\+Host\+By\+Name()}{getHostByName()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} get\+Host\+By\+Name (\begin{DoxyParamCaption}\item[{\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$}]{interface,  }\item[{const \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\+\_\+t} $\ast$}]{name,  }\item[{\hyperlink{structIpAddr}{Ip\+Addr} $\ast$}]{ip\+Addr,  }\item[{\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t}}]{flags }\end{DoxyParamCaption})}
+
+
+
+Resolve a host name into an IP address. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em interface} & Underlying network interface (optional parameter) \\
+\hline
+\mbox{\tt in}  & {\em name} & Name of the host to be resolved \\
+\hline
+\mbox{\tt out}  & {\em ip\+Addr} & IP address corresponding to the specified host name \\
+\hline
+\mbox{\tt in}  & {\em flags} & Set of flags that influences the behavior of this function \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 1078 of file socket.\+c.
+
+
+\begin{DoxyCode}
+1080 \{
+1081    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+1082    \hyperlink{socket_8h_ab5e32e6fb9dfb43706584ab98de9a7bd}{HostType} \hyperlink{resource__manager_8h_a12e46a33bfe90638e58ef067c6fd4a6e}{type};
+1083    \hyperlink{socket_8h_adb58068eb0cfd0e54798ac480eb19f94}{HostnameResolver} \hyperlink{dhcpv6__common_8h_ad124d3d2e02c729afa303c775295278e}{protocol};
+1084 
+1085    \textcolor{comment}{//Default address type depends on TCP/IP stack configuration}
+1086 \textcolor{preprocessor}{#if (IPV4\_SUPPORT == ENABLED)}
+1087    type = \hyperlink{socket_8h_ab5e32e6fb9dfb43706584ab98de9a7bdaebe58bd51c617e7f9024189e369dc8e9}{HOST\_TYPE\_IPV4};
+1088 \textcolor{preprocessor}{#elif (IPV6\_SUPPORT == ENABLED)}
+1089    type = \hyperlink{socket_8h_ab5e32e6fb9dfb43706584ab98de9a7bdaa1f89753ef33b5e8efcc253208e11c61}{HOST\_TYPE\_IPV6};
+1090 \textcolor{preprocessor}{#else}
+1091    type = \hyperlink{socket_8h_ab5e32e6fb9dfb43706584ab98de9a7bdae62e4d81f41cef89d1dfb1707c7443d7}{HOST\_TYPE\_ANY};
+1092 \textcolor{preprocessor}{#endif}
+1093 
+1094    \textcolor{comment}{//Default name resolution protocol depends on TCP/IP stack configuration}
+1095 \textcolor{preprocessor}{#if (DNS\_CLIENT\_SUPPORT == ENABLED)}
+1096    protocol = \hyperlink{socket_8h_adb58068eb0cfd0e54798ac480eb19f94a7289eef0101ef470c06bfb1c96d37396}{HOST\_NAME\_RESOLVER\_DNS};
+1097 \textcolor{preprocessor}{#elif (MDNS\_CLIENT\_SUPPORT == ENABLED)}
+1098    protocol = \hyperlink{socket_8h_adb58068eb0cfd0e54798ac480eb19f94a9e9dee333128d92abfcdb6d58f2b7cb4}{HOST\_NAME\_RESOLVER\_MDNS};
+1099 \textcolor{preprocessor}{#elif (NBNS\_CLIENT\_SUPPORT == ENABLED)}
+1100    protocol = \hyperlink{socket_8h_adb58068eb0cfd0e54798ac480eb19f94a71aefbb76f027115b860aebd98ce74e9}{HOST\_NAME\_RESOLVER\_NBNS};
+1101 \textcolor{preprocessor}{#elif (LLMNR\_CLIENT\_SUPPORT == ENABLED)}
+1102    protocol = \hyperlink{socket_8h_adb58068eb0cfd0e54798ac480eb19f94ae1dd21be774a259aa36f930440754000}{HOST\_NAME\_RESOLVER\_LLMNR};
+1103 \textcolor{preprocessor}{#else}
+1104    protocol = \hyperlink{socket_8h_adb58068eb0cfd0e54798ac480eb19f94acfdd66842c7a2e6697e28165d5510529}{HOST\_NAME\_RESOLVER\_ANY};
+1105 \textcolor{preprocessor}{#endif}
+1106 
+1107    \textcolor{comment}{//Check parameters}
+1108    \textcolor{keywordflow}{if}(\hyperlink{resource__manager_8h_a26532d7194d592ae8da35222073f36d6}{name} == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || ipAddr == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1109       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+1110 
+1111    \textcolor{comment}{//Use default network interface?}
+1112    \textcolor{keywordflow}{if}(interface == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1113       \textcolor{keyword}{interface }= \hyperlink{net_8c_a991aba7eae4de79f30c6889d95cc6870}{netGetDefaultInterface}();
+1114 
+1115    \textcolor{comment}{//The specified name can be either an IP or a host name}
+1116    error = \hyperlink{ip_8c_abb33f7bf7752d5465c08a873fe040b03}{ipStringToAddr}(\hyperlink{resource__manager_8h_a26532d7194d592ae8da35222073f36d6}{name}, ipAddr);
+1117 
+1118    \textcolor{comment}{//Perform name resolution if necessary}
+1119    \textcolor{keywordflow}{if}(error)
+1120    \{
+1121       \textcolor{comment}{//The user may provide a hint to choose between IPv4 and IPv6}
+1122       \textcolor{keywordflow}{if}(\hyperlink{tcp_8h_aa2585d779da0ab21273a8d92de9a0ebe}{flags} & \hyperlink{socket_8h_ab5e32e6fb9dfb43706584ab98de9a7bdaebe58bd51c617e7f9024189e369dc8e9}{HOST\_TYPE\_IPV4})
+1123          type = \hyperlink{socket_8h_ab5e32e6fb9dfb43706584ab98de9a7bdaebe58bd51c617e7f9024189e369dc8e9}{HOST\_TYPE\_IPV4};
+1124       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(\hyperlink{tcp_8h_aa2585d779da0ab21273a8d92de9a0ebe}{flags} & \hyperlink{socket_8h_ab5e32e6fb9dfb43706584ab98de9a7bdaa1f89753ef33b5e8efcc253208e11c61}{HOST\_TYPE\_IPV6})
+1125          type = \hyperlink{socket_8h_ab5e32e6fb9dfb43706584ab98de9a7bdaa1f89753ef33b5e8efcc253208e11c61}{HOST\_TYPE\_IPV6};
+1126 
+1127       \textcolor{comment}{//The user may provide a hint to to select the desired protocol to be used}
+1128       \textcolor{keywordflow}{if}(\hyperlink{tcp_8h_aa2585d779da0ab21273a8d92de9a0ebe}{flags} & \hyperlink{socket_8h_adb58068eb0cfd0e54798ac480eb19f94a7289eef0101ef470c06bfb1c96d37396}{HOST\_NAME\_RESOLVER\_DNS})
+1129       \{
+1130          \textcolor{comment}{//Use DNS to resolve the specified host name}
+1131          protocol = \hyperlink{socket_8h_adb58068eb0cfd0e54798ac480eb19f94a7289eef0101ef470c06bfb1c96d37396}{HOST\_NAME\_RESOLVER\_DNS};
+1132       \}
+1133       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(\hyperlink{tcp_8h_aa2585d779da0ab21273a8d92de9a0ebe}{flags} & \hyperlink{socket_8h_adb58068eb0cfd0e54798ac480eb19f94a9e9dee333128d92abfcdb6d58f2b7cb4}{HOST\_NAME\_RESOLVER\_MDNS})
+1134       \{
+1135          \textcolor{comment}{//Use mDNS to resolve the specified host name}
+1136          protocol = \hyperlink{socket_8h_adb58068eb0cfd0e54798ac480eb19f94a9e9dee333128d92abfcdb6d58f2b7cb4}{HOST\_NAME\_RESOLVER\_MDNS};
+1137       \}
+1138       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(\hyperlink{tcp_8h_aa2585d779da0ab21273a8d92de9a0ebe}{flags} & \hyperlink{socket_8h_adb58068eb0cfd0e54798ac480eb19f94a71aefbb76f027115b860aebd98ce74e9}{HOST\_NAME\_RESOLVER\_NBNS})
+1139       \{
+1140          \textcolor{comment}{//Use NBNS to resolve the specified host name}
+1141          protocol = \hyperlink{socket_8h_adb58068eb0cfd0e54798ac480eb19f94a71aefbb76f027115b860aebd98ce74e9}{HOST\_NAME\_RESOLVER\_NBNS};
+1142       \}
+1143       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(\hyperlink{tcp_8h_aa2585d779da0ab21273a8d92de9a0ebe}{flags} & \hyperlink{socket_8h_adb58068eb0cfd0e54798ac480eb19f94ae1dd21be774a259aa36f930440754000}{HOST\_NAME\_RESOLVER\_LLMNR})
+1144       \{
+1145          \textcolor{comment}{//Use LLMNR to resolve the specified host name}
+1146          protocol = \hyperlink{socket_8h_adb58068eb0cfd0e54798ac480eb19f94ae1dd21be774a259aa36f930440754000}{HOST\_NAME\_RESOLVER\_LLMNR};
+1147       \}
+1148       \textcolor{keywordflow}{else}
+1149       \{
+1150          \textcolor{comment}{//Retrieve the length of the host name to be resolved}
+1151          \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n} = strlen(\hyperlink{resource__manager_8h_a26532d7194d592ae8da35222073f36d6}{name});
+1152 
+1153          \textcolor{comment}{//Select the most suitable protocol}
+1154          \textcolor{keywordflow}{if}(n >= 6 && !\hyperlink{os__port__windows_8h_ac99ec3f1036620727a68aa8c25a8963c}{strcasecmp}(\hyperlink{resource__manager_8h_a26532d7194d592ae8da35222073f36d6}{name} + n - 6, \textcolor{stringliteral}{".local"}))
+1155          \{
+1156 \textcolor{preprocessor}{#if (MDNS\_CLIENT\_SUPPORT == ENABLED)}
+1157             \textcolor{comment}{//Use mDNS to resolve the specified host name}
+1158             protocol = \hyperlink{socket_8h_adb58068eb0cfd0e54798ac480eb19f94a9e9dee333128d92abfcdb6d58f2b7cb4}{HOST\_NAME\_RESOLVER\_MDNS};
+1159 \textcolor{preprocessor}{#endif}
+1160          \}
+1161          \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(n <= 15 && !strchr(\hyperlink{resource__manager_8h_a26532d7194d592ae8da35222073f36d6}{name}, \textcolor{charliteral}{'.'}) && type == HOST\_TYPE\_IPV4)
+1162          \{
+1163 \textcolor{preprocessor}{#if (NBNS\_CLIENT\_SUPPORT == ENABLED)}
+1164             \textcolor{comment}{//Use NetBIOS Name Service to resolve the specified host name}
+1165             protocol = \hyperlink{socket_8h_adb58068eb0cfd0e54798ac480eb19f94a71aefbb76f027115b860aebd98ce74e9}{HOST\_NAME\_RESOLVER\_NBNS};
+1166 \textcolor{preprocessor}{#endif}
+1167          \}
+1168          \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!strchr(\hyperlink{resource__manager_8h_a26532d7194d592ae8da35222073f36d6}{name}, \textcolor{charliteral}{'.'}))
+1169          \{
+1170 \textcolor{preprocessor}{#if (LLMNR\_CLIENT\_SUPPORT == ENABLED)}
+1171             \textcolor{comment}{//Use LLMNR to resolve the specified host name}
+1172             protocol = \hyperlink{socket_8h_adb58068eb0cfd0e54798ac480eb19f94ae1dd21be774a259aa36f930440754000}{HOST\_NAME\_RESOLVER\_LLMNR};
+1173 \textcolor{preprocessor}{#endif}
+1174          \}
+1175       \}
+1176 
+1177 \textcolor{preprocessor}{#if (DNS\_CLIENT\_SUPPORT == ENABLED)}
+1178       \textcolor{comment}{//Use DNS protocol?}
+1179       \textcolor{keywordflow}{if}(protocol == HOST\_NAME\_RESOLVER\_DNS)
+1180       \{
+1181          \textcolor{comment}{//Perform host name resolution}
+1182          error = \hyperlink{dns__client_8c_a75f9826a5944cbdcf9656fe5e0657788}{dnsResolve}(interface, \hyperlink{resource__manager_8h_a26532d7194d592ae8da35222073f36d6}{name}, type, ipAddr);
+1183       \}
+1184       \textcolor{keywordflow}{else}
+1185 \textcolor{preprocessor}{#endif}
+1186 \textcolor{preprocessor}{#if (MDNS\_CLIENT\_SUPPORT == ENABLED)}
+1187       \textcolor{comment}{//Use mDNS protocol?}
+1188       \textcolor{keywordflow}{if}(protocol == HOST\_NAME\_RESOLVER\_MDNS)
+1189       \{
+1190          \textcolor{comment}{//Perform host name resolution}
+1191          error = \hyperlink{mdns__client_8c_a0532eb8be56a816f5050773de4320807}{mdnsClientResolve}(interface, \hyperlink{resource__manager_8h_a26532d7194d592ae8da35222073f36d6}{name}, type, ipAddr);
+1192       \}
+1193       \textcolor{keywordflow}{else}
+1194 \textcolor{preprocessor}{#endif}
+1195 \textcolor{preprocessor}{#if (NBNS\_CLIENT\_SUPPORT == ENABLED && IPV4\_SUPPORT == ENABLED)}
+1196       \textcolor{comment}{//Use NetBIOS Name Service protocol?}
+1197       \textcolor{keywordflow}{if}(protocol == HOST\_NAME\_RESOLVER\_NBNS)
+1198       \{
+1199          \textcolor{comment}{//Perform host name resolution}
+1200          error = \hyperlink{nbns__client_8c_a00bd7dea91c743a4decfd8b1bc7bd2a5}{nbnsResolve}(interface, \hyperlink{resource__manager_8h_a26532d7194d592ae8da35222073f36d6}{name}, ipAddr);
+1201       \}
+1202       \textcolor{keywordflow}{else}
+1203 \textcolor{preprocessor}{#endif}
+1204 \textcolor{preprocessor}{#if (LLMNR\_CLIENT\_SUPPORT == ENABLED)}
+1205       \textcolor{comment}{//Use LLMNR protocol?}
+1206       \textcolor{keywordflow}{if}(protocol == HOST\_NAME\_RESOLVER\_LLMNR)
+1207       \{
+1208          \textcolor{comment}{//Perform host name resolution}
+1209          error = \hyperlink{llmnr__client_8c_a2245c343cbb4b733364c5eee0e50376f}{llmnrResolve}(interface, \hyperlink{resource__manager_8h_a26532d7194d592ae8da35222073f36d6}{name}, type, ipAddr);
+1210       \}
+1211       \textcolor{keywordflow}{else}
+1212 \textcolor{preprocessor}{#endif}
+1213       \textcolor{comment}{//Invalid protocol?}
+1214       \{
+1215          \textcolor{comment}{//Report an error}
+1216          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+1217       \}
+1218    \}
+1219 
+1220    \textcolor{comment}{//Return status code}
+1221    \textcolor{keywordflow}{return} error;
+1222 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{socket_8c_a00ec8a49fe1ee3597a0f7a2afbe46f00}\label{socket_8c_a00ec8a49fe1ee3597a0f7a2afbe46f00}} 
+\index{socket.\+c@{socket.\+c}!socket\+Accept@{socket\+Accept}}
+\index{socket\+Accept@{socket\+Accept}!socket.\+c@{socket.\+c}}
+\subsubsection{\texorpdfstring{socket\+Accept()}{socketAccept()}}
+{\footnotesize\ttfamily \hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket}$\ast$ socket\+Accept (\begin{DoxyParamCaption}\item[{\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$}]{socket,  }\item[{\hyperlink{structIpAddr}{Ip\+Addr} $\ast$}]{client\+Ip\+Addr,  }\item[{\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} $\ast$}]{client\+Port }\end{DoxyParamCaption})}
+
+
+
+Permit an incoming connection attempt on a socket. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em socket} & Handle to a socket previously placed in a listening state \\
+\hline
+\mbox{\tt out}  & {\em client\+Ip\+Addr} & IP address of the client \\
+\hline
+\mbox{\tt out}  & {\em client\+Port} & Port number used by the client \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Handle to the socket in which the actual connection is made 
+\end{DoxyReturn}
+
+
+Definition at line 481 of file socket.\+c.
+
+
+\begin{DoxyCode}
+482 \{
+483 \textcolor{preprocessor}{#if (TCP\_SUPPORT == ENABLED)}
+484    \hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} *newSocket;
+485 
+486    \textcolor{comment}{//Make sure the socket handle is valid}
+487    \textcolor{keywordflow}{if}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket} == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+488       \textcolor{keywordflow}{return} \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+489    \textcolor{comment}{//This function shall be used with connection-oriented socket types}
+490    \textcolor{keywordflow}{if}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->type != \hyperlink{socket_8h_aa78c7398fa81f7f62aa233159d4d8d97a9dab003c4dc9f7279e806241534d4859}{SOCKET\_TYPE\_STREAM})
+491       \textcolor{keywordflow}{return} \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+492 
+493    \textcolor{comment}{//Accept an incoming connection attempt}
+494    newSocket = \hyperlink{tcp_8c_a5ef77d175010247794c1e98a9acc0e7e}{tcpAccept}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, clientIpAddr, clientPort);
+495 
+496    \textcolor{comment}{//Return a handle to the newly created socket}
+497    \textcolor{keywordflow}{return} newSocket;
+498 \textcolor{preprocessor}{#else}
+499    \textcolor{keywordflow}{return} \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+500 \textcolor{preprocessor}{#endif}
+501 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{socket_8c_a56de93ca9f66782811dbe151d6da0b9c}\label{socket_8c_a56de93ca9f66782811dbe151d6da0b9c}} 
+\index{socket.\+c@{socket.\+c}!socket\+Bind@{socket\+Bind}}
+\index{socket\+Bind@{socket\+Bind}!socket.\+c@{socket.\+c}}
+\subsubsection{\texorpdfstring{socket\+Bind()}{socketBind()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} socket\+Bind (\begin{DoxyParamCaption}\item[{\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$}]{socket,  }\item[{const \hyperlink{structIpAddr}{Ip\+Addr} $\ast$}]{local\+Ip\+Addr,  }\item[{\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t}}]{local\+Port }\end{DoxyParamCaption})}
+
+
+
+Associate a local address with a socket. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em socket} & Handle to a socket \\
+\hline
+\mbox{\tt in}  & {\em local\+Ip\+Addr} & Local address to assign to the bound socket \\
+\hline
+\mbox{\tt in}  & {\em local\+Port} & Local port number to assign to the bound socket \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 355 of file socket.\+c.
+
+
+\begin{DoxyCode}
+356 \{
+357    \textcolor{comment}{//Check input parameters}
+358    \textcolor{keywordflow}{if}(!\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket} || !localIpAddr)
+359       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+360    \textcolor{comment}{//Make sure the socket type is correct}
+361    \textcolor{keywordflow}{if}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->type != \hyperlink{socket_8h_aa78c7398fa81f7f62aa233159d4d8d97a9dab003c4dc9f7279e806241534d4859}{SOCKET\_TYPE\_STREAM} && \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->type != 
+      \hyperlink{socket_8h_aa78c7398fa81f7f62aa233159d4d8d97a26963b01dac3a99a930779035d3796a7}{SOCKET\_TYPE\_DGRAM})
+362       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca28be6b082c0f8c109ae2e241eb768e1d}{ERROR\_INVALID\_SOCKET};
+363 
+364    \textcolor{comment}{//Associate the specified IP address and port number}
+365    \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->localIpAddr = *localIpAddr;
+366    \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->localPort = localPort;
+367 
+368    \textcolor{comment}{//No error to report}
+369    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+370 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{socket_8c_ac5012e9f71c97e2ea0410f2c5baccb0e}\label{socket_8c_ac5012e9f71c97e2ea0410f2c5baccb0e}} 
+\index{socket.\+c@{socket.\+c}!socket\+Close@{socket\+Close}}
+\index{socket\+Close@{socket\+Close}!socket.\+c@{socket.\+c}}
+\subsubsection{\texorpdfstring{socket\+Close()}{socketClose()}}
+{\footnotesize\ttfamily void socket\+Close (\begin{DoxyParamCaption}\item[{\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$}]{socket }\end{DoxyParamCaption})}
+
+
+
+Close an existing socket. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em socket} & Handle identifying the socket to close \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 822 of file socket.\+c.
+
+
+\begin{DoxyCode}
+823 \{
+824    \textcolor{comment}{//Make sure the socket handle is valid}
+825    \textcolor{keywordflow}{if}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket} == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+826       \textcolor{keywordflow}{return};
+827 
+828    \textcolor{comment}{//Get exclusive access}
+829    \hyperlink{os__port__chibios_8c_a58485224df4bfa522246d55b35bbd83a}{osAcquireMutex}(&\hyperlink{net_8c_afe31551ad26115fae8e575654346d441}{netMutex});
+830 
+831 \textcolor{preprocessor}{#if (TCP\_SUPPORT == ENABLED)}
+832    \textcolor{comment}{//Connection-oriented socket?}
+833    \textcolor{keywordflow}{if}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->type == \hyperlink{socket_8h_aa78c7398fa81f7f62aa233159d4d8d97a9dab003c4dc9f7279e806241534d4859}{SOCKET\_TYPE\_STREAM})
+834    \{
+835       \textcolor{comment}{//Abort the current TCP connection}
+836       \hyperlink{tcp_8c_a2e3cdf2c9c5e7d6939f15a7cea345fe7}{tcpAbort}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket});
+837    \}
+838 \textcolor{preprocessor}{#endif}
+839 \textcolor{preprocessor}{#if (UDP\_SUPPORT == ENABLED || RAW\_SOCKET\_SUPPORT == ENABLED)}
+840    \textcolor{comment}{//Connectionless socket or raw socket?}
+841    \textcolor{keywordflow}{if}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->type == \hyperlink{socket_8h_aa78c7398fa81f7f62aa233159d4d8d97a26963b01dac3a99a930779035d3796a7}{SOCKET\_TYPE\_DGRAM} ||
+842       \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->type == \hyperlink{socket_8h_aa78c7398fa81f7f62aa233159d4d8d97a3db886c9e1e99cf877623ee040af71c5}{SOCKET\_TYPE\_RAW\_IP} ||
+843       \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->type == \hyperlink{socket_8h_aa78c7398fa81f7f62aa233159d4d8d97a4cdd66d5c35beeed721c6b43a779315c}{SOCKET\_TYPE\_RAW\_ETH})
+844    \{
+845       \textcolor{comment}{//Point to the first item in the receive queue}
+846       \hyperlink{struct__SocketQueueItem}{SocketQueueItem} *queueItem = \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->receiveQueue;
+847 
+848       \textcolor{comment}{//Purge the receive queue}
+849       \textcolor{keywordflow}{while}(queueItem)
+850       \{
+851          \textcolor{comment}{//Keep track of the next item in the queue}
+852          \hyperlink{struct__SocketQueueItem}{SocketQueueItem} *nextQueueItem = queueItem->\hyperlink{struct__SocketQueueItem_a1160810dc2a18cd5fe63d9fc9dbf5f26}{next};
+853          \textcolor{comment}{//Free previously allocated memory}
+854          \hyperlink{net__mem_8c_a5e8a514f3dfcb35008de9beb39bcdcde}{memPoolFree}(queueItem->\hyperlink{struct__SocketQueueItem_a31b5c1ca345095021d7af269deefdb42}{buffer});
+855          \textcolor{comment}{//Point to the next item}
+856          queueItem = nextQueueItem;
+857       \}
+858 
+859       \textcolor{comment}{//Mark the socket as closed}
+860       \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->type = \hyperlink{socket_8h_aa78c7398fa81f7f62aa233159d4d8d97a69a5ebbd0e9391abfc7f6798ebf73fb6}{SOCKET\_TYPE\_UNUSED};
+861    \}
+862 \textcolor{preprocessor}{#endif}
+863 
+864    \textcolor{comment}{//Release exclusive access}
+865    \hyperlink{os__port__chibios_8c_a8e10e5b2c6d3877b5ba60e375ac45d79}{osReleaseMutex}(&\hyperlink{net_8c_afe31551ad26115fae8e575654346d441}{netMutex});
+866 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{socket_8c_aff3e3c0abc332f42189fce8f362fbd63}\label{socket_8c_aff3e3c0abc332f42189fce8f362fbd63}} 
+\index{socket.\+c@{socket.\+c}!socket\+Connect@{socket\+Connect}}
+\index{socket\+Connect@{socket\+Connect}!socket.\+c@{socket.\+c}}
+\subsubsection{\texorpdfstring{socket\+Connect()}{socketConnect()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} socket\+Connect (\begin{DoxyParamCaption}\item[{\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$}]{socket,  }\item[{const \hyperlink{structIpAddr}{Ip\+Addr} $\ast$}]{remote\+Ip\+Addr,  }\item[{\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t}}]{remote\+Port }\end{DoxyParamCaption})}
+
+
+
+Establish a connection to a specified socket. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em socket} & Handle to an unconnected socket \\
+\hline
+\mbox{\tt in}  & {\em remote\+Ip\+Addr} & IP address of the remote host \\
+\hline
+\mbox{\tt in}  & {\em remote\+Port} & Remote port number that will be used to establish the connection \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 381 of file socket.\+c.
+
+
+\begin{DoxyCode}
+382 \{
+383    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+384 
+385    \textcolor{comment}{//Check input parameters}
+386    \textcolor{keywordflow}{if}(!\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket} || !remoteIpAddr)
+387       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+388 
+389 \textcolor{preprocessor}{#if (TCP\_SUPPORT == ENABLED)}
+390    \textcolor{comment}{//Connection-oriented socket?}
+391    \textcolor{keywordflow}{if}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->type == \hyperlink{socket_8h_aa78c7398fa81f7f62aa233159d4d8d97a9dab003c4dc9f7279e806241534d4859}{SOCKET\_TYPE\_STREAM})
+392    \{
+393       \textcolor{comment}{//Get exclusive access}
+394       \hyperlink{os__port__chibios_8c_a58485224df4bfa522246d55b35bbd83a}{osAcquireMutex}(&\hyperlink{net_8c_afe31551ad26115fae8e575654346d441}{netMutex});
+395 
+396       \textcolor{comment}{//Establish TCP connection}
+397       error = \hyperlink{tcp_8c_acdf3499416a761d544c9c2210b36fd3c}{tcpConnect}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, remoteIpAddr, remotePort);
+398 
+399       \textcolor{comment}{//Release exclusive access}
+400       \hyperlink{os__port__chibios_8c_a8e10e5b2c6d3877b5ba60e375ac45d79}{osReleaseMutex}(&\hyperlink{net_8c_afe31551ad26115fae8e575654346d441}{netMutex});
+401    \}
+402    \textcolor{keywordflow}{else}
+403 \textcolor{preprocessor}{#endif}
+404    \textcolor{comment}{//Connectionless socket?}
+405    \textcolor{keywordflow}{if}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->type == \hyperlink{socket_8h_aa78c7398fa81f7f62aa233159d4d8d97a26963b01dac3a99a930779035d3796a7}{SOCKET\_TYPE\_DGRAM})
+406    \{
+407       \textcolor{comment}{//Save port number and IP address of the remote host}
+408       \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->remoteIpAddr = *remoteIpAddr;
+409       \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->remotePort = remotePort;
+410       \textcolor{comment}{//No error to report}
+411       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+412    \}
+413    \textcolor{comment}{//Raw socket?}
+414    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->type == \hyperlink{socket_8h_aa78c7398fa81f7f62aa233159d4d8d97a3db886c9e1e99cf877623ee040af71c5}{SOCKET\_TYPE\_RAW\_IP})
+415    \{
+416       \textcolor{comment}{//Save the IP address of the remote host}
+417       \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->remoteIpAddr = *remoteIpAddr;
+418       \textcolor{comment}{//No error to report}
+419       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+420    \}
+421    \textcolor{comment}{//Socket type not supported...}
+422    \textcolor{keywordflow}{else}
+423    \{
+424       \textcolor{comment}{//Invalid socket type}
+425       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca28be6b082c0f8c109ae2e241eb768e1d}{ERROR\_INVALID\_SOCKET};
+426    \}
+427 
+428    \textcolor{comment}{//Return status code}
+429    \textcolor{keywordflow}{return} error;
+430 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{socket_8c_ac445bb2c530b9c51d11d3bb07b13c1c4}\label{socket_8c_ac445bb2c530b9c51d11d3bb07b13c1c4}} 
+\index{socket.\+c@{socket.\+c}!socket\+Get\+Events@{socket\+Get\+Events}}
+\index{socket\+Get\+Events@{socket\+Get\+Events}!socket.\+c@{socket.\+c}}
+\subsubsection{\texorpdfstring{socket\+Get\+Events()}{socketGetEvents()}}
+{\footnotesize\ttfamily \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} socket\+Get\+Events (\begin{DoxyParamCaption}\item[{\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$}]{socket }\end{DoxyParamCaption})}
+
+
+
+Retrieve event flags for a specified socket. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em socket} & Handle that identifies a socket \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Logic OR of events in the signaled state 
+\end{DoxyReturn}
+
+
+Definition at line 1042 of file socket.\+c.
+
+
+\begin{DoxyCode}
+1043 \{
+1044    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} eventFlags;
+1045 
+1046    \textcolor{comment}{//Valid socket handle?}
+1047    \textcolor{keywordflow}{if}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket} != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1048    \{
+1049       \textcolor{comment}{//Get exclusive access}
+1050       \hyperlink{os__port__chibios_8c_a58485224df4bfa522246d55b35bbd83a}{osAcquireMutex}(&\hyperlink{net_8c_afe31551ad26115fae8e575654346d441}{netMutex});
+1051 
+1052       \textcolor{comment}{//Read event flags for the specified socket}
+1053       eventFlags = \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->eventFlags;
+1054 
+1055       \textcolor{comment}{//Release exclusive access}
+1056       \hyperlink{os__port__chibios_8c_a8e10e5b2c6d3877b5ba60e375ac45d79}{osReleaseMutex}(&\hyperlink{net_8c_afe31551ad26115fae8e575654346d441}{netMutex});
+1057    \}
+1058    \textcolor{keywordflow}{else}
+1059    \{
+1060       \textcolor{comment}{//The socket handle is not valid}
+1061       eventFlags = 0;
+1062    \}
+1063 
+1064    \textcolor{comment}{//Return the events in the signaled state}
+1065    \textcolor{keywordflow}{return} eventFlags;
+1066 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{socket_8c_a5f7f436ed06e8781888517f29eba7610}\label{socket_8c_a5f7f436ed06e8781888517f29eba7610}} 
+\index{socket.\+c@{socket.\+c}!socket\+Get\+Interface@{socket\+Get\+Interface}}
+\index{socket\+Get\+Interface@{socket\+Get\+Interface}!socket.\+c@{socket.\+c}}
+\subsubsection{\texorpdfstring{socket\+Get\+Interface()}{socketGetInterface()}}
+{\footnotesize\ttfamily \hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface}$\ast$ socket\+Get\+Interface (\begin{DoxyParamCaption}\item[{\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$}]{socket }\end{DoxyParamCaption})}
+
+
+
+Retrieve the underlying interface. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em socket} & Handle to a socket \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Pointer to the underlying network interface 
+\end{DoxyReturn}
+
+
+Definition at line 332 of file socket.\+c.
+
+
+\begin{DoxyCode}
+333 \{
+334    \hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{NetInterface} *\textcolor{keyword}{interface }= \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+335 
+336    \textcolor{comment}{//Make sure the socket handle is valid}
+337    \textcolor{keywordflow}{if}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket} != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+338    \{
+339       \textcolor{keyword}{interface }= \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->interface;
+340    \}
+341 
+342    \textcolor{comment}{//Return a pointer to the underlying network interface}
+343    \textcolor{keywordflow}{return} interface;
+344 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{socket_8c_aee73814e98b4258f707284521341420a}\label{socket_8c_aee73814e98b4258f707284521341420a}} 
+\index{socket.\+c@{socket.\+c}!socket\+Get\+Local\+Addr@{socket\+Get\+Local\+Addr}}
+\index{socket\+Get\+Local\+Addr@{socket\+Get\+Local\+Addr}!socket.\+c@{socket.\+c}}
+\subsubsection{\texorpdfstring{socket\+Get\+Local\+Addr()}{socketGetLocalAddr()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} socket\+Get\+Local\+Addr (\begin{DoxyParamCaption}\item[{\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$}]{socket,  }\item[{\hyperlink{structIpAddr}{Ip\+Addr} $\ast$}]{local\+Ip\+Addr,  }\item[{\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} $\ast$}]{local\+Port }\end{DoxyParamCaption})}
+
+
+
+Retrieve the local address for a given socket. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em socket} & Handle that identifies a socket \\
+\hline
+\mbox{\tt out}  & {\em local\+Ip\+Addr} & Local IP address (optional) \\
+\hline
+\mbox{\tt out}  & {\em local\+Port} & Local port number (optional) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 728 of file socket.\+c.
+
+
+\begin{DoxyCode}
+729 \{
+730    \textcolor{comment}{//Make sure the socket handle is valid}
+731    \textcolor{keywordflow}{if}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket} == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+732       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+733 
+734    \textcolor{comment}{//Retrieve local IP address}
+735    \textcolor{keywordflow}{if}(localIpAddr != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+736       *localIpAddr = \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->localIpAddr;
+737 
+738    \textcolor{comment}{//Retrieve local port number}
+739    \textcolor{keywordflow}{if}(localPort != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+740       *localPort = \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->localPort;
+741 
+742    \textcolor{comment}{//Successful processing}
+743    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+744 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{socket_8c_aeb04e3b375708898d2330e9c67c4e1a9}\label{socket_8c_aeb04e3b375708898d2330e9c67c4e1a9}} 
+\index{socket.\+c@{socket.\+c}!socket\+Get\+Remote\+Addr@{socket\+Get\+Remote\+Addr}}
+\index{socket\+Get\+Remote\+Addr@{socket\+Get\+Remote\+Addr}!socket.\+c@{socket.\+c}}
+\subsubsection{\texorpdfstring{socket\+Get\+Remote\+Addr()}{socketGetRemoteAddr()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} socket\+Get\+Remote\+Addr (\begin{DoxyParamCaption}\item[{\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$}]{socket,  }\item[{\hyperlink{structIpAddr}{Ip\+Addr} $\ast$}]{remote\+Ip\+Addr,  }\item[{\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} $\ast$}]{remote\+Port }\end{DoxyParamCaption})}
+
+
+
+Retrieve the address of the peer to which a socket is connected. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em socket} & Handle that identifies a socket \\
+\hline
+\mbox{\tt out}  & {\em remote\+Ip\+Addr} & IP address of the remote host (optional) \\
+\hline
+\mbox{\tt out}  & {\em remote\+Port} & Remote port number (optional) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 755 of file socket.\+c.
+
+
+\begin{DoxyCode}
+756 \{
+757    \textcolor{comment}{//Make sure the socket handle is valid}
+758    \textcolor{keywordflow}{if}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket} == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+759       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+760 
+761    \textcolor{comment}{//Retrieve local IP address}
+762    \textcolor{keywordflow}{if}(remoteIpAddr != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+763       *remoteIpAddr = \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->remoteIpAddr;
+764 
+765    \textcolor{comment}{//Retrieve local port number}
+766    \textcolor{keywordflow}{if}(remotePort != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+767       *remotePort = \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->remotePort;
+768 
+769    \textcolor{comment}{//Successful processing}
+770    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+771 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{socket_8c_a0d875c0cf5ad68f72f23e982602f5aa2}\label{socket_8c_a0d875c0cf5ad68f72f23e982602f5aa2}} 
+\index{socket.\+c@{socket.\+c}!socket\+Init@{socket\+Init}}
+\index{socket\+Init@{socket\+Init}!socket.\+c@{socket.\+c}}
+\subsubsection{\texorpdfstring{socket\+Init()}{socketInit()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} socket\+Init (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Socket related initialization. 
+
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 57 of file socket.\+c.
+
+
+\begin{DoxyCode}
+58 \{
+59    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+60    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} j;
+61 
+62    \textcolor{comment}{//Initialize socket descriptors}
+63    memset(\hyperlink{socket_8c_acdd76d8e01b4715c774c404b10f958da}{socketTable}, 0, \textcolor{keyword}{sizeof}(\hyperlink{socket_8c_acdd76d8e01b4715c774c404b10f958da}{socketTable}));
+64 
+65    \textcolor{comment}{//Loop through socket descriptors}
+66    \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{socket_8h_ab793a8c76592a00fa3ea0510cd2ffe3a}{SOCKET\_MAX\_COUNT}; i++)
+67    \{
+68       \textcolor{comment}{//Set socket identifier}
+69       \hyperlink{socket_8c_acdd76d8e01b4715c774c404b10f958da}{socketTable}[i].descriptor = i;
+70 
+71       \textcolor{comment}{//Create an event object to track socket events}
+72       \textcolor{keywordflow}{if}(!\hyperlink{os__port__chibios_8c_ac1658f3fed1eb64efcd47e4503a9ef2e}{osCreateEvent}(&\hyperlink{socket_8c_acdd76d8e01b4715c774c404b10f958da}{socketTable}[i].event))
+73       \{
+74          \textcolor{comment}{//Clean up side effects}
+75          \textcolor{keywordflow}{for}(j = 0; j < i; j++)
+76             \hyperlink{os__port__chibios_8c_a25827a49278bad6150b04b47165fda3d}{osDeleteEvent}(&\hyperlink{socket_8c_acdd76d8e01b4715c774c404b10f958da}{socketTable}[j].event);
+77 
+78          \textcolor{comment}{//Report an error}
+79          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca528efe91b7a7e4bcc9a6de7d4b778c67}{ERROR\_OUT\_OF\_RESOURCES};
+80       \}
+81    \}
+82 
+83    \textcolor{comment}{//Successful initialization}
+84    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+85 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{socket_8c_a96b275d0dd033cf5fc36ba1a9c4543e3}\label{socket_8c_a96b275d0dd033cf5fc36ba1a9c4543e3}} 
+\index{socket.\+c@{socket.\+c}!socket\+Listen@{socket\+Listen}}
+\index{socket\+Listen@{socket\+Listen}!socket.\+c@{socket.\+c}}
+\subsubsection{\texorpdfstring{socket\+Listen()}{socketListen()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} socket\+Listen (\begin{DoxyParamCaption}\item[{\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$}]{socket,  }\item[{\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t}}]{backlog }\end{DoxyParamCaption})}
+
+
+
+Place a socket in the listening state. 
+
+Place a socket in a state in which it is listening for an incoming connection
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em socket} & Socket to place in the listening state \\
+\hline
+\mbox{\tt in}  & {\em backlog} & backlog The maximum length of the pending connection queue. If this parameter is zero, then the default backlog value is used instead \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 444 of file socket.\+c.
+
+
+\begin{DoxyCode}
+445 \{
+446 \textcolor{preprocessor}{#if (TCP\_SUPPORT == ENABLED)}
+447    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+448 
+449    \textcolor{comment}{//Make sure the socket handle is valid}
+450    \textcolor{keywordflow}{if}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket} == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+451       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+452    \textcolor{comment}{//This function shall be used with connection-oriented socket types}
+453    \textcolor{keywordflow}{if}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->type != \hyperlink{socket_8h_aa78c7398fa81f7f62aa233159d4d8d97a9dab003c4dc9f7279e806241534d4859}{SOCKET\_TYPE\_STREAM})
+454       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca28be6b082c0f8c109ae2e241eb768e1d}{ERROR\_INVALID\_SOCKET};
+455 
+456    \textcolor{comment}{//Get exclusive access}
+457    \hyperlink{os__port__chibios_8c_a58485224df4bfa522246d55b35bbd83a}{osAcquireMutex}(&\hyperlink{net_8c_afe31551ad26115fae8e575654346d441}{netMutex});
+458 
+459    \textcolor{comment}{//Start listening for an incoming connection}
+460    error = \hyperlink{tcp_8c_a95ef0ed28e2843d976605a49bfb9286c}{tcpListen}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, backlog);
+461 
+462    \textcolor{comment}{//Release exclusive access}
+463    \hyperlink{os__port__chibios_8c_a8e10e5b2c6d3877b5ba60e375ac45d79}{osReleaseMutex}(&\hyperlink{net_8c_afe31551ad26115fae8e575654346d441}{netMutex});
+464 
+465    \textcolor{comment}{//Return status code}
+466    \textcolor{keywordflow}{return} error;
+467 \textcolor{preprocessor}{#else}
+468    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cab61c5ef368fbf03fdc1fb566c63f2f9a}{ERROR\_NOT\_IMPLEMENTED};
+469 \textcolor{preprocessor}{#endif}
+470 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{socket_8c_aa139bbf42b326b52eb08cf52771ac337}\label{socket_8c_aa139bbf42b326b52eb08cf52771ac337}} 
+\index{socket.\+c@{socket.\+c}!socket\+Open@{socket\+Open}}
+\index{socket\+Open@{socket\+Open}!socket.\+c@{socket.\+c}}
+\subsubsection{\texorpdfstring{socket\+Open()}{socketOpen()}}
+{\footnotesize\ttfamily \hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket}$\ast$ socket\+Open (\begin{DoxyParamCaption}\item[{\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t}}]{type,  }\item[{\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t}}]{protocol }\end{DoxyParamCaption})}
+
+
+
+Create a socket (U\+DP or T\+CP) 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em type} & Type specification for the new socket \\
+\hline
+\mbox{\tt in}  & {\em protocol} & Protocol to be used \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Handle referencing the new socket 
+\end{DoxyReturn}
+
+
+Definition at line 95 of file socket.\+c.
+
+
+\begin{DoxyCode}
+96 \{
+97    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+98    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+99    \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t} \hyperlink{dns__common_8h_a8e0798404bf2cf5dabb84c5ba9a4f236}{port};
+100    \hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} *\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket};
+101    \hyperlink{structOsEvent}{OsEvent} event;
+102 
+103    \textcolor{comment}{//Initialize socket handle}
+104    socket = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+105 
+106    \textcolor{comment}{//Get exclusive access}
+107    \hyperlink{os__port__chibios_8c_a58485224df4bfa522246d55b35bbd83a}{osAcquireMutex}(&\hyperlink{net_8c_afe31551ad26115fae8e575654346d441}{netMutex});
+108 
+109 \textcolor{preprocessor}{#if (TCP\_SUPPORT == ENABLED)}
+110    \textcolor{comment}{//Connection-oriented socket?}
+111    \textcolor{keywordflow}{if}(\hyperlink{resource__manager_8h_a12e46a33bfe90638e58ef067c6fd4a6e}{type} == \hyperlink{socket_8h_aa78c7398fa81f7f62aa233159d4d8d97a9dab003c4dc9f7279e806241534d4859}{SOCKET\_TYPE\_STREAM})
+112    \{
+113       \textcolor{comment}{//Always use TCP as underlying transport protocol}
+114       \hyperlink{dhcpv6__common_8h_ad124d3d2e02c729afa303c775295278e}{protocol} = \hyperlink{socket_8h_a56eb0e60bda5d1d8a2e702228405d969ae0f38a6f025bce7700b3cf0ddd04bb2a}{SOCKET\_IP\_PROTO\_TCP};
+115       \textcolor{comment}{//Get an ephemeral port number}
+116       port = \hyperlink{tcp_8c_a9b9267b95c40d4e437d3c43c29267b02}{tcpGetDynamicPort}();
+117       \textcolor{comment}{//Continue processing}
+118       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+119    \}
+120    \textcolor{keywordflow}{else}
+121 \textcolor{preprocessor}{#endif}
+122 \textcolor{preprocessor}{#if (UDP\_SUPPORT == ENABLED)}
+123    \textcolor{comment}{//Connectionless socket?}
+124    \textcolor{keywordflow}{if}(\hyperlink{resource__manager_8h_a12e46a33bfe90638e58ef067c6fd4a6e}{type} == \hyperlink{socket_8h_aa78c7398fa81f7f62aa233159d4d8d97a26963b01dac3a99a930779035d3796a7}{SOCKET\_TYPE\_DGRAM})
+125    \{
+126       \textcolor{comment}{//Always use UDP as underlying transport protocol}
+127       \hyperlink{dhcpv6__common_8h_ad124d3d2e02c729afa303c775295278e}{protocol} = \hyperlink{socket_8h_a56eb0e60bda5d1d8a2e702228405d969a53c45ffdb9dee4a8f885b816386a99b8}{SOCKET\_IP\_PROTO\_UDP};
+128       \textcolor{comment}{//Get an ephemeral port number}
+129       port = \hyperlink{udp_8c_a9c0d754bee24d4408903597b0fd57fea}{udpGetDynamicPort}();
+130       \textcolor{comment}{//Continue processing}
+131       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+132    \}
+133    \textcolor{keywordflow}{else}
+134 \textcolor{preprocessor}{#endif}
+135 \textcolor{preprocessor}{#if (RAW\_SOCKET\_SUPPORT == ENABLED)}
+136    \textcolor{comment}{//Raw socket?}
+137    \textcolor{keywordflow}{if}(\hyperlink{resource__manager_8h_a12e46a33bfe90638e58ef067c6fd4a6e}{type} == \hyperlink{socket_8h_aa78c7398fa81f7f62aa233159d4d8d97a3db886c9e1e99cf877623ee040af71c5}{SOCKET\_TYPE\_RAW\_IP} || \hyperlink{resource__manager_8h_a12e46a33bfe90638e58ef067c6fd4a6e}{type} == 
+      \hyperlink{socket_8h_aa78c7398fa81f7f62aa233159d4d8d97a4cdd66d5c35beeed721c6b43a779315c}{SOCKET\_TYPE\_RAW\_ETH})
+138    \{
+139       \textcolor{comment}{//Port numbers are not relevant for raw sockets}
+140       port = 0;
+141       \textcolor{comment}{//Continue processing}
+142       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+143    \}
+144    \textcolor{keywordflow}{else}
+145 \textcolor{preprocessor}{#endif}
+146    \{
+147       \textcolor{comment}{//The socket type is not supported}
+148       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+149    \}
+150 
+151    \textcolor{comment}{//Check status code}
+152    \textcolor{keywordflow}{if}(!error)
+153    \{
+154       \textcolor{comment}{//Loop through socket descriptors}
+155       \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{socket_8h_ab793a8c76592a00fa3ea0510cd2ffe3a}{SOCKET\_MAX\_COUNT}; i++)
+156       \{
+157          \textcolor{comment}{//Unused socket found?}
+158          \textcolor{keywordflow}{if}(\hyperlink{socket_8c_acdd76d8e01b4715c774c404b10f958da}{socketTable}[i].\hyperlink{resource__manager_8h_a12e46a33bfe90638e58ef067c6fd4a6e}{type} == \hyperlink{socket_8h_aa78c7398fa81f7f62aa233159d4d8d97a69a5ebbd0e9391abfc7f6798ebf73fb6}{SOCKET\_TYPE\_UNUSED})
+159          \{
+160             \textcolor{comment}{//Save socket handle}
+161             socket = &\hyperlink{socket_8c_acdd76d8e01b4715c774c404b10f958da}{socketTable}[i];
+162             \textcolor{comment}{//We are done}
+163             \textcolor{keywordflow}{break};
+164          \}
+165       \}
+166 
+167 \textcolor{preprocessor}{#if (TCP\_SUPPORT == ENABLED)}
+168       \textcolor{comment}{//No more sockets available?}
+169       \textcolor{keywordflow}{if}(socket == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+170       \{
+171          \textcolor{comment}{//Kill the oldest connection in the TIME-WAIT state}
+172          \textcolor{comment}{//whenever the socket table runs out of space}
+173          socket = \hyperlink{tcp_8c_a7e56a871df61979ed1f70b56559e7443}{tcpKillOldestConnection}();
+174       \}
+175 \textcolor{preprocessor}{#endif}
+176 
+177       \textcolor{comment}{//Check whether the current entry is free}
+178       \textcolor{keywordflow}{if}(socket != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+179       \{
+180          \textcolor{comment}{//Save socket descriptor}
+181          i = socket->descriptor;
+182          \textcolor{comment}{//Save event object instance}
+183          memcpy(&event, &socket->event, \textcolor{keyword}{sizeof}(\hyperlink{structOsEvent}{OsEvent}));
+184 
+185          \textcolor{comment}{//Clear associated structure}
+186          memset(socket, 0, \textcolor{keyword}{sizeof}(\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket}));
+187          \textcolor{comment}{//Reuse event objects and avoid recreating them whenever possible}
+188          memcpy(&socket->event, &event, \textcolor{keyword}{sizeof}(\hyperlink{structOsEvent}{OsEvent}));
+189 
+190          \textcolor{comment}{//Save socket characteristics}
+191          socket->descriptor = i;
+192          socket->type = \hyperlink{resource__manager_8h_a12e46a33bfe90638e58ef067c6fd4a6e}{type};
+193          socket->protocol = \hyperlink{dhcpv6__common_8h_ad124d3d2e02c729afa303c775295278e}{protocol};
+194          socket->localPort = \hyperlink{dns__common_8h_a8e0798404bf2cf5dabb84c5ba9a4f236}{port};
+195          socket->timeout = \hyperlink{os__port_8h_ab893de6f8a0ec8b0e6dd8097ff398019}{INFINITE\_DELAY};
+196 
+197 \textcolor{preprocessor}{#if (TCP\_SUPPORT == ENABLED)}
+198          socket->txBufferSize = \hyperlink{os__port_8h_a3acffbd305ee72dcd4593c0d8af64a4f}{MIN}(\hyperlink{tcp_8h_a2044a2f0db067616a51d9c0db8834782}{TCP\_DEFAULT\_TX\_BUFFER\_SIZE}, 
+      \hyperlink{tcp_8h_a85c483022d7093f56ad49e0f7373c432}{TCP\_MAX\_TX\_BUFFER\_SIZE});
+199          socket->rxBufferSize = \hyperlink{os__port_8h_a3acffbd305ee72dcd4593c0d8af64a4f}{MIN}(\hyperlink{tcp_8h_aa257073f580e464ba23f7066abc108ea}{TCP\_DEFAULT\_RX\_BUFFER\_SIZE}, 
+      \hyperlink{tcp_8h_a220fffa3407e7ee49fdd8466c24d21b7}{TCP\_MAX\_RX\_BUFFER\_SIZE});
+200 \textcolor{preprocessor}{#endif}
+201       \}
+202    \}
+203 
+204    \textcolor{comment}{//Release exclusive access}
+205    \hyperlink{os__port__chibios_8c_a8e10e5b2c6d3877b5ba60e375ac45d79}{osReleaseMutex}(&\hyperlink{net_8c_afe31551ad26115fae8e575654346d441}{netMutex});
+206 
+207    \textcolor{comment}{//Return a handle to the freshly created socket}
+208    \textcolor{keywordflow}{return} \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket};
+209 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{socket_8c_a57ec969d9a3deee2dae93fe0a891e583}\label{socket_8c_a57ec969d9a3deee2dae93fe0a891e583}} 
+\index{socket.\+c@{socket.\+c}!socket\+Poll@{socket\+Poll}}
+\index{socket\+Poll@{socket\+Poll}!socket.\+c@{socket.\+c}}
+\subsubsection{\texorpdfstring{socket\+Poll()}{socketPoll()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} socket\+Poll (\begin{DoxyParamCaption}\item[{\hyperlink{structSocketEventDesc}{Socket\+Event\+Desc} $\ast$}]{event\+Desc,  }\item[{\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t}}]{size,  }\item[{\hyperlink{structOsEvent}{Os\+Event} $\ast$}]{ext\+Event,  }\item[{\hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\+\_\+t}}]{timeout }\end{DoxyParamCaption})}
+
+
+
+Wait for one of a set of sockets to become ready to perform I/O. 
+
+The socket\+Poll function determines the status of one or more sockets, waiting if necessary, to perform synchronous I/O
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in,out}  & {\em event\+Desc} & Set of entries specifying the events the user is interested in \\
+\hline
+\mbox{\tt in}  & {\em size} & Number of entries in the descriptor set \\
+\hline
+\mbox{\tt in}  & {\em ext\+Event} & External event that can abort the wait if necessary (optional) \\
+\hline
+\mbox{\tt in}  & {\em timeout} & Maximum time to wait before returning \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 882 of file socket.\+c.
+
+
+\begin{DoxyCode}
+884 \{
+885    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+886    \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\_t} status;
+887    \hyperlink{structOsEvent}{OsEvent} *event;
+888    \hyperlink{structOsEvent}{OsEvent} eventObject;
+889 
+890    \textcolor{comment}{//Check parameters}
+891    \textcolor{keywordflow}{if}(eventDesc == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || size == 0)
+892       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+893 
+894    \textcolor{comment}{//Try to use the supplied event object to receive notifications}
+895    \textcolor{keywordflow}{if}(!extEvent)
+896    \{
+897       \textcolor{comment}{//Create an event object only if necessary}
+898       \textcolor{keywordflow}{if}(!\hyperlink{os__port__chibios_8c_ac1658f3fed1eb64efcd47e4503a9ef2e}{osCreateEvent}(&eventObject))
+899       \{
+900          \textcolor{comment}{//Report an error}
+901          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca528efe91b7a7e4bcc9a6de7d4b778c67}{ERROR\_OUT\_OF\_RESOURCES};
+902       \}
+903 
+904       \textcolor{comment}{//Reference to the newly created event}
+905       \textcolor{keyword}{event} = &eventObject;
+906    \}
+907    \textcolor{keywordflow}{else}
+908    \{
+909       \textcolor{comment}{//Reference to the external event}
+910       \textcolor{keyword}{event} = extEvent;
+911    \}
+912 
+913    \textcolor{comment}{//Loop through descriptors}
+914    \textcolor{keywordflow}{for}(i = 0; i < size; i++)
+915    \{
+916       \textcolor{comment}{//Valid socket handle?}
+917       \textcolor{keywordflow}{if}(eventDesc[i].\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket} != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+918       \{
+919          \textcolor{comment}{//Clear event flags}
+920          eventDesc[i].\hyperlink{structSocketEventDesc_aca8e460cfc75c58870239584437a3c1d}{eventFlags} = 0;
+921          \textcolor{comment}{//Subscribe to the requested events}
+922          \hyperlink{socket_8c_a2a034bca17a40ea29d238c8f45d8a842}{socketRegisterEvents}(eventDesc[i].\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, event, eventDesc[i].eventMask)
+      ;
+923       \}
+924    \}
+925 
+926    \textcolor{comment}{//Block the current task until an event occurs}
+927    status = \hyperlink{os__port__chibios_8c_a1dc707247e44dfefae5bec4a322fc78a}{osWaitForEvent}(event, timeout);
+928 
+929    \textcolor{comment}{//Loop through descriptors}
+930    \textcolor{keywordflow}{for}(i = 0; i < size; i++)
+931    \{
+932       \textcolor{comment}{//Valid socket handle?}
+933       \textcolor{keywordflow}{if}(eventDesc[i].\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket} != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+934       \{
+935          \textcolor{comment}{//Any socket event in the signaled state?}
+936          \textcolor{keywordflow}{if}(status)
+937          \{
+938             \textcolor{comment}{//Retrieve event flags for the current socket}
+939             eventDesc[i].\hyperlink{structSocketEventDesc_aca8e460cfc75c58870239584437a3c1d}{eventFlags} = \hyperlink{socket_8c_ac445bb2c530b9c51d11d3bb07b13c1c4}{socketGetEvents}(eventDesc[i].
+      \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket});
+940             \textcolor{comment}{//Clear unnecessary flags}
+941             eventDesc[i].\hyperlink{structSocketEventDesc_aca8e460cfc75c58870239584437a3c1d}{eventFlags} &= eventDesc[i].\hyperlink{structSocketEventDesc_ac979f02c9bb6b9517ed9c2d1b17e6201}{eventMask};
+942          \}
+943 
+944          \textcolor{comment}{//Unsubscribe previously registered events}
+945          \hyperlink{socket_8c_a3baa68d9d7c771a38463123a595075ff}{socketUnregisterEvents}(eventDesc[i].\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket});
+946       \}
+947    \}
+948 
+949    \textcolor{comment}{//Reset event object}
+950    \hyperlink{os__port__chibios_8c_a9122a1cf258caef553a6b224ef8ef6bf}{osResetEvent}(event);
+951 
+952    \textcolor{comment}{//Release previously allocated resources}
+953    \textcolor{keywordflow}{if}(!extEvent)
+954       \hyperlink{os__port__chibios_8c_a25827a49278bad6150b04b47165fda3d}{osDeleteEvent}(&eventObject);
+955 
+956    \textcolor{comment}{//Return status code}
+957    \textcolor{keywordflow}{return} status ? \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR} : \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4d0f7be53b837f004379ac6bbd56f1e2}{ERROR\_TIMEOUT};
+958 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{socket_8c_a894c7bf0bfd4e3886fc584ed7ebbb087}\label{socket_8c_a894c7bf0bfd4e3886fc584ed7ebbb087}} 
+\index{socket.\+c@{socket.\+c}!socket\+Receive@{socket\+Receive}}
+\index{socket\+Receive@{socket\+Receive}!socket.\+c@{socket.\+c}}
+\subsubsection{\texorpdfstring{socket\+Receive()}{socketReceive()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} socket\+Receive (\begin{DoxyParamCaption}\item[{\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$}]{socket,  }\item[{void $\ast$}]{data,  }\item[{size\+\_\+t}]{size,  }\item[{size\+\_\+t $\ast$}]{received,  }\item[{\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t}}]{flags }\end{DoxyParamCaption})}
+
+
+
+Receive data from a connected socket. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em socket} & Handle that identifies a connected socket \\
+\hline
+\mbox{\tt out}  & {\em data} & Buffer where to store the incoming data \\
+\hline
+\mbox{\tt in}  & {\em size} & Maximum number of bytes that can be received \\
+\hline
+\mbox{\tt out}  & {\em received} & Number of bytes that have been received \\
+\hline
+\mbox{\tt in}  & {\em flags} & Set of flags that influences the behavior of this function \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 609 of file socket.\+c.
+
+
+\begin{DoxyCode}
+611 \{
+612    \textcolor{comment}{//For connection-oriented sockets, source and destination addresses are no use}
+613    \textcolor{keywordflow}{return} \hyperlink{socket_8c_a8417ca0c48a905179e0275603a98a849}{socketReceiveEx}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, 
+      \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, size, received, \hyperlink{tcp_8h_aa2585d779da0ab21273a8d92de9a0ebe}{flags});
+614 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{socket_8c_a8417ca0c48a905179e0275603a98a849}\label{socket_8c_a8417ca0c48a905179e0275603a98a849}} 
+\index{socket.\+c@{socket.\+c}!socket\+Receive\+Ex@{socket\+Receive\+Ex}}
+\index{socket\+Receive\+Ex@{socket\+Receive\+Ex}!socket.\+c@{socket.\+c}}
+\subsubsection{\texorpdfstring{socket\+Receive\+Ex()}{socketReceiveEx()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} socket\+Receive\+Ex (\begin{DoxyParamCaption}\item[{\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$}]{socket,  }\item[{\hyperlink{structIpAddr}{Ip\+Addr} $\ast$}]{src\+Ip\+Addr,  }\item[{\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} $\ast$}]{src\+Port,  }\item[{\hyperlink{structIpAddr}{Ip\+Addr} $\ast$}]{dest\+Ip\+Addr,  }\item[{void $\ast$}]{data,  }\item[{size\+\_\+t}]{size,  }\item[{size\+\_\+t $\ast$}]{received,  }\item[{\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t}}]{flags }\end{DoxyParamCaption})}
+
+
+
+Receive a datagram. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em socket} & Handle that identifies a socket \\
+\hline
+\mbox{\tt out}  & {\em src\+Ip\+Addr} & Source IP address (optional) \\
+\hline
+\mbox{\tt out}  & {\em src\+Port} & Source port number (optional) \\
+\hline
+\mbox{\tt out}  & {\em dest\+Ip\+Addr} & Destination IP address (optional) \\
+\hline
+\mbox{\tt out}  & {\em data} & Buffer where to store the incoming data \\
+\hline
+\mbox{\tt in}  & {\em size} & Maximum number of bytes that can be received \\
+\hline
+\mbox{\tt out}  & {\em received} & Number of bytes that have been received \\
+\hline
+\mbox{\tt in}  & {\em flags} & Set of flags that influences the behavior of this function \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 650 of file socket.\+c.
+
+
+\begin{DoxyCode}
+652 \{
+653    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+654 
+655    \textcolor{comment}{//Make sure the socket handle is valid}
+656    \textcolor{keywordflow}{if}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket} == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+657       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+658 
+659    \textcolor{comment}{//Get exclusive access}
+660    \hyperlink{os__port__chibios_8c_a58485224df4bfa522246d55b35bbd83a}{osAcquireMutex}(&\hyperlink{net_8c_afe31551ad26115fae8e575654346d441}{netMutex});
+661 
+662 \textcolor{preprocessor}{#if (TCP\_SUPPORT == ENABLED)}
+663    \textcolor{comment}{//Connection-oriented socket?}
+664    \textcolor{keywordflow}{if}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->type == \hyperlink{socket_8h_aa78c7398fa81f7f62aa233159d4d8d97a9dab003c4dc9f7279e806241534d4859}{SOCKET\_TYPE\_STREAM})
+665    \{
+666       \textcolor{comment}{//Receive data}
+667       error = \hyperlink{tcp_8c_af5bafdbb2dbf35df2d0fee56f1c0c168}{tcpReceive}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, size, received, \hyperlink{tcp_8h_aa2585d779da0ab21273a8d92de9a0ebe}{flags});
+668 
+669       \textcolor{comment}{//Output parameters}
+670       \textcolor{keywordflow}{if}(srcIpAddr)
+671          *srcIpAddr = \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->remoteIpAddr;
+672       \textcolor{keywordflow}{if}(\hyperlink{tcp_8h_a26ebbf4f65c3f6fd9959d9cecef5c9d8}{srcPort})
+673          *\hyperlink{tcp_8h_a26ebbf4f65c3f6fd9959d9cecef5c9d8}{srcPort} = \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->remotePort;
+674       \textcolor{keywordflow}{if}(destIpAddr)
+675          *destIpAddr = \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->localIpAddr;
+676    \}
+677    \textcolor{keywordflow}{else}
+678 \textcolor{preprocessor}{#endif}
+679 \textcolor{preprocessor}{#if (UDP\_SUPPORT == ENABLED)}
+680    \textcolor{comment}{//Connectionless socket?}
+681    \textcolor{keywordflow}{if}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->type == \hyperlink{socket_8h_aa78c7398fa81f7f62aa233159d4d8d97a26963b01dac3a99a930779035d3796a7}{SOCKET\_TYPE\_DGRAM})
+682    \{
+683       \textcolor{comment}{//Receive UDP datagram}
+684       error = \hyperlink{udp_8c_ad04884594577e99c5f724e2929286ede}{udpReceiveDatagram}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, srcIpAddr,
+685          \hyperlink{tcp_8h_a26ebbf4f65c3f6fd9959d9cecef5c9d8}{srcPort}, destIpAddr, \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, size, received, \hyperlink{tcp_8h_aa2585d779da0ab21273a8d92de9a0ebe}{flags});
+686    \}
+687    \textcolor{keywordflow}{else}
+688 \textcolor{preprocessor}{#endif}
+689 \textcolor{preprocessor}{#if (RAW\_SOCKET\_SUPPORT == ENABLED)}
+690    \textcolor{comment}{//Raw socket?}
+691    \textcolor{keywordflow}{if}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->type == \hyperlink{socket_8h_aa78c7398fa81f7f62aa233159d4d8d97a3db886c9e1e99cf877623ee040af71c5}{SOCKET\_TYPE\_RAW\_IP})
+692    \{
+693       \textcolor{comment}{//Receive a raw IP packet}
+694       error = \hyperlink{raw__socket_8c_a3a4847947846250d316321659feb0e52}{rawSocketReceiveIpPacket}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket},
+695          srcIpAddr, destIpAddr, \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, size, received, \hyperlink{tcp_8h_aa2585d779da0ab21273a8d92de9a0ebe}{flags});
+696    \}
+697    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->type == \hyperlink{socket_8h_aa78c7398fa81f7f62aa233159d4d8d97a4cdd66d5c35beeed721c6b43a779315c}{SOCKET\_TYPE\_RAW\_ETH})
+698    \{
+699       \textcolor{comment}{//Receive a raw Ethernet packet}
+700       error = \hyperlink{raw__socket_8c_a464cbc1f822724be352807f23357b762}{rawSocketReceiveEthPacket}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, 
+      \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, size, received, \hyperlink{tcp_8h_aa2585d779da0ab21273a8d92de9a0ebe}{flags});
+701    \}
+702    \textcolor{keywordflow}{else}
+703 \textcolor{preprocessor}{#endif}
+704    \textcolor{comment}{//Socket type not supported...}
+705    \{
+706       \textcolor{comment}{//No data can be read}
+707       *received = 0;
+708       \textcolor{comment}{//Invalid socket type}
+709       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca28be6b082c0f8c109ae2e241eb768e1d}{ERROR\_INVALID\_SOCKET};
+710    \}
+711 
+712    \textcolor{comment}{//Release exclusive access}
+713    \hyperlink{os__port__chibios_8c_a8e10e5b2c6d3877b5ba60e375ac45d79}{osReleaseMutex}(&\hyperlink{net_8c_afe31551ad26115fae8e575654346d441}{netMutex});
+714 
+715    \textcolor{comment}{//Return status code}
+716    \textcolor{keywordflow}{return} error;
+717 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{socket_8c_a26af4b642b71708e1408fc94483f90bb}\label{socket_8c_a26af4b642b71708e1408fc94483f90bb}} 
+\index{socket.\+c@{socket.\+c}!socket\+Receive\+From@{socket\+Receive\+From}}
+\index{socket\+Receive\+From@{socket\+Receive\+From}!socket.\+c@{socket.\+c}}
+\subsubsection{\texorpdfstring{socket\+Receive\+From()}{socketReceiveFrom()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} socket\+Receive\+From (\begin{DoxyParamCaption}\item[{\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$}]{socket,  }\item[{\hyperlink{structIpAddr}{Ip\+Addr} $\ast$}]{src\+Ip\+Addr,  }\item[{\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} $\ast$}]{src\+Port,  }\item[{void $\ast$}]{data,  }\item[{size\+\_\+t}]{size,  }\item[{size\+\_\+t $\ast$}]{received,  }\item[{\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t}}]{flags }\end{DoxyParamCaption})}
+
+
+
+Receive a datagram from a connectionless socket. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em socket} & Handle that identifies a socket \\
+\hline
+\mbox{\tt out}  & {\em src\+Ip\+Addr} & Source IP address (optional) \\
+\hline
+\mbox{\tt out}  & {\em src\+Port} & Source port number (optional) \\
+\hline
+\mbox{\tt out}  & {\em data} & Buffer where to store the incoming data \\
+\hline
+\mbox{\tt in}  & {\em size} & Maximum number of bytes that can be received \\
+\hline
+\mbox{\tt out}  & {\em received} & Number of bytes that have been received \\
+\hline
+\mbox{\tt in}  & {\em flags} & Set of flags that influences the behavior of this function \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 629 of file socket.\+c.
+
+
+\begin{DoxyCode}
+631 \{
+632    \textcolor{comment}{//Destination address is no use}
+633    \textcolor{keywordflow}{return} \hyperlink{socket_8c_a8417ca0c48a905179e0275603a98a849}{socketReceiveEx}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, srcIpAddr, \hyperlink{tcp_8h_a26ebbf4f65c3f6fd9959d9cecef5c9d8}{srcPort}, 
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}, \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, size, received, \hyperlink{tcp_8h_aa2585d779da0ab21273a8d92de9a0ebe}{flags});
+634 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{socket_8c_a2a034bca17a40ea29d238c8f45d8a842}\label{socket_8c_a2a034bca17a40ea29d238c8f45d8a842}} 
+\index{socket.\+c@{socket.\+c}!socket\+Register\+Events@{socket\+Register\+Events}}
+\index{socket\+Register\+Events@{socket\+Register\+Events}!socket.\+c@{socket.\+c}}
+\subsubsection{\texorpdfstring{socket\+Register\+Events()}{socketRegisterEvents()}}
+{\footnotesize\ttfamily void socket\+Register\+Events (\begin{DoxyParamCaption}\item[{\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$}]{socket,  }\item[{\hyperlink{structOsEvent}{Os\+Event} $\ast$}]{event,  }\item[{\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t}}]{event\+Mask }\end{DoxyParamCaption})}
+
+
+
+Subscribe to the specified socket events. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em socket} & Handle that identifies a socket \\
+\hline
+\mbox{\tt in}  & {\em event} & Event object used to receive notifications \\
+\hline
+\mbox{\tt in}  & {\em event\+Mask} & Logic OR of the requested socket events \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 968 of file socket.\+c.
+
+
+\begin{DoxyCode}
+969 \{
+970    \textcolor{comment}{//Valid socket handle?}
+971    \textcolor{keywordflow}{if}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket} != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+972    \{
+973       \textcolor{comment}{//Get exclusive access}
+974       \hyperlink{os__port__chibios_8c_a58485224df4bfa522246d55b35bbd83a}{osAcquireMutex}(&\hyperlink{net_8c_afe31551ad26115fae8e575654346d441}{netMutex});
+975 
+976       \textcolor{comment}{//An user event may have been previously registered...}
+977       \textcolor{keywordflow}{if}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->userEvent != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+978          \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->eventMask |= eventMask;
+979       \textcolor{keywordflow}{else}
+980          \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->eventMask = eventMask;
+981 
+982       \textcolor{comment}{//Suscribe to get notified of events}
+983       \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->userEvent = event;
+984 
+985 \textcolor{preprocessor}{#if (TCP\_SUPPORT == ENABLED)}
+986       \textcolor{comment}{//Handle TCP specific events}
+987       \textcolor{keywordflow}{if}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->type == \hyperlink{socket_8h_aa78c7398fa81f7f62aa233159d4d8d97a9dab003c4dc9f7279e806241534d4859}{SOCKET\_TYPE\_STREAM})
+988       \{
+989          \hyperlink{tcp__misc_8c_a1d69d8ed2662a74417c757291f540077}{tcpUpdateEvents}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket});
+990       \}
+991 \textcolor{preprocessor}{#endif}
+992 \textcolor{preprocessor}{#if (UDP\_SUPPORT == ENABLED)}
+993       \textcolor{comment}{//Handle UDP specific events}
+994       \textcolor{keywordflow}{if}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->type == \hyperlink{socket_8h_aa78c7398fa81f7f62aa233159d4d8d97a26963b01dac3a99a930779035d3796a7}{SOCKET\_TYPE\_DGRAM})
+995       \{
+996          \hyperlink{udp_8c_a9602ce39b27bfab384388170f1a25eab}{udpUpdateEvents}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket});
+997       \}
+998 \textcolor{preprocessor}{#endif}
+999 \textcolor{preprocessor}{#if (RAW\_SOCKET\_SUPPORT == ENABLED)}
+1000       \textcolor{comment}{//Handle events that are specific to raw sockets}
+1001       \textcolor{keywordflow}{if}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->type == \hyperlink{socket_8h_aa78c7398fa81f7f62aa233159d4d8d97a3db886c9e1e99cf877623ee040af71c5}{SOCKET\_TYPE\_RAW\_IP} ||
+1002          \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->type == \hyperlink{socket_8h_aa78c7398fa81f7f62aa233159d4d8d97a4cdd66d5c35beeed721c6b43a779315c}{SOCKET\_TYPE\_RAW\_ETH})
+1003       \{
+1004          \hyperlink{raw__socket_8c_ad2549c2b0b0ee5cdab3fb45dbb5770d4}{rawSocketUpdateEvents}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket});
+1005       \}
+1006 \textcolor{preprocessor}{#endif}
+1007 
+1008       \textcolor{comment}{//Release exclusive access}
+1009       \hyperlink{os__port__chibios_8c_a8e10e5b2c6d3877b5ba60e375ac45d79}{osReleaseMutex}(&\hyperlink{net_8c_afe31551ad26115fae8e575654346d441}{netMutex});
+1010    \}
+1011 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{socket_8c_aa4eeb3a3294d14d681675ba9f0d3e568}\label{socket_8c_aa4eeb3a3294d14d681675ba9f0d3e568}} 
+\index{socket.\+c@{socket.\+c}!socket\+Send@{socket\+Send}}
+\index{socket\+Send@{socket\+Send}!socket.\+c@{socket.\+c}}
+\subsubsection{\texorpdfstring{socket\+Send()}{socketSend()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} socket\+Send (\begin{DoxyParamCaption}\item[{\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$}]{socket,  }\item[{const void $\ast$}]{data,  }\item[{size\+\_\+t}]{length,  }\item[{size\+\_\+t $\ast$}]{written,  }\item[{\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t}}]{flags }\end{DoxyParamCaption})}
+
+
+
+Send data to a connected socket. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em socket} & Handle that identifies a connected socket \\
+\hline
+\mbox{\tt in}  & {\em data} & Pointer to a buffer containing the data to be transmitted \\
+\hline
+\mbox{\tt in}  & {\em length} & Number of data bytes to send \\
+\hline
+\mbox{\tt out}  & {\em written} & Actual number of bytes written (optional parameter) \\
+\hline
+\mbox{\tt in}  & {\em flags} & Set of flags that influences the behavior of this function \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 514 of file socket.\+c.
+
+
+\begin{DoxyCode}
+516 \{
+517    \textcolor{comment}{//Use default remote IP address for connectionless or raw sockets}
+518    \textcolor{keywordflow}{return} \hyperlink{socket_8c_a5985321fef9f287f84c4004aaa78920e}{socketSendTo}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, &\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->remoteIpAddr,
+519       \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->remotePort, \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, written, \hyperlink{tcp_8h_aa2585d779da0ab21273a8d92de9a0ebe}{flags});
+520 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{socket_8c_a5985321fef9f287f84c4004aaa78920e}\label{socket_8c_a5985321fef9f287f84c4004aaa78920e}} 
+\index{socket.\+c@{socket.\+c}!socket\+Send\+To@{socket\+Send\+To}}
+\index{socket\+Send\+To@{socket\+Send\+To}!socket.\+c@{socket.\+c}}
+\subsubsection{\texorpdfstring{socket\+Send\+To()}{socketSendTo()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} socket\+Send\+To (\begin{DoxyParamCaption}\item[{\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$}]{socket,  }\item[{const \hyperlink{structIpAddr}{Ip\+Addr} $\ast$}]{dest\+Ip\+Addr,  }\item[{\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t}}]{dest\+Port,  }\item[{const void $\ast$}]{data,  }\item[{size\+\_\+t}]{length,  }\item[{size\+\_\+t $\ast$}]{written,  }\item[{\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t}}]{flags }\end{DoxyParamCaption})}
+
+
+
+Send a datagram to a specific destination. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em socket} & Handle that identifies a socket \\
+\hline
+\mbox{\tt in}  & {\em dest\+Ip\+Addr} & IP address of the target host \\
+\hline
+\mbox{\tt in}  & {\em dest\+Port} & Target port number \\
+\hline
+\mbox{\tt in}  & {\em data} & Pointer to a buffer containing the data to be transmitted \\
+\hline
+\mbox{\tt in}  & {\em length} & Number of data bytes to send \\
+\hline
+\mbox{\tt out}  & {\em written} & Actual number of bytes written (optional parameter) \\
+\hline
+\mbox{\tt in}  & {\em flags} & Set of flags that influences the behavior of this function \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 535 of file socket.\+c.
+
+
+\begin{DoxyCode}
+537 \{
+538    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+539 
+540    \textcolor{comment}{//No data has been transmitted yet}
+541    \textcolor{keywordflow}{if}(written)
+542       *written = 0;
+543 
+544    \textcolor{comment}{//Make sure the socket handle is valid}
+545    \textcolor{keywordflow}{if}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket} == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+546       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+547 
+548    \textcolor{comment}{//Get exclusive access}
+549    \hyperlink{os__port__chibios_8c_a58485224df4bfa522246d55b35bbd83a}{osAcquireMutex}(&\hyperlink{net_8c_afe31551ad26115fae8e575654346d441}{netMutex});
+550 
+551 \textcolor{preprocessor}{#if (TCP\_SUPPORT == ENABLED)}
+552    \textcolor{comment}{//Connection-oriented socket?}
+553    \textcolor{keywordflow}{if}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->type == \hyperlink{socket_8h_aa78c7398fa81f7f62aa233159d4d8d97a9dab003c4dc9f7279e806241534d4859}{SOCKET\_TYPE\_STREAM})
+554    \{
+555       \textcolor{comment}{//For connection-oriented sockets, target address is ignored}
+556       error = \hyperlink{tcp_8c_ae42ff0820ab0fdfde9f2db2f3afa9595}{tcpSend}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, written, 
+      \hyperlink{tcp_8h_aa2585d779da0ab21273a8d92de9a0ebe}{flags});
+557    \}
+558    \textcolor{keywordflow}{else}
+559 \textcolor{preprocessor}{#endif}
+560 \textcolor{preprocessor}{#if (UDP\_SUPPORT == ENABLED)}
+561    \textcolor{comment}{//Connectionless socket?}
+562    \textcolor{keywordflow}{if}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->type == \hyperlink{socket_8h_aa78c7398fa81f7f62aa233159d4d8d97a26963b01dac3a99a930779035d3796a7}{SOCKET\_TYPE\_DGRAM})
+563    \{
+564       \textcolor{comment}{//Send UDP datagram}
+565       error = \hyperlink{udp_8c_a5db98abd9950a468a297a45640a6ba52}{udpSendDatagram}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, destIpAddr, \hyperlink{tcp_8h_af15d713ad2bc92686abfa6ab012b5039}{destPort}, 
+      \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length},
+566          written, \hyperlink{tcp_8h_aa2585d779da0ab21273a8d92de9a0ebe}{flags});
+567    \}
+568    \textcolor{keywordflow}{else}
+569 \textcolor{preprocessor}{#endif}
+570 \textcolor{preprocessor}{#if (RAW\_SOCKET\_SUPPORT == ENABLED)}
+571    \textcolor{comment}{//Raw socket?}
+572    \textcolor{keywordflow}{if}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->type == \hyperlink{socket_8h_aa78c7398fa81f7f62aa233159d4d8d97a3db886c9e1e99cf877623ee040af71c5}{SOCKET\_TYPE\_RAW\_IP})
+573    \{
+574       \textcolor{comment}{//Send a raw IP packet}
+575       error = \hyperlink{raw__socket_8c_a97dedb8c93bbc612d09563f523140a9c}{rawSocketSendIpPacket}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, destIpAddr, 
+      \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length},
+576          written, \hyperlink{tcp_8h_aa2585d779da0ab21273a8d92de9a0ebe}{flags});
+577    \}
+578    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->type == \hyperlink{socket_8h_aa78c7398fa81f7f62aa233159d4d8d97a4cdd66d5c35beeed721c6b43a779315c}{SOCKET\_TYPE\_RAW\_ETH})
+579    \{
+580       \textcolor{comment}{//Send a raw Ethernet packet}
+581       error = \hyperlink{raw__socket_8c_a9999b3d59ed200a7a72114da765f1577}{rawSocketSendEthPacket}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, \hyperlink{dtls__misc_8h_a5c239a1bb87b52b0f1d6d68c4749cd2a}{data}, 
+      \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, written);
+582    \}
+583    \textcolor{keywordflow}{else}
+584 \textcolor{preprocessor}{#endif}
+585    \textcolor{comment}{//Socket type not supported...}
+586    \{
+587       \textcolor{comment}{//Invalid socket type}
+588       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca28be6b082c0f8c109ae2e241eb768e1d}{ERROR\_INVALID\_SOCKET};
+589    \}
+590 
+591    \textcolor{comment}{//Release exclusive access}
+592    \hyperlink{os__port__chibios_8c_a8e10e5b2c6d3877b5ba60e375ac45d79}{osReleaseMutex}(&\hyperlink{net_8c_afe31551ad26115fae8e575654346d441}{netMutex});
+593 
+594    \textcolor{comment}{//Return status code}
+595    \textcolor{keywordflow}{return} error;
+596 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{socket_8c_a014878addaa120654ac3370335e8bd92}\label{socket_8c_a014878addaa120654ac3370335e8bd92}} 
+\index{socket.\+c@{socket.\+c}!socket\+Set\+Interface@{socket\+Set\+Interface}}
+\index{socket\+Set\+Interface@{socket\+Set\+Interface}!socket.\+c@{socket.\+c}}
+\subsubsection{\texorpdfstring{socket\+Set\+Interface()}{socketSetInterface()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} socket\+Set\+Interface (\begin{DoxyParamCaption}\item[{\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$}]{socket,  }\item[{\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$}]{interface }\end{DoxyParamCaption})}
+
+
+
+Bind a socket to a particular network interface. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em socket} & Handle to a socket \\
+\hline
+\mbox{\tt in}  & {\em interface} & Network interface to be used \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 312 of file socket.\+c.
+
+
+\begin{DoxyCode}
+313 \{
+314    \textcolor{comment}{//Make sure the socket handle is valid}
+315    \textcolor{keywordflow}{if}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket} == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+316       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+317 
+318    \textcolor{comment}{//Explicitly associate the socket with the specified interface}
+319    \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->interface = interface;
+320 
+321    \textcolor{comment}{//No error to report}
+322    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+323 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{socket_8c_ade5d61125056ad265723b44f236bdb20}\label{socket_8c_ade5d61125056ad265723b44f236bdb20}} 
+\index{socket.\+c@{socket.\+c}!socket\+Set\+Rx\+Buffer\+Size@{socket\+Set\+Rx\+Buffer\+Size}}
+\index{socket\+Set\+Rx\+Buffer\+Size@{socket\+Set\+Rx\+Buffer\+Size}!socket.\+c@{socket.\+c}}
+\subsubsection{\texorpdfstring{socket\+Set\+Rx\+Buffer\+Size()}{socketSetRxBufferSize()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} socket\+Set\+Rx\+Buffer\+Size (\begin{DoxyParamCaption}\item[{\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$}]{socket,  }\item[{size\+\_\+t}]{size }\end{DoxyParamCaption})}
+
+
+
+Specify the size of the receive buffer. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em socket} & Handle to a socket \\
+\hline
+\mbox{\tt in}  & {\em size} & Desired buffer size in bytes \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 278 of file socket.\+c.
+
+
+\begin{DoxyCode}
+279 \{
+280 \textcolor{preprocessor}{#if (TCP\_SUPPORT == ENABLED)}
+281    \textcolor{comment}{//Make sure the socket handle is valid}
+282    \textcolor{keywordflow}{if}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket} == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+283       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+284    \textcolor{comment}{//Check parameter value}
+285    \textcolor{keywordflow}{if}(size < 1 || size > \hyperlink{tcp_8h_a220fffa3407e7ee49fdd8466c24d21b7}{TCP\_MAX\_RX\_BUFFER\_SIZE})
+286       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+287 
+288    \textcolor{comment}{//This function shall be used with connection-oriented socket types}
+289    \textcolor{keywordflow}{if}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->type != \hyperlink{socket_8h_aa78c7398fa81f7f62aa233159d4d8d97a9dab003c4dc9f7279e806241534d4859}{SOCKET\_TYPE\_STREAM})
+290       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca28be6b082c0f8c109ae2e241eb768e1d}{ERROR\_INVALID\_SOCKET};
+291    \textcolor{comment}{//The buffer size cannot be changed when the connection is established}
+292    \textcolor{keywordflow}{if}(\hyperlink{tcp_8c_a5256b029b29f2bdbf34927938935b7ff}{tcpGetState}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}) != \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfeca1af39131036c81d79f09174d2fb6f788}{TCP\_STATE\_CLOSED})
+293       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca28be6b082c0f8c109ae2e241eb768e1d}{ERROR\_INVALID\_SOCKET};
+294 
+295    \textcolor{comment}{//Use the specified buffer size}
+296    \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->rxBufferSize = size;
+297    \textcolor{comment}{//No error to report}
+298    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+299 \textcolor{preprocessor}{#else}
+300    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cab61c5ef368fbf03fdc1fb566c63f2f9a}{ERROR\_NOT\_IMPLEMENTED};
+301 \textcolor{preprocessor}{#endif}
+302 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{socket_8c_abdd29ac0ba4a644c726f5b1280680099}\label{socket_8c_abdd29ac0ba4a644c726f5b1280680099}} 
+\index{socket.\+c@{socket.\+c}!socket\+Set\+Timeout@{socket\+Set\+Timeout}}
+\index{socket\+Set\+Timeout@{socket\+Set\+Timeout}!socket.\+c@{socket.\+c}}
+\subsubsection{\texorpdfstring{socket\+Set\+Timeout()}{socketSetTimeout()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} socket\+Set\+Timeout (\begin{DoxyParamCaption}\item[{\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$}]{socket,  }\item[{\hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\+\_\+t}}]{timeout }\end{DoxyParamCaption})}
+
+
+
+Set timeout value for blocking operations. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em socket} & Handle to a socket \\
+\hline
+\mbox{\tt in}  & {\em timeout} & Maximum time to wait \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 219 of file socket.\+c.
+
+
+\begin{DoxyCode}
+220 \{
+221    \textcolor{comment}{//Make sure the socket handle is valid}
+222    \textcolor{keywordflow}{if}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket} == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+223       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+224 
+225    \textcolor{comment}{//Get exclusive access}
+226    \hyperlink{os__port__chibios_8c_a58485224df4bfa522246d55b35bbd83a}{osAcquireMutex}(&\hyperlink{net_8c_afe31551ad26115fae8e575654346d441}{netMutex});
+227    \textcolor{comment}{//Record timeout value}
+228    \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->timeout = timeout;
+229    \textcolor{comment}{//Release exclusive access}
+230    \hyperlink{os__port__chibios_8c_a8e10e5b2c6d3877b5ba60e375ac45d79}{osReleaseMutex}(&\hyperlink{net_8c_afe31551ad26115fae8e575654346d441}{netMutex});
+231 
+232    \textcolor{comment}{//No error to report}
+233    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+234 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{socket_8c_aedf25ddaf93caf6fb4a9e47dae20c831}\label{socket_8c_aedf25ddaf93caf6fb4a9e47dae20c831}} 
+\index{socket.\+c@{socket.\+c}!socket\+Set\+Tx\+Buffer\+Size@{socket\+Set\+Tx\+Buffer\+Size}}
+\index{socket\+Set\+Tx\+Buffer\+Size@{socket\+Set\+Tx\+Buffer\+Size}!socket.\+c@{socket.\+c}}
+\subsubsection{\texorpdfstring{socket\+Set\+Tx\+Buffer\+Size()}{socketSetTxBufferSize()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} socket\+Set\+Tx\+Buffer\+Size (\begin{DoxyParamCaption}\item[{\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$}]{socket,  }\item[{size\+\_\+t}]{size }\end{DoxyParamCaption})}
+
+
+
+Specify the size of the send buffer. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em socket} & Handle to a socket \\
+\hline
+\mbox{\tt in}  & {\em size} & Desired buffer size in bytes \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 244 of file socket.\+c.
+
+
+\begin{DoxyCode}
+245 \{
+246 \textcolor{preprocessor}{#if (TCP\_SUPPORT == ENABLED)}
+247    \textcolor{comment}{//Make sure the socket handle is valid}
+248    \textcolor{keywordflow}{if}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket} == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+249       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+250    \textcolor{comment}{//Check parameter value}
+251    \textcolor{keywordflow}{if}(size < 1 || size > \hyperlink{tcp_8h_a85c483022d7093f56ad49e0f7373c432}{TCP\_MAX\_TX\_BUFFER\_SIZE})
+252       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+253 
+254    \textcolor{comment}{//This function shall be used with connection-oriented socket types}
+255    \textcolor{keywordflow}{if}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->type != \hyperlink{socket_8h_aa78c7398fa81f7f62aa233159d4d8d97a9dab003c4dc9f7279e806241534d4859}{SOCKET\_TYPE\_STREAM})
+256       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca28be6b082c0f8c109ae2e241eb768e1d}{ERROR\_INVALID\_SOCKET};
+257    \textcolor{comment}{//The buffer size cannot be changed when the connection is established}
+258    \textcolor{keywordflow}{if}(\hyperlink{tcp_8c_a5256b029b29f2bdbf34927938935b7ff}{tcpGetState}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}) != \hyperlink{tcp_8h_a4310b47e70de394d33f7cf601e35bfeca1af39131036c81d79f09174d2fb6f788}{TCP\_STATE\_CLOSED})
+259       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca28be6b082c0f8c109ae2e241eb768e1d}{ERROR\_INVALID\_SOCKET};
+260 
+261    \textcolor{comment}{//Use the specified buffer size}
+262    \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->txBufferSize = size;
+263    \textcolor{comment}{//No error to report}
+264    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+265 \textcolor{preprocessor}{#else}
+266    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cab61c5ef368fbf03fdc1fb566c63f2f9a}{ERROR\_NOT\_IMPLEMENTED};
+267 \textcolor{preprocessor}{#endif}
+268 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{socket_8c_acc736b53dba4a0d3b11b63f75cdcfffb}\label{socket_8c_acc736b53dba4a0d3b11b63f75cdcfffb}} 
+\index{socket.\+c@{socket.\+c}!socket\+Shutdown@{socket\+Shutdown}}
+\index{socket\+Shutdown@{socket\+Shutdown}!socket.\+c@{socket.\+c}}
+\subsubsection{\texorpdfstring{socket\+Shutdown()}{socketShutdown()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} socket\+Shutdown (\begin{DoxyParamCaption}\item[{\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$}]{socket,  }\item[{\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t}}]{how }\end{DoxyParamCaption})}
+
+
+
+Disable reception, transmission, or both. 
+
+Note that \hyperlink{socket_8c_acc736b53dba4a0d3b11b63f75cdcfffb}{socket\+Shutdown()} does not close the socket, and resources attached to the socket will not be freed until \hyperlink{socket_8c_ac5012e9f71c97e2ea0410f2c5baccb0e}{socket\+Close()} is invoked
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em socket} & Handle to a socket \\
+\hline
+\mbox{\tt in}  & {\em how} & Flag that describes what types of operation will no longer be allowed \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 785 of file socket.\+c.
+
+
+\begin{DoxyCode}
+786 \{
+787 \textcolor{preprocessor}{#if (TCP\_SUPPORT == ENABLED)}
+788    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+789 
+790    \textcolor{comment}{//Make sure the socket handle is valid}
+791    \textcolor{keywordflow}{if}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket} == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+792       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+793    \textcolor{comment}{//Make sure the socket type is correct}
+794    \textcolor{keywordflow}{if}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->type != \hyperlink{socket_8h_aa78c7398fa81f7f62aa233159d4d8d97a9dab003c4dc9f7279e806241534d4859}{SOCKET\_TYPE\_STREAM})
+795       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca28be6b082c0f8c109ae2e241eb768e1d}{ERROR\_INVALID\_SOCKET};
+796    \textcolor{comment}{//Check flags}
+797    \textcolor{keywordflow}{if}((how != \hyperlink{socket_8h_a36ee33c18de64f549a6336d1aa7333b7a535dc5f70a642b86e56e6e83ce2a3378}{SOCKET\_SD\_SEND}) && (how != \hyperlink{socket_8h_a36ee33c18de64f549a6336d1aa7333b7a88cccdaadbcce09cccd7561d10af6a39}{SOCKET\_SD\_RECEIVE}) && (how != 
+      \hyperlink{socket_8h_a36ee33c18de64f549a6336d1aa7333b7a4c533f4b86ea89dfd6a508bb4262c76d}{SOCKET\_SD\_BOTH}))
+798       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+799 
+800    \textcolor{comment}{//Get exclusive access}
+801    \hyperlink{os__port__chibios_8c_a58485224df4bfa522246d55b35bbd83a}{osAcquireMutex}(&\hyperlink{net_8c_afe31551ad26115fae8e575654346d441}{netMutex});
+802 
+803    \textcolor{comment}{//Graceful shutdown}
+804    error = \hyperlink{tcp_8c_a9520355455840d2ba13b3fc00921981f}{tcpShutdown}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}, how);
+805 
+806    \textcolor{comment}{//Release exclusive access}
+807    \hyperlink{os__port__chibios_8c_a8e10e5b2c6d3877b5ba60e375ac45d79}{osReleaseMutex}(&\hyperlink{net_8c_afe31551ad26115fae8e575654346d441}{netMutex});
+808 
+809    \textcolor{comment}{//Return status code}
+810    \textcolor{keywordflow}{return} error;
+811 \textcolor{preprocessor}{#else}
+812    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cab61c5ef368fbf03fdc1fb566c63f2f9a}{ERROR\_NOT\_IMPLEMENTED};
+813 \textcolor{preprocessor}{#endif}
+814 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{socket_8c_a3baa68d9d7c771a38463123a595075ff}\label{socket_8c_a3baa68d9d7c771a38463123a595075ff}} 
+\index{socket.\+c@{socket.\+c}!socket\+Unregister\+Events@{socket\+Unregister\+Events}}
+\index{socket\+Unregister\+Events@{socket\+Unregister\+Events}!socket.\+c@{socket.\+c}}
+\subsubsection{\texorpdfstring{socket\+Unregister\+Events()}{socketUnregisterEvents()}}
+{\footnotesize\ttfamily void socket\+Unregister\+Events (\begin{DoxyParamCaption}\item[{\hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} $\ast$}]{socket }\end{DoxyParamCaption})}
+
+
+
+Unsubscribe previously registered events. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em socket} & Handle that identifies a socket \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 1019 of file socket.\+c.
+
+
+\begin{DoxyCode}
+1020 \{
+1021    \textcolor{comment}{//Valid socket handle?}
+1022    \textcolor{keywordflow}{if}(\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket} != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1023    \{
+1024       \textcolor{comment}{//Get exclusive access}
+1025       \hyperlink{os__port__chibios_8c_a58485224df4bfa522246d55b35bbd83a}{osAcquireMutex}(&\hyperlink{net_8c_afe31551ad26115fae8e575654346d441}{netMutex});
+1026 
+1027       \textcolor{comment}{//Unsuscribe socket events}
+1028       \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket}->userEvent = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+1029 
+1030       \textcolor{comment}{//Release exclusive access}
+1031       \hyperlink{os__port__chibios_8c_a8e10e5b2c6d3877b5ba60e375ac45d79}{osReleaseMutex}(&\hyperlink{net_8c_afe31551ad26115fae8e575654346d441}{netMutex});
+1032    \}
+1033 \}
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{socket_8c_acdd76d8e01b4715c774c404b10f958da}\label{socket_8c_acdd76d8e01b4715c774c404b10f958da}} 
+\index{socket.\+c@{socket.\+c}!socket\+Table@{socket\+Table}}
+\index{socket\+Table@{socket\+Table}!socket.\+c@{socket.\+c}}
+\subsubsection{\texorpdfstring{socket\+Table}{socketTable}}
+{\footnotesize\ttfamily \hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} socket\+Table\mbox{[}\hyperlink{net__config_8h_ab793a8c76592a00fa3ea0510cd2ffe3a}{S\+O\+C\+K\+E\+T\+\_\+\+M\+A\+X\+\_\+\+C\+O\+U\+NT}\mbox{]}}
+
+
+
+Definition at line 49 of file socket.\+c.
+

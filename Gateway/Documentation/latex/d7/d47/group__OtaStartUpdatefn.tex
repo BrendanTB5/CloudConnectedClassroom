@@ -1,0 +1,131 @@
+\hypertarget{group__OtaStartUpdatefn}{}\section{m2m\+\_\+ota\+\_\+start\+\_\+update}
+\label{group__OtaStartUpdatefn}\index{m2m\+\_\+ota\+\_\+start\+\_\+update@{m2m\+\_\+ota\+\_\+start\+\_\+update}}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group__BSPDefine_gaecc0323d771e41ef81a76b5f12783e22}{N\+M\+I\+\_\+\+A\+PI} \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} \hyperlink{group__OtaStartUpdatefn_gac50387eab16b3257f1c037942f2682fd}{m2m\+\_\+ota\+\_\+start\+\_\+update} (\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} $\ast$u8\+Download\+Url)
+\begin{DoxyCompactList}\small\item\em Request O\+TA start update using the downloaded url. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Request O\+TA start update using the downloaded U\+RL, the O\+TA module will download the O\+TA image and ensure integrity of the image, and update the validity of the image in control structure, Switching to that image requires calling m2m\+\_\+ota\+\_\+switch\+\_\+firmware A\+PI 
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group__OtaStartUpdatefn_gac50387eab16b3257f1c037942f2682fd}\label{group__OtaStartUpdatefn_gac50387eab16b3257f1c037942f2682fd}} 
+\index{m2m\+\_\+ota\+\_\+start\+\_\+update@{m2m\+\_\+ota\+\_\+start\+\_\+update}!m2m\+\_\+ota\+\_\+start\+\_\+update@{m2m\+\_\+ota\+\_\+start\+\_\+update}}
+\index{m2m\+\_\+ota\+\_\+start\+\_\+update@{m2m\+\_\+ota\+\_\+start\+\_\+update}!m2m\+\_\+ota\+\_\+start\+\_\+update@{m2m\+\_\+ota\+\_\+start\+\_\+update}}
+\subsubsection{\texorpdfstring{m2m\+\_\+ota\+\_\+start\+\_\+update()}{m2m\_ota\_start\_update()}}
+{\footnotesize\ttfamily \hyperlink{group__BSPDefine_gaecc0323d771e41ef81a76b5f12783e22}{N\+M\+I\+\_\+\+A\+PI} \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} m2m\+\_\+ota\+\_\+start\+\_\+update (\begin{DoxyParamCaption}\item[{\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} $\ast$}]{u8\+Download\+Url }\end{DoxyParamCaption})}
+
+
+
+{\ttfamily \#include $<$\hyperlink{m2m__ota_8h}{third\+\_\+party/atmel/devices/wilc1000/driver/include/m2m\+\_\+ota.\+h}$>$}
+
+
+
+Request O\+TA start update using the downloaded url. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em u8\+Download\+Url} & The download firmware U\+RL, you get it from device info according to the application server\\
+\hline
+\end{DoxyParams}
+\begin{DoxyWarning}{Warning}
+Calling the m2m\+\_\+ota\+\_\+init is a M\+U\+ST. Calling this A\+PI doesnot guarantee O\+TA W\+I\+NC image update, It depends on the connection between the W\+I\+NC and the Download Server, and the validity of the image If the A\+PI response failed that may invalidate the roll-\/back image if it previously valid as the W\+I\+NC has not any internal memory except the flash roll-\/back image location to validate the downloaded image
+\end{DoxyWarning}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{group__OtaInitFn_gacd2a1a8ffaccc3deb1970cf1ad41ceec}{m2m\+\_\+ota\+\_\+init} \hyperlink{group__OTATYPEDEF_ga86bdacc22dca0d0844e0825d81fb4f85}{tpf\+Ota\+Update\+Cb}
+\end{DoxySeeAlso}
+\begin{DoxyReturn}{Returns}
+The function returns \hyperlink{nm__common_8h_a9ef27ba27aafdd1aa3a79d3ba2c36b8f}{M2\+M\+\_\+\+S\+U\+C\+C\+E\+SS} for successful operations and a negative value otherwise. 
+\end{DoxyReturn}
+\hypertarget{group__WifiEnableMonitorModeFn_Example}{}\subsection{Example}\label{group__WifiEnableMonitorModeFn_Example}
+The example shows an example of how the O\+TA image update is carried out. 
+\begin{DoxyCode}
+\textcolor{keyword}{static} \textcolor{keywordtype}{void} OtaUpdateCb(\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} u8OtaUpdateStatusType ,\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} u8OtaUpdateStatus)
+\{
+    \textcolor{keywordflow}{if}(u8OtaUpdateStatusType == DL\_STATUS) \{
+        \textcolor{keywordflow}{if}(u8OtaUpdateStatus == OTA\_STATUS\_SUCSESS) \{
+            \textcolor{comment}{//switch to the upgraded firmware}
+            \hyperlink{group__OtaSwitchFirmware_ga464a45a53473152d5a78c578ae0edd8a}{m2m\_ota\_switch\_firmware}();
+        \}
+    \}
+    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(u8OtaUpdateStatusType == SW\_STATUS) \{
+        \textcolor{keywordflow}{if}(u8OtaUpdateStatus == OTA\_STATUS\_SUCSESS) \{
+            \hyperlink{nm__common_8h_a84108eca2655e811179386a39c62acf2}{M2M\_INFO}(\textcolor{stringliteral}{"Now OTA successfully done"});
+            \textcolor{comment}{//start the host SW upgrade then system reset is required (Reinitialize the driver)}
+        \}
+    \}
+\}
+\textcolor{keywordtype}{void} wifi\_event\_cb(\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8} u8WiFiEvent, \textcolor{keywordtype}{void} * pvMsg)
+\{
+    \textcolor{keywordflow}{case} M2M\_WIFI\_REQ\_DHCP\_CONF:
+    \{
+        \textcolor{comment}{//after successfully connection, start the over air upgrade}
+        \hyperlink{group__OtaStartUpdatefn_gac50387eab16b3257f1c037942f2682fd}{m2m\_ota\_start\_update}(OTA\_URL);
+    \}
+    \textcolor{keywordflow}{break};
+    \textcolor{keywordflow}{default}:
+    \textcolor{keywordflow}{break};
+\}
+\textcolor{keywordtype}{int} \hyperlink{demo_2microchip_2pic32mz__ef__curiosity_2wifi__http__server__demo_2src_2main_8c_ac5a1eca594b063e0d2dbccf86f96f221}{main} (\textcolor{keywordtype}{void})
+\{
+    \hyperlink{structtstrWifiInitParam}{tstrWifiInitParam} param;
+    \hyperlink{structtstr1xAuthCredentials}{tstr1xAuthCredentials} gstrCred1x    = AUTH\_CREDENTIALS;
+    \hyperlink{group__NmBspInitFn_ga91533a50cf3da832110a746b4a57789e}{nm\_bsp\_init}();
+    
+    \hyperlink{nm__common_8h_ad4de761e451e6416e7e21d6abc4fb776}{m2m\_memset}((\hyperlink{group__DataT_ga4df709a77647e870bbf1d955b8edc9a6}{uint8}*)&param, 0, \textcolor{keyword}{sizeof}(param));
+    param.pfAppWifiCb = wifi\_event\_cb;
+    
+    \textcolor{comment}{//intilize the WINC Driver}
+    ret = \hyperlink{group__WifiInitFn_ga73c734812e844d96d860c4e93e9daf35}{m2m\_wifi\_init}(&param);
+    \textcolor{keywordflow}{if} (\hyperlink{nm__common_8h_a9ef27ba27aafdd1aa3a79d3ba2c36b8f}{M2M\_SUCCESS} != ret)
+    \{
+        \hyperlink{nm__common_8h_a34d005df494e50b05cd38b80f318d7ac}{M2M\_ERR}(\textcolor{stringliteral}{"Driver Init Failed <%d>\(\backslash\)r\(\backslash\)n"},ret);
+        \textcolor{keywordflow}{while}(1);
+    \}
+    \textcolor{comment}{//intilize the ota module}
+    \hyperlink{group__OtaInitFn_gacd2a1a8ffaccc3deb1970cf1ad41ceec}{m2m\_ota\_init}(OtaUpdateCb,\hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+    \textcolor{comment}{//connect to AP that provide connection to the OTA server}
+    m2m\_wifi\_default\_connect();
+
+    \textcolor{keywordflow}{while}(1)
+    \{
+        
+        \textcolor{comment}{//Handle the app state machine plus the WINC event handler                                         
+                                  }
+        \textcolor{keywordflow}{while}(\hyperlink{group__WifiHandleEventsFn_ga461a4edc057cec8c00cf124a07aa3b02}{m2m\_wifi\_handle\_events}(\hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}) != 
+      \hyperlink{nm__common_8h_a9ef27ba27aafdd1aa3a79d3ba2c36b8f}{M2M\_SUCCESS}) \{
+            
+        \}
+        
+    \}
+\}
+\end{DoxyCode}
+
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em u8\+Download\+Url} & The download firmware url, you get it from device info\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The function S\+H\+A\+LL return 0 for success and a negative value otherwise. 
+\end{DoxyReturn}
+
+
+Definition at line 216 of file m2m\+\_\+ota.\+c.
+
+
+\begin{DoxyCode}
+217 \{
+218     \hyperlink{group__DataT_gae35f10ffd0ac8dd2bc3e794da9bdfbc7}{sint8} ret;
+219     \hyperlink{group__DataT_ga1daa745171fc6e31d942c161422a76f9}{uint16} u16DurlSize = \hyperlink{nm__common_8h_a3c10c83b6b5eda6b18bbc40ca411eeb4}{m2m\_strlen}(u8DownloadUrl) + 1; 
+220     \textcolor{comment}{/*Todo: we may change it to data pkt but we need to give it higer priority}
+221 \textcolor{comment}{            but the priorty is not implemnted yet in data pkt}
+222 \textcolor{comment}{    */}
+223     ret = \hyperlink{m2m__hif_8c_a13ba8ad11b2ac39516ca787386d16ce0}{hif\_send}(M2M\_REQ\_GRP\_OTA,M2M\_OTA\_REQ\_START\_UPDATE,u8DownloadUrl,u16DurlSize,
+      \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL},0,0);
+224     \textcolor{keywordflow}{return} ret;
+225 \}
+\end{DoxyCode}

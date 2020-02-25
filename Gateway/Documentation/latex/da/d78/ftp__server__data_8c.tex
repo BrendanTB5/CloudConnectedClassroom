@@ -1,0 +1,915 @@
+\hypertarget{ftp__server__data_8c}{}\section{cyclone\+\_\+tcp/ftp/ftp\+\_\+server\+\_\+data.c File Reference}
+\label{ftp__server__data_8c}\index{cyclone\+\_\+tcp/ftp/ftp\+\_\+server\+\_\+data.\+c@{cyclone\+\_\+tcp/ftp/ftp\+\_\+server\+\_\+data.\+c}}
+
+
+F\+TP data connection.  
+
+
+{\ttfamily \#include \char`\"{}ftp/ftp\+\_\+server.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ftp/ftp\+\_\+server\+\_\+data.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ftp/ftp\+\_\+server\+\_\+transport.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ftp/ftp\+\_\+server\+\_\+misc.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}path.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}debug.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{ftp__server__data_8c_afcdf5e66fd927a7f4cc64295acd20407}{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}~\hyperlink{net__config_8h_ae398facab6ce5126fa3b23996aafefa5}{F\+T\+P\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{ftp__server__data_8c_a2796f2b1e77f205af4187cae0b916024}{ftp\+Server\+Register\+Data\+Channel\+Events} (\hyperlink{ftp__server_8h_ab682699c15473841571a42c3df57e9d2}{Ftp\+Client\+Connection} $\ast$connection, \hyperlink{structSocketEventDesc}{Socket\+Event\+Desc} $\ast$event\+Desc)
+\begin{DoxyCompactList}\small\item\em Register data connection events. \end{DoxyCompactList}\item 
+void \hyperlink{ftp__server__data_8c_aed7f8eac88f002524e9d4b7ec14c140b}{ftp\+Server\+Process\+Data\+Channel\+Events} (\hyperlink{ftp__server_8h_ab682699c15473841571a42c3df57e9d2}{Ftp\+Client\+Connection} $\ast$connection, \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} event\+Flags)
+\begin{DoxyCompactList}\small\item\em Data connection event handler. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{ftp__server__data_8c_a1897b513ba9ce04dc3a4a9be61445b54}{ftp\+Server\+Open\+Data\+Channel} (\hyperlink{ftp__server_8h_ab682699c15473841571a42c3df57e9d2}{Ftp\+Client\+Connection} $\ast$connection)
+\begin{DoxyCompactList}\small\item\em Open data connection. \end{DoxyCompactList}\item 
+void \hyperlink{ftp__server__data_8c_a7f8b628df62d6ed93dd5a4a94618beb0}{ftp\+Server\+Accept\+Data\+Channel} (\hyperlink{ftp__server_8h_ab682699c15473841571a42c3df57e9d2}{Ftp\+Client\+Connection} $\ast$connection)
+\begin{DoxyCompactList}\small\item\em Accept data connection. \end{DoxyCompactList}\item 
+void \hyperlink{ftp__server__data_8c_ad35c464b437a1937cac5cb387eff778a}{ftp\+Server\+Write\+Data\+Channel} (\hyperlink{ftp__server_8h_ab682699c15473841571a42c3df57e9d2}{Ftp\+Client\+Connection} $\ast$connection)
+\begin{DoxyCompactList}\small\item\em Write data to the data connection. \end{DoxyCompactList}\item 
+void \hyperlink{ftp__server__data_8c_a19d09fbd1a6c6d4843d2031945a55416}{ftp\+Server\+Read\+Data\+Channel} (\hyperlink{ftp__server_8h_ab682699c15473841571a42c3df57e9d2}{Ftp\+Client\+Connection} $\ast$connection)
+\begin{DoxyCompactList}\small\item\em Read data from the data connection. \end{DoxyCompactList}\item 
+void \hyperlink{ftp__server__data_8c_a62d97804710ebb11e8a1814fba4158a1}{ftp\+Server\+Close\+Data\+Channel} (\hyperlink{ftp__server_8h_ab682699c15473841571a42c3df57e9d2}{Ftp\+Client\+Connection} $\ast$connection)
+\begin{DoxyCompactList}\small\item\em Close data connection. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+F\+TP data connection. 
+
+\hypertarget{pic32mz__ef__curiosity_8h_License}{}\subsection{License}\label{pic32mz__ef__curiosity_8h_License}
+S\+P\+D\+X-\/\+License-\/\+Identifier\+: G\+P\+L-\/2.\+0-\/or-\/later
+
+Copyright (C) 2010-\/2019 Oryx Embedded S\+A\+RL. All rights reserved.
+
+This file is part of Cyclone\+T\+CP Open.
+
+This program is free software; you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+
+You should have received a copy of the G\+NU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-\/1301, U\+SA.
+
+\begin{DoxyAuthor}{Author}
+Oryx Embedded S\+A\+RL (www.\+oryx-\/embedded.\+com) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+9.\+6 
+\end{DoxyVersion}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{ftp__server__data_8c_afcdf5e66fd927a7f4cc64295acd20407}\label{ftp__server__data_8c_afcdf5e66fd927a7f4cc64295acd20407}} 
+\index{ftp\+\_\+server\+\_\+data.\+c@{ftp\+\_\+server\+\_\+data.\+c}!T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+\index{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}!ftp\+\_\+server\+\_\+data.\+c@{ftp\+\_\+server\+\_\+data.\+c}}
+\subsubsection{\texorpdfstring{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}{TRACE\_LEVEL}}
+{\footnotesize\ttfamily \#define T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL~\hyperlink{net__config_8h_ae398facab6ce5126fa3b23996aafefa5}{F\+T\+P\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+
+
+
+Definition at line 32 of file ftp\+\_\+server\+\_\+data.\+c.
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{ftp__server__data_8c_a7f8b628df62d6ed93dd5a4a94618beb0}\label{ftp__server__data_8c_a7f8b628df62d6ed93dd5a4a94618beb0}} 
+\index{ftp\+\_\+server\+\_\+data.\+c@{ftp\+\_\+server\+\_\+data.\+c}!ftp\+Server\+Accept\+Data\+Channel@{ftp\+Server\+Accept\+Data\+Channel}}
+\index{ftp\+Server\+Accept\+Data\+Channel@{ftp\+Server\+Accept\+Data\+Channel}!ftp\+\_\+server\+\_\+data.\+c@{ftp\+\_\+server\+\_\+data.\+c}}
+\subsubsection{\texorpdfstring{ftp\+Server\+Accept\+Data\+Channel()}{ftpServerAcceptDataChannel()}}
+{\footnotesize\ttfamily void ftp\+Server\+Accept\+Data\+Channel (\begin{DoxyParamCaption}\item[{\hyperlink{ftp__server_8h_ab682699c15473841571a42c3df57e9d2}{Ftp\+Client\+Connection} $\ast$}]{connection }\end{DoxyParamCaption})}
+
+
+
+Accept data connection. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em connection} & Pointer to the client connection \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 363 of file ftp\+\_\+server\+\_\+data.\+c.
+
+
+\begin{DoxyCode}
+364 \{
+365    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+366    \hyperlink{socket_8h_aa85acfb0fa336ef495e6ba87fb88fc48}{Socket} *\hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket};
+367    \hyperlink{structIpAddr}{IpAddr} clientIpAddr;
+368    \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t} clientPort;
+369 
+370    \textcolor{comment}{//Accept incoming connection}
+371    socket = \hyperlink{socket_8c_a00ec8a49fe1ee3597a0f7a2afbe46f00}{socketAccept}(connection->dataChannel.socket, &clientIpAddr,
+372       &clientPort);
+373    \textcolor{comment}{//Failure detected?}
+374    \textcolor{keywordflow}{if}(socket == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+375       \textcolor{keywordflow}{return};
+376 
+377    \textcolor{comment}{//Debug message}
+378    \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"FTP server: Data connection established with client %s port %"} PRIu16 \textcolor{stringliteral}{"...\(\backslash\)r\(\backslash\)n"},
+379       \hyperlink{ip_8c_aecdb577de79f65f8c814d5f101c7c6ae}{ipAddrToString}(&clientIpAddr, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}), clientPort);
+380 
+381    \textcolor{comment}{//Close the listening socket}
+382    \hyperlink{socket_8c_ac5012e9f71c97e2ea0410f2c5baccb0e}{socketClose}(connection->dataChannel.socket);
+383    \textcolor{comment}{//Save socket handle}
+384    connection->dataChannel.socket = \hyperlink{bsd__socket_8c_a3f8f3a2707fbc87fc30aa70f31f53218}{socket};
+385 
+386    \textcolor{comment}{//Force the socket to operate in non-blocking mode}
+387    error = \hyperlink{socket_8c_abdd29ac0ba4a644c726f5b1280680099}{socketSetTimeout}(connection->dataChannel.socket, 0);
+388    \textcolor{comment}{//Any error to report?}
+389    \textcolor{keywordflow}{if}(error)
+390    \{
+391       \textcolor{comment}{//Clean up side effects}
+392       \hyperlink{socket_8c_ac5012e9f71c97e2ea0410f2c5baccb0e}{socketClose}(connection->dataChannel.socket);
+393       \textcolor{comment}{//Exit immediately}
+394       \textcolor{keywordflow}{return};
+395    \}
+396 
+397 \textcolor{preprocessor}{#if (FTP\_SERVER\_TLS\_SUPPORT == ENABLED)}
+398    \textcolor{comment}{//TLS-secured connection?}
+399    \textcolor{keywordflow}{if}(connection->controlChannel.tlsContext != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+400    \{
+401       \textcolor{comment}{//Check data transfer direction}
+402       \textcolor{keywordflow}{if}(connection->controlChannel.state == \hyperlink{ftp__server_8h_a925bb5abc66ff43f81be2420bd31156bae38b71c4f0fb9b2bfe19bed29dc18fab}{FTP\_CHANNEL\_STATE\_STOR} ||
+403          connection->controlChannel.state == \hyperlink{ftp__server_8h_a925bb5abc66ff43f81be2420bd31156baae63a24a943e513d5ac6f9c8bfa448ad}{FTP\_CHANNEL\_STATE\_APPE})
+404       \{
+405          \textcolor{comment}{//TLS initialization}
+406          error = \hyperlink{ftp__server__transport_8c_a5cfa9b56f98d969fcc0ac892122a691c}{ftpServerOpenSecureChannel}(connection->context,
+407             &connection->dataChannel, \hyperlink{ftp__server_8h_aee515d8a6cde76b93c7979bbda3bd1d3}{FTP\_SERVER\_TLS\_TX\_BUFFER\_SIZE},
+408             \hyperlink{ftp__server_8h_aff8ccf9f16dbb15b380b0f18eae7b7de}{FTP\_SERVER\_MAX\_TLS\_RX\_BUFFER\_SIZE});
+409       \}
+410       \textcolor{keywordflow}{else}
+411       \{
+412          \textcolor{comment}{//TLS initialization}
+413          error = \hyperlink{ftp__server__transport_8c_a5cfa9b56f98d969fcc0ac892122a691c}{ftpServerOpenSecureChannel}(connection->context,
+414             &connection->dataChannel, \hyperlink{ftp__server_8h_aee515d8a6cde76b93c7979bbda3bd1d3}{FTP\_SERVER\_TLS\_TX\_BUFFER\_SIZE},
+415             \hyperlink{ftp__server_8h_a15d40ad09228662bbc4ccecf14618709}{FTP\_SERVER\_MIN\_TLS\_RX\_BUFFER\_SIZE});
+416       \}
+417 
+418       \textcolor{comment}{//Perform TLS handshake}
+419       connection->dataChannel.state = \hyperlink{ftp__server_8h_a925bb5abc66ff43f81be2420bd31156ba21aad3902f20c8ec868f94257a15f12c}{FTP\_CHANNEL\_STATE\_CONNECT\_TLS};
+420    \}
+421    \textcolor{keywordflow}{else}
+422 \textcolor{preprocessor}{#endif}
+423    \{
+424       \textcolor{comment}{//Check current state}
+425       \textcolor{keywordflow}{if}(connection->controlChannel.state == \hyperlink{ftp__server_8h_a925bb5abc66ff43f81be2420bd31156baa81832bd77a10a26025024723d496568}{FTP\_CHANNEL\_STATE\_LIST} ||
+426          connection->controlChannel.state == \hyperlink{ftp__server_8h_a925bb5abc66ff43f81be2420bd31156ba4c5afb19eec32c28176cb73346a9742c}{FTP\_CHANNEL\_STATE\_RETR})
+427       \{
+428          \textcolor{comment}{//Prepare to send data}
+429          connection->dataChannel.state = \hyperlink{ftp__server_8h_a925bb5abc66ff43f81be2420bd31156bafebec00ae2eeb6b0629d749c38932e8b}{FTP\_CHANNEL\_STATE\_SEND};
+430       \}
+431       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(connection->controlChannel.state == \hyperlink{ftp__server_8h_a925bb5abc66ff43f81be2420bd31156bae38b71c4f0fb9b2bfe19bed29dc18fab}{FTP\_CHANNEL\_STATE\_STOR} ||
+432          connection->controlChannel.state == \hyperlink{ftp__server_8h_a925bb5abc66ff43f81be2420bd31156baae63a24a943e513d5ac6f9c8bfa448ad}{FTP\_CHANNEL\_STATE\_APPE})
+433       \{
+434          \textcolor{comment}{//Prepare to receive data}
+435          connection->dataChannel.state = \hyperlink{ftp__server_8h_a925bb5abc66ff43f81be2420bd31156ba1da5754390026467598643916c13c5e9}{FTP\_CHANNEL\_STATE\_RECEIVE};
+436       \}
+437       \textcolor{keywordflow}{else}
+438       \{
+439          \textcolor{comment}{//Data transfer direction is unknown...}
+440          connection->dataChannel.state = \hyperlink{ftp__server_8h_a925bb5abc66ff43f81be2420bd31156bae764f1c2df0975ec9cd81a77639e8e9a}{FTP\_CHANNEL\_STATE\_IDLE};
+441       \}
+442    \}
+443 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ftp__server__data_8c_a62d97804710ebb11e8a1814fba4158a1}\label{ftp__server__data_8c_a62d97804710ebb11e8a1814fba4158a1}} 
+\index{ftp\+\_\+server\+\_\+data.\+c@{ftp\+\_\+server\+\_\+data.\+c}!ftp\+Server\+Close\+Data\+Channel@{ftp\+Server\+Close\+Data\+Channel}}
+\index{ftp\+Server\+Close\+Data\+Channel@{ftp\+Server\+Close\+Data\+Channel}!ftp\+\_\+server\+\_\+data.\+c@{ftp\+\_\+server\+\_\+data.\+c}}
+\subsubsection{\texorpdfstring{ftp\+Server\+Close\+Data\+Channel()}{ftpServerCloseDataChannel()}}
+{\footnotesize\ttfamily void ftp\+Server\+Close\+Data\+Channel (\begin{DoxyParamCaption}\item[{\hyperlink{ftp__server_8h_ab682699c15473841571a42c3df57e9d2}{Ftp\+Client\+Connection} $\ast$}]{connection }\end{DoxyParamCaption})}
+
+
+
+Close data connection. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em connection} & Pointer to the client connection \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 732 of file ftp\+\_\+server\+\_\+data.\+c.
+
+
+\begin{DoxyCode}
+733 \{
+734    \hyperlink{structIpAddr}{IpAddr} clientIpAddr;
+735    \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t} clientPort;
+736 
+737    \textcolor{comment}{//Check whether the data connection is active}
+738    \textcolor{keywordflow}{if}(connection->dataChannel.socket != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+739    \{
+740       \textcolor{comment}{//Retrieve the address of the peer to which a socket is connected}
+741       \hyperlink{socket_8c_aeb04e3b375708898d2330e9c67c4e1a9}{socketGetRemoteAddr}(connection->dataChannel.socket, &clientIpAddr,
+742          &clientPort);
+743 
+744       \textcolor{comment}{//Check whether the data connection is established}
+745       \textcolor{keywordflow}{if}(clientPort != 0)
+746       \{
+747          \textcolor{comment}{//Debug message}
+748          \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"FTP server: Closing data connection with client %s port %"}
+749             PRIu16 \textcolor{stringliteral}{"...\(\backslash\)r\(\backslash\)n"}, \hyperlink{ip_8c_aecdb577de79f65f8c814d5f101c7c6ae}{ipAddrToString}(&clientIpAddr, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}), clientPort);
+750       \}
+751 
+752 \textcolor{preprocessor}{#if (FTP\_SERVER\_TLS\_SUPPORT == ENABLED)}
+753       \textcolor{comment}{//Valid TLS context?}
+754       \textcolor{keywordflow}{if}(connection->dataChannel.tlsContext != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+755       \{
+756          \textcolor{comment}{//Release TLS context}
+757          \hyperlink{tls_8c_aec8c1957ad13f5ad67d07a872d5fe66b}{tlsFree}(connection->dataChannel.tlsContext);
+758          connection->dataChannel.tlsContext = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+759       \}
+760 \textcolor{preprocessor}{#endif}
+761 
+762       \textcolor{comment}{//Valid socket?}
+763       \textcolor{keywordflow}{if}(connection->dataChannel.socket != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+764       \{
+765          \textcolor{comment}{//Close data connection}
+766          \hyperlink{socket_8c_ac5012e9f71c97e2ea0410f2c5baccb0e}{socketClose}(connection->dataChannel.socket);
+767          connection->dataChannel.socket = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+768       \}
+769 
+770       \textcolor{comment}{//Re initialize data connection}
+771       connection->passiveMode = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+772       connection->remotePort = 0;
+773 
+774       \textcolor{comment}{//Mark the connection as closed}
+775       connection->dataChannel.state = \hyperlink{ftp__server_8h_a925bb5abc66ff43f81be2420bd31156bab3165039e718584ac932b07402ac08f2}{FTP\_CHANNEL\_STATE\_CLOSED};
+776    \}
+777 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ftp__server__data_8c_a1897b513ba9ce04dc3a4a9be61445b54}\label{ftp__server__data_8c_a1897b513ba9ce04dc3a4a9be61445b54}} 
+\index{ftp\+\_\+server\+\_\+data.\+c@{ftp\+\_\+server\+\_\+data.\+c}!ftp\+Server\+Open\+Data\+Channel@{ftp\+Server\+Open\+Data\+Channel}}
+\index{ftp\+Server\+Open\+Data\+Channel@{ftp\+Server\+Open\+Data\+Channel}!ftp\+\_\+server\+\_\+data.\+c@{ftp\+\_\+server\+\_\+data.\+c}}
+\subsubsection{\texorpdfstring{ftp\+Server\+Open\+Data\+Channel()}{ftpServerOpenDataChannel()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} ftp\+Server\+Open\+Data\+Channel (\begin{DoxyParamCaption}\item[{\hyperlink{ftp__server_8h_ab682699c15473841571a42c3df57e9d2}{Ftp\+Client\+Connection} $\ast$}]{connection }\end{DoxyParamCaption})}
+
+
+
+Open data connection. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em connection} & Pointer to the client connection \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 268 of file ftp\+\_\+server\+\_\+data.\+c.
+
+
+\begin{DoxyCode}
+269 \{
+270    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+271    \hyperlink{ftp__server_8h_af7294ff4e42ca4befb7414ce9fd6f287}{FtpServerContext} *context;
+272 
+273    \textcolor{comment}{//Point to the FTP server context}
+274    context = connection->context;
+275 
+276    \textcolor{comment}{//Release previously allocated resources}
+277    \hyperlink{ftp__server__data_8c_a62d97804710ebb11e8a1814fba4158a1}{ftpServerCloseDataChannel}(connection);
+278 
+279    \textcolor{comment}{//No port specified?}
+280    \textcolor{keywordflow}{if}(!connection->remotePort)
+281       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cae9be6449970fca5714ab9957b16562a5}{ERROR\_FAILURE};
+282 
+283    \textcolor{comment}{//Debug message}
+284    \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"FTP server: Opening data connection with client %s port %"} PRIu16 \textcolor{stringliteral}{"...\(\backslash\)r\(\backslash\)n"},
+285       \hyperlink{ip_8c_aecdb577de79f65f8c814d5f101c7c6ae}{ipAddrToString}(&connection->remoteIpAddr, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}), connection->remotePort);
+286 
+287    \textcolor{comment}{//Open data socket}
+288    connection->dataChannel.socket = \hyperlink{socket_8c_aa139bbf42b326b52eb08cf52771ac337}{socketOpen}(\hyperlink{socket_8h_aa78c7398fa81f7f62aa233159d4d8d97a9dab003c4dc9f7279e806241534d4859}{SOCKET\_TYPE\_STREAM},
+289       \hyperlink{socket_8h_a56eb0e60bda5d1d8a2e702228405d969ae0f38a6f025bce7700b3cf0ddd04bb2a}{SOCKET\_IP\_PROTO\_TCP});
+290    \textcolor{comment}{//Failed to open socket?}
+291    \textcolor{keywordflow}{if}(!connection->dataChannel.socket)
+292       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cab721230e985e398cc0977dd729a12c61}{ERROR\_OPEN\_FAILED};
+293 
+294    \textcolor{comment}{//Start of exception handling block}
+295    \textcolor{keywordflow}{do}
+296    \{
+297       \textcolor{comment}{//Force the socket to operate in non-blocking mode}
+298       error = \hyperlink{socket_8c_abdd29ac0ba4a644c726f5b1280680099}{socketSetTimeout}(connection->dataChannel.socket, 0);
+299       \textcolor{comment}{//Any error to report?}
+300       \textcolor{keywordflow}{if}(error)
+301          \textcolor{keywordflow}{break};
+302 
+303       \textcolor{comment}{//Adjust the size of the TX buffer}
+304       error = \hyperlink{socket_8c_aedf25ddaf93caf6fb4a9e47dae20c831}{socketSetTxBufferSize}(connection->dataChannel.socket,
+305          \hyperlink{ftp__server_8h_a483d36c0b3d4b60e0af026e64fd8ff26}{FTP\_SERVER\_MAX\_TCP\_BUFFER\_SIZE});
+306       \textcolor{comment}{//Any error to report?}
+307       \textcolor{keywordflow}{if}(error)
+308          \textcolor{keywordflow}{break};
+309 
+310       \textcolor{comment}{//Adjust the size of the RX buffer}
+311       error = \hyperlink{socket_8c_ade5d61125056ad265723b44f236bdb20}{socketSetRxBufferSize}(connection->dataChannel.socket,
+312          \hyperlink{ftp__server_8h_a483d36c0b3d4b60e0af026e64fd8ff26}{FTP\_SERVER\_MAX\_TCP\_BUFFER\_SIZE});
+313       \textcolor{comment}{//Any error to report?}
+314       \textcolor{keywordflow}{if}(error)
+315          \textcolor{keywordflow}{break};
+316 
+317       \textcolor{comment}{//Associate the socket with the relevant interface}
+318       error = \hyperlink{net__legacy_8h_a80bc49fa99e5654d8c345cd5c70d36d3}{socketBindToInterface}(connection->dataChannel.socket,
+319          connection->interface);
+320       \textcolor{comment}{//Unable to bind the socket to the desired interface?}
+321       \textcolor{keywordflow}{if}(error)
+322          \textcolor{keywordflow}{break};
+323 
+324       \textcolor{comment}{//The server initiates the data connection from port 20}
+325       error = \hyperlink{socket_8c_a56de93ca9f66782811dbe151d6da0b9c}{socketBind}(connection->dataChannel.socket, &\hyperlink{ip_8c_a132481a9d89ddf554ea8bbbe342e5d5a}{IP\_ADDR\_ANY},
+326          context->settings.dataPort);
+327       \textcolor{comment}{//Any error to report?}
+328       \textcolor{keywordflow}{if}(error)
+329          \textcolor{keywordflow}{break};
+330 
+331       \textcolor{comment}{//Establish data connection}
+332       error = \hyperlink{socket_8c_aff3e3c0abc332f42189fce8f362fbd63}{socketConnect}(connection->dataChannel.socket,
+333          &connection->remoteIpAddr, connection->remotePort);
+334       \textcolor{comment}{//Any error to report?}
+335       \textcolor{keywordflow}{if}(error != \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR} && error != \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4d0f7be53b837f004379ac6bbd56f1e2}{ERROR\_TIMEOUT})
+336          \textcolor{keywordflow}{break};
+337 
+338       \textcolor{comment}{//Connection is being established}
+339       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+340 
+341       \textcolor{comment}{//End of exception handling block}
+342    \} \textcolor{keywordflow}{while}(0);
+343 
+344    \textcolor{comment}{//Any error to report?}
+345    \textcolor{keywordflow}{if}(error)
+346    \{
+347       \textcolor{comment}{//Clean up side effects}
+348       \hyperlink{ftp__server__data_8c_a62d97804710ebb11e8a1814fba4158a1}{ftpServerCloseDataChannel}(connection);
+349       \textcolor{comment}{//Exit immediately}
+350       \textcolor{keywordflow}{return} error;
+351    \}
+352 
+353    \textcolor{comment}{//Successful processing}
+354    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+355 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ftp__server__data_8c_aed7f8eac88f002524e9d4b7ec14c140b}\label{ftp__server__data_8c_aed7f8eac88f002524e9d4b7ec14c140b}} 
+\index{ftp\+\_\+server\+\_\+data.\+c@{ftp\+\_\+server\+\_\+data.\+c}!ftp\+Server\+Process\+Data\+Channel\+Events@{ftp\+Server\+Process\+Data\+Channel\+Events}}
+\index{ftp\+Server\+Process\+Data\+Channel\+Events@{ftp\+Server\+Process\+Data\+Channel\+Events}!ftp\+\_\+server\+\_\+data.\+c@{ftp\+\_\+server\+\_\+data.\+c}}
+\subsubsection{\texorpdfstring{ftp\+Server\+Process\+Data\+Channel\+Events()}{ftpServerProcessDataChannelEvents()}}
+{\footnotesize\ttfamily void ftp\+Server\+Process\+Data\+Channel\+Events (\begin{DoxyParamCaption}\item[{\hyperlink{ftp__server_8h_ab682699c15473841571a42c3df57e9d2}{Ftp\+Client\+Connection} $\ast$}]{connection,  }\item[{\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t}}]{event\+Flags }\end{DoxyParamCaption})}
+
+
+
+Data connection event handler. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em connection} & Pointer to the client connection \\
+\hline
+\mbox{\tt in}  & {\em event\+Flags} & Event to be processed \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 137 of file ftp\+\_\+server\+\_\+data.\+c.
+
+
+\begin{DoxyCode}
+139 \{
+140    \textcolor{comment}{//Check current state}
+141    \textcolor{keywordflow}{if}(connection->dataChannel.state == \hyperlink{ftp__server_8h_a925bb5abc66ff43f81be2420bd31156baa0e05b7dd100973e72279fe8b12d5393}{FTP\_CHANNEL\_STATE\_LISTEN})
+142    \{
+143       \textcolor{comment}{//Accept data connection}
+144       \hyperlink{ftp__server__data_8c_a7f8b628df62d6ed93dd5a4a94618beb0}{ftpServerAcceptDataChannel}(connection);
+145    \}
+146 \textcolor{preprocessor}{#if (FTP\_SERVER\_TLS\_SUPPORT == ENABLED)}
+147    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(connection->dataChannel.state == \hyperlink{ftp__server_8h_a925bb5abc66ff43f81be2420bd31156ba21aad3902f20c8ec868f94257a15f12c}{FTP\_CHANNEL\_STATE\_CONNECT\_TLS})
+148    \{
+149       \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+150 
+151       \textcolor{comment}{//Perform TLS handshake}
+152       error = \hyperlink{ftp__server__transport_8c_a4114584444ad6a12b534f163f350c4aa}{ftpServerEstablishSecureChannel}(&connection->dataChannel);
+153 
+154       \textcolor{comment}{//Check status code}
+155       \textcolor{keywordflow}{if}(error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR})
+156       \{
+157          \textcolor{comment}{//Update the state of the data connection}
+158          \textcolor{keywordflow}{if}(connection->controlChannel.state == \hyperlink{ftp__server_8h_a925bb5abc66ff43f81be2420bd31156baa81832bd77a10a26025024723d496568}{FTP\_CHANNEL\_STATE\_LIST} ||
+159             connection->controlChannel.state == \hyperlink{ftp__server_8h_a925bb5abc66ff43f81be2420bd31156ba4c5afb19eec32c28176cb73346a9742c}{FTP\_CHANNEL\_STATE\_RETR})
+160          \{
+161             \textcolor{comment}{//Prepare to send data}
+162             connection->dataChannel.state = \hyperlink{ftp__server_8h_a925bb5abc66ff43f81be2420bd31156bafebec00ae2eeb6b0629d749c38932e8b}{FTP\_CHANNEL\_STATE\_SEND};
+163          \}
+164          \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(connection->controlChannel.state == \hyperlink{ftp__server_8h_a925bb5abc66ff43f81be2420bd31156bae38b71c4f0fb9b2bfe19bed29dc18fab}{FTP\_CHANNEL\_STATE\_STOR} ||
+165             connection->controlChannel.state == \hyperlink{ftp__server_8h_a925bb5abc66ff43f81be2420bd31156baae63a24a943e513d5ac6f9c8bfa448ad}{FTP\_CHANNEL\_STATE\_APPE})
+166          \{
+167             \textcolor{comment}{//Prepare to receive data}
+168             connection->dataChannel.state = \hyperlink{ftp__server_8h_a925bb5abc66ff43f81be2420bd31156ba1da5754390026467598643916c13c5e9}{FTP\_CHANNEL\_STATE\_RECEIVE};
+169          \}
+170          \textcolor{keywordflow}{else}
+171          \{
+172             \textcolor{comment}{//Data transfer direction is unknown...}
+173             connection->dataChannel.state = \hyperlink{ftp__server_8h_a925bb5abc66ff43f81be2420bd31156bae764f1c2df0975ec9cd81a77639e8e9a}{FTP\_CHANNEL\_STATE\_IDLE};
+174          \}
+175       \}
+176       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca16f356a669fbb42deb27f59e9054f6d6}{ERROR\_WOULD\_BLOCK} || error == 
+      \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4d0f7be53b837f004379ac6bbd56f1e2}{ERROR\_TIMEOUT})
+177       \{
+178       \}
+179       \textcolor{keywordflow}{else}
+180       \{
+181          \textcolor{comment}{//Close the data connection}
+182          \hyperlink{ftp__server__data_8c_a62d97804710ebb11e8a1814fba4158a1}{ftpServerCloseDataChannel}(connection);
+183 
+184          \textcolor{comment}{//Release previously allocated resources}
+185          \hyperlink{fs__port__fatfs_8c_a563173066eb2924f61e00e87fbf9d0bc}{fsCloseFile}(connection->file);
+186          connection->file = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+187 
+188          \textcolor{comment}{//Back to idle state}
+189          connection->controlChannel.state = \hyperlink{ftp__server_8h_a925bb5abc66ff43f81be2420bd31156bae764f1c2df0975ec9cd81a77639e8e9a}{FTP\_CHANNEL\_STATE\_IDLE};
+190 
+191          \textcolor{comment}{//Transfer status}
+192          strcpy(connection->response, \textcolor{stringliteral}{"451 Transfer aborted\(\backslash\)r\(\backslash\)n"});
+193          \textcolor{comment}{//Debug message}
+194          \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"FTP server: %s"}, connection->response);
+195 
+196          \textcolor{comment}{//Number of bytes in the response buffer}
+197          connection->responseLen = strlen(connection->response);
+198          connection->responsePos = 0;
+199       \}
+200    \}
+201 \textcolor{preprocessor}{#endif}
+202    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(connection->dataChannel.state == \hyperlink{ftp__server_8h_a925bb5abc66ff43f81be2420bd31156bafebec00ae2eeb6b0629d749c38932e8b}{FTP\_CHANNEL\_STATE\_SEND})
+203    \{
+204       \textcolor{comment}{//Send more data to the remote host}
+205       \hyperlink{ftp__server__data_8c_ad35c464b437a1937cac5cb387eff778a}{ftpServerWriteDataChannel}(connection);
+206    \}
+207    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(connection->dataChannel.state == \hyperlink{ftp__server_8h_a925bb5abc66ff43f81be2420bd31156ba1da5754390026467598643916c13c5e9}{FTP\_CHANNEL\_STATE\_RECEIVE})
+208    \{
+209       \textcolor{comment}{//Process incoming data}
+210       \hyperlink{ftp__server__data_8c_a19d09fbd1a6c6d4843d2031945a55416}{ftpServerReadDataChannel}(connection);
+211    \}
+212 \textcolor{preprocessor}{#if (FTP\_SERVER\_TLS\_SUPPORT == ENABLED)}
+213    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(connection->dataChannel.state == \hyperlink{ftp__server_8h_a925bb5abc66ff43f81be2420bd31156baa801c5e9892dee686c3d5ff4c80da8d1}{FTP\_CHANNEL\_STATE\_SHUTDOWN\_TLS})
+214    \{
+215       \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+216 
+217       \textcolor{comment}{//Gracefully close TLS session}
+218       error = \hyperlink{tls_8c_ae6a631703510008537d2cd97ab3425ef}{tlsShutdown}(connection->dataChannel.tlsContext);
+219 
+220       \textcolor{comment}{//Check status code}
+221       \textcolor{keywordflow}{if}(error != \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca16f356a669fbb42deb27f59e9054f6d6}{ERROR\_WOULD\_BLOCK} && error != \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4d0f7be53b837f004379ac6bbd56f1e2}{ERROR\_TIMEOUT})
+222       \{
+223          \textcolor{comment}{//Wait for all the data to be transmitted and acknowledged}
+224          connection->dataChannel.state = \hyperlink{ftp__server_8h_a925bb5abc66ff43f81be2420bd31156ba8c20866e8b647211dfdcf92b8549a603}{FTP\_CHANNEL\_STATE\_WAIT\_ACK};
+225       \}
+226    \}
+227 \textcolor{preprocessor}{#endif}
+228    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(connection->dataChannel.state == \hyperlink{ftp__server_8h_a925bb5abc66ff43f81be2420bd31156ba8c20866e8b647211dfdcf92b8549a603}{FTP\_CHANNEL\_STATE\_WAIT\_ACK})
+229    \{
+230       \textcolor{comment}{//Disable transmission}
+231       \hyperlink{socket_8c_acc736b53dba4a0d3b11b63f75cdcfffb}{socketShutdown}(connection->dataChannel.socket, 
+      \hyperlink{socket_8h_a36ee33c18de64f549a6336d1aa7333b7a535dc5f70a642b86e56e6e83ce2a3378}{SOCKET\_SD\_SEND});
+232       \textcolor{comment}{//Next state}
+233       connection->dataChannel.state = \hyperlink{ftp__server_8h_a925bb5abc66ff43f81be2420bd31156baa6e21182a0e61b8b06cc836d1f7b54c8}{FTP\_CHANNEL\_STATE\_SHUTDOWN\_TX};
+234    \}
+235    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(connection->dataChannel.state == \hyperlink{ftp__server_8h_a925bb5abc66ff43f81be2420bd31156baa6e21182a0e61b8b06cc836d1f7b54c8}{FTP\_CHANNEL\_STATE\_SHUTDOWN\_TX})
+236    \{
+237       \textcolor{comment}{//Disable reception}
+238       \hyperlink{socket_8c_acc736b53dba4a0d3b11b63f75cdcfffb}{socketShutdown}(connection->dataChannel.socket, 
+      \hyperlink{socket_8h_a36ee33c18de64f549a6336d1aa7333b7a88cccdaadbcce09cccd7561d10af6a39}{SOCKET\_SD\_RECEIVE});
+239       \textcolor{comment}{//Next state}
+240       connection->dataChannel.state = \hyperlink{ftp__server_8h_a925bb5abc66ff43f81be2420bd31156bae05572df1e35ac30e869b91783590ced}{FTP\_CHANNEL\_STATE\_SHUTDOWN\_RX};
+241    \}
+242    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(connection->dataChannel.state == \hyperlink{ftp__server_8h_a925bb5abc66ff43f81be2420bd31156bae05572df1e35ac30e869b91783590ced}{FTP\_CHANNEL\_STATE\_SHUTDOWN\_RX})
+243    \{
+244       \textcolor{comment}{//Close the data connection}
+245       \hyperlink{ftp__server__data_8c_a62d97804710ebb11e8a1814fba4158a1}{ftpServerCloseDataChannel}(connection);
+246 
+247       \textcolor{comment}{//Back to idle state}
+248       connection->controlChannel.state = \hyperlink{ftp__server_8h_a925bb5abc66ff43f81be2420bd31156bae764f1c2df0975ec9cd81a77639e8e9a}{FTP\_CHANNEL\_STATE\_IDLE};
+249 
+250       \textcolor{comment}{//Transfer status}
+251       strcpy(connection->response, \textcolor{stringliteral}{"226 Transfer complete\(\backslash\)r\(\backslash\)n"});
+252       \textcolor{comment}{//Debug message}
+253       \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"FTP server: %s"}, connection->response);
+254 
+255       \textcolor{comment}{//Number of bytes in the response buffer}
+256       connection->responseLen = strlen(connection->response);
+257       connection->responsePos = 0;
+258    \}
+259 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ftp__server__data_8c_a19d09fbd1a6c6d4843d2031945a55416}\label{ftp__server__data_8c_a19d09fbd1a6c6d4843d2031945a55416}} 
+\index{ftp\+\_\+server\+\_\+data.\+c@{ftp\+\_\+server\+\_\+data.\+c}!ftp\+Server\+Read\+Data\+Channel@{ftp\+Server\+Read\+Data\+Channel}}
+\index{ftp\+Server\+Read\+Data\+Channel@{ftp\+Server\+Read\+Data\+Channel}!ftp\+\_\+server\+\_\+data.\+c@{ftp\+\_\+server\+\_\+data.\+c}}
+\subsubsection{\texorpdfstring{ftp\+Server\+Read\+Data\+Channel()}{ftpServerReadDataChannel()}}
+{\footnotesize\ttfamily void ftp\+Server\+Read\+Data\+Channel (\begin{DoxyParamCaption}\item[{\hyperlink{ftp__server_8h_ab682699c15473841571a42c3df57e9d2}{Ftp\+Client\+Connection} $\ast$}]{connection }\end{DoxyParamCaption})}
+
+
+
+Read data from the data connection. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em connection} & Pointer to the client connection \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 623 of file ftp\+\_\+server\+\_\+data.\+c.
+
+
+\begin{DoxyCode}
+624 \{
+625    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+626    \hyperlink{compiler__port_8h_a812d16e5494522586b3784e55d479912}{bool\_t} eof;
+627    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+628 
+629    \textcolor{comment}{//File transfer in progress?}
+630    \textcolor{keywordflow}{if}(connection->controlChannel.state == \hyperlink{ftp__server_8h_a925bb5abc66ff43f81be2420bd31156bae38b71c4f0fb9b2bfe19bed29dc18fab}{FTP\_CHANNEL\_STATE\_STOR} ||
+631       connection->controlChannel.state == \hyperlink{ftp__server_8h_a925bb5abc66ff43f81be2420bd31156baae63a24a943e513d5ac6f9c8bfa448ad}{FTP\_CHANNEL\_STATE\_APPE})
+632    \{
+633       \textcolor{comment}{//Receive data}
+634       error = \hyperlink{ftp__server__transport_8c_a8daedd68f4993a0c999aca53bce4697d}{ftpServerReadChannel}(&connection->dataChannel,
+635          connection->buffer + connection->bufferPos,
+636          \hyperlink{ftp__server_8h_a37067cf14f1730ca29fec31f4c8a2bff}{FTP\_SERVER\_BUFFER\_SIZE} - connection->bufferLength, &n, 0);
+637 
+638       \textcolor{comment}{//Check status code}
+639       \textcolor{keywordflow}{if}(error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR} || error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca16f356a669fbb42deb27f59e9054f6d6}{ERROR\_WOULD\_BLOCK} || error == 
+      \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4d0f7be53b837f004379ac6bbd56f1e2}{ERROR\_TIMEOUT})
+640       \{
+641          \textcolor{comment}{//Successful read operation}
+642          eof = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+643 
+644          \textcolor{comment}{//Advance data pointer}
+645          connection->bufferPos += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+646          connection->bufferLength += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+647       \}
+648       \textcolor{keywordflow}{else}
+649       \{
+650          \textcolor{comment}{//Cannot read more data}
+651          eof = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+652       \}
+653 
+654       \textcolor{comment}{//Read data until the buffer is full or the end of the file is reached}
+655       \textcolor{keywordflow}{if}(eof || connection->bufferLength >= \hyperlink{ftp__server_8h_a37067cf14f1730ca29fec31f4c8a2bff}{FTP\_SERVER\_BUFFER\_SIZE})
+656       \{
+657          \textcolor{comment}{//Any data to be written?}
+658          \textcolor{keywordflow}{if}(connection->bufferLength > 0)
+659          \{
+660             \textcolor{comment}{//Write data to the specified file}
+661             error = \hyperlink{fs__port__fatfs_8c_aa5372052eff813ade8102cff497ad739}{fsWriteFile}(connection->file,
+662                connection->buffer, connection->bufferLength);
+663 
+664             \textcolor{comment}{//Any error to report?}
+665             \textcolor{keywordflow}{if}(error)
+666             \{
+667                \textcolor{comment}{//Close the data connection}
+668                \hyperlink{ftp__server__data_8c_a62d97804710ebb11e8a1814fba4158a1}{ftpServerCloseDataChannel}(connection);
+669 
+670                \textcolor{comment}{//Release previously allocated resources}
+671                \hyperlink{fs__port__fatfs_8c_a563173066eb2924f61e00e87fbf9d0bc}{fsCloseFile}(connection->file);
+672                connection->file = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+673 
+674                \textcolor{comment}{//Back to idle state}
+675                connection->controlChannel.state = \hyperlink{ftp__server_8h_a925bb5abc66ff43f81be2420bd31156bae764f1c2df0975ec9cd81a77639e8e9a}{FTP\_CHANNEL\_STATE\_IDLE};
+676 
+677                \textcolor{comment}{//Transfer status}
+678                strcpy(connection->response, \textcolor{stringliteral}{"451 Transfer aborted\(\backslash\)r\(\backslash\)n"});
+679                \textcolor{comment}{//Debug message}
+680                \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"FTP server: %s"}, connection->response);
+681 
+682                \textcolor{comment}{//Number of bytes in the response buffer}
+683                connection->responseLen = strlen(connection->response);
+684                connection->responsePos = 0;
+685 
+686                \textcolor{comment}{//Exit immediately}
+687                \textcolor{keywordflow}{return};
+688             \}
+689          \}
+690 
+691          \textcolor{comment}{//Flush reception buffer}
+692          connection->bufferLength = 0;
+693          connection->bufferPos = 0;
+694       \}
+695 
+696       \textcolor{comment}{//End of stream?}
+697       \textcolor{keywordflow}{if}(eof)
+698       \{
+699          \textcolor{comment}{//Close file}
+700          \hyperlink{fs__port__fatfs_8c_a563173066eb2924f61e00e87fbf9d0bc}{fsCloseFile}(connection->file);
+701          connection->file = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+702 
+703 \textcolor{preprocessor}{#if (FTP\_SERVER\_TLS\_SUPPORT == ENABLED)}
+704          \textcolor{comment}{//TLS-secured connection?}
+705          \textcolor{keywordflow}{if}(connection->dataChannel.tlsContext != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+706          \{
+707             \textcolor{comment}{//Gracefully close TLS session}
+708             connection->dataChannel.state = \hyperlink{ftp__server_8h_a925bb5abc66ff43f81be2420bd31156baa801c5e9892dee686c3d5ff4c80da8d1}{FTP\_CHANNEL\_STATE\_SHUTDOWN\_TLS};
+709          \}
+710          \textcolor{keywordflow}{else}
+711 \textcolor{preprocessor}{#endif}
+712          \{
+713             \textcolor{comment}{//Wait for all the data to be transmitted and acknowledged}
+714             connection->dataChannel.state = \hyperlink{ftp__server_8h_a925bb5abc66ff43f81be2420bd31156ba8c20866e8b647211dfdcf92b8549a603}{FTP\_CHANNEL\_STATE\_WAIT\_ACK};
+715          \}
+716       \}
+717    \}
+718    \textcolor{comment}{//Invalid state?}
+719    \textcolor{keywordflow}{else}
+720    \{
+721       \textcolor{comment}{//The FTP server has encountered a critical error}
+722       \hyperlink{ftp__server__misc_8c_a131bc4ee0544ae32eee4cf829f006a11}{ftpServerCloseConnection}(connection);
+723    \}
+724 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ftp__server__data_8c_a2796f2b1e77f205af4187cae0b916024}\label{ftp__server__data_8c_a2796f2b1e77f205af4187cae0b916024}} 
+\index{ftp\+\_\+server\+\_\+data.\+c@{ftp\+\_\+server\+\_\+data.\+c}!ftp\+Server\+Register\+Data\+Channel\+Events@{ftp\+Server\+Register\+Data\+Channel\+Events}}
+\index{ftp\+Server\+Register\+Data\+Channel\+Events@{ftp\+Server\+Register\+Data\+Channel\+Events}!ftp\+\_\+server\+\_\+data.\+c@{ftp\+\_\+server\+\_\+data.\+c}}
+\subsubsection{\texorpdfstring{ftp\+Server\+Register\+Data\+Channel\+Events()}{ftpServerRegisterDataChannelEvents()}}
+{\footnotesize\ttfamily void ftp\+Server\+Register\+Data\+Channel\+Events (\begin{DoxyParamCaption}\item[{\hyperlink{ftp__server_8h_ab682699c15473841571a42c3df57e9d2}{Ftp\+Client\+Connection} $\ast$}]{connection,  }\item[{\hyperlink{structSocketEventDesc}{Socket\+Event\+Desc} $\ast$}]{event\+Desc }\end{DoxyParamCaption})}
+
+
+
+Register data connection events. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em connection} & Pointer to the client connection \\
+\hline
+\mbox{\tt in}  & {\em event\+Desc} & Event to be registered \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 52 of file ftp\+\_\+server\+\_\+data.\+c.
+
+
+\begin{DoxyCode}
+54 \{
+55    \textcolor{comment}{//Check the state of the data connection}
+56    \textcolor{keywordflow}{if}(connection->dataChannel.state == \hyperlink{ftp__server_8h_a925bb5abc66ff43f81be2420bd31156baa0e05b7dd100973e72279fe8b12d5393}{FTP\_CHANNEL\_STATE\_LISTEN})
+57    \{
+58       \textcolor{comment}{//Wait for data to be available for reading}
+59       eventDesc->\hyperlink{structSocketEventDesc_a31fbff5c4d515c81ff43934e8aeba08c}{socket} = connection->dataChannel.socket;
+60       eventDesc->\hyperlink{structSocketEventDesc_ac979f02c9bb6b9517ed9c2d1b17e6201}{eventMask} = \hyperlink{socket_8h_add8a4c36456f478ab23bd4372aebde6ea72985d7e82625f037ca8a6734f49996c}{SOCKET\_EVENT\_RX\_READY};
+61    \}
+62    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(connection->dataChannel.state == \hyperlink{ftp__server_8h_a925bb5abc66ff43f81be2420bd31156ba21aad3902f20c8ec868f94257a15f12c}{FTP\_CHANNEL\_STATE\_CONNECT\_TLS})
+63    \{
+64 \textcolor{preprocessor}{#if (FTP\_SERVER\_TLS\_SUPPORT == ENABLED)}
+65       \textcolor{comment}{//Any data pending in the send buffer?}
+66       \textcolor{keywordflow}{if}(\hyperlink{tls_8c_a54064670848f38f025bc40d612179890}{tlsIsTxReady}(connection->dataChannel.tlsContext))
+67       \{
+68          \textcolor{comment}{//Wait until there is more room in the send buffer}
+69          eventDesc->\hyperlink{structSocketEventDesc_a31fbff5c4d515c81ff43934e8aeba08c}{socket} = connection->dataChannel.socket;
+70          eventDesc->\hyperlink{structSocketEventDesc_ac979f02c9bb6b9517ed9c2d1b17e6201}{eventMask} = \hyperlink{socket_8h_add8a4c36456f478ab23bd4372aebde6ea078fc309f8e29689ee08e584f00a73b6}{SOCKET\_EVENT\_TX\_READY};
+71       \}
+72       \textcolor{keywordflow}{else}
+73       \{
+74          \textcolor{comment}{//Wait for data to be available for reading}
+75          eventDesc->\hyperlink{structSocketEventDesc_a31fbff5c4d515c81ff43934e8aeba08c}{socket} = connection->dataChannel.socket;
+76          eventDesc->\hyperlink{structSocketEventDesc_ac979f02c9bb6b9517ed9c2d1b17e6201}{eventMask} = \hyperlink{socket_8h_add8a4c36456f478ab23bd4372aebde6ea72985d7e82625f037ca8a6734f49996c}{SOCKET\_EVENT\_RX\_READY};
+77       \}
+78 \textcolor{preprocessor}{#endif}
+79    \}
+80    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(connection->dataChannel.state == \hyperlink{ftp__server_8h_a925bb5abc66ff43f81be2420bd31156ba1da5754390026467598643916c13c5e9}{FTP\_CHANNEL\_STATE\_RECEIVE})
+81    \{
+82 \textcolor{preprocessor}{#if (FTP\_SERVER\_TLS\_SUPPORT == ENABLED)}
+83       \textcolor{comment}{//Any data pending in the receive buffer?}
+84       \textcolor{keywordflow}{if}(connection->dataChannel.tlsContext != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} &&
+85          \hyperlink{tls_8c_ae3de9c47e92455f6dd4739d54bc6981c}{tlsIsRxReady}(connection->dataChannel.tlsContext))
+86       \{
+87          \textcolor{comment}{//No need to poll the underlying socket for incoming traffic}
+88          eventDesc->\hyperlink{structSocketEventDesc_aca8e460cfc75c58870239584437a3c1d}{eventFlags} = \hyperlink{socket_8h_add8a4c36456f478ab23bd4372aebde6ea72985d7e82625f037ca8a6734f49996c}{SOCKET\_EVENT\_RX\_READY};
+89       \}
+90       \textcolor{keywordflow}{else}
+91 \textcolor{preprocessor}{#endif}
+92       \{
+93          \textcolor{comment}{//Wait for data to be available for reading}
+94          eventDesc->\hyperlink{structSocketEventDesc_a31fbff5c4d515c81ff43934e8aeba08c}{socket} = connection->dataChannel.socket;
+95          eventDesc->\hyperlink{structSocketEventDesc_ac979f02c9bb6b9517ed9c2d1b17e6201}{eventMask} = \hyperlink{socket_8h_add8a4c36456f478ab23bd4372aebde6ea72985d7e82625f037ca8a6734f49996c}{SOCKET\_EVENT\_RX\_READY};
+96       \}
+97    \}
+98    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(connection->dataChannel.state == \hyperlink{ftp__server_8h_a925bb5abc66ff43f81be2420bd31156bafebec00ae2eeb6b0629d749c38932e8b}{FTP\_CHANNEL\_STATE\_SEND})
+99    \{
+100       \textcolor{comment}{//Wait until there is more room in the send buffer}
+101       eventDesc->\hyperlink{structSocketEventDesc_a31fbff5c4d515c81ff43934e8aeba08c}{socket} = connection->dataChannel.socket;
+102       eventDesc->\hyperlink{structSocketEventDesc_ac979f02c9bb6b9517ed9c2d1b17e6201}{eventMask} = \hyperlink{socket_8h_add8a4c36456f478ab23bd4372aebde6ea078fc309f8e29689ee08e584f00a73b6}{SOCKET\_EVENT\_TX\_READY};
+103    \}
+104    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(connection->dataChannel.state == \hyperlink{ftp__server_8h_a925bb5abc66ff43f81be2420bd31156baa801c5e9892dee686c3d5ff4c80da8d1}{FTP\_CHANNEL\_STATE\_SHUTDOWN\_TLS})
+105    \{
+106       \textcolor{comment}{//Wait until there is more room in the send buffer}
+107       eventDesc->\hyperlink{structSocketEventDesc_a31fbff5c4d515c81ff43934e8aeba08c}{socket} = connection->dataChannel.socket;
+108       eventDesc->\hyperlink{structSocketEventDesc_ac979f02c9bb6b9517ed9c2d1b17e6201}{eventMask} = \hyperlink{socket_8h_add8a4c36456f478ab23bd4372aebde6ea078fc309f8e29689ee08e584f00a73b6}{SOCKET\_EVENT\_TX\_READY};
+109    \}
+110    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(connection->dataChannel.state == \hyperlink{ftp__server_8h_a925bb5abc66ff43f81be2420bd31156ba8c20866e8b647211dfdcf92b8549a603}{FTP\_CHANNEL\_STATE\_WAIT\_ACK})
+111    \{
+112       \textcolor{comment}{//Wait for all the data to be transmitted and acknowledged}
+113       eventDesc->\hyperlink{structSocketEventDesc_a31fbff5c4d515c81ff43934e8aeba08c}{socket} = connection->dataChannel.socket;
+114       eventDesc->\hyperlink{structSocketEventDesc_ac979f02c9bb6b9517ed9c2d1b17e6201}{eventMask} = \hyperlink{socket_8h_add8a4c36456f478ab23bd4372aebde6ea9303c52298e0adf175b7064fbe7ce077}{SOCKET\_EVENT\_TX\_ACKED};
+115    \}
+116    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(connection->dataChannel.state == \hyperlink{ftp__server_8h_a925bb5abc66ff43f81be2420bd31156baa6e21182a0e61b8b06cc836d1f7b54c8}{FTP\_CHANNEL\_STATE\_SHUTDOWN\_TX})
+117    \{
+118       \textcolor{comment}{//Wait for the FIN to be acknowledged}
+119       eventDesc->\hyperlink{structSocketEventDesc_a31fbff5c4d515c81ff43934e8aeba08c}{socket} = connection->dataChannel.socket;
+120       eventDesc->\hyperlink{structSocketEventDesc_ac979f02c9bb6b9517ed9c2d1b17e6201}{eventMask} = \hyperlink{socket_8h_add8a4c36456f478ab23bd4372aebde6ea7c192744b90c583effbac921fe00c4a0}{SOCKET\_EVENT\_TX\_SHUTDOWN};
+121    \}
+122    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(connection->dataChannel.state == \hyperlink{ftp__server_8h_a925bb5abc66ff43f81be2420bd31156bae05572df1e35ac30e869b91783590ced}{FTP\_CHANNEL\_STATE\_SHUTDOWN\_RX})
+123    \{
+124       \textcolor{comment}{//Wait for a FIN to be received}
+125       eventDesc->\hyperlink{structSocketEventDesc_a31fbff5c4d515c81ff43934e8aeba08c}{socket} = connection->dataChannel.socket;
+126       eventDesc->\hyperlink{structSocketEventDesc_ac979f02c9bb6b9517ed9c2d1b17e6201}{eventMask} = \hyperlink{socket_8h_add8a4c36456f478ab23bd4372aebde6ea0578189399787b74acb9636b9eef30fc}{SOCKET\_EVENT\_RX\_SHUTDOWN};
+127    \}
+128 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{ftp__server__data_8c_ad35c464b437a1937cac5cb387eff778a}\label{ftp__server__data_8c_ad35c464b437a1937cac5cb387eff778a}} 
+\index{ftp\+\_\+server\+\_\+data.\+c@{ftp\+\_\+server\+\_\+data.\+c}!ftp\+Server\+Write\+Data\+Channel@{ftp\+Server\+Write\+Data\+Channel}}
+\index{ftp\+Server\+Write\+Data\+Channel@{ftp\+Server\+Write\+Data\+Channel}!ftp\+\_\+server\+\_\+data.\+c@{ftp\+\_\+server\+\_\+data.\+c}}
+\subsubsection{\texorpdfstring{ftp\+Server\+Write\+Data\+Channel()}{ftpServerWriteDataChannel()}}
+{\footnotesize\ttfamily void ftp\+Server\+Write\+Data\+Channel (\begin{DoxyParamCaption}\item[{\hyperlink{ftp__server_8h_ab682699c15473841571a42c3df57e9d2}{Ftp\+Client\+Connection} $\ast$}]{connection }\end{DoxyParamCaption})}
+
+
+
+Write data to the data connection. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em connection} & Pointer to the client connection \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 451 of file ftp\+\_\+server\+\_\+data.\+c.
+
+
+\begin{DoxyCode}
+452 \{
+453    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+454    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+455 
+456    \textcolor{comment}{//Any data waiting for transmission?}
+457    \textcolor{keywordflow}{if}(connection->bufferLength > 0)
+458    \{
+459       \textcolor{comment}{//Transmit data}
+460       error = \hyperlink{ftp__server__transport_8c_abce43a97874ed1e25273269c30b05b90}{ftpServerWriteChannel}(&connection->dataChannel,
+461          connection->buffer + connection->bufferPos,
+462          connection->bufferLength, &n, 0);
+463 
+464       \textcolor{comment}{//Failed to send data?}
+465       \textcolor{keywordflow}{if}(error != \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR} && error != \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4d0f7be53b837f004379ac6bbd56f1e2}{ERROR\_TIMEOUT})
+466       \{
+467          \textcolor{comment}{//Close the data connection}
+468          \hyperlink{ftp__server__data_8c_a62d97804710ebb11e8a1814fba4158a1}{ftpServerCloseDataChannel}(connection);
+469 
+470          \textcolor{comment}{//Release previously allocated resources}
+471          \textcolor{keywordflow}{if}(connection->file != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+472          \{
+473             \hyperlink{fs__port__fatfs_8c_a563173066eb2924f61e00e87fbf9d0bc}{fsCloseFile}(connection->file);
+474             connection->file = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+475          \}
+476 
+477          \textcolor{keywordflow}{if}(connection->dir != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+478          \{
+479             \hyperlink{fs__port__fatfs_8c_a94bfd6c1ae79880d0a5cbe3b491368f2}{fsCloseDir}(connection->dir);
+480             connection->dir = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+481          \}
+482 
+483          \textcolor{comment}{//Back to idle state}
+484          connection->controlChannel.state = \hyperlink{ftp__server_8h_a925bb5abc66ff43f81be2420bd31156bae764f1c2df0975ec9cd81a77639e8e9a}{FTP\_CHANNEL\_STATE\_IDLE};
+485 
+486          \textcolor{comment}{//Transfer status}
+487          strcpy(connection->response, \textcolor{stringliteral}{"451 Transfer aborted\(\backslash\)r\(\backslash\)n"});
+488          \textcolor{comment}{//Debug message}
+489          \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"FTP server: %s"}, connection->response);
+490 
+491          \textcolor{comment}{//Number of bytes in the response buffer}
+492          connection->responseLen = strlen(connection->response);
+493          connection->responsePos = 0;
+494 
+495          \textcolor{comment}{//Exit immediately}
+496          \textcolor{keywordflow}{return};
+497       \}
+498 
+499       \textcolor{comment}{//Advance data pointer}
+500       connection->bufferPos += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+501       \textcolor{comment}{//Number of bytes still available in the buffer}
+502       connection->bufferLength -= \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+503    \}
+504 
+505    \textcolor{comment}{//Empty transmission buffer?}
+506    \textcolor{keywordflow}{if}(connection->bufferLength == 0)
+507    \{
+508       \textcolor{comment}{//File transfer in progress?}
+509       \textcolor{keywordflow}{if}(connection->controlChannel.state == \hyperlink{ftp__server_8h_a925bb5abc66ff43f81be2420bd31156ba4c5afb19eec32c28176cb73346a9742c}{FTP\_CHANNEL\_STATE\_RETR})
+510       \{
+511          \textcolor{comment}{//Read more data}
+512          error = \hyperlink{fs__port__fatfs_8c_af802c67ab60bcc6273bcc65a967d99ab}{fsReadFile}(connection->file,
+513             connection->buffer, \hyperlink{ftp__server_8h_a37067cf14f1730ca29fec31f4c8a2bff}{FTP\_SERVER\_BUFFER\_SIZE}, &n);
+514 
+515          \textcolor{comment}{//End of stream?}
+516          \textcolor{keywordflow}{if}(error)
+517          \{
+518             \textcolor{comment}{//Close file}
+519             \hyperlink{fs__port__fatfs_8c_a563173066eb2924f61e00e87fbf9d0bc}{fsCloseFile}(connection->file);
+520             connection->file = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+521 
+522 \textcolor{preprocessor}{#if (FTP\_SERVER\_TLS\_SUPPORT == ENABLED)}
+523             \textcolor{comment}{//TLS-secured connection?}
+524             \textcolor{keywordflow}{if}(connection->dataChannel.tlsContext != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+525             \{
+526                \textcolor{comment}{//Gracefully close TLS session}
+527                connection->dataChannel.state = \hyperlink{ftp__server_8h_a925bb5abc66ff43f81be2420bd31156baa801c5e9892dee686c3d5ff4c80da8d1}{FTP\_CHANNEL\_STATE\_SHUTDOWN\_TLS}
+      ;
+528             \}
+529             \textcolor{keywordflow}{else}
+530 \textcolor{preprocessor}{#endif}
+531             \{
+532                \textcolor{comment}{//Wait for all the data to be transmitted and acknowledged}
+533                connection->dataChannel.state = \hyperlink{ftp__server_8h_a925bb5abc66ff43f81be2420bd31156ba8c20866e8b647211dfdcf92b8549a603}{FTP\_CHANNEL\_STATE\_WAIT\_ACK};
+534             \}
+535 
+536             \textcolor{comment}{//Exit immediately}
+537             \textcolor{keywordflow}{return};
+538          \}
+539       \}
+540       \textcolor{comment}{//Directory listing in progress?}
+541       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(connection->controlChannel.state == \hyperlink{ftp__server_8h_a925bb5abc66ff43f81be2420bd31156baa81832bd77a10a26025024723d496568}{FTP\_CHANNEL\_STATE\_LIST})
+542       \{
+543          \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} perm;
+544          \hyperlink{compiler__port_8h_a40bb5262bf908c328fbcfbe5d29d0201}{char\_t} *path;
+545          \hyperlink{structFsDirEntry}{FsDirEntry} dirEntry;
+546 
+547          \textcolor{comment}{//Read a new entry in the directory}
+548          error = \hyperlink{fs__port__fatfs_8c_af9286e05d7b1032502ef39874a5b85ee}{fsReadDir}(connection->dir, &dirEntry);
+549 
+550          \textcolor{comment}{//End of stream?}
+551          \textcolor{keywordflow}{if}(error)
+552          \{
+553             \textcolor{comment}{//Close directory}
+554             \hyperlink{fs__port__fatfs_8c_a94bfd6c1ae79880d0a5cbe3b491368f2}{fsCloseDir}(connection->dir);
+555             connection->dir = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+556 
+557 \textcolor{preprocessor}{#if (FTP\_SERVER\_TLS\_SUPPORT == ENABLED)}
+558             \textcolor{comment}{//TLS-secured connection?}
+559             \textcolor{keywordflow}{if}(connection->dataChannel.tlsContext != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+560             \{
+561                \textcolor{comment}{//Gracefully close TLS session}
+562                connection->dataChannel.state = \hyperlink{ftp__server_8h_a925bb5abc66ff43f81be2420bd31156baa801c5e9892dee686c3d5ff4c80da8d1}{FTP\_CHANNEL\_STATE\_SHUTDOWN\_TLS}
+      ;
+563             \}
+564             \textcolor{keywordflow}{else}
+565 \textcolor{preprocessor}{#endif}
+566             \{
+567                \textcolor{comment}{//Wait for all the data to be transmitted and acknowledged}
+568                connection->dataChannel.state = \hyperlink{ftp__server_8h_a925bb5abc66ff43f81be2420bd31156ba8c20866e8b647211dfdcf92b8549a603}{FTP\_CHANNEL\_STATE\_WAIT\_ACK};
+569             \}
+570 
+571             \textcolor{comment}{//Exit immediately}
+572             \textcolor{keywordflow}{return};
+573          \}
+574 
+575          \textcolor{comment}{//Point to the scratch buffer}
+576          path = connection->buffer;
+577 
+578          \textcolor{comment}{//Get the pathname of the directory being listed}
+579          strcpy(path, connection->path);
+580          \textcolor{comment}{//Retrieve the full pathname}
+581          \hyperlink{path_8c_a38625df4e9abd106fb932b8ff308adc3}{pathCombine}(path, dirEntry.\hyperlink{structFsDirEntry_ab2a81b6bc89dc202e25448d2afdbae5b}{name}, \hyperlink{ftp__server_8h_ade570d175c68d8272bc482bf337af10f}{FTP\_SERVER\_MAX\_PATH\_LEN});
+582          \hyperlink{path_8c_a64519f81386b6ece797fb51f06e3052d}{pathCanonicalize}(path);
+583 
+584          \textcolor{comment}{//Get permissions for the specified file}
+585          perm = \hyperlink{ftp__server__misc_8c_a5c8fef27bdd37ac48d983912577b8ac3}{ftpServerGetFilePermissions}(connection, path);
+586 
+587          \textcolor{comment}{//Enforce access rights}
+588          \textcolor{keywordflow}{if}(perm & \hyperlink{ftp__server_8h_aa941a819cc54df0f491b11d56ebe4a5eaeede2660186e1e3800757ec2c6744df6}{FTP\_FILE\_PERM\_LIST})
+589          \{
+590             \textcolor{comment}{//Format the directory entry in UNIX-style format}
+591             n = \hyperlink{ftp__server__misc_8c_a01d9bcf3bf568909180f709c27234f28}{ftpServerFormatDirEntry}(&dirEntry, perm, connection->buffer);
+592 
+593             \textcolor{comment}{//Debug message}
+594             \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"FTP server: %s"}, connection->buffer);
+595          \}
+596          \textcolor{keywordflow}{else}
+597          \{
+598             \textcolor{comment}{//Insufficient access rights}
+599             n = 0;
+600          \}
+601       \}
+602       \textcolor{comment}{//Invalid state?}
+603       \textcolor{keywordflow}{else}
+604       \{
+605          \textcolor{comment}{//The FTP server has encountered a critical error}
+606          \hyperlink{ftp__server__misc_8c_a131bc4ee0544ae32eee4cf829f006a11}{ftpServerCloseConnection}(connection);
+607          \textcolor{comment}{//Exit immediately}
+608          \textcolor{keywordflow}{return};
+609       \}
+610 
+611       \textcolor{comment}{//Number of bytes in the buffer}
+612       connection->bufferPos = 0;
+613       connection->bufferLength = \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+614    \}
+615 \}
+\end{DoxyCode}

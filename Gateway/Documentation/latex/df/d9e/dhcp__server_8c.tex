@@ -1,0 +1,1461 @@
+\hypertarget{dhcp__server_8c}{}\section{cyclone\+\_\+tcp/dhcp/dhcp\+\_\+server.c File Reference}
+\label{dhcp__server_8c}\index{cyclone\+\_\+tcp/dhcp/dhcp\+\_\+server.\+c@{cyclone\+\_\+tcp/dhcp/dhcp\+\_\+server.\+c}}
+
+
+D\+H\+CP server (Dynamic Host Configuration Protocol)  
+
+
+{\ttfamily \#include \char`\"{}core/net.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}dhcp/dhcp\+\_\+server.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}dhcp/dhcp\+\_\+common.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}dhcp/dhcp\+\_\+debug.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}date\+\_\+time.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}debug.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{dhcp__server_8c_afcdf5e66fd927a7f4cc64295acd20407}{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}~\hyperlink{net__config_8h_ae1bb18d3ebb26b8de75fc6572f73f7e9}{D\+H\+C\+P\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{dhcp__server_8c_a2606120d4b33338ade0f28b4f8126482}{dhcp\+Server\+Get\+Default\+Settings} (\hyperlink{structDhcpServerSettings}{Dhcp\+Server\+Settings} $\ast$settings)
+\begin{DoxyCompactList}\small\item\em Initialize settings with default values. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{dhcp__server_8c_acecfa808038c14e6c907983f8eaa20e1}{dhcp\+Server\+Init} (\hyperlink{structDhcpServerContext}{Dhcp\+Server\+Context} $\ast$context, const \hyperlink{structDhcpServerSettings}{Dhcp\+Server\+Settings} $\ast$settings)
+\begin{DoxyCompactList}\small\item\em D\+H\+CP server initialization. \end{DoxyCompactList}\item 
+void \hyperlink{dhcp__server_8c_a916845abdb36b0b0ccf1a21a5ef8770f}{dhcp\+Server\+Deinit} (\hyperlink{structDhcpServerContext}{Dhcp\+Server\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Release D\+H\+CP server context. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{dhcp__server_8c_adc3c149e889e03b29270a3de90a1cb62}{dhcp\+Server\+Start} (\hyperlink{structDhcpServerContext}{Dhcp\+Server\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Start D\+H\+CP server. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{dhcp__server_8c_a428dac87bac6863801835f2e9a265f49}{dhcp\+Server\+Stop} (\hyperlink{structDhcpServerContext}{Dhcp\+Server\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Stop D\+H\+CP server. \end{DoxyCompactList}\item 
+void \hyperlink{dhcp__server_8c_a3f86bf18208648251991792f8477cb1e}{dhcp\+Server\+Tick} (\hyperlink{structDhcpServerContext}{Dhcp\+Server\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em D\+H\+CP server timer handler. \end{DoxyCompactList}\item 
+void \hyperlink{dhcp__server_8c_a51273ad02fadd9be6f7b608c4967db84}{dhcp\+Server\+Process\+Message} (\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface, const \hyperlink{structIpPseudoHeader}{Ip\+Pseudo\+Header} $\ast$pseudo\+Header, const \hyperlink{udp_8h_a6877bae1da8326482f5e311875e52bce}{Udp\+Header} $\ast$udp\+Header, const \hyperlink{structNetBuffer}{Net\+Buffer} $\ast$buffer, size\+\_\+t \hyperlink{pic32mz_2isr__support_8h_ac0542d92dfcd62c19170fd963f9e5052}{offset}, void $\ast$param)
+\begin{DoxyCompactList}\small\item\em Process incoming D\+H\+CP message. \end{DoxyCompactList}\item 
+void \hyperlink{dhcp__server_8c_a9cbac4ae06c599cfbd942ebdd1a5de28}{dhcp\+Server\+Parse\+Discover} (\hyperlink{structDhcpServerContext}{Dhcp\+Server\+Context} $\ast$context, const \hyperlink{dhcp__common_8h_a7a679c72d82764f76bc4dea42a213e23}{Dhcp\+Message} $\ast$\hyperlink{pap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length})
+\begin{DoxyCompactList}\small\item\em Parse D\+H\+C\+P\+D\+I\+S\+C\+O\+V\+ER message. \end{DoxyCompactList}\item 
+void \hyperlink{dhcp__server_8c_a4ed91595fbedddaa0303818037a74587}{dhcp\+Server\+Parse\+Request} (\hyperlink{structDhcpServerContext}{Dhcp\+Server\+Context} $\ast$context, const \hyperlink{dhcp__common_8h_a7a679c72d82764f76bc4dea42a213e23}{Dhcp\+Message} $\ast$\hyperlink{pap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length})
+\begin{DoxyCompactList}\small\item\em Parse D\+H\+C\+P\+R\+E\+Q\+U\+E\+ST message. \end{DoxyCompactList}\item 
+void \hyperlink{dhcp__server_8c_ac9e1b80ffa525266ce8d0eb332fa7f14}{dhcp\+Server\+Parse\+Decline} (\hyperlink{structDhcpServerContext}{Dhcp\+Server\+Context} $\ast$context, const \hyperlink{dhcp__common_8h_a7a679c72d82764f76bc4dea42a213e23}{Dhcp\+Message} $\ast$\hyperlink{pap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length})
+\begin{DoxyCompactList}\small\item\em Parse D\+H\+C\+P\+D\+E\+C\+L\+I\+NE message. \end{DoxyCompactList}\item 
+void \hyperlink{dhcp__server_8c_a85652718fa1b25f7a792d751eed7c80c}{dhcp\+Server\+Parse\+Release} (\hyperlink{structDhcpServerContext}{Dhcp\+Server\+Context} $\ast$context, const \hyperlink{dhcp__common_8h_a7a679c72d82764f76bc4dea42a213e23}{Dhcp\+Message} $\ast$\hyperlink{pap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length})
+\begin{DoxyCompactList}\small\item\em Parse D\+H\+C\+P\+R\+E\+L\+E\+A\+SE message. \end{DoxyCompactList}\item 
+void \hyperlink{dhcp__server_8c_ab2e8b973493820c5fb36ef9e0ef09116}{dhcp\+Server\+Parse\+Inform} (\hyperlink{structDhcpServerContext}{Dhcp\+Server\+Context} $\ast$context, const \hyperlink{dhcp__common_8h_a7a679c72d82764f76bc4dea42a213e23}{Dhcp\+Message} $\ast$\hyperlink{pap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length})
+\begin{DoxyCompactList}\small\item\em Parse D\+H\+C\+P\+I\+N\+F\+O\+RM message. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{dhcp__server_8c_ae92eaea5db72b20e51f15063efbd80e7}{dhcp\+Server\+Send\+Reply} (\hyperlink{structDhcpServerContext}{Dhcp\+Server\+Context} $\ast$context, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} \hyperlink{ppp_8h_a1d127017fb298b889f4ba24752d08b8e}{type}, \hyperlink{ipv4_8h_a411debb3d770caa0c06d3f73367da37f}{Ipv4\+Addr} your\+Ip\+Addr, const \hyperlink{dhcp__common_8h_a7a679c72d82764f76bc4dea42a213e23}{Dhcp\+Message} $\ast$request, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length})
+\begin{DoxyCompactList}\small\item\em Send D\+H\+CP reply message. \end{DoxyCompactList}\item 
+\hyperlink{structDhcpServerBinding}{Dhcp\+Server\+Binding} $\ast$ \hyperlink{dhcp__server_8c_ab99f78755c13fd5cac62cde67980f2ef}{dhcp\+Server\+Create\+Binding} (\hyperlink{structDhcpServerContext}{Dhcp\+Server\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Create a new binding. \end{DoxyCompactList}\item 
+\hyperlink{structDhcpServerBinding}{Dhcp\+Server\+Binding} $\ast$ \hyperlink{dhcp__server_8c_a14385867a28f77eba3d573f396876fb2}{dhcp\+Server\+Find\+Binding\+By\+Mac\+Addr} (\hyperlink{structDhcpServerContext}{Dhcp\+Server\+Context} $\ast$context, const \hyperlink{ethernet_8h_a1e00ed3977e8a770e8b4ae4cb306d1c0}{Mac\+Addr} $\ast$mac\+Addr)
+\begin{DoxyCompactList}\small\item\em Search the list of bindings for a given M\+AC address. \end{DoxyCompactList}\item 
+\hyperlink{structDhcpServerBinding}{Dhcp\+Server\+Binding} $\ast$ \hyperlink{dhcp__server_8c_ae6531b7b9d4139fc847a4519081c9f28}{dhcp\+Server\+Find\+Binding\+By\+Ip\+Addr} (\hyperlink{structDhcpServerContext}{Dhcp\+Server\+Context} $\ast$context, \hyperlink{ipv4_8h_a411debb3d770caa0c06d3f73367da37f}{Ipv4\+Addr} \hyperlink{ipcp_8h_a11542dd5a4de5976a89188df3d53b42d}{ip\+Addr})
+\begin{DoxyCompactList}\small\item\em Search the list of bindings for a given IP address. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{dhcp__server_8c_a9c1a60c06e7e5e61fa7b52f42bc095c0}{dhcp\+Server\+Get\+Next\+Ip\+Addr} (\hyperlink{structDhcpServerContext}{Dhcp\+Server\+Context} $\ast$context, \hyperlink{ipv4_8h_a411debb3d770caa0c06d3f73367da37f}{Ipv4\+Addr} $\ast$\hyperlink{ipcp_8h_a11542dd5a4de5976a89188df3d53b42d}{ip\+Addr})
+\begin{DoxyCompactList}\small\item\em Retrieve the next IP address to be used. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\+\_\+t} \hyperlink{dhcp__server_8c_a30af78630b1445a4a54a8b6a27db2918}{dhcp\+Server\+Tick\+Counter}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+D\+H\+CP server (Dynamic Host Configuration Protocol) 
+
+\hypertarget{pic32mz__ef__curiosity_8h_License}{}\subsection{License}\label{pic32mz__ef__curiosity_8h_License}
+S\+P\+D\+X-\/\+License-\/\+Identifier\+: G\+P\+L-\/2.\+0-\/or-\/later
+
+Copyright (C) 2010-\/2019 Oryx Embedded S\+A\+RL. All rights reserved.
+
+This file is part of Cyclone\+T\+CP Open.
+
+This program is free software; you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+
+You should have received a copy of the G\+NU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-\/1301, U\+SA.\hypertarget{tftp__server_8c_Description}{}\subsection{Description}\label{tftp__server_8c_Description}
+The Dynamic Host Configuration Protocol is used to provide configuration parameters to hosts. Refer to the following R\+F\+Cs for complete details\+:
+\begin{DoxyItemize}
+\item R\+FC 2131\+: Dynamic Host Configuration Protocol
+\item R\+FC 2132\+: D\+H\+CP Options and B\+O\+O\+TP Vendor Extensions
+\item R\+FC 4039\+: Rapid Commit Option for the D\+H\+CP version 4
+\end{DoxyItemize}
+
+\begin{DoxyAuthor}{Author}
+Oryx Embedded S\+A\+RL (www.\+oryx-\/embedded.\+com) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+9.\+6 
+\end{DoxyVersion}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{dhcp__server_8c_afcdf5e66fd927a7f4cc64295acd20407}\label{dhcp__server_8c_afcdf5e66fd927a7f4cc64295acd20407}} 
+\index{dhcp\+\_\+server.\+c@{dhcp\+\_\+server.\+c}!T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+\index{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}!dhcp\+\_\+server.\+c@{dhcp\+\_\+server.\+c}}
+\subsubsection{\texorpdfstring{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}{TRACE\_LEVEL}}
+{\footnotesize\ttfamily \#define T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL~\hyperlink{net__config_8h_ae1bb18d3ebb26b8de75fc6572f73f7e9}{D\+H\+C\+P\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+
+
+
+Definition at line 40 of file dhcp\+\_\+server.\+c.
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{dhcp__server_8c_ab99f78755c13fd5cac62cde67980f2ef}\label{dhcp__server_8c_ab99f78755c13fd5cac62cde67980f2ef}} 
+\index{dhcp\+\_\+server.\+c@{dhcp\+\_\+server.\+c}!dhcp\+Server\+Create\+Binding@{dhcp\+Server\+Create\+Binding}}
+\index{dhcp\+Server\+Create\+Binding@{dhcp\+Server\+Create\+Binding}!dhcp\+\_\+server.\+c@{dhcp\+\_\+server.\+c}}
+\subsubsection{\texorpdfstring{dhcp\+Server\+Create\+Binding()}{dhcpServerCreateBinding()}}
+{\footnotesize\ttfamily \hyperlink{structDhcpServerBinding}{Dhcp\+Server\+Binding}$\ast$ dhcp\+Server\+Create\+Binding (\begin{DoxyParamCaption}\item[{\hyperlink{structDhcpServerContext}{Dhcp\+Server\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Create a new binding. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the D\+H\+CP server context \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Pointer to the newly created binding 
+\end{DoxyReturn}
+
+
+Definition at line 930 of file dhcp\+\_\+server.\+c.
+
+
+\begin{DoxyCode}
+931 \{
+932    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+933    \hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\_t} \hyperlink{dhcpv6__common_8h_ae73654f333e4363463ad8c594eca1905}{time};
+934    \hyperlink{structDhcpServerBinding}{DhcpServerBinding} *binding;
+935    \hyperlink{structDhcpServerBinding}{DhcpServerBinding} *oldestBinding;
+936 
+937    \textcolor{comment}{//Get current time}
+938    time = \hyperlink{os__port__chibios_8c_ab66a11272d40a916fa69dd8e4dc443d4}{osGetSystemTime}();
+939 
+940    \textcolor{comment}{//Keep track of the oldest binding}
+941    oldestBinding = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+942 
+943    \textcolor{comment}{//Loop through the list of bindings}
+944    \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{dhcp__server_8h_aedfad8c8acee15994969b8ebd1bc0333}{DHCP\_SERVER\_MAX\_CLIENTS}; i++)
+945    \{
+946       \textcolor{comment}{//Point to the current binding}
+947       binding = &context->\hyperlink{structDhcpServerContext_a15ab325de708c7913708082f2e04bb75}{clientBinding}[i];
+948 
+949       \textcolor{comment}{//Check whether the binding is available}
+950       \textcolor{keywordflow}{if}(\hyperlink{ethernet_8h_a800d9f928930baf027e925976c44b9b2}{macCompAddr}(&binding->\hyperlink{structDhcpServerBinding_a1bc8376a7a0ac99fd159f3f2650671b4}{macAddr}, &\hyperlink{ethernet_8c_a24b2ce78dd643fe028d2e18c3b503f1f}{MAC\_UNSPECIFIED\_ADDR}))
+951       \{
+952          \textcolor{comment}{//Erase contents}
+953          memset(binding, 0, \textcolor{keyword}{sizeof}(\hyperlink{structDhcpServerBinding}{DhcpServerBinding}));
+954          \textcolor{comment}{//Return a pointer to the newly created binding}
+955          \textcolor{keywordflow}{return} binding;
+956       \}
+957       \textcolor{keywordflow}{else}
+958       \{
+959          \textcolor{comment}{//Bindings that have been committed cannot be removed}
+960          \textcolor{keywordflow}{if}(!binding->\hyperlink{structDhcpServerBinding_a3f86ea591925b77ded04d37e424ab3d9}{validLease})
+961          \{
+962             \textcolor{comment}{//Keep track of the oldest binding in the list}
+963             \textcolor{keywordflow}{if}(oldestBinding == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+964             \{
+965                oldestBinding = binding;
+966             \}
+967             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}((time - binding->\hyperlink{structDhcpServerBinding_ad0aee5bda4907f14bc7ca6c20cadfb09}{timestamp}) > (time - oldestBinding->
+      \hyperlink{structDhcpServerBinding_ad0aee5bda4907f14bc7ca6c20cadfb09}{timestamp}))
+968             \{
+969                oldestBinding = binding;
+970             \}
+971          \}
+972       \}
+973    \}
+974 
+975    \textcolor{comment}{//Any binding available in the list?}
+976    \textcolor{keywordflow}{if}(oldestBinding != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+977    \{
+978       \textcolor{comment}{//Erase contents}
+979       memset(oldestBinding, 0, \textcolor{keyword}{sizeof}(\hyperlink{structDhcpServerBinding}{DhcpServerBinding}));
+980    \}
+981 
+982    \textcolor{comment}{//Return a pointer to the oldest binding}
+983    \textcolor{keywordflow}{return} oldestBinding;
+984 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{dhcp__server_8c_a916845abdb36b0b0ccf1a21a5ef8770f}\label{dhcp__server_8c_a916845abdb36b0b0ccf1a21a5ef8770f}} 
+\index{dhcp\+\_\+server.\+c@{dhcp\+\_\+server.\+c}!dhcp\+Server\+Deinit@{dhcp\+Server\+Deinit}}
+\index{dhcp\+Server\+Deinit@{dhcp\+Server\+Deinit}!dhcp\+\_\+server.\+c@{dhcp\+\_\+server.\+c}}
+\subsubsection{\texorpdfstring{dhcp\+Server\+Deinit()}{dhcpServerDeinit()}}
+{\footnotesize\ttfamily void dhcp\+Server\+Deinit (\begin{DoxyParamCaption}\item[{\hyperlink{structDhcpServerContext}{Dhcp\+Server\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Release D\+H\+CP server context. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the D\+H\+CP server context \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 156 of file dhcp\+\_\+server.\+c.
+
+
+\begin{DoxyCode}
+157 \{
+158    \hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{NetInterface} *interface;
+159 
+160    \textcolor{comment}{//Make sure the DHCP server context is valid}
+161    \textcolor{keywordflow}{if}(context != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+162    \{
+163       \textcolor{comment}{//Get exclusive access}
+164       \hyperlink{os__port__chibios_8c_a58485224df4bfa522246d55b35bbd83a}{osAcquireMutex}(&\hyperlink{net_8c_afe31551ad26115fae8e575654346d441}{netMutex});
+165 
+166       \textcolor{comment}{//Point to the underlying network interface}
+167       \textcolor{keyword}{interface }= context->settings.interface;
+168 
+169       \textcolor{comment}{//Valid network interface?}
+170       \textcolor{keywordflow}{if}(interface != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+171       \{
+172          \textcolor{comment}{//Detach the DHCP server context from the network interface}
+173          interface->dhcpServerContext = \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+174 
+175          \textcolor{comment}{//Unregister callback function}
+176          \hyperlink{udp_8c_a1d915e0747de1926d096062048111e66}{udpDetachRxCallback}(interface, \hyperlink{dhcp__common_8h_a478f5be6fb4bfb09b235bb50cf806cc9}{DHCP\_SERVER\_PORT});
+177       \}
+178 
+179       \textcolor{comment}{//Clear the DHCP server context}
+180       memset(context, 0, \textcolor{keyword}{sizeof}(\hyperlink{structDhcpServerContext}{DhcpServerContext}));
+181 
+182       \textcolor{comment}{//Release exclusive access}
+183       \hyperlink{os__port__chibios_8c_a8e10e5b2c6d3877b5ba60e375ac45d79}{osReleaseMutex}(&\hyperlink{net_8c_afe31551ad26115fae8e575654346d441}{netMutex});
+184    \}
+185 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{dhcp__server_8c_ae6531b7b9d4139fc847a4519081c9f28}\label{dhcp__server_8c_ae6531b7b9d4139fc847a4519081c9f28}} 
+\index{dhcp\+\_\+server.\+c@{dhcp\+\_\+server.\+c}!dhcp\+Server\+Find\+Binding\+By\+Ip\+Addr@{dhcp\+Server\+Find\+Binding\+By\+Ip\+Addr}}
+\index{dhcp\+Server\+Find\+Binding\+By\+Ip\+Addr@{dhcp\+Server\+Find\+Binding\+By\+Ip\+Addr}!dhcp\+\_\+server.\+c@{dhcp\+\_\+server.\+c}}
+\subsubsection{\texorpdfstring{dhcp\+Server\+Find\+Binding\+By\+Ip\+Addr()}{dhcpServerFindBindingByIpAddr()}}
+{\footnotesize\ttfamily \hyperlink{structDhcpServerBinding}{Dhcp\+Server\+Binding}$\ast$ dhcp\+Server\+Find\+Binding\+By\+Ip\+Addr (\begin{DoxyParamCaption}\item[{\hyperlink{structDhcpServerContext}{Dhcp\+Server\+Context} $\ast$}]{context,  }\item[{\hyperlink{ipv4_8h_a411debb3d770caa0c06d3f73367da37f}{Ipv4\+Addr}}]{ip\+Addr }\end{DoxyParamCaption})}
+
+
+
+Search the list of bindings for a given IP address. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the D\+H\+CP server context \\
+\hline
+\mbox{\tt in}  & {\em ip\+Addr} & IP address \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Pointer to the corresponding D\+H\+CP binding 
+\end{DoxyReturn}
+
+
+Definition at line 1030 of file dhcp\+\_\+server.\+c.
+
+
+\begin{DoxyCode}
+1032 \{
+1033    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+1034    \hyperlink{structDhcpServerBinding}{DhcpServerBinding} *binding;
+1035 
+1036    \textcolor{comment}{//Loop through the list of bindings}
+1037    \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{dhcp__server_8h_aedfad8c8acee15994969b8ebd1bc0333}{DHCP\_SERVER\_MAX\_CLIENTS}; i++)
+1038    \{
+1039       \textcolor{comment}{//Point to the current binding}
+1040       binding = &context->\hyperlink{structDhcpServerContext_a15ab325de708c7913708082f2e04bb75}{clientBinding}[i];
+1041 
+1042       \textcolor{comment}{//Valid binding?}
+1043       \textcolor{keywordflow}{if}(!\hyperlink{ethernet_8h_a800d9f928930baf027e925976c44b9b2}{macCompAddr}(&binding->\hyperlink{structDhcpServerBinding_a1bc8376a7a0ac99fd159f3f2650671b4}{macAddr}, &\hyperlink{ethernet_8c_a24b2ce78dd643fe028d2e18c3b503f1f}{MAC\_UNSPECIFIED\_ADDR}))
+1044       \{
+1045          \textcolor{comment}{//Check whether the current binding matches the specified IP address}
+1046          \textcolor{keywordflow}{if}(binding->\hyperlink{structDhcpServerBinding_a1e389f0baa8490f1bbbcd2c1a83c7ad5}{ipAddr} == \hyperlink{mib__common_8h_a3860e959b1b7dd73686a6e11424805e2}{ipAddr})
+1047          \{
+1048             \textcolor{comment}{//Return the pointer to the corresponding binding}
+1049             \textcolor{keywordflow}{return} binding;
+1050          \}
+1051       \}
+1052    \}
+1053 
+1054    \textcolor{comment}{//No matching binding...}
+1055    \textcolor{keywordflow}{return} \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+1056 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{dhcp__server_8c_a14385867a28f77eba3d573f396876fb2}\label{dhcp__server_8c_a14385867a28f77eba3d573f396876fb2}} 
+\index{dhcp\+\_\+server.\+c@{dhcp\+\_\+server.\+c}!dhcp\+Server\+Find\+Binding\+By\+Mac\+Addr@{dhcp\+Server\+Find\+Binding\+By\+Mac\+Addr}}
+\index{dhcp\+Server\+Find\+Binding\+By\+Mac\+Addr@{dhcp\+Server\+Find\+Binding\+By\+Mac\+Addr}!dhcp\+\_\+server.\+c@{dhcp\+\_\+server.\+c}}
+\subsubsection{\texorpdfstring{dhcp\+Server\+Find\+Binding\+By\+Mac\+Addr()}{dhcpServerFindBindingByMacAddr()}}
+{\footnotesize\ttfamily \hyperlink{structDhcpServerBinding}{Dhcp\+Server\+Binding}$\ast$ dhcp\+Server\+Find\+Binding\+By\+Mac\+Addr (\begin{DoxyParamCaption}\item[{\hyperlink{structDhcpServerContext}{Dhcp\+Server\+Context} $\ast$}]{context,  }\item[{const \hyperlink{ethernet_8h_a1e00ed3977e8a770e8b4ae4cb306d1c0}{Mac\+Addr} $\ast$}]{mac\+Addr }\end{DoxyParamCaption})}
+
+
+
+Search the list of bindings for a given M\+AC address. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the D\+H\+CP server context \\
+\hline
+\mbox{\tt in}  & {\em mac\+Addr} & M\+AC address \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Pointer to the corresponding D\+H\+CP binding 
+\end{DoxyReturn}
+
+
+Definition at line 994 of file dhcp\+\_\+server.\+c.
+
+
+\begin{DoxyCode}
+996 \{
+997    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+998    \hyperlink{structDhcpServerBinding}{DhcpServerBinding} *binding;
+999 
+1000    \textcolor{comment}{//Loop through the list of bindings}
+1001    \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{dhcp__server_8h_aedfad8c8acee15994969b8ebd1bc0333}{DHCP\_SERVER\_MAX\_CLIENTS}; i++)
+1002    \{
+1003       \textcolor{comment}{//Point to the current binding}
+1004       binding = &context->\hyperlink{structDhcpServerContext_a15ab325de708c7913708082f2e04bb75}{clientBinding}[i];
+1005 
+1006       \textcolor{comment}{//Valid binding?}
+1007       \textcolor{keywordflow}{if}(!\hyperlink{ethernet_8h_a800d9f928930baf027e925976c44b9b2}{macCompAddr}(&binding->\hyperlink{structDhcpServerBinding_a1bc8376a7a0ac99fd159f3f2650671b4}{macAddr}, &\hyperlink{ethernet_8c_a24b2ce78dd643fe028d2e18c3b503f1f}{MAC\_UNSPECIFIED\_ADDR}))
+1008       \{
+1009          \textcolor{comment}{//Check whether the current binding matches the specified MAC address}
+1010          \textcolor{keywordflow}{if}(\hyperlink{ethernet_8h_a800d9f928930baf027e925976c44b9b2}{macCompAddr}(&binding->\hyperlink{structDhcpServerBinding_a1bc8376a7a0ac99fd159f3f2650671b4}{macAddr}, macAddr))
+1011          \{
+1012             \textcolor{comment}{//Return the pointer to the corresponding binding}
+1013             \textcolor{keywordflow}{return} binding;
+1014          \}
+1015       \}
+1016    \}
+1017 
+1018    \textcolor{comment}{//No matching binding...}
+1019    \textcolor{keywordflow}{return} \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL};
+1020 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{dhcp__server_8c_a2606120d4b33338ade0f28b4f8126482}\label{dhcp__server_8c_a2606120d4b33338ade0f28b4f8126482}} 
+\index{dhcp\+\_\+server.\+c@{dhcp\+\_\+server.\+c}!dhcp\+Server\+Get\+Default\+Settings@{dhcp\+Server\+Get\+Default\+Settings}}
+\index{dhcp\+Server\+Get\+Default\+Settings@{dhcp\+Server\+Get\+Default\+Settings}!dhcp\+\_\+server.\+c@{dhcp\+\_\+server.\+c}}
+\subsubsection{\texorpdfstring{dhcp\+Server\+Get\+Default\+Settings()}{dhcpServerGetDefaultSettings()}}
+{\footnotesize\ttfamily void dhcp\+Server\+Get\+Default\+Settings (\begin{DoxyParamCaption}\item[{\hyperlink{structDhcpServerSettings}{Dhcp\+Server\+Settings} $\ast$}]{settings }\end{DoxyParamCaption})}
+
+
+
+Initialize settings with default values. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em settings} & Structure that contains D\+H\+CP server settings \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 62 of file dhcp\+\_\+server.\+c.
+
+
+\begin{DoxyCode}
+63 \{
+64    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+65 
+66    \textcolor{comment}{//Use default interface}
+67    settings->\hyperlink{structDhcpServerSettings_a3acdee6074b02512c0abca577e062b26}{interface} = \hyperlink{net_8c_a991aba7eae4de79f30c6889d95cc6870}{netGetDefaultInterface}();
+68    \textcolor{comment}{//Index of the IP address assigned to the DHCP server}
+69    settings->\hyperlink{structDhcpServerSettings_aaad90677f7fa180236c4ae488ed076f1}{ipAddrIndex} = 0;
+70 
+71    \textcolor{comment}{//Support for quick configuration using rapid commit}
+72    settings->\hyperlink{structDhcpServerSettings_a579ebac7fc6a51baa1f70f597309024e}{rapidCommit} = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+73    \textcolor{comment}{//Lease time, in seconds, assigned to the DHCP clients}
+74    settings->\hyperlink{structDhcpServerSettings_ab2ca89761cb8c1611c0988c4a07d0c54}{leaseTime} = \hyperlink{dhcp__server_8h_a9cc5f39776751099d1ee9979f759f9bb}{DHCP\_SERVER\_DEFAULT\_LEASE\_TIME};
+75 
+76    \textcolor{comment}{//Lowest and highest IP addresses in the pool that are available}
+77    \textcolor{comment}{//for dynamic address assignment}
+78    settings->\hyperlink{structDhcpServerSettings_abb307df11884b58de9e98b53702abe31}{ipAddrRangeMin} = \hyperlink{ipv4_8h_aa9d277a6ff68d361eaf48d6af73e78e8}{IPV4\_UNSPECIFIED\_ADDR};
+79    settings->\hyperlink{structDhcpServerSettings_ad1ffb003f59319b0c15e43a6a5e4fa7a}{ipAddrRangeMax} = \hyperlink{ipv4_8h_aa9d277a6ff68d361eaf48d6af73e78e8}{IPV4\_UNSPECIFIED\_ADDR};
+80 
+81    \textcolor{comment}{//Subnet mask}
+82    settings->\hyperlink{structDhcpServerSettings_aeedb8313c969d8695966f58053ac54a0}{subnetMask} = \hyperlink{ipv4_8h_aa9d277a6ff68d361eaf48d6af73e78e8}{IPV4\_UNSPECIFIED\_ADDR};
+83    \textcolor{comment}{//Default gateway}
+84    settings->\hyperlink{structDhcpServerSettings_ad4b4b4460d2115ea068e05efd78042e1}{defaultGateway} = \hyperlink{ipv4_8h_aa9d277a6ff68d361eaf48d6af73e78e8}{IPV4\_UNSPECIFIED\_ADDR};
+85 
+86    \textcolor{comment}{//DNS servers}
+87    \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{dhcp__server_8h_aa9e4ab9acf963783ab2e3901b9fe2c45}{DHCP\_SERVER\_MAX\_DNS\_SERVERS}; i++)
+88       settings->\hyperlink{structDhcpServerSettings_af77ddb04fecfd94fe7c1259003b18d76}{dnsServer}[i] = \hyperlink{ipv4_8h_aa9d277a6ff68d361eaf48d6af73e78e8}{IPV4\_UNSPECIFIED\_ADDR};
+89 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{dhcp__server_8c_a9c1a60c06e7e5e61fa7b52f42bc095c0}\label{dhcp__server_8c_a9c1a60c06e7e5e61fa7b52f42bc095c0}} 
+\index{dhcp\+\_\+server.\+c@{dhcp\+\_\+server.\+c}!dhcp\+Server\+Get\+Next\+Ip\+Addr@{dhcp\+Server\+Get\+Next\+Ip\+Addr}}
+\index{dhcp\+Server\+Get\+Next\+Ip\+Addr@{dhcp\+Server\+Get\+Next\+Ip\+Addr}!dhcp\+\_\+server.\+c@{dhcp\+\_\+server.\+c}}
+\subsubsection{\texorpdfstring{dhcp\+Server\+Get\+Next\+Ip\+Addr()}{dhcpServerGetNextIpAddr()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} dhcp\+Server\+Get\+Next\+Ip\+Addr (\begin{DoxyParamCaption}\item[{\hyperlink{structDhcpServerContext}{Dhcp\+Server\+Context} $\ast$}]{context,  }\item[{\hyperlink{ipv4_8h_a411debb3d770caa0c06d3f73367da37f}{Ipv4\+Addr} $\ast$}]{ip\+Addr }\end{DoxyParamCaption})}
+
+
+
+Retrieve the next IP address to be used. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the D\+H\+CP server context \\
+\hline
+\mbox{\tt out}  & {\em ip\+Addr} & Next IP address to be used \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 1066 of file dhcp\+\_\+server.\+c.
+
+
+\begin{DoxyCode}
+1067 \{
+1068    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+1069    \hyperlink{structDhcpServerBinding}{DhcpServerBinding} *binding;
+1070 
+1071    \textcolor{comment}{//Search the pool for any available IP address}
+1072    \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{dhcp__server_8h_aedfad8c8acee15994969b8ebd1bc0333}{DHCP\_SERVER\_MAX\_CLIENTS}; i++)
+1073    \{
+1074       \textcolor{comment}{//Check whether the current IP address is already allocated}
+1075       binding = \hyperlink{dhcp__server_8c_ae6531b7b9d4139fc847a4519081c9f28}{dhcpServerFindBindingByIpAddr}(context, context->
+      \hyperlink{structDhcpServerContext_aa6df6d5693549dcf2d1cd6570e7a3389}{nextIpAddr});
+1076 
+1077       \textcolor{comment}{//If the IP address is available, then it can be assigned to a new client}
+1078       \textcolor{keywordflow}{if}(binding == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1079          *\hyperlink{mib__common_8h_a3860e959b1b7dd73686a6e11424805e2}{ipAddr} = context->\hyperlink{structDhcpServerContext_aa6df6d5693549dcf2d1cd6570e7a3389}{nextIpAddr};
+1080 
+1081       \textcolor{comment}{//Compute the next IP address that will be assigned by the DHCP server}
+1082       \textcolor{keywordflow}{if}(\hyperlink{cpu__endian_8h_a22f92ea3318059b7d88dfbd98d0cbc3e}{ntohl}(context->\hyperlink{structDhcpServerContext_aa6df6d5693549dcf2d1cd6570e7a3389}{nextIpAddr}) >= \hyperlink{cpu__endian_8h_a22f92ea3318059b7d88dfbd98d0cbc3e}{ntohl}(context->
+      \hyperlink{structDhcpServerContext_a63471f8a788839b2b8cfdee9d97c32fb}{settings}.\hyperlink{structDhcpServerSettings_ad1ffb003f59319b0c15e43a6a5e4fa7a}{ipAddrRangeMax}))
+1083       \{
+1084          \textcolor{comment}{//Wrap around to the beginning of the pool}
+1085          context->\hyperlink{structDhcpServerContext_aa6df6d5693549dcf2d1cd6570e7a3389}{nextIpAddr} = context->\hyperlink{structDhcpServerContext_a63471f8a788839b2b8cfdee9d97c32fb}{settings}.
+      \hyperlink{structDhcpServerSettings_abb307df11884b58de9e98b53702abe31}{ipAddrRangeMin};
+1086       \}
+1087       \textcolor{keywordflow}{else}
+1088       \{
+1089          \textcolor{comment}{//Increment IP address}
+1090          context->\hyperlink{structDhcpServerContext_aa6df6d5693549dcf2d1cd6570e7a3389}{nextIpAddr} = \hyperlink{cpu__endian_8h_a63baf217625b15caa7246af75b027380}{htonl}(\hyperlink{cpu__endian_8h_a22f92ea3318059b7d88dfbd98d0cbc3e}{ntohl}(context->
+      \hyperlink{structDhcpServerContext_aa6df6d5693549dcf2d1cd6570e7a3389}{nextIpAddr}) + 1);
+1091       \}
+1092 
+1093       \textcolor{comment}{//If the IP address is available, we are done}
+1094       \textcolor{keywordflow}{if}(binding == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+1095          \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+1096    \}
+1097 
+1098    \textcolor{comment}{//No available addresses in the pool...}
+1099    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cab341b466f058a1fcda38ae5afe2d23c2}{ERROR\_NO\_ADDRESS};
+1100 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{dhcp__server_8c_acecfa808038c14e6c907983f8eaa20e1}\label{dhcp__server_8c_acecfa808038c14e6c907983f8eaa20e1}} 
+\index{dhcp\+\_\+server.\+c@{dhcp\+\_\+server.\+c}!dhcp\+Server\+Init@{dhcp\+Server\+Init}}
+\index{dhcp\+Server\+Init@{dhcp\+Server\+Init}!dhcp\+\_\+server.\+c@{dhcp\+\_\+server.\+c}}
+\subsubsection{\texorpdfstring{dhcp\+Server\+Init()}{dhcpServerInit()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} dhcp\+Server\+Init (\begin{DoxyParamCaption}\item[{\hyperlink{structDhcpServerContext}{Dhcp\+Server\+Context} $\ast$}]{context,  }\item[{const \hyperlink{structDhcpServerSettings}{Dhcp\+Server\+Settings} $\ast$}]{settings }\end{DoxyParamCaption})}
+
+
+
+D\+H\+CP server initialization. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the D\+H\+CP server context \\
+\hline
+\mbox{\tt in}  & {\em settings} & D\+H\+CP server specific settings \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 99 of file dhcp\+\_\+server.\+c.
+
+
+\begin{DoxyCode}
+101 \{
+102    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+103    \hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{NetInterface} *interface;
+104 
+105    \textcolor{comment}{//Debug message}
+106    \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"Initializing DHCP server...\(\backslash\)r\(\backslash\)n"});
+107 
+108    \textcolor{comment}{//Ensure the parameters are valid}
+109    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || settings == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+110       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+111 
+112    \textcolor{comment}{//Valid network interface?}
+113    \textcolor{keywordflow}{if}(settings->\hyperlink{structDhcpServerSettings_a3acdee6074b02512c0abca577e062b26}{interface} == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+114       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+115 
+116    \textcolor{comment}{//Get exclusive access}
+117    \hyperlink{os__port__chibios_8c_a58485224df4bfa522246d55b35bbd83a}{osAcquireMutex}(&\hyperlink{net_8c_afe31551ad26115fae8e575654346d441}{netMutex});
+118 
+119    \textcolor{comment}{//Point to the underlying network interface}
+120    \textcolor{keyword}{interface }= settings->interface;
+121 
+122    \textcolor{comment}{//Clear the DHCP server context}
+123    memset(context, 0, \textcolor{keyword}{sizeof}(\hyperlink{structDhcpServerContext}{DhcpServerContext}));
+124    \textcolor{comment}{//Save user settings}
+125    context->\hyperlink{structDhcpServerContext_a63471f8a788839b2b8cfdee9d97c32fb}{settings} = *settings;
+126 
+127    \textcolor{comment}{//Next IP address that will be assigned by the DHCP server}
+128    context->\hyperlink{structDhcpServerContext_aa6df6d5693549dcf2d1cd6570e7a3389}{nextIpAddr} = settings->\hyperlink{structDhcpServerSettings_abb307df11884b58de9e98b53702abe31}{ipAddrRangeMin};
+129    \textcolor{comment}{//DHCP server is currently suspended}
+130    context->\hyperlink{structDhcpServerContext_abaf75d5113b57268dea728e946a1029b}{running} = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+131 
+132    \textcolor{comment}{//Callback function to be called when a DHCP message is received}
+133    error = \hyperlink{udp_8c_a38370e246c2908c710db4773a6423cee}{udpAttachRxCallback}(interface, \hyperlink{dhcp__common_8h_a478f5be6fb4bfb09b235bb50cf806cc9}{DHCP\_SERVER\_PORT},
+134       \hyperlink{dhcp__server_8c_a51273ad02fadd9be6f7b608c4967db84}{dhcpServerProcessMessage}, context);
+135 
+136    \textcolor{comment}{//Check status code}
+137    \textcolor{keywordflow}{if}(!error)
+138    \{
+139       \textcolor{comment}{//Attach the DHCP server context to the network interface}
+140       interface->dhcpServerContext = context;
+141    \}
+142 
+143    \textcolor{comment}{//Release exclusive access}
+144    \hyperlink{os__port__chibios_8c_a8e10e5b2c6d3877b5ba60e375ac45d79}{osReleaseMutex}(&\hyperlink{net_8c_afe31551ad26115fae8e575654346d441}{netMutex});
+145 
+146    \textcolor{comment}{//Return status code}
+147    \textcolor{keywordflow}{return} error;
+148 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{dhcp__server_8c_ac9e1b80ffa525266ce8d0eb332fa7f14}\label{dhcp__server_8c_ac9e1b80ffa525266ce8d0eb332fa7f14}} 
+\index{dhcp\+\_\+server.\+c@{dhcp\+\_\+server.\+c}!dhcp\+Server\+Parse\+Decline@{dhcp\+Server\+Parse\+Decline}}
+\index{dhcp\+Server\+Parse\+Decline@{dhcp\+Server\+Parse\+Decline}!dhcp\+\_\+server.\+c@{dhcp\+\_\+server.\+c}}
+\subsubsection{\texorpdfstring{dhcp\+Server\+Parse\+Decline()}{dhcpServerParseDecline()}}
+{\footnotesize\ttfamily void dhcp\+Server\+Parse\+Decline (\begin{DoxyParamCaption}\item[{\hyperlink{structDhcpServerContext}{Dhcp\+Server\+Context} $\ast$}]{context,  }\item[{const \hyperlink{dhcp__common_8h_a7a679c72d82764f76bc4dea42a213e23}{Dhcp\+Message} $\ast$}]{message,  }\item[{size\+\_\+t}]{length }\end{DoxyParamCaption})}
+
+
+
+Parse D\+H\+C\+P\+D\+E\+C\+L\+I\+NE message. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the D\+H\+CP server context \\
+\hline
+\mbox{\tt in}  & {\em message} & Pointer to the incoming D\+H\+CP message \\
+\hline
+\mbox{\tt in}  & {\em length} & Length of the incoming message to parse \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 646 of file dhcp\+\_\+server.\+c.
+
+
+\begin{DoxyCode}
+648 \{
+649    \hyperlink{dhcp__common_8h_acda8729e2d21674719c0fcd0b67489ca}{DhcpOption} *option;
+650    \hyperlink{structDhcpServerBinding}{DhcpServerBinding} *binding;
+651    \hyperlink{ipv4_8h_a411debb3d770caa0c06d3f73367da37f}{Ipv4Addr} requestedIpAddr;
+652 
+653    \textcolor{comment}{//Retrieve Requested IP Address option}
+654    option = \hyperlink{dhcp__common_8c_afbedc34152186d4b0a559cd1b97db456}{dhcpGetOption}(\hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, 
+      \hyperlink{dhcp__common_8h_a39fd6c3743d1905cdae40e0756a49c53a024e3bd7eb77cb3098e86bb81175655e}{DHCP\_OPT\_REQUESTED\_IP\_ADDRESS});
+655 
+656    \textcolor{comment}{//Option found?}
+657    \textcolor{keywordflow}{if}(option != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} && option->length == 4)
+658    \{
+659       \textcolor{comment}{//Copy the requested IP address}
+660       \hyperlink{ipv4_8h_a36a3af47ec7eec9b1781964eb0494b6f}{ipv4CopyAddr}(&requestedIpAddr, option->value);
+661 
+662       \textcolor{comment}{//Search the list for a matching binding}
+663       binding = \hyperlink{dhcp__server_8c_a14385867a28f77eba3d573f396876fb2}{dhcpServerFindBindingByMacAddr}(context, &
+      \hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}->chaddr);
+664 
+665       \textcolor{comment}{//Matching binding found?}
+666       \textcolor{keywordflow}{if}(binding != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+667       \{
+668          \textcolor{comment}{//Check the IP address against the requested IP address}
+669          \textcolor{keywordflow}{if}(binding->\hyperlink{structDhcpServerBinding_a1e389f0baa8490f1bbbcd2c1a83c7ad5}{ipAddr} == requestedIpAddr)
+670          \{
+671             \textcolor{comment}{//Remote the binding from the list}
+672             memset(binding, 0, \textcolor{keyword}{sizeof}(\hyperlink{structDhcpServerBinding}{DhcpServerBinding}));
+673          \}
+674       \}
+675    \}
+676 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{dhcp__server_8c_a9cbac4ae06c599cfbd942ebdd1a5de28}\label{dhcp__server_8c_a9cbac4ae06c599cfbd942ebdd1a5de28}} 
+\index{dhcp\+\_\+server.\+c@{dhcp\+\_\+server.\+c}!dhcp\+Server\+Parse\+Discover@{dhcp\+Server\+Parse\+Discover}}
+\index{dhcp\+Server\+Parse\+Discover@{dhcp\+Server\+Parse\+Discover}!dhcp\+\_\+server.\+c@{dhcp\+\_\+server.\+c}}
+\subsubsection{\texorpdfstring{dhcp\+Server\+Parse\+Discover()}{dhcpServerParseDiscover()}}
+{\footnotesize\ttfamily void dhcp\+Server\+Parse\+Discover (\begin{DoxyParamCaption}\item[{\hyperlink{structDhcpServerContext}{Dhcp\+Server\+Context} $\ast$}]{context,  }\item[{const \hyperlink{dhcp__common_8h_a7a679c72d82764f76bc4dea42a213e23}{Dhcp\+Message} $\ast$}]{message,  }\item[{size\+\_\+t}]{length }\end{DoxyParamCaption})}
+
+
+
+Parse D\+H\+C\+P\+D\+I\+S\+C\+O\+V\+ER message. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the D\+H\+CP server context \\
+\hline
+\mbox{\tt in}  & {\em message} & Pointer to the incoming D\+H\+CP message \\
+\hline
+\mbox{\tt in}  & {\em length} & Length of the incoming message to parse \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 396 of file dhcp\+\_\+server.\+c.
+
+
+\begin{DoxyCode}
+398 \{
+399    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+400    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+401    \hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{NetInterface} *interface;
+402    \hyperlink{ipv4_8h_a411debb3d770caa0c06d3f73367da37f}{Ipv4Addr} requestedIpAddr;
+403    \hyperlink{dhcp__common_8h_acda8729e2d21674719c0fcd0b67489ca}{DhcpOption} *option;
+404    \hyperlink{structDhcpServerBinding}{DhcpServerBinding} *binding;
+405 
+406    \textcolor{comment}{//Point to the underlying network interface}
+407    \textcolor{keyword}{interface }= context->settings.interface;
+408    \textcolor{comment}{//Index of the IP address assigned to the DHCP server}
+409    i = context->\hyperlink{structDhcpServerContext_a63471f8a788839b2b8cfdee9d97c32fb}{settings}.\hyperlink{structDhcpServerSettings_aaad90677f7fa180236c4ae488ed076f1}{ipAddrIndex};
+410 
+411    \textcolor{comment}{//Retrieve Server Identifier option}
+412    option = \hyperlink{dhcp__common_8c_afbedc34152186d4b0a559cd1b97db456}{dhcpGetOption}(\hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, 
+      \hyperlink{dhcp__common_8h_a39fd6c3743d1905cdae40e0756a49c53a5e9e6ade723c29a0fe2f60baaddbf0eb}{DHCP\_OPT\_SERVER\_IDENTIFIER});
+413 
+414    \textcolor{comment}{//Option found?}
+415    \textcolor{keywordflow}{if}(option != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} && option->length == 4)
+416    \{
+417       \textcolor{comment}{//Unexpected server identifier?}
+418       \textcolor{keywordflow}{if}(!\hyperlink{ipv4_8h_a98c009c680d3f1f84660d21c62b162d8}{ipv4CompAddr}(option->value, &interface->ipv4Context.addrList[i].addr))
+419          \textcolor{keywordflow}{return};
+420    \}
+421 
+422    \textcolor{comment}{//Retrieve Requested IP Address option}
+423    option = \hyperlink{dhcp__common_8c_afbedc34152186d4b0a559cd1b97db456}{dhcpGetOption}(\hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, 
+      \hyperlink{dhcp__common_8h_a39fd6c3743d1905cdae40e0756a49c53a024e3bd7eb77cb3098e86bb81175655e}{DHCP\_OPT\_REQUESTED\_IP\_ADDRESS});
+424 
+425    \textcolor{comment}{//The client may include the 'requested IP address' option to suggest}
+426    \textcolor{comment}{//that a particular IP address be assigned}
+427    \textcolor{keywordflow}{if}(option != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} && option->length == 4)
+428       \hyperlink{ipv4_8h_a36a3af47ec7eec9b1781964eb0494b6f}{ipv4CopyAddr}(&requestedIpAddr, option->value);
+429    \textcolor{keywordflow}{else}
+430       requestedIpAddr = \hyperlink{ipv4_8h_aa9d277a6ff68d361eaf48d6af73e78e8}{IPV4\_UNSPECIFIED\_ADDR};
+431 
+432    \textcolor{comment}{//Search the list for a matching binding}
+433    binding = \hyperlink{dhcp__server_8c_a14385867a28f77eba3d573f396876fb2}{dhcpServerFindBindingByMacAddr}(context, &
+      \hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}->chaddr);
+434 
+435    \textcolor{comment}{//Matching binding found?}
+436    \textcolor{keywordflow}{if}(binding != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+437    \{
+438       \textcolor{comment}{//Different IP address than cached?}
+439       \textcolor{keywordflow}{if}(requestedIpAddr != binding->\hyperlink{structDhcpServerBinding_a1e389f0baa8490f1bbbcd2c1a83c7ad5}{ipAddr})
+440       \{
+441          \textcolor{comment}{//Ensure the IP address is in the server's pool of available addresses}
+442          \textcolor{keywordflow}{if}(\hyperlink{cpu__endian_8h_a22f92ea3318059b7d88dfbd98d0cbc3e}{ntohl}(requestedIpAddr) >= \hyperlink{cpu__endian_8h_a22f92ea3318059b7d88dfbd98d0cbc3e}{ntohl}(context->\hyperlink{structDhcpServerContext_a63471f8a788839b2b8cfdee9d97c32fb}{settings}.
+      \hyperlink{structDhcpServerSettings_abb307df11884b58de9e98b53702abe31}{ipAddrRangeMin}) &&
+443             \hyperlink{cpu__endian_8h_a22f92ea3318059b7d88dfbd98d0cbc3e}{ntohl}(requestedIpAddr) <= \hyperlink{cpu__endian_8h_a22f92ea3318059b7d88dfbd98d0cbc3e}{ntohl}(context->\hyperlink{structDhcpServerContext_a63471f8a788839b2b8cfdee9d97c32fb}{settings}.
+      \hyperlink{structDhcpServerSettings_ad1ffb003f59319b0c15e43a6a5e4fa7a}{ipAddrRangeMax}))
+444          \{
+445             \textcolor{comment}{//Make sure the IP address is not already allocated}
+446             \textcolor{keywordflow}{if}(!\hyperlink{dhcp__server_8c_ae6531b7b9d4139fc847a4519081c9f28}{dhcpServerFindBindingByIpAddr}(context, requestedIpAddr))
+447             \{
+448                \textcolor{comment}{//Record IP address}
+449                binding->\hyperlink{structDhcpServerBinding_a1e389f0baa8490f1bbbcd2c1a83c7ad5}{ipAddr} = requestedIpAddr;
+450                \textcolor{comment}{//Get current time}
+451                binding->\hyperlink{structDhcpServerBinding_ad0aee5bda4907f14bc7ca6c20cadfb09}{timestamp} = \hyperlink{os__port__chibios_8c_ab66a11272d40a916fa69dd8e4dc443d4}{osGetSystemTime}();
+452             \}
+453          \}
+454       \}
+455 
+456       \textcolor{comment}{//Sucessful processing}
+457       error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+458    \}
+459    \textcolor{keywordflow}{else}
+460    \{
+461       \textcolor{comment}{//Create a new binding}
+462       binding = \hyperlink{dhcp__server_8c_ab99f78755c13fd5cac62cde67980f2ef}{dhcpServerCreateBinding}(context);
+463 
+464       \textcolor{comment}{//Binding successfully created}
+465       \textcolor{keywordflow}{if}(binding != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+466       \{
+467          \textcolor{comment}{//Ensure the IP address is in the server's pool of available addresses}
+468          \textcolor{keywordflow}{if}(\hyperlink{cpu__endian_8h_a22f92ea3318059b7d88dfbd98d0cbc3e}{ntohl}(requestedIpAddr) >= \hyperlink{cpu__endian_8h_a22f92ea3318059b7d88dfbd98d0cbc3e}{ntohl}(context->\hyperlink{structDhcpServerContext_a63471f8a788839b2b8cfdee9d97c32fb}{settings}.
+      \hyperlink{structDhcpServerSettings_abb307df11884b58de9e98b53702abe31}{ipAddrRangeMin}) &&
+469             \hyperlink{cpu__endian_8h_a22f92ea3318059b7d88dfbd98d0cbc3e}{ntohl}(requestedIpAddr) <= \hyperlink{cpu__endian_8h_a22f92ea3318059b7d88dfbd98d0cbc3e}{ntohl}(context->\hyperlink{structDhcpServerContext_a63471f8a788839b2b8cfdee9d97c32fb}{settings}.
+      \hyperlink{structDhcpServerSettings_ad1ffb003f59319b0c15e43a6a5e4fa7a}{ipAddrRangeMax}))
+470          \{
+471             \textcolor{comment}{//Make sure the IP address is not already allocated}
+472             \textcolor{keywordflow}{if}(!\hyperlink{dhcp__server_8c_ae6531b7b9d4139fc847a4519081c9f28}{dhcpServerFindBindingByIpAddr}(context, requestedIpAddr))
+473             \{
+474                \textcolor{comment}{//Record IP address}
+475                binding->\hyperlink{structDhcpServerBinding_a1e389f0baa8490f1bbbcd2c1a83c7ad5}{ipAddr} = requestedIpAddr;
+476                \textcolor{comment}{//Sucessful processing}
+477                error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+478             \}
+479             \textcolor{keywordflow}{else}
+480             \{
+481                \textcolor{comment}{//Retrieve the next available IP address from the pool of addresses}
+482                error = \hyperlink{dhcp__server_8c_a9c1a60c06e7e5e61fa7b52f42bc095c0}{dhcpServerGetNextIpAddr}(context, &binding->
+      \hyperlink{structDhcpServerBinding_a1e389f0baa8490f1bbbcd2c1a83c7ad5}{ipAddr});
+483             \}
+484          \}
+485          \textcolor{keywordflow}{else}
+486          \{
+487             \textcolor{comment}{//Retrieve the next available IP address from the pool of addresses}
+488             error = \hyperlink{dhcp__server_8c_a9c1a60c06e7e5e61fa7b52f42bc095c0}{dhcpServerGetNextIpAddr}(context, &binding->
+      \hyperlink{structDhcpServerBinding_a1e389f0baa8490f1bbbcd2c1a83c7ad5}{ipAddr});
+489          \}
+490 
+491          \textcolor{comment}{//Check status code}
+492          \textcolor{keywordflow}{if}(!error)
+493          \{
+494             \textcolor{comment}{//Record MAC address}
+495             binding->\hyperlink{structDhcpServerBinding_a1bc8376a7a0ac99fd159f3f2650671b4}{macAddr} = \hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}->chaddr;
+496             \textcolor{comment}{//Get current time}
+497             binding->\hyperlink{structDhcpServerBinding_ad0aee5bda4907f14bc7ca6c20cadfb09}{timestamp} = \hyperlink{os__port__chibios_8c_ab66a11272d40a916fa69dd8e4dc443d4}{osGetSystemTime}();
+498          \}
+499       \}
+500       \textcolor{keywordflow}{else}
+501       \{
+502          \textcolor{comment}{//Failed to create a new binding}
+503          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cae9be6449970fca5714ab9957b16562a5}{ERROR\_FAILURE};
+504       \}
+505    \}
+506 
+507    \textcolor{comment}{//Check status code}
+508    \textcolor{keywordflow}{if}(!error)
+509    \{
+510       \textcolor{comment}{//The server responds with a DHCPOFFER message that includes an}
+511       \textcolor{comment}{//available network address in the 'yiaddr' field (and other}
+512       \textcolor{comment}{//configuration parameters in DHCP options)}
+513       \hyperlink{dhcp__server_8c_ae92eaea5db72b20e51f15063efbd80e7}{dhcpServerSendReply}(context, \hyperlink{dhcp__common_8h_a89d2219341673e19f006b81690a74b2fa8503f65dff5479650f2c6a7999e29ec8}{DHCP\_MESSAGE\_TYPE\_OFFER},
+514          binding->\hyperlink{structDhcpServerBinding_a1e389f0baa8490f1bbbcd2c1a83c7ad5}{ipAddr}, \hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length});
+515    \}
+516 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{dhcp__server_8c_ab2e8b973493820c5fb36ef9e0ef09116}\label{dhcp__server_8c_ab2e8b973493820c5fb36ef9e0ef09116}} 
+\index{dhcp\+\_\+server.\+c@{dhcp\+\_\+server.\+c}!dhcp\+Server\+Parse\+Inform@{dhcp\+Server\+Parse\+Inform}}
+\index{dhcp\+Server\+Parse\+Inform@{dhcp\+Server\+Parse\+Inform}!dhcp\+\_\+server.\+c@{dhcp\+\_\+server.\+c}}
+\subsubsection{\texorpdfstring{dhcp\+Server\+Parse\+Inform()}{dhcpServerParseInform()}}
+{\footnotesize\ttfamily void dhcp\+Server\+Parse\+Inform (\begin{DoxyParamCaption}\item[{\hyperlink{structDhcpServerContext}{Dhcp\+Server\+Context} $\ast$}]{context,  }\item[{const \hyperlink{dhcp__common_8h_a7a679c72d82764f76bc4dea42a213e23}{Dhcp\+Message} $\ast$}]{message,  }\item[{size\+\_\+t}]{length }\end{DoxyParamCaption})}
+
+
+
+Parse D\+H\+C\+P\+I\+N\+F\+O\+RM message. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the D\+H\+CP server context \\
+\hline
+\mbox{\tt in}  & {\em message} & Pointer to the incoming D\+H\+CP message \\
+\hline
+\mbox{\tt in}  & {\em length} & Length of the incoming message to parse \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 714 of file dhcp\+\_\+server.\+c.
+
+
+\begin{DoxyCode}
+716 \{
+717    \textcolor{comment}{//Make sure the client IP address is valid}
+718    \textcolor{keywordflow}{if}(\hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}->ciaddr != \hyperlink{ipv4_8h_aa9d277a6ff68d361eaf48d6af73e78e8}{IPV4\_UNSPECIFIED\_ADDR})
+719    \{
+720       \textcolor{comment}{//Servers receiving a DHCPINFORM message construct a DHCPACK message}
+721       \textcolor{comment}{//with any local configuration parameters appropriate for the client}
+722       \hyperlink{dhcp__server_8c_ae92eaea5db72b20e51f15063efbd80e7}{dhcpServerSendReply}(context, \hyperlink{dhcp__common_8h_a89d2219341673e19f006b81690a74b2fa001c59d9c9057c7fd8a409a38431ea96}{DHCP\_MESSAGE\_TYPE\_ACK},
+723          \hyperlink{ipv4_8h_aa9d277a6ff68d361eaf48d6af73e78e8}{IPV4\_UNSPECIFIED\_ADDR}, \hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length});
+724    \}
+725 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{dhcp__server_8c_a85652718fa1b25f7a792d751eed7c80c}\label{dhcp__server_8c_a85652718fa1b25f7a792d751eed7c80c}} 
+\index{dhcp\+\_\+server.\+c@{dhcp\+\_\+server.\+c}!dhcp\+Server\+Parse\+Release@{dhcp\+Server\+Parse\+Release}}
+\index{dhcp\+Server\+Parse\+Release@{dhcp\+Server\+Parse\+Release}!dhcp\+\_\+server.\+c@{dhcp\+\_\+server.\+c}}
+\subsubsection{\texorpdfstring{dhcp\+Server\+Parse\+Release()}{dhcpServerParseRelease()}}
+{\footnotesize\ttfamily void dhcp\+Server\+Parse\+Release (\begin{DoxyParamCaption}\item[{\hyperlink{structDhcpServerContext}{Dhcp\+Server\+Context} $\ast$}]{context,  }\item[{const \hyperlink{dhcp__common_8h_a7a679c72d82764f76bc4dea42a213e23}{Dhcp\+Message} $\ast$}]{message,  }\item[{size\+\_\+t}]{length }\end{DoxyParamCaption})}
+
+
+
+Parse D\+H\+C\+P\+R\+E\+L\+E\+A\+SE message. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the D\+H\+CP server context \\
+\hline
+\mbox{\tt in}  & {\em message} & Pointer to the incoming D\+H\+CP message \\
+\hline
+\mbox{\tt in}  & {\em length} & Length of the incoming message to parse \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 686 of file dhcp\+\_\+server.\+c.
+
+
+\begin{DoxyCode}
+688 \{
+689    \hyperlink{structDhcpServerBinding}{DhcpServerBinding} *binding;
+690 
+691    \textcolor{comment}{//Search the list for a matching binding}
+692    binding = \hyperlink{dhcp__server_8c_a14385867a28f77eba3d573f396876fb2}{dhcpServerFindBindingByMacAddr}(context, &
+      \hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}->chaddr);
+693 
+694    \textcolor{comment}{//Matching binding found?}
+695    \textcolor{keywordflow}{if}(binding != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+696    \{
+697       \textcolor{comment}{//Check the IP address against the client IP address}
+698       \textcolor{keywordflow}{if}(binding->\hyperlink{structDhcpServerBinding_a1e389f0baa8490f1bbbcd2c1a83c7ad5}{ipAddr} == \hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}->ciaddr)
+699       \{
+700          \textcolor{comment}{//Release the network address and cancel remaining lease}
+701          binding->\hyperlink{structDhcpServerBinding_a3f86ea591925b77ded04d37e424ab3d9}{validLease} = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+702       \}
+703    \}
+704 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{dhcp__server_8c_a4ed91595fbedddaa0303818037a74587}\label{dhcp__server_8c_a4ed91595fbedddaa0303818037a74587}} 
+\index{dhcp\+\_\+server.\+c@{dhcp\+\_\+server.\+c}!dhcp\+Server\+Parse\+Request@{dhcp\+Server\+Parse\+Request}}
+\index{dhcp\+Server\+Parse\+Request@{dhcp\+Server\+Parse\+Request}!dhcp\+\_\+server.\+c@{dhcp\+\_\+server.\+c}}
+\subsubsection{\texorpdfstring{dhcp\+Server\+Parse\+Request()}{dhcpServerParseRequest()}}
+{\footnotesize\ttfamily void dhcp\+Server\+Parse\+Request (\begin{DoxyParamCaption}\item[{\hyperlink{structDhcpServerContext}{Dhcp\+Server\+Context} $\ast$}]{context,  }\item[{const \hyperlink{dhcp__common_8h_a7a679c72d82764f76bc4dea42a213e23}{Dhcp\+Message} $\ast$}]{message,  }\item[{size\+\_\+t}]{length }\end{DoxyParamCaption})}
+
+
+
+Parse D\+H\+C\+P\+R\+E\+Q\+U\+E\+ST message. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the D\+H\+CP server context \\
+\hline
+\mbox{\tt in}  & {\em message} & Pointer to the incoming D\+H\+CP message \\
+\hline
+\mbox{\tt in}  & {\em length} & Length of the incoming message to parse \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 526 of file dhcp\+\_\+server.\+c.
+
+
+\begin{DoxyCode}
+528 \{
+529    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+530    \hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{NetInterface} *interface;
+531    \hyperlink{ipv4_8h_a411debb3d770caa0c06d3f73367da37f}{Ipv4Addr} clientIpAddr;
+532    \hyperlink{dhcp__common_8h_acda8729e2d21674719c0fcd0b67489ca}{DhcpOption} *option;
+533    \hyperlink{structDhcpServerBinding}{DhcpServerBinding} *binding;
+534 
+535    \textcolor{comment}{//Point to the underlying network interface}
+536    \textcolor{keyword}{interface }= context->settings.interface;
+537    \textcolor{comment}{//Index of the IP address assigned to the DHCP server}
+538    i = context->\hyperlink{structDhcpServerContext_a63471f8a788839b2b8cfdee9d97c32fb}{settings}.\hyperlink{structDhcpServerSettings_aaad90677f7fa180236c4ae488ed076f1}{ipAddrIndex};
+539 
+540    \textcolor{comment}{//Retrieve Server Identifier option}
+541    option = \hyperlink{dhcp__common_8c_afbedc34152186d4b0a559cd1b97db456}{dhcpGetOption}(\hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, 
+      \hyperlink{dhcp__common_8h_a39fd6c3743d1905cdae40e0756a49c53a5e9e6ade723c29a0fe2f60baaddbf0eb}{DHCP\_OPT\_SERVER\_IDENTIFIER});
+542 
+543    \textcolor{comment}{//Option found?}
+544    \textcolor{keywordflow}{if}(option != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} && option->length == 4)
+545    \{
+546       \textcolor{comment}{//Unexpected server identifier?}
+547       \textcolor{keywordflow}{if}(!\hyperlink{ipv4_8h_a98c009c680d3f1f84660d21c62b162d8}{ipv4CompAddr}(option->value, &interface->ipv4Context.addrList[i].addr))
+548          \textcolor{keywordflow}{return};
+549    \}
+550 
+551    \textcolor{comment}{//Check the 'ciaddr' field}
+552    \textcolor{keywordflow}{if}(\hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}->ciaddr != \hyperlink{ipv4_8h_aa9d277a6ff68d361eaf48d6af73e78e8}{IPV4\_UNSPECIFIED\_ADDR})
+553    \{
+554       \textcolor{comment}{//Save client's network address}
+555       clientIpAddr = \hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}->ciaddr;
+556    \}
+557    \textcolor{keywordflow}{else}
+558    \{
+559       \textcolor{comment}{//Retrieve Requested IP Address option}
+560       option = \hyperlink{dhcp__common_8c_afbedc34152186d4b0a559cd1b97db456}{dhcpGetOption}(\hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, 
+      \hyperlink{dhcp__common_8h_a39fd6c3743d1905cdae40e0756a49c53a024e3bd7eb77cb3098e86bb81175655e}{DHCP\_OPT\_REQUESTED\_IP\_ADDRESS});
+561 
+562       \textcolor{comment}{//Option found?}
+563       \textcolor{keywordflow}{if}(option != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} && option->length == 4)
+564          \hyperlink{ipv4_8h_a36a3af47ec7eec9b1781964eb0494b6f}{ipv4CopyAddr}(&clientIpAddr, option->value);
+565       \textcolor{keywordflow}{else}
+566          clientIpAddr = \hyperlink{ipv4_8h_aa9d277a6ff68d361eaf48d6af73e78e8}{IPV4\_UNSPECIFIED\_ADDR};
+567    \}
+568 
+569    \textcolor{comment}{//Valid client IP address?}
+570    \textcolor{keywordflow}{if}(clientIpAddr != \hyperlink{ipv4_8h_aa9d277a6ff68d361eaf48d6af73e78e8}{IPV4\_UNSPECIFIED\_ADDR})
+571    \{
+572       \textcolor{comment}{//Search the list for a matching binding}
+573       binding = \hyperlink{dhcp__server_8c_a14385867a28f77eba3d573f396876fb2}{dhcpServerFindBindingByMacAddr}(context, &
+      \hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}->chaddr);
+574 
+575       \textcolor{comment}{//Matching binding found?}
+576       \textcolor{keywordflow}{if}(binding != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+577       \{
+578          \textcolor{comment}{//Make sure the client's IP address is valid}
+579          \textcolor{keywordflow}{if}(clientIpAddr == binding->\hyperlink{structDhcpServerBinding_a1e389f0baa8490f1bbbcd2c1a83c7ad5}{ipAddr})
+580          \{
+581             \textcolor{comment}{//Commit network address}
+582             binding->\hyperlink{structDhcpServerBinding_a3f86ea591925b77ded04d37e424ab3d9}{validLease} = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+583             \textcolor{comment}{//Save lease start time}
+584             binding->\hyperlink{structDhcpServerBinding_ad0aee5bda4907f14bc7ca6c20cadfb09}{timestamp} = \hyperlink{os__port__chibios_8c_ab66a11272d40a916fa69dd8e4dc443d4}{osGetSystemTime}();
+585 
+586             \textcolor{comment}{//The server responds with a DHCPACK message containing the}
+587             \textcolor{comment}{//configuration parameters for the requesting client}
+588             \hyperlink{dhcp__server_8c_ae92eaea5db72b20e51f15063efbd80e7}{dhcpServerSendReply}(context, 
+      \hyperlink{dhcp__common_8h_a89d2219341673e19f006b81690a74b2fa001c59d9c9057c7fd8a409a38431ea96}{DHCP\_MESSAGE\_TYPE\_ACK},
+589                binding->\hyperlink{structDhcpServerBinding_a1e389f0baa8490f1bbbcd2c1a83c7ad5}{ipAddr}, \hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length});
+590 
+591             \textcolor{comment}{//Exit immediately}
+592             \textcolor{keywordflow}{return};
+593          \}
+594       \}
+595       \textcolor{keywordflow}{else}
+596       \{
+597          \textcolor{comment}{//Ensure the IP address is in the server's pool of available addresses}
+598          \textcolor{keywordflow}{if}(\hyperlink{cpu__endian_8h_a22f92ea3318059b7d88dfbd98d0cbc3e}{ntohl}(clientIpAddr) >= \hyperlink{cpu__endian_8h_a22f92ea3318059b7d88dfbd98d0cbc3e}{ntohl}(context->\hyperlink{structDhcpServerContext_a63471f8a788839b2b8cfdee9d97c32fb}{settings}.
+      \hyperlink{structDhcpServerSettings_abb307df11884b58de9e98b53702abe31}{ipAddrRangeMin}) &&
+599             \hyperlink{cpu__endian_8h_a22f92ea3318059b7d88dfbd98d0cbc3e}{ntohl}(clientIpAddr) <= \hyperlink{cpu__endian_8h_a22f92ea3318059b7d88dfbd98d0cbc3e}{ntohl}(context->\hyperlink{structDhcpServerContext_a63471f8a788839b2b8cfdee9d97c32fb}{settings}.
+      \hyperlink{structDhcpServerSettings_ad1ffb003f59319b0c15e43a6a5e4fa7a}{ipAddrRangeMax}))
+600          \{
+601             \textcolor{comment}{//Make sure the IP address is not already allocated}
+602             \textcolor{keywordflow}{if}(!\hyperlink{dhcp__server_8c_ae6531b7b9d4139fc847a4519081c9f28}{dhcpServerFindBindingByIpAddr}(context, clientIpAddr))
+603             \{
+604                \textcolor{comment}{//Create a new binding}
+605                binding = \hyperlink{dhcp__server_8c_ab99f78755c13fd5cac62cde67980f2ef}{dhcpServerCreateBinding}(context);
+606 
+607                \textcolor{comment}{//Binding successfully created}
+608                \textcolor{keywordflow}{if}(binding != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+609                \{
+610                   \textcolor{comment}{//Record MAC address}
+611                   binding->\hyperlink{structDhcpServerBinding_a1bc8376a7a0ac99fd159f3f2650671b4}{macAddr} = \hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}->chaddr;
+612                   \textcolor{comment}{//Record IP address}
+613                   binding->\hyperlink{structDhcpServerBinding_a1e389f0baa8490f1bbbcd2c1a83c7ad5}{ipAddr} = clientIpAddr;
+614                   \textcolor{comment}{//Commit network address}
+615                   binding->\hyperlink{structDhcpServerBinding_a3f86ea591925b77ded04d37e424ab3d9}{validLease} = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+616                   \textcolor{comment}{//Get current time}
+617                   binding->\hyperlink{structDhcpServerBinding_ad0aee5bda4907f14bc7ca6c20cadfb09}{timestamp} = \hyperlink{os__port__chibios_8c_ab66a11272d40a916fa69dd8e4dc443d4}{osGetSystemTime}();
+618 
+619                   \textcolor{comment}{//The server responds with a DHCPACK message containing the}
+620                   \textcolor{comment}{//configuration parameters for the requesting client}
+621                   \hyperlink{dhcp__server_8c_ae92eaea5db72b20e51f15063efbd80e7}{dhcpServerSendReply}(context, 
+      \hyperlink{dhcp__common_8h_a89d2219341673e19f006b81690a74b2fa001c59d9c9057c7fd8a409a38431ea96}{DHCP\_MESSAGE\_TYPE\_ACK},
+622                      binding->\hyperlink{structDhcpServerBinding_a1e389f0baa8490f1bbbcd2c1a83c7ad5}{ipAddr}, \hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length});
+623 
+624                   \textcolor{comment}{//Exit immediately}
+625                   \textcolor{keywordflow}{return};
+626                \}
+627             \}
+628          \}
+629       \}
+630    \}
+631 
+632    \textcolor{comment}{//If the server is unable to satisfy the DHCPREQUEST message, the}
+633    \textcolor{comment}{//server should respond with a DHCPNAK message}
+634    \hyperlink{dhcp__server_8c_ae92eaea5db72b20e51f15063efbd80e7}{dhcpServerSendReply}(context, \hyperlink{dhcp__common_8h_a89d2219341673e19f006b81690a74b2fa9ec0e4d56c2af4ccb5dadfc059a72420}{DHCP\_MESSAGE\_TYPE\_NAK},
+635       \hyperlink{ipv4_8h_aa9d277a6ff68d361eaf48d6af73e78e8}{IPV4\_UNSPECIFIED\_ADDR}, \hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message}, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length});
+636 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{dhcp__server_8c_a51273ad02fadd9be6f7b608c4967db84}\label{dhcp__server_8c_a51273ad02fadd9be6f7b608c4967db84}} 
+\index{dhcp\+\_\+server.\+c@{dhcp\+\_\+server.\+c}!dhcp\+Server\+Process\+Message@{dhcp\+Server\+Process\+Message}}
+\index{dhcp\+Server\+Process\+Message@{dhcp\+Server\+Process\+Message}!dhcp\+\_\+server.\+c@{dhcp\+\_\+server.\+c}}
+\subsubsection{\texorpdfstring{dhcp\+Server\+Process\+Message()}{dhcpServerProcessMessage()}}
+{\footnotesize\ttfamily void dhcp\+Server\+Process\+Message (\begin{DoxyParamCaption}\item[{\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$}]{interface,  }\item[{const \hyperlink{structIpPseudoHeader}{Ip\+Pseudo\+Header} $\ast$}]{pseudo\+Header,  }\item[{const \hyperlink{udp_8h_a6877bae1da8326482f5e311875e52bce}{Udp\+Header} $\ast$}]{udp\+Header,  }\item[{const \hyperlink{structNetBuffer}{Net\+Buffer} $\ast$}]{buffer,  }\item[{size\+\_\+t}]{offset,  }\item[{void $\ast$}]{param }\end{DoxyParamCaption})}
+
+
+
+Process incoming D\+H\+CP message. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em interface} & Underlying network interface \\
+\hline
+\mbox{\tt in}  & {\em pseudo\+Header} & U\+DP pseudo header \\
+\hline
+\mbox{\tt in}  & {\em udp\+Header} & U\+DP header \\
+\hline
+\mbox{\tt in}  & {\em buffer} & Multi-\/part buffer containing the incoming D\+H\+CP message \\
+\hline
+\mbox{\tt in}  & {\em offset} & Offset to the first byte of the D\+H\+CP message \\
+\hline
+\mbox{\tt in}  & {\em param} & Pointer to the D\+H\+CP server context \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 305 of file dhcp\+\_\+server.\+c.
+
+
+\begin{DoxyCode}
+308 \{
+309    \textcolor{keywordtype}{size\_t} \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length};
+310    \hyperlink{structDhcpServerContext}{DhcpServerContext} *context;
+311    \hyperlink{dhcp__common_8h_a7a679c72d82764f76bc4dea42a213e23}{DhcpMessage} *\hyperlink{chap_8h_a52f19d36a71e9b8ddea38fe00c291181}{message};
+312    \hyperlink{dhcp__common_8h_acda8729e2d21674719c0fcd0b67489ca}{DhcpOption} *option;
+313 
+314    \textcolor{comment}{//Point to the DHCP server context}
+315    context = (\hyperlink{structDhcpServerContext}{DhcpServerContext} *) param;
+316 
+317    \textcolor{comment}{//Retrieve the length of the DHCP message}
+318    length = \hyperlink{net__mem_8c_ac9dbcd9e28e61d8f4f6d2e9af2607b68}{netBufferGetLength}(buffer) - \hyperlink{pic32mz_2isr__support_8h_a12a5aed8a193ebbf9a641104a310610d}{offset};
+319 
+320    \textcolor{comment}{//Make sure the DHCP message is valid}
+321    \textcolor{keywordflow}{if}(length < \textcolor{keyword}{sizeof}(\hyperlink{dhcp__common_8h_a7a679c72d82764f76bc4dea42a213e23}{DhcpMessage}))
+322       \textcolor{keywordflow}{return};
+323    \textcolor{keywordflow}{if}(length > \hyperlink{dhcp__common_8h_ae806604380d7c2a7b7ba8717992011b9}{DHCP\_MAX\_MSG\_SIZE})
+324       \textcolor{keywordflow}{return};
+325 
+326    \textcolor{comment}{//Point to the beginning of the DHCP message}
+327    message = \hyperlink{net__mem_8c_a20d30c9db547b3b2743368b589cf482b}{netBufferAt}(buffer, \hyperlink{pic32mz_2isr__support_8h_a12a5aed8a193ebbf9a641104a310610d}{offset});
+328    \textcolor{comment}{//Sanity check}
+329    \textcolor{keywordflow}{if}(message == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+330       \textcolor{keywordflow}{return};
+331 
+332    \textcolor{comment}{//Debug message}
+333    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"\(\backslash\)r\(\backslash\)n%s: DHCP message received (%"} \hyperlink{compiler__port_8h_a2b7b0557dc6cd786df02dafbb51f5292}{PRIuSIZE} \textcolor{stringliteral}{" bytes)...\(\backslash\)r\(\backslash\)n"},
+334       \hyperlink{date__time_8c_ae15b3e664208ca7e4d6983921865cd74}{formatSystemTime}(\hyperlink{os__port__chibios_8c_ab66a11272d40a916fa69dd8e4dc443d4}{osGetSystemTime}(), \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}), length);
+335 
+336    \textcolor{comment}{//Dump the contents of the message for debugging purpose}
+337    \hyperlink{dhcp__debug_8c_adbe69beed8df17477b62ddcaff4ba734}{dhcpDumpMessage}(message, length);
+338 
+339    \textcolor{comment}{//Check opcode}
+340    \textcolor{keywordflow}{if}(message->op != \hyperlink{dhcp__common_8h_a119ea03b203d6621d28e62b05e99bb24ad98cc92777ae8f8e719b0165ce71c217}{DHCP\_OPCODE\_BOOTREQUEST})
+341       \textcolor{keywordflow}{return};
+342    \textcolor{comment}{//Enforce hardware type}
+343    \textcolor{keywordflow}{if}(message->htype != \hyperlink{dhcp__common_8h_a891cb0a11f1543432cac1c87e950f221}{DHCP\_HARDWARE\_TYPE\_ETH})
+344       \textcolor{keywordflow}{return};
+345    \textcolor{comment}{//Check the length of the hardware address}
+346    \textcolor{keywordflow}{if}(message->hlen != \textcolor{keyword}{sizeof}(\hyperlink{ethernet_8h_a1e00ed3977e8a770e8b4ae4cb306d1c0}{MacAddr}))
+347       \textcolor{keywordflow}{return};
+348    \textcolor{comment}{//Check magic cookie}
+349    \textcolor{keywordflow}{if}(message->magicCookie != \hyperlink{cpu__endian_8h_ac54311f25fef1611a699b949c7410f64}{HTONL}(\hyperlink{dhcp__common_8h_ac38bb410b5a906ccc81317bf2197d0d5}{DHCP\_MAGIC\_COOKIE}))
+350       \textcolor{keywordflow}{return};
+351 
+352    \textcolor{comment}{//Retrieve DHCP Message Type option}
+353    option = \hyperlink{dhcp__common_8c_afbedc34152186d4b0a559cd1b97db456}{dhcpGetOption}(message, length, 
+      \hyperlink{dhcp__common_8h_a39fd6c3743d1905cdae40e0756a49c53a3c7ee579aa6c4a496d874dfb8e02c742}{DHCP\_OPT\_DHCP\_MESSAGE\_TYPE});
+354 
+355    \textcolor{comment}{//Failed to retrieve specified option?}
+356    \textcolor{keywordflow}{if}(option == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || option->length != 1)
+357       \textcolor{keywordflow}{return};
+358 
+359    \textcolor{comment}{//Check message type}
+360    \textcolor{keywordflow}{switch}(option->value[0])
+361    \{
+362    \textcolor{keywordflow}{case} \hyperlink{dhcp__common_8h_a89d2219341673e19f006b81690a74b2fa4d44f7174988c73ac8318c6604cfc6ce}{DHCP\_MESSAGE\_TYPE\_DISCOVER}:
+363       \textcolor{comment}{//Parse DHCPDISCOVER message}
+364       \hyperlink{dhcp__server_8c_a9cbac4ae06c599cfbd942ebdd1a5de28}{dhcpServerParseDiscover}(context, message, length);
+365       \textcolor{keywordflow}{break};
+366    \textcolor{keywordflow}{case} \hyperlink{dhcp__common_8h_a89d2219341673e19f006b81690a74b2fa1f1083e74d362a5722dec023459de18b}{DHCP\_MESSAGE\_TYPE\_REQUEST}:
+367       \textcolor{comment}{//Parse DHCPREQUEST message}
+368       \hyperlink{dhcp__server_8c_a4ed91595fbedddaa0303818037a74587}{dhcpServerParseRequest}(context, message, length);
+369       \textcolor{keywordflow}{break};
+370    \textcolor{keywordflow}{case} \hyperlink{dhcp__common_8h_a89d2219341673e19f006b81690a74b2fa89d1fe5bbaf8d7bacbedafb1cce2bb6c}{DHCP\_MESSAGE\_TYPE\_DECLINE}:
+371       \textcolor{comment}{//Parse DHCPDECLINE message}
+372       \hyperlink{dhcp__server_8c_ac9e1b80ffa525266ce8d0eb332fa7f14}{dhcpServerParseDecline}(context, message, length);
+373       \textcolor{keywordflow}{break};
+374    \textcolor{keywordflow}{case} \hyperlink{dhcp__common_8h_a89d2219341673e19f006b81690a74b2fab6241466858716d7e281904532316c11}{DHCP\_MESSAGE\_TYPE\_RELEASE}:
+375       \textcolor{comment}{//Parse DHCPRELEASE message}
+376       \hyperlink{dhcp__server_8c_a85652718fa1b25f7a792d751eed7c80c}{dhcpServerParseRelease}(context, message, length);
+377       \textcolor{keywordflow}{break};
+378    \textcolor{keywordflow}{case} \hyperlink{dhcp__common_8h_a89d2219341673e19f006b81690a74b2fa0f5985370818ae737e39999f0546e14a}{DHCP\_MESSAGE\_TYPE\_INFORM}:
+379       \textcolor{comment}{//Parse DHCPINFORM message}
+380       \hyperlink{dhcp__server_8c_ab2e8b973493820c5fb36ef9e0ef09116}{dhcpServerParseInform}(context, message, length);
+381       \textcolor{keywordflow}{break};
+382    \textcolor{keywordflow}{default}:
+383       \textcolor{comment}{//Silently drop incoming message}
+384       \textcolor{keywordflow}{break};
+385    \}
+386 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{dhcp__server_8c_ae92eaea5db72b20e51f15063efbd80e7}\label{dhcp__server_8c_ae92eaea5db72b20e51f15063efbd80e7}} 
+\index{dhcp\+\_\+server.\+c@{dhcp\+\_\+server.\+c}!dhcp\+Server\+Send\+Reply@{dhcp\+Server\+Send\+Reply}}
+\index{dhcp\+Server\+Send\+Reply@{dhcp\+Server\+Send\+Reply}!dhcp\+\_\+server.\+c@{dhcp\+\_\+server.\+c}}
+\subsubsection{\texorpdfstring{dhcp\+Server\+Send\+Reply()}{dhcpServerSendReply()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} dhcp\+Server\+Send\+Reply (\begin{DoxyParamCaption}\item[{\hyperlink{structDhcpServerContext}{Dhcp\+Server\+Context} $\ast$}]{context,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}}]{type,  }\item[{\hyperlink{ipv4_8h_a411debb3d770caa0c06d3f73367da37f}{Ipv4\+Addr}}]{your\+Ip\+Addr,  }\item[{const \hyperlink{dhcp__common_8h_a7a679c72d82764f76bc4dea42a213e23}{Dhcp\+Message} $\ast$}]{request,  }\item[{size\+\_\+t}]{length }\end{DoxyParamCaption})}
+
+
+
+Send D\+H\+CP reply message. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the D\+H\+CP server context \\
+\hline
+\mbox{\tt in}  & {\em type} & D\+H\+CP message type (D\+H\+C\+P\+O\+F\+F\+ER, D\+H\+C\+P\+A\+CK or D\+H\+C\+P\+N\+AK) \\
+\hline
+\mbox{\tt in}  & {\em your\+Ip\+Addr} & The IP address to be placed in the \textquotesingle{}yiaddr\textquotesingle{} field \\
+\hline
+\mbox{\tt in}  & {\em request} & Pointer to D\+H\+CP message received from the client \\
+\hline
+\mbox{\tt in}  & {\em length} & Length of the D\+H\+CP message received from the client \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 738 of file dhcp\+\_\+server.\+c.
+
+
+\begin{DoxyCode}
+740 \{
+741    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+742    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+743    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+744    \hyperlink{stdint_8h_a435d1572bf3f880d55459d9805097f62}{uint32\_t} \hyperlink{dtls__misc_8h_a74bce8e92ccabd0c885447114a48b80e}{value};
+745    \textcolor{keywordtype}{size\_t} \hyperlink{pic32mz_2isr__support_8h_a12a5aed8a193ebbf9a641104a310610d}{offset};
+746    \hyperlink{structNetBuffer}{NetBuffer} *buffer;
+747    \hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{NetInterface} *interface;
+748    \hyperlink{dhcp__common_8h_a7a679c72d82764f76bc4dea42a213e23}{DhcpMessage} *reply;
+749    \hyperlink{structIpAddr}{IpAddr} \hyperlink{ipcp_8h_a8ddffb4d02fcd8ad856313d3e208c34f}{srcIpAddr};
+750    \hyperlink{structIpAddr}{IpAddr} \hyperlink{ipcp_8h_a752e1719cf65f78dfec6274352cb56df}{destIpAddr};
+751    \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t} \hyperlink{tcp_8h_af15d713ad2bc92686abfa6ab012b5039}{destPort};
+752 
+753    \textcolor{comment}{//Point to the underlying network interface}
+754    \textcolor{keyword}{interface }= context->settings.interface;
+755    \textcolor{comment}{//Index of the IP address assigned to the DHCP server}
+756    i = context->\hyperlink{structDhcpServerContext_a63471f8a788839b2b8cfdee9d97c32fb}{settings}.\hyperlink{structDhcpServerSettings_aaad90677f7fa180236c4ae488ed076f1}{ipAddrIndex};
+757 
+758    \textcolor{comment}{//Allocate a memory buffer to hold the DHCP message}
+759    buffer = \hyperlink{udp_8c_a2c65cad7c5665fe03f94364e7e52b2be}{udpAllocBuffer}(\hyperlink{dhcp__common_8h_a31643f29ba9fe756494780ca25c745c1}{DHCP\_MIN\_MSG\_SIZE}, &offset);
+760    \textcolor{comment}{//Failed to allocate buffer?}
+761    \textcolor{keywordflow}{if}(buffer == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+762       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac0a554045048d2fb61387cf735676f69}{ERROR\_OUT\_OF\_MEMORY};
+763 
+764    \textcolor{comment}{//Point to the beginning of the DHCP message}
+765    reply = \hyperlink{net__mem_8c_a20d30c9db547b3b2743368b589cf482b}{netBufferAt}(buffer, offset);
+766    \textcolor{comment}{//Clear memory buffer contents}
+767    memset(reply, 0, \hyperlink{dhcp__common_8h_a31643f29ba9fe756494780ca25c745c1}{DHCP\_MIN\_MSG\_SIZE});
+768 
+769    \textcolor{comment}{//Format DHCP reply message}
+770    reply->op = \hyperlink{dhcp__common_8h_a119ea03b203d6621d28e62b05e99bb24a8b98727d49340ec425cce23b0ee998e4}{DHCP\_OPCODE\_BOOTREPLY};
+771    reply->htype = \hyperlink{dhcp__common_8h_a891cb0a11f1543432cac1c87e950f221}{DHCP\_HARDWARE\_TYPE\_ETH};
+772    reply->hlen = \textcolor{keyword}{sizeof}(\hyperlink{ethernet_8h_a1e00ed3977e8a770e8b4ae4cb306d1c0}{MacAddr});
+773    reply->xid = request->xid;
+774    reply->secs = 0;
+775    reply->flags = request->flags;
+776    reply->ciaddr = \hyperlink{ipv4_8h_aa9d277a6ff68d361eaf48d6af73e78e8}{IPV4\_UNSPECIFIED\_ADDR};
+777    reply->yiaddr = yourIpAddr;
+778    reply->siaddr = \hyperlink{ipv4_8h_aa9d277a6ff68d361eaf48d6af73e78e8}{IPV4\_UNSPECIFIED\_ADDR};
+779    reply->giaddr = request->giaddr;
+780    reply->chaddr = request->chaddr;
+781 
+782    \textcolor{comment}{//Write magic cookie before setting any option}
+783    reply->magicCookie = \hyperlink{cpu__endian_8h_ac54311f25fef1611a699b949c7410f64}{HTONL}(\hyperlink{dhcp__common_8h_ac38bb410b5a906ccc81317bf2197d0d5}{DHCP\_MAGIC\_COOKIE});
+784    \textcolor{comment}{//Properly terminate options field}
+785    reply->options[0] = \hyperlink{dhcp__common_8h_a39fd6c3743d1905cdae40e0756a49c53a16551ffc10c9db2a717bb1514aaddf01}{DHCP\_OPT\_END};
+786 
+787    \textcolor{comment}{//Add DHCP Message Type option}
+788    \hyperlink{dhcp__common_8c_ac73a9b66a20b04200f4457c70adb2503}{dhcpAddOption}(reply, \hyperlink{dhcp__common_8h_a39fd6c3743d1905cdae40e0756a49c53a3c7ee579aa6c4a496d874dfb8e02c742}{DHCP\_OPT\_DHCP\_MESSAGE\_TYPE},
+789       &\hyperlink{resource__manager_8h_a12e46a33bfe90638e58ef067c6fd4a6e}{type}, \textcolor{keyword}{sizeof}(\hyperlink{resource__manager_8h_a12e46a33bfe90638e58ef067c6fd4a6e}{type}));
+790 
+791    \textcolor{comment}{//Add Server Identifier option}
+792    \hyperlink{dhcp__common_8c_ac73a9b66a20b04200f4457c70adb2503}{dhcpAddOption}(reply, \hyperlink{dhcp__common_8h_a39fd6c3743d1905cdae40e0756a49c53a5e9e6ade723c29a0fe2f60baaddbf0eb}{DHCP\_OPT\_SERVER\_IDENTIFIER},
+793       &interface->ipv4Context.addrList[i].addr, \textcolor{keyword}{sizeof}(\hyperlink{ipv4_8h_a411debb3d770caa0c06d3f73367da37f}{Ipv4Addr}));
+794 
+795    \textcolor{comment}{//DHCPOFFER or DHCPACK message?}
+796    \textcolor{keywordflow}{if}(\hyperlink{resource__manager_8h_a12e46a33bfe90638e58ef067c6fd4a6e}{type} == \hyperlink{dhcp__common_8h_a89d2219341673e19f006b81690a74b2fa8503f65dff5479650f2c6a7999e29ec8}{DHCP\_MESSAGE\_TYPE\_OFFER} || \hyperlink{resource__manager_8h_a12e46a33bfe90638e58ef067c6fd4a6e}{type} == 
+      \hyperlink{dhcp__common_8h_a89d2219341673e19f006b81690a74b2fa001c59d9c9057c7fd8a409a38431ea96}{DHCP\_MESSAGE\_TYPE\_ACK})
+797    \{
+798       \textcolor{comment}{//Convert the lease time to network byte order}
+799       value = \hyperlink{cpu__endian_8h_a63baf217625b15caa7246af75b027380}{htonl}(context->\hyperlink{structDhcpServerContext_a63471f8a788839b2b8cfdee9d97c32fb}{settings}.\hyperlink{structDhcpServerSettings_ab2ca89761cb8c1611c0988c4a07d0c54}{leaseTime});
+800 
+801       \textcolor{comment}{//When responding to a DHCPINFORM message, the server must not}
+802       \textcolor{comment}{//send a lease expiration time to the client}
+803       \textcolor{keywordflow}{if}(yourIpAddr != \hyperlink{ipv4_8h_aa9d277a6ff68d361eaf48d6af73e78e8}{IPV4\_UNSPECIFIED\_ADDR})
+804       \{
+805          \textcolor{comment}{//Add IP Address Lease Time option}
+806          \hyperlink{dhcp__common_8c_ac73a9b66a20b04200f4457c70adb2503}{dhcpAddOption}(reply, \hyperlink{dhcp__common_8h_a39fd6c3743d1905cdae40e0756a49c53a8748e7481b42a053fd5984332e08e6a2}{DHCP\_OPT\_IP\_ADDRESS\_LEASE\_TIME},
+807             &value, \textcolor{keyword}{sizeof}(value));
+808       \}
+809 
+810       \textcolor{comment}{//Add Subnet Mask option}
+811       \textcolor{keywordflow}{if}(context->\hyperlink{structDhcpServerContext_a63471f8a788839b2b8cfdee9d97c32fb}{settings}.\hyperlink{structDhcpServerSettings_aeedb8313c969d8695966f58053ac54a0}{subnetMask} != \hyperlink{ipv4_8h_aa9d277a6ff68d361eaf48d6af73e78e8}{IPV4\_UNSPECIFIED\_ADDR})
+812       \{
+813          \hyperlink{dhcp__common_8c_ac73a9b66a20b04200f4457c70adb2503}{dhcpAddOption}(reply, \hyperlink{dhcp__common_8h_a39fd6c3743d1905cdae40e0756a49c53abd8a3ab7ac1e70519e4920fcdb7087a6}{DHCP\_OPT\_SUBNET\_MASK},
+814             &context->\hyperlink{structDhcpServerContext_a63471f8a788839b2b8cfdee9d97c32fb}{settings}.\hyperlink{structDhcpServerSettings_aeedb8313c969d8695966f58053ac54a0}{subnetMask}, \textcolor{keyword}{sizeof}(\hyperlink{ipv4_8h_a411debb3d770caa0c06d3f73367da37f}{Ipv4Addr}));
+815       \}
+816 
+817       \textcolor{comment}{//Add Router option}
+818       \textcolor{keywordflow}{if}(context->\hyperlink{structDhcpServerContext_a63471f8a788839b2b8cfdee9d97c32fb}{settings}.\hyperlink{structDhcpServerSettings_ad4b4b4460d2115ea068e05efd78042e1}{defaultGateway} != 
+      \hyperlink{ipv4_8h_aa9d277a6ff68d361eaf48d6af73e78e8}{IPV4\_UNSPECIFIED\_ADDR})
+819       \{
+820          \hyperlink{dhcp__common_8c_ac73a9b66a20b04200f4457c70adb2503}{dhcpAddOption}(reply, \hyperlink{dhcp__common_8h_a39fd6c3743d1905cdae40e0756a49c53acc8722fc2b5bedd5c280efd0b0c6c84c}{DHCP\_OPT\_ROUTER},
+821             &context->\hyperlink{structDhcpServerContext_a63471f8a788839b2b8cfdee9d97c32fb}{settings}.\hyperlink{structDhcpServerSettings_ad4b4b4460d2115ea068e05efd78042e1}{defaultGateway}, \textcolor{keyword}{sizeof}(
+      \hyperlink{ipv4_8h_a411debb3d770caa0c06d3f73367da37f}{Ipv4Addr}));
+822       \}
+823 
+824       \textcolor{comment}{//Retrieve the number of DNS servers}
+825       \textcolor{keywordflow}{for}(n = 0; n < \hyperlink{dhcp__server_8h_aa9e4ab9acf963783ab2e3901b9fe2c45}{DHCP\_SERVER\_MAX\_DNS\_SERVERS}; n++)
+826       \{
+827          \textcolor{comment}{//Check whether the current DNS server is valid}
+828          \textcolor{keywordflow}{if}(context->\hyperlink{structDhcpServerContext_a63471f8a788839b2b8cfdee9d97c32fb}{settings}.\hyperlink{structDhcpServerSettings_af77ddb04fecfd94fe7c1259003b18d76}{dnsServer}[n] == 
+      \hyperlink{ipv4_8h_aa9d277a6ff68d361eaf48d6af73e78e8}{IPV4\_UNSPECIFIED\_ADDR})
+829             \textcolor{keywordflow}{break};
+830       \}
+831 
+832       \textcolor{comment}{//Add DNS Server option}
+833       \textcolor{keywordflow}{if}(n > 0)
+834       \{
+835          \hyperlink{dhcp__common_8c_ac73a9b66a20b04200f4457c70adb2503}{dhcpAddOption}(reply, \hyperlink{dhcp__common_8h_a39fd6c3743d1905cdae40e0756a49c53ab8fa2e2824cbf12549ac87c398454f35}{DHCP\_OPT\_DNS\_SERVER},
+836             context->\hyperlink{structDhcpServerContext_a63471f8a788839b2b8cfdee9d97c32fb}{settings}.\hyperlink{structDhcpServerSettings_af77ddb04fecfd94fe7c1259003b18d76}{dnsServer}, n * \textcolor{keyword}{sizeof}(\hyperlink{ipv4_8h_a411debb3d770caa0c06d3f73367da37f}{Ipv4Addr}));
+837       \}
+838    \}
+839 
+840    \textcolor{comment}{//A server with multiple network address (e.g. a multi-homed host) may}
+841    \textcolor{comment}{//use any of its network addresses in outgoing DHCP messages (refer to}
+842    \textcolor{comment}{//RFC 2131, section 4.1)}
+843    srcIpAddr.\hyperlink{structIpAddr_ae61478bd1e79361fca7dd04a21aeb2f8}{length} = \textcolor{keyword}{sizeof}(\hyperlink{ipv4_8h_a411debb3d770caa0c06d3f73367da37f}{Ipv4Addr});
+844    srcIpAddr.\hyperlink{structIpAddr_a8de6f49cb0461f57c1eda49bb1088916}{ipv4Addr} = interface->ipv4Context.addrList[i].addr;
+845 
+846    \textcolor{comment}{//Check whether the 'giaddr' field is non-zero}
+847    \textcolor{keywordflow}{if}(request->giaddr != \hyperlink{ipv4_8h_aa9d277a6ff68d361eaf48d6af73e78e8}{IPV4\_UNSPECIFIED\_ADDR})
+848    \{
+849       \textcolor{comment}{//If the 'giaddr' field in a DHCP message from a client is non-zero,}
+850       \textcolor{comment}{//the server sends any return messages to the 'DHCP server' port}
+851       destPort = \hyperlink{dhcp__common_8h_a478f5be6fb4bfb09b235bb50cf806cc9}{DHCP\_SERVER\_PORT};
+852 
+853       \textcolor{comment}{//The DHCP message is sent to the BOOTP relay agent whose address}
+854       \textcolor{comment}{//appears in 'giaddr'}
+855       destIpAddr.\hyperlink{structIpAddr_ae61478bd1e79361fca7dd04a21aeb2f8}{length} = \textcolor{keyword}{sizeof}(\hyperlink{ipv4_8h_a411debb3d770caa0c06d3f73367da37f}{Ipv4Addr});
+856       destIpAddr.\hyperlink{structIpAddr_a8de6f49cb0461f57c1eda49bb1088916}{ipv4Addr} = request->giaddr;
+857    \}
+858    \textcolor{keywordflow}{else}
+859    \{
+860       \textcolor{comment}{//If the 'giaddr' field in a DHCP message from a client is zero,}
+861       \textcolor{comment}{//the server sends any return messages to the 'DHCP client'}
+862       destPort = \hyperlink{dhcp__common_8h_a23dd788b1cd28a0d834c3afefceaa1c1}{DHCP\_CLIENT\_PORT};
+863 
+864       \textcolor{comment}{//DHCPOFFER or DHCPACK message?}
+865       \textcolor{keywordflow}{if}(\hyperlink{resource__manager_8h_a12e46a33bfe90638e58ef067c6fd4a6e}{type} == \hyperlink{dhcp__common_8h_a89d2219341673e19f006b81690a74b2fa8503f65dff5479650f2c6a7999e29ec8}{DHCP\_MESSAGE\_TYPE\_OFFER} || \hyperlink{resource__manager_8h_a12e46a33bfe90638e58ef067c6fd4a6e}{type} == 
+      \hyperlink{dhcp__common_8h_a89d2219341673e19f006b81690a74b2fa001c59d9c9057c7fd8a409a38431ea96}{DHCP\_MESSAGE\_TYPE\_ACK})
+866       \{
+867          \textcolor{comment}{//Check whether the 'giaddr' field is non-zero}
+868          \textcolor{keywordflow}{if}(request->ciaddr != \hyperlink{ipv4_8h_aa9d277a6ff68d361eaf48d6af73e78e8}{IPV4\_UNSPECIFIED\_ADDR})
+869          \{
+870             \textcolor{comment}{//If the 'giaddr' field is zero and the 'ciaddr' field is nonzero,}
+871             \textcolor{comment}{//then the server unicasts DHCPOFFER and DHCPACK messages to the}
+872             \textcolor{comment}{//address in 'ciaddr'}
+873             destIpAddr.\hyperlink{structIpAddr_ae61478bd1e79361fca7dd04a21aeb2f8}{length} = \textcolor{keyword}{sizeof}(\hyperlink{ipv4_8h_a411debb3d770caa0c06d3f73367da37f}{Ipv4Addr});
+874             destIpAddr.\hyperlink{structIpAddr_a8de6f49cb0461f57c1eda49bb1088916}{ipv4Addr} = request->ciaddr;
+875          \}
+876          \textcolor{keywordflow}{else}
+877          \{
+878             \textcolor{comment}{//Check whether the broadcast bit is set}
+879             \textcolor{keywordflow}{if}(\hyperlink{cpu__endian_8h_a9312c6eb72e64f748ae0d0e0dc3ec9b9}{ntohs}(request->flags) & \hyperlink{dhcp__common_8h_a5c0de9145fa62e0cdc0ce274a8186beca476111e5464a45a5f3e15cc3090901de}{DHCP\_FLAG\_BROADCAST})
+880             \{
+881                \textcolor{comment}{//If 'giaddr' is zero and 'ciaddr' is zero, and the broadcast bit is}
+882                \textcolor{comment}{//set, then the server broadcasts DHCPOFFER and DHCPACK messages}
+883                destIpAddr.\hyperlink{structIpAddr_ae61478bd1e79361fca7dd04a21aeb2f8}{length} = \textcolor{keyword}{sizeof}(\hyperlink{ipv4_8h_a411debb3d770caa0c06d3f73367da37f}{Ipv4Addr});
+884                destIpAddr.\hyperlink{structIpAddr_a8de6f49cb0461f57c1eda49bb1088916}{ipv4Addr} = \hyperlink{ipv4_8h_a1b7329007670c2e728ddaa434a01c992}{IPV4\_BROADCAST\_ADDR};
+885             \}
+886             \textcolor{keywordflow}{else}
+887             \{
+888                \textcolor{comment}{//If 'giaddr' is zero and 'ciaddr' is zero, and the broadcast bit is}
+889                \textcolor{comment}{//not set, then the server unicasts DHCPOFFER and DHCPACK messages}
+890                \textcolor{comment}{//to the client's hardware address and 'yiaddr' address}
+891                destIpAddr.\hyperlink{structIpAddr_ae61478bd1e79361fca7dd04a21aeb2f8}{length} = \textcolor{keyword}{sizeof}(\hyperlink{ipv4_8h_a411debb3d770caa0c06d3f73367da37f}{Ipv4Addr});
+892                destIpAddr.\hyperlink{structIpAddr_a8de6f49cb0461f57c1eda49bb1088916}{ipv4Addr} = \hyperlink{ipv4_8h_a1b7329007670c2e728ddaa434a01c992}{IPV4\_BROADCAST\_ADDR};
+893             \}
+894          \}
+895       \}
+896       \textcolor{comment}{//DHCPNAK message?}
+897       \textcolor{keywordflow}{else}
+898       \{
+899          \textcolor{comment}{//In all cases, when 'giaddr' is zero, the server broadcasts any}
+900          \textcolor{comment}{//DHCPNAK messages}
+901          destIpAddr.\hyperlink{structIpAddr_ae61478bd1e79361fca7dd04a21aeb2f8}{length} = \textcolor{keyword}{sizeof}(\hyperlink{ipv4_8h_a411debb3d770caa0c06d3f73367da37f}{Ipv4Addr});
+902          destIpAddr.\hyperlink{structIpAddr_a8de6f49cb0461f57c1eda49bb1088916}{ipv4Addr} = \hyperlink{ipv4_8h_a1b7329007670c2e728ddaa434a01c992}{IPV4\_BROADCAST\_ADDR};
+903       \}
+904    \}
+905 
+906    \textcolor{comment}{//Debug message}
+907    \hyperlink{debug_8h_a67a8f9bc74358aa21745a76e23768dae}{TRACE\_DEBUG}(\textcolor{stringliteral}{"\(\backslash\)r\(\backslash\)n%s: Sending DHCP message (%"} \hyperlink{compiler__port_8h_a2b7b0557dc6cd786df02dafbb51f5292}{PRIuSIZE} \textcolor{stringliteral}{" bytes)...\(\backslash\)r\(\backslash\)n"},
+908       \hyperlink{date__time_8c_ae15b3e664208ca7e4d6983921865cd74}{formatSystemTime}(\hyperlink{os__port__chibios_8c_ab66a11272d40a916fa69dd8e4dc443d4}{osGetSystemTime}(), \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}), 
+      \hyperlink{dhcp__common_8h_a31643f29ba9fe756494780ca25c745c1}{DHCP\_MIN\_MSG\_SIZE});
+909 
+910    \textcolor{comment}{//Dump the contents of the message for debugging purpose}
+911    \hyperlink{dhcp__debug_8c_adbe69beed8df17477b62ddcaff4ba734}{dhcpDumpMessage}(reply, \hyperlink{dhcp__common_8h_a31643f29ba9fe756494780ca25c745c1}{DHCP\_MIN\_MSG\_SIZE});
+912 
+913    \textcolor{comment}{//Send DHCP reply}
+914    error = \hyperlink{udp_8c_a72a529f723ed1b75bfe98d0708f28eb1}{udpSendDatagramEx}(interface, &srcIpAddr, 
+      \hyperlink{dhcp__common_8h_a478f5be6fb4bfb09b235bb50cf806cc9}{DHCP\_SERVER\_PORT},
+915       &destIpAddr, destPort, buffer, offset, \hyperlink{ipv4_8h_a23220cfb7e593785a73a64a092829228}{IPV4\_DEFAULT\_TTL});
+916 
+917    \textcolor{comment}{//Free previously allocated memory}
+918    \hyperlink{net__mem_8c_aa33fc4dd2a71649194052f297c707d08}{netBufferFree}(buffer);
+919    \textcolor{comment}{//Return status code}
+920    \textcolor{keywordflow}{return} error;
+921 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{dhcp__server_8c_adc3c149e889e03b29270a3de90a1cb62}\label{dhcp__server_8c_adc3c149e889e03b29270a3de90a1cb62}} 
+\index{dhcp\+\_\+server.\+c@{dhcp\+\_\+server.\+c}!dhcp\+Server\+Start@{dhcp\+Server\+Start}}
+\index{dhcp\+Server\+Start@{dhcp\+Server\+Start}!dhcp\+\_\+server.\+c@{dhcp\+\_\+server.\+c}}
+\subsubsection{\texorpdfstring{dhcp\+Server\+Start()}{dhcpServerStart()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} dhcp\+Server\+Start (\begin{DoxyParamCaption}\item[{\hyperlink{structDhcpServerContext}{Dhcp\+Server\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Start D\+H\+CP server. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the D\+H\+CP server context \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 194 of file dhcp\+\_\+server.\+c.
+
+
+\begin{DoxyCode}
+195 \{
+196    \textcolor{comment}{//Check parameter}
+197    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+198       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+199 
+200    \textcolor{comment}{//Debug message}
+201    \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"Starting DHCP server...\(\backslash\)r\(\backslash\)n"});
+202 
+203    \textcolor{comment}{//Get exclusive access}
+204    \hyperlink{os__port__chibios_8c_a58485224df4bfa522246d55b35bbd83a}{osAcquireMutex}(&\hyperlink{net_8c_afe31551ad26115fae8e575654346d441}{netMutex});
+205    \textcolor{comment}{//Start DHCP server}
+206    context->\hyperlink{structDhcpServerContext_abaf75d5113b57268dea728e946a1029b}{running} = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+207    \textcolor{comment}{//Release exclusive access}
+208    \hyperlink{os__port__chibios_8c_a8e10e5b2c6d3877b5ba60e375ac45d79}{osReleaseMutex}(&\hyperlink{net_8c_afe31551ad26115fae8e575654346d441}{netMutex});
+209 
+210    \textcolor{comment}{//Successful processing}
+211    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+212 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{dhcp__server_8c_a428dac87bac6863801835f2e9a265f49}\label{dhcp__server_8c_a428dac87bac6863801835f2e9a265f49}} 
+\index{dhcp\+\_\+server.\+c@{dhcp\+\_\+server.\+c}!dhcp\+Server\+Stop@{dhcp\+Server\+Stop}}
+\index{dhcp\+Server\+Stop@{dhcp\+Server\+Stop}!dhcp\+\_\+server.\+c@{dhcp\+\_\+server.\+c}}
+\subsubsection{\texorpdfstring{dhcp\+Server\+Stop()}{dhcpServerStop()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} dhcp\+Server\+Stop (\begin{DoxyParamCaption}\item[{\hyperlink{structDhcpServerContext}{Dhcp\+Server\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Stop D\+H\+CP server. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the D\+H\+CP server context \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 221 of file dhcp\+\_\+server.\+c.
+
+
+\begin{DoxyCode}
+222 \{
+223    \textcolor{comment}{//Check parameter}
+224    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+225       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+226 
+227    \textcolor{comment}{//Debug message}
+228    \hyperlink{debug_8h_a7339bfd784193a5c79efcef2eeb2d6df}{TRACE\_INFO}(\textcolor{stringliteral}{"Stopping DHCP server...\(\backslash\)r\(\backslash\)n"});
+229 
+230    \textcolor{comment}{//Get exclusive access}
+231    \hyperlink{os__port__chibios_8c_a58485224df4bfa522246d55b35bbd83a}{osAcquireMutex}(&\hyperlink{net_8c_afe31551ad26115fae8e575654346d441}{netMutex});
+232    \textcolor{comment}{//Stop DHCP server}
+233    context->\hyperlink{structDhcpServerContext_abaf75d5113b57268dea728e946a1029b}{running} = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+234    \textcolor{comment}{//Release exclusive access}
+235    \hyperlink{os__port__chibios_8c_a8e10e5b2c6d3877b5ba60e375ac45d79}{osReleaseMutex}(&\hyperlink{net_8c_afe31551ad26115fae8e575654346d441}{netMutex});
+236 
+237    \textcolor{comment}{//Successful processing}
+238    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+239 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{dhcp__server_8c_a3f86bf18208648251991792f8477cb1e}\label{dhcp__server_8c_a3f86bf18208648251991792f8477cb1e}} 
+\index{dhcp\+\_\+server.\+c@{dhcp\+\_\+server.\+c}!dhcp\+Server\+Tick@{dhcp\+Server\+Tick}}
+\index{dhcp\+Server\+Tick@{dhcp\+Server\+Tick}!dhcp\+\_\+server.\+c@{dhcp\+\_\+server.\+c}}
+\subsubsection{\texorpdfstring{dhcp\+Server\+Tick()}{dhcpServerTick()}}
+{\footnotesize\ttfamily void dhcp\+Server\+Tick (\begin{DoxyParamCaption}\item[{\hyperlink{structDhcpServerContext}{Dhcp\+Server\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+D\+H\+CP server timer handler. 
+
+This routine must be periodically called by the T\+C\+P/\+IP stack to manage D\+H\+CP server operation
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the D\+H\+CP server context \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 251 of file dhcp\+\_\+server.\+c.
+
+
+\begin{DoxyCode}
+252 \{
+253    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+254    \hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\_t} \hyperlink{dhcpv6__common_8h_ae73654f333e4363463ad8c594eca1905}{time};
+255    \hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\_t} leaseTime;
+256    \hyperlink{structDhcpServerBinding}{DhcpServerBinding} *binding;
+257 
+258    \textcolor{comment}{//Make sure the DHCP server has been properly instantiated}
+259    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+260       \textcolor{keywordflow}{return};
+261 
+262    \textcolor{comment}{//Get current time}
+263    time = \hyperlink{os__port__chibios_8c_ab66a11272d40a916fa69dd8e4dc443d4}{osGetSystemTime}();
+264 
+265    \textcolor{comment}{//Convert the lease time to milliseconds}
+266    \textcolor{keywordflow}{if}(context->\hyperlink{structDhcpServerContext_a63471f8a788839b2b8cfdee9d97c32fb}{settings}.\hyperlink{structDhcpServerSettings_ab2ca89761cb8c1611c0988c4a07d0c54}{leaseTime} < (\hyperlink{os__port_8h_a16027d8acc5301e440cefa086eb9db2a}{MAX\_DELAY} / 1000))
+267       leaseTime = context->\hyperlink{structDhcpServerContext_a63471f8a788839b2b8cfdee9d97c32fb}{settings}.\hyperlink{structDhcpServerSettings_ab2ca89761cb8c1611c0988c4a07d0c54}{leaseTime} * 1000;
+268    \textcolor{keywordflow}{else}
+269       leaseTime = \hyperlink{os__port_8h_a16027d8acc5301e440cefa086eb9db2a}{MAX\_DELAY};
+270 
+271    \textcolor{comment}{//Loop through the list of bindings}
+272    \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{dhcp__server_8h_aedfad8c8acee15994969b8ebd1bc0333}{DHCP\_SERVER\_MAX\_CLIENTS}; i++)
+273    \{
+274       \textcolor{comment}{//Point to the current binding}
+275       binding = &context->\hyperlink{structDhcpServerContext_a15ab325de708c7913708082f2e04bb75}{clientBinding}[i];
+276 
+277       \textcolor{comment}{//Valid binding?}
+278       \textcolor{keywordflow}{if}(!\hyperlink{ethernet_8h_a800d9f928930baf027e925976c44b9b2}{macCompAddr}(&binding->\hyperlink{structDhcpServerBinding_a1bc8376a7a0ac99fd159f3f2650671b4}{macAddr}, &\hyperlink{ethernet_8c_a24b2ce78dd643fe028d2e18c3b503f1f}{MAC\_UNSPECIFIED\_ADDR}))
+279       \{
+280          \textcolor{comment}{//Check whether the network address has been committed}
+281          \textcolor{keywordflow}{if}(binding->\hyperlink{structDhcpServerBinding_a3f86ea591925b77ded04d37e424ab3d9}{validLease})
+282          \{
+283             \textcolor{comment}{//Check whether the lease has expired}
+284             \textcolor{keywordflow}{if}(\hyperlink{os__port_8h_a25c13833ef003da02045a91b1080263a}{timeCompare}(time, binding->\hyperlink{structDhcpServerBinding_ad0aee5bda4907f14bc7ca6c20cadfb09}{timestamp} + leaseTime) >= 0)
+285             \{
+286                \textcolor{comment}{//The address lease is not more valid}
+287                binding->\hyperlink{structDhcpServerBinding_a3f86ea591925b77ded04d37e424ab3d9}{validLease} = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+288             \}
+289          \}
+290       \}
+291    \}
+292 \}
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{dhcp__server_8c_a30af78630b1445a4a54a8b6a27db2918}\label{dhcp__server_8c_a30af78630b1445a4a54a8b6a27db2918}} 
+\index{dhcp\+\_\+server.\+c@{dhcp\+\_\+server.\+c}!dhcp\+Server\+Tick\+Counter@{dhcp\+Server\+Tick\+Counter}}
+\index{dhcp\+Server\+Tick\+Counter@{dhcp\+Server\+Tick\+Counter}!dhcp\+\_\+server.\+c@{dhcp\+\_\+server.\+c}}
+\subsubsection{\texorpdfstring{dhcp\+Server\+Tick\+Counter}{dhcpServerTickCounter}}
+{\footnotesize\ttfamily \hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\+\_\+t} dhcp\+Server\+Tick\+Counter}
+
+
+
+Definition at line 54 of file dhcp\+\_\+server.\+c.
+

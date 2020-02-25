@@ -1,0 +1,898 @@
+\hypertarget{coap__client_8h}{}\section{cyclone\+\_\+tcp/coap/coap\+\_\+client.h File Reference}
+\label{coap__client_8h}\index{cyclone\+\_\+tcp/coap/coap\+\_\+client.\+h@{cyclone\+\_\+tcp/coap/coap\+\_\+client.\+h}}
+
+
+Co\+AP client.  
+
+
+{\ttfamily \#include \char`\"{}core/net.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}coap/coap\+\_\+common.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}coap/coap\+\_\+message.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}coap/coap\+\_\+option.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}core/crypto.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}tls.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}coap\+\_\+client\+\_\+request.\+h\char`\"{}}\newline
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{struct__CoapClientContext}{\+\_\+\+Coap\+Client\+Context}
+\begin{DoxyCompactList}\small\item\em Co\+AP client context. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{coap__client_8h_ad61b5a6d3278d2e2e682d75b98965221}{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+U\+P\+P\+O\+RT}~\hyperlink{os__port_8h_a73c228f87e038e8295ee8ea8eceaa5ac}{E\+N\+A\+B\+L\+ED}
+\item 
+\#define \hyperlink{coap__client_8h_a90b698248713a56f7a8045f46c0a61af}{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+D\+T\+L\+S\+\_\+\+S\+U\+P\+P\+O\+RT}~\hyperlink{os__port_8h_abd5c8ab57c190a6522ccdbf0ed7577da}{D\+I\+S\+A\+B\+L\+ED}
+\item 
+\#define \hyperlink{coap__client_8h_afc6447594d7ba2044a575d9f4e150915}{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+O\+B\+S\+E\+R\+V\+E\+\_\+\+S\+U\+P\+P\+O\+RT}~\hyperlink{os__port_8h_a73c228f87e038e8295ee8ea8eceaa5ac}{E\+N\+A\+B\+L\+ED}
+\item 
+\#define \hyperlink{coap__client_8h_a03e42a93b879cb6bd724ec06f92dc3ce}{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+B\+L\+O\+C\+K\+\_\+\+S\+U\+P\+P\+O\+RT}~\hyperlink{os__port_8h_a73c228f87e038e8295ee8ea8eceaa5ac}{E\+N\+A\+B\+L\+ED}
+\item 
+\#define \hyperlink{coap__client_8h_ab1261a7201fa9fadec7e0e2f3ce1e903}{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+T\+I\+C\+K\+\_\+\+I\+N\+T\+E\+R\+V\+AL}~100
+\item 
+\#define \hyperlink{coap__client_8h_a55fdef6691d3e20aa7577c1261237bff}{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+D\+E\+F\+A\+U\+L\+T\+\_\+\+T\+I\+M\+E\+O\+UT}~20000
+\item 
+\#define \hyperlink{coap__client_8h_a1d9b5c1d8e03256e7164e0e26995654d}{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+N\+S\+T\+A\+RT}~1
+\item 
+\#define \hyperlink{coap__client_8h_a6f8661e91fab5f86593cd4df6bc44d19}{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+M\+A\+X\+\_\+\+R\+E\+T\+R\+A\+N\+S\+M\+IT}~4
+\item 
+\#define \hyperlink{coap__client_8h_afbc1c306934d2e0377ed0ee41c43ea9d}{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+A\+C\+K\+\_\+\+T\+I\+M\+E\+O\+U\+T\+\_\+\+M\+IN}~2000
+\item 
+\#define \hyperlink{coap__client_8h_a54b756821aaa49ae9a39e7cc51803bcf}{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+A\+C\+K\+\_\+\+T\+I\+M\+E\+O\+U\+T\+\_\+\+M\+AX}~3000
+\item 
+\#define \hyperlink{coap__client_8h_a1af981fb807fd5ccd6a0f8716ac6488d}{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+R\+A\+N\+D\+\_\+\+D\+E\+L\+A\+Y\+\_\+\+M\+IN}~5000
+\item 
+\#define \hyperlink{coap__client_8h_ad06bf355fe7fdeaa05d9a8f58b471242}{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+R\+A\+N\+D\+\_\+\+D\+E\+L\+A\+Y\+\_\+\+M\+AX}~15000
+\item 
+\#define \hyperlink{coap__client_8h_af1774ef80e655013dd33ee27552132c9}{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+D\+E\+F\+A\+U\+L\+T\+\_\+\+T\+O\+K\+E\+N\+\_\+\+L\+EN}~4
+\item 
+\#define \hyperlink{coap__client_8h_a3b7ac08b734045846f1dba69cd6b8700}{Coap\+Client\+Context}~struct \hyperlink{struct__CoapClientContext}{\+\_\+\+Coap\+Client\+Context}
+\item 
+\#define \hyperlink{coap__client_8h_a3dac6728ded461f458ffd870eca7afe7}{Coap\+Client\+Request}~struct \hyperlink{struct__CoapClientRequest}{\+\_\+\+Coap\+Client\+Request}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t}($\ast$ \hyperlink{coap__client_8h_a8d82e4052cfdce573905e9b9c6e302df}{Coap\+Client\+Dtls\+Init\+Callback}) (\hyperlink{coap__client_8h_a3b7ac08b734045846f1dba69cd6b8700}{Coap\+Client\+Context} $\ast$context, \hyperlink{tls_8h_ac09f7a286c0cdf9b07ee1edd107946f5}{Tls\+Context} $\ast$dtls\+Context)
+\begin{DoxyCompactList}\small\item\em D\+T\+LS initialization callback. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{coap__client_8h_a0449d3c44dfab2ba1d564f8d7d50bf7d}{Coap\+Client\+State} \{ \hyperlink{coap__client_8h_a0449d3c44dfab2ba1d564f8d7d50bf7dad3a0f7ed7f2adb6e9537886342322a1b}{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+D\+I\+S\+C\+O\+N\+N\+E\+C\+T\+ED} = 0, 
+\hyperlink{coap__client_8h_a0449d3c44dfab2ba1d564f8d7d50bf7dae08fe1c4d93a6c67b7ce7a4b4676a6f8}{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+NG} = 1, 
+\hyperlink{coap__client_8h_a0449d3c44dfab2ba1d564f8d7d50bf7daf2b1fd03902d79f892a733141fc320f5}{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+C\+O\+N\+N\+E\+C\+T\+ED} = 2
+ \}\begin{DoxyCompactList}\small\item\em Co\+AP client states. \end{DoxyCompactList}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{coap__client_8h_abd7ecea724f1954bed5132ea03b0c4c8}{coap\+Client\+Init} (\hyperlink{coap__client_8h_a3b7ac08b734045846f1dba69cd6b8700}{Coap\+Client\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Initialize Co\+AP client context. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{coap__client_8h_ac27dadbabb85d1cd65f9004ac67943b7}{coap\+Client\+Set\+Transport\+Protocol} (\hyperlink{coap__client_8h_a3b7ac08b734045846f1dba69cd6b8700}{Coap\+Client\+Context} $\ast$context, \hyperlink{coap__common_8h_acfca0beb05471516d1793f8ae992c53a}{Coap\+Transport\+Protocol} transport\+Protocol)
+\begin{DoxyCompactList}\small\item\em Set the transport protocol to be used. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{coap__client_8h_accef1396d03af23a50f8586b5c9417d1}{coap\+Client\+Register\+Dtls\+Init\+Callback} (\hyperlink{coap__client_8h_a3b7ac08b734045846f1dba69cd6b8700}{Coap\+Client\+Context} $\ast$context, \hyperlink{coap__client_8h_a8d82e4052cfdce573905e9b9c6e302df}{Coap\+Client\+Dtls\+Init\+Callback} callback)
+\begin{DoxyCompactList}\small\item\em Register D\+T\+LS initialization callback function. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{coap__client_8h_a4daa91377319dd999ba4d7212039d292}{coap\+Client\+Set\+Timeout} (\hyperlink{coap__client_8h_a3b7ac08b734045846f1dba69cd6b8700}{Coap\+Client\+Context} $\ast$context, \hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\+\_\+t} timeout)
+\begin{DoxyCompactList}\small\item\em Set default request timeout. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{coap__client_8h_a5ffa2e560377a0a8838d62691646289a}{coap\+Client\+Set\+Token\+Length} (\hyperlink{coap__client_8h_a3b7ac08b734045846f1dba69cd6b8700}{Coap\+Client\+Context} $\ast$context, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length})
+\begin{DoxyCompactList}\small\item\em Set the length of the token. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{coap__client_8h_a2a841b0399392d12074d457db31faeb1}{coap\+Client\+Bind\+To\+Interface} (\hyperlink{coap__client_8h_a3b7ac08b734045846f1dba69cd6b8700}{Coap\+Client\+Context} $\ast$context, \hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$interface)
+\begin{DoxyCompactList}\small\item\em Bind the Co\+AP client to a particular network interface. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{coap__client_8h_ad06da1c2fb4e5cad591eef3e868bc1ac}{coap\+Client\+Connect} (\hyperlink{coap__client_8h_a3b7ac08b734045846f1dba69cd6b8700}{Coap\+Client\+Context} $\ast$context, const \hyperlink{structIpAddr}{Ip\+Addr} $\ast$server\+Ip\+Addr, \hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t} server\+Port)
+\begin{DoxyCompactList}\small\item\em Establish connection with the Co\+AP server. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{coap__client_8h_a0fbfade6b128057b5d24c2206ef8df70}{coap\+Client\+Task} (\hyperlink{coap__client_8h_a3b7ac08b734045846f1dba69cd6b8700}{Coap\+Client\+Context} $\ast$context, \hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\+\_\+t} timeout)
+\begin{DoxyCompactList}\small\item\em Process Co\+AP client events. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{coap__client_8h_a56a8e9370dc4de1d5173b7a5425b7d46}{coap\+Client\+Disconnect} (\hyperlink{coap__client_8h_a3b7ac08b734045846f1dba69cd6b8700}{Coap\+Client\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Disconnect from the Co\+AP server. \end{DoxyCompactList}\item 
+void \hyperlink{coap__client_8h_a6288c0fc8c4c0ffd32fa2647da14cc98}{coap\+Client\+Deinit} (\hyperlink{coap__client_8h_a3b7ac08b734045846f1dba69cd6b8700}{Coap\+Client\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Release Co\+AP client context. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Co\+AP client. 
+
+\hypertarget{pic32mz__ef__curiosity_8h_License}{}\subsection{License}\label{pic32mz__ef__curiosity_8h_License}
+S\+P\+D\+X-\/\+License-\/\+Identifier\+: G\+P\+L-\/2.\+0-\/or-\/later
+
+Copyright (C) 2010-\/2019 Oryx Embedded S\+A\+RL. All rights reserved.
+
+This file is part of Cyclone\+T\+CP Open.
+
+This program is free software; you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+
+You should have received a copy of the G\+NU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-\/1301, U\+SA.
+
+\begin{DoxyAuthor}{Author}
+Oryx Embedded S\+A\+RL (www.\+oryx-\/embedded.\+com) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+9.\+6 
+\end{DoxyVersion}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{coap__client_8h_a54b756821aaa49ae9a39e7cc51803bcf}\label{coap__client_8h_a54b756821aaa49ae9a39e7cc51803bcf}} 
+\index{coap\+\_\+client.\+h@{coap\+\_\+client.\+h}!C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+A\+C\+K\+\_\+\+T\+I\+M\+E\+O\+U\+T\+\_\+\+M\+AX@{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+A\+C\+K\+\_\+\+T\+I\+M\+E\+O\+U\+T\+\_\+\+M\+AX}}
+\index{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+A\+C\+K\+\_\+\+T\+I\+M\+E\+O\+U\+T\+\_\+\+M\+AX@{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+A\+C\+K\+\_\+\+T\+I\+M\+E\+O\+U\+T\+\_\+\+M\+AX}!coap\+\_\+client.\+h@{coap\+\_\+client.\+h}}
+\subsubsection{\texorpdfstring{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+A\+C\+K\+\_\+\+T\+I\+M\+E\+O\+U\+T\+\_\+\+M\+AX}{COAP\_CLIENT\_ACK\_TIMEOUT\_MAX}}
+{\footnotesize\ttfamily \#define C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+A\+C\+K\+\_\+\+T\+I\+M\+E\+O\+U\+T\+\_\+\+M\+AX~3000}
+
+
+
+Definition at line 105 of file coap\+\_\+client.\+h.
+
+\mbox{\Hypertarget{coap__client_8h_afbc1c306934d2e0377ed0ee41c43ea9d}\label{coap__client_8h_afbc1c306934d2e0377ed0ee41c43ea9d}} 
+\index{coap\+\_\+client.\+h@{coap\+\_\+client.\+h}!C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+A\+C\+K\+\_\+\+T\+I\+M\+E\+O\+U\+T\+\_\+\+M\+IN@{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+A\+C\+K\+\_\+\+T\+I\+M\+E\+O\+U\+T\+\_\+\+M\+IN}}
+\index{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+A\+C\+K\+\_\+\+T\+I\+M\+E\+O\+U\+T\+\_\+\+M\+IN@{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+A\+C\+K\+\_\+\+T\+I\+M\+E\+O\+U\+T\+\_\+\+M\+IN}!coap\+\_\+client.\+h@{coap\+\_\+client.\+h}}
+\subsubsection{\texorpdfstring{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+A\+C\+K\+\_\+\+T\+I\+M\+E\+O\+U\+T\+\_\+\+M\+IN}{COAP\_CLIENT\_ACK\_TIMEOUT\_MIN}}
+{\footnotesize\ttfamily \#define C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+A\+C\+K\+\_\+\+T\+I\+M\+E\+O\+U\+T\+\_\+\+M\+IN~2000}
+
+
+
+Definition at line 98 of file coap\+\_\+client.\+h.
+
+\mbox{\Hypertarget{coap__client_8h_a03e42a93b879cb6bd724ec06f92dc3ce}\label{coap__client_8h_a03e42a93b879cb6bd724ec06f92dc3ce}} 
+\index{coap\+\_\+client.\+h@{coap\+\_\+client.\+h}!C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+B\+L\+O\+C\+K\+\_\+\+S\+U\+P\+P\+O\+RT@{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+B\+L\+O\+C\+K\+\_\+\+S\+U\+P\+P\+O\+RT}}
+\index{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+B\+L\+O\+C\+K\+\_\+\+S\+U\+P\+P\+O\+RT@{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+B\+L\+O\+C\+K\+\_\+\+S\+U\+P\+P\+O\+RT}!coap\+\_\+client.\+h@{coap\+\_\+client.\+h}}
+\subsubsection{\texorpdfstring{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+B\+L\+O\+C\+K\+\_\+\+S\+U\+P\+P\+O\+RT}{COAP\_CLIENT\_BLOCK\_SUPPORT}}
+{\footnotesize\ttfamily \#define C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+B\+L\+O\+C\+K\+\_\+\+S\+U\+P\+P\+O\+RT~\hyperlink{os__port_8h_a73c228f87e038e8295ee8ea8eceaa5ac}{E\+N\+A\+B\+L\+ED}}
+
+
+
+Definition at line 63 of file coap\+\_\+client.\+h.
+
+\mbox{\Hypertarget{coap__client_8h_a55fdef6691d3e20aa7577c1261237bff}\label{coap__client_8h_a55fdef6691d3e20aa7577c1261237bff}} 
+\index{coap\+\_\+client.\+h@{coap\+\_\+client.\+h}!C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+D\+E\+F\+A\+U\+L\+T\+\_\+\+T\+I\+M\+E\+O\+UT@{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+D\+E\+F\+A\+U\+L\+T\+\_\+\+T\+I\+M\+E\+O\+UT}}
+\index{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+D\+E\+F\+A\+U\+L\+T\+\_\+\+T\+I\+M\+E\+O\+UT@{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+D\+E\+F\+A\+U\+L\+T\+\_\+\+T\+I\+M\+E\+O\+UT}!coap\+\_\+client.\+h@{coap\+\_\+client.\+h}}
+\subsubsection{\texorpdfstring{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+D\+E\+F\+A\+U\+L\+T\+\_\+\+T\+I\+M\+E\+O\+UT}{COAP\_CLIENT\_DEFAULT\_TIMEOUT}}
+{\footnotesize\ttfamily \#define C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+D\+E\+F\+A\+U\+L\+T\+\_\+\+T\+I\+M\+E\+O\+UT~20000}
+
+
+
+Definition at line 77 of file coap\+\_\+client.\+h.
+
+\mbox{\Hypertarget{coap__client_8h_af1774ef80e655013dd33ee27552132c9}\label{coap__client_8h_af1774ef80e655013dd33ee27552132c9}} 
+\index{coap\+\_\+client.\+h@{coap\+\_\+client.\+h}!C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+D\+E\+F\+A\+U\+L\+T\+\_\+\+T\+O\+K\+E\+N\+\_\+\+L\+EN@{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+D\+E\+F\+A\+U\+L\+T\+\_\+\+T\+O\+K\+E\+N\+\_\+\+L\+EN}}
+\index{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+D\+E\+F\+A\+U\+L\+T\+\_\+\+T\+O\+K\+E\+N\+\_\+\+L\+EN@{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+D\+E\+F\+A\+U\+L\+T\+\_\+\+T\+O\+K\+E\+N\+\_\+\+L\+EN}!coap\+\_\+client.\+h@{coap\+\_\+client.\+h}}
+\subsubsection{\texorpdfstring{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+D\+E\+F\+A\+U\+L\+T\+\_\+\+T\+O\+K\+E\+N\+\_\+\+L\+EN}{COAP\_CLIENT\_DEFAULT\_TOKEN\_LEN}}
+{\footnotesize\ttfamily \#define C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+D\+E\+F\+A\+U\+L\+T\+\_\+\+T\+O\+K\+E\+N\+\_\+\+L\+EN~4}
+
+
+
+Definition at line 126 of file coap\+\_\+client.\+h.
+
+\mbox{\Hypertarget{coap__client_8h_a90b698248713a56f7a8045f46c0a61af}\label{coap__client_8h_a90b698248713a56f7a8045f46c0a61af}} 
+\index{coap\+\_\+client.\+h@{coap\+\_\+client.\+h}!C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+D\+T\+L\+S\+\_\+\+S\+U\+P\+P\+O\+RT@{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+D\+T\+L\+S\+\_\+\+S\+U\+P\+P\+O\+RT}}
+\index{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+D\+T\+L\+S\+\_\+\+S\+U\+P\+P\+O\+RT@{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+D\+T\+L\+S\+\_\+\+S\+U\+P\+P\+O\+RT}!coap\+\_\+client.\+h@{coap\+\_\+client.\+h}}
+\subsubsection{\texorpdfstring{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+D\+T\+L\+S\+\_\+\+S\+U\+P\+P\+O\+RT}{COAP\_CLIENT\_DTLS\_SUPPORT}}
+{\footnotesize\ttfamily \#define C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+D\+T\+L\+S\+\_\+\+S\+U\+P\+P\+O\+RT~\hyperlink{os__port_8h_abd5c8ab57c190a6522ccdbf0ed7577da}{D\+I\+S\+A\+B\+L\+ED}}
+
+
+
+Definition at line 49 of file coap\+\_\+client.\+h.
+
+\mbox{\Hypertarget{coap__client_8h_a6f8661e91fab5f86593cd4df6bc44d19}\label{coap__client_8h_a6f8661e91fab5f86593cd4df6bc44d19}} 
+\index{coap\+\_\+client.\+h@{coap\+\_\+client.\+h}!C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+M\+A\+X\+\_\+\+R\+E\+T\+R\+A\+N\+S\+M\+IT@{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+M\+A\+X\+\_\+\+R\+E\+T\+R\+A\+N\+S\+M\+IT}}
+\index{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+M\+A\+X\+\_\+\+R\+E\+T\+R\+A\+N\+S\+M\+IT@{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+M\+A\+X\+\_\+\+R\+E\+T\+R\+A\+N\+S\+M\+IT}!coap\+\_\+client.\+h@{coap\+\_\+client.\+h}}
+\subsubsection{\texorpdfstring{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+M\+A\+X\+\_\+\+R\+E\+T\+R\+A\+N\+S\+M\+IT}{COAP\_CLIENT\_MAX\_RETRANSMIT}}
+{\footnotesize\ttfamily \#define C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+M\+A\+X\+\_\+\+R\+E\+T\+R\+A\+N\+S\+M\+IT~4}
+
+
+
+Definition at line 91 of file coap\+\_\+client.\+h.
+
+\mbox{\Hypertarget{coap__client_8h_a1d9b5c1d8e03256e7164e0e26995654d}\label{coap__client_8h_a1d9b5c1d8e03256e7164e0e26995654d}} 
+\index{coap\+\_\+client.\+h@{coap\+\_\+client.\+h}!C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+N\+S\+T\+A\+RT@{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+N\+S\+T\+A\+RT}}
+\index{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+N\+S\+T\+A\+RT@{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+N\+S\+T\+A\+RT}!coap\+\_\+client.\+h@{coap\+\_\+client.\+h}}
+\subsubsection{\texorpdfstring{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+N\+S\+T\+A\+RT}{COAP\_CLIENT\_NSTART}}
+{\footnotesize\ttfamily \#define C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+N\+S\+T\+A\+RT~1}
+
+
+
+Definition at line 84 of file coap\+\_\+client.\+h.
+
+\mbox{\Hypertarget{coap__client_8h_afc6447594d7ba2044a575d9f4e150915}\label{coap__client_8h_afc6447594d7ba2044a575d9f4e150915}} 
+\index{coap\+\_\+client.\+h@{coap\+\_\+client.\+h}!C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+O\+B\+S\+E\+R\+V\+E\+\_\+\+S\+U\+P\+P\+O\+RT@{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+O\+B\+S\+E\+R\+V\+E\+\_\+\+S\+U\+P\+P\+O\+RT}}
+\index{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+O\+B\+S\+E\+R\+V\+E\+\_\+\+S\+U\+P\+P\+O\+RT@{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+O\+B\+S\+E\+R\+V\+E\+\_\+\+S\+U\+P\+P\+O\+RT}!coap\+\_\+client.\+h@{coap\+\_\+client.\+h}}
+\subsubsection{\texorpdfstring{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+O\+B\+S\+E\+R\+V\+E\+\_\+\+S\+U\+P\+P\+O\+RT}{COAP\_CLIENT\_OBSERVE\_SUPPORT}}
+{\footnotesize\ttfamily \#define C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+O\+B\+S\+E\+R\+V\+E\+\_\+\+S\+U\+P\+P\+O\+RT~\hyperlink{os__port_8h_a73c228f87e038e8295ee8ea8eceaa5ac}{E\+N\+A\+B\+L\+ED}}
+
+
+
+Definition at line 56 of file coap\+\_\+client.\+h.
+
+\mbox{\Hypertarget{coap__client_8h_ad06bf355fe7fdeaa05d9a8f58b471242}\label{coap__client_8h_ad06bf355fe7fdeaa05d9a8f58b471242}} 
+\index{coap\+\_\+client.\+h@{coap\+\_\+client.\+h}!C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+R\+A\+N\+D\+\_\+\+D\+E\+L\+A\+Y\+\_\+\+M\+AX@{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+R\+A\+N\+D\+\_\+\+D\+E\+L\+A\+Y\+\_\+\+M\+AX}}
+\index{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+R\+A\+N\+D\+\_\+\+D\+E\+L\+A\+Y\+\_\+\+M\+AX@{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+R\+A\+N\+D\+\_\+\+D\+E\+L\+A\+Y\+\_\+\+M\+AX}!coap\+\_\+client.\+h@{coap\+\_\+client.\+h}}
+\subsubsection{\texorpdfstring{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+R\+A\+N\+D\+\_\+\+D\+E\+L\+A\+Y\+\_\+\+M\+AX}{COAP\_CLIENT\_RAND\_DELAY\_MAX}}
+{\footnotesize\ttfamily \#define C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+R\+A\+N\+D\+\_\+\+D\+E\+L\+A\+Y\+\_\+\+M\+AX~15000}
+
+
+
+Definition at line 119 of file coap\+\_\+client.\+h.
+
+\mbox{\Hypertarget{coap__client_8h_a1af981fb807fd5ccd6a0f8716ac6488d}\label{coap__client_8h_a1af981fb807fd5ccd6a0f8716ac6488d}} 
+\index{coap\+\_\+client.\+h@{coap\+\_\+client.\+h}!C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+R\+A\+N\+D\+\_\+\+D\+E\+L\+A\+Y\+\_\+\+M\+IN@{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+R\+A\+N\+D\+\_\+\+D\+E\+L\+A\+Y\+\_\+\+M\+IN}}
+\index{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+R\+A\+N\+D\+\_\+\+D\+E\+L\+A\+Y\+\_\+\+M\+IN@{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+R\+A\+N\+D\+\_\+\+D\+E\+L\+A\+Y\+\_\+\+M\+IN}!coap\+\_\+client.\+h@{coap\+\_\+client.\+h}}
+\subsubsection{\texorpdfstring{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+R\+A\+N\+D\+\_\+\+D\+E\+L\+A\+Y\+\_\+\+M\+IN}{COAP\_CLIENT\_RAND\_DELAY\_MIN}}
+{\footnotesize\ttfamily \#define C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+R\+A\+N\+D\+\_\+\+D\+E\+L\+A\+Y\+\_\+\+M\+IN~5000}
+
+
+
+Definition at line 112 of file coap\+\_\+client.\+h.
+
+\mbox{\Hypertarget{coap__client_8h_ad61b5a6d3278d2e2e682d75b98965221}\label{coap__client_8h_ad61b5a6d3278d2e2e682d75b98965221}} 
+\index{coap\+\_\+client.\+h@{coap\+\_\+client.\+h}!C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+U\+P\+P\+O\+RT@{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+U\+P\+P\+O\+RT}}
+\index{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+U\+P\+P\+O\+RT@{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+U\+P\+P\+O\+RT}!coap\+\_\+client.\+h@{coap\+\_\+client.\+h}}
+\subsubsection{\texorpdfstring{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+U\+P\+P\+O\+RT}{COAP\_CLIENT\_SUPPORT}}
+{\footnotesize\ttfamily \#define C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+U\+P\+P\+O\+RT~\hyperlink{os__port_8h_a73c228f87e038e8295ee8ea8eceaa5ac}{E\+N\+A\+B\+L\+ED}}
+
+
+
+Definition at line 42 of file coap\+\_\+client.\+h.
+
+\mbox{\Hypertarget{coap__client_8h_ab1261a7201fa9fadec7e0e2f3ce1e903}\label{coap__client_8h_ab1261a7201fa9fadec7e0e2f3ce1e903}} 
+\index{coap\+\_\+client.\+h@{coap\+\_\+client.\+h}!C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+T\+I\+C\+K\+\_\+\+I\+N\+T\+E\+R\+V\+AL@{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+T\+I\+C\+K\+\_\+\+I\+N\+T\+E\+R\+V\+AL}}
+\index{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+T\+I\+C\+K\+\_\+\+I\+N\+T\+E\+R\+V\+AL@{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+T\+I\+C\+K\+\_\+\+I\+N\+T\+E\+R\+V\+AL}!coap\+\_\+client.\+h@{coap\+\_\+client.\+h}}
+\subsubsection{\texorpdfstring{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+T\+I\+C\+K\+\_\+\+I\+N\+T\+E\+R\+V\+AL}{COAP\_CLIENT\_TICK\_INTERVAL}}
+{\footnotesize\ttfamily \#define C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+T\+I\+C\+K\+\_\+\+I\+N\+T\+E\+R\+V\+AL~100}
+
+
+
+Definition at line 70 of file coap\+\_\+client.\+h.
+
+\mbox{\Hypertarget{coap__client_8h_a3b7ac08b734045846f1dba69cd6b8700}\label{coap__client_8h_a3b7ac08b734045846f1dba69cd6b8700}} 
+\index{coap\+\_\+client.\+h@{coap\+\_\+client.\+h}!Coap\+Client\+Context@{Coap\+Client\+Context}}
+\index{Coap\+Client\+Context@{Coap\+Client\+Context}!coap\+\_\+client.\+h@{coap\+\_\+client.\+h}}
+\subsubsection{\texorpdfstring{Coap\+Client\+Context}{CoapClientContext}}
+{\footnotesize\ttfamily \#define Coap\+Client\+Context~struct \hyperlink{struct__CoapClientContext}{\+\_\+\+Coap\+Client\+Context}}
+
+
+
+Definition at line 139 of file coap\+\_\+client.\+h.
+
+\mbox{\Hypertarget{coap__client_8h_a3dac6728ded461f458ffd870eca7afe7}\label{coap__client_8h_a3dac6728ded461f458ffd870eca7afe7}} 
+\index{coap\+\_\+client.\+h@{coap\+\_\+client.\+h}!Coap\+Client\+Request@{Coap\+Client\+Request}}
+\index{Coap\+Client\+Request@{Coap\+Client\+Request}!coap\+\_\+client.\+h@{coap\+\_\+client.\+h}}
+\subsubsection{\texorpdfstring{Coap\+Client\+Request}{CoapClientRequest}}
+{\footnotesize\ttfamily \#define Coap\+Client\+Request~struct \hyperlink{struct__CoapClientRequest}{\+\_\+\+Coap\+Client\+Request}}
+
+
+
+Definition at line 143 of file coap\+\_\+client.\+h.
+
+
+
+\subsection{Typedef Documentation}
+\mbox{\Hypertarget{coap__client_8h_a8d82e4052cfdce573905e9b9c6e302df}\label{coap__client_8h_a8d82e4052cfdce573905e9b9c6e302df}} 
+\index{coap\+\_\+client.\+h@{coap\+\_\+client.\+h}!Coap\+Client\+Dtls\+Init\+Callback@{Coap\+Client\+Dtls\+Init\+Callback}}
+\index{Coap\+Client\+Dtls\+Init\+Callback@{Coap\+Client\+Dtls\+Init\+Callback}!coap\+\_\+client.\+h@{coap\+\_\+client.\+h}}
+\subsubsection{\texorpdfstring{Coap\+Client\+Dtls\+Init\+Callback}{CoapClientDtlsInitCallback}}
+{\footnotesize\ttfamily typedef \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t}($\ast$ Coap\+Client\+Dtls\+Init\+Callback) (\hyperlink{coap__client_8h_a3b7ac08b734045846f1dba69cd6b8700}{Coap\+Client\+Context} $\ast$context, \hyperlink{tls_8h_ac09f7a286c0cdf9b07ee1edd107946f5}{Tls\+Context} $\ast$dtls\+Context)}
+
+
+
+D\+T\+LS initialization callback. 
+
+
+
+Definition at line 173 of file coap\+\_\+client.\+h.
+
+
+
+\subsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{coap__client_8h_a0449d3c44dfab2ba1d564f8d7d50bf7d}\label{coap__client_8h_a0449d3c44dfab2ba1d564f8d7d50bf7d}} 
+\index{coap\+\_\+client.\+h@{coap\+\_\+client.\+h}!Coap\+Client\+State@{Coap\+Client\+State}}
+\index{Coap\+Client\+State@{Coap\+Client\+State}!coap\+\_\+client.\+h@{coap\+\_\+client.\+h}}
+\subsubsection{\texorpdfstring{Coap\+Client\+State}{CoapClientState}}
+{\footnotesize\ttfamily enum \hyperlink{coap__client_8h_a0449d3c44dfab2ba1d564f8d7d50bf7d}{Coap\+Client\+State}}
+
+
+
+Co\+AP client states. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+D\+I\+S\+C\+O\+N\+N\+E\+C\+T\+ED@{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+D\+I\+S\+C\+O\+N\+N\+E\+C\+T\+ED}!coap\+\_\+client.\+h@{coap\+\_\+client.\+h}}\index{coap\+\_\+client.\+h@{coap\+\_\+client.\+h}!C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+D\+I\+S\+C\+O\+N\+N\+E\+C\+T\+ED@{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+D\+I\+S\+C\+O\+N\+N\+E\+C\+T\+ED}}}\mbox{\Hypertarget{coap__client_8h_a0449d3c44dfab2ba1d564f8d7d50bf7dad3a0f7ed7f2adb6e9537886342322a1b}\label{coap__client_8h_a0449d3c44dfab2ba1d564f8d7d50bf7dad3a0f7ed7f2adb6e9537886342322a1b}} 
+C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+D\+I\+S\+C\+O\+N\+N\+E\+C\+T\+ED&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+NG@{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+NG}!coap\+\_\+client.\+h@{coap\+\_\+client.\+h}}\index{coap\+\_\+client.\+h@{coap\+\_\+client.\+h}!C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+NG@{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+NG}}}\mbox{\Hypertarget{coap__client_8h_a0449d3c44dfab2ba1d564f8d7d50bf7dae08fe1c4d93a6c67b7ce7a4b4676a6f8}\label{coap__client_8h_a0449d3c44dfab2ba1d564f8d7d50bf7dae08fe1c4d93a6c67b7ce7a4b4676a6f8}} 
+C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+NG&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+C\+O\+N\+N\+E\+C\+T\+ED@{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+C\+O\+N\+N\+E\+C\+T\+ED}!coap\+\_\+client.\+h@{coap\+\_\+client.\+h}}\index{coap\+\_\+client.\+h@{coap\+\_\+client.\+h}!C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+C\+O\+N\+N\+E\+C\+T\+ED@{C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+C\+O\+N\+N\+E\+C\+T\+ED}}}\mbox{\Hypertarget{coap__client_8h_a0449d3c44dfab2ba1d564f8d7d50bf7daf2b1fd03902d79f892a733141fc320f5}\label{coap__client_8h_a0449d3c44dfab2ba1d564f8d7d50bf7daf2b1fd03902d79f892a733141fc320f5}} 
+C\+O\+A\+P\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+S\+T\+A\+T\+E\+\_\+\+C\+O\+N\+N\+E\+C\+T\+ED&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line 158 of file coap\+\_\+client.\+h.
+
+
+\begin{DoxyCode}
+159 \{
+160    \hyperlink{coap__client_8h_a0449d3c44dfab2ba1d564f8d7d50bf7dad3a0f7ed7f2adb6e9537886342322a1b}{COAP\_CLIENT\_STATE\_DISCONNECTED} = 0,
+161    \hyperlink{coap__client_8h_a0449d3c44dfab2ba1d564f8d7d50bf7dae08fe1c4d93a6c67b7ce7a4b4676a6f8}{COAP\_CLIENT\_STATE\_CONNECTING}   = 1,
+162    \hyperlink{coap__client_8h_a0449d3c44dfab2ba1d564f8d7d50bf7daf2b1fd03902d79f892a733141fc320f5}{COAP\_CLIENT\_STATE\_CONNECTED}    = 2
+163 \} \hyperlink{coap__client_8h_a0449d3c44dfab2ba1d564f8d7d50bf7d}{CoapClientState};
+\end{DoxyCode}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{coap__client_8h_a2a841b0399392d12074d457db31faeb1}\label{coap__client_8h_a2a841b0399392d12074d457db31faeb1}} 
+\index{coap\+\_\+client.\+h@{coap\+\_\+client.\+h}!coap\+Client\+Bind\+To\+Interface@{coap\+Client\+Bind\+To\+Interface}}
+\index{coap\+Client\+Bind\+To\+Interface@{coap\+Client\+Bind\+To\+Interface}!coap\+\_\+client.\+h@{coap\+\_\+client.\+h}}
+\subsubsection{\texorpdfstring{coap\+Client\+Bind\+To\+Interface()}{coapClientBindToInterface()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} coap\+Client\+Bind\+To\+Interface (\begin{DoxyParamCaption}\item[{\hyperlink{coap__client_8h_a3b7ac08b734045846f1dba69cd6b8700}{Coap\+Client\+Context} $\ast$}]{context,  }\item[{\hyperlink{net_8h_a2234db8911a1148c9159979d8f5e0d6b}{Net\+Interface} $\ast$}]{interface }\end{DoxyParamCaption})}
+
+
+
+Bind the Co\+AP client to a particular network interface. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the Co\+AP client context \\
+\hline
+\mbox{\tt in}  & {\em interface} & Network interface to be used \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 240 of file coap\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+242 \{
+243    \textcolor{comment}{//Make sure the CoAP client context is valid}
+244    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+245       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+246 
+247    \textcolor{comment}{//Acquire exclusive access to the CoAP client context}
+248    \hyperlink{os__port__chibios_8c_a58485224df4bfa522246d55b35bbd83a}{osAcquireMutex}(&context->mutex);
+249    \textcolor{comment}{//Explicitly associate the CoAP client with the specified interface}
+250    context->interface = interface;
+251    \textcolor{comment}{//Release exclusive access to the CoAP client context}
+252    \hyperlink{os__port__chibios_8c_a8e10e5b2c6d3877b5ba60e375ac45d79}{osReleaseMutex}(&context->mutex);
+253 
+254    \textcolor{comment}{//Successful processing}
+255    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+256 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{coap__client_8h_ad06da1c2fb4e5cad591eef3e868bc1ac}\label{coap__client_8h_ad06da1c2fb4e5cad591eef3e868bc1ac}} 
+\index{coap\+\_\+client.\+h@{coap\+\_\+client.\+h}!coap\+Client\+Connect@{coap\+Client\+Connect}}
+\index{coap\+Client\+Connect@{coap\+Client\+Connect}!coap\+\_\+client.\+h@{coap\+\_\+client.\+h}}
+\subsubsection{\texorpdfstring{coap\+Client\+Connect()}{coapClientConnect()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} coap\+Client\+Connect (\begin{DoxyParamCaption}\item[{\hyperlink{coap__client_8h_a3b7ac08b734045846f1dba69cd6b8700}{Coap\+Client\+Context} $\ast$}]{context,  }\item[{const \hyperlink{structIpAddr}{Ip\+Addr} $\ast$}]{server\+Ip\+Addr,  }\item[{\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\+\_\+t}}]{server\+Port }\end{DoxyParamCaption})}
+
+
+
+Establish connection with the Co\+AP server. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the Co\+AP client context \\
+\hline
+\mbox{\tt in}  & {\em server\+Ip\+Addr} & IP address of the Co\+AP server to connect to \\
+\hline
+\mbox{\tt in}  & {\em server\+Port} & U\+DP port number that will be used \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 267 of file coap\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+269 \{
+270    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+271    \hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\_t} \hyperlink{dhcpv6__common_8h_ae73654f333e4363463ad8c594eca1905}{time};
+272 
+273    \textcolor{comment}{//Check parameters}
+274    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || serverIpAddr == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+275       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+276 
+277    \textcolor{comment}{//Acquire exclusive access to the CoAP client context}
+278    \hyperlink{os__port__chibios_8c_a58485224df4bfa522246d55b35bbd83a}{osAcquireMutex}(&context->mutex);
+279 
+280    \textcolor{comment}{//Initialize status code}
+281    error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+282 
+283    \textcolor{comment}{//Establish connection with the CoAP server}
+284    \textcolor{keywordflow}{while}(!error)
+285    \{
+286       \textcolor{comment}{//Get current time}
+287       time = \hyperlink{os__port__chibios_8c_ab66a11272d40a916fa69dd8e4dc443d4}{osGetSystemTime}();
+288 
+289       \textcolor{comment}{//Check current state}
+290       \textcolor{keywordflow}{if}(context->state == \hyperlink{coap__client_8h_a0449d3c44dfab2ba1d564f8d7d50bf7dad3a0f7ed7f2adb6e9537886342322a1b}{COAP\_CLIENT\_STATE\_DISCONNECTED})
+291       \{
+292          \textcolor{comment}{//Open network connection}
+293          error = \hyperlink{coap__client__transport_8c_ab52f2e3ea958977bc331746fc970136c}{coapClientOpenConnection}(context);
+294 
+295          \textcolor{comment}{//Check status code}
+296          \textcolor{keywordflow}{if}(!error)
+297          \{
+298             \textcolor{comment}{//Save current time}
+299             context->startTime = \hyperlink{dhcpv6__common_8h_ae73654f333e4363463ad8c594eca1905}{time};
+300             \textcolor{comment}{//Update CoAP client state}
+301             context->state = \hyperlink{coap__client_8h_a0449d3c44dfab2ba1d564f8d7d50bf7dae08fe1c4d93a6c67b7ce7a4b4676a6f8}{COAP\_CLIENT\_STATE\_CONNECTING};
+302          \}
+303       \}
+304       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->state == \hyperlink{coap__client_8h_a0449d3c44dfab2ba1d564f8d7d50bf7dae08fe1c4d93a6c67b7ce7a4b4676a6f8}{COAP\_CLIENT\_STATE\_CONNECTING})
+305       \{
+306          \textcolor{comment}{//Establish DTLS connection}
+307          error = \hyperlink{coap__client__transport_8c_a02ecc6720df0c0182c0bc2a86eb0cf5f}{coapClientEstablishConnection}(context, serverIpAddr,
+308             serverPort);
+309 
+310          \textcolor{comment}{//Check status code}
+311          \textcolor{keywordflow}{if}(error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR})
+312          \{
+313             \textcolor{comment}{//Update CoAP client state}
+314             context->state = \hyperlink{coap__client_8h_a0449d3c44dfab2ba1d564f8d7d50bf7daf2b1fd03902d79f892a733141fc320f5}{COAP\_CLIENT\_STATE\_CONNECTED};
+315          \}
+316          \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(error == \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca16f356a669fbb42deb27f59e9054f6d6}{ERROR\_WOULD\_BLOCK} || error == 
+      \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4d0f7be53b837f004379ac6bbd56f1e2}{ERROR\_TIMEOUT})
+317          \{
+318             \textcolor{comment}{//Check whether the timeout has elapsed}
+319             \textcolor{keywordflow}{if}(\hyperlink{os__port_8h_a25c13833ef003da02045a91b1080263a}{timeCompare}(time, context->startTime + context->timeout) < 0)
+320             \{
+321                \textcolor{comment}{//Wait for an incoming datagram}
+322                \hyperlink{coap__client__transport_8c_a7bb185cfc769269b364e1ff097dd3304}{coapClientWaitForDatagram}(context, 
+      \hyperlink{coap__client_8h_ab1261a7201fa9fadec7e0e2f3ce1e903}{COAP\_CLIENT\_TICK\_INTERVAL});
+323                \textcolor{comment}{//Continue processing}
+324                error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+325             \}
+326             \textcolor{keywordflow}{else}
+327             \{
+328                \textcolor{comment}{//Report an error}
+329                error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca4d0f7be53b837f004379ac6bbd56f1e2}{ERROR\_TIMEOUT};
+330             \}
+331          \}
+332          \textcolor{keywordflow}{else}
+333          \{
+334             \textcolor{comment}{//Just for sanity}
+335          \}
+336       \}
+337       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(context->state == \hyperlink{coap__client_8h_a0449d3c44dfab2ba1d564f8d7d50bf7daf2b1fd03902d79f892a733141fc320f5}{COAP\_CLIENT\_STATE\_CONNECTED})
+338       \{
+339          \textcolor{comment}{//The CoAP client is connected}
+340          \textcolor{keywordflow}{break};
+341       \}
+342       \textcolor{keywordflow}{else}
+343       \{
+344          \textcolor{comment}{//Invalid state}
+345          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cac3190fa1f36c6acf147c7ce453a655e2}{ERROR\_WRONG\_STATE};
+346       \}
+347    \}
+348 
+349    \textcolor{comment}{//Failed to establish connection with the CoAP server?}
+350    \textcolor{keywordflow}{if}(error)
+351    \{
+352       \textcolor{comment}{//Clean up side effects}
+353       \hyperlink{coap__client__transport_8c_aa78a3d35639a16fbaf4a7a9c74427894}{coapClientCloseConnection}(context);
+354       \textcolor{comment}{//Update CoAP client state}
+355       context->state = \hyperlink{coap__client_8h_a0449d3c44dfab2ba1d564f8d7d50bf7dad3a0f7ed7f2adb6e9537886342322a1b}{COAP\_CLIENT\_STATE\_DISCONNECTED};
+356    \}
+357 
+358    \textcolor{comment}{//Release exclusive access to the CoAP client context}
+359    \hyperlink{os__port__chibios_8c_a8e10e5b2c6d3877b5ba60e375ac45d79}{osReleaseMutex}(&context->mutex);
+360 
+361    \textcolor{comment}{//Return status code}
+362    \textcolor{keywordflow}{return} error;
+363 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{coap__client_8h_a6288c0fc8c4c0ffd32fa2647da14cc98}\label{coap__client_8h_a6288c0fc8c4c0ffd32fa2647da14cc98}} 
+\index{coap\+\_\+client.\+h@{coap\+\_\+client.\+h}!coap\+Client\+Deinit@{coap\+Client\+Deinit}}
+\index{coap\+Client\+Deinit@{coap\+Client\+Deinit}!coap\+\_\+client.\+h@{coap\+\_\+client.\+h}}
+\subsubsection{\texorpdfstring{coap\+Client\+Deinit()}{coapClientDeinit()}}
+{\footnotesize\ttfamily void coap\+Client\+Deinit (\begin{DoxyParamCaption}\item[{\hyperlink{coap__client_8h_a3b7ac08b734045846f1dba69cd6b8700}{Coap\+Client\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Release Co\+AP client context. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the Co\+AP client context \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 438 of file coap\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+439 \{
+440    \textcolor{comment}{//Make sure the CoAP client context is valid}
+441    \textcolor{keywordflow}{if}(context != \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+442    \{
+443       \textcolor{comment}{//Close connection}
+444       \hyperlink{coap__client__transport_8c_aa78a3d35639a16fbaf4a7a9c74427894}{coapClientCloseConnection}(context);
+445 
+446 \textcolor{preprocessor}{#if (COAP\_CLIENT\_DTLS\_SUPPORT == ENABLED)}
+447       \textcolor{comment}{//Release DTLS session state}
+448       \hyperlink{tls_8c_a6e78d966a9bcd9eb6210c996389f6551}{tlsFreeSessionState}(&context->dtlsSession);
+449 \textcolor{preprocessor}{#endif}
+450 
+451       \textcolor{comment}{//Release previously allocated resources}
+452       \hyperlink{os__port__chibios_8c_a2b0ba1e39227e4a4d52ee46bbee15c11}{osDeleteMutex}(&context->mutex);
+453       \hyperlink{os__port__chibios_8c_a25827a49278bad6150b04b47165fda3d}{osDeleteEvent}(&context->event);
+454 
+455       \textcolor{comment}{//Clear CoAP client context}
+456       memset(context, 0, \textcolor{keyword}{sizeof}(\hyperlink{coap__client_8h_a3b7ac08b734045846f1dba69cd6b8700}{CoapClientContext}));
+457    \}
+458 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{coap__client_8h_a56a8e9370dc4de1d5173b7a5425b7d46}\label{coap__client_8h_a56a8e9370dc4de1d5173b7a5425b7d46}} 
+\index{coap\+\_\+client.\+h@{coap\+\_\+client.\+h}!coap\+Client\+Disconnect@{coap\+Client\+Disconnect}}
+\index{coap\+Client\+Disconnect@{coap\+Client\+Disconnect}!coap\+\_\+client.\+h@{coap\+\_\+client.\+h}}
+\subsubsection{\texorpdfstring{coap\+Client\+Disconnect()}{coapClientDisconnect()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} coap\+Client\+Disconnect (\begin{DoxyParamCaption}\item[{\hyperlink{coap__client_8h_a3b7ac08b734045846f1dba69cd6b8700}{Coap\+Client\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Disconnect from the Co\+AP server. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the Co\+AP client context \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 399 of file coap\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+400 \{
+401    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+402 
+403    \textcolor{comment}{//Make sure the CoAP client context is valid}
+404    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+405       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+406 
+407    \textcolor{comment}{//Initialize status code}
+408    error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+409 
+410    \textcolor{comment}{//Acquire exclusive access to the CoAP client context}
+411    \hyperlink{os__port__chibios_8c_a58485224df4bfa522246d55b35bbd83a}{osAcquireMutex}(&context->mutex);
+412 
+413    \textcolor{comment}{//Check current state}
+414    \textcolor{keywordflow}{if}(context->state == \hyperlink{coap__client_8h_a0449d3c44dfab2ba1d564f8d7d50bf7daf2b1fd03902d79f892a733141fc320f5}{COAP\_CLIENT\_STATE\_CONNECTED})
+415    \{
+416       \textcolor{comment}{//Terminate DTLS connection}
+417       error = \hyperlink{coap__client__transport_8c_a4e5aafffd27f66e86af5b623a2a91d68}{coapClientShutdownConnection}(context);
+418    \}
+419 
+420    \textcolor{comment}{//Close connection}
+421    \hyperlink{coap__client__transport_8c_aa78a3d35639a16fbaf4a7a9c74427894}{coapClientCloseConnection}(context);
+422    \textcolor{comment}{//Update CoAP client state}
+423    context->state = \hyperlink{coap__client_8h_a0449d3c44dfab2ba1d564f8d7d50bf7dad3a0f7ed7f2adb6e9537886342322a1b}{COAP\_CLIENT\_STATE\_DISCONNECTED};
+424 
+425    \textcolor{comment}{//Release exclusive access to the CoAP client context}
+426    \hyperlink{os__port__chibios_8c_a8e10e5b2c6d3877b5ba60e375ac45d79}{osReleaseMutex}(&context->mutex);
+427 
+428    \textcolor{comment}{//Return status code}
+429    \textcolor{keywordflow}{return} error;
+430 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{coap__client_8h_abd7ecea724f1954bed5132ea03b0c4c8}\label{coap__client_8h_abd7ecea724f1954bed5132ea03b0c4c8}} 
+\index{coap\+\_\+client.\+h@{coap\+\_\+client.\+h}!coap\+Client\+Init@{coap\+Client\+Init}}
+\index{coap\+Client\+Init@{coap\+Client\+Init}!coap\+\_\+client.\+h@{coap\+\_\+client.\+h}}
+\subsubsection{\texorpdfstring{coap\+Client\+Init()}{coapClientInit()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} coap\+Client\+Init (\begin{DoxyParamCaption}\item[{\hyperlink{coap__client_8h_a3b7ac08b734045846f1dba69cd6b8700}{Coap\+Client\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Initialize Co\+AP client context. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the Co\+AP client context \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 53 of file coap\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+54 \{
+55    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+56 
+57    \textcolor{comment}{//Make sure the CoAP client context is valid}
+58    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+59       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+60 
+61    \textcolor{comment}{//Clear CoAP client context}
+62    memset(context, 0, \textcolor{keyword}{sizeof}(\hyperlink{coap__client_8h_a3b7ac08b734045846f1dba69cd6b8700}{CoapClientContext}));
+63 
+64    \textcolor{comment}{//Initialize status code}
+65    error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+66 
+67    \textcolor{comment}{//Start of exception handling block}
+68    \textcolor{keywordflow}{do}
+69    \{
+70       \textcolor{comment}{//Create a mutex to prevent simultaneous access to the context}
+71       \textcolor{keywordflow}{if}(!\hyperlink{os__port__chibios_8c_a16627f901c807c29adf29a38fb1af16a}{osCreateMutex}(&context->mutex))
+72       \{
+73          \textcolor{comment}{//Report an error}
+74          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca528efe91b7a7e4bcc9a6de7d4b778c67}{ERROR\_OUT\_OF\_RESOURCES};
+75          \textcolor{keywordflow}{break};
+76       \}
+77 
+78       \textcolor{comment}{//Create a event object to receive notifications}
+79       \textcolor{keywordflow}{if}(!\hyperlink{os__port__chibios_8c_ac1658f3fed1eb64efcd47e4503a9ef2e}{osCreateEvent}(&context->event))
+80       \{
+81          \textcolor{comment}{//Report an error}
+82          error = \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca528efe91b7a7e4bcc9a6de7d4b778c67}{ERROR\_OUT\_OF\_RESOURCES};
+83          \textcolor{keywordflow}{break};
+84       \}
+85 
+86 \textcolor{preprocessor}{#if (COAP\_CLIENT\_DTLS\_SUPPORT == ENABLED)}
+87       \textcolor{comment}{//Initialize DTLS session state}
+88       error = \hyperlink{tls_8c_aea7b98b4b876fe45322df04583f7c1b4}{tlsInitSessionState}(&context->dtlsSession);
+89       \textcolor{comment}{//Any error to report?}
+90       \textcolor{keywordflow}{if}(error)
+91          \textcolor{keywordflow}{break};
+92 \textcolor{preprocessor}{#endif}
+93 
+94       \textcolor{comment}{//Initialize CoAP client state}
+95       context->state = \hyperlink{coap__client_8h_a0449d3c44dfab2ba1d564f8d7d50bf7dad3a0f7ed7f2adb6e9537886342322a1b}{COAP\_CLIENT\_STATE\_DISCONNECTED};
+96 
+97       \textcolor{comment}{//Default transport protocol}
+98       context->transportProtocol = \hyperlink{coap__common_8h_acfca0beb05471516d1793f8ae992c53aa5f69df39a6421b434e1d80e5cdee49f0}{COAP\_TRANSPORT\_PROTOCOL\_UDP};
+99       \textcolor{comment}{//Default timeout}
+100       context->timeout = \hyperlink{coap__client_8h_a55fdef6691d3e20aa7577c1261237bff}{COAP\_CLIENT\_DEFAULT\_TIMEOUT};
+101       \textcolor{comment}{//Default token length}
+102       context->tokenLen = \hyperlink{coap__client_8h_af1774ef80e655013dd33ee27552132c9}{COAP\_CLIENT\_DEFAULT\_TOKEN\_LEN};
+103 
+104       \textcolor{comment}{//It is strongly recommended that the initial value of the message ID}
+105       \textcolor{comment}{//be randomized (refer to RFC 7252, section 4.4)}
+106       context->mid = (\hyperlink{stdint_8h_a273cf69d639a59973b6019625df33e30}{uint16\_t}) \hyperlink{net_8c_a7bb00b31d641749ac8ce742261eb1f6d}{netGetRand}();
+107 
+108       \textcolor{comment}{//End of exception handling block}
+109    \} \textcolor{keywordflow}{while}(0);
+110 
+111    \textcolor{comment}{//Check status code}
+112    \textcolor{keywordflow}{if}(error)
+113    \{
+114       \textcolor{comment}{//Clean up side effects}
+115       \hyperlink{coap__client_8c_a6288c0fc8c4c0ffd32fa2647da14cc98}{coapClientDeinit}(context);
+116    \}
+117 
+118    \textcolor{comment}{//Return status code}
+119    \textcolor{keywordflow}{return} error;
+120 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{coap__client_8h_accef1396d03af23a50f8586b5c9417d1}\label{coap__client_8h_accef1396d03af23a50f8586b5c9417d1}} 
+\index{coap\+\_\+client.\+h@{coap\+\_\+client.\+h}!coap\+Client\+Register\+Dtls\+Init\+Callback@{coap\+Client\+Register\+Dtls\+Init\+Callback}}
+\index{coap\+Client\+Register\+Dtls\+Init\+Callback@{coap\+Client\+Register\+Dtls\+Init\+Callback}!coap\+\_\+client.\+h@{coap\+\_\+client.\+h}}
+\subsubsection{\texorpdfstring{coap\+Client\+Register\+Dtls\+Init\+Callback()}{coapClientRegisterDtlsInitCallback()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} coap\+Client\+Register\+Dtls\+Init\+Callback (\begin{DoxyParamCaption}\item[{\hyperlink{coap__client_8h_a3b7ac08b734045846f1dba69cd6b8700}{Coap\+Client\+Context} $\ast$}]{context,  }\item[{\hyperlink{coap__client_8h_a8d82e4052cfdce573905e9b9c6e302df}{Coap\+Client\+Dtls\+Init\+Callback}}]{callback }\end{DoxyParamCaption})}
+
+
+
+Register D\+T\+LS initialization callback function. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the Co\+AP client context \\
+\hline
+\mbox{\tt in}  & {\em callback} & D\+T\+LS initialization callback function \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 158 of file coap\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+160 \{
+161    \textcolor{comment}{//Check parameters}
+162    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL} || callback == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+163       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+164 
+165    \textcolor{comment}{//Acquire exclusive access to the CoAP client context}
+166    \hyperlink{os__port__chibios_8c_a58485224df4bfa522246d55b35bbd83a}{osAcquireMutex}(&context->mutex);
+167    \textcolor{comment}{//Save callback function}
+168    context->dtlsInitCallback = callback;
+169    \textcolor{comment}{//Release exclusive access to the CoAP client context}
+170    \hyperlink{os__port__chibios_8c_a8e10e5b2c6d3877b5ba60e375ac45d79}{osReleaseMutex}(&context->mutex);
+171 
+172    \textcolor{comment}{//Successful processing}
+173    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+174 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{coap__client_8h_a4daa91377319dd999ba4d7212039d292}\label{coap__client_8h_a4daa91377319dd999ba4d7212039d292}} 
+\index{coap\+\_\+client.\+h@{coap\+\_\+client.\+h}!coap\+Client\+Set\+Timeout@{coap\+Client\+Set\+Timeout}}
+\index{coap\+Client\+Set\+Timeout@{coap\+Client\+Set\+Timeout}!coap\+\_\+client.\+h@{coap\+\_\+client.\+h}}
+\subsubsection{\texorpdfstring{coap\+Client\+Set\+Timeout()}{coapClientSetTimeout()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} coap\+Client\+Set\+Timeout (\begin{DoxyParamCaption}\item[{\hyperlink{coap__client_8h_a3b7ac08b734045846f1dba69cd6b8700}{Coap\+Client\+Context} $\ast$}]{context,  }\item[{\hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\+\_\+t}}]{timeout }\end{DoxyParamCaption})}
+
+
+
+Set default request timeout. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the Co\+AP client context \\
+\hline
+\mbox{\tt in}  & {\em timeout} & Timeout value, in milliseconds \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 186 of file coap\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+187 \{
+188    \textcolor{comment}{//Make sure the CoAP client context is valid}
+189    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+190       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+191 
+192    \textcolor{comment}{//Acquire exclusive access to the CoAP client context}
+193    \hyperlink{os__port__chibios_8c_a58485224df4bfa522246d55b35bbd83a}{osAcquireMutex}(&context->mutex);
+194    \textcolor{comment}{//Save timeout value}
+195    context->timeout = timeout;
+196    \textcolor{comment}{//Release exclusive access to the CoAP client context}
+197    \hyperlink{os__port__chibios_8c_a8e10e5b2c6d3877b5ba60e375ac45d79}{osReleaseMutex}(&context->mutex);
+198 
+199    \textcolor{comment}{//Successful processing}
+200    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+201 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{coap__client_8h_a5ffa2e560377a0a8838d62691646289a}\label{coap__client_8h_a5ffa2e560377a0a8838d62691646289a}} 
+\index{coap\+\_\+client.\+h@{coap\+\_\+client.\+h}!coap\+Client\+Set\+Token\+Length@{coap\+Client\+Set\+Token\+Length}}
+\index{coap\+Client\+Set\+Token\+Length@{coap\+Client\+Set\+Token\+Length}!coap\+\_\+client.\+h@{coap\+\_\+client.\+h}}
+\subsubsection{\texorpdfstring{coap\+Client\+Set\+Token\+Length()}{coapClientSetTokenLength()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} coap\+Client\+Set\+Token\+Length (\begin{DoxyParamCaption}\item[{\hyperlink{coap__client_8h_a3b7ac08b734045846f1dba69cd6b8700}{Coap\+Client\+Context} $\ast$}]{context,  }\item[{size\+\_\+t}]{length }\end{DoxyParamCaption})}
+
+
+
+Set the length of the token. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the Co\+AP client context \\
+\hline
+\mbox{\tt in}  & {\em length} & Token length \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 211 of file coap\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+212 \{
+213    \textcolor{comment}{//Make sure the CoAP client context is valid}
+214    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+215       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+216 
+217    \textcolor{comment}{//Make sure the token length is acceptable}
+218    \textcolor{keywordflow}{if}(\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} > \hyperlink{coap__common_8h_af8d60904caba59c879459011aa84e7ab}{COAP\_MAX\_TOKEN\_LEN})
+219       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+220 
+221    \textcolor{comment}{//Acquire exclusive access to the CoAP client context}
+222    \hyperlink{os__port__chibios_8c_a58485224df4bfa522246d55b35bbd83a}{osAcquireMutex}(&context->mutex);
+223    \textcolor{comment}{//Save token length}
+224    context->tokenLen = \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length};
+225    \textcolor{comment}{//Release exclusive access to the CoAP client context}
+226    \hyperlink{os__port__chibios_8c_a8e10e5b2c6d3877b5ba60e375ac45d79}{osReleaseMutex}(&context->mutex);
+227 
+228    \textcolor{comment}{//Successful processing}
+229    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+230 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{coap__client_8h_ac27dadbabb85d1cd65f9004ac67943b7}\label{coap__client_8h_ac27dadbabb85d1cd65f9004ac67943b7}} 
+\index{coap\+\_\+client.\+h@{coap\+\_\+client.\+h}!coap\+Client\+Set\+Transport\+Protocol@{coap\+Client\+Set\+Transport\+Protocol}}
+\index{coap\+Client\+Set\+Transport\+Protocol@{coap\+Client\+Set\+Transport\+Protocol}!coap\+\_\+client.\+h@{coap\+\_\+client.\+h}}
+\subsubsection{\texorpdfstring{coap\+Client\+Set\+Transport\+Protocol()}{coapClientSetTransportProtocol()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} coap\+Client\+Set\+Transport\+Protocol (\begin{DoxyParamCaption}\item[{\hyperlink{coap__client_8h_a3b7ac08b734045846f1dba69cd6b8700}{Coap\+Client\+Context} $\ast$}]{context,  }\item[{\hyperlink{coap__common_8h_acfca0beb05471516d1793f8ae992c53a}{Coap\+Transport\+Protocol}}]{transport\+Protocol }\end{DoxyParamCaption})}
+
+
+
+Set the transport protocol to be used. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the Co\+AP client context \\
+\hline
+\mbox{\tt in}  & {\em transport\+Protocol} & Transport protocol to be used (U\+DP or D\+T\+LS) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 130 of file coap\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+132 \{
+133    \textcolor{comment}{//Make sure the CoAP client context is valid}
+134    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+135       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+136 
+137    \textcolor{comment}{//Acquire exclusive access to the CoAP client context}
+138    \hyperlink{os__port__chibios_8c_a58485224df4bfa522246d55b35bbd83a}{osAcquireMutex}(&context->mutex);
+139    \textcolor{comment}{//Save the transport protocol to be used}
+140    context->transportProtocol = transportProtocol;
+141    \textcolor{comment}{//Release exclusive access to the CoAP client context}
+142    \hyperlink{os__port__chibios_8c_a8e10e5b2c6d3877b5ba60e375ac45d79}{osReleaseMutex}(&context->mutex);
+143 
+144    \textcolor{comment}{//Successful processing}
+145    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+146 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{coap__client_8h_a0fbfade6b128057b5d24c2206ef8df70}\label{coap__client_8h_a0fbfade6b128057b5d24c2206ef8df70}} 
+\index{coap\+\_\+client.\+h@{coap\+\_\+client.\+h}!coap\+Client\+Task@{coap\+Client\+Task}}
+\index{coap\+Client\+Task@{coap\+Client\+Task}!coap\+\_\+client.\+h@{coap\+\_\+client.\+h}}
+\subsubsection{\texorpdfstring{coap\+Client\+Task()}{coapClientTask()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} coap\+Client\+Task (\begin{DoxyParamCaption}\item[{\hyperlink{coap__client_8h_a3b7ac08b734045846f1dba69cd6b8700}{Coap\+Client\+Context} $\ast$}]{context,  }\item[{\hyperlink{compiler__port_8h_ae3e32a98d431a02106616da3071832dd}{systime\+\_\+t}}]{timeout }\end{DoxyParamCaption})}
+
+
+
+Process Co\+AP client events. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the Co\+AP client context \\
+\hline
+\mbox{\tt in}  & {\em timeout} & Maximum time to wait before returning \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 373 of file coap\+\_\+client.\+c.
+
+
+\begin{DoxyCode}
+374 \{
+375    \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\_t} error;
+376 
+377    \textcolor{comment}{//Make sure the CoAP client context is valid}
+378    \textcolor{keywordflow}{if}(context == \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL})
+379       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+380 
+381    \textcolor{comment}{//Acquire exclusive access to the CoAP client context}
+382    \hyperlink{os__port__chibios_8c_a58485224df4bfa522246d55b35bbd83a}{osAcquireMutex}(&context->mutex);
+383    \textcolor{comment}{//Process CoAP client events}
+384    error = \hyperlink{coap__client__misc_8c_aeb4d9d3f14c4fe35cf886dd06fd737ee}{coapClientProcessEvents}(context, timeout);
+385    \textcolor{comment}{//Release exclusive access to the CoAP client context}
+386    \hyperlink{os__port__chibios_8c_a8e10e5b2c6d3877b5ba60e375ac45d79}{osReleaseMutex}(&context->mutex);
+387 
+388    \textcolor{comment}{//Return status code}
+389    \textcolor{keywordflow}{return} error;
+390 \}
+\end{DoxyCode}

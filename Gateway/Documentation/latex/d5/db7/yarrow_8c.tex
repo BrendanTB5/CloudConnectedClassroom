@@ -1,0 +1,545 @@
+\hypertarget{yarrow_8c}{}\section{cyclone\+\_\+crypto/rng/yarrow.c File Reference}
+\label{yarrow_8c}\index{cyclone\+\_\+crypto/rng/yarrow.\+c@{cyclone\+\_\+crypto/rng/yarrow.\+c}}
+
+
+Yarrow P\+R\+NG.  
+
+
+{\ttfamily \#include \char`\"{}core/crypto.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}rng/yarrow.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}debug.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{yarrow_8c_afcdf5e66fd927a7f4cc64295acd20407}{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}~\hyperlink{crypto__config_8h_a6afae3a9b63f9b55d979e667ee0e881d}{C\+R\+Y\+P\+T\+O\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{yarrow_8c_a3f6057971e328bd5132541d403442edb}{yarrow\+Init} (\hyperlink{structYarrowContext}{Yarrow\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Initialize P\+R\+NG context. \end{DoxyCompactList}\item 
+void \hyperlink{yarrow_8c_aa0d619039d634de91591942b29ec61d1}{yarrow\+Release} (\hyperlink{structYarrowContext}{Yarrow\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Release P\+R\+NG context. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{yarrow_8c_a3e7e278386284e1660d07aa01d61ae1f}{yarrow\+Seed} (\hyperlink{structYarrowContext}{Yarrow\+Context} $\ast$context, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$input, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length})
+\begin{DoxyCompactList}\small\item\em Seed the P\+R\+NG state. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{yarrow_8c_a491ad3f023adc73814060c279ae6407f}{yarrow\+Add\+Entropy} (\hyperlink{structYarrowContext}{Yarrow\+Context} $\ast$context, \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t} source, const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$input, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length}, size\+\_\+t entropy)
+\begin{DoxyCompactList}\small\item\em Add entropy to the P\+R\+NG state. \end{DoxyCompactList}\item 
+\hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} \hyperlink{yarrow_8c_a134f7399665078a3bf26c324695daf67}{yarrow\+Read} (\hyperlink{structYarrowContext}{Yarrow\+Context} $\ast$context, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$output, size\+\_\+t \hyperlink{ppp_8h_ab2b3adeb2a67e656ff030b56727fd0ac}{length})
+\begin{DoxyCompactList}\small\item\em Read random data. \end{DoxyCompactList}\item 
+void \hyperlink{yarrow_8c_aa2513e4aab8801299c9e45cf7f3bbd80}{yarrow\+Generate\+Block} (\hyperlink{structYarrowContext}{Yarrow\+Context} $\ast$context, \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$output)
+\begin{DoxyCompactList}\small\item\em Generate a random block of data. \end{DoxyCompactList}\item 
+void \hyperlink{yarrow_8c_a2e59e2e30f7a03ed5b67764741c4e03c}{yarrow\+Fast\+Reseed} (\hyperlink{structYarrowContext}{Yarrow\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Reseed from the fast pool. \end{DoxyCompactList}\item 
+void \hyperlink{yarrow_8c_aadafbac6f16263ce583fee784cf02e5c}{yarrow\+Slow\+Reseed} (\hyperlink{structYarrowContext}{Yarrow\+Context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Reseed from the slow pool. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const \hyperlink{structPrngAlgo}{Prng\+Algo} \hyperlink{yarrow_8c_a672ac827cc558585820767176cf477dd}{yarrow\+Prng\+Algo}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Yarrow P\+R\+NG. 
+
+\hypertarget{pic32mz__ef__curiosity_8h_License}{}\subsection{License}\label{pic32mz__ef__curiosity_8h_License}
+S\+P\+D\+X-\/\+License-\/\+Identifier\+: G\+P\+L-\/2.\+0-\/or-\/later
+
+Copyright (C) 2010-\/2019 Oryx Embedded S\+A\+RL. All rights reserved.
+
+This file is part of Cyclone\+Crypto Open.
+
+This program is free software; you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+
+You should have received a copy of the G\+NU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-\/1301, U\+SA.
+
+\begin{DoxyAuthor}{Author}
+Oryx Embedded S\+A\+RL (www.\+oryx-\/embedded.\+com) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+9.\+6 
+\end{DoxyVersion}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{yarrow_8c_afcdf5e66fd927a7f4cc64295acd20407}\label{yarrow_8c_afcdf5e66fd927a7f4cc64295acd20407}} 
+\index{yarrow.\+c@{yarrow.\+c}!T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+\index{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL@{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}!yarrow.\+c@{yarrow.\+c}}
+\subsubsection{\texorpdfstring{T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}{TRACE\_LEVEL}}
+{\footnotesize\ttfamily \#define T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL~\hyperlink{crypto__config_8h_a6afae3a9b63f9b55d979e667ee0e881d}{C\+R\+Y\+P\+T\+O\+\_\+\+T\+R\+A\+C\+E\+\_\+\+L\+E\+V\+EL}}
+
+
+
+Definition at line 32 of file yarrow.\+c.
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{yarrow_8c_a491ad3f023adc73814060c279ae6407f}\label{yarrow_8c_a491ad3f023adc73814060c279ae6407f}} 
+\index{yarrow.\+c@{yarrow.\+c}!yarrow\+Add\+Entropy@{yarrow\+Add\+Entropy}}
+\index{yarrow\+Add\+Entropy@{yarrow\+Add\+Entropy}!yarrow.\+c@{yarrow.\+c}}
+\subsubsection{\texorpdfstring{yarrow\+Add\+Entropy()}{yarrowAddEntropy()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} yarrow\+Add\+Entropy (\begin{DoxyParamCaption}\item[{\hyperlink{structYarrowContext}{Yarrow\+Context} $\ast$}]{context,  }\item[{\hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\+\_\+t}}]{source,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{input,  }\item[{size\+\_\+t}]{length,  }\item[{size\+\_\+t}]{entropy }\end{DoxyParamCaption})}
+
+
+
+Add entropy to the P\+R\+NG state. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the P\+R\+NG context \\
+\hline
+\mbox{\tt in}  & {\em source} & Entropy source identifier \\
+\hline
+\mbox{\tt in}  & {\em input} & Pointer to the input data \\
+\hline
+\mbox{\tt in}  & {\em length} & Length of the input data \\
+\hline
+\mbox{\tt in}  & {\em entropy} & Actual number of bits of entropy \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 134 of file yarrow.\+c.
+
+
+\begin{DoxyCode}
+136 \{
+137    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} i;
+138    \hyperlink{compiler__port_8h_a12a1e9b3ce141648783a82445d02b58d}{uint\_t} \hyperlink{md5_8c_af11ea3cdbca7345eb6a4a8ac5ce0434d}{k};
+139 
+140    \textcolor{comment}{//Check parameters}
+141    \textcolor{keywordflow}{if}(source >= \hyperlink{yarrow_8h_a26ee6536b9ff794ba4a21956c7dc44a5}{YARROW\_N})
+142       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+143 
+144    \textcolor{comment}{//Acquire exclusive access to the PRNG state}
+145    \hyperlink{os__port__chibios_8c_a58485224df4bfa522246d55b35bbd83a}{osAcquireMutex}(&context->\hyperlink{structYarrowContext_ad640562fce2921008b8e1203a04b45a7}{mutex});
+146 
+147    \textcolor{comment}{//Entropy from samples are collected into two pools}
+148    \textcolor{keywordflow}{if}(context->\hyperlink{structYarrowContext_ab70fd1773a6e3de3ab5be0149bb1d3f0}{currentPool}[source] == \hyperlink{yarrow_8h_af44bf1f4b7e4fdecc2b3f8ae1652306f}{YARROW\_FAST\_POOL\_ID})
+149    \{
+150       \textcolor{comment}{//Each pool contains running hash of all inputs since last reseed}
+151       \hyperlink{sha256_8c_a9086d4b2fdb4be9ebe5f7b72b5f17a56}{sha256Update}(&context->\hyperlink{structYarrowContext_a0cc3cd3fb0c205a927a72c384ade1b29}{fastPool}, input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length});
+152       \textcolor{comment}{//Estimate the amount of entropy we have collected thus far}
+153       context->\hyperlink{structYarrowContext_aa98934d1f80991748c2ae6ce898dee2c}{fastPoolEntropy}[source] += entropy;
+154 
+155       \textcolor{comment}{//Reseed when any source estimate reaches 100 bits}
+156       \textcolor{keywordflow}{if}(context->\hyperlink{structYarrowContext_aa98934d1f80991748c2ae6ce898dee2c}{fastPoolEntropy}[source] >= 
+      \hyperlink{yarrow_8h_a602857f5d428366fb67904fc4d2f72f5}{YARROW\_FAST\_THRESHOLD})
+157          \hyperlink{yarrow_8c_a2e59e2e30f7a03ed5b67764741c4e03c}{yarrowFastReseed}(context);
+158 
+159       \textcolor{comment}{//The samples from each source alternate between the two pools}
+160       context->\hyperlink{structYarrowContext_ab70fd1773a6e3de3ab5be0149bb1d3f0}{currentPool}[source] = \hyperlink{yarrow_8h_a0329ed75a959ba635a2263456f71dd8a}{YARROW\_SLOW\_POOL\_ID};
+161    \}
+162    \textcolor{keywordflow}{else}
+163    \{
+164       \textcolor{comment}{//Each pool contains running hash of all inputs since last reseed}
+165       \hyperlink{sha256_8c_a9086d4b2fdb4be9ebe5f7b72b5f17a56}{sha256Update}(&context->\hyperlink{structYarrowContext_afa35e962f4269b12f40dfc3f93ea64c4}{slowPool}, input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length});
+166       \textcolor{comment}{//Estimate the amount of entropy we have collected thus far}
+167       context->\hyperlink{structYarrowContext_a295ac4bb5a95ce6237ad0b6a9776eff9}{slowPoolEntropy}[source] += entropy;
+168 
+169       \textcolor{comment}{//Prevent overflows while adding up the entropy estimate}
+170       \textcolor{keywordflow}{if}(context->\hyperlink{structYarrowContext_a295ac4bb5a95ce6237ad0b6a9776eff9}{slowPoolEntropy}[source] >= 
+      \hyperlink{yarrow_8h_abcc065e8e8adcc5514c0a4f1eb119597}{YARROW\_SLOW\_THRESHOLD})
+171          context->\hyperlink{structYarrowContext_a295ac4bb5a95ce6237ad0b6a9776eff9}{slowPoolEntropy}[source] = \hyperlink{yarrow_8h_abcc065e8e8adcc5514c0a4f1eb119597}{YARROW\_SLOW\_THRESHOLD};
+172 
+173       \textcolor{comment}{//At least two different sources must be over 160 bits in the slow}
+174       \textcolor{comment}{//pool before the slow pool reseeds}
+175       \textcolor{keywordflow}{for}(k = 0, i = 0; i < \hyperlink{yarrow_8h_a26ee6536b9ff794ba4a21956c7dc44a5}{YARROW\_N}; i++)
+176       \{
+177          \textcolor{comment}{//Check whether the current source has hit the threshold}
+178          \textcolor{keywordflow}{if}(context->\hyperlink{structYarrowContext_a295ac4bb5a95ce6237ad0b6a9776eff9}{slowPoolEntropy}[i] >= \hyperlink{yarrow_8h_abcc065e8e8adcc5514c0a4f1eb119597}{YARROW\_SLOW\_THRESHOLD})
+179             k++;
+180       \}
+181 
+182       \textcolor{comment}{//Reseed from the slow pool?}
+183       \textcolor{keywordflow}{if}(k >= \hyperlink{yarrow_8h_ae0cd9939185c37fa8bd9c3d32b32125d}{YARROW\_K})
+184          \hyperlink{yarrow_8c_aadafbac6f16263ce583fee784cf02e5c}{yarrowSlowReseed}(context);
+185 
+186       \textcolor{comment}{//The samples from each source alternate between the two pools}
+187       context->\hyperlink{structYarrowContext_ab70fd1773a6e3de3ab5be0149bb1d3f0}{currentPool}[source] = \hyperlink{yarrow_8h_af44bf1f4b7e4fdecc2b3f8ae1652306f}{YARROW\_FAST\_POOL\_ID};
+188    \}
+189 
+190    \textcolor{comment}{//Release exclusive access to the PRNG state}
+191    \hyperlink{os__port__chibios_8c_a8e10e5b2c6d3877b5ba60e375ac45d79}{osReleaseMutex}(&context->\hyperlink{structYarrowContext_ad640562fce2921008b8e1203a04b45a7}{mutex});
+192 
+193    \textcolor{comment}{//Successful processing}
+194    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+195 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{yarrow_8c_a2e59e2e30f7a03ed5b67764741c4e03c}\label{yarrow_8c_a2e59e2e30f7a03ed5b67764741c4e03c}} 
+\index{yarrow.\+c@{yarrow.\+c}!yarrow\+Fast\+Reseed@{yarrow\+Fast\+Reseed}}
+\index{yarrow\+Fast\+Reseed@{yarrow\+Fast\+Reseed}!yarrow.\+c@{yarrow.\+c}}
+\subsubsection{\texorpdfstring{yarrow\+Fast\+Reseed()}{yarrowFastReseed()}}
+{\footnotesize\ttfamily void yarrow\+Fast\+Reseed (\begin{DoxyParamCaption}\item[{\hyperlink{structYarrowContext}{Yarrow\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Reseed from the fast pool. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the P\+R\+NG context \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 285 of file yarrow.\+c.
+
+
+\begin{DoxyCode}
+286 \{
+287    \textcolor{keywordtype}{size\_t} i;
+288 
+289    \textcolor{comment}{//Reseeding from the fast pool use the current key and the hash of all}
+290    \textcolor{comment}{//inputs to the fast pool since the last reseed, to generate a new key}
+291    \hyperlink{sha256_8c_a9086d4b2fdb4be9ebe5f7b72b5f17a56}{sha256Update}(&context->\hyperlink{structYarrowContext_a0cc3cd3fb0c205a927a72c384ade1b29}{fastPool}, context->\hyperlink{structYarrowContext_af6ae1cbcaa5dd10f23acade23fb2b79c}{key}, \textcolor{keyword}{sizeof}(context->
+      \hyperlink{structYarrowContext_af6ae1cbcaa5dd10f23acade23fb2b79c}{key}));
+292    \hyperlink{sha256_8c_a92fa8ca8cd5a039515feb6f40190dbd8}{sha256Final}(&context->\hyperlink{structYarrowContext_a0cc3cd3fb0c205a927a72c384ade1b29}{fastPool}, context->\hyperlink{structYarrowContext_af6ae1cbcaa5dd10f23acade23fb2b79c}{key});
+293 
+294    \textcolor{comment}{//Set the new key}
+295    \hyperlink{aes_8c_a1786debf48f536d5dd454e4a8f7ecd0f}{aesInit}(&context->\hyperlink{structYarrowContext_a20f7d783d0cbf6427551cd60f6a4b13d}{cipherContext}, context->\hyperlink{structYarrowContext_af6ae1cbcaa5dd10f23acade23fb2b79c}{key}, \textcolor{keyword}{sizeof}(context->
+      \hyperlink{structYarrowContext_af6ae1cbcaa5dd10f23acade23fb2b79c}{key}));
+296 
+297    \textcolor{comment}{//Define the new value of the counter}
+298    \hyperlink{cyclone__crypto_2core_2crypto_8h_ad4465436e4ff353300fba4896012e18b}{cryptoMemset}(context->\hyperlink{structYarrowContext_a38d6c27182707d79f9479a60934972ba}{counter}, 0, \textcolor{keyword}{sizeof}(context->\hyperlink{structYarrowContext_a38d6c27182707d79f9479a60934972ba}{counter}));
+299    \hyperlink{aes_8c_aa524ebbb575c847bcceb7260d3da9245}{aesEncryptBlock}(&context->\hyperlink{structYarrowContext_a20f7d783d0cbf6427551cd60f6a4b13d}{cipherContext}, context->
+      \hyperlink{structYarrowContext_a38d6c27182707d79f9479a60934972ba}{counter}, context->\hyperlink{structYarrowContext_a38d6c27182707d79f9479a60934972ba}{counter});
+300 
+301    \textcolor{comment}{//Reset the hash context}
+302    \hyperlink{sha256_8c_ad276fcbe89e0721753679bb7ff790825}{sha256Init}(&context->\hyperlink{structYarrowContext_a0cc3cd3fb0c205a927a72c384ade1b29}{fastPool});
+303 
+304    \textcolor{comment}{//The entropy estimates for the fast pool are all reset to zero}
+305    \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{yarrow_8h_a26ee6536b9ff794ba4a21956c7dc44a5}{YARROW\_N}; i++)
+306    \{
+307       context->\hyperlink{structYarrowContext_aa98934d1f80991748c2ae6ce898dee2c}{fastPoolEntropy}[i] = 0;
+308    \}
+309 
+310    \textcolor{comment}{//The PRNG is ready to generate random data}
+311    context->\hyperlink{structYarrowContext_a69811dc5b1ae10c287a3f6c7752d7c21}{ready} = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+312 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{yarrow_8c_aa2513e4aab8801299c9e45cf7f3bbd80}\label{yarrow_8c_aa2513e4aab8801299c9e45cf7f3bbd80}} 
+\index{yarrow.\+c@{yarrow.\+c}!yarrow\+Generate\+Block@{yarrow\+Generate\+Block}}
+\index{yarrow\+Generate\+Block@{yarrow\+Generate\+Block}!yarrow.\+c@{yarrow.\+c}}
+\subsubsection{\texorpdfstring{yarrow\+Generate\+Block()}{yarrowGenerateBlock()}}
+{\footnotesize\ttfamily void yarrow\+Generate\+Block (\begin{DoxyParamCaption}\item[{\hyperlink{structYarrowContext}{Yarrow\+Context} $\ast$}]{context,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{output }\end{DoxyParamCaption})}
+
+
+
+Generate a random block of data. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the P\+R\+NG context \\
+\hline
+\mbox{\tt out}  & {\em output} & Buffer where to store the output block \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 263 of file yarrow.\+c.
+
+
+\begin{DoxyCode}
+264 \{
+265    \hyperlink{compiler__port_8h_a022c65af7f6c8d3947e8a37d64db6ad6}{int\_t} i;
+266 
+267    \textcolor{comment}{//Encrypt counter block}
+268    \hyperlink{aes_8c_aa524ebbb575c847bcceb7260d3da9245}{aesEncryptBlock}(&context->\hyperlink{structYarrowContext_a20f7d783d0cbf6427551cd60f6a4b13d}{cipherContext}, context->
+      \hyperlink{structYarrowContext_a38d6c27182707d79f9479a60934972ba}{counter}, output);
+269 
+270    \textcolor{comment}{//Increment counter value}
+271    \textcolor{keywordflow}{for}(i = \hyperlink{aes_8h_af19ab913a847ad1e91c5291215116de1}{AES\_BLOCK\_SIZE} - 1; i >= 0; i--)
+272    \{
+273       \textcolor{comment}{//Increment the current byte and propagate the carry if necessary}
+274       \textcolor{keywordflow}{if}(++(context->\hyperlink{structYarrowContext_a38d6c27182707d79f9479a60934972ba}{counter}[i]) != 0)
+275          \textcolor{keywordflow}{break};
+276    \}
+277 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{yarrow_8c_a3f6057971e328bd5132541d403442edb}\label{yarrow_8c_a3f6057971e328bd5132541d403442edb}} 
+\index{yarrow.\+c@{yarrow.\+c}!yarrow\+Init@{yarrow\+Init}}
+\index{yarrow\+Init@{yarrow\+Init}!yarrow.\+c@{yarrow.\+c}}
+\subsubsection{\texorpdfstring{yarrow\+Init()}{yarrowInit()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} yarrow\+Init (\begin{DoxyParamCaption}\item[{\hyperlink{structYarrowContext}{Yarrow\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Initialize P\+R\+NG context. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the P\+R\+NG context to initialize \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 61 of file yarrow.\+c.
+
+
+\begin{DoxyCode}
+62 \{
+63    \textcolor{comment}{//Clear PRNG state}
+64    \hyperlink{cyclone__crypto_2core_2crypto_8h_ad4465436e4ff353300fba4896012e18b}{cryptoMemset}(context, 0, \textcolor{keyword}{sizeof}(\hyperlink{structYarrowContext}{YarrowContext}));
+65 
+66    \textcolor{comment}{//Create a mutex to prevent simultaneous access to the PRNG state}
+67    \textcolor{keywordflow}{if}(!\hyperlink{os__port__chibios_8c_a16627f901c807c29adf29a38fb1af16a}{osCreateMutex}(&context->\hyperlink{structYarrowContext_ad640562fce2921008b8e1203a04b45a7}{mutex}))
+68    \{
+69       \textcolor{comment}{//Failed to create mutex}
+70       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca528efe91b7a7e4bcc9a6de7d4b778c67}{ERROR\_OUT\_OF\_RESOURCES};
+71    \}
+72 
+73    \textcolor{comment}{//Initialize hash contexts}
+74    \hyperlink{sha256_8c_ad276fcbe89e0721753679bb7ff790825}{sha256Init}(&context->\hyperlink{structYarrowContext_a0cc3cd3fb0c205a927a72c384ade1b29}{fastPool});
+75    \hyperlink{sha256_8c_ad276fcbe89e0721753679bb7ff790825}{sha256Init}(&context->\hyperlink{structYarrowContext_afa35e962f4269b12f40dfc3f93ea64c4}{slowPool});
+76 
+77    \textcolor{comment}{//The PRNG is not ready to generate random data}
+78    context->\hyperlink{structYarrowContext_a69811dc5b1ae10c287a3f6c7752d7c21}{ready} = \hyperlink{os__port_8h_aa93f0eb578d23995850d61f7d61c55c1}{FALSE};
+79 
+80    \textcolor{comment}{//Successful initialization}
+81    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+82 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{yarrow_8c_a134f7399665078a3bf26c324695daf67}\label{yarrow_8c_a134f7399665078a3bf26c324695daf67}} 
+\index{yarrow.\+c@{yarrow.\+c}!yarrow\+Read@{yarrow\+Read}}
+\index{yarrow\+Read@{yarrow\+Read}!yarrow.\+c@{yarrow.\+c}}
+\subsubsection{\texorpdfstring{yarrow\+Read()}{yarrowRead()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} yarrow\+Read (\begin{DoxyParamCaption}\item[{\hyperlink{structYarrowContext}{Yarrow\+Context} $\ast$}]{context,  }\item[{\hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{output,  }\item[{size\+\_\+t}]{length }\end{DoxyParamCaption})}
+
+
+
+Read random data. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the P\+R\+NG context \\
+\hline
+\mbox{\tt out}  & {\em output} & Buffer where to store the output data \\
+\hline
+\mbox{\tt in}  & {\em length} & Desired length in bytes \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 206 of file yarrow.\+c.
+
+
+\begin{DoxyCode}
+207 \{
+208    \textcolor{keywordtype}{size\_t} \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+209    \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t} buffer[\hyperlink{aes_8h_af19ab913a847ad1e91c5291215116de1}{AES\_BLOCK\_SIZE}];
+210 
+211    \textcolor{comment}{//Make sure that the PRNG has been properly seeded}
+212    \textcolor{keywordflow}{if}(!context->\hyperlink{structYarrowContext_a69811dc5b1ae10c287a3f6c7752d7c21}{ready})
+213       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689ca2846b744950d419d058ba0f917caf491}{ERROR\_PRNG\_NOT\_READY};
+214 
+215    \textcolor{comment}{//Acquire exclusive access to the PRNG state}
+216    \hyperlink{os__port__chibios_8c_a58485224df4bfa522246d55b35bbd83a}{osAcquireMutex}(&context->\hyperlink{structYarrowContext_ad640562fce2921008b8e1203a04b45a7}{mutex});
+217 
+218    \textcolor{comment}{//Generate random data in a block-by-block fashion}
+219    \textcolor{keywordflow}{while}(\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} > 0)
+220    \{
+221       \textcolor{comment}{//Number of bytes to process at a time}
+222       n = \hyperlink{os__port_8h_a3acffbd305ee72dcd4593c0d8af64a4f}{MIN}(\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length}, \hyperlink{aes_8h_af19ab913a847ad1e91c5291215116de1}{AES\_BLOCK\_SIZE});
+223 
+224       \textcolor{comment}{//Generate a random block}
+225       \hyperlink{yarrow_8c_aa2513e4aab8801299c9e45cf7f3bbd80}{yarrowGenerateBlock}(context, buffer);
+226       \textcolor{comment}{//Copy data to the output buffer}
+227       \hyperlink{cyclone__crypto_2core_2crypto_8h_a6724616c4014bb7e21f2660bd7b88be8}{cryptoMemcpy}(output, buffer, n);
+228 
+229       \textcolor{comment}{//We keep track of how many blocks we have output}
+230       context->\hyperlink{structYarrowContext_a4884396418346045041cd7cf33e81082}{blockCount}++;
+231 
+232       \textcolor{comment}{//Next block}
+233       output += \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+234       \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} -= \hyperlink{dhcpv6__common_8h_a5a648f5ec00c526b0dfa2df7a272c6c0}{n};
+235    \}
+236 
+237    \textcolor{comment}{//Apply generator gate?}
+238    \textcolor{keywordflow}{if}(context->\hyperlink{structYarrowContext_a4884396418346045041cd7cf33e81082}{blockCount} >= \hyperlink{yarrow_8h_aaced8ab5ef52d5a4f9f6d2068f420891}{YARROW\_PG})
+239    \{
+240       \textcolor{comment}{//Generate some random bytes}
+241       \hyperlink{yarrow_8c_aa2513e4aab8801299c9e45cf7f3bbd80}{yarrowGenerateBlock}(context, context->\hyperlink{structYarrowContext_af6ae1cbcaa5dd10f23acade23fb2b79c}{key});
+242       \textcolor{comment}{//Use them as the new key}
+243       \hyperlink{aes_8c_a1786debf48f536d5dd454e4a8f7ecd0f}{aesInit}(&context->\hyperlink{structYarrowContext_a20f7d783d0cbf6427551cd60f6a4b13d}{cipherContext}, context->\hyperlink{structYarrowContext_af6ae1cbcaa5dd10f23acade23fb2b79c}{key}, \textcolor{keyword}{sizeof}(context->
+      \hyperlink{structYarrowContext_af6ae1cbcaa5dd10f23acade23fb2b79c}{key}));
+244 
+245       \textcolor{comment}{//Reset block counter}
+246       context->\hyperlink{structYarrowContext_a4884396418346045041cd7cf33e81082}{blockCount} = 0;
+247    \}
+248 
+249    \textcolor{comment}{//Release exclusive access to the PRNG state}
+250    \hyperlink{os__port__chibios_8c_a8e10e5b2c6d3877b5ba60e375ac45d79}{osReleaseMutex}(&context->\hyperlink{structYarrowContext_ad640562fce2921008b8e1203a04b45a7}{mutex});
+251 
+252    \textcolor{comment}{//Successful processing}
+253    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+254 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{yarrow_8c_aa0d619039d634de91591942b29ec61d1}\label{yarrow_8c_aa0d619039d634de91591942b29ec61d1}} 
+\index{yarrow.\+c@{yarrow.\+c}!yarrow\+Release@{yarrow\+Release}}
+\index{yarrow\+Release@{yarrow\+Release}!yarrow.\+c@{yarrow.\+c}}
+\subsubsection{\texorpdfstring{yarrow\+Release()}{yarrowRelease()}}
+{\footnotesize\ttfamily void yarrow\+Release (\begin{DoxyParamCaption}\item[{\hyperlink{structYarrowContext}{Yarrow\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Release P\+R\+NG context. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the P\+R\+NG context \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 90 of file yarrow.\+c.
+
+
+\begin{DoxyCode}
+91 \{
+92    \textcolor{comment}{//Release previously allocated resources}
+93    \hyperlink{os__port__chibios_8c_a2b0ba1e39227e4a4d52ee46bbee15c11}{osDeleteMutex}(&context->\hyperlink{structYarrowContext_ad640562fce2921008b8e1203a04b45a7}{mutex});
+94 
+95    \textcolor{comment}{//Clear PRNG state}
+96    \hyperlink{cyclone__crypto_2core_2crypto_8h_ad4465436e4ff353300fba4896012e18b}{cryptoMemset}(context, 0, \textcolor{keyword}{sizeof}(\hyperlink{structYarrowContext}{YarrowContext}));
+97 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{yarrow_8c_a3e7e278386284e1660d07aa01d61ae1f}\label{yarrow_8c_a3e7e278386284e1660d07aa01d61ae1f}} 
+\index{yarrow.\+c@{yarrow.\+c}!yarrow\+Seed@{yarrow\+Seed}}
+\index{yarrow\+Seed@{yarrow\+Seed}!yarrow.\+c@{yarrow.\+c}}
+\subsubsection{\texorpdfstring{yarrow\+Seed()}{yarrowSeed()}}
+{\footnotesize\ttfamily \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689c}{error\+\_\+t} yarrow\+Seed (\begin{DoxyParamCaption}\item[{\hyperlink{structYarrowContext}{Yarrow\+Context} $\ast$}]{context,  }\item[{const \hyperlink{stdint_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t} $\ast$}]{input,  }\item[{size\+\_\+t}]{length }\end{DoxyParamCaption})}
+
+
+
+Seed the P\+R\+NG state. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the P\+R\+NG context \\
+\hline
+\mbox{\tt in}  & {\em input} & Pointer to the input data \\
+\hline
+\mbox{\tt in}  & {\em length} & Length of the input data \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+
+
+Definition at line 108 of file yarrow.\+c.
+
+
+\begin{DoxyCode}
+109 \{
+110    \textcolor{comment}{//Check parameters}
+111    \textcolor{keywordflow}{if}(\hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length} < \textcolor{keyword}{sizeof}(context->\hyperlink{structYarrowContext_af6ae1cbcaa5dd10f23acade23fb2b79c}{key}))
+112       \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689caeae4b12e06d727d085f75f79a820f2e8}{ERROR\_INVALID\_PARAMETER};
+113 
+114    \textcolor{comment}{//Add entropy to the fast pool}
+115    \hyperlink{sha256_8c_a9086d4b2fdb4be9ebe5f7b72b5f17a56}{sha256Update}(&context->\hyperlink{structYarrowContext_a0cc3cd3fb0c205a927a72c384ade1b29}{fastPool}, input, \hyperlink{dtls__misc_8h_ab43ca82dd7fa2a0e56f941032ef324c4}{length});
+116    \textcolor{comment}{//Reseed from the fast pool}
+117    \hyperlink{yarrow_8c_a2e59e2e30f7a03ed5b67764741c4e03c}{yarrowFastReseed}(context);
+118 
+119    \textcolor{comment}{//Successful processing}
+120    \textcolor{keywordflow}{return} \hyperlink{error_8h_ac7659d73a8cdedc08e9f566bb406689cabf350750d0d4fabd8954c0f1e9bbae94}{NO\_ERROR};
+121 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{yarrow_8c_aadafbac6f16263ce583fee784cf02e5c}\label{yarrow_8c_aadafbac6f16263ce583fee784cf02e5c}} 
+\index{yarrow.\+c@{yarrow.\+c}!yarrow\+Slow\+Reseed@{yarrow\+Slow\+Reseed}}
+\index{yarrow\+Slow\+Reseed@{yarrow\+Slow\+Reseed}!yarrow.\+c@{yarrow.\+c}}
+\subsubsection{\texorpdfstring{yarrow\+Slow\+Reseed()}{yarrowSlowReseed()}}
+{\footnotesize\ttfamily void yarrow\+Slow\+Reseed (\begin{DoxyParamCaption}\item[{\hyperlink{structYarrowContext}{Yarrow\+Context} $\ast$}]{context }\end{DoxyParamCaption})}
+
+
+
+Reseed from the slow pool. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em context} & Pointer to the P\+R\+NG context \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 320 of file yarrow.\+c.
+
+
+\begin{DoxyCode}
+321 \{
+322    \textcolor{keywordtype}{size\_t} i;
+323 
+324    \textcolor{comment}{//Compute the hash of all inputs to the fast pool}
+325    \hyperlink{sha256_8c_a92fa8ca8cd5a039515feb6f40190dbd8}{sha256Final}(&context->\hyperlink{structYarrowContext_a0cc3cd3fb0c205a927a72c384ade1b29}{fastPool}, \hyperlink{group__BSPDefine_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL});
+326 
+327    \textcolor{comment}{//Reseeding from the slow pool use the current key, the hash of all inputs to the}
+328    \textcolor{comment}{//fast pool and the hash of all inputs to the slow pool, to generate a new key}
+329    \hyperlink{sha256_8c_a9086d4b2fdb4be9ebe5f7b72b5f17a56}{sha256Update}(&context->\hyperlink{structYarrowContext_afa35e962f4269b12f40dfc3f93ea64c4}{slowPool}, context->\hyperlink{structYarrowContext_af6ae1cbcaa5dd10f23acade23fb2b79c}{key}, \textcolor{keyword}{sizeof}(context->
+      \hyperlink{structYarrowContext_af6ae1cbcaa5dd10f23acade23fb2b79c}{key}));
+330    \hyperlink{sha256_8c_a9086d4b2fdb4be9ebe5f7b72b5f17a56}{sha256Update}(&context->\hyperlink{structYarrowContext_afa35e962f4269b12f40dfc3f93ea64c4}{slowPool}, context->\hyperlink{structYarrowContext_a0cc3cd3fb0c205a927a72c384ade1b29}{fastPool}.
+      \hyperlink{structSha256Context_ab41942b2bb42e4a07e95c6e09e26b2f5}{digest}, \hyperlink{sha256_8h_a81efbc0fc101b06a914f7ff9e2fbc0e9}{SHA256\_DIGEST\_SIZE});
+331    \hyperlink{sha256_8c_a92fa8ca8cd5a039515feb6f40190dbd8}{sha256Final}(&context->\hyperlink{structYarrowContext_afa35e962f4269b12f40dfc3f93ea64c4}{slowPool}, context->\hyperlink{structYarrowContext_af6ae1cbcaa5dd10f23acade23fb2b79c}{key});
+332 
+333    \textcolor{comment}{//Set the new key}
+334    \hyperlink{aes_8c_a1786debf48f536d5dd454e4a8f7ecd0f}{aesInit}(&context->\hyperlink{structYarrowContext_a20f7d783d0cbf6427551cd60f6a4b13d}{cipherContext}, context->\hyperlink{structYarrowContext_af6ae1cbcaa5dd10f23acade23fb2b79c}{key}, \textcolor{keyword}{sizeof}(context->
+      \hyperlink{structYarrowContext_af6ae1cbcaa5dd10f23acade23fb2b79c}{key}));
+335 
+336    \textcolor{comment}{//Define the new value of the counter}
+337    \hyperlink{cyclone__crypto_2core_2crypto_8h_ad4465436e4ff353300fba4896012e18b}{cryptoMemset}(context->\hyperlink{structYarrowContext_a38d6c27182707d79f9479a60934972ba}{counter}, 0, \textcolor{keyword}{sizeof}(context->\hyperlink{structYarrowContext_a38d6c27182707d79f9479a60934972ba}{counter}));
+338    \hyperlink{aes_8c_aa524ebbb575c847bcceb7260d3da9245}{aesEncryptBlock}(&context->\hyperlink{structYarrowContext_a20f7d783d0cbf6427551cd60f6a4b13d}{cipherContext}, context->
+      \hyperlink{structYarrowContext_a38d6c27182707d79f9479a60934972ba}{counter}, context->\hyperlink{structYarrowContext_a38d6c27182707d79f9479a60934972ba}{counter});
+339 
+340    \textcolor{comment}{//Reset the hash contexts}
+341    \hyperlink{sha256_8c_ad276fcbe89e0721753679bb7ff790825}{sha256Init}(&context->\hyperlink{structYarrowContext_a0cc3cd3fb0c205a927a72c384ade1b29}{fastPool});
+342    \hyperlink{sha256_8c_ad276fcbe89e0721753679bb7ff790825}{sha256Init}(&context->\hyperlink{structYarrowContext_afa35e962f4269b12f40dfc3f93ea64c4}{slowPool});
+343 
+344    \textcolor{comment}{//The entropy estimates for both pools are reset to zero}
+345    \textcolor{keywordflow}{for}(i = 0; i < \hyperlink{yarrow_8h_a26ee6536b9ff794ba4a21956c7dc44a5}{YARROW\_N}; i++)
+346    \{
+347       context->\hyperlink{structYarrowContext_aa98934d1f80991748c2ae6ce898dee2c}{fastPoolEntropy}[i] = 0;
+348       context->\hyperlink{structYarrowContext_a295ac4bb5a95ce6237ad0b6a9776eff9}{slowPoolEntropy}[i] = 0;
+349    \}
+350 
+351    \textcolor{comment}{//The PRNG is ready to generate random data}
+352    context->\hyperlink{structYarrowContext_a69811dc5b1ae10c287a3f6c7752d7c21}{ready} = \hyperlink{os__port_8h_aa8cecfc5c5c054d2875c03e77b7be15d}{TRUE};
+353 \}
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{yarrow_8c_a672ac827cc558585820767176cf477dd}\label{yarrow_8c_a672ac827cc558585820767176cf477dd}} 
+\index{yarrow.\+c@{yarrow.\+c}!yarrow\+Prng\+Algo@{yarrow\+Prng\+Algo}}
+\index{yarrow\+Prng\+Algo@{yarrow\+Prng\+Algo}!yarrow.\+c@{yarrow.\+c}}
+\subsubsection{\texorpdfstring{yarrow\+Prng\+Algo}{yarrowPrngAlgo}}
+{\footnotesize\ttfamily const \hyperlink{structPrngAlgo}{Prng\+Algo} yarrow\+Prng\+Algo}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=
+\{
+   \textcolor{stringliteral}{"Yarrow"},
+   \textcolor{keyword}{sizeof}(\hyperlink{structYarrowContext}{YarrowContext}),
+   (\hyperlink{cyclone__crypto_2core_2crypto_8h_ab49454c4c68dfc5734a75010fbc7ec50}{PrngAlgoInit}) \hyperlink{yarrow_8c_a3f6057971e328bd5132541d403442edb}{yarrowInit},
+   (\hyperlink{cyclone__crypto_2core_2crypto_8h_aa2ab13cb1a30eadf81230ab08c00fc8c}{PrngAlgoRelease}) \hyperlink{yarrow_8c_aa0d619039d634de91591942b29ec61d1}{yarrowRelease},
+   (\hyperlink{cyclone__crypto_2core_2crypto_8h_a66d430d5b8d0932d87b832ca8cf12e19}{PrngAlgoSeed}) \hyperlink{yarrow_8c_a3e7e278386284e1660d07aa01d61ae1f}{yarrowSeed},
+   (\hyperlink{cyclone__crypto_2core_2crypto_8h_a7a1131568c9968297240a339611528b6}{PrngAlgoAddEntropy}) \hyperlink{yarrow_8c_a491ad3f023adc73814060c279ae6407f}{yarrowAddEntropy},
+   (\hyperlink{cyclone__crypto_2core_2crypto_8h_a533acba5eee0f4988acd735a20b36993}{PrngAlgoRead}) \hyperlink{yarrow_8c_a134f7399665078a3bf26c324695daf67}{yarrowRead}
+\}
+\end{DoxyCode}
+
+
+Definition at line 43 of file yarrow.\+c.
+
